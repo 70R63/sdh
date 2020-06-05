@@ -48,6 +48,7 @@
 			<div class="caja--ser-rel color-sr2">
 				<select id="aniograv" class="new_alto form-control " name="aniograv">
 					<option value="">Seleccionar</option>
+					<option value="2020">2020</option>
 					<option value="2019">2019</option>
 					<option value="2018">2018</option>
 					<option value="2017">2017</option>
@@ -110,7 +111,7 @@
 		<div class="row">
 			<div class="col-md-3 col-md-offset-5">
 				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button">
+					class="btn btn-primary btn-lg" type="button" onclick="descargaFactura()">
 					<spring:theme code="descarga.factura.predial.desfact" />
 				</button>
 			</div>
@@ -157,7 +158,7 @@
 		<div class="row">
 			<div class="col-md-3 col-md-offset-5">
 				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button">
+					class="btn btn-primary btn-lg" type="button" onclick="descargaFactura()">
 					<spring:theme code="descarga.factura.vehiculo.desfac" />
 				</button>
 			</div>
@@ -186,6 +187,13 @@
 			tabveh.style.display = 'none';
 		}
 
+	}
+	function descargaFactura() {
+		var anoGravable = $("#aniograv").val();
+		var anoGravable = "2020";
+		var numObjeto = "AAAA0102XAUZ";
+		
+		ACC.facturacion.descargaFactura(anoGravable,numObjeto);
 	}
 </script>
 

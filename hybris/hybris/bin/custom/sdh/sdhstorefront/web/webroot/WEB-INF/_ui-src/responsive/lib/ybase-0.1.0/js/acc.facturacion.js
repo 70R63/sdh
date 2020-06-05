@@ -55,6 +55,62 @@ ACC.facturacion = {
 
 			
 		});
-	}
+	},
+	
+	
+	descargaFactura : function (anoGravable,numObjeto){
+
+		debugger;
+		if(ACC.facturacion.validarAntesSubmit(anoGravable,numObjeto)){
+			var dataActual = {};	
+		
+			
+			dataActual.numBP = '1';
+			dataActual.anoGravable = anoGravable;
+			dataActual.numObjeto = numObjeto;
+			
+			
+			$.ajax({
+				url : ACC.descargaFacturaURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					var descargarFactura = false;
+					if(dataResponse != null && dataResponse.errores != null ){
+		            	$("#dialogMensajes" ).dialog( "open" );
+	            		$.each(dataResponse.errores, function( index, value ) {
+	            			if(value.txt_msj.trim() != ""){
+	            				$("#dialogMensajesContent").html($("#dialogMensajesContent").html()+value.txt_msj+"<br>");
+	            			}
+	            		});
+					}else{
+						if(dataResponse.urlDownload!=null && dataResponse.urlDownload != ""){
+		        			$("#downloadHelper").attr("href",dataResponse.urlDownload);
+		        			
+		        			document.getElementById("downloadHelper").click();
+						}						
+					}
+					
+				}
+			
+			,
+				error : function() {
+					alert("Error procesar la solicitud de descarga de factura");	
+				}
+			});
+		}
+	 },
+	 
+	 
+	 validarAntesSubmit : function (anoGravable,numObjeto){
+		 var flagValidacion = false;
+		 
+		 if(anoGravable!= null && numObjeto != null){
+			 flagValidacion = true;
+		 }
+		 
+		 
+		 return flagValidacion;
+	 }
 	
 };

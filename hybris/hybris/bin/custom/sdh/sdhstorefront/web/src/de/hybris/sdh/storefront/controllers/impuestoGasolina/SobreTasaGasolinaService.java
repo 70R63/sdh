@@ -14,6 +14,7 @@ import de.hybris.sdh.core.pojos.requests.ConsCasosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsulPagosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosRequest;
+import de.hybris.sdh.core.pojos.requests.DescargaFacturaRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredial2Request;
@@ -36,6 +37,7 @@ import de.hybris.sdh.core.pojos.responses.CatalogoVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ConsCasosResponse;
 import de.hybris.sdh.core.pojos.responses.CreaCasosResponse;
 import de.hybris.sdh.core.pojos.responses.DelineacionUUsos;
+import de.hybris.sdh.core.pojos.responses.DescargaFacturaResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
@@ -2309,6 +2311,22 @@ public class SobreTasaGasolinaService
 
 
 		return (DetallePredialBPResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet, LOG,
+				nombreClase);
+	}
+
+
+	public DescargaFacturaResponse descargaFactura(final DescargaFacturaRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		final String confUrl = "sdh.facturacion.url";
+		final String confUser = "sdh.facturacion.user";
+		final String confPass = "sdh.facturacion.password";
+		final String wsNombre = "trm/facturacion";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.DescargaFacturaResponse";
+
+
+		return (DescargaFacturaResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet, LOG,
 				nombreClase);
 	}
 

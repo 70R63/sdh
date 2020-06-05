@@ -7,19 +7,36 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.DescargaFacturaRequest;
+import de.hybris.sdh.core.pojos.responses.DescargaFacturaResponse;
+import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
+import de.hybris.sdh.storefront.forms.DescargaFacturaForm;
 import de.hybris.sdh.storefront.forms.FacturacionForm;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -28,7 +45,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import sun.misc.BASE64Decoder;
 
 
 /**
@@ -63,6 +83,20 @@ public class DescargaFacturaPageController extends AbstractPageController
 
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
+	@Resource(name = "sdhDetalleGasolina")
+	private SDHDetalleGasolina sdhDetalleGasolinaWS;
+
+	@Resource(name = "mediaService")
+	private MediaService mediaService;
+
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
+
+
 
 	@RequestMapping(value = "/contribuyentes/descargafactura", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -117,6 +151,81 @@ public class DescargaFacturaPageController extends AbstractPageController
 		System.out.println("------------------Entro al POST de Descarga Factura------------------------");
 
 		return REDIRECT_TO_DESCARGA_FACTURA_PAGE;
+	}
+
+	@RequestMapping(value = "/contribuyentes/descargafactura/descargarFactura", method = RequestMethod.GET)
+	@ResponseBody
+	public DescargaFacturaForm descaragarPDF(final DescargaFacturaForm dataForm, final HttpServletResponse response,
+			final HttpServletRequest request) throws CMSItemNotFoundException
+	{
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		DescargaFacturaResponse descargaFacturaResponse = null;
+		final DescargaFacturaRequest descargaFacturaRequest = new DescargaFacturaRequest();
+		final String numBP = customerFacade.getCurrentCustomer().getNumBP();
+
+
+		dataForm.setErrores(null);
+		dataForm.setUrlDownload(null);
+		descargaFacturaRequest.setNumBP(numBP);
+		descargaFacturaRequest.setNumBP(dataForm.getNumBP());
+		descargaFacturaRequest.setAnoGravable(dataForm.getAnoGravable());
+		descargaFacturaRequest.setNumObjeto(dataForm.getNumObjeto());
+
+		try
+		{
+			System.out.println("Request de trm/facturacion: " + descargaFacturaRequest);
+			descargaFacturaResponse = gasolinaService.descargaFactura(descargaFacturaRequest, sdhDetalleGasolinaWS, LOG);
+			System.out.println("Response de trm/facturacion: " + descargaFacturaResponse);
+
+			dataForm.setErrores(descargaFacturaResponse.getErrores());
+			if (descargaFacturaResponse != null && descargaFacturaResponse.getPdf() != null
+					&& !descargaFacturaResponse.getPdf().isEmpty())
+			{
+				final String encodedBytes = descargaFacturaResponse.getPdf();
+
+				final BASE64Decoder decoder = new BASE64Decoder();
+				byte[] decodedBytes;
+				final FileOutputStream fop;
+				decodedBytes = new BASE64Decoder().decodeBuffer(encodedBytes);
+
+
+
+				final String fileName = dataForm.getNumObjeto() + "-" + dataForm.getNumBP() + ".pdf";
+
+				final InputStream is = new ByteArrayInputStream(decodedBytes);
+
+
+				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
+				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
+				mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
+				modelService.save(mediaModel);
+				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
+				modelService.refresh(mediaModel);
+
+				dataForm.setUrlDownload(mediaModel.getDownloadURL());
+
+
+			}
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error al descargar factura : " + e.getMessage());
+
+			final ErrorEnWS error = new ErrorEnWS();
+
+			error.setIdmsj("0");
+			error.setTxtmsj("Hubo un error al descargar la declaración, por favor intentalo más tarde");
+
+			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+
+			errores.add(error);
+
+			dataForm.setErrores(errores);
+
+		}
+		return dataForm;
+
 	}
 
 }
