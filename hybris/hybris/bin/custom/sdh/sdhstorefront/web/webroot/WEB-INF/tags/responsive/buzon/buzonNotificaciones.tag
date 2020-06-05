@@ -51,7 +51,7 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${miBuzon.mensajesMsg}" var="eachDocs">
-								<c:if test="${eachDocs.tipoMensaje == '1'}">
+								<c:if test="${eachDocs.tipoMensaje == '1' && eachDocs.checkLectura != 'X'}">
 
 									<tr>
 										<td><c:out value="${eachDocs.id_radicado}" /></td>
@@ -130,6 +130,46 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach items="${miBuzon.mensajesMsg}" var="eachDocs">
+								<c:if test="${eachDocs.tipoMensaje == '1' && eachDocs.checkLectura == 'X'}">
+
+									<tr>
+										<td><c:out value="${eachDocs.id_radicado}" /></td>
+										<td><c:out value="${eachDocs.autoridadEmisora}" /></td>
+										<c:forEach items="${eachDocs.errores}" var="eachError">
+											<c:choose>
+												<c:when
+													test="${eachError.txt_msj != '' && eachError.id_msj == '4'}">
+													<td><c:out value="${eachDocs.asunto}" /></td>
+													<td><c:out value="${eachDocs.fechaNotificacion}" /></td>
+													<td><c:out value="${eachError.txt_msj}" /></td>
+												</c:when>
+
+												<c:otherwise>
+													<c:forEach items="${eachDocs.documentos}"
+														var="echDocumentosNot">
+														<c:if test="${echDocumentosNot.pdf != ''}">
+															<td><c:out value="${eachDocs.asunto}" /></td>
+															<td><c:out value="${eachDocs.fechaNotificacion}" /></td>
+															<td><label class="control-label downloadNoti"
+																style="text-transform: capitalize !important"
+																id="downloadNoti"
+																data-pdfimprimir="${echDocumentosNot.pdf}"
+																data-identifi="${eachDocs.id_radicado}"
+																data-autoridad="${eachDocs.autoridadEmisora}"
+																data-asunto="${eachDocs.asunto}"
+																data-fechaNotificacion="${eachDocs.fechaNotificacion}"
+																onclick="downloadNoti1(this)"> <span
+																	class="glyphicon glyphicon-download-alt"></span></label></td>
+														</c:if>
+													</c:forEach>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</tr>
+
+								</c:if>
+							</c:forEach>
 
 						</tbody>
 					</table>
