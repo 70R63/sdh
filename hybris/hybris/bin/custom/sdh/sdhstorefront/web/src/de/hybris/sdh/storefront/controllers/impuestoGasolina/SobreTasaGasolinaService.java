@@ -1723,7 +1723,11 @@ public class SobreTasaGasolinaService
 			{
 				if (list.get(i).getCdu().equals(infoDelineacionInput.getSelectedCDU()))
 				{
-					anoGravable = list.get(i).getFechaExp().substring(6);
+					if ((!list.get(i).getFechaExp().equals("")) && (list.get(i).getFechaExp().length() > 6))
+					{
+						anoGravable = list.get(i).getFechaExp().substring(6);
+					}
+
 				}
 			}
 		}
