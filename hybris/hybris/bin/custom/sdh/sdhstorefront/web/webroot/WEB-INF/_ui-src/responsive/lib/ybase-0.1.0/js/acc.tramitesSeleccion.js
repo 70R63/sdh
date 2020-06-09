@@ -748,13 +748,10 @@ ACC.tramitesSeleccion = {
 	
 	mostrarMensaje : function(infoResponse){
 		
-		if(infoResponse!= null && 
-				infoResponse.docTramitesResponse!= null && 
-				infoResponse.docTramitesResponse.idmsj!=null && 
-				infoResponse.docTramitesResponse.idmsj.trim() !=""){
+		if(infoResponse!= null && infoResponse.notas!= null && infoResponse.notas.trim() !=""){
 	    	$("#dialogMensajes" ).dialog( "open" );
 			$("#dialogMensajesContent").html("");
-			$("#dialogMensajesContent").html(infoResponse.docTramitesResponse.txtmsj+"<br>");
+			$("#dialogMensajesContent").html(infoResponse.notas);
 		}
 	}
 
