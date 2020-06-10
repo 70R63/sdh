@@ -9,7 +9,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -150,8 +149,8 @@ public class RopPageController extends AbstractPageController
 		ropRequest.setConsulta("");
 		ropRequest.setImporteusuario(ropForm.getImporteusuario());
 
-		System.out.println("Request de infObjeto/rop: " + ropRequest);
-		System.out.println("Request de infObjeto/rop: [" + ropForm.getNumObjeto() +"]");
+		//		System.out.println("Request de infObjeto/rop: " + ropRequest);
+		//		System.out.println("Request de infObjeto/rop: [" + ropForm.getNumObjeto() +"]");
 		try
 		{
 			final RopForm ropFormRequest = new RopForm();
@@ -161,7 +160,8 @@ public class RopPageController extends AbstractPageController
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final RopResponse ropResponse = mapper.readValue(sdhRopService.rop(ropRequest), RopResponse.class);
-			System.out.println("Request de infObjeto/rop: " + ropResponse);
+			//			System.out.println("Request de infObjeto/rop: " + ropResponse);
+			generaDeclaracionResponse.setErrores(ropResponse.getErrores());
 
 			if (ropResponse.getStringFact() != null)
 			{

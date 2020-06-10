@@ -14,8 +14,8 @@ public class RopResponse
 {
 
 	private String stringFact;
-	private List<ErrorEnWS> errores;
-	
+	private List<ErrorPubli> errores;
+
 	/**
 	 * @return the stringFact
 	 */
@@ -23,7 +23,7 @@ public class RopResponse
 	{
 		return stringFact;
 	}
-	
+
 	/**
 	 * @param stringFact
 	 *           the stringFact to set
@@ -35,16 +35,16 @@ public class RopResponse
 	/**
 	 * @return the errores
 	 */
-	public List<ErrorEnWS> getErrores()
+	public List<ErrorPubli> getErrores()
 	{
 		return errores;
 	}
-	
+
 	/**
 	 * @param errores
 	 *           the errores to set
 	 */
-	public void setErrores(final List<ErrorEnWS> errores)
+	public void setErrores(final List<ErrorPubli> errores)
 	{
 		this.errores = errores;
 	}
