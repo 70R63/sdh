@@ -38,7 +38,7 @@ ACC.rop = {
 					if(data.errores != null)
 					{
 						$.each(data.errores, function( index, value ) {
-							if(value.txtmsj!=null && value.txtmsj.trim() != ""){
+							if(value.txtmsj!=null && value.txtmsj.trim() != "" && value.txtmsj.trim() != "OK"){
 								strMensaje += value.txtmsj.trim()+"<br>";
 							}
 						});
