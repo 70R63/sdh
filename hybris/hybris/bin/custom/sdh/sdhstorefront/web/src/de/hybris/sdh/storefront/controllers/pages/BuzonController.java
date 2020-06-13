@@ -9,7 +9,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -92,26 +91,26 @@ public class BuzonController extends AbstractPageController
 	@RequestMapping(value =
 	{ "/contribuyentes/mibuzon_tributario", "/agenteRetenedor/mibuzon_tributario" }, method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String buzoninicizl(final Model model, HttpServletRequest request) throws CMSItemNotFoundException
+	public String buzoninicizl(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET mi buzon inicial --------------------------");
 
-		String referrer = request.getHeader("referer");
+		final String referrer = request.getHeader("referer");
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final MiBuzon miBuzon = new MiBuzon();
 		final BuzonTributarioRequest buzonrequest = new BuzonTributarioRequest();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
-		Calendar fecha = new GregorianCalendar();
-		int anio = fecha.get(Calendar.YEAR);
+		final Calendar fecha = new GregorianCalendar();
+		final int anio = fecha.get(Calendar.YEAR);
 		//	int mes = fecha.get(Calendar.MONTH);
 		//	int dia = fecha.get(Calendar.DAY_OF_MONTH);
 		//	int hora = fecha.get(Calendar.HOUR_OF_DAY);
 		//	int minuto = fecha.get(Calendar.MINUTE);
 		//	int segundo = fecha.get(Calendar.SECOND);
 
-		String anioact = Integer.toString(anio);
+		final String anioact = Integer.toString(anio);
 
 		buzonrequest.setNumBP(customerModel.getNumBP());
 		buzonrequest.setVigencia(anioact);
@@ -128,7 +127,7 @@ public class BuzonController extends AbstractPageController
 
 			BuzonErrores errores = new BuzonErrores();
 
-			errores = buzonTributarioResponse.getMensajes().getErrores();
+			errores = buzonTributarioResponse.getMensajes().get(0).getErrores();
 
 			if (errores != null)
 			{
@@ -204,13 +203,13 @@ public class BuzonController extends AbstractPageController
 	@RequestMapping(value =
 	{ "/contribuyentes/mibuzon_tributario", "/agenteRetenedor/mibuzon_tributario" }, method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String buzonpost(final BindingResult bindingResult, HttpServletRequest request, final Model model,
+	public String buzonpost(final BindingResult bindingResult, final HttpServletRequest request, final Model model,
 			final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
 		System.out.println("------------------Entro al POST de mi buzon inicial------------------------");
 
-		String referrer = request.getHeader("referer");
+		final String referrer = request.getHeader("referer");
 
 		return REDIRECT_TO_MI_BUZON_PAGE;
 	}
