@@ -9,6 +9,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -18,6 +19,7 @@ import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.BuzonTributarioRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.BuzonErrores;
+import de.hybris.sdh.core.pojos.responses.BuzonMensajes;
 import de.hybris.sdh.core.pojos.responses.BuzonMensajes2;
 import de.hybris.sdh.core.pojos.responses.BuzonTributarioMsgResponse;
 import de.hybris.sdh.core.pojos.responses.BuzonTributarioResponse;
@@ -26,8 +28,10 @@ import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.MiBuzon;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -125,9 +129,15 @@ public class BuzonController extends AbstractPageController
 			final BuzonTributarioResponse buzonTributarioResponse = mapper.readValue(
 					sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioResponse.class);
 
-			BuzonErrores errores = new BuzonErrores();
+			final List<BuzonErrores> errores = new ArrayList<BuzonErrores>();
 
-			errores = buzonTributarioResponse.getMensajes().get(0).getErrores();
+			for (final BuzonMensajes buzon : buzonTributarioResponse.getMensajes())
+			{
+				if (buzon.getErrores() != null)
+				{
+					errores.add(buzon.getErrores());
+				}
+			}
 
 			if (errores != null)
 			{

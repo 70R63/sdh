@@ -17,10 +17,15 @@
 			<div class="alert alert-danger alert-dismissable getAccAlert">
 				<button class="close closeAccAlert" aria-hidden="true"
 					data-dismiss="alert" type="button">&times;</button>
-				<spring:theme code="${errores.txt_msj}"
-					arguments="${errores.txt_msj}" htmlEscape="false"
-					var="errorMessages" />
-				${ycommerce:sanitizeHTML(errorMessages)}
+				<c:forEach items="${errores}" varStatus="varStatus" var="error">
+					<c:if test="${not empty error.txt_msj}">
+						<spring:theme code="${error.txt_msj}"
+						arguments="${error.txt_msj}" htmlEscape="false"
+						var="errorMessages" />
+						${ycommerce:sanitizeHTML(errorMessages)}
+						<br>
+					</c:if>
+				</c:forEach>
 			</div>
 		</c:if>
 		<div class="col-md-12">
