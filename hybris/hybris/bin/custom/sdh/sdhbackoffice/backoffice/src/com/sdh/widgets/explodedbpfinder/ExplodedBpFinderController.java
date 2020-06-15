@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 public class ExplodedBpFinderController extends DefaultWidgetController {
+    //Data
     private static final Logger LOG = LoggerFactory.getLogger(ExplodedBpFinderController.class);
     private static final String SOCKET_ID = "explodedBpFinderInput";
     private CustomerModel currentCustomer;
