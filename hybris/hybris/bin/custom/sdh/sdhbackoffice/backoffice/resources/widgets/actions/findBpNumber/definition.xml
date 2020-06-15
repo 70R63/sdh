@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<action-definition id="com.sdh.widgets.actions.findbpnumberaction"
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+
+	<name>sdh.search.bpNumber</name>
+	<description>Find BP Number By Parameters</description>
+	<author>Jair Roa</author>
+	<version>0.1</version>
+
+	<!--customRendererClassName>com.sdh.widgets.actions.findbpnumberaction.SdhActionRender</customRendererClassName-->
+
+	<sockets>
+		<output id="sdhBpFdrCtx" type="de.hybris.platform.core.model.user.CustomerModel"/>
+	</sockets>
+
+
+	<!--inputType>de.hybris.platform.core.model.user.CustomerModel</inputType-->
+	<!---outputType>de.hybris.platform.core.model.user.CustomerModel</outputType-->
+
+	<iconUri>icons/icon-search-sync.png</iconUri>
+	<actionClassName>com.sdh.widgets.actions.findbpnumberaction.SdhFindBpAction</actionClassName>
+	<!--iconHoverUri>icons/icon_action_bulkedit_hover.png</iconHoverUri>
+	<iconDisabledUri>icons/icon_action_bulkedit_disabled.png</iconDisabledUri-->
+
+	<settings>
+		<setting key="viewMode" default-value="iconAndText"/>
+	</settings>
+
+	<!-- Sockets definition-->
+	<!--sockets>
+		<output id="bpFinderContext"/>
+	</sockets-->
+
+</action-definition>

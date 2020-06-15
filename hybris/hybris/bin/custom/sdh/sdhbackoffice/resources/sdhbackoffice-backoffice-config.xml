@@ -19,6 +19,27 @@
 		<!--Please check documentation for code snippets for specific components-->
 	<!--</context>-->
 
+	<!--Custom SDH ExplorerTree -->
+	<context merge-by="module" parent="auto" component="sdh-explorer-tree">
+		<sdh-explorer-tree:explorer-tree xmlns:sdh-explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+			<sdh-explorer-tree:navigation-node id="hmc.sdhCustomerSupport">
+				<sdh-explorer-tree:type-node code="sdhFAQsCategory" id="SdhFAQsCategory"/>
+				<sdh-explorer-tree:type-node code="sdhFAQs" id="SdhFAQs"/>
+			</sdh-explorer-tree:navigation-node>
+		</sdh-explorer-tree:explorer-tree>
+	</context>
+
+	<!--context component="explorer-tree" merge-by="module">
+		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+			<explorer-tree:navigation-node id="mydetails">
+				<explorer-tree:navigation-node id="cart address"/>
+			</explorer-tree:navigation-node>
+		</explorer-tree:explorer-tree>
+	</context-->
+
+
+
+
 	<!-- Begin SDH FAQs -->
 	<!-- ExplorerTree -->
 	<context merge-by="module" parent="auto" component="explorer-tree">
@@ -331,4 +352,17 @@
             </editorArea:tab>
         </editorArea:editorArea>
     </context>
+
+	<context type="Customer" merge-by="type" parent="GenericItem" component="editorareaactions">
+		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:group qualifier="common">
+				<y:label>actiongroup.common</y:label>
+				<y:action action-id="com.hybris.cockpitng.action.delete" property="currentObject"/>
+				<y:action action-id="com.hybris.cockpitng.action.principalpermission" property="currentObject"/>
+				<y:action action-id="com.sdh.actions.bpfinder" property="currentObject"/>
+			</y:group>
+		</y:actions>
+	</context>
+
+
 </config>

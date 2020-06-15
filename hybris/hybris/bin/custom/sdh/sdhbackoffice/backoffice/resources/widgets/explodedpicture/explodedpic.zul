@@ -1,0 +1,9 @@
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.zkoss.org/2005/zul">
+    <style src="${wr}/default.css"/>
+    <div>
+        <hlayout>
+            <textbox id="searchInput"/>
+            <button id="searchBtn" label="Search"/>
+        </hlayout>
+    </div>
+</widget>
