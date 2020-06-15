@@ -12,7 +12,19 @@
 <spring:url value="/impuestos/preparaPagoPSE" var="pagarURL" htmlEscape="false" />
 
 
-
+<c:set var="flagPresentarDeclaracion" value="false" />
+<c:set var="flagPagarEnLinea" value="false" />
+<c:if test="${vehiculosFormDeclaracion.controlCampos.btnPresentarDec == false}">
+	<c:set var="flagPresentarDeclaracion" value="true" />
+</c:if>
+<c:if test="${vehiculosFormDeclaracion.controlCampos.btnPagarDec == false}">
+	<c:set var="flagPagarEnLinea" value="true" />
+</c:if>
+<c:if test="${contribuyente.documentType ne 'NIT' and contribuyente.numBP eq currentUser.numBP }">
+	<c:set var="flagPresentarDeclaracion" value="true" />
+	<c:set var="flagPagarEnLinea" value="true" />
+	<input type="hidden" value="X" id="contribuyenteNoNIT"/>
+</c:if>
 <div class="container">
 	
 
@@ -29,11 +41,13 @@
 
 				<div class="col-md-3">
 					<a id="downloadHelper" target="_blank"></a>
+					<c:if test="${flagPresentarDeclaracion eq true}">
 					<button id="generaDeclaracionVehiculosButton" type="button" class="btn btn-primary btn-lg" onclick="pagarlinea()">
 					<!-- 	<c:out value='${empty vehiculosFormDeclaracion.numForm ? "disabled":""}'/>
 						class="btn btn-primary btn-lg" onclick="pagarlinea()">  Se comenta linea para habilitar botón 19/12/2019 Maria Torres-->
 						<spring:theme code="delineacion.urbana.dec.firm.predec" />
 					</button>
+					</c:if>
 				</div>
 	
 				<sf:hidden path="tipoImpuesto" />
@@ -48,10 +62,12 @@
 				<sf:hidden path="CDU" />
 				<sf:hidden path="anticipo" />
 				<div class="col-md-3">
+					<c:if test="${flagPagarEnLinea eq true}">
 					<sf:button class="btn btn-primary btn-lg pagarbtn" type="button" onclick="validaBotonPago()" id="action"
 						name="pagar" value="pagar" disabled="true">
 						<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 					</sf:button>
+					</c:if>
 				</div>
 			</sf:form>	
 
@@ -65,7 +81,9 @@
 		debugger;
 		var totPagar = document.getElementById('totpag');
 		if(totPagar.value == '0'){
-			alert('El total a pagar debe ser mayor a 0')
+			alert('El total a pagar debe ser mayor a 0');
+		var btnPagar = document.getElementById("action");
+		btnPagar.disabled = true;
 		}else{
 			var form1 = document.getElementById('infoPreviaPSE');
 			form1.submit();		

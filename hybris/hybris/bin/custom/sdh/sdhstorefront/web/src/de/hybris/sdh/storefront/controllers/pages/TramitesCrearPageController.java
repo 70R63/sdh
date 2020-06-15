@@ -9,6 +9,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.i18n.I18NService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.Breadcrumb;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
@@ -37,6 +38,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -82,6 +84,12 @@ public class TramitesCrearPageController extends AbstractPageController
 
 	@Resource(name = "userService")
 	UserService userService;
+
+	@Resource(name = "messageSource")
+	MessageSource messageSource;
+
+	@Resource(name = "i18nService")
+	I18NService i18nService;
 
 
 	@RequestMapping(value = "/contibuyentes/tramites/crear", method = RequestMethod.GET)
@@ -189,6 +197,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		final DocTramitesRequest docTramitesRequest = new DocTramitesRequest();
 		DocTramitesResponse docTramitesResponse = null;
 		String urlAccion = null;
+		String notas = null;
 
 
 		llenarElementosTramites(elementos);
@@ -232,12 +241,17 @@ public class TramitesCrearPageController extends AbstractPageController
 			{
 				urlAccion = elementoSeleccionado.getUrlAccion();
 			}
+			if (elementoSeleccionado.getNotas() != null)
+			{
+				notas = messageSource.getMessage(elementoSeleccionado.getNotas(), null, i18nService.getCurrentLocale());
+			}
 
 		}
 
 		infoVista.setOpciones(elementosResponse);
 		infoVista.setDocTramitesResponse(docTramitesResponse);
 		infoVista.setUrlAccion(urlAccion);
+		infoVista.setNotas(notas);
 
 
 		return infoVista;
@@ -639,7 +653,8 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "03________", "03", "Facturación");
 		agregarElementoTramites(elementos, "04________", "04", "Analisis de la cuenta");
 		agregarElementoTramites(elementos, "05________", "05", "Boletín de deudores Morosos"); //se modifica etiqueta, valor anterior = Boletín de deudores Morosos del Estado 14-01-2020 Maria Torres
-		agregarElementoTramites(elementos, "06________", "06", "Verificación de pagos", "ZT10", "A1ZTRT0001Z006");
+		agregarElementoTramites(elementos, "06________", "06", "Verificación de pagos", "ZT10", "A1ZTRT0001Z006",
+				"tramites.crear.categorizacion.notas.01");
 		agregarElementoTramites(elementos, "07________", "07", "Corrección de la información causada contablemente");
 		agregarElementoTramites(elementos, "09________", "09", "Agente Autorizado");
 
@@ -1021,6 +1036,18 @@ public class TramitesCrearPageController extends AbstractPageController
 		elementos.add(new TramiteOpcion(claveBusqueda, new ItemSelectOption(idTramiteOpcion, descripcionTramiteOpcion), processID,
 				idCategorizacion, "02", new TramiteRolAccion(rolAccion, rolIndicador)));
 
+	}
+
+
+	private void agregarElementoTramites(final List<TramiteOpcion> elementos, final String claveBusqueda,
+			final String idTramiteOpcion, final String descripcionTramiteOpcion, final String processID,
+			final String idCategorizacion, final String notas)
+	{
+		final TramiteOpcion tramiteOpcion = new TramiteOpcion(claveBusqueda,
+				new ItemSelectOption(idTramiteOpcion, descripcionTramiteOpcion), processID, idCategorizacion, "02");
+
+		tramiteOpcion.setNotas(notas);
+		elementos.add(tramiteOpcion);
 	}
 
 

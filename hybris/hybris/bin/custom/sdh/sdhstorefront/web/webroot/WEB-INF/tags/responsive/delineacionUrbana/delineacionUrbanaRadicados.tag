@@ -46,13 +46,13 @@
 				<table class="table" id="duRadicados">
 					<thead>
 						<tr>
-							<th style="width: 50% !important"><label class="control-label labeltabletd"><spring:theme
+							<th style="width: 120px !important"><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.radicados" /> </label></th>
-							<th><label class="control-label labeltabletd"><spring:theme
+							<th style="width: 92px !important"><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.fechradicado" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.modlicencia" /></label></th>
-							<th><label class="control-label labeltabletd"><spring:theme
+							<th style="width: 192px !important"><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.presupuestoRadicado" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.codigoEstrato" /></label></th>

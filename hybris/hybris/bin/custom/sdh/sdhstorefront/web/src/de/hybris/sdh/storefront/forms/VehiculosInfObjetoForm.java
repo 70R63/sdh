@@ -120,6 +120,8 @@ public class VehiculosInfObjetoForm
 	private String mensajeVehiculos;
 	private String campo_catalogo;
 	private CatalogoVehiculosResponse catalogo;
+
+	private VehiculosControlCamposDec controlCampos;
 	/**
 	 * @return the numBP
 	 */
@@ -1369,6 +1371,23 @@ public class VehiculosInfObjetoForm
 	public void setCatalogo(final CatalogoVehiculosResponse catalogo)
 	{
 		this.catalogo = catalogo;
+	}
+
+	/**
+	 * @return the controlCampos
+	 */
+	public VehiculosControlCamposDec getControlCampos()
+	{
+		return controlCampos;
+	}
+
+	/**
+	 * @param controlCampos
+	 *           the controlCampos to set
+	 */
+	public void setControlCampos(final VehiculosControlCamposDec controlCampos)
+	{
+		this.controlCampos = controlCampos;
 	}
 
 
