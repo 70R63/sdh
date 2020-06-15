@@ -5,6 +5,7 @@ import com.hybris.cockpitng.annotations.ViewEvent;
 import com.hybris.cockpitng.util.DefaultWidgetController;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.sdh.core.pojos.requests.SdhValidaContribuyenteRequest;
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
@@ -94,16 +95,17 @@ public class ExplodedBpFinderController extends DefaultWidgetController {
     public void takeFoundBp() {
         getCurrentCustomer().setNumBP(businessPartnerOutput.getValue());
         modelService.save(getCurrentCustomer());
+        takeFoundBpButton.setDisabled(true);
     }
 
-    private String getBpNumberFromWs(ValidaContribuyenteRequest request){
-        final String response = sdhValidaContribuyenteService.validaContribuyente(request);
-        final ObjectMapper mapper = new ObjectMapper();
+    private String getBpNumberFromWs(ValidaContribuyenteRequest documentos){
+        SdhValidaContribuyenteRequest request = new SdhValidaContribuyenteRequest();
+        SDHValidaMailRolResponse response = null;
+        request.setDocumentos(documentos);
         String bpNumber;
         try {
-            mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            final SDHValidaMailRolResponse sdhValidaMailRolResponse = mapper.readValue(response, SDHValidaMailRolResponse.class);
-            bpNumber = sdhValidaMailRolResponse.getInfoContrib().getNumBP();
+            response = sdhValidaContribuyenteService.validaContribuyente(request);
+            bpNumber = response.getInfoContrib().getNumBP();
         } catch (Exception e) {
             bpNumber = StringUtils.EMPTY;
             LOG.error(e.getMessage());
