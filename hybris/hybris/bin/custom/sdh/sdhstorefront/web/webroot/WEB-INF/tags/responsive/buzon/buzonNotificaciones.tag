@@ -18,7 +18,7 @@
 	</div>
 	<sf:form>
 		<div class="row">
-			<div class="col-md-4 col-md-offset-3 center headline">
+			<div class="col-md-6 col-md-offset-3 headline">
 				<h2>
 					<span><spring:theme code="mibuzon.notificaciones.nuevos" /></span>
 				</h2>
@@ -86,8 +86,8 @@
 															style="text-transform: capitalize !important"
 															id="downloadNoti"
 															data-pdfimprimir="${echDocumentosNot.pdf}"
-															data-identifi="${eachDocs.id_radicado}"
-															data-autoridad="${eachDocs.autoridadEmisora}"
+															data-idRadicado="${eachDocs.id_radicado}"
+															data-autoridadEmisora="${eachDocs.autoridadEmisora}"
 															data-asunto="${eachDocs.asunto}"
 															data-fechaNotificacion="${eachDocs.fechaNotificacion}"
 															onclick="downloadNoti1(this)"> <span
@@ -175,8 +175,8 @@
 															style="text-transform: capitalize !important"
 															id="downloadNoti"
 															data-pdfimprimir="${echDocumentosNot.pdf}"
-															data-identifi="${eachDocs.id_radicado}"
-															data-autoridad="${eachDocs.autoridadEmisora}"
+															data-idRadicado="${eachDocs.id_radicado}"
+															data-autoridadEmisora="${eachDocs.autoridadEmisora}"
 															data-asunto="${eachDocs.asunto}"
 															data-fechaNotificacion="${eachDocs.fechaNotificacion}"
 															onclick="downloadNoti1(this)"> <span
@@ -203,7 +203,9 @@
 <script>
 	function downloadNoti1(objectnoti1) {
 		ACC.mibuzon.descargarNoti(objectnoti1);
+		ACC.publicidadexterior.bindDataTable_ID_refresh("#tabPaginacion2");
 		objectnoti1.offsetParent.parentNode.remove();
+		ACC.publicidadexterior.bindDataTable_id("#tabPaginacion2");
 	}
 
 	function downloaddosNoti(objectnoti2) {

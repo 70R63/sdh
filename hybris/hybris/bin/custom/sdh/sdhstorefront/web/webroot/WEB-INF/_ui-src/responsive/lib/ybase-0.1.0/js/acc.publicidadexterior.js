@@ -491,6 +491,12 @@ ACC.publicidadexterior = {
 	    	
 	    },
 	    
+	    bindDataTable_ID_refresh: function (id) {
+			table = $(id).DataTable();
+			table.destroy();
+	    	
+	    },
+	    
 
 	    bindDataTablesPagination: function () {
 	    	var nombrePrefijo = "#tabPaginacion";
@@ -509,6 +515,34 @@ ACC.publicidadexterior = {
 				table = $(idTable).DataTable();
 				table.destroy();
 			}
+			var tabla = $(idTable)
+					.DataTable(
+							{
+								"sPagingType" : "full_numbers",
+								"oLanguage" : {
+									"oPaginate" : {
+										"sPrevious" : " Anterior ",
+
+										"sNext" : " Siguiente ",
+										"sLast" : " >> ",
+										"sFirst" : " << "
+									},
+									"sLengthMenu" : 'Mostrando <select >'
+											+ '<option value="10">10</option>'
+											+ '<option value="20">20</option>'
+											+ '<option value="30">30</option>'
+											+ '</select> datos por página',
+									"sInfo" : "Mostrando del _START_ a _END_ (Total: _TOTAL_ resultados)",
+									"sInfoFiltered" : " Filtrados de MAX registros",
+									"sInfoEmpty" : " ",
+									"sZeroRecords" : "No se encontraron registros",
+									"sProcessing" : "Espere, por favor...",
+									"sSearch" : "Buscar:",
+								}
+							});
+	    },
+	    
+	    bindDataTable_id(idTable){
 			var tabla = $(idTable)
 					.DataTable(
 							{
