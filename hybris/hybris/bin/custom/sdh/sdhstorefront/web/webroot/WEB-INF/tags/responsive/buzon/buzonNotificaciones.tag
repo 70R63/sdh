@@ -56,7 +56,7 @@
 									<c:forEach items="${eachDocs.errores}" var="eachError">
 										<c:choose>
 											<c:when test="${eachError.txt_msj != '' && eachError.id_msj == '4'}">
-												<c:set var="mensajeError" value="${mensajeError}${eachError.txt_msj}"/>
+												<c:set var="mensajeError" value="${mensajeError} ${eachError.txt_msj}"/>
 											</c:when>
 										</c:choose>
 									</c:forEach>
@@ -69,7 +69,15 @@
 
 										<c:choose>
 											<c:when test="${not empty mensajeError}">
-												<td><c:out value="${eachError.txt_msj}" /></td>
+												<td>
+													<c:forEach items="${eachDocs.errores}" var="eachError">
+														<c:choose>
+															<c:when test="${eachError.txt_msj != '' && eachError.id_msj == '4'}">
+																<c:out value="${eachError.txt_msj}"/><br>
+															</c:when>
+														</c:choose>
+													</c:forEach>
+												</td>
 											</c:when>
 											<c:otherwise>
 												<c:forEach items="${eachDocs.documentos}" var="echDocumentosNot">
@@ -138,7 +146,7 @@
 									<c:forEach items="${eachDocs.errores}" var="eachError">
 										<c:choose>
 											<c:when test="${eachError.txt_msj != '' && eachError.id_msj == '4'}">
-												<c:set var="mensajeError" value="${mensajeError}${eachError.txt_msj}"/>
+												<c:set var="mensajeError" value="${mensajeError} ${eachError.txt_msj}"/>
 											</c:when>
 										</c:choose>
 									</c:forEach>
@@ -150,7 +158,15 @@
 										<td><c:out value="${eachDocs.fechaNotificacion}" /></td>
 										<c:choose>
 											<c:when test="${not empty mensajeError}">
-												<td><c:out value="${eachError.txt_msj}" /></td>
+												<td>
+													<c:forEach items="${eachDocs.errores}" var="eachError">
+														<c:choose>
+															<c:when test="${eachError.txt_msj != '' && eachError.id_msj == '4'}">
+																<c:out value="${eachError.txt_msj}"/><br>
+															</c:when>
+														</c:choose>
+													</c:forEach>
+												</td>
 											</c:when>
 											<c:otherwise>
 												<c:forEach items="${eachDocs.documentos}" var="echDocumentosNot">
