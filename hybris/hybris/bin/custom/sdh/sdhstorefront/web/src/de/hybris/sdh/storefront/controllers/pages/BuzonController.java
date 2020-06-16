@@ -18,20 +18,15 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.BuzonTributarioRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
-import de.hybris.sdh.core.pojos.responses.BuzonErrores;
-import de.hybris.sdh.core.pojos.responses.BuzonMensajes;
 import de.hybris.sdh.core.pojos.responses.BuzonMensajes2;
 import de.hybris.sdh.core.pojos.responses.BuzonTributarioMsgResponse;
-import de.hybris.sdh.core.pojos.responses.BuzonTributarioResponse;
 import de.hybris.sdh.core.services.SDHBuzonTributarioService;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.MiBuzon;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -125,53 +120,26 @@ public class BuzonController extends AbstractPageController
 
 
 		try
-		{
-			final BuzonTributarioResponse buzonTributarioResponse = mapper.readValue(
-					sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioResponse.class);
-
-			final List<BuzonErrores> errores = new ArrayList<BuzonErrores>();
-
-			for (final BuzonMensajes buzon : buzonTributarioResponse.getMensajes())
 			{
-				if (buzon.getErrores() != null)
+			final BuzonTributarioMsgResponse buzonTributarioMsgResponse = mapper
+					.readValue(sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioMsgResponse.class);
+
+			miBuzon.setMensajesMsg(buzonTributarioMsgResponse.getMensajes());
+
+			int Mi = 1;
+			int Ni = 1;
+
+			for (final BuzonMensajes2 eachTipMensaje : buzonTributarioMsgResponse.getMensajes())
 				{
-					errores.add(buzon.getErrores());
+				if ("2".equals(eachTipMensaje.getTipoMensaje()))
+				{
+					miBuzon.setContMsj(Mi);
+					Mi++;
 				}
-			}
-
-			if (errores != null)
-			{
-
-				model.addAttribute("errores", errores);
-			}
-
-			model.addAttribute("miBuzon", miBuzon);
-
-		}
-		catch (final Exception e)
-		{
-
-			try
-			{
-				final BuzonTributarioMsgResponse buzonTributarioMsgResponse = mapper
-						.readValue(sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioMsgResponse.class);
-
-				miBuzon.setMensajesMsg(buzonTributarioMsgResponse.getMensajes());
-
-				int Mi = 1;
-				int Ni = 1;
-
-				for (final BuzonMensajes2 eachTipMensaje : buzonTributarioMsgResponse.getMensajes())
-				{
-					if ("2".equals(eachTipMensaje.getTipoMensaje()))
+				else if ("1".equals(eachTipMensaje.getTipoMensaje()))
 					{
-						miBuzon.setContMsj(Mi);
-						Mi++;
-					}
-					else if ("1".equals(eachTipMensaje.getTipoMensaje()))
-					{
-						miBuzon.setContNot(Ni);
-						Ni++;
+					miBuzon.setContNot(Ni);
+					Ni++;
 					}
 				}
 
@@ -181,11 +149,10 @@ public class BuzonController extends AbstractPageController
 			catch (final Exception s)
 			{
 
-				LOG.error("error getting customer info from SAP for rit page: " + s.getMessage());
+			LOG.error("error getting customer info from SAP for rit page: " + s.getMessage());
 				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 				model.addAttribute("miBuzon", miBuzon);
 			}
-		}
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));
