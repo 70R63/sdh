@@ -633,6 +633,8 @@ public class PSEPaymentController extends AbstractPageController
 	public String realizarPago(final Model model, final PSEPaymentForm psePaymentForm, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
+		String flagSuccessView = null;
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_REALIZAR_PAGO));
@@ -677,6 +679,18 @@ public class PSEPaymentController extends AbstractPageController
 				{
 					redirecUrl = "redirect:" + response.getBankurl();
 					GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
+				}
+				else if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS))
+				{
+					final String[] parametrosMsg =
+					{ psePaymentForm.getNumeroDeReferencia() };
+
+					flagSuccessView = "E";
+
+					GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
+							"pse.message.error.no._FAIL_SERVICENOTEXISTS", parametrosMsg);
+
+					model.addAttribute("flagSuccessView", flagSuccessView);
 				}
 				else
 				{

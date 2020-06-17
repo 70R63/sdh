@@ -77,10 +77,11 @@ ACC.mibuzon = {
 		  dlnk.click();
 		  
 		  
-	
+		  ACC.publicidadexterior.bindDataTable_ID_refresh("#tabPaginacion3");	
 		  var newtr = $(this).closest('tr');
 		  
 			 $('#tabPaginacion3').append('<tr><td>' + identif + '</td><td>' + autoridadEmisora + '</td><td>' + asunto + '</td><td>' + fecnot + '</td><td><label class="control-label download2Noti" style="text-transform: capitalize !important" data-pdfimprimir='+ newpdf +' id="download2Noti" onclick="downloaddosNoti(this)"> <span class="glyphicon glyphicon-download-alt"></span></label></td></tr>');
+			 ACC.publicidadexterior.bindDataTable_id("#tabPaginacion3");
 	
 },
 
