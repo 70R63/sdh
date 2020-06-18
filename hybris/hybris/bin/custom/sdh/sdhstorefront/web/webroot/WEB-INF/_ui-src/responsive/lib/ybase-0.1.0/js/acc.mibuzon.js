@@ -95,6 +95,33 @@ descargarNoti2 : function(objectNoti2){
 	  dlnk.href = pdf;
 	  dlnk.click();
 
+},
+
+
+descargarNoti1_v2 : function(objectNoti){
+	ACC.publicidadexterior.bindDataTable_ID_refresh("#tabPaginacion2");
+	ACC.publicidadexterior.bindDataTable_ID_refresh("#tabPaginacion3");	
+
+	var newpdf = $.trim($(objectNoti).attr("data-pdfimprimir"));
+	var identif = $.trim($(objectNoti).attr("data-idRadicado")); 
+	var autoridadEmisora= $.trim($(objectNoti).attr("data-autoridadEmisora")); 
+	var asunto= $.trim($(objectNoti).attr("data-asunto"));
+	var fecnot = $.trim($(objectNoti).attr("data-fechaNotificacion"));
+	var pdf = 'data:application/newpdf;base64,'+ newpdf;
+	
+
+	objectNoti.offsetParent.parentNode.remove();
+	$('#tabPaginacion3').append('<tr><td>' + identif + '</td><td>' + autoridadEmisora + '</td><td>' + asunto + '</td><td>' + fecnot + '</td><td><label class="control-label download2Noti" style="text-transform: capitalize !important" data-pdfimprimir='+ newpdf +' id="download2Noti" onclick="downloaddosNoti(this)"> <span class="glyphicon glyphicon-download-alt"></span></label></td></tr>');
+
+	var dlnk = document.getElementById('dwnldLnk');
+	if(dlnk!= null){
+		dlnk.href = pdf;
+		dlnk.click();		
+	}
+
+	ACC.publicidadexterior.bindDataTable_id("#tabPaginacion2");
+	ACC.publicidadexterior.bindDataTable_id("#tabPaginacion3");
+	
 }
 	
 };
