@@ -90,7 +90,7 @@
 															data-autoridadEmisora="${eachDocs.autoridadEmisora}"
 															data-asunto="${eachDocs.asunto}"
 															data-fechaNotificacion="${eachDocs.fechaNotificacion}"
-															onclick="downloadNoti1(this)"> <span
+															onclick="downloadNoti(this)"> <span
 																class="glyphicon glyphicon-download-alt"></span></label></td>
 													</c:if>
 												</c:forEach>
@@ -179,7 +179,7 @@
 															data-autoridadEmisora="${eachDocs.autoridadEmisora}"
 															data-asunto="${eachDocs.asunto}"
 															data-fechaNotificacion="${eachDocs.fechaNotificacion}"
-															onclick="downloadNoti1(this)"> <span
+															onclick="downloaddosNoti(this)"> <span
 																class="glyphicon glyphicon-download-alt"></span></label></td>
 													</c:if>
 												</c:forEach>
@@ -201,11 +201,8 @@
 </div>
 
 <script>
-	function downloadNoti1(objectnoti1) {
-		ACC.mibuzon.descargarNoti(objectnoti1);
-		ACC.publicidadexterior.bindDataTable_ID_refresh("#tabPaginacion2");
-		objectnoti1.offsetParent.parentNode.remove();
-		ACC.publicidadexterior.bindDataTable_id("#tabPaginacion2");
+	function downloadNoti(objectnoti) {
+		ACC.mibuzon.descargarNoti1_v2(objectnoti);
 	}
 
 	function downloaddosNoti(objectnoti2) {
