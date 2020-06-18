@@ -633,7 +633,7 @@ public class PSEPaymentController extends AbstractPageController
 	public String realizarPago(final Model model, final PSEPaymentForm psePaymentForm, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
-		//String flagSuccessView = null;
+		String flagSuccessView = null;
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
@@ -680,18 +680,12 @@ public class PSEPaymentController extends AbstractPageController
 					redirecUrl = "redirect:" + response.getBankurl();
 					GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
 				}
-				//else if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS))
-				//{
-				//	final String[] parametrosMsg =
-				//	{ psePaymentForm.getNumeroDeReferencia() };
-
-				//	flagSuccessView = "E";
-
-				//	GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
-				//			"pse.message.error.no._FAIL_SERVICENOTEXISTS", parametrosMsg);
-
-				//	model.addAttribute("flagSuccessView", flagSuccessView);
-				//}
+				else if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS))
+				{
+					GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_SERVICENOTEXISTS");
+					flagSuccessView = "E";
+					model.addAttribute("flagSuccessView", flagSuccessView);
+				}
 				else
 				{
 					GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
@@ -702,9 +696,6 @@ public class PSEPaymentController extends AbstractPageController
 			else
 			{
 				GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
-				//GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_SERVICENOTEXISTS");
-				//flagSuccessView = "E";
-				//model.addAttribute("flagSuccessView", flagSuccessView);
 
 			}
 			LOG.info(response);
