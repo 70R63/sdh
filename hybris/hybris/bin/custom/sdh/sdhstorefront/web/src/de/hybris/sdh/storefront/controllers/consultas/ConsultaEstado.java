@@ -19,25 +19,35 @@ import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.EdoCuentaRequest;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.EdoCuentaResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHEdoCuentaService;
+import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaCatalogos;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaTabla;
+import de.hybris.sdh.storefront.controllers.pages.InfoDelineacion;
 import de.hybris.sdh.storefront.forms.EdoCuentaForm;
+import de.hybris.sdh.storefront.forms.MiRitForm;
+import de.hybris.sdh.storefront.forms.PredialForm;
+import de.hybris.sdh.storefront.forms.PublicidadForm;
+import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -185,7 +195,110 @@ public class ConsultaEstado extends AbstractSearchPageController
 			LOG.error("Error en el servicio: " + e.getMessage());
 		}
 
+		//		Consumo de pedial
+		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
+		final PredialForm predialFormIni = new PredialForm();
+		final VehiculosInfObjetoForm vehiculosForm = new VehiculosInfObjetoForm();
+		final InfoDelineacion infoDelineacion = new InfoDelineacion();
+		final MiRitForm miRitForm = new MiRitForm();
+		final PublicidadForm publicidadForm = new PublicidadForm();
+
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		consultaContribuyenteBPRequest.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
+
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+		try
+		{
+			sdhConsultaContribuyenteBPResponse = mapper.readValue(
+					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+					SDHValidaMailRolResponse.class);
+			predialFormIni.setPredial(sdhConsultaContribuyenteBPResponse.getPredial());
+
+
+			if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
+					&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getVehicular()))
+			{
+				vehiculosForm.setImpvehicular(sdhConsultaContribuyenteBPResponse.getVehicular().stream()
+						.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getDelineacion() != null
+					&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getDelineacion()))
+			{
+				miRitForm.setDelineacion(sdhConsultaContribuyenteBPResponse.getDelineacion().stream()
+						.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
+					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
+			{
+				miRitForm.setGasolina(sdhConsultaContribuyenteBPResponse.getGasolina().stream()
+						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumDoc())).collect(Collectors.toList()));
+			}
+
+
+
+			if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
+			{
+				final List<SDHExteriorPublicityTaxData> exteriorPublicityList = customerData.getExteriorPublicityTaxList();
+
+				final List<ImpuestoPublicidadExterior> listImpuestoPublicdadExterior = new ArrayList<ImpuestoPublicidadExterior>();
+
+				for (final SDHExteriorPublicityTaxData eachPublicityTax : exteriorPublicityList)
+				{
+					final ImpuestoPublicidadExterior eachImpuestoPE = new ImpuestoPublicidadExterior();
+
+					eachImpuestoPE.setNumObjeto(eachPublicityTax.getObjectNumber());
+					eachImpuestoPE.setNumResolu(eachPublicityTax.getResolutionNumber());
+					eachImpuestoPE.setTipoValla(eachPublicityTax.getFenceType());
+					eachImpuestoPE.setAnoGravable(eachPublicityTax.getAnoGravable());
+					if ("VALLA VEHICULOS".equalsIgnoreCase(eachPublicityTax.getFenceType())
+							|| "VALLA VEHíCULOS".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+					{
+						eachImpuestoPE.setTipoVallaCode("02");
+					}
+					else if ("Valla Tubular de Obra".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+					{
+						eachImpuestoPE.setTipoVallaCode("03");
+					}
+					else if ("Valla de Obra Convencional".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+					{
+						eachImpuestoPE.setTipoVallaCode("04");
+					}
+					else if ("Valla Tubular Comercial".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+					{
+						eachImpuestoPE.setTipoVallaCode("01");
+					}
+					else if ("Pantalla LED".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+					{
+						eachImpuestoPE.setTipoVallaCode("05");
+					}
+					listImpuestoPublicdadExterior.add(eachImpuestoPE);
+				}
+
+				publicidadForm.setPublicidadExt(listImpuestoPublicdadExterior);
+
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getIca() != null
+					&& StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getIca().getNumObjeto()))
+			{
+				miRitForm.setImpuestoICA(sdhConsultaContribuyenteBPResponse.getIca());
+			}
+
+		}
+		catch (final IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		model.addAttribute("dataForm", miRitForm);
+		model.addAttribute("vehiculosForm", vehiculosForm);
+		model.addAttribute("predial", predialFormIni);
 		model.addAttribute("ctaForm", ctaForm);
+		model.addAttribute("publicidadForm", publicidadForm);
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ESTADO_DE_CUENTA_CMS_PAGE));

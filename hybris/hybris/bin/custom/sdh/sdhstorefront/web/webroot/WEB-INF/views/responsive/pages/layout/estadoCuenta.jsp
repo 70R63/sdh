@@ -15,6 +15,8 @@
 	<consultas:estadoCuentaMenu />
 
 	<consultas:edoCuentaTodo />
+	
+	<consultas:edoCuentaImprimir/>
 
 	<%-- 	<consultas:estadoCuentaImpuesto /> --%>
 
