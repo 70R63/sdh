@@ -48,8 +48,8 @@
 										<%-- 												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')"> --%>
 										<%-- 													<spring:theme code="predial.inicial.table.ver" /> --%>
 										<!-- 											</label></td> -->
-										<td><label data-objeto="${current.CHIP}"
-											onclick="ACC.oblipend.bindTrmPdf('01','2','predialReporte.pdf');"><span
+										<td><label data-objeto="${current.numObjeto}"
+											onclick="ACC.oblipend.bindTrmPdf('${current.numObjeto}','2','predialReporte.pdf');"><span
 												class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
 									</tr>
 								</c:when>
@@ -68,8 +68,8 @@
 										<%-- 												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')"> --%>
 										<%-- 													<spring:theme code="predial.inicial.table.ver" /> --%>
 										<!-- 											</label></td> -->
-										<td><label data-objeto="${current.CHIP}"
-											onclick="ACC.oblipend.bindTrmPdf('01','2','predialReporte.pdf');"><span
+										<td><label data-objeto="${current.numObjeto}"
+											onclick="ACC.oblipend.bindTrmPdf('${current.numObjeto}','2','predialReporte.pdf');"><span
 												class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
 									</tr>
 								</c:when>
@@ -88,8 +88,8 @@
 										<%-- 												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')"> --%>
 										<%-- 													<spring:theme code="predial.inicial.table.ver" /> --%>
 										<!-- 											</label></td> -->
-										<td><label data-objeto="${current.CHIP}"
-											onclick="ACC.oblipend.bindTrmPdf('01','2','predialReporte.pdf');"><span
+										<td><label data-objeto="${current.numObjeto}"
+											onclick="ACC.oblipend.bindTrmPdf('${current.numObjeto}','2','predialReporte.pdf');"><span
 												class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
 									</tr>
 								</c:when>
@@ -138,7 +138,7 @@
 								<%-- 								data-numbp="${vehiculosForm.numBP}" --%>
 								<%-- 								class="text-capitalize !important labelVerDetVeh "><spring:theme --%>
 								<%-- 										code="sobre.vehiculo.table.verdetalle" /></label></td> --%>
-								<td><label data-objeto="${eachVehiculo.placa}" onclick="ACC.oblipend.bindTrmPdf('03','2','vehicularReporte.pdf');"><span class="glyphicon glyphicon-save"
+								<td><label data-objeto="${eachVehiculo.numObjeto}" onclick="ACC.oblipend.bindTrmPdf('${eachVehiculo.numObjeto}','2','vehicularReporte.pdf');"><span class="glyphicon glyphicon-save"
 										aria-hidden="true"></span></label></td>
 							</tr>
 						</c:forEach>
@@ -174,7 +174,7 @@
 							<%-- 										data-cdu="${delineacion.cdu}" --%>
 							<%-- 										class="text-capitalize !important label1Ver "><spring:theme --%>
 							<%-- 												code="publicidad.exterior.ver" /></label></td> --%>
-							<td><label onclick="ACC.oblipend.bindTrmPdf('02','2','icaReporte.pdf');"><span class="glyphicon glyphicon-save"
+							<td><label onclick="ACC.oblipend.bindTrmPdf('${dataForm.impuestoICA.numObjeto}','2','icaReporte.pdf');"><span class="glyphicon glyphicon-save"
 									aria-hidden="true"></span></label></td>
 
 						</tr>
@@ -209,16 +209,12 @@
 						<c:forEach items="${dataForm.delineacion}" var="delineacion">
 							<c:if test="${delineacion.cdu != ''}">
 								<tr>
-									<td><input id="CDU" name=""
-										class="inputtextnew tableident" aria-required="true"
-										type="text" readonly="readonly" value="${delineacion.cdu}"
-										maxlength="240"
-										style="width: 81px !important; padding-left: 1px !important; padding-right: 1px !important;"></td>
+								<td><c:out value="${delineacion.cdu}" /></td>
 									<!-- 									<td><label style="color: #0358d8 !important" -->
 									<%-- 										data-cdu="${delineacion.cdu}" --%>
 									<%-- 										class="text-capitalize !important label1Ver "><spring:theme --%>
 									<%-- 												code="publicidad.exterior.ver" /></label></td> --%>
-									<td><label onclick="ACC.oblipend.bindTrmPdf('06','2','delUrbanaReporte.pdf');"><span class="glyphicon glyphicon-save"
+									<td><label onclick="ACC.oblipend.bindTrmPdf('${delineacion.numObjeto}','2','delUrbanaReporte.pdf');"><span class="glyphicon glyphicon-save"
 											aria-hidden="true"></span></label></td>
 
 								</tr>
@@ -258,7 +254,7 @@
 								<td><c:out value="${eachgas.tipoDoc}"></c:out></td>
 								<td><c:out value="${eachgas.numDoc}" /></td>
 								<td><c:out value="${eachgas.numObjeto}" /></td>
-								<td><label onclick="ACC.oblipend.bindTrmPdf('08','2','sobGasolinaReporte.pdf');"><span class="glyphicon glyphicon-save"
+								<td><label onclick="ACC.oblipend.bindTrmPdf('${eachgas.numObjeto}','2','sobGasolinaReporte.pdf');"><span class="glyphicon glyphicon-save"
 										aria-hidden="true"></span></label></td>
 							</tr>
 						</c:forEach>
@@ -304,7 +300,7 @@
 								<%-- 								class="text-capitalize !important labelVer "><spring:theme --%>
 								<%-- 										code="publicidad.exterior.ver" /></label></td> --%>
 
-								<td><label onclick="ACC.oblipend.bindTrmPdf('54','2','pubExteriorReporte.pdf');"><span class="glyphicon glyphicon-save"
+								<td><label onclick="ACC.oblipend.bindTrmPdf('${eachPubExtTax.numObjeto}','2','pubExteriorReporte.pdf');"><span class="glyphicon glyphicon-save"
 										aria-hidden="true"></span></label></td>
 							</tr>
 						</c:forEach>
