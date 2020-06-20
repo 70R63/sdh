@@ -160,7 +160,7 @@
 						<tr>
 							<th style="text-align: center"><label
 								class="control-label labeltabletd"><spring:theme
-										code="delineacion.urbana.CDU" /> </label></th>
+										code="edocta.ica.ica" /> </label></th>
 							<th style="text-align: center"><label
 								class="control-label labeltabletd"> <spring:theme
 										code="Imprimir" />
