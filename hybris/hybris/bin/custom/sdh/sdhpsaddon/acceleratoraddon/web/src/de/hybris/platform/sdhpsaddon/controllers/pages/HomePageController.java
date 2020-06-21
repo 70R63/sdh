@@ -108,7 +108,7 @@ public class HomePageController extends AbstractPageController
 		}
 		else if ("sdh_04".equals(role))
 		{
-			return REDIRECT_PREFIX + "/retenedores/cargadocumentos";
+			return REDIRECT_PREFIX + "/retenedores/registroretenciones";
 		}
 		else if ("sdh_05".equals(role))
 		{
