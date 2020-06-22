@@ -1,9 +1,6 @@
 package de.hybris.sdh.storefront.controllers.rest;
 
 
-import de.hybris.sdh.core.model.SdhFAQsCategoryModel;
-import de.hybris.sdh.core.model.SdhFAQsModel;
-import de.hybris.sdh.core.services.SDHFAQsService;
 import de.hybris.sdh.facades.SDHFAQsFacade;
 import de.hybris.sdh.facades.faqs.data.SDHFaqData;
 import org.springframework.web.bind.annotation.RequestMapping;
