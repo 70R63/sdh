@@ -10,7 +10,15 @@
 
 <div class="loader"></div>
 
-<reex:reexpedicionFactura/>
+<c:choose>
+	<c:when test="${ not empty facturacionForm.vehicular || not empty facturacionForm.predial}">
+		<reex:reexpedicionFactura/>
+	</c:when>
+	<c:otherwise>
+		<reex:sinReexpedicionFactura/>
+	</c:otherwise>
+</c:choose>
+
 
 
 <script type="text/javascript">

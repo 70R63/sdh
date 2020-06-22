@@ -13,21 +13,23 @@
 
 
 	<div class="row">
-		<c:if test="${not empty errores}">
-			<div class="alert alert-danger alert-dismissable getAccAlert">
-				<button class="close closeAccAlert" aria-hidden="true"
-					data-dismiss="alert" type="button">&times;</button>
-				<c:forEach items="${errores}" varStatus="varStatus" var="error">
-					<c:if test="${not empty error.txt_msj}">
-						<spring:theme code="${error.txt_msj}"
-						arguments="${error.txt_msj}" htmlEscape="false"
-						var="errorMessages" />
-						${ycommerce:sanitizeHTML(errorMessages)}
-						<br>
+		<c:if test="${not empty miBuzon.mensajesMsg}">
+			<c:forEach items="${miBuzon.mensajesMsg}" varStatus="varStatusMensaje" var="mensaje">
+				<c:forEach items="${mensaje.errores}" varStatus="varStatus" var="error">					
+					<c:if test="${not empty error.txt_msj }">
+						<div class="alert alert-danger alert-dismissable getAccAlert">
+							<button class="close closeAccAlert" aria-hidden="true" data-dismiss="alert" type="button">&times;</button>
+							<spring:theme code="${error.txt_msj}" arguments="${error.txt_msj}" htmlEscape="false" var="errorMessages" />
+							${ycommerce:sanitizeHTML(errorMessages) }
+							<br>
+						</div>
 					</c:if>
 				</c:forEach>
-			</div>
+			</c:forEach>
 		</c:if>
+	</div>
+	
+	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
 				<thead>

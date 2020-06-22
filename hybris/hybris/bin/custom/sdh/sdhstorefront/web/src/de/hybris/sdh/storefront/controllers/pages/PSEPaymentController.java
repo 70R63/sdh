@@ -682,14 +682,8 @@ public class PSEPaymentController extends AbstractPageController
 				}
 				else if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS))
 				{
-					final String[] parametrosMsg =
-					{ psePaymentForm.getNumeroDeReferencia() };
-
+					GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_SERVICENOTEXISTS");
 					flagSuccessView = "E";
-
-					GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
-							"pse.message.error.no._FAIL_SERVICENOTEXISTS", parametrosMsg);
-
 					model.addAttribute("flagSuccessView", flagSuccessView);
 				}
 				else
@@ -702,6 +696,7 @@ public class PSEPaymentController extends AbstractPageController
 			else
 			{
 				GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
+
 			}
 			LOG.info(response);
 		}
