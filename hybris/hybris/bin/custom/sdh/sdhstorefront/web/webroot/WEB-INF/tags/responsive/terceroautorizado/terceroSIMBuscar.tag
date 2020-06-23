@@ -6,10 +6,19 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
+	        <form:form method="post" commandName="tercerosAutForm" action="buscar">
+	            <div class="col-sm-3">
+                <formElement:formSelectBox idKey="tipdoc" labelKey="terceros.notario.buscar.tipdoc"
+                    path="tipdoc" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
+                    items="${documentTypes}" selectCSSClass="form-control" disabled="false"/>
+
+             </div>
+	
 		<div class="col-md-2">
 			<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -23,6 +32,7 @@
 			</button>
 			</div>
 		</div>
-
+		
+         </form:form>
 	</div>
 </div>
