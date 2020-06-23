@@ -48,13 +48,13 @@
 					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label"> <spring:theme
-									code="autorizado.crear.buscar.tipdoc" text="" /></label> <select id=""
+									code="autorizado.crear.buscar.tipdoc" text="" /></label> <select id="documentType"
 								class="newalto form-control">
 								<option value="">Seleccionar</option>
-								<option value="">Cedula de Ciudadania</option>
-								<option value="">Cedula de Extranjería</option>
-								<option value="">N.I.T</option>
-								<option value="">Pasaporte</option>
+								<option value="CC">Cedula de Ciudadania</option>
+								<option value="CE">Cedula de Extranjerï¿½a</option>
+								<option value="NIT">N.I.T</option>
+								<option value="PA">Pasaporte</option>
 							</select>
 						</div>
 					</div>
@@ -62,7 +62,7 @@
 						<div class="form-group ">
 							<label class="control-label required" for="numDoc"> <spring:theme
 									code="autorizado.crear.buscar.numdoc" />
-							</label> <input id="" name="" class="newalto form-control"
+							</label> <input id="documentNumber" name="" class="newalto form-control"
 								aria-required="true" type="text" value="" maxlength="240">
 						</div>
 					</div>
@@ -71,7 +71,7 @@
 						<div class="form-group ">
 							<label class="control-label required"> <spring:theme
 									code="autorizado.crear.buscar.fecexpe" />
-							</label> <input id="" name="" class="newalto form-control"
+							</label> <input id="issuedDate" name="" class="newalto form-control"
 								aria-required="true" type="text" value="" maxlength="240"
 								placeholder="dd/mm/aaaa">
 						</div>

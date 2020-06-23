@@ -766,4 +766,6 @@
 	<alias alias="sdhTercerosAutService" name="defaultSDHTercerosAutService"/>
 	<bean name="defaultSDHTercerosAutService" class="de.hybris.sdh.core.services.impl.DefaultSDHTercerosAutService" />
 
+	<alias alias="sdhAgentesAutBPService" name="defaultSDHAgentesAutBPService"/>
+	<bean name="defaultSDHAgentesAutBPService" class="de.hybris.sdh.core.services.impl.DefaultSDHAgentesAutBPService" />
 </beans>

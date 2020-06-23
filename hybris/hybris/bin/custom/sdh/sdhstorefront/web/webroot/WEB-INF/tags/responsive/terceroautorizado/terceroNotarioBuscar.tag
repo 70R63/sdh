@@ -25,7 +25,7 @@
              <div class="col-sm-3">
                  <formElement:formSelectBox idKey="impuesto" labelKey="terceros.notario.buscar.impuesto"
                                  path="impuesto" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
-                                 items="${impuestos}" selectCSSClass="form-control" disabled="false"/>
+                                 items="${tercerosAutForm.listaImpuestos}" selectCSSClass="form-control" disabled="false"/>
              </div>
              <div class="col-sm-3">
                 <formElement:formInputBox idKey="numdoc" labelKey="terceros.notario.buscar.numdoc" path="numdoc" />
