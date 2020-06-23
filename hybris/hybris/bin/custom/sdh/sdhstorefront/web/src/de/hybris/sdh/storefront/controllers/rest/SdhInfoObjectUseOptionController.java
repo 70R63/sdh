@@ -84,7 +84,7 @@ public class SdhInfoObjectUseOptionController {
             }else if(taxType.equals("2")){ //Vehicular
                 opcionUso = this.getOpcionUsoVehicular(anioGravable, placa);
             }else if(taxType.equals("6")){ //Delineacion Urbana
-                opcionUso = this.getOpcionUsoDelineacionUrbana(cdu, numRadicado);
+				opcionUso = this.getOpcionUsoDelineacionUrbana(cdu, numRadicado);
             }
         }
 
@@ -168,7 +168,8 @@ public class SdhInfoObjectUseOptionController {
         return detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso();
     }
 
-    private String getOpcionUsoDelineacionUrbana(final String cdu, final String numRadicado){
+	private String getOpcionUsoDelineacionUrbana(final String cdu, final String numRadicado)
+	{
 		String opcionUso = null;
         final InfoObjetoDelineacionRequest infoDelineacionRequest = new InfoObjetoDelineacionRequest();
         final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
@@ -185,7 +186,9 @@ public class SdhInfoObjectUseOptionController {
 
         infoDelineacionRequest.setNumBP(customerModel.getNumBP());
         //infoDelineacionRequest.setAnoGravable(gasolinaService.getAnoGravableDU(detalleContribuyente.getDelineacion(), infoDelineacionInput));
-        infoDelineacionRequest.setAnoGravable("2020");
+		infoDelineacionRequest.setAnoGravable("2020");
+		//infoDelineacionRequest.setAnoGravable(anioGravable);
+		infoDelineacionRequest.setAnoGravable("");
         infoDelineacionRequest.setCdu(cdu);
         infoDelineacionRequest.setNumRadicado(numRadicado);
         infoDelineacionRequest.setTipoLicencia("");
@@ -197,6 +200,11 @@ public class SdhInfoObjectUseOptionController {
 		if (infoDelineacionResponse != null && infoDelineacionResponse.getInfoDeclara() != null)
 		{
 			opcionUso = infoDelineacionResponse.getInfoDeclara().getOpcionUso();
+		}
+
+		if (numRadicado.isEmpty() && infoDelineacionResponse.getInfoDeclara().getObjetoLicen() == null)
+		{
+			opcionUso = "99";
 		}
 
 

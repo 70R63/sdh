@@ -175,7 +175,6 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
 		}
 
-
 		model.addAttribute("dataForm", infoDelineacion);
 
 
@@ -286,6 +285,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		 * detalleContribuyente.getTxtmsj(); // LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
 		 * // GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2"); }
 		 */
+
 
 
 		model.addAttribute("dataForm", infoDelineacion);
