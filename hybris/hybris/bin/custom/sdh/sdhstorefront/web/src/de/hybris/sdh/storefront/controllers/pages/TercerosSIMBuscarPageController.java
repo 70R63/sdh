@@ -49,7 +49,7 @@ public class TercerosSIMBuscarPageController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
-	@RequestMapping(value = "/terceros/sim/buscar", method = RequestMethod.GET)
+	@RequestMapping(value = "/terceros/objeto", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String tercerossim(final Model model) throws CMSItemNotFoundException
 	{
@@ -66,7 +66,7 @@ public class TercerosSIMBuscarPageController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/terceros/sim/buscar", method = RequestMethod.POST)
+	@RequestMapping(value = "/terceros/objeto", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String tercerossimpost(final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes)

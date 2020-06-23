@@ -428,6 +428,44 @@ public class SobreTasaGasolinaService
 		return elementos;
 	}
 
+	public List<SelectAtomValue> obtenerListaImpuesto(final String subrol)
+	{
+		final List<SelectAtomValue> elementos = new ArrayList<SelectAtomValue>();
+
+		if (subrol.equals("03_01"))
+		{
+			elementos.add(new SelectAtomValue("1", "Predial Unificado"));
+			elementos.add(new SelectAtomValue("2", "Vehículos"));
+			elementos.add(new SelectAtomValue("3", "ICA"));
+			elementos.add(new SelectAtomValue("4", "Reteica"));
+			elementos.add(new SelectAtomValue("5", "Sobretasa Gasolina"));
+			elementos.add(new SelectAtomValue("6", "Delineación Urbana"));
+			elementos.add(new SelectAtomValue("7", "Publicidad Exterior"));
+
+		}
+		if (subrol.equals("03_02"))
+		{
+			elementos.add(new SelectAtomValue("1", "Predial Unificado"));
+			elementos.add(new SelectAtomValue("2", "Vehículos"));
+			elementos.add(new SelectAtomValue("3", "ICA"));
+			elementos.add(new SelectAtomValue("4", "Reteica"));
+			elementos.add(new SelectAtomValue("5", "Sobretasa Gasolina"));
+			elementos.add(new SelectAtomValue("6", "Delineación Urbana"));
+			elementos.add(new SelectAtomValue("7", "Publicidad Exterior"));
+		}
+		if (subrol.equals("03_03"))
+		{
+			elementos.add(new SelectAtomValue("1", "Predial Unificado"));
+		}
+		if (subrol.equals("03"))
+		{
+			elementos.add(new SelectAtomValue("2", "Vehículos"));
+		}
+
+
+		return elementos;
+	}
+
 	private Map<String, String> obtenerListaTipoConsulta()
 	{
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
