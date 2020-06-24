@@ -202,7 +202,9 @@ public class SdhInfoObjectUseOptionController {
 			opcionUso = infoDelineacionResponse.getInfoDeclara().getOpcionUso();
 		}
 
-		if (numRadicado.isEmpty() && infoDelineacionResponse.getInfoDeclara().getObjetoLicen() == null)
+		if (numRadicado.isEmpty() && (
+		infoDelineacionResponse.getInfoDeclara().getFechaEjecutaria().equals("00/00/0000")
+				|| infoDelineacionResponse.getInfoDeclara().getFechaEjecutaria() == null))
 		{
 			opcionUso = "99";
 		}
