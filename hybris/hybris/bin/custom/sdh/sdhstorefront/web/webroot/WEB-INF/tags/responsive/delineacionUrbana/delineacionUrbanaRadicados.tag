@@ -99,7 +99,7 @@
 				</div>
 				<div class="col-md-4  ">
 					<div class="form-group ">
-						<sf:button class="btn btn-primary btn-lg" name="action"
+						<sf:button class="btn btn-primary btn-lg" name="action" 
                             id="declaradelibutton1" value="declaracion" disabled="true" onclick="formValidator();">
                             <spring:theme code="delineacion.urbana.radicados.generar.declaracion" />
                         </sf:button>
@@ -173,34 +173,38 @@
 
 	    $.ajax({
             url : currentUrl,
+            async: false,
+            cache: false,
+            timeout: 30000,
            	type : "GET",
         	success : function(dataResponse) {
         		
         		debugger;
                 
                 if ( dataResponse == "99"){
-       				 alert("Solicite mediante un Trámite la actualización de los datos de la Licencia, una vez actualizado presente su Declaración");
-       				 window.location.href = nowUrl;
-       				 alert("");
+                	 alert("Solicite mediante un Trámite la actualización de los datos de la Licencia, una vez actualizado presente su Declaración");
+                	 window.location.assign( nowUrl );                	 
+                	 alert("");
        			}else{
                 
 	                if(dataResponse == "02"){
 	                    var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
 	                    if (r == true) {
 	                        return true;
+	                        
 	                    } else {
 	                        window.location.href = nowUrl;
 	                    }
 	                }else{
-	                   return true;
-	                 }
+	                   return true;	                   
+	                }
        			}    
         	},
         	error : function() {
         	}
         	
         });
-	    alert("Validaciones para la declaracion");
+	    
 	}
 
 </script>
