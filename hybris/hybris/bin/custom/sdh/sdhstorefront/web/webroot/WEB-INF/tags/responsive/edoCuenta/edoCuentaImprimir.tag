@@ -138,8 +138,9 @@
 								<%-- 								data-numbp="${vehiculosForm.numBP}" --%>
 								<%-- 								class="text-capitalize !important labelVerDetVeh "><spring:theme --%>
 								<%-- 										code="sobre.vehiculo.table.verdetalle" /></label></td> --%>
-								<td><label data-objeto="${eachVehiculo.numObjeto}" onclick="ACC.oblipend.bindTrmPdf('${eachVehiculo.numObjeto}','2','vehicularReporte.pdf');"><span class="glyphicon glyphicon-save"
-										aria-hidden="true"></span></label></td>
+								<td><label data-objeto="${eachVehiculo.numObjeto}"
+									onclick="ACC.oblipend.bindTrmPdf('${eachVehiculo.numObjeto}','2','vehicularReporte.pdf');"><span
+										class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -158,9 +159,10 @@
 				<table class="table ImprimirIca">
 					<thead style="background-color: #006DCC !important">
 						<tr>
-							<th style="text-align: center"><label
-								class="control-label labeltabletd"><spring:theme
-										code="edocta.ica.ica" /> </label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="mirit.gas.tax.tipoDoc" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="mirit.gas.tax.numDoc" /></label></th>
 							<th style="text-align: center"><label
 								class="control-label labeltabletd"> <spring:theme
 										code="Imprimir" />
@@ -169,13 +171,15 @@
 					</thead>
 					<tbody>
 						<tr>
-						<td><c:out value="${dataForm.impuestoICA.numObjeto}" /></td>
+							<td><c:out value="${ctaForm.tipoDoc}" /></td>
+							<td><c:out value="${ctaForm.numDoc}" /></td>
 							<!-- 									<td><label style="color: #0358d8 !important" -->
 							<%-- 										data-cdu="${delineacion.cdu}" --%>
 							<%-- 										class="text-capitalize !important label1Ver "><spring:theme --%>
 							<%-- 												code="publicidad.exterior.ver" /></label></td> --%>
-							<td><label onclick="ACC.oblipend.bindTrmPdf('${dataForm.impuestoICA.numObjeto}','2','icaReporte.pdf');"><span class="glyphicon glyphicon-save"
-									aria-hidden="true"></span></label></td>
+							<td><label
+								onclick="ACC.oblipend.bindTrmPdf('${dataForm.impuestoICA.numObjeto}','2','icaReporte.pdf');"><span
+									class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
 
 						</tr>
 					</tbody>
@@ -209,13 +213,14 @@
 						<c:forEach items="${dataForm.delineacion}" var="delineacion">
 							<c:if test="${delineacion.cdu != ''}">
 								<tr>
-								<td><c:out value="${delineacion.cdu}" /></td>
+									<td><c:out value="${delineacion.cdu}" /></td>
 									<!-- 									<td><label style="color: #0358d8 !important" -->
 									<%-- 										data-cdu="${delineacion.cdu}" --%>
 									<%-- 										class="text-capitalize !important label1Ver "><spring:theme --%>
 									<%-- 												code="publicidad.exterior.ver" /></label></td> --%>
-									<td><label onclick="ACC.oblipend.bindTrmPdf('${delineacion.numObjeto}','2','delUrbanaReporte.pdf');"><span class="glyphicon glyphicon-save"
-											aria-hidden="true"></span></label></td>
+									<td><label
+										onclick="ACC.oblipend.bindTrmPdf('${delineacion.numObjeto}','2','delUrbanaReporte.pdf');"><span
+											class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
 
 								</tr>
 							</c:if>
@@ -241,24 +246,26 @@
 										code="mirit.gas.tax.tipoDoc" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="mirit.gas.tax.numDoc" /></label></th>
-							<th><label class="control-label labeltabletd"><spring:theme
-										code="mirit.gas.tax.numObjeto" /></label></th>
-							<th><label class="control-label labeltabletd" for=""> <spring:theme
-										code="Imprimir" /></label></th>
+							<%-- 							<th><label class="control-label labeltabletd"><spring:theme --%>
+							<%-- 										code="mirit.gas.tax.numObjeto" /></label></th> --%>
+							<th><label class="control-label labeltabletd" for="">
+									<spring:theme code="Imprimir" />
+							</label></th>
 						</tr>
 					</thead>
 					<tbody>
-						
+
 						<c:forEach items="${dataForm.gasolina}" var="eachgas">
 							<tr>
 								<td><c:out value="${eachgas.tipoDoc}"></c:out></td>
 								<td><c:out value="${eachgas.numDoc}" /></td>
-								<td><c:out value="${eachgas.numObjeto}" /></td>
-								<td><label onclick="ACC.oblipend.bindTrmPdf('${eachgas.numObjeto}','2','sobGasolinaReporte.pdf');"><span class="glyphicon glyphicon-save"
-										aria-hidden="true"></span></label></td>
+								<%-- 								<td><c:out value="${eachgas.numObjeto}" /></td> --%>
+								<td><label
+									onclick="ACC.oblipend.bindTrmPdf('${eachgas.numObjeto}','2','sobGasolinaReporte.pdf');"><span
+										class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
 							</tr>
 						</c:forEach>
-						
+
 					</tbody>
 				</table>
 
@@ -300,8 +307,9 @@
 								<%-- 								class="text-capitalize !important labelVer "><spring:theme --%>
 								<%-- 										code="publicidad.exterior.ver" /></label></td> --%>
 
-								<td><label onclick="ACC.oblipend.bindTrmPdf('${eachPubExtTax.numObjeto}','2','pubExteriorReporte.pdf');"><span class="glyphicon glyphicon-save"
-										aria-hidden="true"></span></label></td>
+								<td><label
+									onclick="ACC.oblipend.bindTrmPdf('${eachPubExtTax.numObjeto}','2','pubExteriorReporte.pdf');"><span
+										class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
 							</tr>
 						</c:forEach>
 					</tbody>
