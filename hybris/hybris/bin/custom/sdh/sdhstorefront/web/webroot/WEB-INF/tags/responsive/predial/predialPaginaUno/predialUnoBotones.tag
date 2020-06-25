@@ -53,6 +53,7 @@
  <input type="hidden" value="${predialForm.estrLiquidacionPrivada.aporteVoluntario}" id="AporteVoluntario"/>
  <input type="hidden" value="${predialForm.estrLiquidacionPrivada.proyecto}" id="Proyecto"/>
  <input type="hidden" value="" id="Autoavaluo"/><!-- este campo no se encuentra en el servicio -->
+  <input type="hidden" value="${predialForm.objetocontrato}" id="ObjetoContrato"/>
 <!-- Fin de campos para calculo -->
 	<input type="hidden" id="numForm" value="${predialForm.numFrom}"/>
 
@@ -91,12 +92,29 @@
 				</c:if>
 				
 				
-				<button class="btn btn-primary btn-lg" type="submit" id="action"
-					name="pagar" value="pagar">
+				<button class="btn btn-primary btn-lg btnspac" type="submit" id="btnspac"
+					name="pagar" value="pagar" data-numForm="${predialForm.numFrom}" data-anio="${predialForm.anioGravable}" data-obj="${predialForm.objetocontrato}" data-reimpresion="">
 					<spring:theme code="predialuno.firma.spac" />
 				</button>
+				
 	
 			</div>
+			<div class="col-md-6" id="tableSpac" style="visibility:hidden;">
+			<br><br>
+				<table class="table tableSpacPago" id="tableSpacPago">
+						<thead>
+							<tr>
+								<th><label class="control-label labeltabletd tableident"><spring:theme
+											code="spac.table.cuotas" /></label></th>
+								<th><label class="control-label labeltabletd"><spring:theme
+											code="spac.table.pagar" /></label></th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
 			
 		</sf:form>
 	</div>

@@ -57,6 +57,7 @@
 			<sf:input type="hidden" id="renumBP"  path="numBP" />
 			<sf:input type="hidden" id="retipRegistro"  class="retipRegistro" path="retipRegistro"/>
 			<sf:input type="hidden" id="retipDeclaracion"  class="retipDeclaracion" path="retipDeclaracion"/>
+			<sf:input type="hidden" id="objetocontrato" value="" path="objetocontrato"/>
 			<div class="col-md-12 centercol-md-8 text-center">
 				<button style="margin-top: 3px;" id=""
 					class="btn btn-secondary btn-lg" type="button">
@@ -85,6 +86,7 @@
 
 <script type="text/javascript">
     function validateForm() {
+    	debugger;
     	if(ACC.predial.mostrarMensajeInfoObjeto()){
     		return false;
     	}

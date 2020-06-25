@@ -69,6 +69,9 @@
 									<th><label class="control-label labeltabletd"> <spring:theme
 												code="obligacion.inicial.predio.pagar" />
 									</label></th>
+									<th><label class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.spac" />
+									</label></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -92,6 +95,9 @@
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 													id="Detalle"
 													onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPredDet.objetoContrato}','${current.CHIP}', '${eachObPredDet.fechaVencimiento}', '${eachObPredDet.numReferencia}','${eachObPredDet.obligacion}' )">Pagar</label></td>
+													<td><label class="control-label btnGenerarSPACObli"
+													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+													id="btnGenerarSPACObli" data-numForm="${eachObPredDet.numFormulario}" data-anio="${eachObPred.anioGravable}" data-obj="${eachObPredDet.objetoContrato}" data-reimpresion="X">Generar SPAC</label></td>
 											</tr>
 										</c:if>
 									</c:forEach>
@@ -108,8 +114,39 @@
 					</div>
 				</div>
 			</c:if>
+		
 		</div>
-
+	<div class="col-md-8" id="tableSpac" style="visibility:hidden;">
+	<br>
+	<input type="hidden" value="" id="anioGravPDF" class="anioGravPDF"/>
+	<input type="hidden" value="" id="objcontPDF"/>
+	<input type="hidden" value="" id="numFormPDF"/>
+	<input type="hidden" value="" id="numBP"/>
+				<table class="table tableSpacPago" id="tableSpacPago">
+						<thead>
+							<tr>
+								<th><label class="control-label labeltabletd tableident"><spring:theme
+											code="spac.table.cuotas" /></label></th>
+								<th><label class="control-label labeltabletd tablenumiden"><spring:theme
+											code="spac.table.pagar" /></label></th>
+														<th><label class="control-label labeltabletd tablenumiden"><spring:theme
+											code="spac.table.monto" /></label></th>
+														<th><label class="control-label labeltabletd tablenumiden"><spring:theme
+											code="spac.table.estatus" /></label></th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+					
+					<div class="col-md-3 col-md-offset-8">
+							<button type="button" class="btn btn-primary btn-lg btnGenerarSpacPDF" id="btnGenerarSpacPDF"
+								name="btnGenerarSpacPDF" value="btnGenerarSpacPDF" style="margin-top: 3px">
+								<spring:theme code="spac.table.descargar" />
+							</button>
+						</div>
+				</div>
 		<div id="oblipend-vehiculos" class="oblipend-table"
 			style="display: none;">
 			<div class="row">
@@ -1309,6 +1346,10 @@
 		</div>
 
 	</div>
+	<div class="row">
+			<a id='dwnldLnk' download='SPAC.pdf'
+				style="display: none;" />
+		</div>
 </sf:form>
 <br>
 

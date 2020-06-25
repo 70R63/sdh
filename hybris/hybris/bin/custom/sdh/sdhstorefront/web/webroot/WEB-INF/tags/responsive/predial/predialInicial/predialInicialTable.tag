@@ -73,7 +73,7 @@
 												data-matrInmobiliaria="${current.matrInmobiliaria}"
 												class="text-capitalize !important showDetailPredio"
 												id="showDetailPredio"
-												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')">
+												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}','${current.numObjeto}')">
 													<spring:theme code="predial.inicial.table.ver" />
 											</label></td>
 										</tr>
@@ -91,7 +91,7 @@
 												data-matrInmobiliaria="${current.matrInmobiliaria}"
 												class="text-capitalize !important showDetailPredio"
 												id="showDetailPredio"
-												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')">
+												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}','${current.numObjeto}')">
 													<spring:theme code="predial.inicial.table.ver" />
 											</label></td>
 										</tr>
@@ -109,7 +109,7 @@
 												data-matrInmobiliaria="${current.matrInmobiliaria}"
 												class="text-capitalize !important showDetailPredio"
 												id="showDetailPredio"
-												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')">
+												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}','${current.numObjeto}')">
 													<spring:theme code="predial.inicial.table.ver" />
 											</label></td>
 										</tr>
