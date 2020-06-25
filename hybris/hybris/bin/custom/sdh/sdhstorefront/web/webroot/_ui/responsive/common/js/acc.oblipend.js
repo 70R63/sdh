@@ -18,7 +18,9 @@ ACC.oblipend = {
 			$("#oblipend-publiext").hide();
 			$("#oblipend-gasolina").hide();
 			$("#oblipend-delurbana").hide();
-			
+			var divtable = document.getElementById("tableSpac");
+
+			divtable.style.visibility = 'hidden';
 
 			var impuesto = $("#impuesto").val();
 

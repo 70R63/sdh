@@ -122,13 +122,28 @@
 				</c:if>
 				
 				
-				<button class="btn btn-primary btn-lg" type="submit" id="action"
-					name="pagar" value="pagar">
+				<button class="btn btn-primary btn-lg btnspac" type="submit"
+					id="btnspac" name="pagar" value="pagar" data-numForm="${predialFormbases.numFrom}" data-anio="${predialFormbases.anioGravable}" data-obj="${predialFormbases.anioGravable}">
 					<spring:theme code="predialuno.firma.spac" />
 				</button>
-	
+
+
 			</div>
-			
+			<div class="col-md-6" id="tableSpac" style="display: none">
+				<table class="table tableSpacPago" id="tableSpacPago">
+					<thead>
+						<tr>
+							<th><label class="control-label labeltabletd tableident"><spring:theme
+										code="spac.table.cuotas" /></label></th>
+							<th><label class="control-label labeltabletd tablenumiden"><spring:theme
+										code="spac.table.pagar" /></label></th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
+			</div>
 		</sf:form>
 	</div>
 </div>

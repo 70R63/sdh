@@ -36,6 +36,24 @@ public class PredialForm
 	private String CHIP;
 	private String matrInmobiliaria;
 	private String anioGravable;
+	private String objetocontrato;
+
+	/**
+	 * @return the objetocontrato
+	 */
+	public String getObjetocontrato()
+	{
+		return objetocontrato;
+	}
+
+	/**
+	 * @param objetocontrato
+	 *           the objetocontrato to set
+	 */
+	public void setObjetocontrato(final String objetocontrato)
+	{
+		this.objetocontrato = objetocontrato;
+	}
 
 	private String fechaInactivacion;
 	private String opcionuso;
