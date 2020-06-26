@@ -103,10 +103,6 @@ public class TercerosNotarioBuscarPageController extends AbstractPageController
 				break;
 			}
 		}
-		if(subrol == null) {
-			//			notaria.subrol=03_03
-					subrol = messageSource.getMessage("notaria.subrol", null, i18nService.getCurrentLocale());
-		}
 
 		tercerosAutForm.setListaImpuestos(gasolinaService.obtenerListaImpuesto(subrol));
 

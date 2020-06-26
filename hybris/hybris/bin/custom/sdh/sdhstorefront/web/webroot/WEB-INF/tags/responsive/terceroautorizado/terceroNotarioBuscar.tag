@@ -31,15 +31,22 @@
                 <formElement:formInputBox idKey="numdoc" labelKey="terceros.notario.buscar.numdoc" path="numdoc" />
              </div>
              <div class="col-sm-3">
-                    </br>
-                    <ycommerce:testId code="login_forgotPasswordSubmit_button">
-                        <button class="btn btn-primary btn-lg" type="submit">
-                            <spring:theme code="register.send"/>
-                        </button>
-                        <button class="btn btn-secondary btn-lg" type="submit">
-                            <spring:theme code="register.cancel"/>
-                        </button>
-                    </ycommerce:testId>
+             <br/>
+			<div class="row mt-3">
+				<div class="col-md-7 text-right">
+					<sf:button class="btn btn-primary btn-lg !important tramitesEnviar" type="submit" id="btnEnviar"
+					name="btnEnviar" value="enviar" disabled="false">
+					<spring:theme code="tramites.crear.inicial.enviar" />
+				</sf:button>
+			</div>
+			<div class="col-md-1">
+				<button style="margin-top: 3px;" id=""
+					class="btn btn-secondary btn-lg" type="button" 
+					onclick="btnCancelar()">
+					<spring:theme code="tramites.crear.inicial.cancelar" />
+					</button>
+				</div>
+			</div>
              </div>
          </form:form>
      </div>

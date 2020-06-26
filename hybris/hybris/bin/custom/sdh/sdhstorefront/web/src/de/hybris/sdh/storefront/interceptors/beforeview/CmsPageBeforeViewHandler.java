@@ -43,7 +43,6 @@ import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.sdh.core.pojos.responses.ContribAgente;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.facades.SDHCustomerFacade;
-import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
 import de.hybris.sdh.storefront.filters.cms.CMSSiteFilter;
 import de.hybris.sdh.storefront.forms.UIMenuForm;
@@ -165,8 +164,10 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 					modelAndView.addObject("hasCORol", true);
 				} else if ("02".equals(eachRolData.getRol())) {
 					modelAndView.addObject("hasAARol", true);
-				} else if ("03".equals(eachRolData.getRol())) {
-					modelAndView.addObject("hasTARol", true);
+				}
+				else if (eachRolData.getRol() != null && eachRolData.getRol().startsWith("03"))
+				{
+					modelAndView.addObject("hasTARol_" + eachRolData.getRol().substring(3), true);
 				} else if ("04".equals(eachRolData.getRol())) {
 					modelAndView.addObject("hasARRol", true);
 				} else if ("05".equals(eachRolData.getRol())) {
@@ -180,15 +181,15 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 			modelAndView.addObject("uiMenuForm", uiMenuForm);
 			if(sessionService.getAttribute("representado")!= null) {
 
-				String representado = sessionService.getAttribute("representado");
+				final String representado = sessionService.getAttribute("representado");
 
-				SDHValidaMailRolResponse representadoData = sdhCustomerFacade.getRepresentadoFromSAP(representado);
+				final SDHValidaMailRolResponse representadoData = sdhCustomerFacade.getRepresentadoFromSAP(representado);
 
 				modelAndView.addObject("representado", representadoData);
 
 				String aamenus = "";
 
-				for (ContribAgente eachAgent : representadoData.getAgentes())
+				for (final ContribAgente eachAgent : representadoData.getAgentes())
 				{
 					if(customerData.getNumBP().equalsIgnoreCase(eachAgent.getBp()) || StringUtils.leftPad(customerData.getNumBP(),10,"0").equalsIgnoreCase(eachAgent.getBp()))
 					{

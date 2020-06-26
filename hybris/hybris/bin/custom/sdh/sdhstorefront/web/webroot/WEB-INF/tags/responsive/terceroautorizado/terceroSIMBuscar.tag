@@ -11,28 +11,19 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
-	        <form:form method="post" commandName="tercerosAutForm" action="buscar">
-	            <div class="col-sm-3">
-                <formElement:formSelectBox idKey="tipdoc" labelKey="terceros.notario.buscar.tipdoc"
-                    path="tipdoc" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
-                    items="${documentTypes}" selectCSSClass="form-control" disabled="false"/>
-
-             </div>
-	
-		<div class="col-md-2">
-			<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="terceros.sim.buscar.iddoc" /></label> <input id="" name=""
-						class="newalto form-control" type="text" value="" maxlength="240">
+        <form:form method="post" commandName="tercerosAutForm" action="buscar">
+            <div class="col-md-12">
+				<div class="form-group">
+					<div class="col-md-3">
+						<formElement:formInputBox idKey="numdoc" labelKey="terceros.sim.buscar.numeroObjeto" path="numdoc" />
+					</div>
+					<div class="col-md-2">
+						<button type="button" class="btn btn-primary btn-lg" id="" name="" value="Buscar" onclick=""> 
+							<spring:theme code="terceros.sim.buscar.buscar" />
+						</button>
+					</div>
 				</div>
-				<div class="col-md-2">
-				<button type="button" class="btn btn-primary btn-lg" id="" name=""
-				value="Buscar" onclick="">
-				<spring:theme code="terceros.sim.buscar.buscar" />
-			</button>
 			</div>
-		</div>
-		
-         </form:form>
+		</form:form>
 	</div>
 </div>
