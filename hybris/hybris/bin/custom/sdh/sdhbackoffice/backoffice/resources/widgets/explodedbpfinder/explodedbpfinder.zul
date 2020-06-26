@@ -1,0 +1,72 @@
+<widget xmlns="http://www.zkoss.org/2005/zul"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:h="http://www.w3.org/1999/xhtml"
+		xmlns:n="native"
+		xmlns:w="http://www.zkoss.org/2005/zk/client"
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul
+		http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+ 		height="100%">   <style src="${wr}/default.css"/>
+    <div>
+        <hlayout>
+            <widgetslot slotID="wizardNotificationarea" sclass="yw-notification"/>
+            <grid>
+                <rows>
+                    <row>
+                        <cell>
+                            <label value="Tipo De Documento:"/>
+                        </cell>
+                        <cell>
+                            <listbox id="documentTypeListInput" mold="select" tabindex="8"  width="100%" height="38px">
+                                <listitem value="CC" label="CC Cédula de Ciudadanía"/>
+                                	<listitem value="CE" label="CE Cédula de Extranjería"/>
+                                	<listitem value="NIT" label="NIT Número de Identificación Tributaria"/>
+                                	<listitem value="PA" label="PA Pasaporte"/>
+                                	<listitem value="TI" label="TI Tarjeta de Identidad"/>
+                                	<listitem value="TIE" label="TIE Tarjeta de Identidad de Extranjero"/>
+                                	<listitem value="NITE" label="NITE NIT Extranjero"/>
+                                	<listitem value="NUIP" label="NUIP Número Único de Identificación Personal"/>
+                            </listbox>
+                        </cell>
+                    </row>
+                    <row>
+                        <cell>
+                            <label value="Número De Documento: "/>
+                        </cell>
+                        <cell>
+                            <textbox id="documentNumberInput" width="100%"/>
+                        </cell>
+                    </row>
+                    <row>
+                        <cell>
+                            <label value="Fecha Expiración Del Documento:"/>
+                        </cell>
+                        <cell>
+                            <hbox align="center">
+                                <datebox id="documentExpirationDateInput" format="dd/MM/yyyy"
+                                width="241px" style="display: table; position: relative"/>
+                            </hbox>
+                        </cell>
+                    </row>
+                    <row>
+                        <cell>
+                            <label value="Business Partner (BP):"/>
+                        </cell>
+                        <cell>
+                                <textbox id="businessPartnerOutput" readonly="true" width="100%"/>
+                        </cell>
+                    </row>
+                    <row>
+                        <cell></cell>
+                        <cell>
+                            <hbox style="float: right;">
+                                <button id="takeFoundBpButton" label="Tomar BP"/>
+                                <button id="findBpButton" label="Buscar"/>
+                            </hbox>
+                        </cell>
+                    </row>
+                </rows>
+            </grid>
+        </hlayout>
+    </div>
+</widget>

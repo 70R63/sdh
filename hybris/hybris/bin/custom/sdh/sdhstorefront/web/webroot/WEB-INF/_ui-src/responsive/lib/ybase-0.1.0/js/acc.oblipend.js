@@ -1,6 +1,6 @@
 ACC.oblipend = {
 
-	_autoload : [ "bindBuscarObliPend", "bindDetalle", "bindDetalledos" ],
+	_autoload : [ "bindBuscarObliPend", "bindDetalle", "bindDetalledos", "bindPopupPDF"],
 
 	bindBuscarObliPend : function() {
 		
@@ -18,7 +18,9 @@ ACC.oblipend = {
 			$("#oblipend-publiext").hide();
 			$("#oblipend-gasolina").hide();
 			$("#oblipend-delurbana").hide();
-			
+			var divtable = document.getElementById("tableSpac");
+
+			divtable.style.visibility = 'hidden';
 
 			var impuesto = $("#impuesto").val();
 
@@ -58,6 +60,181 @@ ACC.oblipend = {
 
 		});
 
+	},
+	
+	bindPopupPDF : function(){
+ $(document).on("click", "#ImprimirPopUp", function(e) {
+ debugger;
+
+ e.preventDefault();
+ debugger;
+	var impuestoSelc = $(this).data("impuesto");
+	var tablePred = document.getElementsByClassName("table ImprimirPredial");
+	tablePred[0].setAttribute("id","example1");
+	var tableVeh = document.getElementsByClassName("table ImprimirVehicular");
+	tableVeh[0].setAttribute("id","example2");
+	var tableIca = document.getElementsByClassName("table ImprimirIca");
+	tableIca[0].setAttribute("id","example3");
+	var tableDel = document.getElementsByClassName("table ImprimirDelineacion");
+	tableDel[0].setAttribute("id","example4");
+	var tableGas = document.getElementsByClassName("table ImprimirGasolina");
+	tableGas[0].setAttribute("id","example5");
+	var tablePub = document.getElementsByClassName("table ImprimirPublicidad");
+	tablePub[0].setAttribute("id","example6");
+	
+	if(impuestoSelc=="1"){
+		tablePred[0].setAttribute("id","example");
+	    var selectRefinementsTitle = "Predial";
+        ACC.colorbox.open(selectRefinementsTitle, {
+            href: ".js-impuesto-facet",
+            inline: true,
+            width: "90%",
+            onComplete: function () {
+                $(document).on("click", ".js-impuesto-facet .js-facet-name-imp", function (e) {
+                    e.preventDefault();
+                    $(".js-impuesto-facet  .js-facet-imp").removeClass("active");
+                    $(this).parents(".js-facet-imp").addClass("active");
+                    $.colorbox.resize()
+                })
+            },
+            onClosed: function () {
+                $(document).off("click", ".js-impuesto-facet .js-facet-name-imp");
+            }
+        });
+	}else if(impuestoSelc=="2"){
+	
+		tableVeh[0].setAttribute("id","example");
+		   var selectRefinementsTitle = "Vehicular";
+	        ACC.colorbox.open(selectRefinementsTitle, {
+	            href: ".js-vehicular-facet",
+	            inline: true,
+	            width: "90%",
+	            onComplete: function () {
+	                $(document).on("click", ".js-vehicular-facet .js-facet-name-veh", function (e) {
+	                    e.preventDefault();
+	                    $(".js-vehicular-facet  .js-facet-veh").removeClass("active");
+	                    $(this).parents(".js-facet-veh").addClass("active");
+	                    $.colorbox.resize()
+	                })
+	            },
+	            onClosed: function () {
+	                $(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
+	            }
+	        });
+	}else if(impuestoSelc=="3"){
+		tableIca[0].setAttribute("id","example");
+		   var selectRefinementsTitle = "ICA";
+	        ACC.colorbox.open(selectRefinementsTitle, {
+	            href: ".js-ica-facet",
+	            inline: true,
+	            width: "90%",
+	            onComplete: function () {
+	                $(document).on("click", ".js-ica-facet .js-facet-name-ica", function (e) {
+	                    e.preventDefault();
+	                    $(".js-ica-facet  .js-facet-ica").removeClass("active");
+	                    $(this).parents(".js-facet-ica").addClass("active");
+	                    $.colorbox.resize()
+	                })
+	            },
+	            onClosed: function () {
+	                $(document).off("click", ".js-ica-facet .js-facet-name-ica");
+	            }
+	        });
+	}else if(impuestoSelc=="4"){
+		tableDel[0].setAttribute("id","example");
+		   var selectRefinementsTitle = "Delineación Urbana";
+	        ACC.colorbox.open(selectRefinementsTitle, {
+	            href: ".js-delineacion-facet",
+	            inline: true,
+	            width: "90%",
+	            onComplete: function () {
+	                $(document).on("click", ".js-delineacion-facet .js-facet-name-del", function (e) {
+	                    e.preventDefault();
+	                    $(".js-delineacion-facet  .js-facet-del").removeClass("active");
+	                    $(this).parents(".js-facet-del").addClass("active");
+	                    $.colorbox.resize()
+	                })
+	            },
+	            onClosed: function () {
+	                $(document).off("click", ".js-delineacion-facet .js-facet-name-del");
+	            }
+	        });
+	}
+	else if(impuestoSelc=="5"){
+		tableGas[0].setAttribute("id","example");
+		   var selectRefinementsTitle = "Gasolina";
+	        ACC.colorbox.open(selectRefinementsTitle, {
+	            href: ".js-gasolina-facet",
+	            inline: true,
+	            width: "90%",
+	            onComplete: function () {
+	                $(document).on("click", ".js-gasolina-facet .js-facet-name-gas", function (e) {
+	                    e.preventDefault();
+	                    $(".js-gasolina-facet  .js-facet-gas").removeClass("active");
+	                    $(this).parents(".js-facet-gas").addClass("active");
+	                    $.colorbox.resize()
+	                })
+	            },
+	            onClosed: function () {
+	                $(document).off("click", ".js-gasolina-facet .js-facet-name-gas");
+	            }
+	        });
+	}
+	else if(impuestoSelc=="6"){
+		tablePub[0].setAttribute("id","example");
+		   var selectRefinementsTitle = "Publicidad Exterior";
+	        ACC.colorbox.open(selectRefinementsTitle, {
+	            href: ".js-publicidad-facet",
+	            inline: true,
+	            width: "90%",
+	            onComplete: function () {
+	                $(document).on("click", ".js-publicidad-facet .js-facet-name-pub", function (e) {
+	                    e.preventDefault();
+	                    $(".js-publicidad-facet  .js-facet-pub").removeClass("active");
+	                    $(this).parents(".js-facet-pub").addClass("active");
+	                    $.colorbox.resize()
+	                })
+	            },
+	            onClosed: function () {
+	                $(document).off("click", ".js-publicidad-facet .js-facet-name-pub");
+	            }
+	        });
+	}
+	
+		if ($.fn.dataTable.isDataTable('#example')) {
+			table = $('#example').DataTable();
+			table.destroy();
+		}
+		var tabla = $("#example")
+				.DataTable(
+						{
+							"sPaginationType" : "full_numbers",
+							"oLanguage" : {
+								"oPaginate" : {
+									"sPrevious" : "Anterior",
+									"sNext" : "Siguiente",
+									"sLast" : "Ultima",
+									"sFirst" : "Primera"
+								},
+								"sLengthMenu" : 'Mostrar <select>'
+										+ '<option value="5">5</option>'
+										+ '<option value="10">10</option>'
+										+ '<option value="15">15</option>'
+										+ '<option value="20">20</option>'
+										+ '<option value="30">30</option>'
+										+ '</select> registros',
+								"sInfo" : "Mostrando del START a END (Total: TOTAL resultados)",
+								"sInfoFiltered" : " Filtrados de MAX registros",
+								"sInfoEmpty" : " ",
+								"sZeroRecords" : "No se encontraron registros",
+								"sProcessing" : "Espere, por favor...",
+								"sSearch" : "Buscar:",
+							}
+						});
+	
+
+	});
+		
 	},
 
 	bindTrmPdf : function(impuesto, reporte, reportPdfName) {

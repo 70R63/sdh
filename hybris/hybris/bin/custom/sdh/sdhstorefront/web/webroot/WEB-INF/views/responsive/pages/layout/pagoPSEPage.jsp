@@ -11,6 +11,13 @@
 
 <%-- --flagSuccessView:${flagSuccessView}-- --${empty flagSuccessView}-- --%>
 <c:choose>
+	<c:when test="${flagSuccessView eq 'E'}">
+		<template:page pageTitle="${pageTitle}">
+			<div class="container">
+				<pagoPSE:formSection_error />
+			</div>
+		</template:page>
+	</c:when>
 	<c:when test="${empty flagSuccessView}">
 		<template:page pageTitle="${pageTitle}">
 			<div class="container">

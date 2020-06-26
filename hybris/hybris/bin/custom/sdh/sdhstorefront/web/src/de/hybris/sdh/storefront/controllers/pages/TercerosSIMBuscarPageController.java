@@ -8,8 +8,12 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.dao.SdhDocumentTypeDao;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.storefront.forms.TercerosAutForm;
+
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -17,6 +21,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -49,13 +54,26 @@ public class TercerosSIMBuscarPageController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
-	@RequestMapping(value = "/terceros/sim/buscar", method = RequestMethod.GET)
+	@Resource(name = "sdhDocumentTypeDao")
+	SdhDocumentTypeDao sdhDocumentTypeDao;
+
+
+	@ModelAttribute("documentTypes")
+	public List<de.hybris.sdh.core.form.SelectAtomValue> getDocumentTypes()
+	{
+		return sdhDocumentTypeDao.getAllDocumentTypes();
+	}
+
+
+	@RequestMapping(value = "/terceros/objeto", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String tercerossim(final Model model) throws CMSItemNotFoundException
+	public String tercerossim(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET terceros Autorizados SIM--------------------------");
 
+		final TercerosAutForm tercerosAutForm = new TercerosAutForm();
 
+		model.addAttribute("tercerosAutForm", tercerosAutForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(TERCEROS_AUTORIZADOS_SIM_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(TERCEROS_AUTORIZADOS_SIM_CMS_PAGE));
@@ -66,7 +84,7 @@ public class TercerosSIMBuscarPageController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/terceros/sim/buscar", method = RequestMethod.POST)
+	@RequestMapping(value = "/terceros/objeto", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String tercerossimpost(final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes)

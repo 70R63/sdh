@@ -71,9 +71,11 @@ function validaBotonPago(){
 	debugger;
 	var totPagar = document.getElementById('valorTotalPagar');
 	if(totPagar.value == '0'){
-		alert('El total a pagar debe ser mayor a 0')
+		alert('El total a pagar debe ser mayor a 0');
+		var btnPagar = document.getElementById("pagar");
+		btnPagar.disabled = true;
 	}else{
-		var form1 = document.getElementById('infoPreviaPSE');
+		var form1 = document.getElementById('detallePagoRequest');
 		form1.submit();		
 	}
 	

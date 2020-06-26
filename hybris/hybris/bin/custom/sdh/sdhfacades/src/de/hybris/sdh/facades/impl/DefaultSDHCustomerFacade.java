@@ -146,7 +146,8 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 
 		for (final SDHRolData eachRole : customerData.getRolList())
 		{
-			if (role.contains(eachRole.getRol()))
+			if (eachRole.getRol() != null && role != null && role.length() >= 4
+					&& eachRole.getRol().startsWith(role.trim().substring(4)))
 			{
 				return true;
 			}

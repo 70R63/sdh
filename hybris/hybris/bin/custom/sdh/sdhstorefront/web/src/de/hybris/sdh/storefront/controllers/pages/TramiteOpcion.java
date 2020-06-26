@@ -19,6 +19,7 @@ public class TramiteOpcion
 	private String canal;
 	private String urlAccion;
 	private TramiteRolAccion rolAccion;
+	private String notas;
 
 
 
@@ -140,6 +141,23 @@ public class TramiteOpcion
 	public void setRolAccion(final TramiteRolAccion rolAccion)
 	{
 		this.rolAccion = rolAccion;
+	}
+
+	/**
+	 * @return the notas
+	 */
+	public String getNotas()
+	{
+		return notas;
+	}
+
+	/**
+	 * @param notas
+	 *           the notas to set
+	 */
+	public void setNotas(final String notas)
+	{
+		this.notas = notas;
 	}
 
 	/**

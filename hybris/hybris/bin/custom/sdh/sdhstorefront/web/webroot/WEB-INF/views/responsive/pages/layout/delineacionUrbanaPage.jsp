@@ -32,6 +32,8 @@
 			}
 		}
 		$(".loader").fadeOut("slow");
+		
+		
 
 	}
 	function goBack() {

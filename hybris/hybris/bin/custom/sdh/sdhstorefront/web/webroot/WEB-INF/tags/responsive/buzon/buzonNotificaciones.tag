@@ -18,7 +18,7 @@
 	</div>
 	<sf:form>
 		<div class="row">
-			<div class="col-md-4 col-md-offset-3 center headline">
+			<div class="col-md-6 col-md-offset-3 headline">
 				<h2>
 					<span><spring:theme code="mibuzon.notificaciones.nuevos" /></span>
 				</h2>
@@ -51,41 +51,51 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${miBuzon.mensajesMsg}" var="eachDocs">
-								<c:if test="${eachDocs.tipoMensaje == '1'}">
+								<c:set var="mensajeError" value=""/>
+								<c:if test="${eachDocs.tipoMensaje == '1' && eachDocs.checkLectura != 'X'}">
+									<c:forEach items="${eachDocs.errores}" var="eachError">
+										<c:choose>
+											<c:when test="${eachError.txt_msj != '' && eachError.id_msj == '4'}">
+												<c:set var="mensajeError" value="${mensajeError} ${eachError.txt_msj}"/>
+											</c:when>
+										</c:choose>
+									</c:forEach>
 
 									<tr>
 										<td><c:out value="${eachDocs.id_radicado}" /></td>
 										<td><c:out value="${eachDocs.autoridadEmisora}" /></td>
-										<c:forEach items="${eachDocs.errores}" var="eachError">
-											<c:choose>
-												<c:when
-													test="${eachError.txt_msj != '' && eachError.id_msj == '4'}">
-													<td><c:out value="${eachDocs.asunto}" /></td>
-													<td><c:out value="${eachDocs.fechaNotificacion}" /></td>
-													<td><c:out value="${eachError.txt_msj}" /></td>
-												</c:when>
+										<td><c:out value="${eachDocs.asunto}" /></td>
+										<td><c:out value="${eachDocs.fechaNotificacion}" /></td>
 
-												<c:otherwise>
-													<c:forEach items="${eachDocs.documentos}"
-														var="echDocumentosNot">
-														<c:if test="${echDocumentosNot.pdf != ''}">
-															<td><c:out value="${eachDocs.asunto}" /></td>
-															<td><c:out value="${eachDocs.fechaNotificacion}" /></td>
-															<td><label class="control-label downloadNoti"
-																style="text-transform: capitalize !important"
-																id="downloadNoti"
-																data-pdfimprimir="${echDocumentosNot.pdf}"
-																data-identifi="${eachDocs.id_radicado}"
-																data-autoridad="${eachDocs.autoridadEmisora}"
-																data-asunto="${eachDocs.asunto}"
-																data-fechaNotificacion="${eachDocs.fechaNotificacion}"
-																onclick="downloadNoti1(this)"> <span
-																	class="glyphicon glyphicon-download-alt"></span></label></td>
-														</c:if>
+										<c:choose>
+											<c:when test="${not empty mensajeError}">
+												<td>
+													<c:forEach items="${eachDocs.errores}" var="eachError">
+														<c:choose>
+															<c:when test="${eachError.txt_msj != '' && eachError.id_msj == '4'}">
+																<c:out value="${eachError.txt_msj}"/><br>
+															</c:when>
+														</c:choose>
 													</c:forEach>
-												</c:otherwise>
-											</c:choose>
-										</c:forEach>
+												</td>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${eachDocs.documentos}" var="echDocumentosNot">
+													<c:if test="${echDocumentosNot.pdf != ''}">
+														<td><label class="control-label downloadNoti"
+															style="text-transform: capitalize !important"
+															id="downloadNoti"
+															data-pdfimprimir="${echDocumentosNot.pdf}"
+															data-idRadicado="${eachDocs.id_radicado}"
+															data-autoridadEmisora="${eachDocs.autoridadEmisora}"
+															data-asunto="${eachDocs.asunto}"
+															data-fechaNotificacion="${eachDocs.fechaNotificacion}"
+															onclick="downloadNoti(this)"> <span
+																class="glyphicon glyphicon-download-alt"></span></label></td>
+													</c:if>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
 									</tr>
 
 								</c:if>
@@ -130,6 +140,55 @@
 							</tr>
 						</thead>
 						<tbody>
+							<c:forEach items="${miBuzon.mensajesMsg}" var="eachDocs">
+								<c:set var="mensajeError" value=""/>
+								<c:if test="${eachDocs.tipoMensaje == '1' && eachDocs.checkLectura == 'X'}">
+									<c:forEach items="${eachDocs.errores}" var="eachError">
+										<c:choose>
+											<c:when test="${eachError.txt_msj != '' && eachError.id_msj == '4'}">
+												<c:set var="mensajeError" value="${mensajeError} ${eachError.txt_msj}"/>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+									
+									<tr>
+										<td><c:out value="${eachDocs.id_radicado}" /></td>
+										<td><c:out value="${eachDocs.autoridadEmisora}" /></td>
+										<td><c:out value="${eachDocs.asunto}" /></td>
+										<td><c:out value="${eachDocs.fechaNotificacion}" /></td>
+										<c:choose>
+											<c:when test="${not empty mensajeError}">
+												<td>
+													<c:forEach items="${eachDocs.errores}" var="eachError">
+														<c:choose>
+															<c:when test="${eachError.txt_msj != '' && eachError.id_msj == '4'}">
+																<c:out value="${eachError.txt_msj}"/><br>
+															</c:when>
+														</c:choose>
+													</c:forEach>
+												</td>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${eachDocs.documentos}" var="echDocumentosNot">
+													<c:if test="${echDocumentosNot.pdf != ''}">
+														<td><label class="control-label downloadNoti"
+															style="text-transform: capitalize !important"
+															id="downloadNoti"
+															data-pdfimprimir="${echDocumentosNot.pdf}"
+															data-idRadicado="${eachDocs.id_radicado}"
+															data-autoridadEmisora="${eachDocs.autoridadEmisora}"
+															data-asunto="${eachDocs.asunto}"
+															data-fechaNotificacion="${eachDocs.fechaNotificacion}"
+															onclick="downloaddosNoti(this)"> <span
+																class="glyphicon glyphicon-download-alt"></span></label></td>
+													</c:if>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+									</tr>
+
+								</c:if>
+							</c:forEach>
 
 						</tbody>
 					</table>
@@ -142,9 +201,8 @@
 </div>
 
 <script>
-	function downloadNoti1(objectnoti1) {
-		ACC.mibuzon.descargarNoti(objectnoti1);
-		objectnoti1.offsetParent.parentNode.remove();
+	function downloadNoti(objectnoti) {
+		ACC.mibuzon.descargarNoti1_v2(objectnoti);
 	}
 
 	function downloaddosNoti(objectnoti2) {

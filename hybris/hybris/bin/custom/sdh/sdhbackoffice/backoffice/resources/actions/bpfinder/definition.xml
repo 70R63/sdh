@@ -1,0 +1,27 @@
+<action-definition id="com.sdh.actions.bpfinder"
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+	<!-- id to be used in widgets.xml with widget-definition tag -->
+	<name>sdh.search.bpNumber</name>
+	<description>Find BP Number By Parameters</description>
+	<author>Jair Roa</author>
+	<version>0.1</version>
+
+	<!-- canPerform, perform operation defined on this Action class -->
+	<actionClassName>com.sdh.actions.bpfinder.BpFinderAction</actionClassName>
+	<inputType>de.hybris.platform.core.model.user.CustomerModel</inputType>
+	<outputType>java.lang.Object</outputType>
+
+	<iconUri>icons/icon-search-sync.png</iconUri>
+	<iconDisabledUri>icons/icon_action_cancel_disabled.png</iconDisabledUri>
+	<iconHoverUri>icons/icon_action_cancel_hover.png</iconHoverUri>
+
+	<!--settings>
+		<setting key="viewMode" default-value="iconAndText"/>
+	</settings-->
+
+	<sockets>
+		<output id="bpFinderContext"/> <!-- to be used in widgets.xml with widget-definition tag -->
+	</sockets>
+
+</action-definition>

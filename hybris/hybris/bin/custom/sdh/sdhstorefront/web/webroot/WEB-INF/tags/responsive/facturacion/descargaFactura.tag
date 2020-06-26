@@ -30,8 +30,12 @@
 			<div class="caja--ser-rel color-sr1">
 				<select class="new_alto form-control !important" id="impuesto">
 					<option value="00">Seleccionar</option>
-					<option value="01">Predial Unificado</option>
-					<option value="02">Vehícular</option>
+					<c:if test="${ not empty facturacionForm.predial}">
+						<option value="01">Predial Unificado</option>
+					</c:if>
+					<c:if test="${ not empty facturacionForm.vehicular}">					
+						<option value="02">Vehícular</option>
+					</c:if>
 				</select>
 			</div>
 		</div>
@@ -48,6 +52,7 @@
 			<div class="caja--ser-rel color-sr2">
 				<select id="aniograv" class="new_alto form-control " name="aniograv">
 					<option value="">Seleccionar</option>
+					<option value="2020">2020</option>
 					<option value="2019">2019</option>
 					<option value="2018">2018</option>
 					<option value="2017">2017</option>
@@ -92,6 +97,7 @@
 					<tbody>
 
 						<c:forEach items="${facturacionForm.predial }" var="eachPredial">
+							<c:if test="${not empty eachPredial.anioGravable && not empty eachPredial.CHIP && not empty eachPredial.matrInmobiliaria && not empty eachPredial.direccionPredio}">
 							<tr>
 								<td><c:out value="${eachPredial.anioGravable}" /></td>
 								<td><c:out value="${eachPredial.CHIP}" /></td>
@@ -102,6 +108,7 @@
 									type="radio" id="" name="" value=""></td>
 
 							</tr>
+							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -110,7 +117,7 @@
 		<div class="row">
 			<div class="col-md-3 col-md-offset-5">
 				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button">
+					class="btn btn-primary btn-lg" type="button" onclick="descargaFactura()">
 					<spring:theme code="descarga.factura.predial.desfact" />
 				</button>
 			</div>
@@ -139,6 +146,7 @@
 					<tbody>
 						<c:forEach items="${facturacionForm.vehicular }"
 							var="eachVehiculo">
+							<c:if test="${not empty eachVehiculo.anioGravable && not empty eachVehiculo.placa && not empty eachVehiculo.marca}">
 							<tr>
 								<td><c:out value="${eachVehiculo.anioGravable}" /></td>
 								<td><c:out value="${eachVehiculo.placa}" /></td>
@@ -149,6 +157,7 @@
 									type="radio" id="" name="" value=""></td>
 
 							</tr>
+							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -157,7 +166,7 @@
 		<div class="row">
 			<div class="col-md-3 col-md-offset-5">
 				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button">
+					class="btn btn-primary btn-lg" type="button" onclick="descargaFactura()">
 					<spring:theme code="descarga.factura.vehiculo.desfac" />
 				</button>
 			</div>
@@ -186,6 +195,13 @@
 			tabveh.style.display = 'none';
 		}
 
+	}
+	function descargaFactura() {
+		var anoGravable = $("#aniograv").val();
+		var anoGravable = "2020";
+		var numObjeto = "AAAA0102XAUZ";
+		
+		ACC.facturacion.descargaFactura(anoGravable,numObjeto);
 	}
 </script>
 

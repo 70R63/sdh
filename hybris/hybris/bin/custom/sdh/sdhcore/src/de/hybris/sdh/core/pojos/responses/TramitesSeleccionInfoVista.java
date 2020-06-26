@@ -17,6 +17,7 @@ public class TramitesSeleccionInfoVista
 	private List<ItemSelectOption> opciones;
 	private DocTramitesResponse docTramitesResponse;
 	private String urlAccion;
+	private String notas;
 
 	/**
 	 * @return the opciones
@@ -67,6 +68,23 @@ public class TramitesSeleccionInfoVista
 	public void setUrlAccion(final String urlAccion)
 	{
 		this.urlAccion = urlAccion;
+	}
+
+	/**
+	 * @return the notas
+	 */
+	public String getNotas()
+	{
+		return notas;
+	}
+
+	/**
+	 * @param notas
+	 *           the notas to set
+	 */
+	public void setNotas(final String notas)
+	{
+		this.notas = notas;
 	}
 
 

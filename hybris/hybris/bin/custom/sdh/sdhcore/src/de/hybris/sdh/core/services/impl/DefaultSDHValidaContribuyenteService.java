@@ -6,6 +6,7 @@ package de.hybris.sdh.core.services.impl;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
+import de.hybris.sdh.core.pojos.requests.SdhValidaContribuyenteRequest;
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbanaWithRadicados;
@@ -108,6 +109,19 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
 		}
 		return null;
+	}
+
+	@Override
+	public SDHValidaMailRolResponse validaContribuyente(SdhValidaContribuyenteRequest request) throws Exception{
+		final String usuario = configurationService.getConfiguration().getString("sdh.validacontribuyente.user");
+		final String password = configurationService.getConfiguration().getString("sdh.validacontribuyente.password");
+		final String urlService = configurationService.getConfiguration().getString("sdh.validacontribuyente.url");
+
+		final RestTemplate restTemplate = new RestTemplate();
+		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
+
+		final HttpEntity<SdhValidaContribuyenteRequest> requestData = new HttpEntity<>(request);
+		return restTemplate.postForObject(urlService, requestData, SDHValidaMailRolResponse.class);
 	}
 
 	/*

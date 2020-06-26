@@ -26,7 +26,6 @@
 					</tr>
 				</thead>
 				<tbody>
-
 					<tr>
 						<td><input class="inputtextnew tablefechas" maxlength="30"
 							size="30" disabled="disabled" type="text"

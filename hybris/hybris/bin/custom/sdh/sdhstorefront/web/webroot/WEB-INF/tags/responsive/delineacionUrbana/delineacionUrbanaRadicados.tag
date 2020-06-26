@@ -46,13 +46,13 @@
 				<table class="table" id="duRadicados">
 					<thead>
 						<tr>
-							<th style="width: 50% !important"><label class="control-label labeltabletd"><spring:theme
+							<th style="width: 120px !important"><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.radicados" /> </label></th>
-							<th><label class="control-label labeltabletd"><spring:theme
+							<th style="width: 92px !important"><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.fechradicado" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.modlicencia" /></label></th>
-							<th><label class="control-label labeltabletd"><spring:theme
+							<th style="width: 192px !important"><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.presupuestoRadicado" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.codigoEstrato" /></label></th>
@@ -99,7 +99,7 @@
 				</div>
 				<div class="col-md-4  ">
 					<div class="form-group ">
-						<sf:button class="btn btn-primary btn-lg" name="action"
+						<sf:button class="btn btn-primary btn-lg" name="action" 
                             id="declaradelibutton1" value="declaracion" disabled="true" onclick="formValidator();">
                             <spring:theme code="delineacion.urbana.radicados.generar.declaracion" />
                         </sf:button>
@@ -162,30 +162,49 @@
 	}
 
 	function formValidator(){
-	    var hiddenCdu = document.getElementById("hiddenCdu").value;
-
+		
+		debugger;
+		
+		var hiddenCdu = document.getElementById("hiddenCdu").value;
+	
 	    var nowUrl = window.location.href;
         var targetUrl = "infoObject/getUseOption?cdu="+hiddenCdu+"&taxType=6";
         currentUrl = nowUrl.replace("contribuyentes/delineacion-urbana",targetUrl);
 
 	    $.ajax({
             url : currentUrl,
+            async: false,
+            cache: false,
+            timeout: 30000,
            	type : "GET",
         	success : function(dataResponse) {
-                if(dataResponse == "02"){
-                    var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
-                    if (r == true) {
-                        return true;
-                    } else {
-                        window.location.href = nowUrl;
-                    }
-                }else{
-                   return true;
-                 }
+        		
+        		debugger;
+                
+                if ( dataResponse == "99"){
+                	 alert("Solicite mediante un Trámite la actualización de los datos de la Licencia, una vez actualizado presente su Declaración");
+                	 window.location.assign( nowUrl );                	 
+                	 alert("");
+       			}else{
+                
+	                if(dataResponse == "02"){
+	                    var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+	                    if (r == true) {
+	                        return true;
+	                        
+	                    } else {
+	                        window.location.href = nowUrl;
+	                    }
+	                }else{
+	                   return true;	                   
+	                }
+       			}    
         	},
         	error : function() {
         	}
+        	
         });
+	    
 	}
 
 </script>

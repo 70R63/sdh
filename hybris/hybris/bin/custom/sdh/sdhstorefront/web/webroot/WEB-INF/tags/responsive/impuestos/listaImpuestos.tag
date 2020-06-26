@@ -507,7 +507,9 @@
             url : currentUrl,
         	type : "GET",
         	success : function(data) {
-        	    var opcUso = data;
+        	    debugger;
+        		
+        		var opcUso = data;
                 if (impuesto == '5' && opcUso == '02') {//Sobretasa a la gasolina
                     promtConfirmation();
         		}else if(impuesto == '3' && opcUso == '02'){//ICA
@@ -542,20 +544,29 @@
             url : currentUrl,
            	type : "GET",
         	success : function(dataResponse) {
-                if(dataResponse == "02"){
-                    var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
-                    if (r == true) {
-                        btnSelected.click();
-                    } else {
-                        return false;
-                    }
-                }else{
-                   btnSelected.click();
-                 }
+               
+        		debugger;
+        		
+        		if ( dataResponse == "99"){
+	               	 alert("Solicite mediante un Trámite la actualización de los datos de la Licencia, una vez actualizado presente su Declaración");
+	               	 
+      			}else{
+	        		if(dataResponse == "02"){
+	                    var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+	                    if (r == true) {
+	                        btnSelected.click();
+	                    } else {
+	                        return false;
+	                    }
+	                }else{
+	                   btnSelected.click();
+	                 }
+      			}	
         	},
         	error : function() {
         	}
         });
+	    
 
         return false;
 

@@ -18,10 +18,8 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.BuzonTributarioRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
-import de.hybris.sdh.core.pojos.responses.BuzonErrores;
 import de.hybris.sdh.core.pojos.responses.BuzonMensajes2;
 import de.hybris.sdh.core.pojos.responses.BuzonTributarioMsgResponse;
-import de.hybris.sdh.core.pojos.responses.BuzonTributarioResponse;
 import de.hybris.sdh.core.services.SDHBuzonTributarioService;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -92,26 +90,26 @@ public class BuzonController extends AbstractPageController
 	@RequestMapping(value =
 	{ "/contribuyentes/mibuzon_tributario", "/agenteRetenedor/mibuzon_tributario" }, method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String buzoninicizl(final Model model, HttpServletRequest request) throws CMSItemNotFoundException
+	public String buzoninicizl(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET mi buzon inicial --------------------------");
 
-		String referrer = request.getHeader("referer");
+		final String referrer = request.getHeader("referer");
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final MiBuzon miBuzon = new MiBuzon();
 		final BuzonTributarioRequest buzonrequest = new BuzonTributarioRequest();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
-		Calendar fecha = new GregorianCalendar();
-		int anio = fecha.get(Calendar.YEAR);
+		final Calendar fecha = new GregorianCalendar();
+		final int anio = fecha.get(Calendar.YEAR);
 		//	int mes = fecha.get(Calendar.MONTH);
 		//	int dia = fecha.get(Calendar.DAY_OF_MONTH);
 		//	int hora = fecha.get(Calendar.HOUR_OF_DAY);
 		//	int minuto = fecha.get(Calendar.MINUTE);
 		//	int segundo = fecha.get(Calendar.SECOND);
 
-		String anioact = Integer.toString(anio);
+		final String anioact = Integer.toString(anio);
 
 		buzonrequest.setNumBP(customerModel.getNumBP());
 		buzonrequest.setVigencia(anioact);
@@ -122,47 +120,26 @@ public class BuzonController extends AbstractPageController
 
 
 		try
-		{
-			final BuzonTributarioResponse buzonTributarioResponse = mapper.readValue(
-					sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioResponse.class);
-
-			BuzonErrores errores = new BuzonErrores();
-
-			errores = buzonTributarioResponse.getMensajes().getErrores();
-
-			if (errores != null)
 			{
+			final BuzonTributarioMsgResponse buzonTributarioMsgResponse = mapper
+					.readValue(sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioMsgResponse.class);
 
-				model.addAttribute("errores", errores);
-			}
+			miBuzon.setMensajesMsg(buzonTributarioMsgResponse.getMensajes());
 
-			model.addAttribute("miBuzon", miBuzon);
+			int Mi = 1;
+			int Ni = 1;
 
-		}
-		catch (final Exception e)
-		{
-
-			try
-			{
-				final BuzonTributarioMsgResponse buzonTributarioMsgResponse = mapper
-						.readValue(sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioMsgResponse.class);
-
-				miBuzon.setMensajesMsg(buzonTributarioMsgResponse.getMensajes());
-
-				int Mi = 1;
-				int Ni = 1;
-
-				for (final BuzonMensajes2 eachTipMensaje : buzonTributarioMsgResponse.getMensajes())
+			for (final BuzonMensajes2 eachTipMensaje : buzonTributarioMsgResponse.getMensajes())
 				{
-					if ("2".equals(eachTipMensaje.getTipoMensaje()))
+				if ("2".equals(eachTipMensaje.getTipoMensaje()))
+				{
+					miBuzon.setContMsj(Mi);
+					Mi++;
+				}
+				else if ("1".equals(eachTipMensaje.getTipoMensaje()))
 					{
-						miBuzon.setContMsj(Mi);
-						Mi++;
-					}
-					else if ("1".equals(eachTipMensaje.getTipoMensaje()))
-					{
-						miBuzon.setContNot(Ni);
-						Ni++;
+					miBuzon.setContNot(Ni);
+					Ni++;
 					}
 				}
 
@@ -172,11 +149,10 @@ public class BuzonController extends AbstractPageController
 			catch (final Exception s)
 			{
 
-				LOG.error("error getting customer info from SAP for rit page: " + s.getMessage());
+			LOG.error("error getting customer info from SAP for rit page: " + s.getMessage());
 				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 				model.addAttribute("miBuzon", miBuzon);
 			}
-		}
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));
@@ -204,13 +180,13 @@ public class BuzonController extends AbstractPageController
 	@RequestMapping(value =
 	{ "/contribuyentes/mibuzon_tributario", "/agenteRetenedor/mibuzon_tributario" }, method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String buzonpost(final BindingResult bindingResult, HttpServletRequest request, final Model model,
+	public String buzonpost(final BindingResult bindingResult, final HttpServletRequest request, final Model model,
 			final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
 		System.out.println("------------------Entro al POST de mi buzon inicial------------------------");
 
-		String referrer = request.getHeader("referer");
+		final String referrer = request.getHeader("referer");
 
 		return REDIRECT_TO_MI_BUZON_PAGE;
 	}

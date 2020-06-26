@@ -3,6 +3,7 @@
  */
 package de.hybris.sdh.core.services;
 
+import de.hybris.sdh.core.pojos.requests.SdhValidaContribuyenteRequest;
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbanaWithRadicados;
@@ -20,6 +21,8 @@ import java.util.List;
 public interface SDHValidaContribuyenteService
 {
 	String validaContribuyente(ValidaContribuyenteRequest request);
+
+	SDHValidaMailRolResponse validaContribuyente (SdhValidaContribuyenteRequest request) throws Exception;
 
 	SDHValidaMailRolResponse validaContribuyente(String stringBp);
 

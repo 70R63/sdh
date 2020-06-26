@@ -19,6 +19,7 @@
 <predialIni:predialInicialTable></predialIni:predialInicialTable>
 
 <input type="hidden" id="opcUsoPredialUni" value="">
+<!-- <input type="hidden" id="objetocontrato" value=""> -->
 <div class="InicialDetalle" id="InicialDetalle" style="display: none">
 	<predialIni:predialInicialJuridicos />
 	<predialIni:predialInicialEconomicos />
@@ -48,6 +49,7 @@
 	}
 
 	function presentarDeclaracion(CHIP, anioGravable) {
+		debugger;
 		ACC.opcionDeclaraciones.predial_presentarDec(CHIP, anioGravable);
 
 	}
@@ -65,7 +67,9 @@
 				numObjeto, chip);
 	}
 
-	function showDetailPredio(anioGravable, chip, matrInmobiliaria) {
+	function showDetailPredio(anioGravable, chip, matrInmobiliaria, objetoCon) {
+		debugger;
+		document.getElementById("objetocontrato").value=objetoCon;
 		ACC.predial.detalle_tres(anioGravable, chip, matrInmobiliaria);
 	}
 	

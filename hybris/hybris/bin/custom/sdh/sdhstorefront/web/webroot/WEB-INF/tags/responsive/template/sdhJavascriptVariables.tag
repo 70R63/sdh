@@ -153,7 +153,12 @@
 			ACC.calculoPredialURL="<c:url value='/contribuyentes/predialunificado/calculo' />";
 
 			ACC.declaracionPredialURL="<c:url value='/contribuyentes/predialunificado/URL/declara' />";
+			
+			ACC.descargaFacturaURL="<c:url value='/contribuyentes/descargafactura/descargarFactura' />";
 
+			ACC.spacURL="<c:url value='/contribuyentes/spac' />";
+
+			ACC.spacPDFURL="<c:url value='/contribuyentes/spac/PDF' />";
 
 
 		  	ACC.currentURL = "${currentURL}";

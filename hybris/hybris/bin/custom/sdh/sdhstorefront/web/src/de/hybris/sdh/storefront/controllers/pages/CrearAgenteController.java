@@ -53,14 +53,10 @@ public class CrearAgenteController extends AbstractPageController
 	public String crearagente(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET CREAR AGENTE --------------------------");
-
-
-
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CREAR_AGENTE_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CREAR_AGENTE_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-
 		return getViewForPage(model);
 	}
 

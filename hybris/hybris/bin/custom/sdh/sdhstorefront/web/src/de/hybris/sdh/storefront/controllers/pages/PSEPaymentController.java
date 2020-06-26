@@ -153,6 +153,7 @@ public class PSEPaymentController extends AbstractPageController
 	{
 
 		final List<SelectAtomValue> anoGravable = Arrays.asList(
+				new SelectAtomValue("2020", "2020"),
 				new SelectAtomValue("2019", "2019"),
 				new SelectAtomValue("2018", "2018"),
 				new SelectAtomValue("2017", "2017"),
@@ -632,6 +633,8 @@ public class PSEPaymentController extends AbstractPageController
 	public String realizarPago(final Model model, final PSEPaymentForm psePaymentForm, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
+		String flagSuccessView = null;
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_REALIZAR_PAGO));
@@ -677,6 +680,12 @@ public class PSEPaymentController extends AbstractPageController
 					redirecUrl = "redirect:" + response.getBankurl();
 					GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
 				}
+				else if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS))
+				{
+					GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_SERVICENOTEXISTS");
+					flagSuccessView = "E";
+					model.addAttribute("flagSuccessView", flagSuccessView);
+				}
 				else
 				{
 					GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
@@ -687,6 +696,7 @@ public class PSEPaymentController extends AbstractPageController
 			else
 			{
 				GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
+
 			}
 			LOG.info(response);
 		}

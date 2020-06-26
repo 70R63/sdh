@@ -9,8 +9,19 @@
 	tagdir="/WEB-INF/tags/responsive/facturacion"%>
 <div class="loader"></div>
 
-<desfac:descargaFactura/>
+<c:choose>
+	<c:when test="${ not empty facturacionForm.vehicular || not empty facturacionForm.predial}">
+		<desfac:descargaFactura/>
+	</c:when>
+	<c:otherwise>
+		<desfac:sinDescargaFactura/>
+	</c:otherwise>
+</c:choose>
 
+<a id="downloadHelper" target="_blank"></a>
+<div id="dialogMensajes" title="Descarga Factura">
+	<div id="dialogMensajesContent"></div>
+</div>
 
 		<script type="text/javascript">
 window.onload = function() {

@@ -89,11 +89,28 @@
 					</sf:button>
 				</c:if>
 				
-				<button class="btn btn-primary btn-lg" type="submit" id="action"
-					name="pagar" value="pagar">
-					<spring:theme code="predialdos.firma.spac" />
+				<button class="btn btn-primary btn-lg btnspac" type="submit"
+					id="btnspac" name="pagar" value="pagar" data-numForm="${predialFormdos.numFrom}" data-anio="${predialFormdos.anioGravable}" data-obj="${predialFormdos.anioGravable}">
+					<spring:theme code="predialuno.firma.spac" />
 				</button>
-	
+
+
+			</div>
+			<div class="col-md-6" id="tableSpac" style="visibility:hidden;">
+			<br><br>
+				<table class="table tableSpacPago" id="tableSpacPago">
+					<thead>
+						<tr>
+							<th><label class="control-label labeltabletd tableident"><spring:theme
+										code="spac.table.cuotas" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="spac.table.pagar" /></label></th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
 			</div>
 		</sf:form>
 	</div>
@@ -106,7 +123,9 @@ function validaBotonPago(){
 	debugger;
 	var totPagar = document.getElementById('TotalAPagar');
 	if(totPagar.value == '0'){
-		alert('El total a pagar debe ser mayor a 0')
+		alert('El total a pagar debe ser mayor a 0');
+		var btnPagar = document.getElementById("action");
+		btnPagar.disabled = true;
 	}else{
 		var form1 = document.getElementById('infoPreviaPSE');
 		form1.submit();		

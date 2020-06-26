@@ -33,18 +33,24 @@ ACC.rop = {
 				data: data,
 				type: "POST",
 				success: function (data) {
+					var strMensaje = "";
 
-					$( "#dialogRop" ).dialog( "open" );
-					if(data.errores)
+					if(data.errores != null)
 					{
-						$("#ropDialogContent").html("");
 						$.each(data.errores, function( index, value ) {
-							$("#ropDialogContent").html($("#ropDialogContent").html()+value.txtmsj+"<br>");
+							if(value.txtmsj!=null && value.txtmsj.trim() != "" && value.txtmsj.trim() != "OK"){
+								strMensaje += value.txtmsj.trim()+"<br>";
+							}
 						});
 
-
-					}else
+					}
+					if(strMensaje != ""){
+						$( "#dialogRop" ).dialog( "open" );
+						$("#ropDialogContent").html(strMensaje);
+					}
+					else
 					{
+						$( "#dialogRop" ).dialog( "open" );
 						$("#ropDialogContent").html("");
 						$("#ropDialogContent").html("ROP generado exitosamente.")
 

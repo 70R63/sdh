@@ -102,8 +102,9 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ;RetenedorRegistroLink; REGISTRO LINK	; "/retenedores/cargadocumentos" ;;;;;
 ; ;RetenedorDeclaracionesLink; DECLARACION LINK ; "/retenedores/declaracionesfirmar" ;;;;;
 
-;;TerceroAutorizadoReportarInformacionLink;REPORTAR INFORMACION;"/terceros/reportar";;;;;
-;;TerceroAutorizadoConsultasLink;CONSULTAS;"/terceros/consultas";;;;;
+;;TerceroAutorizadoReportesLink;REPORTES;"#";;;;;
+;;TerceroAutorizadoPorSujetoLink;REPORTE POR SUJETO;"/terceros/sujeto";;;;;
+;;TerceroAutorizadoPorObjetoLink;REPORTE POR OBJETO;"/terceros/objeto";;;;;
 
 ;;AgenteAutorizadoReportarInformacionLink;REPORTAR INFORMACION LINK;"/autorizados/entidades/reportarinfo";;;;;
 ;;AgenteAutorizadoConsultasLink;CONSULTAS LINK;"/autorizados/entidades/consultas";;;;;
@@ -263,7 +264,6 @@ INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=tru
 ;;AgenteRetenedorCategoryNavComponent;Agente Retenedor Category Navigation Component;;AgenteRetenedorCategoryNavComponent;AgenteRetenedorCategoryNavNode;10
 ;;TerceroAutorizadoCategoryNavComponent;Tercero Autorizado Category Navigation Component;;TerceroAutorizadoCategoryNavComponent;TerceroAutorizadoCategoryNavNode;10
 ;;AnonnymousCategoryNavComponent; Anonnymous Category Navigation Component;;AnonnymousCategoryNavComponent;AnnonymousCategoryNavNode;10
-;;TerceroAutorizadoNewCategoryNavComponent;Tercero Autorizado New Category Navigation Component;;TerceroAutorizadoNewCategoryNavComponent;TerceroAutorizadoNewCategoryNavNode;10
 
 #INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&userRestriction)[allownull=true];uid[unique=true];components(uid,$contentCV)
 #;;CategoryNavComponent Logged in User;anonymousUserRestriction;CategoryNavComponentloggedInUser;CategoryNavComponent
@@ -277,8 +277,7 @@ INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];name;uid[unique=tr
 #;;Autorizados Category Nav Componet Restriction;AutorizadosCategoryNavComponentRestriction;sdh_01;AutorizadosCategoryNavComponent
 ;;Reportantes Informacion Category Nav Component Restriction;ReportantesInformacionCategoryNavComponentRestriction;sdh_05;ReportantesInformacionCategoryNavComponent
 ;;Agente Retenedor Category Nav Component Restriction;AgenteRetenedorCategoryNavComponentRestriction;sdh_04;AgenteRetenedorCategoryNavComponent
-;;Tercero Autorizado Category Nav Component Restriction;TerceroAutorizadoCategoryNavComponentRestriction;sdh_02;TerceroAutorizadoCategoryNavComponent
-;;Tercero Autorizado New Category Nav Component Restriction;TerceroAutorizadoNewCategoryNavComponentRestriction;sdh_03;TerceroAutorizadoNewCategoryNavComponent
+;;Tercero Autorizado Category Nav Component Restriction;TerceroAutorizadoCategoryNavComponentRestriction;sdh_03;TerceroAutorizadoCategoryNavComponent
 
 ## level 1. SiteRoot ##
 ## level 2. children of SiteRoot ##ContribuyentesCategoryNavComponentRestriction
@@ -298,8 +297,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 ;AutorizadosCategoryNavNode;;Autorizados Categories;SiteRootNode;AutorizadosCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
 ;ReportantesInformacionCategoryNavNode;;Reportantes Categories;SiteRootNode;ReportantesInformacionCategoryNavNode;MiRITReportanteInformacionNavigationNode,ReportantesNavigationNode
 ;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;ARMiRITNavigationNode,ARMiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,ARConsultaNavigationNode
-;TerceroAutorizadoNewCategoryNavNode;;Tercero Autorizado New Categories;SiteRootNode;TerceroAutorizadoNewCategoryNavNode;TerceroAutorizadoReportarInformacionNavigationNode,TerceroAutorizadoConsultasNavigationNode
-;TerceroAutorizadoCategoryNavNode;;Tercero Autorizado Categories;SiteRootNode;TerceroAutorizadoCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
+;TerceroAutorizadoCategoryNavNode;;Tercero Autorizado Categories;SiteRootNode;TerceroAutorizadoCategoryNavNode;TerceroAutorizadoReportesNavigationNode
 ;AnnonymousCategoryNavNode;;Anonnymous Categories;SiteRootNode;AnnonymousCategoryNavNode;PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode
 
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
@@ -321,7 +319,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;EscuelaVirtualNavigationNode;;Escuela Virtual Menu;EscuelaVirtualNavigationNode;
 ;PreguntasFrecuentesNavigationNode;;Preguntas Frecuentes Menu;PreguntasFrecuentesNavigationNode;
 
-;TerceroAutorizadoReportarInformacionNavigationNode;;Tercero Autorizado Reportar Información Menu;TerceroAutorizadoReportarInformacionNavigationNode;
+;TerceroAutorizadoReporteSujetoNavigationNode;;Tercero Autorizado Reporte por sujeto;TerceroAutorizadoReporteSujetoNavigationNode;
 ;TerceroAutorizadoConsultasNavigationNode;;Tercero Autorizado Consutlas Menu;TerceroAutorizadoConsultasNavigationNode;
 
 ;AgenteAutorizadoReportarInformacionNavigationNode;;Agente Autorizado Reportar Información Menu;AgenteAutorizadoReportarInformacionNavigationNode;
@@ -349,6 +347,8 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;ReportantesNavigationNode;;Reportantes Menu;ReportantesNavigationNode;ReportantesNavigationServiceRequestsNavNodeMenu
 ;RetenedorRegistroNavigationNode;;Retenedor Registros;RetenedorRegistroNavigationNode;RetenedorRegistroNavigationServiceRequestsNavNodeMenu
 ;RetenedorDeclaracionesNavigationNode;; Retenedor Declaraciones;RetenedorDeclaracionesNavigationNode;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu
+
+;TerceroAutorizadoReportesNavigationNode;;Tercero Autorizado Menu;TerceroAutorizadoReportesNavigationNode;TerceroAutorizadoReportesNavigationServiceRequestsNavNodeMenu
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 #*->-------------------------------------------------------------------------------------------------------------------------
 
@@ -366,8 +366,8 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;EscuelaVirtualNavigationNodeEntry;;Escuela Virtual Menu;EscuelaVirtualNavigationNode;EscuelaVirtualLink;
 ;PreguntasFrecuentesNavigationNodeEntry;;Preguntas Frecuentes Menu;PreguntasFrecuentesNavigationNode;PreguntasFrecuentesLink;
 
-;TerceroAutorizadoReportarInformacionNavigationNodeEntry;;Tercero Autorizado Reportar Informacion Menu;TerceroAutorizadoReportarInformacionNavigationNode;TerceroAutorizadoReportarInformacionLink;
-;TerceroAutorizadoConsultasNavigationNodeEntry;;Tercero Autorizado Consultas Menu;TerceroAutorizadoConsultasNavigationNode;TerceroAutorizadoConsultasLink;
+#;TerceroAutorizadoReporteSujetoNavigationNodeEntry;;Tercero Autorizado Reporte por sujeto;TerceroAutorizadoReporteSujetoNavigationNode;TerceroAutorizadoReporteSujetoLink;
+#;TerceroAutorizadoConsultasNavigationNodeEntry;;Tercero Autorizado Consultas Menu;TerceroAutorizadoConsultasNavigationNode;TerceroAutorizadoConsultasLink;
 
 ;AgenteAutorizadoReportarInformacionNavigationNodeEntry;;Agente Autorizado Reportar Informacion Menu;AgenteAutorizadoReportarInformacionNavigationNode;AgenteAutorizadoReportarInformacionLink;
 ;AgeteAutorizadoConsultasNavigationNodeEntry;;Agente Autorizado Consultas Menu;AgenteAutorizadoConsultasNavigationNode;AgenteAutorizadoConsultasLink;
@@ -397,6 +397,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;ReportantesNavigationNodeEntry;;Reportantes Menu;ReportantesNavigationNode;ReportantesLink;
 ;RetenedorRegistroNavigationNodeEntry;;Retenedor Registro;RetenedorRegistroNavigationNode;RetenedorRegistroLink;
 ;RetenedorDeclaracionesNavigationNodeEntry;;Retenedor Declaraciones;RetenedorDeclaracionesNavigationNode;RetenedorDeclaracionesLink;
+;TerceroAutorizadoReportesNavigationNodeEntry;;Tercero autorizado Menu;TerceroAutorizadoReportesNavigationNode;TerceroAutorizadoReportesLink;
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 #*->-------------------------------------------------------------------------------------------------------------------------
 
@@ -468,6 +469,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;RetenedorDetalleNavigationServiceRequestsNavNodeMenu;;Retenedores Detalle Service Requests Menu;RetenedorDetalleNavigationServiceRequestsNavNodeMenu;
 ;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;;Retenedores Registro Service Requests;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;EdoCargasNavNode
 ;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;;Retenedores Declaracion Service Requests;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;ARPresentarDeclaracionNavNode,ARListaDeclaracionNavNode
+;TerceroAutorizadoReportesNavigationServiceRequestsNavNodeMenu;;TerceroAutorizado Service Requests Menu;TerceroAutorizadoReportesNavigationServiceRequestsNavNodeMenu;TerceroAutorizadoPorSujetoNavNode,TerceroAutorizadoPorObjetoNavNode
 
 
 #*->-------------------------------------------------------------------------------------------------------------------------
@@ -603,7 +605,8 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->INI dev-maria Agregar menu Retenedores Registro 04/04/2019
 ;EdoCargasNavNode;;Declaraciones Link;EdoCargasNavNode
 #*->-------------------------------------------------------------------------------------------------------------------------
-
+;TerceroAutorizadoPorSujetoNavNode ;;Tercero autorizado por sujeto Link;TerceroAutorizadoPorSujetoNavNode
+;TerceroAutorizadoPorObjetoNavNode ;;Tercero autorizado por objeto Link;TerceroAutorizadoPorObjetoNavNode
 
 
 ## entries of the above Links ##
@@ -733,6 +736,9 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 #->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
 
 ;EdoCargasNavNodeEntry;;Declaraciones Navigation Node Entry;EdoCargasNavNode;EdoCargasLink
+
+;TerceroAutorizadoPorSujetoNavNodeEntry;;TerceroAutorizadoPorSujeto Navigation Node Entry;TerceroAutorizadoPorSujetoNavNode;TerceroAutorizadoPorSujetoLink
+;TerceroAutorizadoPorObjetoNavNodeEntry;;TerceroAutorizadoPorObjeto Navigation Node Entry;TerceroAutorizadoPorObjetoNavNode;TerceroAutorizadoPorObjetoLink
 #*->-------------------------------------------------------------------------------------------------------------------------
 
 
@@ -1623,8 +1629,8 @@ INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestric
 #->;;PagosLink Logged in User;anonymousUserRestriction;PagosLinkloggedInUser;PagosLink
 ;;ConsultasLink Logged in User;anonymousUserRestriction;ConsultasLinkloggedInUser;ConsultasLink
 ;;ReportantesLink Logged in User;anonymousUserRestriction;RecaudacionLinkloggedInUser;ReportantesLink
-
-
+;;TerceroAutorizadoPorSujetoLink Logged in User;anonymousUserRestriction;TerceroAutorizadoPorSujetoLinkloggedInUser;TerceroAutorizadoPorSujetoLink
+;;TerceroAutorizadoPorObjetoLink Logged in User;anonymousUserRestriction;TerceroAutorizadoPorObjetoLinkloggedInUser;TerceroAutorizadoPorObjetoLink
 
 
 
@@ -2447,11 +2453,11 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 #->FIN dev-maria Agregar paginas para terceros autorizados menu
 
 #->INI dev-maria Agregar paginas terceros notarios buscar
-$contentCatalog=sdhContentCatalog
+				$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;tercerosNotarisBuscarPage 		;tramites notario buscar	;AccountPageTemplate:sdhContentCatalog:Staged	;/terceros/notarios/buscar
+			 				;							;tercerosNotarisBuscarPage 		;tramites notario buscar	;AccountPageTemplate:sdhContentCatalog:Staged	;/terceros/sujeto
 
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='tercerosNotarisBuscarPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
@@ -2472,7 +2478,7 @@ $contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;tercerosSIMBuscarPage 		;tramites sim buscar	;AccountPageTemplate:sdhContentCatalog:Staged	;/terceros/sim/buscar
+			 				;							;tercerosSIMBuscarPage 		;tramites sim buscar	;AccountPageTemplate:sdhContentCatalog:Staged	;/terceros/objeto
 
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='tercerosSIMBuscarPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;

@@ -88,8 +88,9 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;EventsLink;"EVENTOS";"Haga clic aquí para acceder a la opción de menú Eventos"
 ;;EscuelaVirtualLink;"ESCUELA VIRTUAL";"Haga clic aquí para ir a la Escuela Virtual"
 ;;PreguntasFrecuentesLink;"PREGUNTAS FRECUENTES";"Haga clic aquí para ir a las Preguntas Frecuentes"
-;;TerceroAutorizadoReportarInformacionLink;"Reportar Información"
-;;TerceroAutorizadoConsultasLink;"Consultas"
+;;TerceroAutorizadoReportesLink;"Reportes"
+;;TerceroAutorizadoPorSujetoLink;"Por sujeto"
+;;TerceroAutorizadoPorObjetoLink;"Por objeto"
 ;;AgenteAutorizadoReportarInformacionLink;"Reportar Información"
 ;;AgenteAutorizadoConsultasLink;"Consultas"
 

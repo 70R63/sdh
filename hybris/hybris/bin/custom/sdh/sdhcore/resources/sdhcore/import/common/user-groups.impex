@@ -14,7 +14,7 @@ $regulargroup=regulargroup
 $customergroup=customergroup
 
 
-$defaultPassword=12341234
+$defaultPassword=1234
 
 # Create Customer Group
 INSERT_UPDATE Usergroup;uid[unique=true];groups(uid)[mode=append]
@@ -35,8 +35,18 @@ INSERT_UPDATE Usergroup;uid[unique=true];locName[lang=en];locName[lang=es]
 ;sdh_04;Agente Retenedor;Agente Retenedor
 ;sdh_05;Reportante de Información;Reportente de Información
 
-INSERT_UPDATE BackofficeRole;uid[unique=true];locName[lang=en];locName[lang=es]
-#;sdhemployeegroup;sdhemployeegroup;sdhemployeegroup
+INSERT_UPDATE BackofficeRole;uid[unique=true]           ;locName[lang=es]               ;description                     ;authorities
+                            ;sdhCustomerSupportChatRole	;Sdh Customer Support Chat Role ;Sdh Customer Support Chat Role  ;sdhCustomerSupportChat
+                            ;sdhAmsAdminEmployeeRole    ;Sdh ASM Adminisrator Role      ;Sdh ASM Adminisrator Role
+
+#SDH Backoffice roles
+INSERT_UPDATE BackofficeRole	;UID[unique=true]		            ;authorities
+                                ;backofficeadministratorrole	;backofficeworkflowadmin	sdhBackOfficeAdmin
+
+
+INSERT_UPDATE Employee;UID[unique=true];name                                 ;password[default=$defaultPassword] ;description                     ;groups(uid)[mode=append]     ;backOfficeLoginDisabled
+                      ;supportAgent    ;SDH Support Agent - [Name LastName]  ;                                   ;SDH Support Agent - Jorge Reyes ;sdhCustomerSupportChatRole   ;false
+                      ;sdhAsmAdmin     ;SDH ASM Admin                        ;                                   ;SDH ASM Adminisrator            ;sdhAmsAdminEmployeeRole      ;false
 
 INSERT_UPDATE Employee;uid[unique=true];name;groups(uid);backOfficeLoginDisabled;passwordEncoding;encodedPassword[default=$defaultPassword]
 #;jorge.romero;jorge.romero;sdhemployeegroup;false;plain
@@ -60,3 +70,10 @@ INSERT_UPDATE Employee;uid[unique=true];name;groups(uid);backOfficeLoginDisabled
  ;;;;SDHICACity;+;+;-;-;-
  ;;;;SDHICAEconomicActivity;+;+;-;-;-
  $END_USERRIGHTS
+
+
+$START_USERRIGHTS;;;;;;;;;
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+BackofficeRole;sdhAmsAdminEmployeeRole;;;;;;;
+;;;;Customer;+;-;-;-;-
+$END_USERRIGHTS;;;;;

@@ -698,7 +698,10 @@
 	<bean name="sdhCalculoPredialService" class="de.hybris.sdh.core.services.impl.DefaultSDHCalculoPredialService" />
 	
 	<bean name="sdhBuzonTributarioService" class="de.hybris.sdh.core.services.impl.DefaultSDHBuzonTributarioService"/>
-
+	
+	<bean name="sdhSpacService" class="de.hybris.sdh.core.services.impl.DefaultSDHSpacService"/>
+	
+	<bean name="sdhSpacPDFService" class="de.hybris.sdh.core.services.impl.DefaultSDHSpacPDFService"/>
 
 	<alias alias="sdhTaxTypeDao" name="defaultSDHTaxTypeDao"/>
 	<bean id="defaultSDHTaxTypeDao" class="de.hybris.sdh.core.dao.impl.DefaultSDHTaxTypeDao">
@@ -766,4 +769,6 @@
 	<alias alias="sdhTercerosAutService" name="defaultSDHTercerosAutService"/>
 	<bean name="defaultSDHTercerosAutService" class="de.hybris.sdh.core.services.impl.DefaultSDHTercerosAutService" />
 
+	<alias alias="sdhAgentesAutBPService" name="defaultSDHAgentesAutBPService"/>
+	<bean name="defaultSDHAgentesAutBPService" class="de.hybris.sdh.core.services.impl.DefaultSDHAgentesAutBPService" />
 </beans>
