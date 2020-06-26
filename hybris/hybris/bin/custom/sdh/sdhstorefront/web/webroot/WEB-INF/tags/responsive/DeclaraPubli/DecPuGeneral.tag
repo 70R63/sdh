@@ -45,7 +45,7 @@
 						code="declaracion.publicidad.opuso" /></label> <select id="opuso"
 					class="form-control" disabled="disabled" style="height: 25px !important; min-height: 26px !important; width: 100%; text-align: left !important; padding: 0px;">
 					<option value="${fn:substring(declaPublicidadForm.opuso, 0, 2)}">
-						<spring:theme code="${fn:substring(declaPublicidadForm.opuso, 5,fn:length(declaPublicidadForm.opuso))}">
+						<spring:theme code="${declaPublicidadForm.opuso}">
 						</spring:theme></option>
 				</select>
 			</div>
