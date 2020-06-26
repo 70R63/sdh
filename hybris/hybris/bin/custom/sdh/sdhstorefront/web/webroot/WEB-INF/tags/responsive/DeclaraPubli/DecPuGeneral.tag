@@ -4,6 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -43,8 +44,8 @@
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.opuso" /></label> <select id="opuso"
 					class="form-control" disabled="disabled" style="height: 25px !important; min-height: 26px !important; width: 100%; text-align: left !important; padding: 0px;">
-					<option value="${declaPublicidadForm.opuso}"><spring:theme
-							code="declaracion.publicidad.opuso.d${declaPublicidadForm.opuso}">
+					<option value="${fn:substring(declaPublicidadForm.opuso, 0, 2)}">
+						<spring:theme code="${fn:substring(declaPublicidadForm.opuso, 5,fn:length(declaPublicidadForm.opuso))}">
 						</spring:theme></option>
 				</select>
 			</div>
