@@ -11,7 +11,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -462,20 +461,6 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				}
 
 			}
-			else if (dataFormResponse.getImpuesto().equals("4") && !dataFormResponse.getAnoGravable().equals("")
-					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
-			{
-				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-				final List<ImpuestoPublicidadExterior> publicidadExtList = sdhValidaContribuyenteService
-						.getpublicidadExtListByBpAndYear(customerModel.getNumBP(), dataFormResponse.getAnoGravable());
-				model.addAttribute("publicidadExtList", publicidadExtList);
-				if (publicidadExtList == null || publicidadExtList.isEmpty())
-				{
-					GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-							"error.presentarDeclaracion.publicidadExt.listaVacia");
-					GlobalMessages.addErrorMessage(model, "error.presentarDeclaracion.publicidadExt.listaVacia");
-				}
-			}
 		}
 		else
 		{
@@ -513,6 +498,20 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 
 
+			}
+			else if (dataFormResponse.getImpuesto().equals("4") && !dataFormResponse.getAnoGravable().equals("")
+					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
+			{
+				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+				final List<ImpuestoPublicidadExterior> publicidadExtList = sdhValidaContribuyenteService
+						.getpublicidadExtListByBpAndYear(customerModel.getNumBP(), dataFormResponse.getAnoGravable());
+				model.addAttribute("publicidadExtList", publicidadExtList);
+				if (publicidadExtList == null || publicidadExtList.isEmpty())
+				{
+					GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+							"error.presentarDeclaracion.publicidadExt.listaVacia");
+					GlobalMessages.addErrorMessage(model, "error.presentarDeclaracion.publicidadExt.listaVacia");
+				}
 			}
 		}
 

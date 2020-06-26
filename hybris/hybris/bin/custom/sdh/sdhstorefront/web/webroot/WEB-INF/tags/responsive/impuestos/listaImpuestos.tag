@@ -212,9 +212,8 @@
 				<tr>
 					<td><c:out value="${item.numResolu}" /></td>
 					<td><c:out value="${item.tipoValla}" /></td>
-					<td><c:set var="href"
-							value="location.href = 'publicidadexterior/declaracion?numResolu=${item.numResolu}&anoGravable=${item.anoGravable}&tipoValla=${item.tipoVallaCode}';" />
-						<button onclick="${href}" id="myButton"
+					<td>
+						<button onclick="return validarPublicidadForm('${item.numResolu}','${item.tipoVallaCode}' );" id="myButton"
 							class="float-left submit-button">Generar</button></td>
 				</tr>
 			</c:forEach>
@@ -569,8 +568,49 @@
 	    
 
         return false;
-
     }
+    
+    
+    function validarPublicidadForm(numResolu, tipoVallaCode ){
+        //var btnSelected = document.getElementById("auxbtn_"+hiddenCdu);
+		
+        debugger;
+        
+        var anioGravable = document.getElementById("anoGravable").value;
+        
+        var urlDeclaracion = "publicidadexterior/declaracion?numResolu="+numResolu+"&anoGravable="+anioGravable+"&tipoValla="+tipoVallaCode;
+        
+        var nowUrl = window.location.href;
+        var targetUrl = "infoObject/getUseOption?anioGravable="+anioGravable+"&taxType=4"+"&numResolu="+numResolu+"&tipoVallaCode="+tipoVallaCode;
+        currentUrl = nowUrl.replace("contribuyentes/presentar-declaracion",targetUrl);
+
+	    $.ajax({
+            url : currentUrl,
+           	type : "GET",
+        	success : function(dataResponse) {
+               
+        		debugger;
+        		
+       			if(dataResponse == "02"){
+                    var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+                    if (r == true) {
+                    	window.location.href = urlDeclaracion;
+                    } else {
+                        return false;
+                    }
+                }else{
+                	window.location.href = urlDeclaracion;
+                 }
+      				
+        	},
+        	error : function() {
+        	}
+        });
+	    
+
+        return false;
+    }
+    
 
 </script>
 
