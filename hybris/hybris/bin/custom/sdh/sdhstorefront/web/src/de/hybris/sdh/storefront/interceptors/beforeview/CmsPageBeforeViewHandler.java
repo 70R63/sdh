@@ -165,7 +165,7 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 				} else if ("02".equals(eachRolData.getRol())) {
 					modelAndView.addObject("hasAARol", true);
 				}
-				else if (eachRolData.getRol() != null && eachRolData.getRol().startsWith("03"))
+				else if (eachRolData.getRol() != null && eachRolData.getRol().startsWith("03") && eachRolData.getRol().length() >= 3)
 				{
 					modelAndView.addObject("hasTARol_" + eachRolData.getRol().substring(3), true);
 				} else if ("04".equals(eachRolData.getRol())) {

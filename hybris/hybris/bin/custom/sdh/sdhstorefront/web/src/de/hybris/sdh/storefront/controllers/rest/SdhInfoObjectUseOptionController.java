@@ -5,16 +5,19 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
+import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
@@ -53,6 +56,9 @@ public class SdhInfoObjectUseOptionController {
     @Resource(name = "sdhICAInfObjetoService")
     SDHICAInfObjetoService sdhICAInfObjetoService;
 
+	@Resource(name = "sdhDetallePublicidadService")
+	SDHDetallePublicidadService sdhDetallePublicidadService;
+
     @Resource(name = "sdhCustomerFacade")
     SDHCustomerFacade sdhCustomerFacade;
 
@@ -67,7 +73,11 @@ public class SdhInfoObjectUseOptionController {
                                    @RequestParam(value="taxType", defaultValue="") final String taxType,
                                    @RequestParam(value="placa", defaultValue="") final String placa,
                                    @RequestParam(value="cdu", defaultValue="") final String cdu,
-                                   @RequestParam(value="numRadicado", defaultValue="") final String numRadicado) {
+			@RequestParam(value = "numRadicado", defaultValue = "")
+			final String numRadicado, @RequestParam(value = "numResolu", defaultValue = "")
+			final String numResolu, @RequestParam(value = "tipoValla", defaultValue = "")
+			final String tipoValla)
+	{
         String opcionUso = null;
         LOG.info("getUseOptionSobreTasaGasolina");
         LOG.info("anioGravable: "+anioGravable);
@@ -81,8 +91,12 @@ public class SdhInfoObjectUseOptionController {
                 opcionUso = this.getOpcionUsosobreTasaGasolina(anioGravable, periodo);
             }else if(taxType.equals("3")){ //ICA
                 opcionUso = this.getOpcionUsoIca(anioGravable, periodo);
+			}
+			else if (taxType.equals("4"))
+			{ //Publicidad
+				opcionUso = this.getOpcionUsoPublicidad(anioGravable, numResolu, tipoValla);
             }else if(taxType.equals("2")){ //Vehicular
-                opcionUso = this.getOpcionUsoVehicular(anioGravable, placa);
+				opcionUso = this.getOpcionUsoVehicular(anioGravable, placa);
             }else if(taxType.equals("6")){ //Delineacion Urbana
 				opcionUso = this.getOpcionUsoDelineacionUrbana(cdu, numRadicado);
             }
@@ -167,6 +181,35 @@ public class SdhInfoObjectUseOptionController {
 
         return detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso();
     }
+
+	private String getOpcionUsoPublicidad(final String anioGravable, final String numResolu, final String tipoValla)
+	{
+		final ObjectMapper mapper = new ObjectMapper();
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		String opcionUso = null;
+
+		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
+		detallePublicidadRequest.setNumBP(customerModel.getNumBP());
+		detallePublicidadRequest.setNumResolu(numResolu);
+		detallePublicidadRequest.setAnoGravable(anioGravable);
+		detallePublicidadRequest.setTipoValla(tipoValla);
+
+		try
+		{
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
+					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
+
+			opcionUso = detallePublicidadResponse.getInfoDeclara().getOpcionUso();
+		}
+		catch (final IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		return opcionUso;
+	}
 
 	private String getOpcionUsoDelineacionUrbana(final String cdu, final String numRadicado)
 	{
