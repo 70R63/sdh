@@ -9,7 +9,7 @@
 <div class="container">
 	<div class="row" style="margin-top: 10px !important">
 		<div class="col-md-2">
-			<table class="table">
+			<table class="table" id="contribuyenteTable">
 				<thead>
 					<tr>
 						<th><label class="control-label labeltabletd" for=""><spring:theme
@@ -25,22 +25,8 @@
 
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td><input class="inputtextnew tablefechas" maxlength="30"
-							size="30" disabled="disabled" type="text"
-							value="<c:out value=""></c:out>" /></td>
-						<td><input class="inputtextnew tablefechas" maxlength="30"
-							size="30" disabled="disabled" type="text"
-							value="<c:out value=""></c:out>" /></td>
-						<td><input class="inputtextnew tablefechas" maxlength="30"
-							size="30" disabled="disabled" type="text"
-							value="<c:out value=""></c:out>" /></td>
-						<td><input class="inputtextnew tablefechas" maxlength="30"
-							size="30" disabled="disabled" type="text"
-							value="<c:out value=""></c:out>" /></td>
-					</tr>
-				</tbody>
+				<tbody id="contribuyenteTbody">
+                </tbody>
 			</table>
 		</div>
 	</div>
@@ -77,7 +63,7 @@
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
+									id="TZRE090" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.asignarse.calidad.admin" />
 								</label>
@@ -89,7 +75,7 @@
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
+									id="TZRE010" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.asignarse.calidad.apgeneral" />
 								</label>
@@ -101,7 +87,7 @@
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
+									id="TZRE050" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.asignarse.calidad.herede" />
 								</label>
@@ -113,7 +99,7 @@
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
+									id="TZRE180" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.asignarse.calidad.tutor" />
 								</label>
@@ -127,7 +113,7 @@
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
+									id="TZRE040" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.asignarse.calidad.agofici" />
 								</label>
@@ -140,7 +126,7 @@
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
+									id="TZRE120" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.asignarse.calidad.contador" />
 								</label>
@@ -152,7 +138,7 @@
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
+									id="TZRE100" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.asignarse.calidad.liqui" />
 								</label>
@@ -160,7 +146,6 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
@@ -179,7 +164,7 @@
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
+									id="TZRE070" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.asignarse.calidad.curador" />
 								</label>
@@ -191,7 +176,7 @@
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
+									id="TZRE130" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.asignarse.calidad.padres" />
 								</label>
@@ -206,7 +191,7 @@
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
+									id="TZRE060" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.asignarse.calidad.albacea" />
 								</label>
@@ -218,7 +203,7 @@
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
+									id="TZRE140" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.asignarse.calidad.dontarios" />
 								</label>
@@ -230,7 +215,7 @@
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
+									id="TZRE110" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.asignarse.calidad.revfiscal" />
 								</label>
@@ -238,6 +223,8 @@
 						</div>
 					</div>
 				</div>
+
+
 				<div class="row">
 					<div class="col-md-12">
 						<div class="alert alert-warning">

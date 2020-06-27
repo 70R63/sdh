@@ -101,7 +101,7 @@
 						</button>
 					</div>
 					<div class="col-md-2">
-						<button class="btn btn-primary" type="button" id="">
+						<button class="btn btn-primary" type="button" id="" onclick="continuar()">
 							<spring:theme code="autorizado.asignarse.resumen.enviar" />
 						</button>
 					</div>

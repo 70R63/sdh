@@ -33,16 +33,109 @@
 					</div>
 				</div>
 				<div class="row">
+                    <div class="col-md-3 ">
+                        <div class="fomchk form-group ">
+                            <div class="chkagent checkbox" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.impuesto.todos" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="fomchk form-group ">
+                            <div class="chkagent checkbox" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="0001" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.impuesto.predial" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="fomchk form-group ">
+                            <div class="chkagent checkbox" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="0002" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.impuesto.vehicular" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="fomchk form-group ">
+                            <div class="chkagent checkbox" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="0003" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.impuesto.ica" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 ">
+                        <div class="fomchk form-group ">
+                            <div class="chkagent checkbox" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="0004" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.impuesto.reteIca" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="fomchk form-group ">
+                            <div class="chkagent checkbox" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="0005" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.impuesto.sobretasaGasolina" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="fomchk form-group ">
+                            <div class="chkagent checkbox" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="0006" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.impuesto.delineacionUrbana" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="fomchk form-group ">
+                            <div class="chkagent checkbox" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="0007" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.impuesto.publicidadExterior" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="row">
 					<div class="col-md-3 ">
 						<div class="fomchk form-group ">
-							<div class="chkagent checkbox" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.asignarse.impuesto.todos" />
-								</label>
-							</div>
+
 						</div>
 					</div>
 					<div class="col-md-3 ">

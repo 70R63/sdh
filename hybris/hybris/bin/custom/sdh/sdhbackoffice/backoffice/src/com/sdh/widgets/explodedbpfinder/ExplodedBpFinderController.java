@@ -65,10 +65,15 @@ public class ExplodedBpFinderController extends DefaultWidgetController {
         request.setTipoid(documentTypeListInput.getSelectedItem().getValue());
         request.setNumid(documentNumberInput.getValue());
 
-        request.setExpeditionDate(Objects.nonNull(documentExpirationDateInput) ?
+        request.setFechExp(Objects.nonNull(documentExpirationDateInput) ?
                 Objects.nonNull(documentExpirationDateInput.getValue()) ?
                         formatter.format(documentExpirationDateInput.getValue()) : StringUtils.EMPTY
                          : StringUtils.EMPTY );
+
+        /*request.setExpeditionDate(Objects.nonNull(documentExpirationDateInput) ?
+                Objects.nonNull(documentExpirationDateInput.getValue()) ?
+                        formatter.format(documentExpirationDateInput.getValue()) : StringUtils.EMPTY
+                         : StringUtils.EMPTY );*/
 
         String bpNumber = getBpNumberFromWs(request);
         if(!StringUtils.EMPTY.equals(bpNumber)){

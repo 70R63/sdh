@@ -14,6 +14,7 @@ public class ValidaContribuyenteRequest
 	private String numid;
 	private String tipoid;
 	private String expeditionDate;
+	private String fechExp;
 
 	/**
 	 * @return the expeditionDate
@@ -65,6 +66,10 @@ public class ValidaContribuyenteRequest
 	{
 		this.tipoid = tipoid;
 	}
+
+	public String getFechExp() { return fechExp; }
+
+	public void setFechExp(String fechExp) { this.fechExp = fechExp; }
 
 	/*
 	 * (non-Javadoc)

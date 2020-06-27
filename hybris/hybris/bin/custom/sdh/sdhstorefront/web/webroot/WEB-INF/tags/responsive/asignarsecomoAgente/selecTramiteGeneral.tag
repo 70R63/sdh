@@ -34,7 +34,7 @@
 				</div>
 				<div class="row">
 
-					<!-- 				primera columna representación-->
+					<!-- 				primera columna representaciï¿½n-->
 					<div class="col-md-2 ">
 
 						<label class="control-label"><spring:theme
@@ -74,8 +74,91 @@
 					<!-- 					segunda columna proceso -->
 					<div class="col-md-2 ">
 
-						<label class="control-label"><spring:theme
-								code="autorizado.asignarse.tramgen.proce.titulo" /></label>
+						<label class="control-label">
+						    <spring:theme code="autorizado.asignarse.tramgen.proce.titulo" />
+						</label>
+                        <div class=" fomchk form-group ">
+                            <div class="checkbox chkagent" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="ZM01" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.tramgen.proce.todos" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class=" fomchk form-group ">
+                            <div class="checkbox chkagent" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="ZM02" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.tramgen.proce.miRit" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class=" fomchk form-group ">
+                            <div class="checkbox chkagent" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="ZM03" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.tramgen.proce.miBuzon" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class=" fomchk form-group ">
+                            <div class="checkbox chkagent" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="ZM04" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.tramgen.proce.impuestos" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class=" fomchk form-group ">
+                            <div class="checkbox chkagent" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="ZM05" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.tramgen.proce.tramites" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class=" fomchk form-group ">
+                            <div class="checkbox chkagent" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="ZM06" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.tramgen.proce.facturacion" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class=" fomchk form-group ">
+                            <div class="checkbox chkagent" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="ZM07" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.tramgen.proce.declaraciones" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class=" fomchk form-group ">
+                            <div class="checkbox chkagent" role="checkbox"
+                                aria-checked="false">
+                                <label tabindex="0" class="chkagent control-label  "> <input
+                                    id="ZM08" name="" type="checkbox" value="true"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on">
+                                    <spring:theme code="autorizado.crear.tramgen.proce.consultas" />
+                                </label>
+                            </div>
+                        </div>
+
+						<!--
 						<div class=" fomchk form-group ">
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
@@ -126,6 +209,8 @@
 								</label>
 							</div>
 						</div>
+
+						-->
 					</div>
 
 					<!-- 					tercer columna tramites 1 -->

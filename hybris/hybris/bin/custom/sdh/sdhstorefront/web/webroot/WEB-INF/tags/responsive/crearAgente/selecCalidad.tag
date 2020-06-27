@@ -46,8 +46,7 @@
 				</button>
 			</h5>
 		</div>
-		<div id="collapse1" class="collapse" aria-ladelledby="head1"
-			data-parent="#acordeon">
+		<div id="collapse1" class="collapse" aria-ladelledby="head1" data-parent="#acordeon">
 			<div class="card-body">
 				<div class="row mt-3">
 					<div class="col-md-12"
@@ -65,7 +64,7 @@
 						<div class="fomchk  form-group">
 							<div class="checkbox chkagent" role="checkbox" aria-checked="false">
 								<label tabindex="0" class="chkagent control-label"> <input
-									id="TZRE090" name="" type="checkbox" value="1231dd23"> <input
+									id="TZRE090" name="" type="checkbox" value > <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.crear.calidad.admin" />
 								</label>
@@ -266,10 +265,6 @@
 						</div>
 					</div>
 				</div>
-
-
-
-
 			</div>
 		</div>
 	</div>
