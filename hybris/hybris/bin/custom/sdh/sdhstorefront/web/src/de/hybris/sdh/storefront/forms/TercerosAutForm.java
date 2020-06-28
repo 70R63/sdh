@@ -7,9 +7,10 @@ import java.util.List;
 
 
 public class TercerosAutForm {
-    private String tipdoc;
-    private String numdoc;
-    private String impuesto;
+	private String tipdoc;
+	private String numdoc;
+	private String numObjeto;
+	private String impuesto;
 
 	private List<SelectAtomValue> listaImpuestos;
 
@@ -54,6 +55,23 @@ public class TercerosAutForm {
 	public void setListaImpuestos(final List<SelectAtomValue> listaImpuestos)
 	{
 		this.listaImpuestos = listaImpuestos;
+	}
+
+	/**
+	 * @return the numObjeto
+	 */
+	public String getNumObjeto()
+	{
+		return numObjeto;
+	}
+
+	/**
+	 * @param numObjeto
+	 *           the numObjeto to set
+	 */
+	public void setNumObjeto(final String numObjeto)
+	{
+		this.numObjeto = numObjeto;
 	}
 
 }
