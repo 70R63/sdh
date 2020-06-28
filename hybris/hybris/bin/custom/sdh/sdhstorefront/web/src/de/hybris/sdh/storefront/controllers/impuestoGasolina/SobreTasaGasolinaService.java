@@ -432,34 +432,29 @@ public class SobreTasaGasolinaService
 	{
 		final List<SelectAtomValue> elementos = new ArrayList<SelectAtomValue>();
 
-		if (subrol.equals("03_01"))
+		switch (subrol)
 		{
-			elementos.add(new SelectAtomValue("1", "Predial Unificado"));
-			elementos.add(new SelectAtomValue("2", "Vehículos"));
-			elementos.add(new SelectAtomValue("3", "ICA"));
-			elementos.add(new SelectAtomValue("4", "Reteica"));
-			elementos.add(new SelectAtomValue("5", "Sobretasa Gasolina"));
-			elementos.add(new SelectAtomValue("6", "Delineación Urbana"));
-			elementos.add(new SelectAtomValue("7", "Publicidad Exterior"));
+			case "03_01":
+			case "03_02":
+				elementos.add(new SelectAtomValue("0001", "Predial Unificado"));
+				elementos.add(new SelectAtomValue("0002", "Vehículos"));
+				elementos.add(new SelectAtomValue("0003", "ICA"));
+				elementos.add(new SelectAtomValue("0004", "Reteica"));
+				elementos.add(new SelectAtomValue("0005", "Sobretasa Gasolina"));
+				elementos.add(new SelectAtomValue("0006", "Delineación Urbana"));
+				elementos.add(new SelectAtomValue("0007", "Publicidad Exterior"));
 
-		}
-		if (subrol.equals("03_02"))
-		{
-			elementos.add(new SelectAtomValue("1", "Predial Unificado"));
-			elementos.add(new SelectAtomValue("2", "Vehículos"));
-			elementos.add(new SelectAtomValue("3", "ICA"));
-			elementos.add(new SelectAtomValue("4", "Reteica"));
-			elementos.add(new SelectAtomValue("5", "Sobretasa Gasolina"));
-			elementos.add(new SelectAtomValue("6", "Delineación Urbana"));
-			elementos.add(new SelectAtomValue("7", "Publicidad Exterior"));
-		}
-		if (subrol.equals("03_03"))
-		{
-			elementos.add(new SelectAtomValue("1", "Predial Unificado"));
-		}
-		if (subrol.equals("03"))
-		{
-			elementos.add(new SelectAtomValue("2", "Vehículos"));
+				break;
+			case "03_03":
+				elementos.add(new SelectAtomValue("0001", "Predial Unificado"));
+				break;
+
+			case "03_04":
+				elementos.add(new SelectAtomValue("0002", "Vehículos"));
+				break;
+
+			default:
+				break;
 		}
 
 

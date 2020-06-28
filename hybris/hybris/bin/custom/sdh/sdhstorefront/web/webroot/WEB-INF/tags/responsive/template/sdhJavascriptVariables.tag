@@ -159,6 +159,8 @@
 			ACC.spacURL="<c:url value='/contribuyentes/spac' />";
 
 			ACC.spacPDFURL="<c:url value='/contribuyentes/spac/PDF' />";
+			
+			ACC.consultaTerceroAutorizado= "<c:url value='/terceros/consulta' />";
 
 
 		  	ACC.currentURL = "${currentURL}";

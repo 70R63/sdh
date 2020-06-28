@@ -12,28 +12,26 @@
 <div class="container_new_page">
 	<div class="headlinecol-md-12">
 		<h2>
-			<span class="col-md-10 "><spring:theme code="terceros.objeto.vehicular.titulo" /></span>
+			<span class="col-md-10 "><spring:theme code="terceros.objeto.delineacion.titulo" /></span>
 		</h2>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="table-responsive">
-				<table id="tabPaginacion2" 
-					class="table table-bordered">
+				<table id="table-delineacion1" 
+					class="table table-bordered tabPaginacion5">
 					<thead>
 						<tr>
 							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.vehicular.anoGravable" /></label></td>
+										code="terceros.objeto.delineacion.anoGravable" /></label></td>
 							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.vehicular.placa" /></label></td>
+										code="terceros.objeto.delineacion.cdu" /></label></td>
 							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.vehicular.modelo" /></label></td>
+										code="terceros.objeto.delineacion.chip" /></label></td>
 							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.vehicular.marca" /></label></td>
+										code="terceros.objeto.delineacion.direccion" /></label></td>
 							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.vehicular.linea" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.vehicular.estadoObligacion" /></label></td>
+										code="terceros.objeto.delineacion.estadoObligacion" /></label></td>
 						</tr>
 					</thead>
 					<tbody>

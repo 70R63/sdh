@@ -99,6 +99,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.duBotonVer.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.tramitesSeleccion.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.opcionDeclaraciones.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.reportesTerceroAutorizado.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.publicidadexterior.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.gasolina.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.csv-import.js"></script>

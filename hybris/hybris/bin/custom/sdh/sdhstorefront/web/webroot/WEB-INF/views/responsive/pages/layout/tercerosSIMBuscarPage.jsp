@@ -12,12 +12,13 @@
 <div class="loader"></div>
 
 <terceros:terceroSIMBuscar/>
-<terceros:terceroSIMBuscar_predial/>
-<terceros:terceroSIMBuscar_ica/>
-<terceros:terceroSIMBuscar_vehicular/>
-<terceros:terceroSIMBuscar_delineacion/>
-<terceros:terceroSIMBuscar_gasolina/>
-<terceros:terceroSIMBuscar_publicidad/>
+<terceros:tercero_predial/>
+<terceros:tercero_ica/>
+<terceros:tercero_reteica/>
+<terceros:tercero_vehicular/>
+<terceros:tercero_delineacion/>
+<terceros:tercero_gasolina/>
+<terceros:tercero_publicidad/>
 
 <script type="text/javascript">
 window.onload = function() {

@@ -11,6 +11,13 @@
 <div class="loader"></div>
 
 <terceros:terceroNotarioBuscar/>
+<terceros:tercero_predial/>
+<terceros:tercero_ica/>
+<terceros:tercero_reteica/>
+<terceros:tercero_vehicular/>
+<terceros:tercero_delineacion/>
+<terceros:tercero_gasolina/>
+<terceros:tercero_publicidad/>
 
 
 <script type="text/javascript">

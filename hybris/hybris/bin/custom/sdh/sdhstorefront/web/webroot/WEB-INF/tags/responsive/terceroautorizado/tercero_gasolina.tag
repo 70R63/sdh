@@ -12,22 +12,22 @@
 <div class="container_new_page">
 	<div class="headlinecol-md-12">
 		<h2>
-			<span class="col-md-10 "><spring:theme code="terceros.objeto.ica.titulo" /></span>
+			<span class="col-md-10 "><spring:theme code="terceros.objeto.gasolina.titulo" /></span>
 		</h2>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="table-responsive">
-				<table id="tabPaginacion1" 
-					class="table table-bordered">
+				<table id="table-gasolina1" 
+					class="table table-bordered tabPaginacion4">
 					<thead>
 						<tr>
 							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.ica.anoGravable" /></label></td>
+										code="terceros.objeto.gasolina.anoGravable" /></label></td>
 							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.ica.periodo" /></label></td>
+										code="terceros.objeto.gasolina.periodo" /></label></td>
 							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.ica.estadoObligacion" /></label></td>
+										code="terceros.objeto.gasolina.estadoObligacion" /></label></td>
 						</tr>
 					</thead>
 					<tbody>

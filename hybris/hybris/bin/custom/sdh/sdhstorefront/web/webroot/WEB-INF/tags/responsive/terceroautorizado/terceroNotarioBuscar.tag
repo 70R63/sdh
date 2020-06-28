@@ -16,64 +16,26 @@
 <div class="container">
     <div class="row">
         <form:form method="post" commandName="tercerosAutForm" action="buscar">
-            <div class="col-sm-3">
-                <formElement:formSelectBox idKey="tipdoc" labelKey="terceros.notario.buscar.tipdoc"
-                    path="tipdoc" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
-                    items="${documentTypes}" selectCSSClass="form-control" disabled="false"/>
-
-             </div>
-             <div class="col-sm-3">
+             <div class="col-md-5">
                  <formElement:formSelectBox idKey="impuesto" labelKey="terceros.notario.buscar.impuesto"
-                                 path="impuesto" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
+                                 path="impuesto" mandatory="false" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
                                  items="${tercerosAutForm.listaImpuestos}" selectCSSClass="form-control" disabled="false"/>
              </div>
-             <div class="col-sm-3">
-                <formElement:formInputBox idKey="numdoc" labelKey="terceros.notario.buscar.numdoc" path="numdoc" />
-             </div>
-             <div class="col-sm-3">
-             <br/>
-			<div class="row mt-3">
-				<div class="col-md-7 text-right">
-					<sf:button class="btn btn-primary btn-lg !important tramitesEnviar" type="submit" id="btnEnviar"
+			<div class="row md-5">
+				<div class="col-md-5 text-right">
+					<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="submit" id="btnEnviar"
 					name="btnEnviar" value="enviar" disabled="false">
 					<spring:theme code="tramites.crear.inicial.enviar" />
-				</sf:button>
-			</div>
-			<div class="col-md-1">
-				<button style="margin-top: 3px;" id=""
-					class="btn btn-secondary btn-lg" type="button" 
-					onclick="btnCancelar()">
-					<spring:theme code="tramites.crear.inicial.cancelar" />
+					</sf:button>
+				</div>
+				<div class="col-md-1">
+					<button style="margin-top: 3px;" id=""
+						class="btn btn-secondary btn-lg" type="button" 
+						onclick="btnCancelar()">
+						<spring:theme code="tramites.crear.inicial.cancelar" />
 					</button>
 				</div>
 			</div>
-             </div>
          </form:form>
-     </div>
-     <div class="row">
-        <div class="col-sm-12">
-             <table id="example" class="sdhTable sdhTable-striped sdhTable-bordered" style="width:100%">
-                 <thead>
-                     <tr>
-                         <th><spring:theme code="sdh.tercerosAut.chip.table.header"/></th>
-                         <th><spring:theme code="sdh.tercerosAut.matriculaInmobiliaria.table.header"/></th>
-                         <th><spring:theme code="sdh.tercerosAut.direccion.table.header"/></th>
-                         <th><spring:theme code="sdh.tercerosAut.anioGravable.table.header"/></th>
-                         <th><spring:theme code="sdh.tercerosAut.estadoObligacion.table.header"/></th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                    <c:forEach items="${tercerosAutTable.obligacionesPredios}" var="obligacion">
-                        <tr>
-                            <td><c:out value="${obligacion.chip}"/></td>
-                            <td><c:out value="${obligacion.matriculaInmobiliaria}"/></td>
-                            <td><c:out value="${obligacion.direccion}"/></td>
-                            <td><c:out value="${obligacion.anoGravable}"/></td>
-                            <td><c:out value="${obligacion.estadoObligacion}"/></td>
-                        </tr>
-                    </c:forEach>
-                 </tbody>
-             </table>
-        </div>
      </div>
 </div>

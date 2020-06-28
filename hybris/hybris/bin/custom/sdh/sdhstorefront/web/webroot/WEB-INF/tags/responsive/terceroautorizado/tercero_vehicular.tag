@@ -12,26 +12,28 @@
 <div class="container_new_page">
 	<div class="headlinecol-md-12">
 		<h2>
-			<span class="col-md-10 "><spring:theme code="terceros.objeto.predial.titulo" /></span>
+			<span class="col-md-10 "><spring:theme code="terceros.objeto.vehicular.titulo" /></span>
 		</h2>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="table-responsive">
-				<table id="tabPaginacion0" 
-					class="table table-bordered">
+				<table id="table-vehicular1" 
+					class="table table-bordered tabPaginacion1">
 					<thead>
 						<tr>
 							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.predial.chip" /></label></td>
+										code="terceros.objeto.vehicular.anoGravable" /></label></td>
 							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.predial.matriculaInmobiliaria" /></label></td>
+										code="terceros.objeto.vehicular.placa" /></label></td>
 							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.predial.direccion" /></label></td>
+										code="terceros.objeto.vehicular.modelo" /></label></td>
 							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.predial.anoGravable" /></label></td>
+										code="terceros.objeto.vehicular.marca" /></label></td>
 							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.predial.estadoObligacion" /></label></td>
+										code="terceros.objeto.vehicular.linea" /></label></td>
+							<td><label class="control-label labeltabletd"><spring:theme
+										code="terceros.objeto.vehicular.estadoObligacion" /></label></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -41,3 +43,4 @@
 		</div>
 	</div>
 </div>
+

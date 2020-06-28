@@ -1,63 +1,122 @@
 package de.hybris.sdh.core.pojos.requests;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
 public class TercerosAutRequest {
-    private String TIPO_DOCUMENTO;
-    private String IMPUESTO;
-    private String NUMERO_DOCUMENTO;
-    private String NUMERO_OBJETO;
+	private String impuesto;
+	private String numeroObjeto;
+	private String tipoDocumento;
+	private String numeroDocumento;
 
-    public TercerosAutRequest(String TIPO_DOCUMENTO, String IMPUESTO, String NUMERO_DOCUMENTO, String NUMERO_OBJETO) {
-        this.TIPO_DOCUMENTO = TIPO_DOCUMENTO;
-        this.IMPUESTO = IMPUESTO;
-        this.NUMERO_DOCUMENTO = NUMERO_DOCUMENTO;
-        this.NUMERO_OBJETO = NUMERO_OBJETO;
-    }
+	/**
+	 * @return the tipoDocumento
+	 */
+	public String getTipoDocumento()
+	{
+		return tipoDocumento;
+	}
 
-    public String getTIPO_DOCUMENTO() {
-        return TIPO_DOCUMENTO;
-    }
+	/**
+	 * @param tipoDocumento
+	 *           the tipoDocumento to set
+	 */
+	public void setTipoDocumento(final String tipoDocumento)
+	{
+		this.tipoDocumento = tipoDocumento;
+	}
 
-    @JsonProperty("TIPO_DOCUMENTO")
-    public void setTIPO_DOCUMENTO(String TIPO_DOCUMENTO) {
-        this.TIPO_DOCUMENTO = TIPO_DOCUMENTO;
-    }
+	/**
+	 * @return the impuesto
+	 */
+	public String getImpuesto()
+	{
+		return impuesto;
+	}
 
-    public String getIMPUESTO() {
-        return IMPUESTO;
-    }
+	/**
+	 * @param impuesto
+	 *           the impuesto to set
+	 */
+	public void setImpuesto(final String impuesto)
+	{
+		this.impuesto = impuesto;
+	}
 
-    @JsonProperty("IMPUESTO")
-    public void setIMPUESTO(String IMPUESTO) {
-        this.IMPUESTO = IMPUESTO;
-    }
+	/**
+	 * @return the numeroDocumento
+	 */
+	public String getNumeroDocumento()
+	{
+		return numeroDocumento;
+	}
 
-    public String getNUMERO_DOCUMENTO() {
-        return NUMERO_DOCUMENTO;
-    }
+	/**
+	 * @param numeroDocumento
+	 *           the numeroDocumento to set
+	 */
+	public void setNumeroDocumento(final String numeroDocumento)
+	{
+		this.numeroDocumento = numeroDocumento;
+	}
 
-    @JsonProperty("NUMERO_DOCUMENTO")
-    public void setNUMERO_DOCUMENTO(String NUMERO_DOCUMENTO) {
-        this.NUMERO_DOCUMENTO = NUMERO_DOCUMENTO;
-    }
+	/**
+	 * @return the numeroObjeto
+	 */
+	public String getNumeroObjeto()
+	{
+		return numeroObjeto;
+	}
 
-    public String getNUMERO_OBJETO() {
-        return NUMERO_OBJETO;
-    }
+	/**
+	 * @param numeroObjeto
+	 *           the numeroObjeto to set
+	 */
+	public void setNumeroObjeto(final String numeroObjeto)
+	{
+		this.numeroObjeto = numeroObjeto;
+	}
 
-    @JsonProperty("NUMERO_OBJETO")
-    public void setNUMERO_OBJETO(String NUMERO_OBJETO) {
-        this.NUMERO_OBJETO = NUMERO_OBJETO;
-    }
+	/**
+	 * @param impuesto
+	 * @param numeroObjeto
+	 * @param tipoDocumento
+	 * @param numeroDocumento
+	 */
+	public TercerosAutRequest(final String impuesto, final String numeroObjeto, final String tipoDocumento, final String numeroDocumento)
+	{
+		super();
+		this.impuesto = impuesto;
+		this.numeroObjeto = numeroObjeto;
+		this.tipoDocumento = tipoDocumento;
+		this.numeroDocumento = numeroDocumento;
+	}
 
-    @Override
-    public String toString() {
-        return "TercerosAutRequest{" +
-                "TIPO_DOCUMENTO='" + TIPO_DOCUMENTO + '\'' +
-                ", IMPUESTO='" + IMPUESTO + '\'' +
-                ", NUMERO_DOCUMENTO='" + NUMERO_DOCUMENTO + '\'' +
-                ", NUMERO_OBJETO='" + NUMERO_OBJETO + '\'' +
-                '}';
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		final StringBuilder stringBuilder = new StringBuilder();
+
+		stringBuilder.append("{\"parametros\":");
+		stringBuilder.append(obtenerValorJson("\"impuesto\":\"", this.getImpuesto(), "\","));
+		stringBuilder.append(obtenerValorJson("\"numeroObjeto\":\"", this.getNumeroObjeto(), "\","));
+		stringBuilder.append(obtenerValorJson("\"tipoDocumento\":\"", this.getTipoDocumento(), "\","));
+		stringBuilder.append(obtenerValorJson("\"numeroDocumento\":\"", this.getNumeroDocumento(), "\""));
+		stringBuilder.append("}}");
+
+		return stringBuilder.toString();
+	}
+
+	private String obtenerValorJson(final String cadena1, final String valor, final String cadena2)
+	{
+		String valorVariable = "";
+
+		valorVariable = (valor != null) ? cadena1 + valor + cadena2 : cadena1 + cadena2;
+
+
+		return valorVariable;
+	}
+
 }

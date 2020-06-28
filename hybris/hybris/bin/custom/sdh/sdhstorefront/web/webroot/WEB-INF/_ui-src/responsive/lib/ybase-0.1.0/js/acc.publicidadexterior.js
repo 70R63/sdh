@@ -1,6 +1,6 @@
 ACC.publicidadexterior = {
 
-	 _autoload: ["bindLabelVerButton","bindGeneraDeclaracionButton", "bindCalculoButton","bindSearchButton","bindPresentarDeclaracionButton","bindDialogPublicidadExterior","bindDataTable","bindDataTablesPagination","bindDataTable_Class"],
+	 _autoload: ["bindLabelVerButton","bindGeneraDeclaracionButton", "bindCalculoButton","bindSearchButton","bindPresentarDeclaracionButton","bindDialogPublicidadExterior","bindDataTable","bindDataTablesPagination","bindDataTablesPagination_class","bindDataTable_Class"],
 	 
 	
 	 
@@ -509,6 +509,20 @@ ACC.publicidadexterior = {
 	    	}
 	    	
 	    },
+	    
+	    
+	    bindDataTablesPagination_class: function () {
+	    	var nombrePrefijo = ".tabPaginacion";
+	    	var cantidadTablas = 7;
+	    	var idTabla = null;
+	    	
+	    	for(var i = 0;i<cantidadTablas;i++){
+	    		idTabla = nombrePrefijo+i;
+	    		ACC.publicidadexterior.bindDataTables_id(idTabla);
+	    	}
+	    	
+	    },
+	    
 	    
 	    bindDataTables_id(idTable){
 	    	if ($.fn.dataTable.isDataTable(idTable)) {

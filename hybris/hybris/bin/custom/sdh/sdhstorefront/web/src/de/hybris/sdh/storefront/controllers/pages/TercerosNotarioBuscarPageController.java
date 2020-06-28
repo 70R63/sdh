@@ -34,6 +34,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -122,27 +123,43 @@ public class TercerosNotarioBuscarPageController extends AbstractPageController
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(TERCEROS_AUTORIZADOS_NOTARIO_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(TERCEROS_AUTORIZADOS_NOTARIO_CMS_PAGE));
-		TercerosAutResponse responseData = null;
 
-		try {
-			responseData = sdhTercerosAutService.getTercerosAut(
-					new TercerosAutRequest(tercerosAutForm.getTipdoc(), tercerosAutForm.getImpuesto(),
-							tercerosAutForm.getNumdoc(), "AAA0102XAUZ"));
-
-			if(!StringUtils.isEmpty(responseData.getErrores().get(0).getId_msj())){
-				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-					"sdh.standard.global.message", new Object[]
-					{responseData.getErrores().get(0).getTxt_msj()});
-			}
-		} catch (final Exception e) {
-			LOG.error("Network connection error : " + e.getMessage());
-		}
-
-		redirectAttributes.addFlashAttribute("tercerosAutTable",responseData);
 		redirectAttributes.addFlashAttribute("tercerosAutForm", tercerosAutForm);
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		return REDIRECT_PREFIX + TERCEROS_AUTORIZADOS_REDIRECT;
+	}
+
+
+	@RequestMapping(value = "/terceros/consulta", method = RequestMethod.POST)
+	@RequireHardLogIn
+	@ResponseBody
+	public TercerosAutResponse consultaInfo(final Model model, final RedirectAttributes redirectAttributes,
+			@ModelAttribute("tercerosAutForm")
+	final TercerosAutForm tercerosAutForm) throws CMSItemNotFoundException
+	{
+		storeCmsPageInModel(model, getContentPageForLabelOrId(TERCEROS_AUTORIZADOS_NOTARIO_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(TERCEROS_AUTORIZADOS_NOTARIO_CMS_PAGE));
+		TercerosAutResponse responseData = null;
+
+		try
+		{
+			responseData = sdhTercerosAutService.getTercerosAut(new TercerosAutRequest(tercerosAutForm.getImpuesto(),
+					tercerosAutForm.getNumObjeto(), tercerosAutForm.getTipdoc(), tercerosAutForm.getNumdoc()));
+
+			if (!StringUtils.isEmpty(responseData.getErrores().get(0).getId_msj()))
+			{
+				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+						"sdh.standard.global.message", new Object[]
+						{ responseData.getErrores().get(0).getTxt_msj() });
+			}
+		}
+		catch (final Exception e)
+		{
+			LOG.error("Network connection error : " + e.getMessage());
+		}
+
+		return responseData;
 	}
 
 }

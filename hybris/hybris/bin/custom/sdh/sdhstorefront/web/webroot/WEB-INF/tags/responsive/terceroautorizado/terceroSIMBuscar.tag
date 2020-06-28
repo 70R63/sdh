@@ -10,20 +10,32 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
-	<div class="row">
+    <div class="row">
         <form:form method="post" commandName="tercerosAutForm" action="buscar">
-            <div class="col-md-12">
-				<div class="form-group">
-					<div class="col-md-3">
-						<formElement:formInputBox idKey="numdoc" labelKey="terceros.sim.buscar.numeroObjeto" path="numdoc" />
-					</div>
-					<div class="col-md-2">
-						<button type="button" class="btn btn-primary btn-lg" id="" name="" value="Buscar" onclick=""> 
-							<spring:theme code="terceros.sim.buscar.buscar" />
-						</button>
-					</div>
+             <div class="col-md-5">
+				<formElement:formInputBox idKey="numdoc" labelKey="terceros.sim.buscar.numeroObjeto" path="numdoc" />
+             </div>
+			<div class="row md-5">
+				<div class="col-md-5 text-right">
+					<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="submit" id="btnEnviar"
+					name="btnEnviar" value="enviar" disabled="false" onclick="consultaTA()" >
+					<spring:theme code="tramites.crear.inicial.enviar" />
+					</sf:button>
+				</div>
+				<div class="col-md-1">
+					<button style="margin-top: 3px;" id=""
+						class="btn btn-secondary btn-lg" type="button" 
+						onclick="btnCancelar()">
+						<spring:theme code="tramites.crear.inicial.cancelar" />
+					</button>
 				</div>
 			</div>
-		</form:form>
-	</div>
+         </form:form>
+     </div>
 </div>
+
+<script>
+	function consultaTA() {
+		alert("consulta");
+	}
+</script>
