@@ -6,7 +6,6 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
@@ -26,7 +25,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -131,15 +129,13 @@ public class TercerosNotarioBuscarPageController extends AbstractPageController
 	}
 
 
-	@RequestMapping(value = "/terceros/consulta", method = RequestMethod.POST)
-	@RequireHardLogIn
+	@RequestMapping(value = "/terceros/consultaTA", method = RequestMethod.GET)
 	@ResponseBody
-	public TercerosAutResponse consultaInfo(final Model model, final RedirectAttributes redirectAttributes,
-			@ModelAttribute("tercerosAutForm")
-	final TercerosAutForm tercerosAutForm) throws CMSItemNotFoundException
+	public TercerosAutResponse consultaInfo(@ModelAttribute("tercerosAutForm")
+	final TercerosAutForm tercerosAutForm, final Model model, final RedirectAttributes redirectModel)
+			throws CMSItemNotFoundException
 	{
-		storeCmsPageInModel(model, getContentPageForLabelOrId(TERCEROS_AUTORIZADOS_NOTARIO_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(TERCEROS_AUTORIZADOS_NOTARIO_CMS_PAGE));
+		System.out.println("---------------- En GET terceros Autorizados consulta--------------------------");
 		TercerosAutResponse responseData = null;
 
 		try
@@ -147,12 +143,7 @@ public class TercerosNotarioBuscarPageController extends AbstractPageController
 			responseData = sdhTercerosAutService.getTercerosAut(new TercerosAutRequest(tercerosAutForm.getImpuesto(),
 					tercerosAutForm.getNumObjeto(), tercerosAutForm.getTipdoc(), tercerosAutForm.getNumdoc()));
 
-			if (!StringUtils.isEmpty(responseData.getErrores().get(0).getId_msj()))
-			{
-				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-						"sdh.standard.global.message", new Object[]
-						{ responseData.getErrores().get(0).getTxt_msj() });
-			}
+
 		}
 		catch (final Exception e)
 		{
