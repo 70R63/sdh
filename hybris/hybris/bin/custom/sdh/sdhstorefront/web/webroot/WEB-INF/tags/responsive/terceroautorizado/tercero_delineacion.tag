@@ -8,8 +8,8 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 
-<spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new_page">
+<spring:htmlEscape defaultHtmlEscape="true"/>
+<div class="container_new_page" id="table-delineacion" style="display: none">
 	<div class="headlinecol-md-12">
 		<h2>
 			<span class="col-md-10 "><spring:theme code="terceros.objeto.delineacion.titulo" /></span>
@@ -19,19 +19,19 @@
 		<div class="col-md-12">
 			<div class="table-responsive">
 				<table id="table-delineacion1" 
-					class="table table-bordered tabPaginacion5">
+					class="table table-bordered col-md-10 tabPaginacion5">
 					<thead>
 						<tr>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.delineacion.anoGravable" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.delineacion.cdu" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.delineacion.chip" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.delineacion.direccion" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.delineacion.estadoObligacion" /></label></td>
+							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.delineacion.anoGravable" /></label></th>
+							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.delineacion.cdu" /></label></th>
+							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.delineacion.chip" /></label></th>
+							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.delineacion.direccion" /></label></th>
+							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.delineacion.estadoObligacion" /></label></th>
 						</tr>
 					</thead>
 					<tbody>

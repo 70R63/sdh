@@ -493,7 +493,9 @@ ACC.publicidadexterior = {
 	    
 	    bindDataTable_ID_refresh: function (id) {
 			table = $(id).DataTable();
-			table.destroy();
+			if(table!=null){
+				table.destroy();
+			}
 	    	
 	    },
 	    

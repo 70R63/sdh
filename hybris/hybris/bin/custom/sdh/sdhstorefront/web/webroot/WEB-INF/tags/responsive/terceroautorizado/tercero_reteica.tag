@@ -8,8 +8,8 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 
-<spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new_page">
+<spring:htmlEscape defaultHtmlEscape="true"/>
+<div class="container_new_page" id="table-reteica" style="display: none">
 	<div class="headlinecol-md-12">
 		<h2>
 			<span class="col-md-10 "><spring:theme code="terceros.objeto.reteica.titulo" /></span>
@@ -22,12 +22,12 @@
 					class="table table-bordered tabPaginacion3">
 					<thead>
 						<tr>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.ica.anoGravable" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.ica.periodo" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.ica.estadoObligacion" /></label></td>
+							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.ica.anoGravable" /></label></th>
+							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.ica.periodo" /></label></th>
+							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.ica.estadoObligacion" /></label></th>
 						</tr>
 					</thead>
 					<tbody>

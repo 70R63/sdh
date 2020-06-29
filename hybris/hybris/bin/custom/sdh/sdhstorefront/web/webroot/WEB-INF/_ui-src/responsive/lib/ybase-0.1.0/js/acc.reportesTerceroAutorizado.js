@@ -3,21 +3,13 @@ ACC.reportesTerceroAutorizado = {
 	_autoload : [ "consultaTA"],
 
 	
-	consultaTA : function() {
+	consultaTA : function(opcionConsulta) {
 
-		debugger;
-//		ACC.reportesTerceroAutorizado.ocultarTablas();
-//		ACC.reportesTerceroAutorizado.()
-//		ACC.publicidadexterior.bindDataTable_ID_refresh();
+		ACC.reportesTerceroAutorizado.displayTablas('none');
 		ACC.reportesTerceroAutorizado.vaciarTablasInfo();
-		if(ACC.reportesTerceroAutorizado.validarAntesSubmit()){
-			var impuesto = $("#impuesto").val();
-			var numObjeto = $("#numObjeto").val();
-			var dataActual = {};
-		
-			
-			dataActual.impuesto = impuesto;
-			dataActual.numObjeto = numObjeto;
+		ACC.reportesTerceroAutorizado.bindDataTables_refresh();
+		if(ACC.reportesTerceroAutorizado.validarAntesSubmit(opcionConsulta)){
+			var dataActual = ACC.reportesTerceroAutorizado.determinarData(opcionConsulta);
 			
 			
 			$.ajax({
@@ -25,10 +17,9 @@ ACC.reportesTerceroAutorizado = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
-					debugger;
-					ACC.reportesTerceroAutorizado.mostrarErrores(dataResponse);
-					ACC.reportesTerceroAutorizado.updateFromResponse(dataActual,dataResponse,null);					
-					ACC.reportesTerceroAutorizado.bindDataTable_Class();
+//					debugger;
+					ACC.reportesTerceroAutorizado.updateFromResponse(opcionConsulta,dataActual,dataResponse,null);
+					ACC.reportesTerceroAutorizado.bindDataTable_id();
 				},
 				error : function() {
 					alert("Error procesar la solicitud");	
@@ -36,135 +27,231 @@ ACC.reportesTerceroAutorizado = {
 			});
 		}
 		
-		
 	},	
 
-    bindDataTable_ID_refresh: function (id) {
-		table = $(id).DataTable();
-		table.destroy();
+	
+	bindDataTables_refresh : function () {
+		ACC.publicidadexterior.bindDataTable_ID_refresh("#table-predial1");
+		ACC.publicidadexterior.bindDataTable_ID_refresh("#table-vehicular1");
+		ACC.publicidadexterior.bindDataTable_ID_refresh("#table-ica1");
+		ACC.publicidadexterior.bindDataTable_ID_refresh("#table-reteica1");
+		ACC.publicidadexterior.bindDataTable_ID_refresh("#table-publicidad1");
+		ACC.publicidadexterior.bindDataTable_ID_refresh("#table-gasolina1");
+		ACC.publicidadexterior.bindDataTable_ID_refresh("#table-delineacion1");
+
     	
+    },
+    
+    bindDataTable_id : function(){
+		ACC.publicidadexterior.bindDataTable_id("#table-predial1");
+		ACC.publicidadexterior.bindDataTable_id("#table-vehicular1");
+		ACC.publicidadexterior.bindDataTable_id("#table-ica1");
+		ACC.publicidadexterior.bindDataTable_id("#table-reteica1");
+		ACC.publicidadexterior.bindDataTable_id("#table-publicidad1");
+		ACC.publicidadexterior.bindDataTable_id("#table-gasolina1");
+		ACC.publicidadexterior.bindDataTable_id("#table-delineacion1");
+		
+		
     },
 	
 	
-	
 	mostrarErrores : function (infoResponse) {
-		debugger;
-		if (infoResponse.errores != null && infoResponse.errores[0] != null && infoResponse.errores[0].idmsj != 0){
-			alert(infoResponse.errores[0].txtmsj);
+		var flagErrores = false;
+		
+		
+		if (infoResponse.errores != null && infoResponse.errores[0] != null && infoResponse.errores[0].id_msj != null && infoResponse.errores[0].id_msj != ""){
+			alert(infoResponse.errores[0].txt_msj);
+			flagErrores = true;
 		}
+		
+		return flagErrores;
 	},
 	
 	
-	updateFromResponse : function(infoActual,infoResponse) {
+	updateFromResponse : function(opcionConsulta,infoActual,infoResponse) {
 
-		debugger;
-		ACC.reportesTerceroAutorizado.vaciarTablasInfo();
+		var flagTablas = ACC.reportesTerceroAutorizado.determinarTablas(opcionConsulta,infoActual,infoResponse);
 
-		if (infoResponse.errores != null){
-			alert(infoResponse.errores[0].txtmsj);
-		}else{
+		if (ACC.reportesTerceroAutorizado.mostrarErrores(infoResponse) != true){
 
-			if(infoActual.claveImpuesto == '0001'){
-				if(infoResponse.predial.length > 0){
-					$.each(infoResponse.predial, function (index,value){
-						$('#table-predial1').append("<tr>"+
-								'<td>' + value.chip + '</td>'+
-								'<td>' + value.matrInmobiliaria + '</td>'+
-								'<td>' + value.direccionPredio + '</td>'+
-								'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
-								"</tr>");
-					});
-				}
-			}
-
-			if(infoActual.claveImpuesto == '0002'){
-				if(infoResponse.vehicular.length > 0){
-					$.each(infoResponse.vehicular, function (index,value){
-						$('#table-vehicular1').append("<tr>"+
-								'<td>' + value.placa + '</td>'+
-								'<td>' + value.marca + '</td>'+
-								'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
-								"</tr>");
-					});
-				}
-
-			}
-			if(infoActual.claveImpuesto == '0003'){
-				$('#table-ica1').append("<tr>"+
-						'<td>' + "Industria y Comercio" + '</td>'+
-						'<td>' + infoResponse.anoGravable + '</td>'+
-						'<td><input id="registroNum_'+ 0 +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ infoResponse.ica.numObjeto +'"' +">" + "</td>"+
+			if(flagTablas.obligacionesPredios == true && infoResponse.obligacionesPredios != null && infoResponse.obligacionesPredios.length > 0){
+				$.each(infoResponse.obligacionesPredios, function (index,value){
+					$('#table-predial1').append("<tr>"+
+						'<td>' + value.chip + '</td>'+
+						'<td>' + value.matriculaInmobiliaria + '</td>'+
+						'<td>' + value.direccion + '</td>'+
+						'<td>' + value.anoGravable + '</td>'+
+						'<td><input id="obligacionesPredios_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
 						"</tr>");
+				});
 			}
-			if(infoResponse.reteIca != null){
-				if(infoResponse.reteIca.consecutivo == null){
-					infoResponse.reteIca.consecutivo ="-";
-				}
-			}
-
-			if(infoActual.claveImpuesto == '0004'){
-				$('#table-reteica1').append("<tr>"+
-						'<td>' + infoResponse.reteIca.numID + '</td>'+
-						'<td>' + infoResponse.reteIca.consecutivo + '</td>'+
-						'<td><input id="registroNum_'+ 0 +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ infoResponse.reteIca.numObjeto +'"' +">" + "</td>"+
+			
+			if(flagTablas.obligacionesVehicular == true && infoResponse.obligacionesVehicular != null && infoResponse.obligacionesVehicular.length > 0){
+				$.each(infoResponse.obligacionesVehicular, function (index,value){
+					$('#table-vehicular1').append("<tr>"+
+						'<td>' + value.anoGravable + '</td>'+
+						'<td>' + value.placa + '</td>'+
+						'<td>' + value.modelo + '</td>'+
+						'<td>' + value.marca + '</td>'+
+						'<td>' + value.linea + '</td>'+
+						'<td><input id="obligacionesVehicular_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
 						"</tr>");
+				});
+			}
+			
+			if(flagTablas.obligacionesICA == true && infoResponse.obligacionesICA != null && infoResponse.obligacionesICA.length > 0){
+				$.each(infoResponse.obligacionesICA, function (index,value){
+					$('#table-ica1').append("<tr>"+
+						'<td>' + value.anoGravable + '</td>'+
+						'<td>' + value.periodo + '</td>'+
+						'<td><input id="obligacionesICA_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
+						"</tr>");
+				});
+			}
+			
+			if(flagTablas.obligacionesGasolina == true && infoResponse.obligacionesGasolina != null && infoResponse.obligacionesGasolina.length > 0){
+				$.each(infoResponse.obligacionesGasolina, function (index,value){
+					$('#table-gasolina1').append("<tr>"+
+						'<td>' + value.anoGravable + '</td>'+
+						'<td>' + value.periodo + '</td>'+
+						'<td><input id="obligacionesGasolina_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
+						"</tr>");
+				});
+			}
+			
+			if(flagTablas.obligacionesDelineacion == true && infoResponse.obligacionesDelineacion != null && infoResponse.obligacionesDelineacion.length > 0){
+				$.each(infoResponse.obligacionesDelineacion, function (index,value){
+					$('#table-delineacion1').append("<tr>"+
+						'<td>' + value.anoGravable + '</td>'+
+						'<td>' + value.cdu + '</td>'+
+						'<td>' + value.chip + '</td>'+
+						'<td>' + value.direccion + '</td>'+
+						'<td><input id="obligacionesDelineacion_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
+						"</tr>");
+				});
 			}
 
-			if(infoActual.claveImpuesto == '0005'){
-				if(infoResponse.gasolina.length > 0){
-					$.each(infoResponse.gasolina, function (index,value){
-						$('#table-gasolina1').append("<tr>"+
-								'<td>' + value.numDoc + '</td>'+
-								'<td>' + value.tipoDoc + '</td>'+
-								'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
-								"</tr>");
-					});
-				}
-			}
-
-			if(infoActual.claveImpuesto == '0006'){
-				if(infoResponse.delineacion != null){
-					if(infoResponse.delineacion.length > 0){
-						$.each(infoResponse.delineacion, function (index,value){
-							var numRadicado = "";
-							//debugger
-							if(value.radicados!= null){
-								numRadicado = value.radicados[0].numRadicado;
-							}
-
-							$('#table-delineacion1').append("<tr>"+
-									'<td>' + value.cdu + '</td>'+
-									'<td>' + numRadicado + '</td>'+
-									'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto + '" data-numRadicado="'+ numRadicado +'"' +">" + "</td>"+
-									"</tr>");
-						});
-					}
-				}
-			}
-
-			if(infoActual.claveImpuesto == '0007'){
-				if(infoResponse.publicidadExt != null){
-					if(infoResponse.publicidadExt.length > 0){
-						$.each(infoResponse.publicidadExt, function (index,value){
-							$('#table-publicidad1').append("<tr>"+
-									'<td>' + value.numResolu + '</td>'+
-									'<td>' + value.tipoValla + '</td>'+
-									'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
-									"</tr>");
-						});
-					}
-				}
+			if(flagTablas.obligacionesPublicidad == true && infoResponse.obligacionesPublicidad != null && infoResponse.obligacionesPublicidad.length > 0){
+				$.each(infoResponse.obligacionesPublicidad, function (index,value){
+					$('#table-publicidad1').append("<tr>"+
+							'<td>' + value.anoGravable + '</td>'+
+							'<td>' + value.numResolucion + '</td>'+
+							'<td>' + value.direccionValla + '</td>'+
+							'<td>' + value.orientacionValla + '</td>'+
+							'<td><input id="obligacionesPublicidad_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
+							"</tr>");
+				});
 			}
 		}
 
 
+	},
+	
+	determinarTablas :  function(opcionConsulta,infoActual,infoResponse){
+		var flags = {};
+		
+		switch(opcionConsulta){
+		case "objeto":
+			flags.obligacionesPredios = true;
+			flags.obligacionesVehicular = true;
+			flags.obligacionesICA = true;
+			flags.obligacionesReteica = true;
+			flags.obligacionesGasolina = true;
+			flags.obligacionesDelineacion = true;
+			flags.obligacionesPublicidad = true;
+			
+			ACC.reportesTerceroAutorizado.displayTablas('block');
+			break;
+			
+			
+		case "sujeto":
+			var claveImpuesto = $("#impuesto").val();
+			var nombreObjeto = null;
+	        
+			switch(claveImpuesto){
+			case "0001": //predial
+				nombreObjeto = 'table-predial';
+				flags.obligacionesPredios = true;
+				break;
+			case "0002":
+				nombreObjeto = 'table-vehicular';
+				flags.obligacionesVehicular = true;
+				break;
+			case "0003":
+				nombreObjeto = 'table-ica';
+				flags.obligacionesICA = true;
+				break;
+			case "0004":
+				nombreObjeto = 'table-reteica';
+				flags.obligacionesReteica = true;
+				break;
+			case "0005":
+				nombreObjeto = 'table-gasolina';
+				flags.obligacionesGasolina = true;
+				break;
+			case "0006":
+				nombreObjeto = 'table-delineacion';
+				flags.obligacionesDelineacion = true;
+				break;
+			case "0007":
+				nombreObjeto = 'table-publicidad';
+				flags.obligacionesPublicidad = true;
+				break;
+			}
+			if(nombreObjeto != null){
+				var doc = document.getElementById(nombreObjeto);
+				if(doc != null){
+					doc.style.display = 'block';
+				}
+			}
+
+			break;
+		}
+
+		
+		return flags;
+	},
+	
+	
+	displayTablas : function(opcionDisplay){
+		var doc = null;
+		
+		doc = document.getElementById('table-predial');
+		if(doc != null){
+			doc.style.display = opcionDisplay;
+		}
+		doc = document.getElementById('table-vehicular');
+		if(doc != null){
+			doc.style.display = opcionDisplay;
+		}
+		doc = document.getElementById('table-ica');
+		if(doc != null){
+			doc.style.display = opcionDisplay;
+		}
+		doc = document.getElementById('table-reteica');
+		if(doc != null){
+			doc.style.display = opcionDisplay;
+		}
+		doc = document.getElementById('table-gasolina');
+		if(doc != null){
+			doc.style.display = opcionDisplay;
+		}
+		doc = document.getElementById('table-delineacion');
+		if(doc != null){
+			doc.style.display = opcionDisplay;
+		}
+		doc = document.getElementById('table-publicidad');
+		if(doc != null){
+			doc.style.display = opcionDisplay;
+		}
 	},
 
 
 	validarAntesSubmit : function(opcionConsulta) {
 		var validacionOK = false;
 		
-		if(opcionConsulta == "objeto"){
+		switch(opcionConsulta){
+		case "objeto":
 	        var numObjeto = $("#numObjeto").val();
 			
 	        if(numObjeto != ""){
@@ -172,7 +259,9 @@ ACC.reportesTerceroAutorizado = {
 	        }else{
 	        	alert("Campo Número de objeto es obligatorio");
 	        }
-		}else if(opcionConsulta == "sujeto"){
+	        
+			break;
+		case "sujeto":
 	        var claveImpuesto = $("#impuesto").val();
 	        
 	        if(claveImpuesto != ""){
@@ -180,96 +269,45 @@ ACC.reportesTerceroAutorizado = {
 	        }else{
 	        	alert("Campo Tipo de impuesto es obligatorio");
 	        }
-			
+			break;
 		}
+
 
 		return validacionOK;
 	},
-
-
-	ocultarTablas : function() {
-
-		debugger;
-		var x = $("#impuesto").val;
-
-		ACC.reportesTerceroAutorizado.ocultarTablas_impuesto(x);
-
-
-	},
-
 	
-	ocultarTablas_impuesto : function(x) {
+	
+	determinarData : function(opcionConsulta) {
+		var dataActual = {};
+		
+		if(opcionConsulta=="objeto"){
+			var numObjeto = $("#numObjeto").val();
+			var dataActual = {};
 
-		var tablepredial = document.getElementById('table-predial');
-		var tablevehicular = document.getElementById('table-vehicular');
-		var tableica = document.getElementById('table-ica');
-		var tablereteica = document.getElementById('table-reteica');
-		var tablepublicidad = document.getElementById('table-publicidad');
-		var tablegasolina = document.getElementById('table-gasolina');
-		var cdus = document.getElementById('table-delineacion');
-
-
-		if(tablepredial!=null){
-			tablepredial.style.display = 'none';
-		}
-		if(tablevehicular!=null){
-			tablevehicular.style.display = 'none';
-		}
-		if(tableica!=null){
-			tableica.style.display = 'none';
-		}
-		if(tablereteica!=null){
-			tablereteica.style.display = 'none';
-		}
-		if(tablegasolina!=null){
-			tablegasolina.style.display = 'none';
-		}
-		if(cdus!=null){
-			cdus.style.display = 'none';
-		}
-		if(tablepublicidad!=null){
-			tablepublicidad.style.display = 'none';
+		    
+			dataActual.numObjeto = numObjeto;				
+		}else if(opcionConsulta=="sujeto"){
+			var impuesto = $("#impuesto").val();
+			var dataActual = {};
+			
+			dataActual.impuesto = impuesto;
 		}
 
-		ACC.reportesTerceroAutorizado.vaciarTablasInfo();
-
-		if (x == '0001') {  //predial
-			tablepredial.style.display = 'block';
-		} else if (x == '0002') { //vehicular
-			tablevehicular.style.display = 'block';
-		} else if (x == '0003') { //ica
-			tableica.style.display = 'block';
-		} else if (x == '0004') { //reteica
-			tablereteica.style.display = 'block';
-		} else if (x == '0005') { //gasolina
-			tablegasolina.style.display = 'block';
-		} else if (x == '0006') { //delineacion
-			cdus.style.display = 'block';
-		} else if (x == '0007') { //publicidad
-			tablepublicidad.style.display = 'block';
-		}
-
-
+		return dataActual;
 	},
+	
 
 	vaciarTablasInfo : function(){
 		$("#table-predial1").find("tr:gt(0)").remove();
 		$("#table-vehicular1").find("tr:gt(0)").remove();
-		$("#table-publicidad1").find("tr:gt(0)").remove();
-		$("#table-gasolina1").find("tr:gt(0)").remove();
 		$("#table-ica1").find("tr:gt(0)").remove();
 		$("#table-reteica1").find("tr:gt(0)").remove();
+		$("#table-gasolina1").find("tr:gt(0)").remove();
 		$("#table-delineacion1").find("tr:gt(0)").remove();
+		$("#table-publicidad1").find("tr:gt(0)").remove();
 
-	},
 
-	
-	vaciarTablasInfo_presentarDec : function(){
-		$("#table-vehicular1").find("tr:gt(0)").remove();
-		$("#table-predial1").find("tr:gt(0)").remove();
-		$("#table-myTable").find("tr:gt(0)").remove();
-	},
-	
+	}	
 	
 	
 };
