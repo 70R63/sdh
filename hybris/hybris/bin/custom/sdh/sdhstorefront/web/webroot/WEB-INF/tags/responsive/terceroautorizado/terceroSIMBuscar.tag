@@ -4,20 +4,25 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
+<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
+
+<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
+
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
     <div class="row">
         <form:form method="post" commandName="tercerosAutForm" action="buscar">
              <div class="col-md-5">
-				<formElement:formInputBox idKey="numdoc" labelKey="terceros.sim.buscar.numeroObjeto" path="numdoc" />
+				<formElement:formInputBox idKey="numObjeto" labelKey="terceros.sim.buscar.numeroObjeto" path="numObjeto" />
              </div>
 			<div class="row md-5">
 				<div class="col-md-5 text-right">
-					<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="submit" id="btnEnviar"
+					<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="button" id="btnEnviar"
 					name="btnEnviar" value="enviar" disabled="false" onclick="consultaTA()" >
 					<spring:theme code="tramites.crear.inicial.enviar" />
 					</sf:button>
@@ -36,6 +41,7 @@
 
 <script>
 	function consultaTA() {
-		alert("consulta");
+// 		alert("consulta");
+		ACC.reportesTerceroAutorizado.consultaTA("objeto");
 	}
 </script>

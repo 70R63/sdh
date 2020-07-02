@@ -91,7 +91,7 @@ public class TercerosAutRequest {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -99,7 +99,7 @@ public class TercerosAutRequest {
 	{
 		final StringBuilder stringBuilder = new StringBuilder();
 
-		stringBuilder.append("{\"parametros\":");
+		stringBuilder.append("{\"parametros\":{");
 		stringBuilder.append(obtenerValorJson("\"impuesto\":\"", this.getImpuesto(), "\","));
 		stringBuilder.append(obtenerValorJson("\"numeroObjeto\":\"", this.getNumeroObjeto(), "\","));
 		stringBuilder.append(obtenerValorJson("\"tipoDocumento\":\"", this.getTipoDocumento(), "\","));

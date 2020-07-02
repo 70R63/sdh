@@ -19,12 +19,12 @@
              <div class="col-md-5">
                  <formElement:formSelectBox idKey="impuesto" labelKey="terceros.notario.buscar.impuesto"
                                  path="impuesto" mandatory="false" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
-                                 items="${tercerosAutForm.listaImpuestos}" selectCSSClass="form-control" disabled="false"/>
+                                 items="${tercerosAutForm.listaImpuestos}" selectCSSClass="form-control" disabled="false" onchange="reiniciarSeleccion()"/>
              </div>
 			<div class="row md-5">
 				<div class="col-md-5 text-right">
-					<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="submit" id="btnEnviar"
-					name="btnEnviar" value="enviar" disabled="false">
+					<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="button" id="btnEnviar"
+					name="btnEnviar" value="enviar" disabled="false" onclick="consultaTA()">
 					<spring:theme code="tramites.crear.inicial.enviar" />
 					</sf:button>
 				</div>
@@ -39,3 +39,14 @@
          </form:form>
      </div>
 </div>
+
+
+<script>
+	function reiniciarSeleccion(){
+		ACC.reportesTerceroAutorizado.displayTablas('none');
+	}
+
+	function consultaTA() {
+		ACC.reportesTerceroAutorizado.consultaTA("sujeto");
+	}
+</script>

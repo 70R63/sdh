@@ -9,7 +9,9 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.i18n.I18NService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.dao.SdhDocumentTypeDao;
 import de.hybris.sdh.core.pojos.requests.TercerosAutRequest;
@@ -65,6 +67,9 @@ public class TercerosNotarioBuscarPageController extends AbstractPageController
 
 	@Resource(name = "i18nService")
 	I18NService i18nService;
+
+	@Resource(name = "userService")
+	UserService userService;
 
 
 	@ModelAttribute("documentTypes")
@@ -136,17 +141,18 @@ public class TercerosNotarioBuscarPageController extends AbstractPageController
 			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En GET terceros Autorizados consulta--------------------------");
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		TercerosAutResponse responseData = null;
 
 		try
 		{
 			responseData = sdhTercerosAutService.getTercerosAut(new TercerosAutRequest(tercerosAutForm.getImpuesto(),
-					tercerosAutForm.getNumObjeto(), tercerosAutForm.getTipdoc(), tercerosAutForm.getNumdoc()));
-
+					tercerosAutForm.getNumObjeto(), customerModel.getDocumentType(), customerModel.getDocumentNumber()));
 
 		}
 		catch (final Exception e)
 		{
+			System.out.println("excepcion en consulta");
 			LOG.error("Network connection error : " + e.getMessage());
 		}
 
