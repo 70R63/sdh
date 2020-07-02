@@ -9,7 +9,7 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new_page">
+<div class="container_new_page" id="table-vehicular" style="display: none">
 	<div class="headlinecol-md-12">
 		<h2>
 			<span class="col-md-10 "><spring:theme code="terceros.objeto.vehicular.titulo" /></span>
@@ -18,22 +18,22 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="table-responsive">
-				<table id="tabPaginacion2" 
-					class="table table-bordered">
+				<table id="table-vehicular1" 
+					class="table table-bordered tabPaginacion1">
 					<thead>
 						<tr>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.vehicular.anoGravable" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.vehicular.placa" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.vehicular.modelo" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.vehicular.marca" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.vehicular.linea" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.vehicular.estadoObligacion" /></label></td>
+							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.vehicular.anoGravable" /></label></th>
+							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.vehicular.placa" /></label></th>
+							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.vehicular.modelo" /></label></th>
+							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.vehicular.marca" /></label></th>
+							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.vehicular.linea" /></label></th>
+							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.vehicular.estadoObligacion" /></label></th>
 						</tr>
 					</thead>
 					<tbody>

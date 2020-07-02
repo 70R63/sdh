@@ -6,11 +6,12 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.i18n.I18NService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.dao.SdhDocumentTypeDao;
 import de.hybris.sdh.core.pojos.requests.TercerosAutRequest;
@@ -26,7 +27,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -34,6 +34,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -66,6 +67,9 @@ public class TercerosNotarioBuscarPageController extends AbstractPageController
 
 	@Resource(name = "i18nService")
 	I18NService i18nService;
+
+	@Resource(name = "userService")
+	UserService userService;
 
 
 	@ModelAttribute("documentTypes")
@@ -122,27 +126,37 @@ public class TercerosNotarioBuscarPageController extends AbstractPageController
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(TERCEROS_AUTORIZADOS_NOTARIO_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(TERCEROS_AUTORIZADOS_NOTARIO_CMS_PAGE));
-		TercerosAutResponse responseData = null;
 
-		try {
-			responseData = sdhTercerosAutService.getTercerosAut(
-					new TercerosAutRequest(tercerosAutForm.getTipdoc(), tercerosAutForm.getImpuesto(),
-							tercerosAutForm.getNumdoc(), "AAA0102XAUZ"));
-
-			if(!StringUtils.isEmpty(responseData.getErrores().get(0).getId_msj())){
-				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-					"sdh.standard.global.message", new Object[]
-					{responseData.getErrores().get(0).getTxt_msj()});
-			}
-		} catch (final Exception e) {
-			LOG.error("Network connection error : " + e.getMessage());
-		}
-
-		redirectAttributes.addFlashAttribute("tercerosAutTable",responseData);
 		redirectAttributes.addFlashAttribute("tercerosAutForm", tercerosAutForm);
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		return REDIRECT_PREFIX + TERCEROS_AUTORIZADOS_REDIRECT;
+	}
+
+
+	@RequestMapping(value = "/terceros/consultaTA", method = RequestMethod.GET)
+	@ResponseBody
+	public TercerosAutResponse consultaInfo(@ModelAttribute("tercerosAutForm")
+	final TercerosAutForm tercerosAutForm, final Model model, final RedirectAttributes redirectModel)
+			throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En GET terceros Autorizados consulta--------------------------");
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		TercerosAutResponse responseData = null;
+
+		try
+		{
+			responseData = sdhTercerosAutService.getTercerosAut(new TercerosAutRequest(tercerosAutForm.getImpuesto(),
+					tercerosAutForm.getNumObjeto(), customerModel.getDocumentType(), customerModel.getDocumentNumber()));
+
+		}
+		catch (final Exception e)
+		{
+			System.out.println("excepcion en consulta");
+			LOG.error("Network connection error : " + e.getMessage());
+		}
+
+		return responseData;
 	}
 
 }

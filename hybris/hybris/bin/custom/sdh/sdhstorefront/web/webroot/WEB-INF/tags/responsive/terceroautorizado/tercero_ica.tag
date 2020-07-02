@@ -9,29 +9,25 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new_page">
+<div class="container_new_page" id="table-ica" style="display: none">
 	<div class="headlinecol-md-12">
 		<h2>
-			<span class="col-md-10 "><spring:theme code="terceros.objeto.delineacion.titulo" /></span>
+			<span class="col-md-10 "><spring:theme code="terceros.objeto.ica.titulo" /></span>
 		</h2>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="table-responsive">
-				<table id="tabPaginacion3" 
-					class="table table-bordered">
+				<table id="table-ica1" 
+					class="table table-bordered tabPaginacion2">
 					<thead>
 						<tr>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.delineacion.anoGravable" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.delineacion.cdu" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.delineacion.chip" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.delineacion.direccion" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
-										code="terceros.objeto.delineacion.estadoObligacion" /></label></td>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="terceros.objeto.ica.anoGravable" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="terceros.objeto.ica.periodo" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="terceros.objeto.ica.estadoObligacion" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -41,4 +37,3 @@
 		</div>
 	</div>
 </div>
-
