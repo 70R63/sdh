@@ -47,7 +47,6 @@ INSERT_UPDATE SiteMapConfig;&siteMapConfigId;configId[unique=true];siteMapLangua
 INSERT_UPDATE CMSSite;uid[unique=true];theme(code);channel(code);stores(uid);contentCatalogs(id);defaultCatalog(id);defaultLanguage(isoCode);siteMapConfig(&siteMapConfigId);urlPatterns;active;previewURL;startingPage(uid,$contentCV);urlEncodingAttributes;defaultPromotionGroup(Identifier)
 ;$siteUid;psalpha;B2C;$storeUid;$contentCatalog;$productCatalog;$defaultLanguage;$siteUidSiteMapConfig;(?i)^https?://vhshdtq1web01.hec.shd.gov.co:9002\\.[^/]+(|/.*|\?.*)$,(?i)^https?://hec45v111680\\.us1\\.hec\\.sap\\.biz:9002\\.[^/]+(|/.*|\?.*)$,(?i)^https?://hec45v111680\\.us1\\.hec\\.sap\\.biz:9002\\?site=sdh\\&clear=true$,(?i)^https?://hec45v111680\\.us1\\.hec\\.sap\\.biz:9002\\[^/]+(|/.*|\\?.*)$,(?i)^https?://qasnuevaoficinavirtual.shd.gov.co/\\.[^/]+(|/.*|\?.*)$,^(https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$;true;$storefrontContextRoot/?site=$siteUid;homepage;language
 
-
 # Cart Cleanup CronJobs
 INSERT_UPDATE CartRemovalCronJob;code[unique=true];job(code)[default=cartRemovalJob];sites(uid)[default=$siteUid];sessionLanguage(isoCode)[default=en]
 ;$siteUid-CartRemovalJob
