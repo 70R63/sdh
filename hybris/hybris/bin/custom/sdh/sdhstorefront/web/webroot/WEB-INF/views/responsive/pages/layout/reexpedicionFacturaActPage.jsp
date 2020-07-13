@@ -16,12 +16,12 @@
 <miRit:personalData />
 <miRit:generalData />
 <miRit:contactData />
+<facturacion:reexpedirFactura/>
 
-<facturacion:autorizaciones/>
 
 <script type="text/javascript">
 window.onload = function() {
-	alert("Los contribuyentes del predial, pueden obtener un descuento adicional del 1% sobre el valor a pagar del impuesto predial, para la vigencia 2020 si actualizan y reportan su información de contacto y autorizan que los datos registrados puedan ser usados con fines institucionales y para la notificación electrónica. ");
+	alert('Para reexpedición de factura, debes actualizar o confirmar datos y dar clic en el botón "Reexpedir Factura"');
     $(".loader").fadeOut("slow");
 }
 </script>	
