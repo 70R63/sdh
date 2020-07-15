@@ -18,6 +18,8 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/platformbackoffice"/>
 	<classpathentry exported="true" kind="lib" path="lib/java-jwt-3.8.1.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/datahubadapter"/>
+	<classpathentry exported="true" kind="lib" path="lib/sevenzipjbinding-AllPlatforms.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/gson-2.8.6.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sdhfacades"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/publicsectorconsignmentexchange"/>
 	<classpathentry exported="true" kind="lib" path="lib/axis-1.4.jar"/>
@@ -73,6 +75,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/solrfacetsearch"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/backoffice"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/permissionsfacades"/>
+	<classpathentry exported="true" kind="lib" path="lib/sevenzipjbinding.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/commercewebservicescommons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/solrfacetsearchbackoffice"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/cscockpit"/>
@@ -83,6 +86,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/sdhbillsaddon"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/auditreportservices"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/xyformscockpits"/>
+	<classpathentry exported="true" kind="lib" path="lib/javax.websocket-api-1.1.jar"/>
 	<classpathentry exported="true" kind="src" path="/solrserver"/>
 	<classpathentry kind="src" output="eclipsebin/classes" path="src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/voucher"/>

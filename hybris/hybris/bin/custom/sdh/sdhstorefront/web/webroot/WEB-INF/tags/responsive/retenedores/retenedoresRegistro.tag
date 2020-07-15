@@ -75,17 +75,17 @@
 
 			<div class="row mt-3">
 				<div class="col-md-2">
-					<div class="form-group">
-						<label class="control-label"><spring:theme
-								code="reteica.inicial.carga.anio" /></label> <select
-							id="reteICAAnoGravable" name="reteICAAnoGravable"
-							class="newalto form-control">
-							<option value="">Seleccionar</option>
-							<c:forEach items="${ years}" var="eachYear">
-								<option value="${ eachYear}">${eachYear }</option>
-							</c:forEach>
-						</select>
-					</div>
+<!-- 					<div class="form-group"> -->
+<%-- 						<label class="control-label"><spring:theme --%>
+<%-- 								code="reteica.inicial.carga.anio" /></label> <select --%>
+<!-- 							id="reteICAAnoGravable" name="reteICAAnoGravable" -->
+<!-- 							class="newalto form-control"> -->
+<!-- 							<option value="">Seleccionar</option> -->
+<%-- 							<c:forEach items="${ years}" var="eachYear"> --%>
+<%-- 								<option value="${ eachYear}">${eachYear }</option> --%>
+<%-- 							</c:forEach> --%>
+<!-- 						</select> -->
+<!-- 					</div> -->
 				</div>
 				<div class="col-md-2">
 					<div class="form-group">
