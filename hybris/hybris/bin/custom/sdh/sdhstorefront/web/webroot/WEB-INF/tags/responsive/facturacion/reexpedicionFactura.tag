@@ -120,8 +120,8 @@
 		<div class="row">
 			<div class="col-md-3 col-md-offset-5">
 				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button">
-					<spring:theme code="descarga.factura.predial.desfact" />
+					class="btn btn-primary btn-lg" type="button" onclick="reexpedicion('0001')">
+					<spring:theme code="reexpedicion.factura.predial.desfact" />
 				</button>
 			</div>
 		</div>
@@ -170,7 +170,7 @@
 		<div class="row">
 			<div class="col-md-3 col-md-offset-5">
 				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button">
+					class="btn btn-primary btn-lg" type="button" onclick="reexpedicion('0002')">
 					<spring:theme code="reexpedicion.factura.vehiculo.desfac" />
 				</button>
 			</div>
@@ -199,6 +199,12 @@
 			tabveh.style.display = 'none';
 		}
 
+	}
+	
+	function reexpedicion(claveImpuesto){
+		
+		window.location.href = '<c:url value="/contribuyentes/reexpedicionfacturaAct" />';
+		
 	}
 </script>
 
