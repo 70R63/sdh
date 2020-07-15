@@ -183,7 +183,7 @@
 								</li>
 								<li class="liOffcanvas">
 									<ycommerce:testId code="header_num_doc_link">
-										<spring:theme code="header.num.doc" var="Número de Documento: " />
+										<spring:theme code="header.num.doc" var="Nï¿½mero de Documento: " />
 									</ycommerce:testId>
 								</li>
 								<li class="liOffcanvas">
