@@ -1399,7 +1399,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		response = sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest);
 		try {
-			sdhConsultaContribuyenteBPRespons = mapper.readValue(response, SDHValidaMailRolResponse.class);
+			if(Objects.nonNull(response)){
+				sdhConsultaContribuyenteBPRespons = mapper.readValue(response, SDHValidaMailRolResponse.class);
+			}
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
