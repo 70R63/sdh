@@ -238,8 +238,11 @@ ACC.oblipend = {
 	},
 
 	bindTrmPdf : function(impuesto, reporte, reportPdfName) {
+		debugger;
 	    var currentUrl = window.location.href;
 	    var baseUrl = currentUrl.substring(0, currentUrl.indexOf("sdhstorefront"));
+
+if(currentUrl.includes("contribuyentes")){
 	    $.ajax({
             url     : baseUrl+'sdhstorefront/es/trmService/getPdfString?impuesto='+impuesto+'&reporte='+reporte,
             method  : 'GET',
@@ -253,6 +256,22 @@ ACC.oblipend = {
                 console.log('Error occured!!');
             }
         });
+}else{
+	impuesto = 31;
+	 $.ajax({
+            url     : baseUrl+'sdhstorefront/es/trmService/getPdfString?impuesto='+impuesto+'&reporte='+reporte,
+            method  : 'GET',
+            success : function(pdfResponse){
+            	if(!ACC.oblipend.hayErrores_getPdfString(pdfResponse)){
+	                console.log(pdfResponse.pdf);
+	                ACC.oblipend.bindDownloadPdf(pdfResponse.pdf, reportPdfName);
+            	}
+            },
+            error : function(jqXHR, exception){
+                console.log('Error occured!!');
+            }
+        });
+}
 	},
 
 	bindDownloadPdf : function(stringPdf, reportPdfName){

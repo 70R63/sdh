@@ -9,7 +9,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -34,6 +33,7 @@ import de.hybris.sdh.storefront.forms.ObligacionesForm;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -56,6 +56,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 {
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.oblipendienetes";
+	private static final String TEXT_ACCOUNT_PROFILE_RETE = "text.account.profile.obligaRETE";
 
 	// CMS Pages
 	private static final String OBLIGACIONES_PENDIENTES_CMS_PAGE = "obligacionesPendientesPage";
@@ -97,12 +98,14 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	private static final Logger LOG = Logger.getLogger(SobreTasaGasolina.class);
 
 
-	@RequestMapping(value = "/contribuyentes/consultas/obligaciones", method = RequestMethod.GET)
+	@RequestMapping(value =
+	{ "/contribuyentes/consultas/obligaciones", "/agenteRetenedor/consultas/obligaciones" }, method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String oblipendi(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("obligacionesForm")
-	final ObligacionesForm obligacionesForm) throws CMSItemNotFoundException
+	final ObligacionesForm obligacionesForm, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 
+		final String referrer = request.getHeader("referer");
 		System.out.println("Se encuentra dentro del get de OBLIGACIONES PENDIENTES");
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
@@ -177,6 +180,21 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			LOG.error("error generating declaration : " + e.getMessage());
 		}
 
+
+		if (referrer.contains("contribuyentes"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		}
+		else if (referrer.contains("retenedor") || referrer.contains("agenteRetenedor"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE_RETE));
+		}
+		else
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		}
+
+
 		model.addAttribute("obligacionesFormuno", obligacionesFormuno);
 		model.addAttribute("customerData", customerData);
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
@@ -184,7 +202,6 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(OBLIGACIONES_PENDIENTES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(OBLIGACIONES_PENDIENTES_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);

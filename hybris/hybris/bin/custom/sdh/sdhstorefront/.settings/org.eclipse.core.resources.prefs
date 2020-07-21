@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//web/webroot/WEB-INF/messages/addons/sdhpsaddon/base_es.properties=UTF-8
 encoding//web/webroot/WEB-INF/messages/base.properties=UTF-8
 encoding//web/webroot/WEB-INF/messages/base_de.properties=UTF-8
 encoding//web/webroot/WEB-INF/messages/base_ja.properties=UTF-8
@@ -9,6 +10,4 @@ encoding//web/webroot/WEB-INF/messages/site-apparel-uk.properties=UTF-8
 encoding//web/webroot/WEB-INF/messages/site-electronics.properties=UTF-8
 encoding//web/webroot/WEB-INF/messages/site-electronics_de.properties=UTF-8
 encoding//web/webroot/WEB-INF/messages/site-electronics_ja.properties=UTF-8
-
 encoding/<project>=UTF-8
-
