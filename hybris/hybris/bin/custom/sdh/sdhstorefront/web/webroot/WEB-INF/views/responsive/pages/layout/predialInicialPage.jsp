@@ -11,11 +11,13 @@
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 <%@ taglib prefix="obligaciones"
 	tagdir="/WEB-INF/tags/responsive/obligacionesPendi"%>
+<%@ taglib prefix="facturacion" tagdir="/WEB-INF/tags/responsive/facturacion"%>
 
 <div class="loader"></div>
 
 <obligaciones:obliPendientesPagar />
 <a id="downloadHelper" target="_blank"></a>
+<facturacion:descuentoUnoPorCiento/>
 <predialIni:predialInicialTable></predialIni:predialInicialTable>
 
 <input type="hidden" id="opcUsoPredialUni" value="">
