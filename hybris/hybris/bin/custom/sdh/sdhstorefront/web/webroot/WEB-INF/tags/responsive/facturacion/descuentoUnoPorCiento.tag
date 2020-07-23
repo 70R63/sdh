@@ -20,7 +20,7 @@
 	<c:if test="${fechaActualNumber <= fechaLimiteNumber}">
 		<div class="row">
 			<div class="col-md-12">
-				<a href="" ><spring:theme code="text.account.profile.descuento1pc"></spring:theme></a>
+				<a href="<c:url value='/contribuyentes/facturacion/descuentoUnoPorCiento'/>" ><spring:theme code="text.account.profile.descuento1pc"></spring:theme></a>
 				<br>
 				<br>
 				<br>
