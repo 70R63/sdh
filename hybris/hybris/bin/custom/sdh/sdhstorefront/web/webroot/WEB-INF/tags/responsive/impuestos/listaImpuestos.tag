@@ -284,8 +284,9 @@
 							</select>
 						</td>
 						<td class="col-sm-3">
+							<c:url var="post_url" value="/contribuyentes/delineacion-urbana/declaracion" />
 							<form:form method="post" commandName="inputDelineacion"
-								action="/sdhstorefront/es/contribuyentes/delineacion-urbana/declaracion">
+								action="${post_url}">
 								<c:set var="idCampoTipoLicencia"
 									value='tipoLicenciaSeleccionada_${item.cdu}' />
 								<form:hidden path="selectedCDU" value="${item.cdu}" />
@@ -323,8 +324,9 @@
 								<label>${radicado.numRadicado}</label>
 							</td>
 							<td class="col-sm-3">
+								<c:url var="post_url" value="/contribuyentes/delineacion-urbana/declaracion" />
 								<form:form method="post" commandName="inputDelineacion"
-									action="/sdhstorefront/es/contribuyentes/delineacion-urbana/declaracion">
+									action="${post_url}">
 									<form:hidden path="selectedCDU" value="${item.cdu}" />
 									<form:hidden path="selectedRadicado"
 										value="${radicado.numRadicado}" />

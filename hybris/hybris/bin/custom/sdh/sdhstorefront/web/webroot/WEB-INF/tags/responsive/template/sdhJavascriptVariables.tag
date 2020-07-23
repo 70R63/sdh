@@ -162,6 +162,8 @@
 			
 			ACC.consultaTerceroAutorizado= "<c:url value='/terceros/consultaTA' />";
 
+			ACC.trmPDFString= "<c:url value='/trmService/getPdfString' />";
+
 
 		  	ACC.currentURL = "${currentURL}";
 

@@ -40,7 +40,7 @@
 		var declaracion = '${param.declaracion}';
 
 		if (declaracion) {
-			window.location.href = "/sdhstorefront/es/contribuyentes/presentar-declaracion";
+			window.location.href = "<c:url value='/contribuyentes/presentar-declaracion' />";
 		} else {
 			window.history.back();
 		}
