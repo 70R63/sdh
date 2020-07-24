@@ -72,6 +72,7 @@ ACC.reportesTerceroAutorizado = {
 
 		var flagTablas = ACC.reportesTerceroAutorizado.determinarTablas(opcionConsulta,infoActual,infoResponse);
 
+		ACC.reportesTerceroAutorizado.vaciarTablasInfo();
 		if (ACC.reportesTerceroAutorizado.mostrarErrores(infoResponse) != true){
 
 			if(flagTablas.obligacionesPredios == true && infoResponse.obligacionesPredios != null && infoResponse.obligacionesPredios.length > 0){
