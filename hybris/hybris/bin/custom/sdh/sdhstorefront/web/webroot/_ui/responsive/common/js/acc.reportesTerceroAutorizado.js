@@ -5,8 +5,9 @@ ACC.reportesTerceroAutorizado = {
 	
 	consultaTA : function(opcionConsulta) {
 
-		ACC.reportesTerceroAutorizado.displayTablas('none');
+
 		ACC.reportesTerceroAutorizado.vaciarTablasInfo();
+		ACC.reportesTerceroAutorizado.displayTablas('none');
 		ACC.reportesTerceroAutorizado.bindDataTables_refresh();
 		if(ACC.reportesTerceroAutorizado.validarAntesSubmit(opcionConsulta)){
 			var dataActual = ACC.reportesTerceroAutorizado.determinarData(opcionConsulta);
@@ -72,6 +73,7 @@ ACC.reportesTerceroAutorizado = {
 
 		var flagTablas = ACC.reportesTerceroAutorizado.determinarTablas(opcionConsulta,infoActual,infoResponse);
 
+		ACC.reportesTerceroAutorizado.vaciarTablasInfo();
 		if (ACC.reportesTerceroAutorizado.mostrarErrores(infoResponse) != true){
 
 			if(flagTablas.obligacionesPredios == true && infoResponse.obligacionesPredios != null && infoResponse.obligacionesPredios.length > 0){
@@ -263,11 +265,26 @@ ACC.reportesTerceroAutorizado = {
 			break;
 		case "sujeto":
 	        var claveImpuesto = $("#impuesto").val();
-	        
-	        if(claveImpuesto != ""){
-	        	validacionOK = true;
+	        if(claveImpuesto != null && claveImpuesto != ""){
 	        }else{
-	        	alert("Campo Tipo de impuesto es obligatorio");
+	        	alert("El campo Tipo de impuesto es obligatorio");
+	        }
+	        
+	        var claveTipdoc = $("#tipdoc").val();
+	        if(claveTipdoc != null && claveTipdoc != ""){
+	        }else{
+	        	alert("El campo Tipo de documento es obligatorio");
+	        }
+	        
+	        var claveNumdoc = $("#numdoc").val();
+	        
+	        if(claveNumdoc != null && claveNumdoc != ""){
+	        }else{
+	        	alert("El campo Número de documento es obligatorio");
+	        }
+
+	        if(claveImpuesto != null && claveImpuesto != "" && claveTipdoc != null && claveTipdoc != "" && claveNumdoc != null && claveNumdoc != ""){
+	        	validacionOK = true;
 	        }
 			break;
 		}
@@ -278,6 +295,7 @@ ACC.reportesTerceroAutorizado = {
 	
 	
 	determinarData : function(opcionConsulta) {
+		debugger;
 		var dataActual = {};
 		
 		if(opcionConsulta=="objeto"){
@@ -288,9 +306,13 @@ ACC.reportesTerceroAutorizado = {
 			dataActual.numObjeto = numObjeto;				
 		}else if(opcionConsulta=="sujeto"){
 			var impuesto = $("#impuesto").val();
+			var tipdoc = $("#tipdoc").val();
+			var numdoc = $("#numdoc").val();
 			var dataActual = {};
 			
 			dataActual.impuesto = impuesto;
+			dataActual.tipdoc = tipdoc;
+			dataActual.numdoc = numdoc;
 		}
 
 		return dataActual;

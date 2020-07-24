@@ -263,6 +263,11 @@ ACC.mirit = {
 		        $(document).on("click", "#updateAutorizacionesButton", function (e) {
 		    	        e.preventDefault();
 		    	        
+  var r = confirm("Señor contribuyente para activar la Notificación electrónica de Actos oficiales en el buzón electrónico ingresa a este enlace para leer los términos y condiciones");
+  if (r == true) {
+   
+ 
+
 		    	        
 		    	        var updateAutorizacionesData = {};
 		    	        updateAutorizacionesData.usoBuzon = $("#buzon").is(":checked");
@@ -291,6 +296,9 @@ ACC.mirit = {
 			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
 			   	            }
 			   	        });
+}else{
+	
+}
 		        });
 		   },
 		 
