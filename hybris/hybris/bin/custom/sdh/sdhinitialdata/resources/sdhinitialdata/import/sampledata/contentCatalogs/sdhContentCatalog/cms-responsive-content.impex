@@ -444,7 +444,6 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 
 #->INI dev-eduardo Agregar menu FACTURACION 04/01/2019
 #;FacturacionNavigationServiceRequestsNavNodeMenu;;Facturacion Service Requests Menu;FacturacionNavigationServiceRequestsNavNodeMenu;DescuentoUnoPorCientoNavNode,DescargaFacturaNavNode,ReexpedicionFacturaNavNode
-;FacturacionNavigationServiceRequestsNavNodeMenu;;Facturacion Service Requests Menu;FacturacionNavigationServiceRequestsNavNodeMenu;DescargaFacturaNavNode,ReexpedicionFacturaNavNode
 #->FIN dev-eduardo Agregar menu FACTURACION 04/01/2019
 
 #->INI dev-eduardo Agregar menu DECLARACIONES 04/01/2019
@@ -471,6 +470,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;;Retenedores Registro Service Requests;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;EdoCargasNavNode
 ;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;;Retenedores Declaracion Service Requests;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;ARPresentarDeclaracionNavNode,ARListaDeclaracionNavNode
 ;TerceroAutorizadoReportesNavigationServiceRequestsNavNodeMenu;;TerceroAutorizado Service Requests Menu;TerceroAutorizadoReportesNavigationServiceRequestsNavNodeMenu;TerceroAutorizadoPorSujetoNavNode,TerceroAutorizadoPorObjetoNavNode
+;FacturacionNavigationServiceRequestsNavNodeMenu;;Facturacion Service Requests Menu;FacturacionNavigationServiceRequestsNavNodeMenu;DescargaFacturaNavNode,ReexpedicionFacturaNavNode 
 
 
 #*->-------------------------------------------------------------------------------------------------------------------------
