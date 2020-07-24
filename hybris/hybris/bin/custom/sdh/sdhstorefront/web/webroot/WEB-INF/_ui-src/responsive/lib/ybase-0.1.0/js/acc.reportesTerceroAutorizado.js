@@ -278,6 +278,7 @@ ACC.reportesTerceroAutorizado = {
 	
 	
 	determinarData : function(opcionConsulta) {
+		debugger;
 		var dataActual = {};
 		
 		if(opcionConsulta=="objeto"){
@@ -288,9 +289,13 @@ ACC.reportesTerceroAutorizado = {
 			dataActual.numObjeto = numObjeto;				
 		}else if(opcionConsulta=="sujeto"){
 			var impuesto = $("#impuesto").val();
+			var tipdoc = $("#tipdoc").val();
+			var numdoc = $("#numdoc").val();
 			var dataActual = {};
 			
 			dataActual.impuesto = impuesto;
+			dataActual.tipdoc = tipdoc;
+			dataActual.numdoc = numdoc;
 		}
 
 		return dataActual;

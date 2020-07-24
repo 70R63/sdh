@@ -21,6 +21,23 @@
                                  path="impuesto" mandatory="false" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
                                  items="${tercerosAutForm.listaImpuestos}" selectCSSClass="form-control" disabled="false" onchange="reiniciarSeleccion()"/>
              </div>
+
+
+
+            <div class="col-sm-3">
+                <formElement:formSelectBox idKey="tipdoc" labelKey="terceros.notario.buscar.tipdoc"
+                    path="tipdoc" mandatory="false" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
+                    items="${documentTypes}" selectCSSClass="form-control" disabled="false"/>
+
+             </div>
+                          <div class="col-sm-3">
+                <formElement:formInputBox idKey="numdoc" labelKey="terceros.notario.buscar.numdoc" path="numdoc" />
+             </div>
+            
+
+
+             
+             
 			<div class="row md-5">
 				<div class="col-md-5 text-right">
 					<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="button" id="btnEnviar"
