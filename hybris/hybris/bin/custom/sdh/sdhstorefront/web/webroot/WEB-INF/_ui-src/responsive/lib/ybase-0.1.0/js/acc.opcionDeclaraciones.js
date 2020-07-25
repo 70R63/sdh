@@ -1495,7 +1495,7 @@ debugger;
 		var ocultarPeriodo2 = false;
         var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = 0;
+		var cantidadAnoGravable = 5;
 		
 		debugger;
         
@@ -1506,11 +1506,11 @@ debugger;
         
 		if(claveImpuesto == '2'){ //vehicular
 			ocultarPeriodo2=true;
-	        cantidadAnoGravable = 7;
+//	        cantidadAnoGravable = 7;
 		}else if(claveImpuesto == '1'){ //predial
 			ocultarPeriodo2=true;
-			anoGravableBase--;
-	        cantidadAnoGravable = 6;
+//			anoGravableBase--;
+//	        cantidadAnoGravable = 6;
 		}
 		
 		if(ocultarPeriodo2==true){
@@ -1624,13 +1624,13 @@ debugger;
 		
 		$("#anoGravable").find("option:gt(0)").remove();
 		if(claveImpuesto == '1' || claveImpuesto == '2'){ // predial vehicular 
-			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,7);
+			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,5);
 		}else if(claveImpuesto == '6'){ // delineacion
 			//anoGravableBase--;
-			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,7);
+			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,5);
 		}else{
-			anoGravableBase--;
-			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,6);
+//			anoGravableBase--;
+			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,5);
 		}
 		
 	},

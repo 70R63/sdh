@@ -80,7 +80,7 @@
 			<input type="hidden" name="skipReques" value="" id="skipReques"/>
 			<sf:hidden path="periodicidadImpuesto"/>
 
-			<c:if test="${dataForm.impuesto != '3'}">
+<%-- 			<c:if test="${dataForm.impuesto != '3'}"> --%>
 				<div class="col-md-4 col-xs-12 mb-20 no-margincol">
 					<span class="paso--dos pasos color-sr2">2</span>
 					<h2 class="titulo-caja--ser-rel color-sr2 ">
@@ -102,31 +102,31 @@
 						</div>
 					</div>
 				</div>
-			</c:if>
+<%-- 			</c:if> --%>
 
-			<c:if test="${dataForm.impuesto == '3'}">
-				<div class="col-md-4 col-xs-12 mb-20 no-margincol">
-					<span class="paso--dos pasos color-sr2">2</span>
-					<h2 class="titulo-caja--ser-rel color-sr2 ">
-						<span class="paso2"><spring:theme
-								code="impuestos.presentarDeclaracion.anioGravableConsultarUpper" /></span>
-					</h2>
-					<p class="pasoClase2 metrophobic">
-						<spring:theme code="impuestos.presentarDeclaracion.seleccionaAnio" />
-					</p>
-					<div class="caja--ser-rel color-sr2">
-						<div class="form-group ">
-							<label class="control-label required"><spring:theme
-									code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
+<%-- 			<c:if test="${dataForm.impuesto == '3'}"> --%>
+<!-- 				<div class="col-md-4 col-xs-12 mb-20 no-margincol"> -->
+<!-- 					<span class="paso--dos pasos color-sr2">2</span> -->
+<!-- 					<h2 class="titulo-caja--ser-rel color-sr2 "> -->
+<%-- 						<span class="paso2"><spring:theme --%>
+<%-- 								code="impuestos.presentarDeclaracion.anioGravableConsultarUpper" /></span> --%>
+<!-- 					</h2> -->
+<!-- 					<p class="pasoClase2 metrophobic"> -->
+<%-- 						<spring:theme code="impuestos.presentarDeclaracion.seleccionaAnio" /> --%>
+<!-- 					</p> -->
+<!-- 					<div class="caja--ser-rel color-sr2"> -->
+<!-- 						<div class="form-group "> -->
+<%-- 							<label class="control-label required"><spring:theme --%>
+<%-- 									code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label> --%>
 
 
-							<sf:select path="anoGravable" id="anoGravable"
-								items="${icaAnioGravable}" referenceData="${icaAnioGravable}"
-								class="newalto form-control" onchange="onChangeAnioGravable()" />
-						</div>
-					</div>
-				</div>
-			</c:if>
+<%-- 							<sf:select path="anoGravable" id="anoGravable" --%>
+<%-- 								items="${icaAnioGravable}" referenceData="${icaAnioGravable}" --%>
+<%-- 								class="newalto form-control" onchange="onChangeAnioGravable()" /> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<%-- 			</c:if> --%>
 
 			<c:if
 				test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6' and dataForm.impuesto ne '2'}">
