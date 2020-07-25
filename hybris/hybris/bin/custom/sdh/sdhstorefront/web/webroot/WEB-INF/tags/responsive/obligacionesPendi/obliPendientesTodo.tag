@@ -327,7 +327,7 @@
 												<td><c:out value="${eachObIcaDet.numReferencia}" /></td>
 												<td><c:out value="${eachObIcaDet.objetoContrato}" /></td>
 												<td><a
-													href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}&tpImp=02&objCont=${eachObIcaDet.objetoContrato}&clvPer=${eachObIca.anioGravable}${eachObIca.periodo}" />">Generar
+													href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}&tpImp=02&objCont=${eachObIcaDet.objetoContrato}&clvPer=${eachObIca.periodo}" />">Generar
 														ROP</a></td>
 												<td><label class="control-label"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
