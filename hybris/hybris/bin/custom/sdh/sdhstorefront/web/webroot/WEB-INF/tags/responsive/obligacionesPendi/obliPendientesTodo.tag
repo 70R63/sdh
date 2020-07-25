@@ -23,8 +23,8 @@
 			<input id="Idimp" value="">
 		</div>
 		<br>
-
-
+	</div>
+	<div class="container">
 		<div id="oblipend-predial" class="oblipend-table"
 			style="display: none;">
 
@@ -38,7 +38,7 @@
 
 			<c:if test="${not empty obligacionesFormuno.headerPred}">
 				<div class="row">
-					<div class="col-md-11">
+					<div class="col-md-12">
 						<table class="tablesearch table" id="tabPaginacion0">
 							<thead style="cellspacing: 10 !important">
 								<tr>
@@ -146,7 +146,10 @@
 								<spring:theme code="spac.table.descargar" />
 							</button>
 						</div>
-				</div>
+	</div>
+	</div>
+
+	<div class="container">	
 		<div id="oblipend-vehiculos" class="oblipend-table"
 			style="display: none;">
 			<div class="row">
@@ -159,7 +162,7 @@
 			</div>
 			<c:if test="${not empty obligacionesFormuno.headerVehiculos}">
 				<div class="row">
-					<div class="col-md-11">
+					<div class="col-md-12">
 						<table class="tablesearch table" id="tabPaginacion1">
 							<thead>
 								<tr>
@@ -241,8 +244,9 @@
 				</div>
 			</c:if>
 		</div>
+</div>
 
-
+	<div class="container">
 		<div id="oblipend-ica" class="oblipend-table" style="display: none;">
 			<div class="row">
 				<div class="headline">
@@ -359,8 +363,9 @@
 				</div>
 			</c:if>
 		</div>
+</div>
 
-
+	<div class="container">
 		<div id="oblipend-publiext" class="oblipend-table"
 			style="display: none;">
 			<div class="row">
@@ -453,10 +458,10 @@
 				</div>
 			</c:if>
 		</div>
+</div>
 
 
-
-
+	<div class="container">
 		<div id="oblipend-gasolina" class="oblipend-table"
 			style="display: none;">
 			<div class="row">
@@ -562,9 +567,9 @@
 				</div>
 			</c:if>
 		</div>
+</div>
 
-
-
+	<div class="container">
 		<div id="oblipend-delurbana" class="oblipend-table"
 			style="display: none;">
 			<div class="row">
@@ -652,7 +657,7 @@
 
 			</c:if>
 		</div>
-
+</div>
 
 
 		<!-- 			tablas de detalle -->
@@ -1345,7 +1350,6 @@
 			</div>
 		</div>
 
-	</div>
 	<div class="row">
 			<a id='dwnldLnk' download='SPAC.pdf'
 				style="display: none;" />
