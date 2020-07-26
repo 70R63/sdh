@@ -40,9 +40,9 @@
 </div>
 
 
-
+<c:url var="post_url" value="/contribuyentes/rop" />
 <form:form id="form_pdf"
-		action="/sdhstorefront/es/contribuyentes/rop"
+		action="${post_url}"
 		method="post" commandName="ropForm">
 <div class="container_new_page">
 	<div class="row">

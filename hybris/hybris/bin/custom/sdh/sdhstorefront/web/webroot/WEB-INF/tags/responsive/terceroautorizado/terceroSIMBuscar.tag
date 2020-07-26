@@ -24,7 +24,7 @@
 				<div class="col-md-5 text-right">
 					<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="button" id="btnEnviar"
 					name="btnEnviar" value="enviar" disabled="false" onclick="consultaTA()" >
-					<spring:theme code="tramites.crear.inicial.enviar" />
+					<spring:theme code="terceros.sim.buscar.buscar" />
 					</sf:button>
 				</div>
 				<div class="col-md-1">
@@ -43,5 +43,9 @@
 	function consultaTA() {
 // 		alert("consulta");
 		ACC.reportesTerceroAutorizado.consultaTA("objeto");
+	}
+	
+	function btnCancelar(){
+		window.history.back();
 	}
 </script>

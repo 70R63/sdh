@@ -80,8 +80,9 @@ window.onload = function() {
 	</div>
 	</div>
 
+	<c:url var="post_url" value="/contribuyentes/mirit/certificacion-datos" />
 	<form:form id="form_pdf"
-		action="/sdhstorefront/es/contribuyentes/mirit/certificacion-datos"
+		action="${post_url}"
 		method="post" commandName="miRitCertificacionForm">
 
 		<br>

@@ -146,8 +146,38 @@ public class TercerosNotarioBuscarPageController extends AbstractPageController
 
 		try
 		{
-			responseData = sdhTercerosAutService.getTercerosAut(new TercerosAutRequest(tercerosAutForm.getImpuesto(),
-					tercerosAutForm.getNumObjeto(), customerModel.getDocumentType(), customerModel.getDocumentNumber()));
+			String impuesto = null;
+			String numeroObjeto = null;
+			String tipoDocumento = null;
+			String numeroDocumento = null;
+
+			if (tercerosAutForm.getImpuesto() != null)
+			{
+				impuesto = tercerosAutForm.getImpuesto();
+			}
+			if (tercerosAutForm.getNumObjeto() != null)
+			{
+				numeroObjeto = tercerosAutForm.getNumObjeto();
+			}
+			if (tercerosAutForm.getTipdoc() != null)
+			{
+				tipoDocumento = tercerosAutForm.getTipdoc();
+			}
+			else
+			{
+				tipoDocumento = customerModel.getDocumentType();
+			}
+			if (tercerosAutForm.getNumdoc() != null)
+			{
+				numeroDocumento = tercerosAutForm.getNumdoc();
+			}
+			else
+			{
+				numeroDocumento = customerModel.getDocumentNumber();
+			}
+
+			final TercerosAutRequest request = new TercerosAutRequest(impuesto, numeroObjeto, tipoDocumento, numeroDocumento);
+			responseData = sdhTercerosAutService.getTercerosAut(request);
 
 		}
 		catch (final Exception e)

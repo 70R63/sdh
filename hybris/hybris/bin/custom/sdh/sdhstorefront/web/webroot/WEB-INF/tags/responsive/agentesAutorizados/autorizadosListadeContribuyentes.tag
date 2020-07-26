@@ -56,7 +56,7 @@
 <%-- 											type="text" size="30" value="${eachAgent.completeName}" /></td> --%>
 										<td><c:out value="${eachAgent.completeName}" /></td>
 										<td
-											style="color: #2196f3; text-decoration: underline !important; font-size: 14px;"><a href="/sdhstorefront/autorizados/contribuyente/representando?representado=${eachAgent.bp}">Ingresar</a></td>
+											style="color: #2196f3; text-decoration: underline !important; font-size: 14px;"><a href="<c:url value='/autorizados/contribuyente/representando?representado=${eachAgent.bp}'/>" >Ingresar</a></td>
 									</tr>
 								</c:if>
 							</c:forEach>

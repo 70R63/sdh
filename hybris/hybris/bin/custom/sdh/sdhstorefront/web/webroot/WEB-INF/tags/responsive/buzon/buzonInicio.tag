@@ -20,6 +20,10 @@
 						<div class="alert alert-danger alert-dismissable getAccAlert">
 							<button class="close closeAccAlert" aria-hidden="true" data-dismiss="alert" type="button">&times;</button>
 							<spring:theme code="${error.txt_msj}" arguments="${error.txt_msj}" htmlEscape="false" var="errorMessages" />
+							<c:if test="${error.id_msj==2}">
+							<c:set var= "messageBuzon" value = "${error.id_msj}"></c:set>
+							
+							</c:if>
 							${ycommerce:sanitizeHTML(errorMessages) }
 							<br>
 						</div>
@@ -40,8 +44,17 @@
 				</thead>
 				<tbody>
 					<tr class="avisobody">
-
-						<td><spring:theme code="mibuzon.inicial.descripcion" /></td>
+      <c:choose>
+         
+         <c:when test = "${messageBuzon==2}">
+            <td><spring:theme code="mibuzon.inicial.descripcion.error" /></td>
+         </c:when>
+         
+         <c:otherwise>
+            <td><spring:theme code="mibuzon.inicial.descripcion" /></td>
+         </c:otherwise>
+      </c:choose>
+						
 					</tr>
 				</tbody>
 			</table>

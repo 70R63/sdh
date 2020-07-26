@@ -30,14 +30,25 @@
 					<c:set var="checkBuzon" value="true" />
 					<c:set var="checked" value="checked" />
 				</c:if>
+<!-- 				<div class="row" id="mensaggeBuzon" style="visibility: hidden"> -->
+<!-- 				<div class="global-alerts"> -->
+<!-- 		<button class="global-alert close" aria-label="Cerrar este mensaje" data-dismiss="alert" type="button"><span aria-label="Close">×</span></button> -->
+<!-- 				<div class="alert alert-info alert-dismissable"> -->
+<%-- 					<spring:theme --%>
+<%-- 										code="buzon.mirit.mensaje" /> --%>
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			</div> -->
 				<div class="row">
 					<div class="col-md-8 ">
 						<div class="form-group ">
+						
 							<div class="checkbox" role="checkbox" aria-checked="false">
-								<label tabindex="0" class="control-label  "> <input
-									id="buzon" name="buzon" type="checkbox" ${ checked}
-									value="true"> <input type="hidden"
-									name="_consentForm.consentGiven" value="on"> <spring:theme
+								<label tabindex="0" class="control-label"> <input readonly="readonly" id="buzon" name="buzon" type="checkbox" ${ checked}
+									value="true">
+<!-- 									 onclick="showMessage()">  -->
+									 <input type="hidden"
+									name="_consentForm.consentGiven" value="on" readonly="readonly"> <spring:theme
 										code="mirit.constents.notifications" />
 								</label>
 							</div>
@@ -64,6 +75,20 @@
 						</div>
 					</div>
 				</div>
+						<div class="row">
+					<div class="col-md-8 ">
+						<div class="form-group ">
+							<div class="checkbox" role="checkbox" aria-checked="false">
+								<label tabindex="0" class="control-label "> <input
+									id="termsConditions" name="termsConditions" type="checkbox"
+									${ checked} value="true"> <input type="hidden"
+									name="_consentForm.consentGiven" value="on"> <spring:theme
+										code="mirit.constents.termsConditions" />
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-12 col-md-3  ">
 						<div class="form-group ">
@@ -78,4 +103,19 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+// function showMessage(){
+// 	debugger;
+// // 	var objeto = this 
+// 	var checkbuzon = document.getElementById("buzon");
+// 	var mensaje = document.getElementById("mensaggeBuzon");
+// 	var newbu = checkbuzon;
+// 	if(checkbuzon.checked == true){
+// 		mensaje.style.visibility="hidden";
+// 	}else{
+// 		mensaje.style.visibility="visible";
+// 	}
+// }
+</script>
 
