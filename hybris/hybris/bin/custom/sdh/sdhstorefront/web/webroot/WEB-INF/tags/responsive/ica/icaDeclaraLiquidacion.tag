@@ -259,171 +259,171 @@
 			</c:otherwise>
 		</c:choose>
 
-<!-- 		<div class="row"> -->
-<!-- 			<div class="col-md-5"> -->
-<!-- 				<div class="form-check"> -->
-<!-- 					<label class="form-check-label" -->
-<%-- 						style="text-transform: none !important; font-weight: normal !important; font-size: 14px;"><spring:theme --%>
-<%-- 							code="ica.declaracion.liquidacion.aportvol" /> </label> <label --%>
-<!-- 						class="form-check-label" -->
-<!-- 						style="text-transform: capitalize !important; font-weight: normal !important"> -->
-<!-- 						<input type="radio" name="aporte" id="" -->
-<!-- 						class="form-check-input mr-2" -->
-<!-- 						style="visibility: visible !important; min-height: 4px !important;" -->
-<%-- 						onclick="disab()" ${aporteSI} value="si"> Si --%>
-<!-- 					</label> -->
-<!-- 					Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
-<!-- 					<label class="form-check-label" -->
-<!-- 						style="text-transform: capitalize !important; font-weight: normal !important"> -->
-<!-- 						<input type="radio" name="aporte" id="" -->
-<!-- 						class="form-check-input mr-2" -->
-<!-- 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px" -->
-<%-- 						${aporteNO} onclick="disab2()" value="no" > No --%>
-<!-- 					</label> -->
-<!-- 					Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<%-- 		<c:set var="selectProjectSelected" value="" /> --%>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-check">
+					<label class="form-check-label"
+						style="text-transform: none !important; font-weight: normal !important; font-size: 14px;"><spring:theme
+							code="ica.declaracion.liquidacion.aportvol" /> </label> <label
+						class="form-check-label"
+						style="text-transform: capitalize !important; font-weight: normal !important">
+						<input type="radio" name="aporte" id=""
+						class="form-check-input mr-2"
+						style="visibility: visible !important; min-height: 4px !important;"
+						onclick="disab()" ${aporteSI} value="si"> Si
+					</label>
+					<!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
+					<label class="form-check-label"
+						style="text-transform: capitalize !important; font-weight: normal !important">
+						<input type="radio" name="aporte" id=""
+						class="form-check-input mr-2"
+						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
+						${aporteNO} onclick="disab2()" value="no" > No
+					</label>
+					<!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
+				</div>
+			</div>
+		</div>
+		<c:set var="selectProjectSelected" value="" />
 
-<%-- 		<c:set var="fortalecimientoOptionSelected" value="" /> --%>
-<%-- 		<c:set var="financimientoOptionSelected" value="" /> --%>
+		<c:set var="fortalecimientoOptionSelected" value="" />
+		<c:set var="financimientoOptionSelected" value="" />
 
-<%-- 		<c:set var="selectTarifa2OptionSelected" value="" /> --%>
-<%-- 		<c:set var="selectTarifa1OptionSelected" value="" /> --%>
+		<c:set var="selectTarifa2OptionSelected" value="" />
+		<c:set var="selectTarifa1OptionSelected" value="" />
 
-<%-- 		<c:set var="tarifa2_10OptionSelected" value="" /> --%>
+		<c:set var="tarifa2_10OptionSelected" value="" />
 
-<%-- 		<c:set var="tarifa1_3OptionSelected" value="" /> --%>
-<%-- 		<c:set var="tarifa1_5OptionSelected" value="" /> --%>
-<%-- 		<c:set var="tarifa1_10OptionSelected" value="" /> --%>
+		<c:set var="tarifa1_3OptionSelected" value="" />
+		<c:set var="tarifa1_5OptionSelected" value="" />
+		<c:set var="tarifa1_10OptionSelected" value="" />
 
-<%-- 		<c:set var="projectDisable" value="disabled" /> --%>
-<%-- 		<c:set var="tarifa2Disable" value="disabled" /> --%>
-<%-- 		<c:set var="tarifa1Disable" value="disabled" /> --%>
+		<c:set var="projectDisable" value="disabled" />
+		<c:set var="tarifa2Disable" value="disabled" />
+		<c:set var="tarifa1Disable" value="disabled" />
 
-<%-- 		<c:set var="tarifa2Display" value="display: none;" /> --%>
-<%-- 		<c:set var="tarifa1Display" value="display: none;" /> --%>
-<%-- 		<c:set var="emptyTarifaDisplay" value="display: none;" /> --%>
-
-
-<%-- 		<c:choose> --%>
-<%-- 			<c:when test="${not empty infoDeclara.checkAporte}"> --%>
-<%-- 				<c:set var="projectDisable" value="" /> --%>
-<%-- 				<c:choose> --%>
-<%-- 					<c:when --%>
-<%-- 						test="${fn:trim(infoDeclara.proyectoAporte) eq '02' or fn:trim(infoDeclara.proyectoAporte) eq '2'}"> --%>
-
-<%-- 						<c:set var="financimientoOptionSelected" value="selected" /> --%>
-
-<%-- 						<c:set var="tarifa1Display" value="" /> --%>
-<%-- 						<c:set var="tarifa1Disable" value="" /> --%>
-
-<%-- 						<c:if test="${fn:trim(infoDeclara.tarifaAporte) eq '3.00'}"> --%>
-<%-- 							<c:set var="tarifa1_3OptionSelected" value="selected" /> --%>
-<%-- 						</c:if> --%>
-<%-- 						<c:if test="${fn:trim(infoDeclara.tarifaAporte) eq '5.00'}"> --%>
-<%-- 							<c:set var="tarifa1_5OptionSelected" value="selected" /> --%>
-<%-- 						</c:if> --%>
-<%-- 						<c:if test="${fn:trim(infoDeclara.tarifaAporte) eq '10.00'}"> --%>
-<%-- 							<c:set var="tarifa1_10OptionSelected" value="selected" /> --%>
-<%-- 						</c:if> --%>
-<%-- 					</c:when> --%>
-<%-- 					<c:when --%>
-<%-- 						test="${fn:trim(infoDeclara.proyectoAporte) eq '01' or fn:trim(infoDeclara.proyectoAporte) eq '1'}"> --%>
-
-<%-- 						<c:set var="fortalecimientoOptionSelected" value="selected" /> --%>
-<%-- 						<c:set var="tarifa2Disable" value="" /> --%>
-<%-- 						<c:set var="tarifa2Display" value="" /> --%>
-<%-- 						<c:if test="${fn:trim(infoDeclara.tarifaAporte) eq '10.00'}"> --%>
-<%-- 							<c:set var="tarifa2_10OptionSelected" value="selected" /> --%>
-<%-- 						</c:if> --%>
-<%-- 					</c:when> --%>
-<%-- 					<c:otherwise> --%>
-<%-- 						<c:set var="projectDisable" value="" /> --%>
-<%-- 						<c:set var="tarifa1Display" value="" /> --%>
-<%-- 					</c:otherwise> --%>
-<%-- 				</c:choose> --%>
-
-<%-- 			</c:when> --%>
-<%-- 			<c:otherwise> --%>
-<%-- 				<c:set var="emptyTarifaDisplay" value="display: block;" /> --%>
-<%-- 			</c:otherwise> --%>
-<%-- 		</c:choose> --%>
-
-<!-- 		<div class="row"> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<div class="form-group"> -->
-
-<!-- 					<span class="">Proyecto</span> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-5"> -->
-<!-- 				<div class="form-group"> -->
-<%-- 					<select id="idaporte" ${projectDisable } --%>
-<!-- 						class="sel_etiqlargas form-control" onchange="showtarifa(this)" -->
-<!-- 						style="text-transform: none !important; font-weight: normal !important; font-size: 14px; width: 80% !important;"> -->
-<!-- 						<option value="0">Seleccionar</option> -->
-<%-- 						<option value="01" ${fortalecimientoOptionSelected }>Fortalecimiento --%>
-<!-- 							de la seguridad ciudadana</option> -->
-<%-- 						<option value="02" ${financimientoOptionSelected }>Financiación --%>
-<!-- 							de la educación superior</option> -->
-<!-- 					</select> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-
-<!-- 		</div> -->
+		<c:set var="tarifa2Display" value="display: none;" />
+		<c:set var="tarifa1Display" value="display: none;" />
+		<c:set var="emptyTarifaDisplay" value="display: none;" />
 
 
+		<c:choose>
+			<c:when test="${not empty infoDeclara.checkAporte}">
+				<c:set var="projectDisable" value="" />
+				<c:choose>
+					<c:when
+						test="${fn:trim(infoDeclara.proyectoAporte) eq '02' or fn:trim(infoDeclara.proyectoAporte) eq '2'}">
+
+						<c:set var="financimientoOptionSelected" value="selected" />
+
+						<c:set var="tarifa1Display" value="" />
+						<c:set var="tarifa1Disable" value="" />
+
+						<c:if test="${fn:trim(infoDeclara.tarifaAporte) eq '3.00'}">
+							<c:set var="tarifa1_3OptionSelected" value="selected" />
+						</c:if>
+						<c:if test="${fn:trim(infoDeclara.tarifaAporte) eq '5.00'}">
+							<c:set var="tarifa1_5OptionSelected" value="selected" />
+						</c:if>
+						<c:if test="${fn:trim(infoDeclara.tarifaAporte) eq '10.00'}">
+							<c:set var="tarifa1_10OptionSelected" value="selected" />
+						</c:if>
+					</c:when>
+					<c:when
+						test="${fn:trim(infoDeclara.proyectoAporte) eq '01' or fn:trim(infoDeclara.proyectoAporte) eq '1'}">
+
+						<c:set var="fortalecimientoOptionSelected" value="selected" />
+						<c:set var="tarifa2Disable" value="" />
+						<c:set var="tarifa2Display" value="" />
+						<c:if test="${fn:trim(infoDeclara.tarifaAporte) eq '10.00'}">
+							<c:set var="tarifa2_10OptionSelected" value="selected" />
+						</c:if>
+					</c:when>
+					<c:otherwise>
+						<c:set var="projectDisable" value="" />
+						<c:set var="tarifa1Display" value="" />
+					</c:otherwise>
+				</c:choose>
+
+			</c:when>
+			<c:otherwise>
+				<c:set var="emptyTarifaDisplay" value="display: block;" />
+			</c:otherwise>
+		</c:choose>
+
+		<div class="row">
+			<div class="col-md-1">
+				<div class="form-group">
+
+					<span class="">Proyecto</span>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<div class="form-group">
+					<select id="idaporte" ${projectDisable }
+						class="sel_etiqlargas form-control" onchange="showtarifa(this)"
+						style="text-transform: none !important; font-weight: normal !important; font-size: 14px; width: 80% !important;">
+						<option value="0">Seleccionar</option>
+						<option value="01" ${fortalecimientoOptionSelected }>Fortalecimiento
+							de la seguridad ciudadana</option>
+						<option value="02" ${financimientoOptionSelected }>Financiación
+							de la educación superior</option>
+					</select>
+				</div>
+			</div>
+
+		</div>
 
 
-<!-- 		<div class="row"> -->
-<!-- 			<div class="col-md-5"> -->
-<!-- 				<div class="form-group"> -->
-<%-- 					<select id="tarifaAporte2" ${tarifa2Disable} --%>
-<!-- 						class="sel_etiqlargas form-control" -->
-<%-- 						style="${tarifa2Display} text-transform: none !important; font-weight: normal !important; font-size: 14px;"> --%>
-<!-- 						<option value="">Seleccionar</option> -->
-<%-- 						<option value="10.00" ${tarifa2_10OptionSelected }>10.00</option> --%>
-<!-- 					</select> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
 
-<!-- 		</div> -->
-<!-- 		<div class="row"> -->
-<!-- 			<div class="col-md-5"> -->
-<!-- 				<div class="form-group"> -->
-<%-- 					<select id="tarifaAporte1" ${tarifa1Disable} --%>
-<!-- 						class="sel_etiqlargas form-control" -->
-<%-- 						style="${tarifa1Display} text-transform: none !important; font-weight: normal !important; font-size: 14px;"> --%>
-<!-- 						<option value="">Seleccionar</option> -->
-<%-- 						<option value="3.00" ${tarifa1_3OptionSelected }>3.00</option> --%>
-<%-- 						<option value="5.00" ${tarifa1_5OptionSelected }>5.00</option> --%>
-<%-- 						<option value="10.00" ${ tarifa1_10OptionSelected}>10.00</option> --%>
-<!-- 					</select> -->
 
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 		<div class="row"> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<div class="form-group"> -->
-<!-- 					<span class="">Tarifa</span> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-5"> -->
-<!-- 				<div class="form-group"> -->
-<%-- 					<select id="emptyTarifa" ${tarifa1Disable} --%>
-<!-- 						class="sel_etiqlargas form-control" -->
-<%-- 						style="${emptyTarifaDisplay} text-transform: none !important; font-weight: normal !important; font-size: 14px;" --%>
-<!-- 						style="margin-left: -345px;"> -->
-<!-- 						<option value="">Seleccionar</option> -->
-<!-- 					</select> -->
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<select id="tarifaAporte2" ${tarifa2Disable}
+						class="sel_etiqlargas form-control"
+						style="${tarifa2Display} text-transform: none !important; font-weight: normal !important; font-size: 14px;">
+						<option value="">Seleccionar</option>
+						<option value="10.00" ${tarifa2_10OptionSelected }>10.00</option>
+					</select>
+				</div>
+			</div>
 
-<!-- 				</div> -->
-<!-- 			</div> -->
+		</div>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<select id="tarifaAporte1" ${tarifa1Disable}
+						class="sel_etiqlargas form-control"
+						style="${tarifa1Display} text-transform: none !important; font-weight: normal !important; font-size: 14px;">
+						<option value="">Seleccionar</option>
+						<option value="3.00" ${tarifa1_3OptionSelected }>3.00</option>
+						<option value="5.00" ${tarifa1_5OptionSelected }>5.00</option>
+						<option value="10.00" ${ tarifa1_10OptionSelected}>10.00</option>
+					</select>
 
-<!-- 		</div> -->
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-1">
+				<div class="form-group">
+					<span class="">Tarifa</span>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<div class="form-group">
+					<select id="emptyTarifa" ${tarifa1Disable}
+						class="sel_etiqlargas form-control"
+						style="${emptyTarifaDisplay} text-transform: none !important; font-weight: normal !important; font-size: 14px;"
+						style="margin-left: -345px;">
+						<option value="">Seleccionar</option>
+					</select>
+
+				</div>
+			</div>
+
+		</div>
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
