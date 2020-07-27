@@ -48,7 +48,7 @@
 
 							<formElement:formCheckbox idKey="useEmailForNotifications"
 								labelKey="register.activateInbox"
-								path="useEmailForNotifications" inputCSS="form-control" />
+								path="useEmailForNotifications" inputCSS="form-control"/>
 							<formElement:formCheckbox
 								idKey="useInformationForInstitutionalPurposes"
 								labelKey="register.personalDataAuthorization"
@@ -77,3 +77,15 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+document.getElementById('useEmailForNotifications').onclick = function(){
+	debugger;
+	var chulo3 = document.getElementById("useEmailForNotifications").checked;
+	if(chulo3 == true){
+		alert("Usted NO esta aceptando los términos y condiciones \n Aquí van los términos y condiciones");
+	}else{
+		alert("Usted esta aceptando los términos y condiciones \n Aquí van los términos y condiciones");
+	}
+}
+</script>
