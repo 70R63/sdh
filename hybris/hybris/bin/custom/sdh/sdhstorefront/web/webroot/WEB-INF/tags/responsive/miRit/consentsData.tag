@@ -108,9 +108,9 @@ function showMessage(){
 	debugger;
 	var chulo3 = document.getElementById("buzon").checked;
 	if(chulo3 == true){
-		alert("Usted NO esta aceptando los términos y condiciones \n Aquí van los términos y condiciones");
+		alert("Usted NO esta aceptando los términos y condiciones. \n Aquí van los términos y condiciones.");
 	}else{
-		alert("Usted esta aceptando los términos y condiciones \n Aquí van los términos y condiciones");
+		alert("Usted esta aceptando los términos y condiciones. \n Aquí van los términos y condiciones.");
 	}
 }
 </script>
