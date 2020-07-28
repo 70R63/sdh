@@ -270,7 +270,7 @@
 						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
-						onclick="disab()" ${aporteSI} value="si"> Si
+						onclick="disab()" ${aporteSI} value="si" disabled="disabled"> Si
 					</label>
 					<!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
 					<label class="form-check-label"
@@ -278,7 +278,7 @@
 						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
-						${aporteNO} onclick="disab2()" value="no" > No
+						${aporteNO} onclick="disab2()" value="no" disabled="disabled"> No
 					</label>
 					<!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
 				</div>
@@ -360,6 +360,7 @@
 			</div>
 			<div class="col-md-5">
 				<div class="form-group">
+					<c:set var="projectDisable" value="disabled" /> <!-- Se agregan atributos disabled="disabled" -->
 					<select id="idaporte" ${projectDisable }
 						class="sel_etiqlargas form-control" onchange="showtarifa(this)"
 						style="text-transform: none !important; font-weight: normal !important; font-size: 14px; width: 80% !important;">
@@ -380,6 +381,7 @@
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
+					<c:set var="tarifa2Disable" value="disabled" /><!-- Se agregan atributos disabled="disabled" -->
 					<select id="tarifaAporte2" ${tarifa2Disable}
 						class="sel_etiqlargas form-control"
 						style="${tarifa2Display} text-transform: none !important; font-weight: normal !important; font-size: 14px;">
@@ -393,6 +395,7 @@
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
+					<c:set var="tarifa1Disable" value="disabled" /><!-- Se agregan atributos disabled="disabled" -->
 					<select id="tarifaAporte1" ${tarifa1Disable}
 						class="sel_etiqlargas form-control"
 						style="${tarifa1Display} text-transform: none !important; font-weight: normal !important; font-size: 14px;">
@@ -413,6 +416,7 @@
 			</div>
 			<div class="col-md-5">
 				<div class="form-group">
+					<c:set var="tarifa1Disable" value="disabled" /><!-- Se agregan atributos disabled="disabled" -->
 					<select id="emptyTarifa" ${tarifa1Disable}
 						class="sel_etiqlargas form-control"
 						style="${emptyTarifaDisplay} text-transform: none !important; font-weight: normal !important; font-size: 14px;"
