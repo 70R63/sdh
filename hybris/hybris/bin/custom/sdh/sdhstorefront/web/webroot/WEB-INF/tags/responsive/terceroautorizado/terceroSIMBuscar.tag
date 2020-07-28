@@ -14,9 +14,11 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<spring:url value="/terceros/objeto" var="actionURL" htmlEscape="false" />
+	
 <div class="container">
     <div class="row">
-        <form:form method="post" commandName="tercerosAutForm" action="buscar">
+        <form:form method="get" commandName="tercerosAutForm" action="${actionURL}" >
              <div class="col-md-5">
 				<formElement:formInputBox idKey="numObjeto" labelKey="terceros.sim.buscar.numeroObjeto" path="numObjeto" />
              </div>
