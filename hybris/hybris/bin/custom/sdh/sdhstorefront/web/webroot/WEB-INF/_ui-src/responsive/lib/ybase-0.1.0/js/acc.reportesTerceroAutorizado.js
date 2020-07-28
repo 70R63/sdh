@@ -7,7 +7,7 @@ ACC.reportesTerceroAutorizado = {
 
 
 		ACC.reportesTerceroAutorizado.vaciarTablasInfo();
-		ACC.reportesTerceroAutorizado.displayTablas('none');
+		ACC.reportesTerceroAutorizado.displayTablas('none', ACC.reportesTerceroAutorizado.todosImpuestos());
 		ACC.reportesTerceroAutorizado.bindDataTables_refresh();
 		if(ACC.reportesTerceroAutorizado.validarAntesSubmit(opcionConsulta)){
 			var dataActual = ACC.reportesTerceroAutorizado.determinarData(opcionConsulta);
@@ -72,6 +72,8 @@ ACC.reportesTerceroAutorizado = {
 	updateFromResponse : function(opcionConsulta,infoActual,infoResponse) {
 
 		var flagTablas = ACC.reportesTerceroAutorizado.determinarTablas(opcionConsulta,infoActual,infoResponse);
+		var flagMostrarTabla = {};
+
 
 		ACC.reportesTerceroAutorizado.vaciarTablasInfo();
 		if (ACC.reportesTerceroAutorizado.mostrarErrores(infoResponse) != true){
@@ -85,6 +87,7 @@ ACC.reportesTerceroAutorizado = {
 						'<td>' + value.anoGravable + '</td>'+
 						'<td><input id="obligacionesPredios_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
 						"</tr>");
+					flagMostrarTabla.obligacionesPredios = true;
 				});
 			}
 			
@@ -98,6 +101,7 @@ ACC.reportesTerceroAutorizado = {
 						'<td>' + value.linea + '</td>'+
 						'<td><input id="obligacionesVehicular_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
 						"</tr>");
+					flagMostrarTabla.obligacionesVehicular = true;
 				});
 			}
 			
@@ -108,6 +112,7 @@ ACC.reportesTerceroAutorizado = {
 						'<td>' + value.periodo + '</td>'+
 						'<td><input id="obligacionesICA_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
 						"</tr>");
+					flagMostrarTabla.obligacionesICA = true;
 				});
 			}
 			
@@ -118,6 +123,7 @@ ACC.reportesTerceroAutorizado = {
 						'<td>' + value.periodo + '</td>'+
 						'<td><input id="obligacionesGasolina_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
 						"</tr>");
+					flagMostrarTabla.obligacionesGasolina = true;
 				});
 			}
 			
@@ -130,6 +136,7 @@ ACC.reportesTerceroAutorizado = {
 						'<td>' + value.direccion + '</td>'+
 						'<td><input id="obligacionesDelineacion_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
 						"</tr>");
+					flagMostrarTabla.obligacionesDelineacion = true;
 				});
 			}
 
@@ -142,8 +149,11 @@ ACC.reportesTerceroAutorizado = {
 							'<td>' + value.orientacionValla + '</td>'+
 							'<td><input id="obligacionesPublicidad_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
 							"</tr>");
+					flagMostrarTabla.obligacionesPublicidad = true;
 				});
 			}
+			
+			ACC.reportesTerceroAutorizado.displayTablas('block',flagMostrarTabla);
 		}
 
 
@@ -162,7 +172,7 @@ ACC.reportesTerceroAutorizado = {
 			flags.obligacionesDelineacion = true;
 			flags.obligacionesPublicidad = true;
 			
-			ACC.reportesTerceroAutorizado.displayTablas('block');
+			
 			break;
 			
 			
@@ -215,36 +225,50 @@ ACC.reportesTerceroAutorizado = {
 	},
 	
 	
-	displayTablas : function(opcionDisplay){
+	displayTablas : function(opcionDisplay,flagTabla){
 		var doc = null;
 		
-		doc = document.getElementById('table-predial');
-		if(doc != null){
-			doc.style.display = opcionDisplay;
+		if(flagTabla.obligacionesPredios == true){
+			doc = document.getElementById('table-predial');
+			if(doc != null){
+				doc.style.display = opcionDisplay;
+			}
 		}
-		doc = document.getElementById('table-vehicular');
-		if(doc != null){
-			doc.style.display = opcionDisplay;
+		if(flagTabla.obligacionesVehicular == true){
+			doc = document.getElementById('table-vehicular');
+			if(doc != null){
+				doc.style.display = opcionDisplay;
+			}
 		}
-		doc = document.getElementById('table-ica');
-		if(doc != null){
-			doc.style.display = opcionDisplay;
+		if(flagTabla.obligacionesReteica == true){
+			doc = document.getElementById('table-ica');
+			if(doc != null){
+				doc.style.display = opcionDisplay;
+			}
 		}
-		doc = document.getElementById('table-reteica');
-		if(doc != null){
-			doc.style.display = opcionDisplay;
+		if(flagTabla.obligacionesReteICA == true){
+			doc = document.getElementById('table-reteica');
+			if(doc != null){
+				doc.style.display = opcionDisplay;
+			}
 		}
-		doc = document.getElementById('table-gasolina');
-		if(doc != null){
-			doc.style.display = opcionDisplay;
+		if(flagTabla.obligacionesGasolina == true){
+			doc = document.getElementById('table-gasolina');
+			if(doc != null){
+				doc.style.display = opcionDisplay;
+			}
 		}
-		doc = document.getElementById('table-delineacion');
-		if(doc != null){
-			doc.style.display = opcionDisplay;
+		if(flagTabla.obligacionesDelineacion == true){
+			doc = document.getElementById('table-delineacion');
+			if(doc != null){
+				doc.style.display = opcionDisplay;
+			}
 		}
-		doc = document.getElementById('table-publicidad');
-		if(doc != null){
-			doc.style.display = opcionDisplay;
+		if(flagTabla.obligacionesPublicidad == true){
+			doc = document.getElementById('table-publicidad');
+			if(doc != null){
+				doc.style.display = opcionDisplay;
+			}
 		}
 	},
 
@@ -329,7 +353,21 @@ ACC.reportesTerceroAutorizado = {
 		$("#table-publicidad1").find("tr:gt(0)").remove();
 
 
-	}	
+	},
+	
+	todosImpuestos : function(){
+		var flags = {};
+		
+		flags.obligacionesPredios = true;
+		flags.obligacionesVehicular = true;
+		flags.obligacionesICA = true;
+		flags.obligacionesReteica = true;
+		flags.obligacionesGasolina = true;
+		flags.obligacionesDelineacion = true;
+		flags.obligacionesPublicidad = true;
+		
+		return flags;
+	}
 	
 	
 };
