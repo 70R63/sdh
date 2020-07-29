@@ -28,7 +28,7 @@
 
             $(window).on('load', function () {
                 var host = document.location.host;
-                ws = new WebSocket("wss://"+host+"/sdhstorefront/chatEndPoint/AGENT/JAIR04/JAIR ROA/HOLA/NO ASUNTO");
+                ws = new WebSocket("wss://"+host+"/bogota/chatEndPoint/AGENT/USERID/USER NAME/HOLA/NO ASUNTO");
                 ws.onmessage = function(event) {
                     var message = JSON.parse(event.data);
                     console.log(message);
@@ -52,7 +52,7 @@
 
                 var frame = document.getElementById("chatSpaceOne");
                 var currentUrl = window.location.href;
-                frame.src = currentUrl.replace("backoffice/", "sdhstorefront/chat/customer?userType=AGENT");;
+                frame.src = currentUrl.replace("backoffice/", "bogota/chat/customer?userType=AGENT");;
             });
 
             function addCustomer(userId, usarName, subjectType, content, sessionId, isPicked){
