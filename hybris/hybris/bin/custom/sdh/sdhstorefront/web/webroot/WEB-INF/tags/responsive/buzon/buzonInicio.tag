@@ -46,6 +46,7 @@
 					<tr class="avisobody">
       <c:choose>
          
+         
          <c:when test = "${messageBuzon==2}">
             <td><spring:theme code="mibuzon.inicial.descripcion.error" /></td>
          </c:when>
