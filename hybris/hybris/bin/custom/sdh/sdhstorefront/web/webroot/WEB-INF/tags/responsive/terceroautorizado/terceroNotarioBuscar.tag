@@ -13,9 +13,10 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<spring:url value="/terceros/sujeto" var="actionURL" htmlEscape="false" />
 <div class="container">
     <div class="row">
-        <form:form method="post" commandName="tercerosAutForm" action="buscar">
+        <form:form method="get" commandName="tercerosAutForm" action="${actionURL}" >
              <div class="col-md-5">
                  <formElement:formSelectBox idKey="impuesto" labelKey="terceros.notario.buscar.impuesto"
                                  path="impuesto" mandatory="false" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"

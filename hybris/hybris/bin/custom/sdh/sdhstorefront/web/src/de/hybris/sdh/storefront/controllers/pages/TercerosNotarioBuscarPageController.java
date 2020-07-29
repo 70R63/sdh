@@ -92,12 +92,16 @@ public class TercerosNotarioBuscarPageController extends AbstractPageController
 
 	@RequestMapping(value = "/terceros/sujeto", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String tercerosnotarios(final Model model) throws CMSItemNotFoundException
+	public String tercerosnotarios(@ModelAttribute("tercerosAutForm") TercerosAutForm tercerosAutForm, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		String subrol = null;
-		final TercerosAutForm tercerosAutForm = new TercerosAutForm();
+		if (tercerosAutForm == null)
+		{
+			tercerosAutForm = new TercerosAutForm();
+		}
 
 		for (final SDHRolData rol : customerData.getRolList())
 		{

@@ -31,10 +31,10 @@
 				<select class="new_alto form-control !important" id="impuesto">
 					<option value="00">Seleccionar</option>
 					<c:if test="${ not empty facturacionForm.predial}">
-						<option value="01">Predial Unificado</option>
+						<option value="0001">Predial Unificado</option>
 					</c:if>
 					<c:if test="${ not empty facturacionForm.vehicular}">					
-						<option value="02">Vehícular</option>
+						<option value="0002">Vehícular</option>
 					</c:if>
 				</select>
 			</div>
@@ -105,7 +105,7 @@
 								<td><c:out value="${eachPredial.direccionPredio}" /></td>
 								<td><input class="inputtextnew"
 									style="visibility: visible !important; width: 15px"
-									type="radio" id="" name="" value=""></td>
+									type="radio" id="" name="objetoPredial" value="${eachPredial.numObjeto}"></td>
 
 							</tr>
 							</c:if>
@@ -154,7 +154,7 @@
 											code="vehiculos.detalle.marca.${eachVehiculo.marca}" /></label></td>
 								<td><input class="inputtextnew"
 									style="visibility: visible !important; width: 15px"
-									type="radio" id="" name="" value=""></td>
+									type="radio" id="" name="objetoVehicular" value="${eachVehiculo.numObjeto}"></td>
 
 							</tr>
 							</c:if>
@@ -183,11 +183,11 @@
 		var tabpred = document.getElementById('table-predial');
 		var tabveh = document.getElementById('table-vehiculos');
 
-		if (imp == '01') {
+		if (imp == '0001') {
 			tabpred.style.display = 'block';
 			tabveh.style.display = 'none';
 
-		} else if (imp == '02') {
+		} else if (imp == '0002') {
 			tabpred.style.display = 'none';
 			tabveh.style.display = 'block';
 		} else {
@@ -197,9 +197,22 @@
 
 	}
 	function descargaFactura() {
+
+		debugger;
 		var anoGravable = $("#aniograv").val();
-		var anoGravable = "2020";
-		var numObjeto = "AAAA0102XAUZ";
+		var claveImpuesto = $("#impuesto").val();
+		var nombreObjeto = "";
+		
+		switch (claveImpuesto){
+		case "0001":
+			nombreObjeto = "objetoPredial";
+			break;
+		case "0002":
+			nombreObjeto = "objetoVehicular";
+			break;
+		}
+		var numObjeto = $("input[name='"+nombreObjeto+"']:checked"). val();
+	
 		
 		ACC.facturacion.descargaFactura(anoGravable,numObjeto);
 	}
