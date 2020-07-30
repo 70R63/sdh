@@ -8,9 +8,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 
+
 <c:set var="disabledLiquidacion" value="" />
+<c:set var="disabledAporte" value="" />
+<c:if test="${vehiculosFormDeclaracion.checkAporte_flag == 1}">
+	<c:set var="disabledAporte" value='' />
+</c:if>
+<c:if test="${vehiculosFormDeclaracion.checkAporte_flag == 2}">
+	<c:set var="disabledAporte" value='disabled="disabled"' />
+</c:if>
 <c:if test="${vehiculosFormDeclaracion.controlCampos.liquidacion == true}">
 	<c:set var="disabledLiquidacion" value='disabled="disabled"' />
+	<c:set var="disabledAporte" value='disabled="disabled"' />
 </c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
@@ -117,13 +126,13 @@
 						<input type="radio" name="aporte" id="aporteSi"
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
-						value="si" ${yesChecked} onclick="proyecthabi()" ${disabledLiquidacion}> Si
+						value="si" ${yesChecked} onclick="proyecthabi()" ${disabledAporte}> Si
 					</label> <label class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
 						<input type="radio" name="aporte" id="aporteNo"
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
-						value="no" ${noChecked} onclick="proyectdeshabi()" ${disabledLiquidacion}> No
+						value="no" ${noChecked} onclick="proyectdeshabi()" ${disabledAporte}> No
 					</label>
 				</div>
 			</div>

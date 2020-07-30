@@ -17,6 +17,7 @@ public class DetalleVehiculosResponse
 	private List<DetalleMarcasVehiculos> marcas;
 	private List<DetalleLiquidacionVehiculos> liquidacion;
 	private DetalleInfoDeclaraVehiculos info_declara;
+	private String checkAporte;
 	/**
 	 * @return the detalle
 	 */
@@ -99,6 +100,23 @@ public class DetalleVehiculosResponse
 	public void setInfo_declara(final DetalleInfoDeclaraVehiculos info_declara)
 	{
 		this.info_declara = info_declara;
+	}
+
+	/**
+	 * @return the checkAporte
+	 */
+	public String getCheckAporte()
+	{
+		return checkAporte;
+	}
+
+	/**
+	 * @param checkAporte
+	 *           the checkAporte to set
+	 */
+	public void setCheckAporte(final String checkAporte)
+	{
+		this.checkAporte = checkAporte;
 	}
 
 
