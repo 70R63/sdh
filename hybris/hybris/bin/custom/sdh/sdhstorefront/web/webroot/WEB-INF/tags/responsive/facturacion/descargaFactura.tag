@@ -214,7 +214,7 @@
 		var numObjeto = $("input[name='"+nombreObjeto+"']:checked"). val();
 	
 		
-		ACC.facturacion.descargaFactura(anoGravable,numObjeto);
+		ACC.facturacion.descargaFactura(anoGravable,numObjeto,1);
 	}
 </script>
 
