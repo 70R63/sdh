@@ -194,6 +194,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 			vehiculosFormDeclaracion.setIdServicio(detalleVehiculosResponse.getDetalle().getIdServicio());
 			vehiculosFormDeclaracion.setWatts(detalleVehiculosResponse.getDetalle().getWatts());
 			vehiculosFormDeclaracion.setClasicoAntig(detalleVehiculosResponse.getDetalle().getClasicoAntig());
+			vehiculosFormDeclaracion.setCheckAporte_flag(detalleVehiculosResponse.getCheckAporte());
 
 			if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
 					&& !sdhConsultaContribuyenteBPResponse.getVehicular().isEmpty())
