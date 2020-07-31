@@ -58,7 +58,7 @@ ACC.facturacion = {
 	},
 	
 	
-	descargaFactura : function (anoGravable,numObjeto){
+	descargaFactura : function (anoGravable,numObjeto,tipoOperacion){
 
 		debugger;
 		if(ACC.facturacion.validarAntesSubmit(anoGravable,numObjeto)){
@@ -67,6 +67,7 @@ ACC.facturacion = {
 			
 			dataActual.anoGravable = anoGravable;
 			dataActual.numObjeto = numObjeto;
+			dataActual.tipoOperacion = tipoOperacion;
 			
 			
 			$.ajax({

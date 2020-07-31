@@ -120,6 +120,7 @@ public class VehiculosInfObjetoForm
 	private String mensajeVehiculos;
 	private String campo_catalogo;
 	private CatalogoVehiculosResponse catalogo;
+	private String checkAporte_flag;
 
 	private VehiculosControlCamposDec controlCampos;
 	/**
@@ -1388,6 +1389,23 @@ public class VehiculosInfObjetoForm
 	public void setControlCampos(final VehiculosControlCamposDec controlCampos)
 	{
 		this.controlCampos = controlCampos;
+	}
+
+	/**
+	 * @return the checkAporte_flag
+	 */
+	public String getCheckAporte_flag()
+	{
+		return checkAporte_flag;
+	}
+
+	/**
+	 * @param checkAporte_flag
+	 *           the checkAporte_flag to set
+	 */
+	public void setCheckAporte_flag(final String checkAporte_flag)
+	{
+		this.checkAporte_flag = checkAporte_flag;
 	}
 
 

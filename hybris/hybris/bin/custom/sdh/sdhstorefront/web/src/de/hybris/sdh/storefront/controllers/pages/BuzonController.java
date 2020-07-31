@@ -20,6 +20,7 @@ import de.hybris.sdh.core.pojos.requests.BuzonTributarioRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.BuzonMensajes2;
 import de.hybris.sdh.core.pojos.responses.BuzonTributarioMsgResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHBuzonTributarioService;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -101,6 +102,11 @@ public class BuzonController extends AbstractPageController
 		final BuzonTributarioRequest buzonrequest = new BuzonTributarioRequest();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
+		//		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+
+		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+
 		final Calendar fecha = new GregorianCalendar();
 		final int anio = fecha.get(Calendar.YEAR);
 		//	int mes = fecha.get(Calendar.MONTH);
@@ -121,10 +127,17 @@ public class BuzonController extends AbstractPageController
 
 		try
 			{
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+						SDHValidaMailRolResponse.class);
+
 			final BuzonTributarioMsgResponse buzonTributarioMsgResponse = mapper
 					.readValue(sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioMsgResponse.class);
 
 			miBuzon.setMensajesMsg(buzonTributarioMsgResponse.getMensajes());
+			int Buzon = sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getZZAUTOBUZONE();
+
+			miBuzon.setBuzActivo(Buzon);
 
 			int Mi = 1;
 			int Ni = 1;

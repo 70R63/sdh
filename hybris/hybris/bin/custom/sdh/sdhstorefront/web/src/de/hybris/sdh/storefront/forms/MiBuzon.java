@@ -48,6 +48,8 @@ public class MiBuzon
 
 	private List<BuzonMensajes2> mensajesMsg;
 
+	private int buzActivo;
+
 
 
 	/**
@@ -424,6 +426,24 @@ public class MiBuzon
 	{
 		this.mensajesMsg = mensajesMsg;
 	}
+
+	/**
+	 * @return the buzActivo
+	 */
+	public int getBuzActivo()
+	{
+		return buzActivo;
+	}
+
+	/**
+	 * @param buzActivo
+	 *           the buzActivo to set
+	 */
+	public void setBuzActivo(final int buzActivo)
+	{
+		this.buzActivo = buzActivo;
+	}
+
 
 	//*->FIN dev-eduardo ajuste de menu impuestos
 

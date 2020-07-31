@@ -170,7 +170,7 @@ public class DescargaFacturaPageController extends AbstractPageController
 		//		descargaFacturaRequest.setNumBP(dataForm.getNumBP());
 		descargaFacturaRequest.setAnoGravable(dataForm.getAnoGravable());
 		descargaFacturaRequest.setNumObjeto(dataForm.getNumObjeto());
-		descargaFacturaRequest.setTipoOperacion("1");
+		descargaFacturaRequest.setTipoOperacion(dataForm.getTipoOperacion());
 
 		try
 		{
