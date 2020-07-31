@@ -199,7 +199,7 @@ public class SobreVehiculosController extends AbstractPageController
 					.readValue(sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
 
 			vehiculosForm.setDetalle(detalleVehiculosResponse.getDetalle());
-			String opcUso = detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso();
+			final String opcUso = detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso();
 
 			vehiculosForm.setIdServicio(detalleVehiculosResponse.getDetalle().getIdServicio());
 			vehiculosForm.setIdEstado(detalleVehiculosResponse.getDetalle().getIdEstado());
@@ -209,6 +209,7 @@ public class SobreVehiculosController extends AbstractPageController
 			vehiculosForm.setCapacidadPas(detalleVehiculosResponse.getDetalle().getCapacidadPas());
 			vehiculosForm.setCapacidadTon(detalleVehiculosResponse.getDetalle().getCapacidadTon());
 			vehiculosForm.setNumForm(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm());
+			vehiculosForm.setObjetoCont(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getObjetoCont());
 			vehiculosForm.setOpcionUso(Objects.isNull(opcUso) ? null : opcUso.replace(" ", "").split("-")[0]);
 
 			//			vehiculosForm.setFechaCambio(detalleVehiculosResponse.getDetalle().getFechaCambio());

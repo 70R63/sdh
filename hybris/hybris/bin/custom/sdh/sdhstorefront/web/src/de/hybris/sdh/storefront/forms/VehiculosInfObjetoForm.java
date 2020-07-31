@@ -95,6 +95,7 @@ public class VehiculosInfObjetoForm
 	private String numObjeto;
 
 	private String numForm;
+	private String objetoCont;
 
 	private String clasicoAntiguo;
 	private String checkAporte;
@@ -1015,6 +1016,23 @@ public class VehiculosInfObjetoForm
 	public void setNumForm(final String numForm)
 	{
 		this.numForm = numForm;
+	}
+
+	/**
+	 * @return the objetoCont
+	 */
+	public String getObjetoCont()
+	{
+		return objetoCont;
+	}
+
+	/**
+	 * @param objetoCont
+	 *           the objetoCont to set
+	 */
+	public void setObjetoCont(final String objetoCont)
+	{
+		this.objetoCont = objetoCont;
 	}
 
 	/**

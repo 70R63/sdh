@@ -187,10 +187,6 @@
 		modelAttribute="descargaFacturaForm" id="reexpedicionFacturaAct">
 		<sf:hidden path="anoGravable" id="anoGravable"/>
 		<sf:hidden path="numObjeto" id="numObjeto"/>
-<%-- 		<sf:button class="btn btn-primary btn-lg" type="submit" id="action" --%>
-<%-- 			name="pagar" value="pagar" disabled="true"> --%>
-<%-- 			<spring:theme code="impuestos.decGasolina.Pago.Pagar" /> --%>
-<%-- 		</sf:button> --%>
 	</sf:form>
 </div>
 
