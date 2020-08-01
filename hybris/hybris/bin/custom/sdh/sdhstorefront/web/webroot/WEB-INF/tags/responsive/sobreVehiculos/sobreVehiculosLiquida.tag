@@ -49,10 +49,11 @@
 				</button>
 			</div>
 			<div class="col-md-4">
-				<button  type="submit" class="btn btn-primary "
+				<button  type="button" class="btn btn-primary " onclick="descargaFactura()"
 					id="" name="" value="regresar">
 					<spring:theme code="sobre.vehiculo.liqui.descfactura" />
 				</button>
+				<input type="hidden" id="objetoCont"/>
 			</div>
 			<div class="col-md-4">
 				<button type="submit" class="bindPresentarDeclaracionVehiculoButton btn btn-primary "
@@ -64,3 +65,12 @@
 
 	</div>
 </sf:form>
+<script type="text/javascript">
+	function descargaFactura() {
+
+		var anoGravable = new Date().getFullYear();
+		var numObjeto = $("#objetoCont").val();
+		
+		ACC.facturacion.descargaFactura(anoGravable,numObjeto,1);
+	}
+</script>

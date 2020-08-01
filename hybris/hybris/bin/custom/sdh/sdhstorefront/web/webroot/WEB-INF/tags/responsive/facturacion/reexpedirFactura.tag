@@ -28,20 +28,14 @@
 		modelAttribute="dataForm" id="reexpedicionFacturaAct">
 		<sf:hidden path="descargaFactura.anoGravable" id="anoGravable"/>
 		<sf:hidden path="descargaFactura.numObjeto" id="numObjeto"/>
-<%-- 		<sf:button class="btn btn-primary btn-lg" type="submit" id="action" --%>
-<%-- 			name="pagar" value="pagar" disabled="true"> --%>
-<%-- 			<spring:theme code="impuestos.decGasolina.Pago.Pagar" /> --%>
-<%-- 		</sf:button> --%>
 	</sf:form>
 </div>
 
 <script>
 	function descargaFactura() {
 
-		debugger;
 		var anoGravable = $("#anoGravable").val();
-// 		var claveImpuesto = $("#impuesto").val();
-		var numObjeto = $("#numObjeto").val();;	
+		var numObjeto = $("#numObjeto").val();
 		
 		ACC.facturacion.descargaFactura(anoGravable,numObjeto,2);
 	}
