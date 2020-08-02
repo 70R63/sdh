@@ -12,7 +12,6 @@
 
 	<extension abstractclassprefix="Generated" classprefix="Sdhbackoffice" name="sdhbackoffice" usemaven="false">
 		<requires-extension name="backoffice"/>
-		<requires-extension name="sdhcore"/>
 		<!--PLACEHOLDER_FOR_SASS_REGISTRATION-->
 
 		<coremodule generated="true" manager="com.sdh.jalo.SdhbackofficeManager" packageroot="com.sdh"/>

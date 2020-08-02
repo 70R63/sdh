@@ -28,7 +28,7 @@
 
             $(window).on('load', function () {
                 var host = document.location.host;
-                ws = new WebSocket("wss://"+host+"/bogota/chatEndPoint/AGENT/USERID/USER NAME/HOLA/NO ASUNTO");
+                ws = new WebSocket("wss://"+host+"/bogota/chatEndPoint/AGENT/UserTest/User Test/Message/Subject");
                 ws.onmessage = function(event) {
                     var message = JSON.parse(event.data);
                     console.log(message);

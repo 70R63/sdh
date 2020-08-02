@@ -3,7 +3,6 @@
 	<classpathentry kind="src" output="eclipsebin/backoffice/classes" path="backoffice/src"/>
 	<classpathentry exported="true" kind="lib" path="resources"/>
 	<classpathentry kind="src" output="eclipsebin/classes" path="src"/>
-	<classpathentry exported="true" kind="src" path="/sdhcore"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="/platform"/>
 	<classpathentry kind="src" path="gensrc"/>
