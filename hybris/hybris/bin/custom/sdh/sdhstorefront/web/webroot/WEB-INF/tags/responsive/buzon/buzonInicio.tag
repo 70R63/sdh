@@ -32,7 +32,7 @@
 			</c:forEach>
 		</c:if>
 	</div>
-	
+	<c:set var= "buzonActivo" value = "${miBuzon.buzActivo}"></c:set>
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
@@ -47,7 +47,7 @@
       <c:choose>
          
          
-         <c:when test = "${messageBuzon==2}">
+         <c:when test = "${messageBuzon==2 || buzonActivo==2}">
             <td><spring:theme code="mibuzon.inicial.descripcion.error" /></td>
          </c:when>
          

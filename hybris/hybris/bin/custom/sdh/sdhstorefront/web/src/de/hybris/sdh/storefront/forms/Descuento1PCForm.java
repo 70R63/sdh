@@ -15,6 +15,7 @@ public class Descuento1PCForm
 
 	private CustomerData customerData;
 	private Descuento1PCCatalogos catalogos;
+	private DescargaFacturaForm descargaFactura;
 
 	/**
 	 * @return the customerData
@@ -48,6 +49,23 @@ public class Descuento1PCForm
 	public void setCatalogos(final Descuento1PCCatalogos catalogos)
 	{
 		this.catalogos = catalogos;
+	}
+
+	/**
+	 * @return the descargaFactura
+	 */
+	public DescargaFacturaForm getDescargaFactura()
+	{
+		return descargaFactura;
+	}
+
+	/**
+	 * @param descargaFactura
+	 *           the descargaFactura to set
+	 */
+	public void setDescargaFactura(final DescargaFacturaForm descargaFactura)
+	{
+		this.descargaFactura = descargaFactura;
 	}
 
 

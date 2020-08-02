@@ -18,6 +18,11 @@
 <miRit:contactData />
 <facturacion:reexpedirFactura/>
 
+<a id="downloadHelper" target="_blank"></a>
+<div id="dialogMensajes" title="Descarga Factura">
+	<div id="dialogMensajesContent"></div>
+</div>
+
 
 <script type="text/javascript">
 window.onload = function() {

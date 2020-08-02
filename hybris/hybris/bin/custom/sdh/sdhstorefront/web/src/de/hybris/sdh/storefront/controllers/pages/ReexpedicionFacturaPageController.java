@@ -25,6 +25,7 @@ import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
+import de.hybris.sdh.storefront.forms.DescargaFacturaForm;
 import de.hybris.sdh.storefront.forms.Descuento1PCCatalogos;
 import de.hybris.sdh.storefront.forms.Descuento1PCForm;
 import de.hybris.sdh.storefront.forms.FacturacionForm;
@@ -44,6 +45,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -123,6 +125,7 @@ public class ReexpedicionFacturaPageController extends AbstractPageController
 			facturacionForm.setVehicular(sdhConsultaContribuyenteBPResponse.getVehicular());
 
 			model.addAttribute("facturacionForm", facturacionForm);
+			model.addAttribute("descargaFacturaForm", new DescargaFacturaForm());
 		}
 		catch (final Exception e)
 		{
@@ -155,7 +158,9 @@ public class ReexpedicionFacturaPageController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/reexpedicionfacturaAct", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String reexpfact_act(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
+	public String reexpfact_act(@ModelAttribute("descargaFacturaForm")
+	final DescargaFacturaForm descargaFacturaForm, final Model model, final HttpServletRequest request)
+			throws CMSItemNotFoundException
 
 	{
 		System.out.println("---------------- En GET REEXPEDICION Factura Actualizacion --------------------------");
@@ -170,6 +175,7 @@ public class ReexpedicionFacturaPageController extends AbstractPageController
 
 
 		dataForm.setCustomerData(customerData);
+		dataForm.setDescargaFactura(descargaFacturaForm);
 		model.addAttribute("dataForm", dataForm);
 
 

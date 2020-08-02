@@ -64,7 +64,7 @@
 					<spring:theme code="predial.inicial.marcas.btnregresar" />
 				</button>
 
-				<button class="btn btn-primary btn-lg" type="button" id="action"
+				<button class="btn btn-primary btn-lg" type="button" id="action" onclick="descargaFactura()"
 					name="pagar" value="pagar">
 					<spring:theme code="predial.inicial.marcas.btndescar" />
 				</button>
@@ -106,4 +106,12 @@
          }
         return false;
     }
+    
+	function descargaFactura() {
+
+		var anoGravable = new Date().getFullYear();
+		var numObjeto = $("#objetocontrato").val();
+		
+		ACC.facturacion.descargaFactura(anoGravable,numObjeto,1);
+	}
 </script>
