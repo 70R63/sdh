@@ -1,6 +1,6 @@
 ACC.mirit = {
 
-		 _autoload: ["bindUpdateNombreButton","bindUpdateNotificationAddressButton","bindUpdateContactAddressButton","bindUpdateTelefonoButton","bindUpdateRedesSocialesButton","bindUpdateAutorizacionesButton","bindUpdatePasswordButton", "bindUpdateEmailButton", "bindCertifNombButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton"],
+		 _autoload: ["bindUpdateNombreButton","bindUpdateNotificationAddressButton","bindUpdateContactAddressButton","bindUpdateTelefonoButton","bindUpdateRedesSocialesButton","bindUpdateAutorizacionesButton","bindUpdatePasswordButton", "bindUpdateEmailButton", "bindCertifNombButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton", "bindTermnsandConditions" ],
 		 
 		 bindUpdateNombreButton: function () {
 		        $(document).on("click", "#updateNombreButton", function (e) {
@@ -156,6 +156,32 @@ ACC.mirit = {
 		        });
 		   },
 		 
+	bindTermnsandConditions: function(){
+		$(document).on("click", "#terminosPopUp", function(e) {
+ debugger;
+
+ e.preventDefault();
+ debugger;
+		   var selectRefinementsTitle = "Términos y condiciones";
+	        ACC.colorbox.open(selectRefinementsTitle, {
+	            href: ".js-terminos-facet",
+	            inline: true,
+	            width: "90%",
+	            onComplete: function () {
+	                $(document).on("click", ".js-terminos-facet .js-facet-name-veh", function (e) {
+	                    e.preventDefault();
+	                    $(".js-terminos-facet  .js-facet-veh").removeClass("active");
+	                    $(this).parents(".js-facet-veh").addClass("active");
+	                    $.colorbox.resize()
+	                })
+	            },
+	            onClosed: function () {
+	                $(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
+	            }
+	        });
+});
+	},
+	
 		 bindUpdateTelefonoButton: function () {
 		        $(document).on("click", "#updateTelefonoButton", function (e) {
 		    	        e.preventDefault();
