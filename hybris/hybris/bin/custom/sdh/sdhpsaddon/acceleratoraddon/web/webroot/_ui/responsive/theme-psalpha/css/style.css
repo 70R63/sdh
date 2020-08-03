@@ -25190,3 +25190,63 @@ th {
   color: #356ab5;
   font-size: large;
 }
+header {
+  background: white !important;
+}
+.navigation__overflow {
+  background: #E80B2B;
+}
+@media (max-width: 1399px) and (min-width: 1024px) {
+  .main-header .navigation--bottom {
+    background: #E80B2B;
+  }
+}
+.breadcrumb-section {
+  background: #ffb71b;
+}
+.breadcrumb-section .breadcrumb {
+  background: #ffb71b;
+}
+.login-section .headline,
+.register-section .headline,
+.checkout-login .headline {
+  color: #e80b2b;
+}
+.navigation--button .nav__link:hover {
+  backgrond: #e80b2b;
+}
+a,
+button {
+  color: #ffb71b;
+}
+a:hover {
+  color: #ffb71b;
+}
+.btn-primary {
+  background-color: #bfbfbf;
+  border-color: #bfbfbf;
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background-color: #bfbfbf;
+  border-color: #bfbfbf;
+  color: #ffffff;
+}
+.btn-primary:focus {
+  background-color: #bfbfbf;
+  border-color: #bfbfbf;
+  color: #ffffff;
+}
+.footer__top {
+  border-bottom: 1px solid #f38595;
+}
+.btn:hover,
+.btn:active:hover,
+.btn.active:hover {
+  outline: 2px solid transparent;
+}
+.main-footer .copyright .pop-over-toggle {
+  background-color: #ffb71c;
+  border-color: #ffb71c;
+  border: 2px solid #ffb71c;
+}
