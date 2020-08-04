@@ -100,7 +100,10 @@ public class TercerosAutRequest {
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{\"parametros\":{");
-		stringBuilder.append(obtenerValorJson("\"impuesto\":\"", this.getImpuesto(), "\","));
+		if (this.getImpuesto() != null)
+		{
+			stringBuilder.append(obtenerValorJson("\"impuesto\":\"", this.getImpuesto(), "\","));
+		}
 		stringBuilder.append(obtenerValorJson("\"numeroObjeto\":\"", this.getNumeroObjeto(), "\","));
 		stringBuilder.append(obtenerValorJson("\"tipoDocumento\":\"", this.getTipoDocumento(), "\","));
 		stringBuilder.append(obtenerValorJson("\"numeroDocumento\":\"", this.getNumeroDocumento(), "\""));
