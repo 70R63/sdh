@@ -87,7 +87,7 @@
 					</div>
 				</div>
 										<div class="row">
-									<div class="col-md-8 ">
+									<div class="col-md-8">
 										<div class="form-group ">
 											<div class="checkbox" role="checkbox" aria-checked="false">
 												<label tabindex="0" class="control-label "> <input

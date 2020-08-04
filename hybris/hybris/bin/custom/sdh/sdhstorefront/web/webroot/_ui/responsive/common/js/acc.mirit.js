@@ -158,10 +158,9 @@ ACC.mirit = {
 		 
 	bindTermnsandConditions: function(){
 		$(document).on("click", "#terminosPopUp", function(e) {
- debugger;
 
  e.preventDefault();
- debugger;
+
 		   var selectRefinementsTitle = "Términos y condiciones";
 	        ACC.colorbox.open(selectRefinementsTitle, {
 	            href: ".js-terminos-facet",
