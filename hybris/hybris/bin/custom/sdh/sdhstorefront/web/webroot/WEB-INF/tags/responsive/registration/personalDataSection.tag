@@ -54,6 +54,21 @@
 								labelKey="register.personalDataAuthorization"
 								path="useInformationForInstitutionalPurposes"
 								inputCSS="form-control" />
+								
+	<div class="row">
+									<div class="col-md-8 ">
+										<div class="form-group ">
+											<div class="checkbox" role="checkbox" aria-checked="false">
+												<label tabindex="0" class="control-label "> <input
+													id="termsConditions" name="termsConditions" type="checkbox"
+													${ checked} value="true"> <input type="hidden"
+													name="_consentForm.consentGiven" value="on"> <spring:theme
+													code="mirit.constents.termsConditions" /><button id="terminosPopUp" class="terminosPopUp" style="background: #fff; border: 0px">términos y condiciones</button>
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
 
 							<div class="text-right">
 								<ycommerce:testId code="login_forgotPasswordSubmit_button">
@@ -77,6 +92,18 @@
 		</div>
 	</div>
 </div>
+
+<div class="terminosycondiciones" style="display: none;">
+	<div class="js-terminos-facet" id="js-terminos-facet">
+		<div class="facet js-facet-veh">
+			<div class="facet__name js-facet-name-veh">
+				<spring:theme code="" />
+		<spring:theme
+						code="Aquí van los términos y condiciones" />
+			</div>
+		</div>
+	</div>
+	</div>
 
 <script type="text/javascript">
 document.getElementById('useEmailForNotifications').onclick = function(){
