@@ -35,6 +35,7 @@ ACC.spac = {
 												debugger;
 
 												var cuotas = spacform.cuotas_Spac;
+												if(cuotas != null){
 												for (var i = 0; i < cuotas.length; i++) {
 
 													$('#tableSpacPago')
@@ -47,6 +48,16 @@ ACC.spac = {
 
 												}
 												divtable.style.visibility = 'visible';
+												}else{
+													var errores = spacform.errores;
+													for (var i = 0; i < errores.length; i++)
+													{
+														if(errores[i].id_msj != ""){
+															alert(errores[i].txt_msj);
+															
+														}
+													}
+												}
 
 											},
 											error : function() {
@@ -88,8 +99,8 @@ ACC.spac = {
 						type : "GET",
 						success : function(spacform) {
 							debugger;
-
 							var cuotas = spacform.cuotas_Spac;
+								if(cuotas != null){
 							for (var i = 0; i < cuotas.length; i++) {
 
 								$('#tableSpacPago').append(
@@ -103,8 +114,17 @@ ACC.spac = {
 
 							}
 							divtable.style.visibility = 'visible';
-
-						},
+							}else{
+								var errores = spacform.errores;
+								for (var i = 0; i < errores.length; i++)
+								{
+		     						if(errores[i].id_msj != ""){
+										alert(errores[i].txt_msj);
+															
+									}
+								}
+							}
+					},
 						error : function() {
 						}
 					});
