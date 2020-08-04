@@ -42,6 +42,13 @@
 			</div>
 		</div>
 	</div>
+	<div class="col-md-3 col-md-offset-8">
+		<button type="button" class="btn btn-primary btn-lg" id="action"
+			name="action" value="Imprimir" style="margin-top: 3px"
+			onclick="ACC.oblipend.bindTrmPdf('0002','4','vehicularReporte.pdf');">
+			<spring:theme code="obligacion.inicial.imprimir" />
+		</button>
+	</div>
 	<br>
 </div>
 
