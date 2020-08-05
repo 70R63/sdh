@@ -19,6 +19,9 @@ ACC.spac = {
 								var anio = $.trim($(this).attr("data-anio"));
 								var numform = $.trim($(this).attr(
 										"data-numForm"));
+								if(numform==""){
+									numform = $("#numForm").val();
+								}
 								var numobj = $.trim($(this).attr("data-obj"));
 								var reimpresion = $.trim($(this).attr(
 										"data-reimpresion"));
