@@ -240,12 +240,22 @@ ACC.oblipend = {
 	bindTrmPdf : function(impuesto, reporte, reportPdfName) {
 		debugger;
 	    var currentUrl = window.location.href;
+	    var infoTA = null;
 
 		if(currentUrl.includes("contribuyentes")){
+		}else if(currentUrl.includes("/terceros/")){
+			infoTA = ACC.oblipend.determinaInfoTA(impuesto);
+			impuesto = infoTA.impuesto;
 		}else{
 			impuesto = 31;
 		}
 		var strUrlWS = ACC.trmPDFString+'?impuesto='+impuesto+'&reporte='+reporte;
+
+
+		if(infoTA.infoURL != null){
+			strUrlWS = strUrlWS+infoTA.infoURL;
+		}
+
 		$.ajax({
 		    url     : strUrlWS,
 		    method  : 'GET',
@@ -258,6 +268,23 @@ ACC.oblipend = {
 		        console.log('Ocurrio un error al intentar obtener el archivo PDF');
 		    }
 		});
+	},
+	
+	determinaInfoTA : function(impuesto){
+		var numDoc = $("#numdoc").val();
+		var tipDoc = $("#tipdoc").val();
+		var numObjeto = $("#numObjeto").val();
+		var infoTA = {};
+				
+		if(numDoc!=null && tipDoc !=null){
+			infoTA.infoURL = '&numDoc='+numDoc+'&tipDoc='+tipDoc;
+			infoTA.impuesto = impuesto;
+		}else{
+			infoTA.impuesto = numObjeto;
+		}
+		
+		
+		return infoTA;
 	},
 
 	bindDownloadPdf : function(stringPdf, reportPdfName){

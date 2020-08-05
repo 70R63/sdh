@@ -240,13 +240,13 @@ ACC.reportesTerceroAutorizado = {
 				doc.style.display = opcionDisplay;
 			}
 		}
-		if(flagTabla.obligacionesReteica == true){
+		if(flagTabla.obligacionesICA == true){
 			doc = document.getElementById('table-ica');
 			if(doc != null){
 				doc.style.display = opcionDisplay;
 			}
 		}
-		if(flagTabla.obligacionesReteICA == true){
+		if(flagTabla.obligacionesReteica == true){
 			doc = document.getElementById('table-reteica');
 			if(doc != null){
 				doc.style.display = opcionDisplay;
