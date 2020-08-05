@@ -25248,3 +25248,19 @@ a:hover {
   border-color: #ffb71c;
   border: 2px solid #ffb71c;
 }
+.navigation--bottom .nav__links--primary .sub__navigation {
+  background: #e80b2b;
+}
+.navigation--bottom .nav__link:hover {
+  background: #e80b2b;
+}
+.navigation--bottom .nav__links--primary .sub-navigation-section .sub-navigation-list li:hover {
+  background: #e80b2b !important;
+}
+.navigation--bottom .nav__links--primary .sub-navigation-section ul.sub-navigation-list > li > a:hover,
+.navigation--bottom .nav__links--primary .sub-navigation-section ul.sub-navigation-list > li > a:focus {
+  background: #e80b2b;
+}
+.breadcrumb-section .breadcrumb a {
+  color: #fff;
+}
