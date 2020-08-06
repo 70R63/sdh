@@ -252,7 +252,7 @@ ACC.oblipend = {
 		var strUrlWS = ACC.trmPDFString+'?impuesto='+impuesto+'&reporte='+reporte;
 
 
-		if(infoTA.infoURL != null){
+		if(infoTA!=null && infoTA.infoURL != null){
 			strUrlWS = strUrlWS+infoTA.infoURL;
 		}
 
