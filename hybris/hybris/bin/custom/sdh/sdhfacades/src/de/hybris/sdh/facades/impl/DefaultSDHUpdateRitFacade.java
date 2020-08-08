@@ -12,7 +12,6 @@ import de.hybris.sdh.core.pojos.requests.UpdateRedesSocialesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateTelefonoRitRequest;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
-import de.hybris.sdh.core.pojos.responses.UpdateRitErrorResponse;
 import de.hybris.sdh.core.pojos.responses.UpdateRitResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
@@ -256,15 +255,20 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				response = mapper.readValue(strinResponse, UpdateRitResponse.class);
 
-				if (response != null && response.getErrores() != null && !response.getErrores().isEmpty())
+				if (response != null && response.getErrores() != null)
 				{
 					response.setRitUpdated(true);
-					for (final UpdateRitErrorResponse eachMessage : response.getErrores())
+					//					for (final UpdateRitErrorResponse eachMessage : response.getErrores())
+					//					{
+					//						if (!"0".equalsIgnoreCase(eachMessage.getIdmsj()) && !"".equalsIgnoreCase(eachMessage.getIdmsj()))
+					//						{
+					//							response.setRitUpdated(false);
+					//						}
+					//					}
+					if (!"0".equalsIgnoreCase(response.getErrores().getIdmsj())
+							&& !"".equalsIgnoreCase(response.getErrores().getIdmsj()))
 					{
-						if (!"0".equalsIgnoreCase(eachMessage.getIdmsj()) && !"".equalsIgnoreCase(eachMessage.getIdmsj()))
-						{
-							response.setRitUpdated(false);
-						}
+						response.setRitUpdated(false);
 					}
 				}
 

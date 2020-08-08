@@ -19,7 +19,6 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commerceservices.event.AbstractCommerceUserEvent;
 import de.hybris.platform.commerceservices.event.ChangeUIDEvent;
 import de.hybris.platform.commerceservices.i18n.CommerceCommonI18NService;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
@@ -66,7 +65,6 @@ import de.hybris.sdh.storefront.forms.ValidPasswordForm;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -152,7 +150,7 @@ public class MiRitPageController extends AbstractPageController
 	@RequestMapping(method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String showView(final Model model,
-			final RedirectAttributes redirectModel, HttpServletRequest request) throws CMSItemNotFoundException
+			final RedirectAttributes redirectModel, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 
 
@@ -163,7 +161,7 @@ public class MiRitPageController extends AbstractPageController
 
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
 
-		String referrer = request.getHeader("referer");
+		final String referrer = request.getHeader("referer");
 
 		try
 		{
@@ -861,14 +859,15 @@ public class MiRitPageController extends AbstractPageController
 
 		if (Boolean.TRUE.equals(updateRitForm.getRequestUpdateName()) && nameUpdated == false)
 		{
-			List<UpdateRitErrorResponse> errorsList = udpateRitResponse.getErrores();
+			UpdateRitErrorResponse errorsList = udpateRitResponse.getErrores();
 			if (errorsList == null)
 			{
-				errorsList = new ArrayList<UpdateRitErrorResponse>();
+				errorsList = new UpdateRitErrorResponse("x",
+						"El nombre no ha sido actualizado ya que no cumple con el porcentaje mínimo de similitud");
 			}
 
-			errorsList.add(new UpdateRitErrorResponse("x",
-					"El nombre no ha sido actualizado ya que no cumple con el porcentaje mínimo de similitud"));
+			//			errorsList.add(new UpdateRitErrorResponse("x",
+			//					"El nombre no ha sido actualizado ya que no cumple con el porcentaje mínimo de similitud"));
 
 			udpateRitResponse.setErrores(errorsList);
 		}

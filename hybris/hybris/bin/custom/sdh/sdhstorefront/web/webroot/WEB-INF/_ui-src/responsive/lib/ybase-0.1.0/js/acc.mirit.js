@@ -82,10 +82,10 @@ ACC.mirit = {
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
 				    	            	$("#ritDialogContent").html("Tu dirección de notificación no ha sido actualizada.");
-				    	            	$.each(data.errores,function (index, value)
-				    	            	{
-				    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+value.txtmsj);
-				    	            	});
+//				    	            	$.each(data.errores,function (index, value)
+//				    	            	{
+				    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+data.errores.txtmsj);
+//				    	            	});
 			        	        	}
 			    	            	
 			   	            },
@@ -139,10 +139,10 @@ ACC.mirit = {
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
 				    	            	$("#ritDialogContent").html("Tu dirección de contacto no ha sido actualizada.");
-				    	            	$.each(data.errores,function (index, value)
-				    	            	{
-				    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+value.txtmsj);
-				    	            	});
+//				    	            	$.each(data.errores,function (index, value)
+//				    	            	{
+				    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+data.errores.txtmsj);
+//				    	            	});
 				    	            	
 			        	        	}
 			    	            	
@@ -261,7 +261,7 @@ ACC.mirit = {
 				        	        	if(data.ritUpdated==true)
 				        	        	{
 				        	        		$("#ritDialogContent").html("");
-					    	            	$("#ritDialogContent").html(data.errores[0].txtmsj);
+					    	            	$("#ritDialogContent").html(data.errores.txtmsj);
 				        	        	}else
 				        	        	{
 				        	        		$("#ritDialogContent").html("");
@@ -519,12 +519,12 @@ msgBuzon.style.visibility="visible";
                          	            success: function (data) {
                      	        	        	$( "#dialog" ).dialog( "open" );
                     	    	            	$("#ritDialogContent").html("");
-                    	    	            	$.each(data.errores, function( index, value ) {
-                    	    	            		if(value.idmsj != "")
+//                    	    	            	$.each(data.errores, function( index, value ) {
+                    	    	            		if(data.errores.idmsj != "")
                     	    	            		{
-                    	    	            			$("#ritDialogContent").html($("#ritDialogContent").html()+value.txtmsj+"<br>");
+                    	    	            			$("#ritDialogContent").html($("#ritDialogContent").html()+data.errores.txtmsj+"<br>");
                     	    	            		}
-                    	    	            	});
+//                    	    	            	});
                          	            },
                          	            error: function () {
                          	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
@@ -1073,12 +1073,12 @@ msgBuzon.style.visibility="visible";
     	    	            success: function (data) {
     	    	            	$( "#dialog" ).dialog( "open" );
     	    	            	$("#textCertNom").html("");
-    	    	            	$.each(data.errores, function( index, value ) {
-    	    	            		if(value.idmsj != "")
-    	    	            		{
-    	    	            			$("#textCertNom").html($("#textCertNom").html()+value.txtmsj+"<br>");
-    	    	            		}
-    	    	            		});
+//    	    	            	$.each(data.errores, function( index, value ) {
+    	    	            		if(data.errores.idmsj != "")
+//    	    	            		{
+    	    	            			$("#textCertNom").html($("#textCertNom").html()+data.errores.txtmsj+"<br>");
+//    	    	            		}
+//    	    	            		});
     	    	            },
     	    	            error: function () {
     	    	            	$("#textCertNom").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
