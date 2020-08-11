@@ -76,15 +76,15 @@ ACC.reportesTerceroAutorizado = {
 
 
 		ACC.reportesTerceroAutorizado.vaciarTablasInfo();
-		if (ACC.reportesTerceroAutorizado.mostrarErrores(infoResponse) != true){
+		if (ACC.reportesTerceroAutorizado.mostrarErrores(infoResponse) != true || opcionConsulta == "objeto" ){
 
 			if(flagTablas.obligacionesPredios == true && infoResponse.obligacionesPredios != null && infoResponse.obligacionesPredios.length > 0){
 				$.each(infoResponse.obligacionesPredios, function (index,value){
 					$('#table-predial1').append("<tr>"+
+						'<td>' + value.anoGravable + '</td>'+
 						'<td>' + value.chip + '</td>'+
 						'<td>' + value.matriculaInmobiliaria + '</td>'+
 						'<td>' + value.direccion + '</td>'+
-						'<td>' + value.anoGravable + '</td>'+
 						'<td><input id="obligacionesPredios_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
 						"</tr>");
 					flagMostrarTabla.obligacionesPredios = true;
@@ -103,6 +103,9 @@ ACC.reportesTerceroAutorizado = {
 						"</tr>");
 					flagMostrarTabla.obligacionesVehicular = true;
 				});
+			}
+			if(opcionConsulta == "objeto"){
+				flagMostrarTabla.obligacionesVehicular = true;
 			}
 			
 			if(flagTablas.obligacionesICA == true && infoResponse.obligacionesICA != null && infoResponse.obligacionesICA.length > 0){
