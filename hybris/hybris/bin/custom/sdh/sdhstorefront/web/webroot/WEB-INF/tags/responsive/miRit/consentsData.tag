@@ -55,7 +55,7 @@
 
 							<div class="checkbox" role="checkbox" aria-checked="false"
 								id="buzon2" style=" cursor: not-allowed; pointer-events: none;">
-								<label tabindex="0" class="control-label" id="buzon3" disabled> <input
+								<label tabindex="0" class="control-label" id="buzon3"> <input
 									id="buzon" name="buzon" type="checkbox" ${ checked}
 									value="true"> <input type="hidden"
 									name="_consentForm.consentGiven" value="on" disabled> <spring:theme
