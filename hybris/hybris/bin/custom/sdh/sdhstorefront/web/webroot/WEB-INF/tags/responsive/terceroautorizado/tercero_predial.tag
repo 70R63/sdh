@@ -23,13 +23,13 @@
 					<thead>
 						<tr>
 							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.predial.anoGravable" /></label></th>
+							<th><label class="control-label labeltableth"><spring:theme
 										code="terceros.objeto.predial.chip" /></label></th>
 							<th><label class="control-label labeltableth"><spring:theme
 										code="terceros.objeto.predial.matriculaInmobiliaria" /></label></th>
 							<th><label class="control-label labeltableth"><spring:theme
 										code="terceros.objeto.predial.direccion" /></label></th>
-							<th><label class="control-label labeltableth"><spring:theme
-										code="terceros.objeto.predial.anoGravable" /></label></th>
 							<th><label class="control-label labeltableth"><spring:theme
 										code="terceros.objeto.predial.estadoObligacion" /></label></th>
 						</tr>

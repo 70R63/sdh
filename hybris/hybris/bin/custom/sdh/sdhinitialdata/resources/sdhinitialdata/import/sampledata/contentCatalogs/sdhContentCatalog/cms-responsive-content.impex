@@ -397,7 +397,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;ReportantesNavigationNodeEntry;;Reportantes Menu;ReportantesNavigationNode;ReportantesLink;
 ;RetenedorRegistroNavigationNodeEntry;;Retenedor Registro;RetenedorRegistroNavigationNode;RetenedorRegistroLink;
 ;RetenedorDeclaracionesNavigationNodeEntry;;Retenedor Declaraciones;RetenedorDeclaracionesNavigationNode;RetenedorDeclaracionesLink;
-;TerceroAutorizadoReportesNavigationNodeEntry;;Tercero autorizado Menu;TerceroAutorizadoReportesNavigationNode;TerceroAutorizadoReportesLink;
+#;TerceroAutorizadoReportesNavigationNodeEntry;;Tercero autorizado Menu;TerceroAutorizadoReportesNavigationNode;TerceroAutorizadoReportesLink;
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 #*->-------------------------------------------------------------------------------------------------------------------------
 

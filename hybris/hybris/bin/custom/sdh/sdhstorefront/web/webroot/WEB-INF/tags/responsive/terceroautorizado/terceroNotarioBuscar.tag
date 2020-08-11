@@ -14,7 +14,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <spring:url value="/terceros/sujeto" var="actionURL" htmlEscape="false" />
-<div class="container">
+<div class="container_new_page" id="buscarSujeto" style="display: none">
     <div class="row">
         <form:form method="get" commandName="tercerosAutForm" action="${actionURL}" >
              <div class="col-md-5">
@@ -42,7 +42,7 @@
 			<div class="row md-5">
 				<div class="col-md-5 text-right">
 					<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="button" id="btnEnviar"
-					name="btnEnviar" value="enviar" disabled="false" onclick="consultaTA()">
+					name="btnEnviar" value="enviar" disabled="false" onclick="consultaTA('sujeto')">
 					<spring:theme code="terceros.notario.buscar.buscar" />
 					</sf:button>
 				</div>
@@ -64,8 +64,8 @@
 		ACC.reportesTerceroAutorizado.displayTablas('none');
 	}
 
-	function consultaTA() {
-		ACC.reportesTerceroAutorizado.consultaTA("sujeto");
+	function consultaTA(opcionBusqueda) {
+		ACC.reportesTerceroAutorizado.consultaTA(opcionBusqueda);
 	}
 	function btnCancelar(){
 		window.history.back();

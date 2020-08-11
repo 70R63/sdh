@@ -11,6 +11,7 @@ public class TercerosAutForm {
 	private String numdoc;
 	private String numObjeto;
 	private String impuesto;
+	private String subrol;
 
 	private List<SelectAtomValue> listaImpuestos;
 
@@ -72,6 +73,23 @@ public class TercerosAutForm {
 	public void setNumObjeto(final String numObjeto)
 	{
 		this.numObjeto = numObjeto;
+	}
+
+	/**
+	 * @return the subrol
+	 */
+	public String getSubrol()
+	{
+		return subrol;
+	}
+
+	/**
+	 * @param subrol
+	 *           the subrol to set
+	 */
+	public void setSubrol(final String subrol)
+	{
+		this.subrol = subrol;
 	}
 
 }

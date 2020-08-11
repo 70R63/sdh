@@ -4,7 +4,27 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/nav"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="terceros" tagdir="/WEB-INF/tags/responsive/terceroautorizado"%>
 <div class="loader"></div>
+
+
+<terceros:terceroOpcionesBuscar/>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<terceros:terceroSIMBuscar/>
+<terceros:terceroNotarioBuscar/>
+<terceros:tercero_predial/>
+<terceros:tercero_ica/>
+<terceros:tercero_reteica/>
+<terceros:tercero_vehicular/>
+<terceros:tercero_delineacion/>
+<terceros:tercero_gasolina/>
+<terceros:tercero_publicidad/>
+
 
 <!-- <div class="container_new_page"> -->
 <!-- 	<div class="row "> -->
@@ -43,5 +63,34 @@
 window.onload = function() {
 	
     $(".loader").fadeOut("slow");
+}
+
+function habilitarBusqueda(opcionBusqueda){
+	
+	var nombreObjeto = null;
+	
+	switch(opcionBusqueda){
+	case "sujeto":
+		opcionVisualizar("buscarSujeto","block");
+		opcionVisualizar("buscarObjeto","none");
+		break;
+	case "objeto":
+		opcionVisualizar("buscarSujeto","none");
+		opcionVisualizar("buscarObjeto","block");
+		break;		
+	}
+	
+	
+}
+
+function opcionVisualizar(nombreObjeto,opcionMostrar){
+	
+	if(nombreObjeto != null){
+		var doc = document.getElementById(nombreObjeto);
+		if(doc != null){
+			doc.style.display = opcionMostrar; 
+		}
+	}
+	
 }
 </script>
