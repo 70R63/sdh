@@ -3,6 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
 
 /**
  * @author hybris
@@ -11,7 +12,7 @@ package de.hybris.sdh.core.pojos.responses;
 public class UpdateRitResponse
 {
 	private Boolean ritUpdated;
-	private UpdateRitErrorResponse errores;
+	private List<UpdateRitErrorResponse> errores;
 	private String numBP;
 
 	/**
@@ -34,7 +35,7 @@ public class UpdateRitResponse
 	/**
 	 * @return the errores
 	 */
-	public UpdateRitErrorResponse getErrores()
+	public List<UpdateRitErrorResponse> getErrores()
 	{
 		return errores;
 	}
@@ -43,7 +44,7 @@ public class UpdateRitResponse
 	 * @param errores
 	 *           the errores to set
 	 */
-	public void setErrores(final UpdateRitErrorResponse errores)
+	public void setErrores(final List<UpdateRitErrorResponse> errores)
 	{
 		this.errores = errores;
 	}

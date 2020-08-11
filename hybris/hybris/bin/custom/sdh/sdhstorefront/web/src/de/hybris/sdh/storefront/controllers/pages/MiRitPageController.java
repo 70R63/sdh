@@ -65,6 +65,7 @@ import de.hybris.sdh.storefront.forms.ValidPasswordForm;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -859,15 +860,16 @@ public class MiRitPageController extends AbstractPageController
 
 		if (Boolean.TRUE.equals(updateRitForm.getRequestUpdateName()) && nameUpdated == false)
 		{
-			UpdateRitErrorResponse errorsList = udpateRitResponse.getErrores();
+			List<UpdateRitErrorResponse> errorsList = udpateRitResponse.getErrores();
 			if (errorsList == null)
 			{
-				errorsList = new UpdateRitErrorResponse("x",
-						"El nombre no ha sido actualizado ya que no cumple con el porcentaje mínimo de similitud");
+				errorsList = new ArrayList<UpdateRitErrorResponse>();
+				//				errorsList = new UpdateRitErrorResponse("x",
+				//						"El nombre no ha sido actualizado ya que no cumple con el porcentaje mínimo de similitud");
 			}
 
-			//			errorsList.add(new UpdateRitErrorResponse("x",
-			//					"El nombre no ha sido actualizado ya que no cumple con el porcentaje mínimo de similitud"));
+			errorsList.add(new UpdateRitErrorResponse("x",
+					"El nombre no ha sido actualizado ya que no cumple con el porcentaje mínimo de similitud"));
 
 			udpateRitResponse.setErrores(errorsList);
 		}
