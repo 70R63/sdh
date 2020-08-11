@@ -1672,13 +1672,13 @@ debugger;
 		
 		$("#aniograv").find("option:gt(0)").remove();
 		if(claveImpuesto == '0001' || claveImpuesto == '0002'){ // predial vehicular 
-			ACC.opcionDeclaraciones.preparaCatAnioGravable(anoGravableBase,7);
+			ACC.opcionDeclaraciones.preparaCatAnioGravable(anoGravableBase,5);
 		}else if(claveImpuesto == '0006'){ // delineacion
 			//anoGravableBase--;
-			ACC.opcionDeclaraciones.preparaCatAnioGravable(anoGravableBase,7);
+			ACC.opcionDeclaraciones.preparaCatAnioGravable(anoGravableBase,5);
 		}else{
-			anoGravableBase--;
-			ACC.opcionDeclaraciones.preparaCatAnioGravable(anoGravableBase,6);
+//			anoGravableBase--;
+			ACC.opcionDeclaraciones.preparaCatAnioGravable(anoGravableBase,5);
 		}
 		
 	},

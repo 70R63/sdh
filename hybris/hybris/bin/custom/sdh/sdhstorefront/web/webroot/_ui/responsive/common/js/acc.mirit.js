@@ -82,10 +82,10 @@ ACC.mirit = {
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
 				    	            	$("#ritDialogContent").html("Tu dirección de notificación no ha sido actualizada.");
-				    	            	$.each(data.errores,function (index, value)
-				    	            	{
-				    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+value.txtmsj);
-				    	            	});
+//				    	            	$.each(data.errores,function (index, value)
+//				    	            	{
+				    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+data.errores.txtmsj);
+//				    	            	});
 			        	        	}
 			    	            	
 			   	            },
@@ -139,10 +139,10 @@ ACC.mirit = {
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
 				    	            	$("#ritDialogContent").html("Tu dirección de contacto no ha sido actualizada.");
-				    	            	$.each(data.errores,function (index, value)
-				    	            	{
-				    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+value.txtmsj);
-				    	            	});
+//				    	            	$.each(data.errores,function (index, value)
+//				    	            	{
+				    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+data.errores.txtmsj);
+//				    	            	});
 				    	            	
 			        	        	}
 			    	            	
@@ -161,23 +161,40 @@ ACC.mirit = {
 
  e.preventDefault();
 
-		   var selectRefinementsTitle = "Términos y condiciones";
-	        ACC.colorbox.open(selectRefinementsTitle, {
-	            href: ".js-terminos-facet",
-	            inline: true,
-	            width: "90%",
-	            onComplete: function () {
-	                $(document).on("click", ".js-terminos-facet .js-facet-name-veh", function (e) {
-	                    e.preventDefault();
-	                    $(".js-terminos-facet  .js-facet-veh").removeClass("active");
-	                    $(this).parents(".js-facet-veh").addClass("active");
-	                    $.colorbox.resize()
-	                })
-	            },
-	            onClosed: function () {
-	                $(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
-	            }
-	        });
+//		   var selectRefinementsTitle = "Términos y condiciones";
+//	        ACC.colorbox.open(selectRefinementsTitle, {
+//	            href: ".js-terminos-facet",
+//	            inline: true,
+//	            width: "90%",
+//	            onComplete: function () {
+//	                $(document).on("click", ".js-terminos-facet .js-facet-name-veh", function (e) {
+//	                    e.preventDefault();
+//	                    $(".js-terminos-facet  .js-facet-veh").removeClass("active");
+//	                    $(this).parents(".js-facet-veh").addClass("active");
+//	                    $.colorbox.resize()
+//	                })
+//	            },
+//	            onClosed: function () {
+//	                $(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
+//	            }
+//	        });
+var txt;
+  var r = confirm("Aquí van los términos y condiciones");
+  if (r == true) {
+	debugger;
+    var habcheck = document.getElementById("buzon2");
+	var habcheck2 = document.getElementById("buzon3");
+		habcheck.style.cursor=="auto";
+		habcheck.style.pointer-event=="painted";
+		
+	
+		$("#buzon2").attr("aria-checked", true);
+		$("#buzon3").attr("class", "checked");
+
+  } else {
+   $("#buzon2").attr("aria-checked", false);
+		$("#buzon3").attr("class", "control-label");
+  }
 });
 	},
 	
@@ -261,7 +278,7 @@ ACC.mirit = {
 				        	        	if(data.ritUpdated==true)
 				        	        	{
 				        	        		$("#ritDialogContent").html("");
-					    	            	$("#ritDialogContent").html(data.errores[0].txtmsj);
+					    	            	$("#ritDialogContent").html(data.errores.txtmsj);
 				        	        	}else
 				        	        	{
 				        	        		$("#ritDialogContent").html("");
@@ -519,12 +536,12 @@ msgBuzon.style.visibility="visible";
                          	            success: function (data) {
                      	        	        	$( "#dialog" ).dialog( "open" );
                     	    	            	$("#ritDialogContent").html("");
-                    	    	            	$.each(data.errores, function( index, value ) {
-                    	    	            		if(value.idmsj != "")
+//                    	    	            	$.each(data.errores, function( index, value ) {
+                    	    	            		if(data.errores.idmsj != "")
                     	    	            		{
-                    	    	            			$("#ritDialogContent").html($("#ritDialogContent").html()+value.txtmsj+"<br>");
+                    	    	            			$("#ritDialogContent").html($("#ritDialogContent").html()+data.errores.txtmsj+"<br>");
                     	    	            		}
-                    	    	            	});
+//                    	    	            	});
                          	            },
                          	            error: function () {
                          	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
@@ -1073,12 +1090,12 @@ msgBuzon.style.visibility="visible";
     	    	            success: function (data) {
     	    	            	$( "#dialog" ).dialog( "open" );
     	    	            	$("#textCertNom").html("");
-    	    	            	$.each(data.errores, function( index, value ) {
-    	    	            		if(value.idmsj != "")
-    	    	            		{
-    	    	            			$("#textCertNom").html($("#textCertNom").html()+value.txtmsj+"<br>");
-    	    	            		}
-    	    	            		});
+//    	    	            	$.each(data.errores, function( index, value ) {
+    	    	            		if(data.errores.idmsj != "")
+//    	    	            		{
+    	    	            			$("#textCertNom").html($("#textCertNom").html()+data.errores.txtmsj+"<br>");
+//    	    	            		}
+//    	    	            		});
     	    	            },
     	    	            error: function () {
     	    	            	$("#textCertNom").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");

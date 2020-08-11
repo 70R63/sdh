@@ -39,30 +39,30 @@
 				<!-- 				</div> -->
 				<!-- 			</div> -->
 				<!-- 			</div> -->
-				<div class="row"  id="mensaggeBuzon" style="visibility: hidden">
+				<div class="row"  id="mensaggeBuzon">
 					<div class="col-md-12">
 						<div class="form-group ">
 							<label class="control-label" for="" > <spring:theme
-									code="buzon.mirit.mensaje" />
+									code="buzon.mirit.mensaje" /><button id="terminosPopUp" class="terminosPopUp" style="background: #fff; border: 0px">términos y condiciones</button>
 							</label>
 						</div>
 					</div>
 				</div>
 				
-				<div class="row" onclick="showMessage()">
+				<div class="row">
 					<div class="col-md-8 ">
-						<div class="form-group ">
+<!-- 						<div class="form-group "> -->
 
 							<div class="checkbox" role="checkbox" aria-checked="false"
-								id="buzon2">
-								<label tabindex="0" class="control-label" id="buzon3"> <input
+								id="buzon2" style=" cursor: not-allowed; pointer-events: none;">
+								<label tabindex="0" class="control-label" id="buzon3" disabled> <input
 									id="buzon" name="buzon" type="checkbox" ${ checked}
 									value="true"> <input type="hidden"
-									name="_consentForm.consentGiven" value="on"> <spring:theme
+									name="_consentForm.consentGiven" value="on" disabled> <spring:theme
 										code="mirit.constents.notifications" />
 								</label>
 							</div>
-						</div>
+<!-- 						</div> -->
 					</div>
 				</div>
 				<c:set var="checkAutUsoInfo" value="false" />
@@ -86,20 +86,20 @@
 						</div>
 					</div>
 				</div>
-										<div class="row">
-									<div class="col-md-8">
-										<div class="form-group ">
-											<div class="checkbox" role="checkbox" aria-checked="false">
-												<label tabindex="0" class="control-label "> <input
-													id="termsConditions" name="termsConditions" type="checkbox"
-													${ checked} value="true"> <input type="hidden"
-													name="_consentForm.consentGiven" value="on"> <spring:theme
-													code="mirit.constents.termsConditions" /><button id="terminosPopUp" class="terminosPopUp" style="background: #fff; border: 0px">términos y condiciones</button>
-												</label>
-											</div>
-										</div>
-									</div>
-								</div>
+<!-- 										<div class="row"> -->
+<!-- 									<div class="col-md-8"> -->
+<!-- 										<div class="form-group "> -->
+<!-- 											<div class="checkbox" role="checkbox" aria-checked="false"> -->
+<!-- 												<label tabindex="0" class="control-label "> <input -->
+<!-- 													id="termsConditions" name="termsConditions" type="checkbox" -->
+<%-- 													${ checked} value="true"> <input type="hidden" --%>
+<%-- 													name="_consentForm.consentGiven" value="on"> <spring:theme --%>
+<%-- 													code="mirit.constents.termsConditions" /><button id="terminosPopUp" class="terminosPopUp" style="background: #fff; border: 0px">términos y condiciones</button> --%>
+<!-- 												</label> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 				<div class="row">
 					<div class="col-12 col-md-3  ">
 						<div class="form-group ">
@@ -122,6 +122,15 @@
 				<spring:theme code="" />
 		<spring:theme
 						code="Aquí van los términos y condiciones" />
+						<div class="row">
+							<div class="col-md-4">
+							<button class="btn btn-primary btn-block btn-lg " type="button"
+								id="AceptTerms">
+								<spring:theme code="Aceptar" />
+							</button>
+							</div>
+						
+						</div>
 			</div>
 		</div>
 	</div>
@@ -133,11 +142,20 @@
 	function showMessage() {
 		debugger;
 		var chulo3 = document.getElementById("buzon").checked;
+		var message = document.getElementById("mensaggeBuzon");
 		if (chulo3 == true) {
-			alert("Usted NO esta aceptando los términos y condiciones. \n Aquí van los términos y condiciones.");
+			message.style.visibility = "hidden";
 		} else {
-			alert("Usted esta aceptando los términos y condiciones. \n Aquí van los términos y condiciones.");
+			message.style.visibility = "visible";
 		}
+	}
+	function habilitaBuzon(){
+		debugger;
+		var habcheck = document.getElementById("buzon2");
+		habcheck.style.cursor="auto";
+		habcheck.style.pointer-event="painted";
+		alert("activar buzon");
+		
 	}
 </script>
 
