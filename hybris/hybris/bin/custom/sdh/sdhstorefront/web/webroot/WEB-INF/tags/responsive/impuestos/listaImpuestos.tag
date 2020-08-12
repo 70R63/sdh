@@ -178,7 +178,7 @@
 			test="${dataForm.impuesto ne '4' and dataForm.impuesto ne ' ' and dataForm.impuesto ne '6'}">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-9 text-center">
-					<sf:button type="submit"
+					<sf:button type="button"
 						class="btn btn-primary btn-lg" id="action" name="action"
 						onClick="validateForm();"
 						value="presentarDeclaracion"
