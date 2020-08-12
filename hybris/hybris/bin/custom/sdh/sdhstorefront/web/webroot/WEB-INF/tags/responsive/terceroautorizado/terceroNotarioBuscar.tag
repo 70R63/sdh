@@ -14,7 +14,21 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <spring:url value="/terceros/sujeto" var="actionURL" htmlEscape="false" />
-<div class="container_new_page" id="buscarSujeto" style="display: none">
+
+<c:set var="flagMostrarObjeto" value="none" />
+<c:set var="flagMostrarSujeto" value="none" />
+<c:choose>
+	<c:when test="${tercerosAutForm.subrol == '03_01'}">
+	</c:when>
+	<c:when test="${tercerosAutForm.subrol == '03_02'}">
+	</c:when>
+	<c:when test="${tercerosAutForm.subrol == '03_03'}">
+	</c:when>
+	<c:when test="${tercerosAutForm.subrol == '03_04'}">
+	</c:when>
+</c:choose>
+
+<div class="container_new_page" id="buscarSujeto" style="display: ${flagMostrarSujeto}">
     <div class="row">
         <form:form method="get" commandName="tercerosAutForm" action="${actionURL}" >
              <div class="col-md-5">

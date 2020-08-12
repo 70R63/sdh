@@ -64,33 +64,4 @@ window.onload = function() {
 	
     $(".loader").fadeOut("slow");
 }
-
-function habilitarBusqueda(opcionBusqueda){
-	
-	var nombreObjeto = null;
-	
-	switch(opcionBusqueda){
-	case "sujeto":
-		opcionVisualizar("buscarSujeto","block");
-		opcionVisualizar("buscarObjeto","none");
-		break;
-	case "objeto":
-		opcionVisualizar("buscarSujeto","none");
-		opcionVisualizar("buscarObjeto","block");
-		break;		
-	}
-	
-	
-}
-
-function opcionVisualizar(nombreObjeto,opcionMostrar){
-	
-	if(nombreObjeto != null){
-		var doc = document.getElementById(nombreObjeto);
-		if(doc != null){
-			doc.style.display = opcionMostrar; 
-		}
-	}
-	
-}
 </script>

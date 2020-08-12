@@ -11,29 +11,28 @@
 
 <%-- <div>--${tercerosAutForm.subrol}--</div> --%>
 <spring:htmlEscape defaultHtmlEscape="true" />
-<c:set var="mostrarObjeto" value="false" />
-<c:set var="mostrarSujeto" value="false" />
-<c:choose>
-<c:when test="${tercerosAutForm.subrol == '03_01'}">
-<c:set var="mostrarObjeto" value="false" />
-<c:set var="mostrarSujeto" value="true" />
-</c:when>
-<c:when test="${tercerosAutForm.subrol == '03_02'}">
-<c:set var="mostrarObjeto" value="false" />
-<c:set var="mostrarSujeto" value="true" />
-</c:when>
-<c:when test="${tercerosAutForm.subrol == '03_03'}">
-<c:set var="mostrarObjeto" value="true" />
-<c:set var="mostrarSujeto" value="false" />
-</c:when>
-<c:when test="${tercerosAutForm.subrol == '03_04'}">
-<c:set var="mostrarObjeto" value="true" />
-<c:set var="mostrarSujeto" value="false" />
-</c:when>
 
+<c:set var="flagBotonObjeto" value="false" />
+<c:set var="flagBotonSujeto" value="false" />
+<c:choose>
+	<c:when test="${tercerosAutForm.subrol == '03_01'}">
+		<c:set var="flagBotonObjeto" value="true" />
+		<c:set var="flagBotonSujeto" value="true" />
+	</c:when>
+	<c:when test="${tercerosAutForm.subrol == '03_02'}">
+		<c:set var="flagBotonObjeto" value="true" />
+		<c:set var="flagBotonSujeto" value="true" />
+	</c:when>
+	<c:when test="${tercerosAutForm.subrol == '03_03'}">
+		<c:set var="flagBotonObjeto" value="true" />
+		<c:set var="flagBotonSujeto" value="true" />
+	</c:when>
+	<c:when test="${tercerosAutForm.subrol == '03_04'}">
+	</c:when>
 </c:choose>
+
 <div class="container_new_page" id="opcionesBuscar">
-	<c:if test="${mostrarSujeto == true}">
+	<c:if test="${flagBotonSujeto == true}">
 		<div class="col-md-3 col-md-offset-1">
 			<button type="button" class="btn btn-primary btn-lg" id="action"
 				name="action" value="Imprimir" style="margin-top: 3px"
@@ -42,7 +41,7 @@
 			</button>
 		</div>
 	</c:if>
-	<c:if test="${mostrarObjeto == true}">
+	<c:if test="${flagBotonObjeto == true}">
 		<div class="col-md-3 col-md-offset-1">
 			<button type="button" class="btn btn-primary btn-lg" id="action"
 				name="action" value="Imprimir" style="margin-top: 3px"
@@ -63,8 +62,12 @@ function habilitarBusqueda(opcionBusqueda){
 	case "sujeto":
 		opcionVisualizar("buscarSujeto","block");
 		opcionVisualizar("buscarObjeto","none");
+		$("#numdoc").val("");
+		$("#tipdoc").val("");
 		break;
 	case "objeto":
+		$("#numdoc").val("");
+		$("#tipdoc").val("");
 		opcionVisualizar("buscarSujeto","none");
 		opcionVisualizar("buscarObjeto","block");
 		break;		

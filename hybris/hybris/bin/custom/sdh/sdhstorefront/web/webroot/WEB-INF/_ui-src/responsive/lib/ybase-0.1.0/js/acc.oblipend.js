@@ -243,7 +243,7 @@ ACC.oblipend = {
 	    var infoTA = null;
 
 		if(currentUrl.includes("contribuyentes")){
-		}else if(currentUrl.includes("/terceros/")){
+		}else if(currentUrl.includes("/terceros")){
 			infoTA = ACC.oblipend.determinaInfoTA(impuesto);
 			impuesto = infoTA.impuesto;
 		}else{
