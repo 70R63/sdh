@@ -5,7 +5,6 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
-
 /**
  * @author hybris
  *

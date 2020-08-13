@@ -17,7 +17,6 @@
  	
  	
     function downloadPDF(indexItem) {
-    	debugger;
         var dlnk = document.getElementById('dwnldLnk');
 			if(resultado != null){ 
  	            dlnk.href = 'data:application/octet-stream;base64,' + resultado[indexItem];

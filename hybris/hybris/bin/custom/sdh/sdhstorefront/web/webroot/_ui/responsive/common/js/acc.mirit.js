@@ -1,6 +1,6 @@
 ACC.mirit = {
 
-		 _autoload: ["bindUpdateNombreButton","bindUpdateNotificationAddressButton","bindUpdateContactAddressButton","bindUpdateTelefonoButton","bindUpdateRedesSocialesButton","bindUpdateAutorizacionesButton","bindUpdatePasswordButton", "bindUpdateEmailButton", "bindCertifNombButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton", "bindTermnsandConditions" ],
+		 _autoload: ["bindUpdateNombreButton","bindUpdateNotificationAddressButton","bindUpdateContactAddressButton","bindUpdateTelefonoButton","bindUpdateRedesSocialesButton","bindUpdateAutorizacionesButton","bindUpdatePasswordButton", "bindUpdateEmailButton", "bindCertifNombButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton", "bindTermnsandConditions","bindTermnsandConditionsRegister" ],
 		 
 		 bindUpdateNombreButton: function () {
 		        $(document).on("click", "#updateNombreButton", function (e) {
@@ -158,29 +158,96 @@ ACC.mirit = {
 		 
 	bindTermnsandConditions: function(){
 		$(document).on("click", "#terminosPopUp", function(e) {
- debugger;
 
  e.preventDefault();
- debugger;
-		   var selectRefinementsTitle = "Términos y condiciones";
-	        ACC.colorbox.open(selectRefinementsTitle, {
-	            href: ".js-terminos-facet",
-	            inline: true,
-	            width: "90%",
-	            onComplete: function () {
-	                $(document).on("click", ".js-terminos-facet .js-facet-name-veh", function (e) {
-	                    e.preventDefault();
-	                    $(".js-terminos-facet  .js-facet-veh").removeClass("active");
-	                    $(this).parents(".js-facet-veh").addClass("active");
-	                    $.colorbox.resize()
-	                })
-	            },
-	            onClosed: function () {
-	                $(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
-	            }
-	        });
+
+//		   var selectRefinementsTitle = "Términos y condiciones";
+//	        ACC.colorbox.open(selectRefinementsTitle, {
+//	            href: ".js-terminos-facet",
+//	            inline: true,
+//	            width: "90%",
+//	            onComplete: function () {
+//	                $(document).on("click", ".js-terminos-facet .js-facet-name-veh", function (e) {
+//	                    e.preventDefault();
+//	                    $(".js-terminos-facet  .js-facet-veh").removeClass("active");
+//	                    $(this).parents(".js-facet-veh").addClass("active");
+//	                    $.colorbox.resize()
+//	                })
+//	            },
+//	            onClosed: function () {
+//	                $(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
+//	            }
+//	        });
+var txt;
+  var r = confirm("Aquí van los términos y condiciones");
+  if (r == true) {
+	debugger;
+    var habcheck = document.getElementById("buzon2");
+	var habcheck2 = document.getElementById("buzon3");
+		habcheck.style.cursor=="auto";
+		habcheck.style.pointer-event=="painted";
+		
+	
+		$("#buzon2").attr("aria-checked", true);
+		$("#buzon3").attr("class", "checked");
+
+  } else {
+   $("#buzon2").attr("aria-checked", false);
+		$("#buzon3").attr("class", "control-label");
+  }
 });
 	},
+	
+	bindTermnsandConditionsRegister: function(){
+		$(document).on("click", "#terminosPopUpRegister", function(e) {
+
+ e.preventDefault();
+
+//		   var selectRefinementsTitle = "Términos y condiciones";
+//	        ACC.colorbox.open(selectRefinementsTitle, {
+//	            href: ".js-terminos-facet",
+//	            inline: true,
+//	            width: "90%",
+//	            onComplete: function () {
+//	                $(document).on("click", ".js-terminos-facet .js-facet-name-veh", function (e) {
+//	                    e.preventDefault();
+//	                    $(".js-terminos-facet  .js-facet-veh").removeClass("active");
+//	                    $(this).parents(".js-facet-veh").addClass("active");
+//	                    $.colorbox.resize()
+//	                })
+//	            },
+//	            onClosed: function () {
+//	                $(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
+//	            }
+//	        });
+var txt;
+  var r = confirm("Aquí van los términos y condiciones");
+  if (r == true) {
+	debugger;
+   var habcheck = document.getElementById("useEmailForNotifications");
+	
+       var parent = habcheck.offsetParent;
+parent.ariaChecked=true;
+parent.attributes[4]=true;
+	var label = parent.lastElementChild;
+	label.attributes[0]="checked";
+	label.className="checked";
+
+		
+
+  } else {
+     var habcheck = document.getElementById("useEmailForNotifications");
+	
+       var parent = habcheck.offsetParent;
+parent.ariaChecked=false;
+parent.attributes[4]=false;
+	var label = parent.lastElementChild;
+	label.attributes[0]="control-label";
+	label.className="control-label";
+  }
+});
+	},
+	
 	
 		 bindUpdateTelefonoButton: function () {
 		        $(document).on("click", "#updateTelefonoButton", function (e) {

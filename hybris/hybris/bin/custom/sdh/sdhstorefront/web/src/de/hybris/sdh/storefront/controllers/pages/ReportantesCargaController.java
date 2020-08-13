@@ -80,7 +80,7 @@ public class ReportantesCargaController extends AbstractPageController
 	//->Carga de documentos
 	//----------------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value =
-	{ "/reportantes/cargadocumentos", "/retenedores/cargadocumentos" }, method = RequestMethod.GET)
+	{ "/reportantes/cargadocumentos" }, method = RequestMethod.GET)
 	public String showView(final Model model, final RedirectAttributes redirectModel, final HttpServletRequest request)
 			throws CMSItemNotFoundException
 	{

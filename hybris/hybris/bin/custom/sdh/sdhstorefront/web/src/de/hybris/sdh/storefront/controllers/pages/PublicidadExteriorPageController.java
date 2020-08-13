@@ -320,6 +320,12 @@ public class PublicidadExteriorPageController extends AbstractPageController
 					{
 						System.out.println("------------Algo salio mal con el mapeo------------------");
 					}
+
+					if (publicidadForm.getTipoServicio() == null || "-".equals(publicidadForm.getTipoServicio()))
+					{
+						publicidadForm.setTipoServicio(eachDetalle.getTipoServicio());
+					}
+
 					break;
 				}
 

@@ -15,8 +15,23 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <spring:url value="/terceros/objeto" var="actionURL" htmlEscape="false" />
-	
-<div class="container">
+
+<c:set var="flagMostrarObjeto" value="none" />
+<c:set var="flagMostrarSujeto" value="none" />
+<c:choose>
+	<c:when test="${tercerosAutForm.subrol == '03_01'}">
+		<c:set var="flagMostrarObjeto" value="block" />
+	</c:when>
+	<c:when test="${tercerosAutForm.subrol == '03_02'}">
+	</c:when>
+	<c:when test="${tercerosAutForm.subrol == '03_03'}">
+	</c:when>
+	<c:when test="${tercerosAutForm.subrol == '03_04'}">
+		<c:set var="flagMostrarObjeto" value="block" />
+	</c:when>
+</c:choose>
+
+<div class="container_new_page" id="buscarObjeto" style="display: ${flagMostrarObjeto}">
     <div class="row">
         <form:form method="get" commandName="tercerosAutForm" action="${actionURL}" >
              <div class="col-md-5">
@@ -25,7 +40,7 @@
 			<div class="row md-5">
 				<div class="col-md-5 text-right">
 					<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="button" id="btnEnviar"
-					name="btnEnviar" value="enviar" disabled="false" onclick="consultaTA()" >
+					name="btnEnviar" value="enviar" disabled="false" onclick="consultaTA('objeto')" >
 					<spring:theme code="terceros.sim.buscar.buscar" />
 					</sf:button>
 				</div>
@@ -42,9 +57,8 @@
 </div>
 
 <script>
-	function consultaTA() {
-// 		alert("consulta");
-		ACC.reportesTerceroAutorizado.consultaTA("objeto");
+	function consultaTA(opcionBusqueda) {
+		ACC.reportesTerceroAutorizado.consultaTA(opcionBusqueda);
 	}
 	
 	function btnCancelar(){
