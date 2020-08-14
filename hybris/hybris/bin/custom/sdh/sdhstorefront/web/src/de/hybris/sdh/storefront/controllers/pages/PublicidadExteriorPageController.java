@@ -323,7 +323,9 @@ public class PublicidadExteriorPageController extends AbstractPageController
 
 					if (publicidadForm.getTipoServicio() == null || "-".equals(publicidadForm.getTipoServicio()))
 					{
-						publicidadForm.setTipoServicio(eachDetalle.getTipoServicio());
+						publicidadForm.setTipoServicio(getMessageSource().getMessage(
+								"publicidad.exterior.vehicles.tipoServicio." + eachDetalle.getTipoServicio(), null,
+								getI18nService().getCurrentLocale()));
 					}
 
 					break;
