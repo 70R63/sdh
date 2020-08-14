@@ -19,6 +19,7 @@
 <c:set var="flagMostrarSujeto" value="none" />
 <c:choose>
 	<c:when test="${tercerosAutForm.subrol == '03_01'}">
+		<c:set var="flagMostrarSujeto" value="block" />
 	</c:when>
 	<c:when test="${tercerosAutForm.subrol == '03_02'}">
 	</c:when>
