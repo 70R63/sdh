@@ -23,6 +23,10 @@
 	<div id="dialogMensajesContent"></div>
 </div>
 
+<div id="dialog" title="Actualización de RIT">
+	<div id="ritDialogContent"></div>
+</div>
+
 
 <script type="text/javascript">
 window.onload = function() {
