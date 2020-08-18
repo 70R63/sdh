@@ -111,7 +111,7 @@ window.onload = function() {
 			<div class="row">
 
 			<div class="col-md-2">
-				<button class="btn btn-primary btn-block" type="submit">
+				<button class="btn btn-primary btn-block" type="submit" id="botonGenerar">
 					<spring:theme code="mirit.certificacion.btnGenerar" />
 				</button>
 			</div>
@@ -188,7 +188,7 @@ window.onload = function() {
 </button>
 </div>
 
-<consultas:edoCuentaImprimir/>
+<consultas:edoCuentaImprimir mostrarBotonCertiRit="true" />
 
 
 <script type="text/javascript">
@@ -198,6 +198,12 @@ function mostrarTabla(claveImpuesto){
 		$("#ImprimirPopUp").data("impuesto",claveImpuesto);
 		botonImprimir.click();
 	}
+	
+}
+
+function generarCertiRit(){
+
+	$("#botonGenerar").click();
 	
 }
 </script>
