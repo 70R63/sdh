@@ -86,6 +86,7 @@ window.onload = function() {
 	<form:form id="form_pdf"
 		action="${post_url}"
 		method="post" commandName="miRitCertificacionForm">
+		<form:hidden path="numObjeto" id="numObjeto" />
 
 		<br>
 		<div class="row">
@@ -201,8 +202,9 @@ function mostrarTabla(claveImpuesto){
 	
 }
 
-function generarCertiRit(){
+function generarCertiRit(numObjeto){
 
+	$("#numObjeto").val(numObjeto);
 	$("#botonGenerar").click();
 	
 }

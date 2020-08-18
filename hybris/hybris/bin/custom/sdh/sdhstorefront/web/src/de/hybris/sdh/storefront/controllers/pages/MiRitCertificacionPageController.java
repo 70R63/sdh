@@ -12,6 +12,7 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
@@ -138,6 +139,15 @@ public class MiRitCertificacionPageController extends AbstractPageController
 		else
 		{
 			certificaRITRequest.setTipoImp(VACIO);
+		}
+
+		if (miRitCertificacionFormDatos.getNumObjeto() != null)
+		{
+			certificaRITRequest.setNumObjeto(miRitCertificacionFormDatos.getNumObjeto());
+		}
+		else
+		{
+			certificaRITRequest.setNumObjeto(VACIO);
 		}
 
 

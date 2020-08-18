@@ -58,7 +58,7 @@
 										<!-- 											</label></td> -->
 										<c:choose>
 										<c:when test="${flagCertiRit == true }">
-											<td><label onclick="generarCertiRit()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+											<td><label onclick="generarCertiRit('${current.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
 										</c:when>
 										<c:otherwise>
 											<td><label data-objeto="${current.numObjeto}"
@@ -85,7 +85,7 @@
 										<!-- 											</label></td> -->
 										<c:choose>
 											<c:when test="${flagCertiRit == true }">
-												<td><label onclick="generarCertiRit()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+												<td><label onclick="generarCertiRit('${current.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
 											</c:when>
 											<c:otherwise>									
 												<td><label data-objeto="${current.numObjeto}"
@@ -112,7 +112,7 @@
 										<!-- 											</label></td> -->
 										<c:choose>
 											<c:when test="${flagCertiRit == true }">
-												<td><label onclick="generarCertiRit()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+												<td><label onclick="generarCertiRit('${current.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
 											</c:when>
 											<c:otherwise>									
 												<td><label data-objeto="${current.numObjeto}"
@@ -132,7 +132,7 @@
 				
 				<c:if test="${flagCertiRit == true}">
 					<br>
-					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit()">
+					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit('')">
 						<spring:theme code="mirit.certificacion.btnGenerar" />
 					</button>
 					<br>
@@ -179,7 +179,7 @@
 								<%-- 										code="sobre.vehiculo.table.verdetalle" /></label></td> --%>
 								<c:choose>
 									<c:when test="${flagCertiRit == true }">
-										<td><label onclick="generarCertiRit()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+										<td><label onclick="generarCertiRit('${eachVehiculo.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
 									</c:when>
 									<c:otherwise>								
 									<td><label data-objeto="${eachVehiculo.numObjeto}"
@@ -194,7 +194,7 @@
 				
 				<c:if test="${flagCertiRit == true}">
 					<br>
-					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit()">
+					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit('')">
 						<spring:theme code="mirit.certificacion.btnGenerar" />
 					</button>
 					<br>
@@ -235,7 +235,7 @@
 							<%-- 												code="publicidad.exterior.ver" /></label></td> --%>
 							<c:choose>
 								<c:when test="${flagCertiRit == true }">
-									<td><label onclick="generarCertiRit()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+									<td><label onclick="generarCertiRit('${dataForm.impuestoICA.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
 								</c:when>
 								<c:otherwise>
 									<td><label
@@ -251,7 +251,7 @@
 
 				<c:if test="${flagCertiRit == true}">
 					<br>
-					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit()">
+					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit('')">
 						<spring:theme code="mirit.certificacion.btnGenerar" />
 					</button>
 					<br>
@@ -292,7 +292,7 @@
 									<%-- 												code="publicidad.exterior.ver" /></label></td> --%>
 									<c:choose>
 										<c:when test="${flagCertiRit == true }">
-											<td><label onclick="generarCertiRit()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+											<td><label onclick="generarCertiRit('${delineacion.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
 										</c:when>
 										<c:otherwise>
 											<td><label
@@ -309,7 +309,7 @@
 
 				<c:if test="${flagCertiRit == true}">
 					<br>
-					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit()">
+					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit('')">
 						<spring:theme code="mirit.certificacion.btnGenerar" />
 					</button>
 					<br>
@@ -350,7 +350,7 @@
 								<%-- 								<td><c:out value="${eachgas.numObjeto}" /></td> --%>
 								<c:choose>
 									<c:when test="${flagCertiRit == true }">
-										<td><label onclick="generarCertiRit()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+										<td><label onclick="generarCertiRit('${eachgas.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
 									</c:when>
 									<c:otherwise>
 										<td><label
@@ -366,7 +366,7 @@
 
 				<c:if test="${flagCertiRit == true}">
 					<br>
-					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit()">
+					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit('')">
 						<spring:theme code="mirit.certificacion.btnGenerar" />
 					</button>
 					<br>
@@ -412,7 +412,7 @@
 
 								<c:choose>
 									<c:when test="${flagCertiRit == true }">
-										<td><label onclick="generarCertiRit()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+										<td><label onclick="generarCertiRit('${eachPubExtTax.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
 									</c:when>
 									<c:otherwise>
 										<td><label
@@ -427,7 +427,7 @@
 				
 				<c:if test="${flagCertiRit == true}">
 					<br>
-					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit()">
+					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit('')">
 						<spring:theme code="mirit.certificacion.btnGenerar" />
 					</button>
 					<br>

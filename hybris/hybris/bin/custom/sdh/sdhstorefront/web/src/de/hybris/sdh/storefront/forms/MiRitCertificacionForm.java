@@ -23,6 +23,8 @@ public class MiRitCertificacionForm
 	private String txtmsj;
 	private CertificacionRIT rit;
 
+	private String numObjeto;
+
 
 
 
@@ -231,6 +233,23 @@ public class MiRitCertificacionForm
 	public void setbDelineacionUrbana(final String bDelineacionUrbana)
 	{
 		this.bDelineacionUrbana = bDelineacionUrbana;
+	}
+
+	/**
+	 * @return the numObjeto
+	 */
+	public String getNumObjeto()
+	{
+		return numObjeto;
+	}
+
+	/**
+	 * @param numObjeto
+	 *           the numObjeto to set
+	 */
+	public void setNumObjeto(final String numObjeto)
+	{
+		this.numObjeto = numObjeto;
 	}
 
 
