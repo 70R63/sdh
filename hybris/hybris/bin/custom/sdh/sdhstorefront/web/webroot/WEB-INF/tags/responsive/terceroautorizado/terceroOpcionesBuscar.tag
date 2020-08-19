@@ -16,8 +16,6 @@
 <c:set var="flagBotonSujeto" value="false" />
 <c:choose>
 	<c:when test="${tercerosAutForm.subrol == '03_01'}">
-		<c:set var="flagBotonObjeto" value="true" />
-		<c:set var="flagBotonSujeto" value="true" />
 	</c:when>
 	<c:when test="${tercerosAutForm.subrol == '03_02'}">
 		<c:set var="flagBotonObjeto" value="true" />

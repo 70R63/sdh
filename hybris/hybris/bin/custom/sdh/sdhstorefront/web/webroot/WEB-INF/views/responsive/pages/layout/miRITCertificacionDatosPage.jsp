@@ -5,6 +5,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="consultas"
+	tagdir="/WEB-INF/tags/responsive/edoCuenta"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="loader"></div>
@@ -84,6 +86,7 @@ window.onload = function() {
 	<form:form id="form_pdf"
 		action="${post_url}"
 		method="post" commandName="miRitCertificacionForm">
+		<form:hidden path="numObjeto" id="numObjeto" />
 
 		<br>
 		<div class="row">
@@ -109,7 +112,7 @@ window.onload = function() {
 			<div class="row">
 
 			<div class="col-md-2">
-				<button class="btn btn-primary btn-block" type="submit">
+				<button class="btn btn-primary btn-block" type="submit" id="botonGenerar">
 					<spring:theme code="mirit.certificacion.btnGenerar" />
 				</button>
 			</div>
@@ -133,42 +136,42 @@ window.onload = function() {
 				<div class=" col-md-4">
 					<c:if test="${uiMenuForm.bPredial == 'X'}">
 						<input type="radio" name="tipoImp" id="tipoImp" value="01"
-							style="visibility: visible">
+							style="visibility: visible" onclick="mostrarTabla('1')">
 						<spring:theme code="mirit.certificacion.opPredial" />
 						<br>
 					</c:if>
 
 					<c:if test="${uiMenuForm.bVehicular == 'X'}">
 						<input type="radio" name="tipoImp" id="tipoImp" value="02"
-							style="visibility: visible">
+							style="visibility: visible" onclick="mostrarTabla('2')">
 						<spring:theme code="mirit.certificacion.opVehicular" />
 						<br>
 					</c:if>
 
 					<c:if test="${uiMenuForm.bIca == 'X'}">
 						<input type="radio" name="tipoImp" id="tipoImp" value="03"
-							style="visibility: visible">
+							style="visibility: visible" onclick="mostrarTabla('3')">
 						<spring:theme code="mirit.certificacion.opICA" />
 						<br>
 					</c:if>
 
 					<c:if test="${uiMenuForm.bPublicidadExt == 'X'}">
 						<input type="radio" name="tipoImp" id="tipoImp" value="07"
-							style="visibility: visible">
+							style="visibility: visible" onclick="mostrarTabla('6')">
 						<spring:theme code="mirit.certificacion.opPublicidadExterior" />
 						<br>
 					</c:if>
 
 					<c:if test="${uiMenuForm.bSobreGasolina == 'X'}">
 						<input type="radio" name="tipoImp" id="tipoImp" value="05"
-							style="visibility: visible">
+							style="visibility: visible" onclick="mostrarTabla('5')">
 						<spring:theme code="mirit.certificacion.opSobretasaGasolina" />
 						<br>
 					</c:if>
 
 					<c:if test="${uiMenuForm.bDelineacionUrbana == 'X'}">
 						<input type="radio" name="tipoImp" id="tipoImp" value="06"
-							style="visibility: visible">
+							style="visibility: visible" onclick="mostrarTabla('4')">
 						<spring:theme code="mirit.certificacion.opDelineaciónUrbana" />
 						<br>
 					</c:if>
@@ -178,4 +181,31 @@ window.onload = function() {
 	</form:form>
 </div>
 
+<div style="display: none;">
+<button type="button" class="btn btn-primary btn-lg"
+	id="ImprimirPopUp" name="ImprimirPopUp" value="ImprimirPopUp"
+	style="margin-top: 3px" data-impuesto="" >
+	<spring:theme code="obligacion.inicial.imprimir" />
+</button>
+</div>
 
+<consultas:edoCuentaImprimir mostrarBotonCertiRit="true" />
+
+
+<script type="text/javascript">
+function mostrarTabla(claveImpuesto){
+	var botonImprimir = document.getElementById('ImprimirPopUp');
+	if(botonImprimir != null){
+		$("#ImprimirPopUp").data("impuesto",claveImpuesto);
+		botonImprimir.click();
+	}
+	
+}
+
+function generarCertiRit(numObjeto){
+
+	$("#numObjeto").val(numObjeto);
+	$("#botonGenerar").click();
+	
+}
+</script>

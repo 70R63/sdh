@@ -194,6 +194,15 @@
                     	<spring:theme
                     	    code="impuestos.presentarDeclaracion.PresentarDeclaracion" />
                     	</sf:button>
+
+					<sf:button type="submit"
+						class="btn btn-primary btn-lg accionGasolina" id="action" name="action"
+ 						value="presentarDeclaracion"
+						style="display:none;">
+						<spring:theme
+							code="impuestos.presentarDeclaracion.PresentarDeclaracion" />
+					</sf:button>
+					
 				</div>
 			</div>
 		</c:if>
@@ -516,6 +525,7 @@
         		}else if(impuesto == '3' && opcUso == '02'){//ICA
         		    promtConfirmation();
         		} else {
+        			$(".accionGasolina").click();
                     return true;
                 }
         	},

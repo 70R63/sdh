@@ -20,7 +20,6 @@
 <c:set var="flagMostrarSujeto" value="none" />
 <c:choose>
 	<c:when test="${tercerosAutForm.subrol == '03_01'}">
-		<c:set var="flagMostrarObjeto" value="block" />
 	</c:when>
 	<c:when test="${tercerosAutForm.subrol == '03_02'}">
 	</c:when>
@@ -50,6 +49,9 @@
 						onclick="btnCancelar()">
 						<spring:theme code="tramites.crear.inicial.cancelar" />
 					</button>
+				</div>
+				<div>
+					<label><spring:theme code="terceros.sim.buscar.mensaje1" /></label>
 				</div>
 			</div>
          </form:form>

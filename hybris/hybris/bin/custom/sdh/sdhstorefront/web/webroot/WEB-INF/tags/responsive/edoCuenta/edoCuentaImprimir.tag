@@ -6,6 +6,14 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ attribute name="mostrarBotonCertiRit" required="false" type="java.lang.Boolean"%>
+
+
+<c:set var="flagCertiRit" value="" />
+<c:if test="${mostrarBotonCertiRit == true}">
+	<c:set var="flagCertiRit" value="true" />
+</c:if>
+
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -48,9 +56,16 @@
 										<%-- 												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')"> --%>
 										<%-- 													<spring:theme code="predial.inicial.table.ver" /> --%>
 										<!-- 											</label></td> -->
-										<td><label data-objeto="${current.numObjeto}"
-											onclick="ACC.oblipend.bindTrmPdf('${current.numObjeto}','2','predialReporte.pdf');"><span
-												class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+										<c:choose>
+										<c:when test="${flagCertiRit == true }">
+											<td><label onclick="generarCertiRit('${current.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+										</c:when>
+										<c:otherwise>
+											<td><label data-objeto="${current.numObjeto}"
+												onclick="ACC.oblipend.bindTrmPdf('${current.numObjeto}','2','predialReporte.pdf');"><span
+													class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+										</c:otherwise>
+										</c:choose>
 									</tr>
 								</c:when>
 								<c:when
@@ -68,9 +83,16 @@
 										<%-- 												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')"> --%>
 										<%-- 													<spring:theme code="predial.inicial.table.ver" /> --%>
 										<!-- 											</label></td> -->
-										<td><label data-objeto="${current.numObjeto}"
-											onclick="ACC.oblipend.bindTrmPdf('${current.numObjeto}','2','predialReporte.pdf');"><span
-												class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+										<c:choose>
+											<c:when test="${flagCertiRit == true }">
+												<td><label onclick="generarCertiRit('${current.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+											</c:when>
+											<c:otherwise>									
+												<td><label data-objeto="${current.numObjeto}"
+												onclick="ACC.oblipend.bindTrmPdf('${current.numObjeto}','2','predialReporte.pdf');"><span
+													class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+											</c:otherwise>
+										</c:choose>
 									</tr>
 								</c:when>
 								<c:when
@@ -88,9 +110,16 @@
 										<%-- 												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')"> --%>
 										<%-- 													<spring:theme code="predial.inicial.table.ver" /> --%>
 										<!-- 											</label></td> -->
-										<td><label data-objeto="${current.numObjeto}"
-											onclick="ACC.oblipend.bindTrmPdf('${current.numObjeto}','2','predialReporte.pdf');"><span
-												class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+										<c:choose>
+											<c:when test="${flagCertiRit == true }">
+												<td><label onclick="generarCertiRit('${current.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+											</c:when>
+											<c:otherwise>									
+												<td><label data-objeto="${current.numObjeto}"
+												onclick="ACC.oblipend.bindTrmPdf('${current.numObjeto}','2','predialReporte.pdf');"><span
+													class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+											</c:otherwise>
+										</c:choose>
 									</tr>
 								</c:when>
 								<c:otherwise>
@@ -100,6 +129,16 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				
+				<c:if test="${flagCertiRit == true}">
+					<br>
+					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit('')">
+						<spring:theme code="mirit.certificacion.btnGenerar" />
+					</button>
+					<br>
+					<br>
+					<br>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -138,13 +177,30 @@
 								<%-- 								data-numbp="${vehiculosForm.numBP}" --%>
 								<%-- 								class="text-capitalize !important labelVerDetVeh "><spring:theme --%>
 								<%-- 										code="sobre.vehiculo.table.verdetalle" /></label></td> --%>
-								<td><label data-objeto="${eachVehiculo.numObjeto}"
-									onclick="ACC.oblipend.bindTrmPdf('${eachVehiculo.numObjeto}','2','vehicularReporte.pdf');"><span
-										class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+								<c:choose>
+									<c:when test="${flagCertiRit == true }">
+										<td><label onclick="generarCertiRit('${eachVehiculo.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+									</c:when>
+									<c:otherwise>								
+									<td><label data-objeto="${eachVehiculo.numObjeto}"
+										onclick="ACC.oblipend.bindTrmPdf('${eachVehiculo.numObjeto}','2','vehicularReporte.pdf');"><span
+											class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				
+				<c:if test="${flagCertiRit == true}">
+					<br>
+					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit('')">
+						<spring:theme code="mirit.certificacion.btnGenerar" />
+					</button>
+					<br>
+					<br>
+					<br>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -177,15 +233,31 @@
 							<%-- 										data-cdu="${delineacion.cdu}" --%>
 							<%-- 										class="text-capitalize !important label1Ver "><spring:theme --%>
 							<%-- 												code="publicidad.exterior.ver" /></label></td> --%>
-							<td><label
-								onclick="ACC.oblipend.bindTrmPdf('${dataForm.impuestoICA.numObjeto}','2','icaReporte.pdf');"><span
-									class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+							<c:choose>
+								<c:when test="${flagCertiRit == true }">
+									<td><label onclick="generarCertiRit('${dataForm.impuestoICA.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+								</c:when>
+								<c:otherwise>
+									<td><label
+										onclick="ACC.oblipend.bindTrmPdf('${dataForm.impuestoICA.numObjeto}','2','icaReporte.pdf');"><span
+											class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+								</c:otherwise>
+							</c:choose>
 
 						</tr>
 					</tbody>
 				</table>
 
 
+				<c:if test="${flagCertiRit == true}">
+					<br>
+					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit('')">
+						<spring:theme code="mirit.certificacion.btnGenerar" />
+					</button>
+					<br>
+					<br>
+					<br>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -218,9 +290,16 @@
 									<%-- 										data-cdu="${delineacion.cdu}" --%>
 									<%-- 										class="text-capitalize !important label1Ver "><spring:theme --%>
 									<%-- 												code="publicidad.exterior.ver" /></label></td> --%>
-									<td><label
-										onclick="ACC.oblipend.bindTrmPdf('${delineacion.numObjeto}','2','delUrbanaReporte.pdf');"><span
-											class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+									<c:choose>
+										<c:when test="${flagCertiRit == true }">
+											<td><label onclick="generarCertiRit('${delineacion.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+										</c:when>
+										<c:otherwise>
+											<td><label
+												onclick="ACC.oblipend.bindTrmPdf('${delineacion.numObjeto}','2','delUrbanaReporte.pdf');"><span
+													class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+										</c:otherwise>
+									</c:choose>
 
 								</tr>
 							</c:if>
@@ -228,6 +307,15 @@
 					</tbody>
 				</table>
 
+				<c:if test="${flagCertiRit == true}">
+					<br>
+					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit('')">
+						<spring:theme code="mirit.certificacion.btnGenerar" />
+					</button>
+					<br>
+					<br>
+					<br>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -260,16 +348,31 @@
 								<td><c:out value="${eachgas.tipoDoc}"></c:out></td>
 								<td><c:out value="${eachgas.numDoc}" /></td>
 								<%-- 								<td><c:out value="${eachgas.numObjeto}" /></td> --%>
-								<td><label
-									onclick="ACC.oblipend.bindTrmPdf('${eachgas.numObjeto}','2','sobGasolinaReporte.pdf');"><span
-										class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+								<c:choose>
+									<c:when test="${flagCertiRit == true }">
+										<td><label onclick="generarCertiRit('${eachgas.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+									</c:when>
+									<c:otherwise>
+										<td><label
+											onclick="ACC.oblipend.bindTrmPdf('${eachgas.numObjeto}','2','sobGasolinaReporte.pdf');"><span
+												class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 						</c:forEach>
 
 					</tbody>
 				</table>
 
-
+				<c:if test="${flagCertiRit == true}">
+					<br>
+					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit('')">
+						<spring:theme code="mirit.certificacion.btnGenerar" />
+					</button>
+					<br>
+					<br>
+					<br>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -307,13 +410,30 @@
 								<%-- 								class="text-capitalize !important labelVer "><spring:theme --%>
 								<%-- 										code="publicidad.exterior.ver" /></label></td> --%>
 
-								<td><label
-									onclick="ACC.oblipend.bindTrmPdf('${eachPubExtTax.numObjeto}','2','pubExteriorReporte.pdf');"><span
-										class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+								<c:choose>
+									<c:when test="${flagCertiRit == true }">
+										<td><label onclick="generarCertiRit('${eachPubExtTax.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+									</c:when>
+									<c:otherwise>
+										<td><label
+											onclick="ACC.oblipend.bindTrmPdf('${eachPubExtTax.numObjeto}','2','pubExteriorReporte.pdf');"><span
+												class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				
+				<c:if test="${flagCertiRit == true}">
+					<br>
+					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit('')">
+						<spring:theme code="mirit.certificacion.btnGenerar" />
+					</button>
+					<br>
+					<br>
+					<br>
+				</c:if>
 			</div>
 		</div>
 	</div>
