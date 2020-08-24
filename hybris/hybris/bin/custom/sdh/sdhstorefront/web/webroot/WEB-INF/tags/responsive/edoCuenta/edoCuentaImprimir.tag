@@ -438,3 +438,61 @@
 		</div>
 	</div>
 </div>
+
+<!-- 		Impresion ReteICA-->
+<div class="newReteicaImp" style="display: none;">
+	<div class="js-reteica-facet" id="js-reteica-facet">
+		<div class="facet js-facet-reteica">
+			<div class="facet__name js-facet-name-reteica">
+				<spring:theme code="" />
+				<table class="table ImprimirReteIca">
+					<thead style="background-color: #006DCC !important">
+						<tr>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="mirit.gas.tax.tipoDoc" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="mirit.gas.tax.numDoc" /></label></th>
+							<th style="text-align: center"><label
+								class="control-label labeltabletd"> <spring:theme
+										code="Imprimir" />
+							</label></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><c:out value="${ctaForm.tipoDoc}" /></td>
+							<td><c:out value="${ctaForm.numDoc}" /></td>
+							<!-- 									<td><label style="color: #0358d8 !important" -->
+							<%-- 										data-cdu="${delineacion.cdu}" --%>
+							<%-- 										class="text-capitalize !important label1Ver "><spring:theme --%>
+							<%-- 												code="publicidad.exterior.ver" /></label></td> --%>
+							<c:choose>
+								<c:when test="${flagCertiRit == true }">
+									<td><label onclick="generarCertiRit('${ctaForm.tablaReteica.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										
+								</c:when>
+								<c:otherwise>
+									<td><label
+										onclick="ACC.oblipend.bindTrmPdf('${ctaForm.tablaReteica.numObjeto}','31','ReteicaReporte.pdf');"><span
+											class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
+								</c:otherwise>
+							</c:choose>
+
+						</tr>
+					</tbody>
+				</table>
+
+
+				<c:if test="${flagCertiRit == true}">
+					<br>
+					<button class="btn btn-primary btn-block" type="button" onclick="generarCertiRit('')">
+						<spring:theme code="mirit.certificacion.btnGenerar" />
+					</button>
+					<br>
+					<br>
+					<br>
+				</c:if>
+			</div>
+		</div>
+	</div>
+</div>
+

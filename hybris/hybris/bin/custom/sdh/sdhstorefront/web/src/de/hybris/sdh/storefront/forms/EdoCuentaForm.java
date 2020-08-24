@@ -10,6 +10,7 @@ import de.hybris.sdh.core.pojos.responses.EdoCtaOblig;
 import de.hybris.sdh.core.pojos.responses.EdoCtaPredial;
 import de.hybris.sdh.core.pojos.responses.EdoCtaPublicidad;
 import de.hybris.sdh.core.pojos.responses.EdoCtaVehiculos;
+import de.hybris.sdh.core.pojos.responses.ReteICA;
 
 import java.util.List;
 
@@ -46,6 +47,8 @@ public class EdoCuentaForm
 	private List<EdoCtaPublicidad> tablaPublicidad;
 	private List<EdoCtaOblig> obligNoTributaria;
 	private String fechageneracion;
+	private ReteICA tablaReteica;
+
 
 	/**
 	 * @return the numBP
@@ -470,6 +473,23 @@ public class EdoCuentaForm
 	public void setFechageneracion(final String fechageneracion)
 	{
 		this.fechageneracion = fechageneracion;
+	}
+
+	/**
+	 * @return the tablaReteica
+	 */
+	public ReteICA getTablaReteica()
+	{
+		return tablaReteica;
+	}
+
+	/**
+	 * @param tablaReteica
+	 *           the tablaReteica to set
+	 */
+	public void setTablaReteica(final ReteICA tablaReteica)
+	{
+		this.tablaReteica = tablaReteica;
 	}
 
 

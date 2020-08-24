@@ -18,6 +18,7 @@ ACC.oblipend = {
 			$("#oblipend-publiext").hide();
 			$("#oblipend-gasolina").hide();
 			$("#oblipend-delurbana").hide();
+			$("#oblipend-reteica").hide();
 			var divtable = document.getElementById("tableSpac");
 
 			divtable.style.visibility = 'hidden';
@@ -56,6 +57,10 @@ ACC.oblipend = {
 				$("#oblipend-gasolina").show();
 				$("#oblipend-delurbana").show();
 
+			}else if (impuesto == "8" || impuesto == "0") {
+
+				$("#oblipend-reteica").show();
+
 			}
 
 		});
@@ -81,6 +86,8 @@ ACC.oblipend = {
 	tableGas[0].setAttribute("id","example5");
 	var tablePub = document.getElementsByClassName("table ImprimirPublicidad");
 	tablePub[0].setAttribute("id","example6");
+	var tableReteIca = document.getElementsByClassName("table ImprimirReteIca");
+	tableReteIca[0].setAttribute("id","example7");
 	
 	if(impuestoSelc=="1"){
 		tablePred[0].setAttribute("id","example");
@@ -197,6 +204,27 @@ ACC.oblipend = {
 	            },
 	            onClosed: function () {
 	                $(document).off("click", ".js-publicidad-facet .js-facet-name-pub");
+	            }
+	        });
+	}
+	
+	else if(impuestoSelc=="8"){
+		tablePub[0].setAttribute("id","example");
+		   var selectRefinementsTitle = "RETEICA";
+	        ACC.colorbox.open(selectRefinementsTitle, {
+	            href: ".js-reteica-facet",
+	            inline: true,
+	            width: "90%",
+	            onComplete: function () {
+	                $(document).on("click", ".js-reteica-facet .js-facet-name-reteica", function (e) {
+	                    e.preventDefault();
+	                    $(".js-reteica-facet  .js-facet-reteica").removeClass("active");
+	                    $(this).parents(".js-facet-reteica").addClass("active");
+	                    $.colorbox.resize()
+	                })
+	            },
+	            onClosed: function () {
+	                $(document).off("click", ".js-reteica-facet .js-facet-name-reteica");
 	            }
 	        });
 	}
