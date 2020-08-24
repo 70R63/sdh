@@ -1,16 +1,15 @@
-<%@ tag body-content="empty" trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
-<%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
+<%-- <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%> --%>
+<%-- <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%> --%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%-- <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%> --%>
+<%-- <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%> --%>
+<%-- <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> --%>
+<%-- <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%> --%>
 
 
 <%-- <div>--${tercerosAutForm.subrol}--</div> --%>
-<spring:htmlEscape defaultHtmlEscape="true" />
+<%-- <spring:htmlEscape defaultHtmlEscape="true" /> --%>
 
 <c:set var="flagBotonObjeto" value="false" />
 <c:set var="flagBotonSujeto" value="false" />

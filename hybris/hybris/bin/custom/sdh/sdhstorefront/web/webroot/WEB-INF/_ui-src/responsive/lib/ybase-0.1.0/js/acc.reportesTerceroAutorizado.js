@@ -5,8 +5,8 @@ ACC.reportesTerceroAutorizado = {
 	
 	consultaTA : function(opcionConsulta) {
 
-
 		ACC.reportesTerceroAutorizado.vaciarTablasInfo();
+		ACC.reportesTerceroAutorizado.habilitarBotonGen('none');
 		ACC.reportesTerceroAutorizado.displayTablas('none', ACC.reportesTerceroAutorizado.todosImpuestos());
 		ACC.reportesTerceroAutorizado.bindDataTables_refresh();
 		if(ACC.reportesTerceroAutorizado.validarAntesSubmit(opcionConsulta)){
@@ -73,7 +73,7 @@ ACC.reportesTerceroAutorizado = {
 
 		var flagTablas = ACC.reportesTerceroAutorizado.determinarTablas(opcionConsulta,infoActual,infoResponse);
 		var flagMostrarTabla = {};
-
+		var claveImpuestoBTN = "";
 
 		ACC.reportesTerceroAutorizado.vaciarTablasInfo();
 		if (ACC.reportesTerceroAutorizado.mostrarErrores(infoResponse) != true || opcionConsulta == "objeto" ){
@@ -89,24 +89,30 @@ ACC.reportesTerceroAutorizado = {
 						"</tr>");
 					flagMostrarTabla.obligacionesPredios = true;
 				});
+				if(opcionConsulta == "objeto"){
+					claveImpuestoBTN = "0001";
+				}
 			}
 			
 			if(flagTablas.obligacionesVehicular == true && infoResponse.obligacionesVehicular != null && infoResponse.obligacionesVehicular.length > 0){
 				$.each(infoResponse.obligacionesVehicular, function (index,value){
-					$('#table-vehicular1').append("<tr>"+
-						'<td>' + value.anoGravable + '</td>'+
-						'<td>' + value.placa + '</td>'+
-						'<td>' + value.modelo + '</td>'+
-						'<td>' + value.marca + '</td>'+
-						'<td>' + value.linea + '</td>'+
-						'<td><input id="obligacionesVehicular_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
-						"</tr>");
-					flagMostrarTabla.obligacionesVehicular = true;
+					if(value.placa!=""){
+						$('#table-vehicular1').append("<tr>"+
+							'<td>' + value.anoGravable + '</td>'+
+							'<td>' + value.placa + '</td>'+
+							'<td>' + value.modelo + '</td>'+
+							'<td>' + value.marca + '</td>'+
+							'<td>' + value.linea + '</td>'+
+							'<td><input id="obligacionesVehicular_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
+							"</tr>");
+						flagMostrarTabla.obligacionesVehicular = true;
+					}
 				});
+				if(opcionConsulta == "objeto"){
+					claveImpuestoBTN = "0002";
+				}
 			}
-			if(opcionConsulta == "objeto"){
-				flagMostrarTabla.obligacionesVehicular = true;
-			}
+
 			
 			if(flagTablas.obligacionesICA == true && infoResponse.obligacionesICA != null && infoResponse.obligacionesICA.length > 0){
 				$.each(infoResponse.obligacionesICA, function (index,value){
@@ -157,6 +163,14 @@ ACC.reportesTerceroAutorizado = {
 			}
 			
 			ACC.reportesTerceroAutorizado.displayTablas('block',flagMostrarTabla);
+		}
+		if(flagMostrarTabla.value == undefined){
+			if(opcionConsulta == "objeto"){
+				$("#btnGenImprimirRep").data("claveImpuesto",claveImpuestoBTN);
+			}else{
+				$("#btnGenImprimirRep").data("claveImpuesto",$("#impuesto").val());
+			}
+			ACC.reportesTerceroAutorizado.habilitarBotonGen('block');
 		}
 
 
@@ -216,7 +230,7 @@ ACC.reportesTerceroAutorizado = {
 			if(nombreObjeto != null){
 				var doc = document.getElementById(nombreObjeto);
 				if(doc != null){
-					doc.style.display = 'block';
+//					doc.style.display = 'block';
 				}
 			}
 
@@ -231,48 +245,60 @@ ACC.reportesTerceroAutorizado = {
 	displayTablas : function(opcionDisplay,flagTabla){
 		var doc = null;
 		
-		if(flagTabla.obligacionesPredios == true){
-			doc = document.getElementById('table-predial');
-			if(doc != null){
-				doc.style.display = opcionDisplay;
+		if(flagTabla != undefined){
+			if(flagTabla.obligacionesPredios == true){
+				doc = document.getElementById('table-predial');
+				if(doc != null){
+					doc.style.display = opcionDisplay;
+				}
+			}
+			if(flagTabla.obligacionesVehicular == true){
+				doc = document.getElementById('table-vehicular');
+				if(doc != null){
+					doc.style.display = opcionDisplay;
+				}
+			}
+			if(flagTabla.obligacionesICA == true){
+				doc = document.getElementById('table-ica');
+				if(doc != null){
+					doc.style.display = opcionDisplay;
+				}
+			}
+			if(flagTabla.obligacionesReteica == true){
+				doc = document.getElementById('table-reteica');
+				if(doc != null){
+					doc.style.display = opcionDisplay;
+				}
+			}
+			if(flagTabla.obligacionesGasolina == true){
+				doc = document.getElementById('table-gasolina');
+				if(doc != null){
+					doc.style.display = opcionDisplay;
+				}
+			}
+			if(flagTabla.obligacionesDelineacion == true){
+				doc = document.getElementById('table-delineacion');
+				if(doc != null){
+					doc.style.display = opcionDisplay;
+				}
+			}
+			if(flagTabla.obligacionesPublicidad == true){
+				doc = document.getElementById('table-publicidad');
+				if(doc != null){
+					doc.style.display = opcionDisplay;
+				}
 			}
 		}
-		if(flagTabla.obligacionesVehicular == true){
-			doc = document.getElementById('table-vehicular');
-			if(doc != null){
-				doc.style.display = opcionDisplay;
-			}
+	},
+	
+	
+	habilitarBotonGen : function(opcionDisplay){
+		
+		var botonGen = document.getElementById('btnGenImprimirRep');
+		if(botonGen!=null){
+			botonGen.style.display = opcionDisplay;
 		}
-		if(flagTabla.obligacionesICA == true){
-			doc = document.getElementById('table-ica');
-			if(doc != null){
-				doc.style.display = opcionDisplay;
-			}
-		}
-		if(flagTabla.obligacionesReteica == true){
-			doc = document.getElementById('table-reteica');
-			if(doc != null){
-				doc.style.display = opcionDisplay;
-			}
-		}
-		if(flagTabla.obligacionesGasolina == true){
-			doc = document.getElementById('table-gasolina');
-			if(doc != null){
-				doc.style.display = opcionDisplay;
-			}
-		}
-		if(flagTabla.obligacionesDelineacion == true){
-			doc = document.getElementById('table-delineacion');
-			if(doc != null){
-				doc.style.display = opcionDisplay;
-			}
-		}
-		if(flagTabla.obligacionesPublicidad == true){
-			doc = document.getElementById('table-publicidad');
-			if(doc != null){
-				doc.style.display = opcionDisplay;
-			}
-		}
+		
 	},
 
 
@@ -322,7 +348,6 @@ ACC.reportesTerceroAutorizado = {
 	
 	
 	determinarData : function(opcionConsulta) {
-		debugger;
 		var dataActual = {};
 		
 		if(opcionConsulta=="objeto"){
