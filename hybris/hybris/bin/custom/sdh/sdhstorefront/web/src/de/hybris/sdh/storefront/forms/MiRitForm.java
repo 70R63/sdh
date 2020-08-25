@@ -11,6 +11,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
 
 import java.util.List;
 
@@ -76,6 +77,7 @@ public class MiRitForm
 	private ImpuestoICA impuestoICA;
 	private List<ImpuestoDelineacionUrbana> delineacion;
 	private List<ImpuestoVehiculos> vehicular;
+	private List<PredialResponse> predial;
 
 
 	//*->INI dev-eduardo ajuste de menu impuestos
@@ -903,6 +905,23 @@ public class MiRitForm
 	public void setPublicidadExt(final List<ImpuestoPublicidadExterior> publicidadExt)
 	{
 		this.publicidadExt = publicidadExt;
+	}
+
+	/**
+	 * @return the predial
+	 */
+	public List<PredialResponse> getPredial()
+	{
+		return predial;
+	}
+
+	/**
+	 * @param predial
+	 *           the predial to set
+	 */
+	public void setPredial(final List<PredialResponse> predial)
+	{
+		this.predial = predial;
 	}
 
 	/**
