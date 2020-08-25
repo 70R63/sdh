@@ -86,7 +86,7 @@ ACC.oblipend = {
 	tableGas[0].setAttribute("id","example5");
 	var tablePub = document.getElementsByClassName("table ImprimirPublicidad");
 	tablePub[0].setAttribute("id","example6");
-	var tableReteIca = document.getElementsByClassName("table ImprimirReteIca");
+	var tablePub = document.getElementsByClassName("table ImprimirReteIca");
 	tableReteIca[0].setAttribute("id","example7");
 	
 	if(impuestoSelc=="1"){
