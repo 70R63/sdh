@@ -23,8 +23,8 @@
 			<input id="Idimp" value="">
 		</div>
 		<br>
-
-
+	</div>
+	<div class="container">
 		<div id="oblipend-predial" class="oblipend-table"
 			style="display: none;">
 
@@ -38,7 +38,7 @@
 
 			<c:if test="${not empty obligacionesFormuno.headerPred}">
 				<div class="row">
-					<div class="col-md-11">
+					<div class="col-md-12">
 						<table class="tablesearch table" id="tabPaginacion0">
 							<thead style="cellspacing: 10 !important">
 								<tr>
@@ -146,7 +146,10 @@
 								<spring:theme code="spac.table.descargar" />
 							</button>
 						</div>
-				</div>
+	</div>
+	</div>
+
+	<div class="container">	
 		<div id="oblipend-vehiculos" class="oblipend-table"
 			style="display: none;">
 			<div class="row">
@@ -159,7 +162,7 @@
 			</div>
 			<c:if test="${not empty obligacionesFormuno.headerVehiculos}">
 				<div class="row">
-					<div class="col-md-11">
+					<div class="col-md-12">
 						<table class="tablesearch table" id="tabPaginacion1">
 							<thead>
 								<tr>
@@ -241,8 +244,9 @@
 				</div>
 			</c:if>
 		</div>
+</div>
 
-
+	<div class="container">
 		<div id="oblipend-ica" class="oblipend-table" style="display: none;">
 			<div class="row">
 				<div class="headline">
@@ -327,7 +331,7 @@
 												<td><c:out value="${eachObIcaDet.numReferencia}" /></td>
 												<td><c:out value="${eachObIcaDet.objetoContrato}" /></td>
 												<td><a
-													href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}&tpImp=02&objCont=${eachObIcaDet.objetoContrato}&clvPer=${eachObIca.anioGravable}${eachObIca.periodo}" />">Generar
+													href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}&tpImp=02&objCont=${eachObIcaDet.objetoContrato}&clvPer=${eachObIca.periodo}" />">Generar
 														ROP</a></td>
 												<td><label class="control-label"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
@@ -359,8 +363,9 @@
 				</div>
 			</c:if>
 		</div>
+</div>
 
-
+	<div class="container">
 		<div id="oblipend-publiext" class="oblipend-table"
 			style="display: none;">
 			<div class="row">
@@ -453,10 +458,10 @@
 				</div>
 			</c:if>
 		</div>
+</div>
 
 
-
-
+	<div class="container">
 		<div id="oblipend-gasolina" class="oblipend-table"
 			style="display: none;">
 			<div class="row">
@@ -562,9 +567,9 @@
 				</div>
 			</c:if>
 		</div>
+</div>
 
-
-
+	<div class="container">
 		<div id="oblipend-delurbana" class="oblipend-table"
 			style="display: none;">
 			<div class="row">
@@ -652,7 +657,97 @@
 
 			</c:if>
 		</div>
+</div>
 
+	<div class="container" style="margin-top: -20px!important;">
+		<div id="oblipend-reteica" class="oblipend-table"
+			style="display: none;">
+			<div class="row">
+				<div class="headline">
+					<h2>
+						<span><spring:theme
+								code="obligacion.sujeto.reteica.titulo" /></span>
+					</h2>
+				</div>
+			</div>
+			<c:if test="${not empty obligacionesFormuno.headerdeli}">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<div class="table-responsive">
+							<table class="tablesearch table table-bordered"
+								id="tabPaginacion5">
+								<thead>
+									<tr>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="obligacion.inicial.delineacion.aniograv" /> </label></th>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="obligacion.inicial.delineacion.cdu" /> </label></th>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="obligacion.inicial.delineacion.chip" /> </label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="obligacion.inicial.delineacion.direccion" /> </label></th>
+										<th><label class="control-label labeltabletd tableangrav"><spring:theme
+													code="obligacion.inicial.delineacion.edoobli" /> </label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="obligacion.inicial.delineacion.obligacion" /> </label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="obligacion.inicial.delineacion.numForm" /> </label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="obligacion.inicial.delineacion.numRef" /> </label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="obligacion.inicial.delineacion.obcontra" /> </label></th>
+										<th><label class="control-label labeltabletd "><spring:theme
+													code="obligacion.inicial.delineacion.rop" /> </label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="obligacion.inicial.delineacion.pagar" /> </label></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${obligacionesFormuno.headerdeli}"
+										var="eachDeli">
+										<c:forEach items="${eachDeli.details}" var="eachDeliDet">
+											<c:if test="${not empty eachDeliDet.numReferencia}">
+												<tr>
+													<td><c:out value="${eachDeli.anioGravable}" /></td>
+													<td><c:out value="${eachDeli.cdu}" /></td>
+													<td><c:out value="${eachDeli.chip}" /></td>
+													<td><c:out value="${eachDeli.direccion}" /></td>
+													<td><c:out value="${eachDeliDet.estadoObligacion}" /></td>
+													<td><c:out value="${eachDeliDet.obligacion}" /></td>
+													<td><c:out value="${eachDeliDet.numFormulario}" /></td>
+													<td><c:out value="${eachDeliDet.numReferencia}" /></td>
+													<td><c:out value="${eachDeliDet.objetoContrato}" /></td>
+													<td><a
+														href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeliDet.obligacion}&objCont=${eachDeliDet.objetoContrato}&clvPer=${eachDeli.anioGravable}&tpImp=06" />">Generar
+															ROP</a></td>
+													<td><label class="control-label"
+														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+														id="Detalle"
+														onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}' )">Pagar</label></td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</c:forEach>
+								</tbody>
+							</table>
+							<div class="col-md-3 col-md-offset-8">
+								<button type="button" class="btn btn-primary btn-lg" id="action"
+									name="action" value="Imprimir" style="margin-top: 3px"
+									onclick="ACC.oblipend.bindTrmPdf('06','1','delUrbanaReporte.pdf');">
+									<spring:theme code="obligacion.inicial.imprimir" />
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:if>
+			<c:if test="${empty obligacionesFormuno.headerdeli}">
+				<label class="control-label">No cuenta con obligaciones
+					pendientes de RETEICA</label>
+
+			</c:if>
+		</div>
+</div>
 
 
 		<!-- 			tablas de detalle -->
@@ -1345,7 +1440,6 @@
 			</div>
 		</div>
 
-	</div>
 	<div class="row">
 			<a id='dwnldLnk' download='SPAC.pdf'
 				style="display: none;" />

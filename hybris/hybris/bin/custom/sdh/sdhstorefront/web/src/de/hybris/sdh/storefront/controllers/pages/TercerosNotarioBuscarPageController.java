@@ -92,12 +92,16 @@ public class TercerosNotarioBuscarPageController extends AbstractPageController
 
 	@RequestMapping(value = "/terceros/sujeto", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String tercerosnotarios(final Model model) throws CMSItemNotFoundException
+	public String tercerosnotarios(@ModelAttribute("tercerosAutForm") TercerosAutForm tercerosAutForm, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		String subrol = null;
-		final TercerosAutForm tercerosAutForm = new TercerosAutForm();
+		if (tercerosAutForm == null)
+		{
+			tercerosAutForm = new TercerosAutForm();
+		}
 
 		for (final SDHRolData rol : customerData.getRolList())
 		{
@@ -146,8 +150,38 @@ public class TercerosNotarioBuscarPageController extends AbstractPageController
 
 		try
 		{
-			responseData = sdhTercerosAutService.getTercerosAut(new TercerosAutRequest(tercerosAutForm.getImpuesto(),
-					tercerosAutForm.getNumObjeto(), customerModel.getDocumentType(), customerModel.getDocumentNumber()));
+			String impuesto = null;
+			String numeroObjeto = null;
+			String tipoDocumento = null;
+			String numeroDocumento = null;
+
+			if (tercerosAutForm.getImpuesto() != null)
+			{
+				impuesto = tercerosAutForm.getImpuesto();
+			}
+			if (tercerosAutForm.getNumObjeto() != null)
+			{
+				numeroObjeto = tercerosAutForm.getNumObjeto();
+			}
+			if (tercerosAutForm.getTipdoc() != null)
+			{
+				tipoDocumento = tercerosAutForm.getTipdoc();
+			}
+			else
+			{
+				tipoDocumento = customerModel.getDocumentType();
+			}
+			if (tercerosAutForm.getNumdoc() != null)
+			{
+				numeroDocumento = tercerosAutForm.getNumdoc();
+			}
+			else
+			{
+				numeroDocumento = customerModel.getDocumentNumber();
+			}
+
+			final TercerosAutRequest request = new TercerosAutRequest(impuesto, numeroObjeto, tipoDocumento, numeroDocumento);
+			responseData = sdhTercerosAutService.getTercerosAut(request);
 
 		}
 		catch (final Exception e)

@@ -74,7 +74,7 @@ public abstract class RetenedoresAbstractPageController extends SDHAbstractPageC
 	{
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
-		final int minimunYear = currentYear - 4;
+		final int minimunYear = currentYear - 5;
 
 		final List<String> years = new ArrayList<String>();
 

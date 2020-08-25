@@ -1,4 +1,4 @@
-<%@ tag body-content="empty" trimDirectiveWhitespaces="true"%>
+<%-- <%@ tag body-content="empty" trimDirectiveWhitespaces="true"%> --%>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -8,24 +8,57 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
-<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css" rel="stylesheet">
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
+<!-- <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css" rel="stylesheet"> -->
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script> -->
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container">
+<spring:url value="/terceros/sujeto" var="actionURL" htmlEscape="false" />
+
+<c:set var="flagMostrarObjeto" value="none" />
+<c:set var="flagMostrarSujeto" value="none" />
+<c:choose>
+	<c:when test="${tercerosAutForm.subrol == '03_01'}">
+		<c:set var="flagMostrarSujeto" value="block" />
+	</c:when>
+	<c:when test="${tercerosAutForm.subrol == '03_02'}">
+	</c:when>
+	<c:when test="${tercerosAutForm.subrol == '03_03'}">
+	</c:when>
+	<c:when test="${tercerosAutForm.subrol == '03_04'}">
+	</c:when>
+</c:choose>
+
+<div class="container_new_page" id="buscarSujeto" style="display: ${flagMostrarSujeto}">
     <div class="row">
-        <form:form method="post" commandName="tercerosAutForm" action="buscar">
+        <form:form method="get" commandName="tercerosAutForm" action="${actionURL}" >
              <div class="col-md-5">
                  <formElement:formSelectBox idKey="impuesto" labelKey="terceros.notario.buscar.impuesto"
                                  path="impuesto" mandatory="false" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
                                  items="${tercerosAutForm.listaImpuestos}" selectCSSClass="form-control" disabled="false" onchange="reiniciarSeleccion()"/>
              </div>
+
+
+
+            <div class="col-sm-3">
+                <formElement:formSelectBox idKey="tipdoc" labelKey="terceros.notario.buscar.tipdoc"
+                    path="tipdoc" mandatory="false" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
+                    items="${documentTypes}" selectCSSClass="form-control" disabled="false"/>
+
+             </div>
+                          <div class="col-sm-3">
+                <formElement:formInputBox idKey="numdoc" labelKey="terceros.notario.buscar.numdoc" path="numdoc" />
+             </div>
+            
+
+
+             
+             
 			<div class="row md-5">
 				<div class="col-md-5 text-right">
 					<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="button" id="btnEnviar"
-					name="btnEnviar" value="enviar" disabled="false" onclick="consultaTA()">
-					<spring:theme code="tramites.crear.inicial.enviar" />
+					name="btnEnviar" value="enviar" disabled="false" onclick="consultaTA('sujeto')">
+					<spring:theme code="terceros.notario.buscar.buscar" />
 					</sf:button>
 				</div>
 				<div class="col-md-1">
@@ -46,7 +79,10 @@
 		ACC.reportesTerceroAutorizado.displayTablas('none');
 	}
 
-	function consultaTA() {
-		ACC.reportesTerceroAutorizado.consultaTA("sujeto");
+	function consultaTA(opcionBusqueda) {
+		ACC.reportesTerceroAutorizado.consultaTA(opcionBusqueda);
+	}
+	function btnCancelar(){
+		window.history.back();
 	}
 </script>

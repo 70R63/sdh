@@ -12,19 +12,13 @@
 <div class="loader"></div>
 
 <terceros:terceroSIMBuscar/>
-<br>
+<terceros:terceroImprimirRep/>
 <terceros:tercero_predial/>
-<br>
 <terceros:tercero_ica/>
-<br>
 <terceros:tercero_reteica/>
-<br>
 <terceros:tercero_vehicular/>
-<br>
 <terceros:tercero_delineacion/>
-<br>
 <terceros:tercero_gasolina/>
-<br>
 <terceros:tercero_publicidad/>
 
 

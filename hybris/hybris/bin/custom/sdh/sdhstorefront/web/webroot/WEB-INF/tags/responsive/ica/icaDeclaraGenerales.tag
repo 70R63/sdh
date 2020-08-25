@@ -12,8 +12,10 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <c:set var="roTotalIngrPeriodo" value=""/>
+<c:set var="disableSeccion" value=""/>
 <c:if test="${icaInfObjetoFormResp.controlCampos.totalIngrPeriodo == true}">
 	<c:set var="roTotalIngrPeriodo" value='readonly="readonly"'/>
+	<c:set var="disableSeccion" value="disabled='disabled'"/>
 </c:if>
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
 <div class="container">
@@ -93,13 +95,13 @@
 							<input type="radio" name="entidadFinanciera" id=""
 							class="form-check-input mr-2"
 							style="visibility: visible !important; min-height: 4px !important;"
-							onclick="disa()" ${yesChecked} value="si"> Si
+							onclick="disa()" ${yesChecked} value="si" ${disableSeccion}> Si
 						</label> <label class="form-check-label"
 							style="text-transform: capitalize !important; font-weight: normal !important">
 							<input type="radio" name="entidadFinanciera" id=""
 							class="form-check-input mr-2"
 							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
-							onclick="disa2()" ${noChecked } value="no"> No
+							onclick="disa2()" ${noChecked } value="no" ${disableSeccion}> No
 						</label>
 					</div>
 				</div>

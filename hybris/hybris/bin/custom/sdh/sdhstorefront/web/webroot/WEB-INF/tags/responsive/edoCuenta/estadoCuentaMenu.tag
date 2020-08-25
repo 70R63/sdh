@@ -47,6 +47,16 @@
 
 			<div class="col-md-6">
 				<div class="card cardsinfondo">
+				<div class="row">
+						<div class="col-md-7">
+							<div class="form-group">
+								<label class="control-label"><spring:theme
+										code="edocuenta.inicial.nom" /></label> <input class="alto form-control"
+									maxlength="30" size="30" disabled="disabled" type="text"
+									value="<c:out value="${ctaForm.compleName}"></c:out>" />
+							</div>
+						</div>
+					</div>
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group">
@@ -67,16 +77,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-7">
-							<div class="form-group">
-								<label class="control-label"><spring:theme
-										code="edocuenta.inicial.nom" /></label> <input class="alto form-control"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="${ctaForm.compleName}"></c:out>" />
-							</div>
-						</div>
-					</div>
+					
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group">
@@ -104,12 +105,11 @@
 			<div class="col-md-3">
 				<div class="card cardsinfondo">
 					<div class="row">
-						<div class="col-md-10" id="idImpuesto">
+						<div class="col-md-10" id="idImpuesto" style="display: none;">
 							<div class="form-group">
 								<label class="control-label"><spring:theme
 										code="edocuenta.inicial.selcimpuesto" /></label> <select
-									id="impuesto" class="new_alto form-control " name="impuesto"
-									onchange="Selected(this)">
+									id="impuesto" class="new_alto form-control " name="impuesto">
 									<option value="0">Todo</option>
 									<option value="1">Predial Unificado</option>
 									<option value="2">Veh&iacuteculos</option>
@@ -121,21 +121,16 @@
 								</select>
 							</div>
 						</div>
-					</div>
-					<%--div class="row">
-						<div class="col-md-10">
+						<div class="col-md-10" id="idImpuestoAgente" style="display: none;">
 							<div class="form-group">
-								<label class="control-label text-right"><spring:theme
-										code="edocuenta.inicial.aniograv" /></label> <select
-									aria-required="true" id="aniograva" class="newalto form-control "
-									name="aniograva" onchange="" required>
-									<option value="">Seleccionar</option>
-									<option value="1">2019</option>
+								<label class="control-label"><spring:theme
+										code="edocuenta.inicial.selcimpuesto" /></label> <select
+									id="impuesto" class="new_alto form-control " name="impuesto">
+									<option value="8">RETEICA</option>
 								</select>
 							</div>
 						</div>
-					</div--%>
-					
+					</div>
 				</div>
 			</div>
 		</div>
@@ -158,7 +153,7 @@
 					</button>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3" style="display: none;" id="btnBuscar">
 				<div class="form-group ">
 					<button type="button" class="btn btn-primary btn-lg" id="action"
 						name="action" value="buscar" style="margin-top: 3px"

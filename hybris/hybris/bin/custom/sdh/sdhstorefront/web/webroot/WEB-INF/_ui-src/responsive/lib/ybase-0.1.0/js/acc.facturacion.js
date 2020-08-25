@@ -13,7 +13,7 @@ ACC.facturacion = {
 			var buscar = document.getElementById('aniograv').value;
 			
 
-			if (imp == '01') {
+			if (imp == '0001') {
 				
 				$("#tabPaginacion0 tr").find('td:eq(0)').each(function () {
 					 
@@ -34,7 +34,7 @@ ACC.facturacion = {
 
 
 		        
-			} else if (imp == '02') {
+			} else if (imp == '0002') {
 				$("#tabPaginacion1 tr").find('td:eq(0)').each(function () {
 					 
 					  valor = $(this).html();
@@ -58,16 +58,16 @@ ACC.facturacion = {
 	},
 	
 	
-	descargaFactura : function (anoGravable,numObjeto){
+	descargaFactura : function (anoGravable,numObjeto,tipoOperacion){
 
 		debugger;
 		if(ACC.facturacion.validarAntesSubmit(anoGravable,numObjeto)){
 			var dataActual = {};	
 		
 			
-			dataActual.numBP = '1';
 			dataActual.anoGravable = anoGravable;
 			dataActual.numObjeto = numObjeto;
+			dataActual.tipoOperacion = tipoOperacion;
 			
 			
 			$.ajax({

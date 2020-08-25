@@ -67,11 +67,15 @@ public class TercerosSIMBuscarPageController extends AbstractPageController
 
 	@RequestMapping(value = "/terceros/objeto", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String tercerossim(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String tercerossim(@ModelAttribute("tercerosAutForm") TercerosAutForm tercerosAutForm, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET terceros Autorizados SIM--------------------------");
 
-		final TercerosAutForm tercerosAutForm = new TercerosAutForm();
+		if (tercerosAutForm == null)
+		{
+			tercerosAutForm = new TercerosAutForm();
+		}
 
 		model.addAttribute("tercerosAutForm", tercerosAutForm);
 

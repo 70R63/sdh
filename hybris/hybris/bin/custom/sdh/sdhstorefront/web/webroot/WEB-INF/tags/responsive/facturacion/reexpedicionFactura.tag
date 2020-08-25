@@ -33,10 +33,10 @@
 				<select class="new_alto form-control !important" id="impuesto">
 					<option value="00">Seleccionar</option>
 					<c:if test="${ not empty facturacionForm.predial}">
-						<option value="01">Predial Unificado</option>
+						<option value="0001">Predial Unificado</option>
 					</c:if>
 					<c:if test="${ not empty facturacionForm.vehicular}">					
-						<option value="02">Vehícular</option>
+						<option value="0002">Vehícular</option>
 					</c:if>
 				</select>
 			</div>
@@ -108,7 +108,7 @@
 								<td><c:out value="${eachPredial.direccionPredio}" /></td>
 								<td><input class="inputtextnew"
 									style="visibility: visible !important; width: 15px"
-									type="radio" id="" name="" value=""></td>
+									type="radio" id="" name="objetoPredial" value="${eachPredial.numObjeto}"></td>
 
 							</tr>
 							</c:if>
@@ -120,8 +120,8 @@
 		<div class="row">
 			<div class="col-md-3 col-md-offset-5">
 				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button">
-					<spring:theme code="descarga.factura.predial.desfact" />
+					class="btn btn-primary btn-lg" type="button" onclick="reexpedicion('0001')">
+					<spring:theme code="reexpedicion.factura.predial.desfact" />
 				</button>
 			</div>
 		</div>
@@ -158,7 +158,7 @@
 											code="vehiculos.detalle.marca.${eachVehiculo.marca}" /></label></td>
 								<td><input class="inputtextnew"
 									style="visibility: visible !important; width: 15px"
-									type="radio" id="" name="" value=""></td>
+									type="radio" id="" name="objetoVehicular" value="${eachVehiculo.numObjeto}"></td>
 
 							</tr>
 							</c:if>
@@ -170,13 +170,24 @@
 		<div class="row">
 			<div class="col-md-3 col-md-offset-5">
 				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button">
+					class="btn btn-primary btn-lg" type="button" onclick="reexpedicion('0002')">
 					<spring:theme code="reexpedicion.factura.vehiculo.desfac" />
 				</button>
 			</div>
 		</div>
 
 	</div>
+</div>
+
+
+
+<div class="container">
+	<spring:url value="/contribuyentes/reexpedicionfacturaAct" var="reexpedicionURL" htmlEscape="false" />
+	<sf:form action="${reexpedicionURL}" method="GET"
+		modelAttribute="descargaFacturaForm" id="reexpedicionFacturaAct">
+		<sf:hidden path="anoGravable" id="anoGravable"/>
+		<sf:hidden path="numObjeto" id="numObjeto"/>
+	</sf:form>
 </div>
 
 <script>
@@ -199,6 +210,30 @@
 			tabveh.style.display = 'none';
 		}
 
+	}
+	
+	function reexpedicion(claveImpuesto){
+		
+		$("#anoGravable").val($("#aniograv").val());
+		var claveImpuesto = $("#impuesto").val();
+		var nombreObjeto = "";
+		
+		switch (claveImpuesto){
+		case "0001":
+			nombreObjeto = "objetoPredial";
+			break;
+		case "0002":
+			nombreObjeto = "objetoVehicular";
+			break;
+		}
+		var numObjeto = $("input[name='"+nombreObjeto+"']:checked"). val();
+		$("#numObjeto").val(numObjeto);
+		
+		var form = document.getElementById('reexpedicionFacturaAct');
+		if(form!=null && numObjeto!= null && numObjeto!=""){
+			form.submit();
+		}
+		
 	}
 </script>
 

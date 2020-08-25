@@ -13,7 +13,7 @@ function connect() {
     userContentType = "CustomerUserMessage";
 
     var host = document.location.host;
-    ws = new WebSocket("wss://"+host+"/sdhstorefront/chatEndPoint/CUSTOMER/"
+    ws = new WebSocket("wss://"+host+"/bogota/chatEndPoint/CUSTOMER/"
                         +userId+"/"
                         +username+"/"
                         +comentario+"/"
@@ -42,7 +42,7 @@ function send() {
 
 function displayMessage (evt) {
     var host = document.location.host;
-    ws = new WebSocket("wss://"+host+"/sdhstorefront/chatEndPoint/AGENTSESSION/"+evt.data.agentId+"/"+evt.data.agentName+"/NoData/NoData");
+    ws = new WebSocket("wss://"+host+"/bogota/chatEndPoint/AGENTSESSION/"+evt.data.agentId+"/"+evt.data.agentName+"/NoData/NoData");
     document.getElementById("receiverUser").value = evt.data.sessionId;
     document.getElementById("userName").value = evt.data.agentName;
     userContentType = "AgentUserMessage";

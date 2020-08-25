@@ -6,14 +6,17 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="facturacion" tagdir="/WEB-INF/tags/responsive/facturacion"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="miRit" tagdir="/WEB-INF/tags/responsive/miRit"%>
 <spring:url
 	value="/contibuyentes/tramites/seguimiento"
 	var="seguimientoURL" htmlEscape="false" />
 	
 <div class="loader"></div>
 
-<facturacion:personaNatGenBas/>
-<facturacion:datosContacto/>
+<miRit:personalData />
+<miRit:generalData />
+<miRit:contactData />
+
 <facturacion:autorizaciones/>
 
 <script type="text/javascript">

@@ -49,8 +49,7 @@
 <script>
 
 window.onload = function() {
-	debugger;
-	var cosas = $(":input");
+		var cosas = $(":input");
 	var tam = cosas.length;
 	if (false){
 		for (var i = 0; i < tam; i++) {
@@ -61,7 +60,7 @@ window.onload = function() {
 			}
 		}
 	}
-	debugger;
+	
 	var url = window.parent.location.href;
 	var contenido_url = url.includes('contribuyentes');
 }
@@ -79,6 +78,8 @@ window.onload = function() {
 		
 	
 		$(".loader").fadeOut("slow");
+		
+		var checkbuzon = document.getElementById("buzon").disabled = true;
 	};
 
 	function ajustar(selectObject) {

@@ -382,6 +382,7 @@ ACC.vehiculos = {
 		$('#tablemarcas tbody').empty();
 		$('#tableLiq tbody').empty();
 		$('#numFormdet').val(data.numForm);
+		$('#objetoCont').val(data.objetoCont);
 		$("#placas").val(data.placa);
 
 		if (data.idServicio == "01") {

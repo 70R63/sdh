@@ -12,6 +12,7 @@ public class CertificaRITRequest
 	private String numBP;
 	private String tipoCert;
 	private String tipoImp;
+	private String numObjeto;
 
 
 	/**
@@ -80,6 +81,22 @@ public class CertificaRITRequest
 		this.tipoImp = tipoImp;
 	}
 
+	/**
+	 * @return the numObjeto
+	 */
+	public String getNumObjeto()
+	{
+		return numObjeto;
+	}
+
+	/**
+	 * @param numObjeto
+	 *           the numObjeto to set
+	 */
+	public void setNumObjeto(final String numObjeto)
+	{
+		this.numObjeto = numObjeto;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -94,7 +111,8 @@ public class CertificaRITRequest
 		stringBuilder.append("{");
 		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
 		stringBuilder.append("\"tipoCert\":\"" + this.getTipoCert() + "\",");
-		stringBuilder.append("\"tipoImp\":\"" + this.getTipoImp() + "\"");
+		stringBuilder.append("\"tipoImp\":\"" + this.getTipoImp() + "\",");
+		stringBuilder.append("\"numObjeto\":\"" + this.getNumObjeto() + "\"");
 		stringBuilder.append("}");
 
 		return stringBuilder.toString();

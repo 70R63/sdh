@@ -83,15 +83,16 @@ window.onload = function() {
 		
 
 }
-	function goBack() {
-		var declaracion = '${param.declaracion}';
+// 	function goBack() {
+// 		debugger;
+// 		var declaracion = '${param.declaracion}';
 
-		if (declaracion) {
-			window.location.href = "/sdhstorefront/es/contribuyentes/presentar-declaracion";
-		} else {
-			window.history.back();
-		}
-	}
+// 		if (declaracion) {
+// 			window.location.href = "/sdhstorefront/es/contribuyentes/presentar-declaracion";
+// 		} else {
+// 			window.history.back();
+// 		}
+// 	}
 
 	
 </script>

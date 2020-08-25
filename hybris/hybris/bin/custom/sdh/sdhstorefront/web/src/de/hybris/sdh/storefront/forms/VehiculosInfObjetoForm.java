@@ -95,6 +95,7 @@ public class VehiculosInfObjetoForm
 	private String numObjeto;
 
 	private String numForm;
+	private String objetoCont;
 
 	private String clasicoAntiguo;
 	private String checkAporte;
@@ -120,6 +121,7 @@ public class VehiculosInfObjetoForm
 	private String mensajeVehiculos;
 	private String campo_catalogo;
 	private CatalogoVehiculosResponse catalogo;
+	private String checkAporte_flag;
 
 	private VehiculosControlCamposDec controlCampos;
 	/**
@@ -1017,6 +1019,23 @@ public class VehiculosInfObjetoForm
 	}
 
 	/**
+	 * @return the objetoCont
+	 */
+	public String getObjetoCont()
+	{
+		return objetoCont;
+	}
+
+	/**
+	 * @param objetoCont
+	 *           the objetoCont to set
+	 */
+	public void setObjetoCont(final String objetoCont)
+	{
+		this.objetoCont = objetoCont;
+	}
+
+	/**
 	 * @return the clasicoAntiguo
 	 */
 	public String getClasicoAntiguo()
@@ -1388,6 +1407,23 @@ public class VehiculosInfObjetoForm
 	public void setControlCampos(final VehiculosControlCamposDec controlCampos)
 	{
 		this.controlCampos = controlCampos;
+	}
+
+	/**
+	 * @return the checkAporte_flag
+	 */
+	public String getCheckAporte_flag()
+	{
+		return checkAporte_flag;
+	}
+
+	/**
+	 * @param checkAporte_flag
+	 *           the checkAporte_flag to set
+	 */
+	public void setCheckAporte_flag(final String checkAporte_flag)
+	{
+		this.checkAporte_flag = checkAporte_flag;
 	}
 
 

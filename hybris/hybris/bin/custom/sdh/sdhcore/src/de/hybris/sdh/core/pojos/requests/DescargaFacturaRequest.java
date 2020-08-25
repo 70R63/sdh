@@ -12,6 +12,7 @@ public class DescargaFacturaRequest
 	private String numBP;
 	private String anoGravable;
 	private String numObjeto;
+	private String tipoOperacion;
 
 
 	/**
@@ -65,6 +66,23 @@ public class DescargaFacturaRequest
 		this.numObjeto = numObjeto;
 	}
 
+	/**
+	 * @return the tipoOperacion
+	 */
+	public String getTipoOperacion()
+	{
+		return tipoOperacion;
+	}
+
+	/**
+	 * @param tipoOperacion
+	 *           the tipoOperacion to set
+	 */
+	public void setTipoOperacion(final String tipoOperacion)
+	{
+		this.tipoOperacion = tipoOperacion;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -76,7 +94,8 @@ public class DescargaFacturaRequest
 		stringBuilder.append("{");
 		stringBuilder.append(obtenerValorJson("\"numBP\":\"", this.getNumBP(), "\","));
 		stringBuilder.append(obtenerValorJson("\"anoGravable\":\"", this.getAnoGravable(), "\","));
-		stringBuilder.append(obtenerValorJson("\"numObjeto\":\"", this.getNumObjeto(), "\""));
+		stringBuilder.append(obtenerValorJson("\"numObjeto\":\"", this.getNumObjeto(), "\","));
+		stringBuilder.append(obtenerValorJson("\"tipoOperacion\":\"", this.getTipoOperacion(), "\""));
 		stringBuilder.append("}");
 
 

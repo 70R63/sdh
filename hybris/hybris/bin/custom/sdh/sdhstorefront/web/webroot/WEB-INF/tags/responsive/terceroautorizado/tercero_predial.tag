@@ -23,13 +23,13 @@
 					<thead>
 						<tr>
 							<th><label class="control-label labeltableth"><spring:theme
+										code="terceros.objeto.predial.anoGravable" /></label></th>
+							<th><label class="control-label labeltableth"><spring:theme
 										code="terceros.objeto.predial.chip" /></label></th>
 							<th><label class="control-label labeltableth"><spring:theme
 										code="terceros.objeto.predial.matriculaInmobiliaria" /></label></th>
 							<th><label class="control-label labeltableth"><spring:theme
 										code="terceros.objeto.predial.direccion" /></label></th>
-							<th><label class="control-label labeltableth"><spring:theme
-										code="terceros.objeto.predial.anoGravable" /></label></th>
 							<th><label class="control-label labeltableth"><spring:theme
 										code="terceros.objeto.predial.estadoObligacion" /></label></th>
 						</tr>
@@ -40,4 +40,12 @@
 			</div>
 		</div>
 	</div>
+	<div class="col-md-3 col-md-offset-8">
+		<button type="button" class="btn btn-primary btn-lg" id="action"
+			name="action" value="Imprimir" style="margin-top: 3px"
+			onclick="ACC.oblipend.bindTrmPdf('0001','4','predialReporte.pdf');">
+			<spring:theme code="obligacion.inicial.imprimir" />
+		</button>
+	</div>
+	<br>
 </div>

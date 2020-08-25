@@ -4,7 +4,7 @@ function connect() {
 
     var username = document.getElementById("username").value;
     var host = document.location.host;
-    ws = new WebSocket("wss://"+host+"/sdhstorefront/chatEndPoint/" + username);
+    ws = new WebSocket("wss://"+host+"/bogota/chatEndPoint/" + username);
 
     console.log(username);
     ws.onmessage = function(event) {

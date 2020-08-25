@@ -397,7 +397,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;ReportantesNavigationNodeEntry;;Reportantes Menu;ReportantesNavigationNode;ReportantesLink;
 ;RetenedorRegistroNavigationNodeEntry;;Retenedor Registro;RetenedorRegistroNavigationNode;RetenedorRegistroLink;
 ;RetenedorDeclaracionesNavigationNodeEntry;;Retenedor Declaraciones;RetenedorDeclaracionesNavigationNode;RetenedorDeclaracionesLink;
-;TerceroAutorizadoReportesNavigationNodeEntry;;Tercero autorizado Menu;TerceroAutorizadoReportesNavigationNode;TerceroAutorizadoReportesLink;
+#;TerceroAutorizadoReportesNavigationNodeEntry;;Tercero autorizado Menu;TerceroAutorizadoReportesNavigationNode;TerceroAutorizadoReportesLink;
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 #*->-------------------------------------------------------------------------------------------------------------------------
 
@@ -443,7 +443,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu TRAMITES 04/01/2019
 
 #->INI dev-eduardo Agregar menu FACTURACION 04/01/2019
-;FacturacionNavigationServiceRequestsNavNodeMenu;;Facturacion Service Requests Menu;FacturacionNavigationServiceRequestsNavNodeMenu;DescuentoUnoPorCientoNavNode,DescargaFacturaNavNode,ReexpedicionFacturaNavNode
+#;FacturacionNavigationServiceRequestsNavNodeMenu;;Facturacion Service Requests Menu;FacturacionNavigationServiceRequestsNavNodeMenu;DescuentoUnoPorCientoNavNode,DescargaFacturaNavNode,ReexpedicionFacturaNavNode
 #->FIN dev-eduardo Agregar menu FACTURACION 04/01/2019
 
 #->INI dev-eduardo Agregar menu DECLARACIONES 04/01/2019
@@ -470,6 +470,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;;Retenedores Registro Service Requests;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;EdoCargasNavNode
 ;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;;Retenedores Declaracion Service Requests;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;ARPresentarDeclaracionNavNode,ARListaDeclaracionNavNode
 ;TerceroAutorizadoReportesNavigationServiceRequestsNavNodeMenu;;TerceroAutorizado Service Requests Menu;TerceroAutorizadoReportesNavigationServiceRequestsNavNodeMenu;TerceroAutorizadoPorSujetoNavNode,TerceroAutorizadoPorObjetoNavNode
+;FacturacionNavigationServiceRequestsNavNodeMenu;;Facturacion Service Requests Menu;FacturacionNavigationServiceRequestsNavNodeMenu;DescargaFacturaNavNode,ReexpedicionFacturaNavNode 
 
 
 #*->-------------------------------------------------------------------------------------------------------------------------
@@ -2532,6 +2533,24 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;reexpedicionFacturaPageComponent	;reexpedicionFacturaPage Component	;/WEB-INF/views/responsive/pages/layout/reexpedicionFacturaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reexpedicionFacturaPageComponent
+
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;reexpedicionFacturaActPage 		;reexpedicion factura	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/reexpedicionfacturaAct
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reexpedicionFacturaActPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-reexpedicionFacturaActPage 	;SideContent			;																	;SideContent-reexpedicionFacturaActPage				;;;
+								;						;BodyContent-reexpedicionFacturaActPage 	;BodyContent			;																	;BodyContent-reexpedicionFacturaActPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-reexpedicionFacturaActPage	;Side Content Slot for reexpedicion factura;true	;								;;;
+							;							;BodyContent-reexpedicionFacturaActPage	;Body Content Slot for reexpedicion factura;true	;reexpedicionFacturaActPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;reexpedicionFacturaActPageComponent	;reexpedicionFacturaActPage Component	;/WEB-INF/views/responsive/pages/layout/reexpedicionFacturaActPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reexpedicionFacturaActPageComponent
 
 #->FIN dev-maria Agregar paginas para reexpedicion factura
 

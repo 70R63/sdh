@@ -18,6 +18,7 @@ ACC.oblipend = {
 			$("#oblipend-publiext").hide();
 			$("#oblipend-gasolina").hide();
 			$("#oblipend-delurbana").hide();
+			$("#oblipend-reteica").hide();
 			var divtable = document.getElementById("tableSpac");
 
 			divtable.style.visibility = 'hidden';
@@ -56,6 +57,10 @@ ACC.oblipend = {
 				$("#oblipend-gasolina").show();
 				$("#oblipend-delurbana").show();
 
+			}else if (impuesto == "8" || impuesto == "0") {
+
+				$("#oblipend-reteica").show();
+
 			}
 
 		});
@@ -81,6 +86,8 @@ ACC.oblipend = {
 	tableGas[0].setAttribute("id","example5");
 	var tablePub = document.getElementsByClassName("table ImprimirPublicidad");
 	tablePub[0].setAttribute("id","example6");
+	var tablePub = document.getElementsByClassName("table ImprimirReteIca");
+	tableReteIca[0].setAttribute("id","example7");
 	
 	if(impuestoSelc=="1"){
 		tablePred[0].setAttribute("id","example");
@@ -201,6 +208,27 @@ ACC.oblipend = {
 	        });
 	}
 	
+	else if(impuestoSelc=="8"){
+		tablePub[0].setAttribute("id","example");
+		   var selectRefinementsTitle = "RETEICA";
+	        ACC.colorbox.open(selectRefinementsTitle, {
+	            href: ".js-reteica-facet",
+	            inline: true,
+	            width: "90%",
+	            onComplete: function () {
+	                $(document).on("click", ".js-reteica-facet .js-facet-name-reteica", function (e) {
+	                    e.preventDefault();
+	                    $(".js-reteica-facet  .js-facet-reteica").removeClass("active");
+	                    $(this).parents(".js-facet-reteica").addClass("active");
+	                    $.colorbox.resize()
+	                })
+	            },
+	            onClosed: function () {
+	                $(document).off("click", ".js-reteica-facet .js-facet-name-reteica");
+	            }
+	        });
+	}
+	
 		if ($.fn.dataTable.isDataTable('#example')) {
 			table = $('#example').DataTable();
 			table.destroy();
@@ -238,21 +266,53 @@ ACC.oblipend = {
 	},
 
 	bindTrmPdf : function(impuesto, reporte, reportPdfName) {
+		debugger;
 	    var currentUrl = window.location.href;
-	    var baseUrl = currentUrl.substring(0, currentUrl.indexOf("sdhstorefront"));
-	    $.ajax({
-            url     : baseUrl+'sdhstorefront/es/trmService/getPdfString?impuesto='+impuesto+'&reporte='+reporte,
-            method  : 'GET',
-            success : function(pdfResponse){
-            	if(!ACC.oblipend.hayErrores_getPdfString(pdfResponse)){
-	                console.log(pdfResponse.pdf);
-	                ACC.oblipend.bindDownloadPdf(pdfResponse.pdf, reportPdfName);
-            	}
-            },
-            error : function(jqXHR, exception){
-                console.log('Error occured!!');
-            }
-        });
+	    var infoTA = null;
+
+		if(currentUrl.includes("contribuyentes")){
+		}else if(currentUrl.includes("/terceros")){
+			infoTA = ACC.oblipend.determinaInfoTA(impuesto);
+			impuesto = infoTA.impuesto;
+		}else{
+			impuesto = 31;
+		}
+		var strUrlWS = ACC.trmPDFString+'?impuesto='+impuesto+'&reporte='+reporte;
+
+
+		if(infoTA!=null && infoTA.infoURL != null){
+			strUrlWS = strUrlWS+infoTA.infoURL;
+		}
+
+		$.ajax({
+		    url     : strUrlWS,
+		    method  : 'GET',
+		    success : function(pdfResponse){
+		    	if(!ACC.oblipend.hayErrores_getPdfString(pdfResponse)){
+		            ACC.oblipend.bindDownloadPdf(pdfResponse.pdf, reportPdfName);
+		    	}
+		    },
+		    error : function(jqXHR, exception){
+		        console.log('Ocurrio un error al intentar obtener el archivo PDF');
+		    }
+		});
+	},
+	
+	determinaInfoTA : function(impuesto){
+		var numDoc = $("#numdoc").val();
+		var tipDoc = $("#tipdoc").val();
+		var numObjeto = $("#numObjeto").val();
+		var infoTA = {};
+				
+		if(numDoc!=null && tipDoc !=null){
+			infoTA.infoURL = '&numDoc='+numDoc+'&tipDoc='+tipDoc;
+			infoTA.impuesto = impuesto;
+		}else{
+			infoTA.impuesto = numObjeto;
+		}
+		
+		
+		return infoTA;
 	},
 
 	bindDownloadPdf : function(stringPdf, reportPdfName){

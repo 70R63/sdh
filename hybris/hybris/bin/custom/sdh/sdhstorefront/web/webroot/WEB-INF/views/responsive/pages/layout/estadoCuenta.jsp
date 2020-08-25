@@ -23,6 +23,23 @@
 </sf:form>
 <script type="text/javascript">
 	window.onload = function() {
+		var url = window.parent.location.href;
+		var contenido_url = url.includes('agenteRetenedor');
+		
+		if(contenido_url == true){
+			var contrib_select = document.getElementById('idImpuestoAgente');
+			var impblock = document.getElementById('impRetenedor');
+		
+			contrib_select.style.display = 'block';
+			impblock.style.display = 'block';
+		}else{
+			var contrib_select = document.getElementById('idImpuesto');
+			var impblock = document.getElementById('impContribuyente');
+			var btn = document.getElementById('btnBuscar');
+			contrib_select.style.display = 'block';
+			impblock.style.display = 'block';
+			btn.style.display = 'block';
+		}
 
 		$(".loader").fadeOut("slow");
 	}
@@ -33,7 +50,10 @@
 	}
 
 	function Selectedver(selectObject) {
-		debugger;
+		var contrib_select = document.getElementById('idImpuesto');
+		var impblock = document.getElementById('impContribuyente');
+		contrib_select.style.display = 'block';
+		impblock.style.display = 'block';
 		var value = selectObject.value;
 		var xx = document.getElementById('impuesto');
 		var x = xx.value;

@@ -76,7 +76,7 @@
 							code="publicidad.exterior.vehicles.typeservice" /></label> <input
 						id="vehiculoTipoServicio" name="vehiculoTipoServicio"
 						class="newalto form-control" aria-required="true" type="text"
-						value="${publicidadForm.tipoServicio}" maxlength="240" disabled>
+						value="<spring:theme code='publicidad.exterior.vehicles.tipoServicio.${publicidadForm.tipoServicio}' />" maxlength="240" disabled>
 				</div>
 			</div>
 			<div class="col-md-2">

@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -76,6 +77,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 	//Example Controller
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.estadocuenta";
+	private static final String TEXT_ACCOUNT_PROFILE_RETE = "text.account.profile.edoctaRETE";
 
 	// CMS Pages
 	private static final String ESTADO_DE_CUENTA_CMS_PAGE = "estado-de-cuenta";
@@ -108,12 +110,13 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 
 	//-----------------------------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/contribuyentes/estado-de-cuenta", method = RequestMethod.GET)
+	@RequestMapping(value =
+	{ "/contribuyentes/estado-de-cuenta", "/agenteRetenedor/estado-de-cuenta" }, method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String handleGET_PD(final Model model) throws CMSItemNotFoundException
+	public String handleGET_PD(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Estado de Cuenta GET --------------------------");
-
+		final String referrer = request.getHeader("referer");
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
 		model.addAttribute("dataForm", dataForm);
@@ -288,10 +291,30 @@ public class ConsultaEstado extends AbstractSearchPageController
 				miRitForm.setImpuestoICA(sdhConsultaContribuyenteBPResponse.getIca());
 			}
 
+			if (sdhConsultaContribuyenteBPResponse.getReteIca() != null
+					&& StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getReteIca().getNumObjeto()))
+			{
+				ctaForm.setTablaReteica(sdhConsultaContribuyenteBPResponse.getReteIca());
+			}
+
 		}
 		catch (final IOException e)
 		{
 			e.printStackTrace();
+		}
+
+
+		if (referrer.contains("contribuyentes"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		}
+		else if (referrer.contains("retenedor") || referrer.contains("agenteRetenedor"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE_RETE));
+		}
+		else
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		}
 
 		model.addAttribute("dataForm", miRitForm);
@@ -303,7 +326,6 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ESTADO_DE_CUENTA_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ESTADO_DE_CUENTA_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);

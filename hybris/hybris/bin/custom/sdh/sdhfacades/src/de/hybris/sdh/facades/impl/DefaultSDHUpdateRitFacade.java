@@ -266,6 +266,11 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 							response.setRitUpdated(false);
 						}
 					}
+					//					if (!"0".equalsIgnoreCase(response.getErrores().getIdmsj())
+					//							&& !"".equalsIgnoreCase(response.getErrores().getIdmsj()))
+					//					{
+					//						response.setRitUpdated(false);
+					//					}
 				}
 
 				if (response.getRitUpdated() == true)

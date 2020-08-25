@@ -45,15 +45,26 @@
 								<spring:theme code="register.passwordRequirements"
 									htmlEscape="false" />
 							</div>
-
+<div class="row"  id="mensaggeBuzon">
+					<div class="col-md-12">
+						<div class="form-group ">
+							<label class="control-label" for="" > <spring:theme
+									code="buzon.mirit.mensaje" /><button id="terminosPopUpRegister" class="terminosPopUpRegister" style="background: #fff; border: 0px">términos y condiciones</button>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div style=" cursor: not-allowed; pointer-events: none;">
 							<formElement:formCheckbox idKey="useEmailForNotifications"
 								labelKey="register.activateInbox"
-								path="useEmailForNotifications" inputCSS="form-control" />
+								path="useEmailForNotifications" inputCSS="form-control disabled" labelCSS="disabled"/>
+								</div>
 							<formElement:formCheckbox
 								idKey="useInformationForInstitutionalPurposes"
 								labelKey="register.personalDataAuthorization"
 								path="useInformationForInstitutionalPurposes"
 								inputCSS="form-control" />
+								
 
 							<div class="text-right">
 								<ycommerce:testId code="login_forgotPasswordSubmit_button">
@@ -77,3 +88,27 @@
 		</div>
 	</div>
 </div>
+
+<div class="terminosycondiciones" style="display: none;">
+	<div class="js-terminos-facet" id="js-terminos-facet">
+		<div class="facet js-facet-veh">
+			<div class="facet__name js-facet-name-veh">
+				<spring:theme code="" />
+		<spring:theme
+						code="Aquí van los términos y condiciones" />
+			</div>
+		</div>
+	</div>
+	</div>
+
+<!-- <script type="text/javascript"> -->
+<!-- // document.getElementById('useEmailForNotifications').onclick = function(){ -->
+<!-- // 	debugger; -->
+<!-- // 	var chulo3 = document.getElementById("useEmailForNotifications").checked; -->
+<!-- // 	if(chulo3 == true){ -->
+<!-- // 		alert("Usted NO esta aceptando los términos y condiciones. \n Aquí van los términos y condiciones."); -->
+<!-- // 	}else{ -->
+<!-- // 		alert("Usted esta aceptando los términos y condiciones. \n Aquí van los términos y condiciones."); -->
+<!-- // 	} -->
+<!-- // } -->
+<!-- </script> -->

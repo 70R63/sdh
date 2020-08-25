@@ -80,7 +80,7 @@
 			<input type="hidden" name="skipReques" value="" id="skipReques"/>
 			<sf:hidden path="periodicidadImpuesto"/>
 
-			<c:if test="${dataForm.impuesto != '3'}">
+<%-- 			<c:if test="${dataForm.impuesto != '3'}"> --%>
 				<div class="col-md-4 col-xs-12 mb-20 no-margincol">
 					<span class="paso--dos pasos color-sr2">2</span>
 					<h2 class="titulo-caja--ser-rel color-sr2 ">
@@ -102,31 +102,31 @@
 						</div>
 					</div>
 				</div>
-			</c:if>
+<%-- 			</c:if> --%>
 
-			<c:if test="${dataForm.impuesto == '3'}">
-				<div class="col-md-4 col-xs-12 mb-20 no-margincol">
-					<span class="paso--dos pasos color-sr2">2</span>
-					<h2 class="titulo-caja--ser-rel color-sr2 ">
-						<span class="paso2"><spring:theme
-								code="impuestos.presentarDeclaracion.anioGravableConsultarUpper" /></span>
-					</h2>
-					<p class="pasoClase2 metrophobic">
-						<spring:theme code="impuestos.presentarDeclaracion.seleccionaAnio" />
-					</p>
-					<div class="caja--ser-rel color-sr2">
-						<div class="form-group ">
-							<label class="control-label required"><spring:theme
-									code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
+<%-- 			<c:if test="${dataForm.impuesto == '3'}"> --%>
+<!-- 				<div class="col-md-4 col-xs-12 mb-20 no-margincol"> -->
+<!-- 					<span class="paso--dos pasos color-sr2">2</span> -->
+<!-- 					<h2 class="titulo-caja--ser-rel color-sr2 "> -->
+<%-- 						<span class="paso2"><spring:theme --%>
+<%-- 								code="impuestos.presentarDeclaracion.anioGravableConsultarUpper" /></span> --%>
+<!-- 					</h2> -->
+<!-- 					<p class="pasoClase2 metrophobic"> -->
+<%-- 						<spring:theme code="impuestos.presentarDeclaracion.seleccionaAnio" /> --%>
+<!-- 					</p> -->
+<!-- 					<div class="caja--ser-rel color-sr2"> -->
+<!-- 						<div class="form-group "> -->
+<%-- 							<label class="control-label required"><spring:theme --%>
+<%-- 									code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label> --%>
 
 
-							<sf:select path="anoGravable" id="anoGravable"
-								items="${icaAnioGravable}" referenceData="${icaAnioGravable}"
-								class="newalto form-control" onchange="onChangeAnioGravable()" />
-						</div>
-					</div>
-				</div>
-			</c:if>
+<%-- 							<sf:select path="anoGravable" id="anoGravable" --%>
+<%-- 								items="${icaAnioGravable}" referenceData="${icaAnioGravable}" --%>
+<%-- 								class="newalto form-control" onchange="onChangeAnioGravable()" /> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<%-- 			</c:if> --%>
 
 			<c:if
 				test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6' and dataForm.impuesto ne '2'}">
@@ -178,7 +178,7 @@
 			test="${dataForm.impuesto ne '4' and dataForm.impuesto ne ' ' and dataForm.impuesto ne '6'}">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-9 text-center">
-					<sf:button type="submit"
+					<sf:button type="button"
 						class="btn btn-primary btn-lg" id="action" name="action"
 						onClick="validateForm();"
 						value="presentarDeclaracion"
@@ -194,6 +194,15 @@
                     	<spring:theme
                     	    code="impuestos.presentarDeclaracion.PresentarDeclaracion" />
                     	</sf:button>
+
+					<sf:button type="submit"
+						class="btn btn-primary btn-lg accionGasolina" id="action" name="action"
+ 						value="presentarDeclaracion"
+						style="display:none;">
+						<spring:theme
+							code="impuestos.presentarDeclaracion.PresentarDeclaracion" />
+					</sf:button>
+					
 				</div>
 			</div>
 		</c:if>
@@ -284,8 +293,9 @@
 							</select>
 						</td>
 						<td class="col-sm-3">
+							<c:url var="post_url" value="/contribuyentes/delineacion-urbana/declaracion" />
 							<form:form method="post" commandName="inputDelineacion"
-								action="/sdhstorefront/es/contribuyentes/delineacion-urbana/declaracion">
+								action="${post_url}">
 								<c:set var="idCampoTipoLicencia"
 									value='tipoLicenciaSeleccionada_${item.cdu}' />
 								<form:hidden path="selectedCDU" value="${item.cdu}" />
@@ -323,8 +333,9 @@
 								<label>${radicado.numRadicado}</label>
 							</td>
 							<td class="col-sm-3">
+								<c:url var="post_url" value="/contribuyentes/delineacion-urbana/declaracion" />
 								<form:form method="post" commandName="inputDelineacion"
-									action="/sdhstorefront/es/contribuyentes/delineacion-urbana/declaracion">
+									action="${post_url}">
 									<form:hidden path="selectedCDU" value="${item.cdu}" />
 									<form:hidden path="selectedRadicado"
 										value="${radicado.numRadicado}" />
@@ -514,6 +525,7 @@
         		}else if(impuesto == '3' && opcUso == '02'){//ICA
         		    promtConfirmation();
         		} else {
+        			$(".accionGasolina").click();
                     return true;
                 }
         	},

@@ -63,7 +63,7 @@
 
 	</div>
 
-	<form:form commandName="importConciliacionForm" enctype="multipart/form-data" action="/sdhstorefront/es/gestionBancaria/uploadFile" method="POST" onsubmit="return fncEnviarReporInfo(this);">
+	<form:form commandName="importConciliacionForm" enctype="multipart/form-data" action="/bogota/es/gestionBancaria/uploadFile" method="POST" onsubmit="return fncEnviarReporInfo(this);">
 		<div class="row" style="margin-top: 6px;">
 			<div class="col-md-4">
 				<div class="form-group">

@@ -17,6 +17,10 @@
 <sobreVehiculos:sobreVehiculosMarcas />
 <sobreVehiculos:sobreVehiculosLiquida />
 </div>
+<a id="downloadHelper" target="_blank"></a>
+<div id="dialogMensajes" title="Descarga Factura">
+	<div id="dialogMensajesContent"></div>
+</div>
 
 <script>
 	function goBack() {

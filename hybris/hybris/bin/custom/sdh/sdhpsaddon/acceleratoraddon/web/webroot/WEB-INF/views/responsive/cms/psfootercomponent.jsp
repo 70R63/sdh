@@ -108,7 +108,7 @@
 						   <spring:theme code="chat.box.close" var="chatClose"></spring:theme>
 						   <spring:theme code="chat.box.new.chat" var="chatWindow"></spring:theme>
 						   <button class="close chat-glyphicon" tabindex="0" title="${chatClose}"></button>
-						   <button value='<c:url value="https://publicsector.local:9002/sdhstorefront/chat/customer"/>'
+						   <button value='<c:url value="/bogota/chat/customer"/>'
 								class="glyphicon glyphicon-new-window js-newWindow"
 								data-popup="scrollbars=yes" title="${chatWindow}"></button>
 						</span>
@@ -147,7 +147,7 @@
 	<script>
         function openChatWindow(){
            var url = window.location.href;
-           url = url.substring(0, url.indexOf("sdhstorefront")) + "sdhstorefront/chat/customer";
+           url = url.substring(0, url.indexOf("bogota")) + "bogota/chat/customer";
            myWindow = window.open(url, "", "width=345, height=575");
         }
     </script>

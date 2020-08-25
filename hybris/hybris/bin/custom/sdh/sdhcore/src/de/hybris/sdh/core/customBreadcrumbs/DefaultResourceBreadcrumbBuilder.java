@@ -606,7 +606,25 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		//*->FIN MI BUZON-------------------------------------------------------------------------------
 
 
+		//*->INI estado de cuenta-------------------------------------------------------------------------------
+		if (resourceKey.equals("text.account.profile.edoctaRETE"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
+			treeMap.put("text.account.profile.edoctaRETE", subTreeMap);
+		}
+		//*->FIN estado de cuenta-------------------------------------------------------------------------------
 
+		//*->INI obligaciones-------------------------------------------------------------------------------
+		if (resourceKey.equals("text.account.profile.obligaRETE"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
+			treeMap.put("text.account.profile.obligaRETE", subTreeMap);
+		}
+		//*->FIN obligaciones-------------------------------------------------------------------------------
 
 
 

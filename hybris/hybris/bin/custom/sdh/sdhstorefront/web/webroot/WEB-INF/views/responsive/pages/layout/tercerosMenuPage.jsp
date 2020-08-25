@@ -4,7 +4,22 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/nav"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="terceros" tagdir="/WEB-INF/tags/responsive/terceroautorizado"%>
 <div class="loader"></div>
+
+
+<terceros:terceroOpcionesBuscar/>
+<terceros:terceroSIMBuscar/>
+<terceros:terceroNotarioBuscar/>
+<terceros:terceroImprimirRep/>
+<terceros:tercero_predial/>
+<terceros:tercero_ica/>
+<terceros:tercero_reteica/>
+<terceros:tercero_vehicular/>
+<terceros:tercero_delineacion/>
+<terceros:tercero_gasolina/>
+<terceros:tercero_publicidad/>
+
 
 <!-- <div class="container_new_page"> -->
 <!-- 	<div class="row "> -->

@@ -18,6 +18,7 @@ public class DescargaFacturaForm
 	private String numBP;
 	private String anoGravable;
 	private String numObjeto;
+	private String tipoOperacion;
 
 	private String urlDownload;
 	private List<ErrorEnWS> errores;
@@ -106,5 +107,23 @@ public class DescargaFacturaForm
 	{
 		this.errores = errores;
 	}
+
+	/**
+	 * @return the tipoOperacion
+	 */
+	public String getTipoOperacion()
+	{
+		return tipoOperacion;
+	}
+
+	/**
+	 * @param tipoOperacion
+	 *           the tipoOperacion to set
+	 */
+	public void setTipoOperacion(final String tipoOperacion)
+	{
+		this.tipoOperacion = tipoOperacion;
+	}
+
 
 }
