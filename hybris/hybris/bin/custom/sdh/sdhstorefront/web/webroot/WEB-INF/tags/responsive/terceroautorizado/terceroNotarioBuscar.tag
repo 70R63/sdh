@@ -32,28 +32,22 @@
 <div class="container_new_page" id="buscarSujeto" style="display: ${flagMostrarSujeto}">
     <div class="row">
         <form:form method="get" commandName="tercerosAutForm" action="${actionURL}" >
-             <div class="col-md-5">
-                 <formElement:formSelectBox idKey="impuesto" labelKey="terceros.notario.buscar.impuesto"
-                                 path="impuesto" mandatory="false" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
-                                 items="${tercerosAutForm.listaImpuestos}" selectCSSClass="form-control" disabled="false" onchange="reiniciarSeleccion()"/>
-             </div>
-
-
-
             <div class="col-sm-3">
                 <formElement:formSelectBox idKey="tipdoc" labelKey="terceros.notario.buscar.tipdoc"
                     path="tipdoc" mandatory="false" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
                     items="${documentTypes}" selectCSSClass="form-control" disabled="false"/>
 
-             </div>
-                          <div class="col-sm-3">
+            </div>
+            <div class="col-sm-3">
                 <formElement:formInputBox idKey="numdoc" labelKey="terceros.notario.buscar.numdoc" path="numdoc" />
-             </div>
+            </div>
+            <div class="col-md-5">
+                <formElement:formSelectBox idKey="impuesto" labelKey="terceros.notario.buscar.impuesto"
+                                path="impuesto" mandatory="false" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
+                                items="${tercerosAutForm.listaImpuestos}" selectCSSClass="form-control" disabled="false" onchange="reiniciarSeleccion()"/>
+            </div>
+
             
-
-
-             
-             
 			<div class="row md-5">
 				<div class="col-md-5 text-right">
 					<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="button" id="btnEnviar"
