@@ -166,16 +166,53 @@ ACC.reportesTerceroAutorizado = {
 			
 			ACC.reportesTerceroAutorizado.displayTablas('block',flagMostrarTabla);
 		}
-		if(!ACC.reportesTerceroAutorizado.seMostroAlgunaTabla(flagMostrarTabla)){
-			if(opcionConsulta == "objeto"){
+		ACC.reportesTerceroAutorizado.mostrarBtnGenImprimir(opcionConsulta,flagMostrarTabla,infoResponse,claveImpuestoBTN);
+
+	},
+	
+	
+	mostrarBtnGenImprimir : function(opcionConsulta,flagMostrarTabla,infoResponse,claveImpuestoBTN){
+		var flagMostrarBoton = false;
+		var idMensaje = "";
+		var flagSeMostroAlgunaTabla = ACC.reportesTerceroAutorizado.seMostroAlgunaTabla(flagMostrarTabla);
+		
+		if (infoResponse != null && infoResponse.errores != null && infoResponse.errores[0] != null && infoResponse.errores[0].id_msj != null && infoResponse.errores[0].id_msj != ""){
+			idMensaje = infoResponse.errores[0].id_msj;
+		}
+		
+		switch(opcionConsulta){
+		case "objeto":
+			if(flagSeMostroAlgunaTabla == false && idMensaje == "09"){
+				flagMostrarBoton = true;
+			}
+			if(flagSeMostroAlgunaTabla == false && idMensaje == "02"){
+				flagMostrarBoton = false;
+			}
+			break;
+		
+		case "sujeto":
+			if(flagSeMostroAlgunaTabla == false && idMensaje == "09"){
+				flagMostrarBoton = true;
+			}
+			if(flagSeMostroAlgunaTabla == false && idMensaje == "02"){
+				flagMostrarBoton = false;
+			}
+			break;
+		}
+
+		if(flagMostrarBoton){
+			switch(opcionConsulta){
+			case "objeto":
 				$("#btnGenImprimirRep").data("claveImpuesto",claveImpuestoBTN);
-			}else{
+				break;
+			
+			case "sujeto":
 				$("#btnGenImprimirRep").data("claveImpuesto",$("#impuesto").val());
+				break;
 			}
 			ACC.reportesTerceroAutorizado.habilitarBotonGen('block');
 		}
-
-
+		
 	},
 	
 	
