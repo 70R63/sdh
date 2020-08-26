@@ -67,7 +67,7 @@
 
 <script>
 	function reiniciarSeleccion(){
-		ACC.reportesTerceroAutorizado.displayTablas('none');
+		ACC.reportesTerceroAutorizado.displayTablas('none', ACC.reportesTerceroAutorizado.todosImpuestos());
 	}
 
 	function consultaTA(opcionBusqueda) {
