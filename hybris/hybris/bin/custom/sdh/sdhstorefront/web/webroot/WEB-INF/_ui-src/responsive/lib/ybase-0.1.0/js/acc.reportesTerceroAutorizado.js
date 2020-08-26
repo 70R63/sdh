@@ -80,6 +80,7 @@ ACC.reportesTerceroAutorizado = {
 
 			if(flagTablas.obligacionesPredios == true && infoResponse.obligacionesPredios != null && infoResponse.obligacionesPredios.length > 0){
 				$.each(infoResponse.obligacionesPredios, function (index,value){
+					if(value.chip != ""){
 					$('#table-predial1').append("<tr>"+
 						'<td>' + value.anoGravable + '</td>'+
 						'<td>' + value.chip + '</td>'+
@@ -88,6 +89,7 @@ ACC.reportesTerceroAutorizado = {
 						'<td><input id="obligacionesPredios_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
 						"</tr>");
 					flagMostrarTabla.obligacionesPredios = true;
+					}
 				});
 				if(opcionConsulta == "objeto"){
 					claveImpuestoBTN = "0001";
@@ -164,7 +166,7 @@ ACC.reportesTerceroAutorizado = {
 			
 			ACC.reportesTerceroAutorizado.displayTablas('block',flagMostrarTabla);
 		}
-		if(flagMostrarTabla.value == undefined){
+		if(!ACC.reportesTerceroAutorizado.seMostroAlgunaTabla(flagMostrarTabla)){
 			if(opcionConsulta == "objeto"){
 				$("#btnGenImprimirRep").data("claveImpuesto",claveImpuestoBTN);
 			}else{
@@ -175,6 +177,24 @@ ACC.reportesTerceroAutorizado = {
 
 
 	},
+	
+	
+	seMostroAlgunaTabla : function(flagMostrarTabla){
+		var flagValor = false;
+		
+		if(flagMostrarTabla.obligacionesPredios != undefined || 
+				flagMostrarTabla.obligacionesVehicular != undefined || 
+				flagMostrarTabla.obligacionesICA != undefined || 
+				flagMostrarTabla.obligacionesReteica != undefined || 
+				flagMostrarTabla.obligacionesGasolina != undefined || 
+				flagMostrarTabla.obligacionesDelineacion != undefined || 
+				flagMostrarTabla.obligacionesPublicidad != undefined){
+			flagValor = true;
+		}
+		
+		return flagValor;
+	},
+	
 	
 	determinarTablas :  function(opcionConsulta,infoActual,infoResponse){
 		var flags = {};

@@ -30,41 +30,38 @@
 </c:choose>
 
 <div class="container_new_page" id="buscarSujeto" style="display: ${flagMostrarSujeto}">
-    <div class="row">
-        <form:form method="get" commandName="tercerosAutForm" action="${actionURL}" >
+	<form:form method="get" commandName="tercerosAutForm" action="${actionURL}" >
+		<div class="row">
             <div class="col-sm-3">
                 <formElement:formSelectBox idKey="tipdoc" labelKey="terceros.notario.buscar.tipdoc"
                     path="tipdoc" mandatory="false" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
                     items="${documentTypes}" selectCSSClass="form-control" disabled="false"/>
-
             </div>
             <div class="col-sm-3">
                 <formElement:formInputBox idKey="numdoc" labelKey="terceros.notario.buscar.numdoc" path="numdoc" />
             </div>
-            <div class="col-md-5">
+            <div class="col-sm-3">
                 <formElement:formSelectBox idKey="impuesto" labelKey="terceros.notario.buscar.impuesto"
-                                path="impuesto" mandatory="false" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
-                                items="${tercerosAutForm.listaImpuestos}" selectCSSClass="form-control" disabled="false" onchange="reiniciarSeleccion()"/>
+                    path="impuesto" mandatory="false" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"
+                    items="${tercerosAutForm.listaImpuestos}" selectCSSClass="form-control" disabled="false" onchange="reiniciarSeleccion()"/>
             </div>
-
-            
-			<div class="row md-5">
-				<div class="col-md-5 text-right">
-					<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="button" id="btnEnviar"
-					name="btnEnviar" value="enviar" disabled="false" onclick="consultaTA('sujeto')">
-					<spring:theme code="terceros.notario.buscar.buscar" />
-					</sf:button>
-				</div>
-				<div class="col-md-1">
-					<button style="margin-top: 3px;" id=""
-						class="btn btn-secondary btn-lg" type="button" 
-						onclick="btnCancelar()">
-						<spring:theme code="tramites.crear.inicial.cancelar" />
-					</button>
-				</div>
+			<div class="col-md-1 text-right">
+				<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="button" id="btnEnviar"
+				name="btnEnviar" value="enviar" disabled="false" onclick="consultaTA('sujeto')">
+				<spring:theme code="terceros.notario.buscar.buscar" />
+				</sf:button>
 			</div>
-         </form:form>
-     </div>
+			<div class="col-md-1">
+				<button style="margin-top: 3px;" id=""
+				class="btn btn-secondary btn-lg" type="button" 
+				onclick="btnCancelar()">
+				<spring:theme code="tramites.crear.inicial.cancelar" />
+				</button>
+			</div>
+		</div>
+	</form:form>
+	<br>
+	<br>
 </div>
 
 

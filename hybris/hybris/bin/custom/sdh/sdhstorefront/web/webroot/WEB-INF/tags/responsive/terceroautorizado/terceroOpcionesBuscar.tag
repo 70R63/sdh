@@ -29,8 +29,9 @@
 </c:choose>
 
 <div class="container_new_page" id="opcionesBuscar">
+<div class="row">
 	<c:if test="${flagBotonSujeto == true}">
-		<div class="col-md-3 col-md-offset-1">
+		<div class="col-sm-6">
 			<button type="button" class="btn btn-primary btn-lg" id="action"
 				name="action" value="Imprimir" style="margin-top: 3px"
 				onclick="habilitarBusqueda('sujeto');">
@@ -39,7 +40,7 @@
 		</div>
 	</c:if>
 	<c:if test="${flagBotonObjeto == true}">
-		<div class="col-md-3 col-md-offset-1">
+		<div class="col-sm-6">
 			<button type="button" class="btn btn-primary btn-lg" id="action"
 				name="action" value="Imprimir" style="margin-top: 3px"
 				onclick="habilitarBusqueda('objeto');">
@@ -47,6 +48,9 @@
 			</button>
 		</div>
 	</c:if>
+</div>
+<br>
+<br>
 </div>
 
 
