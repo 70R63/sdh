@@ -117,13 +117,13 @@ public class UIMenuForm
 				this.setbVehicular("");
 			}
 
-			if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
+			if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
 			{
-				this.setbSobreGasolina("X");
+				this.setbPredial("X");
 			}
 			else
 			{
-				this.setbSobreGasolina("");
+				this.setbPredial("");
 			}
 
 			if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())

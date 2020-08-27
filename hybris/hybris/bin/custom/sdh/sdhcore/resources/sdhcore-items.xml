@@ -24,6 +24,7 @@
         <collectiontype code="SDHGasTaxList" elementtype="SDHGasTax" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SDHUrbanDelineationsTaxList" elementtype="SDHUrbanDelineationsTax" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SDHVehiculosTaxList" elementtype="SDHVehiculosTax" autocreate="true" generate="true" type="list"/>
+        <collectiontype code="SDHPredialTaxList" elementtype="SDHPredialTax" autocreate="true" generate="true" type="list"/>
 
         
         
@@ -297,6 +298,10 @@
         				<description>SDH custom field</description>
         				<persistence type="property"></persistence>
         			</attribute>
+        			<attribute qualifier="predialTaxList" type="SDHPredialTaxList">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
         		</attributes>
         	</itemtype>
         	<itemtype code="SDHAddress" autocreate="true" generate="true">
@@ -407,6 +412,32 @@
         				<persistence type="property"></persistence>
         			</attribute>
         			<attribute qualifier="cilindraje" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="numObjeto" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+       			</attributes>
+	        </itemtype>
+	        
+	        
+	        <itemtype code="SDHPredialTax" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save Predial data</description>
+        		<deployment table="SDHPREDIALTAX" typecode="15021"/>
+       			<attributes>
+       				<attribute qualifier="CHIP" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="matrInmobiliaria" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="direccionPredio" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="contratoArrenda" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="anioGravable" type="java.lang.String">
         				<persistence type="property"></persistence>
         			</attribute>
         			<attribute qualifier="numObjeto" type="java.lang.String">
