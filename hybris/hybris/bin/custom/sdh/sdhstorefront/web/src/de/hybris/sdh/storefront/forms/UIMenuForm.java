@@ -108,6 +108,24 @@ public class UIMenuForm
 			//private String bPredial;
 			//private String bVehicular;
 			//private String bIca;
+			if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
+			{
+				this.setbVehicular("X");
+			}
+			else
+			{
+				this.setbVehicular("");
+			}
+
+			if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
+			{
+				this.setbSobreGasolina("X");
+			}
+			else
+			{
+				this.setbSobreGasolina("");
+			}
+
 			if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
 			{
 				this.setbSobreGasolina("X");
