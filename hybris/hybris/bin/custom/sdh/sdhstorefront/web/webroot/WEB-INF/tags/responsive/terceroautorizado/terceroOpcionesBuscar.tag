@@ -60,6 +60,7 @@ function habilitarBusqueda(opcionBusqueda){
 	var nombreObjeto = null;
 	
 	ACC.reportesTerceroAutorizado.displayTablas('none', ACC.reportesTerceroAutorizado.todosImpuestos());
+	ACC.reportesTerceroAutorizado.habilitarBotonGen('none');
 	switch(opcionBusqueda){
 	case "sujeto":
 		opcionVisualizar("buscarSujeto","block");
