@@ -10,10 +10,20 @@
 <input type="hidden" value="${predialForm.mostrarAporteVoluntario}"
 	id="mostrarAporteVoluntario" />
 
+<c:set var="disabledAporte" value="" />
+<c:choose>
+<c:when test="${predialFormcinco.checkAporte_flag == 1}">
+	<c:set var="disabledAporte" value='' />
+</c:when>
+<c:when test="${predialFormcinco.checkAporte_flag == 2}">
+	<c:set var="disabledAporte" value='disabled="disabled"' />
+</c:when>
+</c:choose>
 <c:set var="disabledLiquidacionPrivada" value="" />
 <c:if
 	test="${predialFormcinco.controlCampos.liquidacionPrivada == true}">
 	<c:set var="disabledLiquidacionPrivada" value='disabled="disabled"' />
+	<c:set var="disabledAporte" value='disabled="disabled"' />
 </c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <form:form>
@@ -39,10 +49,10 @@
 					class="optradio"
 					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
 					type="radio" name="optradio" id="optionSi" value="1"
-					${disabledLiquidacionPrivada}> Si <input class="optradio"
+					${disabledAporte}> Si <input class="optradio"
 					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
 					type="radio" name="optradio" id="optionNo" value="2"
-					${disabledLiquidacionPrivada}>No
+					${disabledAporte}>No
 			</div>
 			<div class="col-md-5">
 				<label class="control-label "
@@ -60,7 +70,7 @@
 					<label class="control-label"><spring:theme
 							code="predialuno.liquidacionpriv.proyecto" /></label> <select
 						id="proyectoLiq" name="" class="alto_select alto form-control"
-						${disabledLiquidacionPrivada}><option value="00">Seleccionar</option>
+						${disabledAporte}><option value="00">Seleccionar</option>
 						<option value="01">FORTALECIMIENTO DE LA SEGURIDAD
 							CIUDADANA</option>
 						<option value="02">FINANCIACIÓN DE LA EDUCACIÓN SUPERIOR</option></select>

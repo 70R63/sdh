@@ -37,23 +37,7 @@ public class PredialForm
 	private String matrInmobiliaria;
 	private String anioGravable;
 	private String objetocontrato;
-
-	/**
-	 * @return the objetocontrato
-	 */
-	public String getObjetocontrato()
-	{
-		return objetocontrato;
-	}
-
-	/**
-	 * @param objetocontrato
-	 *           the objetocontrato to set
-	 */
-	public void setObjetocontrato(final String objetocontrato)
-	{
-		this.objetocontrato = objetocontrato;
-	}
+	private String checkAporte_flag;
 
 	private String fechaInactivacion;
 	private String opcionuso;
@@ -129,6 +113,22 @@ public class PredialForm
 	private String areaTerrenoCatastro;
 
 
+	/**
+	 * @return the objetocontrato
+	 */
+	public String getObjetocontrato()
+	{
+		return objetocontrato;
+	}
+
+	/**
+	 * @param objetocontrato
+	 *           the objetocontrato to set
+	 */
+	public void setObjetocontrato(final String objetocontrato)
+	{
+		this.objetocontrato = objetocontrato;
+	}
 
 	/**
 	 * @return the mostrarAporteVoluntario
@@ -1199,6 +1199,23 @@ public class PredialForm
 	public void setAreaTerrenoCatastro(final String areaTerrenoCatastro)
 	{
 		this.areaTerrenoCatastro = areaTerrenoCatastro;
+	}
+
+	/**
+	 * @return the checkAporte_flag
+	 */
+	public String getCheckAporte_flag()
+	{
+		return checkAporte_flag;
+	}
+
+	/**
+	 * @param checkAporte_flag
+	 *           the checkAporte_flag to set
+	 */
+	public void setCheckAporte_flag(final String checkAporte_flag)
+	{
+		this.checkAporte_flag = checkAporte_flag;
 	}
 
 
