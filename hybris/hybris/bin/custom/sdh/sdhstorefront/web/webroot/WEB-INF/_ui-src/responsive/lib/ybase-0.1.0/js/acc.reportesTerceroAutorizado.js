@@ -144,7 +144,7 @@ ACC.reportesTerceroAutorizado = {
 			
 			if(flagTablas.obligacionesDelineacion == true && infoResponse.obligacionesDelineacion != null && infoResponse.obligacionesDelineacion.length > 0){
 				$.each(infoResponse.obligacionesDelineacion, function (index,value){
-					if(value.cdu != "" && value.chip != ""){
+					if(value.cdu != "" || value.chip != ""){
 						$('#table-delineacion1').append("<tr>"+
 							'<td>' + value.anoGravable + '</td>'+
 							'<td>' + value.cdu + '</td>'+
