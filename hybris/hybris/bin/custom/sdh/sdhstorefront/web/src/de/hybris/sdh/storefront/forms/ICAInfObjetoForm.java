@@ -20,6 +20,7 @@ public class ICAInfObjetoForm
 
 	private ICADeclaracionCatalogos catalogos;
 	private ICAControlCamposDec controlCampos;
+	private String checkAporte_flag;
 
 	/**
 	 * @return the documentType
@@ -121,6 +122,23 @@ public class ICAInfObjetoForm
 	public void setControlCampos(final ICAControlCamposDec controlCampos)
 	{
 		this.controlCampos = controlCampos;
+	}
+
+	/**
+	 * @return the checkAporte_flag
+	 */
+	public String getCheckAporte_flag()
+	{
+		return checkAporte_flag;
+	}
+
+	/**
+	 * @param checkAporte_flag
+	 *           the checkAporte_flag to set
+	 */
+	public void setCheckAporte_flag(final String checkAporte_flag)
+	{
+		this.checkAporte_flag = checkAporte_flag;
 	}
 
 

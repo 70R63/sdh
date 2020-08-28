@@ -37,6 +37,7 @@ public class ICAInfObjetoResponse
 	private List<DetalleMarcas> marcas;
 
 	private ICAInfoDeclara infoDeclara;
+	private String checkAporte;
 
 	/**
 	 * @return the numForm
@@ -378,6 +379,23 @@ public class ICAInfObjetoResponse
 	public void setAnoGravable(final String anoGravable)
 	{
 		this.anoGravable = anoGravable;
+	}
+
+	/**
+	 * @return the checkAporte
+	 */
+	public String getCheckAporte()
+	{
+		return checkAporte;
+	}
+
+	/**
+	 * @param checkAporte
+	 *           the checkAporte to set
+	 */
+	public void setCheckAporte(final String checkAporte)
+	{
+		this.checkAporte = checkAporte;
 	}
 
 

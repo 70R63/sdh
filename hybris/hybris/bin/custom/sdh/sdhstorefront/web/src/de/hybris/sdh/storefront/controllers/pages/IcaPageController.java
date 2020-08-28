@@ -429,6 +429,7 @@ public class IcaPageController extends SDHAbstractPageController
 
 			icaInfObjetoFormResp
 					.setCatalogos(obtenerCatalogos(icaInfObjetoResponse.getAnoGravable(), icaInfObjetoResponse.getPeriodo()));
+			icaInfObjetoFormResp.setCheckAporte_flag(icaInfObjetoResponse.getCheckAporte());
 
 			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
 			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());

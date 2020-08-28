@@ -11,12 +11,14 @@
 
 <c:set var="disabledLiquidacion" value="" />
 <c:set var="disabledAporte" value="" />
-<c:if test="${vehiculosFormDeclaracion.checkAporte_flag == 1}">
+<c:choose>
+<c:when test="${vehiculosFormDeclaracion.checkAporte_flag == 1}">
 	<c:set var="disabledAporte" value='' />
-</c:if>
-<c:if test="${vehiculosFormDeclaracion.checkAporte_flag == 2}">
+</c:when>
+<c:when test="${vehiculosFormDeclaracion.checkAporte_flag == 2}">
 	<c:set var="disabledAporte" value='disabled="disabled"' />
-</c:if>
+</c:when>
+</c:choose>
 <c:if test="${vehiculosFormDeclaracion.controlCampos.liquidacion == true}">
 	<c:set var="disabledLiquidacion" value='disabled="disabled"' />
 	<c:set var="disabledAporte" value='disabled="disabled"' />
