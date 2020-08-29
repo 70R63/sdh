@@ -19,9 +19,11 @@ ACC.register = {
 			
 			if($(this).val() == "CC")
 			{
+				$("#expeditionDate").val("");
 				$("#expeditionDateDiv").show();
 			}else
 			{
+				$("#expeditionDate").val("");
 				$("#expeditionDateDiv").hide();
 			}
 			
