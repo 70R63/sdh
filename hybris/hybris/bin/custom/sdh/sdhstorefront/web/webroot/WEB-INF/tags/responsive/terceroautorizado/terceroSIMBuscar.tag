@@ -14,7 +14,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<spring:url value="/terceros/objeto" var="actionURL" htmlEscape="false" />
+<spring:url value="/terceros" var="actionURL" htmlEscape="false" />
 
 <c:set var="flagMostrarObjeto" value="none" />
 <c:set var="flagMostrarSujeto" value="none" />
@@ -37,7 +37,7 @@
 				<formElement:formInputBox idKey="numObjeto" labelKey="terceros.sim.buscar.numeroObjeto" path="numObjeto" />
              </div>
 			<div class="row md-5">
-				<div class="col-md-5 text-right">
+				<div class="col-md-3 text-right">
 					<sf:button class="btn btn-primary btn-lg !important taConsultaEnviar" type="button" id="btnEnviar"
 					name="btnEnviar" value="enviar" disabled="false" onclick="consultaTA('objeto')" >
 					<spring:theme code="terceros.sim.buscar.buscar" />
@@ -48,6 +48,13 @@
 						class="btn btn-secondary btn-lg" type="button" 
 						onclick="btnCancelar()">
 						<spring:theme code="tramites.crear.inicial.cancelar" />
+					</button>
+				</div>
+				<div class="col-md-1">
+					<button style="margin-top: 3px;" id=""
+					class="btn btn-secondary btn-lg" type="button" 
+					onclick="btnLimpiar()">
+					<spring:theme code="tramites.crear.inicial.limpiar" />
 					</button>
 				</div>
 				<div>
@@ -67,5 +74,8 @@
 	
 	function btnCancelar(){
 		window.history.back();
+	}
+	function btnLimpiar(){
+		$("#numObjeto").val("");
 	}
 </script>

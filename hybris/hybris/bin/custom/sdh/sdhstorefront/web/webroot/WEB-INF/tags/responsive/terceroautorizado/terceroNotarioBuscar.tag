@@ -13,7 +13,7 @@
 <!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script> -->
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<spring:url value="/terceros/sujeto" var="actionURL" htmlEscape="false" />
+<spring:url value="/terceros" var="actionURL" htmlEscape="false" />
 
 <c:set var="flagMostrarObjeto" value="none" />
 <c:set var="flagMostrarSujeto" value="none" />
@@ -58,6 +58,13 @@
 				<spring:theme code="tramites.crear.inicial.cancelar" />
 				</button>
 			</div>
+			<div class="col-md-1">
+				<button style="margin-top: 3px;" id=""
+				class="btn btn-secondary btn-lg" type="button" 
+				onclick="btnLimpiar()">
+				<spring:theme code="tramites.crear.inicial.limpiar" />
+				</button>
+			</div>
 		</div>
 	</form:form>
 	<br>
@@ -75,5 +82,10 @@
 	}
 	function btnCancelar(){
 		window.history.back();
+	}
+	function btnLimpiar(){
+		$("#tipdoc").val("");
+		$("#numdoc").val("");
+		$("#impuesto").val("");
 	}
 </script>
