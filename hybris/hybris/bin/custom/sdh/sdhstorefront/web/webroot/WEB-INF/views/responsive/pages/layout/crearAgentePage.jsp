@@ -31,17 +31,26 @@ window.onload = function() {
 function detalleBP(){
     var t = $('#contribuyenteTable').DataTable();
     $("#contribuyenteTable tr>td").remove();
+    var urlConsulta = "<c:url value='/agentesAut/getBp?'/>"+
+	    "tipoId="+ $("#documentType").val() +
+	    "&numId="+ $("#documentNumber").val() +
+	    "&fechaExp=" + $("#issuedDate").val();
+
+//     url: "/sdhstorefront/es/agentesAut/getBp?"+
+//     "tipoId="+ $("#documentType").val() +
+//     "&numId="+ $("#documentNumber").val() +
+//     "&fechaExp=" + $("#issuedDate").val(),    
+    debugger;
     $.ajax({
-        url: "/sdhstorefront/es/agentesAut/getBp?"+
-            "tipoId="+ $("#documentType").val() +
-            "&numId="+ $("#documentNumber").val() +
-            "&fechaExp=" + $("#issuedDate").val(),
+        url: urlConsulta,
         data:{},
         type: "GET",
         success: function(dataResponse){
-            t.row.add( [dataResponse.tipoId, dataResponse.numDoc,
-                dataResponse.nomAgen, dataResponse.tipoPers
-            ] ).draw( false );
+        	if(dataResponse.tipoId != undefined ){
+                t.row.add( [dataResponse.tipoId, dataResponse.numDoc,
+                    dataResponse.nomAgen, dataResponse.tipoPers
+                ] ).draw( false );
+        	}
         },
         error: function(){}
     });
