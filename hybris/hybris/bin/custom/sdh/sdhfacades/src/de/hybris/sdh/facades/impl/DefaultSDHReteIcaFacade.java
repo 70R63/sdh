@@ -54,7 +54,8 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 	{
 		ReteIcaResponse reteIcaResponse = new ReteIcaResponse();
 
-		final String response = sdhReteIcaService.reteICA(request);
+		String response = sdhReteIcaService.reteICA(request);
+		response = response.replaceAll("\"archivosTRM\":\\{([\"])(.*)(\"\\})", "\"archivosTRM\":[{\"$2\"}]");
 
 		if (StringUtils.isNotBlank(response))
 		{
