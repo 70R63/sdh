@@ -5,6 +5,6 @@
 <c:url value="/j_spring_security_check" var="loginActionUrl" />
 <div class="login-section">
    <user:login actionNameKey="login.login" action="${loginActionUrl}"/>
-	<br><br><div><a href="https://www.shd.gov.co/shd/sites/default/files/files/impuestos/PasoAPasoRegistroOfVirtual.pdf" 
+	<br><br><div><a href="https://www.shd.gov.co/shd/sites/default/files/files/impuestos/registroOfVirtual.pdf" 
 		target="_blank">Instructivo registro Oficina Virtual</a></div>
 </div>
