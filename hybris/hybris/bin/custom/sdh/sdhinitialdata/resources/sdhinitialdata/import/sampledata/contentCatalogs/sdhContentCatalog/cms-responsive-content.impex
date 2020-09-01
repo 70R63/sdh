@@ -294,6 +294,7 @@ INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];name;uid[unique=tr
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
 #;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode,PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode, ReportantesNavigationNode, RetenedorDetalleNavigationNode, RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode
 ;ContribuyentesCategoryNavNode;;Contributentes Categories;SiteRootNode;ContribuyentesCategoryNavNode;MiRITContribuyentesNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,ConsultaNavigationNode
+#;ContribuyentesCategoryNavNode;;Contributentes Categories;SiteRootNode;ContribuyentesCategoryNavNode;MiRITContribuyentesNavigationNode
 ;AutorizadosCategoryNavNode;;Autorizados Categories;SiteRootNode;AutorizadosCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
 ;ReportantesInformacionCategoryNavNode;;Reportantes Categories;SiteRootNode;ReportantesInformacionCategoryNavNode;MiRITReportanteInformacionNavigationNode,ReportantesNavigationNode
 ;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;ARMiRITNavigationNode,ARMiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,ARConsultaNavigationNode
@@ -435,7 +436,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu MI BUZON 04/01/2019
 
 #->INI dev-eduardo Agregar menu IMPUESTOS 04/01/2019
-;ImpuestosNavigationServiceRequestsNavNodeMenu;;Impuestos Service Requests Menu;ImpuestosNavigationServiceRequestsNavNodeMenu;DelineacionUrbanaNavNode,NewPredialNavNode,ICANavNode,PredialUnificadoNavNode,PublicidadExteriorNavNode,NewSobreVehiNodeNavNode,SobreTasaGasolinaNavNode
+;ImpuestosNavigationServiceRequestsNavNodeMenu;;Impuestos Service Requests Menu;ImpuestosNavigationServiceRequestsNavNodeMenu;DelineacionUrbanaNavNode,NewPredialNavNode,ICANavNode,PublicidadExteriorNavNode,NewSobreVehiNodeNavNode,SobreTasaGasolinaNavNode
 #->FIN dev-eduardo Agregar menu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu TRAMITES 04/01/2019
@@ -1335,8 +1336,8 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 #Footer Start
 
 # CMS Footer Component
-INSERT_UPDATE PSFooterComponent;$contentCV[unique=true];uid[unique=true];wrapAfter;&componentRef;showLanguageCurrency;navigationNodes(uid, $contentCV);socialNavigationNode(uid, $contentCV);
-;;FooterComponent;6;FooterComponent;true;NoticiasNavNode,CalendarioTributarioNavNode,IndiceRecaudacionNavNode,PredialNavNode;;
+#INSERT_UPDATE PSFooterComponent;$contentCV[unique=true];uid[unique=true];wrapAfter;&componentRef;showLanguageCurrency;navigationNodes(uid, $contentCV);socialNavigationNode(uid, $contentCV);
+#;;FooterComponent;6;FooterComponent;true;NoticiasNavNode,CalendarioTributarioNavNode,IndiceRecaudacionNavNode,PredialNavNode;;
 
 # CMS Navigation Nodes
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); children(uid, $contentCV)[mode = append]; links(uid, $contentCV); &nodeRef
