@@ -75,7 +75,4 @@
 	function btnCancelar(){
 		window.history.back();
 	}
-	function btnLimpiar(){
-		$("#numObjeto").val("");
-	}
 </script>

@@ -87,5 +87,6 @@
 		$("#tipdoc").val("");
 		$("#numdoc").val("");
 		$("#impuesto").val("");
+		$("#numObjeto").val("");
 	}
 </script>
