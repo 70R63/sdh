@@ -18,6 +18,7 @@ public class DetalleVehiculos
 	private String capacidadTon;
 	private String fechaCambio;
 	private String fechaInacti;
+	private String homologacion;
 
 	/**
 	 * @return the idServicio
@@ -26,7 +27,7 @@ public class DetalleVehiculos
 	{
 		return idServicio;
 	}
-	
+
 	/**
 	 * @param idServicio
 	 *           the idServicio to set
@@ -35,7 +36,7 @@ public class DetalleVehiculos
 	{
 		this.idServicio = idServicio;
 	}
-	
+
 	/**
 	 * @return the idEstado
 	 */
@@ -43,7 +44,7 @@ public class DetalleVehiculos
 	{
 		return idEstado;
 	}
-	
+
 	/**
 	 * @param idEstado
 	 *           the idEstado to set
@@ -52,7 +53,7 @@ public class DetalleVehiculos
 	{
 		this.idEstado = idEstado;
 	}
-	
+
 	/**
 	 * @return the watts
 	 */
@@ -60,7 +61,7 @@ public class DetalleVehiculos
 	{
 		return watts;
 	}
-	
+
 	/**
 	 * @param watts
 	 *           the watts to set
@@ -69,7 +70,7 @@ public class DetalleVehiculos
 	{
 		this.watts = watts;
 	}
-	
+
 	/**
 	 * @return the clasicoAntig
 	 */
@@ -77,7 +78,7 @@ public class DetalleVehiculos
 	{
 		return clasicoAntig;
 	}
-	
+
 	/**
 	 * @param clasicoAntig
 	 *           the clasicoAntig to set
@@ -86,7 +87,7 @@ public class DetalleVehiculos
 	{
 		this.clasicoAntig = clasicoAntig;
 	}
-	
+
 	/**
 	 * @return the tipoVeh
 	 */
@@ -94,7 +95,7 @@ public class DetalleVehiculos
 	{
 		return tipoVeh;
 	}
-	
+
 	/**
 	 * @param tipoVeh
 	 *           the tipoVeh to set
@@ -103,7 +104,7 @@ public class DetalleVehiculos
 	{
 		this.tipoVeh = tipoVeh;
 	}
-	
+
 	/**
 	 * @return the capacidadPas
 	 */
@@ -111,7 +112,7 @@ public class DetalleVehiculos
 	{
 		return capacidadPas;
 	}
-	
+
 	/**
 	 * @param capacidadPas
 	 *           the capacidadPas to set
@@ -120,7 +121,7 @@ public class DetalleVehiculos
 	{
 		this.capacidadPas = capacidadPas;
 	}
-	
+
 	/**
 	 * @return the capacidadTon
 	 */
@@ -128,7 +129,7 @@ public class DetalleVehiculos
 	{
 		return capacidadTon;
 	}
-	
+
 	/**
 	 * @param capacidadTon
 	 *           the capacidadTon to set
@@ -137,7 +138,7 @@ public class DetalleVehiculos
 	{
 		this.capacidadTon = capacidadTon;
 	}
-	
+
 	/**
 	 * @return the fechaCambio
 	 */
@@ -145,7 +146,7 @@ public class DetalleVehiculos
 	{
 		return fechaCambio;
 	}
-	
+
 	/**
 	 * @param fechaCambio
 	 *           the fechaCambio to set
@@ -159,7 +160,24 @@ public class DetalleVehiculos
 		return fechaInacti;
 	}
 
-	public void setFechaInacti(String fechaInacti) {
+	public void setFechaInacti(final String fechaInacti) {
 		this.fechaInacti = fechaInacti;
+	}
+
+	/**
+	 * @return the homologacion
+	 */
+	public String getHomologacion()
+	{
+		return homologacion;
+	}
+
+	/**
+	 * @param homologacion
+	 *           the homologacion to set
+	 */
+	public void setHomologacion(final String homologacion)
+	{
+		this.homologacion = homologacion;
 	}
 }
