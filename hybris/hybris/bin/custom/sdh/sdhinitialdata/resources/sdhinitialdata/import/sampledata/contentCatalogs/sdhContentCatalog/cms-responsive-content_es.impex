@@ -205,9 +205,9 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 
 
 ;;ARCertPagoLink;"Certificaciones de pago";"Haga clic aquí para acceder a la opción de menú Certificaciones de pago"
-;;ARObligacionesPendLink;"Obligaciones Pendientes";"Haga clic aquí para acceder a la opción de menú Obligaciones pendientes"
+#Se comenta por salida a produccion;;ARObligacionesPendLink;"Obligaciones Pendientes";"Haga clic aquí para acceder a la opción de menú Obligaciones pendientes"
 ;;ARRelPagosLink;"Relación de pagos";"Haga clic aquí para acceder a la opción de menú Relación de pagos"
-;;AREdoCuentaLink;"Estado de cuenta";"Haga clic aquí para acceder a la opción de menú Estado de cuenta"
+#Se comenta por salida a produccion;;AREdoCuentaLink;"Estado de cuenta";"Haga clic aquí para acceder a la opción de menú Estado de cuenta"
 ;;ARCertDeclaraLink;"Certificaciones de declaración";"Haga clic aquí para acceder a la opción de menú Certificaciones de Declaración"
 ;;ARDeclaracionesLink;"Declaraciones";"Haga clic aquí para acceder a la opción del menú Declaraciones"
 

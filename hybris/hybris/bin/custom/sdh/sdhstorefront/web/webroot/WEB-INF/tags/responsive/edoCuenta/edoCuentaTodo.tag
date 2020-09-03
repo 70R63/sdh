@@ -583,7 +583,7 @@
 			</div>
 		</div>
 
-		<div id="impRetenedor">
+		<div id="impRetenedor" style="display: none;">
 				<div class="row">
 					<div class="headline">
 						<h2>

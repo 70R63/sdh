@@ -227,7 +227,7 @@
 							code="ica.declaracion.liquidacion.valpag" /></label> <input
 						id="valorPagar" name="valorPagar"
 						class="etiqlargas form-control text-right !important" type="text"
-						value="${infoDeclara.valorPagar }" maxlength="240" ${roValorPagar}></input>
+						value="${infoDeclara.valorPagar }" maxlength="240" ${roValorPagar} disabled></input>
 				</div>
 			</div>
 		</div>
