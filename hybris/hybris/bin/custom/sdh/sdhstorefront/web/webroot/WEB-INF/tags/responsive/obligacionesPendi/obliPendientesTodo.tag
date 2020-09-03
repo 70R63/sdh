@@ -321,7 +321,9 @@
 													<c:when
 														test="${eachObIca.periodo == '01' || eachObIca.periodo == '02' || eachObIca.periodo == '03' || eachObIca.periodo == '04' || eachObIca.periodo == '05' || eachObIca.periodo == '06' }">
 														<td><c:out value="${peridoDesc[eachObIca.periodo]}" /></td>
-														<c:set var="clavePeriodo" value="${fn:substring(eachObIca.anioGravable, 2, 4)}B${fn:substring(eachObIca.periodo,1, 2)}"/>
+														<c:if test="${fn:length(eachObIca.anioGravable) >= 4}">
+															<c:set var="clavePeriodo" value="${fn:substring(eachObIca.anioGravable, 2, 4)}B${fn:substring(eachObIca.periodo,1, 2)}"/>
+														</c:if>
 													</c:when>
 													<c:otherwise>
 														<td><c:out value="${eachObIca.periodo}" /></td>
@@ -550,7 +552,7 @@
 													<td><label class="control-label"
 														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 														id="Detalle"
-														onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}','','${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}', '${eachDeliDet.obligacion}')">Pagar</label></td>
+														onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}','','${eachObGasDet.fechaVencimiento}', '${eachObGasDet.numReferencia}', '${eachObGasDet.obligacion}')">Pagar</label></td>
 												</tr>
 											</c:if>
 										</c:forEach>
@@ -630,8 +632,12 @@
 													<td><c:out value="${eachDeliDet.numFormulario}" /></td>
 													<td><c:out value="${eachDeliDet.numReferencia}" /></td>
 													<td><c:out value="${eachDeliDet.objetoContrato}" /></td>
-													<td><a
-														href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeliDet.obligacion}&objCont=${eachDeliDet.objetoContrato}&clvPer=${eachDeli.anioGravable}&tpImp=06" />">Generar
+													<td>
+													<c:set var="clavePeriodo" value=""/>
+													<c:if test="${fn:length(eachDeli.anioGravable) >= 4}">
+														<c:set var="clavePeriodo" value="${fn:substring(eachDeli.anioGravable, 2, 4)}A1"/>
+													</c:if>
+													<a href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeliDet.obligacion}&objCont=${eachDeliDet.objetoContrato}&clvPer=${clavePeriodo}&tpImp=06" />">Generar
 															ROP</a></td>
 													<td><label class="control-label"
 														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
