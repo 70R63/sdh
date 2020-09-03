@@ -1065,10 +1065,12 @@ public class TramitesCrearPageController extends AbstractPageController
 
 		//Agente Autorizado
 		agregarElementoTramites(elementos, "0900______", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "0901______", "01", "Crear Agente Autorizado Entidad Bancaria",
-				"contribuyentes/crearagente");
-		agregarElementoTramites(elementos, "0902______", "02", "Baja de Agente Autorizado",
+		agregarElementoTramites(elementos, "0901______", "01", "Crear Agente Autorizado", "contribuyentes/crearagente");
+		agregarElementoTramites(elementos, "0902______", "02", "Asignarse como Agente Autorizado",
 				"contribuyentes/asignarsecomoagente");
+		agregarElementoTramites(elementos, "0903______", "03", "Crear Agente Autorizado Entidad Bancaria", "ZT17",
+				"A1ZTRT0002Z038");
+		agregarElementoTramites(elementos, "0904______", "04", "Baja de Agente Autorizado", "ZT17", "A1ZTRT0002Z038");
 
 
 
