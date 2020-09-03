@@ -310,6 +310,7 @@
 									var="eachObIca">
 									<c:forEach items="${eachObIca.details }" var="eachObIcaDet">
 										<c:if test="${not empty eachObIcaDet.numReferencia }">
+											<c:set var="clavePeriodo" value="----"/>
 											<tr>
 												<%-- 												<td><c:out value="${eachObIca.tipoIdentificacion}" /></td> --%>
 												<%-- 												<td><c:out value="${eachObIca.noIdentificacion}" /></td> --%>
@@ -320,9 +321,11 @@
 													<c:when
 														test="${eachObIca.periodo == '01' || eachObIca.periodo == '02' || eachObIca.periodo == '03' || eachObIca.periodo == '04' || eachObIca.periodo == '05' || eachObIca.periodo == '06' }">
 														<td><c:out value="${peridoDesc[eachObIca.periodo]}" /></td>
+														<c:set var="clavePeriodo" value="${fn:substring(eachObIca.anioGravable, 2, 4)}B${fn:substring(eachObIca.periodo,1, 2)}"/>
 													</c:when>
 													<c:otherwise>
 														<td><c:out value="${eachObIca.periodo}" /></td>
+														<c:set var="clavePeriodo" value="${eachObIca.periodo}"/>
 													</c:otherwise>
 												</c:choose>
 												<td><c:out value="${eachObIcaDet.estadoObligacion}" /></td>
@@ -331,7 +334,7 @@
 												<td><c:out value="${eachObIcaDet.numReferencia}" /></td>
 												<td><c:out value="${eachObIcaDet.objetoContrato}" /></td>
 												<td><a
-													href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}&tpImp=02&objCont=${eachObIcaDet.objetoContrato}&clvPer=${eachObIca.periodo}" />">Generar
+													href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}&tpImp=02&objCont=${eachObIcaDet.objetoContrato}&clvPer=${clavePeriodo}" />">Generar
 														ROP</a></td>
 												<td><label class="control-label"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
