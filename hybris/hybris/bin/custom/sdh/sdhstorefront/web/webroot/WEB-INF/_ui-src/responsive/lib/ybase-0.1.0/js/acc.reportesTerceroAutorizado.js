@@ -191,19 +191,19 @@ ACC.reportesTerceroAutorizado = {
 		switch(opcionConsulta){
 		case "objeto":
 			if(flagSeMostroAlgunaTabla == false && idMensaje == "09"){
-				flagMostrarBoton = true;
+				flagMostrarBoton = false;
 			}
 			if(flagSeMostroAlgunaTabla == false && idMensaje == "02"){
-				flagMostrarBoton = false;
+				flagMostrarBoton = true;
 			}
 			break;
 		
 		case "sujeto":
 			if(flagSeMostroAlgunaTabla == false && idMensaje == "09"){
-				flagMostrarBoton = true;
+				flagMostrarBoton = false;
 			}
 			if(flagSeMostroAlgunaTabla == false && idMensaje == "02"){
-				flagMostrarBoton = false;
+				flagMostrarBoton = true;
 			}
 			break;
 		}
