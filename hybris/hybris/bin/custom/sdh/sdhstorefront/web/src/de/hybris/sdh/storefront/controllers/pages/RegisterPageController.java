@@ -71,6 +71,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping(value = "/register")
 public class RegisterPageController extends SDHAbstractRegisterPageController
 {
+	public int valorBuzon = 5;
 	private HttpSessionRequestCache httpSessionRequestCache;
 
 	private static final Logger LOG = Logger.getLogger(RegisterPageController.class);
@@ -226,6 +227,10 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 
 		final String msg = "No puedes acceder a este sitio";
 
+		final int valorBuzonData = valorBuzon;
+
+		System.out.println(valorBuzonData);
+
 		if(token.equals("null")) {
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,msg);
 			return "redirect:/login";
@@ -236,6 +241,7 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 
 
 		sdhCustomerAccountService.validateToken(token,bpNumbre);
+		model.addAttribute("valorBuzon", valorBuzon);
 		model.addAttribute("currentSection", "personalDataSection");
 		return getDefaultRegistrationPage(model);
 	}
@@ -398,6 +404,8 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 		{
 			sdhConsultaContribuyenteBPResponse = mapper.readValue(sdhConsultaContribuyenteBPService.consultaContribuyenteBP(bp),
 					SDHValidaMailRolResponse.class);
+
+			valorBuzon = sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getZZAUTOBUZONE();
 
 			if (sdhConsultaContribuyenteBPResponse != null && (sdhConsultaContribuyenteBPResponse.getRoles() == null
 					|| sdhConsultaContribuyenteBPResponse.getRoles().isEmpty()))
