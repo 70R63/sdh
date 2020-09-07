@@ -80,9 +80,9 @@
 				<table class="table" id="tabPaginacion0">
 					<thead style="cellspacing: 10 !important">
 						<tr>
-						<th style="text-align: center"><label class="control-label "
-								for=""><spring:theme
-										code="Año Gravable" /></label></th>
+<!-- 						<th style="text-align: center"><label class="control-label " -->
+<%-- 								for=""><spring:theme --%>
+<%-- 										code="Año Gravable" /></label></th> --%>
 							<th style="text-align: center"><label class="control-label "
 								for=""><spring:theme
 										code="reexpedicion.factura.predial.chip" /></label></th>
@@ -102,7 +102,7 @@
 							var="eachPredial">
 							<c:if test="${not empty eachPredial.anioGravable && not empty eachPredial.CHIP && not empty eachPredial.matrInmobiliaria && not empty eachPredial.direccionPredio}">
 						<tr>
-							<td><c:out value="${eachPredial.anioGravable}" /></td>
+<%-- 								<td><c:out value="${eachPredial.anioGravable}" /></td> --%>
 								<td><c:out value="${eachPredial.CHIP}" /></td>
 								<td><c:out value="${eachPredial.matrInmobiliaria}" /></td>
 								<td><c:out value="${eachPredial.direccionPredio}" /></td>
@@ -133,9 +133,9 @@
 				<table class="table" id="tabPaginacion1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
-						<th style="text-align: center"><label class="control-label "
-								for=""><spring:theme
-										code="año gravable" /></label></th>
+<!-- 						<th style="text-align: center"><label class="control-label " -->
+<%-- 								for=""><spring:theme --%>
+<%-- 										code="año gravable" /></label></th> --%>
 							<th style="text-align: center"><label class="control-label "
 								for=""><spring:theme
 										code="descarga.factura.vehiculo.placa" /></label></th>
@@ -152,7 +152,7 @@
 							var="eachVehiculo">
 							<c:if test="${not empty eachVehiculo.anioGravable && not empty eachVehiculo.placa && not empty eachVehiculo.marca}">
 							<tr>
-							<td><c:out value="${eachVehiculo.anioGravable}" /></td>
+<%-- 							<td><c:out value="${eachVehiculo.anioGravable}" /></td> --%>
 								<td><c:out value="${eachVehiculo.placa}" /></td>
 								<td><label class="labelVerDetVeh "><spring:theme
 											code="vehiculos.detalle.marca.${eachVehiculo.marca}" /></label></td>

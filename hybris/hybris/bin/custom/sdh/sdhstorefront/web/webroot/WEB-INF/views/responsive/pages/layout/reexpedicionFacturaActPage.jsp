@@ -13,8 +13,16 @@
 	
 <div class="loader"></div>
 
-<miRit:personalData />
-<miRit:generalData />
+
+<c:choose>
+	<c:when test="${ PJUR eq true}">
+		<miRit:personalDataPJ />
+	</c:when>
+	<c:otherwise>
+		<miRit:personalData />
+		<miRit:generalData />
+	</c:otherwise>
+</c:choose>
 <miRit:contactData />
 <facturacion:reexpedirFactura/>
 
