@@ -259,11 +259,11 @@
 	<context merge-by="principal" component="explorer-tree" principal="sdhemployeegroup">
 		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
 			<explorer-tree:navigation-node id="hmc_treenode_catalog" merge-mode="remove">
-
 			</explorer-tree:navigation-node>
+
 			<explorer-tree:navigation-node id="hmc_treenode_system" merge-mode="remove">
-
 			</explorer-tree:navigation-node>
+
 			<explorer-tree:navigation-node id="hmc_treenode_medias" merge-mode="remove">
 			</explorer-tree:navigation-node>
 			
