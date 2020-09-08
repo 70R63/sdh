@@ -161,27 +161,28 @@ ACC.mirit = {
 
  e.preventDefault();
 
-//		   var selectRefinementsTitle = "Términos y condiciones";
-//	        ACC.colorbox.open(selectRefinementsTitle, {
-//	            href: ".js-terminos-facet",
-//	            inline: true,
-//	            width: "90%",
-//	            onComplete: function () {
-//	                $(document).on("click", ".js-terminos-facet .js-facet-name-veh", function (e) {
-//	                    e.preventDefault();
-//	                    $(".js-terminos-facet  .js-facet-veh").removeClass("active");
-//	                    $(this).parents(".js-facet-veh").addClass("active");
-//	                    $.colorbox.resize()
-//	                })
-//	            },
-//	            onClosed: function () {
-//	                $(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
-//	            }
-//	        });
-var txt;
-  var r = confirm("Aquí van los términos y condiciones");
-  if (r == true) {
-	debugger;
+		   var selectRefinementsTitle = "Términos y condiciones";
+	        ACC.colorbox.open(selectRefinementsTitle, {
+	            href: ".js-terminos-facet",
+	            inline: true,
+	            width: "90%",
+	            onComplete: function () {
+	                $(document).on("click", ".js-terminos-facet .js-facet-name-veh", function (e) {
+	                    e.preventDefault();
+	                    $(".js-terminos-facet  .js-facet-veh").removeClass("active");
+	                    $(this).parents(".js-facet-veh").addClass("active");
+	                    $.colorbox.resize()
+	                })
+	            },
+	            onClosed: function () {
+	                $(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
+	            }
+	        });
+});
+	},
+	
+	terminosAceptar : function(){
+		debugger;
     var habcheck = document.getElementById("buzon2");
 	var habcheck2 = document.getElementById("buzon3");
 		habcheck.style.cursor=="auto";
@@ -190,12 +191,16 @@ var txt;
 	
 		$("#buzon2").attr("aria-checked", true);
 		$("#buzon3").attr("class", "checked");
-
-  } else {
-   $("#buzon2").attr("aria-checked", false);
+		$.colorbox.close();
+		$(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
+	},
+	
+	terminosCancelar : function(){
+		debugger;
+    $("#buzon2").attr("aria-checked", false);
 		$("#buzon3").attr("class", "control-label");
-  }
-});
+		$.colorbox.close();
+		$(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
 	},
 	
 	bindTermnsandConditionsRegister: function(){
@@ -203,51 +208,79 @@ var txt;
 
  e.preventDefault();
 
-//		   var selectRefinementsTitle = "Términos y condiciones";
-//	        ACC.colorbox.open(selectRefinementsTitle, {
-//	            href: ".js-terminos-facet",
-//	            inline: true,
-//	            width: "90%",
-//	            onComplete: function () {
-//	                $(document).on("click", ".js-terminos-facet .js-facet-name-veh", function (e) {
-//	                    e.preventDefault();
-//	                    $(".js-terminos-facet  .js-facet-veh").removeClass("active");
-//	                    $(this).parents(".js-facet-veh").addClass("active");
-//	                    $.colorbox.resize()
-//	                })
-//	            },
-//	            onClosed: function () {
-//	                $(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
-//	            }
-//	        });
-var txt;
-  var r = confirm("Aquí van los términos y condiciones");
-  if (r == true) {
-	debugger;
-   var habcheck = document.getElementById("useEmailForNotifications");
-	
-       var parent = habcheck.offsetParent;
-parent.ariaChecked=true;
-parent.attributes[4]=true;
-	var label = parent.lastElementChild;
-	label.attributes[0]="checked";
-	label.className="checked";
+		   var selectRefinementsTitle = "Términos y condiciones";
+	        ACC.colorbox.open(selectRefinementsTitle, {
+	            href: ".js-terminos-facet",
+	            inline: true,
+	            width: "90%",
+	            onComplete: function () {
+	                $(document).on("click", ".js-terminos-facet .js-facet-name-veh", function (e) {
+	                    e.preventDefault();
+	                    $(".js-terminos-facet  .js-facet-veh").removeClass("active");
+	                    $(this).parents(".js-facet-veh").addClass("active");
+	                    $.colorbox.resize()
+	                })
+	            },
+	            onClosed: function () {
+	                $(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
+	            }
+	        });
 
-		
-
-  } else {
-     var habcheck = document.getElementById("useEmailForNotifications");
+});
+	},
 	
+//	terminosAceptarRegister : function(){
+//		debugger;
+//   var habcheck = document.getElementById("useEmailForNotifications");
+//       var parent = habcheck.offsetParent;
+//parent.ariaChecked=true;
+//parent.attributes[4]=true;
+//	var label = parent.lastElementChild;
+//	label.attributes[0]="checked";
+//	label.className="checked";
+//	$.colorbox.close();
+//		$(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
+//
+//	},
+	
+	terminosCancelarRegister : function(){
+		debugger;
+       var habcheck = document.getElementById("useEmailForNotifications");
        var parent = habcheck.offsetParent;
 parent.ariaChecked=false;
 parent.attributes[4]=false;
 	var label = parent.lastElementChild;
 	label.attributes[0]="control-label";
 	label.className="control-label";
-  }
-});
+	$.colorbox.close();
+		$(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
 	},
 	
+		terminosRegister : function(){
+		debugger;
+       var habcheck = document.getElementById("useEmailForNotifications");
+       var parent = habcheck.offsetParent;
+parent.ariaChecked=true;
+parent.attributes[4]=true;
+	var label = parent.lastElementChild;
+	label.attributes[0]="checked";
+	label.className="checked";
+	$.colorbox.close();
+		$(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
+	},
+	
+	terminosAceptarRegisterTwo : function(){
+		debugger;
+//         var habcheck = document.getElementById("useEmailForNotifications");
+//       var parent = habcheck.offsetParent;
+//parent.ariaChecked=true;
+//parent.attributes[4]=true;
+//	var label = parent.lastElementChild;
+//	label.attributes[0]="checked";
+//	label.className="checked";
+//	$.colorbox.close();
+//		$(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
+	},
 	
 		 bindUpdateTelefonoButton: function () {
 		        $(document).on("click", "#updateTelefonoButton", function (e) {

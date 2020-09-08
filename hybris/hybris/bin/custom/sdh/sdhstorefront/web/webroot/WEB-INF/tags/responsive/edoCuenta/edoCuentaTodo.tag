@@ -12,166 +12,166 @@
 
 <div class="container">
 	<sf:form>
-
-		<div id="predial">
-			<div class="row">
-				<div class="headline">
-					<h2>
-						<span><spring:theme code="edocuenta.inicial.predio.titulo" /></span>
-					</h2>
+		<div id="impContribuyente" style="display: none;">
+			<div id="predial">
+				<div class="row">
+					<div class="headline">
+						<h2>
+							<span><spring:theme code="edocuenta.inicial.predio.titulo" /></span>
+						</h2>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="table-responsive text-center">
-						<table class="table tableedocuenta" id="tabPaginacion0">
-							<thead>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="table-responsive text-center">
+							<table class="table tableedocuenta" id="tabPaginacion0">
+								<thead>
 
-								<tr>
-									<th><label class="control-label labeltabletd"><spring:theme
-												code="edocuenta.inicial.predio.chip" /> </label></th>
-									<th><label class="control-label labeltabletd"><spring:theme
-												code="edocuenta.inicial.predio.matricula" /> </label></th>
-									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="edocuenta.inicial.predio.aniograv" /> </label></th>
-									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="edocuenta.inicial.predio.desthacen" /> </label></th>
-									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="edocuenta.inicial.predio.estado" /> </label></th>
-									<th><label class="control-label labeltabletd tableangrav"><spring:theme
-												code="edocuenta.inicial.predio.participa" /> </label></th>
-									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="edocuenta.inicial.predio.saldocargo" /> </label></th>
-									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="edocuenta.inicial.predio.saldofavor" /> </label></th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach varStatus="loop" items="${ctaForm.predial}"
-									var="eachPredial">
-									<c:forEach varStatus="loop"
-										items="${eachPredial.detallePredial}" var="eachPredialDetail">
-										<c:if
-											test="${not empty eachPredial.newCHIP || not empty eachPredial.matrInmobiliaria}">
-											<tr>
-												<td><c:out value="${eachPredial.newCHIP}" /></td>
-												<td><c:out value="${eachPredial.matrInmobiliaria}" /></td>
-												<td><c:out value="${eachPredialDetail.anioGravable}" /></td>
-												<td><c:out
-														value="${eachPredialDetail.destinohacendario}" /></td>
-												<td><c:out value="${eachPredialDetail.estado}" /></td>
-												<td><c:out
-														value="${eachPredialDetail.porcParticipacion}" /></td>
-												<td><c:out value="${eachPredialDetail.saldoCargo}" /></td>
-												<td><c:out value="${eachPredialDetail.saldoFavor}" /></td>
-											</tr>
-										</c:if>
+									<tr>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="edocuenta.inicial.predio.chip" /> </label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="edocuenta.inicial.predio.matricula" /> </label></th>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.predio.aniograv" /> </label></th>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.predio.desthacen" /> </label></th>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.predio.estado" /> </label></th>
+										<th><label class="control-label labeltabletd tableangrav"><spring:theme
+													code="edocuenta.inicial.predio.participa" /> </label></th>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.predio.saldocargo" /> </label></th>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.predio.saldofavor" /> </label></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach varStatus="loop" items="${ctaForm.predial}"
+										var="eachPredial">
+										<c:forEach varStatus="loop"
+											items="${eachPredial.detallePredial}" var="eachPredialDetail">
+											<c:if
+												test="${not empty eachPredial.newCHIP || not empty eachPredial.matrInmobiliaria}">
+												<tr>
+													<td><c:out value="${eachPredial.newCHIP}" /></td>
+													<td><c:out value="${eachPredial.matrInmobiliaria}" /></td>
+													<td><c:out value="${eachPredialDetail.anioGravable}" /></td>
+													<td><c:out
+															value="${eachPredialDetail.destinohacendario}" /></td>
+													<td><c:out value="${eachPredialDetail.estado}" /></td>
+													<td><c:out
+															value="${eachPredialDetail.porcParticipacion}" /></td>
+													<td><c:out value="${eachPredialDetail.saldoCargo}" /></td>
+													<td><c:out value="${eachPredialDetail.saldoFavor}" /></td>
+												</tr>
+											</c:if>
+										</c:forEach>
 									</c:forEach>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-					<div class="col-md-offset-6">
-						<table class="table tableedocuenta">
-							<tbody>
-								<tr>
-									<td class="td-total" style="width: 264px;"><label
-										class="control-label labeltabletd tableangrav labeltabletd"><spring:theme
-												code="edocuenta.inicial.predio.total" /> </label></td>
-									<td><c:out value="${ctaForm.predialSaldoCargo}" /></td>
-									<td><c:out value="${ctaForm.predialSaldoFavor}" /></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<!-- 					<div class="col-md-3 col-md-offset-8"> -->
-					<!-- 						<button type="button" class="btn btn-primary btn-lg" id="action" -->
-					<!-- 							name="action" value="Imprimir" style="margin-top: 3px" -->
-					<!-- 							onclick="ACC.oblipend.bindTrmPdf('01','2','predialReporte.pdf');"> -->
-					<%-- 							<spring:theme code="obligacion.inicial.imprimir" /> --%>
-					<!-- 						</button> -->
-					<!-- 					</div> -->
+								</tbody>
+							</table>
+						</div>
+						<div class="col-md-offset-6">
+							<table class="table tableedocuenta">
+								<tbody>
+									<tr>
+										<td class="td-total" style="width: 264px;"><label
+											class="control-label labeltabletd tableangrav labeltabletd"><spring:theme
+													code="edocuenta.inicial.predio.total" /> </label></td>
+										<td><c:out value="${ctaForm.predialSaldoCargo}" /></td>
+										<td><c:out value="${ctaForm.predialSaldoFavor}" /></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- 					<div class="col-md-3 col-md-offset-8"> -->
+						<!-- 						<button type="button" class="btn btn-primary btn-lg" id="action" -->
+						<!-- 							name="action" value="Imprimir" style="margin-top: 3px" -->
+						<!-- 							onclick="ACC.oblipend.bindTrmPdf('01','2','predialReporte.pdf');"> -->
+						<%-- 							<spring:theme code="obligacion.inicial.imprimir" /> --%>
+						<!-- 						</button> -->
+						<!-- 					</div> -->
 
-					<div class="col-md-3 col-md-offset-8">
-						<button type="button" class="btn btn-primary btn-lg"
-							id="ImprimirPopUp" name="ImprimirPopUp" value="ImprimirPopUp"
-							style="margin-top: 3px" data-impuesto="1">
-							<!--                             // onclick="ACC.oblipend.bindPopupPDF();" -->
-							<spring:theme code="obligacion.inicial.imprimir" />
-						</button>
+						<div class="col-md-3 col-md-offset-8">
+							<button type="button" class="btn btn-primary btn-lg"
+								id="ImprimirPopUp" name="ImprimirPopUp" value="ImprimirPopUp"
+								style="margin-top: 3px" data-impuesto="1">
+								<!--                             // onclick="ACC.oblipend.bindPopupPDF();" -->
+								<spring:theme code="obligacion.inicial.imprimir" />
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
 
 
-		<div id="vehiculos">
-			<div class="row">
-				<div class="headline">
-					<h2>
-						<span><spring:theme
-								code="edocuenta.inicial.vehiculo.titulo" /></span>
-					</h2>
+			<div id="vehiculos">
+				<div class="row">
+					<div class="headline">
+						<h2>
+							<span><spring:theme
+									code="edocuenta.inicial.vehiculo.titulo" /></span>
+						</h2>
+					</div>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="col-md-10 text-center">
-					<div class="table-responsive">
-						<table class="table tableedocuenta" id="tabPaginacion1">
-							<thead>
-								<tr>
-									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="edocuenta.inicial.vehiculo.placa" /> </label></th>
-									<th><label class="control-label labeltabletd tableangrav"><spring:theme
-												code="edocuenta.inicial.vehiculo.aniograv" /> </label></th>
-									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="edocuenta.inicial.vehiculo.estado" /> </label></th>
-									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="edocuenta.inicial.vehiculo.saldocargo" /> </label></th>
-									<th><label class="control-label labeltabletd tableangrav"><spring:theme
-												code="edocuenta.inicial.vehiculo.saldofavor" /> </label></th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach varStatus="loop" items="${ctaForm.tablaVehicular}"
-									var="eachVehicular">
-									<c:forEach varStatus="loop"
-										items="${eachVehicular.detalleVehicular}"
-										var="eachVehicularDetail">
-										<c:if
-											test="${not empty eachVehicularDetail.anioGravable && not empty eachVehicularDetail.estado}">
-											<tr>
-												<td><c:out value="${eachVehicular.placa}" /></td>
-												<td><c:out value="${eachVehicularDetail.anioGravable}" /></td>
-												<td><c:out value="${eachVehicularDetail.estado}" /></td>
-												<td><c:out value="${eachVehicularDetail.saldoCargo}" /></td>
-												<td><c:out value="${eachVehicularDetail.saldoFavor}" /></td>
-											</tr>
-										</c:if>
+				<div class="row">
+					<div class="col-md-10 text-center">
+						<div class="table-responsive">
+							<table class="table tableedocuenta" id="tabPaginacion1">
+								<thead>
+									<tr>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.vehiculo.placa" /> </label></th>
+										<th><label class="control-label labeltabletd tableangrav"><spring:theme
+													code="edocuenta.inicial.vehiculo.aniograv" /> </label></th>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.vehiculo.estado" /> </label></th>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.vehiculo.saldocargo" /> </label></th>
+										<th><label class="control-label labeltabletd tableangrav"><spring:theme
+													code="edocuenta.inicial.vehiculo.saldofavor" /> </label></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach varStatus="loop" items="${ctaForm.tablaVehicular}"
+										var="eachVehicular">
+										<c:forEach varStatus="loop"
+											items="${eachVehicular.detalleVehicular}"
+											var="eachVehicularDetail">
+											<c:if
+												test="${not empty eachVehicularDetail.anioGravable && not empty eachVehicularDetail.estado}">
+												<tr>
+													<td><c:out value="${eachVehicular.placa}" /></td>
+													<td><c:out value="${eachVehicularDetail.anioGravable}" /></td>
+													<td><c:out value="${eachVehicularDetail.estado}" /></td>
+													<td><c:out value="${eachVehicularDetail.saldoCargo}" /></td>
+													<td><c:out value="${eachVehicularDetail.saldoFavor}" /></td>
+												</tr>
+											</c:if>
+										</c:forEach>
 									</c:forEach>
-								</c:forEach>
 
-							</tbody>
-						</table>
-					</div>
-					<div class="col-md-offset-5">
-						<table class="table tableedocuenta">
-							<tbody>
-								<tr>
-									<td colspan="2" class="td-colspann"
-										style="border: 0px !important;"></td>
-									<td class="td-total" style="width: 264px;"><label
-										class="control-label labeltabletd"><spring:theme
-												code="edocuenta.inicial.vehiculo.total" /> </label></td>
-									<td><c:out value="${ctaForm.vehicularSaldoCargo}" /></td>
-									<td><c:out value="${ctaForm.vehicularSaldoFavor}" /></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					
+								</tbody>
+							</table>
+						</div>
+						<div class="col-md-offset-5">
+							<table class="table tableedocuenta">
+								<tbody>
+									<tr>
+										<td colspan="2" class="td-colspann"
+											style="border: 0px !important;"></td>
+										<td class="td-total" style="width: 264px;"><label
+											class="control-label labeltabletd"><spring:theme
+													code="edocuenta.inicial.vehiculo.total" /> </label></td>
+										<td><c:out value="${ctaForm.vehicularSaldoCargo}" /></td>
+										<td><c:out value="${ctaForm.vehicularSaldoFavor}" /></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
 						<!-- 						<button type="button" class="btn btn-primary btn-lg" id="action" -->
 						<!-- 							name="action" value="Imprimir" style="margin-top: 3px" -->
 						<!-- 							onclick="ACC.oblipend.bindTrmPdf('03','2','vehicularReporte.pdf');"> -->
@@ -184,10 +184,10 @@
 								<spring:theme code="obligacion.inicial.imprimir" />
 							</button>
 						</div>
-					
+
+					</div>
 				</div>
 			</div>
-
 
 			<div id="ica">
 				<div class="row">
@@ -197,17 +197,6 @@
 						</h2>
 					</div>
 				</div>
-				<!-- 			<div class="row"> -->
-				<!-- 				<div class="col-md-2"> -->
-				<!-- 					<div class="form-group"> -->
-				<%-- 						<label class="control-label"> <spring:theme --%>
-				<%-- 								code="edocuenta.inicial.ica.tiporegimen" /></label> <input --%>
-				<!-- 							class="form-cntrol" disabled="disabled" value="" type="text" /> -->
-				<!-- 					</div> -->
-				<!-- 				</div> -->
-				<!-- 			</div> -->
-
-
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<div class="table-responsive">
@@ -260,14 +249,14 @@
 								</tbody>
 							</table>
 						</div>
-<!-- 						<div class="col-md-3 col-md-offset-8"> -->
-<!-- 							<button type="button" class="btn btn-primary btn-lg" id="action" -->
-<!-- 								name="action" value="Imprimir" style="margin-top: 3px" -->
-<!-- 								onclick="ACC.oblipend.bindTrmPdf('02','2','icaReporte.pdf');"> -->
-<%-- 								<spring:theme code="obligacion.inicial.imprimir" /> --%>
-<!-- 							</button> -->
-<!-- 						</div> -->
-<div class="col-md-3 col-md-offset-8">
+						<!-- 						<div class="col-md-3 col-md-offset-8"> -->
+						<!-- 							<button type="button" class="btn btn-primary btn-lg" id="action" -->
+						<!-- 								name="action" value="Imprimir" style="margin-top: 3px" -->
+						<!-- 								onclick="ACC.oblipend.bindTrmPdf('02','2','icaReporte.pdf');"> -->
+						<%-- 								<spring:theme code="obligacion.inicial.imprimir" /> --%>
+						<!-- 							</button> -->
+						<!-- 						</div> -->
+						<div class="col-md-3 col-md-offset-8">
 							<button type="button" class="btn btn-primary btn-lg"
 								id="ImprimirPopUp" name="ImprimirPopUp" value="ImprimirPopUp"
 								style="margin-top: 3px" data-impuesto="3">
@@ -343,14 +332,14 @@
 								</tbody>
 							</table>
 						</div>
-<!-- 						<div class="col-md-3 col-md-offset-8"> -->
-<!-- 							<button type="button" class="btn btn-primary btn-lg" id="action" -->
-<!-- 								name="action" value="Imprimir" style="margin-top: 3px" -->
-<!-- 								onclick="ACC.oblipend.bindTrmPdf('06','2','delUrbanaReporte.pdf');"> -->
-<%-- 								<spring:theme code="obligacion.inicial.imprimir" /> --%>
-<!-- 							</button> -->
-<!-- 						</div> -->
-<div class="col-md-3 col-md-offset-8">
+						<!-- 						<div class="col-md-3 col-md-offset-8"> -->
+						<!-- 							<button type="button" class="btn btn-primary btn-lg" id="action" -->
+						<!-- 								name="action" value="Imprimir" style="margin-top: 3px" -->
+						<!-- 								onclick="ACC.oblipend.bindTrmPdf('06','2','delUrbanaReporte.pdf');"> -->
+						<%-- 								<spring:theme code="obligacion.inicial.imprimir" /> --%>
+						<!-- 							</button> -->
+						<!-- 						</div> -->
+						<div class="col-md-3 col-md-offset-8">
 							<button type="button" class="btn btn-primary btn-lg"
 								id="ImprimirPopUp" name="ImprimirPopUp" value="ImprimirPopUp"
 								style="margin-top: 3px" data-impuesto="4">
@@ -426,14 +415,14 @@
 								</tbody>
 							</table>
 						</div>
-<!-- 						<div class="col-md-3 col-md-offset-8"> -->
-<!-- 							<button type="button" class="btn btn-primary btn-lg" id="action" -->
-<!-- 								name="action" value="Imprimir" style="margin-top: 3px" -->
-<!-- 								onclick="ACC.oblipend.bindTrmPdf('08','2','sobGasolinaReporte.pdf');"> -->
-<%-- 								<spring:theme code="obligacion.inicial.imprimir" /> --%>
-<!-- 							</button> -->
-<!-- 						</div> -->
-<div class="col-md-3 col-md-offset-8">
+						<!-- 						<div class="col-md-3 col-md-offset-8"> -->
+						<!-- 							<button type="button" class="btn btn-primary btn-lg" id="action" -->
+						<!-- 								name="action" value="Imprimir" style="margin-top: 3px" -->
+						<!-- 								onclick="ACC.oblipend.bindTrmPdf('08','2','sobGasolinaReporte.pdf');"> -->
+						<%-- 								<spring:theme code="obligacion.inicial.imprimir" /> --%>
+						<!-- 							</button> -->
+						<!-- 						</div> -->
+						<div class="col-md-3 col-md-offset-8">
 							<button type="button" class="btn btn-primary btn-lg"
 								id="ImprimirPopUp" name="ImprimirPopUp" value="ImprimirPopUp"
 								style="margin-top: 3px" data-impuesto="5">
@@ -510,14 +499,14 @@
 								</tbody>
 							</table>
 						</div>
-<!-- 						<div class="col-md-3 col-md-offset-8"> -->
-<!-- 							<button type="button" class="btn btn-primary btn-lg" id="action" -->
-<!-- 								name="action" value="Imprimir" style="margin-top: 3px" -->
-<!-- 								onclick="ACC.oblipend.bindTrmPdf('54','2','pubExteriorReporte.pdf');"> -->
-<%-- 								<spring:theme code="obligacion.inicial.imprimir" /> --%>
-<!-- 							</button> -->
-<!-- 						</div> -->
-<div class="col-md-3 col-md-offset-8">
+						<!-- 						<div class="col-md-3 col-md-offset-8"> -->
+						<!-- 							<button type="button" class="btn btn-primary btn-lg" id="action" -->
+						<!-- 								name="action" value="Imprimir" style="margin-top: 3px" -->
+						<!-- 								onclick="ACC.oblipend.bindTrmPdf('54','2','pubExteriorReporte.pdf');"> -->
+						<%-- 								<spring:theme code="obligacion.inicial.imprimir" /> --%>
+						<!-- 							</button> -->
+						<!-- 						</div> -->
+						<div class="col-md-3 col-md-offset-8">
 							<button type="button" class="btn btn-primary btn-lg"
 								id="ImprimirPopUp" name="ImprimirPopUp" value="ImprimirPopUp"
 								style="margin-top: 3px" data-impuesto="6">
@@ -591,11 +580,81 @@
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+
+		<div id="impRetenedor" style="display: none;">
+				<div class="row">
+					<div class="headline">
+						<h2>
+							<span><spring:theme code="edocuenta.inicial.reteica.titulo" /></span>
+						</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<div class="table-responsive">
+							<table class="table tableedocuenta" id="example">
+								<thead>
+									<tr>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.ica.aniograv" /> </label></th>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.ica.periodo" /> </label></th>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.ica.estado" /> </label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="edocuenta.inicial.ica.saldocargo" /> </label></th>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.ica.saldofavor" /> </label></th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach varStatus="loop" items="${ctaForm.tablaICA}"
+										var="eachICA">
+										<c:forEach varStatus="loop" items="${eachICA.newDetalleICA}"
+											var="eachICADetail">
+											<tr>
+												<td><c:out value="${eachICADetail.anioGravable}" /></td>
+												<td><c:out value="${eachICADetail.periodo}" /></td>
+												<td><c:out value="${eachICADetail.estado}" /></td>
+												<td><c:out value="${eachICADetail.saldoCargo}" /></td>
+												<td><c:out value="${eachICADetail.saldoFavor}" /></td>
+											</tr>
+										</c:forEach>
+									</c:forEach>
+
+								</tbody>
+							</table>
+						</div>
+						<div class="col-md-offset-6">
+							<table class="table tableedocuenta">
+								<tbody>
+									<tr>
+										<td colspan="2" class="td-colspann"
+											style="border: 0px !important;"></td>
+										<td class="td-total" style="width: 264px;"><label
+											class="control-label labeltabletd"><spring:theme
+													code="edocuenta.inicial.ica.total" /> </label></td>
+										<td><c:out value="${ctaForm.iCASaldoCargo}" /></td>
+										<td><c:out value="${ctaForm.iCASaldoFavor}" /></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="col-md-3 col-md-offset-8">
+							<button type="button" class="btn btn-primary btn-lg"
+								id="ImprimirPopUp" name="ImprimirPopUp" value="ImprimirPopUp"
+								style="margin-top: 3px" data-impuesto="8">
+								<spring:theme code="obligacion.inicial.imprimir" />
+							</button>
+						</div>
+					</div>
+				</div>
 
 			</div>
 
-
-	
 	</sf:form>
 </div>
 

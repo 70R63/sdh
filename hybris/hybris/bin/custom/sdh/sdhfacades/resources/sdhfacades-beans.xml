@@ -58,6 +58,7 @@
 		<property name="icaTax" type="de.hybris.sdh.facades.questions.data.SDHICATaxData"/>
 		<property name="reteIcaTax" type="de.hybris.sdh.facades.questions.data.SDHReteICATaxData"/>
 		<property name="vehiculosTaxList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHVehiculosTaxData>"/>
+		<property name="predialTaxList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHPredialTaxData>"/>
 		
 	</bean>
 	
@@ -152,6 +153,15 @@
 		<property name="numPuertas" type="String"/>
 		<property name="blindado" type="String"/>
 		<property name="cilindraje" type="String"/>
+		<property name="numObjeto" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.sdh.facades.questions.data.SDHPredialTaxData">	
+		<property name="CHIP" type="String"/>
+		<property name="matrInmobiliaria" type="String"/>
+		<property name="direccionPredio" type="String"/>
+		<property name="contratoArrenda" type="String"/>
+		<property name="anioGravable" type="String"/>
 		<property name="numObjeto" type="String"/>
 	</bean>
 

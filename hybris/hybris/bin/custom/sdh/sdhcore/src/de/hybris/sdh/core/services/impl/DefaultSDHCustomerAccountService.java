@@ -36,6 +36,7 @@ import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
 import de.hybris.sdh.core.model.SDHGasTaxModel;
 import de.hybris.sdh.core.model.SDHICATaxModel;
 import de.hybris.sdh.core.model.SDHPhoneModel;
+import de.hybris.sdh.core.model.SDHPredialTaxModel;
 import de.hybris.sdh.core.model.SDHReteICATaxModel;
 import de.hybris.sdh.core.model.SDHRolModel;
 import de.hybris.sdh.core.model.SDHSocialNetworkModel;
@@ -57,6 +58,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 //import de.hybris.sdh.core.services.;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -852,6 +854,51 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 				customerModel.setVehiculosTaxList(null);
 			}
 
+
+
+			//clean old predial taxes
+
+			final List<SDHPredialTaxModel> oldPredialTaxModels = customerModel.getPredialTaxList();
+
+			if (oldPredialTaxModels != null && !oldPredialTaxModels.isEmpty())
+			{
+				modelService.removeAll(oldPredialTaxModels);
+			}
+
+			final List<PredialResponse> predial = sdhConsultaContribuyenteBPResponse.getPredial();
+
+			if (predial != null && !predial.isEmpty())
+			{
+
+				final List<SDHPredialTaxModel> newPredialTaxModels = new ArrayList<SDHPredialTaxModel>();
+
+				for (final PredialResponse eachPredialTax : predial)
+				{
+					if (StringUtils.isBlank(eachPredialTax.getCHIP()))
+					{
+						continue;
+					}
+
+					final SDHPredialTaxModel eachNewPredialTaxModel = new SDHPredialTaxModel();
+					eachNewPredialTaxModel.setCHIP(eachPredialTax.getCHIP());
+					eachNewPredialTaxModel.setMatrInmobiliaria(eachPredialTax.getMatrInmobiliaria());
+					eachNewPredialTaxModel.setDireccionPredio(eachPredialTax.getDireccionPredio());
+					eachNewPredialTaxModel.setContratoArrenda(eachPredialTax.getContratoArrenda());
+					eachNewPredialTaxModel.setAnioGravable(eachPredialTax.getAnioGravable());
+					eachNewPredialTaxModel.setNumObjeto(eachPredialTax.getNumObjeto());
+
+					newPredialTaxModels.add(eachNewPredialTaxModel);
+
+				}
+
+				modelService.saveAll(newPredialTaxModels);
+
+				customerModel.setPredialTaxList(newPredialTaxModels);
+			}
+			else
+			{
+				customerModel.setPredialTaxList(null);
+			}
 
 
 

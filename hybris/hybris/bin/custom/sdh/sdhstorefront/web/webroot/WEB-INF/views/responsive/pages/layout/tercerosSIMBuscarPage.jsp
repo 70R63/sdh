@@ -12,6 +12,7 @@
 <div class="loader"></div>
 
 <terceros:terceroSIMBuscar/>
+<terceros:terceroImprimirRep/>
 <terceros:tercero_predial/>
 <terceros:tercero_ica/>
 <terceros:tercero_reteica/>

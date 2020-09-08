@@ -7,8 +7,24 @@ import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.sdh.core.model.*;
-import de.hybris.sdh.facades.questions.data.*;
+import de.hybris.sdh.core.model.SDHAgentModel;
+import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
+import de.hybris.sdh.core.model.SDHGasTaxModel;
+import de.hybris.sdh.core.model.SDHICATaxModel;
+import de.hybris.sdh.core.model.SDHPredialTaxModel;
+import de.hybris.sdh.core.model.SDHReteICATaxModel;
+import de.hybris.sdh.core.model.SDHRolModel;
+import de.hybris.sdh.core.model.SDHUrbanDelineationsTaxModel;
+import de.hybris.sdh.core.model.SDHVehiculosTaxModel;
+import de.hybris.sdh.facades.questions.data.SDHAgentData;
+import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
+import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
+import de.hybris.sdh.facades.questions.data.SDHICATaxData;
+import de.hybris.sdh.facades.questions.data.SDHPredialTaxData;
+import de.hybris.sdh.facades.questions.data.SDHReteICATaxData;
+import de.hybris.sdh.facades.questions.data.SDHRolData;
+import de.hybris.sdh.facades.questions.data.SDHUrbanDelineationsTaxData;
+import de.hybris.sdh.facades.questions.data.SDHVehiculosTaxData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,6 +173,29 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 
 		}
 		target.setVehiculosTaxList(veTaxDatas);
+
+
+		final List<SDHPredialTaxModel> predialTaxModels = source.getPredialTaxList();
+		final List<SDHPredialTaxData> predialTaxDatas = new ArrayList<SDHPredialTaxData>();
+		if (null != predialTaxModels && !predialTaxModels.isEmpty())
+		{
+
+			for (final SDHPredialTaxModel eachModel : predialTaxModels)
+			{
+				final SDHPredialTaxData eachData = new SDHPredialTaxData();
+
+				eachData.setCHIP(eachModel.getCHIP());
+				eachData.setMatrInmobiliaria(eachModel.getMatrInmobiliaria());
+				eachData.setDireccionPredio(eachModel.getDireccionPredio());
+				eachData.setContratoArrenda(eachModel.getContratoArrenda());
+				eachData.setAnioGravable(eachModel.getAnioGravable());
+				eachData.setNumObjeto(eachModel.getNumObjeto());
+				predialTaxDatas.add(eachData);
+			}
+
+		}
+		target.setPredialTaxList(predialTaxDatas);
+
 
 		final List<SDHGasTaxModel> gasTaxModels = source.getGasTaxList();
 		final List<SDHGasTaxData> gasTaxDatas = new ArrayList<SDHGasTaxData>();

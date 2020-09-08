@@ -291,6 +291,12 @@ public class ConsultaEstado extends AbstractSearchPageController
 				miRitForm.setImpuestoICA(sdhConsultaContribuyenteBPResponse.getIca());
 			}
 
+			if (sdhConsultaContribuyenteBPResponse.getReteIca() != null
+					&& StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getReteIca().getNumObjeto()))
+			{
+				ctaForm.setTablaReteica(sdhConsultaContribuyenteBPResponse.getReteIca());
+			}
+
 		}
 		catch (final IOException e)
 		{

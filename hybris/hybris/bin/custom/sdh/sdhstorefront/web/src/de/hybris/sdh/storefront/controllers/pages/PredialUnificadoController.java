@@ -10,6 +10,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -438,6 +439,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 			if (detallePredialResponse != null)
 			{
+				predialFormuno.setCheckAporte_flag(detallePredialResponse.getCheckAporte());
 				predialFormuno.setObjetocontrato(predialInfoIniUno.getObjetocontrato());
 				predialFormuno.setNumDoc(predialInfoIniUno.getNumDoc());
 				predialFormuno.setCompleName(predialInfoIniUno.getCompleName());
@@ -646,6 +648,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 			if (detallePredialResponse != null)
 			{
+				predialFormdos.setCheckAporte_flag(detallePredialResponse.getCheckAporte());
 				predialFormdos.setObjetocontrato(predialInfoInidos.getObjetocontrato());
 				predialFormdos.setNumDoc(predialInfoInidos.getNumDoc());
 				predialFormdos.setCompleName(predialInfoInidos.getCompleName());
@@ -854,6 +857,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
 
+			predialFormtres.setCheckAporte_flag(detallePredialResponse.getCheckAporte());
 			predialFormtres.setObjetocontrato(predialInfoInitres.getObjetocontrato());
 			predialFormtres.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
 			predialFormtres.setOpcionuso(detallePredialResponse.getOpcionuso());
@@ -1045,6 +1049,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
 
+			predialFormcua.setCheckAporte_flag(detallePredialResponse.getCheckAporte());
 			predialFormcua.setObjetocontrato(predialInfoInicuatro.getObjetocontrato());
 			predialFormcua.setTipDoc(predialInfoInicuatro.getTipDoc());
 			predialFormcua.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
@@ -1239,6 +1244,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
 
+			predialFormcinco.setCheckAporte_flag(detallePredialResponse.getCheckAporte());
 			predialFormcinco.setObjetocontrato(predialInfoInicinco.getObjetocontrato());
 			predialFormcinco.setNumDoc(customerData.getDocumentNumber());
 			predialFormcinco.setCompleName(customerData.getCompleteName());
@@ -1429,6 +1435,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 			if (detallePredialResponse != null)
 			{
+				predialFormseis.setCheckAporte_flag(detallePredialResponse.getCheckAporte());
 				predialFormseis.setObjetocontrato(predialInfoIniseis.getObjetocontrato());
 				predialFormseis.setNumDoc(customerData.getDocumentNumber());
 				predialFormseis.setTipDoc(customerData.getDocumentType());
@@ -2002,6 +2009,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		if (detallePredialResponse != null)
 		{
+			predialFormbases.setCheckAporte_flag(detallePredialResponse.getCheckAporte());
 			predialFormbases.setObjetocontrato(predialInfoInibases.getObjetocontrato());
 			predialFormbases.setNumDoc(customerData.getDocumentNumber());
 			predialFormbases.setTipDoc(customerData.getDocumentType());
@@ -2758,7 +2766,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		{
 			responseRemapeo = new DetallePredialResponse();
 
-
+			responseRemapeo.setCheckAporte(predialInfo.getCheckAporte_flag());
 			responseRemapeo
 					.setOpcionuso(predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales().getOpcionuso());
 			responseRemapeo.setDireccionPredio(

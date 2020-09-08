@@ -408,6 +408,13 @@ public class MiRitPageController extends AbstractPageController
 						.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
 			}
 
+			if (sdhConsultaContribuyenteBPResponse.getPredial() != null
+					&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getPredial()))
+			{
+				miRitForm.setPredial(sdhConsultaContribuyenteBPResponse.getPredial().stream()
+						.filter(d -> StringUtils.isNotBlank(d.getCHIP())).collect(Collectors.toList()));
+			}
+
 			model.addAttribute("miRitForm", miRitForm);
 
 		}

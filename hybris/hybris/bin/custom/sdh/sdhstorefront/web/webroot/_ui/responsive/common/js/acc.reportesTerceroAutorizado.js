@@ -5,8 +5,8 @@ ACC.reportesTerceroAutorizado = {
 	
 	consultaTA : function(opcionConsulta) {
 
-
 		ACC.reportesTerceroAutorizado.vaciarTablasInfo();
+		ACC.reportesTerceroAutorizado.habilitarBotonGen('none');
 		ACC.reportesTerceroAutorizado.displayTablas('none', ACC.reportesTerceroAutorizado.todosImpuestos());
 		ACC.reportesTerceroAutorizado.bindDataTables_refresh();
 		if(ACC.reportesTerceroAutorizado.validarAntesSubmit(opcionConsulta)){
@@ -73,13 +73,14 @@ ACC.reportesTerceroAutorizado = {
 
 		var flagTablas = ACC.reportesTerceroAutorizado.determinarTablas(opcionConsulta,infoActual,infoResponse);
 		var flagMostrarTabla = {};
-
+		var claveImpuestoBTN = "";
 
 		ACC.reportesTerceroAutorizado.vaciarTablasInfo();
 		if (ACC.reportesTerceroAutorizado.mostrarErrores(infoResponse) != true || opcionConsulta == "objeto" ){
 
 			if(flagTablas.obligacionesPredios == true && infoResponse.obligacionesPredios != null && infoResponse.obligacionesPredios.length > 0){
 				$.each(infoResponse.obligacionesPredios, function (index,value){
+					if(value.chip != ""){
 					$('#table-predial1').append("<tr>"+
 						'<td>' + value.anoGravable + '</td>'+
 						'<td>' + value.chip + '</td>'+
@@ -88,79 +89,157 @@ ACC.reportesTerceroAutorizado = {
 						'<td><input id="obligacionesPredios_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
 						"</tr>");
 					flagMostrarTabla.obligacionesPredios = true;
+					}
 				});
+				if(opcionConsulta == "objeto"){
+					claveImpuestoBTN = "0001";
+				}
 			}
 			
 			if(flagTablas.obligacionesVehicular == true && infoResponse.obligacionesVehicular != null && infoResponse.obligacionesVehicular.length > 0){
 				$.each(infoResponse.obligacionesVehicular, function (index,value){
-					$('#table-vehicular1').append("<tr>"+
-						'<td>' + value.anoGravable + '</td>'+
-						'<td>' + value.placa + '</td>'+
-						'<td>' + value.modelo + '</td>'+
-						'<td>' + value.marca + '</td>'+
-						'<td>' + value.linea + '</td>'+
-						'<td><input id="obligacionesVehicular_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
-						"</tr>");
-					flagMostrarTabla.obligacionesVehicular = true;
+					if(value.placa!=""){
+						$('#table-vehicular1').append("<tr>"+
+							'<td>' + value.anoGravable + '</td>'+
+							'<td>' + value.placa + '</td>'+
+							'<td>' + value.modelo + '</td>'+
+							'<td>' + value.marca + '</td>'+
+							'<td>' + value.linea + '</td>'+
+							'<td><input id="obligacionesVehicular_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
+							"</tr>");
+						flagMostrarTabla.obligacionesVehicular = true;
+					}
 				});
+				if(opcionConsulta == "objeto"){
+					claveImpuestoBTN = "0002";
+				}
 			}
-			if(opcionConsulta == "objeto"){
-				flagMostrarTabla.obligacionesVehicular = true;
-			}
+
 			
 			if(flagTablas.obligacionesICA == true && infoResponse.obligacionesICA != null && infoResponse.obligacionesICA.length > 0){
 				$.each(infoResponse.obligacionesICA, function (index,value){
-					$('#table-ica1').append("<tr>"+
-						'<td>' + value.anoGravable + '</td>'+
-						'<td>' + value.periodo + '</td>'+
-						'<td><input id="obligacionesICA_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
-						"</tr>");
-					flagMostrarTabla.obligacionesICA = true;
+					if(value.anoGravable != "" && value.periodo != ""){
+						$('#table-ica1').append("<tr>"+
+							'<td>' + value.anoGravable + '</td>'+
+							'<td>' + value.periodo + '</td>'+
+							'<td><input id="obligacionesICA_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
+							"</tr>");
+						flagMostrarTabla.obligacionesICA = true;
+					}
 				});
 			}
 			
 			if(flagTablas.obligacionesGasolina == true && infoResponse.obligacionesGasolina != null && infoResponse.obligacionesGasolina.length > 0){
 				$.each(infoResponse.obligacionesGasolina, function (index,value){
-					$('#table-gasolina1').append("<tr>"+
-						'<td>' + value.anoGravable + '</td>'+
-						'<td>' + value.periodo + '</td>'+
-						'<td><input id="obligacionesGasolina_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
-						"</tr>");
-					flagMostrarTabla.obligacionesGasolina = true;
+					if(value.anoGravable != "" && value.periodo != ""){
+						$('#table-gasolina1').append("<tr>"+
+							'<td>' + value.anoGravable + '</td>'+
+							'<td>' + value.periodo + '</td>'+
+							'<td><input id="obligacionesGasolina_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
+							"</tr>");
+						flagMostrarTabla.obligacionesGasolina = true;
+					}
 				});
 			}
 			
 			if(flagTablas.obligacionesDelineacion == true && infoResponse.obligacionesDelineacion != null && infoResponse.obligacionesDelineacion.length > 0){
 				$.each(infoResponse.obligacionesDelineacion, function (index,value){
-					$('#table-delineacion1').append("<tr>"+
-						'<td>' + value.anoGravable + '</td>'+
-						'<td>' + value.cdu + '</td>'+
-						'<td>' + value.chip + '</td>'+
-						'<td>' + value.direccion + '</td>'+
-						'<td><input id="obligacionesDelineacion_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
-						"</tr>");
-					flagMostrarTabla.obligacionesDelineacion = true;
+					if(value.cdu != "" || value.chip != ""){
+						$('#table-delineacion1').append("<tr>"+
+							'<td>' + value.anoGravable + '</td>'+
+							'<td>' + value.cdu + '</td>'+
+							'<td>' + value.chip + '</td>'+
+							'<td>' + value.direccion + '</td>'+
+							'<td><input id="obligacionesDelineacion_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
+							"</tr>");
+						flagMostrarTabla.obligacionesDelineacion = true;
+					}
 				});
 			}
 
 			if(flagTablas.obligacionesPublicidad == true && infoResponse.obligacionesPublicidad != null && infoResponse.obligacionesPublicidad.length > 0){
 				$.each(infoResponse.obligacionesPublicidad, function (index,value){
-					$('#table-publicidad1').append("<tr>"+
-							'<td>' + value.anoGravable + '</td>'+
-							'<td>' + value.numResolucion + '</td>'+
-							'<td>' + value.direccionValla + '</td>'+
-							'<td>' + value.orientacionValla + '</td>'+
-							'<td><input id="obligacionesPublicidad_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
-							"</tr>");
-					flagMostrarTabla.obligacionesPublicidad = true;
+					if(value.anoGravable != "" && value.numResolucion != ""){
+						$('#table-publicidad1').append("<tr>"+
+								'<td>' + value.anoGravable + '</td>'+
+								'<td>' + value.numResolucion + '</td>'+
+								'<td>' + value.direccionValla + '</td>'+
+								'<td>' + value.orientacionValla + '</td>'+
+								'<td><input id="obligacionesPublicidad_registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="text" value="'+ value.estadoObligacion +'" data-chip="'+ value.chip +'"' +">" + "</td>"+
+								"</tr>");
+						flagMostrarTabla.obligacionesPublicidad = true;
+					}
 				});
 			}
 			
 			ACC.reportesTerceroAutorizado.displayTablas('block',flagMostrarTabla);
 		}
-
+		ACC.reportesTerceroAutorizado.mostrarBtnGenImprimir(opcionConsulta,flagMostrarTabla,infoResponse,claveImpuestoBTN);
 
 	},
+	
+	
+	mostrarBtnGenImprimir : function(opcionConsulta,flagMostrarTabla,infoResponse,claveImpuestoBTN){
+		var flagMostrarBoton = false;
+		var idMensaje = "";
+		var flagSeMostroAlgunaTabla = ACC.reportesTerceroAutorizado.seMostroAlgunaTabla(flagMostrarTabla);
+		
+		if (infoResponse != null && infoResponse.errores != null && infoResponse.errores[0] != null && infoResponse.errores[0].id_msj != null && infoResponse.errores[0].id_msj != ""){
+			idMensaje = infoResponse.errores[0].id_msj;
+		}
+		
+		switch(opcionConsulta){
+		case "objeto":
+			if(flagSeMostroAlgunaTabla == false && idMensaje == "09"){
+				flagMostrarBoton = true;
+			}
+			if(flagSeMostroAlgunaTabla == false && idMensaje == "02"){
+				flagMostrarBoton = false;
+			}
+			break;
+		
+		case "sujeto":
+			if(flagSeMostroAlgunaTabla == false && idMensaje == "09"){
+				flagMostrarBoton = true;
+			}
+			if(flagSeMostroAlgunaTabla == false && idMensaje == "02"){
+				flagMostrarBoton = false;
+			}
+			break;
+		}
+
+		if(flagMostrarBoton){
+			switch(opcionConsulta){
+			case "objeto":
+				$("#btnGenImprimirRep").data("claveImpuesto",claveImpuestoBTN);
+				break;
+			
+			case "sujeto":
+				$("#btnGenImprimirRep").data("claveImpuesto",$("#impuesto").val());
+				break;
+			}
+			ACC.reportesTerceroAutorizado.habilitarBotonGen('block');
+		}
+		
+	},
+	
+	
+	seMostroAlgunaTabla : function(flagMostrarTabla){
+		var flagValor = false;
+		
+		if(flagMostrarTabla.obligacionesPredios != undefined || 
+				flagMostrarTabla.obligacionesVehicular != undefined || 
+				flagMostrarTabla.obligacionesICA != undefined || 
+				flagMostrarTabla.obligacionesReteica != undefined || 
+				flagMostrarTabla.obligacionesGasolina != undefined || 
+				flagMostrarTabla.obligacionesDelineacion != undefined || 
+				flagMostrarTabla.obligacionesPublicidad != undefined){
+			flagValor = true;
+		}
+		
+		return flagValor;
+	},
+	
 	
 	determinarTablas :  function(opcionConsulta,infoActual,infoResponse){
 		var flags = {};
@@ -216,7 +295,7 @@ ACC.reportesTerceroAutorizado = {
 			if(nombreObjeto != null){
 				var doc = document.getElementById(nombreObjeto);
 				if(doc != null){
-					doc.style.display = 'block';
+//					doc.style.display = 'block';
 				}
 			}
 
@@ -231,48 +310,60 @@ ACC.reportesTerceroAutorizado = {
 	displayTablas : function(opcionDisplay,flagTabla){
 		var doc = null;
 		
-		if(flagTabla.obligacionesPredios == true){
-			doc = document.getElementById('table-predial');
-			if(doc != null){
-				doc.style.display = opcionDisplay;
+		if(flagTabla != undefined){
+			if(flagTabla.obligacionesPredios == true){
+				doc = document.getElementById('table-predial');
+				if(doc != null){
+					doc.style.display = opcionDisplay;
+				}
+			}
+			if(flagTabla.obligacionesVehicular == true){
+				doc = document.getElementById('table-vehicular');
+				if(doc != null){
+					doc.style.display = opcionDisplay;
+				}
+			}
+			if(flagTabla.obligacionesICA == true){
+				doc = document.getElementById('table-ica');
+				if(doc != null){
+					doc.style.display = opcionDisplay;
+				}
+			}
+			if(flagTabla.obligacionesReteica == true){
+				doc = document.getElementById('table-reteica');
+				if(doc != null){
+					doc.style.display = opcionDisplay;
+				}
+			}
+			if(flagTabla.obligacionesGasolina == true){
+				doc = document.getElementById('table-gasolina');
+				if(doc != null){
+					doc.style.display = opcionDisplay;
+				}
+			}
+			if(flagTabla.obligacionesDelineacion == true){
+				doc = document.getElementById('table-delineacion');
+				if(doc != null){
+					doc.style.display = opcionDisplay;
+				}
+			}
+			if(flagTabla.obligacionesPublicidad == true){
+				doc = document.getElementById('table-publicidad');
+				if(doc != null){
+					doc.style.display = opcionDisplay;
+				}
 			}
 		}
-		if(flagTabla.obligacionesVehicular == true){
-			doc = document.getElementById('table-vehicular');
-			if(doc != null){
-				doc.style.display = opcionDisplay;
-			}
+	},
+	
+	
+	habilitarBotonGen : function(opcionDisplay){
+		
+		var botonGen = document.getElementById('btnGenImprimirRep');
+		if(botonGen!=null){
+			botonGen.style.display = opcionDisplay;
 		}
-		if(flagTabla.obligacionesICA == true){
-			doc = document.getElementById('table-ica');
-			if(doc != null){
-				doc.style.display = opcionDisplay;
-			}
-		}
-		if(flagTabla.obligacionesReteica == true){
-			doc = document.getElementById('table-reteica');
-			if(doc != null){
-				doc.style.display = opcionDisplay;
-			}
-		}
-		if(flagTabla.obligacionesGasolina == true){
-			doc = document.getElementById('table-gasolina');
-			if(doc != null){
-				doc.style.display = opcionDisplay;
-			}
-		}
-		if(flagTabla.obligacionesDelineacion == true){
-			doc = document.getElementById('table-delineacion');
-			if(doc != null){
-				doc.style.display = opcionDisplay;
-			}
-		}
-		if(flagTabla.obligacionesPublicidad == true){
-			doc = document.getElementById('table-publicidad');
-			if(doc != null){
-				doc.style.display = opcionDisplay;
-			}
-		}
+		
 	},
 
 
@@ -322,7 +413,6 @@ ACC.reportesTerceroAutorizado = {
 	
 	
 	determinarData : function(opcionConsulta) {
-		debugger;
 		var dataActual = {};
 		
 		if(opcionConsulta=="objeto"){

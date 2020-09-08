@@ -122,6 +122,7 @@ public class VehiculosInfObjetoForm
 	private String campo_catalogo;
 	private CatalogoVehiculosResponse catalogo;
 	private String checkAporte_flag;
+	private String homologacion;
 
 	private VehiculosControlCamposDec controlCampos;
 	/**
@@ -1424,6 +1425,23 @@ public class VehiculosInfObjetoForm
 	public void setCheckAporte_flag(final String checkAporte_flag)
 	{
 		this.checkAporte_flag = checkAporte_flag;
+	}
+
+	/**
+	 * @return the homologacion
+	 */
+	public String getHomologacion()
+	{
+		return homologacion;
+	}
+
+	/**
+	 * @param homologacion
+	 *           the homologacion to set
+	 */
+	public void setHomologacion(final String homologacion)
+	{
+		this.homologacion = homologacion;
 	}
 
 

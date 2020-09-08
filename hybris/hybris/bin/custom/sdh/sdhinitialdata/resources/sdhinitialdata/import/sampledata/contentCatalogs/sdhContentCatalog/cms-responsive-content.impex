@@ -163,11 +163,11 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
 ; ; ARCertPagoLink                 ; CONSULTAS LINK                      ; "/agenteRetenedor/consultas/arCertipagos" ;;;;;
-; ; ARObligacionesPendLink         ; OBLIGACIONES PENDIENTES LINK        ; "/agenteRetenedor/consultas/obligaciones" ;;;;;
+#SE comenta por salida a produccion; ; ARObligacionesPendLink         ; OBLIGACIONES PENDIENTES LINK        ; "/agenteRetenedor/consultas/obligaciones" ;;;;;
 ; ; ARRelPagosLink                 ; RELACION DE PAGOS LINK              ; "/agenteRetenedor/consultas/relacionpagos" ;;;;;
 ; ; AREdoCuentaLink                ; ESTADO DE CUENTAS LINK              ; "/agenteRetenedor/estado-de-cuenta" ;;;;;
 ; ; ARCertDeclaraLink              ; CERTIFICACION DECLARACION LINK      ; "/agenteRetenedor/consultas/certideclaraciones" ;;;;;
-; ; ARDeclaracionesLink			   ; DECLARACIONES LINK   				 ;"/agenteRetenedor/consultas/declaraciones";;;;;
+#Se comenta por salida a produccion ; ; ARDeclaracionesLink			   ; DECLARACIONES LINK   				 ;"/agenteRetenedor/consultas/declaraciones";;;;;
 ; ; ARPresentarDeclaracionLink	   ; DECLARACIONES LINK   				 ;"/retenedores/estadocargas";;;;;
 ; ; ARListaDeclaracionLink	   	   ; LISTA LINK   				 			;"/agenteRetenedor/lista-declaraciones" ;;;;;
 
@@ -294,6 +294,7 @@ INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];name;uid[unique=tr
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
 #;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode,PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode, ReportantesNavigationNode, RetenedorDetalleNavigationNode, RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode
 ;ContribuyentesCategoryNavNode;;Contributentes Categories;SiteRootNode;ContribuyentesCategoryNavNode;MiRITContribuyentesNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,ConsultaNavigationNode
+#;ContribuyentesCategoryNavNode;;Contributentes Categories;SiteRootNode;ContribuyentesCategoryNavNode;MiRITContribuyentesNavigationNode
 ;AutorizadosCategoryNavNode;;Autorizados Categories;SiteRootNode;AutorizadosCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
 ;ReportantesInformacionCategoryNavNode;;Reportantes Categories;SiteRootNode;ReportantesInformacionCategoryNavNode;MiRITReportanteInformacionNavigationNode,ReportantesNavigationNode
 ;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;ARMiRITNavigationNode,ARMiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,ARConsultaNavigationNode
@@ -435,7 +436,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu MI BUZON 04/01/2019
 
 #->INI dev-eduardo Agregar menu IMPUESTOS 04/01/2019
-;ImpuestosNavigationServiceRequestsNavNodeMenu;;Impuestos Service Requests Menu;ImpuestosNavigationServiceRequestsNavNodeMenu;DelineacionUrbanaNavNode,NewPredialNavNode,ICANavNode,PredialUnificadoNavNode,PublicidadExteriorNavNode,NewSobreVehiNodeNavNode,SobreTasaGasolinaNavNode
+;ImpuestosNavigationServiceRequestsNavNodeMenu;;Impuestos Service Requests Menu;ImpuestosNavigationServiceRequestsNavNodeMenu;DelineacionUrbanaNavNode,NewPredialNavNode,ICANavNode,PublicidadExteriorNavNode,NewSobreVehiNodeNavNode,SobreTasaGasolinaNavNode
 #->FIN dev-eduardo Agregar menu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu TRAMITES 04/01/2019
@@ -461,7 +462,9 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
 ;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode, CertDeclaraNavNode, DeclaracionesNavNode
-;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertDeclaraNavNode,ARCertPagoNavNode, ARObligacionesPendNavNode, AREdoCuentaNavNode, ARDeclaracionesNavNode 
+#Se comenta por salida a produccion;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertDeclaraNavNode,ARCertPagoNavNode, ARObligacionesPendNavNode, AREdoCuentaNavNode, ARDeclaracionesNavNode
+#SE agrega la linea de abajo por salida a produccion
+;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertDeclaraNavNode,ARCertPagoNavNode,ARDeclaracionesNavNode 
 #->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
 
 ;ReportantesNavigationServiceRequestsNavNodeMenu;;Reportantes Service Requests Menu;ReportantesNavigationServiceRequestsNavNodeMenu;CargaNavNode, HistoricoNavNode, SancionesNavNode
@@ -589,11 +592,11 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;DeclaracionesNavNode;; Declaraciones Link; DeclaracionesNavNode
 
 ;ARCertPagoNavNode;;Certificacion Pago Link;ARCertPagoNavNode
-;ARObligacionesPendNavNode;;Obligaciones Pendientes Link;ARObligacionesPendNavNode
+#Se coemntta por salida a produccion;ARObligacionesPendNavNode;;Obligaciones Pendientes Link;ARObligacionesPendNavNode
 ;ARRelPagosNavNode;;Relacion Pagos Link;ARRelPagosNavNode
 ;ARCertDeclaraNavNode;; Certificacion Declaracion Link;ARCertDeclaraNavNode
 ;ARDeclaracionesNavNode;; Declaraciones Link; ARDeclaracionesNavNode
-;AREdoCuentaNavNode;;Estado Cuenta Link; AREdoCuentaNavNode
+#Se comenta por salida a produccion;AREdoCuentaNavNode;;Estado Cuenta Link; AREdoCuentaNavNode
 ;ARPresentarDeclaracionNavNode ;;Presentar Declaracion Link;ARPresentarDeclaracionNavNode
 ;ARListaDeclaracionNavNode ;; Lista Declaraciones Link;ARListaDeclaracionNavNode
 
@@ -722,11 +725,11 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 
 #;AR
 ;ARCertPagoNavNodeEntry;;Certificacion Pago Navigation Node Entry;ARCertPagoNavNode;ARCertPagoLink
-;ARObligacionesPendNavNodeEntry;;Obligaciones Pendientes Navigation Node Entry;ARObligacionesPendNavNode;ARObligacionesPendLink
+#Se comenta por salida a produccion;ARObligacionesPendNavNodeEntry;;Obligaciones Pendientes Navigation Node Entry;ARObligacionesPendNavNode;ARObligacionesPendLink
 ;ARRelPagosNavNodeEntry;;Relaciones Pagos Navigation Node Entry;ARRelPagosNavNode;ARRelPagosLink
 ;ARCertDeclaraNavNodeEntry;;Certificacion declaracion Navigation Node entry;ARCertDeclaraNavNode;ARCertDeclaraLink
 ;ARDeclaracionesNavNodeEntry;;Declaraciones Navigation Node Entry;ARDeclaracionesNavNode;ARDeclaracionesLink
-;AREdoCuentaNavNodeEntry;;Estado de cuenta Navigation Node Entry;AREdoCuentaNavNode;AREdoCuentaLink
+#Se comenta por salida a produccion;AREdoCuentaNavNodeEntry;;Estado de cuenta Navigation Node Entry;AREdoCuentaNavNode;AREdoCuentaLink
 
 ;ARPresentarDeclaracionNavNodeEntry;;Presentar declaracion Navigation Node Entry;ARPresentarDeclaracionNavNode;ARPresentarDeclaracionLink
 ;ARListaDeclaracionNavNodeEntry;; Lista Declaraciones Firma AR Navigation Node Entry;ARListaDeclaracionNavNode;ARListaDeclaracionLink
@@ -1335,8 +1338,8 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 #Footer Start
 
 # CMS Footer Component
-INSERT_UPDATE PSFooterComponent;$contentCV[unique=true];uid[unique=true];wrapAfter;&componentRef;showLanguageCurrency;navigationNodes(uid, $contentCV);socialNavigationNode(uid, $contentCV);
-;;FooterComponent;6;FooterComponent;true;NoticiasNavNode,CalendarioTributarioNavNode,IndiceRecaudacionNavNode,PredialNavNode;;
+#INSERT_UPDATE PSFooterComponent;$contentCV[unique=true];uid[unique=true];wrapAfter;&componentRef;showLanguageCurrency;navigationNodes(uid, $contentCV);socialNavigationNode(uid, $contentCV);
+#;;FooterComponent;6;FooterComponent;true;NoticiasNavNode,CalendarioTributarioNavNode,IndiceRecaudacionNavNode,PredialNavNode;;
 
 # CMS Navigation Nodes
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); children(uid, $contentCV)[mode = append]; links(uid, $contentCV); &nodeRef

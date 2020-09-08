@@ -1,23 +1,28 @@
 package de.hybris.sdh.storefront.controllers.rest;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import de.hybris.sdh.core.pojos.requests.*;
+import de.hybris.sdh.core.pojos.requests.AgentesAutBpRequest;
+import de.hybris.sdh.core.pojos.requests.AgentesAutImpuestoRequest;
+import de.hybris.sdh.core.pojos.requests.AutorizacionRequest;
+import de.hybris.sdh.core.pojos.requests.CalidadRequest;
+import de.hybris.sdh.core.pojos.requests.ImpuestoRequest;
+import de.hybris.sdh.core.pojos.requests.ListCalidadRequest;
 import de.hybris.sdh.core.pojos.responses.AgentesAutBpResponse;
 import de.hybris.sdh.core.pojos.responses.AgentesAutImpuestoResponse;
 import de.hybris.sdh.core.pojos.responses.DocumentoResponse;
 import de.hybris.sdh.core.pojos.responses.ListDocumentoResponse;
 import de.hybris.sdh.core.services.SDHAgentesAutBPService;
-import org.apache.log4j.Logger;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/agentesAut")
@@ -33,8 +38,15 @@ public class AgentesAutController {
                                       @RequestParam(value="numId", defaultValue="") final String numId,
                                       @RequestParam(value="fechaExp", defaultValue="") final String fechaExp){
 
-        AgentesAutBpRequest request = new AgentesAutBpRequest(tipoId,numId,fechaExp);
-        return sdhAgentesAutBPService.getAgentesAutBp(request);
+		AgentesAutBpResponse response = null;
+
+        final AgentesAutBpRequest request = new AgentesAutBpRequest(tipoId,numId,fechaExp);
+
+		System.out.println("Request de /crm/agentesAutBP: " + request);
+		response = sdhAgentesAutBPService.getAgentesAutBp(request);
+		System.out.println("Response de /crm/agentesAutBP: " + response);
+
+		return response;
     }
 
     @RequestMapping("/createAgente")
@@ -47,26 +59,26 @@ public class AgentesAutController {
         List<String> list;
 
         //Creating Calidades List
-        List<CalidadRequest> calidadesList = new ArrayList<>();
+        final List<CalidadRequest> calidadesList = new ArrayList<>();
         list = Arrays.asList(calidades.split(" "));
         list.forEach(calidad ->{ calidadesList.add(new CalidadRequest(calidad)); });
 
         //Getting Documents List
-        ListCalidadRequest calidadRequest = new ListCalidadRequest();
+        final ListCalidadRequest calidadRequest = new ListCalidadRequest();
         calidadRequest.setCalidades(calidadesList);
-        ListDocumentoResponse documentosResponse = sdhAgentesAutBPService.getCalidades(calidadRequest);
+        final ListDocumentoResponse documentosResponse = sdhAgentesAutBPService.getCalidades(calidadRequest);
 
         //Creating Impuestos List
-        List<ImpuestoRequest> impuestosList = new ArrayList<>();
+        final List<ImpuestoRequest> impuestosList = new ArrayList<>();
         list = Arrays.asList(impuestos.split(" "));
         list.forEach(impuesto ->{ impuestosList.add(new ImpuestoRequest(impuesto)); });
 
         //Creating Autorizaciones List
-        List<AutorizacionRequest> autorizacionesList = new ArrayList<>();
+        final List<AutorizacionRequest> autorizacionesList = new ArrayList<>();
         list = Arrays.asList(autorizaciones.split(" "));
         list.forEach(autorizacion ->{ autorizacionesList.add(new AutorizacionRequest(autorizacion)); });
 
-        AgentesAutImpuestoRequest agentesAutImpuestoRequest = new AgentesAutImpuestoRequest();
+        final AgentesAutImpuestoRequest agentesAutImpuestoRequest = new AgentesAutImpuestoRequest();
         agentesAutImpuestoRequest.setDocumentosAdjuntos(Objects.nonNull(documentosResponse) ?
                 documentosResponse.getDocumentos() : new ArrayList<DocumentoResponse>());
         agentesAutImpuestoRequest.setImpuestos(impuestosList);

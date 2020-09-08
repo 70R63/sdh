@@ -9,14 +9,9 @@
 
 
 <terceros:terceroOpcionesBuscar/>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <terceros:terceroSIMBuscar/>
 <terceros:terceroNotarioBuscar/>
+<terceros:terceroImprimirRep/>
 <terceros:tercero_predial/>
 <terceros:tercero_ica/>
 <terceros:tercero_reteica/>

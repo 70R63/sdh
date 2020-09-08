@@ -18,6 +18,7 @@ public class DetallePredialResponse
 	private String indicadorbasegravable;
 	private String autoavaluo;
 	private String direccionPredio;
+	private String checkAporte;
 
 	private PredialDatosJuridicos datosJuridicos;
 	private PredialDatosEconomicos datosEconomicos;
@@ -252,6 +253,23 @@ public class DetallePredialResponse
 	public void setDireccionPredio(final String direccionPredio)
 	{
 		this.direccionPredio = direccionPredio;
+	}
+
+	/**
+	 * @return the checkAporte
+	 */
+	public String getCheckAporte()
+	{
+		return checkAporte;
+	}
+
+	/**
+	 * @param checkAporte
+	 *           the checkAporte to set
+	 */
+	public void setCheckAporte(final String checkAporte)
+	{
+		this.checkAporte = checkAporte;
 	}
 
 

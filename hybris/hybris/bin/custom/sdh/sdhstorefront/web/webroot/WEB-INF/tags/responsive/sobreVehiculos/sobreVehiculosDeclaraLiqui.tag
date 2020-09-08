@@ -11,15 +11,38 @@
 
 <c:set var="disabledLiquidacion" value="" />
 <c:set var="disabledAporte" value="" />
-<c:if test="${vehiculosFormDeclaracion.checkAporte_flag == 1}">
+<c:set var="disabledLinea" value='disabled="disabled"' />
+<c:set var="disabledCilindraje" value='disabled="disabled"' />
+<c:set var="disabledAvaluo" value='disabled="disabled"' />
+
+<c:choose>
+<c:when test="${vehiculosFormDeclaracion.checkAporte_flag == 1}">
 	<c:set var="disabledAporte" value='' />
-</c:if>
-<c:if test="${vehiculosFormDeclaracion.checkAporte_flag == 2}">
+</c:when>
+<c:when test="${vehiculosFormDeclaracion.checkAporte_flag == 2}">
 	<c:set var="disabledAporte" value='disabled="disabled"' />
-</c:if>
+</c:when>
+</c:choose>
+
+<c:choose>
+<c:when test="${vehiculosFormDeclaracion.homologacion == 'X'}">
+	<c:set var="disabledLinea" value='' />
+	<c:set var="disabledCilindraje" value='' />
+	<c:set var="disabledAvaluo" value='' />
+</c:when>
+<c:when test="${vehiculosFormDeclaracion.homologacion == ''}">
+	<c:set var="disabledLinea" value='disabled="disabled"' />
+	<c:set var="disabledCilindraje" value='disabled="disabled"' />
+	<c:set var="disabledAvaluo" value='disabled="disabled"' />
+</c:when>
+</c:choose>
+
 <c:if test="${vehiculosFormDeclaracion.controlCampos.liquidacion == true}">
 	<c:set var="disabledLiquidacion" value='disabled="disabled"' />
 	<c:set var="disabledAporte" value='disabled="disabled"' />
+	<c:set var="disabledLinea" value='disabled="disabled"' />
+	<c:set var="disabledCilindraje" value='disabled="disabled"' />
+	<c:set var="disabledAvaluo" value='disabled="disabled"' />
 </c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
@@ -63,7 +86,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.linea" /></label> <select
 						id="linea" class="alto_select form-control" aria-required="true"
-						onchange='actualizarCampo("cilindraje")' ${disabledLiquidacion}></select>
+						onchange='actualizarCampo("cilindraje")' ${disabledLinea}></select>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -83,7 +106,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.cilindra" /></label> <select
 						id="cilindraje" class="alto_select form-control"
-						aria-required="true" onchange='actualizarCampo("avaluo")' ${disabledLiquidacion}></select>
+						aria-required="true" onchange='actualizarCampo("avaluo")' ${disabledCilindraje}></select>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -104,7 +127,7 @@
 							code="sobre.vehiculo.declaracion.vehiculo.liq.avalact" /></label> <input
 						id="avaluoAct" name="" class="newalto form-control avaluoAct"
 						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" ${disabledLiquidacion}>
+						value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" ${disabledAvaluo}>
 				</div>
 			</div>
 		</div>

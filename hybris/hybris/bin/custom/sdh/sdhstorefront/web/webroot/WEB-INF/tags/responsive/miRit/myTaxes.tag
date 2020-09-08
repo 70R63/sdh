@@ -207,6 +207,51 @@
 				</c:if>
 
 
+
+				<c:if test="${ not empty miRitForm.predial }">
+				
+					<div class="form-group ">
+						<label class="control-label " >
+							<spring:theme code="mirit.impuestos.predial.titulo"/>
+						</label>
+					</div>
+					<div class="row">
+						<div class="col-md-10">
+							<table class="table" id="tabPaginacion4" class="newtd">
+								<thead>
+									<tr>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="mirit.impuestos.predial.CHIP" /></label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="mirit.impuestos.predial.matrInmobiliaria" /></label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="mirit.impuestos.predial.direccionPredio" /></label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="mirit.impuestos.predial.contratoArrenda" /></label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="mirit.impuestos.predial.anioGravable" /></label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="mirit.impuestos.predial.numObjeto" /></label></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${miRitForm.predial}" var="eachItem">
+										<tr>
+											<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.CHIP}"></c:out></td>
+											<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.matrInmobiliaria}"/></td>
+											<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.direccionPredio}"/></td>
+											<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.contratoArrenda}"></c:out></td>
+											<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.anioGravable}"/></td>
+											<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.numObjeto}"/></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				
+				</c:if>
+
 				<!-- 		<div class="form-group "> -->
 				<!-- 			<label class="control-label " > -->
 				<%-- 				<spring:theme code="mirit.taxesData.unifiedPropertyTax"/> --%>

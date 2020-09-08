@@ -90,7 +90,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="reteica.declaracion.juridico.valpag" /></label>
-							<input id="valorPagar"
+							<input disabled id="valorPagar"
 								name="" class="form-control"  type="text" value="${calculoResponse.infoDeclara.valorPagar }"
 								maxlength="240"
 								style="width: 280px !important; text-align: center !important"></input>		 
@@ -121,16 +121,16 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-10">
-						<div class="form-group">
-							<button type="button" class="btn btn-primary text-center" id="actualizarButton" name="actualizarButton"
-								value="actualizar">
-								<spring:theme code="reteica.declaracion.juridico.actualizar" />
-							</button>
-						</div>
-					</div>
-				</div>
+<!-- 				<div class="row"> -->
+<!-- 					<div class="col-md-10"> -->
+<!-- 						<div class="form-group"> -->
+<!-- 							<button type="button" class="btn btn-primary text-center" id="actualizarButton" name="actualizarButton" -->
+<!-- 								value="actualizar"> -->
+<%-- 								<spring:theme code="reteica.declaracion.juridico.actualizar" /> --%>
+<!-- 							</button> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 			</form:form>
 		</div>
 	</div>
