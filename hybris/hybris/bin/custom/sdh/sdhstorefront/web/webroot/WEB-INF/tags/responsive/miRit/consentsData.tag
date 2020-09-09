@@ -182,14 +182,14 @@
 						<div class="row">
 							<div class="col-md-4">
 							<button class="btn btn-primary btn-block btn-lg " type="button"
-								id="cboxClose" onclick= "ACC.mirit.terminosAceptar()">
+								id="cboxClose_tmp" onclick= "ACC.mirit.terminosAceptar()">
 								<spring:theme code="Aceptar" />
 							</button>
 							</div>
 						
 							<div class="col-md-4">
 							<button class="btn btn-secondary btn-block btn-lg " type="button"
-								id="cboxClose" onclick= "ACC.mirit.terminosCancelar()">
+								id="cboxClose_tmp" onclick= "ACC.mirit.terminosCancelar()">
 								<spring:theme code="Cancelar" />
 							</button>
 							</div>
@@ -217,7 +217,7 @@
 		debugger;
 		var habcheck = document.getElementById("buzon2");
 		habcheck.style.cursor="auto";
-		habcheck.style.pointer-event="painted";
+// 		habcheck.style.pointer-event="painted";
 		alert("activar buzon");
 		
 	}
