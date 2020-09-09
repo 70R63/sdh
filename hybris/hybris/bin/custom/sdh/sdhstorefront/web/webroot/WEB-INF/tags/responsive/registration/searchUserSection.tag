@@ -75,7 +75,10 @@
 						
 						<div class="text-right">
 							<ycommerce:testId code="login_forgotPasswordSubmit_button">
-								<button class="btn btn-primary btn-lg" type="submit" >
+								<button class="btn btn-primary btn-lg" type="button" onclick="validarCampos()">
+									<spring:theme code="register.search"/>
+								</button>
+								<button class="btn btn-primary btn-lg" type="submit" style="display:none;" id="btnSearch">
 									<spring:theme code="register.search"/>
 								</button>
 								<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href = '<c:url value="/" />'">
@@ -91,3 +94,33 @@
 	</div>
 </div>
 </div>
+
+<script>
+function validarCampos() {
+	debugger;
+	var flagValidacion = false;
+	
+	var documentType = $("#documentType").val();
+	if($("#documentType").val()!= "" && documentType != "Seleccionar"){
+		switch (documentType){
+		case "CC":
+			var expeditionDate = $("#expeditionDate").val();
+			if(expeditionDate!= ""){
+				flagValidacion = true;
+			}else{
+				alert("El campo: "+'<spring:theme code="register.expeditioDate"/>'+" es obligatorio");
+			}
+			break;
+		default:
+			flagValidacion = true;
+			break;
+		}
+	}else{
+		alert("El campo: "+'<spring:theme code="register.documentType"/>'+" es obligatorio");
+	}
+	
+	if(flagValidacion == true){
+		$("#btnSearch").click();
+	}
+}
+</script>
