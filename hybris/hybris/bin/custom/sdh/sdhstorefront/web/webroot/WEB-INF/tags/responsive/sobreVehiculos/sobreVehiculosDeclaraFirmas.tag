@@ -34,10 +34,12 @@
 			
 
 			<sf:form action="${pagarURL}" method="POST" modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
+			<div class="col-md-1">
 				<button style="margin-top: 3px;" id="regresar"
 					class="btn btn-secondary btn-lg" onclick="goBack()" type="button">
 					<spring:theme code="vehiculos.declaracion.firma.regresar" />
 				</button>
+			</div>
 
 				<div class="col-md-3">
 					<a id="downloadHelper" target="_blank"></a>
@@ -69,9 +71,33 @@
 					</sf:button>
 					</c:if>
 				</div>
-			</sf:form>	
+			</sf:form>
+			<div class="col-md-1">
+				<button class="btn btn-primary btn-lg btnspac" type="button" id="btnspac"
+					data-numForm="${vehiculosFormDeclaracion.numForm}" 
+					data-anio="${vehiculosFormDeclaracion.anioGravable}" 
+					data-obj="${vehiculosFormDeclaracion.objetoCont}" 
+					data-reimpresion="">
+					<spring:theme code="predialuno.firma.spac" />
+				</button>
+			</div>	
 
 		</div>
+	</div>
+	<div class="col-md-6" id="tableSpac" style="visibility:hidden;">
+		<br><br>
+		<table class="table tableSpacPago" id="tableSpacPago">
+			<thead>
+				<tr>
+					<th><label class="control-label labeltabletd tableident"><spring:theme
+						code="spac.table.cuotas" /></label></th>
+					<th><label class="control-label labeltabletd"><spring:theme
+						code="spac.table.pagar" /></label></th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
 	</div>
 </div>
 
