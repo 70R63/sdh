@@ -122,7 +122,7 @@ public class VehiculosInfObjetoForm
 	private String campo_catalogo;
 	private CatalogoVehiculosResponse catalogo;
 	private String checkAporte_flag;
-	private String homologacion;
+	private String homologado;
 
 	private VehiculosControlCamposDec controlCampos;
 	/**
@@ -1428,21 +1428,22 @@ public class VehiculosInfObjetoForm
 	}
 
 	/**
-	 * @return the homologacion
+	 * @return the homologado
 	 */
-	public String getHomologacion()
+	public String getHomologado()
 	{
-		return homologacion;
+		return homologado;
 	}
 
 	/**
-	 * @param homologacion
-	 *           the homologacion to set
+	 * @param homologado
+	 *           the homologado to set
 	 */
-	public void setHomologacion(final String homologacion)
+	public void setHomologado(final String homologado)
 	{
-		this.homologacion = homologacion;
+		this.homologado = homologado;
 	}
+
 
 
 

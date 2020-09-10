@@ -25,12 +25,12 @@
 </c:choose>
 
 <c:choose>
-<c:when test="${vehiculosFormDeclaracion.homologacion == 'X'}">
+<c:when test="${vehiculosFormDeclaracion.homologado == 'X'}">
 	<c:set var="disabledLinea" value='' />
 	<c:set var="disabledCilindraje" value='' />
 	<c:set var="disabledAvaluo" value='' />
 </c:when>
-<c:when test="${vehiculosFormDeclaracion.homologacion == ''}">
+<c:when test="${vehiculosFormDeclaracion.homologado == ''}">
 	<c:set var="disabledLinea" value='disabled="disabled"' />
 	<c:set var="disabledCilindraje" value='disabled="disabled"' />
 	<c:set var="disabledAvaluo" value='disabled="disabled"' />

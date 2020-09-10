@@ -18,7 +18,7 @@ public class DetalleVehiculos
 	private String capacidadTon;
 	private String fechaCambio;
 	private String fechaInacti;
-	private String homologacion;
+	private String homologado;
 
 	/**
 	 * @return the idServicio
@@ -165,19 +165,21 @@ public class DetalleVehiculos
 	}
 
 	/**
-	 * @return the homologacion
+	 * @return the homologado
 	 */
-	public String getHomologacion()
+	public String getHomologado()
 	{
-		return homologacion;
+		return homologado;
 	}
 
 	/**
-	 * @param homologacion
-	 *           the homologacion to set
+	 * @param homologado
+	 *           the homologado to set
 	 */
-	public void setHomologacion(final String homologacion)
+	public void setHomologado(final String homologado)
 	{
-		this.homologacion = homologacion;
+		this.homologado = homologado;
 	}
+
+
 }
