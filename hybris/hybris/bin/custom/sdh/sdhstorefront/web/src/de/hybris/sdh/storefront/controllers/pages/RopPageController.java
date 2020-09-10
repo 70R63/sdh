@@ -146,7 +146,7 @@ public class RopPageController extends AbstractPageController
 		ropRequest.setNumBP(ropForm.getNumBP());
 		ropRequest.setNumObjeto(ropForm.getNumObjeto());
 		ropRequest.setClavePeriodo(ropForm.getClavePeriodo());
-		ropRequest.setConsulta("");
+		ropRequest.setConsulta(ropForm.getConsulta());
 		ropRequest.setImporteusuario(ropForm.getImporteusuario());
 
 		//		System.out.println("Request de infObjeto/rop: " + ropRequest);
