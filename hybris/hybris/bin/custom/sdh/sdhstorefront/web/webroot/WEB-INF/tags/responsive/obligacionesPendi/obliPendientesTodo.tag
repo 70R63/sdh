@@ -199,6 +199,9 @@
 									<th><label class="control-label labeltabletd" for="">
 											<spring:theme code="obligacion.inicial.vehiculo.pagar" />
 									</label></th>
+									<th><label class="control-label labeltabletd"> <spring:theme
+											code="obligacion.inicial.predio.spac" />
+									</label></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -227,6 +230,9 @@
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 													id="Detalle"
 													onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}' )">Pagar</label></td>
+												<td><label class="control-label btnGenerarSPACObliVehicular"
+													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+													id="btnGenerarSPACObliVehicular" data-numForm="${eachObVehiDet.numFormulario}" data-anio="${eachObVehi.anioGravable}" data-obj="${eachObVehiDet.objetoContrato}" data-reimpresion="X">Generar SPAC</label></td>
 											</tr>
 										</c:if>
 									</c:forEach>
@@ -244,6 +250,37 @@
 				</div>
 			</c:if>
 		</div>
+		
+	<div class="col-md-8" id="tableSpacVehicular" style="visibility:hidden;">
+	<br>
+		<input type="hidden" value="" id="anioGravPDFVehicular" class="anioGravPDF"/>
+		<input type="hidden" value="" id="objcontPDFVehicular"/>
+		<input type="hidden" value="" id="numFormPDFVehicular"/>
+		<input type="hidden" value="" id="numBPVehicular"/>
+		<table class="table tableSpacPago" id="tableSpacPagoVehicular">
+			<thead>
+				<tr>
+					<th><label class="control-label labeltabletd tableident"><spring:theme
+								code="spac.table.cuotas" /></label></th>
+					<th><label class="control-label labeltabletd tablenumiden"><spring:theme
+								code="spac.table.pagar" /></label></th>
+					<th><label class="control-label labeltabletd tablenumiden"><spring:theme
+								code="spac.table.monto" /></label></th>
+					<th><label class="control-label labeltabletd tablenumiden"><spring:theme
+								code="spac.table.estatus" /></label></th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+					
+		<div class="col-md-3 col-md-offset-8">
+			<button type="button" class="btn btn-primary btn-lg btnGenerarSpacPDFVehicular" id="btnGenerarSpacPDFVehicular"
+				name="btnGenerarSpacPDF" value="btnGenerarSpacPDF" style="margin-top: 3px">
+				<spring:theme code="spac.table.descargar" />
+			</button>
+		</div>
+	</div>
 </div>
 
 	<div class="container">
