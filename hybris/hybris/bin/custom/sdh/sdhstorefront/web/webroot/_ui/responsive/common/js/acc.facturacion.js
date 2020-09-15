@@ -23,8 +23,8 @@ ACC.facturacion = {
 						  $("#tabPaginacion0 tr").show();
 						  
 					  }else{
-					
-						  $("#tabPaginacion0 tr").hide();
+						  $("#tabPaginacion0 tr").show();
+//						  $("#tabPaginacion0 tr").hide();
 					  }
 					})
 					 
@@ -42,8 +42,8 @@ ACC.facturacion = {
 						  $("#tabPaginacion1 tr").show();
 						  
 					  }else{
-					
-						  $("#tabPaginacion1 tr").hide();
+						  $("#tabPaginacion1 tr").show();
+//						  $("#tabPaginacion1 tr").hide();
 					  }
 					})
 				tabpred.style.display = 'none';
