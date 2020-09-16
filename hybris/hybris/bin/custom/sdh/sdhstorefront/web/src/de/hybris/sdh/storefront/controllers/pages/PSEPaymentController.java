@@ -635,20 +635,6 @@ public class PSEPaymentController extends AbstractPageController
 	{
 		String flagSuccessView = null;
 
-		/*
-		 * LOG.info("--------- INI: Set up Proxy parameters ---------");
-		 *
-		 * System.setProperty("http.proxyHost", "186.31.132.21"); LOG.info(System.getProperty("http.proxyHost"));
-		 *
-		 * System.setProperty("http.proxyPort", "3128"); LOG.info(System.getProperty("http.proxyPort"));
-		 *
-		 * System.setProperty("https.proxyHost", "186.31.132.21"); LOG.info(System.getProperty("https.proxyHost"));
-		 *
-		 * System.setProperty("https.proxyPort", "3128"); LOG.info(System.getProperty("https.proxyPort"));
-		 *
-		 * LOG.info("---------END: Set up Proxy parameters ---------");
-		 */
-
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_REALIZAR_PAGO));

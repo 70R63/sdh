@@ -93,6 +93,31 @@ public class ContribuyentesPageController extends AbstractPageController
 	{
 		System.out.println("---------------- Hola entro al GET Contribuyentes --------------------------");
 
+      LOG.info("--------- INI: Set up Proxy parameters ---------");
+	  final String httpProxyHost = configurationService.getConfiguration().getString("sdh.pse.http.proxyHost");
+	  System.setProperty("http.proxyHost", httpProxyHost);
+	  LOG.info( "http.proxyHost:" + System.getProperty("http.proxyHost"));
+
+	  final String httpProxyPort = configurationService.getConfiguration().getString("sdh.pse.http.proxyPort");
+	  System.setProperty("http.proxyPort", httpProxyPort);
+	  LOG.info("http.proxyPort:" + System.getProperty("http.proxyPort"));
+
+	  final String httpsProxyHost = configurationService.getConfiguration().getString("sdh.pse.https.proxyHost");
+		System.setProperty("https.proxyHost", httpsProxyHost);
+	  LOG.info("https.proxyHost:" + System.getProperty("https.proxyHost"));
+
+	  final String httpsProxyPort = configurationService.getConfiguration().getString("sdh.pse.https.proxyPort");
+	  System.setProperty("https.proxyPort", httpsProxyPort);
+	  LOG.info("https.proxyPort:" + System.getProperty("https.proxyPort"));
+
+	  final String httpNonProxyHosts  = configurationService.getConfiguration().getString("sdh.pse.http.nonProxyHosts");
+	  System.setProperty("https.nonProxyHosts", httpNonProxyHosts);
+		LOG.info("https.nonProxyHosts:" + System.getProperty("https.proxyPort"));
+
+	  LOG.info("---------END: Set up Proxy parameters ---------");
+
+
+
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();

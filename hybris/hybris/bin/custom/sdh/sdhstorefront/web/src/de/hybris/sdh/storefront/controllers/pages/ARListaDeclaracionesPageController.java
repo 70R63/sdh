@@ -17,8 +17,8 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsulFirmasRequest;
@@ -69,6 +69,9 @@ public class ARListaDeclaracionesPageController extends AbstractPageController
 	@Resource(name = "sdhConsulFirmasService")
 	SDHConsulFirmasService sdhConsulFirmasService;
 
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
 	//	@Resource(name = "sdhCreaModContribuyenteFacade")
 	//	SDHCreaModContribuyenteFacade sdhCreaModContribuyenteFacade;
 
@@ -77,6 +80,29 @@ public class ARListaDeclaracionesPageController extends AbstractPageController
 	public String listadeclaraciones(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET Contribuyentes --------------------------");
+
+		LOG.info("--------- INI: Set up Proxy parameters ---------");
+	  final String httpProxyHost = configurationService.getConfiguration().getString("sdh.pse.http.proxyHost");
+	  System.setProperty("http.proxyHost", httpProxyHost);
+	  LOG.info( "http.proxyHost:" + System.getProperty("http.proxyHost"));
+
+	  final String httpProxyPort = configurationService.getConfiguration().getString("sdh.pse.http.proxyPort");
+	  System.setProperty("http.proxyPort", httpProxyPort);
+	  LOG.info("http.proxyPort:" + System.getProperty("http.proxyPort"));
+
+	  final String httpsProxyHost = configurationService.getConfiguration().getString("sdh.pse.https.proxyHost");
+		System.setProperty("https.proxyHost", httpsProxyHost);
+	  LOG.info("https.proxyHost:" + System.getProperty("https.proxyHost"));
+
+	  final String httpsProxyPort = configurationService.getConfiguration().getString("sdh.pse.https.proxyPort");
+	  System.setProperty("https.proxyPort", httpsProxyPort);
+	  LOG.info("https.proxyPort:" + System.getProperty("https.proxyPort"));
+
+	  final String httpNonProxyHosts  = configurationService.getConfiguration().getString("sdh.pse.http.nonProxyHosts");
+	  System.setProperty("https.nonProxyHosts", httpNonProxyHosts);
+		LOG.info("https.nonProxyHosts:" + System.getProperty("https.proxyPort"));
+
+	  LOG.info("---------END: Set up Proxy parameters ---------");
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
