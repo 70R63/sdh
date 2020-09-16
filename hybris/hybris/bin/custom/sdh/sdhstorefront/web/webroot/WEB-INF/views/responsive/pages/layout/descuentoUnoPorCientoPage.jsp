@@ -16,9 +16,12 @@
 <miRit:personalData />
 <miRit:generalData />
 <miRit:contactData />
+<miRit:consentsData />
+<facturacion:botones/>
 
-<facturacion:autorizaciones/>
-
+<div id="dialog" title="Autorizaciones">
+	<div id="ritDialogContent"></div>
+</div>
 <script type="text/javascript">
 window.onload = function() {
 	alert("Los contribuyentes del predial, pueden obtener un descuento adicional del 1% sobre el valor a pagar del impuesto predial, para la vigencia 2020 si actualizan y reportan su información de contacto y autorizan que los datos registrados puedan ser usados con fines institucionales y para la notificación electrónica. ");
