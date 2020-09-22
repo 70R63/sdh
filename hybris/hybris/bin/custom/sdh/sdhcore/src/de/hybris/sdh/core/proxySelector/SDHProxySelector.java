@@ -4,6 +4,8 @@
 package de.hybris.sdh.core.proxySelector;
 
 
+import de.hybris.platform.servicelayer.config.ConfigurationService;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -14,6 +16,10 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+
 
 /**
  * @author Praxis
@@ -21,7 +27,20 @@ import java.util.HashMap;
  */
 public class SDHProxySelector extends ProxySelector
 {
+
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
+
 	ProxySelector defsel = null;
+	private static final Logger LOG = Logger.getLogger(SDHProxySelector.class);
+
+	String config;
+	String httpProxyHostACH;
+	String httpProxyPortACH;
+	String httpProxyHostInternet;
+	String httpProxyPortInternet;
+	String proxyType;
 
 
 
@@ -33,7 +52,22 @@ public class SDHProxySelector extends ProxySelector
 		InnerProxy(final InetSocketAddress a)
 		{
 			addr = a;
-			proxy = new Proxy(Proxy.Type.HTTP, a);
+
+
+			if (proxyType.equals("SOCKS"))
+			{
+				proxy = new Proxy(Proxy.Type.SOCKS, a);
+				LOG.info("Tipo Proxy: " + Proxy.Type.SOCKS);
+				LOG.info("Address: " + a.toString());
+			}
+
+			if (proxyType.equals("HTTP"))
+			{
+				proxy = new Proxy(Proxy.Type.HTTP, a);
+				LOG.info("Tipo Proxy: " + Proxy.Type.HTTP);
+				LOG.info("Address: " + a.toString());
+			}
+
 		}
 
 		SocketAddress address()
@@ -49,25 +83,104 @@ public class SDHProxySelector extends ProxySelector
 	}
 
 	HashMap<SocketAddress, InnerProxy> proxies = new HashMap<SocketAddress, InnerProxy>();
+	HashMap<SocketAddress, InnerProxy> proxiACH = new HashMap<SocketAddress, InnerProxy>();
+	HashMap<SocketAddress, InnerProxy> proxiInternet = new HashMap<SocketAddress, InnerProxy>();
 
-	public SDHProxySelector(final ProxySelector def)
+	public SDHProxySelector(final ProxySelector def, final String pconfig, final String phttpProxyHostACH,
+			final String phttpProxyPortACH, final String phttpProxyHostInternet, final String phttpProxyPortInternet,
+			final String pproxyType)
 	{
 
 		super();
 
+		config = pconfig;
+		httpProxyHostACH = phttpProxyHostACH;
+		httpProxyPortACH = phttpProxyPortACH;
+		httpProxyHostInternet = phttpProxyHostInternet;
+		httpProxyPortInternet = phttpProxyPortInternet;
+		proxyType = pproxyType;
+
 		defsel = def;
 
-		try
+
+
+		LOG.info("---------------INI Carga de lista de proxys:------------------------");
+
+		if (config.equals("1"))
 		{
-			InnerProxy i = new InnerProxy(new InetSocketAddress(InetAddress.getByName("186.31.132.21"), 3128));
-			proxies.put(i.address(), i);
-			i = new InnerProxy(new InetSocketAddress(InetAddress.getByName("147.204.152.42"), 3128));
-			proxies.put(i.address(), i);
+
+			try
+			{
+				final InnerProxy i = new InnerProxy(
+						new InetSocketAddress(InetAddress.getByName(httpProxyHostACH), new Integer(httpProxyPortACH).intValue()));
+				proxiACH.put(i.address(), i);
+			}
+			catch (final Exception ex)
+			{
+				System.err.println(ex);
+			}
+
 		}
-		catch (final Exception ex)
+
+		if (config.equals("2"))
 		{
-			System.err.println(ex);
+
+			try
+			{
+				final InnerProxy i = new InnerProxy(new InetSocketAddress(InetAddress.getByName(httpProxyHostInternet),
+						new Integer(httpProxyPortInternet).intValue()));
+				proxiInternet.put(i.address(), i);
+			}
+			catch (final Exception ex)
+			{
+				LOG.info(ex);
+			}
 		}
+
+
+		if (config.equals("3"))
+		{
+
+			try
+			{
+				final InnerProxy i = new InnerProxy(
+						new InetSocketAddress(InetAddress.getByName(httpProxyHostACH), new Integer(httpProxyPortACH).intValue()));
+				proxiACH.put(i.address(), i);
+			}
+			catch (final Exception ex)
+			{
+				LOG.info(ex);
+			}
+
+			try
+			{
+				final InnerProxy i = new InnerProxy(new InetSocketAddress(InetAddress.getByName(httpProxyHostInternet),
+						new Integer(httpProxyPortInternet).intValue()));
+				proxiInternet.put(i.address(), i);
+			}
+			catch (final Exception ex)
+			{
+				LOG.info(ex);
+			}
+
+
+			/*
+			 * try { final String httpProxyHostACH =
+			 * configurationService.getConfiguration().getString("sdh.pse.http.proxyHostACH"); final String
+			 * httpProxyPortACH = configurationService.getConfiguration().getString("sdh.pse.http.proxyPortACH");
+			 * InnerProxy i = new InnerProxy( new InetSocketAddress(InetAddress.getByName(httpProxyHostACH), new
+			 * Integer(httpProxyPortACH).intValue())); proxies.put(i.address(), i);
+			 *
+			 * final String httpProxyHostInternet = configurationService.getConfiguration()
+			 * .getString("sdh.pse.http.proxyHostInternet"); final String httpProxyPortInternet =
+			 * configurationService.getConfiguration() .getString("sdh.pse.http.proxyPortInternet"); i = new InnerProxy(new
+			 * InetSocketAddress(InetAddress.getByName(httpProxyHostInternet), new
+			 * Integer(httpProxyPortInternet).intValue())); proxies.put(i.address(), i); } catch (final Exception ex) {
+			 * System.err.println(ex); }
+			 */
+		}
+
+		LOG.info("---------------FIN Carga de lista de proxys:------------------------");
 	}
 
 
@@ -81,19 +194,97 @@ public class SDHProxySelector extends ProxySelector
 			throw new IllegalArgumentException("URI can't be null.");
 		}
 
-		final String protocol = uri.getScheme();
-		if ("http".equalsIgnoreCase(protocol) || "https".equalsIgnoreCase(protocol))
-		{
-			final ArrayList<Proxy> l = new ArrayList<Proxy>();
-			final SocketAddress sa;
-			for (final InnerProxy p : proxies.values())
-			{
-				l.add(p.toProxy());
-				System.out.println(p.address());
 
+
+
+
+		if (config.equals("1"))
+		{
+
+			LOG.info("---------------INI Configuracion 1:------------------------");
+			final String host = uri.getHost();
+			if ("200.1.124.65".equalsIgnoreCase(host))
+			{
+				final ArrayList<Proxy> l = new ArrayList<Proxy>();
+				final SocketAddress sa;
+				for (final InnerProxy p : proxiACH.values())
+				{
+					l.add(p.toProxy());
+					LOG.info(p.address());
+				}
+				return l;
 			}
-			return l;
+			LOG.info("---------------FIN Configuracion 1:------------------------");
+
 		}
+
+
+
+
+		if (config.equals("2"))
+		{
+
+			LOG.info("---------------INI Configuracion 2:------------------------");
+			final String protocol = uri.getScheme();
+			if ("http".equalsIgnoreCase(protocol) || "https".equalsIgnoreCase(protocol))
+			{
+				final ArrayList<Proxy> l = new ArrayList<Proxy>();
+				final SocketAddress sa;
+				for (final InnerProxy p : proxiInternet.values())
+				{
+					l.add(p.toProxy());
+					LOG.info(p.address());
+
+				}
+				return l;
+			}
+			LOG.info("---------------FIN Configuracion 2:------------------------");
+
+		}
+
+
+
+
+		if (config.equals("3"))
+		{
+
+
+			final String host = uri.getHost();
+			if ("200.1.124.65".equalsIgnoreCase(host))
+			{
+				LOG.info("---------------INI Configuracion 3:------------------------");
+				final ArrayList<Proxy> l = new ArrayList<Proxy>();
+				final SocketAddress sa;
+				for (final InnerProxy p : proxiACH.values())
+				{
+					l.add(p.toProxy());
+					LOG.info(p.address());
+
+				}
+				LOG.info("---------------FIN Configuracion 3:------------------------");
+				return l;
+			}
+
+
+			final String protocol = uri.getScheme();
+			if ("http".equalsIgnoreCase(protocol) || "https".equalsIgnoreCase(protocol))
+			{
+				LOG.info("---------------INI Configuracion 3:------------------------");
+				final ArrayList<Proxy> l = new ArrayList<Proxy>();
+				final SocketAddress sa;
+				for (final InnerProxy p : proxiInternet.values())
+				{
+					l.add(p.toProxy());
+					LOG.info(p.address());
+
+				}
+				LOG.info("---------------FIN Configuracion 3:------------------------");
+				return l;
+			}
+
+
+		}
+
 
 		/*
 		 * Not HTTP or HTTPS (could be SOCKS or FTP) defer to the default selector.

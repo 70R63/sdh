@@ -96,7 +96,15 @@ public class ContribuyentesPageController extends AbstractPageController
 
 
 		System.out.println("---------------- INI Seleccion Proxy --------------------------");
-		final SDHProxySelector sdhps = new SDHProxySelector(ProxySelector.getDefault());
+		final String pconfig = configurationService.getConfiguration().getString("sdh.pse.http.configuracion");
+		final String phttpProxyHostACH = configurationService.getConfiguration().getString("sdh.pse.http.proxyHostACH");
+		final String phttpProxyPortACH = configurationService.getConfiguration().getString("sdh.pse.http.proxyPortACH");
+		final String phttpProxyHostInternet = configurationService.getConfiguration().getString("sdh.pse.http.proxyHostInternet");
+		final String phttpProxyPortInternet = configurationService.getConfiguration().getString("sdh.pse.http.proxyPortInternet");
+		final String pproxyType = configurationService.getConfiguration().getString("sdh.pse.http.proxy.type");
+
+		final SDHProxySelector sdhps = new SDHProxySelector(ProxySelector.getDefault(), pconfig, phttpProxyHostACH,
+				phttpProxyPortACH, phttpProxyHostInternet, phttpProxyPortInternet, pproxyType);
 		ProxySelector.setDefault(sdhps);
 		System.out.println("---------------- FIN Seleccion Proxy --------------------------");
 
