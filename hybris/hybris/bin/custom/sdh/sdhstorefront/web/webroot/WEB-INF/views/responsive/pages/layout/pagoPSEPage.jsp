@@ -37,7 +37,8 @@
 <script>
 
 	function goBack() {
-		window.history.back();
+		//window.history.back();
+		window.location.replace("/bogota/es/");
 	}
 </script>
 

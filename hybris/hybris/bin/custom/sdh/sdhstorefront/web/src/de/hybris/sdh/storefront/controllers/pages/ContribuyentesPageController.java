@@ -93,28 +93,69 @@ public class ContribuyentesPageController extends AbstractPageController
 	{
 		System.out.println("---------------- Hola entro al GET Contribuyentes --------------------------");
 
-      LOG.info("--------- INI: Set up Proxy parameters ---------");
-	  final String httpProxyHost = configurationService.getConfiguration().getString("sdh.pse.http.proxyHost");
-	  System.setProperty("http.proxyHost", httpProxyHost);
-	  LOG.info( "http.proxyHost:" + System.getProperty("http.proxyHost"));
 
-	  final String httpProxyPort = configurationService.getConfiguration().getString("sdh.pse.http.proxyPort");
-	  System.setProperty("http.proxyPort", httpProxyPort);
-	  LOG.info("http.proxyPort:" + System.getProperty("http.proxyPort"));
+		LOG.info("--------- INI: Set up Proxy parameters ---------");
 
-	  final String httpsProxyHost = configurationService.getConfiguration().getString("sdh.pse.https.proxyHost");
-		System.setProperty("https.proxyHost", httpsProxyHost);
-	  LOG.info("https.proxyHost:" + System.getProperty("https.proxyHost"));
+		final String httpProxyHost = configurationService.getConfiguration().getString("sdh.pse.http.proxyHost_1");
+		if (httpProxyHost.equals("null") || httpProxyHost.equals(""))
+		{
+			System.clearProperty("http.proxyHost");
+		}
+		else
+		{
+			System.setProperty("http.proxyHost", httpProxyHost);
+		}
+		LOG.info("http.proxyHost_1:" + System.getProperty("http.proxyHost"));
 
-	  final String httpsProxyPort = configurationService.getConfiguration().getString("sdh.pse.https.proxyPort");
-	  System.setProperty("https.proxyPort", httpsProxyPort);
-	  LOG.info("https.proxyPort:" + System.getProperty("https.proxyPort"));
 
-	  final String httpNonProxyHosts  = configurationService.getConfiguration().getString("sdh.pse.http.nonProxyHosts");
-	  System.setProperty("https.nonProxyHosts", httpNonProxyHosts);
-		LOG.info("https.nonProxyHosts:" + System.getProperty("https.proxyPort"));
+		final String httpProxyPort = configurationService.getConfiguration().getString("sdh.pse.http.proxyPort_1");
+		if (httpProxyPort.equals("null") || httpProxyPort.equals(""))
+		{
+			System.clearProperty("http.proxyPort");
+		}
+		else
+		{
+			System.setProperty("http.proxyPort", httpProxyPort);
+		}
+		LOG.info("http.proxyPort_1:" + System.getProperty("http.proxyPort"));
 
-	  LOG.info("---------END: Set up Proxy parameters ---------");
+
+		final String httpsProxyHost = configurationService.getConfiguration().getString("sdh.pse.https.proxyHost_1");
+		if (httpsProxyHost.equals("null") || httpsProxyHost.equals(""))
+		{
+			System.clearProperty("https.proxyHost");
+		}
+		else
+		{
+			System.setProperty("https.proxyHost", httpsProxyHost);
+		}
+		LOG.info("https.proxyHost_1:" + System.getProperty("https.proxyHost"));
+
+
+		final String httpsProxyPort = configurationService.getConfiguration().getString("sdh.pse.https.proxyPort_1");
+		if (httpsProxyPort.equals("null") || httpsProxyPort.equals(""))
+		{
+			System.clearProperty("https.proxyPort");
+		}
+		else
+		{
+			System.setProperty("https.proxyPort", httpsProxyPort);
+		}
+		LOG.info("https.proxyPort_1:" + System.getProperty("https.proxyPort"));
+
+
+		final String httpNonProxyHosts = configurationService.getConfiguration().getString("sdh.pse.http.nonProxyHosts_1");
+		if (httpNonProxyHosts.equals("null") || httpNonProxyHosts.equals(""))
+		{
+			System.clearProperty("http.nonProxyHosts");
+		}
+		else
+		{
+			System.setProperty("http.nonProxyHosts", httpNonProxyHosts);
+		}
+		LOG.info("http.nonProxyHosts_1:" + System.getProperty("http.nonProxyHosts"));
+
+		LOG.info("---------END: Set up Proxy parameters ---------");
 
 
 
