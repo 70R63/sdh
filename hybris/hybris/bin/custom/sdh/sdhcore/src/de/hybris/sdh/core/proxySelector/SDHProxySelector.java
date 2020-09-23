@@ -286,6 +286,42 @@ public class SDHProxySelector extends ProxySelector
 		}
 
 
+
+		if (config.equals("4"))
+		{
+
+			LOG.info("---------------INI Configuracion 4:------------------------");
+
+
+			final String host = uri.getHost();
+			if ("200.1.124.65".equalsIgnoreCase(host))
+			{
+				LOG.info("httpProxyHostACH: " + httpProxyHostACH);
+				LOG.info("httpProxyPortACH: " + httpProxyPortACH);
+
+
+				final ArrayList<Proxy> proxies = new ArrayList<>();
+
+				if (proxyType.equals("SOCKS"))
+				{
+					proxies.add(new Proxy(Proxy.Type.SOCKS,
+							new InetSocketAddress(httpProxyHostACH, new Integer(httpProxyPortACH).intValue())));
+				}
+				if (proxyType.equals("HTTP"))
+				{
+					proxies.add(new Proxy(Proxy.Type.HTTP,
+							new InetSocketAddress(httpProxyHostACH, new Integer(httpProxyPortACH).intValue())));
+				}
+
+				LOG.info("we enter to proxy server 186");
+
+				return proxies;
+			}
+			LOG.info("---------------FIN Configuracion 4:------------------------");
+		}
+
+
+
 		/*
 		 * Not HTTP or HTTPS (could be SOCKS or FTP) defer to the default selector.
 		 */
