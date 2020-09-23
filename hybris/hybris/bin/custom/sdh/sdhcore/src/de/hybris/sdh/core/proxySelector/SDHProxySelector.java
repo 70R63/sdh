@@ -293,11 +293,17 @@ public class SDHProxySelector extends ProxySelector
 			LOG.info("---------------INI Configuracion 4:------------------------");
 
 
+			LOG.info("Authority = " +  uri.getAuthority ());
+			LOG.info("Fragment = " + uri.getFragment ());
+			LOG.info("Host = " + uri.getHost ());
+			LOG.info("Path = " + uri.getPath ());
+			LOG.info("Port = " + uri.getPort ());
+			LOG.info("Query = " + uri.getQuery ());
+			LOG.info("Scheme = " + uri.getScheme ());
+
 			final String host = uri.getHost();
 			if ("200.1.124.65".equalsIgnoreCase(host))
 			{
-				LOG.info("httpProxyHostACH: " + httpProxyHostACH);
-				LOG.info("httpProxyPortACH: " + httpProxyPortACH);
 
 
 				final ArrayList<Proxy> proxies = new ArrayList<>();
@@ -306,17 +312,27 @@ public class SDHProxySelector extends ProxySelector
 				{
 					proxies.add(new Proxy(Proxy.Type.SOCKS,
 							new InetSocketAddress(httpProxyHostACH, new Integer(httpProxyPortACH).intValue())));
+
+					LOG.info("Proxy Type: SOCKS");
+					LOG.info("httpProxyHostACH: " + httpProxyHostACH);
+					LOG.info("httpProxyPortACH: " + httpProxyPortACH);
+
 				}
-				if (proxyType.equals("HTTP"))
+				else if (proxyType.equals("HTTP"))
 				{
 					proxies.add(new Proxy(Proxy.Type.HTTP,
 							new InetSocketAddress(httpProxyHostACH, new Integer(httpProxyPortACH).intValue())));
+
+					LOG.info("Proxy Type: HTTP");
+					LOG.info("httpProxyHostACH: " + httpProxyHostACH);
+					LOG.info("httpProxyPortACH: " + httpProxyPortACH);
 				}
 
 				LOG.info("we enter to proxy server 186");
 
 				return proxies;
 			}
+
 			LOG.info("---------------FIN Configuracion 4:------------------------");
 		}
 
