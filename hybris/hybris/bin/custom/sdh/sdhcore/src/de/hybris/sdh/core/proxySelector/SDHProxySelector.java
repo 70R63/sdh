@@ -253,6 +253,15 @@ public class SDHProxySelector extends ProxySelector
 			if ("200.1.124.65".equalsIgnoreCase(host))
 			{
 				LOG.info("---------------INI Configuracion 3:------------------------");
+
+				LOG.info("Authority = " + uri.getAuthority());
+				LOG.info("Fragment = " + uri.getFragment());
+				LOG.info("Host = " + uri.getHost());
+				LOG.info("Path = " + uri.getPath());
+				LOG.info("Port = " + uri.getPort());
+				LOG.info("Query = " + uri.getQuery());
+				LOG.info("Scheme = " + uri.getScheme());
+
 				final ArrayList<Proxy> l = new ArrayList<Proxy>();
 				final SocketAddress sa;
 				for (final InnerProxy p : proxiACH.values())
@@ -270,6 +279,15 @@ public class SDHProxySelector extends ProxySelector
 			if ("http".equalsIgnoreCase(protocol) || "https".equalsIgnoreCase(protocol))
 			{
 				LOG.info("---------------INI Configuracion 3:------------------------");
+
+				LOG.info("Authority = " + uri.getAuthority());
+				LOG.info("Fragment = " + uri.getFragment());
+				LOG.info("Host = " + uri.getHost());
+				LOG.info("Path = " + uri.getPath());
+				LOG.info("Port = " + uri.getPort());
+				LOG.info("Query = " + uri.getQuery());
+				LOG.info("Scheme = " + uri.getScheme());
+
 				final ArrayList<Proxy> l = new ArrayList<Proxy>();
 				final SocketAddress sa;
 				for (final InnerProxy p : proxiInternet.values())
