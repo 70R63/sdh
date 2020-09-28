@@ -79,6 +79,7 @@
                     option.text = v.description;
                     option.innerHTML = v.description;
                     bankSelect.appendChild(option);
+                    
                  });
             },
             error : function(jqXHR, exception){

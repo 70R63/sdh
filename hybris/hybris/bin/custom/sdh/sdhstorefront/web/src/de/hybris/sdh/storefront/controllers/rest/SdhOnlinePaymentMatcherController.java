@@ -3,11 +3,11 @@ package de.hybris.sdh.storefront.controllers.rest;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.soap.pse.PseServices;
 import de.hybris.sdh.core.soap.pse.beans.ConstantConnectionData;
-import de.hybris.sdh.core.soap.pse.eanucc.GetBankListResponseInformationType;
-import de.hybris.sdh.core.soap.pse.impl.MessageHeader;import de.hybris.sdh.facades.online.payment.data.OnlinePaymentSelectInputBoxData;
+import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
+import de.hybris.sdh.facades.online.payment.data.OnlinePaymentSelectInputBoxData;
 import de.hybris.sdh.facades.online.payment.impl.DefaultSDHOnlinePaymentProviderMatcherFacade;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,9 +15,6 @@ import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
-import java.util.List;
 @RestController
 @RequestMapping("/onlinePaymentMatcher")
 public class SdhOnlinePaymentMatcherController {
@@ -33,10 +30,14 @@ public class SdhOnlinePaymentMatcherController {
 
 
     @RequestMapping("/getBanks")
-	public List<OnlinePaymentSelectInputBoxData> getBanks(@RequestParam(value="tax", defaultValue="") String tax,
-                                                          @RequestParam(value="paymentMethod", defaultValue="") String paymentMethod) {
+	public List<OnlinePaymentSelectInputBoxData> getBanks(@RequestParam(value="tax", defaultValue="") final String tax,
+                                                          @RequestParam(value="paymentMethod", defaultValue="") final String paymentMethod) {
 
-		return sdhOnlinePaymentProviderMatcherFacade.getBankList(tax, paymentMethod);
+
+		final List<OnlinePaymentSelectInputBoxData> result = sdhOnlinePaymentProviderMatcherFacade.getBankList(tax, paymentMethod);
+		result.sort(Comparator.comparing(OnlinePaymentSelectInputBoxData::getDescription));
+
+		return result;
 
     }
 
