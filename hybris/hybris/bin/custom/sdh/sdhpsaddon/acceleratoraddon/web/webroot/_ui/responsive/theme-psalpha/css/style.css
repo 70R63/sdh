@@ -25288,3 +25288,9 @@ header {
   background: url(../../../responsive/common/images/checkbox_tick.png) no-repeat scroll 0 0;
   border: 1px solid #cccccc;
 }
+.container_new_page {
+  width: 85%;
+}
+.container {
+  width: 85%;
+}
