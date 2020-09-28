@@ -24,11 +24,13 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsulFirmasRequest;
 import de.hybris.sdh.core.pojos.responses.ContribFirmasResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleDeclaraciones;
+import de.hybris.sdh.core.proxySelector.SDHProxySelector;
 import de.hybris.sdh.core.services.SDHConsulFirmasService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.ContribuyenteForm;
 
+import java.net.ProxySelector;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -91,72 +93,29 @@ public class ContribuyentesPageController extends AbstractPageController
 	@RequireHardLogIn
 	public String showView(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
+
+
+		final String pconfig = configurationService.getConfiguration().getString("sdh.pse.http.configuracion");
+
+		if (pconfig.equals("3") || pconfig.equals("4"))
+		{
+   		System.out.println("---------------- INI Seleccion Proxy --------------------------");
+
+   		final String phttpProxyHostACH = configurationService.getConfiguration().getString("sdh.pse.http.proxyHostACH");
+   		final String phttpProxyPortACH = configurationService.getConfiguration().getString("sdh.pse.http.proxyPortACH");
+   		final String phttpProxyHostInternet = configurationService.getConfiguration().getString("sdh.pse.http.proxyHostInternet");
+   		final String phttpProxyPortInternet = configurationService.getConfiguration().getString("sdh.pse.http.proxyPortInternet");
+   		final String pproxyType = configurationService.getConfiguration().getString("sdh.pse.http.proxy.type");
+
+   		final SDHProxySelector sdhps = new SDHProxySelector(ProxySelector.getDefault(), pconfig, phttpProxyHostACH,
+   				phttpProxyPortACH, phttpProxyHostInternet, phttpProxyPortInternet, pproxyType);
+   		ProxySelector.setDefault(sdhps);
+   		System.out.println("---------------- FIN Seleccion Proxy --------------------------");
+		}
+
+
+
 		System.out.println("---------------- Hola entro al GET Contribuyentes --------------------------");
-
-
-		LOG.info("--------- INI: Set up Proxy parameters ---------");
-
-		final String httpProxyHost = configurationService.getConfiguration().getString("sdh.pse.http.proxyHost_1");
-		if (httpProxyHost.equals("null") || httpProxyHost.equals(""))
-		{
-			System.clearProperty("http.proxyHost");
-		}
-		else
-		{
-			System.setProperty("http.proxyHost", httpProxyHost);
-		}
-		LOG.info("http.proxyHost_1:" + System.getProperty("http.proxyHost"));
-
-
-		final String httpProxyPort = configurationService.getConfiguration().getString("sdh.pse.http.proxyPort_1");
-		if (httpProxyPort.equals("null") || httpProxyPort.equals(""))
-		{
-			System.clearProperty("http.proxyPort");
-		}
-		else
-		{
-			System.setProperty("http.proxyPort", httpProxyPort);
-		}
-		LOG.info("http.proxyPort_1:" + System.getProperty("http.proxyPort"));
-
-
-		final String httpsProxyHost = configurationService.getConfiguration().getString("sdh.pse.https.proxyHost_1");
-		if (httpsProxyHost.equals("null") || httpsProxyHost.equals(""))
-		{
-			System.clearProperty("https.proxyHost");
-		}
-		else
-		{
-			System.setProperty("https.proxyHost", httpsProxyHost);
-		}
-		LOG.info("https.proxyHost_1:" + System.getProperty("https.proxyHost"));
-
-
-		final String httpsProxyPort = configurationService.getConfiguration().getString("sdh.pse.https.proxyPort_1");
-		if (httpsProxyPort.equals("null") || httpsProxyPort.equals(""))
-		{
-			System.clearProperty("https.proxyPort");
-		}
-		else
-		{
-			System.setProperty("https.proxyPort", httpsProxyPort);
-		}
-		LOG.info("https.proxyPort_1:" + System.getProperty("https.proxyPort"));
-
-
-		final String httpNonProxyHosts = configurationService.getConfiguration().getString("sdh.pse.http.nonProxyHosts_1");
-		if (httpNonProxyHosts.equals("null") || httpNonProxyHosts.equals(""))
-		{
-			System.clearProperty("http.nonProxyHosts");
-		}
-		else
-		{
-			System.setProperty("http.nonProxyHosts", httpNonProxyHosts);
-		}
-		LOG.info("http.nonProxyHosts_1:" + System.getProperty("http.nonProxyHosts"));
-
-		LOG.info("---------END: Set up Proxy parameters ---------");
-
 
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
