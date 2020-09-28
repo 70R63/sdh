@@ -33,6 +33,7 @@ import de.hybris.sdh.core.soap.pse.eanucc.AmountType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
+import de.hybris.sdh.core.soap.pse.eanucc.GetBankListResponseInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 import de.hybris.sdh.facades.online.payment.impl.DefaultSDHOnlinePaymentProviderMatcherFacade;
@@ -98,6 +99,7 @@ public class PSEPaymentController extends AbstractPageController
 
 	@Resource(name = "defaultPseServices")
 	private PseServices pseServices;
+
 
 
 	@Resource(name = "configurationService")
@@ -680,9 +682,32 @@ public class PSEPaymentController extends AbstractPageController
 					redirecUrl = "redirect:" + response.getBankurl();
 					GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
 				}
-				else if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS))
+				else if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_EXCEEDEDLIMIT))
 				{
-					GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_SERVICENOTEXISTS");
+					GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_EXCEEDEDLIMIT");
+					flagSuccessView = "E";
+					model.addAttribute("flagSuccessView", flagSuccessView);
+				}
+				else if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_BANKUNREACHEABLE))
+				{
+					GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_BANKUNREACHEABLE");
+					flagSuccessView = "E";
+					model.addAttribute("flagSuccessView", flagSuccessView);
+				}
+				else if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_ENTITYNOTEXISTSORDISABLED)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_BANKNOTEXISTSORDISABLED)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_INVALIDAMOUNT)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_INVALIDSOLICITDATE)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_NOTCONFIRMEDBYBANK)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_CANNOTGETCURRENTCYCLE)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_ACCESSDENIED)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_TIMEOUT)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_DESCRIPTIONNOTFOUND)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_TRANSACTIONNOTALLOWED))
+				{
+					GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_EXCEPTION");
 					flagSuccessView = "E";
 					model.addAttribute("flagSuccessView", flagSuccessView);
 				}
@@ -709,42 +734,6 @@ public class PSEPaymentController extends AbstractPageController
 		LOG.info(psePaymentForm.getTipoDeTarjeta());
 		LOG.info(provider);
 
-		/*
-		 * LOG.info("--------- INI: Set up Proxy parameters ---------");
-		 *
-		 * final String httpProxyHost = configurationService.getConfiguration().getString("sdh.pse.http.proxyHost_1"); if
-		 * (httpProxyHost.equals("null") || httpProxyHost.equals("")) { System.clearProperty("http.proxyHost"); } else {
-		 * System.setProperty("http.proxyHost", httpProxyHost); } LOG.info("http.proxyHost_1:" +
-		 * System.getProperty("http.proxyHost"));
-		 *
-		 *
-		 * final String httpProxyPort = configurationService.getConfiguration().getString("sdh.pse.http.proxyPort_1"); if
-		 * (httpProxyPort.equals("null") || httpProxyPort.equals("")) { System.clearProperty("http.proxyPort"); } else {
-		 * System.setProperty("http.proxyPort", httpProxyPort); } LOG.info("http.proxyPort_1:" +
-		 * System.getProperty("http.proxyPort"));
-		 *
-		 *
-		 * final String httpsProxyHost = configurationService.getConfiguration().getString("sdh.pse.https.proxyHost_1");
-		 * if (httpsProxyHost.equals("null") || httpsProxyHost.equals("")) { System.clearProperty("https.proxyHost"); }
-		 * else { System.setProperty("https.proxyHost", httpsProxyHost); } LOG.info("https.proxyHost_1:" +
-		 * System.getProperty("https.proxyHost"));
-		 *
-		 *
-		 * final String httpsProxyPort = configurationService.getConfiguration().getString("sdh.pse.https.proxyPort_1");
-		 * if (httpsProxyPort.equals("null") || httpsProxyPort.equals("")) { System.clearProperty("https.proxyPort"); }
-		 * else { System.setProperty("https.proxyPort", httpsProxyPort); } LOG.info("https.proxyPort_1:" +
-		 * System.getProperty("https.proxyPort"));
-		 *
-		 *
-		 * final String httpNonProxyHosts =
-		 * configurationService.getConfiguration().getString("sdh.pse.http.nonProxyHosts_1"); if
-		 * (httpNonProxyHosts.equals("null") || httpNonProxyHosts.equals("")) {
-		 * System.clearProperty("http.nonProxyHosts"); } else { System.setProperty("http.nonProxyHosts",
-		 * httpNonProxyHosts); } LOG.info("http.nonProxyHosts_1:" + System.getProperty("http.nonProxyHosts"));
-		 *
-		 * LOG.info("---------END: Set up Proxy parameters ---------");
-		 */
-
 
 
 
@@ -760,41 +749,13 @@ public class PSEPaymentController extends AbstractPageController
 		LOG.info(psePaymentForm);
 		LOG.info("----------- doPsePayment --------------");
 
-		/*
-		 * LOG.info("--------- INI: Set up Proxy parameters ---------");
-		 *
-		 * final String httpProxyHost = configurationService.getConfiguration().getString("sdh.pse.http.proxyHost_2"); if
-		 * (httpProxyHost.equals("null") || httpProxyHost.equals("")) { System.clearProperty("http.proxyHost"); } else {
-		 * System.setProperty("http.proxyHost", httpProxyHost); } LOG.info("http.proxyHost_2:" +
-		 * System.getProperty("http.proxyHost"));
-		 *
-		 *
-		 * final String httpProxyPort = configurationService.getConfiguration().getString("sdh.pse.http.proxyPort_2"); if
-		 * (httpProxyPort.equals("null") || httpProxyPort.equals("")) { System.clearProperty("http.proxyPort"); } else {
-		 * System.setProperty("http.proxyPort", httpProxyPort); } LOG.info("http.proxyPort_2:" +
-		 * System.getProperty("http.proxyPort"));
-		 *
-		 *
-		 * final String httpsProxyHost = configurationService.getConfiguration().getString("sdh.pse.https.proxyHost_2");
-		 * if (httpsProxyHost.equals("null") || httpsProxyHost.equals("")) { System.clearProperty("https.proxyHost"); }
-		 * else { System.setProperty("https.proxyHost", httpsProxyHost); } LOG.info("https.proxyHost_2:" +
-		 * System.getProperty("https.proxyHost"));
-		 *
-		 *
-		 * final String httpsProxyPort = configurationService.getConfiguration().getString("sdh.pse.https.proxyPort_2");
-		 * if (httpsProxyPort.equals("null") || httpsProxyPort.equals("")) { System.clearProperty("https.proxyPort"); }
-		 * else { System.setProperty("https.proxyPort", httpsProxyPort); } LOG.info("https.proxyPort_2:" +
-		 * System.getProperty("https.proxyPort"));
-		 *
-		 *
-		 * final String httpNonProxyHosts =
-		 * configurationService.getConfiguration().getString("sdh.pse.http.nonProxyHosts_2"); if
-		 * (httpNonProxyHosts.equals("null") || httpNonProxyHosts.equals("")) {
-		 * System.clearProperty("http.nonProxyHosts"); } else { System.setProperty("http.nonProxyHosts",
-		 * httpNonProxyHosts); } LOG.info("http.nonProxyHosts_2:" + System.getProperty("http.nonProxyHosts"));
-		 *
-		 * LOG.info("---------END: Set up Proxy parameters ---------");
-		 */
+
+		LOG.info("-----------INI  getBankList  --------------");
+
+		final GetBankListResponseInformationType[] bankList = pseServices.getBankList(this.getConstantConnectionDataListBank(),
+				this.getMessageHeader());
+
+		LOG.info("-----------FIN  getBankList  --------------");
 
 
 
@@ -923,6 +884,14 @@ public class PSEPaymentController extends AbstractPageController
 		constantConnectionData.setEntityUrl(configurationService.getConfiguration().getString("sdh.pse.entityUrl") + "?ticketId=" + ticketId);
 		constantConnectionData.setBankCode(bankCode);
 		constantConnectionData.setServiceCode(serviceCode);
+		return constantConnectionData;
+	}
+
+	private ConstantConnectionData getConstantConnectionDataListBank()
+	{
+		final ConstantConnectionData constantConnectionData = new ConstantConnectionData();
+		constantConnectionData.setPseurl(configurationService.getConfiguration().getString("sdh.pse.pseURL"));
+		constantConnectionData.setPpeCode(configurationService.getConfiguration().getString("sdh.pse.ppeCode"));
 		return constantConnectionData;
 	}
 
