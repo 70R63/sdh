@@ -76,6 +76,9 @@
 		<!-- filter to restore customer preferred location -->
 		<ref bean="customerLocationRestorationFilter"/>
 
+		<!-- filter to monitor request/response time and log threshold -->
+		<ref bean="amsLTPLoggerFilter"/>
+
 	</util:list>
 	
 	<bean id="storefrontTenantDefaultFilterChain" class="de.hybris.platform.servicelayer.web.PlatformFilterChain" >
@@ -97,6 +100,11 @@
 		<constructor-arg>
 			<ref bean="integrationTenantFilterChainList" />
 		</constructor-arg>
+	</bean>
+
+	<bean id="amsLTPLoggerFilter" class="de.hybris.sdh.storefront.filters.AmsLTPLoggerFilter">
+		<property name="executionThreshold" value="${storefrontAMSRequestSpringLogFilter.executionThreshold}"/>
+		<property name="userService" ref="userService"/>
 	</bean>
 
 	<bean id="accMediaFilter" class="de.hybris.platform.servicelayer.web.WebAppMediaFilter">
