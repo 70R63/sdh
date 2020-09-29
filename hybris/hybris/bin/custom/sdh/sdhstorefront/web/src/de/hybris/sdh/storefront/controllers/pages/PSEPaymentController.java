@@ -959,6 +959,8 @@ public class PSEPaymentController extends AbstractPageController
 			form.setBanco(modelo.getBanco());
 			form.setValorAPagar(modelo.getValorAPagar());
 			form.setTipoDeTarjeta(modelo.getTipoDeTarjeta());
+			form.setBankDateResponse(modelo.getBankProcessDate());
+			form.setTrazabilityCode(modelo.getTrazabilityCode());
 
 			bankProcessDate = modelo.getBankProcessDate();
 
