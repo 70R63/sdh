@@ -10,7 +10,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -263,6 +262,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialForm.setEstrLiquidacionPrivada(detallePredialResponse.getEstrLiquidacionPrivada());
 			predialForm.setTblErrores(detallePredialResponse.getTblErrores());
 			predialForm.setEstrDatosGenerales(detallePredialResponse.getEstrDatosGenerales());
+			predialForm.setIndicadorDesc1(detallePredialResponse.getIndicadorDesc1());
 
 			model.addAttribute("predialForm", predialForm);
 

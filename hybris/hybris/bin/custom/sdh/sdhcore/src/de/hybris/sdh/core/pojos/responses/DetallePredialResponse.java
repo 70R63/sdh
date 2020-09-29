@@ -19,6 +19,7 @@ public class DetallePredialResponse
 	private String autoavaluo;
 	private String direccionPredio;
 	private String checkAporte;
+	private String indicadorDesc1;
 
 	private PredialDatosJuridicos datosJuridicos;
 	private PredialDatosEconomicos datosEconomicos;
@@ -270,6 +271,23 @@ public class DetallePredialResponse
 	public void setCheckAporte(final String checkAporte)
 	{
 		this.checkAporte = checkAporte;
+	}
+
+	/**
+	 * @return the indicadorDesc1
+	 */
+	public String getIndicadorDesc1()
+	{
+		return indicadorDesc1;
+	}
+
+	/**
+	 * @param indicadorDesc1
+	 *           the indicadorDesc1 to set
+	 */
+	public void setIndicadorDesc1(final String indicadorDesc1)
+	{
+		this.indicadorDesc1 = indicadorDesc1;
 	}
 
 
