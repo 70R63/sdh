@@ -163,11 +163,11 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
 ; ; ARCertPagoLink                 ; CONSULTAS LINK                      ; "/agenteRetenedor/consultas/arCertipagos" ;;;;;
-#SE comenta por salida a produccion; ; ARObligacionesPendLink         ; OBLIGACIONES PENDIENTES LINK        ; "/agenteRetenedor/consultas/obligaciones" ;;;;;
+; ; ARObligacionesPendLink         ; OBLIGACIONES PENDIENTES LINK        ; "/agenteRetenedor/consultas/obligaciones" ;;;;;
 ; ; ARRelPagosLink                 ; RELACION DE PAGOS LINK              ; "/agenteRetenedor/consultas/relacionpagos" ;;;;;
 ; ; AREdoCuentaLink                ; ESTADO DE CUENTAS LINK              ; "/agenteRetenedor/estado-de-cuenta" ;;;;;
 ; ; ARCertDeclaraLink              ; CERTIFICACION DECLARACION LINK      ; "/agenteRetenedor/consultas/certideclaraciones" ;;;;;
-#Se comenta por salida a produccion ; ; ARDeclaracionesLink			   ; DECLARACIONES LINK   				 ;"/agenteRetenedor/consultas/declaraciones";;;;;
+; ; ARDeclaracionesLink			   ; DECLARACIONES LINK   				 ;"/agenteRetenedor/consultas/declaraciones";;;;;
 ; ; ARPresentarDeclaracionLink	   ; DECLARACIONES LINK   				 ;"/retenedores/estadocargas";;;;;
 ; ; ARListaDeclaracionLink	   	   ; LISTA LINK   				 			;"/agenteRetenedor/lista-declaraciones" ;;;;;
 
@@ -462,9 +462,9 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
 ;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode, CertDeclaraNavNode, DeclaracionesNavNode
-#Se comenta por salida a produccion;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertDeclaraNavNode,ARCertPagoNavNode, ARObligacionesPendNavNode, AREdoCuentaNavNode, ARDeclaracionesNavNode
+;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertDeclaraNavNode,ARCertPagoNavNode, ARObligacionesPendNavNode, AREdoCuentaNavNode, ARDeclaracionesNavNode
 #SE agrega la linea de abajo por salida a produccion
-;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertDeclaraNavNode,ARCertPagoNavNode,ARDeclaracionesNavNode 
+#;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertDeclaraNavNode,ARCertPagoNavNode,ARDeclaracionesNavNode 
 #->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
 
 ;ReportantesNavigationServiceRequestsNavNodeMenu;;Reportantes Service Requests Menu;ReportantesNavigationServiceRequestsNavNodeMenu;CargaNavNode, HistoricoNavNode, SancionesNavNode
@@ -592,11 +592,11 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;DeclaracionesNavNode;; Declaraciones Link; DeclaracionesNavNode
 
 ;ARCertPagoNavNode;;Certificacion Pago Link;ARCertPagoNavNode
-#Se coemntta por salida a produccion;ARObligacionesPendNavNode;;Obligaciones Pendientes Link;ARObligacionesPendNavNode
+;ARObligacionesPendNavNode;;Obligaciones Pendientes Link;ARObligacionesPendNavNode
 ;ARRelPagosNavNode;;Relacion Pagos Link;ARRelPagosNavNode
 ;ARCertDeclaraNavNode;; Certificacion Declaracion Link;ARCertDeclaraNavNode
 ;ARDeclaracionesNavNode;; Declaraciones Link; ARDeclaracionesNavNode
-#Se comenta por salida a produccion;AREdoCuentaNavNode;;Estado Cuenta Link; AREdoCuentaNavNode
+;AREdoCuentaNavNode;;Estado Cuenta Link; AREdoCuentaNavNode
 ;ARPresentarDeclaracionNavNode ;;Presentar Declaracion Link;ARPresentarDeclaracionNavNode
 ;ARListaDeclaracionNavNode ;; Lista Declaraciones Link;ARListaDeclaracionNavNode
 
@@ -725,11 +725,11 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 
 #;AR
 ;ARCertPagoNavNodeEntry;;Certificacion Pago Navigation Node Entry;ARCertPagoNavNode;ARCertPagoLink
-#Se comenta por salida a produccion;ARObligacionesPendNavNodeEntry;;Obligaciones Pendientes Navigation Node Entry;ARObligacionesPendNavNode;ARObligacionesPendLink
+;ARObligacionesPendNavNodeEntry;;Obligaciones Pendientes Navigation Node Entry;ARObligacionesPendNavNode;ARObligacionesPendLink
 ;ARRelPagosNavNodeEntry;;Relaciones Pagos Navigation Node Entry;ARRelPagosNavNode;ARRelPagosLink
 ;ARCertDeclaraNavNodeEntry;;Certificacion declaracion Navigation Node entry;ARCertDeclaraNavNode;ARCertDeclaraLink
 ;ARDeclaracionesNavNodeEntry;;Declaraciones Navigation Node Entry;ARDeclaracionesNavNode;ARDeclaracionesLink
-#Se comenta por salida a produccion;AREdoCuentaNavNodeEntry;;Estado de cuenta Navigation Node Entry;AREdoCuentaNavNode;AREdoCuentaLink
+;AREdoCuentaNavNodeEntry;;Estado de cuenta Navigation Node Entry;AREdoCuentaNavNode;AREdoCuentaLink
 
 ;ARPresentarDeclaracionNavNodeEntry;;Presentar declaracion Navigation Node Entry;ARPresentarDeclaracionNavNode;ARPresentarDeclaracionLink
 ;ARListaDeclaracionNavNodeEntry;; Lista Declaraciones Firma AR Navigation Node Entry;ARListaDeclaracionNavNode;ARListaDeclaracionLink

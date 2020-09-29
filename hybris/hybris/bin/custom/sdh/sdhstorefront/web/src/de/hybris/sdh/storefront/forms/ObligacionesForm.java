@@ -11,6 +11,7 @@ import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraPublicidad;
 import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraVehiculos;
 import de.hybris.sdh.core.pojos.responses.ObligacionesDeliResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesPredialResponse;
+import de.hybris.sdh.core.pojos.responses.ReteicaObligacionesHeader;
 
 import java.util.List;
 
@@ -32,6 +33,8 @@ public class ObligacionesForm
 
 	private List<ObligacionesCabeceraPredial> headerPred;
 	private List<ObligacionesCabeceraVehiculos> headerVehiculos;
+
+	private List<ReteicaObligacionesHeader> headerreteica;
 	/**
 	 * @return the header
 	 */
@@ -39,7 +42,7 @@ public class ObligacionesForm
 	{
 		return header;
 	}
-	
+
 	/**
 	 * @param header
 	 *           the header to set
@@ -55,7 +58,7 @@ public class ObligacionesForm
 	{
 		return variableres;
 	}
-	
+
 	/**
 	 * @param variableres
 	 *           the variableres to set
@@ -71,7 +74,7 @@ public class ObligacionesForm
 	{
 		return headergas;
 	}
-	
+
 	/**
 	 * @param headergas
 	 *           the headergas to set
@@ -87,7 +90,7 @@ public class ObligacionesForm
 	{
 		return headerica;
 	}
-	
+
 	/**
 	 * @param headerica
 	 *           the headerica to set
@@ -103,7 +106,7 @@ public class ObligacionesForm
 	{
 		return headerdeli;
 	}
-	
+
 	/**
 	 * @param headerdeli
 	 *           the headerdeli to set
@@ -119,7 +122,7 @@ public class ObligacionesForm
 	{
 		return headerPredial;
 	}
-	
+
 	/**
 	 * @param headerPredial
 	 *           the headerPredial to set
@@ -135,7 +138,7 @@ public class ObligacionesForm
 	{
 		return headerDelienacion;
 	}
-	
+
 	/**
 	 * @param headerDelienacion
 	 *           the headerDelienacion to set
@@ -178,6 +181,24 @@ public class ObligacionesForm
 	{
 		this.headerVehiculos = headerVehiculos;
 	}
+
+	/**
+	 * @return the headerreteica
+	 */
+	public List<ReteicaObligacionesHeader> getHeaderreteica()
+	{
+		return headerreteica;
+	}
+
+	/**
+	 * @param headerreteica
+	 *           the headerreteica to set
+	 */
+	public void setHeaderreteica(final List<ReteicaObligacionesHeader> headerreteica)
+	{
+		this.headerreteica = headerreteica;
+	}
+
 
 
 }

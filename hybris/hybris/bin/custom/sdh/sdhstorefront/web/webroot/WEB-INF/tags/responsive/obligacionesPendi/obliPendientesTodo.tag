@@ -705,7 +705,7 @@
 		</div>
 </div>
 
-	<div class="container" style="margin-top: -20px!important;">
+	<div class="container" style="margin-top: -400px!important;">
 		<div id="oblipend-reteica" class="oblipend-table"
 			style="display: none;">
 			<div class="row">
@@ -716,9 +716,10 @@
 					</h2>
 				</div>
 			</div>
-			<c:if test="${not empty obligacionesFormuno.headerdeli}">
+			<c:if test="${not empty obligacionesFormuno.headerreteica}">
+		
 				<div class="row">
-					<div class="col-md-12 text-center">
+					<div class="col-md-12 text-center" style="margin-top: -300px!important;">
 						<div class="table-responsive">
 							<table class="tablesearch table table-bordered"
 								id="tabPaginacion5">
@@ -726,12 +727,8 @@
 									<tr>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="obligacion.inicial.delineacion.aniograv" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="obligacion.inicial.delineacion.cdu" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="obligacion.inicial.delineacion.chip" /> </label></th>
-										<th><label class="control-label labeltabletd"><spring:theme
-													code="obligacion.inicial.delineacion.direccion" /> </label></th>
+													<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="obligacion.sujeto.reteica.periodo" /> </label></th>
 										<th><label class="control-label labeltabletd tableangrav"><spring:theme
 													code="obligacion.inicial.delineacion.edoobli" /> </label></th>
 										<th><label class="control-label labeltabletd"><spring:theme
@@ -749,28 +746,26 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${obligacionesFormuno.headerdeli}"
-										var="eachDeli">
-										<c:forEach items="${eachDeli.details}" var="eachDeliDet">
-											<c:if test="${not empty eachDeliDet.numReferencia}">
+									<c:forEach items="${obligacionesFormuno.headerreteica}"
+										var="eachReteIca">
+										<c:forEach items="${eachReteIca.details}" var="eachReteIcaDet">
+											<c:if test="${not empty eachReteIcaDet.numReferencia}">
 												<tr>
-													<td><c:out value="${eachDeli.anioGravable}" /></td>
-													<td><c:out value="${eachDeli.cdu}" /></td>
-													<td><c:out value="${eachDeli.chip}" /></td>
-													<td><c:out value="${eachDeli.direccion}" /></td>
-													<td><c:out value="${eachDeliDet.estadoObligacion}" /></td>
-													<td><c:out value="${eachDeliDet.obligacion}" /></td>
-													<td><c:out value="${eachDeliDet.numFormulario}" /></td>
-													<td><c:out value="${eachDeliDet.numReferencia}" /></td>
-													<td><c:out value="${eachDeliDet.objetoContrato}" /></td>
-													<td><a
-														href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeliDet.obligacion}&objCont=${eachDeliDet.objetoContrato}&clvPer=${eachDeli.anioGravable}&tpImp=06" />">Generar
-															ROP</a></td>
-													<td><label class="control-label"
-														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-														id="Detalle"
-														onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}' )">Pagar</label></td>
-												</tr>
+													<td><c:out value="${eachReteIca.anioGravable}" /></td>
+													<td><c:out value="${eachReteIca.periodo}" /></td>
+													<td><c:out value="${eachReteIcaDet.estadoObligacion}" /></td>
+													<td><c:out value="${eachReteIcaDet.obligacion}" /></td>
+													<td><c:out value="${eachReteIcaDet.numFormulario}" /></td>
+													<td><c:out value="${eachReteIcaDet.numReferencia}" /></td>
+													<td><c:out value="${eachReteIcaDet.objetoContrato}" /></td>
+<td><a
+													href="<c:url value="/contribuyentes/rop?obligacion=${eachReteIcaDet.obligacion}&totalPagar=${eachReteIcaDet.obligacion}&tpImp=02&objCont=${eachReteIcaDet.objetoContrato}&clvPer=${eachReteIcaDet.objetoContrato}" />">Generar
+														ROP</a></td>
+												<td><label class="control-label"
+													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+													id="Detalle"
+													onclick="pagarEnLinea('5102','${eachReteIca.anioGravable}','${eachReteIca.periodo}','${eachReteIcaDet.objetoContrato}','', '${eachReteIcaDet.fechaVencimiento}', '${eachReteIcaDet.numReferencia}','${eachReteIcaDet.obligacion}' )">Pagar</label></td>
+											</tr>
 											</c:if>
 										</c:forEach>
 									</c:forEach>
@@ -787,7 +782,7 @@
 					</div>
 				</div>
 			</c:if>
-			<c:if test="${empty obligacionesFormuno.headerdeli}">
+			<c:if test="${empty obligacionesFormuno.headerreteica}">
 				<label class="control-label">No cuenta con obligaciones
 					pendientes de RETEICA</label>
 
