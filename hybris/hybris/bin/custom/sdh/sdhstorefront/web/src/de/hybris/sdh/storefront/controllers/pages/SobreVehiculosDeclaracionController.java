@@ -18,7 +18,6 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -196,7 +195,12 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 			vehiculosFormDeclaracion.setWatts(detalleVehiculosResponse.getDetalle().getWatts());
 			vehiculosFormDeclaracion.setClasicoAntig(detalleVehiculosResponse.getDetalle().getClasicoAntig());
 			vehiculosFormDeclaracion.setCheckAporte_flag(detalleVehiculosResponse.getCheckAporte());
-			vehiculosFormDeclaracion.setHomologacion(detalleVehiculosResponse.getDetalle().getHomologacion());
+			vehiculosFormDeclaracion.setHomologado(detalleVehiculosResponse.getDetalle().getHomologado());
+			if (detalleVehiculosResponse != null && detalleVehiculosResponse.getInfo_declara() != null
+					&& detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
+			{
+				vehiculosFormDeclaracion.setObjetoCont(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getObjetoCont());
+			}
 
 			if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
 					&& !sdhConsultaContribuyenteBPResponse.getVehicular().isEmpty())

@@ -9,24 +9,28 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.ObligacionesRequest;
+import de.hybris.sdh.core.pojos.requests.ReteicaObligacionesRequest;
 import de.hybris.sdh.core.pojos.responses.ObligacionesDeliResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesICAResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesPredialResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesVehiculosResponse;
+import de.hybris.sdh.core.pojos.responses.ReteicaObligacionesResponse;
 import de.hybris.sdh.core.services.SDHObligacionesDeliService;
 import de.hybris.sdh.core.services.SDHObligacionesGasolinaService;
 import de.hybris.sdh.core.services.SDHObligacionesICAService;
 import de.hybris.sdh.core.services.SDHObligacionesPredialService;
 import de.hybris.sdh.core.services.SDHObligacionesPublicidadService;
 import de.hybris.sdh.core.services.SDHObligacionesVehiculosService;
+import de.hybris.sdh.core.services.SDHReteIcaService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.forms.ObligacionesForm;
 
@@ -95,6 +99,9 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	@Resource(name = "sdhObligacionesVehiculosService")
 	SDHObligacionesVehiculosService sdhObligacionesVehiculosService;
 
+	@Resource(name = "sdhReteIcaService")
+	SDHReteIcaService sdhReteICAInfObjetoService;
+
 	private static final Logger LOG = Logger.getLogger(SobreTasaGasolina.class);
 
 
@@ -110,10 +117,12 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		String wsResponse = null;
+		String wsResponseReteica = null;
 
 		final ObligacionesRequest obligacionesRequest = new ObligacionesRequest();
 		obligacionesRequest.setBp(customerModel.getNumBP());
 		final ObligacionesForm obligacionesFormuno = new ObligacionesForm();
+
 		try
 		{
 
@@ -180,13 +189,38 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			LOG.error("error generating declaration : " + e.getMessage());
 		}
 
-
 		if (referrer.contains("contribuyentes"))
 		{
+
 			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		}
 		else if (referrer.contains("retenedor") || referrer.contains("agenteRetenedor"))
 		{
+
+			final ReteicaObligacionesRequest reteicaRequest = new ReteicaObligacionesRequest();
+			reteicaRequest.setBp(customerModel.getNumBP());
+
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+				wsResponseReteica = sdhReteICAInfObjetoService.reteIcaObligaciones(reteicaRequest);
+				if (wsResponseReteica != null)
+				{
+					final ReteicaObligacionesResponse reteicaObligacionesResponse = mapper.readValue(wsResponse,
+							ReteicaObligacionesResponse.class);
+
+					obligacionesFormuno.setHeaderreteica(reteicaObligacionesResponse.getHeader());
+				}
+
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("error generating declaration : " + e.getMessage());
+			}
+
 			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE_RETE));
 		}
 		else

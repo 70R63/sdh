@@ -191,6 +191,7 @@ ACC.mirit = {
 	
 		$("#buzon2").attr("aria-checked", true);
 		$("#buzon3").attr("class", "checked");
+		$('#buzon').prop('checked', 'checked');
 		$.colorbox.close();
 		$(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
 	},
@@ -199,6 +200,7 @@ ACC.mirit = {
 		debugger;
     $("#buzon2").attr("aria-checked", false);
 		$("#buzon3").attr("class", "control-label");
+		$('#buzon').prop('checked', '');
 		$.colorbox.close();
 		$(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
 	},
@@ -254,6 +256,7 @@ parent.attributes[4]=false;
 	label.className="control-label";
 	$.colorbox.close();
 		$(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
+	$('#useEmailForNotifications').prop('checked', '');
 	},
 	
 		terminosRegister : function(){
@@ -267,6 +270,7 @@ parent.attributes[4]=true;
 	label.className="checked";
 	$.colorbox.close();
 		$(document).off("click", ".js-vehicular-facet .js-facet-name-veh");
+	$('#useEmailForNotifications').prop('checked', 'checked');
 	},
 	
 	terminosAceptarRegisterTwo : function(){

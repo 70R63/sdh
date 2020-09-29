@@ -8,6 +8,7 @@ import de.hybris.sdh.core.pojos.requests.CalculoReteIcaRequest;
 import de.hybris.sdh.core.pojos.requests.LogReteIcaRequest;
 import de.hybris.sdh.core.pojos.requests.ReteIcaAvisoArchivoRequest;
 import de.hybris.sdh.core.pojos.requests.ReteIcaRequest;
+import de.hybris.sdh.core.pojos.requests.ReteicaObligacionesRequest;
 import de.hybris.sdh.core.services.SDHReteIcaService;
 
 import java.io.BufferedReader;
@@ -298,6 +299,69 @@ public class DefaultSDHReteIcaService implements SDHReteIcaService
 		}
 
 		return Boolean.FALSE;
+	}
+
+	@Override
+	public String reteIcaObligaciones(final ReteicaObligacionesRequest request)
+	{
+		final String urlString = configurationService.getConfiguration().getString("sdh.reteIca.obliPendientes.url");
+		final String user = configurationService.getConfiguration().getString("sdh.reteIca.obliPendientes.user");
+		final String password = configurationService.getConfiguration().getString("sdh.reteIca.obliPendientes.password");
+
+		if (StringUtils.isAnyBlank(urlString, user, password))
+		{
+			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+		}
+
+		try
+		{
+			final URL url = new URL(urlString);
+
+			final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+
+			final String authString = user + ":" + password;
+			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
+			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setUseCaches(false);
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			LOG.info("connection to: " + conn.toString());
+
+			final String requestJson = request.toString();
+			LOG.info("request: " + requestJson);
+
+			final OutputStream os = conn.getOutputStream();
+			os.write(requestJson.getBytes());
+			os.flush();
+			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
+			{
+				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+
+			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+			final StringBuilder builder = new StringBuilder();
+
+			String inputLine;
+			while ((inputLine = br.readLine()) != null)
+			{
+				builder.append(inputLine);
+			}
+
+
+			final String result = builder.toString();
+			LOG.info("response: " + result);
+
+			return result;
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+		}
+		// XXX Auto-generated method stub
+		return null;
 	}
 
 }

@@ -36,7 +36,7 @@
 						<option value="0001">Predial Unificado</option>
 					</c:if>
 					<c:if test="${ not empty facturacionForm.vehicular}">					
-						<option value="0002">Vehícular</option>
+						<option value="0002">Impuesto sobre Vehículos Automotores</option>
 					</c:if>
 				</select>
 			</div>

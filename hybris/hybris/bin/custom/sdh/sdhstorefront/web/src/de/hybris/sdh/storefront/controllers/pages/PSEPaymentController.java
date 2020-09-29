@@ -33,6 +33,7 @@ import de.hybris.sdh.core.soap.pse.eanucc.AmountType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
+import de.hybris.sdh.core.soap.pse.eanucc.GetBankListResponseInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 import de.hybris.sdh.facades.online.payment.impl.DefaultSDHOnlinePaymentProviderMatcherFacade;
@@ -98,6 +99,7 @@ public class PSEPaymentController extends AbstractPageController
 
 	@Resource(name = "defaultPseServices")
 	private PseServices pseServices;
+
 
 
 	@Resource(name = "configurationService")
@@ -680,9 +682,32 @@ public class PSEPaymentController extends AbstractPageController
 					redirecUrl = "redirect:" + response.getBankurl();
 					GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
 				}
-				else if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS))
+				else if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_EXCEEDEDLIMIT))
 				{
-					GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_SERVICENOTEXISTS");
+					GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_EXCEEDEDLIMIT");
+					flagSuccessView = "E";
+					model.addAttribute("flagSuccessView", flagSuccessView);
+				}
+				else if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_BANKUNREACHEABLE))
+				{
+					GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_BANKUNREACHEABLE");
+					flagSuccessView = "E";
+					model.addAttribute("flagSuccessView", flagSuccessView);
+				}
+				else if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_ENTITYNOTEXISTSORDISABLED)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_BANKNOTEXISTSORDISABLED)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_INVALIDAMOUNT)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_INVALIDSOLICITDATE)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_NOTCONFIRMEDBYBANK)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_CANNOTGETCURRENTCYCLE)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_ACCESSDENIED)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_TIMEOUT)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_DESCRIPTIONNOTFOUND)
+						|| returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_TRANSACTIONNOTALLOWED))
+				{
+					GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_EXCEPTION");
 					flagSuccessView = "E";
 					model.addAttribute("flagSuccessView", flagSuccessView);
 				}
@@ -709,6 +734,9 @@ public class PSEPaymentController extends AbstractPageController
 		LOG.info(psePaymentForm.getTipoDeTarjeta());
 		LOG.info(provider);
 
+
+
+
 		return redirecUrl;
 	}
 
@@ -720,6 +748,16 @@ public class PSEPaymentController extends AbstractPageController
 		LOG.info("----------- doPsePayment --------------");
 		LOG.info(psePaymentForm);
 		LOG.info("----------- doPsePayment --------------");
+
+
+		LOG.info("-----------INI  getBankList  --------------");
+
+		final GetBankListResponseInformationType[] bankList = pseServices.getBankList(this.getConstantConnectionDataListBank(),
+				this.getMessageHeader());
+
+		LOG.info("-----------FIN  getBankList  --------------");
+
+
 
 		createTransactionPaymentInformationType.setPaymentDescription(psePaymentForm.getTipoDeIdentificacion().concat("-".concat(psePaymentForm.getNumeroDeReferencia())));
 		createTransactionPaymentInformationType.setTicketId(new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()));
@@ -756,9 +794,9 @@ public class PSEPaymentController extends AbstractPageController
 	{
 
 
-		LOG.info("----------- doPsePayment --------------");
+		LOG.info("----------- doCredibancoPayment --------------");
 		LOG.info(psePaymentForm);
-		LOG.info("----------- doPsePayment --------------");
+		LOG.info("----------- doCredibancoPayment --------------");
 
 
 		final int i_ceros = 14
@@ -849,6 +887,14 @@ public class PSEPaymentController extends AbstractPageController
 		return constantConnectionData;
 	}
 
+	private ConstantConnectionData getConstantConnectionDataListBank()
+	{
+		final ConstantConnectionData constantConnectionData = new ConstantConnectionData();
+		constantConnectionData.setPseurl(configurationService.getConfiguration().getString("sdh.pse.pseURL"));
+		constantConnectionData.setPpeCode(configurationService.getConfiguration().getString("sdh.pse.ppeCode"));
+		return constantConnectionData;
+	}
+
 	private AmountType getAmount(final String currencyIso, final String value)
 	{
 		final AmountType amount = new AmountType();
@@ -913,6 +959,8 @@ public class PSEPaymentController extends AbstractPageController
 			form.setBanco(modelo.getBanco());
 			form.setValorAPagar(modelo.getValorAPagar());
 			form.setTipoDeTarjeta(modelo.getTipoDeTarjeta());
+			form.setBankDateResponse(modelo.getBankProcessDate());
+			form.setTrazabilityCode(modelo.getTrazabilityCode());
 
 			bankProcessDate = modelo.getBankProcessDate();
 

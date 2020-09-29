@@ -86,6 +86,8 @@ public class DefaultPseServices implements PseServices
 		MainServicesSoapStub cli = null;
 		CreateTransactionPaymentResponseInformationType result = null;
 
+
+
 		try
 		{
 			cli = getMainServices();

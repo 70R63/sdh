@@ -89,8 +89,9 @@ public class DefaultSDHRopService implements SDHRopService
 			}
 
 
-			final String result = builder.toString();
+			String result = builder.toString();
 			LOG.info("response: " + result);
+			result = result.replaceAll("\"errores\":\\{([\"])(.*)(\"\\})", "\"errores\":[{\"$2\"}]");
 
 			return result;
 

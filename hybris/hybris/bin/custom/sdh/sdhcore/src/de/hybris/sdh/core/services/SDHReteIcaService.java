@@ -7,6 +7,7 @@ import de.hybris.sdh.core.pojos.requests.CalculoReteIcaRequest;
 import de.hybris.sdh.core.pojos.requests.LogReteIcaRequest;
 import de.hybris.sdh.core.pojos.requests.ReteIcaAvisoArchivoRequest;
 import de.hybris.sdh.core.pojos.requests.ReteIcaRequest;
+import de.hybris.sdh.core.pojos.requests.ReteicaObligacionesRequest;
 
 
 /**
@@ -22,4 +23,6 @@ public interface SDHReteIcaService
 	String logReteICA(LogReteIcaRequest request);
 
 	Boolean avisoArchivo(ReteIcaAvisoArchivoRequest request);
+
+	String reteIcaObligaciones(ReteicaObligacionesRequest request);
 }

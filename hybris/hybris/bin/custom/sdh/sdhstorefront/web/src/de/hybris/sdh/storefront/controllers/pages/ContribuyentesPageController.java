@@ -24,11 +24,13 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsulFirmasRequest;
 import de.hybris.sdh.core.pojos.responses.ContribFirmasResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleDeclaraciones;
+import de.hybris.sdh.core.proxySelector.SDHProxySelector;
 import de.hybris.sdh.core.services.SDHConsulFirmasService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.ContribuyenteForm;
 
+import java.net.ProxySelector;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -91,7 +93,30 @@ public class ContribuyentesPageController extends AbstractPageController
 	@RequireHardLogIn
 	public String showView(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
+
+
+		final String pconfig = configurationService.getConfiguration().getString("sdh.pse.http.configuracion");
+
+		if (pconfig.equals("3") || pconfig.equals("4"))
+		{
+   		System.out.println("---------------- INI Seleccion Proxy --------------------------");
+
+   		final String phttpProxyHostACH = configurationService.getConfiguration().getString("sdh.pse.http.proxyHostACH");
+   		final String phttpProxyPortACH = configurationService.getConfiguration().getString("sdh.pse.http.proxyPortACH");
+   		final String phttpProxyHostInternet = configurationService.getConfiguration().getString("sdh.pse.http.proxyHostInternet");
+   		final String phttpProxyPortInternet = configurationService.getConfiguration().getString("sdh.pse.http.proxyPortInternet");
+   		final String pproxyType = configurationService.getConfiguration().getString("sdh.pse.http.proxy.type");
+
+   		final SDHProxySelector sdhps = new SDHProxySelector(ProxySelector.getDefault(), pconfig, phttpProxyHostACH,
+   				phttpProxyPortACH, phttpProxyHostInternet, phttpProxyPortInternet, pproxyType);
+   		ProxySelector.setDefault(sdhps);
+   		System.out.println("---------------- FIN Seleccion Proxy --------------------------");
+		}
+
+
+
 		System.out.println("---------------- Hola entro al GET Contribuyentes --------------------------");
+
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
