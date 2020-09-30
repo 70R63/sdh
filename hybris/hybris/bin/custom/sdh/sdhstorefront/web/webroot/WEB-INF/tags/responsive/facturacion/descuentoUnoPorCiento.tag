@@ -11,22 +11,15 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container">
-
-
-	<spring:theme code="configuracion.descuento1PC.fechaLimite" var="fechaLimite"/>	
-	<fmt:parseNumber var="fechaActualNumber" value="${fechaActual}"/>
-	<fmt:parseNumber var="fechaLimiteNumber" value="${fechaLimite}"/>
-	<c:if test="${fechaActualNumber <= fechaLimiteNumber}">
-		<div class="row">
-			<div class="col-md-12">
-				<a href="<c:url value='/contribuyentes/facturacion/descuentoUnoPorCiento'/>" ><spring:theme code="text.account.profile.descuento1pc"></spring:theme></a>
-				<br>
-				<br>
-				<br>
-			</div>
+<div class="container" style="display:none" id="divDescuento1PC">
+	<div class="row">
+		<div class="col-md-12">
+			<a href="<c:url value='/contribuyentes/facturacion/descuentoUnoPorCiento'/>" ><spring:theme code="text.account.profile.descuento1pc"></spring:theme></a>
+			<br>
+			<br>
+			<br>
 		</div>
-	</c:if>
+	</div>
 </div>
 
 
