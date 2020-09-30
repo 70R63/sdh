@@ -71,14 +71,14 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final String fechaLimiteDePago, final String pagoAdicional, final String banco, final String valorAPagar,
 			final String isoCurrency, final String tipoDeTarjeta, final String objPago)
 	{
-		final PseTransactionsLogModel transactionLogModel = new PseTransactionsLogModel();
-		final String transactionPaymentResponsePrint = null;
+		PseTransactionsLogModel alreadyExistTransaction = pseTransactionsLogDao.getTransaction(numeroDeReferencia);
+		final PseTransactionsLogModel transactionLogModel = Objects.nonNull(alreadyExistTransaction) ? alreadyExistTransaction : new PseTransactionsLogModel();
 
 		// ConstantConnectionDat
 		transactionLogModel.setEntityCode(constantConnectionData.getPpeCode());
 
 		// PSEPaymentForm
-		transactionLogModel.setNumeroDeReferencia(numeroDeReferencia);
+		if(Objects.isNull(alreadyExistTransaction)){transactionLogModel.setNumeroDeReferencia(numeroDeReferencia);}
 		transactionLogModel.setTipoDeImpuesto(tipoDeImpuesto);
 		transactionLogModel.setImpuesto(impuesto);
 		transactionLogModel.setAnoGravable(anoGravable);
