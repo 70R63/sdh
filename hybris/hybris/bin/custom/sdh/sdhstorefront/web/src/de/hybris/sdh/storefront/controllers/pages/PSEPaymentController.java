@@ -15,9 +15,12 @@ import de.hybris.sdh.core.credibanco.InititalizeTransactionRequest;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
 import de.hybris.sdh.core.dao.PseBankListCatalogDao;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
+import de.hybris.sdh.core.dao.SDHPaymentMethodDao;
 import de.hybris.sdh.core.enums.SdhOnlinePaymentProviderEnum;
 import de.hybris.sdh.core.enums.SdhTaxTypesEnum;
+import de.hybris.sdh.core.model.PseBankListCatalogModel;
 import de.hybris.sdh.core.model.PseTransactionsLogModel;
+import de.hybris.sdh.core.model.SDHPaymentMethodModel;
 import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimePagoRequest;
 import de.hybris.sdh.core.pojos.responses.ConsultaPagoDeclaraciones;
@@ -77,8 +80,8 @@ public class PSEPaymentController extends AbstractPageController
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_PAGO_LINEA = "Pago en linea";
-	private static final String TEXT_PSE_RESPUESTA = "PSE Respuesta";
-	private static final String TEXT_PSE_FORMA = "PSE Forma";
+	private static final String TEXT_PSE_RESPUESTA = "Respuesta de pago";
+	private static final String TEXT_PSE_FORMA = "Pague aquí";
 	private static final String TEXT_REALIZAR_PAGO = "Realizar Pago";
 	private static final String VACIO = "";
 	private static final Map<String, String> CREDIBANCO_PERSON_TYPE_DOCUMENT_TYPE = new HashMap<String, String>()
@@ -97,9 +100,12 @@ public class PSEPaymentController extends AbstractPageController
 	private PseBankListCatalogDao pseBankListCatalogDao;
 
 
+	@Resource(name = "sdhPaymentMethodDao")
+	private SDHPaymentMethodDao sdhPaymentMethodDao;
+
+
 	@Resource(name = "defaultPseServices")
 	private PseServices pseServices;
-
 
 
 	@Resource(name = "configurationService")
@@ -111,6 +117,7 @@ public class PSEPaymentController extends AbstractPageController
 
 	@Resource(name = "pseTransactionsLogDao")
 	private PseTransactionsLogDao pseTransactionsLogDao;
+
 
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -288,37 +295,81 @@ public class PSEPaymentController extends AbstractPageController
 
 
 		final String codeResponse = pseTransactionsLogService.updateTransaction(ticketId);
+		final PSEPaymentForm psePaymentForm = this.getPSEPaymentForm(ticketId);
 
-		if (codeResponse != null)
+
+		if (psePaymentForm != null)
 		{
-			if (codeResponse.equals(GetTransactionInformationResponseTransactionStateCodeList.OK.getValue())) //Transaccion exitosa
+			model.addAttribute("psePaymentForm", psePaymentForm);
+			final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade.getTaxByCode(psePaymentForm.getTipoDeImpuesto());
+			model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
+
+			if (psePaymentForm.getReturnCode().equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS)
+					|| psePaymentForm.getReturnCode()
+							.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_ENTITYNOTEXISTSORDISABLED)
+					|| psePaymentForm.getReturnCode()
+							.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_BANKNOTEXISTSORDISABLED)
+					|| psePaymentForm.getReturnCode().equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS)
+					|| psePaymentForm.getReturnCode().equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_INVALIDAMOUNT)
+					|| psePaymentForm.getReturnCode().equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_INVALIDSOLICITDATE)
+					|| psePaymentForm.getReturnCode().equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_NOTCONFIRMEDBYBANK)
+					|| psePaymentForm.getReturnCode()
+							.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_CANNOTGETCURRENTCYCLE)
+					|| psePaymentForm.getReturnCode().equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_ACCESSDENIED)
+					|| psePaymentForm.getReturnCode().equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_TIMEOUT)
+					|| psePaymentForm.getReturnCode().equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_DESCRIPTIONNOTFOUND)
+					|| psePaymentForm.getReturnCode()
+							.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_TRANSACTIONNOTALLOWED)) //Transaccion con error
 			{
-				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
-				final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade
-						.getTaxByCode(this.getPSEPaymentForm(ticketId).getTipoDeImpuesto());
-				model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
+				GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_EXCEPTION");
+				flagSuccessView = "E";
+			}
+			else if (psePaymentForm.getReturnCode().equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_BANKUNREACHEABLE)) //Transaccion exitosa
+			{
+				GlobalMessages.addInfoMessage(model, "pse.message.error.no._FAIL_BANKUNREACHEABLE");
+				flagSuccessView = "E";
+			}
+			else if (psePaymentForm.getReturnCode().equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_EXCEEDEDLIMIT)) //Transaccion exitosa
+			{
+				GlobalMessages.addInfoMessage(model, "pse.message.error.no._FAIL_EXCEEDEDLIMIT");
+				flagSuccessView = "E";
+			}
+			else if (psePaymentForm.getTransactionState()
+					.equals(GetTransactionInformationResponseTransactionStateCodeList.OK.getValue())) //Transaccion exitosa
+			{
 				GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
 				flagSuccessView = "X";
 			}
-			else if (codeResponse.equals(GetTransactionInformationResponseTransactionStateCodeList.PENDING.getValue())) //Transaccion pendiente
+			else if (psePaymentForm.getTransactionState()
+					.equals(GetTransactionInformationResponseTransactionStateCodeList.PENDING.getValue())) //Transaccion pendiente
 			{
+				GlobalMessages.addInfoMessage(model, "pse.message.info.success.PENDING");
+				flagSuccessView = "X";
+			}
+			else if (psePaymentForm.getTransactionState()
+					.equals(GetTransactionInformationResponseTransactionStateCodeList.NOT_AUTHORIZED.getValue())) //Transaccion no autorizada
+			{
+				GlobalMessages.addInfoMessage(model, "pse.message.info.success.NOT_AUTHORIZED");
+				flagSuccessView = "X";
+			}
+			else if (psePaymentForm.getTransactionState()
+					.equals(GetTransactionInformationResponseTransactionStateCodeList.FAILED.getValue())) //Transaccion fallida
+			{
+				GlobalMessages.addInfoMessage(model, "pse.message.info.success.FAILED");
 				flagSuccessView = "X";
 			}
 			else
 			{ //Transaccion con error
-				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId)); //new PSEPaymentForm());
-				final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade
-						.getTaxByCode(this.getPSEPaymentForm(ticketId).getTipoDeImpuesto());
-				model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
-				GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
-				flagReintetarPago = "X";
+				GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_EXCEPTION");
+				flagSuccessView = "E";
+				//flagReintetarPago = "E";
 			}
 		}else {
-			model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
+			//model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
 			final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade
 					.getTaxByCode(this.getPSEPaymentForm(ticketId).getTipoDeImpuesto());
 			model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
-			GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
+			GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_EXCEPTION");
 			flagReintetarPago = "X";
 		}
 
@@ -957,10 +1008,23 @@ public class PSEPaymentController extends AbstractPageController
 			form.setFechaLimiteDePago(modelo.getFechaLimiteDePago());
 			form.setPagoAdicional(modelo.getPagoAdicional());
 			form.setBanco(modelo.getBanco());
+			if (!modelo.getBanco().isEmpty())
+			{
+				final PseBankListCatalogModel pseBankListCatalogModel = pseBankListCatalogDao
+						.getBankByFinancialInstitutionCode(modelo.getBanco());
+				form.setBanco(pseBankListCatalogModel.getFinancialInstitutionName());
+			}
+			if (!modelo.getTipoDeTarjeta().isEmpty())
+			{
+				final SDHPaymentMethodModel sdhPaymentMethodModel = sdhPaymentMethodDao
+						.getBySDHPaymentMethodCode(modelo.getTipoDeTarjeta());
+				form.setTipoDeTarjeta(sdhPaymentMethodModel.getName());
+			}
 			form.setValorAPagar(modelo.getValorAPagar());
-			form.setTipoDeTarjeta(modelo.getTipoDeTarjeta());
 			form.setBankDateResponse(modelo.getBankProcessDate());
 			form.setTrazabilityCode(modelo.getTrazabilityCode());
+			form.setReturnCode(modelo.getReturnCode());
+			form.setTransactionState(modelo.getTransactionState());
 
 			bankProcessDate = modelo.getBankProcessDate();
 

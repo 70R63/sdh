@@ -125,6 +125,29 @@
 			<div class="forgotten-password item_container ">
 									
 				<ycommerce:testId code="login_forgotPasswordSubmit_button">
+					<c:choose>
+						<c:when test= "${disabled eq false or not empty flagReintetarPago}">
+							<div id="PSE" class="text-center">
+
+							    <button id="" class="btn btn-secondary btn-lg" type="button" onclick="location.href='/sdhstorefront/es/contribuyentes/consultas/obligaciones';">
+	                                Obligaciones Pendientes 
+	                            </button>
+	
+								<button class="btn btn-secondary btn-lg" type="button" onclick="goBack()">
+									<spring:theme code="impuestos.decGasolina.Pago.Regresar"/>
+								</button>
+							</div>
+						</c:when>
+						<c:otherwise>
+  							<div id="PSE" class="text-center">							   
+								<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/' />';">
+									<spring:theme code="impuestos.decGasolina.Pago.Regresar"/>
+								</button>
+							</div>
+  						</c:otherwise>
+					</c:choose>	 
+					
+					<!-- 
 					<c:if test = "${disabled eq false or not empty flagReintetarPago}">
 						<div id="PSE" class="text-center">
 
@@ -137,6 +160,7 @@
 							</button>
 						</div>
 					</c:if>
+					 -->
 				</ycommerce:testId>
 			</div>
 		</div>
