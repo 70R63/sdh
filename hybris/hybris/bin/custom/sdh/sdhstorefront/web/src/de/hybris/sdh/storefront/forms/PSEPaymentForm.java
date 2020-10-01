@@ -30,6 +30,42 @@ public class PSEPaymentForm
 	private String bankTimeResponse;
 	private String trazabilityCode;
 	private String onlinePaymentProvider;
+	private String returnCode;
+	private String transactionState;
+
+	/**
+	 * @return the returnCode
+	 */
+	public String getReturnCode()
+	{
+		return returnCode;
+	}
+
+	/**
+	 * @param returnCode
+	 *           the returnCode to set
+	 */
+	public void setReturnCode(final String returnCode)
+	{
+		this.returnCode = returnCode;
+	}
+
+	/**
+	 * @return the transactionState
+	 */
+	public String getTransactionState()
+	{
+		return transactionState;
+	}
+
+	/**
+	 * @param transactionState
+	 *           the transactionState to set
+	 */
+	public void setTransactionState(final String transactionState)
+	{
+		this.transactionState = transactionState;
+	}
 
 	/**
 	 * @return the tipoDeImpuesto
