@@ -18,6 +18,8 @@ public interface PseTransactionsLogDao
 
 	public PseTransactionsLogModel getTransaction(String numeroDeReferencia);
 
+	public String getTransactionState(String objPago);
+
 	public SearchResult<PseTransactionsLogModel> getAllTransactionsNotNotifiedPaymentAndStatusOk(String transactionStateStatus,
 			String notificacionRecaudoStatus);
 

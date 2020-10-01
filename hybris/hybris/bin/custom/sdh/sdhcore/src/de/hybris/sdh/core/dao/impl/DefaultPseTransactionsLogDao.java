@@ -116,4 +116,27 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 		return getFlexibleSearchService().search(query);
 	}
 
+	public String getTransactionState(final String objPago)
+	{
+		String transactionState = new String();
+		final String pending = "PENDING";
+		final String ok = "OK";
+
+		final PseTransactionsLogModel transactionModel = null;
+		final String GET_TRANSACTION = "Select {p:" + PseTransactionsLogModel.PK + "} from {" + PseTransactionsLogModel._TYPECODE
+				+ " AS p} Where {p:" + PseTransactionsLogModel.OBJPAGO + "} = '" + objPago + "'" + " AND ( {p:"
+				+ PseTransactionsLogModel.TRANSACTIONSTATE + "} = '" + pending + "' OR {p:" + PseTransactionsLogModel.TRANSACTIONSTATE
+				+ "} = '" + ok + "' ) ORDER BY {p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "}";
+
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_TRANSACTION);
+		final SearchResult<PseTransactionsLogModel> transactions = getFlexibleSearchService().search(query);
+
+		if (transactions.getResult().size() > 0)
+		{
+			transactionState = transactions.getResult().get(0).getTransactionState();
+		}
+
+		return transactionState;
+	}
+
 }
