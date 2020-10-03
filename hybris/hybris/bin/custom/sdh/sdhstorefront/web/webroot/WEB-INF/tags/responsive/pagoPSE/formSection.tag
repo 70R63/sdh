@@ -87,18 +87,21 @@
 		var bankSelect = document.getElementById("psePaymentForm.banco").value;
 		
 		//Validacion de estatus pendiente
-		var objPago = document.getElementById("objPago").value;
+		var impuesto = document.getElementById("tipoDeImpuesto").value;
+		var anoGravable = document.getElementById("anoGravable").value;
+		var periodo = document.getElementById("periodo").value;
 		var transactionEstatus;
 		
 		var url2 = window.location.href;
-	    url2 = url2.concat("/isPending?objPago=");
-	    url2 = url2.concat(objPago);
+	    url2 = url2.concat("/isPending?tipoDeImpuesto=",impuesto);
+	    url2 = url2.concat("&anoGravable=",anoGravable);
+	    url2 = url2.concat("&periodo=",periodo);
 		
 	    $.ajax({
 	    	url: url2,
 	    	success: function(respuesta22) {
 	    		debugger;
-	    		alert(respuesta22);
+	    			
 	    		
 	    		if(respuesta22 == "PENDING"){	    	    	
 	    			alert("El pago de este impuesto se encuentra en estado -Pendiente por aprobar-, por favor, revise mas tarde el menu CONSULTAS opcion CERTIFICACION PAGO ");

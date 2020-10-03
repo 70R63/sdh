@@ -950,8 +950,9 @@ public class PSEPaymentController extends AbstractPageController
 	private AmountType getAmount(final String currencyIso, final String value)
 	{
 		final AmountType amount = new AmountType();
+		final String newValue = value.replace(" ", "");
 		amount.setCurrencyISOcode(currencyIso);
-		amount.setValue(new BigDecimal(value));
+		amount.setValue(new BigDecimal(newValue));
 		return amount;
 	}
 
@@ -1046,14 +1047,16 @@ public class PSEPaymentController extends AbstractPageController
 
 	@RequestMapping("/pagoEnLinea/form/isPending")
 	@ResponseBody
-	public String isPending(@RequestParam(value = "objPago", defaultValue = "")
-	final String objPago)
+	public String isPending(@RequestParam(value = "tipoDeImpuesto", defaultValue = "")
+	final String impuesto, @RequestParam(value = "anoGravable", defaultValue = "")
+	final String anogravable, @RequestParam(value = "periodo", defaultValue = "")
+	final String periodo)
 	{
 
 		String transactionState = null;
-		transactionState = pseTransactionsLogDao.getTransactionState(objPago);
+		transactionState = pseTransactionsLogDao.getTransactionState(impuesto, anogravable, periodo);
 
-		LOG.info("Estatus del objetiopago " + objPago + " es " + transactionState);
+		LOG.info("Estatus del impuesto " + impuesto + "/" + anogravable + "/" + periodo + " es " + transactionState);
 
 
 		return transactionState;
