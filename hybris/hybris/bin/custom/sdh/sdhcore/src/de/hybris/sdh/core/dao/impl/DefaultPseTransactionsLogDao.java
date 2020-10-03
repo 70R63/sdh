@@ -118,7 +118,8 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 		return getFlexibleSearchService().search(query);
 	}
 
-	public String getTransactionState(final String impuesto, final String anogravable, final String periodo)
+	public String getTransactionState(final String impuesto, final String anogravable, final String periodo,
+			final String tipoDeIdentificacion, final String noIdentificacion)
 	{
 		String transactionState = new String();
 		final String pending = "PENDING";
@@ -128,9 +129,10 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 		final String GET_TRANSACTION = "Select {p:" + PseTransactionsLogModel.PK + "} from {" + PseTransactionsLogModel._TYPECODE
 				+ " AS p} Where {p:" + PseTransactionsLogModel.TIPODEIMPUESTO + "} = '" + impuesto + "'" + " AND {p:"
 				+ PseTransactionsLogModel.ANOGRAVABLE + "} = '" + anogravable + "'" + " AND {p:" + PseTransactionsLogModel.PERIODO
-				+ "} = '" + periodo + "'" + " AND ( {p:"
-				+ PseTransactionsLogModel.TRANSACTIONSTATE + "} = '" + pending + "' OR {p:" + PseTransactionsLogModel.TRANSACTIONSTATE
-				+ "} = '" + ok + "' ) ORDER BY {p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "}";
+				+ "} = '" + periodo + "'" + " AND {p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '" + pending + "' AND {p:"
+				+ PseTransactionsLogModel.TIPODEIDENTIFICACION + "} = '" + tipoDeIdentificacion + "' AND {p:"
+				+ PseTransactionsLogModel.NOIDENTIFICACION + "} = '" + noIdentificacion + "' ORDER BY {p:"
+				+ PseTransactionsLogModel.TRANSACTIONSTATE + "}";
 
 		LOG.info("-------------INI PENDING QUERY-------------");
 		LOG.info(GET_TRANSACTION);
