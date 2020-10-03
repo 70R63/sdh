@@ -38,7 +38,8 @@
 				<div class="row" >
 				<!-- --psePaymentForm.numeroDeReferencia:${psePaymentForm.numeroDeReferencia}-- -->
 				</div>
-					<fieldset>					
+					<fieldset>
+					<!--					
 					<c:if test = "${(tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA || tipoDeImpuestoSeleccionado eq ControllerPseConstants.PUBLICIDAD ) && disabled eq true}">
 						<div class="col-xs-4">
 							<formElement:formInputBox  idKey="psePaymentForm.numeroDeReferencia" maxlength="240" labelKey="psePaymentForm.numeroDeReferencia" path="numeroDeReferencia"  mandatory="true" tabindex="0" disabled="${debugMode}"/>
@@ -51,6 +52,7 @@
 						</div>	
 					</c:if>
 					<c:if test = "${tipoDeImpuestoSeleccionado ne ControllerPseConstants.GASOLINA || disabled ne true}">
+					-->
 						<div class="row">
 							<div class="col-xs-6">
 								<formElement:formInputBox  idKey="psePaymentForm.numeroDeReferencia" maxlength="240" labelKey="psePaymentForm.numeroDeReferencia" path="numeroDeReferencia"  mandatory="true" tabindex="0" disabled="${debugMode}"/>
@@ -59,7 +61,9 @@
 								<formElement:formSelectBox idKey="psePaymentForm.tipoDeImpuesto" labelKey="psePaymentForm.tipoDeImpuesto" path="tipoDeImpuesto" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${tipoDeImpuesto}" selectCSSClass="form-control" disabled="${debugMode}"/>
 							</div>
 						</div>					
+					<!--  
 					</c:if>
+					-->
 
 						<div class="row">
 							<div class="col-xs-6">
@@ -111,10 +115,12 @@
 						<formElement:formInputBox  idKey="psePaymentForm.bankDateResponse" maxlength="240" labelKey="psePaymentForm.bankDateResponse" path="bankDateResponse" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
 						<formElement:formInputBox  idKey="psePaymentForm.trazabilityCode" maxlength="240" labelKey="psePaymentForm.trazabilityCode" path="trazabilityCode" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
 
+					<!--  
 					<c:if test = "${(tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA || tipoDeImpuestoSeleccionado eq ControllerPseConstants.PUBLICIDAD) && !empty psePaymentForm.bankDateResponse }">
    						<formElement:formInputBox  idKey="psePaymentForm.bankDateResponse" maxlength="240" labelKey="psePaymentForm.bankDateResponse" path="bankDateResponse" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
    						<formElement:formInputBox  idKey="psePaymentForm.bankTimeResponse" maxlength="240" labelKey="psePaymentForm.bankDateResponse" path="bankDateResponse" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
 					</c:if>
+					-->
 					</fieldset>
 				</form:form>
 				
@@ -161,7 +167,7 @@
 									<c:when test = "${disabled eq true}">
 										<div id="continuar">										
 											<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/contribuyentes/consultas/certipagos' />';">
-													<spring:theme code="impuestos.Pago.PSE.continuar"/>
+													<spring:theme code="impuestos.Pago.PSE.Impimir"/>
 										    </button>
 										</div>										
 									</c:when>
