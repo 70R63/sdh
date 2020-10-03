@@ -143,13 +143,38 @@
 				
 					<div class="text-center">
 							<ycommerce:testId code="login_forgotPasswordSubmit_button">
+								<c:choose>
+									<c:when test = "${psePaymentForm.transactionState == 'NOT_AUTHORIZED' }">
+										<div id="continuar">										
+											<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/' />';">
+													<spring:theme code="impuestos.Pago.PSE.continuar"/>
+										    </button>
+										</div>	
+									</c:when>
+									<c:when test = "${psePaymentForm.transactionState == 'PENDING' }">
+										<div id="continuar">										
+											<button class="btn btn-secondary btn-lg" type="button" onclick="msgImpresion('<c:url value='/' />')">
+													<spring:theme code="impuestos.Pago.PSE.continuar"/>
+										    </button>
+										</div>	
+									</c:when>
+									<c:when test = "${disabled eq true}">
+										<div id="continuar">										
+											<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/contribuyentes/consultas/certipagos' />';">
+													<spring:theme code="impuestos.Pago.PSE.continuar"/>
+										    </button>
+										</div>										
+									</c:when>
+								</c:choose>
+								<!-- 
 								<c:if test = "${disabled eq true}">
 									<div id="continuar">										
-										<button class="btn btn-secondary btn-lg" type="button" onclick="msgImpresion('<c:url value='/' />')">
+										<button class="btn btn-secondary btn-lg" type="button" onclick="msgImpresion('<c:url value='/contribuyentes/consultas/certipagos' />')">
 												<spring:theme code="impuestos.Pago.PSE.continuar"/>
 									    </button>
 									</div>
 								</c:if>
+								 -->
 							</ycommerce:testId>
 						</div>
 				</form:form>

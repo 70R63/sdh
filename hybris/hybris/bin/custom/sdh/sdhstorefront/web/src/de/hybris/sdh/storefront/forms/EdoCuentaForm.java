@@ -9,6 +9,7 @@ import de.hybris.sdh.core.pojos.responses.EdoCtaIca;
 import de.hybris.sdh.core.pojos.responses.EdoCtaOblig;
 import de.hybris.sdh.core.pojos.responses.EdoCtaPredial;
 import de.hybris.sdh.core.pojos.responses.EdoCtaPublicidad;
+import de.hybris.sdh.core.pojos.responses.EdoCtaReteIcaCabecera;
 import de.hybris.sdh.core.pojos.responses.EdoCtaVehiculos;
 import de.hybris.sdh.core.pojos.responses.ReteICA;
 
@@ -48,6 +49,12 @@ public class EdoCuentaForm
 	private List<EdoCtaOblig> obligNoTributaria;
 	private String fechageneracion;
 	private ReteICA tablaReteica;
+
+	private EdoCtaReteIcaCabecera reteica;
+
+	private String reteicaSaldoCargo;
+	private String reteicaSaldoFavor;
+
 
 
 	/**
@@ -490,6 +497,59 @@ public class EdoCuentaForm
 	public void setTablaReteica(final ReteICA tablaReteica)
 	{
 		this.tablaReteica = tablaReteica;
+	}
+
+
+
+	/**
+	 * @return the reteica
+	 */
+	public EdoCtaReteIcaCabecera getReteica()
+	{
+		return reteica;
+	}
+
+	/**
+	 * @param reteica
+	 *           the reteica to set
+	 */
+	public void setReteica(final EdoCtaReteIcaCabecera reteica)
+	{
+		this.reteica = reteica;
+	}
+
+	/**
+	 * @return the reteicaSaldoCargo
+	 */
+	public String getReteicaSaldoCargo()
+	{
+		return reteicaSaldoCargo;
+	}
+
+	/**
+	 * @param reteicaSaldoCargo
+	 *           the reteicaSaldoCargo to set
+	 */
+	public void setReteicaSaldoCargo(final String reteicaSaldoCargo)
+	{
+		this.reteicaSaldoCargo = reteicaSaldoCargo;
+	}
+
+	/**
+	 * @return the reteicaSaldoFavor
+	 */
+	public String getReteicaSaldoFavor()
+	{
+		return reteicaSaldoFavor;
+	}
+
+	/**
+	 * @param reteicaSaldoFavor
+	 *           the reteicaSaldoFavor to set
+	 */
+	public void setReteicaSaldoFavor(final String reteicaSaldoFavor)
+	{
+		this.reteicaSaldoFavor = reteicaSaldoFavor;
 	}
 
 

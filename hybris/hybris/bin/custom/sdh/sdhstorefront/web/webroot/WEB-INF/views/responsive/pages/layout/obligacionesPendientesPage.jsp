@@ -22,7 +22,12 @@
 		var numBP = "${customerData.numBP}";
 		var numDoc = "${customerData.documentNumber}";
 		var tipoDoc = "${customerData.documentType}";
-		var clavePeriodo = anoGravable.substr(2,2).concat("A1");
+		if (periodo === null || periodo === '' || typeof periodo === 'undefined'){
+			var clavePeriodo = anoGravable.substr(2,2).concat("A1");
+		}	  
+		else{
+			var clavePeriodo = anoGravable.substr(2,2).concat(periodo);
+		} 
 		var dv = "${customerData.digVer}";
 		
 		

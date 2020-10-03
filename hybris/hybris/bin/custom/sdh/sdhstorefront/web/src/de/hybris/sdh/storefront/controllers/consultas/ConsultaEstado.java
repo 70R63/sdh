@@ -10,6 +10,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -167,6 +168,12 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 			//ctaForm.setPredial(edoCuentaResponse.getPredial());
 			ctaForm.setTablaICA(edoCuentaResponse.getTablaICA());
+
+			//cambios para reteica
+			ctaForm.setReteica(edoCuentaResponse.getReteica());
+			ctaForm.setReteicaSaldoFavor(edoCuentaResponse.getNewReteicaSaldoFavor());
+			ctaForm.setReteicaSaldoCargo(edoCuentaResponse.getNewReteicaSaldoCargo());
+			//termina reteica
 
 			if (edoCuentaResponse.getTablaVehicular() != null && !edoCuentaResponse.getTablaVehicular().isEmpty())
 			{

@@ -611,19 +611,19 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach varStatus="loop" items="${ctaForm.tablaICA}"
-										var="eachICA">
-										<c:forEach varStatus="loop" items="${eachICA.newDetalleICA}"
-											var="eachICADetail">
+<%-- 									<c:forEach varStatus="loop" items="${ctaForm.reteica}" --%>
+<%-- 										var="eachReteIca"> --%>
+										<c:forEach varStatus="loop" items="${ctaForm.reteica.detalleReteica}"
+											var="eachReteIcaDetail">
 											<tr>
-												<td><c:out value="${eachICADetail.anioGravable}" /></td>
-												<td><c:out value="${eachICADetail.periodo}" /></td>
-												<td><c:out value="${eachICADetail.estado}" /></td>
-												<td><c:out value="${eachICADetail.saldoCargo}" /></td>
-												<td><c:out value="${eachICADetail.saldoFavor}" /></td>
+												<td><c:out value="${eachReteIcaDetail.anioGravable}" /></td>
+												<td><c:out value="${eachReteIcaDetail.periodo}" /></td>
+												<td><c:out value="${eachReteIcaDetail.estado}" /></td>
+												<td><c:out value="${eachReteIcaDetail.saldoCargo}" /></td>
+												<td><c:out value="${eachReteIcaDetail.saldoFavor}" /></td>
 											</tr>
 										</c:forEach>
-									</c:forEach>
+<%-- 									</c:forEach> --%>
 
 								</tbody>
 							</table>
@@ -637,8 +637,8 @@
 										<td class="td-total" style="width: 264px;"><label
 											class="control-label labeltabletd"><spring:theme
 													code="edocuenta.inicial.ica.total" /> </label></td>
-										<td><c:out value="${ctaForm.iCASaldoCargo}" /></td>
-										<td><c:out value="${ctaForm.iCASaldoFavor}" /></td>
+										<td><c:out value="${ctaForm.reteicaSaldoCargo}" /></td>
+										<td><c:out value="${ctaForm.reteicaSaldoFavor}" /></td>
 									</tr>
 								</tbody>
 							</table>

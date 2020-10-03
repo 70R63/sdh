@@ -19,18 +19,9 @@
 
 	}
 
-	function formSubmition(buttonType){	
-		//document.getElementById("hiddenOnlinePaymentProvider").value = buttonType;
-		var form = document.getElementById("psePaymentFormSubmition");
-		var paymentMethodSelect = document.getElementById("psePaymentForm.tipoDeTarjeta").value;
-		var bankSelect = document.getElementById("psePaymentForm.banco").value;
+	
+	
 
-		if(paymentMethodSelect == "0" || bankSelect == "0"){
-		    alert("Seleccione banco o metodo de pago");
-		}else{
-		    form.submit();
-		}
-	}
 	
 	function downloadPDF(pdf) {
 		debugger;
@@ -87,8 +78,66 @@
             }
         });
     }
+	
+	function formSubmition(buttonType){
+		debugger;
+		//document.getElementById("hiddenOnlinePaymentProvider").value = buttonType;
+		var form = document.getElementById("psePaymentFormSubmition");
+		var paymentMethodSelect = document.getElementById("psePaymentForm.tipoDeTarjeta").value;
+		var bankSelect = document.getElementById("psePaymentForm.banco").value;
+		
+		//Validacion de estatus pendiente
+		var impuesto = document.getElementById("tipoDeImpuesto").value;
+		var anoGravable = document.getElementById("anoGravable").value;
+		var periodo = document.getElementById("periodo").value;
+		var transactionEstatus;
+		
+		var url2 = window.location.href;
+	    url2 = url2.concat("/isPending?tipoDeImpuesto=",impuesto);
+	    url2 = url2.concat("&anoGravable=",anoGravable);
+	    url2 = url2.concat("&periodo=",periodo);
+		
+	    $.ajax({
+	    	url: url2,
+	    	success: function(respuesta22) {
+	    		debugger;
+	    			
+	    		
+	    		if(respuesta22 == "PENDING"){	    	    	
+	    			alert("El pago de este impuesto se encuentra en estado -Pendiente por aprobar-, por favor, revise mas tarde el menu CONSULTAS opcion CERTIFICACION PAGO ");
+	    			window.location = '/bogota/es';	
+	    	    }else if(respuesta22 == "OK"){
+	    	    	alert("El pago de este impuesto se encuentra en estado -Pagado-, por favor, revise el menu CONSULTAS opcion CERTIFICACION PAGO");
+	    			window.location = '/bogota/es/contribuyentes/consultas/certipagos';
+	    	    }else if(paymentMethodSelect == "0" || bankSelect == "0"){
+	    		    alert("Seleccione banco o metodo de pago");
+	    		}else{
+	    			form.submit();
+	    		}
+	    		
+	    	},
+	    	error: function(jqXHR, exception) {
+	    		debugger;
+	    		
+	    		if(paymentMethodSelect == "0" || bankSelect == "0"){
+	    		    alert("Seleccione banco o metodo de pago");
+	    		}else{
+	    			form.submit();
+	    		}
+	        }
+	    });
+		
+	    
+	    
+	}
+
+	
 
 	downloadPDF('${imprimePagoResponse.stringPDF}');
+</script>
+
+<script>
+
 </script>
 
 
