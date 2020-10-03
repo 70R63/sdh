@@ -13,6 +13,8 @@ import de.hybris.sdh.core.model.PseTransactionsLogModel;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
+
 
 /**
  * @author edson.roa
@@ -20,7 +22,7 @@ import javax.annotation.Resource;
  */
 public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransactionsLogModel> implements PseTransactionsLogDao
 {
-
+	private static final Logger LOG = Logger.getLogger(DefaultPseTransactionsLogDao.class); //new
 
 	public DefaultPseTransactionsLogDao(final String typecode)
 	{
@@ -116,7 +118,7 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 		return getFlexibleSearchService().search(query);
 	}
 
-	public String getTransactionState(final String objPago)
+	public String getTransactionState(final String impuesto, final String anogravable, final String periodo)
 	{
 		String transactionState = new String();
 		final String pending = "PENDING";
@@ -124,9 +126,15 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 
 		final PseTransactionsLogModel transactionModel = null;
 		final String GET_TRANSACTION = "Select {p:" + PseTransactionsLogModel.PK + "} from {" + PseTransactionsLogModel._TYPECODE
-				+ " AS p} Where {p:" + PseTransactionsLogModel.OBJPAGO + "} = '" + objPago + "'" + " AND ( {p:"
+				+ " AS p} Where {p:" + PseTransactionsLogModel.TIPODEIMPUESTO + "} = '" + impuesto + "'" + " AND {p:"
+				+ PseTransactionsLogModel.ANOGRAVABLE + "} = '" + anogravable + "'" + " AND {p:" + PseTransactionsLogModel.PERIODO
+				+ "} = '" + periodo + "'" + " AND ( {p:"
 				+ PseTransactionsLogModel.TRANSACTIONSTATE + "} = '" + pending + "' OR {p:" + PseTransactionsLogModel.TRANSACTIONSTATE
 				+ "} = '" + ok + "' ) ORDER BY {p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "}";
+
+		LOG.info("-------------INI PENDING QUERY-------------");
+		LOG.info(GET_TRANSACTION);
+		LOG.info("-------------FIN PENDING QUERY-------------");
 
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_TRANSACTION);
 		final SearchResult<PseTransactionsLogModel> transactions = getFlexibleSearchService().search(query);
