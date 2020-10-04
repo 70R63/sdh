@@ -41,7 +41,14 @@
 		$("#pagarEnLinea_dv").val(dv);
 		$("#pagarEnLinea_numObjeto").val(numObjeto);
 		$("#pagarEnLinea_chip").val(chip);
-		$("#pagarEnLinea_fechaVenc").val(fechaVenc);
+		
+		if(fechaVenc === ''){
+			$("#pagarEnLinea_fechaVenc").val(fechaVenc);
+		}else{
+			var fechaVencimineto = fechaVenc.substring(6,8).concat("/",fechaVenc.substring(4,6),"/",fechaVenc.substring(0,4));
+			$("#pagarEnLinea_fechaVenc").val(fechaVencimineto);
+		}
+		
 		$("#pagarEnLinea_numRef").val(numRef);
 		$("#pagarEnLinea_totalPagar").val(totalPagar);
 		
