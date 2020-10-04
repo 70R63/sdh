@@ -1053,8 +1053,13 @@ public class PSEPaymentController extends AbstractPageController
 	final String periodo)
 	{
 
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		final String tipoDeIdentificacion = customerData.getDocumentType();
+		final String noIdentificacion = customerData.getDocumentNumber();
+
 		String transactionState = null;
-		transactionState = pseTransactionsLogDao.getTransactionState(impuesto, anogravable, periodo);
+		transactionState = pseTransactionsLogDao.getTransactionState(impuesto, anogravable, periodo, tipoDeIdentificacion,
+				noIdentificacion);
 
 		LOG.info("Estatus del impuesto " + impuesto + "/" + anogravable + "/" + periodo + " es " + transactionState);
 
