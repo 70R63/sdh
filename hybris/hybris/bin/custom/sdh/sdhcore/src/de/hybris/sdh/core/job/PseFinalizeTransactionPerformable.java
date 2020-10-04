@@ -39,30 +39,31 @@ public class PseFinalizeTransactionPerformable extends AbstractJobPerformable<Cr
 
     @Override
     public PerformResult perform(CronJobModel cronJobModel) {
-        String transactionState = configurationService.getConfiguration().getString("sdh.pse.finalizeTransaction.whenTransactionStateIs");
-        SearchResult<PseTransactionsLogModel> result = pseTransactionsLogDao.getAllOutstandingTransactions(transactionState);
+        final String TRANSACTION_STATE = "OK";
+        SearchResult<PseTransactionsLogModel> result = pseTransactionsLogDao.getAllOutstandingTransactions(TRANSACTION_STATE);
         FinalizeTransactionPaymentInformationType finalizeType;
 
-        LOG.info("-------------- Begin : Job FinalizePseTransaction When Status Equals To [" + transactionState + "] --------------");
-
+        LOG.info("-------------- Begin : Job FinalizePseTransaction When Status Equals To [" + TRANSACTION_STATE + "] --------------");
         for(PseTransactionsLogModel transactionsLogModel : result.getResult()){
-            finalizeType = new FinalizeTransactionPaymentInformationType();
-            finalizeType.setEntityCode(transactionsLogModel.getEntityCode());
-            finalizeType.setTrazabilityCode(transactionsLogModel.getTrazabilityCode());
+            if(!"CREDIBANCO_TRANSACTION".equals(transactionsLogModel.getEntityCode())){
+                finalizeType = new FinalizeTransactionPaymentInformationType();
+                finalizeType.setEntityCode(transactionsLogModel.getEntityCode());
+                finalizeType.setTrazabilityCode(transactionsLogModel.getTrazabilityCode());
 
-            FinalizeTransactionPaymentResponseInformationType response = pseServices.finalizeTransactionPayment(
-                    getConstantConnectionData(), getMessageHeader(), finalizeType);
+                FinalizeTransactionPaymentResponseInformationType response = pseServices.finalizeTransactionPayment(
+                        getConstantConnectionData(), getMessageHeader(), finalizeType);
 
-            FinalizeTransactionPaymentResponseReturnCodeList returnCodeList = response.getReturnCode();
-            if(Objects.nonNull(returnCodeList)){
-                LOG.info("[ TrazabilityCode: " + transactionsLogModel.getTrazabilityCode() + ", " +
-                         "FinalizeTranzactionReturnedCode: " + response.getReturnCode().getValue() + " ]" );
-                transactionsLogModel.setTransactionState(response.getReturnCode().getValue());
-                modelService.save(transactionsLogModel);
-            }           ;
+                FinalizeTransactionPaymentResponseReturnCodeList returnCodeList = response.getReturnCode();
+
+                if(Objects.nonNull(returnCodeList)){
+                    LOG.info("[ TrazabilityCode: " + transactionsLogModel.getTrazabilityCode() + ", " +
+                            "FinalizeTranzactionReturnedCode: " + response.getReturnCode().getValue() + " ]" );
+                    transactionsLogModel.setTransactionState(response.getReturnCode().getValue());
+                    modelService.save(transactionsLogModel);
+                }
+            }                      ;
         }
-
-        LOG.info("-------------- End : Job FinalizePseTransaction When Status  Equals To [" + transactionState + "] --------------");
+        LOG.info("-------------- End : Job FinalizePseTransaction When Status  Equals To [" + TRANSACTION_STATE + "] --------------");
         return new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
     }
 
