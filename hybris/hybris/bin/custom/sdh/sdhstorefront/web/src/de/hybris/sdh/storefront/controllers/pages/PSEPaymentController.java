@@ -1027,7 +1027,7 @@ public class PSEPaymentController extends AbstractPageController
 			form.setDV(modelo.getDV());
 			form.setTipoDeIdentificacion(modelo.getTipoDeIdentificacion());
 
-			if (modelo.getFechaLimiteDePago().equals(""))
+			if (modelo.getFechaLimiteDePago().equals("") || modelo.getFechaLimiteDePago().contains("/"))
 			{
 				form.setFechaLimiteDePago(modelo.getFechaLimiteDePago());
 			}
