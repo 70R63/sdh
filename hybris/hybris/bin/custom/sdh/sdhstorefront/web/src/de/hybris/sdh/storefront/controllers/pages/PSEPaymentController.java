@@ -46,9 +46,12 @@ import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -666,13 +669,29 @@ public class PSEPaymentController extends AbstractPageController
 	@RequireHardLogIn
 	public String pagoEnLineaForm(final Model model, final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
 	{
+
 		final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade.getTaxByCode(psePaymentForm.getTipoDeImpuesto());
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_FORMA));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-		model.addAttribute("psePaymentForm", psePaymentForm);
+		PSEPaymentForm psePaymentForm_aux = new PSEPaymentForm();
+		psePaymentForm_aux = psePaymentForm;
+
+		if (psePaymentForm.getFechaLimiteDePago().equals(""))
+		{
+			psePaymentForm_aux.setFechaLimiteDePago(psePaymentForm.getFechaLimiteDePago());
+		}
+		else
+		{
+			final String fechaLim = psePaymentForm.getFechaLimiteDePago().substring(6) + "/"
+					+ psePaymentForm.getFechaLimiteDePago().substring(4, 6) + "/"
+					+ psePaymentForm.getFechaLimiteDePago().substring(0, 4);
+			psePaymentForm_aux.setFechaLimiteDePago(fechaLim);
+		}
+
+		model.addAttribute("psePaymentForm", psePaymentForm_aux);
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 		model.addAttribute("debugMode", psePaymentForm.getDebugMode());
 		model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
@@ -1007,7 +1026,18 @@ public class PSEPaymentController extends AbstractPageController
 			form.setNoIdentificacion(modelo.getNoIdentificacion());
 			form.setDV(modelo.getDV());
 			form.setTipoDeIdentificacion(modelo.getTipoDeIdentificacion());
-			form.setFechaLimiteDePago(modelo.getFechaLimiteDePago());
+
+			if (modelo.getFechaLimiteDePago().equals("") || modelo.getFechaLimiteDePago().contains("/"))
+			{
+				form.setFechaLimiteDePago(modelo.getFechaLimiteDePago());
+			}
+			else
+			{
+				final String fechaLim = modelo.getFechaLimiteDePago().substring(6) + "/"
+						+ modelo.getFechaLimiteDePago().substring(4, 6) + "/" + modelo.getFechaLimiteDePago().substring(0, 4);
+				form.setFechaLimiteDePago(fechaLim);
+			}
+
 			form.setPagoAdicional(modelo.getPagoAdicional());
 			form.setBanco(modelo.getBanco());
 			if (!modelo.getBanco().isEmpty())
@@ -1022,7 +1052,12 @@ public class PSEPaymentController extends AbstractPageController
 						.getBySDHPaymentMethodCode(modelo.getTipoDeTarjeta());
 				form.setTipoDeTarjeta(sdhPaymentMethodModel.getName());
 			}
-			form.setValorAPagar(modelo.getValorAPagar());
+
+			final Locale colom = new Locale("es", "CO");
+			final NumberFormat defaultFormat = NumberFormat.getCurrencyInstance(colom);
+			final String valorPagar = defaultFormat.format(new BigInteger(modelo.getValorAPagar()));
+			form.setValorAPagar(valorPagar);
+
 			form.setBankDateResponse(modelo.getBankProcessDate());
 			form.setTrazabilityCode(modelo.getTrazabilityCode());
 			form.setReturnCode(modelo.getReturnCode());

@@ -22,7 +22,7 @@
 		var numBP = "${customerData.numBP}";
 		var numDoc = "${customerData.documentNumber}";
 		var tipoDoc = "${customerData.documentType}";
-		if (periodo === null || periodo === '' || typeof periodo === 'undefined'){
+		if (periodo === null || periodo === '' || typeof periodo === 'undefined' ){
 			var clavePeriodo = anoGravable.substr(2,2).concat("A1");
 		}	  
 		else{
@@ -41,7 +41,14 @@
 		$("#pagarEnLinea_dv").val(dv);
 		$("#pagarEnLinea_numObjeto").val(numObjeto);
 		$("#pagarEnLinea_chip").val(chip);
-		$("#pagarEnLinea_fechaVenc").val(fechaVenc);
+		
+		if(fechaVenc === '' || periodo.search("/") >= 0){
+			$("#pagarEnLinea_fechaVenc").val(fechaVenc);
+		}else{
+			var fechaVencimineto = fechaVenc.substring(6,8).concat("/",fechaVenc.substring(4,6),"/",fechaVenc.substring(0,4));
+			$("#pagarEnLinea_fechaVenc").val(fechaVencimineto);
+		}
+		
 		$("#pagarEnLinea_numRef").val(numRef);
 		$("#pagarEnLinea_totalPagar").val(totalPagar);
 		
