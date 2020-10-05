@@ -17,6 +17,7 @@ public class EdoCtaOblig
 	private String saldoFavor;
 	private String totalSaldoCargo;
 	private String totalSaldoFavor;
+	private String tipodoc;
 
 	/**
 	 * @return the numDoc
@@ -34,7 +35,7 @@ public class EdoCtaOblig
 	{
 		this.numDoc = numDoc;
 	}
-	
+
 	/**
 	 * @return the concepto
 	 */
@@ -42,7 +43,7 @@ public class EdoCtaOblig
 	{
 		return concepto;
 	}
-	
+
 	/**
 	 * @param concepto
 	 *           the concepto to set
@@ -51,7 +52,7 @@ public class EdoCtaOblig
 	{
 		this.concepto = concepto;
 	}
-	
+
 	/**
 	 * @return the anioGravable
 	 */
@@ -59,7 +60,7 @@ public class EdoCtaOblig
 	{
 		return anioGravable;
 	}
-	
+
 	/**
 	 * @param anioGravable
 	 *           the anioGravable to set
@@ -68,7 +69,7 @@ public class EdoCtaOblig
 	{
 		this.anioGravable = anioGravable;
 	}
-	
+
 	/**
 	 * @return the estado
 	 */
@@ -76,7 +77,7 @@ public class EdoCtaOblig
 	{
 		return estado;
 	}
-	
+
 	/**
 	 * @param estado
 	 *           the estado to set
@@ -85,7 +86,7 @@ public class EdoCtaOblig
 	{
 		this.estado = estado;
 	}
-	
+
 	/**
 	 * @return the saldoCargo
 	 */
@@ -93,7 +94,7 @@ public class EdoCtaOblig
 	{
 		return saldoCargo;
 	}
-	
+
 	/**
 	 * @param saldoCargo
 	 *           the saldoCargo to set
@@ -102,7 +103,7 @@ public class EdoCtaOblig
 	{
 		this.saldoCargo = saldoCargo;
 	}
-	
+
 	/**
 	 * @return the saldoFavor
 	 */
@@ -110,7 +111,7 @@ public class EdoCtaOblig
 	{
 		return saldoFavor;
 	}
-	
+
 	/**
 	 * @param saldoFavor
 	 *           the saldoFavor to set
@@ -119,7 +120,7 @@ public class EdoCtaOblig
 	{
 		this.saldoFavor = saldoFavor;
 	}
-	
+
 	/**
 	 * @return the totalSaldoCargo
 	 */
@@ -127,7 +128,7 @@ public class EdoCtaOblig
 	{
 		return totalSaldoCargo;
 	}
-	
+
 	/**
 	 * @param totalSaldoCargo
 	 *           the totalSaldoCargo to set
@@ -136,7 +137,7 @@ public class EdoCtaOblig
 	{
 		this.totalSaldoCargo = totalSaldoCargo;
 	}
-	
+
 	/**
 	 * @return the totalSaldoFavor
 	 */
@@ -144,7 +145,7 @@ public class EdoCtaOblig
 	{
 		return totalSaldoFavor;
 	}
-	
+
 	/**
 	 * @param totalSaldoFavor
 	 *           the totalSaldoFavor to set
@@ -154,5 +155,21 @@ public class EdoCtaOblig
 		this.totalSaldoFavor = totalSaldoFavor;
 	}
 
+	/**
+	 * @return the tipodoc
+	 */
+	public String getTipodoc()
+	{
+		return tipodoc;
+	}
+
+	/**
+	 * @param tipodoc
+	 *           the tipodoc to set
+	 */
+	public void setTipodoc(final String tipodoc)
+	{
+		this.tipodoc = tipodoc;
+	}
 
 }

@@ -1006,7 +1006,7 @@ toddir.style.width= '900px'
 							<div class="row">
 								<div class="col-md-3">
 									<div class="form-group ">
-										<label class="control-label required" for=""> <spring:theme
+										<label class="control-label" for=""> <spring:theme
 												code="mirit.contactData.socialNetwork" />
 										</label>
 									</div>
@@ -1014,7 +1014,7 @@ toddir.style.width= '900px'
 								</div>
 								<div class="col-md-3">
 									<div class="form-group ">
-										<label class="control-label required" for=""> <spring:theme
+										<label class="control-label" for=""> <spring:theme
 												code="mirit.contactData.socialNetworkUser" />
 										</label>
 									</div>
@@ -1069,7 +1069,7 @@ toddir.style.width= '900px'
 							<div class="row">
 								<div class="col-md-3">
 									<div class="form-group ">
-										<label class="control-label required" for=""> <spring:theme
+										<label class="control-label" for=""> <spring:theme
 												code="mirit.contactData.socialNetwork" />
 										</label>
 									</div>
@@ -1077,7 +1077,7 @@ toddir.style.width= '900px'
 								</div>
 								<div class="col-md-3">
 									<div class="form-group ">
-										<label class="control-label required" for=""> <spring:theme
+										<label class="control-label" for=""> <spring:theme
 												code="mirit.contactData.socialNetworkUser" />
 										</label>
 									</div>

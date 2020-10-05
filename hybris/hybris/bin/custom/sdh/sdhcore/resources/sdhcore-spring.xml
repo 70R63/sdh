@@ -612,6 +612,9 @@
 	 
 	<alias alias="pseBankListCatalogPerformable" name="pseBankListCatalogPerformable"/>
 	<bean id="pseBankListCatalogPerformable" class="de.hybris.sdh.core.job.PseBankListCatalogPerformable" parent="abstractJobPerformable"/>
+
+	<alias alias="pseFinalizeTransactionPerformable" name="pseFinalizeTransactionPerformable"/>
+	<bean id="pseFinalizeTransactionPerformable" class="de.hybris.sdh.core.job.PseFinalizeTransactionPerformable" parent="abstractJobPerformable"/>
 	
 	
 	<alias alias="pseBankListCatalogDao" name="defaultPseBankListCatalogDao"/>

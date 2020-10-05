@@ -135,7 +135,7 @@ ACC.predial = {
 						} else if (cal == "2") {
 							$("#JurCal").val("Fideicometente");
 						} else if (cal == "3") {
-							$("#JurCal").val("Pseedor");
+							$("#JurCal").val("Poseedor");
 						} else if (cal == "4") {
 							$("#JurCal").val("Beneficiario");
 						} else if (cal == "5") {

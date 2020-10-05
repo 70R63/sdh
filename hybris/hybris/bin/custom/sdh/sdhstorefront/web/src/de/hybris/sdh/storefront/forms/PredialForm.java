@@ -38,6 +38,7 @@ public class PredialForm
 	private String anioGravable;
 	private String objetocontrato;
 	private String checkAporte_flag;
+	private String indicadorDesc1;
 
 	private String fechaInactivacion;
 	private String opcionuso;
@@ -1216,6 +1217,23 @@ public class PredialForm
 	public void setCheckAporte_flag(final String checkAporte_flag)
 	{
 		this.checkAporte_flag = checkAporte_flag;
+	}
+
+	/**
+	 * @return the indicadorDesc1
+	 */
+	public String getIndicadorDesc1()
+	{
+		return indicadorDesc1;
+	}
+
+	/**
+	 * @param indicadorDesc1
+	 *           the indicadorDesc1 to set
+	 */
+	public void setIndicadorDesc1(final String indicadorDesc1)
+	{
+		this.indicadorDesc1 = indicadorDesc1;
 	}
 
 

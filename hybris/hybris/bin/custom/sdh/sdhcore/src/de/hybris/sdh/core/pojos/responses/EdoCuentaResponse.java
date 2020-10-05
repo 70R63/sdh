@@ -34,6 +34,9 @@ public class EdoCuentaResponse
 	private List<EdoCtaGas> tablaGasolina;
 	private List<EdoCtaPublicidad> tablaPublicidad;
 	private List<EdoCtaOblig> obligNoTributaria;
+	private EdoCtaReteIcaCabecera reteica;
+	private String newReteicaSaldoCargo;
+	private String newReteicaSaldoFavor;
 
 
 
@@ -390,6 +393,63 @@ public class EdoCuentaResponse
 	{
 		this.obligNoTributaria = obligNoTributaria;
 	}
+
+
+
+	/**
+	 * @return the reteica
+	 */
+	public EdoCtaReteIcaCabecera getReteica()
+	{
+		return reteica;
+	}
+
+	/**
+	 * @param reteica
+	 *           the reteica to set
+	 */
+	public void setReteica(final EdoCtaReteIcaCabecera reteica)
+	{
+		this.reteica = reteica;
+	}
+
+	/**
+	 * @return the newReteicaSaldoCargo
+	 */
+	public String getNewReteicaSaldoCargo()
+	{
+		return newReteicaSaldoCargo;
+	}
+
+	/**
+	 * @param newReteicaSaldoCargo
+	 *           the newReteicaSaldoCargo to set
+	 */
+	@JsonProperty("ReteicaSaldoCargo")
+	public void setNewReteicaSaldoCargo(final String newReteicaSaldoCargo)
+	{
+		this.newReteicaSaldoCargo = newReteicaSaldoCargo;
+	}
+
+	/**
+	 * @return the newReteicaSaldoFavor
+	 */
+	public String getNewReteicaSaldoFavor()
+	{
+		return newReteicaSaldoFavor;
+	}
+
+	/**
+	 * @param newReteicaSaldoFavor
+	 *           the newReteicaSaldoFavor to set
+	 */
+	@JsonProperty("ReteicaSaldoFavor")
+	public void setNewReteicaSaldoFavor(final String newReteicaSaldoFavor)
+	{
+		this.newReteicaSaldoFavor = newReteicaSaldoFavor;
+	}
+
+
 
 
 }

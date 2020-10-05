@@ -128,6 +128,8 @@
 	function actualizarCampo(campo_catalogo){
 		if(campo_catalogo == "cilindraje"){
 			$("#cilindraje").val("");
+			var elementoCat = document.getElementById("cilindraje");
+			elementoCat.disabled = "disabled";
 			$("#avaluoAct").val("");
 			var dataActual = ACC.vehiculos.determinarInfoParaCatalogo("cilindraje");
 			ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"cilindraje",null);
