@@ -237,6 +237,14 @@
 				</c:if>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="predial.mensaje.spac" /></label>
+				</div>
+			</div>
+		</div>
 	</div>
 </form:form>
 
