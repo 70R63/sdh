@@ -679,7 +679,7 @@ public class PSEPaymentController extends AbstractPageController
 		PSEPaymentForm psePaymentForm_aux = new PSEPaymentForm();
 		psePaymentForm_aux = psePaymentForm;
 
-		if (psePaymentForm.getFechaLimiteDePago().equals(""))
+		if (psePaymentForm.getFechaLimiteDePago().equals("") || psePaymentForm.getFechaLimiteDePago().contains("/"))
 		{
 			psePaymentForm_aux.setFechaLimiteDePago(psePaymentForm.getFechaLimiteDePago());
 		}

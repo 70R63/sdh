@@ -87,6 +87,11 @@ ACC.predial = {
 		$('#DatosFisicosPredial tbody').empty();
 		$('#DatosLiquidaPredial tbody').empty();
 		$('#MarcasPredial tbody').empty();
+		var divDescuento1PC = document.getElementById("divDescuento1PC");
+		if(divDescuento1PC != null){
+			divDescuento1PC.style = "display:none";
+		}
+		
 
 		var data = {};
 
@@ -108,6 +113,12 @@ ACC.predial = {
 						console.log(result);
 						$(".chip").val(result.chip);
 						$("#opcUsoPredialUni").val(result.opcionuso);
+						if(result.indicadorDesc1 != null && result.indicadorDesc1 == "X"){
+							var divDescuento1PC = document.getElementById("divDescuento1PC");
+							if(divDescuento1PC != null){
+								divDescuento1PC.style = "display:block";
+							}
+						}
 						var econo = result.datosEconomicos;
 						$('#DatosEconomicos')
 								.append(

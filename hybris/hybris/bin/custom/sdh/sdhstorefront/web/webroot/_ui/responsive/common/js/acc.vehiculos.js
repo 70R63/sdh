@@ -604,7 +604,12 @@ ACC.vehiculos = {
 	
 	
 	obtenerCatalogosInicialVehiculos : function(cat_valores_actuales) {
-
+		var elementoCat = null;
+		elementoCat = document.getElementById("linea");
+		elementoCat.disabled = "disabled";
+		elementoCat = document.getElementById("cilindraje");
+		elementoCat.disabled = "disabled";
+		
 		dataActual = null;
 		dataActual = ACC.vehiculos.determinarInfoInicialParaCatalogo("linea",cat_valores_actuales);
 		ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"linea",cat_valores_actuales);
@@ -635,7 +640,6 @@ ACC.vehiculos = {
 	
 	updateFromResponse_catalogos : function(campo_catalogo, cat_valores_actuales, infoActual, infoResponse){
 		
-		debugger;
 		if(campo_catalogo == 'linea'){
 			$("#linea").find("option:gt(0)").remove();
 			$("#linea").find("option:eq(0)").remove();
@@ -645,27 +649,32 @@ ACC.vehiculos = {
 				$('#linea').append('<option value="'+ value.linea +'">'+ value.desc_linea + "</option>");
 			});
 			$("#linea").val(cat_valores_actuales[3]);
+			var elementoCat = document.getElementById("linea");
+			elementoCat.disabled = "";
 		}else if(campo_catalogo == 'cilindraje'){
 			$("#cilindraje").find("option:gt(0)").remove();
 			$("#cilindraje").find("option:eq(0)").remove();
 			
-			$('#cilindraje').append('<option value="">'+ "Seleccionar" + "</option>");
-			if(cat_valores_actuales == null){
+			if(infoResponse.catalogo.vehicularcilindrajeresponse == null){
 				$('#cilindraje').append('<option value="">'+ "No se encontraron opciones" + "</option>");
 			}else{
-			$.each(infoResponse.catalogo.vehicularcilindrajeresponse, function (index,value){
-				if(value.cilindraje != null && value.cilindraje != ""){
-					$('#cilindraje').append('<option value="'+ value.cilindraje +'">'+ value.cilindraje + "</option>");
-				}
-			});}
+				$('#cilindraje').append('<option value="">'+ "Seleccionar" + "</option>");
+				$.each(infoResponse.catalogo.vehicularcilindrajeresponse, function (index,value){
+					if(value.cilindraje != null && value.cilindraje != ""){
+						$('#cilindraje').append('<option value="'+ value.cilindraje +'">'+ value.cilindraje + "</option>");
+					}
+				});
+			}
 			var valueSelected = "";
-			if(cat_valores_actuales!=null){
-				if($('#cilindraje').length == 1){
+			if(cat_valores_actuales!=null && cat_valores_actuales[1] != "" ){
+				if($('#cilindraje option').length == 1){
 					$('#cilindraje').append('<option value="'+cat_valores_actuales[1]+'">'+ cat_valores_actuales[1] + "</option>");				
 				}
 				valueSelected = cat_valores_actuales[1];
 			}
 			$("#cilindraje").val(valueSelected);
+			var elementoCat = document.getElementById("cilindraje");
+			elementoCat.disabled = "";
 		}else if(campo_catalogo == 'avaluo'){
 			if(infoResponse.catalogo.avaluoactual  == null || infoResponse.catalogo.avaluoactual == ""){
 				var error = infoResponse.catalogo.errores;
