@@ -55,9 +55,7 @@
 	</script>
 	
 	<template:sdhJavascriptVariables/>
-	<template:sdhJavascriptVariables2/>
-	<template:sdhJavascriptVariables3/>
-	
+	<template:sdhJavascriptVariables1/>
 	<template:javaScriptAddOnsVariables/>
 	
 	<%-- generated variables from commonVariables.properties --%>
