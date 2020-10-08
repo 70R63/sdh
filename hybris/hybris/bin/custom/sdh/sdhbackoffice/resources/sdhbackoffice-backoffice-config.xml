@@ -352,6 +352,10 @@
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="vehiculosTaxList"/>
 				</editorArea:section>
 			</editorArea:tab>
+			<editorArea:tab merge-mode="remove" name="hmc.administration"/>
+			<editorArea:tab merge-mode="remove" name="hmc.orders"/>
+			<editorArea:tab merge-mode="remove" name="hmc.tab.community"/>
+			<editorArea:tab merge-mode="remove" name="hmc.customerprices"/>
 		</editorArea:editorArea>
 	</context>
 	 <context merge-by="type" parent="GenericItem" type="SDHAddress" component="base" module="sdhbackoffice">
