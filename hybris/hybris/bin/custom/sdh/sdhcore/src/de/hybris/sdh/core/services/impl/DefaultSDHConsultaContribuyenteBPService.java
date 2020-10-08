@@ -50,6 +50,10 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 		final String urlString = configurationService.getConfiguration().getString("sdh.validacontribuyente.url");
 		final String user = configurationService.getConfiguration().getString("sdh.validacontribuyente.user");
 		final String password = configurationService.getConfiguration().getString("sdh.validacontribuyente.password");
+		
+		
+		final long startTime = System.currentTimeMillis();
+        
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
@@ -104,6 +108,8 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
 		}
 
+		final long endTime = System.currentTimeMillis();
+        LOG.info("executed in [" + ((endTime - startTime) / 1000) + "] seconds. ");
 
 
 		// XXX Auto-generated method stub
@@ -111,7 +117,7 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 	}
 
 	@Override
-	public String getEntidadBancaria(String bp) {
+	public String getEntidadBancaria(final String bp) {
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
 		consultaContribuyenteBPRequest.setNumBP(bp);
@@ -130,10 +136,10 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 		}
 
 		if (Objects.nonNull(sdhConsultaContribuyenteBPResponse)){
-			List<ContribAgente> agentes  = sdhConsultaContribuyenteBPResponse.getAgentes();
+			final List<ContribAgente> agentes  = sdhConsultaContribuyenteBPResponse.getAgentes();
 			if(Objects.nonNull(agentes)){
-				for(ContribAgente agente : agentes){
-					String entidadBancaria = agente.getEntBanco();
+				for(final ContribAgente agente : agentes){
+					final String entidadBancaria = agente.getEntBanco();
 					LOG.debug(agente);
 					if(Objects.nonNull(entidadBancaria)){
 						if(!entidadBancaria.equals("")){
