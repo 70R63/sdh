@@ -38,7 +38,7 @@
 
 <script type="text/javascript">
 window.onload = function() {
-	alert('Para reexpedición de factura, debes actualizar o confirmar datos y dar clic en el botón "Reexpedir Factura"');
+	alert('Para reexpedición de factura, debes actualizar o confirmar datos y dar clic en el botón "Reexpedir Factura"\nDe lo contrario se debe realizar un trámite ingresando por el menú superior opción Trámites');
     $(".loader").fadeOut("slow");
 }
 </script>	
