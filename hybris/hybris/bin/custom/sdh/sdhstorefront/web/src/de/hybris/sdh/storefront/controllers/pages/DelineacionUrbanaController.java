@@ -10,6 +10,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -533,6 +534,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		infoPreviaPSE.setDv(dv);
 		infoPreviaPSE.setNumObjeto(numObjeto);
 		infoPreviaPSE.setCDU(CDU);
+		infoPreviaPSE.setCdu(CDU);
 		infoPreviaPSE.setAnticipo(anticipo);
 		infoPreviaPSE.setRadicado(radicado);
 
@@ -646,6 +648,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		infoPreviaPSE.setDv(dv);
 		infoPreviaPSE.setNumObjeto(numObjeto);
 		infoPreviaPSE.setCDU(CDU);
+		infoPreviaPSE.setCdu(CDU);
 		infoPreviaPSE.setAnticipo(anticipo);
 		infoPreviaPSE.setRadicado(radicado);
 
@@ -790,6 +793,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		infoPreviaPSE.setDv(dv);
 		infoPreviaPSE.setNumObjeto(numObjeto);
 		infoPreviaPSE.setCDU(CDU);
+		infoPreviaPSE.setCdu(CDU);
 		infoPreviaPSE.setAnticipo(anticipo);
 		infoPreviaPSE.setRadicado(radicado);
 
@@ -1044,6 +1048,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		infoPreviaPSE.setDv(dv);
 		infoPreviaPSE.setNumObjeto(numObjeto);
 		infoPreviaPSE.setCDU(CDU);
+		infoPreviaPSE.setCdu(CDU);
 		infoPreviaPSE.setAnticipo(anticipo);
 		infoPreviaPSE.setRadicado(radicado);
 

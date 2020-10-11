@@ -69,6 +69,7 @@
 			<sf:hidden path="numObjeto" />
 			<sf:hidden path="CDU" />
 			<sf:hidden path="anticipo" />
+			<sf:hidden path="cdu" />
 
 			<div class="col-md-3">
 				<c:if test="${flagPagarEnLinea eq true}">

@@ -8,6 +8,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
@@ -134,6 +135,9 @@ public class PreparacionPagoPSE extends AbstractPageController
 			psePaymentForm.setNumeroDeReferencia(infoPreviaPSE.getNumRef());
 			psePaymentForm.setFechaLimiteDePago(infoPreviaPSE.getFechaVenc());
 			psePaymentForm.setCHIP(infoPreviaPSE.getChip());
+			psePaymentForm.setCdu(infoPreviaPSE.getCdu());
+			psePaymentForm.setPlaca(infoPreviaPSE.getPlaca());
+
 		}
 		else
 		{

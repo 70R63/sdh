@@ -25,10 +25,46 @@ public class InfoPreviaPSE
 	private String fechaVenc;
 	private String numRef;
 	private String totalPagar;
+	private String cdu;
+	private String placa;
 
 
 
 
+
+	/**
+	 * @return the cdu
+	 */
+	public String getCdu()
+	{
+		return cdu;
+	}
+
+	/**
+	 * @param cdu
+	 *           the cdu to set
+	 */
+	public void setCdu(final String cdu)
+	{
+		this.cdu = cdu;
+	}
+
+	/**
+	 * @return the placa
+	 */
+	public String getPlaca()
+	{
+		return placa;
+	}
+
+	/**
+	 * @param placa
+	 *           the placa to set
+	 */
+	public void setPlaca(final String placa)
+	{
+		this.placa = placa;
+	}
 
 	/**
 	 * @return the fechaVenc

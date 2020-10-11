@@ -63,6 +63,8 @@
 				<sf:hidden path="numObjeto" />
 				<sf:hidden path="CDU" />
 				<sf:hidden path="anticipo" />
+				<sf:hidden path="placa" />
+				
 				<div class="col-md-3">
 					<c:if test="${flagPagarEnLinea eq true}">
 					<sf:button class="btn btn-primary btn-lg pagarbtn" type="button" onclick="validaBotonPago()" id="action"

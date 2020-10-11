@@ -17,7 +17,7 @@
 
 
 <script>
-	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar){
+	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar,cdu,placa){
 		debugger;
 		var numBP = "${customerData.numBP}";
 		var numDoc = "${customerData.documentNumber}";
@@ -41,6 +41,9 @@
 		$("#pagarEnLinea_dv").val(dv);
 		$("#pagarEnLinea_numObjeto").val(numObjeto);
 		$("#pagarEnLinea_chip").val(chip);
+		$("#pagarEnLinea_cdu").val(cdu);
+		$("#pagarEnLinea_placa").val(placa);
+		
 		
 		if(fechaVenc === '' || periodo.search("/") >= 0){
 			$("#pagarEnLinea_fechaVenc").val(fechaVenc);

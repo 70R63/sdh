@@ -8,6 +8,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
@@ -814,7 +815,6 @@ public class PSEPaymentController extends AbstractPageController
 
 	private CreateTransactionPaymentResponseInformationType doPsePayment(final PSEPaymentForm psePaymentForm)
 	{
-		final CreateTransactionPaymentInformationType createTransactionPaymentInformationType = new CreateTransactionPaymentInformationType();
 
 		LOG.info("----------- doPsePayment --------------");
 		LOG.info(psePaymentForm);
@@ -828,15 +828,27 @@ public class PSEPaymentController extends AbstractPageController
 
 		LOG.info("-----------FIN  getBankList  --------------");
 
+		String ref2;
+
+		if (psePaymentForm.getTipoDeImpuesto().equals("5101"))
+		{
+			ref2 = psePaymentForm.getCHIP();
+		}
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5103"))
+		{
+			ref2 = psePaymentForm.getPlaca();
+		}
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5132"))
+		{
+			ref2 = psePaymentForm.getCdu();
+		}
+		else
+		{
+			ref2 = psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
+		}
 
 
-		createTransactionPaymentInformationType.setPaymentDescription(psePaymentForm.getTipoDeIdentificacion().concat("-".concat(psePaymentForm.getNumeroDeReferencia())));
-		createTransactionPaymentInformationType.setTicketId(new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()));
-		createTransactionPaymentInformationType.setTransactionValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
-		createTransactionPaymentInformationType.setVatValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
-
-
-		final int i_ceros = 14 - (psePaymentForm.getTipoDeIdentificacion().length() + psePaymentForm.getNoIdentificacion().length());
+      final int i_ceros = 14 - ref2.length();
 
 		String s_ceros = new String();
 		for (int i = 1; i <= i_ceros; i++)
@@ -844,7 +856,19 @@ public class PSEPaymentController extends AbstractPageController
 			s_ceros = s_ceros + "0";
 		}
 
-		final String s_reference2 = s_ceros + psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
+		final String s_reference2 = s_ceros + ref2;
+
+
+		final CreateTransactionPaymentInformationType createTransactionPaymentInformationType = new CreateTransactionPaymentInformationType();
+
+		createTransactionPaymentInformationType.setPaymentDescription(
+				psePaymentForm.getTipoDeIdentificacion().concat("-".concat(psePaymentForm.getNumeroDeReferencia())));
+		createTransactionPaymentInformationType.setTicketId(new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()));
+		createTransactionPaymentInformationType.setTransactionValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
+		createTransactionPaymentInformationType.setVatValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
+
+
+
 
 		createTransactionPaymentInformationType.setReferenceNumber(
 				this.getReferences(new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()).toString(), s_reference2,
