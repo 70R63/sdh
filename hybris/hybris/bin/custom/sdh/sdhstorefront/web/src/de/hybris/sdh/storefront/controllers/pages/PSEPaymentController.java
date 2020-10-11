@@ -894,8 +894,28 @@ public class PSEPaymentController extends AbstractPageController
 		LOG.info("----------- doCredibancoPayment --------------");
 
 
-		final int i_ceros = 14
-				- (psePaymentForm.getTipoDeIdentificacion().length() + psePaymentForm.getNoIdentificacion().length());
+
+		String ref3;
+
+		if (psePaymentForm.getTipoDeImpuesto().equals("5101"))
+		{
+			ref3 = psePaymentForm.getCHIP();
+		}
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5103"))
+		{
+			ref3 = psePaymentForm.getPlaca();
+		}
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5132"))
+		{
+			ref3 = psePaymentForm.getCdu();
+		}
+		else
+		{
+			ref3 = psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
+		}
+
+
+		final int i_ceros = 14 - ref3.length();
 
 		String s_ceros = new String();
 		for (int i = 1; i <= i_ceros; i++)
@@ -903,7 +923,21 @@ public class PSEPaymentController extends AbstractPageController
 			s_ceros = s_ceros + "0";
 		}
 
-		final String s_reference3 = s_ceros + psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
+		final String s_reference3 = s_ceros + ref3;
+
+
+
+
+		//final int i_ceros = 14
+		//		- (psePaymentForm.getTipoDeIdentificacion().length() + psePaymentForm.getNoIdentificacion().length());
+
+		//String s_ceros = new String();
+		//for (int i = 1; i <= i_ceros; i++)
+		//{
+		//	s_ceros = s_ceros + "0";
+		//}
+
+		//final String s_reference3 = s_ceros + psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
 
 
 		final String concept = psePaymentForm.getBanco().substring(2, 4) + psePaymentForm.getTipoDeImpuesto().substring(2, 4);
