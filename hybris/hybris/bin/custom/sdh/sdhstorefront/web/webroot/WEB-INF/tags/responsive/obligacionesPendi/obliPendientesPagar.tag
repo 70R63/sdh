@@ -28,6 +28,8 @@
 				<sf:hidden path="fechaVenc" id="pagarEnLinea_fechaVenc"/>
 				<sf:hidden path="numRef" id="pagarEnLinea_numRef"/>
 				<sf:hidden path="totalPagar" id="pagarEnLinea_totalPagar"/>
+				<sf:hidden path="cdu" id="pagarEnLinea_cdu"/>
+				<sf:hidden path="placa" id="pagarEnLinea_placa"/>
 			</div>
 		</sf:form>
 	</div>

@@ -472,12 +472,16 @@ ACC.tramitesSeleccion = {
 		// }else{
 		// validacion = false;
 		// }
+		var mensajeValidacion = "Por favor ingresar los valores obligatorios marcados con *";
 		if (validacion == true) {
 			validacion = ACC.tramitesSeleccion.validarArchivosAntesSubmit();
+			if(validacion == false){
+				mensajeValidacion = "No han sido adjuntados los documentos requeridos para este trámite";
+			}
 		}
 
 		if (validacion == false) {
-			alert("Por favor ingresar los valores obligatorios marcados con *");
+			alert(mensajeValidacion);
 		}
 
 		return validacion;

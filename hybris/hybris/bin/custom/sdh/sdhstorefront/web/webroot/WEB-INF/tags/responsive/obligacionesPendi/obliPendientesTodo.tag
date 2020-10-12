@@ -94,7 +94,7 @@
 												<td><label class="control-label"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 													id="Detalle"
-													onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPredDet.objetoContrato}','${current.CHIP}', '${eachObPredDet.fechaVencimiento}', '${eachObPredDet.numReferencia}','${eachObPredDet.obligacion}' )">Pagar</label></td>
+													onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPredDet.objetoContrato}','${current.CHIP}', '${eachObPredDet.fechaVencimiento}', '${eachObPredDet.numReferencia}','${eachObPredDet.obligacion}','','' )">Pagar</label></td>
 													<td><label class="control-label btnGenerarSPACObli"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 													id="btnGenerarSPACObli" data-numForm="${eachObPredDet.numFormulario}" data-anio="${eachObPred.anioGravable}" data-obj="${eachObPredDet.objetoContrato}" data-reimpresion="X">Generar SPAC</label></td>
@@ -229,7 +229,7 @@
 												<td><label class="control-label"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 													id="Detalle"
-													onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}' )">Pagar</label></td>
+													onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}','','${eachObVehi.placa}' )">Pagar</label></td>
 												<td><label class="control-label btnGenerarSPACObliVehicular"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 													id="btnGenerarSPACObliVehicular" data-numForm="${eachObVehiDet.numFormulario}" data-anio="${eachObVehi.anioGravable}" data-obj="${eachObVehiDet.objetoContrato}" data-reimpresion="X">Generar SPAC</label></td>
@@ -378,7 +378,7 @@
 												<td><label class="control-label"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 													id="Detalle"
-													onclick="pagarEnLinea('5102','${eachObIca.anioGravable}','${eachObIca.periodo}','${eachObIcaDet.objetoContrato}','', '${eachObIcaDet.fechaVencimiento}', '${eachObIcaDet.numReferencia}','${eachObIcaDet.obligacion}' )">Pagar</label></td>
+													onclick="pagarEnLinea('5102','${eachObIca.anioGravable}','${eachObIca.periodo}','${eachObIcaDet.objetoContrato}','', '${eachObIcaDet.fechaVencimiento}', '${eachObIcaDet.numReferencia}','${eachObIcaDet.obligacion}','','' )">Pagar</label></td>
 											</tr>
 										</c:if>
 									</c:forEach>
@@ -481,7 +481,7 @@
 													<td><label class="control-label"
 														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 														id="Detalle"
-														onclick="pagarEnLinea('5154','${eachPubExtTax.anioGravable}','','${eachPubExtTaxDet.objetoContrato}','', '${eachPubExtTaxDet.fechaVencimiento}', '${eachPubExtTaxDet.numReferencia}','${eachPubExtTaxDet.obligacion}' )">Pagar</label></td>
+														onclick="pagarEnLinea('5154','${eachPubExtTax.anioGravable}','','${eachPubExtTaxDet.objetoContrato}','', '${eachPubExtTaxDet.fechaVencimiento}', '${eachPubExtTaxDet.numReferencia}','${eachPubExtTaxDet.obligacion}','','' )">Pagar</label></td>
 												</tr>
 											</c:if>
 										</c:forEach>
@@ -589,7 +589,7 @@
 													<td><label class="control-label"
 														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 														id="Detalle"
-														onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}','','${eachObGasDet.fechaVencimiento}', '${eachObGasDet.numReferencia}', '${eachObGasDet.obligacion}')">Pagar</label></td>
+														onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}','','${eachObGasDet.fechaVencimiento}', '${eachObGasDet.numReferencia}', '${eachObGasDet.obligacion}','','')">Pagar</label></td>
 												</tr>
 											</c:if>
 										</c:forEach>
@@ -679,7 +679,7 @@
 													<td><label class="control-label"
 														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 														id="Detalle"
-														onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}' )">Pagar</label></td>
+														onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}','${eachDeli.cdu}','' )">Pagar</label></td>
 												</tr>
 											</c:if>
 										</c:forEach>
@@ -764,7 +764,7 @@
 												<td><label class="control-label"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 													id="Detalle"
-													onclick="pagarEnLinea('5102','${eachReteIca.anioGravable}','${eachReteIca.periodo}','${eachReteIcaDet.objetoContrato}','', '${eachReteIcaDet.fechaVencimiento}', '${eachReteIcaDet.numReferencia}','${eachReteIcaDet.obligacion}' )">Pagar</label></td>
+													onclick="pagarEnLinea('5102','${eachReteIca.anioGravable}','${eachReteIca.periodo}','${eachReteIcaDet.objetoContrato}','', '${eachReteIcaDet.fechaVencimiento}', '${eachReteIcaDet.numReferencia}','${eachReteIcaDet.obligacion}','','' )">Pagar</label></td>
 											</tr>
 											</c:if>
 										</c:forEach>

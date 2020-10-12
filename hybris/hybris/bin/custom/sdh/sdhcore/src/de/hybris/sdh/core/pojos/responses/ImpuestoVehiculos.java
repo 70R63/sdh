@@ -21,6 +21,7 @@ public class ImpuestoVehiculos
 	private String numObjeto;
 	private String anioGravable;
 	private String numForm;
+	private String marca_Desc;
 
 	/**
 	 * @return the placa
@@ -223,6 +224,23 @@ public class ImpuestoVehiculos
 	public void setNumForm(final String numForm)
 	{
 		this.numForm = numForm;
+	}
+
+	/**
+	 * @return the marca_Desc
+	 */
+	public String getMarca_Desc()
+	{
+		return marca_Desc;
+	}
+
+	/**
+	 * @param marca_Desc
+	 *           the marca_Desc to set
+	 */
+	public void setMarca_Desc(final String marca_Desc)
+	{
+		this.marca_Desc = marca_Desc;
 	}
 
 

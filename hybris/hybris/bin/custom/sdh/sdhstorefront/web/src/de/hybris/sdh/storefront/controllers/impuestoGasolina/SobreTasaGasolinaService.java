@@ -5,6 +5,7 @@ package de.hybris.sdh.storefront.controllers.impuestoGasolina;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.i18n.I18NService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
@@ -85,6 +86,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.context.MessageSource;
 
 
 /**
@@ -2431,9 +2433,12 @@ public class SobreTasaGasolinaService
 	/**
 	 * @param infoVista
 	 * @param listaDeclaracionesResponse
+	 * @param i18nService
+	 * @param messageSource
 	 */
 	public void determinarRegistrosDeclaraciones(final OpcionDeclaracionesVista infoVista,
-			final ListaDeclaracionesResponse listaDeclaracionesResponse)
+			final ListaDeclaracionesResponse listaDeclaracionesResponse, final MessageSource messageSource,
+			final I18NService i18nService)
 	{
 
 		List<ImpuestoPublicidadExterior> publicidadExt = null;
@@ -2487,6 +2492,9 @@ public class SobreTasaGasolinaService
 							{
 								if (vehiculos_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto()))
 								{
+									vehiculos_customer.setMarca_Desc(
+											messageSource.getMessage("vehiculos.detalle.marca." + vehiculos_customer.getMarca(), null,
+													i18nService.getCurrentLocale()));
 									vehiculos.add(vehiculos_customer);
 								}
 							}
