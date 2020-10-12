@@ -16,11 +16,12 @@
 
 <c:choose>
 	<c:when test="${ PJUR eq true}">
-		<miRit:personalDataPJ />
+<!-- 	Se comentan secciones de Reexpedicoón de factura por petición de usurio 11/10/2020 -->
+<%-- 		<miRit:personalDataPJ /> --%>
 	</c:when>
 	<c:otherwise>
 		<miRit:personalData />
-		<miRit:generalData />
+<%-- 		<miRit:generalData /> --%>
 	</c:otherwise>
 </c:choose>
 <miRit:contactData />
