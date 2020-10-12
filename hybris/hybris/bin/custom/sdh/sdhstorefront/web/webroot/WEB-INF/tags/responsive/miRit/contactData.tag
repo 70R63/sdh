@@ -302,6 +302,26 @@ toddir.style.width= '900px'
 
 			<div class="card-body">
 				<!--  First column of form -->
+				<c:choose>
+				<c:when test="${ PJUR eq true || PNAT eq true}">
+				<div class="row">
+					<div class="row">
+						<div class="col-12 col-md-2">
+							<div>
+								<button
+									class="btn btn-primary btn-lg btn-block addressHelperField"
+									type="button" onclick="toggleAssistant();"
+									style="margin-bottom: 10px;">
+									<spring:theme code="mirit.contactData.editarAddress" />
+								</button>
+							</div>
+						</div>
+					</div>
+					
+
+				</div>
+			</c:when>
+				<c:otherwise>
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group ">
@@ -474,8 +494,13 @@ toddir.style.width= '900px'
 							</div>
 						</div>
 					</div>
+					
 
 				</div>
+				</c:otherwise>
+				</c:choose>
+					
+				
 				<div id="addressAssistant"
 					style="display: none; border: 1px solid #000; padding: 10px;">
 					<br> <br>
@@ -956,6 +981,13 @@ toddir.style.width= '900px'
 					</div>
 				</div>
 				<br> <br>
+				
+				
+				
+				<c:choose>
+				<c:when test="${ PJUR eq true || PNAT eq true}">
+				</c:when>
+				<c:otherwise>
 				<div class="row">
 					<div class="col-md-2">
 						<div class="form-group ">
@@ -1131,6 +1163,8 @@ toddir.style.width= '900px'
 						</div>
 					</div>
 				</div>
+				</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>

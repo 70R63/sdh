@@ -200,11 +200,12 @@ public class ReexpedicionFacturaPageController extends AbstractPageController
 					SDHValidaMailRolResponse.class);
 
 			final MiRitForm miRitForm = new MiRitForm();
-
+			model.addAttribute("PNAT", true);
 
 			if ("nit".equalsIgnoreCase(customerModel.getDocumentType()) || "nite".equalsIgnoreCase(customerModel.getDocumentType()))
 			{
 				model.addAttribute("PJUR", true);
+				model.addAttribute("PNAT", false);
 				miRitForm.setNombreRazonSocial1(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1());
 				miRitForm.setNombreRazonSocial2(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2());
 				miRitForm.setNombreRazonSocial3(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3());
