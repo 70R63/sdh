@@ -8,7 +8,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -112,7 +111,7 @@ public class DeclaracionesPageController extends AbstractPageController
 	@RequestMapping(value =
 	{ "/contribuyentes/consultas/declaraciones", "/agenteRetenedor/consultas/declaraciones" }, method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String declaracionesGET(final Model model, HttpServletRequest request) throws CMSItemNotFoundException
+	public String declaracionesGET(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET Agentes Declaraciones --------------------------");
 
@@ -120,7 +119,7 @@ public class DeclaracionesPageController extends AbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final OpcionDeclaracionesVista infoVista = new OpcionDeclaracionesVista();
 		SDHValidaMailRolResponse customerData = null;
-		String referrer = request.getHeader("referer");
+		final String referrer = request.getHeader("referer");
 
 		customerData = sdhCustomerFacade.getRepresentadoFromSAP(customerModel.getNumBP());
 		infoVista.setCatalogos(gasolinaService.prepararCatalogosOpcionDeclaraciones(customerData));
@@ -197,7 +196,7 @@ public class DeclaracionesPageController extends AbstractPageController
 
 					if (icaInfObjetoResponse.getRegimen() != null)
 					{
-						String tipoRegimen = icaInfObjetoResponse.getRegimen().substring(0, 1);
+						final String tipoRegimen = icaInfObjetoResponse.getRegimen().substring(0, 1);
 
 						switch (tipoRegimen)
 						{
@@ -310,7 +309,9 @@ public class DeclaracionesPageController extends AbstractPageController
 		System.out.println("Response de docs/consulCertif: " + listaDeclaracionesResponse);
 		if (gasolinaService.ocurrioErrorListaDeclara(listaDeclaracionesResponse) != true)
 		{
-			gasolinaService.determinarRegistrosDeclaraciones(infoVista, listaDeclaracionesResponse);
+			gasolinaService.determinarRegistrosDeclaraciones(infoVista, listaDeclaracionesResponse, getMessageSource(),
+					getI18nService());
+
 			infoVista.setErrores(listaDeclaracionesResponse.getErrores());
 		}
 		else
