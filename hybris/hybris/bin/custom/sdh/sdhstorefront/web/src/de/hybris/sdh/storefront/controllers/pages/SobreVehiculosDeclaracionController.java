@@ -18,6 +18,7 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -317,6 +318,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoVehicular(detalleContribuyente, placa));
 			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
 			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getVEHICULAR());
+			infoPreviaPSE.setPlaca(placa);
 		}
 		else
 		{
@@ -641,6 +643,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 						vehicular2response.getInfo_vehiculo().getPlaca()));
 			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
 			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getVEHICULAR());
+			infoPreviaPSE.setPlaca(vehicular2response.getInfo_vehiculo().getPlaca());
 		}
 		else
 		{

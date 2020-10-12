@@ -280,6 +280,8 @@
 					<form:hidden path="impuesto" value="${psePaymentForm.impuesto}"/>
 					<form:hidden path="anoGravable" value="${psePaymentForm.anoGravable}"/>
 					<form:hidden path="CHIP" value="${psePaymentForm.CHIP}"/>
+					<form:hidden path="cdu" value="${psePaymentForm.cdu}"/>
+					<form:hidden path="placa" value="${psePaymentForm.placa}"/>
 					<form:hidden path="periodo" value="${psePaymentForm.periodo}"/>
 					<form:hidden path="CUD" value="${psePaymentForm.CUD}"/>
 					<form:hidden path="noIdentificacion" value="${psePaymentForm.noIdentificacion}"/>
