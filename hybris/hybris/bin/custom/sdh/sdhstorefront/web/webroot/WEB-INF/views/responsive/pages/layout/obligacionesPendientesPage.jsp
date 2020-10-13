@@ -17,8 +17,23 @@
 
 
 <script>
-	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar,cdu,placa){
+	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar,cdu,placa,facilidad,montoFacilidad){
 		debugger;
+		var montoPagar;
+		
+		if(facilidad == '02'){
+			var isPagoTotal = confirm("¿Desea realizar el pago total de la Obligación seleccionada?");
+	        if (isPagoTotal == true) {
+	          montoPagar = totalPagar;
+	        } else {
+	          montoPagar = montoFacilidad;
+	        }
+	    }else if(facilidad == '01'){
+	    	montoPagar = montoFacilidad;
+		}else{
+			montoPagar = totalPagar;
+		}	
+		
 		var numBP = "${customerData.numBP}";
 		var numDoc = "${customerData.documentNumber}";
 		var tipoDoc = "${customerData.documentType}";
@@ -53,7 +68,7 @@
 		}
 		
 		$("#pagarEnLinea_numRef").val(numRef);
-		$("#pagarEnLinea_totalPagar").val(totalPagar);
+	    $("#pagarEnLinea_totalPagar").val(montoPagar);
 		
 		
 		var form = document.getElementById("infoPreviaPSE");
