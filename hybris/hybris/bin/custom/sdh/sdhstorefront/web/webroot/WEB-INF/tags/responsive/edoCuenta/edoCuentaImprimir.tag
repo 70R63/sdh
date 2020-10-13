@@ -472,7 +472,7 @@
 								</c:when>
 								<c:otherwise>
 									<td><label
-										onclick="ACC.oblipend.bindTrmPdf('${ctaForm.tablaReteica.numObjeto}','31','ReteicaReporte.pdf');"><span
+										onclick="ACC.oblipend.bindTrmPdf('${ctaForm.tablaReteica.numObjeto}','2','ReteicaReporte.pdf');"><span
 											class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>
 								</c:otherwise>
 							</c:choose>
