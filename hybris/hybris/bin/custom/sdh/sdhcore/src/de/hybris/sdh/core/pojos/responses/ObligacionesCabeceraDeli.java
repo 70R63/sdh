@@ -17,7 +17,47 @@ public class ObligacionesCabeceraDeli
 	private String cdu;
 	private String chip;
 	private String direccion;
+	private String facilidad;
+	private String montoFacilidad;
 	private List<ObligacionesDetallePublicidad> details;
+
+
+
+
+	/**
+	 * @return the facilidad
+	 */
+	public String getFacilidad()
+	{
+		return facilidad;
+	}
+
+	/**
+	 * @param facilidad
+	 *           the facilidad to set
+	 */
+	public void setFacilidad(final String facilidad)
+	{
+		this.facilidad = facilidad;
+	}
+
+	/**
+	 * @return the montoFacilidad
+	 */
+	public String getMontoFacilidad()
+	{
+		return montoFacilidad;
+	}
+
+	/**
+	 * @param montoFacilidad
+	 *           the montoFacilidad to set
+	 */
+	public void setMontoFacilidad(final String montoFacilidad)
+	{
+		this.montoFacilidad = montoFacilidad;
+	}
+
 	/**
 	 * @return the anioGravable
 	 */
