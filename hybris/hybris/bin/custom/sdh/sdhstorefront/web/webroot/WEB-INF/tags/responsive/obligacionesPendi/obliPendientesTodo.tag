@@ -783,8 +783,12 @@
 				</div>
 			</c:if>
 			<c:if test="${empty obligacionesFormuno.headerreteica}">
-				<label class="control-label">No cuenta con obligaciones
-					pendientes de RETEICA</label>
+				<div class="row" style="margin-top: -1200px">
+					<div class="col-md-12" style="margin-top: -300px !important;">
+						<label class="control-label" style="text-transform: none;"><spring:theme
+								code="obligaciones.mensaje.reteica" /></label>
+					</div>
+				</div>
 
 			</c:if>
 		</div>
