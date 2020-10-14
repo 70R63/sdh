@@ -838,9 +838,16 @@ public class PSEPaymentController extends AbstractPageController
 		{
 			ref2 = psePaymentForm.getPlaca();
 		}
-		else if (psePaymentForm.getTipoDeImpuesto().equals("5132"))
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5132") || psePaymentForm.getTipoDeImpuesto().equals("5106"))
 		{
-			ref2 = psePaymentForm.getCdu();
+			if (!psePaymentForm.getCUD().equals(""))
+			{
+				ref2 = psePaymentForm.getCUD();
+			}
+			else
+			{
+				ref2 = psePaymentForm.getCdu();
+			}
 		}
 		else
 		{
