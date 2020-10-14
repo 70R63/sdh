@@ -421,7 +421,7 @@ ACC.ica = {
 			 		}
 
 	    	        	
-	    	        	if(anoGravable != "" && tipoID != "" && numID != "" && razonSocial != "" && direccion != "" && telefono != "" && codMunicipio != "" && tarifaApl != "" && montoRetenido != "")
+			 		if(anoGravable != "" && montoRetenido != "")
 	    	        	{
 		    	        	var eachIngreso=new Object();
 		    	        	
