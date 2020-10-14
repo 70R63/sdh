@@ -10,6 +10,7 @@
 <%@ taglib prefix="declaracion" tagdir="/WEB-INF/tags/responsive/predial/predialInicial"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <predial:predialTresGenerales />
 <predial:predialTresDatPredio></predial:predialTresDatPredio>

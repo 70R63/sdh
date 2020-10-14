@@ -6,6 +6,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="terceros" tagdir="/WEB-INF/tags/responsive/terceroautorizado"%>
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 
 <terceros:terceroOpcionesBuscar/>

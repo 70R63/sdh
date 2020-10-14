@@ -71,15 +71,21 @@ ACC.ica = {
 	 
 	 bindCalculoButton: function () {
 		 $(document).on("click", "#icaCalculoButton", function (e) {
-	 	        debugger;
-				
+	 	    			
 				e.preventDefault();
+				
+				   var spinnerdiv=document.getElementById('cargandoSpinner');
+				$("#cargandoSpinner").html(ACC.mirit.spinner);
+				spinnerdiv.style.display = 'block';
+				//Se comentan campos de la validación de valor retenido por petición de usuario 13/10/2020
 				if(ACC.ica.validaAntesCalcular() == false){
+					$("#cargandoSpinner").html();
+					spinnerdiv.style.display = 'none';
 					alert("Los campos en la sección Valor Retenido son obligatorios");
 					return;
 				}
 	 	        
-//	 	        $("#icaCalculoButton").prop('disabled', true);
+
 	 	       var icaCalculaDeclaracionForm = {};
 	 	       
 				icaCalculaDeclaracionForm.numObjeto=$.trim($("#numObjeto").val());
@@ -446,7 +452,8 @@ ACC.ica = {
 		            dataType: "json",
 		              contentType: "application/json",
 		            success: function (data) {
-		            	
+		            	$("#cargandoSpinner").html();
+						spinnerdiv.style.display = 'none';
 		            	var actualErrors = [];
 		            	
 		            	if(data.errores)
@@ -519,6 +526,8 @@ ACC.ica = {
 	 	      		
 		            },
 		            error: function () {
+						$("#cargandoSpinner").html();
+						spinnerdiv.style.display = 'none';
             			$("#icaCalculoButton").prop('disabled', false);
 		            }
 		        });
@@ -529,6 +538,9 @@ ACC.ica = {
 	 bindPresentarDeclaracionButton: function () {
 		 $(document).on("click", "#icaPresentarDeclaracionButton", function (e) {
 	 	        e.preventDefault();
+			var spinnerdiv=document.getElementById('cargandoSpinner');
+			$("#cargandoSpinner").html(ACC.mirit.spinner);
+			spinnerdiv.style.display = 'block';
 	 	       $("#icaPresentarDeclaracionButton").prop('disabled', true);
 	 	       var numForm  = $.trim($("#numForm").val());
 	 		 	 
@@ -541,6 +553,8 @@ ACC.ica = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
+						$("#cargandoSpinner").html();
+						spinnerdiv.style.display = 'none';
 		            	$( "#dialogICA" ).dialog( "open" );
 		            	if(data.errores && ( data.errores[0].idmsj != 0 ) )
 	            		{
@@ -564,6 +578,8 @@ ACC.ica = {
 	 	      		
 		            },
 		            error: function () {
+					$("#cargandoSpinner").html();
+					spinnerdiv.style.display = 'none';
 		            	$( "#dialogICA" ).dialog( "open" );
 		            	$("#icaDialogContent").html("Hubo un error al  la declaración, por favor intentalo más tarde");
 		            	$("#icaPresentarDeclaracionButton").prop('disabled', false);
@@ -611,16 +627,21 @@ ACC.ica = {
 			 		var anio_anoGravable=$.trim($(value).find(".anio_anoGravable").val());
 			 		var mes_anoGravable=$.trim($(value).find(".mes_anoGravable").val());
 			 		var dia_anoGravable=$.trim($(value).find(".dia_anoGravable").val());
-			 		var tipoID=$.trim($(value).find(".tipoID").val());
-			 		var numID=$.trim($(value).find(".numID").val());
-			 		var razonSocial=$.trim($(value).find(".razonSocial").val());
-			 		var codMunicipio=$.trim($(value).find(".codMunicipio").val());
-			 		var direccion=$.trim($(value).find(".direccion").val());
-			 		var telefono=$.trim($(value).find(".telefono").val());
-			 		var tarifaApl=$.trim($(value).find(".tarifaApl").val());
+				//Se comentan campos por petición de usuario 13/10/2020
+//			 		var tipoID=$.trim($(value).find(".tipoID").val());
+//			 		var numID=$.trim($(value).find(".numID").val());
+//			 		var razonSocial=$.trim($(value).find(".razonSocial").val());
+//			 		var codMunicipio=$.trim($(value).find(".codMunicipio").val());
+//			 		var direccion=$.trim($(value).find(".direccion").val());
+//			 		var telefono=$.trim($(value).find(".telefono").val());
+//			 		var tarifaApl=$.trim($(value).find(".tarifaApl").val());
 			 		var montoRetenido=$.trim($(value).find(".montoRetenido").val());
 	
-	    	        	if(anio_anoGravable == "" || mes_anoGravable == "" || dia_anoGravable == "" || tipoID == "" || numID == "" || razonSocial == "" || direccion == "" || telefono == "" || codMunicipio == "" || tarifaApl == "" || montoRetenido == "")
+//	    	        	if(anio_anoGravable == "" || mes_anoGravable == "" || dia_anoGravable == "" || tipoID == "" || numID == "" || razonSocial == "" || direccion == "" || telefono == "" || codMunicipio == "" || tarifaApl == "" || montoRetenido == "")
+//	    	        	{
+//	    	        		validacionValores = false;
+//	    	        	}
+if(anio_anoGravable == "" || mes_anoGravable == "" || dia_anoGravable == "" || montoRetenido == "")
 	    	        	{
 	    	        		validacionValores = false;
 	    	        	}

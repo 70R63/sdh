@@ -81,8 +81,9 @@ ACC.duBotonVer = {
 		 $(document).on("click", "#duGeneraDeclaracionButton", function (e) {
 	 	        e.preventDefault();
 				
-			   debugger;	
-	 	        
+			var spinnerdiv=document.getElementById('cargandoSpinner');
+		    	         $("#cargandoSpinner").html(ACC.mirit.spinner);
+spinnerdiv.style.display = 'block';
 	 	       var numForm  = $.trim($("#numForm").val());
 	 	 
 	 	       var data = {};
@@ -94,8 +95,9 @@ ACC.duBotonVer = {
 		            data: data,
 		            type: "GET",
 		            success: function (data) {
+			$("#cargandoSpinner").html();
+spinnerdiv.style.display = 'none';
 		            	$( "#dialogDU" ).dialog( "open" );
-						debugger;
 		            	if(data.errores && ( data.errores[0].idmsj != 0 ))
 	            		{
 		            		$("#duDialogContent").html("");
@@ -118,6 +120,8 @@ ACC.duBotonVer = {
 	 	      		
 		            },
 		            error: function () {
+			$("#cargandoSpinner").html();
+spinnerdiv.style.display = 'none';
 		            	$( "#dialogDU" ).dialog( "open" );
 		            	$("#duDialogContent").html("Hubo un error al generar la declaración, por favor inténtalo más tarde");
 		            }

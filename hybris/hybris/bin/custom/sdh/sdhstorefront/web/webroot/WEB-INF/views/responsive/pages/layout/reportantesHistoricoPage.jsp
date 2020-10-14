@@ -8,6 +8,7 @@
 	tagdir="/WEB-INF/tags/responsive/reportantesInformacion"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <div class="container_new_page">
 	<reportantes:reportantesHistoricoInicial />

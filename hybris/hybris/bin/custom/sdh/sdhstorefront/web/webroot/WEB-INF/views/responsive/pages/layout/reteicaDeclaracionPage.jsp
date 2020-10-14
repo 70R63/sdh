@@ -7,6 +7,7 @@
 <%@ taglib prefix="rete" tagdir="/WEB-INF/tags/responsive/reteICA"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <rete:reteicaDeclaracionTable />
 <rete:reteicaDeclaracionJuridico />

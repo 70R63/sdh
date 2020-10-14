@@ -12,6 +12,7 @@
 <spring:url value="/contribuyentes/delineacionurbana/retencion"
 	var="duRetencionURL" htmlEscape="false" />
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <sf:form action="${duRetencionURL}" method="POST"
 	modelAttribute="dataForm" id="forma">

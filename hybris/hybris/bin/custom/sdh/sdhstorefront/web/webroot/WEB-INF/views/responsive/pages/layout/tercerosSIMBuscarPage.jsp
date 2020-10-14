@@ -10,6 +10,7 @@
 
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <terceros:terceroSIMBuscar/>
 <terceros:terceroImprimirRep/>

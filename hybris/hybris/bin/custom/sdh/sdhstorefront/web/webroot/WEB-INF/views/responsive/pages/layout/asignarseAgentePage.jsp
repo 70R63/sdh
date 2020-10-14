@@ -9,6 +9,7 @@
 	tagdir="/WEB-INF/tags/responsive/asignarsecomoAgente"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <div id="success" class="alert alert-success" style="display: none"></div>
 <div id="danger" class="alert alert-danger" style="display: none"></div>

@@ -20,8 +20,6 @@ ACC.predial = {
 	
 	bindNoAceptaFactura : function() {
 		$(document).on("click", ".predialNoAceptaFactura", function() {
-			debugger;
-			
 			var valPredialNoAceptaFactura = this.checked;
 			
 			if (valPredialNoAceptaFactura) {
@@ -32,7 +30,6 @@ ACC.predial = {
 		});
 		
 		$(document).on("change", ".basegrav", function() {
-			debugger;
 			var nuevoValor = this.value;
 			$('#BaseGravable').prop('value', nuevoValor);
 		});
@@ -40,7 +37,6 @@ ACC.predial = {
 	
 	
 	bindMostrarAporteVolintario : function(){
-//		debugger;
 		var mostrarAporteVoluntario = document.getElementById('mostrarAporteVoluntario');
 		if (mostrarAporteVoluntario != null && mostrarAporteVoluntario.value == "true"){
 			$('#proyectoLiq').prop('disabled', false);
@@ -79,6 +75,9 @@ ACC.predial = {
 	},
 
 	detalle_tres : function(anioGravable, chip, matrInmobiliaria) {
+		var spinnerdiv=document.getElementById('cargandoSpinner');
+$("#cargandoSpinner").html(ACC.mirit.spinner);
+spinnerdiv.style.display = 'block';
 	
 		var show = document.getElementById('InicialDetalle');
 		show.style.display = 'block';
@@ -108,7 +107,9 @@ ACC.predial = {
 					url : ACC.predialDetalleURL,
 					data : data,
 					type : "GET",
-					success : function(result) {
+					success : function(result) {						
+					$("#cargandoSpinner").html();
+					spinnerdiv.style.display = 'none';
 						ACC.predial.establecerMensajeInfoObjeto(ACC.predial.leerMensajesInfoObjeto(result));
 						console.log(result);
 						$(".chip").val(result.chip);
@@ -447,6 +448,9 @@ ACC.predial = {
 
 					},
 					error : function() {
+						
+$("#cargandoSpinner").html();
+spinnerdiv.style.display = 'none';
 						alert("Error al consultar el Detalle del Predio, Intentalo más tarde");
 					}
 				});
@@ -503,7 +507,9 @@ ACC.predial = {
 	},
 
 	calculoPredial : function() {
-		debugger;
+		var spinnerdiv=document.getElementById('cargandoSpinner');
+		$("#cargandoSpinner").html(ACC.mirit.spinner);
+		spinnerdiv.style.display = 'block';
 		var dataForm = {};
 		dataForm.numBP = $("#NumBP").val();
 		dataForm.chipcalculo = $("#CHIP").val();
@@ -553,7 +559,7 @@ ACC.predial = {
 		dataForm.newDatosLiquidacion = DatosLiquidacion;
 
 		var calcLiquidacionPrivada ={};
-		debugger;
+		
 		var checkAporteRadio = $("input[name='optradio']:checked"). val();
 		
 		if(checkAporteRadio == '1')
@@ -572,7 +578,7 @@ ACC.predial = {
 		
 		var newLiquidacionRequ = {};
 		
-var checkAporteRadio = $("input[name='optradio']:checked"). val();
+		var checkAporteRadio = $("input[name='optradio']:checked"). val();
 		
 		if(checkAporteRadio == '1')
 		{
@@ -599,7 +605,8 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 			 dataType: "json",
 			contentType: "application/json",
 			success : function(result) {
-			    debugger;
+			$("#cargandoSpinner").html();
+			spinnerdiv.style.display = 'none';
 				var actualErrors = [];
             	
             	if(result.errores)
@@ -651,13 +658,18 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
         		
         		}
 			},
-			error : function() {
+			error : function() {		
+			$("#cargandoSpinner").html();
+			spinnerdiv.style.display = 'none';
 				alert("ERROR");
 			}
 		});
 	},
 	
 	calculoPredialSinAporte : function(){
+		var spinnerdiv=document.getElementById('cargandoSpinner');
+		$("#cargandoSpinner").html(ACC.mirit.spinner);
+		spinnerdiv.style.display = 'block';
 		var dataForm = {};
 		dataForm.numBP = $("#NumBP").val();
 		dataForm.chipcalculo = $("#CHIP").val();
@@ -695,7 +707,8 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 			 dataType: "json",
 			contentType: "application/json",
 			success : function(result) {
-		
+			$("#cargandoSpinner").html();
+			spinnerdiv.style.display = 'none';
 				var actualErrors = [];
             	
             	if(result.errores)
@@ -737,6 +750,8 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
         		}
 			},
 			error : function() {
+				$("#cargandoSpinner").html();
+				spinnerdiv.style.display = 'none';
 				alert("ERROR");
 			}
 		});
@@ -754,6 +769,9 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 	 
 	 ejecutarPreCalculoPB : function (numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario){
 
+		var spinnerdiv=document.getElementById('cargandoSpinner');
+		$("#cargandoSpinner").html(ACC.mirit.spinner);
+		spinnerdiv.style.display = 'block';
 		ACC.predial.visualizacionBasesDetalle(false);
 		if(ACC.predial.validarAntesSubmit_precalculoBP()){
 			var dataActual = {};	
@@ -773,7 +791,9 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 				url : ACC.precalculoPredialBPURL,
 				data : dataActual,
 				type : "GET",
-				success : function(dataResponse) {
+				success : function(dataResponse) {			
+				$("#cargandoSpinner").html();
+				spinnerdiv.style.display = 'none';
 					if(dataResponse != null){
 						if(dataResponse.errores.txtMsj.trim() != ""){
 			            	$("#dialogMensajes" ).dialog( "open" );
@@ -786,6 +806,8 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 					}
 				},
 				error : function() {
+					$("#cargandoSpinner").html();
+					spinnerdiv.style.display = 'none';
 					alert("Error procesar la solicitud de basespresuntivas");	
 				}
 			});

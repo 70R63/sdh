@@ -2,10 +2,16 @@ ACC.mirit = {
 
 		 _autoload: ["bindUpdateNombreButton","bindUpdateNotificationAddressButton","bindUpdateContactAddressButton","bindUpdateTelefonoButton","bindUpdateRedesSocialesButton","bindUpdateAutorizacionesButton","bindUpdatePasswordButton", "bindUpdateEmailButton", "bindCertifNombButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton", "bindTermnsandConditions","bindTermnsandConditionsRegister" ],
 		 
+	spinner: $("<img src='" + ACC.config.commonResourcePath + "/images/Bogota.gif' />"),
+
+	
 		 bindUpdateNombreButton: function () {
 		        $(document).on("click", "#updateNombreButton", function (e) {
 		    	        e.preventDefault();
-		    	        
+	var spinnerdiv=document.getElementById('cargandoSpinner');
+		    	         $("#cargandoSpinner").html(ACC.mirit.spinner);
+spinnerdiv.style.display = 'block';
+
 		    	        
 		    	        var updateNombreData = {};
 		    	        
@@ -21,6 +27,8 @@ ACC.mirit = {
 			   	            data: updateNombreData,
 			   	            type: "POST",
 			   	            success: function (data) {
+				$("#cargandoSpinner").html();
+				spinnerdiv.style.display = 'none';
 			        	        	$( "#dialog" ).dialog( "open" );
 			        	        	if(data.ritUpdated==true)
 			        	        	{
@@ -34,6 +42,8 @@ ACC.mirit = {
 			    	            	
 			   	            },
 			   	            error: function () {
+				$("#cargandoSpinner").html();
+				spinnerdiv.style.display = 'none';
 			   	            	$( "#dialog" ).dialog( "open" );
 			    	            	$("#ritDialogContent").html("");
 			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
@@ -45,8 +55,9 @@ ACC.mirit = {
 		 bindUpdateNotificationAddressButton: function () {
 		        $(document).on("click", "#updateNotificationAddressButton", function (e) {
 		    	        e.preventDefault();
-		    	        
-		    	        
+		    	        var spinnerdiv=document.getElementById('cargandoSpinner');
+		    	           $("#cargandoSpinner").html(ACC.mirit.spinner);
+							spinnerdiv.style.display = 'block';
 		    	        var direccionNotificacion = {};
 		    	        
 		    	        direccionNotificacion.ADR_KIND = "02";
@@ -73,6 +84,8 @@ ACC.mirit = {
 			   	            data: addressData,
 			   	            type: "POST",
 			   	            success: function (data) {
+				$("#cargandoSpinner").html();
+				spinnerdiv.style.display = 'none';
 			        	        	$( "#dialog" ).dialog( "open" );
 			        	        	if(data.ritUpdated==true)
 			        	        	{
@@ -90,6 +103,8 @@ ACC.mirit = {
 			    	            	
 			   	            },
 			   	            error: function () {
+				$("#cargandoSpinner").html();
+				spinnerdiv.style.display = 'none';
 			   	            	$( "#dialog" ).dialog( "open" );
 			    	            	$("#ritDialogContent").html("");
 			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
@@ -101,7 +116,7 @@ ACC.mirit = {
 		 bindUpdateContactAddressButton: function () {
 		        $(document).on("click", "#updateContactAddressButton", function (e) {
 		    	        e.preventDefault();
-		    	        
+		    	        var spinnerdiv=document.getElementById('cargandoSpinner');
 		    	        
 		    	        var direccionContacto = {};
 		    	        
@@ -873,8 +888,13 @@ msgBuzon.style.visibility="visible";
     bindCertifNombButton: function () {
     $(document).on("click", "#certifNombButton", function (e) {
 	        e.preventDefault();
+var spinnerdiv=document.getElementById('cargandoSpinner');
+			 $("#cargandoSpinner").html(ACC.mirit.spinner);
+			spinnerdiv.style.display = 'block';
 	        
 	        var data={};
+			
+			
 	        
 	        data.name1 = $("#primNom").val();
 	        data.name2 = $("#segNom").val();
@@ -887,6 +907,8 @@ msgBuzon.style.visibility="visible";
 	            type: "POST",
 	            async: false,
 	            success: function (data) {
+		$("#cargandoSpinner").html();
+spinnerdiv.style.display = 'none';
 	            	$( "#dialog" ).dialog( "open" );
 	            	if(data.success==true)
 	            	{
@@ -897,6 +919,8 @@ msgBuzon.style.visibility="visible";
 	            	}
 	            },
 	            error: function () {
+		$("#cargandoSpinner").html();
+spinnerdiv.style.display = 'none';
 	            	$("#ritDialogContent").html("No se puede certificar el nombre");
 	            }
 	        });

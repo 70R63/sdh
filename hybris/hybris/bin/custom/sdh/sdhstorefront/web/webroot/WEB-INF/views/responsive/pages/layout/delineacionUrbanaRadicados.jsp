@@ -10,6 +10,7 @@
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 <spring:url value="/contribuyentes/delineacionurbana/retencion"
 	var="duRetencionURL" htmlEscape="false" />
 

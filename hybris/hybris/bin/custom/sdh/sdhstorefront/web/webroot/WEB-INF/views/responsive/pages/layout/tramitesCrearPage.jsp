@@ -11,6 +11,7 @@
 	var="enviarURL" htmlEscape="false" />
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <sf:form action="${enviarURL}" method="POST" modelAttribute="dataForm" id="forma" onsubmit="return validarAntesSubmit();">
 	<tramite:crearTramite/>

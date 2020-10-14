@@ -8,6 +8,7 @@
 <%@ taglib prefix="agente" tagdir="/WEB-INF/tags/responsive/agentesAutorizados"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 <agente:autorizadosInicialContribuyente/>
 <script type="text/javascript">
 window.onload = function() {

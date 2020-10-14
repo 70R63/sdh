@@ -23,6 +23,9 @@ ACC.gasolina = {
 	 bindGeneraDeclaracionButton: function () {
 		 $(document).on("click", "#gasolinaGeneraDeclaracionButton", function (e) {
 	 	        e.preventDefault();
+			var spinnerdiv=document.getElementById('cargandoSpinner');
+			$("#cargandoSpinner").html(ACC.mirit.spinner);
+			spinnerdiv.style.display = 'block';
 	 	        
 	 	       var numForm  = $.trim($("#numForm").val());
 	 	 
@@ -35,6 +38,8 @@ ACC.gasolina = {
 		            data: data,
 		            type: "GET",
 		            success: function (data) {
+					$("#cargandoSpinner").html();
+					spinnerdiv.style.display = 'none';
 		            	$( "#dialogGasolina" ).dialog( "open" );
 		            	if(data.errores && ( data.errores[0].idmsj != 0 ))
 	            		{
@@ -63,6 +68,8 @@ ACC.gasolina = {
 	 	      		
 		            },
 		            error: function () {
+					$("#cargandoSpinner").html();
+					spinnerdiv.style.display = 'none';
 		            	$( "#dialogGasolina" ).dialog( "open" );
 		            	$("#gasolinaDialogContent").html("Hubo un error al generar la declaración, por favor inténtalo más tarde");
 		            }

@@ -8,6 +8,7 @@
 	tagdir="/WEB-INF/tags/responsive/obligacionesPendi"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <obligaciones:obliPendientesMenu />
 <div id="idtodos" style="display: block;">

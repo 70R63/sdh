@@ -7,6 +7,7 @@
 <%@ taglib prefix="delineacionUrbana" tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 <template:page pageTitle="${pageTitle}">
 	<div class="container">
 		<div class="row">

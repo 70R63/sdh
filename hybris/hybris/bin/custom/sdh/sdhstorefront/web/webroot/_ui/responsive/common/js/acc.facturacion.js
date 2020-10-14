@@ -59,8 +59,10 @@ ACC.facturacion = {
 	
 	
 	descargaFactura : function (anoGravable,numObjeto,tipoOperacion){
+	var spinnerdiv=document.getElementById('cargandoSpinner');
+	$("#cargandoSpinner").html(ACC.mirit.spinner);
+	spinnerdiv.style.display = 'block';
 
-		debugger;
 		if(ACC.facturacion.validarAntesSubmit(anoGravable,numObjeto)){
 			var dataActual = {};	
 		
@@ -75,10 +77,14 @@ ACC.facturacion = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
+					$("#cargandoSpinner").html();
+					spinnerdiv.style.display = 'none';
 					ACC.facturacion.manejarRespuesta(dataResponse);
 				}
 			,
 				error : function() {
+					$("#cargandoSpinner").html();
+					spinnerdiv.style.display = 'none';
 					alert("Error procesar la solicitud de descarga de factura");	
 				}
 			});

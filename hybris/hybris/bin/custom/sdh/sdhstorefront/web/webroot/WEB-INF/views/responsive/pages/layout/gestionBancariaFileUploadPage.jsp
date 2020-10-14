@@ -9,6 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 <template:page>
 	<div class="container">
 		<c:url var="importGestion" value="uploadFile" />

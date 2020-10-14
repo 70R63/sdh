@@ -4,6 +4,7 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 <template:page pageTitle="${pageTitle}">
     <cms:pageSlot position="Section1" var="feature">
         <cms:component component="${feature}" />

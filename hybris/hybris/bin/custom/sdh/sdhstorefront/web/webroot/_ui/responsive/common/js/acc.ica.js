@@ -71,15 +71,19 @@ ACC.ica = {
 	 
 	 bindCalculoButton: function () {
 		 $(document).on("click", "#icaCalculoButton", function (e) {
-	 	        debugger;
-				
+	 	    			
 				e.preventDefault();
-				if(ACC.ica.validaAntesCalcular() == false){
-					alert("Los campos en la sección Valor Retenido son obligatorios");
-					return;
-				}
+				
+				   var spinnerdiv=document.getElementById('cargandoSpinner');
+				$("#cargandoSpinner").html(ACC.mirit.spinner);
+				spinnerdiv.style.display = 'block';
+				//Se comenta la validación de campos de valor retenido por petición de usuario 13/10/2020
+//				if(ACC.ica.validaAntesCalcular() == false){
+//					alert("Los campos en la sección Valor Retenido son obligatorios");
+//					return;
+//				}
 	 	        
-//	 	        $("#icaCalculoButton").prop('disabled', true);
+
 	 	       var icaCalculaDeclaracionForm = {};
 	 	       
 				icaCalculaDeclaracionForm.numObjeto=$.trim($("#numObjeto").val());
@@ -446,7 +450,8 @@ ACC.ica = {
 		            dataType: "json",
 		              contentType: "application/json",
 		            success: function (data) {
-		            	
+		            	$("#cargandoSpinner").html();
+						spinnerdiv.style.display = 'none';
 		            	var actualErrors = [];
 		            	
 		            	if(data.errores)
@@ -519,6 +524,8 @@ ACC.ica = {
 	 	      		
 		            },
 		            error: function () {
+						$("#cargandoSpinner").html();
+						spinnerdiv.style.display = 'none';
             			$("#icaCalculoButton").prop('disabled', false);
 		            }
 		        });
@@ -529,6 +536,9 @@ ACC.ica = {
 	 bindPresentarDeclaracionButton: function () {
 		 $(document).on("click", "#icaPresentarDeclaracionButton", function (e) {
 	 	        e.preventDefault();
+			var spinnerdiv=document.getElementById('cargandoSpinner');
+			$("#cargandoSpinner").html(ACC.mirit.spinner);
+			spinnerdiv.style.display = 'block';
 	 	       $("#icaPresentarDeclaracionButton").prop('disabled', true);
 	 	       var numForm  = $.trim($("#numForm").val());
 	 		 	 
@@ -541,6 +551,8 @@ ACC.ica = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
+						$("#cargandoSpinner").html();
+						spinnerdiv.style.display = 'none';
 		            	$( "#dialogICA" ).dialog( "open" );
 		            	if(data.errores && ( data.errores[0].idmsj != 0 ) )
 	            		{
@@ -564,6 +576,8 @@ ACC.ica = {
 	 	      		
 		            },
 		            error: function () {
+					$("#cargandoSpinner").html();
+					spinnerdiv.style.display = 'none';
 		            	$( "#dialogICA" ).dialog( "open" );
 		            	$("#icaDialogContent").html("Hubo un error al  la declaración, por favor intentalo más tarde");
 		            	$("#icaPresentarDeclaracionButton").prop('disabled', false);

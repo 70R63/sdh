@@ -8,6 +8,7 @@
 	tagdir="/WEB-INF/tags/responsive/relacionPagos"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
