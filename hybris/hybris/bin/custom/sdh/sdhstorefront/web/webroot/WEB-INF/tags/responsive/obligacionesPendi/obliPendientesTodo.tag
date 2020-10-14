@@ -771,13 +771,13 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<div class="col-md-3 col-md-offset-8">
-								<button type="button" class="btn btn-primary btn-lg" id="action"
-									name="action" value="Imprimir" style="margin-top: 3px"
-									onclick="ACC.oblipend.bindTrmPdf('06','1','delUrbanaReporte.pdf');">
-									<spring:theme code="obligacion.inicial.imprimir" />
-								</button>
-							</div>
+<!-- 							<div class="col-md-3 col-md-offset-8"> -->
+<!-- 								<button type="button" class="btn btn-primary btn-lg" id="action" -->
+<!-- 									name="action" value="Imprimir" style="margin-top: 3px" -->
+<!-- 									onclick="ACC.oblipend.bindTrmPdf('08','1','reteicaReporte.pdf');"> -->
+<%-- 									<spring:theme code="obligacion.inicial.imprimir" /> --%>
+<!-- 								</button> -->
+<!-- 							</div> -->
 						</div>
 					</div>
 				</div>
@@ -791,6 +791,13 @@
 				</div>
 
 			</c:if>
+			<div class="col-md-3 col-md-offset-8">
+				<button type="button" class="btn btn-primary btn-lg" id="action"
+					name="action" value="Imprimir" style="margin-top: 3px"
+					onclick="ACC.oblipend.bindTrmPdf('08','1','reteicaReporte.pdf');">
+					<spring:theme code="obligacion.inicial.imprimir" />
+				</button>
+			</div>
 		</div>
 </div>
 
