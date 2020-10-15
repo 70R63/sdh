@@ -1,10 +1,10 @@
 ACC.reportesTerceroAutorizado = {
 	
-	_autoload : [ "consultaTA"],
+	_autoload : [],
 
 	
 	consultaTA : function(opcionConsulta) {
-
+		ACC.spinner.show();
 		ACC.reportesTerceroAutorizado.vaciarTablasInfo();
 		ACC.reportesTerceroAutorizado.habilitarBotonGen('none');
 		ACC.reportesTerceroAutorizado.displayTablas('none', ACC.reportesTerceroAutorizado.todosImpuestos());
@@ -18,11 +18,12 @@ ACC.reportesTerceroAutorizado = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
-//					debugger;
+					ACC.spinner.close();
 					ACC.reportesTerceroAutorizado.updateFromResponse(opcionConsulta,dataActual,dataResponse,null);
 					ACC.reportesTerceroAutorizado.bindDataTable_id();
 				},
 				error : function() {
+					ACC.spinner.close();
 					alert("Error procesar la solicitud");	
 				}
 			});

@@ -7,6 +7,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+
+<spring:url value="/_ui/common/images/spinner.gif" var="spinnerUrl" />
+
+<%-- 					<img src="${commonResourcePath}/images/spinner.gif" /> --%>
+	
+
+		
+		
 <div id="acordeon" class="container">
 	<div class="card cardmirit ">
 		<div class="card-header" id="head0">

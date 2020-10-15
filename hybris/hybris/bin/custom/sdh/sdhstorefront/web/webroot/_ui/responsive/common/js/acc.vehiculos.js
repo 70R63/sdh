@@ -98,9 +98,7 @@ ACC.vehiculos = {
 	bindPresentarDeclaracionVehiculoButton: function () {
 		 $(document).on("click", "#bindPresentarDeclaracionVehiculoButton", function (e) {
 	 	        e.preventDefault();
-				var spinnerdiv=document.getElementById('cargandoSpinner');
-				$("#cargandoSpinner").html(ACC.mirit.spinner);
-				spinnerdiv.style.display = 'block'; 
+				ACC.spinner.show();
 	 	        var anioGravable = $.trim($("#an").val());
 	 	        var placa = $.trim($("#placas").val());
 	 	       var numBPP  = $.trim($("#numBPP").val());
@@ -117,8 +115,7 @@ ACC.vehiculos = {
 	 	        	
 	 	        if(placa == "" || placa == "-")
 	 	        {
-					$("#cargandoSpinner").html();
-					spinnerdiv.style.display = 'none';
+					ACC.spinner.close();
 	 	        	alert("Por favor, selecciona un vehiculo");
 	 	        	return;
 	 	        }
@@ -127,17 +124,14 @@ ACC.vehiculos = {
 	 	      if(document.getElementById('opcionUso').value == "02"){
                 var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
                 if (r == true) {
-					$("#cargandoSpinner").html();
-					spinnerdiv.style.display = 'none';
+					ACC.spinner.close();
                     window.location.href = ACC.vehiculosDeclararionURL+"?anioGravable="+anioGravable+"&placa="+placa+"&numBPP="+numBPP+"&numForma="+numForma;
                 } else {
-					$("#cargandoSpinner").html();
-					spinnerdiv.style.display = 'none';
+					ACC.spinner.close();
                     return;
                 }
               }else{
-				$("#cargandoSpinner").html();
-				spinnerdiv.style.display = 'none';
+				ACC.spinner.close();
                 window.location.href = ACC.vehiculosDeclararionURL+"?anioGravable="+anioGravable+"&placa="+placa+"&numBPP="+numBPP+"&numForma="+numForma;
               }
 		 });
@@ -147,10 +141,8 @@ ACC.vehiculos = {
 		 $(document).on("click", "#generaDeclaracionVehiculosButton", function (e) {
 
 	 	        e.preventDefault();
-				var spinnerdiv=document.getElementById('cargandoSpinner');
-				$("#cargandoSpinner").html(ACC.mirit.spinner);
-				spinnerdiv.style.display = 'block';
-	 	        
+				ACC.spinner.show();
+ 	        
 	 	       var numForm  = $.trim($("#numForm").val());
 	 	 
 	 	       var data = {};
@@ -162,8 +154,7 @@ ACC.vehiculos = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
-						$("#cargandoSpinner").html();
-						spinnerdiv.style.display = 'none';
+						ACC.spinner.close();
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	if(data.errores && ( data.errores[0].idmsj != 0 ) )
 	            		{
@@ -187,8 +178,7 @@ ACC.vehiculos = {
 	 	      		
 		            },
 		            error: function () {
-						$("#cargandoSpinner").html();
-						spinnerdiv.style.display = 'none';
+						ACC.spinner.close();
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	$("#publicidadExteriorDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
 		            }
@@ -200,9 +190,7 @@ ACC.vehiculos = {
 	 bindCalcularVehButton : function() {
 			$(document).on("click", ".calcularVehButton", function(e) {
 				e.preventDefault();
-				var spinnerdiv=document.getElementById('cargandoSpinner');
-				$("#cargandoSpinner").html(ACC.mirit.spinner);
-				spinnerdiv.style.display = 'block';
+				ACC.spinner.show();
 				
 				var bpNum=$.trim($("#numBPcal").val());
 				var placa=$.trim($("#placaDec").val());
@@ -262,8 +250,7 @@ ACC.vehiculos = {
 					data : data,
 					type : "POST",
 					success : function(data) {
-						$("#cargandoSpinner").html();
-						spinnerdiv.style.display = 'none';
+						ACC.spinner.close();
 		            	if(data.errores != null)
 	            		{
 		            		
@@ -330,8 +317,7 @@ ACC.vehiculos = {
 		            
 
 		},error: function () {
-			$("#cargandoSpinner").html();
-			spinnerdiv.style.display = 'none';
+			ACC.spinner.close();
         	$( "#dialogVehiculos" ).dialog( "open" );
         	$("#vehiculosDialogContent").html("");
         	$("#vehiculosDialogContent").html("Hubo un error al realizar el cálculo, por favor intentalo más tarde");
@@ -364,9 +350,7 @@ ACC.vehiculos = {
 	bindLabelVerDetVeh : function() {
 		$(document).on("click", ".labelVerDetVeh", function(e) {
 			e.preventDefault();
-			var spinnerdiv=document.getElementById('cargandoSpinner');
-			$("#cargandoSpinner").html(ACC.mirit.spinner);
-			spinnerdiv.style.display = 'block';
+			ACC.spinner.show();
 
 			var doc = document.getElementById('detalleVehiculos');
 			doc.style.display='block';
@@ -391,14 +375,12 @@ ACC.vehiculos = {
 				data : data,
 				type : "GET",
 				success : function(data) {
-					$("#cargandoSpinner").html();
-					spinnerdiv.style.display = 'none';
+					ACC.spinner.close();
 					ACC.vehiculos.fillFieldsFromData(data);
                     document.getElementById('opcionUso').value = data.opcionUso;
 				},
 				error : function() {
-					$("#cargandoSpinner").html();
-					spinnerdiv.style.display = 'none';
+					ACC.spinner.close();
 				}
 			});
 		});
@@ -650,23 +632,19 @@ ACC.vehiculos = {
 	
 	
 	obtenerCatalogosVehiculos : function(dataActual, campo_catalogo, cat_valores_actuales) {
-		var spinnerdiv=document.getElementById('cargandoSpinner');
-		$("#cargandoSpinner").html(ACC.mirit.spinner);
-		spinnerdiv.style.display = 'block';
+		ACC.spinner.show();
+
 		$.ajax({
 			url : ACC.vehiculosCatalogosURL,
 			data : dataActual,
 			type : "GET",
 			success : function(dataResponse) {
 				
-				$("#cargandoSpinner").html();
-				spinnerdiv.style.display = 'none';
+				ACC.spinner.close();
 				ACC.vehiculos.updateFromResponse_catalogos(campo_catalogo,cat_valores_actuales,dataActual,dataResponse);					
 			},
 			error : function() {
-				
-				$("#cargandoSpinner").html();
-				spinnerdiv.style.display = 'none';
+				ACC.spinner.close();
 				alert("Error al obtener el catalogo de:"+campo_catalogo);
 			}
 		});

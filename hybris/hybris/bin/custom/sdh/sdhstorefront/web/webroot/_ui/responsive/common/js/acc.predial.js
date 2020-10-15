@@ -75,10 +75,8 @@ ACC.predial = {
 	},
 
 	detalle_tres : function(anioGravable, chip, matrInmobiliaria) {
-		var spinnerdiv=document.getElementById('cargandoSpinner');
-$("#cargandoSpinner").html(ACC.mirit.spinner);
-spinnerdiv.style.display = 'block';
-	
+		debugger;
+		ACC.spinner.show();
 		var show = document.getElementById('InicialDetalle');
 		show.style.display = 'block';
 
@@ -108,8 +106,7 @@ spinnerdiv.style.display = 'block';
 					data : data,
 					type : "GET",
 					success : function(result) {						
-					$("#cargandoSpinner").html();
-					spinnerdiv.style.display = 'none';
+					ACC.spinner.close();
 						ACC.predial.establecerMensajeInfoObjeto(ACC.predial.leerMensajesInfoObjeto(result));
 						console.log(result);
 						$(".chip").val(result.chip);
@@ -448,9 +445,7 @@ spinnerdiv.style.display = 'block';
 
 					},
 					error : function() {
-						
-$("#cargandoSpinner").html();
-spinnerdiv.style.display = 'none';
+						ACC.spinner.close();
 						alert("Error al consultar el Detalle del Predio, Intentalo más tarde");
 					}
 				});
@@ -507,9 +502,8 @@ spinnerdiv.style.display = 'none';
 	},
 
 	calculoPredial : function() {
-		var spinnerdiv=document.getElementById('cargandoSpinner');
-		$("#cargandoSpinner").html(ACC.mirit.spinner);
-		spinnerdiv.style.display = 'block';
+		debugger;
+		ACC.spinner.show();
 		var dataForm = {};
 		dataForm.numBP = $("#NumBP").val();
 		dataForm.chipcalculo = $("#CHIP").val();
@@ -605,8 +599,7 @@ spinnerdiv.style.display = 'none';
 			 dataType: "json",
 			contentType: "application/json",
 			success : function(result) {
-			$("#cargandoSpinner").html();
-			spinnerdiv.style.display = 'none';
+				ACC.spinner.close();
 				var actualErrors = [];
             	
             	if(result.errores)
@@ -659,17 +652,15 @@ spinnerdiv.style.display = 'none';
         		}
 			},
 			error : function() {		
-			$("#cargandoSpinner").html();
-			spinnerdiv.style.display = 'none';
+				ACC.spinner.close();
 				alert("ERROR");
 			}
 		});
 	},
 	
 	calculoPredialSinAporte : function(){
-		var spinnerdiv=document.getElementById('cargandoSpinner');
-		$("#cargandoSpinner").html(ACC.mirit.spinner);
-		spinnerdiv.style.display = 'block';
+		debugger;
+		ACC.spinner.show();
 		var dataForm = {};
 		dataForm.numBP = $("#NumBP").val();
 		dataForm.chipcalculo = $("#CHIP").val();
@@ -707,8 +698,7 @@ spinnerdiv.style.display = 'none';
 			 dataType: "json",
 			contentType: "application/json",
 			success : function(result) {
-			$("#cargandoSpinner").html();
-			spinnerdiv.style.display = 'none';
+			ACC.spinner.close();
 				var actualErrors = [];
             	
             	if(result.errores)
@@ -750,8 +740,7 @@ spinnerdiv.style.display = 'none';
         		}
 			},
 			error : function() {
-				$("#cargandoSpinner").html();
-				spinnerdiv.style.display = 'none';
+				ACC.spinner.close();
 				alert("ERROR");
 			}
 		});
@@ -768,10 +757,8 @@ spinnerdiv.style.display = 'none';
 	 
 	 
 	 ejecutarPreCalculoPB : function (numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario){
-
-		var spinnerdiv=document.getElementById('cargandoSpinner');
-		$("#cargandoSpinner").html(ACC.mirit.spinner);
-		spinnerdiv.style.display = 'block';
+		debugger;
+		ACC.spinner.show();
 		ACC.predial.visualizacionBasesDetalle(false);
 		if(ACC.predial.validarAntesSubmit_precalculoBP()){
 			var dataActual = {};	
@@ -792,8 +779,7 @@ spinnerdiv.style.display = 'none';
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {			
-				$("#cargandoSpinner").html();
-				spinnerdiv.style.display = 'none';
+				ACC.spinner.close();
 					if(dataResponse != null){
 						if(dataResponse.errores.txtMsj.trim() != ""){
 			            	$("#dialogMensajes" ).dialog( "open" );
@@ -806,8 +792,7 @@ spinnerdiv.style.display = 'none';
 					}
 				},
 				error : function() {
-					$("#cargandoSpinner").html();
-					spinnerdiv.style.display = 'none';
+					ACC.spinner.close();
 					alert("Error procesar la solicitud de basespresuntivas");	
 				}
 			});

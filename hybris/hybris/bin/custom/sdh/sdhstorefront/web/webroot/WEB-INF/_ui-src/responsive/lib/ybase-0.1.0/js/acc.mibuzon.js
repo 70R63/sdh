@@ -3,11 +3,7 @@ ACC.mibuzon = {
 
 	
 	bindDescargar : function(objetodeN) {
-//		$(document).on("click", ".download", function(e) {
-//			e.preventDefault();
-		
-		
-			debugger;
+
 			var newpdf = $.trim($(objetodeN).attr("data-pdfimprimir"));
 			var identif = $.trim($(objetodeN).attr("data-idRadicado")); 
 			var autoridadEmisora= $.trim($(objetodeN).attr("data-autoridadEmisora")); 
@@ -18,15 +14,11 @@ ACC.mibuzon = {
 				 var dlnk = document.getElementById('dwnldLnk');
 				  dlnk.href = pdf;
 				  dlnk.click();
-				  
-			
-				 // var newtr = $(objetodeN).closest('tr');
-				  
+
 					 $('#tabPaginacion1').append('<tr><td>' + identif + '</td><td>' + autoridadEmisora + '</td><td>' + asunto + '</td><td>' + fecnot + '</td><td><label class="control-label download2" style="text-transform: capitalize !important" data-pdfimprimir='+newpdf+' id="download2" onclick="downloaddos()"> <span class="glyphicon glyphicon-download-alt"></span></label></td><td><img src="/sdhstorefront/_ui/addons/sdhpsaddon/responsive/theme-psalpha/images/papeleraleidos.png" style="width: 20px"  onclick="eliminarleidos(this)" ></img></td><td style="visibility: hidden;">'+ newpdf +'</td</tr>');
 
 					  $(objetodeN).closest('tr').remove();	 
-				
-//		});
+
 
 	},
 	
@@ -44,9 +36,7 @@ ACC.mibuzon = {
 	},
 	
 	bindPapeleraNuevos : function(objectf){
-		
-			debugger;
-			
+
 			var objnew = objectf;
 			
 			var newpdf = $.trim($(objnew).attr("data-pdfimprimir"));

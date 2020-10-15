@@ -32,6 +32,7 @@ ACC.frimas = {
 		});
 
 		$(".FirmSelectNombre").on("change",function(e){
+			
 			var nameSelected = $(this).val();
 
 			if(nameSelected == "")
@@ -56,11 +57,13 @@ ACC.frimas = {
 		});
 
 		$(".justFirm").on("click",function(e){
-			debugger;
+			ACC.spinner.show();
+		
 			var numForm = $("#numForm").val();
 
 			if(numForm == "" )
 			{
+				ACC.spinner.close();
 				$("#dialogFirmas" ).dialog( "open" );
 				$("#firmasDialogContent").html("");
 				$("#firmasDialogContent").html("Debe realizar el calculo primero");
@@ -103,9 +106,6 @@ ACC.frimas = {
 
 			});
 
-
-
-
 			var data = {};
 			data.numForm=numForm;
 			data.firmantes =firmantes;
@@ -116,7 +116,7 @@ ACC.frimas = {
 				type: "POST",
 				contentType: "application/json",
 				success: function (data) {
-					debugger;
+					ACC.spinner.close();
 					$( "#dialogFirmas" ).dialog( "open" );
 					$("#firmasDialogContent").html("");
 					$.each(data.errores,function (index,value) {
@@ -136,6 +136,7 @@ ACC.frimas = {
 
 				},
 				error: function () {
+					ACC.spinner.close();
 					$( "#dialogFirmas" ).dialog( "open" );
 					$("#firmasDialogContent").html("");
 					$("#firmasDialogContent").html("Hubo un error al intentar firmar la declaración, favor de intentarlo más tarde.")
@@ -144,11 +145,12 @@ ACC.frimas = {
 		});
 
 		$(".firmAndAdd").on("click",function(e){
-debugger;
+			ACC.spinner.show();
 			var numForm = $("#numForm").val();
 
 			if(numForm == "" )
 			{
+				ACC.spinner.close();
 				$("#dialogFirmas" ).dialog( "open" );
 				$("#firmasDialogContent").html("");
 				$("#firmasDialogContent").html("Debe realizar el calculo primero");
@@ -213,6 +215,7 @@ debugger;
 				type: "POST",
 				contentType: "application/json",
 				success: function (data) {
+					ACC.spinner.close();
 					$( "#dialogFirmas" ).dialog( "open" );
 					$("#firmasDialogContent").html("");
 
@@ -244,6 +247,7 @@ debugger;
 
 				},
 				error: function () {
+					ACC.spinner.close();
 					$( "#dialogFirmas" ).dialog( "open" );
 					$("#firmasDialogContent").html("");
 					$("#firmasDialogContent").html("Hubo un error al intentar firmar la declaración, favor de intentarlo más tarde.")

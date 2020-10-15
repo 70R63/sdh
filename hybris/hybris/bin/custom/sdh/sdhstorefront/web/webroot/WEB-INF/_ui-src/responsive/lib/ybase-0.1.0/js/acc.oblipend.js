@@ -2,11 +2,8 @@ ACC.oblipend = {
 
 	_autoload : [ "bindBuscarObliPend", "bindDetalle", "bindDetalledos", "bindPopupPDF"],
 
-	bindBuscarObliPend : function() {
-		
+	bindBuscarObliPend : function() {	
 		$(document).on("click", "#buscarObliPend", function(e) {
-			
-			debugger;
 			e.preventDefault();
 
 			$(".oblipend-table").hide();
@@ -69,10 +66,8 @@ ACC.oblipend = {
 	
 	bindPopupPDF : function(){
  $(document).on("click", "#ImprimirPopUp", function(e) {
- debugger;
-
  e.preventDefault();
- debugger;
+
 	var impuestoSelc = $(this).data("impuesto");
 	var tablePred = document.getElementsByClassName("table ImprimirPredial");
 	tablePred[0].setAttribute("id","example1");
@@ -328,9 +323,7 @@ ACC.oblipend = {
 		$(document).on(
 				"click",
 				"#Detalle",
-				function(e) {
-					debugger;
-					
+				function(e) {					
 					e.preventDefault();
 					
 					$(".oblipend-tabledetalle").hide();
@@ -521,8 +514,6 @@ ACC.oblipend = {
 	
 	bindDetalledos : function() {
 		$(document).on("click", "#Detalledos", function(e) {
-			debugger;
-					
 			e.preventDefault();
 			$(".oblipend-tabledetalledos").hide();
 

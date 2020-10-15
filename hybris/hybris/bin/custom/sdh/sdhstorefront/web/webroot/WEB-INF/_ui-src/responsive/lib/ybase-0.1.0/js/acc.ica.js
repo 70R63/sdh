@@ -70,18 +70,14 @@ ACC.ica = {
 	 
 	 
 	 bindCalculoButton: function () {
-		 $(document).on("click", "#icaCalculoButton", function (e) {
-	 	    			
+		 $(document).on("click", "#icaCalculoButton", function (e) {		
 				e.preventDefault();
-				
-				   var spinnerdiv=document.getElementById('cargandoSpinner');
-				$("#cargandoSpinner").html(ACC.mirit.spinner);
-				spinnerdiv.style.display = 'block';
+				debugger;
+				ACC.spinner.show();
+
 				//Se comentan campos de la validación de valor retenido por petición de usuario 13/10/2020
 				if(ACC.ica.validaAntesCalcular() == false){
-					$("#cargandoSpinner").html();
-					spinnerdiv.style.display = 'none';
-					alert("Los campos en la sección Valor Retenido son obligatorios");
+					ACC.spinner.close();
 					return;
 				}
 	 	        
@@ -115,13 +111,7 @@ ACC.ica = {
 					icaCalculaDeclaracionForm.impuestoAviso = "";
 					icaCalculaDeclaracionForm.valorImpAviso=$.trim($("#valorImpAviso").val());
 				}
-				
-				
-				
-				
-				
-				
-				
+
 				icaCalculaDeclaracionForm.totalIngrPeriodo=$.trim($("#totalIngrPeriodo").val());
 				icaCalculaDeclaracionForm.valorPagar=$.trim($("#valorPagar").val());
 				
@@ -313,15 +303,9 @@ ACC.ica = {
 			 	{	
 			 		deducciones.descuentos = deduccionValue;
 		 		}
-			 	
-			 	
-			 	
-			 	
-			 	
+
 			 	icaCalculaDeclaracionForm.deducciones = deducciones;
-			 	
-			 	
-			 	
+ 	
 			 	var ingNetosGrava = new Array();
 			 	 
 			 	 $.each($(".totaluno"),function(index,value){
@@ -352,16 +336,11 @@ ACC.ica = {
 	    	        });
 			 	 
 			 	icaCalculaDeclaracionForm.ingNetosGrava=ingNetosGrava;
-			 	
-			 	
-			 	
-			 	
+
 			 	var ingPorCIIU = new Array();
 			 	 
 			 	 $.each($(".totaldos"),function(index,value){
-	    	        	
-			 		 	
-			 		 		
+	
 			 		var anoGravable=$.trim($(value).find(".anoGravable").val());
 			 		var tipoID=$.trim($(value).find(".tipoID").val());
 			 		var numID=$.trim($(value).find(".numID").val());
@@ -452,8 +431,7 @@ ACC.ica = {
 		            dataType: "json",
 		              contentType: "application/json",
 		            success: function (data) {
-		            	$("#cargandoSpinner").html();
-						spinnerdiv.style.display = 'none';
+		            	ACC.spinner.close();
 		            	var actualErrors = [];
 		            	
 		            	if(data.errores)
@@ -526,8 +504,7 @@ ACC.ica = {
 	 	      		
 		            },
 		            error: function () {
-						$("#cargandoSpinner").html();
-						spinnerdiv.style.display = 'none';
+						ACC.spinner.close();
             			$("#icaCalculoButton").prop('disabled', false);
 		            }
 		        });
@@ -538,9 +515,8 @@ ACC.ica = {
 	 bindPresentarDeclaracionButton: function () {
 		 $(document).on("click", "#icaPresentarDeclaracionButton", function (e) {
 	 	        e.preventDefault();
-			var spinnerdiv=document.getElementById('cargandoSpinner');
-			$("#cargandoSpinner").html(ACC.mirit.spinner);
-			spinnerdiv.style.display = 'block';
+debugger;
+			ACC.spinner.show();
 	 	       $("#icaPresentarDeclaracionButton").prop('disabled', true);
 	 	       var numForm  = $.trim($("#numForm").val());
 	 		 	 
@@ -553,8 +529,7 @@ ACC.ica = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
-						$("#cargandoSpinner").html();
-						spinnerdiv.style.display = 'none';
+						ACC.spinner.close();
 		            	$( "#dialogICA" ).dialog( "open" );
 		            	if(data.errores && ( data.errores[0].idmsj != 0 ) )
 	            		{
@@ -578,8 +553,7 @@ ACC.ica = {
 	 	      		
 		            },
 		            error: function () {
-					$("#cargandoSpinner").html();
-					spinnerdiv.style.display = 'none';
+						ACC.spinner.close();
 		            	$( "#dialogICA" ).dialog( "open" );
 		            	$("#icaDialogContent").html("Hubo un error al  la declaración, por favor intentalo más tarde");
 		            	$("#icaPresentarDeclaracionButton").prop('disabled', false);

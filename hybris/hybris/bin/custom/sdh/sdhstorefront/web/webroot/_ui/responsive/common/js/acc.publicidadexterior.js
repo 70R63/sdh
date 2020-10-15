@@ -7,7 +7,7 @@ ACC.publicidadexterior = {
 	 bindGeneraDeclaracionButton: function () {
 		 $(document).on("click", "#generaDeclaracionButton", function (e) {
 	 	        e.preventDefault();
-	 	        
+				ACC.spinner.show();
 	 	       var numForm  = $.trim($("#numForm").val());
 	 	 
 	 	       var data = {};
@@ -19,7 +19,7 @@ ACC.publicidadexterior = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
-						
+						ACC.spinner.close();
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	if(data.errores && ( data.errores[0].idmsj != 0 ) )
 	            		{
@@ -42,6 +42,7 @@ ACC.publicidadexterior = {
 	 	      		
 		            },
 		            error: function () {
+						ACC.spinner.close();
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	$("#publicidadExteriorDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
 		            }
@@ -52,8 +53,8 @@ ACC.publicidadexterior = {
 	 
 	 bindCalculoButton: function () {
 		 $(document).on("click", "#calculoButton", function (e) {
-				debugger;
 	 	        e.preventDefault();
+				ACC.spinner.show();
 	 	       //$("#calculoButton").prop('disabled', true); //Se comenta línea derivado del incidente 38-A 05/09/2019 dev-Maria
 	 	       var anograv  = $.trim($("#anograv").val());
 	 	       var numresol = $.trim($("#numresol").val());
@@ -90,7 +91,7 @@ ACC.publicidadexterior = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
-						debugger;
+						ACC.spinner.close();
 		            	if(data.errores)
 	            		{
 		            		$( "#dialogPublicidadExterior" ).dialog( "open" );
@@ -125,7 +126,7 @@ ACC.publicidadexterior = {
 	 	      		
 		            },
 		            error: function () {
-						debugger;
+						ACC.spinner.close();
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	$("#publicidadExteriorDialogContent").html("");
 		            	$("#publicidadExteriorDialogContent").html("Hubo un error al realizar el cálculo, por favor intentalo más tarde");
@@ -183,7 +184,7 @@ ACC.publicidadexterior = {
 	    bindSearchButton: function () {
 	    	 $(document).on("click", "#searchDetailButton", function (e) {
 		 	        e.preventDefault();
-
+					ACC.spinner.show();
 		 	        var anoGravable  = $.trim($("#anio").val());
 		 	       var tipoValla = $("#selectedTipoValla").val();
 		 	       var numResolu =  $("#selectedNumRes").val();
@@ -212,12 +213,12 @@ ACC.publicidadexterior = {
 			            data: data,
 			            type: "GET",
 			            success: function (data) {
-
-
+							ACC.spinner.close();
 			            	ACC.publicidadexterior.fillFieldsFromData(data);
 
 			            },
 			            error: function () {
+							ACC.spinner.close();
 			            }
 			        });
 
@@ -373,8 +374,7 @@ ACC.publicidadexterior = {
 	    bindLabelVerButton: function () {
 	    	 $(document).on("click", ".labelVer", function (e) {
 		 	        e.preventDefault();
-
-
+					ACC.spinner.show();
 		 	        var anoGravable  = $.trim($(this).attr("data-anogravable"));
 		 	        var tipoValla = $.trim($(this).attr("data-tipoValla"));
 		 	       var numResolu = $.trim($(this).attr("data-numRes"));
@@ -405,11 +405,13 @@ ACC.publicidadexterior = {
 			            data: data,
 			            type: "GET",
 			            success: function (data) {
+							ACC.spinner.close();
 			            	ACC.publicidadexterior.fillFieldsFromData(data);
 			            	//Modificacion Jair Roa
 			            	document.getElementById("opcionUsoHidden").value = data.opcionUso;
 			         },
 			            error: function () {
+							ACC.spinner.close();
 			            }
 			        });
 		 	        
