@@ -9,7 +9,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -413,13 +412,16 @@ public class IcaPageController extends SDHAbstractPageController
 
 			for (int i = ICAInfoValorRetenidoList.size() - 1; i >= 0; i--)
 			{
+				if (StringUtils.isEmpty(ICAInfoValorRetenidoList.get(i).getAnio())
+						&& StringUtils.isEmpty(ICAInfoValorRetenidoList.get(i).getMes())
+						&& StringUtils.isEmpty(ICAInfoValorRetenidoList.get(i).getDia()))
+				{
+					ICAInfoValorRetenidoList.remove(i);
+					continue;
+				}
 				if (ICAInfoValorRetenidoList.get(i).getAnio() == null)
 				{
 					ICAInfoValorRetenidoList.get(i).setAnio(icaInfObjetoResponse.getAnoGravable());
-				}
-				if (ICAInfoValorRetenidoList.get(i).getNumID() == null || ICAInfoValorRetenidoList.get(i).getNumID().isEmpty())
-				{
-					ICAInfoValorRetenidoList.remove(i);
 				}
 			}
 			agregarRegistroDefault_VR(ICAInfoValorRetenidoList, icaInfObjetoResponse);
@@ -674,13 +676,16 @@ public class IcaPageController extends SDHAbstractPageController
 				{
 					if (ICAInfoValorRetenidoList.get(i) != null)
 					{
+						if (StringUtils.isEmpty(ICAInfoValorRetenidoList.get(i).getAnio())
+								&& StringUtils.isEmpty(ICAInfoValorRetenidoList.get(i).getMes())
+								&& StringUtils.isEmpty(ICAInfoValorRetenidoList.get(i).getDia()))
+						{
+							ICAInfoValorRetenidoList.remove(i);
+							continue;
+						}
 						if (ICAInfoValorRetenidoList.get(i).getAnio() == null)
 						{
 							ICAInfoValorRetenidoList.get(i).setAnio(icaInfObjetoResponse.getAnoGravable());
-						}
-						if (ICAInfoValorRetenidoList.get(i).getNumID() == null || ICAInfoValorRetenidoList.get(i).getNumID().isEmpty())
-						{
-							ICAInfoValorRetenidoList.remove(i);
 						}
 					}
 				}
