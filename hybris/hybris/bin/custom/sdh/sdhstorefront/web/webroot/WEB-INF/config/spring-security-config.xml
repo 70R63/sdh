@@ -46,7 +46,7 @@
 		<security:access-denied-handler error-page="/login"/>
 		<security:session-management session-authentication-strategy-ref="fixation" />
 		<security:intercept-url pattern="/**" requires-channel="https" />
-		<security:csrf token-repository-ref="csrfTokenRepository" request-matcher-ref="csrfProtectionMatcher" />
+		<!--security:csrf token-repository-ref="csrfTokenRepository" request-matcher-ref="csrfProtectionMatcher" /-->
 		<security:custom-filter before="CSRF_FILTER" ref="logoutFilter" />
 		<security:custom-filter before="FORM_LOGIN_FILTER" ref="sdhLoginDataFilter"/>
 		<security:form-login
@@ -70,8 +70,10 @@
 		
 		<security:headers>
 			<security:frame-options disabled="true"/>
+			
 		</security:headers>
-
+		
+        <security:csrf disabled="true" />
 	</security:http>
 
 	<!-- Ignores url(s) that match paths specified in the set -->
@@ -92,7 +94,7 @@
 		<security:anonymous username="anonymous" granted-authority="ROLE_ANONYMOUS" />
 		<security:access-denied-handler error-page="/login"/>
 		<security:session-management session-authentication-strategy-ref="fixation" />
-		<security:csrf token-repository-ref="csrfTokenRepository" request-matcher-ref="csrfProtectionMatcher" />
+		<!--security:csrf token-repository-ref="csrfTokenRepository" request-matcher-ref="csrfProtectionMatcher" /-->
 		<security:custom-filter before="CSRF_FILTER" ref="logoutFilter" />
 		<security:custom-filter before="FORM_LOGIN_FILTER" ref="sdhLoginDataFilter"/>
 		<!-- RememberMe -->
@@ -130,7 +132,8 @@
 		<security:headers>
 			<security:frame-options disabled="true"/>
 		</security:headers>
-
+		
+       <security:csrf disabled="true" />
 	</security:http>
 
 	<security:authentication-manager alias="authenticationManager">
