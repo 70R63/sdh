@@ -98,8 +98,7 @@ ACC.vehiculos = {
 	bindPresentarDeclaracionVehiculoButton: function () {
 		 $(document).on("click", "#bindPresentarDeclaracionVehiculoButton", function (e) {
 	 	        e.preventDefault();
-	 	        debugger;
-	 	        
+				ACC.spinner.show();
 	 	        var anioGravable = $.trim($("#an").val());
 	 	        var placa = $.trim($("#placas").val());
 	 	       var numBPP  = $.trim($("#numBPP").val());
@@ -108,12 +107,15 @@ ACC.vehiculos = {
 	 	      
 	 	      if(anioGravable == "0")
 	 	        {	
+					$("#cargandoSpinner").html();
+					spinnerdiv.style.display = 'none';
 	 	        	alert("Por favor, selecciona el año a consultar");
 	 	        	return;
 	 	        }
 	 	        	
 	 	        if(placa == "" || placa == "-")
 	 	        {
+					ACC.spinner.close();
 	 	        	alert("Por favor, selecciona un vehiculo");
 	 	        	return;
 	 	        }
@@ -122,11 +124,14 @@ ACC.vehiculos = {
 	 	      if(document.getElementById('opcionUso').value == "02"){
                 var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
                 if (r == true) {
+					ACC.spinner.close();
                     window.location.href = ACC.vehiculosDeclararionURL+"?anioGravable="+anioGravable+"&placa="+placa+"&numBPP="+numBPP+"&numForma="+numForma;
                 } else {
+					ACC.spinner.close();
                     return;
                 }
               }else{
+				ACC.spinner.close();
                 window.location.href = ACC.vehiculosDeclararionURL+"?anioGravable="+anioGravable+"&placa="+placa+"&numBPP="+numBPP+"&numForma="+numForma;
               }
 		 });
@@ -134,9 +139,10 @@ ACC.vehiculos = {
 	 
 	  bindGeneraDeclaracionVehiculosButton: function () {
 		 $(document).on("click", "#generaDeclaracionVehiculosButton", function (e) {
-				debugger;
+
 	 	        e.preventDefault();
-	 	        
+				ACC.spinner.show();
+ 	        
 	 	       var numForm  = $.trim($("#numForm").val());
 	 	 
 	 	       var data = {};
@@ -148,7 +154,7 @@ ACC.vehiculos = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
-						
+						ACC.spinner.close();
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	if(data.errores && ( data.errores[0].idmsj != 0 ) )
 	            		{
@@ -172,6 +178,7 @@ ACC.vehiculos = {
 	 	      		
 		            },
 		            error: function () {
+						ACC.spinner.close();
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	$("#publicidadExteriorDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
 		            }
@@ -183,9 +190,8 @@ ACC.vehiculos = {
 	 bindCalcularVehButton : function() {
 			$(document).on("click", ".calcularVehButton", function(e) {
 				e.preventDefault();
+				ACC.spinner.show();
 				
-				debugger;
-
 				var bpNum=$.trim($("#numBPcal").val());
 				var placa=$.trim($("#placaDec").val());
 				var numForm=$.trim($("#numForm").val());
@@ -244,7 +250,7 @@ ACC.vehiculos = {
 					data : data,
 					type : "POST",
 					success : function(data) {
-						debugger;
+						ACC.spinner.close();
 		            	if(data.errores != null)
 	            		{
 		            		
@@ -311,6 +317,7 @@ ACC.vehiculos = {
 		            
 
 		},error: function () {
+			ACC.spinner.close();
         	$( "#dialogVehiculos" ).dialog( "open" );
         	$("#vehiculosDialogContent").html("");
         	$("#vehiculosDialogContent").html("Hubo un error al realizar el cálculo, por favor intentalo más tarde");
@@ -343,6 +350,8 @@ ACC.vehiculos = {
 	bindLabelVerDetVeh : function() {
 		$(document).on("click", ".labelVerDetVeh", function(e) {
 			e.preventDefault();
+			ACC.spinner.show();
+
 			var doc = document.getElementById('detalleVehiculos');
 			doc.style.display='block';
 
@@ -366,10 +375,12 @@ ACC.vehiculos = {
 				data : data,
 				type : "GET",
 				success : function(data) {
+					ACC.spinner.close();
 					ACC.vehiculos.fillFieldsFromData(data);
                     document.getElementById('opcionUso').value = data.opcionUso;
 				},
 				error : function() {
+					ACC.spinner.close();
 				}
 			});
 		});
@@ -621,15 +632,19 @@ ACC.vehiculos = {
 	
 	
 	obtenerCatalogosVehiculos : function(dataActual, campo_catalogo, cat_valores_actuales) {
+		ACC.spinner.show();
 
 		$.ajax({
 			url : ACC.vehiculosCatalogosURL,
 			data : dataActual,
 			type : "GET",
 			success : function(dataResponse) {
+				
+				ACC.spinner.close();
 				ACC.vehiculos.updateFromResponse_catalogos(campo_catalogo,cat_valores_actuales,dataActual,dataResponse);					
 			},
 			error : function() {
+				ACC.spinner.close();
 				alert("Error al obtener el catalogo de:"+campo_catalogo);
 			}
 		});

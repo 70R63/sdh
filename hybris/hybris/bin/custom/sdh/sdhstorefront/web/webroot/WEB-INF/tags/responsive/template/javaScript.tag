@@ -116,6 +116,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.mibuzon.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.facturacion.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.spac.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.spinner.js"></script>
 
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>
 

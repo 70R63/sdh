@@ -5,8 +5,7 @@ ACC.reteica = {
 	 bindReteIcaRecargar: function(){
 		
 		 $(document).on("click", ".reteICARecargar", function (e) {
-	 	        e.preventDefault();
-	 	      debugger;    
+	 	        e.preventDefault();   
 	 	      var estado = $(this).attr("data-estado");
 	 	      if(estado=="02")
  	    	  {
@@ -32,7 +31,7 @@ ACC.reteica = {
 	 bindGeneraDeclaracionReteICAButton: function () {
 		 $(document).on("click", "#generaDeclaracionReteICAButton", function (e) {
 	 	        e.preventDefault();
-	 	       debugger; 
+	 	       ACC.spinner.show();
 	 	       var numForm  = $.trim($("#numForm").val());
 	 	 
 	 	       var data = {};
@@ -44,8 +43,8 @@ ACC.reteica = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
+						ACC.spinner.close(); 
 		            	$( "#dialogReteICA" ).dialog( "open" );
-						debugger;
 		            	if(data.errores && ( data.errores[0].idmsj != 0 ))
 	            		{
 		            		$("#reteICADialogContent").html("");
@@ -66,6 +65,7 @@ ACC.reteica = {
 	 	      		
 		            },
 		            error: function () {
+						ACC.spinner.close(); 
 		            	$( "#dialogPublicidadialogReteICAdExterior" ).dialog( "open" );
 		            	$("#reteICADialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
 		            }
@@ -77,7 +77,7 @@ ACC.reteica = {
 	 bindActualizarButton: function(){
 		 $(document).on("click", "#actualizarButton", function (e) {
 			 e.preventDefault();
-			 debugger;
+			 ACC.spinner.show();
 			 var valorPagar =  $.trim( $("#valorPagar").val());
 			 
 			 if(valorPagar == "")
@@ -111,6 +111,7 @@ ACC.reteica = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
+						ACC.spinner.close();
 		            	if(!data.errores)
 		            	{
 		            		if(data.numForm == "")
@@ -156,6 +157,7 @@ ACC.reteica = {
 		            	}
 		            },
 		            error: function () {
+						ACC.spinner.close();
 		            	 $( "#dialogReteICA" ).dialog( "open" );
 		     	 		$("#reteICADialogContent").html("");
 		     	 		$("#reteICADialogContent").html("Error al realizar el calculo, por favor intelo nuevamente más tarde.");
@@ -168,7 +170,6 @@ ACC.reteica = {
 		
 		 $(document).on("click", "#downloadTemplateButton", function (e) {
 			 e.preventDefault();
-			 debugger;
 			 $("#reteICADownloadHelper").attr("href",ACC.reteICADownloadTemplate);
 			 document.getElementById("reteICADownloadHelper").download = "Ayuda Rete ICA -Hybris.xlsm";
 			 document.getElementById("reteICADownloadHelper").click();
@@ -179,9 +180,7 @@ ACC.reteica = {
 	 },
 	 
 	 bindReteICAEDOAnoGravable: function(){
-	    	
 	    	$( document ).on("change","#reteICAEDOAnoGravable",function(e) {
-	    		debugger;
 	    		var anoGravable =  $.trim( $("#reteICAEDOAnoGravable").val());
 	    		
 	    		if(anoGravable != "")
@@ -198,7 +197,6 @@ ACC.reteica = {
 				
 	 	    	
 	 	    	$( document ).on("change","#reteICAAnoGravable",function(e) {
-	 	    		debugger;
 	 	    		var anoGravable =  $.trim( $("#reteICAAnoGravable").val());
 	 	    		
 	 	    		var currentYear = new Date().getFullYear()
@@ -326,9 +324,7 @@ ACC.reteica = {
 		 
 		 $(document).on("click", "#bindCargarButton", function (e) {
 			 e.preventDefault();
-			 
-			 debugger;
-			 
+			ACC.spinner.show();		 
 			 var formData = new FormData();
 			 
 			 var anoGravable = $.trim( $("#reteICAAnoGravable").val());
@@ -388,7 +384,7 @@ ACC.reteica = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
-		            	
+						ACC.spinner.close(); 	
 		            	if(data.allowFileUpload == true && data.requestCofirmation == false)
 	            		{
 		            		ACC.reteica.uploadFile();
@@ -412,6 +408,7 @@ ACC.reteica = {
 		            	
 		            },
 		            error: function () {
+						ACC.spinner.close();
 		            	 $( "#dialogReteICA" ).dialog( "open" );
 		     	 		$("#reteICADialogContent").html("");
 		     	 		$("#reteICADialogContent").html("Cargar Archivo Fallida!");
@@ -451,7 +448,7 @@ ACC.reteica = {
 	 
 	 
 	 uploadFile: function(){
-		 debugger;
+		 ACC.spinner.show();
 		 var formData = new FormData();
 		 
 		 var anoGravable = $.trim( $("#reteICAAnoGravable").val());
@@ -471,7 +468,7 @@ ACC.reteica = {
 	            contentType: false,
 	            processData: false ,
 	            success: function (data) {
-	            	debugger;
+	            	ACC.spinner.close();
 	            	if(!data.errores)
 	            	{
 		            	$( "#dialogReteICA" ).dialog( "open" );
@@ -489,6 +486,7 @@ ACC.reteica = {
 	            	
 	            },
 	            error: function () {
+					ACC.spinner.close();
 	            	 $( "#dialogReteICA" ).dialog( "open" );
 	     	 		$("#reteICADialogContent").html("");
 	     	 		$("#reteICADialogContent").html("Cargar Archivo Fallida!");

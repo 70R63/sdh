@@ -8,7 +8,10 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="loader"></div>
+
 <template:page pageTitle="${pageTitle}">
+
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 	<div class="container_new_page">
 		<p>
 			<spring:theme code="mirit.description" />
@@ -41,7 +44,6 @@
 	<miRit:myTributaryRols />
 
 	<miRit:miRitButtons />
-
 
 
 

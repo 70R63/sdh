@@ -10,6 +10,7 @@
 
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 <terceros:terceroNotarioBuscar/>
 <terceros:terceroImprimirRep/>
 <terceros:tercero_predial/>

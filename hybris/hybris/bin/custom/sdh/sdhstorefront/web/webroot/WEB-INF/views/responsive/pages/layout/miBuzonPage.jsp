@@ -7,6 +7,7 @@
 <%@ taglib prefix="mibuzon" tagdir="/WEB-INF/tags/responsive/miBuzon"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 
 	<mibuzon:miBuzonInicial />

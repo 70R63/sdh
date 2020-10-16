@@ -7,6 +7,7 @@
 <%@ taglib prefix="autorizados" tagdir="/WEB-INF/tags/responsive/agentesAutorizados"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 
 <autorizados:autorizadosReportarInfo />

@@ -47,7 +47,7 @@
 		<ref bean="log4jFilter"/>
 		<ref bean="storefrontSessionFilter"/>
 		<ref bean="accMediaFilter"/>
-		<ref bean="addOnDevelopmentFilter"/>
+		<!--ref bean="addOnDevelopmentFilter"/-->
 
 		<!-- filter to log the current request -->
 		<ref bean="requestLoggerFilter"/>

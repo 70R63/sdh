@@ -3,9 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Maria Luisa Torres
@@ -18,7 +16,45 @@ public class ObligacionesCabeceraICA
 	private String noIdentificacion;
 	private String anioGravable;
 	private String periodo;
+	private String facilidad;
+	private String montoFacilidad;
 	private List<ObligacionesDetalleIca> details;
+
+
+
+	/**
+	 * @return the facilidad
+	 */
+	public String getFacilidad()
+	{
+		return facilidad;
+	}
+
+	/**
+	 * @param facilidad
+	 *           the facilidad to set
+	 */
+	public void setFacilidad(final String facilidad)
+	{
+		this.facilidad = facilidad;
+	}
+
+	/**
+	 * @return the montoFacilidad
+	 */
+	public String getMontoFacilidad()
+	{
+		return montoFacilidad;
+	}
+
+	/**
+	 * @param montoFacilidad
+	 *           the montoFacilidad to set
+	 */
+	public void setMontoFacilidad(final String montoFacilidad)
+	{
+		this.montoFacilidad = montoFacilidad;
+	}
 
 	/**
 	 * @return the tipoIdentificacion

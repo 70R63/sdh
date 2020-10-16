@@ -9,6 +9,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <template:page pageTitle="${pageTitle}">
 <cont:contribuyentesLista/>

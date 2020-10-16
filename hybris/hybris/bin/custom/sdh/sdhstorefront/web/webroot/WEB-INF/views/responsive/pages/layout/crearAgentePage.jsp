@@ -11,6 +11,7 @@
 <!--script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script-->
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <div id="success" class="alert alert-success" style="display: none"></div>
 <div id="danger" class="alert alert-danger" style="display: none"></div>

@@ -47,11 +47,11 @@
 					<spring:theme code="ica.declaracion.actifuera.ciiu" />
 				</label>
 			</div>
-			<div class="col-md-2">
-				<label class="control-label format_label" for="">
-					<spring:theme code="ica.declaracion.actifuera.municipio" />
-				</label>
-			</div>
+<!-- 			<div class="col-md-2"> -->
+<!-- 				<label class="control-label format_label" for=""> -->
+<%-- 					<spring:theme code="ica.declaracion.actifuera.municipio" /> --%>
+<!-- 				</label> -->
+<!-- 			</div> -->
 			<div class="col-md-1">
 				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.actifuera.ingre" />
@@ -85,20 +85,20 @@
 						</select>
 					</div>
 
-					<div class="col-md-2">
-						<select id="" class="new_alto form-control mun codMunicipio"
-							style="height: 48px;" ${disabledIngFueraBog}>
-							<option value="">SELECCIONAR</option>
+<!-- 					<div class="col-md-2"> -->
+<!-- 						<select id="" class="new_alto form-control mun codMunicipio" -->
+<%-- 							style="height: 48px;" ${disabledIngFueraBog}> --%>
+<!-- 							<option value="">SELECCIONAR</option> -->
 
-							<c:forEach items="${cities}" var="eachCity">
-								<c:set var="selected" value="" />
-								<c:if test="${eachIngreso.codMunicipio eq eachCity.code}">
-									<c:set var="selected" value="selected" />
-								</c:if>
-								<option value="${ eachCity.code}" ${selected }>${eachCity.name}</option>
-							</c:forEach>
-						</select>
-					</div>
+<%-- 							<c:forEach items="${cities}" var="eachCity"> --%>
+<%-- 								<c:set var="selected" value="" /> --%>
+<%-- 								<c:if test="${eachIngreso.codMunicipio eq eachCity.code}"> --%>
+<%-- 									<c:set var="selected" value="selected" /> --%>
+<%-- 								</c:if> --%>
+<%-- 								<option value="${ eachCity.code}" ${selected }>${eachCity.name}</option> --%>
+<%-- 							</c:forEach> --%>
+<!-- 						</select> -->
+<!-- 					</div> -->
 					<div class="col-md-1">
 						<input class="new_alto form-control ing ingresos" type="text"
 							value="${eachIngreso.ingresos }" ${roIngFueraBog}/>
@@ -134,21 +134,21 @@
 				</div>
 	
 	
-				<div class="col-md-2">
-					<select id="" class="new_alto form-control mun codMunicipio"
-						style="height: 48px;" onchange="bogota(this)">
-						<option value="">SELECCIONAR</option>
-						<c:set var="selected" value="" />
-						<c:if test="${eachIngreso.codMunicipio eq eachCity.code}">
-							<c:set var="selected" value="" />
-						</c:if>
-						<c:forEach items="${cities}" var="eachCity">
-							<c:if test="${eachCity.code ne '000000011001'}">
-								<option value="${ eachCity.code}">${eachCity.name}</option>
-							</c:if>	
-						</c:forEach>
-					</select>
-				</div>
+<!-- 				<div class="col-md-2"> -->
+<!-- 					<select id="" class="new_alto form-control mun codMunicipio" -->
+<!-- 						style="height: 48px;" onchange="bogota(this)"> -->
+<!-- 						<option value="">SELECCIONAR</option> -->
+<%-- 						<c:set var="selected" value="" /> --%>
+<%-- 						<c:if test="${eachIngreso.codMunicipio eq eachCity.code}"> --%>
+<%-- 							<c:set var="selected" value="" /> --%>
+<%-- 						</c:if> --%>
+<%-- 						<c:forEach items="${cities}" var="eachCity"> --%>
+<%-- 							<c:if test="${eachCity.code ne '000000011001'}"> --%>
+<%-- 								<option value="${ eachCity.code}">${eachCity.name}</option> --%>
+<%-- 							</c:if>	 --%>
+<%-- 						</c:forEach> --%>
+<!-- 					</select> -->
+<!-- 				</div> -->
 				<div class="col-md-1">
 					<input class="new_alto form-control ing ingresos" type="text"
 						value="" />

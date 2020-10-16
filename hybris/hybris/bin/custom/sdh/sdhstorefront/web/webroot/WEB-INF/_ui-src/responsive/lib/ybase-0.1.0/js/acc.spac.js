@@ -10,6 +10,8 @@ ACC.spac = {
 						function(e) {
 							
 							e.preventDefault();
+							
+							ACC.spinner.show();
 							var currentUrl = window.location.href;
 							$('#tableSpacPago tbody').empty();
 							var divtable = document.getElementById("tableSpac");
@@ -36,8 +38,7 @@ ACC.spac = {
 											// data : data,
 											type : "GET",
 											success : function(spacform) {
-												
-
+												ACC.spinner.close();
 												var cuotas = spacform.cuotas_Spac;
 												if(cuotas != null){
 												for (var i = 0; i < cuotas.length; i++) {
@@ -65,9 +66,11 @@ ACC.spac = {
 
 											},
 											error : function() {
+												ACC.spinner.close();
 											}
 										});
 							} else {
+								ACC.spinner.close();
 								window.location.href = currentUrl;
 							}
 						});
@@ -90,6 +93,8 @@ ACC.spac = {
 	
 	
 	generarSPACObli : function(objeto,claveImpuesto){
+		
+		ACC.spinner.show();
 		objetosPantalla = ACC.spac.determinarObjetos(claveImpuesto);
 
 		var currentUrl = window.location.href;
@@ -114,7 +119,7 @@ ACC.spac = {
 			// data : data,
 			type : "GET",
 			success : function(spacform) {
-				
+				ACC.spinner.close();
 				var cuotas = spacform.cuotas_Spac;
 				if(cuotas != null){
 					for (var i = 0; i < cuotas.length; i++) {
@@ -130,7 +135,7 @@ ACC.spac = {
 					}
 				}
 		},
-			error : function(){}
+			error : function(){ACC.spinner.close();}
 		});		
 	},
 	
@@ -185,6 +190,9 @@ ACC.spac = {
 	
 	
 	btnSpacObli : function(claveImpuesto){
+		
+		ACC.spinner.show();
+
 		objetosPantalla = ACC.spac.determinarObjetos(claveImpuesto);
 		
 		var currentUrl = window.location.href;
@@ -199,7 +207,7 @@ ACC.spac = {
 			// data : data,
 			type : "GET",
 			success : function(spacform) {
-				
+				ACC.spinner.close();
 				var pdf = spacform.pdf;
 				if(pdf != null){
 				var newpdf = spacform.pdf;
@@ -214,6 +222,7 @@ ACC.spac = {
 				}
 			},
 			error : function() {
+				ACC.spinner.close();
 			}
 		});
 	}

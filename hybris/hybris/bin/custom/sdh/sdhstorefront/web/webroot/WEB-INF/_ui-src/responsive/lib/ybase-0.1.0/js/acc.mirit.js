@@ -2,10 +2,15 @@ ACC.mirit = {
 
 		 _autoload: ["bindUpdateNombreButton","bindUpdateNotificationAddressButton","bindUpdateContactAddressButton","bindUpdateTelefonoButton","bindUpdateRedesSocialesButton","bindUpdateAutorizacionesButton","bindUpdatePasswordButton", "bindUpdateEmailButton", "bindCertifNombButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton", "bindTermnsandConditions","bindTermnsandConditionsRegister" ],
 		 
+
+	
 		 bindUpdateNombreButton: function () {
 		        $(document).on("click", "#updateNombreButton", function (e) {
 		    	        e.preventDefault();
-		    	        
+						
+						
+						ACC.spinner.show();
+
 		    	        
 		    	        var updateNombreData = {};
 		    	        
@@ -21,6 +26,7 @@ ACC.mirit = {
 			   	            data: updateNombreData,
 			   	            type: "POST",
 			   	            success: function (data) {
+									ACC.spinner.close();
 			        	        	$( "#dialog" ).dialog( "open" );
 			        	        	if(data.ritUpdated==true)
 			        	        	{
@@ -34,6 +40,8 @@ ACC.mirit = {
 			    	            	
 			   	            },
 			   	            error: function () {
+				$("#cargandoSpinner").html();
+				spinnerdiv.style.display = 'none';
 			   	            	$( "#dialog" ).dialog( "open" );
 			    	            	$("#ritDialogContent").html("");
 			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
@@ -45,8 +53,8 @@ ACC.mirit = {
 		 bindUpdateNotificationAddressButton: function () {
 		        $(document).on("click", "#updateNotificationAddressButton", function (e) {
 		    	        e.preventDefault();
-		    	        
-		    	        
+
+		    	  ACC.spinner.show();
 		    	        var direccionNotificacion = {};
 		    	        
 		    	        direccionNotificacion.ADR_KIND = "02";
@@ -67,12 +75,14 @@ ACC.mirit = {
 		    	        
 		    	        var addressData = {};
 		    	        addressData.address = JSON.stringify(direccionNotificacion);
+						
 	        
 			   	        $.ajax({
 			   	            url: ACC.updateAddressRitURL,
 			   	            data: addressData,
 			   	            type: "POST",
 			   	            success: function (data) {
+									ACC.spinner.close();
 			        	        	$( "#dialog" ).dialog( "open" );
 			        	        	if(data.ritUpdated==true)
 			        	        	{
@@ -90,6 +100,7 @@ ACC.mirit = {
 			    	            	
 			   	            },
 			   	            error: function () {
+								ACC.spinner.close();
 			   	            	$( "#dialog" ).dialog( "open" );
 			    	            	$("#ritDialogContent").html("");
 			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
@@ -101,8 +112,9 @@ ACC.mirit = {
 		 bindUpdateContactAddressButton: function () {
 		        $(document).on("click", "#updateContactAddressButton", function (e) {
 		    	        e.preventDefault();
-		    	        
-		    	        
+
+		    	        ACC.spinner.show();
+	    	        
 		    	        var direccionContacto = {};
 		    	        
 		    	        direccionContacto.ADR_KIND = "01";
@@ -130,6 +142,7 @@ ACC.mirit = {
 			   	            data: addressData,
 			   	            type: "POST",
 			   	            success: function (data) {
+									ACC.spinner.close();
 			        	        	$( "#dialog" ).dialog( "open" );
 			        	        	if(data.ritUpdated==true)
 			        	        	{
@@ -148,6 +161,7 @@ ACC.mirit = {
 			    	            	
 			   	            },
 			   	            error: function () {
+								ACC.spinner.close();
 			   	            	$( "#dialog" ).dialog( "open" );
 			    	            	$("#ritDialogContent").html("");
 			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
@@ -158,9 +172,7 @@ ACC.mirit = {
 		 
 	bindTermnsandConditions: function(){
 		$(document).on("click", "#terminosPopUp", function(e) {
-
  e.preventDefault();
-
 		   var selectRefinementsTitle = "Términos y condiciones";
 	        ACC.colorbox.open(selectRefinementsTitle, {
 	            href: ".js-terminos-facet",
@@ -182,7 +194,6 @@ ACC.mirit = {
 	},
 	
 	terminosAceptar : function(){
-		debugger;
     var habcheck = document.getElementById("buzon2");
 	var habcheck2 = document.getElementById("buzon3");
 		habcheck.style.cursor=="auto";
@@ -197,7 +208,6 @@ ACC.mirit = {
 	},
 	
 	terminosCancelar : function(){
-		debugger;
     $("#buzon2").attr("aria-checked", false);
 		$("#buzon3").attr("class", "control-label");
 		$('#buzon').prop('checked', '');
@@ -232,7 +242,7 @@ ACC.mirit = {
 	},
 	
 //	terminosAceptarRegister : function(){
-//		debugger;
+//		
 //   var habcheck = document.getElementById("useEmailForNotifications");
 //       var parent = habcheck.offsetParent;
 //parent.ariaChecked=true;
@@ -246,7 +256,6 @@ ACC.mirit = {
 //	},
 	
 	terminosCancelarRegister : function(){
-		debugger;
        var habcheck = document.getElementById("useEmailForNotifications");
        var parent = habcheck.offsetParent;
 parent.ariaChecked=false;
@@ -260,7 +269,6 @@ parent.attributes[4]=false;
 	},
 	
 		terminosRegister : function(){
-		debugger;
        var habcheck = document.getElementById("useEmailForNotifications");
        var parent = habcheck.offsetParent;
 parent.ariaChecked=true;
@@ -274,7 +282,6 @@ parent.attributes[4]=true;
 	},
 	
 	terminosAceptarRegisterTwo : function(){
-		debugger;
 //         var habcheck = document.getElementById("useEmailForNotifications");
 //       var parent = habcheck.offsetParent;
 //parent.ariaChecked=true;
@@ -289,8 +296,9 @@ parent.attributes[4]=true;
 		 bindUpdateTelefonoButton: function () {
 		        $(document).on("click", "#updateTelefonoButton", function (e) {
 		    	        e.preventDefault();
-		    	        
-		    	        
+
+		    	        ACC.spinner.show();
+	    	        
 		    	        var updateTelefonoRitData ={};
 		    	        
 		    	        updateTelefonoRitData.telfonoPrincipal = $.trim($("#telefonoPricipal").val());
@@ -302,6 +310,7 @@ parent.attributes[4]=true;
 			   	            data: updateTelefonoRitData,
 			   	            type: "POST",
 			   	            success: function (data) {
+									ACC.spinner.close();
 			        	        	$( "#dialog" ).dialog( "open" );
 			        	        	if(data.ritUpdated==true)
 			        	        	{
@@ -315,6 +324,7 @@ parent.attributes[4]=true;
 			    	            	
 			   	            },
 			   	            error: function () {
+								ACC.spinner.close();
 			   	            	$( "#dialog" ).dialog( "open" );
 			    	            	$("#ritDialogContent").html("");
 			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
@@ -325,9 +335,9 @@ parent.attributes[4]=true;
 		 
 		 bindUpdateRedesSocialesButton: function () {
 		        $(document).on("click", "#updateRedesSocialesButton", function (e) {
-		    	        e.preventDefault();
-		    	        
-		    	        
+		    	        e.preventDefault();   
+	        
+		    	        ACC.spinner.show();
 		    	        var redSocialData = new Array();
 		    	        
 		    	        var updateRedesSociales = false;
@@ -362,6 +372,7 @@ parent.attributes[4]=true;
 				   	            data: updateRedesSocialesData,
 				   	            type: "POST",
 				   	            success: function (data) {
+										ACC.spinner.close();
 				        	        	$( "#dialog" ).dialog( "open" );
 				        	        	if(data.ritUpdated==true)
 				        	        	{
@@ -375,6 +386,7 @@ parent.attributes[4]=true;
 				    	            	
 				   	            },
 				   	            error: function () {
+									ACC.spinner.close();
 				   	            	$( "#dialog" ).dialog( "open" );
 				    	            	$("#ritDialogContent").html("");
 				   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
@@ -382,6 +394,7 @@ parent.attributes[4]=true;
 				   	        });
 		    	        }else
 	    	        	{
+							ACC.spinner.close();
 		    	        	$( "#dialog" ).dialog( "open" );
 		    	        	$("#ritDialogContent").html("");
 	    	            	$("#ritDialogContent").html("Tus redes sociales no han sido actualizadas.");
@@ -392,10 +405,10 @@ parent.attributes[4]=true;
 		 bindUpdateAutorizacionesButton: function () {
 		        $(document).on("click", "#updateAutorizacionesButton", function (e) {
 		    	        e.preventDefault();
- var msgBuzon = document.getElementById("mensaggeBuzon");
-msgBuzon.style.visibility="visible";
 
-		    	        
+						ACC.spinner.show();
+ 						var msgBuzon = document.getElementById("mensaggeBuzon");
+						msgBuzon.style.visibility="visible";  
 		    	        var updateAutorizacionesData = {};
 		    	        updateAutorizacionesData.usoBuzon = $("#buzon").is(":checked");
 		    	        updateAutorizacionesData.autoUsoInfo = $("#usoInformacion").is(":checked");
@@ -405,8 +418,9 @@ msgBuzon.style.visibility="visible";
 			   	            data: updateAutorizacionesData,
 			   	            type: "POST",
 			   	            success: function (data) {
-				 var msgBuzon = document.getElementById("mensaggeBuzon");
-msgBuzon.style.visibility="visible";
+							ACC.spinner.close();
+				 			var msgBuzon = document.getElementById("mensaggeBuzon");
+							msgBuzon.style.visibility="visible";
 			        	        	$( "#dialog" ).dialog( "open" );
 			        	        	if(data.ritUpdated==true)
 			        	        	{
@@ -420,6 +434,7 @@ msgBuzon.style.visibility="visible";
 			    	            	
 			   	            },
 			   	            error: function () {
+								ACC.spinner.close();
 			   	            	$( "#dialog" ).dialog( "open" );
 			    	            	$("#ritDialogContent").html("");
 			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
@@ -432,8 +447,8 @@ msgBuzon.style.visibility="visible";
 		 bindUpdatePasswordButton: function () {
 		        $(document).on("click", "#updatePasswordButton", function (e) {
 		    	        e.preventDefault();
-		    	        
-		    	        
+
+		    	        ACC.spinner.show();
 		    	        var currentPassword = $.trim($("#currentPassword").val());
 		    	        var newPassword = $.trim($("#newPassword").val());
 		    	        var confirmNewPassword = $.trim($("#confirmNewPassword").val());
@@ -486,11 +501,7 @@ msgBuzon.style.visibility="visible";
 	    	            	$("#ritDialogContent").html("La nueva contraseña y la confirmación de contraseña son diferentes.");
 	    	            	return;
 	    	        	}
-		    	        
-		    	        
-		    	        
-		    	        
-		        	        	
+          	
 		    	        var passwordData = {};
 	        	        passwordData.passoword = currentPassword;
           	        
@@ -499,8 +510,11 @@ msgBuzon.style.visibility="visible";
           	            data: passwordData,
           	            type: "POST",
           	            success: function (data) {
+							ACC.spinner.close();
           	            	if(data.isValidPassword == true)
       	            		{
+	
+								ACC.spinner.show();
           	            		var updatePasswordRitData = {};
           	            		updatePasswordRitData.passoword = currentPassword;
           	            		updatePasswordRitData.newPassword = newPassword;
@@ -512,6 +526,7 @@ msgBuzon.style.visibility="visible";
                       	            type: "POST",
                       	           async: false,
                       	            success: function (data) {
+											ACC.spinner.close();
                   	        	        	$( "#dialog" ).dialog( "open" );
                  	    	            	$("#ritDialogContent").html("");
                  	    	            	if(data.ritUpdated==true)
@@ -528,17 +543,20 @@ msgBuzon.style.visibility="visible";
                  	    	            	}
                       	            },
                       	            error: function () {
+										ACC.spinner.close();
                       	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
                       	            }
                       	        });
       	            		}else
           	            	{
+								ACC.spinner.close();
       	        	        	$( "#dialog" ).dialog( "open" );
      	    	            	$("#ritDialogContent").html("");
      	    	            	$("#ritDialogContent").html("Contraseña actual incorrecta.");
           	            	}
           	            },
           	            error: function () {
+							ACC.spinner.close();
           	            	$( "#dialog" ).dialog( "open" );
  	    	            	$("#ritDialogContent").html("");
           	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
@@ -550,8 +568,8 @@ msgBuzon.style.visibility="visible";
 		 bindUpdateEmailButton: function () {
 		        $(document).on("click", "#updateEmailButton", function (e) {
 		    	        e.preventDefault();
-		    	        
-		    	        
+
+		    	        ACC.spinner.show(); 
 		    	        var email = $.trim($("#currentMail").val());
 		    	        var newEmail = $.trim($("#newEmail").val());
 		    	        var confirmNewEmail = $.trim($("#confirmNewEmail").val());
@@ -609,6 +627,7 @@ msgBuzon.style.visibility="visible";
              	            data: emailData,
              	            type: "POST",
              	            success: function (data) {
+									    	       
              	            	if(data.isValidEmail == true)
          	            		{
              	            		var updateEmailRitData = {};
@@ -622,6 +641,7 @@ msgBuzon.style.visibility="visible";
                          	            type: "POST",
                          	           async: false,
                          	            success: function (data) {
+												ACC.spinner.close();
                      	        	        	$( "#dialog" ).dialog( "open" );
                     	    	            	$("#ritDialogContent").html("");
                     	    	            	$.each(data.errores, function( index, value ) {
@@ -632,17 +652,20 @@ msgBuzon.style.visibility="visible";
                     	    	            	});
                          	            },
                          	            error: function () {
+											ACC.spinner.close();
                          	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
                          	            }
                          	        });
          	            		}else
              	            	{
+									ACC.spinner.close();
          	        	        	$( "#dialog" ).dialog( "open" );
         	    	            	$("#ritDialogContent").html("");
         	    	            	$("#ritDialogContent").html("Correo no disponible está siendo utilizado por otro usuario, introduzca otro");
              	            	}
              	            },
              	            error: function () {
+								ACC.spinner.close();
              	            	$( "#dialog" ).dialog( "open" );
     	    	            	$("#ritDialogContent").html("");
              	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
@@ -873,9 +896,10 @@ msgBuzon.style.visibility="visible";
     bindCertifNombButton: function () {
     $(document).on("click", "#certifNombButton", function (e) {
 	        e.preventDefault();
-	        
+
+        	ACC.spinner.show();
 	        var data={};
-	        
+
 	        data.name1 = $("#primNom").val();
 	        data.name2 = $("#segNom").val();
 	        data.apellido1 = $("#primApe").val();
@@ -887,6 +911,7 @@ msgBuzon.style.visibility="visible";
 	            type: "POST",
 	            async: false,
 	            success: function (data) {
+					ACC.spinner.close();
 	            	$( "#dialog" ).dialog( "open" );
 	            	if(data.success==true)
 	            	{
@@ -897,6 +922,7 @@ msgBuzon.style.visibility="visible";
 	            	}
 	            },
 	            error: function () {
+					ACC.spinner.close();
 	            	$("#ritDialogContent").html("No se puede certificar el nombre");
 	            }
 	        });
@@ -907,7 +933,8 @@ msgBuzon.style.visibility="visible";
     bindUpdateRitButton: function () {
         $(document).on("click", "#updateRitButton", function (e) {
     	        e.preventDefault();
-    	        
+
+    	        ACC.spinner.show();
     	        var updateName = false;
     	        
     	        var hasErrors = false;
@@ -944,6 +971,7 @@ msgBuzon.style.visibility="visible";
              	            type: "POST",
              	           async: false,
              	            success: function (data) {
+								ACC.spinner.close();
              	            	if(data.isValidEmail == true)
          	            		{
              	            		$("#textCertNom").html("Nuevo Usuario Válido");
@@ -956,6 +984,7 @@ msgBuzon.style.visibility="visible";
              	            	}
              	            },
              	            error: function () {
+								ACC.spinner.close();
              	            	$("#textCertNom").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
              	            }
              	        });
@@ -1039,6 +1068,7 @@ msgBuzon.style.visibility="visible";
 		    	            type: "POST",
 		    	            async: false,
 		    	            success: function (data) {
+								ACC.spinner.close();
 		    	            	if(data.isValidPassword == true)
 			            		{
 		    	            		$("#currentPasswordErrors").addClass("hidden");
@@ -1065,6 +1095,7 @@ msgBuzon.style.visibility="visible";
 		    	            	}
 		    	            },
 		    	            error: function () {
+								ACC.spinner.close();
 		    	            	$("#textCertNom").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
 		    	            }
 	        	        });

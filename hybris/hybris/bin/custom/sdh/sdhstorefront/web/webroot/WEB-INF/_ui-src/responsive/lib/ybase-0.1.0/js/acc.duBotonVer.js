@@ -6,11 +6,11 @@ ACC.duBotonVer = {
 	bindLabelVerButton : function() {
 		$(document).on("click", ".label1Ver", function(e) {
 			e.preventDefault();
-			
-
+			ACC.spinner.show();
  	       var valorCDU = $.trim($(this).attr("data-cdu")); 	       
 
  	       if (valorCDU == "") {
+				ACC.spinner.close();
 				alert("Por favor, selecciona un CDU");
 				return;
 			}
@@ -26,10 +26,12 @@ ACC.duBotonVer = {
 				data : data,
 				type : "GET",
 				success : function(dataResponse) {
+					ACC.spinner.close();
 				    document.getElementById("hiddenCdu").value = valorCDU;
 					ACC.duBotonVer.fillFieldsFromData(dataResponse);
 				},
 				error : function() {
+					ACC.spinner.close();
 				}
 			});
 		});
@@ -80,9 +82,7 @@ ACC.duBotonVer = {
 	bindGeneraDeclaracionButton: function () {
 		 $(document).on("click", "#duGeneraDeclaracionButton", function (e) {
 	 	        e.preventDefault();
-				
-			   debugger;	
-	 	        
+				ACC.spinner.show();
 	 	       var numForm  = $.trim($("#numForm").val());
 	 	 
 	 	       var data = {};
@@ -94,8 +94,8 @@ ACC.duBotonVer = {
 		            data: data,
 		            type: "GET",
 		            success: function (data) {
+						ACC.spinner.close();
 		            	$( "#dialogDU" ).dialog( "open" );
-						debugger;
 		            	if(data.errores && ( data.errores[0].idmsj != 0 ))
 	            		{
 		            		$("#duDialogContent").html("");
@@ -118,6 +118,7 @@ ACC.duBotonVer = {
 	 	      		
 		            },
 		            error: function () {
+						ACC.spinner.close();
 		            	$( "#dialogDU" ).dialog( "open" );
 		            	$("#duDialogContent").html("Hubo un error al generar la declaración, por favor inténtalo más tarde");
 		            }

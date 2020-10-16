@@ -8,6 +8,7 @@
 <%@ taglib prefix="tercero"
 	tagdir="/WEB-INF/tags/responsive/terceroconsulta"%>
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <tercero:consultainicial/>
 <div id="tabla" style="display: none;">

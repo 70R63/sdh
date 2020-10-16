@@ -5,8 +5,6 @@ ACC.facturacion = {
 	
 	bindBuscar : function(){
 		$(document).on("click", ".facBuscar", function(){
-			
-			debugger;
 			var imp = document.getElementById('impuesto').value;
 			var tabpred = document.getElementById('table-predial');
 			var tabveh = document.getElementById('table-vehiculos');
@@ -24,7 +22,6 @@ ACC.facturacion = {
 						  
 					  }else{
 						  $("#tabPaginacion0 tr").show();
-//						  $("#tabPaginacion0 tr").hide();
 					  }
 					})
 					 
@@ -59,8 +56,7 @@ ACC.facturacion = {
 	
 	
 	descargaFactura : function (anoGravable,numObjeto,tipoOperacion){
-
-		debugger;
+		ACC.spinner.show();
 		if(ACC.facturacion.validarAntesSubmit(anoGravable,numObjeto)){
 			var dataActual = {};	
 		
@@ -75,10 +71,12 @@ ACC.facturacion = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
+					ACC.spinner.close();
 					ACC.facturacion.manejarRespuesta(dataResponse);
 				}
 			,
 				error : function() {
+					ACC.spinner.close();
 					alert("Error procesar la solicitud de descarga de factura");	
 				}
 			});
@@ -116,8 +114,6 @@ ACC.facturacion = {
 		 if(anoGravable!= null && numObjeto != null){
 			 flagValidacion = true;
 		 }
-		 
-		 
 		 return flagValidacion;
 	 }
 	

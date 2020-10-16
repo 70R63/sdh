@@ -12,6 +12,7 @@
 	var="seguimientoURL" htmlEscape="false" />
 	
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <miRit:personalData />
 <miRit:generalData />

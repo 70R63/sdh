@@ -5,12 +5,13 @@ ACC.contribList = {
 	bindLabelVerDetalle : function() {
 		$(document).on("click", ".labelVerDetalle", function(e) {
 			e.preventDefault();
-			debugger;
+			ACC.spinner.show();
 			var placa = $.trim($(this).attr("data-placa"));
 			var bpNum = $.trim($(this).attr("data-numbp"));
 			var anioGravable = $.trim($("#an").val());
 
 			if (anioGravable == "0") {
+				ACC.spinner.close();
 				alert("Por favor, selecciona el año a consultar");
 				return;
 			}
@@ -25,11 +26,13 @@ ACC.contribList = {
 				url : ACC.vehiculosDetalleURL,
 				data : data,
 				type : "GET",
-				success : function(data) {
-					ACC.vehiculos.fillFieldsFromData(data);
+				success : function(data) {	
+				ACC.spinner.close();
+				ACC.vehiculos.fillFieldsFromData(data);
 
 				},
-				error : function() {
+				error : function() {		
+				ACC.spinner.close();
 				}
 			});
 

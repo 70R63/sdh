@@ -8,6 +8,7 @@
 	tagdir="/WEB-INF/tags/responsive/sobreVehiculos"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <input type="hidden" id="opcionUso" class="opcionUso" value=""/>
 <sobreVehiculos:sobreVehiculosTable />

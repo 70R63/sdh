@@ -12,6 +12,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <template:sdhJavascriptVariables2/>
 <template:sdhJavascriptVariables3/>

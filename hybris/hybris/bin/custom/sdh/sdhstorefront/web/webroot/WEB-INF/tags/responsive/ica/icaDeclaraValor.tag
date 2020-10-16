@@ -40,7 +40,8 @@
 <br>
 
 <sf:form action="" commandName="icaInfObjetoFormResp">
-	<div>
+<!-- 13/10/2020 se esconden campos Se agrego el style por que se ocultaron campos, en caso de quitar el hidden a los demás campos se deberá quitar el style de la linea 44 o renglon de abajo -->
+	<div class="row"  style="padding-left: 400px; margin-right:-400px"> 
 		<div class="row" style="padding-left: 46px;">
 			<!-- 	<div class="col-md-1" style="width: 10.5% !important">
 				<label class="control-label format_label" style="text-transform: none !important"
@@ -65,43 +66,43 @@
 						code="Día" />
 				</label>
 			</div>
-			<div class="col-md-2" style="padding-left: 2px; padding-right: 2px; width: 10% !important">
+			<div class="col-md-2 hidden" style="padding-left: 2px; padding-right: 2px; width: 10% !important">
 				<label class="control-label format_label"
 					style="text-transform: none !important" for=""> <spring:theme
 						code="ica.declaracion.valor.tipdoc" />
 				</label>
 			</div>
-			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+			<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
 				<label style="text-transform: none !important;"
 					class="control-label format_label" for=""> <spring:theme
 						code="ica.declaracion.valor.numide" />
 				</label>
 			</div>
-			<div class="col-md-2" style="padding-left: 2px; padding-right: 2px; width: 15% !important">
+			<div class="col-md-2 hidden" style="padding-left: 2px; padding-right: 2px; width: 15% !important">
 				<label class="control-label format_label"
 					style="text-transform: none !important" for=""> <spring:theme
 						code="ica.declaracion.valor.nombre" />
 				</label>
 			</div>
-			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+			<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
 				<label class="control-label format_label"
 					style="text-transform: none !important" for=""> <spring:theme
 						code="ica.declaracion.valor.direccion" />
 				</label>
 			</div>
-			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+			<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
 				<label class="control-label format_label"
 					style="text-transform: none !important" for=""> <spring:theme
 						code="ica.declaracion.valor.tel" />
 				</label>
 			</div>
-			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+			<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
 				<label class="control-label format_label"
 					style="text-transform: none !important" for=""> <spring:theme
 						code="ica.declaracion.valor.municipio" />
 				</label>
 			</div>
-			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+			<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
 				<label class="control-label format_label"
 					style="text-transform: none !important" for=""> <spring:theme
 						code="ica.declaracion.valor.taraplicada" />
@@ -142,7 +143,7 @@
 					items="${icaInfObjetoFormResp.catalogos.valor_retenido_dias}" 
 					onchange="activarValidacion_valorRetenido()" id="${idDia}" disabled="true"></sf:select>
 				</div>
-				<div class="col-md-2" style="padding-left: 2px; padding-right: 2px; width: 10% !important">
+				<div class="col-md-2 hidden" style="padding-left: 2px; padding-right: 2px; width: 10% !important">
 					<select id="" class="etiq_valor form-control tipoID"
 						style="height: 48px;" onchange="activarValidacion_valorRetenido()" ${disabledValorRetenido}>
 						<option value="">Seleccionar</option>
@@ -161,27 +162,27 @@
 
 					</select>
 				</div>
-				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+				<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control numID" type="text"
 						value="${eachValor.numID }"
 						onchange="activarValidacion_valorRetenido()" ${roValorRetenido}/>
 				</div>
-				<div class="col-md-2" style="padding-left: 2px; padding-right: 2px; width: 15% !important">
+				<div class="col-md-2 hidden" style="padding-left: 2px; padding-right: 2px; width: 15% !important">
 					<input class="new_alto form-control razonSocial" type="text"
 						value="${eachValor.razonSocial }"
 						onchange="activarValidacion_valorRetenido()"${roValorRetenido}/>
 				</div>
-				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+				<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control direccion" type="text"
 						value="${eachValor.direccion }"
 						onchange="activarValidacion_valorRetenido()" ${roValorRetenido}/>
 				</div>
-				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+				<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control telefono" type="text"
 						value="${eachValor.telefono }"
 						onchange="activarValidacion_valorRetenido()" ${roValorRetenido}/>
 				</div>
-				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+				<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
 					<select id="" class="new_alto form-control codMunicipio"
 						style="height: 48px;" onchange="activarValidacion_valorRetenido()" ${disabledValorRetenido}>
 						<option value="">SELECCIONAR</option>
@@ -196,7 +197,7 @@
 						</c:forEach>
 					</select>
 				</div>
-				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+				<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
 					<!-- 						<input class="form-control tarifaApl" type="text" -->
 					<%-- 							value="${eachValor.tarifaApl }" /> --%>
 					<select id="" class="new_alto form-control tarifaApl"
@@ -222,7 +223,7 @@
 						value="${eachValor.montoRetenido }"
 						onchange="activarValidacion_valorRetenido()" ${roValorRetenido}/>
 				</div>
-				<div class="col-md-1" style="width: 5.9% !important; padding-left: 2px; padding-right: 2px;">
+				<div class="col-md-1 hidden" style="width: 5.9% !important; padding-left: 2px; padding-right: 2px;">
 					<div class="form-group ">
 						<c:if test="${icaInfObjetoFormResp.controlCampos.valorRetenido != true}">
 						<img onclick="addvalor()"

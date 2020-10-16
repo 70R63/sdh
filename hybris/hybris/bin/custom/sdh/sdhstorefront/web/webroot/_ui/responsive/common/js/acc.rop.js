@@ -5,7 +5,7 @@ ACC.rop = {
 	bindGeneraROPButton: function () {
 		$(document).on("click", "#generaROPButton", function (e) {
 			e.preventDefault();
-
+			ACC.spinner.show();
 			var importeusuario = $("#importeusuario").val().replace(/\./g,'').replace(/\,/g,'.');
 			var tipoImp = $("#tipoImp").val();
             var numObjeto = $("#numObjeto").val();
@@ -36,6 +36,7 @@ ACC.rop = {
 				data: data,
 				type: "POST",
 				success: function (dataResponse) {
+					ACC.spinner.close();
 					acciones = ACC.rop.accionConsulta(dataResponse);
 					
 					if(acciones.flagGenerarROP == true){
@@ -43,6 +44,7 @@ ACC.rop = {
 					}
 				},
 				error: function () {
+					ACC.spinner.close();
 					$( "#dialogRop" ).dialog( "open" );
 					$("#ropDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
 				}
@@ -85,12 +87,14 @@ ACC.rop = {
 	
 	
 	generarNuevoROP: function(data,dataResponse){
+		ACC.spinner.show();
 		data.consulta = '';
 		$.ajax({
 			url: ACC.generaROPURL,
 			data: data,
 			type: "POST",
 			success: function (dataResponseGen) {
+				ACC.spinner.close();
 				var strMensaje = "";
 
 				if(dataResponseGen.errores != null)
@@ -120,6 +124,7 @@ ACC.rop = {
 
 			},
 			error: function () {
+				ACC.spinner.close();
 				$( "#dialogRop" ).dialog( "open" );
 				$("#ropDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
 			}

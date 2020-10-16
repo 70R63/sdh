@@ -11,6 +11,7 @@ ACC.tramitesSeleccion = {
 				"change",
 				".tramitestSN",
 				function(e) {
+					ACC.spinner.show();
 
 					var valorNivel = $.trim($(this).attr("data-nivel"));
 					var valorActual = this.value;
@@ -65,11 +66,13 @@ ACC.tramitesSeleccion = {
 						data : dataActual,
 						type : "GET",
 						success : function(dataResponse) {
+							ACC.spinner.close();
 							ACC.tramitesSeleccion.mostrarMensaje(dataResponse);
 							ACC.tramitesSeleccion.updateFromResponse(
 									dataActual, dataResponse);
 						},
 						error : function() {
+							ACC.spinner.close();
 						}
 					});
 				});
@@ -258,7 +261,7 @@ ACC.tramitesSeleccion = {
 				".consCasoEnviar",
 				function(e) {
 					e.preventDefault();
-
+					ACC.spinner.show();
 					ACC.tramitesSeleccion.clearSeleccionCaso();
 
 					var dataActual = {};
@@ -274,10 +277,12 @@ ACC.tramitesSeleccion = {
 						data : dataActual,
 						type : "GET",
 						success : function(dataResponse) {
+							ACC.spinner.close();
 							ACC.tramitesSeleccion.resultadoConsultaCaso(
 									dataActual, dataResponse);
 						},
 						error : function() {
+							ACC.spinner.close();
 						}
 					});
 
@@ -286,7 +291,6 @@ ACC.tramitesSeleccion = {
 
 	resultadoConsultaCaso : function(infoSeleccion, infoResponse) {
 
-		debugger;
 		ACC.tramitesSeleccion.clearSeleccionCaso();
 		var mostrarTabDocs = false;
 		var infoDocsData = "";
@@ -397,7 +401,6 @@ ACC.tramitesSeleccion = {
 							$("#mensaje").val(valorCampo);
 
 							// docsAdjuntos
-							debugger;
 							infoDocsData = "";
 							for (var i = 0; i < 10; i++) {
 								nombreCampo = "data-descArchivo_" + i;
@@ -472,12 +475,16 @@ ACC.tramitesSeleccion = {
 		// }else{
 		// validacion = false;
 		// }
+		var mensajeValidacion = "Por favor ingresar los valores obligatorios marcados con *";
 		if (validacion == true) {
 			validacion = ACC.tramitesSeleccion.validarArchivosAntesSubmit();
+			if(validacion == false){
+				mensajeValidacion = "No han sido adjuntados los documentos requeridos para este trámite";
+			}
 		}
 
 		if (validacion == false) {
-			alert("Por favor ingresar los valores obligatorios marcados con *");
+			alert(mensajeValidacion);
 		}
 
 		return validacion;

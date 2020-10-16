@@ -14,7 +14,7 @@
 <%@ taglib prefix="facturacion" tagdir="/WEB-INF/tags/responsive/facturacion"%>
 
 <div class="loader"></div>
-
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 <obligaciones:obliPendientesPagar />
 <a id="downloadHelper" target="_blank"></a>
 <facturacion:descuentoUnoPorCiento/>

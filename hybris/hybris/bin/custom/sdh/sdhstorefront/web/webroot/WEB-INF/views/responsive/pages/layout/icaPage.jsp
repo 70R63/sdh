@@ -7,6 +7,7 @@
 <%@ taglib prefix="ica" tagdir="/WEB-INF/tags/responsive/ica"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <c:out value="${opcionUso}"/>
 <input type="hidden" id="icaOpcionUso" name="icaOpcionUso" value="${opcionUso}">

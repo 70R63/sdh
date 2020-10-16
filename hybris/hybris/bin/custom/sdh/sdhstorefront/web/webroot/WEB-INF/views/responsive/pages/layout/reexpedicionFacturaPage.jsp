@@ -9,6 +9,7 @@
 	tagdir="/WEB-INF/tags/responsive/facturacion"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <c:choose>
 	<c:when test="${ not empty facturacionForm.vehicular || not empty facturacionForm.predial}">

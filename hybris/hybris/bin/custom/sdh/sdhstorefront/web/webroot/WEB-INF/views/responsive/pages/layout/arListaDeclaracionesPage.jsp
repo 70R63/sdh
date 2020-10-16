@@ -7,6 +7,7 @@
 <%@ taglib prefix="lista" tagdir="/WEB-INF/tags/responsive/arListaDeclaraciones"%>
 
 <div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <lista:agentesLista/>
 

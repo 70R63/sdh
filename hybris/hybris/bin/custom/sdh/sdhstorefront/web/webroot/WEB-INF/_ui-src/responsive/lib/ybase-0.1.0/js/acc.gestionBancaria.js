@@ -31,7 +31,7 @@ ACC.gestionBancaria = {
 	 bindGeneraDeclaracionReteICAButton: function () {
 		 $(document).on("click", "#generaDeclaracionReteICAButton", function (e) {
 	 	        e.preventDefault();
-	 	        
+	 	        ACC.spinner.show();
 	 	       var numForm  = $.trim($("#numForm").val());
 	 	 
 	 	       var data = {};
@@ -43,6 +43,7 @@ ACC.gestionBancaria = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
+						ACC.spinner.close();
 		            	$( "#dialogReteICA" ).dialog( "open" );
 		            	if(data.errores)
 	            		{
@@ -64,6 +65,7 @@ ACC.gestionBancaria = {
 	 	      		
 		            },
 		            error: function () {
+						ACC.spinner.close();
 		            	$( "#dialogPublicidadialogReteICAdExterior" ).dialog( "open" );
 		            	$("#reteICADialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
 		            }
@@ -75,11 +77,12 @@ ACC.gestionBancaria = {
 	 bindActualizarButton: function(){
 		 $(document).on("click", "#actualizarButton", function (e) {
 			 e.preventDefault();
-			 
+			ACC.spinner.show();		 
 			 var valorPagar =  $.trim( $("#valorPagar").val());
 			 
 			 if(valorPagar == "")
 			 {
+				ACC.spinner.close();
 				 $( "#dialogReteICA" ).dialog( "open" );
 	  	 		$("#reteICADialogContent").html("");
 	  	 		$("#reteICADialogContent").html("Por favor introduzca un total a pagar");
@@ -91,6 +94,7 @@ ACC.gestionBancaria = {
 			 
 			 if(numForm == "")
 			 {
+				ACC.spinner.close();
 				 $( "#dialogReteICA" ).dialog( "open" );
 	  	 		$("#reteICADialogContent").html("");
 	  	 		$("#reteICADialogContent").html("No se ha encontrado NumForm, por favor actualice nuevamente");
@@ -109,6 +113,7 @@ ACC.gestionBancaria = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
+						ACC.spinner.close();
 		            	if(!data.errores)
 		            	{
 		            		if(data.numForm == "")
@@ -154,6 +159,7 @@ ACC.gestionBancaria = {
 		            	}
 		            },
 		            error: function () {
+						ACC.spinner.close();
 		            	 $( "#dialogReteICA" ).dialog( "open" );
 		     	 		$("#reteICADialogContent").html("");
 		     	 		$("#reteICADialogContent").html("Error al realizar el calculo, por favor intelo nuevamente más tarde.");
@@ -318,13 +324,11 @@ ACC.gestionBancaria = {
 	 	    	
 	 	    	},
 	 
-	 bindCargarButton: function(){
-		 
-		 
-		 
+	 bindCargarButton: function(){ 
 		 $(document).on("click", "#bindCargarButton", function (e) {
 			 e.preventDefault();
-			 
+			 ACC.spinner.show();
+
 			 var formData = new FormData();
 			 
 			 var anoGravable = $.trim( $("#reteICAAnoGravable").val());
@@ -383,7 +387,7 @@ ACC.gestionBancaria = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
-		            	
+		            	ACC.spinner.close();
 		            	if(data.allowFileUpload == true && data.requestCofirmation == false)
 	            		{
 		            		ACC.reteica.uploadFile();
@@ -407,6 +411,7 @@ ACC.gestionBancaria = {
 		            	
 		            },
 		            error: function () {
+						ACC.spinner.close();
 		            	 $( "#dialogReteICA" ).dialog( "open" );
 		     	 		$("#reteICADialogContent").html("");
 		     	 		$("#reteICADialogContent").html("Cargar Archivo Fallida!");
@@ -424,7 +429,7 @@ ACC.gestionBancaria = {
 	 
 	 
 	 uploadFile: function(){
-		 
+		ACC.spinner.show();	 
 		 var formData = new FormData();
 		 
 		 var anoGravable = $.trim( $("#reteICAAnoGravable").val());
@@ -444,7 +449,7 @@ ACC.gestionBancaria = {
 	            contentType: false,
 	            processData: false ,
 	            success: function (data) {
-	            	
+	            	ACC.spinner.close();
 	            	if(!data.errores)
 	            	{
 		            	$( "#dialogReteICA" ).dialog( "open" );
@@ -462,6 +467,7 @@ ACC.gestionBancaria = {
 	            	
 	            },
 	            error: function () {
+					ACC.spinner.close();
 	            	 $( "#dialogReteICA" ).dialog( "open" );
 	     	 		$("#reteICADialogContent").html("");
 	     	 		$("#reteICADialogContent").html("Cargar Archivo Fallida!");
