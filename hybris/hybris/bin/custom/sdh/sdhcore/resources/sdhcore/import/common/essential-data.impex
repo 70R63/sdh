@@ -28,9 +28,6 @@
 # Languages
 INSERT_UPDATE Language;isocode[unique=true];fallbackLanguages(isocode);active[default=true]
 ;en;;;
-;de;en;;
-;ja;en;;
-;zh;en;;
 
 # Currencies
 INSERT_UPDATE Currency;isocode[unique=true];conversion;digits;symbol

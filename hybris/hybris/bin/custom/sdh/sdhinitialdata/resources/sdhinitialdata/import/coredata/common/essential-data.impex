@@ -21,8 +21,6 @@ $jarResourceCommon=jar:de.hybris.sdh.initialdata.setup.InitialDataSystemSetup&/s
 # Languages
 INSERT_UPDATE Language;isocode[unique=true];fallbackLanguages(isocode);active[default=true]
 ;en;;;
-;de;en;;
-;fr;en;;
 ;es;en;;
 
 # Currencies

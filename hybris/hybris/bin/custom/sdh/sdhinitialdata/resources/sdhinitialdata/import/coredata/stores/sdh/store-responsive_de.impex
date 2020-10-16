@@ -1,4 +1,0 @@
-$lang=de
-
-UPDATE BaseStore;uid[unique=true];name[lang=$lang]
-;sdh;"Public-Sector-Filiale"

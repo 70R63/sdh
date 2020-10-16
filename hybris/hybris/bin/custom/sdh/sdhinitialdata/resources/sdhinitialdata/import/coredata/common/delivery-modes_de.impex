@@ -1,9 +1,0 @@
-$lang=de
-
-# Zone Delivery Modes
-UPDATE ZoneDeliveryMode;code[unique=true];name[lang=$lang];description[lang=$lang]
-;not-applicable;"Nicht zutreffend";"Nicht zutreffend"
-;premium-gross;"Premium-Lieferung";"1-2 Werktage"
-;premium-net;"Premium-Lieferung";"1-2 Werktage"
-;standard-gross;"Standard-Lieferung";"3-5 Werktage"
-;standard-net;"Standard-Lieferung";"3-5 Werktage"
