@@ -97,7 +97,7 @@
 													onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPredDet.objetoContrato}','${eachObPred.objetoContrato}', '${eachObPredDet.fechaVencimiento}', '${eachObPredDet.numReferencia}','${eachObPredDet.obligacion}','','','${eachObPred.facilidad}','${eachObPred.montoFacilidad}' )">Pagar</label></td>
 													<td><label class="control-label btnGenerarSPACObli"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-													id="btnGenerarSPACObli" data-numForm="${eachObPredDet.numFormulario}" data-anio="${eachObPred.anioGravable}" data-obj="${eachObPredDet.objetoContrato}" data-reimpresion="X">Generar SPAC</label></td>
+													id="btnGenerarSPACObli" data-numForm="${eachObPredDet.numFormulario}" data-anio="${eachObPred.anioGravable}" data-obj="${eachObPredDet.objetoContrato}" data-reimpresion="X">Cupones</label></td>
 											</tr>
 										</c:if>
 									</c:forEach>
@@ -232,7 +232,7 @@
 													onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}','','${eachObVehi.placa}', '${eachObVehi.facilidad}','${eachObVehi.montoFacilidad}' )">Pagar</label></td>
 												<td><label class="control-label btnGenerarSPACObliVehicular"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-													id="btnGenerarSPACObliVehicular" data-numForm="${eachObVehiDet.numFormulario}" data-anio="${eachObVehi.anioGravable}" data-obj="${eachObVehiDet.objetoContrato}" data-reimpresion="X">Generar SPAC</label></td>
+													id="btnGenerarSPACObliVehicular" data-numForm="${eachObVehiDet.numFormulario}" data-anio="${eachObVehi.anioGravable}" data-obj="${eachObVehiDet.objetoContrato}" data-reimpresion="X">Cupones</label></td>
 											</tr>
 										</c:if>
 									</c:forEach>
