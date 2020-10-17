@@ -16,7 +16,10 @@
 <c:url value="/contribuyentes/presentar-declaracion"
 	var="presentarDeclaracionUrl"/>
 <br>
-
+<div>Solo se puede revisar el año 2020, si requiere revisar su información de años anteriores al 2020 visite el siguiente enlace:</div>
+<br>
+<br>
+<br>
 <div class="container_new_page">
 	<sf:form action="${presentarDeclaracionUrl}"
 		method="POST" id="forma" commandName="dataForm">
