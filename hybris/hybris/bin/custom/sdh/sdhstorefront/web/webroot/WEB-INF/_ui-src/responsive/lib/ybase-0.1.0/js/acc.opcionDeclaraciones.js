@@ -1491,7 +1491,7 @@ ACC.opcionDeclaraciones = {
 		var ocultarPeriodo2 = false;
         var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = 5;
+		var cantidadAnoGravable = 1;
 		
 		debugger;
         
@@ -1618,16 +1618,17 @@ ACC.opcionDeclaraciones = {
 
 		var d = new Date();
 		var anoGravableBase = d.getFullYear();
+		var cantidadAnoGravable = 1;
 		
 		$("#anoGravable").find("option:gt(0)").remove();
 		if(claveImpuesto == '1' || claveImpuesto == '2'){ // predial vehicular 
-			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,5);
+			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,cantidadAnoGravable);
 		}else if(claveImpuesto == '6'){ // delineacion
 			//anoGravableBase--;
-			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,5);
+			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,cantidadAnoGravable);
 		}else{
 //			anoGravableBase--;
-			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,5);
+			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,cantidadAnoGravable);
 		}
 		
 	},
