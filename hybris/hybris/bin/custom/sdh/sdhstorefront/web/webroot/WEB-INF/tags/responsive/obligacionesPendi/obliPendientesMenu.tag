@@ -9,7 +9,10 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div>Solo se puede revisar el año 2020, si requiere revisar su información de años anteriores al 2020 visite el siguiente enlace:</div>
+<div>Solo se puede revisar el año 2020, si requiere revisar su información de años anteriores al 2020 visite el siguiente
+<a href="https://pit.shd.gov.co/vehiculos/">enlace vehicular</a>
+<a href="https://pit.shd.gov.co/predial/">enlace predial</a>
+</div>
 <br>
 <br>
 <br>
