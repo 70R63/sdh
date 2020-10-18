@@ -60,6 +60,13 @@
 										class="control-label labeltabletd"> <spring:theme
 												code="obligacion.inicial.predio.numRef" />
 									</label></th>
+									
+									<th style="text-align: center !important"><label
+										class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.totPagar" />
+									</label></th>
+									
+									
 									<th><label class="control-label labeltabletd"> <spring:theme
 												code="obligacion.inicial.predio.obcontra" />
 									</label></th>
@@ -87,6 +94,16 @@
 												<td><c:out value="${eachObPredDet.obligacion}" /></td>
 												<td><c:out value="${eachObPredDet.numFormulario}" /></td>
 												<td><c:out value="${eachObPredDet.numReferencia}" /></td>
+												
+												<c:if test="${!eachObPred.facilidad || eachObPred.facilidad == '00' }">
+													<td><c:out value="${eachObPredDet.obligacion}" /></td>
+												</c:if>
+												
+												<c:if test="${eachObPred.facilidad == '01' && eachObPred.facilidad == '02'}">
+													<td><c:out value="${eachObPred.montoFacilidad}" /></td>
+												</c:if>
+												
+												
 												<td><c:out value="${eachObPredDet.objetoContrato}" /></td>
 												<td><a
 													href="<c:url value="/contribuyentes/rop?obligacion=${eachObPredDet.obligacion}&totalPagar=${eachObPredDet.obligacion}&objCont=${eachObPredDet.objetoContrato}&clvPer=${fn:substring(eachObPred.anioGravable, 2, 4)}A1&tpImp=01" />">Generar
