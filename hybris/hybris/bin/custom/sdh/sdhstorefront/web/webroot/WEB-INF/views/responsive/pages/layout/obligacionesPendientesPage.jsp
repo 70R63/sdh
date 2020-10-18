@@ -65,6 +65,12 @@
 		
 	}
 	
+	
+	function noActivo() {
+		alert("Debe generar un ROP o Cupón");
+	}
+	
+	
 	window.onload = function() {
 		debugger;
 		var cosas = $(":input");
