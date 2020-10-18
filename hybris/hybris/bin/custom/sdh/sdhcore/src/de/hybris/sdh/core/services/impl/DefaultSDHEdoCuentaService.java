@@ -80,8 +80,9 @@ public class DefaultSDHEdoCuentaService implements SDHEdoCuentaService
 				builder.append(inputLine);
 			}
 
-			final String result = builder.toString();
+			String result = builder.toString();
 			LOG.info("response: " + result);
+			result = result.replace(",\"reteica\":\"\"", "");
 
 			return result;
 
