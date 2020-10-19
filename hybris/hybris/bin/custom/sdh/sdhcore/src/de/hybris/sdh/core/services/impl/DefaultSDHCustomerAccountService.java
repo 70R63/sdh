@@ -667,6 +667,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 					eachNewAgentModel.setCompleteName(eachAgentResponse.getNomCompleto());
 					eachNewAgentModel.setInternalFunction(eachAgentResponse.getFuncionInterl());
 					eachNewAgentModel.setBp(eachAgentResponse.getBp());
+					eachNewAgentModel.setMenu(eachAgentResponse.getMenu());
 
 					newAgentModels.add(eachNewAgentModel);
 

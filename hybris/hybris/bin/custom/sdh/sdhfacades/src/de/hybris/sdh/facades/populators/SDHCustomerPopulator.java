@@ -271,9 +271,9 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 
 		if(CollectionUtils.isNotEmpty(source.getAgentList()))
 		{
-			List<SDHAgentData> agents = new ArrayList<SDHAgentData>();
-			for (SDHAgentModel eachAgentModel: source.getAgentList()) {
-				SDHAgentData eachAgentData = new SDHAgentData();
+			final List<SDHAgentData> agents = new ArrayList<SDHAgentData>();
+			for (final SDHAgentModel eachAgentModel: source.getAgentList()) {
+				final SDHAgentData eachAgentData = new SDHAgentData();
 
 				eachAgentData.setAgent(eachAgentModel.getAgent());
 				eachAgentData.setCompleteName(eachAgentModel.getCompleteName());
@@ -281,6 +281,7 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 				eachAgentData.setDocumentType(eachAgentModel.getDocumentType());
 				eachAgentData.setInternalFunction(eachAgentModel.getInternalFunction());
 				eachAgentData.setBp(eachAgentModel.getBp());
+				eachAgentData.setMenu(eachAgentModel.getMenu());
 				agents.add(eachAgentData);
 			}
 			target.setAgentList(agents);

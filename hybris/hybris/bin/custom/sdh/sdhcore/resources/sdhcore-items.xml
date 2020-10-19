@@ -486,6 +486,9 @@
 					<attribute qualifier="bp" type="java.lang.String">
 						<persistence type="property"></persistence>
 					</attribute>
+					<attribute qualifier="menu" type="java.lang.String">
+						<persistence type="property"></persistence>
+					</attribute>
        			</attributes>
 	        </itemtype>
 	        
