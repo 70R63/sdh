@@ -22,6 +22,7 @@ import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedBodyT
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedResponseBodyType;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedResponseFieldType;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseBodyType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 
 import java.text.DateFormat;
@@ -29,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -71,7 +73,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final String fechaLimiteDePago, final String pagoAdicional, final String banco, final String valorAPagar,
 			final String isoCurrency, final String tipoDeTarjeta, final String objPago)
 	{
-		PseTransactionsLogModel alreadyExistTransaction = pseTransactionsLogDao.getTransaction(numeroDeReferencia);
+		final PseTransactionsLogModel alreadyExistTransaction = pseTransactionsLogDao.getTransaction(numeroDeReferencia);
 		final PseTransactionsLogModel transactionLogModel = Objects.nonNull(alreadyExistTransaction) ? alreadyExistTransaction : new PseTransactionsLogModel();
 
 		// ConstantConnectionDat
@@ -181,7 +183,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 
 			LOG.info("----- Response Data GetTransactionInformationBodyType -------");
 			LOG.info(response);
-            LOG.info("----- Response Data GetTransactionInformationBodyType -------");
+			LOG.info("----- Response Data GetTransactionInformationBodyType -------");
 
 			LOG.info("----- Response Data GetTransactionInformationDetailedResponseBodyType -------");
 			LOG.info(response1);
@@ -269,20 +271,46 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			LOG.info("----- Response Data GetTransactionInformationResponseBodyType -------");
 			LOG.info(response);
 			LOG.info("----- Response Data GetTransactionInformationDetailedResponseBodyType -------");
-			LOG.info(responseDetailed);
+			final Iterator<HashMap.Entry<String, String>> entries = map.entrySet().iterator();
+			while (entries.hasNext())
+			{
+				final HashMap.Entry<String, String> entry = entries.next();
+				LOG.info("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+			}
 			LOG.info("-----------------------------------------------------------------------------");
 
 			pseTransactionsLogModel.setSoliciteDate(dateTimeFormat.format(response.getSoliciteDate()));
 			try
 			{
 				pseTransactionsLogModel.setBankProcessDate(dateTimeFormat.format(map.get("bankProcessDate")));
+
+				if (map.get("bankProcessDate").substring(11).equals("00:00:00") && response.getTransactionState().getValue()
+						.equals(GetTransactionInformationResponseTransactionStateCodeList.OK.getValue()))
+				{
+					pseTransactionsLogModel
+							.setTransactionState(GetTransactionInformationResponseTransactionStateCodeList.PENDING.getValue());
+				}
+				else
+				{
+					pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
+				}
 			}
 			catch (final Exception e)
 			{
 				pseTransactionsLogModel.setBankProcessDate(map.get("bankProcessDate"));
-			}
 
-			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
+				if (map.get("bankProcessDate").substring(11).equals("00:00:00") && response.getTransactionState().getValue()
+						.equals(GetTransactionInformationResponseTransactionStateCodeList.OK.getValue()))
+				{
+					pseTransactionsLogModel
+							.setTransactionState(GetTransactionInformationResponseTransactionStateCodeList.PENDING.getValue());
+				}
+				else
+				{
+					pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
+				}
+
+			}
 
 
 			//pseTransactionsLogModel.setPaymentOrigin(map.get("bankProcessDate"));

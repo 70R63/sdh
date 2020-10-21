@@ -14,6 +14,9 @@
 	value="/contribuyentes/sobretasa-gasolina/declaracion-gasolina"
 	var="declaracionURL" htmlEscape="false" />
 
+<div class="loader"></div>
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>	
+
 
 
 <sf:form action="${declaracionURL}" method="POST"
