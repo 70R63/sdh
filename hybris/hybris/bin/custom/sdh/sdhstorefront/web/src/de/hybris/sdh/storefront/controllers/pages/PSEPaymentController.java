@@ -8,7 +8,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
@@ -708,6 +707,7 @@ public class PSEPaymentController extends AbstractPageController
 			throws CMSItemNotFoundException
 	{
 		String flagSuccessView = null;
+		String ref;
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
@@ -716,6 +716,45 @@ public class PSEPaymentController extends AbstractPageController
 		String redirecUrl = getViewForPage(model);
 
 		final SdhOnlinePaymentProviderEnum provider = sdhOnlinePaymentProviderMatcherFacade.getOnlinePaymentProvider(psePaymentForm.getTipoDeImpuesto(), psePaymentForm.getTipoDeTarjeta(), psePaymentForm.getBanco());
+
+
+		if (psePaymentForm.getTipoDeImpuesto().equals("5101"))
+		{
+			ref = psePaymentForm.getCHIP();
+		}
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5103"))
+		{
+			ref = psePaymentForm.getPlaca();
+		}
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5132"))
+		{
+			if (!psePaymentForm.getCUD().equals(""))
+			{
+				ref = psePaymentForm.getCUD();
+			}
+			else
+			{
+				ref = psePaymentForm.getCdu();
+			}
+		}
+		else
+		{
+			ref = psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
+		}
+
+
+		final int i_ceros = 14 - ref.length();
+
+		String s_ceros = new String();
+		for (int i = 1; i <= i_ceros; i++)
+		{
+			s_ceros = s_ceros + "0";
+		}
+
+		final String objPago = s_ceros + ref;
+
+		psePaymentForm.setObjPago(objPago);
+
 
 
 		if (provider.equals(SdhOnlinePaymentProviderEnum.CREDIBANCO)) //Credibanco Payment
@@ -828,43 +867,7 @@ public class PSEPaymentController extends AbstractPageController
 
 		LOG.info("-----------FIN  getBankList  --------------");
 
-		String ref2;
-
-		if (psePaymentForm.getTipoDeImpuesto().equals("5101"))
-		{
-			ref2 = psePaymentForm.getCHIP();
-		}
-		else if (psePaymentForm.getTipoDeImpuesto().equals("5103"))
-		{
-			ref2 = psePaymentForm.getPlaca();
-		}
-		else if (psePaymentForm.getTipoDeImpuesto().equals("5132") || psePaymentForm.getTipoDeImpuesto().equals("5106"))
-		{
-			if (!psePaymentForm.getCUD().equals(""))
-			{
-				ref2 = psePaymentForm.getCUD();
-			}
-			else
-			{
-				ref2 = psePaymentForm.getCdu();
-			}
-		}
-		else
-		{
-			ref2 = psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
-		}
-
-
-      final int i_ceros = 14 - ref2.length();
-
-		String s_ceros = new String();
-		for (int i = 1; i <= i_ceros; i++)
-		{
-			s_ceros = s_ceros + "0";
-		}
-
-		final String s_reference2 = s_ceros + ref2;
-
+		final String s_reference2 = psePaymentForm.getObjPago();
 
 		final CreateTransactionPaymentInformationType createTransactionPaymentInformationType = new CreateTransactionPaymentInformationType();
 
@@ -901,50 +904,7 @@ public class PSEPaymentController extends AbstractPageController
 		LOG.info("----------- doCredibancoPayment --------------");
 
 
-
-		String ref3;
-
-		if (psePaymentForm.getTipoDeImpuesto().equals("5101"))
-		{
-			ref3 = psePaymentForm.getCHIP();
-		}
-		else if (psePaymentForm.getTipoDeImpuesto().equals("5103"))
-		{
-			ref3 = psePaymentForm.getPlaca();
-		}
-		else if (psePaymentForm.getTipoDeImpuesto().equals("5132"))
-		{
-			ref3 = psePaymentForm.getCdu();
-		}
-		else
-		{
-			ref3 = psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
-		}
-
-
-		final int i_ceros = 14 - ref3.length();
-
-		String s_ceros = new String();
-		for (int i = 1; i <= i_ceros; i++)
-		{
-			s_ceros = s_ceros + "0";
-		}
-
-		final String s_reference3 = s_ceros + ref3;
-
-
-
-
-		//final int i_ceros = 14
-		//		- (psePaymentForm.getTipoDeIdentificacion().length() + psePaymentForm.getNoIdentificacion().length());
-
-		//String s_ceros = new String();
-		//for (int i = 1; i <= i_ceros; i++)
-		//{
-		//	s_ceros = s_ceros + "0";
-		//}
-
-		//final String s_reference3 = s_ceros + psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
+		final String s_reference3 = psePaymentForm.getObjPago();
 
 
 		final String concept = psePaymentForm.getBanco().substring(2, 4) + psePaymentForm.getTipoDeImpuesto().substring(2, 4);
@@ -997,6 +957,12 @@ public class PSEPaymentController extends AbstractPageController
 				psePaymentForm.getNumeroDeReferencia(), //NonRef#2
 				s_reference3, //NonRef#3
 				psePaymentForm.getBanco()); //bankCode
+
+		LOG.info("----------- CredibancoRequest --------------");
+		LOG.info(inititalizeTransactionRequest);
+		LOG.info("----------- CredibancoRequest --------------");
+
+
 
 		return sdhCredibancoJwt.inititalizeTransaction(inititalizeTransactionRequest);
 	}
