@@ -1,7 +1,7 @@
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <script type="text/javascript">
@@ -36,8 +36,6 @@
   }
 
   var idleTime = 0;
-  var idleTimeConfirm = 0;
-  var MT = new Multithread(2);
   $(document).ready(function () {
       //Increment the idle time counter every minute.
       var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
