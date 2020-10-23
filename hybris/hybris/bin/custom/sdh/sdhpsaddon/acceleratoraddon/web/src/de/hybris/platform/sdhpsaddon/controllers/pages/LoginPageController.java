@@ -93,7 +93,8 @@ public class LoginPageController extends AbstractLoginPageController
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String doLogin(@RequestHeader(value = "referer", required = false) final String referer,
-			@RequestParam(value = "error", defaultValue = "false") final boolean loginError, final Model model,
+			@RequestParam(value = "error", defaultValue = "false") final boolean loginError,
+			@RequestParam(value = "sessionExpired", defaultValue = "false") final boolean sessionExpired, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response, final HttpSession session)
 			throws CMSItemNotFoundException
 	{
@@ -106,6 +107,11 @@ public class LoginPageController extends AbstractLoginPageController
 		{
 			model.addAttribute("showloginBody", Boolean.FALSE);
 		}
+
+		if(sessionExpired){
+			GlobalMessages.addInfoMessage(model, "account.confirmation.expiredSession.title");
+		}
+
 		return getDefaultLoginPage(loginError, session, model);
 	}
 
