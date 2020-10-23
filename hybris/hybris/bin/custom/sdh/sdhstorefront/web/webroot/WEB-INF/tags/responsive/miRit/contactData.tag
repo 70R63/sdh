@@ -305,6 +305,31 @@ toddir.style.width= '900px'
 				<c:choose>
 				<c:when test="${ PJUR eq true || PNAT eq true}">
 				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group ">
+							<label class="control-label required" for="direccionNotificacion">
+								<spring:theme code="mirit.contactData.notificationAddress" />
+							</label> <input id="direccionNotificacion" name="direccionNotificacion"
+								class="newalto_dir form-control" aria-required="true" type="text"
+								data-original="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }"
+								" disabled="disabled"
+								value="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }"
+								maxlength="240"> <input id="direccionNotificacionStreet"
+								name="direccionNotificacionStreet" type="hidden"
+								data-original="${miRitForm.direccionNotificacion.STREET}"
+								value="${miRitForm.direccionNotificacion.STREET}"> <input
+								id="direccionNotificacionSuppl1"
+								name="direccionNotificacionStreet" type="hidden"
+								data-original="${miRitForm.direccionNotificacion.STR_SUPPL1 }"
+								value="${miRitForm.direccionNotificacion.STR_SUPPL1}"> <input
+								id="direccionNotificacionSuppl2"
+								name="direccionNotificacionStreet" type="hidden"
+								data-original="${miRitForm.direccionNotificacion.STR_SUPPL2 }"
+								value="${miRitForm.direccionNotificacion.STR_SUPPL2 }">
+						</div>
+					</div>
+				</div>
+				<div class="row">
 					<div class="row">
 						<div class="col-12 col-md-2">
 							<div>

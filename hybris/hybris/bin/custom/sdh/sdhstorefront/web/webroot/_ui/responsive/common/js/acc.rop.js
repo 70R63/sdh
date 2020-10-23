@@ -6,6 +6,7 @@ ACC.rop = {
 		$(document).on("click", "#generaROPButton", function (e) {
 			e.preventDefault();
 			ACC.spinner.show();
+			debugger;
 			var importeusuario = $("#importeusuario").val().replace(/\./g,'').replace(/\,/g,'.');
 			var tipoImp = $("#tipoImp").val();
             var numObjeto = $("#numObjeto").val();
@@ -36,6 +37,7 @@ ACC.rop = {
 				data: data,
 				type: "POST",
 				success: function (dataResponse) {
+					debugger;
 					ACC.spinner.close();
 					acciones = ACC.rop.accionConsulta(dataResponse);
 					
@@ -45,6 +47,7 @@ ACC.rop = {
 				},
 				error: function () {
 					ACC.spinner.close();
+					debugger;
 					$( "#dialogRop" ).dialog( "open" );
 					$("#ropDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
 				}
@@ -54,6 +57,7 @@ ACC.rop = {
 	},
 	
 	accionConsulta: function(data){
+		debugger;
 		var flagGenerarROP = false;
 		var flagConfReimpresion = false;
 		var strMensaje = "";
@@ -64,6 +68,10 @@ ACC.rop = {
 			$.each(data.errores, function( index, value ) {
 				if(value.idmsj!=null && value.idmsj.trim() == "09"){
 					flagConfReimpresion = true;
+					strMensaje = value.txtmsj.trim();
+				}
+				if(value.idmsj!=null && value.idmsj.trim() == "10"){
+					flagGenerarROP = true;
 					strMensaje = value.txtmsj.trim();
 				}
 			});
@@ -79,7 +87,10 @@ ACC.rop = {
 			}else{
 				flagGenerarROP = confirm("¿Desea generar un nuevo ROP?");
 			}
+		}else if(flagGenerarROP == true){
+			flagGenerarROP = confirm("¿Desea generar un nuevo ROP?");
 		}
+		
 		
 		dataResponse.flagGenerarROP = flagGenerarROP;
 		return dataResponse
@@ -95,11 +106,13 @@ ACC.rop = {
 			type: "POST",
 			success: function (dataResponseGen) {
 				ACC.spinner.close();
+				debugger;
 				var strMensaje = "";
 
 				if(dataResponseGen.errores != null)
 				{
 					$.each(dataResponseGen.errores, function( index, value ) {
+						
 						if(value.txtmsj!=null && value.txtmsj.trim() != "" && value.txtmsj.trim() != "OK"){
 							strMensaje += value.txtmsj.trim()+"<br>";
 						}
@@ -125,6 +138,7 @@ ACC.rop = {
 			},
 			error: function () {
 				ACC.spinner.close();
+				debugger;
 				$( "#dialogRop" ).dialog( "open" );
 				$("#ropDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
 			}

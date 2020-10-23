@@ -40,9 +40,9 @@ import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.type.TypeService;
 import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
-import de.hybris.sdh.core.pojos.responses.ContribAgente;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.facades.SDHCustomerFacade;
+import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
 import de.hybris.sdh.storefront.filters.cms.CMSSiteFilter;
 import de.hybris.sdh.storefront.forms.UIMenuForm;
@@ -189,11 +189,13 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 
 				String aamenus = "";
 
-				for (final ContribAgente eachAgent : representadoData.getAgentes())
+				for (final SDHAgentData eachAgent : customerData.getAgentList())
 				{
-					if(customerData.getNumBP().equalsIgnoreCase(eachAgent.getBp()) || StringUtils.leftPad(customerData.getNumBP(),10,"0").equalsIgnoreCase(eachAgent.getBp()))
+					if (representadoData.getInfoContrib().getNumBP().equalsIgnoreCase(eachAgent.getBp()) || StringUtils
+							.leftPad(representadoData.getInfoContrib().getNumBP(), 10, "0").equalsIgnoreCase(eachAgent.getBp()))
 					{
 						aamenus = eachAgent.getMenu();
+						break;
 					}
 
 				}

@@ -17,11 +17,29 @@ public class ObligacionesCabeceraPredial
 	private String objetoContrato;
 	private String facilidad;
 	private String montoFacilidad;
+	private String refActiva;
 	private List<ObligacionesDetallePredial> details;
 
 
 
 
+
+	/**
+	 * @return the refActiva
+	 */
+	public String getRefActiva()
+	{
+		return refActiva;
+	}
+
+	/**
+	 * @param refActiva
+	 *           the refActiva to set
+	 */
+	public void setRefActiva(final String refActiva)
+	{
+		this.refActiva = refActiva;
+	}
 
 	/**
 	 * @return the facilidad

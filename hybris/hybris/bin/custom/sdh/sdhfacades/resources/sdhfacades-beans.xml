@@ -114,6 +114,7 @@
 		<property name="completeName" type="String"/>
 		<property name="internalFunction" type="String"/>
 		<property name="bp" type="String"/>
+		<property name="menu" type="String"/>
 	</bean>
 	
 	<bean class="de.hybris.sdh.facades.questions.data.OptionsData">	

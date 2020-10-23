@@ -60,6 +60,13 @@
 										class="control-label labeltabletd"> <spring:theme
 												code="obligacion.inicial.predio.numRef" />
 									</label></th>
+									
+									<th style="text-align: center !important"><label
+										class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.totPagar" />
+									</label></th>
+									
+									
 									<th><label class="control-label labeltabletd"> <spring:theme
 												code="obligacion.inicial.predio.obcontra" />
 									</label></th>
@@ -87,17 +94,95 @@
 												<td><c:out value="${eachObPredDet.obligacion}" /></td>
 												<td><c:out value="${eachObPredDet.numFormulario}" /></td>
 												<td><c:out value="${eachObPredDet.numReferencia}" /></td>
+												
+												
+												<!--INI  TOTAL A PAGAR -->
+												<c:choose>
+													<c:when test="${eachObPred.facilidad == '00'}">
+														<td><c:out value="${eachObPredDet.obligacion}" /></td>
+													</c:when>
+													<c:when test="${eachObPred.facilidad == '01'}">
+														<td><c:out value="${eachObPred.montoFacilidad}" /></td>
+													</c:when>
+													<c:when test="${eachObPred.facilidad == '02'}">
+														<td><c:out value="${eachObPred.montoFacilidad}" /></td>
+													</c:when>
+													<c:otherwise>
+														<td><c:out value="${eachObPredDet.obligacion}" /></td>
+													</c:otherwise>
+												</c:choose>												
+												<!--FIN TOTAL A PAGAR -->
+												
+												
 												<td><c:out value="${eachObPredDet.objetoContrato}" /></td>
-												<td><a
+												
+												<!--INI ROP -->
+												<c:choose>
+													<c:when test="${eachObPred.facilidad == '00'}">
+														<td><a
 													href="<c:url value="/contribuyentes/rop?obligacion=${eachObPredDet.obligacion}&totalPagar=${eachObPredDet.obligacion}&objCont=${eachObPredDet.objetoContrato}&clvPer=${fn:substring(eachObPred.anioGravable, 2, 4)}A1&tpImp=01" />">Generar
 														ROP</a></td>
-												<td><label class="control-label"
-													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-													id="Detalle"
-													onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPredDet.objetoContrato}','${eachObPred.objetoContrato}', '${eachObPredDet.fechaVencimiento}', '${eachObPredDet.numReferencia}','${eachObPredDet.obligacion}','','','${eachObPred.facilidad}','${eachObPred.montoFacilidad}' )">Pagar</label></td>
-													<td><label class="control-label btnGenerarSPACObli"
-													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-													id="btnGenerarSPACObli" data-numForm="${eachObPredDet.numFormulario}" data-anio="${eachObPred.anioGravable}" data-obj="${eachObPredDet.objetoContrato}" data-reimpresion="X">Generar SPAC</label></td>
+													</c:when>
+													<c:when test="${eachObPred.facilidad == '01'}">
+														<td><a
+													href="<c:url value="/contribuyentes/rop?obligacion=${eachObPredDet.obligacion}&totalPagar=${eachObPredDet.obligacion}&objCont=${eachObPredDet.objetoContrato}&clvPer=${fn:substring(eachObPred.anioGravable, 2, 4)}A1&tpImp=01" />">Generar
+														ROP</a></td>
+													</c:when>
+													<c:when test="${eachObPred.facilidad == '02'}">
+														<td><label class="control-label labeltabletd"> <spring:theme
+														code="obligacion.inicial.sinROP" /></a></td>
+													</c:when>
+													<c:otherwise>
+														<td><a
+													href="<c:url value="/contribuyentes/rop?obligacion=${eachObPredDet.obligacion}&totalPagar=${eachObPredDet.obligacion}&objCont=${eachObPredDet.objetoContrato}&clvPer=${fn:substring(eachObPred.anioGravable, 2, 4)}A1&tpImp=01" />">Generar
+														ROP</a></td>
+													</c:otherwise>
+												</c:choose>									
+												<!--FIN ROP -->
+												
+												
+												<!--INI PAGO VIGENTE -->
+												<c:choose>
+													<c:when test="${eachObVehi.refActiva == '02'}">
+														<td><label class="control-label"
+														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+														id="Detalle" onclick="noActivo()">Pagar</label></td>
+													</c:when>
+													<c:otherwise>
+														<td><label class="control-label"
+														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+														id="Detalle"
+														onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPredDet.objetoContrato}','${eachObPred.objetoContrato}', '${eachObPredDet.fechaVencimiento}', '${eachObPredDet.numReferencia}','${eachObPredDet.obligacion}','','','${eachObPred.facilidad}','${eachObPred.montoFacilidad}' )">Pagar</label></td>															
+													</c:otherwise>
+												</c:choose>												
+												<!--FIN PAGO VIGENTE -->	
+												
+												
+												
+												<!--INI SPAC -->
+												<c:choose>
+													<c:when test="${eachObPred.facilidad == '00'}">
+														<td><label class="control-label labeltabletd"> <spring:theme
+														code="obligacion.inicial.sinCupones" /></a></td>
+													</c:when>
+													<c:when test="${eachObPred.facilidad == '01'}">
+														<td><label class="control-label labeltabletd"> <spring:theme
+														code="obligacion.inicial.sinCupones" /></a></td>
+													</c:when>
+													<c:when test="${eachObPred.facilidad == '02'}">
+														<td><label class="control-label btnGenerarSPACObli"
+														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+														id="btnGenerarSPACObli" data-numForm="${eachObPredDet.numFormulario}" data-anio="${eachObPred.anioGravable}" data-obj="${eachObPredDet.objetoContrato}" data-reimpresion="X">Cupones</label></td>
+													</c:when>
+													<c:otherwise>
+														<td><label class="control-label labeltabletd"> <spring:theme
+														code="obligacion.inicial.sinCupones" /></a></td>
+													</c:otherwise>
+												</c:choose>
+												<!--FIN SPAC -->
+													
+													
+													
 											</tr>
 										</c:if>
 									</c:forEach>
@@ -190,6 +275,12 @@
 									<th><label class="control-label labeltabletd" for="">
 											<spring:theme code="obligacion.inicial.vehiculo.numRef" />
 									</label></th>
+									
+									<th style="text-align: center !important"><label
+										class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.totPagar" />
+									</label></th>
+									
 									<th><label class="control-label labeltabletd" for="">
 											<spring:theme code="obligacion.inicial.vehiculo.obcontra" />
 									</label></th>
@@ -222,17 +313,93 @@
 												<td><c:out value="${eachObVehiDet.obligacion}" /></td>
 												<td><c:out value="${eachObVehiDet.numFormulario}" /></td>
 												<td><c:out value="${eachObVehiDet.numReferencia}" /></td>
+												
+												<!--INI  TOTAL A PAGAR -->
+												<c:choose>
+													<c:when test="${eachObVehi.facilidad == '00'}">
+														<td><c:out value="${eachObVehiDet.obligacion}" /></td>
+													</c:when>
+													<c:when test="${eachObVehi.facilidad == '01'}">
+														<td><c:out value="${eachObVehi.montoFacilidad}" /></td>
+													</c:when>
+													<c:when test="${eachObVehi.facilidad == '02'}">
+														<td><c:out value="${eachObVehi.montoFacilidad}" /></td>
+													</c:when>
+													<c:otherwise>
+														<td><c:out value="${eachObVehiDet.obligacion}" /></td>
+													</c:otherwise>
+												</c:choose>												
+												<!--FIN TOTAL A PAGAR -->
+												
+												
 												<td><c:out value="${eachObVehiDet.objetoContrato}" /></td>
-												<td><a
-													href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}&objCont=${eachObVehiDet.objetoContrato}&clvPer=${fn:substring(eachObVehi.anioGravable, 2, 4)}A1&tpImp=03" />">Generar
-														ROP</a></td>
-												<td><label class="control-label"
-													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-													id="Detalle"
-													onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}','','${eachObVehi.placa}', '${eachObVehi.facilidad}','${eachObVehi.montoFacilidad}' )">Pagar</label></td>
-												<td><label class="control-label btnGenerarSPACObliVehicular"
-													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-													id="btnGenerarSPACObliVehicular" data-numForm="${eachObVehiDet.numFormulario}" data-anio="${eachObVehi.anioGravable}" data-obj="${eachObVehiDet.objetoContrato}" data-reimpresion="X">Generar SPAC</label></td>
+												
+												
+												<!--INI ROP -->
+												<c:choose>
+													<c:when test="${eachObVehi.facilidad == '00'}">
+														<td><a
+														href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}&objCont=${eachObVehiDet.objetoContrato}&clvPer=${fn:substring(eachObVehi.anioGravable, 2, 4)}A1&tpImp=03" />">Generar
+															ROP</a></td>
+													</c:when>
+													<c:when test="${eachObVehi.facilidad == '01'}">
+														<td><a
+														href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}&objCont=${eachObVehiDet.objetoContrato}&clvPer=${fn:substring(eachObVehi.anioGravable, 2, 4)}A1&tpImp=03" />">Generar
+															ROP</a></td>
+													</c:when>
+													<c:when test="${eachObVehi.facilidad == '02'}">
+														<td><label class="control-label labeltabletd"> <spring:theme
+														code="obligacion.inicial.sinROP" /></a></td>
+													</c:when>
+													<c:otherwise>
+														<td><a
+														href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}&objCont=${eachObVehiDet.objetoContrato}&clvPer=${fn:substring(eachObVehi.anioGravable, 2, 4)}A1&tpImp=03" />">Generar
+															ROP</a></td>
+													</c:otherwise>
+												</c:choose>									
+												<!--FIN ROP -->
+															
+															
+												<!--INI PAGO VIGENTE -->
+												<c:choose>
+													<c:when test="${eachObVehi.refActiva == '02'}">
+														<td><label class="control-label"
+														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+														id="Detalle" onclick="noActivo()">Pagar</label></td>
+													</c:when>
+													<c:otherwise>
+														<td><label class="control-label"
+														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+														id="Detalle"
+														onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}','','${eachObVehi.placa}', '${eachObVehi.facilidad}','${eachObVehi.montoFacilidad}' )">Pagar</label></td>															
+													</c:otherwise>
+												</c:choose>												
+												<!--FIN PAGO VIGENTE -->	
+												
+												
+												<!--INI SPAC -->
+												<c:choose>
+													<c:when test="${eachObVehi.facilidad == '00'}">
+														<td><label class="control-label labeltabletd"> <spring:theme
+														code="obligacion.inicial.sinCupones" /></a></td>
+													</c:when>
+													<c:when test="${eachObVehi.facilidad == '01'}">
+														<td><label class="control-label labeltabletd"> <spring:theme
+														code="obligacion.inicial.sinCupones" /></a></td>
+													</c:when>
+													<c:when test="${eachObVehi.facilidad == '02'}">
+														<td><label class="control-label btnGenerarSPACObliVehicular"
+														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+														id="btnGenerarSPACObliVehicular" data-numForm="${eachObVehiDet.numFormulario}" data-anio="${eachObVehi.anioGravable}" data-obj="${eachObVehiDet.objetoContrato}" data-reimpresion="X">Cupones</label></td>
+													</c:when>
+													<c:otherwise>
+														<td><label class="control-label labeltabletd"> <spring:theme
+														code="obligacion.inicial.sinCupones" /></a></td>
+													</c:otherwise>
+												</c:choose>
+												<!--FIN SPAC -->
+												
+												
 											</tr>
 										</c:if>
 									</c:forEach>
@@ -317,6 +484,12 @@
 									<th><label class="control-label labeltabletd" for="">
 											<spring:theme code="obligacion.inicial.ica.numRef" />
 									</label></th>
+									
+									<th style="text-align: center !important"><label
+										class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.totPagar" />
+									</label></th>
+									
 									<th><label class="control-label labeltabletd" for="">
 											<spring:theme code="obligacion.inicial.ica.obcontra" />
 									</label></th>
@@ -371,14 +544,71 @@
 												<td><c:out value="${eachObIcaDet.obligacion}" /></td>
 												<td><c:out value="${eachObIcaDet.numFormulario}" /></td>
 												<td><c:out value="${eachObIcaDet.numReferencia}" /></td>
+												
+												<!--INI  TOTAL A PAGAR -->
+												<c:choose>
+													<c:when test="${eachObIca.facilidad == '00'}">
+														<td><c:out value="${eachObIcaDet.obligacion}" /></td>
+													</c:when>
+													<c:when test="${eachObIca.facilidad == '01'}">
+														<td><c:out value="${eachObIca.montoFacilidad}" /></td>
+													</c:when>
+													<c:when test="${eachObIca.facilidad == '02'}">
+														<td><c:out value="${eachObIca.montoFacilidad}" /></td>
+													</c:when>
+													<c:otherwise>
+														<td><c:out value="${eachObIcaDet.obligacion}" /></td>
+													</c:otherwise>
+												</c:choose>												
+												<!--FIN TOTAL A PAGAR -->
+												
+												
+												
 												<td><c:out value="${eachObIcaDet.objetoContrato}" /></td>
-												<td><a
+												
+												<!--INI ROP -->
+												<c:choose>
+													<c:when test="${eachObIca.facilidad == '00'}">
+														<td><a
 													href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}&tpImp=02&objCont=${eachObIcaDet.objetoContrato}&clvPer=${clavePeriodo}" />">Generar
 														ROP</a></td>
-												<td><label class="control-label"
-													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-													id="Detalle"
-													onclick="pagarEnLinea('5102','${eachObIca.anioGravable}','${eachObIca.periodo}','${eachObIcaDet.objetoContrato}','', '${eachObIcaDet.fechaVencimiento}', '${eachObIcaDet.numReferencia}','${eachObIcaDet.obligacion}','','', '${eachObIca.facilidad}', '${eachObIca.montoFacilidad}' )">Pagar</label></td>
+													</c:when>
+													<c:when test="${eachObIca.facilidad == '01'}">
+														<td><a
+													href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}&tpImp=02&objCont=${eachObIcaDet.objetoContrato}&clvPer=${clavePeriodo}" />">Generar
+														ROP</a></td>
+													</c:when>
+													<c:when test="${eachObIca.facilidad == '02'}">
+														<td><label class="control-label labeltabletd"> <spring:theme
+														code="obligacion.inicial.sinROP" /></a></td>
+													</c:when>
+													<c:otherwise>
+														<td><a
+													href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}&tpImp=02&objCont=${eachObIcaDet.objetoContrato}&clvPer=${clavePeriodo}" />">Generar
+														ROP</a></td>
+													</c:otherwise>
+												</c:choose>									
+												<!--FIN ROP -->
+												
+												
+												
+												<!--INI PAGO VIGENTE -->
+												<c:choose>
+													<c:when test="${eachObVehi.refActiva == '02'}">
+														<td><label class="control-label"
+														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+														id="Detalle" onclick="noActivo()">Pagar</label></td>
+													</c:when>
+													<c:otherwise>
+														<td><label class="control-label"
+														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+														id="Detalle"
+														onclick="pagarEnLinea('5102','${eachObIca.anioGravable}','${eachObIca.periodo}','${eachObIcaDet.objetoContrato}','', '${eachObIcaDet.fechaVencimiento}', '${eachObIcaDet.numReferencia}','${eachObIcaDet.obligacion}','','', '${eachObIca.facilidad}', '${eachObIca.montoFacilidad}' )">Pagar</label></td>															
+													</c:otherwise>
+												</c:choose>												
+												<!--FIN PAGO VIGENTE -->	
+												
+												
 											</tr>
 										</c:if>
 									</c:forEach>
@@ -447,6 +677,13 @@
 										<th><label class="control-label labeltabletd" for="">
 												<spring:theme code="obligacion.inicial.publicidad.numRef" />
 										</label></th>
+										
+										<th style="text-align: center !important"><label
+										class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.totPagar" />
+										</label></th>
+										
+										
 										<th><label class="control-label labeltabletd" for="">
 												<spring:theme code="obligacion.inicial.publicidad.obcontra" />
 										</label></th>
@@ -474,14 +711,71 @@
 													<td><c:out value="${eachPubExtTaxDet.obligacion}" /></td>
 													<td><c:out value="${eachPubExtTaxDet.numFormulario}" /></td>
 													<td><c:out value="${eachPubExtTaxDet.numReferencia}" /></td>
+													
+													<!--INI  TOTAL A PAGAR -->
+													<c:choose>
+														<c:when test="${eachPubExtTax.facilidad == '00'}">
+															<td><c:out value="${eachPubExtTaxDet.obligacion}" /></td>
+														</c:when>
+														<c:when test="${eachPubExtTax.facilidad == '01'}">
+															<td><c:out value="${eachPubExtTax.montoFacilidad}" /></td>
+														</c:when>
+														<c:when test="${eachPubExtTax.facilidad == '02'}">
+															<td><c:out value="${eachPubExtTax.montoFacilidad}" /></td>
+														</c:when>
+														<c:otherwise>
+															<td><c:out value="${eachPubExtTaxDet.obligacion}" /></td>
+														</c:otherwise>
+													</c:choose>												
+													<!--FIN TOTAL A PAGAR -->
+													
+													
 													<td><c:out value="${eachPubExtTaxDet.objetoContrato}" /></td>
-													<td><a
+													
+													
+													<!--INI ROP -->
+													<c:choose>
+														<c:when test="${eachPubExtTax.facilidad == '00'}">
+															<td><a
 														href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTaxDet.obligacion}&objCont=${eachPubExtTaxDet.objetoContrato}&clvPer=${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1&tpImp=54" />">Generar
 															ROP</a></td>
-													<td><label class="control-label"
-														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-														id="Detalle"
-														onclick="pagarEnLinea('5154','${eachPubExtTax.anioGravable}','','${eachPubExtTaxDet.objetoContrato}','', '${eachPubExtTaxDet.fechaVencimiento}', '${eachPubExtTaxDet.numReferencia}','${eachPubExtTaxDet.obligacion}','','','${eachPubExtTax.facilidad}','${eachPubExtTax.montoFacilidad}' )">Pagar</label></td>
+														</c:when>
+														<c:when test="${eachPubExtTax.facilidad == '01'}">
+															<td><a
+														href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTaxDet.obligacion}&objCont=${eachPubExtTaxDet.objetoContrato}&clvPer=${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1&tpImp=54" />">Generar
+															ROP</a></td>
+														</c:when>
+														<c:when test="${eachPubExtTax.facilidad == '02'}">
+															<td><label class="control-label labeltabletd"> <spring:theme
+															code="obligacion.inicial.sinROP" /></a></td>
+														</c:when>
+														<c:otherwise>
+															<td><a
+														href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTaxDet.obligacion}&objCont=${eachPubExtTaxDet.objetoContrato}&clvPer=${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1&tpImp=54" />">Generar
+															ROP</a></td>
+														</c:otherwise>
+													</c:choose>									
+													<!--FIN ROP -->
+													
+													
+													<!--INI PAGO VIGENTE -->
+													<c:choose>
+														<c:when test="${eachObVehi.refActiva == '02'}">
+															<td><label class="control-label"
+															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+															id="Detalle" onclick="noActivo()">Pagar</label></td>
+														</c:when>
+														<c:otherwise>
+															<td><label class="control-label"
+															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+															id="Detalle"
+															onclick="pagarEnLinea('5154','${eachPubExtTax.anioGravable}','','${eachPubExtTaxDet.objetoContrato}','', '${eachPubExtTaxDet.fechaVencimiento}', '${eachPubExtTaxDet.numReferencia}','${eachPubExtTaxDet.obligacion}','','','${eachPubExtTax.facilidad}','${eachPubExtTax.montoFacilidad}' )">Pagar</label></td>															
+														</c:otherwise>
+													</c:choose>												
+													<!--FIN PAGO VIGENTE -->	
+														
+													
+													
 												</tr>
 											</c:if>
 										</c:forEach>
@@ -540,6 +834,13 @@
 										<th><label class="control-label labeltabletd" for="">
 												<spring:theme code="obligacion.inicial.gasolina.numRef" />
 										</label></th>
+										
+										<th style="text-align: center !important"><label
+										class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.totPagar" />
+										</label></th>
+										
+										
 										<th><label class="control-label labeltabletd" for="">
 												<spring:theme code="obligacion.inicial.gasolina.obcontra" />
 										</label></th>
@@ -582,14 +883,69 @@
 													<td><c:out value="${eachObGasDet.obligacion}" /></td>
 													<td><c:out value="${eachObGasDet.numFormulario}" /></td>
 													<td><c:out value="${eachObGasDet.numReferencia}" /></td>
+													
+													<!--INI  TOTAL A PAGAR -->
+													<c:choose>
+														<c:when test="${eachObGas.facilidad == '00'}">
+															<td><c:out value="${eachObGasDet.obligacion}" /></td>
+														</c:when>
+														<c:when test="${eachObGas.facilidad == '01'}">
+															<td><c:out value="${eachObGas.montoFacilidad}" /></td>
+														</c:when>
+														<c:when test="${eachObGas.facilidad == '02'}">
+															<td><c:out value="${eachObGas.montoFacilidad}" /></td>
+														</c:when>
+														<c:otherwise>
+															<td><c:out value="${eachObGasDet.obligacion}" /></td>
+														</c:otherwise>
+													</c:choose>												
+													<!--FIN TOTAL A PAGAR -->
+													
+													
 													<td><c:out value="${eachObGasDet.objetoContrato}" /></td>
-													<td><a
+													
+													<!--INI ROP -->
+													<c:choose>
+														<c:when test="${eachObGas.facilidad == '00'}">
+															<td><a
 														href="<c:url value="/contribuyentes/rop?obligacion=${eachObGasDet.obligacion}&totalPagar=${eachObGasDet.obligacion}&objCont=${eachObGasDet.objetoContrato}&clvPer=${fn:substring(eachObGas.anioGravable, 2, 4)}${eachObGas.periodo}&tpImp=08" />">Generar
 															ROP</a></td>
-													<td><label class="control-label"
-														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-														id="Detalle"
-														onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}','','${eachObGasDet.fechaVencimiento}', '${eachObGasDet.numReferencia}', '${eachObGasDet.obligacion}','','','${eachObGas.facilidad}','${eachObGas.montoFacilidad}')">Pagar</label></td>
+														</c:when>
+														<c:when test="${eachObGas.facilidad == '01'}">
+															<td><a
+														href="<c:url value="/contribuyentes/rop?obligacion=${eachObGasDet.obligacion}&totalPagar=${eachObGasDet.obligacion}&objCont=${eachObGasDet.objetoContrato}&clvPer=${fn:substring(eachObGas.anioGravable, 2, 4)}${eachObGas.periodo}&tpImp=08" />">Generar
+															ROP</a></td>
+														</c:when>
+														<c:when test="${eachObGas.facilidad == '02'}">
+															<td><label class="control-label labeltabletd"> <spring:theme
+															code="obligacion.inicial.sinROP" /></a></td>
+														</c:when>
+														<c:otherwise>
+															<td><a
+														href="<c:url value="/contribuyentes/rop?obligacion=${eachObGasDet.obligacion}&totalPagar=${eachObGasDet.obligacion}&objCont=${eachObGasDet.objetoContrato}&clvPer=${fn:substring(eachObGas.anioGravable, 2, 4)}${eachObGas.periodo}&tpImp=08" />">Generar
+															ROP</a></td>
+														</c:otherwise>
+													</c:choose>									
+													<!--FIN ROP -->
+													
+													
+													<!--INI PAGO VIGENTE -->
+													<c:choose>
+														<c:when test="${eachObVehi.refActiva == '02'}">
+															<td><label class="control-label"
+															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+															id="Detalle" onclick="noActivo()">Pagar</label></td>
+														</c:when>
+														<c:otherwise>
+															<td><label class="control-label"
+															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+															id="Detalle"
+															onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}','','${eachObGasDet.fechaVencimiento}', '${eachObGasDet.numReferencia}', '${eachObGasDet.obligacion}','','','${eachObGas.facilidad}','${eachObGas.montoFacilidad}')">Pagar</label></td>															
+														</c:otherwise>
+													</c:choose>												
+													<!--FIN PAGO VIGENTE -->
+													
+													
 												</tr>
 											</c:if>
 										</c:forEach>
@@ -646,6 +1002,13 @@
 													code="obligacion.inicial.delineacion.numForm" /> </label></th>
 										<th><label class="control-label labeltabletd"><spring:theme
 													code="obligacion.inicial.delineacion.numRef" /> </label></th>
+													
+										<th style="text-align: center !important"><label
+										class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.totPagar" />
+										</label></th>			
+													
+													
 										<th><label class="control-label labeltabletd"><spring:theme
 													code="obligacion.inicial.delineacion.obcontra" /> </label></th>
 										<th><label class="control-label labeltabletd "><spring:theme
@@ -668,18 +1031,82 @@
 													<td><c:out value="${eachDeliDet.obligacion}" /></td>
 													<td><c:out value="${eachDeliDet.numFormulario}" /></td>
 													<td><c:out value="${eachDeliDet.numReferencia}" /></td>
+													
+													
+													<!--INI  TOTAL A PAGAR -->
+													<c:choose>
+														<c:when test="${eachDeli.facilidad == '00'}">
+															<td><c:out value="${eachDeliDet.obligacion}" /></td>
+														</c:when>
+														<c:when test="${eachDeli.facilidad == '01'}">
+															<td><c:out value="${eachDeli.montoFacilidad}" /></td>
+														</c:when>
+														<c:when test="${eachDeli.facilidad == '02'}">
+															<td><c:out value="${eachDeli.montoFacilidad}" /></td>
+														</c:when>
+														<c:otherwise>
+															<td><c:out value="${eachDeliDet.obligacion}" /></td>
+														</c:otherwise>
+													</c:choose>												
+													<!--FIN TOTAL A PAGAR -->
+													
+													
 													<td><c:out value="${eachDeliDet.objetoContrato}" /></td>
-													<td>
-													<c:set var="clavePeriodo" value=""/>
-													<c:if test="${fn:length(eachDeli.anioGravable) >= 4}">
-														<c:set var="clavePeriodo" value="${fn:substring(eachDeli.anioGravable, 2, 4)}A1"/>
-													</c:if>
-													<a href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeliDet.obligacion}&objCont=${eachDeliDet.objetoContrato}&clvPer=${clavePeriodo}&tpImp=06" />">Generar
-															ROP</a></td>
-													<td><label class="control-label"
-														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-														id="Detalle"
-														onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>
+													
+													<!--INI ROP -->
+													<c:choose>
+														<c:when test="${eachObGas.facilidad == '00'}">
+															<td>
+															<c:set var="clavePeriodo" value=""/>
+															<c:if test="${fn:length(eachDeli.anioGravable) >= 4}">
+																<c:set var="clavePeriodo" value="${fn:substring(eachDeli.anioGravable, 2, 4)}A1"/>
+															</c:if>
+															<a href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeliDet.obligacion}&objCont=${eachDeliDet.objetoContrato}&clvPer=${clavePeriodo}&tpImp=06" />">Generar
+																	ROP</a></td>
+														</c:when>
+														<c:when test="${eachObGas.facilidad == '01'}">
+															<td>
+															<c:set var="clavePeriodo" value=""/>
+															<c:if test="${fn:length(eachDeli.anioGravable) >= 4}">
+																<c:set var="clavePeriodo" value="${fn:substring(eachDeli.anioGravable, 2, 4)}A1"/>
+															</c:if>
+															<a href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeliDet.obligacion}&objCont=${eachDeliDet.objetoContrato}&clvPer=${clavePeriodo}&tpImp=06" />">Generar
+																	ROP</a></td>
+														</c:when>
+														<c:when test="${eachObGas.facilidad == '02'}">
+															<td><label class="control-label labeltabletd"> <spring:theme
+															code="obligacion.inicial.sinROP" /></a></td>
+														</c:when>
+														<c:otherwise>
+															<td>
+															<c:set var="clavePeriodo" value=""/>
+															<c:if test="${fn:length(eachDeli.anioGravable) >= 4}">
+																<c:set var="clavePeriodo" value="${fn:substring(eachDeli.anioGravable, 2, 4)}A1"/>
+															</c:if>
+															<a href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeliDet.obligacion}&objCont=${eachDeliDet.objetoContrato}&clvPer=${clavePeriodo}&tpImp=06" />">Generar
+																	ROP</a></td>
+														</c:otherwise>
+													</c:choose>									
+													<!--FIN ROP -->
+													
+													
+													<!--INI PAGO VIGENTE -->
+													<c:choose>
+														<c:when test="${eachObVehi.refActiva == '02'}">
+															<td><label class="control-label"
+															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+															id="Detalle" onclick="noActivo()">Pagar</label></td>
+														</c:when>
+														<c:otherwise>
+															<td><label class="control-label"
+															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+															id="Detalle"
+															onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>															
+														</c:otherwise>
+													</c:choose>												
+													<!--FIN PAGO VIGENTE -->
+													
+													
 												</tr>
 											</c:if>
 										</c:forEach>
@@ -737,6 +1164,12 @@
 													code="obligacion.inicial.delineacion.numForm" /> </label></th>
 										<th><label class="control-label labeltabletd"><spring:theme
 													code="obligacion.inicial.delineacion.numRef" /> </label></th>
+													
+										<th style="text-align: center !important"><label
+										class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.totPagar" />
+										</label></th>
+										
 										<th><label class="control-label labeltabletd"><spring:theme
 													code="obligacion.inicial.delineacion.obcontra" /> </label></th>
 										<th><label class="control-label labeltabletd "><spring:theme
@@ -757,14 +1190,70 @@
 													<td><c:out value="${eachReteIcaDet.obligacion}" /></td>
 													<td><c:out value="${eachReteIcaDet.numFormulario}" /></td>
 													<td><c:out value="${eachReteIcaDet.numReferencia}" /></td>
+													
+													
+													<!--INI  TOTAL A PAGAR -->
+													<c:choose>
+														<c:when test="${eachReteIca.facilidad == '00'}">
+															<td><c:out value="${eachReteIcaDet.obligacion}" /></td>
+														</c:when>
+														<c:when test="${eachReteIca.facilidad == '01'}">
+															<td><c:out value="${eachReteIca.montoFacilidad}" /></td>
+														</c:when>
+														<c:when test="${eachReteIca.facilidad == '02'}">
+															<td><c:out value="${eachReteIca.montoFacilidad}" /></td>
+														</c:when>
+														<c:otherwise>
+															<td><c:out value="${eachReteIcaDet.obligacion}" /></td>
+														</c:otherwise>
+													</c:choose>												
+													<!--FIN TOTAL A PAGAR -->
+													
+													
 													<td><c:out value="${eachReteIcaDet.objetoContrato}" /></td>
-<td><a
-													href="<c:url value="/contribuyentes/rop?obligacion=${eachReteIcaDet.obligacion}&totalPagar=${eachReteIcaDet.obligacion}&tpImp=02&objCont=${eachReteIcaDet.objetoContrato}&clvPer=${eachReteIcaDet.objetoContrato}" />">Generar
-														ROP</a></td>
-												<td><label class="control-label"
-													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-													id="Detalle"
-													onclick="pagarEnLinea('5102','${eachReteIca.anioGravable}','${eachReteIca.periodo}','${eachReteIcaDet.objetoContrato}','', '${eachReteIcaDet.fechaVencimiento}', '${eachReteIcaDet.numReferencia}','${eachReteIcaDet.obligacion}','','','${eachReteIca.facilidad}','${eachReteIca.montoFacilidad}' )">Pagar</label></td>
+													
+													<!--INI ROP -->
+													<c:choose>
+														<c:when test="${eachObGas.facilidad == '00'}">
+															<td><a
+															href="<c:url value="/contribuyentes/rop?obligacion=${eachReteIcaDet.obligacion}&totalPagar=${eachReteIcaDet.obligacion}&tpImp=02&objCont=${eachReteIcaDet.objetoContrato}&clvPer=${eachReteIcaDet.objetoContrato}" />">Generar
+																ROP</a></td>
+														</c:when>
+														<c:when test="${eachObGas.facilidad == '01'}">
+															<td><a
+															href="<c:url value="/contribuyentes/rop?obligacion=${eachReteIcaDet.obligacion}&totalPagar=${eachReteIcaDet.obligacion}&tpImp=02&objCont=${eachReteIcaDet.objetoContrato}&clvPer=${eachReteIcaDet.objetoContrato}" />">Generar
+																ROP</a></td>
+														</c:when>
+														<c:when test="${eachObGas.facilidad == '02'}">
+															<td><label class="control-label labeltabletd"> <spring:theme
+															code="obligacion.inicial.sinROP" /></a></td>
+														</c:when>
+														<c:otherwise>
+															<td><a
+															href="<c:url value="/contribuyentes/rop?obligacion=${eachReteIcaDet.obligacion}&totalPagar=${eachReteIcaDet.obligacion}&tpImp=02&objCont=${eachReteIcaDet.objetoContrato}&clvPer=${eachReteIcaDet.objetoContrato}" />">Generar
+																ROP</a></td>
+														</c:otherwise>
+													</c:choose>									
+													<!--FIN ROP -->
+													
+													
+													<!--INI PAGO VIGENTE -->
+													<c:choose>
+														<c:when test="${eachObVehi.refActiva == '02'}">
+															<td><label class="control-label"
+															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+															id="Detalle" onclick="noActivo()">Pagar</label></td>
+														</c:when>
+														<c:otherwise>
+															<td><label class="control-label"
+															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+															id="Detalle"
+															onclick="pagarEnLinea('5102','${eachReteIca.anioGravable}','${eachReteIca.periodo}','${eachReteIcaDet.objetoContrato}','', '${eachReteIcaDet.fechaVencimiento}', '${eachReteIcaDet.numReferencia}','${eachReteIcaDet.obligacion}','','','${eachReteIca.facilidad}','${eachReteIca.montoFacilidad}' )">Pagar</label></td>															
+														</c:otherwise>
+													</c:choose>												
+													<!--FIN PAGO VIGENTE -->
+													
+												
 											</tr>
 											</c:if>
 										</c:forEach>
