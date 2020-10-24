@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" type="text/javascript"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <script type="text/javascript">
@@ -51,9 +52,12 @@
 
   function timerIncrement() {
       idleTime = idleTime + 1;
+      console.log($.cookie("sessionActived"));
       console.log(idleTime);
-      if (idleTime > 4) { // 5 minutes
-          window.location.href = "/bogota/es/logout?sessionExpired=true";
+      if (idleTime > 2) { // 5 minutes
+          if($.cookie("sessionActived") == "true"){
+            window.location.href = "/bogota/es/logout?sessionExpired=true";
+          }          
       }
   }
 </script>
