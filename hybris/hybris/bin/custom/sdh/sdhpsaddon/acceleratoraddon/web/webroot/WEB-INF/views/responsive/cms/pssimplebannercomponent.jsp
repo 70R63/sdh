@@ -1,7 +1,9 @@
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <script type="text/javascript">
   var msg = "Funcionaliadad no disponible";
   document.onmousedown = function disableclick(event){
@@ -32,6 +34,28 @@
         return false;
     }
   }
+
+  var idleTime = 0;
+  $(document).ready(function () {
+      //Increment the idle time counter every minute.
+      var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+
+      //Zero the idle timer on mouse movement.
+      $(this).mousemove(function (e) {
+          idleTime = 0;
+      });
+      $(this).keypress(function (e) {
+          idleTime = 0;
+      });
+  });
+
+  function timerIncrement() {
+      idleTime = idleTime + 1;
+      console.log(idleTime);
+      if (idleTime > 4) { // 5 minutes
+          window.location.href = "/bogota/es/logout?sessionExpired=true";
+      }
+  }
 </script>
 
 <c:url value="${fn:escapeXml(urlLink)}" var="encodedUrl" />
@@ -47,3 +71,4 @@
 		</c:otherwise>
 	</c:choose>
 </div>
+
