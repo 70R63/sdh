@@ -875,7 +875,7 @@ public class PSEPaymentController extends AbstractPageController
 				psePaymentForm.getTipoDeIdentificacion().concat("-".concat(psePaymentForm.getNumeroDeReferencia())));
 		createTransactionPaymentInformationType.setTicketId(new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()));
 		createTransactionPaymentInformationType.setTransactionValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
-		createTransactionPaymentInformationType.setVatValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
+		createTransactionPaymentInformationType.setVatValue(this.getAmount("COP", "0"));
 
 
 
