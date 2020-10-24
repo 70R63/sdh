@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,10 +46,17 @@ public class SDHStorefrontAuthenticationSuccessHandler extends StorefrontAuthent
 	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response,
 										final Authentication authentication) throws IOException, ServletException
 	{
+		Cookie cookie = new Cookie("sessionActived", "true");
+		cookie.setMaxAge(60 * 60 * 24);
+		cookie.setPath("/");
+		cookie.setSecure(false);
+		response.addCookie(cookie);
+
 		super.onAuthenticationSuccess(request, response, authentication);
 
 		sdhCustomerFacade.updateMiRitInfo();
 		sdhCustomerFacade.updateCustomerTaxRestrictions();
+
 
 	}
 }

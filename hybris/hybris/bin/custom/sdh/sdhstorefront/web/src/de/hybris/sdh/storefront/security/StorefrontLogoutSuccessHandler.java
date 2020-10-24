@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -63,6 +64,12 @@ public class StorefrontLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandle
 	{
 		getGuidCookieStrategy().deleteCookie(request, response);
 		getSessionService().removeAttribute(WebConstants.USER_CONSENTS);
+
+
+		Cookie cookie = new Cookie("sessionActived", "false");
+		cookie.setMaxAge(0);
+		cookie.setPath("/");
+		response.addCookie(cookie);
 
 		// Delegate to default redirect behaviour
 		super.onLogoutSuccess(request, response, authentication);
