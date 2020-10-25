@@ -509,7 +509,7 @@
         impuesto = impuesto.options[impuesto.selectedIndex].value;
 
         //Si - Sobretasa a la gasolina - obtener periodo
-        if(impuesto == "5" || impuesto == "3"){
+        if(impuesto == "5" || impuesto == "3"){ //gasolina, ica
             periodo = document.getElementById("periodo").value;
         }
 
