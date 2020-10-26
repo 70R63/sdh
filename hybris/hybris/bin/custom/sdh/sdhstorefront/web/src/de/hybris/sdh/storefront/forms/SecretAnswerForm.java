@@ -30,12 +30,40 @@ public class SecretAnswerForm
 	private String DIR2_0004; //-
 	private String DIR2_0005; //-
 	private String DIR2_0006; //-
+	private String DIR2_0007; //-
+	private String DIR2_0008; //-
+	private String DIR2_0009; //-
+	private String DIR2_0010; //-
+	private String DIR2_0011; //-
+	private String DIR2_0012; //-
+	private String DIR2_0013; //-
+	private String DIR2_0014; //-
+	private String DIR2_0015; //-
+	private String DIR2_0016; //-
+	private String DIR2_0017; //-
+	private String DIR2_0018; //-
+	private String DIR2_0019; //-
+	private String DIR2_0020; //-
+	private String DIR2_0021; //-
+	private String DIR2_0022; //-
+	private String DIR2_0023; //-
+	private String DIR2_0024; //-
+	private String DIR2_0025; //-
+	private String DIR2_0026; //-
+	private String DIR2_0027; //-
+	private String DIR2_0028; //-
+	private String DIR2_0029; //-
+	private String DIR2_0030; //-
 	private String DIR_0001; //-
 	private String DIR_0002; //-
 	private String DIR_0003;
 	private String DIR_0004;
 	private String DIR_0005;
 	private String DIR_0006;
+	private String DIR_0007;
+	private String DIR_0008;
+	private String DIR_0009;
+	private String DIR_0010;
 	private String PLA_0001;
 	private String PLA_0002;
 
@@ -44,6 +72,482 @@ public class SecretAnswerForm
 
 
 
+
+	/**
+	 * @return the dIR2_0007
+	 */
+	public String getDIR2_0007()
+	{
+		return DIR2_0007;
+	}
+
+	/**
+	 * @param dIR2_0007
+	 *           the dIR2_0007 to set
+	 */
+	public void setDIR2_0007(final String dIR2_0007)
+	{
+		DIR2_0007 = dIR2_0007;
+	}
+
+	/**
+	 * @return the dIR2_0008
+	 */
+	public String getDIR2_0008()
+	{
+		return DIR2_0008;
+	}
+
+	/**
+	 * @param dIR2_0008
+	 *           the dIR2_0008 to set
+	 */
+	public void setDIR2_0008(final String dIR2_0008)
+	{
+		DIR2_0008 = dIR2_0008;
+	}
+
+	/**
+	 * @return the dIR2_0009
+	 */
+	public String getDIR2_0009()
+	{
+		return DIR2_0009;
+	}
+
+	/**
+	 * @param dIR2_0009
+	 *           the dIR2_0009 to set
+	 */
+	public void setDIR2_0009(final String dIR2_0009)
+	{
+		DIR2_0009 = dIR2_0009;
+	}
+
+	/**
+	 * @return the dIR2_0010
+	 */
+	public String getDIR2_0010()
+	{
+		return DIR2_0010;
+	}
+
+	/**
+	 * @param dIR2_0010
+	 *           the dIR2_0010 to set
+	 */
+	public void setDIR2_0010(final String dIR2_0010)
+	{
+		DIR2_0010 = dIR2_0010;
+	}
+
+	/**
+	 * @return the dIR2_0011
+	 */
+	public String getDIR2_0011()
+	{
+		return DIR2_0011;
+	}
+
+	/**
+	 * @param dIR2_0011
+	 *           the dIR2_0011 to set
+	 */
+	public void setDIR2_0011(final String dIR2_0011)
+	{
+		DIR2_0011 = dIR2_0011;
+	}
+
+	/**
+	 * @return the dIR2_0012
+	 */
+	public String getDIR2_0012()
+	{
+		return DIR2_0012;
+	}
+
+	/**
+	 * @param dIR2_0012
+	 *           the dIR2_0012 to set
+	 */
+	public void setDIR2_0012(final String dIR2_0012)
+	{
+		DIR2_0012 = dIR2_0012;
+	}
+
+	/**
+	 * @return the dIR2_0013
+	 */
+	public String getDIR2_0013()
+	{
+		return DIR2_0013;
+	}
+
+	/**
+	 * @param dIR2_0013
+	 *           the dIR2_0013 to set
+	 */
+	public void setDIR2_0013(final String dIR2_0013)
+	{
+		DIR2_0013 = dIR2_0013;
+	}
+
+	/**
+	 * @return the dIR2_0014
+	 */
+	public String getDIR2_0014()
+	{
+		return DIR2_0014;
+	}
+
+	/**
+	 * @param dIR2_0014
+	 *           the dIR2_0014 to set
+	 */
+	public void setDIR2_0014(final String dIR2_0014)
+	{
+		DIR2_0014 = dIR2_0014;
+	}
+
+	/**
+	 * @return the dIR2_0015
+	 */
+	public String getDIR2_0015()
+	{
+		return DIR2_0015;
+	}
+
+	/**
+	 * @param dIR2_0015
+	 *           the dIR2_0015 to set
+	 */
+	public void setDIR2_0015(final String dIR2_0015)
+	{
+		DIR2_0015 = dIR2_0015;
+	}
+
+	/**
+	 * @return the dIR2_0016
+	 */
+	public String getDIR2_0016()
+	{
+		return DIR2_0016;
+	}
+
+	/**
+	 * @param dIR2_0016
+	 *           the dIR2_0016 to set
+	 */
+	public void setDIR2_0016(final String dIR2_0016)
+	{
+		DIR2_0016 = dIR2_0016;
+	}
+
+	/**
+	 * @return the dIR2_0017
+	 */
+	public String getDIR2_0017()
+	{
+		return DIR2_0017;
+	}
+
+	/**
+	 * @param dIR2_0017
+	 *           the dIR2_0017 to set
+	 */
+	public void setDIR2_0017(final String dIR2_0017)
+	{
+		DIR2_0017 = dIR2_0017;
+	}
+
+	/**
+	 * @return the dIR2_0018
+	 */
+	public String getDIR2_0018()
+	{
+		return DIR2_0018;
+	}
+
+	/**
+	 * @param dIR2_0018
+	 *           the dIR2_0018 to set
+	 */
+	public void setDIR2_0018(final String dIR2_0018)
+	{
+		DIR2_0018 = dIR2_0018;
+	}
+
+	/**
+	 * @return the dIR2_0019
+	 */
+	public String getDIR2_0019()
+	{
+		return DIR2_0019;
+	}
+
+	/**
+	 * @param dIR2_0019
+	 *           the dIR2_0019 to set
+	 */
+	public void setDIR2_0019(final String dIR2_0019)
+	{
+		DIR2_0019 = dIR2_0019;
+	}
+
+	/**
+	 * @return the dIR2_0020
+	 */
+	public String getDIR2_0020()
+	{
+		return DIR2_0020;
+	}
+
+	/**
+	 * @param dIR2_0020
+	 *           the dIR2_0020 to set
+	 */
+	public void setDIR2_0020(final String dIR2_0020)
+	{
+		DIR2_0020 = dIR2_0020;
+	}
+
+	/**
+	 * @return the dIR2_0021
+	 */
+	public String getDIR2_0021()
+	{
+		return DIR2_0021;
+	}
+
+	/**
+	 * @param dIR2_0021
+	 *           the dIR2_0021 to set
+	 */
+	public void setDIR2_0021(final String dIR2_0021)
+	{
+		DIR2_0021 = dIR2_0021;
+	}
+
+	/**
+	 * @return the dIR2_0022
+	 */
+	public String getDIR2_0022()
+	{
+		return DIR2_0022;
+	}
+
+	/**
+	 * @param dIR2_0022
+	 *           the dIR2_0022 to set
+	 */
+	public void setDIR2_0022(final String dIR2_0022)
+	{
+		DIR2_0022 = dIR2_0022;
+	}
+
+	/**
+	 * @return the dIR2_0023
+	 */
+	public String getDIR2_0023()
+	{
+		return DIR2_0023;
+	}
+
+	/**
+	 * @param dIR2_0023
+	 *           the dIR2_0023 to set
+	 */
+	public void setDIR2_0023(final String dIR2_0023)
+	{
+		DIR2_0023 = dIR2_0023;
+	}
+
+	/**
+	 * @return the dIR2_0024
+	 */
+	public String getDIR2_0024()
+	{
+		return DIR2_0024;
+	}
+
+	/**
+	 * @param dIR2_0024
+	 *           the dIR2_0024 to set
+	 */
+	public void setDIR2_0024(final String dIR2_0024)
+	{
+		DIR2_0024 = dIR2_0024;
+	}
+
+	/**
+	 * @return the dIR2_0025
+	 */
+	public String getDIR2_0025()
+	{
+		return DIR2_0025;
+	}
+
+	/**
+	 * @param dIR2_0025
+	 *           the dIR2_0025 to set
+	 */
+	public void setDIR2_0025(final String dIR2_0025)
+	{
+		DIR2_0025 = dIR2_0025;
+	}
+
+	/**
+	 * @return the dIR2_0026
+	 */
+	public String getDIR2_0026()
+	{
+		return DIR2_0026;
+	}
+
+	/**
+	 * @param dIR2_0026
+	 *           the dIR2_0026 to set
+	 */
+	public void setDIR2_0026(final String dIR2_0026)
+	{
+		DIR2_0026 = dIR2_0026;
+	}
+
+	/**
+	 * @return the dIR2_0027
+	 */
+	public String getDIR2_0027()
+	{
+		return DIR2_0027;
+	}
+
+	/**
+	 * @param dIR2_0027
+	 *           the dIR2_0027 to set
+	 */
+	public void setDIR2_0027(final String dIR2_0027)
+	{
+		DIR2_0027 = dIR2_0027;
+	}
+
+	/**
+	 * @return the dIR2_0028
+	 */
+	public String getDIR2_0028()
+	{
+		return DIR2_0028;
+	}
+
+	/**
+	 * @param dIR2_0028
+	 *           the dIR2_0028 to set
+	 */
+	public void setDIR2_0028(final String dIR2_0028)
+	{
+		DIR2_0028 = dIR2_0028;
+	}
+
+	/**
+	 * @return the dIR2_0029
+	 */
+	public String getDIR2_0029()
+	{
+		return DIR2_0029;
+	}
+
+	/**
+	 * @param dIR2_0029
+	 *           the dIR2_0029 to set
+	 */
+	public void setDIR2_0029(final String dIR2_0029)
+	{
+		DIR2_0029 = dIR2_0029;
+	}
+
+	/**
+	 * @return the dIR2_0030
+	 */
+	public String getDIR2_0030()
+	{
+		return DIR2_0030;
+	}
+
+	/**
+	 * @param dIR2_0030
+	 *           the dIR2_0030 to set
+	 */
+	public void setDIR2_0030(final String dIR2_0030)
+	{
+		DIR2_0030 = dIR2_0030;
+	}
+
+	/**
+	 * @return the dIR_0007
+	 */
+	public String getDIR_0007()
+	{
+		return DIR_0007;
+	}
+
+	/**
+	 * @param dIR_0007
+	 *           the dIR_0007 to set
+	 */
+	public void setDIR_0007(final String dIR_0007)
+	{
+		DIR_0007 = dIR_0007;
+	}
+
+	/**
+	 * @return the dIR_0008
+	 */
+	public String getDIR_0008()
+	{
+		return DIR_0008;
+	}
+
+	/**
+	 * @param dIR_0008
+	 *           the dIR_0008 to set
+	 */
+	public void setDIR_0008(final String dIR_0008)
+	{
+		DIR_0008 = dIR_0008;
+	}
+
+	/**
+	 * @return the dIR_0009
+	 */
+	public String getDIR_0009()
+	{
+		return DIR_0009;
+	}
+
+	/**
+	 * @param dIR_0009
+	 *           the dIR_0009 to set
+	 */
+	public void setDIR_0009(final String dIR_0009)
+	{
+		DIR_0009 = dIR_0009;
+	}
+
+	/**
+	 * @return the dIR_0010
+	 */
+	public String getDIR_0010()
+	{
+		return DIR_0010;
+	}
+
+	/**
+	 * @param dIR_0010
+	 *           the dIR_0010 to set
+	 */
+	public void setDIR_0010(final String dIR_0010)
+	{
+		DIR_0010 = dIR_0010;
+	}
 
 	/**
 	 * @return the dIR2_0006
