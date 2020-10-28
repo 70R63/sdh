@@ -24,6 +24,11 @@ public class SecretAnswerForm
 	private String REL03; //-
 	private String REL04; //-
 	private String REL05; //-
+	private String REL06; //-
+	private String REL07; //-
+	private String REL08; //-
+	private String REL09; //-
+	private String REL10; //-
 	private String DIR2_0001; //-
 	private String DIR2_0002; //-
 	private String DIR2_0003; //-
@@ -72,6 +77,92 @@ public class SecretAnswerForm
 
 
 
+
+
+	/**
+	 * @return the rEL06
+	 */
+	public String getREL06()
+	{
+		return REL06;
+	}
+
+	/**
+	 * @param rEL06
+	 *           the rEL06 to set
+	 */
+	public void setREL06(final String rEL06)
+	{
+		REL06 = rEL06;
+	}
+
+	/**
+	 * @return the rEL07
+	 */
+	public String getREL07()
+	{
+		return REL07;
+	}
+
+	/**
+	 * @param rEL07
+	 *           the rEL07 to set
+	 */
+	public void setREL07(final String rEL07)
+	{
+		REL07 = rEL07;
+	}
+
+	/**
+	 * @return the rEL08
+	 */
+	public String getREL08()
+	{
+		return REL08;
+	}
+
+	/**
+	 * @param rEL08
+	 *           the rEL08 to set
+	 */
+	public void setREL08(final String rEL08)
+	{
+		REL08 = rEL08;
+	}
+
+	/**
+	 * @return the rEL09
+	 */
+	public String getREL09()
+	{
+		return REL09;
+	}
+
+	/**
+	 * @param rEL09
+	 *           the rEL09 to set
+	 */
+	public void setREL09(final String rEL09)
+	{
+		REL09 = rEL09;
+	}
+
+	/**
+	 * @return the rEL10
+	 */
+	public String getREL10()
+	{
+		return REL10;
+	}
+
+	/**
+	 * @param rEL10
+	 *           the rEL10 to set
+	 */
+	public void setREL10(final String rEL10)
+	{
+		REL10 = rEL10;
+	}
 
 	/**
 	 * @return the dIR2_0007

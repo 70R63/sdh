@@ -588,6 +588,48 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 			}
 		}
 
+
+		if (form.getREL06() != null)
+		{
+			if (form.getREL06().equals(responseWS.getCorrectAnswer("REL06")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getREL07() != null)
+		{
+			if (form.getREL07().equals(responseWS.getCorrectAnswer("REL07")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getREL08() != null)
+		{
+			if (form.getREL08().equals(responseWS.getCorrectAnswer("REL08")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getREL09() != null)
+		{
+			if (form.getREL09().equals(responseWS.getCorrectAnswer("REL09")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getREL10() != null)
+		{
+			if (form.getREL10().equals(responseWS.getCorrectAnswer("REL10")))
+			{
+				i++;
+			}
+		}
+
+
 		if (form.getDIR2_0001() != null)
 		{
 			if (form.getDIR2_0001().equals(responseWS.getCorrectAnswer("DIR2_0001")))
