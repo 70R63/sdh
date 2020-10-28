@@ -12,8 +12,8 @@
 
 <c:choose>
 	<c:when test="${wro4jEnabled}">
-		<script type="text/javascript" src="${contextPath}/wro/all_responsive_sdh.js"></script>
-<%-- 		<script type="text/javascript" src="${contextPath}/wro/addons_responsive_sdh.js"></script> --%>
+		<script type="text/javascript" src="${contextPath}/wro/all_responsive.js"></script>
+  		<script type="text/javascript" src="${contextPath}/wro/addons_responsive.js"></script>
 		
 		<c:if test="${not empty representado}">
 			<script type="text/javascript" src="${commonResourcePath}/js/acc.aamenu.js"></script>
@@ -25,11 +25,6 @@
 		    <script type="text/javascript" src="${commonResourcePath}/js/cms/${actionJsFile}"></script>
 		</c:forEach>
 
-		
-		<%-- AddOn JavaScript files --%>
-		<c:forEach items="${addOnJavaScriptPaths}" var="addOnJavaScript">
-		    <script type="text/javascript" src="${addOnJavaScript}"></script>
-		</c:forEach>
 		
 	</c:when>
 	<c:otherwise>
