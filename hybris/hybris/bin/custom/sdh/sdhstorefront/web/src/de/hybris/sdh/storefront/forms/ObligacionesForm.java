@@ -35,6 +35,7 @@ public class ObligacionesForm
 	private List<ObligacionesCabeceraVehiculos> headerVehiculos;
 
 	private List<ReteicaObligacionesHeader> headerreteica;
+	private String claveImpuesto;
 	/**
 	 * @return the header
 	 */
@@ -197,6 +198,23 @@ public class ObligacionesForm
 	public void setHeaderreteica(final List<ReteicaObligacionesHeader> headerreteica)
 	{
 		this.headerreteica = headerreteica;
+	}
+
+	/**
+	 * @return the claveImpuesto
+	 */
+	public String getClaveImpuesto()
+	{
+		return claveImpuesto;
+	}
+
+	/**
+	 * @param claveImpuesto
+	 *           the claveImpuesto to set
+	 */
+	public void setClaveImpuesto(final String claveImpuesto)
+	{
+		this.claveImpuesto = claveImpuesto;
 	}
 
 
