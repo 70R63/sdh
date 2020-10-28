@@ -14,27 +14,23 @@
 	<c:when test="${wro4jEnabled}">
 		<script type="text/javascript" src="${contextPath}/wro/all_responsive_sdh.js"></script>
 <%-- 		<script type="text/javascript" src="${contextPath}/wro/addons_responsive_sdh.js"></script> --%>
+		
 		<c:if test="${not empty representado}">
 			<script type="text/javascript" src="${commonResourcePath}/js/acc.aamenu.js"></script>
 		</c:if>
+		
+		
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">
 		    <script type="text/javascript" src="${commonResourcePath}/js/cms/${actionJsFile}"></script>
 		</c:forEach>
-<<<<<<< HEAD
-		<%-- AddOn JavaScript files --%>
-		<c:forEach items="${addOnJavaScriptPaths}" var="addOnJavaScript">
-		    <script type="text/javascript" src="${addOnJavaScript}"></script>
-		    <div>${addOnJavaScript}</div>
-=======
+
 		
 		<%-- AddOn JavaScript files --%>
 		<c:forEach items="${addOnJavaScriptPaths}" var="addOnJavaScript">
 		    <script type="text/javascript" src="${addOnJavaScript}"></script>
->>>>>>> dev-eduardo
 		</c:forEach>
-		  	
-		  	
+		
 	</c:when>
 	<c:otherwise>
 		<%-- jquery --%>
