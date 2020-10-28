@@ -8,12 +8,14 @@
 	href="//fonts.googleapis.com/css?family=Alegreya+Sans:400,500,300">
 <c:choose>
 	<c:when test="${wro4jEnabled}">
+<!-- 	<script>alert("con el wro4jactivado");</script> -->
 		<link rel="stylesheet" type="text/css" media="all"
-			href="${contextPath}/wro/all_responsive.css" />
-		<link rel="stylesheet" type="text/css" media="all"
-			href="${contextPath}/wro/${themeName}_responsive.css" />
-		<link rel="stylesheet" type="text/css" media="all"
-			href="${contextPath}/wro/addons_responsive.css" />
+			href="${themeResourcePath}/css/style.css" />
+		<%--  AddOn Common CSS files --%>
+		<c:forEach items="${addOnCommonCssPaths}" var="addOnCommonCss">
+			<link rel="stylesheet" type="text/css" media="all"
+				href="${addOnCommonCss}" />
+		</c:forEach>
 	</c:when>
 	<c:otherwise>
 		<%-- Theme CSS files --%>

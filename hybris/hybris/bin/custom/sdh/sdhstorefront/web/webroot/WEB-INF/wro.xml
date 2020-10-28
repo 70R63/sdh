@@ -16,6 +16,10 @@
 	<group name="alpha_responsive">
 		<css>/_ui/responsive/theme-alpha/css/style.css</css>
 	</group>
+	
+	<group name="psalpha_responsive">
+		<css>/_ui/responsive/theme-psalpha/css/style.css</css>
+	</group>
 
 	<group name="lambda_responsive">
 		<css>/_ui/responsive/theme-lambda/css/style.css</css>
@@ -95,5 +99,88 @@
 		<!-- Cms Action JavaScript files -->
         <js>/_ui/responsive/common/js/cms/*.js</js>
     </group>
+    <group name="login">
+    	<js>/_ui/responsive/common/js/_autoload.js</js>
+		<js>/_ui/responsive/common/js/captcha.js</js>
+    </group>
+    <group name="roles">
+    </group>
+    <group name="all_responsive_sdh">
+		<js>/_ui/responsive/common/js/jquery-3.2.1.min.js</js>
+
+
+		<js>/_ui/responsive/common/js/enquire.min.js</js>
+		<js>/_ui/responsive/common/js/Imager.min.js</js>
+		<js>/_ui/responsive/common/js/purify.min.js</js>
+		<js>/_ui/responsive/common/js/jquery.blockUI-2.66.js</js>
+		<js>/_ui/responsive/common/js/jquery.colorbox-min.js</js>
+		<js>/_ui/responsive/common/js/jquery.form.min.js</js>
+		<js>/_ui/responsive/common/js/jquery.hoverIntent.js</js>
+		<js>/_ui/responsive/common/js/jquery.pstrength.custom-1.2.0.js</js>
+		<js>/_ui/responsive/common/js/jquery.syncheight.custom.js</js>
+		<js>/_ui/responsive/common/js/jquery.tabs.custom.js</js>
+		<js>/_ui/responsive/common/js/jquery-ui-1.12.1.min.js</js>
+		<js>/_ui/responsive/common/js/datepicker-es.js</js>
+		<js>/_ui/responsive/common/js/jquery.zoom.custom.js</js>
+		<js>/_ui/responsive/common/js/owl.carousel.custom.js</js>
+		<js>/_ui/responsive/common/js/jquery.tmpl-1.0.0pre.min.js</js>
+		<js>/_ui/responsive/common/js/jquery.currencies.min.js</js>
+		<js>/_ui/responsive/common/js/jquery.waitforimages.min.js</js>
+		<js>/_ui/responsive/common/js/jquery.slideviewer.custom.1.2.js</js>
+		<js>/_ui/responsive/common/js/bootstrap.min.js</js>
+		<js>/_ui/responsive/common/js/bootstrap.bundle.min.js</js>
+		<js>/_ui/responsive/common/js/popper.min.js</js>
+
+
+		<js>/_ui/responsive/common/js/acc.cms.js</js>
+		<js>/_ui/responsive/common/js/acc.colorbox.js</js>
+		<js>/_ui/responsive/common/js/acc.common.js</js>
+		<js>/_ui/responsive/common/js/acc.forgottenpassword.js</js>
+		<js>/_ui/responsive/common/js/acc.global.js</js>
+		<js>/_ui/responsive/common/js/acc.langcurrencyselector.js</js>
+		<js>/_ui/responsive/common/js/acc.navigation.js</js>
+		<js>/_ui/responsive/common/js/acc.paginationsort.js</js>
+		<js>/_ui/responsive/common/js/acc.sanitizer.js</js>
+		<js>/_ui/responsive/common/js/acc.termsandconditions.js</js>
+		<js>/_ui/responsive/common/js/acc.track.js</js>
+		<js>/_ui/responsive/common/js/acc.multidgrid.js</js>
+		<js>/_ui/responsive/common/js/acc.consent.js</js>
+		<js>/_ui/responsive/common/js/acc.cookienotification.js</js>
+		<js>/_ui/responsive/common/js/acc.closeaccount.js</js>
+		<js>/_ui/responsive/common/js/acc.register.js</js>
+		<js>/_ui/responsive/common/js/acc.mirit.js</js>
+		<js>/_ui/responsive/common/js/acc.duBotonVer.js</js>
+		<js>/_ui/responsive/common/js/acc.tramitesSeleccion.js</js>
+		<js>/_ui/responsive/common/js/acc.opcionDeclaraciones.js</js>
+		<js>/_ui/responsive/common/js/acc.reportesTerceroAutorizado.js</js>
+		<js>/_ui/responsive/common/js/acc.publicidadexterior.js</js>
+		<js>/_ui/responsive/common/js/acc.gasolina.js</js>
+		<js>/_ui/responsive/common/js/acc.csv-import.js</js>
+		<js>/_ui/responsive/common/js/acc.delineacionurbana.js</js>
+		<js>/_ui/responsive/common/js/acc.ica.js</js>
+		<js>/_ui/responsive/common/js/acc.reteica.js</js>
+		<js>/_ui/responsive/common/js/acc.oblipend.js</js>
+		<js>/_ui/responsive/common/js/acc.rop.js</js>
+		
+		<js>/_ui/responsive/common/js/acc.certipago.js</js>
+		<js>/_ui/responsive/common/js/acc.predial.js</js>
+		<js>/_ui/responsive/common/js/acc.vehiculos.js</js>
+		<js>/_ui/responsive/common/js/acc.gestionBancaria.js</js>
+		<js>/_ui/responsive/common/js/acc.mibuzon.js</js>
+		<js>/_ui/responsive/common/js/acc.facturacion.js</js>
+		<js>/_ui/responsive/common/js/acc.spac.js</js>
+		<js>/_ui/responsive/common/js/acc.spinner.js</js>
+
+		<js>/_ui/responsive/common/js/_autoload.js</js>
+
+		<js>/_ui/responsive/common/js/jquery.dataTables.js</js>
+		<js>/_ui/responsive/common/js/jquery.dataTables.min.js</js>
+		<js>/_ui/responsive/common/js/jquery-isloading.js</js>
+		<js>/_ui/responsive/common/js/acc.firmas.js</js>
+		<js>/_ui/responsive/common/js/captcha.js</js>
+    
+    
+    </group>
+    
    
 </groups>       
