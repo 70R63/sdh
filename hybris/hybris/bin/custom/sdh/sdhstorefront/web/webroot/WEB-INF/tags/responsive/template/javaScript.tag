@@ -21,10 +21,17 @@
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">
 		    <script type="text/javascript" src="${commonResourcePath}/js/cms/${actionJsFile}"></script>
 		</c:forEach>
+<<<<<<< HEAD
 		<%-- AddOn JavaScript files --%>
 		<c:forEach items="${addOnJavaScriptPaths}" var="addOnJavaScript">
 		    <script type="text/javascript" src="${addOnJavaScript}"></script>
 		    <div>${addOnJavaScript}</div>
+=======
+		
+		<%-- AddOn JavaScript files --%>
+		<c:forEach items="${addOnJavaScriptPaths}" var="addOnJavaScript">
+		    <script type="text/javascript" src="${addOnJavaScript}"></script>
+>>>>>>> dev-eduardo
 		</c:forEach>
 		  	
 		  	
