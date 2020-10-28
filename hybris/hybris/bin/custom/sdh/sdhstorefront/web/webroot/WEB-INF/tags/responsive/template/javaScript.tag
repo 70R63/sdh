@@ -21,6 +21,11 @@
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">
 		    <script type="text/javascript" src="${commonResourcePath}/js/cms/${actionJsFile}"></script>
 		</c:forEach>
+		
+		<%-- AddOn JavaScript files --%>
+		<c:forEach items="${addOnJavaScriptPaths}" var="addOnJavaScript">
+		    <script type="text/javascript" src="${addOnJavaScript}"></script>
+		</c:forEach>
 		  	
 		  	
 	</c:when>
