@@ -60,7 +60,8 @@
 						
 						<div class="form-group">
 							<label class="control-label " for="documentNumber"><spring:theme code="register.documentNumber" /></label>
-							<input class=" form-control" type="text" id="documentNumber" name="documentNumber" value="${searchUserForm.documentNumber }">
+							<input class=" form-control validacionDocumentNumber" type="text" id="documentNumber" name="documentNumber" value="${searchUserForm.documentNumber }" 
+								onkeydown="valInputText(this);" onkeyup="valInputText(this);" onkeypress="valInputText(this);" onchange="valInputText(this);" maxlength="60" >
 						</div>
 						
 						<c:set var="hiddenStyle" value="" />
@@ -97,7 +98,6 @@
 
 <script>
 function validarCampos() {
-	debugger;
 	var flagValidacion = false;
 	
 	var documentType = $("#documentType").val();
@@ -123,4 +123,22 @@ function validarCampos() {
 		$("#btnSearch").click();
 	}
 }
+
+function valInputText(objeto){
+	const allowedCharacters="0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN"; // You can add any other character in the same way
+	let newValue="";
+	objeto.value.split("").forEach(function(char){
+		if(in_array(char, allowedCharacters.split(""))) newValue+=char;
+	});
+	objeto.value=newValue;
+}
+
+function in_array(elem, array){
+	let isIn=false;
+	for(var i=0;i<array.length;i++){
+		if(elem==array[i]) isIn=true;
+	}
+	return isIn;
+}
+
 </script>
