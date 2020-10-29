@@ -127,8 +127,7 @@ function validarCampos() {
 function valInputText(evento,objeto){
 	var newValue="";
 	if(realizarValidacion(objeto.value,evento)){
-		const allowedCharacters="0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN"; 
-	
+		var allowedCharacters=obtenerCaracteres(objeto.value,evento);	
 		objeto.value.split("").forEach(function(char){
 			if(in_array(char, allowedCharacters.split(""))) newValue+=char;
 		});
@@ -140,16 +139,10 @@ function valInputText(evento,objeto){
 
 
 function realizarValidacion(str,evento){
-	var inicio = "NIT"
 	var completa = "NIT-1234567";
 	var realizarVal = true;
 	
 	switch (evento){
-	case "up":
-		if(str.toUpperCase().startsWith(inicio)){
-			realizarVal = false;
-		}
-		break;
 	case "change":
 		if(str.toUpperCase() == completa){
 			realizarVal = false;
@@ -161,6 +154,24 @@ function realizarValidacion(str,evento){
 	}
 
 	return realizarVal;
+}
+
+function obtenerCaracteres(str,evento){
+	var inicio = "NIT"
+	var allowedCharacters="0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
+	
+	switch (evento){
+	case "up":
+		if(str.toUpperCase().startsWith(inicio)){
+			allowedCharacters="0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN-";
+		}
+		break;
+	default:
+		realizarVal = true;
+		allowedCharacters="0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
+	}
+
+	return allowedCharacters;
 }
 
 function in_array(elem, array){
