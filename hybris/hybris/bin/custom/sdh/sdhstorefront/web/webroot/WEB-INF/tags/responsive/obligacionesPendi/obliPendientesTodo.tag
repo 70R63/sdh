@@ -125,12 +125,12 @@
 													</c:when>
 													<c:when test="${eachObPred.facilidad == '01'}">
 														<td><a
-													href="<c:url value="/contribuyentes/rop?obligacion=${eachObPredDet.obligacion}&totalPagar=${eachObPredDet.obligacion}&objCont=${eachObPredDet.objetoContrato}&clvPer=${fn:substring(eachObPred.anioGravable, 2, 4)}A1&tpImp=01" />">Generar
+													href="<c:url value="/contribuyentes/rop?obligacion=${eachObPredDet.obligacion}&totalPagar=${eachObPred.montoFacilidad}&objCont=${eachObPredDet.objetoContrato}&clvPer=${fn:substring(eachObPred.anioGravable, 2, 4)}A1&tpImp=01" />">Generar
 														ROP</a></td>
 													</c:when>
 													<c:when test="${eachObPred.facilidad == '02'}">
 														<td><label class="control-label labeltabletd"> <spring:theme
-														code="obligacion.inicial.sinROP" /></a></td>
+														code="obligacion.inicial.sinROP" /></label></td>
 													</c:when>
 													<c:otherwise>
 														<td><a
@@ -143,7 +143,7 @@
 												
 												<!--INI PAGO VIGENTE -->
 												<c:choose>
-													<c:when test="${eachObVehi.refActiva == '02'}">
+													<c:when test="${eachObPred.refActiva == '02'}">
 														<td><label class="control-label"
 														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 														id="Detalle" onclick="noActivo()">Pagar</label></td>
@@ -163,11 +163,11 @@
 												<c:choose>
 													<c:when test="${eachObPred.facilidad == '00'}">
 														<td><label class="control-label labeltabletd"> <spring:theme
-														code="obligacion.inicial.sinCupones" /></a></td>
+														code="obligacion.inicial.sinCupones" /></label></td>
 													</c:when>
 													<c:when test="${eachObPred.facilidad == '01'}">
 														<td><label class="control-label labeltabletd"> <spring:theme
-														code="obligacion.inicial.sinCupones" /></a></td>
+														code="obligacion.inicial.sinCupones" /></label></td>
 													</c:when>
 													<c:when test="${eachObPred.facilidad == '02'}">
 														<td><label class="control-label btnGenerarSPACObli"
@@ -176,7 +176,7 @@
 													</c:when>
 													<c:otherwise>
 														<td><label class="control-label labeltabletd"> <spring:theme
-														code="obligacion.inicial.sinCupones" /></a></td>
+														code="obligacion.inicial.sinCupones" /></label></td>
 													</c:otherwise>
 												</c:choose>
 												<!--FIN SPAC -->
@@ -344,12 +344,12 @@
 													</c:when>
 													<c:when test="${eachObVehi.facilidad == '01'}">
 														<td><a
-														href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}&objCont=${eachObVehiDet.objetoContrato}&clvPer=${fn:substring(eachObVehi.anioGravable, 2, 4)}A1&tpImp=03" />">Generar
+														href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehi.montoFacilidad}&objCont=${eachObVehiDet.objetoContrato}&clvPer=${fn:substring(eachObVehi.anioGravable, 2, 4)}A1&tpImp=03" />">Generar
 															ROP</a></td>
 													</c:when>
 													<c:when test="${eachObVehi.facilidad == '02'}">
 														<td><label class="control-label labeltabletd"> <spring:theme
-														code="obligacion.inicial.sinROP" /></a></td>
+														code="obligacion.inicial.sinROP" /></label></td>
 													</c:when>
 													<c:otherwise>
 														<td><a
@@ -381,11 +381,11 @@
 												<c:choose>
 													<c:when test="${eachObVehi.facilidad == '00'}">
 														<td><label class="control-label labeltabletd"> <spring:theme
-														code="obligacion.inicial.sinCupones" /></a></td>
+														code="obligacion.inicial.sinCupones" /></label></td>
 													</c:when>
 													<c:when test="${eachObVehi.facilidad == '01'}">
 														<td><label class="control-label labeltabletd"> <spring:theme
-														code="obligacion.inicial.sinCupones" /></a></td>
+														code="obligacion.inicial.sinCupones" /></label></td>
 													</c:when>
 													<c:when test="${eachObVehi.facilidad == '02'}">
 														<td><label class="control-label btnGenerarSPACObliVehicular"
@@ -394,7 +394,7 @@
 													</c:when>
 													<c:otherwise>
 														<td><label class="control-label labeltabletd"> <spring:theme
-														code="obligacion.inicial.sinCupones" /></a></td>
+														code="obligacion.inicial.sinCupones" /></label></td>
 													</c:otherwise>
 												</c:choose>
 												<!--FIN SPAC -->
@@ -575,12 +575,12 @@
 													</c:when>
 													<c:when test="${eachObIca.facilidad == '01'}">
 														<td><a
-													href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}&tpImp=02&objCont=${eachObIcaDet.objetoContrato}&clvPer=${clavePeriodo}" />">Generar
+													href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIca.montoFacilidad}&tpImp=02&objCont=${eachObIcaDet.objetoContrato}&clvPer=${clavePeriodo}" />">Generar
 														ROP</a></td>
 													</c:when>
 													<c:when test="${eachObIca.facilidad == '02'}">
 														<td><label class="control-label labeltabletd"> <spring:theme
-														code="obligacion.inicial.sinROP" /></a></td>
+														code="obligacion.inicial.sinROP" /></label></td>
 													</c:when>
 													<c:otherwise>
 														<td><a
@@ -594,7 +594,7 @@
 												
 												<!--INI PAGO VIGENTE -->
 												<c:choose>
-													<c:when test="${eachObVehi.refActiva == '02'}">
+													<c:when test="${eachObIca.refActiva == '02'}">
 														<td><label class="control-label"
 														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 														id="Detalle" onclick="noActivo()">Pagar</label></td>
@@ -742,12 +742,12 @@
 														</c:when>
 														<c:when test="${eachPubExtTax.facilidad == '01'}">
 															<td><a
-														href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTaxDet.obligacion}&objCont=${eachPubExtTaxDet.objetoContrato}&clvPer=${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1&tpImp=54" />">Generar
+														href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTax.montoFacilidad}&objCont=${eachPubExtTaxDet.objetoContrato}&clvPer=${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1&tpImp=54" />">Generar
 															ROP</a></td>
 														</c:when>
 														<c:when test="${eachPubExtTax.facilidad == '02'}">
 															<td><label class="control-label labeltabletd"> <spring:theme
-															code="obligacion.inicial.sinROP" /></a></td>
+															code="obligacion.inicial.sinROP" /></label></td>
 														</c:when>
 														<c:otherwise>
 															<td><a
@@ -760,7 +760,7 @@
 													
 													<!--INI PAGO VIGENTE -->
 													<c:choose>
-														<c:when test="${eachObVehi.refActiva == '02'}">
+														<c:when test="${eachPubExtTax.refActiva == '02'}">
 															<td><label class="control-label"
 															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 															id="Detalle" onclick="noActivo()">Pagar</label></td>
@@ -913,12 +913,12 @@
 														</c:when>
 														<c:when test="${eachObGas.facilidad == '01'}">
 															<td><a
-														href="<c:url value="/contribuyentes/rop?obligacion=${eachObGasDet.obligacion}&totalPagar=${eachObGasDet.obligacion}&objCont=${eachObGasDet.objetoContrato}&clvPer=${fn:substring(eachObGas.anioGravable, 2, 4)}${eachObGas.periodo}&tpImp=08" />">Generar
+														href="<c:url value="/contribuyentes/rop?obligacion=${eachObGasDet.obligacion}&totalPagar=${eachObGas.montoFacilidad}&objCont=${eachObGasDet.objetoContrato}&clvPer=${fn:substring(eachObGas.anioGravable, 2, 4)}${eachObGas.periodo}&tpImp=08" />">Generar
 															ROP</a></td>
 														</c:when>
 														<c:when test="${eachObGas.facilidad == '02'}">
 															<td><label class="control-label labeltabletd"> <spring:theme
-															code="obligacion.inicial.sinROP" /></a></td>
+															code="obligacion.inicial.sinROP" /></label></td>
 														</c:when>
 														<c:otherwise>
 															<td><a
@@ -931,7 +931,7 @@
 													
 													<!--INI PAGO VIGENTE -->
 													<c:choose>
-														<c:when test="${eachObVehi.refActiva == '02'}">
+														<c:when test="${eachObGas.refActiva == '02'}">
 															<td><label class="control-label"
 															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 															id="Detalle" onclick="noActivo()">Pagar</label></td>
@@ -1055,7 +1055,7 @@
 													
 													<!--INI ROP -->
 													<c:choose>
-														<c:when test="${eachObGas.facilidad == '00'}">
+														<c:when test="${eachDeli.facilidad == '00'}">
 															<td>
 															<c:set var="clavePeriodo" value=""/>
 															<c:if test="${fn:length(eachDeli.anioGravable) >= 4}">
@@ -1064,18 +1064,18 @@
 															<a href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeliDet.obligacion}&objCont=${eachDeliDet.objetoContrato}&clvPer=${clavePeriodo}&tpImp=06" />">Generar
 																	ROP</a></td>
 														</c:when>
-														<c:when test="${eachObGas.facilidad == '01'}">
+														<c:when test="${eachDeli.facilidad == '01'}">
 															<td>
 															<c:set var="clavePeriodo" value=""/>
 															<c:if test="${fn:length(eachDeli.anioGravable) >= 4}">
 																<c:set var="clavePeriodo" value="${fn:substring(eachDeli.anioGravable, 2, 4)}A1"/>
 															</c:if>
-															<a href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeliDet.obligacion}&objCont=${eachDeliDet.objetoContrato}&clvPer=${clavePeriodo}&tpImp=06" />">Generar
+															<a href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeli.montoFacilidad}&objCont=${eachDeliDet.objetoContrato}&clvPer=${clavePeriodo}&tpImp=06" />">Generar
 																	ROP</a></td>
 														</c:when>
-														<c:when test="${eachObGas.facilidad == '02'}">
+														<c:when test="${eachDeli.facilidad == '02'}">
 															<td><label class="control-label labeltabletd"> <spring:theme
-															code="obligacion.inicial.sinROP" /></a></td>
+															code="obligacion.inicial.sinROP" /></label></td>
 														</c:when>
 														<c:otherwise>
 															<td>
@@ -1092,7 +1092,7 @@
 													
 													<!--INI PAGO VIGENTE -->
 													<c:choose>
-														<c:when test="${eachObVehi.refActiva == '02'}">
+														<c:when test="${eachDeli.refActiva == '02'}">
 															<td><label class="control-label"
 															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 															id="Detalle" onclick="noActivo()">Pagar</label></td>
@@ -1214,19 +1214,19 @@
 													
 													<!--INI ROP -->
 													<c:choose>
-														<c:when test="${eachObGas.facilidad == '00'}">
+														<c:when test="${eachReteIca.facilidad == '00'}">
 															<td><a
 															href="<c:url value="/contribuyentes/rop?obligacion=${eachReteIcaDet.obligacion}&totalPagar=${eachReteIcaDet.obligacion}&tpImp=02&objCont=${eachReteIcaDet.objetoContrato}&clvPer=${eachReteIcaDet.objetoContrato}" />">Generar
 																ROP</a></td>
 														</c:when>
-														<c:when test="${eachObGas.facilidad == '01'}">
+														<c:when test="${eachReteIca.facilidad == '01'}">
 															<td><a
-															href="<c:url value="/contribuyentes/rop?obligacion=${eachReteIcaDet.obligacion}&totalPagar=${eachReteIcaDet.obligacion}&tpImp=02&objCont=${eachReteIcaDet.objetoContrato}&clvPer=${eachReteIcaDet.objetoContrato}" />">Generar
+															href="<c:url value="/contribuyentes/rop?obligacion=${eachReteIcaDet.obligacion}&totalPagar=${eachReteIca.montoFacilidad}&tpImp=02&objCont=${eachReteIcaDet.objetoContrato}&clvPer=${eachReteIcaDet.objetoContrato}" />">Generar
 																ROP</a></td>
 														</c:when>
-														<c:when test="${eachObGas.facilidad == '02'}">
+														<c:when test="${eachReteIca.facilidad == '02'}">
 															<td><label class="control-label labeltabletd"> <spring:theme
-															code="obligacion.inicial.sinROP" /></a></td>
+															code="obligacion.inicial.sinROP" /></label></td>
 														</c:when>
 														<c:otherwise>
 															<td><a
@@ -1239,7 +1239,7 @@
 													
 													<!--INI PAGO VIGENTE -->
 													<c:choose>
-														<c:when test="${eachObVehi.refActiva == '02'}">
+														<c:when test="${eachReteIca.refActiva == '02'}">
 															<td><label class="control-label"
 															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 															id="Detalle" onclick="noActivo()">Pagar</label></td>
