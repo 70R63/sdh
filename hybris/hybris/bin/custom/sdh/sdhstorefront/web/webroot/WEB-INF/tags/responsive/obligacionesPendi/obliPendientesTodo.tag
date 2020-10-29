@@ -149,10 +149,33 @@
 														id="Detalle" onclick="noActivo()">Pagar</label></td>
 													</c:when>
 													<c:otherwise>
-														<td><label class="control-label"
-														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-														id="Detalle"
-														onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPredDet.objetoContrato}','${eachObPred.objetoContrato}', '${eachObPredDet.fechaVencimiento}', '${eachObPredDet.numReferencia}','${eachObPredDet.obligacion}','','','${eachObPred.facilidad}','${eachObPred.montoFacilidad}' )">Pagar</label></td>															
+														<c:choose>
+															<c:when test="${eachObPred.facilidad == '00'}">
+																<td><label class="control-label"
+																style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																id="Detalle"
+																onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPredDet.objetoContrato}','${eachObPred.objetoContrato}', '${eachObPredDet.fechaVencimiento}', '${eachObPredDet.numReferencia}','${eachObPredDet.obligacion}','','','${eachObPred.facilidad}','${eachObPred.montoFacilidad}' )">Pagar</label></td>
+															</c:when>
+															<c:when test="${eachObPred.facilidad == '01'}">
+																<td><label class="control-label"
+																style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																id="Detalle"
+																onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPredDet.objetoContrato}','${eachObPred.objetoContrato}', '${eachObPredDet.fechaVencimiento}', '${eachObPredDet.numReferencia}','${eachObPred.montoFacilidad}','','','${eachObPred.facilidad}','${eachObPred.montoFacilidad}' )">Pagar</label></td>
+															</c:when>
+															<c:when test="${eachObPred.facilidad == '02'}">
+																<td><label class="control-label"
+																style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																id="Detalle"
+																onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPredDet.objetoContrato}','${eachObPred.objetoContrato}', '${eachObPredDet.fechaVencimiento}', '${eachObPredDet.numReferencia}','${eachObPred.montoFacilidad}','','','${eachObPred.facilidad}','${eachObPred.montoFacilidad}' )">Pagar</label></td>
+															</c:when>
+															<c:otherwise>
+																<td><label class="control-label"
+																style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																id="Detalle"
+																onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPredDet.objetoContrato}','${eachObPred.objetoContrato}', '${eachObPredDet.fechaVencimiento}', '${eachObPredDet.numReferencia}','${eachObPredDet.obligacion}','','','${eachObPred.facilidad}','${eachObPred.montoFacilidad}' )">Pagar</label></td>
+															</c:otherwise>
+														</c:choose>
+																													
 													</c:otherwise>
 												</c:choose>												
 												<!--FIN PAGO VIGENTE -->	
@@ -368,10 +391,32 @@
 														id="Detalle" onclick="noActivo()">Pagar</label></td>
 													</c:when>
 													<c:otherwise>
-														<td><label class="control-label"
-														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-														id="Detalle"
-														onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}','','${eachObVehi.placa}', '${eachObVehi.facilidad}','${eachObVehi.montoFacilidad}' )">Pagar</label></td>															
+														<c:choose>
+															<c:when test="${eachObVehi.facilidad == '00'}">
+																<td><label class="control-label"
+																style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																id="Detalle"
+																onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}','','${eachObVehi.placa}', '${eachObVehi.facilidad}','${eachObVehi.montoFacilidad}' )">Pagar</label></td>
+															</c:when>
+															<c:when test="${eachObVehi.facilidad == '01'}">
+																<td><label class="control-label"
+																style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																id="Detalle"
+																onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehi.montoFacilidad}','','${eachObVehi.placa}', '${eachObVehi.facilidad}','${eachObVehi.montoFacilidad}' )">Pagar</label></td>
+															</c:when>
+															<c:when test="${eachObVehi.facilidad == '02'}">
+																<td><label class="control-label"
+																style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																id="Detalle"
+																onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehi.montoFacilidad}','','${eachObVehi.placa}', '${eachObVehi.facilidad}','${eachObVehi.montoFacilidad}' )">Pagar</label></td>
+															</c:when>
+															<c:otherwise>
+																<td><label class="control-label"
+																style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																id="Detalle"
+																onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}','','${eachObVehi.placa}', '${eachObVehi.facilidad}','${eachObVehi.montoFacilidad}' )">Pagar</label></td>
+															</c:otherwise>
+														</c:choose>												
 													</c:otherwise>
 												</c:choose>												
 												<!--FIN PAGO VIGENTE -->	
@@ -600,10 +645,32 @@
 														id="Detalle" onclick="noActivo()">Pagar</label></td>
 													</c:when>
 													<c:otherwise>
-														<td><label class="control-label"
-														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-														id="Detalle"
-														onclick="pagarEnLinea('5102','${eachObIca.anioGravable}','${eachObIca.periodo}','${eachObIcaDet.objetoContrato}','', '${eachObIcaDet.fechaVencimiento}', '${eachObIcaDet.numReferencia}','${eachObIcaDet.obligacion}','','', '${eachObIca.facilidad}', '${eachObIca.montoFacilidad}' )">Pagar</label></td>															
+														<c:choose>
+															<c:when test="${eachObIca.facilidad == '00'}">
+																<td><label class="control-label"
+																style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																id="Detalle"
+																onclick="pagarEnLinea('5102','${eachObIca.anioGravable}','${eachObIca.periodo}','${eachObIcaDet.objetoContrato}','', '${eachObIcaDet.fechaVencimiento}', '${eachObIcaDet.numReferencia}','${eachObIcaDet.obligacion}','','', '${eachObIca.facilidad}', '${eachObIca.montoFacilidad}' )">Pagar</label></td>
+															</c:when>
+															<c:when test="${eachObIca.facilidad == '01'}">
+																<td><label class="control-label"
+																style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																id="Detalle"
+																onclick="pagarEnLinea('5102','${eachObIca.anioGravable}','${eachObIca.periodo}','${eachObIcaDet.objetoContrato}','', '${eachObIcaDet.fechaVencimiento}', '${eachObIcaDet.numReferencia}','${eachObIca.montoFacilidad}','','', '${eachObIca.facilidad}', '${eachObIca.montoFacilidad}' )">Pagar</label></td>
+															</c:when>
+															<c:when test="${eachObIca.facilidad == '02'}">
+																<td><label class="control-label"
+																style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																id="Detalle"
+																onclick="pagarEnLinea('5102','${eachObIca.anioGravable}','${eachObIca.periodo}','${eachObIcaDet.objetoContrato}','', '${eachObIcaDet.fechaVencimiento}', '${eachObIcaDet.numReferencia}','${eachObIca.montoFacilidad}','','', '${eachObIca.facilidad}', '${eachObIca.montoFacilidad}' )">Pagar</label></td>
+															</c:when>
+															<c:otherwise>
+																<td><label class="control-label"
+																style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																id="Detalle"
+																onclick="pagarEnLinea('5102','${eachObIca.anioGravable}','${eachObIca.periodo}','${eachObIcaDet.objetoContrato}','', '${eachObIcaDet.fechaVencimiento}', '${eachObIcaDet.numReferencia}','${eachObIcaDet.obligacion}','','', '${eachObIca.facilidad}', '${eachObIca.montoFacilidad}' )">Pagar</label></td>
+															</c:otherwise>
+														</c:choose>												
 													</c:otherwise>
 												</c:choose>												
 												<!--FIN PAGO VIGENTE -->	
@@ -766,10 +833,32 @@
 															id="Detalle" onclick="noActivo()">Pagar</label></td>
 														</c:when>
 														<c:otherwise>
-															<td><label class="control-label"
-															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-															id="Detalle"
-															onclick="pagarEnLinea('5154','${eachPubExtTax.anioGravable}','','${eachPubExtTaxDet.objetoContrato}','', '${eachPubExtTaxDet.fechaVencimiento}', '${eachPubExtTaxDet.numReferencia}','${eachPubExtTaxDet.obligacion}','','','${eachPubExtTax.facilidad}','${eachPubExtTax.montoFacilidad}' )">Pagar</label></td>															
+															<c:choose>
+																<c:when test="${eachPubExtTax.facilidad == '00'}">
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('5154','${eachPubExtTax.anioGravable}','','${eachPubExtTaxDet.objetoContrato}','', '${eachPubExtTaxDet.fechaVencimiento}', '${eachPubExtTaxDet.numReferencia}','${eachPubExtTaxDet.obligacion}','','','${eachPubExtTax.facilidad}','${eachPubExtTax.montoFacilidad}' )">Pagar</label></td>
+																</c:when>
+																<c:when test="${eachPubExtTax.facilidad == '01'}">
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('5154','${eachPubExtTax.anioGravable}','','${eachPubExtTaxDet.objetoContrato}','', '${eachPubExtTaxDet.fechaVencimiento}', '${eachPubExtTaxDet.numReferencia}','${eachPubExtTax.montoFacilidad}','','','${eachPubExtTax.facilidad}','${eachPubExtTax.montoFacilidad}' )">Pagar</label></td>
+																</c:when>
+																<c:when test="${eachPubExtTax.facilidad == '02'}">
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('5154','${eachPubExtTax.anioGravable}','','${eachPubExtTaxDet.objetoContrato}','', '${eachPubExtTaxDet.fechaVencimiento}', '${eachPubExtTaxDet.numReferencia}','${eachPubExtTax.montoFacilidad}','','','${eachPubExtTax.facilidad}','${eachPubExtTax.montoFacilidad}' )">Pagar</label></td>
+																</c:when>
+																<c:otherwise>
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('5154','${eachPubExtTax.anioGravable}','','${eachPubExtTaxDet.objetoContrato}','', '${eachPubExtTaxDet.fechaVencimiento}', '${eachPubExtTaxDet.numReferencia}','${eachPubExtTaxDet.obligacion}','','','${eachPubExtTax.facilidad}','${eachPubExtTax.montoFacilidad}' )">Pagar</label></td>
+																</c:otherwise>
+															</c:choose>																
 														</c:otherwise>
 													</c:choose>												
 													<!--FIN PAGO VIGENTE -->	
@@ -937,10 +1026,32 @@
 															id="Detalle" onclick="noActivo()">Pagar</label></td>
 														</c:when>
 														<c:otherwise>
-															<td><label class="control-label"
-															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-															id="Detalle"
-															onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}','','${eachObGasDet.fechaVencimiento}', '${eachObGasDet.numReferencia}', '${eachObGasDet.obligacion}','','','${eachObGas.facilidad}','${eachObGas.montoFacilidad}')">Pagar</label></td>															
+															<c:choose>
+																<c:when test="${eachObGas.facilidad == '00'}">
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}','','${eachObGasDet.fechaVencimiento}', '${eachObGasDet.numReferencia}', '${eachObGasDet.obligacion}','','','${eachObGas.facilidad}','${eachObGas.montoFacilidad}')">Pagar</label></td>
+																</c:when>
+																<c:when test="${eachObGas.facilidad == '01'}">
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}','','${eachObGasDet.fechaVencimiento}', '${eachObGasDet.numReferencia}', '${eachObGas.montoFacilidad}','','','${eachObGas.facilidad}','${eachObGas.montoFacilidad}')">Pagar</label></td>
+																</c:when>
+																<c:when test="${eachObGas.facilidad == '02'}">
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}','','${eachObGasDet.fechaVencimiento}', '${eachObGasDet.numReferencia}', '${eachObGas.montoFacilidad}','','','${eachObGas.facilidad}','${eachObGas.montoFacilidad}')">Pagar</label></td>
+																</c:when>
+																<c:otherwise>
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}','','${eachObGasDet.fechaVencimiento}', '${eachObGasDet.numReferencia}', '${eachObGasDet.obligacion}','','','${eachObGas.facilidad}','${eachObGas.montoFacilidad}')">Pagar</label></td>
+																</c:otherwise>
+															</c:choose>												
 														</c:otherwise>
 													</c:choose>												
 													<!--FIN PAGO VIGENTE -->
@@ -1098,10 +1209,32 @@
 															id="Detalle" onclick="noActivo()">Pagar</label></td>
 														</c:when>
 														<c:otherwise>
-															<td><label class="control-label"
-															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-															id="Detalle"
-															onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>															
+															<c:choose>
+																<c:when test="${eachDeli.facilidad == '00'}">
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>
+																</c:when>
+																<c:when test="${eachDeli.facilidad == '01'}">
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeli.montoFacilidad}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>
+																</c:when>
+																<c:when test="${eachDeli.facilidad == '02'}">
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeli.montoFacilidad}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>
+																</c:when>
+																<c:otherwise>
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>
+																</c:otherwise>
+															</c:choose>															
 														</c:otherwise>
 													</c:choose>												
 													<!--FIN PAGO VIGENTE -->
@@ -1245,10 +1378,32 @@
 															id="Detalle" onclick="noActivo()">Pagar</label></td>
 														</c:when>
 														<c:otherwise>
-															<td><label class="control-label"
-															style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-															id="Detalle"
-															onclick="pagarEnLinea('5102','${eachReteIca.anioGravable}','${eachReteIca.periodo}','${eachReteIcaDet.objetoContrato}','', '${eachReteIcaDet.fechaVencimiento}', '${eachReteIcaDet.numReferencia}','${eachReteIcaDet.obligacion}','','','${eachReteIca.facilidad}','${eachReteIca.montoFacilidad}' )">Pagar</label></td>															
+															<c:choose>
+																<c:when test="${eachReteIca.facilidad == '00'}">
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('5102','${eachReteIca.anioGravable}','${eachReteIca.periodo}','${eachReteIcaDet.objetoContrato}','', '${eachReteIcaDet.fechaVencimiento}', '${eachReteIcaDet.numReferencia}','${eachReteIcaDet.obligacion}','','','${eachReteIca.facilidad}','${eachReteIca.montoFacilidad}' )">Pagar</label></td>
+																</c:when>
+																<c:when test="${eachReteIca.facilidad == '01'}">
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('5102','${eachReteIca.anioGravable}','${eachReteIca.periodo}','${eachReteIcaDet.objetoContrato}','', '${eachReteIcaDet.fechaVencimiento}', '${eachReteIcaDet.numReferencia}','${eachReteIca.montoFacilidad}','','','${eachReteIca.facilidad}','${eachReteIca.montoFacilidad}' )">Pagar</label></td>
+																</c:when>
+																<c:when test="${eachReteIca.facilidad == '02'}">
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('5102','${eachReteIca.anioGravable}','${eachReteIca.periodo}','${eachReteIcaDet.objetoContrato}','', '${eachReteIcaDet.fechaVencimiento}', '${eachReteIcaDet.numReferencia}','${eachReteIca.montoFacilidad}','','','${eachReteIca.facilidad}','${eachReteIca.montoFacilidad}' )">Pagar</label></td>
+																</c:when>
+																<c:otherwise>
+																	<td><label class="control-label"
+																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+																	id="Detalle"
+																	onclick="pagarEnLinea('5102','${eachReteIca.anioGravable}','${eachReteIca.periodo}','${eachReteIcaDet.objetoContrato}','', '${eachReteIcaDet.fechaVencimiento}', '${eachReteIcaDet.numReferencia}','${eachReteIcaDet.obligacion}','','','${eachReteIca.facilidad}','${eachReteIca.montoFacilidad}' )">Pagar</label></td>
+																</c:otherwise>
+															</c:choose>												
 														</c:otherwise>
 													</c:choose>												
 													<!--FIN PAGO VIGENTE -->
