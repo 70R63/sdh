@@ -18,6 +18,15 @@
 
 
 <script>
+
+function noActivo() {
+	debugger;
+	alert("Debe generar un ROP o Cupón");
+}
+
+</script>
+
+<script>
 	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar,cdu,placa,facilidad,montoFacilidad){
 		debugger;
 		
@@ -65,10 +74,6 @@
 		
 	}
 	
-	
-	function noActivo() {
-		alert("Debe generar un ROP o Cupón");
-	}
 	
 	
 	window.onload = function() {
