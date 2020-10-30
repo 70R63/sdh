@@ -1,71 +1,105 @@
-<hybrisconfig xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../bin/platform/resources/schemas/extensions.xsd'>
-  <extensions>
-    <path dir='${HYBRIS_BIN_DIR}' autoload='false' />
-    <extension name='backoffice' />
-    <extension name='cmsbackoffice' />
-    <extension name='customersupportbackoffice' />
-    <extension name='sdhcore' />
-    <extension name='sdhfacades' />
-    <extension name='sdhstorefront' />
-    <extension name='sdhinitialdata' />
-    <extension name='sdhpsaddon' />
-    <extension name='sdhpse' />
-     <extension name='sdhbackoffice' />
-<!--     <extension name='sdhtest' /> -->
-<!--     <extension name='sdhcockpits' /> -->
-    <extension name='ycommercewebservices' />
-    <extension name='commercesearchbackoffice' />
-    <extension name='commerceservicesbackoffice' />
-    <extension name='solrfacetsearchbackoffice' />
-    <extension name='solrserver' />
-    <extension name='configurablebundlecockpits' />
-    <extension name='configurablebundlefacades' />
-    <extension name='configurablebundleservices' />
-    <extension name='assistedservicestorefront' />
-<!--     <extension name='assistedserviceatddtests' /> -->
-    <extension name='smarteditaddon' />
-    <extension name='smarteditwebservices' />
-    <extension name='cmssmartedit' />
-    <extension name='cmswebservices' />
-    <extension name='cmssmarteditwebservices' />
-    <extension name='npmtestancillary' />
-    <extension name='previewwebservices' />
-    <extension name='permissionswebservices' />
-    <extension name='xyformscockpits' />
-    <extension name='xyformsbackoffice' />
-   <extension name='orbeonweb' />
-    <extension name='xyformscommerceservices' />
-    <extension name='xyformscommercefacades' />
-    <extension name='xyformscommercecockpits' />
-    <extension name='xyformsservices' />
-    <extension name='datahubadapter' />
-    <extension name='datahubbackoffice' />
-    <extension name='datahubclient' />
-<!--     <extension name='publicsectoracceleratoraddon' /> -->
-    <extension name='publicsectorservices' />
-    <extension name='publicsectorstore' />
-<!--     <extension name='publicsectoratddtests' /> -->
-    <extension name='publicsectorcockpits' />
-    <extension name='publicsectorfacades' />
-    <extension name='publicsectorfulfilment' />
-    <extension name='publicsectorconsignmentexchange' />
-    <extension name='publicsectordocmanagement' />
-    <extension name='publicsectordocmanagementexchange' />
-    <extension name='relationshipexchange' />
-    <extension name='publicsectorbackoffice' />
-<!--     <extension name='xyformscommercebackoffice' /> -->
-<!--     <extension name='xyformscommerceatddtests' /> -->
-    <extension name='billservices' />
-<!--     <extension name='billaddon' /> -->
-    <extension name='billfacades' />
-    <extension name='billbackoffice' />
-<!--     <extension name='billatddtests' /> -->
-    <extension name='billexchange' />
-    <extension name='relationshipservices' />
-<!--     <extension name='relationshipaddon' /> -->
-    <extension name='relationshipbackoffice' />
-    <extension name='relationshipfacades' />
-<!--     <extension name='relationshipatddtests' /> -->
-    <extension name='auditreportservices' />
-  </extensions>
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Generated via ant extensionsxml - please be aware that this file get overwritten each time!
+
+Parameters:
+ production=true
+
+-->
+<hybrisconfig xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='resources/schemas/extensions.xsd'>
+
+	<extensions>
+		<!-- 
+		     Please note that all extensions in platform/ext/* have been omitted 
+		     because they're automatically loaded. Please use <extensions autoload='false'> 
+		     in case you want to configure them explicitly. 
+		  -->
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/voucher'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-platform-optional/embeddedserver'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-platform-optional/tomcatembeddedserver'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-integration/dataimportcommons'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/promotions'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-platform-optional/springintegrationlibs'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-content/npmancillary'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/solrfacetsearch'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/basecommerce'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/customerreview'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-integration/datahubclient'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/permissionsfacades'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-integration/datahubadapter'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-content/cms2'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-content/cms2lib'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/payment'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/commerceservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/commercefacades'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/commercesearch'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-content/cmsfacades'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/ticketsystem'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/assistedserviceservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/assistedservicefacades'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-accelerator/acceleratorservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/xyformsservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/xyformsfacades'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/xyformsweb'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-accelerator/acceleratorcms'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-accelerator/acceleratorfacades'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-accelerator/acceleratorstorefrontcommons'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-addon/addonsupport'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-addon/smarteditaddon'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/solrserver'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-webservices/webservicescommons'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/commercewebservicescommons'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-content/smartedit'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-addon/xyformsstorefrontcommons'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-platform-optional/groovynature'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-platform-optional/auditreportservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-relationship/relationshipservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-relationship/relationshipfacades'/>
+		<extension dir='${HYBRIS_BIN_DIR}/custom/sdh/sdhrelationshipsaddon'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-bill/billservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-bill/billexchange'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-bill/billfacades'/>
+		<extension dir='${HYBRIS_BIN_DIR}/custom/sdh/sdhbillsaddon'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-relationship/relationshipexchange'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-publicsector/publicsectorconsignmentexchange'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-publicsector/publicsectorfulfilment'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-publicsector/xyformscommerceservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-publicsector/xyformscommercefacades'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-webservices/permissionswebservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-webservices/previewwebservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-webservices/cmswebservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-webservices/cmssmarteditwebservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-smartedit/cmssmartedit'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-addon/assistedservicestorefront'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/configurablebundleservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-commerce/configurablebundlefacades'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-publicsector/publicsectorservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-publicsector/publicsectordocmanagement'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-publicsector/publicsectordocmanagementexchange'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-publicsector/publicsectorfacades'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-publicsector/publicsectorstore'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-template/ycommercewebservices'/>
+		<extension dir='${HYBRIS_BIN_DIR}/custom/sdh/sdhpse'/>
+		<extension dir='${HYBRIS_BIN_DIR}/custom/sdh/sdhpsaddon'/>
+		<extension dir='${HYBRIS_BIN_DIR}/custom/sdh/sdhcore'/>
+		<extension dir='${HYBRIS_BIN_DIR}/custom/sdh/sdhinitialdata'/>
+		<extension dir='${HYBRIS_BIN_DIR}/custom/sdh/sdhfacades'/>
+		<extension dir='${HYBRIS_BIN_DIR}/custom/sdh/sdhstorefront'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-backoffice/backoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-platform-backoffice/platformbackoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-backoffice/voucherbackoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-backoffice/ticketsystembackoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-backoffice/solrfacetsearchbackoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-backoffice/commercesearchbackoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-backoffice/promotionsbackoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-backoffice/basecommercebackoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-backoffice/commerceservicesbackoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-backoffice/customersupportbackoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-relationship/relationshipbackoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-bill/billbackoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-publicsector/publicsectorbackoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-backoffice/xyformsbackoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/custom/sdh/sdhbackoffice'/>
+		<extension dir='${HYBRIS_BIN_DIR}/ext-backoffice/cmsbackoffice'/>
+	</extensions>
+
 </hybrisconfig>
