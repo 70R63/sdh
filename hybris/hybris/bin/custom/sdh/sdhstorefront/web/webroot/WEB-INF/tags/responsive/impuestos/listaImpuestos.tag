@@ -10,7 +10,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="jquery.min.js"></script>
+<!-- <script src="jquery.min.js"></script> -->
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <c:url value="/contribuyentes/presentar-declaracion"
@@ -503,7 +503,7 @@
 
         //Si - Sobretasa a la gasolina - obtener periodo
         if(impuesto == "5" || impuesto == "3"){ //gasolina, ica
-            periodo = document.getElementById("periodo").value;
+            periodo = $("#periodo").val();
         }
 
         var currentUrl = window.location.href;
@@ -516,7 +516,6 @@
             url : currentUrl,
         	type : "GET",
         	success : function(data) {
-        	    debugger;
         		
         		var opcUso = data;
                 if (impuesto == '5' && opcUso == '02') {//Sobretasa a la gasolina
