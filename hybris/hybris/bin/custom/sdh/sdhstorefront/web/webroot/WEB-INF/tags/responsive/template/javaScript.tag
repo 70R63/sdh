@@ -12,8 +12,20 @@
 
 <c:choose>
 	<c:when test="${wro4jEnabled}">
-	  	<script type="text/javascript" src="${contextPath}/wro/all_responsive.js"></script>
-	  	<script type="text/javascript" src="${contextPath}/wro/addons_responsive.js"></script>
+		<script type="text/javascript" src="${contextPath}/wro/all_responsive.js"></script>
+  		<script type="text/javascript" src="${contextPath}/wro/addons_responsive.js"></script>
+		
+		<c:if test="${not empty representado}">
+			<script type="text/javascript" src="${commonResourcePath}/js/acc.aamenu.js"></script>
+		</c:if>
+		
+		
+		<%-- Cms Action JavaScript files --%>
+		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">
+		    <script type="text/javascript" src="${commonResourcePath}/js/cms/${actionJsFile}"></script>
+		</c:forEach>
+
+		
 	</c:when>
 	<c:otherwise>
 		<%-- jquery --%>

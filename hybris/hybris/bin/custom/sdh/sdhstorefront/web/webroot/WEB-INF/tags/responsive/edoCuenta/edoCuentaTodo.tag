@@ -13,6 +13,7 @@
 <div class="container">
 	<sf:form>
 		<div id="impContribuyente" style="display: none;">
+			<c:if test="${not empty ctaForm.predial}">
 			<div id="predial">
 				<div class="row">
 					<div class="headline">
@@ -103,9 +104,11 @@
 					</div>
 				</div>
 			</div>
+			</c:if>
 
 
 
+			<c:if test="${not empty ctaForm.tablaVehicular}">
 			<div id="vehiculos">
 				<div class="row">
 					<div class="headline">
@@ -188,7 +191,10 @@
 					</div>
 				</div>
 			</div>
+			</c:if>
+			
 
+			<c:if test="${not empty ctaForm.tablaICA}">
 			<div id="ica">
 				<div class="row">
 					<div class="headline">
@@ -265,9 +271,11 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
+			</c:if>
+			
 
+			<c:if test="${not empty ctaForm.tablaDelineacion}">
 			<div id="delurbana">
 				<div class="row">
 					<div class="headline">
@@ -349,8 +357,10 @@
 					</div>
 				</div>
 			</div>
+			</c:if>
 
 
+			<c:if test="${not empty ctaForm.tablaGasolina}">
 			<div id="gasolina">
 				<div class="row">
 					<div class="headline">
@@ -432,8 +442,10 @@
 					</div>
 				</div>
 			</div>
+			</c:if>
 
 
+			<c:if test="${not empty ctaForm.tablaPublicidad}">
 			<div id="publiext">
 				<div class="row">
 					<div class="headline">
@@ -515,10 +527,13 @@
 						</div>
 					</div>
 				</div>
-
-
 			</div>
-
+			</c:if>
+			
+			
+			
+			
+			<c:if test="${not empty ctaForm.obligNoTributaria}">
 			<div id="obli-no-tributarias">
 				<div class="row">
 					<div class="headline">
@@ -581,8 +596,10 @@
 					</div>
 				</div>
 			</div>
+			</c:if>
 		</div>
 
+		<c:if test="${not empty ctaForm.reteica.detalleReteica}">
 		<div id="impRetenedor" style="display: none;">
 				<div class="row">
 					<div class="headline">
@@ -654,6 +671,7 @@
 				</div>
 
 			</div>
+			</c:if>
 
 	</sf:form>
 </div>

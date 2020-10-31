@@ -25402,3 +25402,11 @@ header {
     font-size: medium;
   }
 }
+.form-group .newaltobtn,
+.newaltobtn {
+  font-size: 8 !important;
+}
+.form-group .newalto,
+.newalto {
+  text-align: right !important;
+}

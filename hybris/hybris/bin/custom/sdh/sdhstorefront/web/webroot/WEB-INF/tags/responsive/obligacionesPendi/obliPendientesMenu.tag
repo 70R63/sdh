@@ -47,32 +47,23 @@
 	</div>
 
 
-	<sf:form>
+	<sf:form commandName="obligacionesFormuno" >
 		<div class="row">
 			<div class="col-md-6"></div>
 			<div class="col-md-3" id="idImpuesto" style="display: none;">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="obligacion.inicial.selcimpuesto" /></label> <select id="impuesto"
-						class="new_alto form-control " name="impuesto">
-						<option value="0">Seleccionar</option>
-						<option value="1">Predial Unificado</option>
-						<option value="2">Veh&iacuteculos</option>
-						<option value="3">ICA</option>
-						<option value="4">Publicidad Exterior</option>
-						<option value="5">Sobretasa Gasolina</option>
-						<option value="6">Delineaci&oacuten Urbana</option>
-						<option value="7">Todo</option>
-					</select>
+							code="obligacion.inicial.selcimpuesto" /></label> 
+					<sf:select class="new_alto form-control" id="impuesto" name="impuesto"
+						path="claveImpuesto" items="${listaImpuestosCatC}" referenceData="${listaImpuestosCatC}"/>
 				</div>
 			</div>
 			<div class="col-md-3" id="idImpuestoAgente" style="display: none;">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="edocuenta.inicial.selcimpuesto" /></label> <select id="impuesto"
-						class="new_alto form-control " name="impuesto">
-						<option value="8">RETEICA</option>
-					</select>
+							code="edocuenta.inicial.selcimpuesto" /></label> 
+					<sf:select class="new_alto form-control" id="impuesto" name="impuesto"
+						path="claveImpuesto" items="${listaImpuestosCatAR}" referenceData="${listaImpuestosCatAR}" />
 				</div>
 			</div>
 		</div>
@@ -93,7 +84,7 @@
 				<div class="form-group ">
 					<button type="button" class="btn btn-primary btn-lg"
 						id="buscarObliPend" name="action" value="buscar"
-						style="margin-top: 3px">
+						style="margin-top: 3px" onclick="ACC.oblipend.bindBuscarObliPend('${listaImpuestosCStr}')">
 						<spring:theme code="obligacion.inicial.buscar" />
 					</button>
 				</div>

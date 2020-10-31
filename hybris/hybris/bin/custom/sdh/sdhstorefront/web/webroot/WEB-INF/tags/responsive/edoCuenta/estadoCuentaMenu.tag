@@ -10,6 +10,37 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 
+<c:set var="claveImpuesto_1" value="false"/>
+<c:set var="claveImpuesto_2" value="false"/>
+<c:set var="claveImpuesto_3" value="false"/>
+<c:set var="claveImpuesto_4" value="false"/>
+<c:set var="claveImpuesto_5" value="false"/>
+<c:set var="claveImpuesto_6" value="false"/>
+<c:set var="claveImpuesto_7" value="false"/>
+
+<c:if test="${not empty ctaForm.predial}">
+<c:set var="claveImpuesto_1" value="true"/>
+</c:if>
+<c:if test="${not empty ctaForm.tablaVehicular}">
+<c:set var="claveImpuesto_2" value="true"/>
+</c:if>
+<c:if test="${not empty ctaForm.tablaICA}">
+<c:set var="claveImpuesto_3" value="true"/>
+</c:if>
+<c:if test="${not empty ctaForm.tablaPublicidad}">
+<c:set var="claveImpuesto_4" value="true"/>
+</c:if>
+<c:if test="${not empty ctaForm.tablaGasolina}">
+<c:set var="claveImpuesto_5" value="true"/>
+</c:if>
+<c:if test="${not empty ctaForm.tablaDelineacion}">
+<c:set var="claveImpuesto_6" value="true"/>
+</c:if>
+<c:if test="${not empty ctaForm.obligNoTributaria}">
+<c:set var="claveImpuesto_7" value="true"/>
+</c:if>
+
+
 <div class="container_new_page">
 	<div class="row">
 		<div class="col-md-12">
@@ -111,13 +142,13 @@
 										code="edocuenta.inicial.selcimpuesto" /></label> <select
 									id="impuesto" class="new_alto form-control " name="impuesto">
 									<option value="0">Todo</option>
-									<option value="1">Predial Unificado</option>
-									<option value="2">Veh&iacuteculos</option>
-									<option value="3">ICA</option>
-									<option value="4">Publicidad Exterior</option>
-									<option value="5">Sobretasa Gasolina</option>
-									<option value="6">Delineaci&oacuten Urbana</option>
-									<option value="7">Obligaciones no tributarias</option>
+									<c:if test="${claveImpuesto_1}"><option value="1">Predial Unificado</option></c:if>
+									<c:if test="${claveImpuesto_2}"><option value="2">Veh&iacuteculos</option></c:if>
+									<c:if test="${claveImpuesto_3}"><option value="3">ICA</option></c:if>
+									<c:if test="${claveImpuesto_4}"><option value="4">Publicidad Exterior</option></c:if>
+									<c:if test="${claveImpuesto_5}"><option value="5">Sobretasa Gasolina</option></c:if>
+									<c:if test="${claveImpuesto_6}"><option value="6">Delineaci&oacuten Urbana</option></c:if>
+									<c:if test="${claveImpuesto_7}"><option value="7">Obligaciones no tributarias</option></c:if>
 								</select>
 							</div>
 						</div>

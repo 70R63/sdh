@@ -60,7 +60,8 @@
 						
 						<div class="form-group">
 							<label class="control-label " for="documentNumber"><spring:theme code="register.documentNumber" /></label>
-							<input class=" form-control" type="text" id="documentNumber" name="documentNumber" value="${searchUserForm.documentNumber }">
+							<input class=" form-control validacionDocumentNumber" type="text" id="documentNumber" name="documentNumber" value="${searchUserForm.documentNumber }" 
+								onkeyup="valInputText('up',this);" onchange="valInputText('change',this);" maxlength="60" >
 						</div>
 						
 						<c:set var="hiddenStyle" value="" />
@@ -97,7 +98,6 @@
 
 <script>
 function validarCampos() {
-	debugger;
 	var flagValidacion = false;
 	
 	var documentType = $("#documentType").val();
@@ -123,4 +123,65 @@ function validarCampos() {
 		$("#btnSearch").click();
 	}
 }
+
+function valInputText(evento,objeto){
+	var newValue="";
+	if(realizarValidacion(objeto.value,evento)){
+		var allowedCharacters=obtenerCaracteres(objeto.value,evento);	
+		objeto.value.split("").forEach(function(char){
+			if(in_array(char, allowedCharacters.split(""))) newValue+=char;
+		});
+	}else{
+		newValue = objeto.value;
+	}
+	objeto.value=newValue;
+}
+
+
+function realizarValidacion(str,evento){
+	var completa = "NIT-1234567";
+	var realizarVal = true;
+	
+	switch (evento){
+	case "change":
+		if(str.toUpperCase() == completa){
+			realizarVal = false;
+		}
+		break;
+		
+	default:
+		realizarVal = true;
+	}
+
+	return realizarVal;
+}
+
+function obtenerCaracteres(str,evento){
+	var inicio = "NIT"
+	var allowedCharacters="0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
+	
+	switch (evento){
+	case "up":
+		if(str.toUpperCase().startsWith(inicio)){
+			allowedCharacters="0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN-";
+		}
+		break;
+	default:
+		realizarVal = true;
+		allowedCharacters="0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
+	}
+
+	return allowedCharacters;
+}
+
+function in_array(elem, array){
+	var isIn = false;
+	for(var i=0;i<array.length;i++){
+		if(elem==array[i]){
+			isIn=true;
+		}
+	}
+	return isIn;
+}
+
 </script>

@@ -4,6 +4,7 @@
 package de.hybris.sdh.storefront.controllers.impuestoGasolina;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.i18n.I18NService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
@@ -462,6 +463,153 @@ public class SobreTasaGasolinaService
 
 		return elementos;
 	}
+
+	public Map<String, String> obtenerListaImpuestosActivosCatC(final CustomerData customerData)
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+		final Map<String, String> impuestos = obtenerListaImpuestosActivos(customerData);
+
+		elementos.put("0", "Seleccionar");
+		if (impuestos.get("1") != null)
+		{
+			elementos.put("1", impuestos.get("1"));
+		}
+		if (impuestos.get("2") != null)
+		{
+			elementos.put("2", impuestos.get("2"));
+		}
+		if (impuestos.get("3") != null)
+		{
+			elementos.put("3", impuestos.get("3"));
+		}
+		if (impuestos.get("5") != null)
+		{
+			elementos.put("5", impuestos.get("5"));
+		}
+		if (impuestos.get("6") != null)
+		{
+			elementos.put("6", impuestos.get("6"));
+		}
+		if (impuestos.get("7") != null)
+		{
+			elementos.put("7", impuestos.get("7"));
+		}
+		elementos.put("99", "Todos");
+
+
+		return elementos;
+	}
+
+
+	public String obtenerListaImpuestosActivosCStr(final CustomerData customerData)
+	{
+		final StringBuffer sb = new StringBuffer();
+		final Map<String, String> impuestos = obtenerListaImpuestosActivos(customerData);
+
+		if (impuestos.get("1") != null)
+		{
+			sb.append("X");
+		}
+		sb.append(",");
+		if (impuestos.get("2") != null)
+		{
+			sb.append("X");
+		}
+		sb.append(",");
+		if (impuestos.get("3") != null)
+		{
+			sb.append("X");
+		}
+		sb.append(",");
+		sb.append(",");//vacio para 4=Reteica
+		if (impuestos.get("5") != null)
+		{
+			sb.append("X");
+		}
+		sb.append(",");
+		if (impuestos.get("6") != null)
+		{
+			sb.append("X");
+		}
+		sb.append(",");
+		if (impuestos.get("7") != null)
+		{
+			sb.append("X");
+		}
+		sb.append(",");
+
+		return sb.toString();
+	}
+
+
+	public String obtenerListaImpuestosActivosARStr(final CustomerData customerData)
+	{
+		final StringBuffer sb = new StringBuffer();
+		final Map<String, String> impuestos = obtenerListaImpuestosActivos(customerData);
+
+		if (impuestos.get("4") != null)
+		{
+			sb.append("X");
+		}
+		sb.append(",");
+
+		return sb.toString();
+	}
+
+
+	public Map<String, String> obtenerListaImpuestosActivosCatAR(final CustomerData customerData)
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+		final Map<String, String> impuestos = obtenerListaImpuestosActivos(customerData);
+
+		elementos.put("00", "Seleccionar");
+		if (impuestos.get("4") != null)
+		{
+			elementos.put("4", impuestos.get("4"));
+		}
+
+
+		return elementos;
+	}
+
+
+	public Map<String, String> obtenerListaImpuestosActivos(final CustomerData customerData)
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
+		{
+			elementos.put("1", "Predial");
+		}
+		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
+		{
+			elementos.put("2", "Impuestos de Vehículos");
+		}
+		if (customerData.getIcaTax() != null && customerData.getIcaTax().getObjectNumber() != null)
+		{
+			elementos.put("3", "ICA");
+		}
+		if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
+		{
+			elementos.put("5", "Sobretasa Gasolina");
+		}
+		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
+		{
+			elementos.put("6", "Delineacion Urbana");
+		}
+		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
+		{
+			elementos.put("7", "Publicidad Exterior");
+		}
+		if (customerData.getReteIcaTax() != null)
+		{
+			elementos.put("4", "Reteica");
+		}
+
+
+		return elementos;
+	}
+
 
 	private Map<String, String> obtenerListaTipoConsulta()
 	{

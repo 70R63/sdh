@@ -42,11 +42,11 @@
 	<br>
 	<form:form action="" style="padding-left: 0px !important">
 		<div class="row">
-			<div class="col-md-7">
-				<label class="control-label format_label" for="">
-					<spring:theme code="ica.declaracion.actifuera.ciiu" />
-				</label>
-			</div>
+<!-- 			<div class="col-md-7"> -->
+<!-- 				<label class="control-label format_label" for=""> -->
+<%-- 					<spring:theme code="ica.declaracion.actifuera.ciiu" /> --%>
+<!-- 				</label> -->
+<!-- 			</div> -->
 <!-- 			<div class="col-md-2"> -->
 <!-- 				<label class="control-label format_label" for=""> -->
 <%-- 					<spring:theme code="ica.declaracion.actifuera.municipio" /> --%>
@@ -66,24 +66,24 @@
 		<c:forEach items="${infoDeclara.ingFueraBog }" var="eachIngreso">
 			<c:if test="${not empty eachIngreso.codCIIU }">
 				<div class="row actvifuera">
-					<div class="col-md-7">
-						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
-							pattern="#######################" var="codCIIUNumber" />
-						<select id="" class="alto form-control deno codCIIU"
-							style="font-size: 11px !important" ${disabledIngFueraBog}>
-							<option value="" selected>SELECCIONAR</option>
-							<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
-								<c:set var="selected" value="" />
-								<fmt:formatNumber value="${ eachActivity.ciiu}"
-									pattern="#######################" var="eachCodCIIUNumber" />
-								<c:if test="${codCIIUNumber eq eachCodCIIUNumber}">
-									<c:set var="selected" value="selected" />
-								</c:if>
-								<option ${selected } value="${eachActivity.ciiu}">${eachActivity.ciiu}
-									- ${eachActivity.denominacion }</option>
-							</c:forEach>
-						</select>
-					</div>
+<!-- 					<div class="col-md-7"> -->
+<%-- 						<fmt:formatNumber value="${ eachIngreso.codCIIU}" --%>
+<%-- 							pattern="#######################" var="codCIIUNumber" /> --%>
+<!-- 						<select id="" class="alto form-control deno codCIIU" -->
+<%-- 							style="font-size: 11px !important" ${disabledIngFueraBog}> --%>
+<!-- 							<option value="" selected>SELECCIONAR</option> -->
+<%-- 							<c:forEach items="${ gravableNetIncomes}" var="eachActivity"> --%>
+<%-- 								<c:set var="selected" value="" /> --%>
+<%-- 								<fmt:formatNumber value="${ eachActivity.ciiu}" --%>
+<%-- 									pattern="#######################" var="eachCodCIIUNumber" /> --%>
+<%-- 								<c:if test="${codCIIUNumber eq eachCodCIIUNumber}"> --%>
+<%-- 									<c:set var="selected" value="selected" /> --%>
+<%-- 								</c:if> --%>
+<%-- 								<option ${selected } value="${eachActivity.ciiu}">${eachActivity.ciiu} --%>
+<%-- 									- ${eachActivity.denominacion }</option> --%>
+<%-- 							</c:forEach> --%>
+<!-- 						</select> -->
+<!-- 					</div> -->
 
 <!-- 					<div class="col-md-2"> -->
 <!-- 						<select id="" class="new_alto form-control mun codMunicipio" -->
@@ -122,16 +122,16 @@
 		<c:if test="${icaInfObjetoFormResp.controlCampos.ingFueraBog != true}">
 			<!--  se agregan l�neas para agregar siempre una linea en la tabla -->
 			<div class="row actvifuera" id="actvifuera">
-				<div class="col-md-7">
-					<select id="" class="alto form-control deno codCIIU"
-						style="font-size: 11px !important">
-						<option value="">SELECCIONAR</option>
-						<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
-							<option ${selected } value="${eachActivity.ciiu}">${eachActivity.ciiu}
-								- ${eachActivity.denominacion }</option>
-						</c:forEach>
-					</select>
-				</div>
+<!-- 				<div class="col-md-7"> -->
+<!-- 					<select id="" class="alto form-control deno codCIIU" -->
+<!-- 						style="font-size: 11px !important"> -->
+<!-- 						<option value="">SELECCIONAR</option> -->
+<%-- 						<c:forEach items="${ gravableNetIncomes}" var="eachActivity"> --%>
+<%-- 							<option ${selected } value="${eachActivity.ciiu}">${eachActivity.ciiu} --%>
+<%-- 								- ${eachActivity.denominacion }</option> --%>
+<%-- 						</c:forEach> --%>
+<!-- 					</select> -->
+<!-- 				</div> -->
 	
 	
 <!-- 				<div class="col-md-2"> -->

@@ -1,4 +1,0 @@
-INSERT_UPDATE PSPermissibleAreaItemType;code[unique=true];visibleByUser;active;shareableType(code)
-;bills;true;true;PSBillPayment
-;documents;true;true;PSDocument
-;serviceRequests;true;true;PSServiceProduct
