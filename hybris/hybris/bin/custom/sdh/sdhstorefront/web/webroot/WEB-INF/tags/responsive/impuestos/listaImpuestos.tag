@@ -10,18 +10,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="jquery.min.js"></script>
+<!-- <script src="jquery.min.js"></script> -->
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <c:url value="/contribuyentes/presentar-declaracion"
 	var="presentarDeclaracionUrl"/>
-<br>
-<div>Solo se puede revisar el año 2020, si requiere revisar su información de años anteriores al 2020 visite el siguiente
-<a href="https://pit.shd.gov.co/vehiculos/">enlace vehicular</a>
-<a href="https://pit.shd.gov.co/predial/">enlace predial</a>
-</div>
-<br>
-<br>
 <br>
 <div class="container_new_page">
 	<sf:form action="${presentarDeclaracionUrl}"
@@ -509,8 +502,8 @@
         impuesto = impuesto.options[impuesto.selectedIndex].value;
 
         //Si - Sobretasa a la gasolina - obtener periodo
-        if(impuesto == "5" || impuesto == "3"){
-            periodo = document.getElementById("periodo").value;
+        if(impuesto == "5" || impuesto == "3"){ //gasolina, ica
+            periodo = $("#periodo").val();
         }
 
         var currentUrl = window.location.href;
@@ -523,7 +516,6 @@
             url : currentUrl,
         	type : "GET",
         	success : function(data) {
-        	    debugger;
         		
         		var opcUso = data;
                 if (impuesto == '5' && opcUso == '02') {//Sobretasa a la gasolina

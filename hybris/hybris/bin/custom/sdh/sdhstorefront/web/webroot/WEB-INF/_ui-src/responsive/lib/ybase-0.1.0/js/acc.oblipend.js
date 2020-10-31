@@ -1,10 +1,10 @@
 ACC.oblipend = {
 
-	_autoload : [ "bindBuscarObliPend", "bindDetalle", "bindDetalledos", "bindPopupPDF"],
+	_autoload : [  "bindDetalle", "bindDetalledos", "bindPopupPDF"],
 
-	bindBuscarObliPend : function() {	
-		$(document).on("click", "#buscarObliPend", function(e) {
-			e.preventDefault();
+	bindBuscarObliPend : function(listaLimpuestos_tag) {	
+//		$(document).on("click", "#buscarObliPend", function(e) {
+//			e.preventDefault();
 
 			$(".oblipend-table").hide();
 			$(".oblipend-tabledetalle").hide();
@@ -34,7 +34,7 @@ ACC.oblipend = {
 
 				$("#oblipend-ica").show();
 
-			} else if (impuesto == "4") {
+			} else if (impuesto == "7") {
 
 				$("#oblipend-publiext").show();
 
@@ -46,21 +46,39 @@ ACC.oblipend = {
 
 				$("#oblipend-delurbana").show();
 
-			}else if (impuesto == "7") {
-				$("#oblipend-predial").show();
-				$("#oblipend-vehiculos").show();
-				$("#oblipend-ica").show();
-				$("#oblipend-publiext").show();
-				$("#oblipend-gasolina").show();
-				$("#oblipend-delurbana").show();
+			}else if (impuesto == "99") {
+				var listaLimpuestos = ["","","","","","",""];
+				if(listaLimpuestos_tag != null){
+					listaLimpuestos = listaLimpuestos_tag.split(",");
+				}
 
-			}else if (impuesto == "8" || impuesto == "0") {
+				debugger;
+				if(listaLimpuestos[0]=="X"){
+					$("#oblipend-predial").show();
+				}
+				if(listaLimpuestos[1]=="X"){
+					$("#oblipend-vehiculos").show();
+				}
+				if(listaLimpuestos[2]=="X"){
+					$("#oblipend-ica").show();
+				}
+				//3=Reteica no se considera
+				if(listaLimpuestos[4]=="X"){
+					$("#oblipend-gasolina").show();
+				}
+				if(listaLimpuestos[5]=="X"){
+					$("#oblipend-delurbana").show();
+				}
+				if(listaLimpuestos[6]=="X"){
+					$("#oblipend-publiext").show();
+				}
 
+			}else if (impuesto == "4" || impuesto == "00") {
 				$("#oblipend-reteica").show();
 
 			}
 
-		});
+//		});
 
 	},
 	
@@ -142,7 +160,7 @@ ACC.oblipend = {
 	                $(document).off("click", ".js-ica-facet .js-facet-name-ica");
 	            }
 	        });
-	}else if(impuestoSelc=="4"){
+	}else if(impuestoSelc=="6"){
 		tableDel[0].setAttribute("id","example");
 		   var selectRefinementsTitle = "Delineación Urbana";
 	        ACC.colorbox.open(selectRefinementsTitle, {
@@ -182,7 +200,7 @@ ACC.oblipend = {
 	            }
 	        });
 	}
-	else if(impuestoSelc=="6"){
+	else if(impuestoSelc=="7"){
 		tablePub[0].setAttribute("id","example");
 		   var selectRefinementsTitle = "Publicidad Exterior";
 	        ACC.colorbox.open(selectRefinementsTitle, {
@@ -203,7 +221,7 @@ ACC.oblipend = {
 	        });
 	}
 	
-	else if(impuestoSelc=="8"){
+	else if(impuestoSelc=="4"){
 		tablePub[0].setAttribute("id","example");
 		   var selectRefinementsTitle = "RETEICA";
 	        ACC.colorbox.open(selectRefinementsTitle, {
@@ -372,7 +390,7 @@ ACC.oblipend = {
 											+ "/" + fecha.getFullYear());
 						}
 
-					} else if (impuesto == "4") {
+					} else if (impuesto == "7") {
 
 						var numrespub = this.attributes[4].nodeValue;
 						var angravpub = this.attributes[3].nodeValue;
@@ -542,7 +560,7 @@ ACC.oblipend = {
 //				$("#obliICA").val(obligICA);
  
 
-			} else if (impuesto == "4") {
+			} else if (impuesto == "7") {
 				
 				var resolu = $("#numResOB").val();
 				var aniogravavble = $("#angravPUB").val();

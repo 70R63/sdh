@@ -47,6 +47,7 @@
 		<fmt:parseNumber var="actnosubPA" type="number"
 			value="${fn:trim(infoDeclara.deducciones.actnosubPA)}" />
 		<c:if test="${ actnosubPA != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -70,11 +71,15 @@
 					</div>
 				</div>
 			</div>
+				<div class="row"></div>
+				<br>
 		</c:if>
+	
 
 		<fmt:parseNumber var="enajActFijo" type="number"
 			value="${fn:trim(infoDeclara.deducciones.enajActFijo)}" />
 		<c:if test="${ enajActFijo != 0  }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -99,10 +104,11 @@
 				</div>
 			</div>
 		</c:if>
-
+<div class="row"></div>
 		<fmt:parseNumber var="exportBienes" type="number"
 			value="${fn:trim(infoDeclara.deducciones.exportBienes)}" />
 		<c:if test="${ exportBienes != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -126,10 +132,11 @@
 				</div>
 			</div>
 		</c:if>
-
+<div class="row"></div>
 		<fmt:parseNumber var="exportServ" type="number"
 			value="${fn:trim(infoDeclara.deducciones.exportServ)}" />
 		<c:if test="${ exportServ != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -153,10 +160,11 @@
 				</div>
 			</div>
 		</c:if>
-
+<div class="row"></div>
 		<fmt:parseNumber var="actnosub39" type="number"
 			value="${fn:trim(infoDeclara.deducciones.actnosub39)}" />
 		<c:if test="${ actnosub39 != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -182,11 +190,12 @@
 			</div>
 		</c:if>
 
-
+<div class="row"></div>
 		<fmt:parseNumber var="actnosubPH" type="number"
 			value="${fn:trim(infoDeclara.deducciones.actnosubPH)}" />
 		<c:if test="${ actnosubPH != 0 }">
 			<div class="row deducciones">
+			<br>
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
 						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
@@ -210,11 +219,12 @@
 				</div>
 			</div>
 		</c:if>
-
+<div class="row"></div>
 		<fmt:parseNumber var="juegoSuerteAzar" type="number"
 			value="${fn:trim(infoDeclara.deducciones.juegoSuerteAzar)}" />
 		<c:if test="${ juegoSuerteAzar != 0 }">
 			<div class="row deducciones">
+			<br>
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
 						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
@@ -238,11 +248,12 @@
 				</div>
 			</div>
 		</c:if>
-
+<div class="row"></div>
 
 		<fmt:parseNumber var="donaciones" type="number"
 			value="${fn:trim(infoDeclara.deducciones.donaciones)}" />
 		<c:if test="${ donaciones != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -267,10 +278,11 @@
 			</div>
 		</c:if>
 
-
+<div class="row"></div>
 		<fmt:parseNumber var="exenActos" type="number"
 			value="${fn:trim(infoDeclara.deducciones.exenActos)}" />
 		<c:if test="${ exenActos != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -295,11 +307,12 @@
 				</div>
 			</div>
 		</c:if>
-
+<div class="row"></div>
 
 		<fmt:parseNumber var="baseGravEsp" type="number"
 			value="${fn:trim(infoDeclara.deducciones.baseGravEsp)}" />
 		<c:if test="${ baseGravEsp != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -324,10 +337,11 @@
 			</div>
 		</c:if>
 
-
+<div class="row"></div>
 		<fmt:parseNumber var="ingrActConsorc" type="number"
 			value="${fn:trim(infoDeclara.deducciones.ingrActConsorc)}" />
 		<c:if test="${ ingrActConsorc != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -357,6 +371,7 @@
 		<fmt:parseNumber var="diviNOGiroOrd" type="number"
 			value="${fn:trim(infoDeclara.deducciones.diviNOGiroOrd)}" />
 		<c:if test="${ diviNOGiroOrd != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -386,6 +401,7 @@
 		<fmt:parseNumber var="exenVictima" type="number"
 			value="${fn:trim(infoDeclara.deducciones.exenVictima)}" />
 		<c:if test="${ exenVictima != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -410,11 +426,13 @@
 				</div>
 			</div>
 		</c:if>
-
+<div class="row"></div>
+<br>
 
 		<fmt:parseNumber var="correcMoneda" type="number"
 			value="${fn:trim(infoDeclara.deducciones.correcMoneda)}" />
 		<c:if test="${ correcMoneda != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -447,6 +465,7 @@
 		<fmt:parseNumber var="reintegro" type="number"
 			value="${fn:trim(infoDeclara.deducciones.reintegro)}" />
 		<c:if test="${ reintegro != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -479,6 +498,7 @@
 		<fmt:parseNumber var="salarios" type="number"
 			value="${fn:trim(infoDeclara.deducciones.salarios)}" />
 		<c:if test="${ salarios != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -510,6 +530,7 @@
 		<fmt:parseNumber var="devoluciones" type="number"
 			value="${fn:trim(infoDeclara.deducciones.devoluciones)}" />
 		<c:if test="${ devoluciones != 0 }">
+			<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -537,6 +558,7 @@
 		<fmt:parseNumber var="rebajas" type="number"
 			value="${fn:trim(infoDeclara.deducciones.rebajas)}" />
 		<c:if test="${ rebajas != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -564,6 +586,7 @@
 		<fmt:parseNumber var="descuentos" type="number"
 			value="${fn:trim(infoDeclara.deducciones.descuentos)}" />
 		<c:if test="${ descuentos != 0 }">
+		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
@@ -590,7 +613,9 @@
 
 
 		<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
+		
 			<div class="row deducciones" id="deducciones">
+			<br>
 				<div class="col-md-6">
 					<select id="deduccionBase" class="alto form-control deducci"
 						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">

@@ -588,6 +588,48 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 			}
 		}
 
+
+		if (form.getREL06() != null)
+		{
+			if (form.getREL06().equals(responseWS.getCorrectAnswer("REL06")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getREL07() != null)
+		{
+			if (form.getREL07().equals(responseWS.getCorrectAnswer("REL07")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getREL08() != null)
+		{
+			if (form.getREL08().equals(responseWS.getCorrectAnswer("REL08")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getREL09() != null)
+		{
+			if (form.getREL09().equals(responseWS.getCorrectAnswer("REL09")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getREL10() != null)
+		{
+			if (form.getREL10().equals(responseWS.getCorrectAnswer("REL10")))
+			{
+				i++;
+			}
+		}
+
+
 		if (form.getDIR2_0001() != null)
 		{
 			if (form.getDIR2_0001().equals(responseWS.getCorrectAnswer("DIR2_0001")))
@@ -604,6 +646,235 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 			}
 		}
 
+		if (form.getDIR2_0003() != null)
+		{
+			if (form.getDIR2_0003().equals(responseWS.getCorrectAnswer("DIR2_0003")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0004() != null)
+		{
+			if (form.getDIR2_0004().equals(responseWS.getCorrectAnswer("DIR2_0004")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0005() != null)
+		{
+			if (form.getDIR2_0005().equals(responseWS.getCorrectAnswer("DIR2_0005")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0006() != null)
+		{
+			if (form.getDIR2_0006().equals(responseWS.getCorrectAnswer("DIR2_0006")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0007() != null)
+		{
+			if (form.getDIR2_0007().equals(responseWS.getCorrectAnswer("DIR2_0007")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0008() != null)
+		{
+			if (form.getDIR2_0008().equals(responseWS.getCorrectAnswer("DIR2_0008")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0009() != null)
+		{
+			if (form.getDIR2_0009().equals(responseWS.getCorrectAnswer("DIR2_0009")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0010() != null)
+		{
+			if (form.getDIR2_0010().equals(responseWS.getCorrectAnswer("DIR2_0010")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0011() != null)
+		{
+			if (form.getDIR2_0011().equals(responseWS.getCorrectAnswer("DIR2_0011")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0012() != null)
+		{
+			if (form.getDIR2_0012().equals(responseWS.getCorrectAnswer("DIR2_0012")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0013() != null)
+		{
+			if (form.getDIR2_0013().equals(responseWS.getCorrectAnswer("DIR2_0013")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0014() != null)
+		{
+			if (form.getDIR2_0014().equals(responseWS.getCorrectAnswer("DIR2_0014")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0015() != null)
+		{
+			if (form.getDIR2_0015().equals(responseWS.getCorrectAnswer("DIR2_0015")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0016() != null)
+		{
+			if (form.getDIR2_0016().equals(responseWS.getCorrectAnswer("DIR2_0016")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0017() != null)
+		{
+			if (form.getDIR2_0017().equals(responseWS.getCorrectAnswer("DIR2_0017")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0018() != null)
+		{
+			if (form.getDIR2_0018().equals(responseWS.getCorrectAnswer("DIR2_0018")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0019() != null)
+		{
+			if (form.getDIR2_0019().equals(responseWS.getCorrectAnswer("DIR2_0019")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0020() != null)
+		{
+			if (form.getDIR2_0020().equals(responseWS.getCorrectAnswer("DIR2_0020")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0021() != null)
+		{
+			if (form.getDIR2_0021().equals(responseWS.getCorrectAnswer("DIR2_0021")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0022() != null)
+		{
+			if (form.getDIR2_0022().equals(responseWS.getCorrectAnswer("DIR2_0022")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0023() != null)
+		{
+			if (form.getDIR2_0023().equals(responseWS.getCorrectAnswer("DIR2_0023")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0024() != null)
+		{
+			if (form.getDIR2_0024().equals(responseWS.getCorrectAnswer("DIR2_0024")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0025() != null)
+		{
+			if (form.getDIR2_0025().equals(responseWS.getCorrectAnswer("DIR2_0025")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0026() != null)
+		{
+			if (form.getDIR2_0026().equals(responseWS.getCorrectAnswer("DIR2_0026")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0027() != null)
+		{
+			if (form.getDIR2_0027().equals(responseWS.getCorrectAnswer("DIR2_0027")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0028() != null)
+		{
+			if (form.getDIR2_0028().equals(responseWS.getCorrectAnswer("DIR2_0028")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0029() != null)
+		{
+			if (form.getDIR2_0029().equals(responseWS.getCorrectAnswer("DIR2_0029")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR2_0030() != null)
+		{
+			if (form.getDIR2_0030().equals(responseWS.getCorrectAnswer("DIR2_0030")))
+			{
+				i++;
+			}
+		}
+
+
+
+
+
+
 		if (form.getDIR_0001() != null)
 		{
 			if (form.getDIR_0001().equals(responseWS.getCorrectAnswer("DIR_0001")))
@@ -619,6 +890,72 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 				i++;
 			}
 		}
+
+		if (form.getDIR_0003() != null)
+		{
+			if (form.getDIR_0003().equals(responseWS.getCorrectAnswer("DIR_0003")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR_0004() != null)
+		{
+			if (form.getDIR_0004().equals(responseWS.getCorrectAnswer("DIR_0004")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR_0005() != null)
+		{
+			if (form.getDIR_0005().equals(responseWS.getCorrectAnswer("DIR_0005")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR_0006() != null)
+		{
+			if (form.getDIR_0006().equals(responseWS.getCorrectAnswer("DIR_0006")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR_0007() != null)
+		{
+			if (form.getDIR_0007().equals(responseWS.getCorrectAnswer("DIR_0007")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR_0008() != null)
+		{
+			if (form.getDIR_0008().equals(responseWS.getCorrectAnswer("DIR_0008")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR_0009() != null)
+		{
+			if (form.getDIR_0009().equals(responseWS.getCorrectAnswer("DIR_0009")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR_0010() != null)
+		{
+			if (form.getDIR_0010().equals(responseWS.getCorrectAnswer("DIR_0010")))
+			{
+				i++;
+			}
+		}
+
+
 
 		if (form.getPLA_0001() != null)
 		{

@@ -10,7 +10,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -119,7 +118,8 @@ public class ConsultaEstado extends AbstractSearchPageController
 		System.out.println("---------------- En Estado de Cuenta GET --------------------------");
 		final String referrer = request.getHeader("referer");
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
-		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
 		model.addAttribute("dataForm", dataForm);
 
 		final EdoCuentaForm ctaForm = new EdoCuentaForm();
@@ -161,13 +161,18 @@ public class ConsultaEstado extends AbstractSearchPageController
 			ctaForm.setPublicidadSaldoFavor(edoCuentaResponse.getNewPublicidadSaldoFavor());
 			if (edoCuentaResponse.getPredial() != null && !edoCuentaResponse.getPredial().isEmpty())
 			{
-//				ctaForm.setPredial(edoCuentaResponse.getPredial().stream()
-//						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCHIP())).collect(Collectors.toList()));
-				ctaForm.setPredial(edoCuentaResponse.getPredial());
+				ctaForm.setPredial(
+						edoCuentaResponse.getPredial().stream().filter(eachTax -> (StringUtils.isNotBlank(eachTax.getNewCHIP())
+								|| StringUtils.isNotBlank(eachTax.getMatrInmobiliaria()))).collect(Collectors.toList()));
 			}
 
-			//ctaForm.setPredial(edoCuentaResponse.getPredial());
-			ctaForm.setTablaICA(edoCuentaResponse.getTablaICA());
+			if (edoCuentaResponse.getTablaICA() != null && !edoCuentaResponse.getTablaICA().isEmpty())
+			{
+				ctaForm.setTablaICA(
+						edoCuentaResponse.getTablaICA().stream().filter(
+								eachTax -> (StringUtils.isNotBlank(eachTax.getNumDoc()) || StringUtils.isNotBlank(eachTax.getTipoDoc())))
+								.collect(Collectors.toList()));
+			}
 
 			//cambios para reteica
 			ctaForm.setReteica(edoCuentaResponse.getReteica());
@@ -187,8 +192,22 @@ public class ConsultaEstado extends AbstractSearchPageController
 						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCDU())).collect(Collectors.toList()));
 			}
 			//ctaForm.setTablaDelineacion(edoCuentaResponse.getTablaDelineacion());
-			ctaForm.setTablaGasolina(edoCuentaResponse.getTablaGasolina());
-			ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad());
+			//			ctaForm.setTablaGasolina(edoCuentaResponse.getTablaGasolina());
+			if (edoCuentaResponse.getTablaGasolina() != null && !edoCuentaResponse.getTablaGasolina().isEmpty())
+			{
+				ctaForm.setTablaGasolina(edoCuentaResponse.getTablaGasolina().stream()
+						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getTipoDocumento())).collect(Collectors.toList()));
+			}
+			//			ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad());
+			if (edoCuentaResponse.getTablaPublicidad() != null && !edoCuentaResponse.getTablaPublicidad().isEmpty())
+			{
+				ctaForm
+						.setTablaPublicidad(
+								edoCuentaResponse.getTablaPublicidad().stream()
+										.filter(eachTax -> (StringUtils.isNotBlank(eachTax.getCabecera().getNoResolucion())
+												&& StringUtils.isNotBlank(eachTax.getCabecera().getTipoValla())))
+										.collect(Collectors.toList()));
+			}
 
 			final Date date = new Date();
 

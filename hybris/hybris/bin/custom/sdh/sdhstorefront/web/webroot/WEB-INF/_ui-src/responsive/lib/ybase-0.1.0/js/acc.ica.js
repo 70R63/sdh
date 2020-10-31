@@ -147,7 +147,8 @@ ACC.ica = {
 	    	        	var codMunicipio = $.trim($(value).find(".codMunicipio").val());
 	    	        	var ingresos = $.trim($(value).find(".ingresos").val());
 	    	        	
-	    	        	if(codCIIU != "" && ingresos != "")
+//	    	        	if(codCIIU != "" && ingresos != "")
+    	        		if(ingresos != "")
 	    	        	{
 		    	        	var eachIngreso=new Object();
 		    	        	

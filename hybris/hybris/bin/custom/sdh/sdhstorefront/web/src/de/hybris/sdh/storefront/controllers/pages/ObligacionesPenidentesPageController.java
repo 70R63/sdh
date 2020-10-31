@@ -9,8 +9,8 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
@@ -32,8 +32,10 @@ import de.hybris.sdh.core.services.SDHObligacionesPublicidadService;
 import de.hybris.sdh.core.services.SDHObligacionesVehiculosService;
 import de.hybris.sdh.core.services.SDHReteIcaService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.ObligacionesForm;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -102,6 +104,10 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	@Resource(name = "sdhReteIcaService")
 	SDHReteIcaService sdhReteICAInfObjetoService;
 
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
+
 	private static final Logger LOG = Logger.getLogger(SobreTasaGasolina.class);
 
 
@@ -122,75 +128,100 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		final ObligacionesRequest obligacionesRequest = new ObligacionesRequest();
 		obligacionesRequest.setBp(customerModel.getNumBP());
 		final ObligacionesForm obligacionesFormuno = new ObligacionesForm();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final Map listaImpuestosCustomer = gasolinaService.obtenerListaImpuestosActivos(customerData);
 
-		try
-		{
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-			wsResponse = sdhObligacionesGasolinaService.obligacionesRequest(obligacionesRequest);
-			if (wsResponse != null)
-			{
-				final ObligacionesGasolinaResponse obligacionesGasolinaResponse = mapper.readValue(wsResponse,
-						ObligacionesGasolinaResponse.class);
-				obligacionesFormuno.setHeadergas(obligacionesGasolinaResponse.getHeader().stream()
-						.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
-			}
-
-			wsResponse = sdhObligacionesICAService.obligacionesRequest(obligacionesRequest);
-			if (wsResponse != null)
-			{
-				final ObligacionesICAResponse obligacionesICAResponse = mapper.readValue(wsResponse, ObligacionesICAResponse.class);
-				obligacionesFormuno.setHeaderica(obligacionesICAResponse.getHeader());
-
-			}
-
-			wsResponse = sdhObligacionesDeliService.obligacionesRequest(obligacionesRequest);
-			if (wsResponse != null)
-			{
-				final ObligacionesDeliResponse obligacionesDeliResponse = mapper.readValue(wsResponse,
-						ObligacionesDeliResponse.class);
-				obligacionesFormuno.setHeaderdeli(obligacionesDeliResponse.getHeader().stream()
-						.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
-			}
-
-			wsResponse = sdhObligacionesPredialService.obligacionesRequest(obligacionesRequest);
-			if (wsResponse != null)
-			{
-				final ObligacionesPredialResponse obligacionesPredResponse = mapper.readValue(wsResponse,
-						ObligacionesPredialResponse.class);
-				obligacionesFormuno.setHeaderPred(obligacionesPredResponse.getHeader().stream()
-						.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
-			}
-
-			wsResponse = sdhObligacionesVehiculosService.obligacionesRequest(obligacionesRequest);
-			if (wsResponse != null)
-			{
-				final ObligacionesVehiculosResponse obligacionesVehiResponse = mapper.readValue(wsResponse,
-						ObligacionesVehiculosResponse.class);
-				obligacionesFormuno.setHeaderVehiculos(obligacionesVehiResponse.getHeader().stream()
-						.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
-			}
-
-			wsResponse = sdhObligacionesPublicidadService.obligacionesRequest(obligacionesRequest);
-			if (wsResponse != null)
-			{
-				final ObligacionesResponse obligacionesResponse = mapper.readValue(wsResponse, ObligacionesResponse.class);
-
-				obligacionesFormuno.setHeader(obligacionesResponse.getHeader().stream()
-						.filter(d -> StringUtils.isNotBlank(d.getNumResolucion())).collect(Collectors.toList()));
-			}
-
-		}
-		catch (final Exception e)
-		{
-			LOG.error("error generating declaration : " + e.getMessage());
-		}
 
 		if (referrer.contains("contribuyentes"))
 		{
+
+			try
+			{
+
+
+
+				if (listaImpuestosCustomer.get("5") != null)
+				{
+					wsResponse = sdhObligacionesGasolinaService.obligacionesRequest(obligacionesRequest);
+					if (wsResponse != null)
+					{
+						final ObligacionesGasolinaResponse obligacionesGasolinaResponse = mapper.readValue(wsResponse,
+								ObligacionesGasolinaResponse.class);
+						obligacionesFormuno.setHeadergas(obligacionesGasolinaResponse.getHeader().stream()
+								.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
+					}
+				}
+
+				if (listaImpuestosCustomer.get("3") != null)
+				{
+					wsResponse = sdhObligacionesICAService.obligacionesRequest(obligacionesRequest);
+					if (wsResponse != null)
+					{
+						final ObligacionesICAResponse obligacionesICAResponse = mapper.readValue(wsResponse,
+								ObligacionesICAResponse.class);
+						obligacionesFormuno.setHeaderica(obligacionesICAResponse.getHeader());
+
+					}
+				}
+
+				if (listaImpuestosCustomer.get("6") != null)
+				{
+					wsResponse = sdhObligacionesDeliService.obligacionesRequest(obligacionesRequest);
+					if (wsResponse != null)
+					{
+						final ObligacionesDeliResponse obligacionesDeliResponse = mapper.readValue(wsResponse,
+								ObligacionesDeliResponse.class);
+						obligacionesFormuno.setHeaderdeli(obligacionesDeliResponse.getHeader().stream()
+								.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
+					}
+				}
+
+				if (listaImpuestosCustomer.get("1") != null)
+				{
+					wsResponse = sdhObligacionesPredialService.obligacionesRequest(obligacionesRequest);
+					if (wsResponse != null)
+					{
+						final ObligacionesPredialResponse obligacionesPredResponse = mapper.readValue(wsResponse,
+								ObligacionesPredialResponse.class);
+						obligacionesFormuno.setHeaderPred(obligacionesPredResponse.getHeader().stream()
+								.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
+					}
+				}
+
+				if (listaImpuestosCustomer.get("2") != null)
+				{
+					wsResponse = sdhObligacionesVehiculosService.obligacionesRequest(obligacionesRequest);
+					if (wsResponse != null)
+					{
+						final ObligacionesVehiculosResponse obligacionesVehiResponse = mapper.readValue(wsResponse,
+								ObligacionesVehiculosResponse.class);
+						obligacionesFormuno.setHeaderVehiculos(obligacionesVehiResponse.getHeader().stream()
+								.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
+					}
+				}
+
+				if (listaImpuestosCustomer.get("7") != null)
+				{
+					wsResponse = sdhObligacionesPublicidadService.obligacionesRequest(obligacionesRequest);
+					if (wsResponse != null)
+					{
+						final ObligacionesResponse obligacionesResponse = mapper.readValue(wsResponse, ObligacionesResponse.class);
+
+						obligacionesFormuno.setHeader(obligacionesResponse.getHeader().stream()
+								.filter(d -> StringUtils.isNotBlank(d.getNumResolucion())).collect(Collectors.toList()));
+					}
+				}
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("error generating declaration : " + e.getMessage());
+			}
+
 
 			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		}
@@ -202,9 +233,9 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 
 			try
 			{
-				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
+				if (listaImpuestosCustomer.get("4") != null)
+				{
 				wsResponseReteica = sdhReteICAInfObjetoService.reteIcaObligaciones(reteicaRequest);
 				if (wsResponseReteica != null)
 				{
@@ -212,6 +243,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 							ReteicaObligacionesResponse.class);
 
 					obligacionesFormuno.setHeaderreteica(reteicaObligacionesResponse.getHeader());
+				}
 				}
 
 
@@ -232,6 +264,11 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		model.addAttribute("obligacionesFormuno", obligacionesFormuno);
 		model.addAttribute("customerData", customerData);
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
+		model.addAttribute("listaImpuestosCatC", gasolinaService.obtenerListaImpuestosActivosCatC(customerData));
+		model.addAttribute("listaImpuestosCatAR", gasolinaService.obtenerListaImpuestosActivosCatAR(customerData));
+		model.addAttribute("listaImpuestosCStr", gasolinaService.obtenerListaImpuestosActivosCStr(customerData));
+		model.addAttribute("listaImpuestosARStr", gasolinaService.obtenerListaImpuestosActivosARStr(customerData));
+
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(OBLIGACIONES_PENDIENTES_CMS_PAGE));
