@@ -1,8 +1,0 @@
-# Macros / Replacement Parameter definitions
-$productCatalog=sdhProductCatalog
-$productCatalogName=SDH Product Catalog
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$ruleType=ruleType(code)[default='ANY']
-
-INSERT_UPDATE DisableProductBundleRule;id[unique=true];$catalogVersion;bundleTemplate(id,version[default=1.0],$catalogVersion);conditionalProducts(code,$catalogVersion);targetProducts(code,$catalogVersion);$ruleType
-;EVENT_Permit_Alcohol_AddOns_Disable_Rule;;EVENT_Permit_WithAlcohol_AddOns_Bundle;event-gather-below-50-addon;event-serve-alcohol-addon,none-eventpermit-alcohol-addon

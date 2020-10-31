@@ -1,7 +1,0 @@
-# ImpEx for Importing Categories into Public Sector Store
-
-# Macros / Replacement Parameter definitions
-$catalogVersion=catalogVersion(catalog(id[default='sdhProductCatalog']),version[default='Staged'])[unique=true,default='sdhProductCatalog:Staged']
-
-# Create Categories
-INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$catalogVersion);allowedPrincipals(uid)[default='customergroup']
