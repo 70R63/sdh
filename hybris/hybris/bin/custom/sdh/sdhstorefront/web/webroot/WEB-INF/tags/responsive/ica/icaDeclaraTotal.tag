@@ -73,7 +73,7 @@
 						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
 							pattern="#######################" var="codCIIUNumber" />
 						<select id="${idDEA_CIIU}" class="alto form-control codCIIU"
-							style="height: 48px;" ${disabledIngNetosGrava} onchange="habilitarTablaING_onChange()">
+							style="height: 48px; font-size:11px !important; padding: 0px !important;" ${disabledIngNetosGrava} onchange="habilitarTablaING_onChange()">
 							<option value="" selected>SELECCIONAR</option>
 							<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
 								<c:set var="selected" value="" />
@@ -127,7 +127,7 @@
 				<div class="col-md-7">
 					<!-- EJRR Adding data to select box -->
 					<select id="" class="alto form-control codCIIU"
-						style="font-size:12px !important; padding: 0px !important" >
+						style="font-size:10px !important; padding: 0px !important" >
 						<option value="" selected>SELECCIONAR</option>
 						<c:forEach items="${gravableNetIncomes}" var="eachActivity">
 							<option value="${eachActivity.ciiu}">${eachActivity.ciiu}
@@ -238,7 +238,7 @@
 
  			<div class="col-md-1"> 
  				<select id="" class="new_alto form-control tipoID" 
- 					style="height: 48px;"> 
+ 					style="height: 48px; font-size:11px !important; padding: 0px !important;"> 
  					<option value="">Seleccionar</option> 
  					<option value="CC">CC C&eacutedula de ciudadania</option> 
  					<option value="CE">CE C&eacutedula de extranjer&iacutea</option> 
@@ -304,7 +304,7 @@
  			<div class="col-md-1"> 
 <%--  			value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].tipoID}" --%>
  				<select id="" 
- 					class="new_alto form-control tipoID" style="height: 48px;" ${disabledIngNetosGrava}> 
+ 					class="new_alto form-control tipoID" style="height: 48px; font-size:11px !important; padding: 0px;" ${disabledIngNetosGrava}> 
  					<option value="">Seleccionar</option> 
  					<c:forEach items="${ idTypes}" var="eachType"> 
 
@@ -331,7 +331,7 @@
  			<div class="col-md-1"> 
 <%--  				<sf:input class="new_alto form-control municipio" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].codMunicipio" readonly="${roIngNetosGravaBoolean}"/> --%>
 				<select id="" class="new_alto form-control codMunicipioING"
-					style="height: 48px;" onchange="activarValidacion_valorRetenido()" ${disabledIngNetosGrava}>
+					style="height: 48px; padding:0px; font-size: 11 px; padding: 0px !important;" onchange="activarValidacion_valorRetenido()" ${disabledIngNetosGrava}>
 					<option value="">SELECCIONAR</option>
 					<c:forEach items="${cities}" var="eachCity">
 						<c:set var="selected" value="" />
