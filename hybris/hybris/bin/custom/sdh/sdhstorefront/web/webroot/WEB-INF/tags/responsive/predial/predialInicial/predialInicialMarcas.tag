@@ -87,6 +87,7 @@
 <script type="text/javascript">
     function validateForm() {
     	debugger;
+		
     	if(ACC.predial.mostrarMensajeInfoObjeto()){
     		return false;
     	}
