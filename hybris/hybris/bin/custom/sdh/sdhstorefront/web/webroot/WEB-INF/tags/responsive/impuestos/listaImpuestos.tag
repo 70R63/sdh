@@ -503,7 +503,10 @@
 
         //Si - Sobretasa a la gasolina - obtener periodo
         if(impuesto == "5" || impuesto == "3"){ //gasolina, ica
-            periodo = $("#periodo").val();
+            var objPeriodo = document.getElementById("periodo");
+        	if(objPeriodo!= null){
+        		periodo = objPeriodo.value;
+        	}
         }
 
         var currentUrl = window.location.href;

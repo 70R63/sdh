@@ -18,7 +18,6 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -184,51 +183,58 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 			final DetalleVehiculosResponse detalleVehiculosResponse = mapper
 					.readValue(sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
 
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-
-			vehiculosFormDeclaracion.setOpcionUso(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso());
-			vehiculosFormDeclaracion.setCapacidadTon(detalleVehiculosResponse.getDetalle().getCapacidadTon());
-			vehiculosFormDeclaracion.setTipoVeh(detalleVehiculosResponse.getDetalle().getTipoVeh());
-			vehiculosFormDeclaracion.setCapacidadPas(detalleVehiculosResponse.getDetalle().getCapacidadPas());
-			vehiculosFormDeclaracion.setIdServicio(detalleVehiculosResponse.getDetalle().getIdServicio());
-			vehiculosFormDeclaracion.setWatts(detalleVehiculosResponse.getDetalle().getWatts());
-			vehiculosFormDeclaracion.setClasicoAntig(detalleVehiculosResponse.getDetalle().getClasicoAntig());
-			vehiculosFormDeclaracion.setCheckAporte_flag(detalleVehiculosResponse.getCheckAporte());
-			vehiculosFormDeclaracion.setHomologado(detalleVehiculosResponse.getDetalle().getHomologado());
-			if (detalleVehiculosResponse != null && detalleVehiculosResponse.getInfo_declara() != null
-					&& detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
+			if (!detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getId_msj().equals(""))
 			{
-				vehiculosFormDeclaracion.setObjetoCont(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getObjetoCont());
+				GlobalMessages.addErrorMessage(model, detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getTxt_msj());
 			}
-
-			if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
-					&& !sdhConsultaContribuyenteBPResponse.getVehicular().isEmpty())
+			else
 			{
 
-				for (final ImpuestoVehiculos eachVehResponse : sdhConsultaContribuyenteBPResponse.getVehicular())
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+						SDHValidaMailRolResponse.class);
+
+				vehiculosFormDeclaracion.setOpcionUso(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso());
+				vehiculosFormDeclaracion.setCapacidadTon(detalleVehiculosResponse.getDetalle().getCapacidadTon());
+				vehiculosFormDeclaracion.setTipoVeh(detalleVehiculosResponse.getDetalle().getTipoVeh());
+				vehiculosFormDeclaracion.setCapacidadPas(detalleVehiculosResponse.getDetalle().getCapacidadPas());
+				vehiculosFormDeclaracion.setIdServicio(detalleVehiculosResponse.getDetalle().getIdServicio());
+				vehiculosFormDeclaracion.setWatts(detalleVehiculosResponse.getDetalle().getWatts());
+				vehiculosFormDeclaracion.setClasicoAntig(detalleVehiculosResponse.getDetalle().getClasicoAntig());
+				vehiculosFormDeclaracion.setCheckAporte_flag(detalleVehiculosResponse.getCheckAporte());
+				vehiculosFormDeclaracion.setHomologado(detalleVehiculosResponse.getDetalle().getHomologado());
+				if (detalleVehiculosResponse != null && detalleVehiculosResponse.getInfo_declara() != null
+						&& detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
+				{
+					vehiculosFormDeclaracion.setObjetoCont(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getObjetoCont());
+				}
+
+				if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
+						&& !sdhConsultaContribuyenteBPResponse.getVehicular().isEmpty())
 				{
 
-					if (placa.equals(eachVehResponse.getPlaca()))
+					for (final ImpuestoVehiculos eachVehResponse : sdhConsultaContribuyenteBPResponse.getVehicular())
 					{
-						vehiculosFormDeclaracion.setClase(eachVehResponse.getClase());
-						vehiculosFormDeclaracion.setCarroceria(eachVehResponse.getCarroceria());
-						vehiculosFormDeclaracion.setMarca(eachVehResponse.getMarca());
-						vehiculosFormDeclaracion.setCilindraje(eachVehResponse.getCilindraje());
-						vehiculosFormDeclaracion.setLinea(eachVehResponse.getLinea());
-						vehiculosFormDeclaracion.setModelo(eachVehResponse.getModelo());
-						vehiculosFormDeclaracion.setBlindado(eachVehResponse.getBlindado());
-						vehiculosFormDeclaracion
-								.setAvaluo(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getAvaluoActual()); //Este campo se seteaba dentro de la validacion de numForm != null, pero por reporte de incidente se removio de la validacion
 
-						if (vehiculosFormDeclaracion.getNumForm() != null && !vehiculosFormDeclaracion.getNumForm().isEmpty())
+						if (placa.equals(eachVehResponse.getPlaca()))
 						{
+							vehiculosFormDeclaracion.setClase(eachVehResponse.getClase());
+							vehiculosFormDeclaracion.setCarroceria(eachVehResponse.getCarroceria());
+							vehiculosFormDeclaracion.setMarca(eachVehResponse.getMarca());
+							vehiculosFormDeclaracion.setCilindraje(eachVehResponse.getCilindraje());
+							vehiculosFormDeclaracion.setLinea(eachVehResponse.getLinea());
+							vehiculosFormDeclaracion.setModelo(eachVehResponse.getModelo());
+							vehiculosFormDeclaracion.setBlindado(eachVehResponse.getBlindado());
+							vehiculosFormDeclaracion
+									.setAvaluo(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getAvaluoActual()); //Este campo se seteaba dentro de la validacion de numForm != null, pero por reporte de incidente se removio de la validacion
+
+							if (vehiculosFormDeclaracion.getNumForm() != null && !vehiculosFormDeclaracion.getNumForm().isEmpty())
+							{
 
 								String formas = "";
-							formas = detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm();
-							vehiculosFormDeclaracion
-									.setImpuestoCargo(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getImpuestoCargo());
+								formas = detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm();
+								vehiculosFormDeclaracion
+										.setImpuestoCargo(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getImpuestoCargo());
 								if (formas.equals(numForma))
 								{
 									vehiculosFormDeclaracion.setInfoVeh(detalleVehiculosResponse.getInfo_declara().getInfoVeh());
@@ -237,10 +243,10 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 									vehiculosFormDeclaracion.setNumForm(formas);
 									vehiculosFormDeclaracion.setImpuestoCargo(
 											detalleVehiculosResponse.getInfo_declara().getLiquidacion().getImpuestoCargo());
-								vehiculosFormDeclaracion
-										.setCheckAporte(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getCheckAPorte());
-								vehiculosFormDeclaracion
-										.setProyectoAporte(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getProyectoAporte());
+									vehiculosFormDeclaracion
+											.setCheckAporte(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getCheckAPorte());
+									vehiculosFormDeclaracion.setProyectoAporte(
+											detalleVehiculosResponse.getInfo_declara().getLiquidacion().getProyectoAporte());
 									vehiculosFormDeclaracion
 											.setTarifaActual(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getTarifaActual());
 									vehiculosFormDeclaracion
@@ -259,23 +265,23 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 											detalleVehiculosResponse.getInfo_declara().getLiquidacion().getTotalPagoVolunt());
 
 								}
+							}
+							else
+							{
+								break;
+							}
+
+							break;
 						}
 						else
 						{
-							break;
+							vehiculosFormDeclaracion.setClase("No existe Placa");
 						}
 
-						break;
 					}
-					else
-					{
-						vehiculosFormDeclaracion.setClase("No existe Placa");
-					}
-
 				}
+
 			}
-
-
 		}
 		catch (final Exception e)
 		{
