@@ -143,9 +143,9 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		{
 			dataForm.setOptionVehicular("2");
 		}
-		if (customerData.getIcaTax() != null)
+		if (customerData.getIcaTax() != null && customerData.getIcaTax().getObjectNumber() != null)
 		{
-			dataForm.setOptionGas("3");
+			dataForm.setOptionIca("3");
 		}
 		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 		{
@@ -157,10 +157,12 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		}
 		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
 		{
-			dataForm.setOptionGas("6");
+			dataForm.setOptionDeli("6");
 		}
-		//Predial
-		dataForm.setOptionPredial("1");
+		if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
+		{
+			dataForm.setOptionPredial("1");
+		}
 
 
 
@@ -597,43 +599,40 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	private Map<String, String> getTpImpuesto(final String optionVehicular, final String optionGas, final String optionPubExt,
 			final String optionIca, final String optionDeli, final String predial)
 	{
-		final Map<String, String> map;
-		if (optionGas != "" || optionPubExt != "" || optionIca != "" || optionDeli != "" || optionVehicular != "" || predial != "")
-		{
-			map = new HashMap<String, String>();
-			map.put("0", "Seleccionar");
+		final Map<String, String> map = new HashMap<String, String>();
+		map.put("0", "Seleccionar");
 
-			if (optionVehicular != "")
+		if (!StringUtils.isEmpty(optionGas) || !StringUtils.isEmpty(optionPubExt) || !StringUtils.isEmpty(optionIca)
+				|| !StringUtils.isEmpty(optionDeli) || !StringUtils.isEmpty(optionVehicular) || !StringUtils.isEmpty(predial))
+		{
+
+			if (!StringUtils.isEmpty(optionVehicular))
 			{
 				map.put("2", "Impuestos de Vehículos");
 			}
 
-			if (optionIca != "")
+			if (!StringUtils.isEmpty(optionIca))
 			{
 				map.put("3", "ICA");
 			}
-			if (optionPubExt != "")
+			if (!StringUtils.isEmpty(optionPubExt))
 			{
 				map.put("4", "Publicidad Exterior");
 			}
-			if (optionGas != "")
+			if (!StringUtils.isEmpty(optionGas))
 			{
 				map.put("5", "Sobretasa Gasolina");
 			}
-			if (optionDeli != "")
+			if (!StringUtils.isEmpty(optionDeli))
 			{
 				map.put("6", "Delineacion Urbana");
 			}
 
-			if (predial != "")
+			if (!StringUtils.isEmpty(predial))
 			{
 				map.put("1", "Predial");
 			}
 
-		}
-		else
-		{
-			map = null;
 		}
 
 		return map;
