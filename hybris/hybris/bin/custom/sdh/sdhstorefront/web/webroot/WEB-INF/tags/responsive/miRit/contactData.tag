@@ -535,9 +535,9 @@ toddir.style.width= '900px'
 						</label>
 					</div>
 					<input id="address.assistant.output" name="addressAssistantOutput"
-						class="form-control form-control" aria-required="true" type="text"
-						value="" maxlength="2000" width="90000"
-						onkeyup="menuAutoSearch();" disabled> <input
+						class="form-control form-control addressXS" aria-required="true" type="text"
+						value="" maxlength="2000" width="auto"
+						onkeyup="menuAutoSearch();" disabled style="width: auto !important"> <input
 						id="address.assistant.output.street"
 						name="address.assistant.output.street"
 						class="form-control form-control" type="hidden" /> <input
@@ -1139,7 +1139,7 @@ toddir.style.width= '900px'
 										</label>
 									</div>
 								</div>
-								<div class="col-12 col-md-2">
+								<div class="col-12 col-md-2 col-xs-2">
 									<div class="form-group ">
 										<button class="btn btn-secondary btn-lg btn-block"
 											type="button" id="addSocialNetworkButton">

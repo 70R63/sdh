@@ -160,8 +160,8 @@
 							<spring:theme code="mirit.sobrevehiculo.tax.title"/>
 						</label>
 					</div>
-					<div class="row">
-						<div class="col-md-10">
+					<div class="row table-responsive">
+						<div class="col-md-10 table-responsive">
 							<table class="table" id="tabPaginacion3" class="newtd">
 								<thead>
 									<tr>
@@ -215,7 +215,7 @@
 							<spring:theme code="mirit.impuestos.predial.titulo"/>
 						</label>
 					</div>
-					<div class="row">
+					<div class="row table-responsive">
 						<div class="col-md-10">
 							<table class="table" id="tabPaginacion4" class="newtd">
 								<thead>
