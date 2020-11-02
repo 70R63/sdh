@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
+
 /**
  * @author hybris
  *
@@ -22,6 +25,7 @@ public class ImpuestoVehiculos
 	private String anioGravable;
 	private String numForm;
 	private String marca_Desc;
+	private List<ErrorEnWS> errores;
 
 	/**
 	 * @return the placa
@@ -241,6 +245,23 @@ public class ImpuestoVehiculos
 	public void setMarca_Desc(final String marca_Desc)
 	{
 		this.marca_Desc = marca_Desc;
+	}
+
+	/**
+	 * @return the errores
+	 */
+	public List<ErrorEnWS> getErrores()
+	{
+		return errores;
+	}
+
+	/**
+	 * @param errores
+	 *           the errores to set
+	 */
+	public void setErrores(final List<ErrorEnWS> errores)
+	{
+		this.errores = errores;
 	}
 
 
