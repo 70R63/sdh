@@ -734,7 +734,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 								&& detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
 						{
 							infoVehiculos.setNumForm(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm());
-
+							infoVehiculos.setErrores(detalleVehiculosResponse.getInfo_declara().getErrores());
 						}
 					}
 					catch (final Exception e)

@@ -6,7 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div id="acordeon" class="container">
+<div id="acordeon" class="container mostrarMD" id="repreRIT">
 	<div class="card cardmirit ">
 		<div class="card-header" id="head7">
 			<h5 class="mb-0 cardtitle">
@@ -328,3 +328,277 @@
 	</div>
 </div>
 
+<div id="acordeon" class="container mostrarXS" id="repreRIT">
+	<div class="card cardmirit ">
+		<div class="card-header" id="head7">
+			<h5 class="mb-0 cardtitle">
+				<button class="btn btn-link miritmenu" data-toggle="collapse"
+					data-target="#collapse7" aria-expanded="true"
+					aria-controls="collapse7">
+					<h4>
+						<span tabindex="0"><spring:theme
+								code="mirit.myRepresentants.title" text="Mis Representantes" /></span>
+					</h4>
+				</button>
+			</h5>
+		</div>
+		<div id="collapse7" class="collapse" aria-ladelledby="head7"
+			data-parent="#acordeon">
+			<div class="card-body">
+				<c:if test="${not empty miRitForm.representados }">
+					<div class="form-group ">
+						<label class="control-label "> <spring:theme
+								code="mirit.myRepresentants.howRepresentsMe" />
+						</label>
+					</div>
+					<div class="row">
+<!-- 						<div class="col-md-3"> -->
+<!-- 							<div class="form-group "> -->
+<!-- 								<label class="control-label required" for="address.surname"> -->
+<%-- 									<spring:theme code="mirit.myRepresentants.documentType" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2"> -->
+<!-- 							<div class="form-group "> -->
+<!-- 								<label class="control-label required" for="address.surname"> -->
+<%-- 									<spring:theme code="mirit.myRepresentants.documentNumber" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-3"> -->
+<!-- 							<div class="form-group "> -->
+<!-- 								<label class="control-label required" for="address.surname"> -->
+<%-- 									<spring:theme code="mirit.myRepresentants.name" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2"> -->
+<!-- 							<div class="form-group "> -->
+<!-- 								<label class="control-label required" for="address.surname"> -->
+<%-- 									<spring:theme code="mirit.myRepresentants.as" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2"> -->
+<!-- 							<div class="form-group "> -->
+<!-- 								<label class="control-label required" for="address.surname"  style="margin-left: 50px !important"> -->
+<%-- 									<spring:theme code="mirit.myRepresentants.refentTo" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+					</div>
+					<c:forEach items="${miRitForm.representados }" var="eachAgent">
+					<hr>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group ">
+								<label class="control-label required" for="address.surname">
+									<spring:theme code="mirit.myRepresentants.documentType" />
+								</label>
+									<input id="address.surname" name="lastName"
+										class="newalto_dir form-control" disabled="disabled"
+										aria-required="true" type="text"
+										value="<spring:theme code="register.id.types.${eachAgent.tipoDoc}"/>"
+										maxlength="240">
+									<div class="help-block">
+										<span id="lastName.errors" class="hidden">Seleccione un
+											tipo de documento</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group ">
+								<label class="control-label required" for="address.surname">
+									<spring:theme code="mirit.myRepresentants.documentNumber" />
+								</label>
+									<input id="address.surname" name="lastName"
+										class="newalto form-control" disabled="disabled"
+										aria-required="true" type="text" value="${eachAgent.numDoc}"
+										maxlength="240">
+									<div class="help-block">
+										<span id="lastName.errors" class="hidden">Seleccione un
+											tipo de documento</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group ">
+									<label class="control-label required" for="address.surname">
+									<spring:theme code="mirit.myRepresentants.name" />
+								</label>
+									<input id="address.surname" name="lastName"
+										class="newalto_dir form-control" disabled="disabled"
+										aria-required="true" type="text"
+										value="${eachAgent.nomCompleto}" maxlength="240">
+									<div class="help-block">
+										<span id="lastName.errors" class="hidden">Seleccione un
+											tipo de documento</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group ">
+								<label class="control-label required" for="address.surname">
+									<spring:theme code="mirit.myRepresentants.as" />
+								</label>
+									<input id="address.surname" name="lastName"
+										class="newalto form-control" disabled="disabled"
+										aria-required="true" type="text"
+										value="${eachAgent.funcionInterl }" maxlength="240">
+									<div class="help-block">
+										<span id="lastName.errors" class="hidden">Seleccione un
+											tipo de documento</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group ">
+								<label class="control-label required" for="address.surname"  style="margin-left: 50px !important">
+									<spring:theme code="mirit.myRepresentants.refentTo" />
+								</label>
+									<input id="address.surname" name="lastName"
+										class="newalto form-control" disabled="disabled"
+										aria-required="true" type="text" value="${eachAgent.impuesto}"
+										maxlength="240" style="margin-left: 50px !important">
+									<div class="help-block">
+										<span id="lastName.errors" class="hidden">Seleccione un
+											tipo de documento</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+					<br>
+				</c:if>
+
+				<c:if test="${not empty miRitForm.representantes }">
+					<div class="form-group ">
+						<label class="control-label "> <spring:theme
+								code="mirit.myRepresentants.iRepresentTo" />
+						</label>
+					</div>
+					<div class="row">
+<!-- 						<div class="col-md-3"> -->
+<!-- 							<div class="form-group "> -->
+<!-- 								<label class="control-label required" for="address.surname"> -->
+<%-- 									<spring:theme code="mirit.myRepresentants.documentType" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2"> -->
+<!-- 							<div class="form-group "> -->
+<!-- 								<label class="control-label required" for="address.surname"> -->
+<%-- 									<spring:theme code="mirit.myRepresentants.documentNumber" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-3"> -->
+<!-- 							<div class="form-group "> -->
+<!-- 								<label class="control-label required" for="address.surname"> -->
+<%-- 									<spring:theme code="mirit.myRepresentants.name" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2"> -->
+<!-- 							<div class="form-group "> -->
+<!-- 								<label class="control-label required" for="address.surname"> -->
+<%-- 									<spring:theme code="mirit.myRepresentants.as" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2"> -->
+<!-- 							<div class="form-group "> -->
+<!-- 								<label class="control-label required" for="address.surname"  style="margin-left: 50px !important"> -->
+<%-- 									<spring:theme code="mirit.myRepresentants.refentTo" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+					</div>
+					<c:forEach items="${miRitForm.representantes }" var="eachAgent">
+					<hr>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group ">
+									<label class="control-label required" for="address.surname">
+									<spring:theme code="mirit.myRepresentants.documentType" />
+								</label>
+									<input id="address.surname" name="lastName"
+										class="newalto_dir form-control" disabled="disabled"
+										aria-required="true" type="text"
+										value="<spring:theme code="register.id.types.${eachAgent.tipoDoc}"/>"
+										maxlength="240">
+									<div class="help-block">
+										<span id="lastName.errors" class="hidden">Seleccione un
+											tipo de documento</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group ">
+								<label class="control-label required" for="address.surname">
+									<spring:theme code="mirit.myRepresentants.documentNumber" />
+								</label>
+									<input id="address.surname" name="lastName"
+										class="newalto form-control" disabled="disabled"
+										aria-required="true" type="text" value="${eachAgent.numDoc}"
+										maxlength="240">
+									<div class="help-block">
+										<span id="lastName.errors" class="hidden">Seleccione un
+											tipo de documento</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group ">
+									<label class="control-label required" for="address.surname">
+									<spring:theme code="mirit.myRepresentants.name" />
+								</label>
+									<input id="address.surname" name="lastName"
+										class="newalto_dir form-control" disabled="disabled"
+										aria-required="true" type="text"
+										value="${eachAgent.nomCompleto}" maxlength="240">
+									<div class="help-block">
+										<span id="lastName.errors" class="hidden">Seleccione un
+											tipo de documento</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group ">
+								<label class="control-label required" for="address.surname">
+									<spring:theme code="mirit.myRepresentants.as" />
+								</label>
+									<input id="address.surname" name="lastName"
+										class="newalto form-control" disabled="disabled"
+										aria-required="true" type="text"
+										value="${eachAgent.funcionInterl}" maxlength="240">
+									<div class="help-block">
+										<span id="lastName.errors" class="hidden">Seleccione un
+											tipo de documento</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group ">
+								<label class="control-label required" for="address.surname"  style="margin-left: 50px !important">
+									<spring:theme code="mirit.myRepresentants.refentTo" />
+								</label>
+									<input id="address.surname" name="lastName"
+										class="newalto form-control" disabled="disabled"
+										aria-required="true" type="text" value="${eachAgent.impuesto}"
+										maxlength="240"  style="margin-left: 50px !important">
+									<div class="help-block">
+										<span id="lastName.errors" class="hidden">Seleccione un
+											tipo de documento</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+					<br>
+				</c:if>
+			</div>
+		</div>
+	</div>
+</div>
