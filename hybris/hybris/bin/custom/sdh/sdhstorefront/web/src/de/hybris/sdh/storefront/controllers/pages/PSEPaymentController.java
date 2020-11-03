@@ -36,7 +36,6 @@ import de.hybris.sdh.core.soap.pse.eanucc.AmountType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
-import de.hybris.sdh.core.soap.pse.eanucc.GetBankListResponseInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 import de.hybris.sdh.facades.online.payment.impl.DefaultSDHOnlinePaymentProviderMatcherFacade;
@@ -862,8 +861,8 @@ public class PSEPaymentController extends AbstractPageController
 
 		LOG.info("-----------INI  getBankList  --------------");
 
-		final GetBankListResponseInformationType[] bankList = pseServices.getBankList(this.getConstantConnectionDataListBank(),
-				this.getMessageHeader());
+		//final GetBankListResponseInformationType[] bankList = pseServices.getBankList(this.getConstantConnectionDataListBank(),
+		//		this.getMessageHeader());
 
 		LOG.info("-----------FIN  getBankList  --------------");
 

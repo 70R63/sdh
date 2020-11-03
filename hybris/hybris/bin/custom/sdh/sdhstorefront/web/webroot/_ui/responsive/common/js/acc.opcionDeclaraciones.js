@@ -1491,7 +1491,7 @@ ACC.opcionDeclaraciones = {
 		var ocultarPeriodo2 = false;
         var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = 1;
+		var cantidadAnoGravable = 5;
 		
 		debugger;
         
@@ -1618,7 +1618,7 @@ ACC.opcionDeclaraciones = {
 
 		var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = 1;
+		var cantidadAnoGravable = 5;
 		
 		$("#anoGravable").find("option:gt(0)").remove();
 		if(claveImpuesto == '1' || claveImpuesto == '2'){ // predial vehicular 
