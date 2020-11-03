@@ -370,12 +370,17 @@ ACC.vehiculos = {
 			data.placa = placa;
 			data.anioGravable = anioGravable;
 
+    		$("#bindPresentarDeclaracionVehiculoButton").prop( "disabled", false );
 			$.ajax({
 				url : ACC.vehiculosDetalleURL,
 				data : data,
 				type : "GET",
 				success : function(data) {
 					ACC.spinner.close();
+	            	if(ACC.vehiculos.leerMensajesInfoObjeto2(data.erroresWS)){
+	            		$("#bindPresentarDeclaracionVehiculoButton").prop( "disabled", true );
+	            		return;
+	            	}
 					ACC.vehiculos.fillFieldsFromData(data);
                     document.getElementById('opcionUso').value = data.opcionUso;
 				},
@@ -765,6 +770,32 @@ ACC.vehiculos = {
 		 }
 		 
 		 return val_campo;
-	}
+	},
+	
+	
+	leerMensajesInfoObjeto2 : function(errores){
+		var flagValidacion = false;
+		
+		$.each(errores, function (index,value){
+			switch (value.id_msj) {
+				case "07":
+				case "08":
+					flagValidacion = true;
+					mensaje = value.txt_msj;
+					$("#dialogMensajesContent").html("");
+		    		$("#dialogMensajesContent").html(mensaje.trim()+"<br>");
+					break;
+	
+				default:
+					break;
+			}
+		});
+
+		if(flagValidacion){
+        	$("#dialogMensajes" ).dialog( "open" );
+		}
+		
+		 return flagValidacion;
+	 }
 
 };

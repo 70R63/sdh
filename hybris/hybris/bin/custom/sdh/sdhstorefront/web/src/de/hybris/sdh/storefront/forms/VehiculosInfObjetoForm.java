@@ -11,6 +11,7 @@ import de.hybris.sdh.core.pojos.responses.DetalleLiquidacionVehiculos;
 import de.hybris.sdh.core.pojos.responses.DetalleMarcas;
 import de.hybris.sdh.core.pojos.responses.DetalleMarcasVehiculos;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculos;
+import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.Infovehic;
@@ -125,6 +126,7 @@ public class VehiculosInfObjetoForm
 	private String homologado;
 
 	private VehiculosControlCamposDec controlCampos;
+	private List<ErrorEnWS> erroresWS;
 	/**
 	 * @return the numBP
 	 */
@@ -1442,6 +1444,23 @@ public class VehiculosInfObjetoForm
 	public void setHomologado(final String homologado)
 	{
 		this.homologado = homologado;
+	}
+
+	/**
+	 * @return the erroresWS
+	 */
+	public List<ErrorEnWS> getErroresWS()
+	{
+		return erroresWS;
+	}
+
+	/**
+	 * @param erroresWS
+	 *           the erroresWS to set
+	 */
+	public void setErroresWS(final List<ErrorEnWS> erroresWS)
+	{
+		this.erroresWS = erroresWS;
 	}
 
 
