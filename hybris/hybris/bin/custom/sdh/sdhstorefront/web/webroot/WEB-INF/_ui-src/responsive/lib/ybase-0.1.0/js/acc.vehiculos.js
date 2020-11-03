@@ -1,4 +1,5 @@
 ACC.vehiculos = {
+	flagMsjInfoObjeto : {},
 
 	_autoload : [ "bindLabelVerDetalle", "bindLabelVerDetVeh","bindPresentarDeclaracionVehiculoButton", "bindGeneraDeclaracionVehiculosButton","bindCalcularVehButton"],
 
@@ -98,6 +99,10 @@ ACC.vehiculos = {
 	bindPresentarDeclaracionVehiculoButton: function () {
 		 $(document).on("click", "#bindPresentarDeclaracionVehiculoButton", function (e) {
 	 	        e.preventDefault();
+	 	        if(ACC.vehiculos.flagMsjInfoObjeto){
+	 	        	ACC.vehiculos.mostrarMensajesInfoObjeto2();
+	 	        	return;
+	 	        }
 				ACC.spinner.show();
 	 	        var anioGravable = $.trim($("#an").val());
 	 	        var placa = $.trim($("#placas").val());
@@ -370,17 +375,13 @@ ACC.vehiculos = {
 			data.placa = placa;
 			data.anioGravable = anioGravable;
 
-    		$("#bindPresentarDeclaracionVehiculoButton").prop( "disabled", false );
 			$.ajax({
 				url : ACC.vehiculosDetalleURL,
 				data : data,
 				type : "GET",
 				success : function(data) {
 					ACC.spinner.close();
-	            	if(ACC.vehiculos.leerMensajesInfoObjeto2(data.erroresWS)){
-	            		$("#bindPresentarDeclaracionVehiculoButton").prop( "disabled", true );
-	            		return;
-	            	}
+	            	ACC.vehiculos.leerMensajesInfoObjeto2(data.erroresWS);
 					ACC.vehiculos.fillFieldsFromData(data);
                     document.getElementById('opcionUso').value = data.opcionUso;
 				},
@@ -774,13 +775,13 @@ ACC.vehiculos = {
 	
 	
 	leerMensajesInfoObjeto2 : function(errores){
-		var flagValidacion = false;
+		ACC.vehiculos.flagMsjInfoObjeto = false;
 		
 		$.each(errores, function (index,value){
 			switch (value.id_msj) {
 				case "07":
 				case "08":
-					flagValidacion = true;
+					ACC.vehiculos.flagMsjInfoObjeto = true;
 					mensaje = value.txt_msj;
 					$("#dialogMensajesContent").html("");
 		    		$("#dialogMensajesContent").html(mensaje.trim()+"<br>");
@@ -791,11 +792,11 @@ ACC.vehiculos = {
 			}
 		});
 
-		if(flagValidacion){
-        	$("#dialogMensajes" ).dialog( "open" );
-		}
-		
-		 return flagValidacion;
+	 },
+	 
+	mostrarMensajesInfoObjeto2 : function(errores){		
+        $("#dialogMensajes" ).dialog( "open" );
+
 	 }
 
 };
