@@ -33,10 +33,10 @@
 		</div>
 		<div class="col-md-1">
 			<div class="form-group ">
-				<label class="control-label "><spring:theme
+				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.generales.radic" /></label>
-				<sf:input class="new_alto form-control" readonly="true"
-					aria-required="true" maxlength="240" path="input.selectedRadicado" style="margin-left: -25px !important; width: 100px !important" />
+				<sf:input class="new_alto form-control deliRadicado" readonly="true"
+					aria-required="true" maxlength="240" path="input.selectedRadicado"/>
 			</div>
 		</div>
 

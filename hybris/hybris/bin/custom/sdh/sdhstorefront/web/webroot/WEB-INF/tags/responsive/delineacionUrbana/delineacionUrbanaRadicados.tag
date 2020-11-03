@@ -41,7 +41,7 @@
 		</div>
 
 		<br>
-		<div class="row">
+		<div class="row table-responsive">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table" id="duRadicados">
 					<thead>
