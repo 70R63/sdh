@@ -11,6 +11,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -579,6 +580,35 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		dataForm.setAnoGravable(dataFormResponse.getAnoGravable());
 		dataForm.setPeriodo(dataFormResponse.getPeriodo());
 		dataForm.setPeriodicidadImpuesto(dataFormResponse.getPeriodicidadImpuesto());
+
+		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
+		{
+			dataForm.setOptionVehicular("2");
+		}
+		if (customerData.getIcaTax() != null && customerData.getIcaTax().getObjectNumber() != null)
+		{
+			dataForm.setOptionIca("3");
+		}
+		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
+		{
+			dataForm.setOptionPubliExt("4");
+		}
+		if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
+		{
+			dataForm.setOptionGas("5");
+		}
+		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
+		{
+			dataForm.setOptionDeli("6");
+		}
+		if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
+		{
+			dataForm.setOptionPredial("1");
+		}
+		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionVehicular(), dataForm.getOptionGas(),
+				dataForm.getOptionPubliExt(), dataForm.getOptionIca(), dataForm.getOptionDeli(), dataForm.getOptionPredial()));
+
+
 		model.addAttribute("dataForm", dataForm);
 		model.addAttribute("icaPeriodo", this.getIcaPeriodo());
 		model.addAttribute("icaAnioGravable", this.getIcaAnoGravable());
