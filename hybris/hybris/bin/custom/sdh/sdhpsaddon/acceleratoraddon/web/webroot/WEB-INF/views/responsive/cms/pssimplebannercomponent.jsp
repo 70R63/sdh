@@ -9,7 +9,7 @@
   var msg = "Funcionaliadad no disponible";
   document.onmousedown = function disableclick(event){
     if(event.button==2){
-       alert(msg);
+       	   alert(msg);
        return false;
      }
   }
@@ -54,7 +54,7 @@
       idleTime = idleTime + 1;
       console.log($.cookie("sessionActived"));
       console.log(idleTime);
-      if (idleTime > 2) { // 5 minutes
+      if (idleTime >= ${idleTimeout}) { // sdhstorefront.idle.timeout
           if($.cookie("sessionActived") == "true"){
             window.location.href = "/bogota/es/logout?sessionExpired=true";
           }          
