@@ -118,9 +118,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 		final DetallePagoResponse detallePagoResponse;
 		final PSEPaymentForm psePaymentForm = new PSEPaymentForm();
 
-		String valorPagar = infoPreviaPSE.getTotalPagar();
-		valorPagar = valorPagar.replaceAll("\\s+", "");
-		valorPagar = valorPagar.replaceAll("\\.(0{1,2})$", "");
+
 
 
 		if (infoPreviaPSE.getNumRef() != null && !infoPreviaPSE.getNumRef().equals(""))
@@ -135,7 +133,9 @@ public class PreparacionPagoPSE extends AbstractPageController
 			psePaymentForm.setCUD(infoPreviaPSE.getCDU());
 
 
-
+			String valorPagar = infoPreviaPSE.getTotalPagar();
+			valorPagar = valorPagar.replaceAll("\\s+", "");
+			valorPagar = valorPagar.replaceAll("\\.(0{1,2})$", "");
 
 			psePaymentForm.setValorAPagar(valorPagar);
 			psePaymentForm.setNumeroDeReferencia(infoPreviaPSE.getNumRef());
