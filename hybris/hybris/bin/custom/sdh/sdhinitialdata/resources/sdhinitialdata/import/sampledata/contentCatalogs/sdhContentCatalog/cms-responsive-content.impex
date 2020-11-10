@@ -274,7 +274,7 @@ INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];u
 INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];name;uid[unique=true];userGroups(uid);components(uid,$contentCV)
 #;;Contribuyentes Category Nav Component Restriction;ContribuyentesCategoryNavComponentRestriction;sdh_01,sdh_02;ContribuyentesCategoryNavComponent
 ;;Contribuyentes Category Nav Component Restriction;ContribuyentesCategoryNavComponentRestriction;sdh_01;ContribuyentesCategoryNavComponent
-;;Autorizados Category Nav Componet Restriction;AutorizadosCategoryNavComponentRestriction;sdh_02;AutorizadosCategoryNavComponent
+;;Autorizados Category Nav Componet Restriction;AutorizadosCategoryNavComponentRestriction;sdh_02;AutorizadosCategoryNavComponent,ContribuyentesCategoryNavComponent
 ;;Reportantes Informacion Category Nav Component Restriction;ReportantesInformacionCategoryNavComponentRestriction;sdh_05;ReportantesInformacionCategoryNavComponent
 ;;Agente Retenedor Category Nav Component Restriction;AgenteRetenedorCategoryNavComponentRestriction;sdh_04;AgenteRetenedorCategoryNavComponent
 ;;Tercero Autorizado Category Nav Component Restriction;TerceroAutorizadoCategoryNavComponentRestriction;sdh_03;TerceroAutorizadoCategoryNavComponent
@@ -755,7 +755,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsCom
 ; ; FooterSlot             ; FooterComponent
 ; ; SearchBoxSlot          ; SearchBox
 ; ; HomepageNavLinkSlot    ; HomepageNavLink
-; ; NavigationBarSlot      ; AnonnymousCategoryNavComponent,ContribuyentesCategoryNavComponent,ReportantesInformacionCategoryNavComponent,AgenteRetenedorCategoryNavComponent,TerceroAutorizadoCategoryNavComponent, breadcrumbComponent
+; ; NavigationBarSlot      ; AnonnymousCategoryNavComponent,ContribuyentesCategoryNavComponent,ReportantesInformacionCategoryNavComponent,AgenteRetenedorCategoryNavComponent,TerceroAutorizadoCategoryNavComponent, breadcrumbComponent,AutorizadosCategoryNavComponent
 ; ; SideContentSlot        ; MobileAppBanner
 ; ; SiteLogoSlot           ; SiteLogoComponent
 ; ; TopContentSlot         ; FacebookOffersBanner

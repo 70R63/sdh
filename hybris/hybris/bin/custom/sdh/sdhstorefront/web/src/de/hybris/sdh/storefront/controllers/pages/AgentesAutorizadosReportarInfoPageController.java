@@ -98,7 +98,7 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 	public String autorizados(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET Agentes Autorizados reportar --------------------------");
-
+		model.addAttribute("aaEntidadBancaria", true);
 		storeCmsPageInModel(model, getContentPageForLabelOrId(AUTORIZADOS_REPORTAR_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AUTORIZADOS_REPORTAR_CMS_PAGE));
 

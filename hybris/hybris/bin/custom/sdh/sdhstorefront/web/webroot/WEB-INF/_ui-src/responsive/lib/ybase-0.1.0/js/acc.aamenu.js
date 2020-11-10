@@ -38,6 +38,15 @@ ACC.aamenu = {
 		{
 			$("a:contains('Reportar Información')").closest("li").remove()
 		}
+		var objetoHref = null;
+		$("[href]").each(function() {
+			objetoHref = $(this).attr('href');
+			if(objetoHref != null && objetoHref.indexOf("autorizados/entidades/consultas") >= 0){
+				$(this).closest("li").remove();
+			}
+		});
 
+
+		
 	}
 };
