@@ -220,7 +220,37 @@
 	 <!-- Comment out to see error stack for development -->
 	<error-page>
 <!-- 		<location>/WEB-INF/common/pages/error/serverError.jsp</location> -->
-		<location>/WEB-INF/common/pages/error/serverErrorGeneral.jsp</location>
+		<location>/sdhError</location>
+		<!--location>/WEB-INF/common/pages/error/serverErrorGeneral.jsp</location-->
+	</error-page>
+
+	<error-page>
+		<error-code>401</error-code>
+		<location>/WEB-INF/common/pages/error/serverMaintenance.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/WEB-INF/common/pages/error/serverMaintenance.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/common/pages/error/serverMaintenance.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/WEB-INF/common/pages/error/serverMaintenance.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/common/pages/error/serverMaintenance.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/WEB-INF/common/pages/error/serverMaintenance.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/WEB-INF/common/pages/error/serverMaintenance.jsp</location>
 	</error-page>
 
 
