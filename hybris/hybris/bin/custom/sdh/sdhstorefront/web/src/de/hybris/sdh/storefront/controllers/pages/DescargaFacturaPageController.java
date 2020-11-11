@@ -179,35 +179,53 @@ public class DescargaFacturaPageController extends AbstractPageController
 			System.out.println("Response de trm/facturacion: " + descargaFacturaResponse);
 
 			dataForm.setErrores(descargaFacturaResponse.getErrores());
-			if (descargaFacturaResponse != null && descargaFacturaResponse.getPdf() != null
-					&& !descargaFacturaResponse.getPdf().isEmpty())
+
+			if (!descargaFacturaResponse.getErrores().get(0).getId_msj().equals(""))
 			{
-				final String encodedBytes = descargaFacturaResponse.getPdf();
 
-				final BASE64Decoder decoder = new BASE64Decoder();
-				byte[] decodedBytes;
-				final FileOutputStream fop;
-				decodedBytes = new BASE64Decoder().decodeBuffer(encodedBytes);
+				final ErrorEnWS error = new ErrorEnWS();
+				error.setId_msj(descargaFacturaResponse.getErrores().get(0).getId_msj());
+				error.setTxt_msj(descargaFacturaResponse.getErrores().get(0).getTxt_msj());
 
+				final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
 
+				errores.add(error);
 
-				final String fileName = dataForm.getNumObjeto() + "-" + dataForm.getNumBP() + ".pdf";
-
-				final InputStream is = new ByteArrayInputStream(decodedBytes);
-
-
-				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
-				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
-				mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
-				modelService.save(mediaModel);
-				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
-				modelService.refresh(mediaModel);
-
-				dataForm.setUrlDownload(mediaModel.getDownloadURL());
-
+				dataForm.setErrores(errores);
 
 			}
+			else
+			{
 
+
+				if (descargaFacturaResponse != null && descargaFacturaResponse.getPdf() != null
+						&& !descargaFacturaResponse.getPdf().isEmpty())
+				{
+					final String encodedBytes = descargaFacturaResponse.getPdf();
+
+					final BASE64Decoder decoder = new BASE64Decoder();
+					byte[] decodedBytes;
+					final FileOutputStream fop;
+					decodedBytes = new BASE64Decoder().decodeBuffer(encodedBytes);
+
+
+
+					final String fileName = dataForm.getNumObjeto() + "-" + dataForm.getNumBP() + ".pdf";
+
+					final InputStream is = new ByteArrayInputStream(decodedBytes);
+
+
+					final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
+					mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
+					mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
+					modelService.save(mediaModel);
+					mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
+					modelService.refresh(mediaModel);
+
+					dataForm.setUrlDownload(mediaModel.getDownloadURL());
+				}
+
+			}
 		}
 		catch (final Exception e)
 		{

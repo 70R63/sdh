@@ -25,7 +25,7 @@
 			</div>
 		</div>
 		<div>
-			<div class="row">
+			<div class="row table-responsive">
 
 				<div class="col-md-8 col-md-offset-2 center">
 					<table class="table table-responsive" id="tabPaginacion2">
@@ -115,7 +115,7 @@
 			</div>
 		</div>
 		<div>
-			<div class="row">
+			<div class="row table-responsive">
 
 				<div class="col-md-8 col-md-offset-2 center">
 					<table class="table table-responsive" id="tabPaginacion3">

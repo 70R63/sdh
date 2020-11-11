@@ -863,7 +863,7 @@ ACC.opcionDeclaraciones = {
 								 }
 
 
-
+							 var obtenerURLGenDec = ACC.opcionDeclaraciones.verificarGenerarDec(value,url);
 							$('#table-vehicular1').append("<tr>"+
 									'<td>' + value.placa + '</td>'+
 									'<td>' + value.marca + '</td>'+
@@ -874,8 +874,8 @@ ACC.opcionDeclaraciones = {
 									'<td>' + value.numPuertas + '</td>'+
 									'<td>' + value.blindado + '</td>'+
 									'<td>' + value.cilindraje + '</td>'+
-									'<td><a href="#" onclick="ACC.opcionDeclaraciones.validarDeclaracion(\''+url+'\',\''+value.placa+'\');">Generar Declaracion</a> </td>'+
-									//'<td><a href="' + url + '">Presentar Declaracion</a> </td>'+
+//									'<td><a href="#" onclick="ACC.opcionDeclaraciones.validarDeclaracion(\''+url+'\',\''+value.placa+'\');">Generar Declaracion</a> </td>'+
+									'<td>' + obtenerURLGenDec + '</td>'+
 									"</tr>");
 						}
 					});
@@ -1491,7 +1491,7 @@ ACC.opcionDeclaraciones = {
 		var ocultarPeriodo2 = false;
         var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = 1;
+		var cantidadAnoGravable = 5;
 		
 		debugger;
         
@@ -1618,7 +1618,7 @@ ACC.opcionDeclaraciones = {
 
 		var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = 1;
+		var cantidadAnoGravable = 5;
 		
 		$("#anoGravable").find("option:gt(0)").remove();
 		if(claveImpuesto == '1' || claveImpuesto == '2'){ // predial vehicular 
@@ -1747,6 +1747,34 @@ ACC.opcionDeclaraciones = {
     	});
     	
     },
+    
+    
+	verificarGenerarDec(infoRegistro,url){
+		var obtenerURLGenDec = null;
+		var flagVerificar = true;
+		
+		$.each(infoRegistro.errores, function (index,value){
+			if(flagVerificar){
+				switch (value.id_msj) {
+				case "07":
+				case "08":
+					obtenerURLGenDec = value.txt_msj;
+					flagVerificar = false;
+					break;
+	
+				default:
+					break;
+				}
+			}
+		});
+		
+		if(obtenerURLGenDec == null){
+			obtenerURLGenDec = '<a href="#" onclick="ACC.opcionDeclaraciones.validarDeclaracion(\''+url+'\',\''+infoRegistro.placa+'\');">Generar Declaracion</a>';
+		}
+		
+		
+		return obtenerURLGenDec;
+	}
 	
 	
 };

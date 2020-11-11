@@ -80,8 +80,11 @@ public class DefaultSDHDetalleVehiculoService implements SDHDetalleVehiculosServ
 				builder.append(inputLine);
 			}
 
-			final String result = builder.toString();
+			String result = builder.toString();
 			LOG.info("response: " + result);
+
+			result = result.replaceAll("\"marcas\":\\[\"\",\"\"\\],", "");
+			result = result.replaceAll(",\"\"\\]", "\\]");
 
 			return result;
 

@@ -14,7 +14,9 @@
 package de.hybris.platform.sdhpsaddon.controllers.cms;
 
 import de.hybris.platform.publicsectorservices.model.PSSimpleBannerComponentModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,9 @@ public class PSSimpleBannerComponentController<C extends PSSimpleBannerComponent
 		extends SubstitutingCMSAddOnComponentController<C>
 {
 
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
 	/**
 	 * Fills the model with required attributes for displaying add to cart action
 	 *
@@ -42,6 +47,8 @@ public class PSSimpleBannerComponentController<C extends PSSimpleBannerComponent
 	protected void fillModel(final HttpServletRequest request, final Model model, final C component)
 	{
 
+		final String idleTimeout = configurationService.getConfiguration().getString("sdhstorefront.idle.timeout");
+		model.addAttribute("idleTimeout", idleTimeout);
 		model.addAttribute("media", component.getMedia());
 		model.addAttribute("urlLink", component.getUrlLink());
 		model.addAttribute("title", component.getTitle());

@@ -71,7 +71,7 @@
 
 
 				<button class="btn btn-primary btn-lg generarDeclracinPredial"
-				    type="submit" id="" name=""
+				    type="submit" id="btnGenerarDeclaracion" name=""
 				    onClick="return validateForm();"
 					value="" id="generarDeclracinPredial">
 					<spring:theme code="predial.inicial.marcas.generar" />

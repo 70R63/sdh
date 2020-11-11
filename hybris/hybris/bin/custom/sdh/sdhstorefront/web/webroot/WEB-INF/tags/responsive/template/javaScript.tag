@@ -12,12 +12,11 @@
 
 <c:choose>
 	<c:when test="${wro4jEnabled}">
-		<script type="text/javascript" src="${contextPath}/wro/all_responsive.js"></script>
-  		<script type="text/javascript" src="${contextPath}/wro/addons_responsive.js"></script>
-		
 		<c:if test="${not empty representado}">
 			<script type="text/javascript" src="${commonResourcePath}/js/acc.aamenu.js"></script>
 		</c:if>
+		<script type="text/javascript" src="${contextPath}/wro/all_responsive.js"></script>
+		<script type="text/javascript" src="${contextPath}/wro/addons_responsive.js"></script>
 		
 		
 		<%-- Cms Action JavaScript files --%>
@@ -136,6 +135,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery-isloading.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.firmas.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.aaEntidadBancariaMenu.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/captcha.js"></script>
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">

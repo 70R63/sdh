@@ -1,4 +1,5 @@
 ACC.vehiculos = {
+	flagMsjInfoObjeto : {},
 
 	_autoload : [ "bindLabelVerDetalle", "bindLabelVerDetVeh","bindPresentarDeclaracionVehiculoButton", "bindGeneraDeclaracionVehiculosButton","bindCalcularVehButton"],
 
@@ -98,6 +99,10 @@ ACC.vehiculos = {
 	bindPresentarDeclaracionVehiculoButton: function () {
 		 $(document).on("click", "#bindPresentarDeclaracionVehiculoButton", function (e) {
 	 	        e.preventDefault();
+	 	        if(ACC.vehiculos.flagMsjInfoObjeto){
+	 	        	ACC.vehiculos.mostrarMensajesInfoObjeto2();
+	 	        	return;
+	 	        }
 				ACC.spinner.show();
 	 	        var anioGravable = $.trim($("#an").val());
 	 	        var placa = $.trim($("#placas").val());
@@ -376,6 +381,7 @@ ACC.vehiculos = {
 				type : "GET",
 				success : function(data) {
 					ACC.spinner.close();
+	            	ACC.vehiculos.leerMensajesInfoObjeto2(data.erroresWS);
 					ACC.vehiculos.fillFieldsFromData(data);
                     document.getElementById('opcionUso').value = data.opcionUso;
 				},
@@ -765,6 +771,32 @@ ACC.vehiculos = {
 		 }
 		 
 		 return val_campo;
-	}
+	},
+	
+	
+	leerMensajesInfoObjeto2 : function(errores){
+		ACC.vehiculos.flagMsjInfoObjeto = false;
+		
+		$.each(errores, function (index,value){
+			switch (value.id_msj) {
+				case "07":
+				case "08":
+					ACC.vehiculos.flagMsjInfoObjeto = true;
+					mensaje = value.txt_msj;
+					$("#dialogMensajesContent").html("");
+		    		$("#dialogMensajesContent").html(mensaje.trim()+"<br>");
+					break;
+	
+				default:
+					break;
+			}
+		});
+
+	 },
+	 
+	mostrarMensajesInfoObjeto2 : function(errores){		
+        $("#dialogMensajes" ).dialog( "open" );
+
+	 }
 
 };

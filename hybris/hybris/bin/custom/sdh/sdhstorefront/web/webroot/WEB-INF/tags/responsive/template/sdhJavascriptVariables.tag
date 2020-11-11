@@ -13,6 +13,10 @@
 			<c:if test="${not empty representado}">
 				ACC.aamenus = "${aamenus}";
 			</c:if>
+			ACC.aaEntidadBancariaMenuflagEjecutar = false;
+			<c:if test="${aaEntidadBancaria == true}">
+				ACC.aaEntidadBancariaMenuflagEjecutar = true;
+			</c:if>
 
 			
 			ACC.certifNombURL ="<c:url value='/contribuyentes/mirit/certifNomb' />";

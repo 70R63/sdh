@@ -71,11 +71,14 @@ ACC.facturacion = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
+					debugger;
 					ACC.spinner.close();
 					ACC.facturacion.manejarRespuesta(dataResponse);
+					
 				}
 			,
 				error : function() {
+					debugger;
 					ACC.spinner.close();
 					alert("Error procesar la solicitud de descarga de factura");	
 				}

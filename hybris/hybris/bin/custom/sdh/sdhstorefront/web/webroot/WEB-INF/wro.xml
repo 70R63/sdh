@@ -97,6 +97,7 @@
 		<js>/_ui/responsive/common/js/jquery.dataTables.min.js</js>
 		<js>/_ui/responsive/common/js/jquery-isloading.js</js>
 		<js>/_ui/responsive/common/js/acc.firmas.js</js>
+		<js>/_ui/responsive/common/js/acc.aaEntidadBancariaMenu.js</js>
 		<js>/_ui/responsive/common/js/captcha.js</js>
     </group>
     

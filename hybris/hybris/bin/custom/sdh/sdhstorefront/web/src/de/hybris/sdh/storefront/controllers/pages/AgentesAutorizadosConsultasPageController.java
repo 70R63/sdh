@@ -9,6 +9,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.form.FileConsultaForm;
 import de.hybris.sdh.core.form.SelectAtomValue;
@@ -16,21 +17,20 @@ import de.hybris.sdh.core.pojos.requests.FileConsultaRequest;
 import de.hybris.sdh.core.pojos.responses.FileConsultaResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHFileConsultaService;
+import de.hybris.sdh.core.services.SDHValidateBankFiles;
+
+import java.util.List;
 
 import javax.annotation.Resource;
 
-import de.hybris.sdh.core.services.SDHFileConsultaService;
-import de.hybris.sdh.core.services.SDHValidateBankFiles;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
 
 
 /**
@@ -85,7 +85,7 @@ public class AgentesAutorizadosConsultasPageController extends AbstractPageContr
 	public String autorizadosconsultas(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET Agentes Autorizados consultas --------------------------");
-
+		model.addAttribute("aaEntidadBancaria", true);
 		storeCmsPageInModel(model, getContentPageForLabelOrId(AUTORIZADOS_CONSULTAS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AUTORIZADOS_CONSULTAS_CMS_PAGE));
 
