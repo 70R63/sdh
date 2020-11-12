@@ -1667,7 +1667,7 @@ ACC.opcionDeclaraciones = {
 		var claveImpuesto = document.getElementById('seleccion').value;
 		var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = 1;
+		var cantidadAnoGravable = 5;
 		
 		$("#aniograv").find("option:gt(0)").remove();
 		if(claveImpuesto == '0001' || claveImpuesto == '0002'){ // predial vehicular 
