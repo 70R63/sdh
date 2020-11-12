@@ -1,7 +1,7 @@
 ACC.vehiculos = {
 	flagMsjInfoObjeto : {},
 
-	_autoload : [ "bindLabelVerDetalle", "bindLabelVerDetVeh","bindPresentarDeclaracionVehiculoButton", "bindGeneraDeclaracionVehiculosButton","bindCalcularVehButton"],
+	_autoload : [ "bindLabelVerDetalle", "bindLabelVerDetVeh","bindPresentarDeclaracionVehiculoButton", "bindGeneraDeclaracionVehiculosButton","bindCalcularVehButton","bindFormatoImporte"],
 
 	bindLabelVerDetalle : function() {
 		$(document)
@@ -797,6 +797,54 @@ ACC.vehiculos = {
 	mostrarMensajesInfoObjeto2 : function(errores){		
         $("#dialogMensajes" ).dialog( "open" );
 
-	 }
+	 },
+	 
+	bindFormatoImporte : function(){
+		$(document).on("change",".valFormatoImporte",function(e){
+			e.preventDefault();
+			var campoImporte = e.target.value;
+			var formateado = ACC.vehiculos.formateoImporte1(e.target.value);
+			if(formateado != null){
+				e.target.value = formateado;
+			}else{
+				e.target.value = "0,00";
+			}			
+			
+		});
+	},
+	
+	
+	formateoImporte1 : function(campoImporte) {
+		var campoImporteTemp = "";
+		var formateado = null;
+		
+		campoImporteTemp = campoImporte;
+		campoImporteTemp = campoImporteTemp.replaceAll(" ","");
+		campoImporteTemp = campoImporteTemp.replaceAll(".","");
+		campoImporteTemp = ACC.vehiculos.reemplazarTodasMenosUltima(campoImporteTemp,",","");
+		campoImporteTemp = campoImporteTemp.replaceAll(",",".");
+		if(!isNaN(campoImporteTemp)){
+			var campoImporteFloat = parseFloat(campoImporteTemp);
+			formateado = (campoImporteFloat).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.');
+			var n = formateado.lastIndexOf(".");
+			if (n >= 0) {
+				formateado = formateado.substring(0, n) + "," + formateado.substring(n+1, formateado.length);
+			}			
+		}
+	
+		return formateado;
+	},
+	
+	
+	reemplazarTodasMenosUltima : function(cadenaOriginal,strBusqueda,strReemplazo){
+		var cadenaNueva = "";
+		
+		var indiceUltima = cadenaOriginal.lastIndexOf(strBusqueda);
+		var cadenaTempInicio = cadenaOriginal.substring(0, indiceUltima).replaceAll(strBusqueda,strReemplazo);
+		
+		cadenaNueva = cadenaTempInicio + cadenaOriginal.substring(indiceUltima, cadenaOriginal.length);
+		
+		return cadenaNueva;
+	}
 
 };
