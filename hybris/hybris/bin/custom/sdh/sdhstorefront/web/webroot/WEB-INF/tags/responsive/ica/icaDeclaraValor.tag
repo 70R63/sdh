@@ -41,7 +41,7 @@
 
 <sf:form action="" commandName="icaInfObjetoFormResp">
 <!-- 13/10/2020 se esconden campos Se agrego el style por que se ocultaron campos, en caso de quitar el hidden a los demás campos se deberá quitar el style de la linea 44 o renglon de abajo -->
-	<div class="row"  style="padding-left: 400px; margin-right:-400px"> 
+	<div class="row centrar_rowICA"> 
 		<div class="row" style="padding-left: 46px;">
 			<!-- 	<div class="col-md-1" style="width: 10.5% !important">
 				<label class="control-label format_label" style="text-transform: none !important"
@@ -273,8 +273,6 @@
 </sf:form>
 <script type="text/javascript">
 	function addvalor() {
-
-		debugger;
 		var tam = $(".valor").length;
 		if ($(".valor").length < 20) {
 			$($(".valor")[0]).parent().append($($(".valor")[0]).clone());
@@ -343,7 +341,6 @@
 	}
 
 	function addfilevalor() {
-		debugger;
 		var subir = document.getElementById('adjuntar-valor');
 		subir.style.display = 'block';
 	}
@@ -402,17 +399,13 @@
 	}
 	
 	
-	function establecerCampoMes(valMes,idCampoMes){
-		
-		debugger;
+	function establecerCampoMes(valMes,idCampoMes){		
 		var idElemento = 'mesValorRetenido_'+idCampoMes;
 		var sel = document.getElementById(idElemento);
 		sel.value = valMes;
 	}
 	
 	function habilitarMes(idCampoMes,banderaHabilitado){
-		
-		debugger;
 		var idElemento = 'mesValorRetenido_'+idCampoMes;
 		var sel = document.getElementById(idElemento);
 		if(banderaHabilitado==true){

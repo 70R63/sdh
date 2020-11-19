@@ -29,7 +29,7 @@
 				type="text" readonly="readonly" maxlength="240">
 		</div>
 		<br> <br>
-		<div class="row">
+		<div class="row table-responsive">
 			<div class="col-md-10">
 				<br>
 				<table class="table">

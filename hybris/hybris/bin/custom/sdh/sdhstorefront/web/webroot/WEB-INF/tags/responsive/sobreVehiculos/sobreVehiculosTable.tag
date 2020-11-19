@@ -77,7 +77,7 @@
 
 
 	<div class="row">
-		<div class="col-md-10">
+		<div class="col-md-10 table-responsive">
 			<table class="table" id="example" class="newtd">
 				<thead>
 					<tr>

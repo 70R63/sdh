@@ -13,12 +13,10 @@
 	<form:form action="">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="headline">
 					<h2>
 						<span class="col-md-10 "><spring:theme
 								code="contribuyente.listadeclaraciones.titulo" /></span>
 					</h2>
-				</div>
 			</div>
 		</div>
 
@@ -26,7 +24,7 @@
 			<div class="col-md-8">
 				<form:form action="">
 					<div class="table-responsive text-center">
-						<table class="table table-bordered">
+						<table class="table table-bordered" id="example">
 							<thead>
 								<tr>
 									<td><label class="control-label labeltabletd tableident"><spring:theme

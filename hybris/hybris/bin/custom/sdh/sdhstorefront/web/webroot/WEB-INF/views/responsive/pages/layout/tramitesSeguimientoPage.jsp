@@ -11,7 +11,7 @@
 	var="seguimientoURL" htmlEscape="false" />
 	
 <div class="loader"></div>
-<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
+<div class="cargandoSpinner col-xs-6" id="cargandoSpinner" style="display: none;"></div>
 
 <sf:form action="${seguimientoURL}" method="POST" modelAttribute="dataForm" id="forma" >
 <tramite:seguimientoTramite/>
