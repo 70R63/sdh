@@ -7,11 +7,11 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<c:set var="roValorRetenido" value=""/>
-<c:set var="disabledValorRetenido" value=''/>
+<c:set var="roValorRetenido" value="" />
+<c:set var="disabledValorRetenido" value='' />
 <c:if test="${icaInfObjetoFormResp.controlCampos.valorRetenido == true}">
-	<c:set var="roValorRetenido" value='readonly="readonly"'/>
-	<c:set var="disabledValorRetenido" value='disabled="disabled"'/>
+	<c:set var="roValorRetenido" value='readonly="readonly"' />
+	<c:set var="disabledValorRetenido" value='disabled="disabled"' />
 </c:if>
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
@@ -40,69 +40,75 @@
 <br>
 
 <sf:form action="" commandName="icaInfObjetoFormResp">
-<!-- 13/10/2020 se esconden campos Se agrego el style por que se ocultaron campos, en caso de quitar el hidden a los demás campos se deberá quitar el style de la linea 44 o renglon de abajo -->
-	<div class="row centrar_rowICA"> 
-		<div class="row" style="padding-left: 46px;">
+	<!-- 13/10/2020 se esconden campos Se agrego el style por que se ocultaron campos, en caso de quitar el hidden a los demás campos se deberá quitar el style de la linea 44 o renglon de abajo -->
+	<div class="row centrar_rowICA">
+		<div class="row mostrarMD" style="padding-left: 46px;">
 			<!-- 	<div class="col-md-1" style="width: 10.5% !important">
 				<label class="control-label format_label" style="text-transform: none !important"
 					for=""> <spring:theme code="ica.declaracion.valor.angrav" />
 				</label>
 			</div>-->
-			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
-				<label class="control-label format_label"
-					style="text-transform: none !important" for=""> <spring:theme
+			<div class="col-md-1 col-xs-12 retenido_ICA">
+				<label class="control-label format_label"> <spring:theme
 						code="Año" />
 				</label>
 			</div>
-			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
+
+			<div class="col-md-1 col-xs-12 retenido_ICA">
 				<label class="control-label format_label"
-					style="text-transform: none !important" for=""> <spring:theme
+					style="text-transform: none !important"> <spring:theme
 						code="Mes" />
 				</label>
 			</div>
-			<div class="col-md-1" style="padding-left: 5px; padding-right: 2px; width: 5% !important">
+			<div class="col-md-1 col-xs-12 retenido_ICA">
 				<label class="control-label format_label"
-					style="text-transform: none !important" for=""> <spring:theme
+					style="text-transform: none !important"> <spring:theme
 						code="Día" />
 				</label>
 			</div>
-			<div class="col-md-2 hidden" style="padding-left: 2px; padding-right: 2px; width: 10% !important">
+			<div class="col-md-2 col-xs-12 hidden retenido_ICA">
 				<label class="control-label format_label"
-					style="text-transform: none !important" for=""> <spring:theme
+					style="text-transform: none !important"> <spring:theme
 						code="ica.declaracion.valor.tipdoc" />
 				</label>
 			</div>
-			<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
-				<label style="text-transform: none !important;"
-					class="control-label format_label" for=""> <spring:theme
+			<div class="col-md-1 col-xs-12 hidden retenido_ICA">
+				<label class="control-label format_label"
+					style="text-transform: none !important"> <spring:theme
 						code="ica.declaracion.valor.numide" />
 				</label>
 			</div>
-			<div class="col-md-2 hidden" style="padding-left: 2px; padding-right: 2px; width: 15% !important">
+
+			<div class="col-md-2 hidden"
+				style="padding-left: 2px; padding-right: 2px; width: 15% !important">
 				<label class="control-label format_label"
 					style="text-transform: none !important" for=""> <spring:theme
 						code="ica.declaracion.valor.nombre" />
 				</label>
 			</div>
-			<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
+			<div class="col-md-1 hidden"
+				style="padding-left: 2px; padding-right: 2px;">
 				<label class="control-label format_label"
 					style="text-transform: none !important" for=""> <spring:theme
 						code="ica.declaracion.valor.direccion" />
 				</label>
 			</div>
-			<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
+			<div class="col-md-1 hidden"
+				style="padding-left: 2px; padding-right: 2px;">
 				<label class="control-label format_label"
 					style="text-transform: none !important" for=""> <spring:theme
 						code="ica.declaracion.valor.tel" />
 				</label>
 			</div>
-			<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
+			<div class="col-md-1 hidden"
+				style="padding-left: 2px; padding-right: 2px;">
 				<label class="control-label format_label"
 					style="text-transform: none !important" for=""> <spring:theme
 						code="ica.declaracion.valor.municipio" />
 				</label>
 			</div>
-			<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
+			<div class="col-md-1 hidden"
+				style="padding-left: 2px; padding-right: 2px;">
 				<label class="control-label format_label"
 					style="text-transform: none !important" for=""> <spring:theme
 						code="ica.declaracion.valor.taraplicada" />
@@ -119,33 +125,48 @@
 
 
 
-		<c:forEach items="${infoDeclara.valorRetenido }" var="eachValor" varStatus="loopStatusInfo" >
+		<c:forEach items="${infoDeclara.valorRetenido }" var="eachValor"
+			varStatus="loopStatusInfo">
 			<c:set var="anoGravable_formateado"
 				value="${fn:substring(eachValor.anoGravable, 6, 10)}-${fn:substring(eachValor.anoGravable, 3, 5)}-${fn:substring(eachValor.anoGravable, 0, 2)}" />
 			<c:set var="idMes" value='mesValorRetenido_${loopStatusInfo.index}' />
 			<c:set var="idDia" value='diaValorRetenido_${loopStatusInfo.index}' />
 			<div class="row valor" id="valor" style="padding-left: 45px;">
-				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
-
-					<sf:input class="new_alto form-control anio_anoGravable " 
-					path="icaInfObjetoResponse.infoDeclara.valorRetenido[${loopStatusInfo.index}].anio"
-					readonly="true" onchange="activarValidacion_valorRetenido()" />
+				<div class="col-md-1 col-xs-12 retenido_ICA">
+					<label class="control-label format_label mostrarXS"
+						style="text-transform: none !important" for=""> <spring:theme
+							code="Año" />
+					</label>
+					<sf:input class="new_alto form-control anio_anoGravable "
+						path="icaInfObjetoResponse.infoDeclara.valorRetenido[${loopStatusInfo.index}].anio"
+						readonly="true" onchange="activarValidacion_valorRetenido()" />
 				</div>
-				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
-					<sf:select class="new_alto form-control mes_anoGravable " 
-					path="icaInfObjetoResponse.infoDeclara.valorRetenido[${loopStatusInfo.index}].mes" 
-					items="${icaInfObjetoFormResp.catalogos.valor_retenido_meses}" 
-					onchange="realizarUpdateMes_valorRetenido(this)" id="${idMes}"></sf:select>
+				<div class="col-md-1 col-xs-12 retenido_ICA">
+					<label class="control-label format_label mostrarXS"
+						style="text-transform: none !important" for=""> <spring:theme
+							code="Mes" />
+					</label>
+					<sf:select class="new_alto form-control mes_anoGravable "
+						path="icaInfObjetoResponse.infoDeclara.valorRetenido[${loopStatusInfo.index}].mes"
+						items="${icaInfObjetoFormResp.catalogos.valor_retenido_meses}"
+						onchange="realizarUpdateMes_valorRetenido(this)" id="${idMes}"></sf:select>
 				</div>
-				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
-					<sf:select class="new_alto form-control dia_anoGravable " 
-					path="icaInfObjetoResponse.infoDeclara.valorRetenido[${loopStatusInfo.index}].dia" 
-					items="${icaInfObjetoFormResp.catalogos.valor_retenido_dias}" 
-					onchange="activarValidacion_valorRetenido()" id="${idDia}" disabled="true"></sf:select>
+				<div class="col-md-1 col-xs-12 retenido_ICA">
+						<label class="control-label format_label mostrarXS"
+					style="text-transform: none !important"> <spring:theme
+						code="Día" />
+				</label>
+					<sf:select class="new_alto form-control dia_anoGravable "
+						path="icaInfObjetoResponse.infoDeclara.valorRetenido[${loopStatusInfo.index}].dia"
+						items="${icaInfObjetoFormResp.catalogos.valor_retenido_dias}"
+						onchange="activarValidacion_valorRetenido()" id="${idDia}"
+						disabled="true"></sf:select>
 				</div>
-				<div class="col-md-2 hidden" style="padding-left: 2px; padding-right: 2px; width: 10% !important">
+				<div class="col-md-2 hidden"
+					style="padding-left: 2px; padding-right: 2px; width: 10% !important">
 					<select id="" class="etiq_valor form-control tipoID"
-						style="height: 48px;" onchange="activarValidacion_valorRetenido()" ${disabledValorRetenido}>
+						style="height: 48px;" onchange="activarValidacion_valorRetenido()"
+						${disabledValorRetenido}>
 						<option value="">Seleccionar</option>
 						<c:forEach items="${ idTypes}" var="eachType">
 
@@ -162,29 +183,35 @@
 
 					</select>
 				</div>
-				<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
+				<div class="col-md-1 hidden"
+					style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control numID" type="text"
 						value="${eachValor.numID }"
-						onchange="activarValidacion_valorRetenido()" ${roValorRetenido}/>
+						onchange="activarValidacion_valorRetenido()" ${roValorRetenido} />
 				</div>
-				<div class="col-md-2 hidden" style="padding-left: 2px; padding-right: 2px; width: 15% !important">
+				<div class="col-md-2 hidden"
+					style="padding-left: 2px; padding-right: 2px; width: 15% !important">
 					<input class="new_alto form-control razonSocial" type="text"
 						value="${eachValor.razonSocial }"
-						onchange="activarValidacion_valorRetenido()"${roValorRetenido}/>
+						onchange="activarValidacion_valorRetenido()" ${roValorRetenido} />
 				</div>
-				<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
+				<div class="col-md-1 hidden"
+					style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control direccion" type="text"
 						value="${eachValor.direccion }"
-						onchange="activarValidacion_valorRetenido()" ${roValorRetenido}/>
+						onchange="activarValidacion_valorRetenido()" ${roValorRetenido} />
 				</div>
-				<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
+				<div class="col-md-1 hidden"
+					style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control telefono" type="text"
 						value="${eachValor.telefono }"
-						onchange="activarValidacion_valorRetenido()" ${roValorRetenido}/>
+						onchange="activarValidacion_valorRetenido()" ${roValorRetenido} />
 				</div>
-				<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
+				<div class="col-md-1 hidden"
+					style="padding-left: 2px; padding-right: 2px;">
 					<select id="" class="new_alto form-control codMunicipio"
-						style="height: 48px;" onchange="activarValidacion_valorRetenido()" ${disabledValorRetenido}>
+						style="height: 48px;" onchange="activarValidacion_valorRetenido()"
+						${disabledValorRetenido}>
 						<option value="">SELECCIONAR</option>
 						<c:forEach items="${cities}" var="eachCity">
 
@@ -197,11 +224,15 @@
 						</c:forEach>
 					</select>
 				</div>
-				<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
+
+
+					<div class="col-md-1 hidden" style="padding-left: 2px; padding-right: 2px;">
 					<!-- 						<input class="form-control tarifaApl" type="text" -->
 					<%-- 							value="${eachValor.tarifaApl }" /> --%>
+					
 					<select id="" class="new_alto form-control tarifaApl"
-						style="height: 48px;" onchange="activarValidacion_valorRetenido()" ${disabledValorRetenido}>
+						style="height: 48px;" onchange="activarValidacion_valorRetenido()"
+						${disabledValorRetenido}>
 						<option value="">Seleccionar</option>
 						<c:forEach items="${ tarifasValorRetenido}" var="eachTarifa">
 
@@ -218,19 +249,26 @@
 					</select>
 
 				</div>
-				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+				<div class="col-md-1 col-xs-12 retenido_ICA">
+				<label class="control-label format_label mostrarXS"
+					style="text-transform: none !important" for=""> <spring:theme
+						code="ica.declaracion.valor.montoret" />
+				</label>
 					<input class="new_alto form-control montoRetenido" type="text"
 						value="${eachValor.montoRetenido }"
-						onchange="activarValidacion_valorRetenido()" ${roValorRetenido}/>
+						onchange="activarValidacion_valorRetenido()" ${roValorRetenido} />
 				</div>
-				<div class="col-md-1 hidden" style="width: 5.9% !important; padding-left: 2px; padding-right: 2px;">
+				<div class="col-md-1 hidden"
+					style="width: 5.9% !important; padding-left: 2px; padding-right: 2px;">
 					<div class="form-group ">
-						<c:if test="${icaInfObjetoFormResp.controlCampos.valorRetenido != true}">
-						<img onclick="addvalor()"
-							src="${themeResourcePath}/images/adddelineacion.png"
-							style="width: 25px"></img> <img onclick="delevalor()"
-							src="${themeResourcePath}/images/deledelineacion.png"
-							style="width: 25px"></img>
+						<c:if
+							test="${icaInfObjetoFormResp.controlCampos.valorRetenido != true}">
+							<img onclick="addvalor()"
+								src="${themeResourcePath}/images/adddelineacion.png"
+								style="width: 25px"></img>
+							<img onclick="delevalor()"
+								src="${themeResourcePath}/images/deledelineacion.png"
+								style="width: 25px"></img>
 						</c:if>
 					</div>
 				</div>
@@ -258,11 +296,12 @@
 			<!-- 			</div> -->
 			<div class="row">
 				<div class="col-md-12 text-center" style="marging-top: 15px">
-					<c:if test="${icaInfObjetoFormResp.controlCampos.valorRetenido != true}">
-					<button style="margin-top: 3px;" id="icaCalculoButton"
-						class="btn btn-primary btn-lg" type="button">
-						<spring:theme code="ica.declaracion.valor.calcular" />
-					</button>
+					<c:if
+						test="${icaInfObjetoFormResp.controlCampos.valorRetenido != true}">
+						<button style="margin-top: 3px;" id="icaCalculoButton"
+							class="btn btn-primary btn-lg" type="button">
+							<spring:theme code="ica.declaracion.valor.calcular" />
+						</button>
 					</c:if>
 				</div>
 			</div>
@@ -276,8 +315,10 @@
 		var tam = $(".valor").length;
 		if ($(".valor").length < 20) {
 			$($(".valor")[0]).parent().append($($(".valor")[0]).clone());
-			$($(".valor")[0]).parent().children().last().find(".mes_anoGravable").val("")
-			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").val("")
+			$($(".valor")[0]).parent().children().last().find(
+					".mes_anoGravable").val("")
+			$($(".valor")[0]).parent().children().last().find(
+					".dia_anoGravable").val("")
 			$($(".valor")[0]).parent().children().last().find(".tipo").val("")
 			$($(".valor")[0]).parent().children().last().find(".numID").val("")
 			$($(".valor")[0]).parent().children().last().find(".razonSocial")
@@ -295,13 +336,14 @@
 			$($(".valor")[0]).parent().children().last().find(".montoRetenido")
 					.val("")
 
-			$($(".valor")[0]).parent().children().last().find(".mes_anoGravable").attr("id",
-				"mesValorRetenido_"+tam);
-			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").attr("id",
-				"diaValorRetenido_"+tam);
-			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").attr("disabled",
-					"disabled");
-			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").find("option:gt(0)").remove();
+			$($(".valor")[0]).parent().children().last().find(
+					".mes_anoGravable").attr("id", "mesValorRetenido_" + tam);
+			$($(".valor")[0]).parent().children().last().find(
+					".dia_anoGravable").attr("id", "diaValorRetenido_" + tam);
+			$($(".valor")[0]).parent().children().last().find(
+					".dia_anoGravable").attr("disabled", "disabled");
+			$($(".valor")[0]).parent().children().last().find(
+					".dia_anoGravable").find("option:gt(0)").remove();
 
 		} else {
 			alert("No se pueden agregar más registros");
@@ -348,70 +390,68 @@
 	function activarValidacion_valorRetenido() {
 		ACC.ica.validacion_valorRetenido = 'X';
 	}
-	
+
 	function realizarUpdateMes_valorRetenido(infoMes) {
-		
-		establecerCampoDia(infoMes.value,infoMes.id.substring(17),"",true);	
+
+		establecerCampoDia(infoMes.value, infoMes.id.substring(17), "", true);
 		activarValidacion_valorRetenido();
 	}
-	
-	function establecerCampoDia(valMes,idCampoDia,valDia,banderaHabilitado){
-		
-// 		debugger;
-		var idElemento = 'diaValorRetenido_'+idCampoDia;
+
+	function establecerCampoDia(valMes, idCampoDia, valDia, banderaHabilitado) {
+
+		// 		debugger;
+		var idElemento = 'diaValorRetenido_' + idCampoDia;
 		var sel = document.getElementById(idElemento);
-		if(banderaHabilitado==true){
-			sel.disabled = '';			
-		}else{
-			sel.disabled = 'true';	
+		if (banderaHabilitado == true) {
+			sel.disabled = '';
+		} else {
+			sel.disabled = 'true';
 		}
 		sel.value = "";
-		
-	    var i;
-	    for(i = sel.options.length - 1 ; i >= 0 ; i--)
-	    {
-	    	sel.remove(i);
-	    }
-	    
+
+		var i;
+		for (i = sel.options.length - 1; i >= 0; i--) {
+			sel.remove(i);
+		}
+
 		var opt = document.createElement('option');
-		opt.appendChild( document.createTextNode('Seleccionar') );
-		opt.value = ""; 
-		sel.appendChild(opt); 
+		opt.appendChild(document.createTextNode('Seleccionar'));
+		opt.value = "";
+		sel.appendChild(opt);
 
 		var diaFormateado = "";
-		for(j = 0 ; j<mesesInfo.length ; j++){
-			if(mesesInfo[j].mes == valMes){
-			    for(i = 1 ; i <= mesesInfo[j].diasEnMes ; i++){
+		for (j = 0; j < mesesInfo.length; j++) {
+			if (mesesInfo[j].mes == valMes) {
+				for (i = 1; i <= mesesInfo[j].diasEnMes; i++) {
 					opt = document.createElement('option');
 					diaFormateado = i.toString();
-					if(i<9){
-						diaFormateado = "0"+diaFormateado;
+					if (i < 9) {
+						diaFormateado = "0" + diaFormateado;
 					}
-					opt.appendChild( document.createTextNode(diaFormateado) );
-					opt.value = diaFormateado; 
+					opt.appendChild(document.createTextNode(diaFormateado));
+					opt.value = diaFormateado;
 					sel.appendChild(opt);
-			    }
+				}
 			}
-	    }
-		if(valDia!=null && valDia!=""){
-			sel.value = valDia;	
+		}
+		if (valDia != null && valDia != "") {
+			sel.value = valDia;
 		}
 	}
-	
-	
-	function establecerCampoMes(valMes,idCampoMes){		
-		var idElemento = 'mesValorRetenido_'+idCampoMes;
+
+	function establecerCampoMes(valMes, idCampoMes) {
+		var idElemento = 'mesValorRetenido_' + idCampoMes;
 		var sel = document.getElementById(idElemento);
 		sel.value = valMes;
 	}
-	
-	function habilitarMes(idCampoMes,banderaHabilitado){
-		var idElemento = 'mesValorRetenido_'+idCampoMes;
+
+	function habilitarMes(idCampoMes, banderaHabilitado) {
+		var idElemento = 'mesValorRetenido_' + idCampoMes;
 		var sel = document.getElementById(idElemento);
-		if(banderaHabilitado==true){
-			sel.disabled = '';			
-		}else{
-			sel.disabled = 'true';	
+		if (banderaHabilitado == true) {
+			sel.disabled = '';
+		} else {
+			sel.disabled = 'true';
 		}
 	}
 </script>
