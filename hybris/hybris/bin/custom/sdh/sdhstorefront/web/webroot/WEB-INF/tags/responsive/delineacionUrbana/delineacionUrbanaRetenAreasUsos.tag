@@ -126,7 +126,7 @@
 			</div>
 		</div>
 
-		<div style="display:none">
+		<!--
 		<div class="row mostrarXS">
 			<div class="row areasusos">
 				<div class="col-md-3">
@@ -204,7 +204,7 @@
 				</c:if>
 			</div>
 		</div>
-		</div>
+		-->
 	</c:forEach>
 
 
@@ -287,7 +287,7 @@
 				</c:if>
 			</div>
 		</div>
-		<div style="display:none">
+		<!--
 		<div class="row mostrarXS">
 			<div class="row areausosdos">
 				<div class="col-md-3">
@@ -331,7 +331,7 @@
 				</c:if>
 			</div>
 		</div>
-		</div>
+		-->
 	</c:forEach>
 
 
@@ -417,7 +417,7 @@
 			</div>
 		</div>
 
-		<div style="display:none">
+		<!-- 
 		<div class="row mostrarXS">
 			<div class=" arearquitec row" id="arearquitec">
 				<div class="col-md-3">
@@ -462,7 +462,7 @@
 				</c:if>
 			</div>
 		</div>
-		</div>
+		 -->
 	</c:forEach>
 
 	<div class="row">
