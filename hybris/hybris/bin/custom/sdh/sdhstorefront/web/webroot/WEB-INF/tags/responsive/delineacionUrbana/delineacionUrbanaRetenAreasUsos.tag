@@ -58,7 +58,7 @@
 				<!-- 					</div> -->
 
 				<div class="col-md-3">
-					<div class="form-group ">
+					<div class="form-group">
 						<label class="control-label format_label mostrarXS" for=""
 				style="text-transform: none !important"> <spring:theme
 					code="delineacion.urbana.dec.areasusos.uso" />
@@ -84,9 +84,10 @@
 
 				<div class="col-md-2">
 					<div class="form-group ">
-					<label class="control-label format_label" for=""
+					<label class="control-label format_label mostrarXS" for=""
 				style="text-transform: none !important"> <spring:theme
 					code="delineacion.urbana.dec.areasusos.netuso" /></label>
+
 						<c:if test='${dataForm.input.tipoFlujo == "D"}'>
 							<sf:input class="newalto form-control"
 								readonly="${disabledInformacionAreaUso}" aria-required="true"
@@ -179,6 +180,7 @@
 
 	<c:forEach items="${dataForm.infObjetoDelineacion.areaIntervenida}"
 		var="varAreaIntervenida" varStatus="loop">
+	
 		<div class="row">
 			<div class="row areausosdos">
 				<div class="col-md-3">
@@ -270,6 +272,7 @@
 
 	<c:forEach items="${dataForm.infObjetoDelineacion.areaProyecto}"
 		var="varAreaIntervenida" varStatus="loop">
+
 		<div class="row">
 			<div class=" arearquitec row" id="arearquitec">
 				<div class="col-md-3">
