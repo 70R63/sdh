@@ -31,15 +31,26 @@
 			var contrib_select = document.getElementById('idImpuestoAgente');
 			var impblock = document.getElementById('impRetenedor');
 		
-			contrib_select.style.display = 'block';
-			impblock.style.display = 'block';
+			if(contrib_select != null){
+				contrib_select.style.display = 'block';
+			}
+			if(impblock != null){
+				impblock.style.display = 'block';				
+			}
 		}else{
 			var contrib_select = document.getElementById('idImpuesto');
 			var impblock = document.getElementById('impContribuyente');
 			var btn = document.getElementById('btnBuscar');
-			contrib_select.style.display = 'block';
-			impblock.style.display = 'block';
-			btn.style.display = 'block';
+			
+			if(contrib_select != null){
+				contrib_select.style.display = 'block';
+			}
+			if(impblock != null){
+				impblock.style.display = 'block';
+			}
+			if(btn != null){
+				btn.style.display = 'block';
+			}
 		}
 
 		$(".loader").fadeOut("slow");
@@ -53,8 +64,13 @@
 	function Selectedver(selectObject) {
 		var contrib_select = document.getElementById('idImpuesto');
 		var impblock = document.getElementById('impContribuyente');
-		contrib_select.style.display = 'block';
-		impblock.style.display = 'block';
+		
+		if(contrib_select != null){
+			contrib_select.style.display = 'block';			
+		}
+		if(impblock != null){
+			impblock.style.display = 'block';			
+		}
 		var value = selectObject.value;
 		var xx = document.getElementById('impuesto');
 		var x = xx.value;
