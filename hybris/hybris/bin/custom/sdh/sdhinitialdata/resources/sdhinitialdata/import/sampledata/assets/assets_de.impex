@@ -1,0 +1,21 @@
+$lang=de
+
+INSERT_UPDATE PSAssetType;code[unique=true];name[lang=$lang]
+ ;car;Personenkraftwagen
+ ;house;Haus
+ ;property;Eigenschaft
+ ;vehicle;Fahrzeug
+
+INSERT_UPDATE PSAssetAttributeMapping;assetTypeCode[unique=true];attributeName[unique=true];attributeDisplayName[lang=$lang]
+ ;car;BILLS;Rechnungen
+ ;car;DOCUMENT;DOCUMENT
+ ;car;ENGNO;Motornummer
+ ;car;OWNER;Besitzer
+ ;car;PADDRESS;Postadresse
+ ;car;REGNO;Registration number
+ ;car;REGSERNO;Seriennummer für Anmeldung
+ ;car;SANCAPP;Sanktionen
+ ;car;STOSTAT;Status „Gestohlen“
+ ;car;TXNDISP;Eigentumsübertragung streitig
+ ;car;VEHICLE;Fahrzeug
+ ;car;VIN;FIN/Fahrzeugidentifikationsnummer

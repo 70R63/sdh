@@ -1,0 +1,27 @@
+# ImpEx for Importing Data Classification Into Service Product
+#% impex.setLocale( Locale.ENGLISH );
+
+# Macros / Replacement Parameter definitions
+$productCatalog=sdhProductCatalog
+$productCatalogName=Public Sector Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$lang=en
+
+INSERT_UPDATE PSDataClassification;classification[unique=true];description[lang=$lang];publicationSystem;feed
+;BIRTHS;Births registrations;;BDM;
+;MARRIAGES;Marriage licences;;BDM;
+;ROADS;Driver licencing service;;ROADS
+;PERMITS;Event Permits;;PERMITS
+;GRAFFITI;Report Graffiti;;ROADS
+
+# Create products
+UPDATE PSServiceProduct;code[unique=true];$catalogVersion;dataClassification(classification);
+;report-graffiti;;ROADS
+;report-pothole;;ROADS
+;apply-learner-driver-licence;;ROADS
+;apply-disabled-parking-permit;;PERMITS
+;working-with-children-check;;
+;pool-building-permit;;PERMITS
+;apply-for-marriage-certificate;;BIRTHS
+;register-birth;;BIRTHS
+;apply-for-death-certificate;;BIRTHS

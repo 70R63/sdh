@@ -1,0 +1,7 @@
+$extensionName=sdhinitialdata
+$jarResourceYformTemplate=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/$extensionName/import/template/yform
+$lang=de
+
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;register-birth_renderer;"Geburtsurkunde registrieren";$jarResourceYformTemplate/register-birth_$lang.vm
+;report-graffiti_renderer;"Vorlage „Graffiti melden“";$jarResourceYformTemplate/report-graffiti_$lang.vm

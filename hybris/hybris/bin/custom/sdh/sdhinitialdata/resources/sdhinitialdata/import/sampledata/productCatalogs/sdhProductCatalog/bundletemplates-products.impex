@@ -1,0 +1,13 @@
+# Macros / Replacement Parameter definitions
+$productCatalog=sdhProductCatalog
+$productCatalogName=SDH Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];products(code, $catalogVersion);$catalogVersion
+;WORKING_withChildren_Service_Bundle;;working-with-children-check;
+;WORKING_withChildren_ApplicationType_Bundle;;apply-as-volunteer-addon, apply-as-paid-employee-addon;
+;EVENT_Permit_Service_Bundle;;event-permit-application;
+;EVENT_Permit_Size_AddOns_Bundle;;event-gather-below-50-addon, event-gather-50-149-addon, event-gather-150-999-addon, event-gather-1000-10000-addon, event-gather-10000up-addon;
+;EVENT_Permit_WithAlcohol_AddOns_Bundle;;event-serve-alcohol-addon, none-eventpermit-alcohol-addon;
+;REGISTER_Birth_Service_Bundle;;register-birth;
+;REGISTER_BirthCert_AddOns_Bundle;;none-birthcert-noprint-addon, birthcert-print1-addon, birthcert-print2-addon, birthcert-print3-addon, birthcert-print4-addon, birthcert-print5-addon;

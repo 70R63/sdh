@@ -1,0 +1,30 @@
+
+$applicationId=sdh
+$lang=de
+
+UPDATE YFormDefinition;applicationId[unique = true];formId[unique = true];version[default=1,unique=true];checkoutStepTitle[lang=$lang]
+ ;$applicationId;Apply-Disabled-Parking-Permit-Form-Step-1;;Details zum Antragsteller
+ ;$applicationId;Apply-Disabled-Parking-Permit-Form-Step-2;;Medizinische Details
+ ;$applicationId;Apply-For-Death-Certificate-Form-Step-1;;Details zu Verstorbenen
+ ;$applicationId;Apply-For-Death-Certificate-Form-Step-2;;Details zum Antragsteller
+ ;$applicationId;Apply-For-Marriage-Certificate-Form-Step-1;;Details zur Eheschließung
+ ;$applicationId;Apply-For-Marriage-Certificate-Form-Step-2;;Details Partner 1
+ ;$applicationId;Apply-For-Marriage-Certificate-Form-Step-3;;Details Partner 2
+ ;$applicationId;Apply-For-Tourist-Visa-Form-Step-1;;Details zum Antragsteller
+ ;$applicationId;Apply-For-Tourist-Visa-Form-Step-2;;Anwendungsdetails
+ ;$applicationId;Apply-For-Tourist-Visa-Form-Step-3;;Gesundheit und Charakter
+ ;$applicationId;Apply-Learner-Driver-Licence-Form-Step-1;;Details zum Antragsteller
+ ;$applicationId;Apply-Learner-Driver-Licence-Form-Step-2;;Lizenzdetails
+ ;$applicationId;Apply-Learner-Driver-Licence-Form-Step-3;;Gesundheitsdetails
+ ;$applicationId;Event-Permit-Application-Form-Step-1;;Veranstaltungsdetails
+ ;$applicationId;Event-Permit-Application-Form-Step-2;;Details zum Antragsteller
+ ;$applicationId;Event-Permit-Application-Form-Step-3;;Details zur Ausschanklizenz
+ ;$applicationId;Pool-Building-Permit-Form-Step-1;;Persönliche Details
+ ;$applicationId;Pool-Building-Permit-Form-Step-2;;Arbeitsdetails
+ ;$applicationId;Register-Birth-Form-Step-1;;Details Kind
+ ;$applicationId;Register-Birth-Form-Step-2;;Details Elternteil 1
+ ;$applicationId;Register-Birth-Form-Step-3;;Details Elternteil 2
+ ;$applicationId;Report-Graffiti-Form;;Graffiti melden
+ ;$applicationId;Report-Pothole-Form;;Schlagloch melden
+ ;$applicationId;Working-With-Children-Check-Form-Step-1;;Antrags- und Organisationsdetails
+ ;$applicationId;Working-With-Children-Check-Form-Step-2;;Persönliche Details

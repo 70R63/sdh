@@ -1,0 +1,35 @@
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(catalog(id[default=$contentCatalog]),version[default=Staged])[unique=true,default=$contentCatalog:Staged]
+
+$lang=de
+
+# Content Pages
+UPDATE ContentPage;$contentCV;uid[unique=true];title[lang=$lang];keywords[lang=$lang];description[lang=$lang]
+ ;;account;"Mein Konto";"account";"Mein Konto"
+ ;;add-edit-address;"Adresse hinzufügen/bearbeiten" ;"Adresse hinzufügen/bearbeiten";"Adresse hinzufügen/bearbeiten"
+ ;;address-book;"Adressbuch";"Adressbuch";"Adressbuch"
+ ;;allOrders;"Antragsverlauf";"Alle Bestellungen";"Antragsverlauf"
+ ;;asset-detail;"Vermögenswertdetails";"Vermögenswertdetail";"Vermögenswertdetails"
+ ;;checkout-login;"Zur Kasse gehen";"Anmeldung zum Bezahlen";"Zur Kasse gehen"
+ ;;dashboardPage;"Mein Konto";"dashboardPage";"Mein Konto"
+ ;;draftConfirmationPage;"Entwurfsbestätigung";"Entwurfsbestätigung";"Draft Confirmation"
+ ;;drafts;"Entwurfsservices";"Entwürfe";"Entwurfsservices"
+ ;;faq;"Häufig gestellte Fragen";"FAQ";"Häufig gestellte Fragen"
+ ;;homepage;"Startseite";"Startseite";"Startseite"
+ ;;login;"Startseite";"Startseite";"Startseite"
+ ;;multiStepCheckoutSummaryPage;"Bezahlen";"Zusammenfassungsseite für mehrstufige Bezahlung" ;"Bezahlen"
+ ;;my-assets;"Vermögenswerte";"Meine Vermögenswerte";"Meine Vermögenswerte"
+ ;;my-documents;"Dokumente";"Meine Dokumente";"Dokumente"
+ ;;notFound;"Nicht gefunden";"Nicht gefunden";"Nicht gefunden"
+ ;;order;"Anwendungsdetails";"Bestellung";"Anwendungsdetails"
+ ;;orderConfirmationPage;"Antragsbestätigung";"Auftragsbestätigungsseite";"Antragsbestätigung"
+ ;;orders;"Antragsverlauf";"Bestellungen";"Antragsverlauf"
+ ;;payment-details;"Zahlungsdetails";"Zahlungsdetails";"Zahlungsdetails"
+ ;;register-checkout-login;"Zur Kasse gehen";"Registrieren zum Bezahlen";"Zur Kasse gehen"
+ ;;retrieve-draft;"Entwurf abrufen";"Entwurf abrufen";"Entwurf abrufen"
+ ;;searchEmpty;"Keine Ergebnisse";"Keine Suchergebnisse";"Keine Ergebnisse"
+ ;;storefinderPage;"Händlersuche";"Seite ""Händlersuche""";"Händlersuche"
+ ;;termsAndConditions;"Allgemeine Geschäftsbedingungen";"Allgemeine Geschäftsbedingungen";"Allgemeine Geschäftsbedingungen"
+ ;;update-email;"E-Mail-Adresse aktualisieren";"E-Mail aktualisieren";"E-Mail-Adresse aktualisieren"
+ ;;update-profile;"Persönliche Daten aktualisieren";"Profil aktualisieren";"Persönliche Daten aktualisieren"
+ ;;updatePassword;"Vergessenes Kennwort erneuern";"Kennwort aktualisieren";"Vergessenes Kennwort erneuern"

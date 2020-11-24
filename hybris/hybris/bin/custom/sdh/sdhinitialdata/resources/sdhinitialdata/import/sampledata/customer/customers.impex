@@ -1,0 +1,53 @@
+#### SAMPLE CUSTOMERS FOR DEMO PURPOSES ####
+
+$defaultPassword=Rosebud$
+
+INSERT_UPDATE Customer	;groups(uid)		;uid[unique=true]					;name					;password[default=$defaultPassword]	; title(code); type(code); &customerId;defaultPaymentAddress(&addId);defaultShipmentAddress(&addId)
+;customergroup	;jane.citizen@stateofrosebud.com	;Jane Citizen	;									;miss	;REGISTERED		;jane.citizen@stateofrosebud.com;primary address;primary address
+;customergroup	;john.citizen@stateofrosebud.com	;John Citizen	;									;mr		;REGISTERED		;john.citizen@stateofrosebud.com;;
+;customergroup	;granny.citizen@stateofrosebud.com	;Granny Citizen	;									;mrs	;REGISTERED		;granny.citizen@stateofrosebud.com;;
+;customergroup	;jason.citizen@stateofrosebud.com	;Jason Citizen	;									;mr		;REGISTERED		;jason.citizen@stateofrosebud.com;;
+;customergroup	;automationtestuser@stateofrosebud.com	;Automation Citizen	;							;mr		;REGISTERED		;automationtestuser@stateofrosebud.com;test_primary_address;test_primary_address
+
+;customergroup	;jill.citizen	                    ;Jill Citizen	;									;miss	;REGISTERED		;jill.citizen;;
+;customergroup	;joey.citizen	                    ;Joey Citizen	;									;mr		;REGISTERED		;joey.citizen;;
+;customergroup	;calvin.citizen@stateofrosebud.com	;Calvin Citizen	;									;mr		;REGISTERED		;calvin.citizen@stateofrosebud.com;;
+;customergroup	;carol.citizen@stateofrosebud.com	;Carol Citizen	;									;mrs	;REGISTERED		;carol.citizen@stateofrosebud.com;;
+;customergroup	;elizabeth.miller@stateofrosebud.com	;Elizabeth Miller	;							;mrs	;REGISTERED		;elizabeth.miller@stateofrosebud.com;;
+;customergroup	;matthew.miller@stateofrosebud.com	;Matthew Miller	;									;mr		;REGISTERED		;matthew.miller@stateofrosebud.com;;
+;customergroup	;teresa.citizen@stateofrosebud.com	;Teresa Citizen	;									;miss	;REGISTERED		;teresa.citizen@stateofrosebud.com;;
+#;customergroup	;josephine.citizen@stateofrosebud.com	;Josephine Citizen	;							;miss	;REGISTERED		;josephine.citizen@stateofrosebud.com;;
+#;customergroup	;homer.citizen@stateofrosebud.com	;Homer Citizen	;									;mr		;REGISTERED		;homer.citizen@stateofrosebud.com;;
+;customergroup	;amanda.smith@stateofrosebud.com	;Amanda Smith	;									;miss	;REGISTERED		;amanda.smith@stateofrosebud.com;;
+;customergroup	;jack.smith@stateofrosebud.com		;Jack Smith	;										;mr		;REGISTERED		;jack.smith@stateofrosebud.com;;
+
+;customergroup	;macfirefox@stateofrosebud.com 		;Automation Citizen	;								;mr		;REGISTERED		;macfirefox@stateofrosebud.com;test_primary_address10;test_primary_address10
+;customergroup	;windowfirefox@stateofrosebud.com 	;Automation Citizen	;								;mr		;REGISTERED		;windowfirefox@stateofrosebud.com;test_primary_address11;test_primary_address11
+;customergroup	;ipadair@stateofrosebud.com 		;Automation Citizen	;								;mr		;REGISTERED		;ipadair@stateofrosebud.com;test_primary_address1;test_primary_address1
+;customergroup	;microsoftedge@stateofrosebud.com 	;Automation Citizen	;								;mr		;REGISTERED		;microsoftedge@stateofrosebud.com;test_primary_address2;test_primary_address2 
+;customergroup	;linuxfirefox@stateofrosebud.com 	;Automation Citizen	;								;mr		;REGISTERED		;linuxfirefox@stateofrosebud.com;test_primary_address3;test_primary_address3 
+;customergroup	;windowchrome@stateofrosebud.com 	;Automation Citizen	;								;mr		;REGISTERED		;windowchrome@stateofrosebud.com;test_primary_address4;test_primary_address4 
+;customergroup	;macchrome@stateofrosebud.com 		;Automation Citizen	;								;mr		;REGISTERED		;macchrome@stateofrosebud.com;test_primary_address5;test_primary_address5 
+;customergroup	;windowie@stateofrosebud.com 		;Automation Citizen	;								;mr		;REGISTERED		;windowie@stateofrosebud.com;test_primary_address6;test_primary_address6 
+;customergroup	;iphone6plus@stateofrosebud.com 	;Automation Citizen	;								;mr		;REGISTERED		;iphone6plus@stateofrosebud.com;test_primary_address7;test_primary_address7 
+;customergroup	;andriodtablet@stateofrosebud.com	;Automation Citizen	;								;mr		;REGISTERED		;andriodtablet@stateofrosebud.com;test_primary_address8;test_primary_address8
+;customergroup	;andriodphone@stateofrosebud.com 	;Automation Citizen	;								;mr		;REGISTERED		;andriodphone@stateofrosebud.com;test_primary_address9;test_primary_address9 
+
+INSERT_UPDATE Address;&addId;owner(Customer.uid)[unique=true];streetname[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+;primary address		;jane.citizen@stateofrosebud.com		;230 Primary Street;1000;false;Rosebud;GB;true;true;true;true;Jane;Citizen;jane.citizen@stateofrosebud.com;FEMALE;;0011234567;miss;;;
+;test_primary_address	;automationtestuser@stateofrosebud.com	;230 Primary Street;1000;false;Rosebud;GB;true;true;true;true;Automation ;Citizen;automationtestuser@stateofrosebud.com;MALE;;0011234567;mr;;;
+;test_primary_address1 	;ipadair@stateofrosebud.com 			;230 Primary Street;1000;false;Rosebud;GB;true;true;true;true;Automation ;Citizen;ipadair@stateofrosebud.com ;MALE;;0011234567;mr;;;
+;test_primary_address2 	;microsoftedge@stateofrosebud.com 		;230 Primary Street;1000;false;Rosebud;GB;true;true;true;true;Automation ;Citizen;microsoftedge@stateofrosebud.com ;MALE;;0011234567;mr;;;
+;test_primary_address3 	;linuxfirefox@stateofrosebud.com 		;230 Primary Street;1000;false;Rosebud;GB;true;true;true;true;Automation ;Citizen;linuxfirefox@stateofrosebud.com ;MALE;;0011234567;mr;;;
+;test_primary_address4 	;windowchrome@stateofrosebud.com 		;230 Primary Street;1000;false;Rosebud;GB;true;true;true;true;Automation ;Citizen;windowchrome@stateofrosebud.com ;MALE;;0011234567;mr;;;
+;test_primary_address5 	;macchrome@stateofrosebud.com 			;230 Primary Street;1000;false;Rosebud;GB;true;true;true;true;Automation ;Citizen;macchrome@stateofrosebud.com ;MALE;;0011234567;mr;;;
+;test_primary_address6 	;windowie@stateofrosebud.com 			;230 Primary Street;1000;false;Rosebud;GB;true;true;true;true;Automation ;Citizen;windowie@stateofrosebud.com ;MALE;;0011234567;mr;;;
+;test_primary_address7 	;iphone6plus@stateofrosebud.com 		;230 Primary Street;1000;false;Rosebud;GB;true;true;true;true;Automation ;Citizen;iphone6plus@stateofrosebud.com ;MALE;;0011234567;mr;;;
+;test_primary_address8 	;andriodtablet@stateofrosebud.com		;230 Primary Street;1000;false;Rosebud;GB;true;true;true;true;Automation ;Citizen;andriodtablet@stateofrosebud.com;MALE;;0011234567;mr;;;
+;test_primary_address9 	;andriodphone@stateofrosebud.com 		;230 Primary Street;1000;false;Rosebud;GB;true;true;true;true;Automation ;Citizen;andriodphone@stateofrosebud.com ;MALE;;0011234567;mr;;;
+;test_primary_address10	;macfirefox@stateofrosebud.com 			;230 Primary Street;1000;false;Rosebud;GB;true;true;true;true;Automation ;Citizen;macfirefox@stateofrosebud.com ;MALE;;0011234567;mr;;;
+;test_primary_address11	;windowfirefox@stateofrosebud.com 		;230 Primary Street;1000;false;Rosebud;GB;true;true;true;true;Automation ;Citizen;windowfirefox@stateofrosebud.com ;MALE;;0011234567;mr;;;
+
+INSERT_UPDATE CreditCardPaymentInfo	;code[unique=true]	;&payId[unique=true]	;user(uid)[unique=true]				;ccOwner				;number				;type(code)	;validFromMonth	;validFromYear	;validToMonth	;validToYear	;subscriptionId	;billingAddress(&addId);duplicate[default=false];saved[default=true]
+									;hpsapayer			;hpsapayer				;jane.citizen@stateofrosebud.com	;Jane Citizen	;4111111111111112	;visa		;1				;2010			;12				;2020			;1231			;primary address;
+									;test_hpsapayer			;test_hpsapayer		;automationtestuser@stateofrosebud.com	;Automation Citizen	;4111111111111112;visa	;1				;2010			;12				;2020			;1231			;

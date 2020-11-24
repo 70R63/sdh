@@ -1,0 +1,41 @@
+$lang=en
+$standardHours=hpsa-standard-hours
+$weekendHours=hpsa-weekend-hours
+
+UPDATE StoreLocatorFeature;code[unique=true];name[lang=$lang]
+ ;buyOnlinePickupInStore;"Buy Online Pick Up In Store"
+ ;creche;"Creche"
+ ;restroom;"Restrooms"
+ ;selfservice;"Self-service kiosk"
+ ;sundayWorkshops;"Sunday Workshops"
+ ;wheelchair;"Wheelchair Access"
+
+UPDATE SpecialOpeningDay;openingSchedule(code)[unique=true];date[unique=true,dateformat=dd.MM.yyyy];name[lang=$lang];message[lang=$lang]
+ ;$standardHours;01.01.2014;"New Year's Day Holiday";""
+ ;$weekendHours;01.01.2014;"New Year's Day Holiday";""
+ ;$standardHours;01.04.2014;"Easter Monday";""
+ ;$weekendHours;01.04.2014;"Easter Monday";""
+ ;$standardHours;06.05.2014;"Early May Bank Holiday";""
+ ;$weekendHours;06.05.2014;"Early May Bank Holiday";""
+ ;$standardHours;25.12.2014;"Christmas Day Holiday";""
+ ;$weekendHours;25.12.2014;"Christmas Day Holiday";""
+ ;$standardHours;26.08.2014;"Summer Bank Holiday";""
+ ;$weekendHours;26.08.2014;"Summer Bank Holiday";""
+ ;$standardHours;26.12.2014;"Boxing Day";""
+ ;$weekendHours;26.12.2014;"Boxing Day";""
+ ;$standardHours;27.05.2014;"Spring Bank Holiday";""
+ ;$weekendHours;27.05.2014;"Spring Bank Holiday";""
+ ;$standardHours;29.03.2014;"Good Friday";""
+ ;$weekendHours;29.03.2014;"Good Friday";""
+
+UPDATE PointOfService;name[unique=true];displayName;
+ ;Association of Rosebud Engineers;Association of Rosebud Engineers;
+ ;Bureau of Births, Deaths & Marriages;Bureau of Births, Deaths & Marriages;
+ ;Department of Commerce;Department of Commerce;
+ ;Department of Development;Department of Development;
+ ;Department of Health;Department of Health;
+ ;Department of Justice;Department of Justice;
+ ;Department of Transport;Department of Transport;
+ ;Institute of Agriculture;Institute of Agriculture;
+ ;Ministry of Families and Youth;Ministry of Families and Youth;
+ ;Rosebud Town Hall;Rosebud Town Hall;

@@ -1,0 +1,72 @@
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$siteResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$picture=icon(code, $contentCV)
+
+INSERT_UPDATE PSAssetType;code[unique=true];$picture
+;vehicle;;
+;property;;
+;car;assetCarIconMedia;
+;house;assetHouseIconMedia;
+	
+INSERT_UPDATE PSAsset;code[unique=true];assetId;name;assetType(code)
+;1;1;Mazda 3 Sedan Black 2015;car
+;2;2;Suzuki Swift Green 2007;car
+;3;3;Chevrolet Orlando Black 2011;car
+
+INSERT_UPDATE PSAssetOwner;uid[unique=true];assetCode[unique=true];startDate[dateformat=MM/dd/yy HH:mm:ss];endDate[dateformat=MM/dd/yy HH:mm:ss]
+;jane.citizen@stateofrosebud.com;1;10/13/16 08:07:47;10/13/18 08:07:47
+;granny.citizen@stateofrosebud.com;2;08/13/13 08:07:47;10/21/19 08:07:47
+;jane.citizen@stateofrosebud.com;3;08/13/14 08:07:47;10/21/20 08:07:47
+
+INSERT_UPDATE PSAssetAttribute;assetCode[unique=true];name[unique=true];value
+;1;REGNO;ABC 123
+;1;VEHICLE;2015 Black Mazda 3 Sedan
+;1;VIN;ABCDE1234567890
+;1;ENGNO;AB1234567890
+;1;REGSERNO;987654321
+;1;STOSTAT;None
+;1;SANCAPP;None
+;1;TXNDISP;None
+#;1;OWNER;None
+#;1;PADDRESS;None
+;2;REGNO;GUD 835
+;2;VEHICLE;2007 Green Suzuki Swift Hatchback
+;2;VIN;IDTVS8462965148
+;2;ENGNO;EG2170385473
+;2;REGSERNO;248610576
+;2;STOSTAT;None
+;2;SANCAPP;None
+;2;TXNDISP;None
+#;2;OWNER;None
+#;2;PADDRESS;None
+
+;3;REGNO;GUD 835
+;3;VEHICLE;2011 Black Chevrolet Orlando
+;3;VIN;IDTVS8462965148
+;3;ENGNO;EG2170385473
+;3;REGSERNO;248610576
+;3;STOSTAT;None
+;3;SANCAPP;None
+;3;TXNDISP;None
+#;3;OWNER;None
+#;3;PADDRESS;None
+
+INSERT_UPDATE PSAssetAttributeMapping;assetTypeCode[unique=true];attributeName[unique=true];attributeDisplayOrder
+;car;REGNO;1
+;car;VEHICLE;2
+;car;VIN;3
+;car;ENGNO;4
+;car;REGSERNO;5
+;car;STOSTAT;6
+;car;SANCAPP;7
+;car;TXNDISP;8
+;car;OWNER;9
+;car;PADDRESS;10
+;car;BILLS;11
+;car;DOCUMENT;12
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images'];;
+;;assetCarIconMedia;text/png;ps_asset_car.png;$siteResource/images/assets/ps_asset_car.png;;;
+;;assetHouseIconMedia;text/png;ps_asset_house.png;$siteResource/images/assets/ps_asset_house.png;;;
+;;assetDetailsBillsIconMedia;text/png;ps_asset_bills.png;$siteResource/images/assets/ps_asset_bills.png;;;
