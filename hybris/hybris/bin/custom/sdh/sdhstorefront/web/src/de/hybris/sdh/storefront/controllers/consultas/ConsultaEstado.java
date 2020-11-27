@@ -139,8 +139,11 @@ public class ConsultaEstado extends AbstractSearchPageController
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			final EdoCuentaResponse edoCuentaResponse = mapper.readValue(sdhEdoCuentaService.detalleEdoCta(edoCuentaRequest),
-					EdoCuentaResponse.class);
+			String responseStr = sdhEdoCuentaService.detalleEdoCta(edoCuentaRequest);
+			responseStr = responseStr.replace(",{\"detalleReteica\":[\"\",\"\"]}", "");
+
+			final EdoCuentaResponse edoCuentaResponse = mapper.readValue(responseStr, EdoCuentaResponse.class);
+
 
 
 			ctaForm.setCompleName(customerData.getCompleteName());
@@ -362,7 +365,8 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 
 	//-----------------------------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/contribuyentes/estado-de-cuenta", method = RequestMethod.POST)
+	@RequestMapping(value =
+	{ "/contribuyentes/estado-de-cuenta", "/agenteRetenedor/estado-de-cuenta" }, method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String handlePOST_ST(final Model model, @ModelAttribute("dataForm")
 	final SobreTasaGasolinaForm dataFormResponse, @RequestParam(value = "action")
