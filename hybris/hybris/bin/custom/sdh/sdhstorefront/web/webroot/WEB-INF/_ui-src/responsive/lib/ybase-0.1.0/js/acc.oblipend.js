@@ -221,7 +221,7 @@ ACC.oblipend = {
 	        });
 	}
 	
-	else if(impuestoSelc=="4"){
+	else if(impuestoSelc=="8"){
 		tablePub[0].setAttribute("id","example");
 		   var selectRefinementsTitle = "RETEICA";
 	        ACC.colorbox.open(selectRefinementsTitle, {
