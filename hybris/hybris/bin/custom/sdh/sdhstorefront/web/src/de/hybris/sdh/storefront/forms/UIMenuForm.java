@@ -42,6 +42,7 @@ public class UIMenuForm
 	private String bSobreGasolina;
 	private String bDelineacionUrbana;
 	private List<NombreRolResponse> roles;
+	private Boolean bNoFiltrarMenuContrib;
 
 
 
@@ -286,6 +287,23 @@ public class UIMenuForm
 	public void setbDelineacionUrbana(final String bDelineacionUrbana)
 	{
 		this.bDelineacionUrbana = bDelineacionUrbana;
+	}
+
+	/**
+	 * @return the bNoFiltrarMenuContrib
+	 */
+	public Boolean getbNoFiltrarMenuContrib()
+	{
+		return bNoFiltrarMenuContrib;
+	}
+
+	/**
+	 * @param bNoFiltrarMenuContrib
+	 *           the bNoFiltrarMenuContrib to set
+	 */
+	public void setbNoFiltrarMenuContrib(final Boolean bNoFiltrarMenuContrib)
+	{
+		this.bNoFiltrarMenuContrib = bNoFiltrarMenuContrib;
 	}
 
 }

@@ -943,6 +943,23 @@
 				</attributes>
 			</itemtype>
 		</typegroup>
+		<typegroup name="sdhTablasAdicionales">
+			<itemtype generate="true" code="SdhAccesoMenuContrib1" extends="GenericItem" autocreate="true" >
+				<deployment table="SdhAccesoMenuContrib1" typecode="20014" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="bp">
+						<description>Numero de BP</description>
+						<modifiers unique="true"/>
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="activeFlag">
+						<description>Estado de validez(si esta valido entonces se habilitan todos los menus)</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
 
     </itemtypes>
 </items>
