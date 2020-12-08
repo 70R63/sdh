@@ -350,13 +350,14 @@ toddir.style.width= '900px'
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group ">
+							<c:set var="direccionOutput" value = "${miRitForm.direccionNotificacion.STREET}  ${miRitForm.direccionNotificacion.STR_SUPPL1 }  ${miRitForm.direccionNotificacion.STR_SUPPL2 } "/>
 							<label class="control-label required" for="direccionNotificacion">
 								<spring:theme code="mirit.contactData.notificationAddress" />
 							</label> <input id="direccionNotificacion" name="direccionNotificacion"
 								class="newalto_dir form-control" aria-required="true" type="text"
 								data-original="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }"
 								" disabled="disabled"
-								value="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }"
+								value="${direccionOutput}"
 								maxlength="240"> <input id="direccionNotificacionStreet"
 								name="direccionNotificacionStreet" type="hidden"
 								data-original="${miRitForm.direccionNotificacion.STREET}"
@@ -429,13 +430,14 @@ toddir.style.width= '900px'
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group ">
+							<c:set var="direccionOutput" value = "${miRitForm.direccionContacto.STREET } ${miRitForm.direccionContacto.STR_SUPPL1 } ${miRitForm.direccionContacto.STR_SUPPL2 }"/>
 							<label class="control-label required" for="direccionContacto">
 								<spring:theme code="mirit.contactData.anotherContactAddress" />
 							</label> <input id="direccionContacto" name="direccionContacto"
 								class="newalto_dir form-control" aria-required="true" type="text"
 								disabled="disabled"
 								data-original="${miRitForm.direccionContacto.STREET } ${miRitForm.direccionContacto.STR_SUPPL1 } ${miRitForm.direccionContacto.STR_SUPPL2 }"
-								value="${miRitForm.direccionContacto.STREET } ${miRitForm.direccionContacto.STR_SUPPL1 } ${miRitForm.direccionContacto.STR_SUPPL2 }"
+								value="${direccionOutput}"
 								maxlength="240"> <input id="direccionContactoStreet"
 								name="direccionContactoStreet" type="hidden"
 								data-original="${miRitForm.direccionContacto.STREET}"
