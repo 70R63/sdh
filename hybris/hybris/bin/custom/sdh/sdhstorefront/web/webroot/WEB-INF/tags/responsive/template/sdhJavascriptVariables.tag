@@ -13,6 +13,10 @@
 			<c:if test="${not empty representado}">
 				ACC.aamenus = "${aamenus}";
 			</c:if>
+			ACC.flagFiltrarMenuContrib = true;
+			<c:if test="${uiMenuForm.bNoFiltrarMenuContrib}">
+				ACC.flagFiltrarMenuContrib = false;
+			</c:if>
 			ACC.aaEntidadBancariaMenuflagEjecutar = false;
 			<c:if test="${aaEntidadBancaria == true}">
 				ACC.aaEntidadBancariaMenuflagEjecutar = true;
