@@ -110,4 +110,18 @@ Number.prototype.pad = function(size) {
   while (s.length < (size || 2)) {s = "0" + s;}
   return s;
 }
+
+function fechaExpedicion(doc){
+	debugger;
+	var tip=doc;
+	var tipDoc =  tip.value;
+	
+	if(tipDoc.includes("CC")){
+	
+	 document.getElementById("fechaExpedicion").style.display = "block";
+	}else{
+		document.getElementById("fechaExpedicion").style.display = "none";
+		document.getElementById("fechaExpedicion").value = "";
+	}
+}
 </script>
