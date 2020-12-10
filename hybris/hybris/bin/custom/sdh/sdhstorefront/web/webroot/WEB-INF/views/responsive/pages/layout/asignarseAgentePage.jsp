@@ -20,7 +20,7 @@
 	<asigna:selecImpuesto />
 	<asigna:selecTramiteGeneral />
 	<asigna:adjDocumentos />
-	<asigna:resumen />
+<%-- 	<asigna:resumen /> --%>
 </div>
 
 
