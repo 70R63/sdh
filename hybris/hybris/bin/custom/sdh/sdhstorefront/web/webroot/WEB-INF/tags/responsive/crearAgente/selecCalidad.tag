@@ -8,7 +8,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row" style="margin-top:10px !important">
-		<div class="col-md-2">
+		<div class="col-md-7">
 			<table class="table" id="contribuyenteTable" >
 				<thead>
 					<tr>
@@ -30,6 +30,27 @@
 			</table>
 		</div>
 	</div>
+	<br>
+				<div class="row">
+				<div class="col-md-2">
+						<div class="form-group ">
+							<label class="control-label"> <spring:theme
+									code="autorizado.crear.buscar.fechinivali" />
+							</label> <input id="iniDate" name="" class="newalto form-control"
+								aria-required="true" type="date" value="" maxlength="240"
+								placeholder="dd/mm/aaaa">
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group ">
+							<label class="control-label"> <spring:theme
+									code="autorizado.crear.buscar.fechfinvali" />
+							</label> <input id="finDate" name="" class="newalto form-control"
+								aria-required="true" type="date" value="" maxlength="240"
+								placeholder="dd/mm/aaaa">
+						</div>
+					</div>
+				</div>
 </div>
 
 <div id="acordeon" class="container">

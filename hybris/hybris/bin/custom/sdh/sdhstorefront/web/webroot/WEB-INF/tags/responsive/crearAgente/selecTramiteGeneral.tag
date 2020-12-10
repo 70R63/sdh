@@ -619,79 +619,79 @@
 					</div>
 				</div>
 
-				<div class="row mt-3">
-					<div class="col-md-12"
-						style="background: #d2d2d2; margin-top: 20px !important;">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="autorizado.crear.tramgen.nota2" /></label>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-1">
-						<div class="fomchk  form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label"> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.todos" />
-								</label>
-							</div>
-						</div>
-					</div>
+<!-- 				<div class="row mt-3"> -->
+<!-- 					<div class="col-md-12" -->
+<!-- 						style="background: #d2d2d2; margin-top: 20px !important;"> -->
+<!-- 						<div class="form-group"> -->
+<%-- 							<label class="control-label"><spring:theme --%>
+<%-- 									code="autorizado.crear.tramgen.nota2" /></label> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="row"> -->
+<!-- 					<div class="col-md-1"> -->
+<!-- 						<div class="fomchk  form-group "> -->
+<!-- 							<div class="checkbox chkagent" role="checkbox" -->
+<!-- 								aria-checked="false"> -->
+<!-- 								<label tabindex="0" class="chkagent control-label"> <input -->
+<!-- 									id="" name="" type="checkbox" value="true"> <input -->
+<!-- 									type="hidden" name="_consentForm.consentGiven" value="on"> -->
+<%-- 									<spring:theme code="autorizado.crear.tramgen.tramite.todos" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 
-					<div class="col-md-1">
-						<div class="fomchk  form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label"> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.2018" />
-								</label>
-							</div>
-						</div>
-					</div>
+<!-- 					<div class="col-md-1"> -->
+<!-- 						<div class="fomchk  form-group "> -->
+<!-- 							<div class="checkbox chkagent" role="checkbox" -->
+<!-- 								aria-checked="false"> -->
+<!-- 								<label tabindex="0" class="chkagent control-label"> <input -->
+<!-- 									id="" name="" type="checkbox" value="true"> <input -->
+<!-- 									type="hidden" name="_consentForm.consentGiven" value="on"> -->
+<%-- 									<spring:theme code="autorizado.crear.tramgen.tramite.2018" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 
-					<div class="col-md-1">
-						<div class="fomchk  form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label"> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.2017" />
-								</label>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-1">
-						<div class="fomchk  form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label"> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.2016" />
-								</label>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-1">
-						<div class="fomchk  form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label"> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.2015" />
-								</label>
-							</div>
-						</div>
-					</div>
-				</div>
+<!-- 					<div class="col-md-1"> -->
+<!-- 						<div class="fomchk  form-group "> -->
+<!-- 							<div class="checkbox chkagent" role="checkbox" -->
+<!-- 								aria-checked="false"> -->
+<!-- 								<label tabindex="0" class="chkagent control-label"> <input -->
+<!-- 									id="" name="" type="checkbox" value="true"> <input -->
+<!-- 									type="hidden" name="_consentForm.consentGiven" value="on"> -->
+<%-- 									<spring:theme code="autorizado.crear.tramgen.tramite.2017" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-md-1"> -->
+<!-- 						<div class="fomchk  form-group "> -->
+<!-- 							<div class="checkbox chkagent" role="checkbox" -->
+<!-- 								aria-checked="false"> -->
+<!-- 								<label tabindex="0" class="chkagent control-label"> <input -->
+<!-- 									id="" name="" type="checkbox" value="true"> <input -->
+<!-- 									type="hidden" name="_consentForm.consentGiven" value="on"> -->
+<%-- 									<spring:theme code="autorizado.crear.tramgen.tramite.2016" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-md-1"> -->
+<!-- 						<div class="fomchk  form-group "> -->
+<!-- 							<div class="checkbox chkagent" role="checkbox" -->
+<!-- 								aria-checked="false"> -->
+<!-- 								<label tabindex="0" class="chkagent control-label"> <input -->
+<!-- 									id="" name="" type="checkbox" value="true"> <input -->
+<!-- 									type="hidden" name="_consentForm.consentGiven" value="on"> -->
+<%-- 									<spring:theme code="autorizado.crear.tramgen.tramite.2015" /> --%>
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 
 
 
