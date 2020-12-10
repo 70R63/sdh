@@ -90,21 +90,11 @@ function noActivo() {
 			}
 		}
 		
-		var url = window.parent.location.href;
-		var contenido_url = url.includes('agenteRetenedor');
-		
-		if(contenido_url == true){
-			var contrib_select = document.getElementById('idImpuestoAgente');
-// 			var impblock = document.getElementById('impRetenedor');
-		
-			contrib_select.style.display = 'block';
-// 			impblock.style.display = 'block';
-		}else{
-			var contrib_select = document.getElementById('idImpuesto');
-// 			var impblock = document.getElementById('impContribuyente');
-			contrib_select.style.display = 'block';
-// 			impblock.style.display = 'block';
+		var impuesto_select = document.getElementById('idImpuesto');
+		if(impuesto_select!=null){
+			impuesto_select.style.display = 'block';			
 		}
+				
 		$(".loader").fadeOut("slow");
 	}
 	function goBack() {
