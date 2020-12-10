@@ -5,12 +5,12 @@ import com.hybris.cockpitng.annotations.ViewEvent;
 import com.hybris.cockpitng.util.DefaultWidgetController;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.sdh.core.dao.impl.DefaultSdhCustomerDao;
 import de.hybris.sdh.core.pojos.requests.SdhValidaContribuyenteRequest;
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 import org.apache.commons.lang.StringUtils;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.zk.ui.event.Events;
@@ -19,10 +19,8 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Listbox;
-import sun.text.normalizer.Utility;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 
@@ -30,6 +28,7 @@ public class ExplodedBpFinderController extends DefaultWidgetController {
     //Data
     private static final Logger LOG = LoggerFactory.getLogger(ExplodedBpFinderController.class);
     private static final String SOCKET_ID = "explodedBpFinderInput";
+    private static final String NOT_CUSTOMER_FOUND_MSG = "-- No Existe --";
     private CustomerModel currentCustomer;
 
     @Wire
@@ -41,6 +40,8 @@ public class ExplodedBpFinderController extends DefaultWidgetController {
     @Wire
     private Textbox businessPartnerOutput;
     @Wire
+    private Textbox businessPartnerEmailOutput;
+    @Wire
     private Button takeFoundBpButton;
 
     @Resource(name = "sdhValidaContribuyenteService")
@@ -48,6 +49,9 @@ public class ExplodedBpFinderController extends DefaultWidgetController {
 
     @Resource(name = "modelService")
     private ModelService modelService;
+
+    @Resource(name = "sdhCustomerDao")
+    DefaultSdhCustomerDao sdhCustomerDao;
 
     @SocketEvent(socketId = SOCKET_ID)
     public void init(final CustomerModel customerModel) {
@@ -70,21 +74,15 @@ public class ExplodedBpFinderController extends DefaultWidgetController {
                         formatter.format(documentExpirationDateInput.getValue()) : StringUtils.EMPTY
                          : StringUtils.EMPTY );
 
-        /*request.setExpeditionDate(Objects.nonNull(documentExpirationDateInput) ?
-                Objects.nonNull(documentExpirationDateInput.getValue()) ?
-                        formatter.format(documentExpirationDateInput.getValue()) : StringUtils.EMPTY
-                         : StringUtils.EMPTY );*/
+        SDHValidaMailRolResponse response = getSdhValidaContribuyente(request);
+        String bpNumber = Objects.nonNull(response) && Objects.nonNull(response.getInfoContrib())
+                ? response.getInfoContrib().getNumBP() :  NOT_CUSTOMER_FOUND_MSG;
+        String customerEmail = sdhCustomerDao.findByBp(bpNumber).isPresent() ?
+                sdhCustomerDao.findByBp(bpNumber).get().getUid() : NOT_CUSTOMER_FOUND_MSG;
 
-        String bpNumber = getBpNumberFromWs(request);
-        if(!StringUtils.EMPTY.equals(bpNumber)){
-            businessPartnerOutput.setText(getBpNumberFromWs(request));
-            takeFoundBpButton.setDisabled(false);
-        }else{
-            businessPartnerOutput.setText("-- No Existe --");
-            takeFoundBpButton.setDisabled(true);
-            LOG.info("BP not found");
-        }
-
+        businessPartnerOutput.setText(bpNumber);
+        businessPartnerEmailOutput.setText(customerEmail);
+        takeFoundBpButton.setDisabled(false);
     }
 
     @ViewEvent(componentID = "documentTypeListInput", eventName = Events.ON_SELECT)
@@ -102,20 +100,17 @@ public class ExplodedBpFinderController extends DefaultWidgetController {
         modelService.save(getCurrentCustomer());
         takeFoundBpButton.setDisabled(true);
     }
-
-    private String getBpNumberFromWs(ValidaContribuyenteRequest documentos){
+    private SDHValidaMailRolResponse getSdhValidaContribuyente(ValidaContribuyenteRequest documentos){
         SdhValidaContribuyenteRequest request = new SdhValidaContribuyenteRequest();
         SDHValidaMailRolResponse response = null;
         request.setDocumentos(documentos);
-        String bpNumber;
+
         try {
             response = sdhValidaContribuyenteService.validaContribuyente(request);
-            bpNumber = response.getInfoContrib().getNumBP();
         } catch (Exception e) {
-            bpNumber = StringUtils.EMPTY;
             LOG.error(e.getMessage());
         }
-        return bpNumber;
+        return response;
     }
 
     public CustomerModel getCurrentCustomer() {
