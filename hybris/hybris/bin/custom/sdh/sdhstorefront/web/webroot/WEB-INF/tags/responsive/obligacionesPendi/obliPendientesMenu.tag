@@ -55,15 +55,7 @@
 					<label class="control-label"><spring:theme
 							code="obligacion.inicial.selcimpuesto" /></label> 
 					<sf:select class="new_alto form-control" id="impuesto" name="impuesto"
-						path="claveImpuesto" items="${listaImpuestosCatC}" referenceData="${listaImpuestosCatC}"/>
-				</div>
-			</div>
-			<div class="col-md-3" id="idImpuestoAgente" style="display: none;">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="edocuenta.inicial.selcimpuesto" /></label> 
-					<sf:select class="new_alto form-control" id="impuesto" name="impuesto"
-						path="claveImpuesto" items="${listaImpuestosCatAR}" referenceData="${listaImpuestosCatAR}" />
+						path="claveImpuesto" items="${listaImpuestosCat}" referenceData="${listaImpuestosCat}"/>
 				</div>
 			</div>
 		</div>
@@ -84,7 +76,7 @@
 				<div class="form-group ">
 					<button type="button" class="btn btn-primary btn-lg"
 						id="buscarObliPend" name="action" value="buscar"
-						style="margin-top: 3px" onclick="ACC.oblipend.bindBuscarObliPend('${listaImpuestosCStr}')">
+						style="margin-top: 3px" onclick="ACC.oblipend.bindBuscarObliPend('${listaImpuestosCatStr}')">
 						<spring:theme code="obligacion.inicial.buscar" />
 					</button>
 				</div>

@@ -17,6 +17,9 @@ public class ReteicaObligacionesHeader
 	private String noIdentificacion;
 	private String anioGravable;
 	private String periodo;
+	private String facilidad;
+	private String montoFacilidad;
+	private String refActiva;
 	private List<ReteicaObligacionesDetails> details;
 
 	/**
@@ -85,6 +88,57 @@ public class ReteicaObligacionesHeader
 	public void setPeriodo(final String periodo)
 	{
 		this.periodo = periodo;
+	}
+
+	/**
+	 * @return the facilidad
+	 */
+	public String getFacilidad()
+	{
+		return facilidad;
+	}
+
+	/**
+	 * @param facilidad
+	 *           the facilidad to set
+	 */
+	public void setFacilidad(final String facilidad)
+	{
+		this.facilidad = facilidad;
+	}
+
+	/**
+	 * @return the montoFacilidad
+	 */
+	public String getMontoFacilidad()
+	{
+		return montoFacilidad;
+	}
+
+	/**
+	 * @param montoFacilidad
+	 *           the montoFacilidad to set
+	 */
+	public void setMontoFacilidad(final String montoFacilidad)
+	{
+		this.montoFacilidad = montoFacilidad;
+	}
+
+	/**
+	 * @return the refActiva
+	 */
+	public String getRefActiva()
+	{
+		return refActiva;
+	}
+
+	/**
+	 * @param refActiva
+	 *           the refActiva to set
+	 */
+	public void setRefActiva(final String refActiva)
+	{
+		this.refActiva = refActiva;
 	}
 
 	/**
