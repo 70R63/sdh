@@ -1,0 +1,80 @@
+# ImpEx for Public Sector Stores
+#% impex.setLocale( Locale.ENGLISH ); 
+
+$storeUid=sdh
+$contentCatalog=sdhContentCatalog
+$catalogVersion=catalogversion(catalog(id[default=$contentCatalog]),version[default='Staged'])[unique=true,default=$contentCatalog:Staged]
+$storeImage=storeImage(qualifier, $catalogVersion)
+$standardHours=hpsa-standard-hours
+$weekendHours=hpsa-weekend-hours
+
+INSERT_UPDATE StoreLocatorFeature;code[unique=true]
+;wheelchair
+;creche
+;sundayWorkshops
+;buyOnlinePickupInStore
+;selfservice
+;restroom
+
+INSERT_UPDATE OpeningSchedule;code[unique=true];
+;$standardHours;
+;$weekendHours;
+
+INSERT_UPDATE WeekdayOpeningDay;openingSchedule(code)[unique=true];dayOfWeek(code)[unique=true];openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm];
+;$standardHours;MONDAY   ; 08:00; 18:00
+;$standardHours;TUESDAY  ; 08:00; 18:00
+;$standardHours;WEDNESDAY; 08:00; 18:00
+;$standardHours;THURSDAY ; 09:00; 18:00
+;$standardHours;FRIDAY   ; 08:00; 18:00
+;$standardHours;SATURDAY ; 08:00; 18:00
+
+;$weekendHours;MONDAY   ; 08:00; 18:00
+;$weekendHours;TUESDAY  ; 08:00; 18:00
+;$weekendHours;WEDNESDAY; 08:00; 18:00
+;$weekendHours;THURSDAY ; 08:00; 18:00
+;$weekendHours;FRIDAY   ; 08:00; 18:00
+;$weekendHours;SATURDAY ; 08:00; 18:00
+;$weekendHours;SUNDAY   ; 08:00; 18:00
+
+INSERT_UPDATE SpecialOpeningDay;openingSchedule(code)[unique=true];date[unique=true,dateformat=dd.MM.yyyy];closed;openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm]
+;$standardHours; 01.01.2014 ;true     
+;$standardHours; 29.03.2014 ;true     
+;$standardHours; 01.04.2014 ;true     
+;$standardHours; 06.05.2014 ;true     
+;$standardHours; 27.05.2014 ;true     
+;$standardHours; 26.08.2014 ;true     
+;$standardHours; 26.12.2014 ;true     
+;$standardHours; 25.12.2014 ;true     
+
+;$weekendHours; 01.01.2014 ;true
+;$weekendHours; 29.03.2014 ;true
+;$weekendHours; 01.04.2014 ;true
+;$weekendHours; 06.05.2014 ;true
+;$weekendHours; 27.05.2014 ;true
+;$weekendHours; 26.08.2014 ;true
+;$weekendHours; 26.12.2014 ;true
+;$weekendHours; 25.12.2014 ;true
+
+INSERT_UPDATE PointOfService;name[unique=true];type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd.MM.yyyy];$storeImage;features(code);basestore(uid)[default=$storeUid];openingSchedule(code)
+;Department of Development;STORE;addr1;-38.356;144.918;29.05.2025;service_point_01;wheelchair,selfservice,restroom;;$standardHours;
+;Department of Transport;STORE;addr2;-38.366;144.932;29.05.2025;service_point_01;wheelchair,restroom;;$standardHours;
+;Rosebud Town Hall;STORE;addr3;-38.343;144.944;29.05.2025;service_point_01;wheelchair,restroom;;$standardHours;
+;Department of Justice;STORE;addr4;-38.360;144.915;29.05.2025;service_point_01;wheelchair,selfservice,restroom;;$standardHours;
+;Department of Health;STORE;addr5;-38.350;144.922;29.05.2025;service_point_01;wheelchair,restroom;;$standardHours;
+;Institute of Agriculture;STORE;addr6;-38.362;144.932;29.05.2025;service_point_01;wheelchair,selfservice,restroom;;$standardHours;
+;Bureau of Births, Deaths & Marriages;STORE;addr7;-38.353;144.914;29.05.2025;service_point_01;wheelchair,selfservice,restroom,creche;;$standardHours;
+;Department of Commerce;STORE;addr8;-38.377;144.872;29.05.2025;service_point_01;wheelchair,selfservice;;$standardHours;
+;Association of Rosebud Engineers;STORE;addr9;-38.392;144.910;29.05.2025;service_point_01;wheelchair;;$standardHours;
+;Ministry of Families and Youth;STORE;addr10;-38.380;144.888;29.05.2025;service_point_01;wheelchair,selfservice,restroom;;$standardHours;
+
+INSERT_UPDATE Address;&addrID;streetname;streetnumber;postalcode;town;country(isocode);phone1;owner(PointOfService.name)[unique=true];
+;addr1;McDowell Street;52;3939;Rosebud;AU;5798135160;Department of Development;
+;addr2;Point Nepean Road;963;3939;Rosebud;AU;5798135160;Department of Transport;
+;addr3;McCombe Street;37;3939;Rosebud;AU;9518437620;Rosebud Town Hall;
+;addr4;Point Nepean Road;843-849;3939;Rosebud;AU;7410852963;Department of Justice;
+;addr5;Point Nepean Road;1527;3939;Rosebud;AU;9518437620;Department of Health;
+;addr6;Herman Street;59;3939;Rosebud;AU;8301845294;Institute of Agriculture;
+;addr7;Hinton Street;16;3939;Rosebud;AU;0372548236;Bureau of Births, Deaths & Marriages;
+;addr8;Allambi Avenue;11a;3940;Rosebud West;AU;8904321764;Department of Commerce;
+;addr9;Elizabeth Avenue;66a;3939;Rosebud;AU;9452845294;Association of Rosebud Engineers;
+;addr10;Capel Avenue;8.16;3940;Rosebud;AU;8352945261;Ministry of Families and Youth;

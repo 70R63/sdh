@@ -57,6 +57,7 @@
 		<js>/_ui/responsive/common/js/acc.common.js</js>
 		<js>/_ui/responsive/common/js/acc.forgottenpassword.js</js>
 		<js>/_ui/responsive/common/js/acc.global.js</js>
+		<js>/_ui/responsive/common/js/acc.menuContrib.js</js>
 		<js>/_ui/responsive/common/js/acc.langcurrencyselector.js</js>
 		<js>/_ui/responsive/common/js/acc.navigation.js</js>
 		<js>/_ui/responsive/common/js/acc.paginationsort.js</js>

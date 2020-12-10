@@ -45,31 +45,31 @@
 			data-parent="#acordeon">
 			<div class="card-body">
 				<div class="row">
-					<div class="col-md-2">
+					<div class="col-md-3 col-xs-2">
 						<div class="form-group ">
 							<label class="control-label"> <spring:theme
 									code="autorizado.crear.buscar.tipdoc" text="" /></label> <select id="documentType"
-								class="newalto form-control">
-								<option value="">Seleccionar</option>
+								class="newalto form-control" onchange="fechaExpedicion(this)">
+								<option value="CC">Seleccionar</option>
 								<option value="CC">Cedula de Ciudadania</option>
-								<option value="CE">Cedula de Extranjerï¿½a</option>
+								<option value="CE">Cedula de Extranjería</option>
 								<option value="NIT">N.I.T</option>
 								<option value="PA">Pasaporte</option>
 							</select>
 						</div>
 					</div>
 					<div class="col-md-2">
-						<div class="form-group ">
+						<div class="form-group " >
 							<label class="control-label required" for="numDoc"> <spring:theme
 									code="autorizado.crear.buscar.numdoc" />
 							</label> <input id="documentNumber" name="" class="newalto form-control"
-								aria-required="true" type="text" value="" maxlength="240">
+								aria-required="true" type="text" value="" maxlength="240" >
 						</div>
 					</div>
 
 					<div class="col-md-2">
-						<div class="form-group ">
-							<label class="control-label required"> <spring:theme
+						<div class="form-group" style="display:none" id="fechaExpedicion">
+							<label class="control-label"> <spring:theme
 									code="autorizado.crear.buscar.fecexpe" />
 							</label> <input id="issuedDate" name="" class="newalto form-control"
 								aria-required="true" type="text" value="" maxlength="240"
@@ -89,6 +89,27 @@
 						</button>
 					</div>
 
+				</div>
+				<br>
+				<div class="row">
+				<div class="col-md-2">
+						<div class="form-group ">
+							<label class="control-label"> <spring:theme
+									code="autorizado.crear.buscar.fechinivali" />
+							</label> <input id="iniDate" name="" class="newalto form-control"
+								aria-required="true" type="date" value="" maxlength="240"
+								placeholder="dd/mm/aaaa">
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group ">
+							<label class="control-label"> <spring:theme
+									code="autorizado.crear.buscar.fechfinvali" />
+							</label> <input id="finDate" name="" class="newalto form-control"
+								aria-required="true" type="date" value="" maxlength="240"
+								placeholder="dd/mm/aaaa">
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -34,7 +34,7 @@
 <br>
 <sf:form action="" style="padding-left: 0px !important" commandName="icaInfObjetoFormResp">
 	<div class="container">
-		<div class="row">
+		<div class="row mostrarMD">
 			<div class="col-md-1">
 				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.total.actprinci" />
@@ -62,6 +62,9 @@
 			</c:if>
 				<div class="row totaluno" id="totaluno">
 					<div class="col-md-1">
+					<label class="control-label format_label mostrarXS" for="">
+					<spring:theme code="ica.declaracion.total.actprinci" />
+				</label>
 						<input type="checkbox" name=""
 							class="form-check-input mr-2 actividad actPrincipal"
 							style="visibility: visible !important; min-height: 4px !important; width: 20px;"
@@ -69,6 +72,9 @@
 					</div>
 
 					<div class="col-md-7">
+					<label class="control-label format_label mostrarXS" for="">
+					<spring:theme code="ica.declaracion.total.denomi" />
+				</label>
 						<!-- EJRR Adding data to select box eachActivity -->
 						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
 							pattern="#######################" var="codCIIUNumber" />
@@ -88,7 +94,10 @@
 						</select>
 					</div>
 					<div class="col-md-2">
-						<input class="newalto form-control ingreso ingresos" type="text"
+					<label class="control-label format_label mostrarXS" for="">
+					<spring:theme code="ica.declaracion.total.ingnet" />
+				</label>
+						<input style="margin-bottom:5px !important"class="newalto form-control ingreso ingresos" type="text"
 							value="${eachIngreso.ingresos}" ${roIngNetosGrava}/>
 					</div>
 					<div class="col-md-1">

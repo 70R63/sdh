@@ -23,19 +23,19 @@
 	</div>
 
 
-	<div class="row mostrarMD">
+	<div class="row">
 		<!-- 			<div class="col-md-3"> -->
 		<%-- 				<label class="control-label" for=""> <spring:theme --%>
 		<%-- 						code="delineacion.urbana.dec.areasusos.uso" /> --%>
 		<!-- 				</label> -->
 		<!-- 			</div> -->
-		<div class="col-md-3">
+		<div class="col-md-3 mostrarMD">
 			<label class="control-label format_label" for=""
 				style="text-transform: none !important"> <spring:theme
 					code="delineacion.urbana.dec.areasusos.uso" />
 			</label>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-2 mostrarMD">
 			<label class="control-label format_label" for=""
 				style="text-transform: none !important"> <spring:theme
 					code="delineacion.urbana.dec.areasusos.netuso" /></label>
@@ -45,7 +45,7 @@
 	<!-- LINEA DE USO -->
 	<c:forEach items="${dataForm.infObjetoDelineacion.usos}" var="info"
 		varStatus="loop">
-		<div class="row mostrarMD">
+		<div class="row">
 			<div class="row areasusos">
 				<!-- 					<div class="col-md-3"> -->
 				<!-- 						<div class="form-group "> -->
@@ -58,7 +58,11 @@
 				<!-- 					</div> -->
 
 				<div class="col-md-3">
-					<div class="form-group ">
+					<div class="form-group">
+						<label class="control-label format_label mostrarXS" for=""
+				style="text-transform: none !important"> <spring:theme
+					code="delineacion.urbana.dec.areasusos.uso" />
+			</label>
 						<c:if test='${dataForm.input.tipoFlujo == "D"}'>
 							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
 								items="${dataForm.catalogos.codUso}"
@@ -80,84 +84,10 @@
 
 				<div class="col-md-2">
 					<div class="form-group ">
-						<c:if test='${dataForm.input.tipoFlujo == "D"}'>
-							<sf:input class="newalto form-control"
-								readonly="${disabledInformacionAreaUso}" aria-required="true"
-								maxlength="240"
-								path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
-								onkeyup="numberFormat(this)" onclick="numberFormat(this)"
-								disabled="false" />
-						</c:if>
-						<c:if test='${dataForm.input.tipoFlujo == "R"}'>
-							<sf:input class="newalto form-control"
-								readonly="${disabledInformacionAreaUso}" aria-required="true"
-								maxlength="240"
-								path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
-								disabled="false" onkeyup="numberFormat(this)"
-								onclick="numberFormat(this)" />
-						</c:if>
-					</div>
-				</div>
+					<label class="control-label format_label mostrarXS" for=""
+				style="text-transform: none !important"> <spring:theme
+					code="delineacion.urbana.dec.areasusos.netuso" /></label>
 
-				<c:if test="${dataForm.controlCampos.informacionAreaUso != true}">
-					<c:if test='${dataForm.input.tipoFlujo == "D"}'>
-						<div class="col-md-1">
-							<div class="form-group ">
-								<img onclick="addinfoareuso()"
-									src="${themeResourcePath}/images/adddelineacion.png"
-									style="width: 25px"></img> <img onclick="deleinfoareuso()"
-									src="${themeResourcePath}/images/deledelineacion.png"
-									style="width: 25px"></img>
-							</div>
-						</div>
-					</c:if>
-					<c:if test='${dataForm.input.tipoFlujo == "R"}'>
-						<div class="col-md-1">
-							<div class="form-group ">
-								<img onclick="addinfoareuso()"
-									src="${themeResourcePath}/images/adddelineacion.png"
-									style="width: 25px"></img> <img onclick="deleinfoareuso()"
-									src="${themeResourcePath}/images/deledelineacion.png"
-									style="width: 25px"></img>
-							</div>
-						</div>
-					</c:if>
-				</c:if>
-			</div>
-		</div>
-
-		<div class="row mostrarXS">
-			<div class="row areasusos">
-				<div class="col-md-3">
-					<div class="form-group ">
-						<label class="control-label format_label" for=""
-							style="text-transform: none !important"> <spring:theme
-								code="delineacion.urbana.dec.areasusos.uso" />
-						</label>
-						<c:if test='${dataForm.input.tipoFlujo == "D"}'>
-							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
-								items="${dataForm.catalogos.codUso}"
-								referenceData="${dataForm.catalogos.codUso}"
-								class="new_alto form-control"
-								disabled="${disabledInformacionAreaUso}"></sf:select>
-						</c:if>
-						<c:if test='${dataForm.input.tipoFlujo == "R"}'>
-							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
-								items="${dataForm.catalogos.codUso}"
-								referenceData="${dataForm.catalogos.codUso}"
-								class="new_alto form-control"
-								disabled="${disabledInformacionAreaUso}"></sf:select>
-						</c:if>
-
-					</div>
-				</div>
-
-
-				<div class="col-md-2">
-					<div class="form-group ">
-						<label class="control-label format_label" for=""
-							style="text-transform: none !important"> <spring:theme
-								code="delineacion.urbana.dec.areasusos.netuso" /></label>
 						<c:if test='${dataForm.input.tipoFlujo == "D"}'>
 							<sf:input class="newalto form-control"
 								readonly="${disabledInformacionAreaUso}" aria-required="true"
@@ -231,8 +161,8 @@
 
 	<!-- 	comienza tabla dos -->
 
-	<div class="row mostrarMD">
-		<div class="row">
+	<div class="row">
+		<div class="row mostrarMD">
 			<div class="col-md-3">
 				<label class="control-label format_label" for=""
 					style="text-transform: none !important"> <spring:theme
@@ -250,10 +180,15 @@
 
 	<c:forEach items="${dataForm.infObjetoDelineacion.areaIntervenida}"
 		var="varAreaIntervenida" varStatus="loop">
-		<div class="row mostrarMD">
+	
+		<div class="row">
 			<div class="row areausosdos">
 				<div class="col-md-3">
 					<div class="form-group ">
+					<label class="control-label format_label mostrarXS" for=""
+					style="text-transform: none !important"> <spring:theme
+						code="delineacion.urbana.dec.areasusos.areainve" />
+				</label>
 						<sf:select id="select"
 							path="infObjetoDelineacion.areaIntervenida[${loop.index}].areaInter"
 							items="${dataForm.catalogos.areaInter}"
@@ -265,49 +200,10 @@
 
 				<div class="col-md-2">
 					<div class="form-group ">
-						<sf:input class="newalto form-control"
-							readonly="${disabledInformacionAreaUso}" aria-required="true"
-							maxlength="240"
-							path="infObjetoDelineacion.areaIntervenida[${loop.index}].aream2"
-							onkeyup="numberFormat(this)" onclick="numberFormat(this)" />
-					</div>
-				</div>
-				<c:if test="${dataForm.controlCampos.informacionAreaUso != true}">
-					<div class="col-md-1">
-						<div class="form-group ">
-							<img onclick="addinfoareuso3()"
-								src="${themeResourcePath}/images/adddelineacion.png"
-								style="width: 25px"></img> <img onclick="deleinfoareusotable3()"
-								src="${themeResourcePath}/images/deledelineacion.png"
-								style="width: 25px"></img>
-						</div>
-					</div>
-				</c:if>
-			</div>
-		</div>
-		<div class="row mostrarXS">
-			<div class="row areausosdos">
-				<div class="col-md-3">
-					<div class="form-group ">
-						<label class="control-label format_label" for=""
-							style="text-transform: none !important"> <spring:theme
-								code="delineacion.urbana.dec.areasusos.areainve" />
-						</label>
-						<sf:select id="select"
-							path="infObjetoDelineacion.areaIntervenida[${loop.index}].areaInter"
-							items="${dataForm.catalogos.areaInter}"
-							referenceData="${dataForm.catalogos.areaInter}"
-							class="new_alto form-control"
-							disabled="${disabledInformacionAreaUso}"></sf:select>
-					</div>
-				</div>
-
-				<div class="col-md-2">
-					<div class="form-group ">
-						<label class="control-label format_label" for=""
-							style="text-transform: none !important"> <spring:theme
-								code="delineacion.urbana.dec.areasusos.m2area" />
-						</label>
+					<label class="control-label format_label mostrarXS" for=""
+					style="text-transform: none !important"> <spring:theme
+						code="delineacion.urbana.dec.areasusos.m2area" />
+				</label>
 						<sf:input class="newalto form-control"
 							readonly="${disabledInformacionAreaUso}" aria-required="true"
 							maxlength="240"
@@ -376,10 +272,15 @@
 
 	<c:forEach items="${dataForm.infObjetoDelineacion.areaProyecto}"
 		var="varAreaIntervenida" varStatus="loop">
-		<div class="row mostrarMD">
+
+		<div class="row">
 			<div class=" arearquitec row" id="arearquitec">
 				<div class="col-md-3">
 					<div class="form-group ">
+					<label class="control-label format_label mostrarXS" for=""
+				style="text-transform: none !important"> <spring:theme
+					code="delineacion.urbana.dec.areasusos.areaproyin" />
+			</label>
 						<sf:select
 							path="infObjetoDelineacion.areaProyecto[${loop.index}].areaProy"
 							items="${dataForm.catalogos.areaProy}"
@@ -392,51 +293,10 @@
 
 				<div class="col-md-2">
 					<div class="form-group ">
-						<sf:input class="newalto form-control"
-							readonly="${disabledInformacionAreaUso}" aria-required="true"
-							maxlength="240"
-							path="infObjetoDelineacion.areaProyecto[${loop.index}].aream2" />
-					</div>
-				</div>
-
-				<c:if test="${dataForm.controlCampos.informacionAreaUso != true}">
-					<div class="col-md-1">
-						<div class="form-group ">
-							<img onclick="addinfoareusotable2()"
-								src="${themeResourcePath}/images/adddelineacion.png"
-								style="width: 25px"></img> <img onclick="deleinfoareusotable2()"
-								src="${themeResourcePath}/images/deledelineacion.png"
-								style="width: 25px"></img>
-						</div>
-					</div>
-				</c:if>
-			</div>
-		</div>
-
-		<div class="row mostrarXS">
-			<div class=" arearquitec row" id="arearquitec">
-				<div class="col-md-3">
-					<div class="form-group ">
-						<label class="control-label format_label" for=""
-							style="text-transform: none !important"> <spring:theme
-								code="delineacion.urbana.dec.areasusos.areaproyin" />
-						</label>
-						<sf:select
-							path="infObjetoDelineacion.areaProyecto[${loop.index}].areaProy"
-							items="${dataForm.catalogos.areaProy}"
-							referenceData="${dataForm.catalogos.areaProy}"
-							class="new_alto form-control"
-							disabled="${disabledInformacionAreaUso}"></sf:select>
-					</div>
-
-				</div>
-
-				<div class="col-md-2">
-					<div class="form-group ">
-						<label class="control-label format_label" for=""
-							style="text-transform: none !important"> <spring:theme
-								code="delineacion.urbana.dec.areasusos.aream2" />
-						</label>
+					<label class="control-label format_label mostrarXS" for=""
+				style="text-transform: none !important"> <spring:theme
+					code="delineacion.urbana.dec.areasusos.aream2" />
+			</label>
 						<sf:input class="newalto form-control"
 							readonly="${disabledInformacionAreaUso}" aria-required="true"
 							maxlength="240"

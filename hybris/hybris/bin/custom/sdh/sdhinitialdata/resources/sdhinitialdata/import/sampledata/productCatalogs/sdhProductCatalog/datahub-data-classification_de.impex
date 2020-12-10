@@ -1,0 +1,23 @@
+
+$productCatalog=sdhProductCatalog
+$productCatalogName=SDH Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$lang=de
+
+INSERT_UPDATE PSDataClassification;classification[unique=true];description[lang=$lang];publicationSystem;feed
+;BIRTHS;Geburtsregistrierungen;;BDM
+;GRAFFITI;Graffiti melden;;ROADS
+;MARRIAGES;Heiratsurkunden;;BDM
+;PERMITS;Veranstaltungsgenehmigungen;;PERMITS
+;ROADS;Führerscheinservice;;ROADS
+
+UPDATE PSServiceProduct;code[unique=true];$catalogVersion;dataClassification(classification);
+;apply-disabled-parking-permit;;PERMITS
+;apply-for-death-certificate;;BIRTHS
+;apply-for-marriage-certificate;;BIRTHS
+;apply-learner-driver-licence;;ROADS
+;pool-building-permit;;PERMITS
+;register-birth;;BIRTHS
+;report-graffiti;;ROADS
+;report-pothole;;ROADS
+;working-with-children-check;;

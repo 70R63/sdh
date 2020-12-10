@@ -12,9 +12,46 @@ import java.util.List;
  */
 public class EdoCtaReteIcaCabecera
 {
+	private String noDocumento;
+	private String tipoDocumento;
 	private String saldoCargo;
 	private String saldoFavor;
 	private List<EdoCtaReteIcaDetail> detalleReteica;
+
+
+	/**
+	 * @return the noDocumento
+	 */
+	public String getNoDocumento()
+	{
+		return noDocumento;
+	}
+
+	/**
+	 * @param noDocumento
+	 *           the noDocumento to set
+	 */
+	public void setNoDocumento(final String noDocumento)
+	{
+		this.noDocumento = noDocumento;
+	}
+
+	/**
+	 * @return the tipoDocumento
+	 */
+	public String getTipoDocumento()
+	{
+		return tipoDocumento;
+	}
+
+	/**
+	 * @param tipoDocumento
+	 *           the tipoDocumento to set
+	 */
+	public void setTipoDocumento(final String tipoDocumento)
+	{
+		this.tipoDocumento = tipoDocumento;
+	}
 
 	/**
 	 * @return the saldoCargo

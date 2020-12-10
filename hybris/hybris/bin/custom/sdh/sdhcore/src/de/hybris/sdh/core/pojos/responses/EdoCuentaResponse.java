@@ -34,7 +34,7 @@ public class EdoCuentaResponse
 	private List<EdoCtaGas> tablaGasolina;
 	private List<EdoCtaPublicidad> tablaPublicidad;
 	private List<EdoCtaOblig> obligNoTributaria;
-	private EdoCtaReteIcaCabecera reteica;
+	private List<EdoCtaReteIcaCabecera> reteica;
 	private String newReteicaSaldoCargo;
 	private String newReteicaSaldoFavor;
 
@@ -394,12 +394,10 @@ public class EdoCuentaResponse
 		this.obligNoTributaria = obligNoTributaria;
 	}
 
-
-
 	/**
 	 * @return the reteica
 	 */
-	public EdoCtaReteIcaCabecera getReteica()
+	public List<EdoCtaReteIcaCabecera> getReteica()
 	{
 		return reteica;
 	}
@@ -408,7 +406,7 @@ public class EdoCuentaResponse
 	 * @param reteica
 	 *           the reteica to set
 	 */
-	public void setReteica(final EdoCtaReteIcaCabecera reteica)
+	public void setReteica(final List<EdoCtaReteIcaCabecera> reteica)
 	{
 		this.reteica = reteica;
 	}

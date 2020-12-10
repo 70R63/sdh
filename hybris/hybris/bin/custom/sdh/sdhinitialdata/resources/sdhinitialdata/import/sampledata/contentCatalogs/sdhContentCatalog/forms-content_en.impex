@@ -1,0 +1,30 @@
+
+$applicationId=sdh
+$lang=en
+
+UPDATE YFormDefinition;applicationId[unique = true];formId[unique = true];version[default=1,unique=true];checkoutStepTitle[lang=$lang]
+ ;$applicationId;Apply-Disabled-Parking-Permit-Form-Step-1;;Applicant Details
+ ;$applicationId;Apply-Disabled-Parking-Permit-Form-Step-2;;Medical Details
+ ;$applicationId;Apply-For-Death-Certificate-Form-Step-1;;Deceased Details
+ ;$applicationId;Apply-For-Death-Certificate-Form-Step-2;;Applicant Details
+ ;$applicationId;Apply-For-Marriage-Certificate-Form-Step-1;;Marriage Details
+ ;$applicationId;Apply-For-Marriage-Certificate-Form-Step-2;;Partner 1 Details
+ ;$applicationId;Apply-For-Marriage-Certificate-Form-Step-3;;Partner 2 Details
+ ;$applicationId;Apply-For-Tourist-Visa-Form-Step-1;;Applicant Details
+ ;$applicationId;Apply-For-Tourist-Visa-Form-Step-2;;Application Details
+ ;$applicationId;Apply-For-Tourist-Visa-Form-Step-3;;Health & Character
+ ;$applicationId;Apply-Learner-Driver-Licence-Form-Step-1;;Applicant Details
+ ;$applicationId;Apply-Learner-Driver-Licence-Form-Step-2;;License Details
+ ;$applicationId;Apply-Learner-Driver-Licence-Form-Step-3;;Health Details
+ ;$applicationId;Event-Permit-Application-Form-Step-1;;Event Details
+ ;$applicationId;Event-Permit-Application-Form-Step-2;;Applicant Details
+ ;$applicationId;Event-Permit-Application-Form-Step-3;;Liquor License Details
+ ;$applicationId;Pool-Building-Permit-Form-Step-1;;Personal Details
+ ;$applicationId;Pool-Building-Permit-Form-Step-2;;Work Details
+ ;$applicationId;Register-Birth-Form-Step-1;;Child Details
+ ;$applicationId;Register-Birth-Form-Step-2;;Parent 1 Details
+ ;$applicationId;Register-Birth-Form-Step-3;;Parent 2 Details
+ ;$applicationId;Report-Graffiti-Form;;Report Graffiti
+ ;$applicationId;Report-Pothole-Form;;Report a Pothole
+ ;$applicationId;Working-With-Children-Check-Form-Step-1;;Application & Organisation Details
+ ;$applicationId;Working-With-Children-Check-Form-Step-2;;Personal Details

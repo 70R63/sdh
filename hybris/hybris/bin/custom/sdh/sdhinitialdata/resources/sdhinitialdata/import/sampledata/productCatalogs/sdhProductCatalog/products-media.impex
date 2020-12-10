@@ -1,0 +1,58 @@
+# ImpEx for Importing Product Medias into Public Sector Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=sdhProductCatalog
+$productCatalogName=Public Sector Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+$siteResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/productCatalogs/$productCatalog
+$thumbnail=thumbnail(code, $catalogVersion)
+$picture=picture(code, $catalogVersion)
+$thumbnails=thumbnails(code, $catalogVersion)
+$detail=detail(code, $catalogVersion)
+$normal=normal(code, $catalogVersion)
+$others=others(code, $catalogVersion)
+$medias=medias(code, $catalogVersion)
+$galleryImages=galleryImages(qualifier, $catalogVersion)
+
+
+# Create medias
+INSERT_UPDATE Media;mediaFormat(qualifier);;code[unique=true];$media;mime[default='image/png'];$catalogVersion;folder(qualifier)
+;80Wx80H;report-graffiti;/80Wx80H/report-graffiti_1.png;$siteResource/images/80Wx80H/report-graffiti_1.png;;;images
+;80Wx80H;report-pothole;/80Wx80H/report-pothole_1.png;$siteResource/images/80Wx80H/report-pothole_1.png;;;images
+;80Wx80H;apply-learner-driver-license;/80Wx80H/apply-learner-driver-license_1.png;$siteResource/images/80Wx80H/apply-learner-driver-license_1.png;;;images
+;80Wx80H;apply-disabled-parking-permit;/80Wx80H/apply-disabled-parking-permit_1.png;$siteResource/images/80Wx80H/apply-disabled-parking-permit_1.png;;;images
+;80Wx80H;working-with-children-check;/80Wx80H/working-with-children-check_1.png;$siteResource/images/80Wx80H/working-with-children-check_1.png;;;images
+;80Wx80H;pool-building-permit;/80Wx80H/pool-building-permit_1.png;$siteResource/images/80Wx80H/pool-building-permit_1.png;;;images
+;80Wx80H;event-permit-application;/80Wx80H/event-permit-application_1.png;$siteResource/images/80Wx80H/event-permit-application_1.png;;;images
+;80Wx80H;apply-for-marriage-certificate;/80Wx80H/apply-for-marriage-certificate_1.png;$siteResource/images/80Wx80H/apply-for-marriage-certificate_1.png;;;images
+;80Wx80H;register-birth;/80Wx80H/register-birth_1.png;$siteResource/images/80Wx80H/register-birth_1.png;;;images
+;80Wx80H;apply-for-death-certificate;/80Wx80H/apply-for-death-certificate_1.png;$siteResource/images/80Wx80H/apply-for-death-certificate_1.png;;;images
+
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
+;report-graffiti-c;/80Wx80H/report-graffiti_1.png;
+;report-pothole-c;/80Wx80H/report-pothole_1.png;
+;apply-learner-driver-license-c;/80Wx80H/apply-learner-driver-license_1.png;
+;apply-disabled-parking-permit-c;/80Wx80H/apply-disabled-parking-permit_1.png;
+;working-with-children-check-c;/80Wx80H/working-with-children-check_1.png;
+;pool-building-permit-c;/80Wx80H/pool-building-permit_1.png;
+;event-permit-application-c;/80Wx80H/event-permit-application_1.png;
+;apply-for-marriage-certificate-c;/80Wx80H/apply-for-marriage-certificate_1.png;
+;register-birth-c;/80Wx80H/register-birth_1.png;
+;apply-for-death-certificate-c;/80Wx80H/apply-for-death-certificate_1.png;
+
+
+# Create products
+UPDATE PSServiceProduct;code[unique=true];$catalogVersion;$galleryImages
+;report-graffiti;;report-graffiti-c
+;report-pothole;;report-pothole-c
+;apply-learner-driver-licence;;apply-learner-driver-license-c
+;apply-disabled-parking-permit;;apply-disabled-parking-permit-c
+;working-with-children-check;;working-with-children-check-c
+;pool-building-permit;;pool-building-permit-c
+;event-permit-application;;event-permit-application-c
+;apply-for-marriage-certificate;;apply-for-marriage-certificate-c
+;register-birth;;register-birth-c
+;apply-for-death-certificate;;apply-for-death-certificate-c
+

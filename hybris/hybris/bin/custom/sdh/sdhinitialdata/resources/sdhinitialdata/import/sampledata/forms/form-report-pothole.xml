@@ -1,0 +1,752 @@
+<xh:html xmlns:xh="http://www.w3.org/1999/xhtml"
+         xmlns:ev="http://www.w3.org/2001/xml-events"
+         xmlns:exf="http://www.exforms.org/exf/1-0"
+         xmlns:fb="http://orbeon.org/oxf/xml/form-builder"
+         xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+         xmlns:saxon="http://saxon.sf.net/"
+         xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+         xmlns:sql="http://orbeon.org/oxf/xml/sql"
+         xmlns:xf="http://www.w3.org/2002/xforms"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+         xmlns:xxi="http://orbeon.org/oxf/xml/xinclude">
+    <xh:head>
+        <xh:title>Report - Pothole</xh:title>
+        <xf:model id="fr-form-model" xxf:expose-xpath-types="true">            
+        <!-- Main instance -->
+            <xf:instance id="fr-form-instance" xxf:exclude-result-prefixes="#all" xxf:index="id">
+                <form>
+                    <section-report-pothole>
+                        <address-line1/>
+                        <label-address-header/>
+                        <address-line2/>
+                        <address-city/>
+                        <address-postcode/>
+                        <comment/>
+                        <attach-1 filename="" mediatype="" size=""/>
+                        <update-me/>
+                        <label-required-field-hint/>
+                        <control-17/>
+                    </section-report-pothole>
+                    <section-update-me>
+                        <is-user-logged-in>false</is-user-logged-in>
+                        <label-logged-in-user/>
+                        <label-unidentified-user/>
+                        <user-name/>
+                        <user-email/>
+                    </section-update-me>
+                </form>
+            </xf:instance>
+            <!-- Bindings -->
+            <xf:bind id="fr-form-binds" ref="instance('fr-form-instance')">
+                <xf:bind id="section-report-pothole-bind" name="section-report-pothole"
+                         ref="section-report-pothole">
+                    <xf:bind id="address-line1-bind" name="address-line1" ref="address-line1"
+                             required="true()">
+                    </xf:bind>
+                    <xf:bind id="address-line2-bind" ref="address-line2" name="address-line2">
+                    </xf:bind>
+                    <xf:bind id="address-city-bind" ref="address-city" name="address-city" required="true()">
+                    </xf:bind>
+                    <xf:bind id="comment-bind" ref="comment" name="comment" required="true()"/>
+                    <xf:bind id="label-required-field-hint-bind" ref="label-required-field-hint"
+                             name="label-required-field-hint"/>
+                    <xf:bind id="label-address-header-bind" ref="label-address-header"
+                             name="label-address-header"/>
+                    <xf:bind id="address-postcode-bind" ref="address-postcode" name="address-postcode"
+                             required="true()">
+                    </xf:bind>
+                    <xf:bind id="update-me-bind" ref="update-me" name="update-me"/>
+                    <xf:bind id="control-17-bind" ref="control-17" name="control-17" required="true()"/>
+                    <xf:bind id="attach-1-bind" ref="attach-1" name="attach-1" type="xf:base64Binary">
+                        <xf:constraint id="constraint-20-constraint"
+                                       value="if(string-length(@filename) gt 0) then if(@mediatype=('image/jpeg', 'image/pjpeg', 'image/png', 'application/pdf')) then true() else false() else true()"
+                                       level="error"/>
+                        <xf:constraint id="constraint-21-constraint"
+                                       value="if(string-length(@filename) gt 0) then if (number(@size) le 3145728) then true() else false() else true()"
+                                       level="error"/>
+                    </xf:bind>
+                </xf:bind>
+                <xf:bind id="section-update-me-bind" ref="section-update-me" name="section-update-me"
+                         relevant="$update-me='true'">
+                    <xf:bind id="user-name-bind" ref="user-name" name="user-name" required="true()">
+                    </xf:bind>
+                    <xf:bind id="label-logged-in-user-bind" ref="label-logged-in-user"
+                             name="label-logged-in-user"
+                             relevant="$update-me='true' and $is-user-logged-in = true()"/>
+                    <xf:bind id="label-unidentified-user-bind" ref="label-unidentified-user"
+                             name="label-unidentified-user"
+                             relevant="$update-me='true' and  $is-user-logged-in = false()"/>
+                    <xf:bind id="is-user-logged-in-bind" ref="is-user-logged-in" name="is-user-logged-in"
+                             type="xf:boolean"
+                             relevant="false"/>
+                    <xf:bind id="user-email-bind" ref="user-email" name="user-email" required="true()">
+                        <xf:constraint id="constraint-18-constraint"
+                                       value="matches(upper-case(.),'^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$')"
+                                       level="error"/>
+                    </xf:bind>
+                </xf:bind>
+            </xf:bind>
+            <!-- Metadata -->
+            <xf:instance xxf:readonly="true" id="fr-form-metadata" xxf:exclude-result-prefixes="#all">
+                <metadata>
+                    <application-name>publicsector</application-name>
+                    <form-name>Report-Pothole-Form</form-name>
+                    <title xml:lang="en">Report - Pothole</title>
+                    <description xml:lang="en">Report New Pothole Incident</description>                  
+                    <title xml:lang="fr">Signalement - Nid-de-poule</title>
+                    <description xml:lang="fr">Signaler un incident lié à un nouveau nid-de-poule</description>
+                    <title xml:lang="de">Schlagloch melden</title>
+                    <description xml:lang="de">Neues Schlagloch melden</description>
+                    <title xml:lang="es">Notificar - Bache</title>
+					<description xml:lang="es">Notificar un nuevo incidente relativo a un bache</description>
+                    <singleton>false</singleton>
+                </metadata>
+            </xf:instance>
+            <!-- Attachments -->
+            <xf:instance id="fr-form-attachments" xxf:exclude-result-prefixes="#all">
+                <attachments>
+                    <css mediatype="text/css" filename="" size=""/>
+                    <pdf mediatype="application/pdf" filename="" size=""/>
+                </attachments>
+            </xf:instance>
+            <!-- All form resources -->            <!-- Don't make readonly by default in case a service modifies the resources -->
+            <xf:instance id="fr-form-resources" xxf:readonly="false" xxf:exclude-result-prefixes="#all">
+                <resources>
+                    <resource xml:lang="en">
+                        <is-user-logged-in>
+                            <label/>
+                            <hint/>
+                        </is-user-logged-in>
+                        <label-logged-in-user>
+                            <label>We will send an email to:</label>
+                            <hint/>
+                        </label-logged-in-user>
+                        <label-unidentified-user>
+                            <label>Please enter your name and email address below&lt;br/&gt; OR &lt;a href=&quot;../login&quot;&gt;Sign In to your account&lt;/a&gt;&lt;br/&gt; OR &lt;a href=&quot;../login&quot;&gt;Register to create an account.&lt;/a&gt;</label>
+                            <hint/>
+                        </label-unidentified-user>
+                        <user-name>
+                            <label>Name</label>
+                            <hint/>
+                            <alert>Please enter a name</alert>
+                        </user-name>
+                        <user-email>
+                            <label>Email address</label>
+                            <hint/>
+                            <alert>Please enter a valid email address - example@yourdomain.com</alert>
+                            <alert>Please enter an email address</alert>
+                        </user-email>
+                        <section-report-pothole>
+                            <label>Report a Pothole</label>
+                        </section-report-pothole>
+                        <section-update-me>
+                            <label/>
+                            <help/>
+                        </section-update-me>
+                        <address-line1>
+                            <label>Address Line 1</label>
+                            <hint/>
+                            <alert>Please enter an address</alert>
+                        </address-line1>
+                        <label-address-header>
+                            <label>Please enter the location of the pothole</label>
+                            <hint/>
+                        </label-address-header>
+                        <address-line2>
+                            <label>Address Line 2</label>
+                            <hint/>
+                        </address-line2>
+                        <address-city>
+                            <label>City</label>
+                            <hint/>
+                            <alert>Please enter a town or city</alert>
+                        </address-city>
+                        <address-postcode>
+                            <label>Postcode</label>
+                            <hint/>
+                            <alert>Please enter a post code</alert>
+                        </address-postcode>
+                        <comment>
+                            <label>Comment or Description</label>
+                            <hint>Please describe the location and or details of the pothole</hint>
+                            <alert>Please enter a comment or description</alert>
+                        </comment>
+                        <attach-1>
+                            <label>Attach an image</label>
+                            <hint>Max. file size 3MB Supported file types: .png, .jpg, .pdf</hint>
+                            <alert>Please upload a file of type - .pdf, .jpg or .png</alert>
+                            <alert>Please upload a file of max. 3 MB in size</alert>
+                            <alert>Please upload a valid file of type - .jpg, or .png and max. 3 MB in size</alert>
+                        </attach-1>
+                        <update-me>
+                            <label/>
+                            <hint/>
+                            <item>
+                                <label>Yes, please keep me updated on this issue</label>
+                                <hint/>
+                                <value>true</value>
+                            </item>
+                        </update-me>
+                        <label-required-field-hint>
+                            <label>Fields marked * are required</label>
+                            <hint/>
+                        </label-required-field-hint>
+                        <control-17>
+                            <label>Please select the type of damage</label>
+                            <hint/>
+                            <alert>Please select the type of damage</alert>
+                            <item>
+                                <label>Pothole</label>
+                                <value>pothole</value>
+                            </item>
+                            <item>
+                                <label>Raised/sunken manhole or drain</label>
+                                <value>raised/sunken-manhole-or-drain</value>
+                            </item>
+                            <item>
+                                <label>Unevenness due to rut or gully</label>
+                                <value>unevenness-due-to-rut-or-gully</value>
+                            </item>
+                            <item>
+                                <label>Debris on road surface</label>
+                                <value>debris-on-road-surface</value>
+                            </item>
+                            <item>
+                                <label>Surface poorly restored after roadworks</label>
+                                <value>surface-poorly-restored-after-roadworks</value>
+                            </item>
+                            <item>
+                                <label>Other</label>
+                                <value>other</value>
+                            </item>
+                        </control-17>
+                    </resource> 
+                    <resource xml:lang="fr">
+                        <is-user-logged-in>
+                            <label/>
+                            <hint/>
+                        </is-user-logged-in>
+                        <label-logged-in-user>
+                            <label>Nous enverrons un e-mail à :</label>
+                            <hint/>
+                        </label-logged-in-user>
+                        <label-unidentified-user>
+                            <label>Veuillez saisir votre nom et votre adresse e-mail ci-dessous&lt;br/&gt; OU &lt;a href=&quot;../login&quot;&gt;connectez-vous à votre compte&lt;/a&gt;&lt;br/&gt; OU &lt;a href=&quot;../login&quot;&gt;enregistrez-vous pour créer un compte.&lt;/a&gt;</label>
+                            <hint/>
+                        </label-unidentified-user>
+                        <user-name>
+                            <label>Nom</label>
+                            <hint/>
+                            <alert>Veuillez saisir un nom</alert>
+                        </user-name>
+                        <user-email>
+                            <label>Adresse e-mail</label>
+                            <hint/>
+                            <alert>Veuillez saisir une adresse e-mail valide (exemple@votredomaine.com)</alert>
+                            <alert>Veuillez saisir une adresse e-mail</alert>
+                        </user-email>
+                        <section-report-pothole>
+                            <label>Signaler un nid-de-poule</label>
+                        </section-report-pothole>
+                        <section-update-me>
+                            <label/>
+                            <help/>
+                        </section-update-me>
+                        <address-line1>
+                            <label>Ligne d&apos;adresse 1</label>
+                            <hint/>
+                            <alert>Veuillez saisir une adresse</alert>
+                        </address-line1>
+                        <label-address-header>
+                            <label>Veuillez saisir l&apos;emplacement du nid-de-poule</label>
+                            <hint/>
+                        </label-address-header>
+                        <address-line2>
+                            <label>Ligne d&apos;adresse 2</label>
+                            <hint/>
+                        </address-line2>
+                        <address-city>
+                            <label>Ville</label>
+                            <hint/>
+                            <alert>Veuillez saisir une ville</alert>
+                        </address-city>
+                        <address-postcode>
+                            <label>Code postal</label>
+                            <hint/>
+                            <alert>Veuillez saisir un code postal</alert>
+                        </address-postcode>
+                        <comment>
+                            <label>Commentaire ou description</label>
+                            <hint>Veuillez décrire l&apos;emplacement et/ou les détails du nid-de-poule</hint>
+                            <alert>Veuillez saisir un commentaire ou une description</alert>
+                        </comment>
+                        <attach-1>
+                            <label>Joindre une photo</label>
+                            <hint>Taille max. de 3 Mo. Types de fichiers pris en charge : .png, .jpg, .pdf</hint>
+                            <alert>Veuillez charger un fichier du type .pdf, .jpg ou .png</alert>
+                            <alert>Veuillez charger un fichier d&apos;une taille max. de 3 Mo</alert>
+                            <alert>Veuillez charger un type de fichier valide (.jpg ou .png d&apos;une taille max. de 3 Mo)</alert>
+                        </attach-1>
+                        <update-me>
+                            <label/>
+                            <hint/>
+                            <item>
+                                <label>Oui, veuillez me tenir informé de ce problème</label>
+                                <hint/>
+                                <value>true</value>
+                            </item>
+                        </update-me>
+                        <label-required-field-hint>
+                            <label>Les zones signalées par * sont obligatoires.</label>
+                            <hint/>
+                        </label-required-field-hint>
+                        <control-17>
+                            <label>Veuillez sélectionner le type de dommage</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner le type de dommage</alert>
+                            <item>
+                                <label>Nid-de-poule</label>
+                                <value>pothole</value>
+                            </item>
+                            <item>
+                                <label>Bouche d&apos;égout ou écoulement enfoncé/surélevé</label>
+                                <value>raised/sunken-manhole-or-drain</value>
+                            </item>
+                            <item>
+                                <label>Irrégularité du sol due à une ornière ou une rigole</label>
+                                <value>unevenness-due-to-rut-or-gully</value>
+                            </item>
+                            <item>
+                                <label>Présence de débris sur la route</label>
+                                <value>debris-on-road-surface</value>
+                            </item>
+                            <item>
+                                <label>Mauvaise remise en état du revêtement à l&apos;issue de travaux</label>
+                                <value>surface-poorly-restored-after-roadworks</value>
+                            </item>
+                            <item>
+                                <label>Autre</label>
+                                <value>other</value>
+                            </item>
+                        </control-17>
+                    </resource>
+                    <resource xml:lang="de">
+                         <is-user-logged-in>
+                            <label/>
+                            <hint/>
+                        </is-user-logged-in>
+                        <label-logged-in-user>
+                            <label>Wir senden eine E-Mail an:</label>
+                            <hint/>
+                        </label-logged-in-user>
+                        <label-unidentified-user>
+                            <label>Geben Sie Ihren Namen und Ihre E-Mail-Adresse unten ein.&lt;br/&gt; ODER &lt;a href=&quot;../login&quot;&gt;Melden Sie sich bei Ihrem Konto an.&lt;/a&gt;&lt;br/&gt; ODER &lt;a href=&quot;../login&quot;&gt;Registrieren Sie sich, um ein Konto anzulegen.&lt;/a&gt;</label>
+                            <hint/>
+                        </label-unidentified-user>
+                        <user-name>
+                            <label>Name</label>
+                            <hint/>
+                            <alert>Geben Sie einen Namen ein.</alert>
+                        </user-name>
+                        <user-email>
+                            <label>E-Mail Adresse</label>
+                            <hint/>
+                            <alert>Geben Sie eine gültige E-Mail-Adresse ein - Beispiel@IhreDomäne.com.</alert>
+                            <alert>Geben Sie eine E-Mail-Adresse ein.</alert>
+                        </user-email>
+                        <section-report-pothole>
+                            <label>Schlagloch melden</label>
+                        </section-report-pothole>
+                        <section-update-me>
+                            <label/>
+                            <help/>
+                        </section-update-me>
+                        <address-line1>
+                            <label>Adresse Zeile 1</label>
+                            <hint/>
+                            <alert>Geben Sie eine Adresse ein.</alert>
+                        </address-line1>
+                        <label-address-header>
+                            <label>Geben Sie den Ort des Schlagloches ein.</label>
+                            <hint/>
+                        </label-address-header>
+                        <address-line2>
+                            <label>Adresse Zeile 2</label>
+                            <hint/>
+                        </address-line2>
+                        <address-city>
+                            <label>Ort</label>
+                            <hint/>
+                            <alert>Geben Sie einen Ort ein.</alert>
+                        </address-city>
+                        <address-postcode>
+                            <label>Postleitzahl</label>
+                            <hint/>
+                            <alert>Geben Sie eine Postleitzahl ein.</alert>
+                        </address-postcode>
+                        <comment>
+                            <label>Kommentar oder Beschreibung</label>
+                            <hint>Beschreiben Sie den Ort und/oder die Details des Schlagloches.</hint>
+                            <alert>Geben Sie einen Kommentar oder eine Beschreibung ein.</alert>
+                        </comment>
+                        <attach-1>
+                            <label>Bild beifügen</label>
+                            <hint>Max. Dateigröße: 3 MB Unterstützte Dateitypen: .png, .jpg, .pdf</hint>
+                            <alert>Laden Sie eine Datei vom Typ .pdf, .jpg oder .png hoch.</alert>
+                            <alert>Laden Sie eine Datei mit einer Größe von max. 3 MB hoch.</alert>
+                            <alert>Laden Sie eine gültige Datei vom Typ .jpg oder .png und mit einer Größe von max. 3 MB hoch.</alert>
+                        </attach-1>
+                        <update-me>
+                            <label/>
+                            <hint/>
+                            <item>
+                                <label>Ja, halten Sie mich hierzu auf dem Laufenden.</label>
+                                <hint/>
+                                <value>true</value>
+                            </item>
+                        </update-me>
+                        <label-required-field-hint>
+                            <label>Mit einem * gekennzeichnete Felder sind Pflichtfelder.</label>
+                            <hint/>
+                        </label-required-field-hint>
+                        <control-17>
+                            <label>Wählen Sie die Art des Schadens aus.</label>
+                            <hint/>
+                            <alert>Wählen Sie die Art des Schadens aus.</alert>
+                            <item>
+                                <label>Schlagloch</label>
+                                <value>pothole</value>
+                            </item>
+                            <item>
+                                <label>Überstehende/gesenkte Kanalschacht- oder Abflussöffnung</label>
+                                <value>raised/sunken-manhole-or-drain</value>
+                            </item>
+                            <item>
+                                <label>Unebenheiten aufgrund von Furchen oder Spurrillen</label>
+                                <value>unevenness-due-to-rut-or-gully</value>
+                            </item>
+                            <item>
+                                <label>Schutt auf Fahrbahnoberfäche</label>
+                                <value>debris-on-road-surface</value>
+                            </item>
+                            <item>
+                                <label>Fahrbahnoberfäche nach Bauarbeiten notdürftig wiederhergestellt</label>
+                                <value>surface-poorly-restored-after-roadworks</value>
+                            </item>
+                            <item>
+                                <label>Andere</label>
+                                <value>other</value>
+                            </item>
+                        </control-17>
+                    </resource>
+                    <resource xml:lang="es">
+                        <is-user-logged-in>
+                            <label/>
+                            <hint/>
+                        </is-user-logged-in>
+                        <label-logged-in-user>
+                            <label>Enviaremos un correo electrónico a:</label>
+                            <hint/>
+                        </label-logged-in-user>
+                        <label-unidentified-user>
+                            <label>Introduzca su nombre y su dirección de correo electrónico más abajo&lt;br/&gt; OR &lt;a href=&quot;../login&quot;&gt;Acceda a su cuenta&lt;/a&gt;&lt;br/&gt; OR &lt;a href=&quot;../login&quot;&gt;Regístrese para crear una cuenta.&lt;/a&gt;</label>
+                            <hint/>
+                        </label-unidentified-user>
+                        <user-name>
+                            <label>Nombre</label>
+                            <hint/>
+                            <alert>Introduzca un nombre</alert>
+                        </user-name>
+                        <user-email>
+                            <label>Dirección de correo electrónico</label>
+                            <hint/>
+                            <alert>Introduzca una dirección de correo electrónico válida: ejemplo@sudominio.com</alert>
+                            <alert>Introduzca una dirección de correo electrónico</alert>
+                        </user-email>
+                        <section-report-pothole>
+                            <label>Notificar un bache</label>
+                        </section-report-pothole>
+                        <section-update-me>
+                            <label/>
+                            <help/>
+                        </section-update-me>
+                        <address-line1>
+                            <label>Línea de dirección 1</label>
+                            <hint/>
+                            <alert>Introduzca una dirección</alert>
+                        </address-line1>
+                        <label-address-header>
+                            <label>Introduzca la localización del bache</label>
+                            <hint/>
+                        </label-address-header>
+                        <address-line2>
+                            <label>Línea de dirección 2</label>
+                            <hint/>
+                        </address-line2>
+                        <address-city>
+                            <label>Ciudad</label>
+                            <hint/>
+                            <alert>Introduzca un pueblo o una ciudad</alert>
+                        </address-city>
+                        <address-postcode>
+                            <label>Código postal</label>
+                            <hint/>
+                            <alert>Introduzca un código postal</alert>
+                        </address-postcode>
+                        <comment>
+                            <label>Comentario o descripción</label>
+                            <hint>Describa la localización y/o los detalles del bache</hint>
+                            <alert>Introduzca un comentario o descripción</alert>
+                        </comment>
+                        <attach-1>
+                            <label>Adjunte una imagen</label>
+                            <hint>Tamaño máximo de fichero: 3MB Tipos de fichero admitidos: .png, .jpg, .pdf</hint>
+                            <alert>Cargue un fichero de tipo .pdf, .jpg o .png</alert>
+                            <alert>Cargue un fichero con un tamaño máximo de 3 MB.</alert>
+                            <alert>Cargue un fichero de un tipo válido (.jpg, o .png) y con un tamaño máximo de 3 MB</alert>
+                        </attach-1>
+                        <update-me>
+                            <label/>
+                            <hint/>
+                            <item>
+                                <label>Sí, quiero que se me mantenga informado sobre este asunto</label>
+                                <hint/>
+                                <value>true</value>
+                            </item>
+                        </update-me>
+                        <label-required-field-hint>
+                            <label>Los campos marcados con * son obligatorios</label>
+                            <hint/>
+                        </label-required-field-hint>
+                        <control-17>
+                            <label>Seleccione el tipo de daño</label>
+                            <hint/>
+                            <alert>Seleccione el tipo de daño</alert>
+                            <item>
+                                <label>Bache</label>
+                                <value>pothole</value>
+                            </item>
+                            <item>
+                                <label>Alcantarilla o sumidero levantado o hundido</label>
+                                <value>raised/sunken-manhole-or-drain</value>
+                            </item>
+                            <item>
+                                <label>Irregularidad por surcos o rodadas</label>
+                                <value>unevenness-due-to-rut-or-gully</value>
+                            </item>
+                            <item>
+                                <label>Escombros en la calzada</label>
+                                <value>debris-on-road-surface</value>
+                            </item>
+                            <item>
+                                <label>Pavimento mal arreglado tras obras en la calzada</label>
+                                <value>surface-poorly-restored-after-roadworks</value>
+                            </item>
+                            <item>
+                                <label>Otro</label>
+                                <value>other</value>
+                            </item>
+                        </control-17>
+                    </resource>
+					           </resources>
+            </xf:instance>
+            <!-- Utility instances for services -->
+            <xf:instance id="fr-service-request-instance" xxf:exclude-result-prefixes="#all">
+                <request/>
+            </xf:instance>
+            <xf:instance id="fr-service-response-instance" xxf:exclude-result-prefixes="#all">
+                <response/>
+            </xf:instance>
+            <xf:action ev:event="xforms-ready">
+                <xxf:script>
+	                window.onbeforeunload = null;
+	                $(".comment span.xforms-hint").hide();
+	                $(".comment textarea").attr("placeholder", $(".comment span.xforms-hint").html());
+            	</xxf:script>
+            </xf:action>
+            <xxf:script ev:event="publicsector-submit-order">
+				    submitPlaceOrderForm();
+				</xxf:script>
+        </xf:model>
+    </xh:head>
+    <xh:body>
+        <fr:view>
+            <fr:body xmlns:xbl="http://www.w3.org/ns/xbl"
+                     xmlns:oxf="http://www.orbeon.com/oxf/processors"
+                     xmlns:p="http://www.orbeon.com/oxf/pipeline">
+                <fr:section id="section-report-pothole-control" bind="section-report-pothole-bind">
+                    <xf:label ref="$form-resources/section-report-pothole/label"/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:output id="label-required-field-hint-control" bind="label-required-field-hint-bind">
+                                    <xf:label ref="$form-resources/label-required-field-hint/label"/>
+                                    <xf:hint ref="$form-resources/label-required-field-hint/hint"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:output>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:select1 id="control-17-control" bind="control-17-bind" appearance="dropdown">
+                                    <xf:label ref="$form-resources/control-17/label"/>
+                                    <xf:hint ref="$form-resources/control-17/hint"/>
+                                    <xf:alert ref="$form-resources/control-17/alert"/>
+                                    <xf:itemset ref="$form-resources/control-17/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                    </xf:itemset>
+                                </xf:select1>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:output id="label-address-header-control" bind="label-address-header-bind">
+                                    <xf:label ref="$form-resources/label-address-header/label"/>
+                                    <xf:hint ref="$form-resources/label-address-header/hint"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:output>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="address-line1-control" bind="address-line1-bind" xxf:maxlength="255">
+                                    <xf:label ref="$form-resources/address-line1/label"/>
+                                    <xf:hint ref="$form-resources/address-line1/hint"/>
+                                    <xf:alert ref="$form-resources/address-line1/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="address-line2-control" bind="address-line2-bind" xxf:maxlength="255">
+                                    <xf:label ref="$form-resources/address-line2/label"/>
+                                    <xf:hint ref="$form-resources/address-line2/hint"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="address-city-control" bind="address-city-bind" xxf:maxlength="255">
+                                    <xf:label ref="$form-resources/address-city/label"/>
+                                    <xf:hint ref="$form-resources/address-city/hint"/>
+                                    <xf:alert ref="$form-resources/address-city/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="address-postcode-control" bind="address-postcode-bind" xxf:maxlength="10">
+                                    <xf:label ref="$form-resources/address-postcode/label"/>
+                                    <xf:hint ref="$form-resources/address-postcode/hint"/>
+                                    <xf:alert ref="$form-resources/address-postcode/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:textarea id="comment-control" bind="comment-bind" class="comment">
+                                    <xf:label ref="$form-resources/comment/label"/>
+                                    <xf:hint ref="$form-resources/comment/hint"/>
+                                    <xf:alert ref="$form-resources/comment/alert"/>
+                                </xf:textarea>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:upload xmlns="http://orbeon.org/oxf/xml/form-builder"
+                                           xmlns:xxbl="http://orbeon.org/oxf/xml/xbl"
+                                           id="attach-1-control"
+                                           bind="attach-1-bind">
+                                    <xf:label ref="$form-resources/attach-1/label"/>
+                                    <xf:hint ref="$form-resources/attach-1/hint"/>
+                                    <xf:alert ref="$form-resources/attach-1/alert[1]" validation="constraint-20-constraint"/>
+                                    <xf:alert ref="$form-resources/attach-1/alert[2]" validation="constraint-21-constraint"/>
+                                    <xf:alert ref="$form-resources/attach-1/alert[3]"/>
+                                    <xf:filename ref="@filename"/>
+                                    <xf:mediatype ref="@mediatype"/>
+                                    <xxf:size ref="@size"/>
+									                           <xf:action ev:event="xxforms-upload-done">
+										                              <xf:var name="isValid" value="xxf:evaluate-bind-property('attach-1-bind','constraint')"/>
+										                              <xf:action if="not($isValid)">
+											                                 <xf:setvalue ref="instance('fr-form-instance')//attach-1"/>
+										                              </xf:action>
+									                           </xf:action>
+                                </xf:upload>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:select id="update-me-control" appearance="full" bind="update-me-bind">
+                                    <xf:label ref="$form-resources/update-me/label"/>
+                                    <xf:hint ref="$form-resources/update-me/hint"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                    <xf:itemset ref="$form-resources/update-me/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                        <xf:hint ref="hint"/>
+                                    </xf:itemset>
+                                </xf:select>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+                <fr:section id="section-update-me-control" bind="section-update-me-bind">
+                    <xf:label ref="$form-resources/section-update-me/label"/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="is-user-logged-in-control" bind="is-user-logged-in-bind">
+                                    <xf:label ref="$form-resources/is-user-logged-in/label"/>
+                                    <xf:hint ref="$form-resources/is-user-logged-in/hint"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:output id="label-logged-in-user-control" bind="label-logged-in-user-bind">
+                                    <xf:label ref="$form-resources/label-logged-in-user/label"/>
+                                    <xf:hint ref="$form-resources/label-logged-in-user/hint"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:output>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:output id="label-unidentified-user-control" bind="label-unidentified-user-bind">
+                                    <xf:label ref="$form-resources/label-unidentified-user/label" mediatype="text/html"/>
+                                    <xf:hint ref="$form-resources/label-unidentified-user/hint"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:output>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="user-name-control" bind="user-name-bind" xxf:maxlength="255">
+                                    <xf:label ref="$form-resources/user-name/label"/>
+                                    <xf:hint ref="$form-resources/user-name/hint"/>
+                                    <xf:alert ref="$form-resources/user-name/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="user-email-control" bind="user-email-bind" xxf:maxlength="255">
+                                    <xf:label ref="$form-resources/user-email/label"/>
+                                    <xf:hint ref="$form-resources/user-email/hint"/>
+                                    <xf:alert ref="$form-resources/user-email/alert[1]" validation="constraint-18-constraint"/>
+                                    <xf:alert ref="$form-resources/user-email/alert[2]"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+            </fr:body>
+        </fr:view>
+    </xh:body>
+</xh:html>

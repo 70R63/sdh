@@ -135,7 +135,7 @@
 		<br>
 
 
-		<div class="row" id="table-predial" style="display: none;">
+		<div class="row" id="table-predial" style="display: none;" class="table-responsive">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table tabPaginacion" id="table-predial1">
 					<thead style="cellspacing: 10 !important">
@@ -160,7 +160,7 @@
 			</div>
 		</div>
 
-		<div class="row" id="table-vehicular" style="display: none;">
+		<div class="row" id="table-vehicular" style="display: none;" class="table-responsive">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table tabPaginacion" id="table-vehicular1">
 					<thead style="cellspacing: 10 !important">
@@ -183,7 +183,7 @@
 		</div>
 
 
-		<div class="row" id="table-ica" style="display: none;">
+		<div class="row" id="table-ica" style="display: none;" class="table-responsive">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table tabPaginacion" id="table-ica1">
 					<thead style="cellspacing: 10 !important">
@@ -206,7 +206,7 @@
 		</div>
 
 
-		<div class="row" id="table-reteica" style="display: none;">
+		<div class="row" id="table-reteica" style="display: none;" class="table-responsive">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table tabPaginacion" id="table-reteica1">
 					<thead style="cellspacing: 10 !important">
@@ -229,7 +229,7 @@
 		</div>
 
 
-		<div class="row" id="table-publicidad" style="display: none;">
+		<div class="row" id="table-publicidad" style="display: none;" class="table-responsive">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table tabPaginacion" id="table-publicidad1">
 					<thead style="cellspacing: 10 !important">
@@ -255,7 +255,7 @@
 
 
 
-		<div class="row" id="table-gasolina" style="display: none;">
+		<div class="row" id="table-gasolina" style="display: none;" class="table-responsive">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table tabPaginacion" id="table-gasolina1">
 					<thead style="cellspacing: 10 !important">
@@ -277,7 +277,7 @@
 			</div>
 		</div>
 
-		<div class="row" id="table-delineacion" style="display: none;">
+		<div class="row" id="table-delineacion" style="display: none;" class="table-responsive">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table tabPaginacion" id="table-delineacion1">
 					<thead style="cellspacing: 10 !important">

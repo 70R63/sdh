@@ -72,7 +72,7 @@
 		</div>
 	</div>
 	<br>
-	<div id="table-predial" style="display: none;">
+	<div id="table-predial" style="display: none;" class="table-responsive">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table" id="tabPaginacion0">
@@ -124,7 +124,7 @@
 		</div>
 	</div>
 
-	<div id="table-vehiculos" style="display: none;">
+	<div id="table-vehiculos" style="display: none;" class="table-responsive">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table" id="tabPaginacion1">

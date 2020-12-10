@@ -65,7 +65,7 @@
 				<sf:hidden path="anticipo" />
 				<sf:hidden path="placa" />
 				
-				<div class="col-md-3">
+				<div class="col-md-3 col-xs-12">
 					<c:if test="${flagPagarEnLinea eq true}">
 					<sf:button class="btn btn-primary btn-lg pagarbtn" type="button" onclick="validaBotonPago()" id="action"
 						name="pagar" value="pagar" disabled="true">
@@ -74,7 +74,7 @@
 					</c:if>
 				</div>
 			</sf:form>
-			<div class="col-md-1">
+			<div class="col-md-1 col-xs-12">
 				<button class="btn btn-primary btn-lg btnspac" type="button" id="btnspac"
 					data-numForm="${vehiculosFormDeclaracion.numForm}" 
 					data-anio="${vehiculosFormDeclaracion.anioGravable}" 

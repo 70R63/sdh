@@ -22,7 +22,6 @@ import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedBodyT
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedResponseBodyType;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedResponseFieldType;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseBodyType;
-import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 
 import java.text.DateFormat;
@@ -283,34 +282,13 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			try
 			{
 				pseTransactionsLogModel.setBankProcessDate(dateTimeFormat.format(map.get("bankProcessDate")));
-
-				if (map.get("bankProcessDate").substring(11).equals("00:00:00") && response.getTransactionState().getValue()
-						.equals(GetTransactionInformationResponseTransactionStateCodeList.OK.getValue()))
-				{
-					pseTransactionsLogModel
-							.setTransactionState(GetTransactionInformationResponseTransactionStateCodeList.PENDING.getValue());
-				}
-				else
-				{
-					pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
-				}
 			}
 			catch (final Exception e)
 			{
 				pseTransactionsLogModel.setBankProcessDate(map.get("bankProcessDate"));
-
-				if (map.get("bankProcessDate").substring(11).equals("00:00:00") && response.getTransactionState().getValue()
-						.equals(GetTransactionInformationResponseTransactionStateCodeList.OK.getValue()))
-				{
-					pseTransactionsLogModel
-							.setTransactionState(GetTransactionInformationResponseTransactionStateCodeList.PENDING.getValue());
-				}
-				else
-				{
-					pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
-				}
-
 			}
+
+			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
 
 
 			//pseTransactionsLogModel.setPaymentOrigin(map.get("bankProcessDate"));

@@ -41,7 +41,7 @@
 
 	<br>
 	<form:form action="" style="padding-left: 0px !important">
-		<div class="row">
+		<div class="row mostrarMD">
 <!-- 			<div class="col-md-7"> -->
 <!-- 				<label class="control-label format_label" for=""> -->
 <%-- 					<spring:theme code="ica.declaracion.actifuera.ciiu" /> --%>
@@ -100,6 +100,9 @@
 <!-- 						</select> -->
 <!-- 					</div> -->
 					<div class="col-md-1">
+					<label class="control-label format_label mostrarXS" for="">
+					<spring:theme code="ica.declaracion.actifuera.ingre" />
+				</label>
 						<input class="new_alto form-control ing ingresos" type="text"
 							value="${eachIngreso.ingresos }" ${roIngFueraBog}/>
 					</div>
@@ -149,7 +152,10 @@
 <%-- 						</c:forEach> --%>
 <!-- 					</select> -->
 <!-- 				</div> -->
-				<div class="col-md-1">
+				<div class="col-md-1" style="padding-bottom: 5px !important">
+				<label class="control-label format_label mostrarXS" for="">
+					<spring:theme code="ica.declaracion.actifuera.ingre" />
+				</label>
 					<input class="new_alto form-control ing ingresos" type="text"
 						value="" />
 				</div>

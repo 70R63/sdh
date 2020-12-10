@@ -25,7 +25,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row mostrarMD">
 			<div class="col-md-3">
 				<label class="control-label format_label" for="">
 					<spring:theme
@@ -72,6 +72,10 @@
 				<div class="row informadeclara">
 
 					<div class="col-md-3">
+					<label class="control-label format_label mostrarXS" for="">
+					<spring:theme
+						code="impuestos.decGasolina.InformacionDec.claseProducto" />
+				</label>
 						<c:set var = "claseProd_id" value = 'dataForm.infoDeclara${loop.index}.claseProd'/>
 						<sf:select class="new_alto form-control-gasolina claseProducto"
 							path="dataForm.infoDeclara[${loop.index}].claseProd"
@@ -80,18 +84,26 @@
 							style="width: 235px" onchange="getProductClassOccurrance(this)" id="${claseProd_id}"/>
 					</div>
 					<div class="col-md-1">
+					<label class="control-label format_label mostrarXS" for="">
+					<spring:theme code="impuestos.decGasolina.InformacionDec.galones" />
+				</label>
 						<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
 							value="${info.galonesGra}"
 							class="new_alto form-control galones" maxlength="30"
 							size="20" onkeyup="numberFormattable(this)" onclick="numberFormattable(this)" id="number1" />
 					</div>
 					<div class="col-md-2">
+					<label class="control-label format_label mostrarXS"><spring:theme
+						code="impuestos.decGasolina.InformacionDec.preciosReferencia" /></label>
+					
 						<sf:input path="dataForm.infoDeclara[${loop.index}].precioRef"
 							value="${info.precioRef}"
 							class="new_alto form-control precio" maxlength="30" size="20"
 							readonly="true" type="" />
 					</div>
 					<div class="col-sm-1">
+					<label class="col-md-4 control-label format_label mostrarXS"><spring:theme
+						code="impuestos.decGasolina.InformacionDec.porcentajeAlcohol" /></label>
 						<c:set var = "alcoholCarbu_id" value = 'dataForm.infoDeclara${loop.index}.alcoholCarbu'/>
 						<c:choose>
 							<c:when
@@ -114,17 +126,30 @@
 						</c:choose>
 					</div>
 					<div class="col-md-2">
+					<label class="control-label format_label mostrarXS"><spring:theme
+						code="impuestos.decGasolina.InformacionDec.baseGravable" /></label>
 						<sf:input path="dataForm.infoDeclara[${loop.index}].baseGravable"
 							value="${info.baseGravable}"
 							class="new_alto form-control base" maxlength="30" size="20"
 							readonly="true" />
 					</div>
 					<div class="col-md-2">
+					<label class="control-label format_label mostrarXS"><spring:theme
+						code="impuestos.decGasolina.InformacionDec.valorSobretasa" /></label>
 						<sf:input path="dataForm.infoDeclara[${loop.index}].vlrSobretasa"
 							value="${info.vlrSobretasa}"
 							class="new_alto form-control vlrsobre" maxlength="30"
 							size="20" readonly="true" />
 					</div>
+					<div class="col-md-1">
+				<div class="form-group mostrarXS" style="margin-top: 5px !important">
+					<img onclick="addinformadeclara()"
+						src="${themeResourcePath}/images/adddelineacion.png"
+						style="width: 25px"></img> <img onclick="deleinformadeclara()"
+						src="${themeResourcePath}/images/deledelineacion.png"
+						style="width: 25px"></img>
+				</div>
+			</div>
 				</div>
 
 			</c:forEach>

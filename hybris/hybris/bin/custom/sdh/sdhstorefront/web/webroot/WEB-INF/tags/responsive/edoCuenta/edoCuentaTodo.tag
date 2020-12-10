@@ -599,7 +599,7 @@
 			</c:if>
 		</div>
 
-		<c:if test="${not empty ctaForm.reteica.detalleReteica}">
+		<c:if test="${not empty ctaForm.reteica && ctaForm.reteica[0] != null && not empty ctaForm.reteica[0].detalleReteica }">
 		<div id="impRetenedor" style="display: none;">
 				<div class="row">
 					<div class="headline">
@@ -630,7 +630,7 @@
 								<tbody>
 <%-- 									<c:forEach varStatus="loop" items="${ctaForm.reteica}" --%>
 <%-- 										var="eachReteIca"> --%>
-										<c:forEach varStatus="loop" items="${ctaForm.reteica.detalleReteica}"
+										<c:forEach varStatus="loop" items="${ctaForm.reteica[0].detalleReteica}"
 											var="eachReteIcaDetail">
 											<tr>
 												<td><c:out value="${eachReteIcaDetail.anioGravable}" /></td>

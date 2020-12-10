@@ -29,9 +29,8 @@
 		</div>
 	</div>
 
-	<br>
 	<form:form action="" style="padding-left: 0px !important">
-		<div class="row">
+		<div class="row mostrarMD">
 			<div class="col-md-6">
 				<label class="control-label format_label" for=""> <spring:theme
 						code="ica.declaracion.deducciones.deduccion" />
@@ -50,15 +49,21 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
-						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important; padding: 0px !important" ${disabledDeducciones}>
+						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important; padding: 0px !important;" ${disabledDeducciones}>
 						<option value="actnosubPA">1.- Actividad no sujeta por la
 							producción Primaria Agricola</option>
 					</select>
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.actnosubPA}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -82,6 +87,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="enajActFijo">2.- Enajenación de Activo
@@ -90,7 +98,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.enajActFijo}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -111,6 +122,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="exportBienes">3.- Exportación de bienes</option>
@@ -118,7 +132,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.exportBienes}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -139,6 +156,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="exportServ">4.- Exportación de Servicios</option>
@@ -146,7 +166,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.exportServ}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -167,6 +190,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important"${disabledDeducciones}>
 						<option value="actnosub39">5.- Actividad no sujeta Art.
@@ -175,7 +201,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.actnosub39}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -197,6 +226,9 @@
 			<div class="row deducciones">
 			<br>
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="actnosubPH">6.- Actividades no sujetas
@@ -205,7 +237,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.actnosubPH}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -226,6 +261,9 @@
 			<div class="row deducciones">
 			<br>
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="juegoSuerteAzar">7.- Explotación de los
@@ -234,7 +272,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.juegoSuerteAzar}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -256,6 +297,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="donaciones">8.- Donaciones</option>
@@ -263,7 +307,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.donaciones}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -285,6 +332,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="exenActos">9.- Exen.consec.de actos
@@ -293,7 +343,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.exenActos}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -315,6 +368,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="baseGravEsp">10.- Base gravable especial</option>
@@ -322,7 +378,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.baseGravEsp}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -344,6 +403,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="ingrActConsorc">11.- Ingresos por
@@ -352,7 +414,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.ingrActConsorc}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -374,6 +439,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="diviNOGiroOrd">12.- Dividendos que no
@@ -382,7 +450,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.diviNOGiroOrd}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -404,6 +475,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="exenVictima">13.- Exención víctima del
@@ -412,7 +486,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.exenVictima}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -435,6 +512,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="correcMoneda">14.- Corrección monetaria
@@ -443,7 +523,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.correcMoneda}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -468,6 +551,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="reintegro">15.- Reintegro de costos y
@@ -476,7 +562,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.reintegro}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -501,6 +590,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="salarios">16.- Salarios</option>
@@ -508,7 +600,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.salarios}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -533,6 +628,9 @@
 			<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="devoluciones">17.- Devoluciones</option>
@@ -540,7 +638,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.devoluciones}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -561,6 +662,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="rebajas">18.- Rebajas</option>
@@ -568,7 +672,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.rebajas}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -589,6 +696,9 @@
 		<br>
 			<div class="row deducciones">
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="" class="alto form-control deducci"
 						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="descuentos">19.- Descuentos</option>
@@ -596,7 +706,10 @@
 				</div>
 
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text"
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input style="margin-bottom: 10px !important;" class="newalto form-control valordedu" type="text"
 						value="${infoDeclara.deducciones.descuentos}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
@@ -615,8 +728,10 @@
 		<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 		
 			<div class="row deducciones" id="deducciones">
-			<br>
 				<div class="col-md-6">
+				<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.deduccion" />
+				</label>
 					<select id="deduccionBase" class="alto form-control deducci"
 						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="">Seleccionar</option>
@@ -655,7 +770,10 @@
 	
 	
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text" ${roDeducciones}/>
+					<label class="control-label format_label mostrarXS" for=""> <spring:theme
+						code="ica.declaracion.deducciones.monto" />
+				</label>
+					<input class="newalto form-control valordedu" type="text" ${roDeducciones} style="margin-bottom: 10px !important;"/>
 				</div>
 				<div class="borrar col-md-1" style="height: 20px;"
 					onclick="borrar(this)">

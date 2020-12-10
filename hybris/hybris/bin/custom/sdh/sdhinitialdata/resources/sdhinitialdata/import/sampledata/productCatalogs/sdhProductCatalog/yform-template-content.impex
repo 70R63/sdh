@@ -1,0 +1,5 @@
+$reviewPageContextClass=de.hybris.platform.publicsectorservices.template.velocity.context.ReviewPageYFormContext
+
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass[default=$reviewPageContextClass];rendererType(code)[default='velocity']
+;report-graffiti_renderer;;;
+;register-birth_renderer;;;

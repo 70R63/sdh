@@ -16,7 +16,7 @@
 		</div>
 		<br>
 
-		<div id="table-predial" style="display: none;">
+		<div id="table-predial" style="display: none;" class="table-responsive">
 			<div class="row">
 				<div class="headline">
 					<h2>
@@ -364,7 +364,7 @@
 
 		<!-- 			tablas de detalle -->
 
-		<div id="detalle-predial" style="display: none;">
+		<div id="detalle-predial" style="display: none;" class="table-responsive">
 			<div class="row">
 				<div class="col-md-2">
 					<div class="form-check">

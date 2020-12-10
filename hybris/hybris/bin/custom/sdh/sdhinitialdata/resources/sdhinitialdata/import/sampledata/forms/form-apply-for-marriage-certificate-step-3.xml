@@ -1,0 +1,1046 @@
+<xh:html xmlns:xh="http://www.w3.org/1999/xhtml"
+         xmlns:ev="http://www.w3.org/2001/xml-events"
+         xmlns:exf="http://www.exforms.org/exf/1-0"
+         xmlns:fb="http://orbeon.org/oxf/xml/form-builder"
+         xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+         xmlns:saxon="http://saxon.sf.net/"
+         xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+         xmlns:sql="http://orbeon.org/oxf/xml/sql"
+         xmlns:xf="http://www.w3.org/2002/xforms"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+         xmlns:xxi="http://orbeon.org/oxf/xml/xinclude">
+	<xh:head>
+		<xh:title>Apply For Marriage Certificate</xh:title>
+		<xf:model id="fr-form-model" xxf:expose-xpath-types="true">
+			<!-- Main instance -->
+			<xf:instance id="fr-form-instance" xxf:exclude-result-prefixes="#all" xxf:index="id">
+				<form>
+					<section-1>
+						<control-19 />
+						<control-10 />
+						<dropdown-title />
+						<first-name-2 />
+						<last-name-2 />
+						<dropdown-gender />
+						<date-of-birth />
+						<place-of-birth />
+						<control-11 />
+						<same-parent1-check>1</same-parent1-check>
+					</section-1>
+					<section-22>
+						<dropdown-country>GB</dropdown-country>
+						<address-line1-2 />
+						<address-line2-2 />
+						<city-2 />
+						<postcode-2 />
+						<phonenumber-2 />
+						<control-13 />
+						<email-address />
+						<control-15 />
+						<upload-identification filename="" mediatype="" size="" />
+					</section-22>
+				</form>
+			</xf:instance>
+			<!-- Bindings -->
+			<xf:bind id="fr-form-binds" ref="instance('fr-form-instance')">
+				<xf:bind id="section-1-bind" name="section-1" ref="section-1">
+					<xf:bind id="dropdown-title-bind" ref="dropdown-title" name="dropdown-title" required="true()" />
+					<xf:bind id="last-name-2-bind" ref="last-name-2" name="last-name-2" required="true()">
+						<xf:constraint id="constraint-8-constraint" value="string-length($first-name-2)+string-length($last-name-2)&lt;=255"
+							level="error" />
+					</xf:bind>
+					<xf:bind id="first-name-2-bind" ref="first-name-2" name="first-name-2" required="true()">
+						<xf:constraint id="constraint-5-constraint" value="string-length($first-name-2)&lt;=240" level="error" />
+						<xf:constraint id="constraint-6-constraint" value="string-length($first-name-2)+string-length($last-name-2)&lt;=255"
+							level="error" />
+					</xf:bind>
+					<xf:bind id="dropdown-gender-bind" ref="dropdown-gender" name="dropdown-gender" required="true()" />
+					<xf:bind id="control-10-bind" ref="control-10" name="control-10" />
+					<xf:bind id="control-11-bind" ref="control-11" name="control-11" />
+					<xf:bind id="date-of-birth-bind" ref="date-of-birth" name="date-of-birth" required="true()">
+						<xf:constraint id="constraint-26-constraint" value=". &lt;= (current-date() - xs:yearMonthDuration(&#34;P18Y&#34;))" />
+						<xf:type id="validation-26-validation">xs:date</xf:type>
+					</xf:bind>
+					<xf:bind id="control-19-bind" ref="control-19" name="control-19" />
+					<xf:bind id="place-of-birth-bind" ref="place-of-birth" name="place-of-birth" required="true()" />
+					<xf:bind id="same-parent1-check-bind" ref="same-parent1-check" name="same-parent1-check" />
+				</xf:bind>
+				<xf:bind id="section-22-bind" ref="section-22" name="section-22" relevant="$same-parent1-check!='1'">
+					<xf:bind id="upload-identification-bind" ref="upload-identification" name="upload-identification" type="xf:base64Binary"
+						required="true()">
+						<xf:constraint id="validation-23-validation"
+							value="if(string-length(@filename) gt 0) then if(@mediatype=('image/jpeg', 'image/pjpeg', 'image/png', 'application/pdf')) then true() else false() else true()"
+							level="error" />
+						<xf:constraint id="validation-24-validation"
+							value="if(string-length(@filename) gt 0) then if (number(@size) le 3145728) then true() else false() else true()" level="error" />
+					</xf:bind>
+					<xf:bind id="control-15-bind" ref="control-15" name="control-15" />
+					<xf:bind id="email-address-bind" ref="email-address" name="email-address" type="xf:email" required="true()" />
+					<xf:bind id="control-13-bind" ref="control-13" name="control-13" />
+					<xf:bind id="phonenumber-2-bind" ref="phonenumber-2" name="phonenumber-2" relevant="$same-parent1-check!='1'" />
+					<xf:bind id="postcode-2-bind" ref="postcode-2" name="postcode-2" required="true()" relevant="$same-parent1-check!='1'" />
+					<xf:bind id="city-2-bind" ref="city-2" name="city-2" required="true()" relevant="$same-parent1-check!='1'" />
+					<xf:bind id="address-line2-2-bind" ref="address-line2-2" name="address-line2-2" relevant="$same-parent1-check!='1'" />
+					<xf:bind id="address-line1-2-bind" ref="address-line1-2" name="address-line1-2" required="true()" relevant="$same-parent1-check!='1'" />
+					<xf:bind id="dropdown-country-bind" ref="dropdown-country" name="dropdown-country" required="true()" xxf:default="'uk'"
+						relevant="$same-parent1-check!='1'" />
+				</xf:bind>
+			</xf:bind>
+			<!-- Metadata -->
+			<xf:instance xxf:readonly="true" id="fr-form-metadata" xxf:exclude-result-prefixes="#all">
+				<metadata>
+					<application-name>publicsector</application-name>
+					<form-name>Apply-For-Marriage-Certificate-Form-Step-3</form-name>
+					<title xml:lang="en">Apply for Marriage Certificate</title>
+					<description xml:lang="en">Apply for Marriage Certificate</description>					
+					<title xml:lang="fr">Demander un certificat de mariage</title>
+					<description xml:lang="fr">Demander un certificat de mariage</description>
+					<title xml:lang="de">Heiratsurkunde beantragen</title>
+					<description xml:lang="de">Heiratsurkunde beantragen</description>
+					<title xml:lang="es">Solicitar certificado de matrimonio</title>
+					<description xml:lang="es">Solicitar certificado de matrimonio</description>
+					<singleton>false</singleton>
+				</metadata>
+			</xf:instance>
+			<!-- Attachments -->
+			<xf:instance id="fr-form-attachments" xxf:exclude-result-prefixes="#all">
+				<attachments>
+					<css mediatype="text/css" filename="" size="" />
+					<pdf mediatype="application/pdf" filename="" size="" />
+				</attachments>
+			</xf:instance>
+			<!-- All form resources -->
+			<!-- Don't make readonly by default in case a service modifies the resources -->
+			<xf:instance id="fr-form-resources" xxf:readonly="false" xxf:exclude-result-prefixes="#all">
+				<resources>
+					<resource xml:lang="en">
+						<dropdown-country>
+							<label>Country</label>
+							<hint />
+							<alert>Please select an option</alert>
+							<item>
+								<label>United Kingdom</label>
+								<value>GB</value>
+							</item>
+							<item>
+								<label>Jersey</label>
+								<value>JE</value>
+							</item>
+							<item>
+								<label>Guernsey</label>
+								<value>GG</value>
+							</item>
+							<item>
+								<label>Isle of Mann</label>
+								<value>IM</value>
+							</item>
+						</dropdown-country>
+						<address-line1-2>
+							<label>Address Line 1</label>
+							<hint />
+							<alert>Please enter an address</alert>
+						</address-line1-2>
+						<address-line2-2>
+							<label>Address Line 2</label>
+							<hint />
+							<alert>Please enter an address</alert>
+						</address-line2-2>
+						<city-2>
+							<label>City</label>
+							<hint />
+							<alert>Please enter a town or city</alert>
+						</city-2>
+						<postcode-2>
+							<label>Postcode</label>
+							<hint />
+							<alert>Please enter a post code</alert>
+						</postcode-2>
+						<phonenumber-2>
+							<label>Phone Number</label>
+							<hint />
+							<alert>Please enter a phone number</alert>
+						</phonenumber-2>
+						<control-13>
+							<label>&lt;h3&gt;&lt;b&gt;Email Address</label>
+							<hint />
+						</control-13>
+						<email-address>
+							<label>Email Address</label>
+							<hint />
+							<alert>Please enter a valid email address - example@yourdomain.com</alert>
+						</email-address>
+						<control-15>
+							<label>&lt;h3&gt;&lt;b&gt;Your Identification Detail</label>
+							<hint />
+						</control-15>
+						<upload-identification>
+							<label>Please upload identification details</label>
+							<hint>Max. file size 3MB Supported file types: .png, .jpg, .pdf</hint>
+							<alert>Please upload a valid file of type - .pdf, .jpg or .png and max. 3 MB in size</alert>
+							<alert>Please upload a file of max. 3 MB in size</alert>
+							<alert>Please upload a valid file of type - .pdf, .jpg or .png and max. 3 MB in size</alert>
+						</upload-identification>
+						<control-19>
+							<label>Fields marked * are required</label>
+							<hint />
+						</control-19>
+						<control-10>
+							<label>&lt;b&gt;&lt;/b&gt;&lt;h3&gt;&lt;b&gt;Personal Details&lt;/b&gt;&lt;/h3&gt;</label>
+							<hint />
+						</control-10>
+						<section-1>
+							<label>Partner 2 Details</label>
+						</section-1>
+						<section-22>
+							<label />
+							<help />
+						</section-22>
+						<dropdown-title>
+							<label>Title</label>
+							<hint />
+							<alert>Please select a title</alert>
+							<item>
+								<label>Mr</label>
+								<value>mr</value>
+							</item>
+							<item>
+								<label>Ms</label>
+								<value>ms</value>
+							</item>
+							<item>
+								<label>Mrs</label>
+								<value>mrs</value>
+							</item>
+							<item>
+								<label>Miss</label>
+								<value>miss</value>
+							</item>
+							<item>
+								<label>Dr.</label>
+								<value>dr</value>
+							</item>
+							<item>
+								<label>Rev</label>
+								<value>rev</value>
+							</item>
+						</dropdown-title>
+						<first-name-2>
+							<label>First Name</label>
+							<hint />
+							<alert>Please enter a first name that is less than 240 characters</alert>
+							<alert>Combined length of first name and last name must be less than 255 characters</alert>
+							<alert>Please enter a first name</alert>
+						</first-name-2>
+						<last-name-2>
+							<label>Last Name</label>
+							<hint />
+							<alert>Combined length of first name and last name must be less than 255 characters</alert>
+							<alert>Please enter a first name</alert>
+						</last-name-2>
+						<dropdown-gender>
+							<label>Gender</label>
+							<hint />
+							<alert>Please select an option</alert>
+							<item>
+								<label>Male</label>
+								<value>1</value>
+							</item>
+							<item>
+								<label>Female</label>
+								<value>2</value>
+							</item>
+							<item>
+								<label>Other</label>
+								<value>other</value>
+							</item>
+							<item>
+								<label>Rather not say</label>
+								<value>rather-not-say</value>
+							</item>
+						</dropdown-gender>
+						<date-of-birth>
+							<label>Date of Birth (example: 23/09/2016)</label>
+							<hint />
+							<alert>Please enter a valid date of birth</alert>
+							<alert>You must be at least 18 years old</alert>
+							<alert>Please select a date of birth</alert>
+						</date-of-birth>
+						<place-of-birth>
+							<label>Place of Birth</label>
+							<hint />
+							<alert>Please enter a valid date of birth</alert>
+						</place-of-birth>
+						<control-11>
+							<label>&lt;h3&gt;&lt;b&gt;Address Details&lt;/b&gt;&lt;/h3&gt;&lt;b&gt;&lt;/b&gt;</label>
+							<hint />
+						</control-11>
+						<same-parent1-check>
+							<label />
+							<hint />
+							<item>
+								<label>Same as Partner 1</label>
+								<hint />
+								<value>1</value>
+							</item>
+						</same-parent1-check>
+					</resource>
+					<resource xml:lang="fr">
+						<dropdown-country>
+							<label>Pays</label>
+							<hint />
+							<alert>Veuillez sélectionner une option</alert>
+							<item>
+								<label>Royaume-Uni</label>
+								<value>GB</value>
+							</item>
+							<item>
+								<label>Jersey</label>
+								<value>JE</value>
+							</item>
+							<item>
+								<label>Guernesey</label>
+								<value>GG</value>
+							</item>
+							<item>
+								<label>Île de Man</label>
+								<value>IM</value>
+							</item>
+						</dropdown-country>
+						<address-line1-2>
+							<label>Ligne d&apos;adresse 1</label>
+							<hint />
+							<alert>Veuillez saisir une adresse</alert>
+						</address-line1-2>
+						<address-line2-2>
+							<label>Ligne d&apos;adresse 2</label>
+							<hint />
+							<alert>Veuillez saisir une adresse</alert>
+						</address-line2-2>
+						<city-2>
+							<label>Ville</label>
+							<hint />
+							<alert>Veuillez saisir une ville</alert>
+						</city-2>
+						<postcode-2>
+							<label>Code postal</label>
+							<hint />
+							<alert>Veuillez saisir un code postal</alert>
+						</postcode-2>
+						<phonenumber-2>
+							<label>Numéro de téléphone</label>
+							<hint />
+							<alert>Veuillez saisir un numéro de téléphone</alert>
+						</phonenumber-2>
+						<control-13>
+							<label>&lt;h3&gt;&lt;b&gt;Adresse e-mail</label>
+							<hint />
+						</control-13>
+						<email-address>
+							<label>Adresse e-mail</label>
+							<hint />
+							<alert>Veuillez saisir une adresse e-mail valide (exemple@votredomaine.com)</alert>
+						</email-address>
+						<control-15>
+							<label>&lt;h3&gt;&lt;b&gt;Vos données d&apos;identification</label>
+							<hint />
+						</control-15>
+						<upload-identification>
+							<label>Veuillez charger les données d&apos;identification</label>
+							<hint>Taille max. de 3 Mo. Types de fichiers pris en charge : .png, .jpg, .pdf</hint>
+							<alert>Veuillez charger un type de fichier valide (.pdf, .jpg ou .png d&apos;une taille max. de 3 Mo)</alert>
+							<alert>Veuillez charger un fichier d&apos;une taille max. de 3 Mo</alert>
+							<alert>Veuillez charger un type de fichier valide (.pdf, .jpg ou .png d&apos;une taille max. de 3 Mo)</alert>
+						</upload-identification>
+						<control-19>
+							<label>Les zones signalées par * sont obligatoires.</label>
+							<hint />
+						</control-19>
+						<control-10>
+							<label>&lt;b&gt;&lt;/b&gt;&lt;h3&gt;&lt;b&gt;Données personnelles&lt;/b&gt;&lt;/h3&gt;</label>
+							<hint />
+						</control-10>
+						<section-1>
+							<label>Informations concernant le conjoint 2</label>
+						</section-1>
+						<section-22>
+							<label />
+							<help />
+						</section-22>
+						<dropdown-title>
+							<label>Titre</label>
+							<hint />
+							<alert>Veuillez sélectionner un titre</alert>
+							<item>
+								<label>M.</label>
+								<value>mr</value>
+							</item>
+							<item>
+								<label>Mme</label>
+								<value>ms</value>
+							</item>
+							<item>
+								<label>Mme</label>
+								<value>mrs</value>
+							</item>
+							<item>
+								<label>Mlle</label>
+								<value>miss</value>
+							</item>
+							<item>
+								<label>Dr</label>
+								<value>dr</value>
+							</item>
+							<item>
+								<label>Révérend</label>
+								<value>rev</value>
+							</item>
+						</dropdown-title>
+						<first-name-2>
+							<label>Prénom</label>
+							<hint />
+							<alert>Veuillez saisir un prénom de moins de 240 caractères</alert>
+							<alert>La longueur totale du prénom et du nom doit être inférieure à 255 caractères</alert>
+							<alert>Veuillez saisir un prénom</alert>
+						</first-name-2>
+						<last-name-2>
+							<label>Nom de famille</label>
+							<hint />
+							<alert>La longueur totale du prénom et du nom doit être inférieure à 255 caractères</alert>
+							<alert>Veuillez saisir un prénom</alert>
+						</last-name-2>
+						<dropdown-gender>
+							<label>Sexe</label>
+							<hint />
+							<alert>Veuillez sélectionner une option</alert>
+							<item>
+								<label>Masculin</label>
+								<value>1</value>
+							</item>
+							<item>
+								<label>Féminin</label>
+								<value>2</value>
+							</item>
+							<item>
+								<label>Autre</label>
+								<value>other</value>
+							</item>
+							<item>
+								<label>Ne souhaite pas l&apos;indiquer</label>
+								<value>rather-not-say</value>
+							</item>
+						</dropdown-gender>
+						<date-of-birth>
+							<label>Date de naissance (exemple : 23/09/2016)</label>
+							<hint />
+							<alert>Veuillez saisir une date de naissance valide</alert>
+							<alert>Vous devez avoir au moins 18 ans.</alert>
+							<alert>Veuillez sélectionner une date de naissance</alert>
+						</date-of-birth>
+						<place-of-birth>
+							<label>Lieu de naissance</label>
+							<hint />
+							<alert>Veuillez saisir une date de naissance valide</alert>
+						</place-of-birth>
+						<control-11>
+							<label>&lt;h3&gt;&lt;b&gt;Détails de l&apos;adresse&lt;/b&gt;&lt;/h3&gt;&lt;b&gt;&lt;/b&gt;</label>
+							<hint />
+						</control-11>
+						<same-parent1-check>
+							<label />
+							<hint />
+							<item>
+								<label>Identiques au conjoint 1</label>
+								<hint />
+								<value>1</value>
+							</item>
+						</same-parent1-check>
+					</resource>
+					<resource xml:lang="de">
+						<dropdown-country>
+							<label>Land</label>
+							<hint />
+							<alert>Wählen Sie eine Option.</alert>
+							<item>
+								<label>Vereinigtes Königreich</label>
+								<value>GB</value>
+							</item>
+							<item>
+								<label>Jersey</label>
+								<value>JE</value>
+							</item>
+							<item>
+								<label>Guernsey</label>
+								<value>GG</value>
+							</item>
+							<item>
+								<label>Isle of Man</label>
+								<value>IM</value>
+							</item>
+						</dropdown-country>
+						<address-line1-2>
+							<label>Adresse Zeile 1</label>
+							<hint />
+							<alert>Geben Sie eine Adresse ein.</alert>
+						</address-line1-2>
+						<address-line2-2>
+							<label>Adresse Zeile 2</label>
+							<hint />
+							<alert>Geben Sie eine Adresse ein.</alert>
+						</address-line2-2>
+						<city-2>
+							<label>Ort</label>
+							<hint />
+							<alert>Geben Sie einen Ort ein.</alert>
+						</city-2>
+						<postcode-2>
+							<label>Postleitzahl</label>
+							<hint />
+							<alert>Geben Sie eine Postleitzahl ein.</alert>
+						</postcode-2>
+						<phonenumber-2>
+							<label>Telefonnummer</label>
+							<hint />
+							<alert>Geben Sie eine Telefonnummer ein.</alert>
+						</phonenumber-2>
+						<control-13>
+							<label>&lt;h3&gt;&lt;b&gt;E-Mail-Adresse</label>
+							<hint />
+						</control-13>
+						<email-address>
+							<label>E-Mail-Adresse</label>
+							<hint />
+							<alert>Geben Sie eine gültige E-Mail-Adresse ein - Beispiel@IhreDomäne.com.</alert>
+						</email-address>
+						<control-15>
+							<label>&lt;h3&gt;&lt;b&gt;Ihre Identifikationsdaten</label>
+							<hint />
+						</control-15>
+						<upload-identification>
+							<label>Laden Sie Ihre Identifikationsdaten hoch.</label>
+							<hint>Max. Dateigröße: 3 MB Unterstützte Dateitypen: .png, .jpg, .pdf</hint>
+							<alert>Laden Sie eine gültige Datei des Typs .pdf, .jpg oder .png mit einer Größe von max. 3 MB hoch.</alert>
+							<alert>Laden Sie eine Datei mit einer Größe von max. 3 MB hoch.</alert>
+							<alert>Laden Sie eine gültige Datei des Typs .pdf, .jpg oder .png mit einer Größe von max. 3 MB hoch.</alert>
+						</upload-identification>
+						<control-19>
+							<label>Mit einem * gekennzeichnete Felder sind Pflichtfelder.</label>
+							<hint />
+						</control-19>
+						<control-10>
+							<label>&lt;b&gt;&lt;/b&gt;&lt;h3&gt;&lt;b&gt;Persönliche Angaben&lt;/b&gt;&lt;/h3&gt;</label>
+							<hint />
+						</control-10>
+						<section-1>
+							<label>Details Partner 2</label>
+						</section-1>
+						<section-22>
+							<label />
+							<help />
+						</section-22>
+						<dropdown-title>
+							<label>Anrede</label>
+							<hint />
+							<alert>Wählen Sie eine Anrede aus.</alert>
+							<item>
+								<label>Herr</label>
+								<value>mr</value>
+							</item>
+							<item>
+								<label>Frau</label>
+								<value>ms</value>
+							</item>
+							<item>
+								<label>Frau</label>
+								<value>mrs</value>
+							</item>
+							<item>
+								<label>Frau</label>
+								<value>miss</value>
+							</item>
+							<item>
+								<label>Dr.</label>
+								<value>dr</value>
+							</item>
+							<item>
+								<label>Pfarrer</label>
+								<value>rev</value>
+							</item>
+						</dropdown-title>
+						<first-name-2>
+							<label>Vorname</label>
+							<hint />
+							<alert>Geben Sie einen Vornamen ein, der kürzer als 240 Zeichen ist.</alert>
+							<alert>Die Länge des Vor- und Nachnamens darf zusammen 255 Zeichen nicht überschreiten.</alert>
+							<alert>Geben Sie einen Vornamen ein.</alert>
+						</first-name-2>
+						<last-name-2>
+							<label>Nachname</label>
+							<hint />
+							<alert>Die Länge des Vor- und Nachnamens darf zusammen 255 Zeichen nicht überschreiten.</alert>
+							<alert>Geben Sie einen Vornamen ein.</alert>
+						</last-name-2>
+						<dropdown-gender>
+							<label>Geschlecht</label>
+							<hint />
+							<alert>Wählen Sie eine Option.</alert>
+							<item>
+								<label>Männlich</label>
+								<value>1</value>
+							</item>
+							<item>
+								<label>Weiblich</label>
+								<value>2</value>
+							</item>
+							<item>
+								<label>Andere</label>
+								<value>other</value>
+							</item>
+							<item>
+								<label>Keine Angabe</label>
+								<value>rather-not-say</value>
+							</item>
+						</dropdown-gender>
+						<date-of-birth>
+							<label>Geburtsdatum (Beispiel: 23.09.2016)</label>
+							<hint />
+							<alert>Geben Sie ein gültiges Geburtsdatum ein.</alert>
+							<alert>Sie müssen mindestens 18 Jahre alt sein.</alert>
+							<alert>Wählen Sie ein Geburtsdatum aus.</alert>
+						</date-of-birth>
+						<place-of-birth>
+							<label>Geburtsort</label>
+							<hint />
+							<alert>Geben Sie ein gültiges Geburtsdatum ein.</alert>
+						</place-of-birth>
+						<control-11>
+							<label>&lt;h3&gt;&lt;b&gt;Adressdaten&lt;/b&gt;&lt;/h3&gt;&lt;b&gt;&lt;/b&gt;</label>
+							<hint />
+						</control-11>
+						<same-parent1-check>
+							<label />
+							<hint />
+							<item>
+								<label>Mit Partner 1 identisch</label>
+								<hint />
+								<value>1</value>
+							</item>
+						</same-parent1-check>
+					</resource>
+					<resource xml:lang="es">
+						<dropdown-country>
+							<label>País</label>
+							<hint />
+							<alert>Seleccione una opción</alert>
+							<item>
+								<label>Reino Unido</label>
+								<value>GB</value>
+							</item>
+							<item>
+								<label>Jersey</label>
+								<value>JE</value>
+							</item>
+							<item>
+								<label>Guernsey</label>
+								<value>GG</value>
+							</item>
+							<item>
+								<label>Isla de Man</label>
+								<value>IM</value>
+							</item>
+						</dropdown-country>
+						<address-line1-2>
+							<label>Línea de dirección 1</label>
+							<hint />
+							<alert>Introduzca una dirección</alert>
+						</address-line1-2>
+						<address-line2-2>
+							<label>Línea de dirección 2</label>
+							<hint />
+							<alert>Introduzca una dirección</alert>
+						</address-line2-2>
+						<city-2>
+							<label>Ciudad</label>
+							<hint />
+							<alert>Introduzca un pueblo o una ciudad</alert>
+						</city-2>
+						<postcode-2>
+							<label>Código postal</label>
+							<hint />
+							<alert>Introduzca un código postal</alert>
+						</postcode-2>
+						<phonenumber-2>
+							<label>Número de teléfono</label>
+							<hint />
+							<alert>Introduzca un número de teléfono</alert>
+						</phonenumber-2>
+						<control-13>
+							<label>&lt;h3&gt;&lt;b&gt;Dirección de correo electrónico</label>
+							<hint />
+						</control-13>
+						<email-address>
+							<label>Dirección de correo electrónico</label>
+							<hint />
+							<alert>Introduzca una dirección de correo electrónico válida: ejemplo@sudominio.com</alert>
+						</email-address>
+						<control-15>
+							<label>&lt;h3&gt;&lt;b&gt;Detalles de identificación</label>
+							<hint />
+						</control-15>
+						<upload-identification>
+							<label>Cargue sus detalles de identificación</label>
+							<hint>Tamaño máximo de fichero: 3MB Tipos de fichero admitidos: .png, .jpg, .pdf</hint>
+							<alert>Cargue un tipo de fichero válido (.pdf, .jpg, o .png) con un tamaño máximo de 3 MB</alert>
+							<alert>Cargue un fichero con un tamaño máximo de 3 MB.</alert>
+							<alert>Cargue un tipo de fichero válido (.pdf, .jpg, o .png) con un tamaño máximo de 3 MB</alert>
+						</upload-identification>
+						<control-19>
+							<label>Los campos marcados con * son obligatorios</label>
+							<hint />
+						</control-19>
+						<control-10>
+							<label>&lt;b&gt;&lt;/b&gt;&lt;h3&gt;&lt;b&gt;Información personal&lt;/b&gt;&lt;/h3&gt;</label>
+							<hint />
+						</control-10>
+						<section-1>
+							<label>Datos del cónyuge 2</label>
+						</section-1>
+						<section-22>
+							<label />
+							<help />
+						</section-22>
+						<dropdown-title>
+							<label>Tratamiento</label>
+							<hint />
+							<alert>Seleccione un tratamiento</alert>
+							<item>
+								<label>Sr.</label>
+								<value>mr</value>
+							</item>
+							<item>
+								<label>-</label>
+								<value>ms</value>
+							</item>
+							<item>
+								<label>Sra.</label>
+								<value>mrs</value>
+							</item>
+							<item>
+								<label>Srta.</label>
+								<value>miss</value>
+							</item>
+							<item>
+								<label>Dr.</label>
+								<value>dr</value>
+							</item>
+							<item>
+								<label>Rev.</label>
+								<value>rev</value>
+							</item>
+						</dropdown-title>
+						<first-name-2>
+							<label>Nombre</label>
+							<hint />
+							<alert>Introduzca un nombre que tenga menos de 240 caracteres</alert>
+							<alert>La longitud total del nombre y los apellidos debe ser inferior a 255 caracteres</alert>
+							<alert>Introduzca un nombre</alert>
+						</first-name-2>
+						<last-name-2>
+							<label>Apellidos</label>
+							<hint />
+							<alert>La longitud total del nombre y los apellidos debe ser inferior a 255 caracteres</alert>
+							<alert>Introduzca un nombre</alert>
+						</last-name-2>
+						<dropdown-gender>
+							<label>Sexo</label>
+							<hint />
+							<alert>Seleccione una opción</alert>
+							<item>
+								<label>Hombre</label>
+								<value>1</value>
+							</item>
+							<item>
+								<label>Mujer</label>
+								<value>2</value>
+							</item>
+							<item>
+								<label>Otro</label>
+								<value>other</value>
+							</item>
+							<item>
+								<label>Prefiero no contestar</label>
+								<value>rather-not-say</value>
+							</item>
+						</dropdown-gender>
+						<date-of-birth>
+							<label>Fecha de nacimiento (ejemplo: 23/09/2016)</label>
+							<hint />
+							<alert>Introduzca una fecha de nacimiento válida</alert>
+							<alert>Debe ser mayor de 18 años</alert>
+							<alert>Seleccione una fecha de nacimiento</alert>
+						</date-of-birth>
+						<place-of-birth>
+							<label>Lugar de nacimiento</label>
+							<hint />
+							<alert>Introduzca una fecha de nacimiento válida</alert>
+						</place-of-birth>
+						<control-11>
+							<label>&lt;h3&gt;&lt;b&gt;Datos de dirección&lt;/b&gt;&lt;/h3&gt;&lt;b&gt;&lt;/b&gt;</label>
+							<hint />
+						</control-11>
+						<same-parent1-check>
+							<label />
+							<hint />
+							<item>
+								<label>Igual que cónyuge 1</label>
+								<hint />
+								<value>1</value>
+							</item>
+						</same-parent1-check>
+					</resource>
+				</resources>
+			</xf:instance>
+			<!-- Utility instances for services -->
+			<xf:instance id="fr-service-request-instance" xxf:exclude-result-prefixes="#all">
+				<request />
+			</xf:instance>
+			<xf:instance id="fr-service-response-instance" xxf:exclude-result-prefixes="#all">
+				<response />
+			</xf:instance>
+		</xf:model>
+	</xh:head>
+	<xh:body>
+		<fr:view>
+			<fr:body xmlns:xbl="http://www.w3.org/ns/xbl" xmlns:p="http://www.orbeon.com/oxf/pipeline" xmlns:oxf="http://www.orbeon.com/oxf/processors">
+				<fr:section id="section-1-control" bind="section-1-bind">
+					<xf:label ref="$form-resources/section-1/label" />
+					<fr:grid>
+						<xh:tr>
+							<xh:td>
+								<xf:output id="control-19-control" bind="control-19-bind">
+									<xf:label ref="$form-resources/control-19/label" />
+									<xf:hint ref="$form-resources/control-19/hint" />
+									<xf:alert ref="$fr-resources/detail/labels/alert" />
+								</xf:output>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:output id="control-10-control" bind="control-10-bind">
+									<xf:label ref="$form-resources/control-10/label" mediatype="text/html" />
+									<xf:hint ref="$form-resources/control-10/hint" />
+									<xf:alert ref="$fr-resources/detail/labels/alert" />
+								</xf:output>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<fr:dropdown-select1 xmlns:xxbl="http://orbeon.org/oxf/xml/xbl" id="dropdown-title-control" bind="dropdown-title-bind">
+									<xf:label ref="$form-resources/dropdown-title/label" />
+									<xf:hint ref="$form-resources/dropdown-title/hint" />
+									<xf:alert ref="$form-resources/dropdown-title/alert" />
+									<xf:itemset ref="$form-resources/dropdown-title/item">
+										<xf:label ref="label" />
+										<xf:value ref="value" />
+									</xf:itemset>
+								</fr:dropdown-select1>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="first-name-2-control" bind="first-name-2-bind">
+									<xf:label ref="$form-resources/first-name-2/label" />
+									<xf:hint ref="$form-resources/first-name-2/hint" />
+									<xf:alert ref="$form-resources/first-name-2/alert[1]" validation="constraint-5-constraint" />
+									<xf:alert ref="$form-resources/first-name-2/alert[2]" validation="constraint-6-constraint" />
+									<xf:alert ref="$form-resources/first-name-2/alert[3]" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="last-name-2-control" bind="last-name-2-bind">
+									<xf:label ref="$form-resources/last-name-2/label" />
+									<xf:hint ref="$form-resources/last-name-2/hint" />
+									<xf:alert ref="$form-resources/last-name-2/alert[1]" validation="constraint-8-constraint" />
+									<xf:alert ref="$form-resources/last-name-2/alert[2]" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<fr:dropdown-select1 xmlns:xxbl="http://orbeon.org/oxf/xml/xbl" id="dropdown-gender-control" bind="dropdown-gender-bind">
+									<xf:label ref="$form-resources/dropdown-gender/label" />
+									<xf:hint ref="$form-resources/dropdown-gender/hint" />
+									<xf:alert ref="$form-resources/dropdown-gender/alert" />
+									<xf:itemset ref="$form-resources/dropdown-gender/item">
+										<xf:label ref="label" />
+										<xf:value ref="value" />
+									</xf:itemset>
+								</fr:dropdown-select1>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="date-of-birth-control" bind="date-of-birth-bind">
+									<xf:label ref="$form-resources/date-of-birth/label" />
+									<xf:hint ref="$form-resources/date-of-birth/hint" />
+									<xf:alert ref="$form-resources/date-of-birth/alert[1]" validation="validation-26-validation" />
+									<xf:alert ref="$form-resources/date-of-birth/alert[2]" validation="constraint-26-constraint" />
+									<xf:alert ref="$form-resources/date-of-birth/alert[3]" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="place-of-birth-control" bind="place-of-birth-bind">
+									<xf:label ref="$form-resources/place-of-birth/label" />
+									<xf:hint ref="$form-resources/place-of-birth/hint" />
+									<xf:alert ref="$form-resources/place-of-birth/alert" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+					</fr:grid>
+					<fr:grid>
+						<xh:tr>
+							<xh:td>
+								<xf:output id="control-11-control" bind="control-11-bind">
+									<xf:label ref="$form-resources/control-11/label" mediatype="text/html" />
+									<xf:hint ref="$form-resources/control-11/hint" />
+									<xf:alert ref="$fr-resources/detail/labels/alert" />
+								</xf:output>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:select id="same-parent1-check-control" appearance="full" bind="same-parent1-check-bind">
+									<xf:label ref="$form-resources/same-parent1-check/label" />
+									<xf:hint ref="$form-resources/same-parent1-check/hint" />
+									<xf:alert ref="$fr-resources/detail/labels/alert" />
+									<xf:itemset ref="$form-resources/same-parent1-check/item">
+										<xf:label ref="label" />
+										<xf:value ref="value" />
+										<xf:hint ref="hint" />
+									</xf:itemset>
+								</xf:select>
+							</xh:td>
+						</xh:tr>
+					</fr:grid>
+				</fr:section>
+				<fr:section id="section-22-control" bind="section-22-bind">
+					<xf:label ref="$form-resources/section-22/label" />
+					<fr:grid>
+						<xh:tr>
+							<xh:td>
+								<xf:select1 id="dropdown-country-control" bind="dropdown-country-bind" appearance="dropdown">
+									<xf:label ref="$form-resources/dropdown-country/label" />
+									<xf:hint ref="$form-resources/dropdown-country/hint" />
+									<xf:alert ref="$form-resources/dropdown-country/alert" />
+									<xf:itemset ref="$form-resources/dropdown-country/item">
+										<xf:label ref="label" />
+										<xf:value ref="value" />
+									</xf:itemset>
+								</xf:select1>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="address-line1-2-control" bind="address-line1-2-bind">
+									<xf:label ref="$form-resources/address-line1-2/label" />
+									<xf:hint ref="$form-resources/address-line1-2/hint" />
+									<xf:alert ref="$form-resources/address-line1-2/alert" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="address-line2-2-control" bind="address-line2-2-bind">
+									<xf:label ref="$form-resources/address-line2-2/label" />
+									<xf:hint ref="$form-resources/address-line2-2/hint" />
+									<xf:alert ref="$form-resources/address-line2-2/alert" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="city-2-control" bind="city-2-bind">
+									<xf:label ref="$form-resources/city-2/label" />
+									<xf:hint ref="$form-resources/city-2/hint" />
+									<xf:alert ref="$form-resources/city-2/alert" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="postcode-2-control" bind="postcode-2-bind">
+									<xf:label ref="$form-resources/postcode-2/label" />
+									<xf:hint ref="$form-resources/postcode-2/hint" />
+									<xf:alert ref="$form-resources/postcode-2/alert" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="phonenumber-2-control" bind="phonenumber-2-bind">
+									<xf:label ref="$form-resources/phonenumber-2/label" />
+									<xf:hint ref="$form-resources/phonenumber-2/hint" />
+									<xf:alert ref="$form-resources/phonenumber-2/alert" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:output id="control-13-control" bind="control-13-bind">
+									<xf:label ref="$form-resources/control-13/label" mediatype="text/html" />
+									<xf:hint ref="$form-resources/control-13/hint" />
+									<xf:alert ref="$fr-resources/detail/labels/alert" />
+								</xf:output>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="email-address-control" bind="email-address-bind">
+									<xf:label ref="$form-resources/email-address/label" />
+									<xf:hint ref="$form-resources/email-address/hint" />
+									<xf:alert ref="$form-resources/email-address/alert" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:output id="control-15-control" bind="control-15-bind">
+									<xf:label ref="$form-resources/control-15/label" mediatype="text/html" />
+									<xf:hint ref="$form-resources/control-15/hint" />
+									<xf:alert ref="$fr-resources/detail/labels/alert" />
+								</xf:output>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:upload xmlns="http://orbeon.org/oxf/xml/form-builder" xmlns:xxbl="http://orbeon.org/oxf/xml/xbl" id="upload-identification-control"
+									bind="upload-identification-bind">
+									<xf:label ref="$form-resources/upload-identification/label" />
+									<xf:hint ref="$form-resources/upload-identification/hint" />
+									<xf:alert ref="$form-resources/upload-identification/alert[1]" validation="validation-23-validation" />
+									<xf:alert ref="$form-resources/upload-identification/alert[2]" validation="validation-24-validation" />
+									<xf:alert ref="$form-resources/upload-identification/alert[3]" />
+									<xf:filename ref="@filename" />
+									<xf:mediatype ref="@mediatype" />
+									<xxf:size ref="@size" />
+									<xf:action event="xxforms-upload-done">
+										<xf:var name="isValid" value="xxf:evaluate-bind-property('upload-identification-bind','constraint')" />
+										<xf:action if="not($isValid)">
+											<xf:setvalue ref="instance('fr-form-instance')//upload-identification" />
+										</xf:action>
+									</xf:action>
+								</xf:upload>
+							</xh:td>
+						</xh:tr>
+					</fr:grid>
+				</fr:section>
+			</fr:body>
+		</fr:view>
+	</xh:body>
+</xh:html>

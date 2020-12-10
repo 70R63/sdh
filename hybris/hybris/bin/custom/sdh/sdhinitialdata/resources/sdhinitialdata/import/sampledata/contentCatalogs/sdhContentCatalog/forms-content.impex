@@ -1,0 +1,118 @@
+#
+# Import the ServiceRequest Forms
+#
+$applicationId=sdh
+
+$systemFormDefinition=orbeon:builder:1
+$xmlResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/forms
+$productCatalog=sdhProductCatalog
+$catalogVersion=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+#################################################################
+# YFormDefinition & YFormData for Public Sector Forms
+#################################################################
+
+INSERT_UPDATE YFormDefinition; applicationId[unique = true]; formId[unique = true]; version[default = 1, unique = true]; status(code)[default = ENABLED]; documentId; title; description; content[translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;$applicationId ;library ; ; ;doc-library ;Reusable Components ;Reusable Components for publicsector Forms;$xmlResource/form-reusable-components.xml
+;$applicationId ;Report-Graffiti-Form ; ; ;doc-report-graffiti ;Report - Graffiti ;Report New Graffiti Incident;$xmlResource/form-report-graffiti.xml
+;$applicationId ;Report-Pothole-Form ; ; ;doc-report-pothole ;Report - Pothole ;Report New Pothole Incident;$xmlResource/form-report-pothole.xml
+;$applicationId ;Pool-Building-Permit-Form-Step-1 ; ; ;doc-pool-building-permit-step-1;Pool Building Permit;Request for permission to build a pool;$xmlResource/form-pool-building-permit-step-1.xml
+;$applicationId ;Pool-Building-Permit-Form-Step-2 ; ; ;doc-pool-building-permit-step-2;Pool Building Permit;Request for permission to build a pool;$xmlResource/form-pool-building-permit-step-2.xml
+;$applicationId ;Working-With-Children-Check-Form-Step-1 ; ; ;doc-working-with-children-check-step-1 ;Working With Children Check ;Request For Working With Children;$xmlResource/form-working-with-children-check-step-1.xml
+;$applicationId ;Working-With-Children-Check-Form-Step-2 ; ; ;doc-working-with-children-check-step-2 ;Working With Children Check ;Request For Working With Children;$xmlResource/form-working-with-children-check-step-2.xml
+;$applicationId ;Apply-For-Death-Certificate-Form-Step-1 ; ; ;doc-apply-for-death-certificate-step-1 ;Apply For Death Certificate ;Apply For Death Certificate;$xmlResource/form-apply-for-death-certificate-step-1.xml
+;$applicationId ;Apply-For-Death-Certificate-Form-Step-2 ; ; ;doc-apply-for-death-certificate-step-2 ;Apply For Death Certificate ;Apply For Death Certificate;$xmlResource/form-apply-for-death-certificate-step-2.xml
+;$applicationId ;Apply-Disabled-Parking-Permit-Form-Step-1 ; ; ;doc-apply-disabled-parking-permit-step-1 ;Apply For Disabled Parking Permit ;Apply For Disabled Parking Permit;$xmlResource/form-apply-disabled-parking-permit-step-1.xml
+;$applicationId ;Apply-Disabled-Parking-Permit-Form-Step-2 ; ; ;doc-apply-disabled-parking-permit-step-2 ;Apply For Disabled Parking Permit ;Apply For Disabled Parking Permit;$xmlResource/form-apply-disabled-parking-permit-step-2.xml
+;$applicationId ;Event-Permit-Application-Form-Step-1 ; ; ;doc-event-permit-application-step-1 ;Apply For Event Permit ;Apply For Event Permit;$xmlResource/form-event-permit-application-step-1.xml
+;$applicationId ;Event-Permit-Application-Form-Step-2 ; ; ;doc-event-permit-application-step-2 ;Apply For Event Permit ;Apply For Event Permit;$xmlResource/form-event-permit-application-step-2.xml
+;$applicationId ;Event-Permit-Application-Form-Step-3 ; ; ;doc-event-permit-application-step-3 ;Apply For Event Permit ;Apply For Event Permit;$xmlResource/form-event-permit-application-step-3.xml
+;$applicationId ;Apply-Learner-Driver-Licence-Form-Step-1 ; ; ;doc-apply-learner-driver-licence-step-1 ;Apply For Learner Driver License ;Apply For Learner Driver License;$xmlResource/form-apply-learner-driver-licence-step-1.xml
+;$applicationId ;Apply-Learner-Driver-Licence-Form-Step-2 ; ; ;doc-apply-learner-driver-licence-step-2 ;Apply For Learner Driver License ;Apply For Learner Driver License;$xmlResource/form-apply-learner-driver-licence-step-2.xml
+;$applicationId ;Apply-Learner-Driver-Licence-Form-Step-3 ; ; ;doc-apply-learner-driver-licence-step-3 ;Apply For Learner Driver License ;Apply For Learner Driver License;$xmlResource/form-apply-learner-driver-licence-step-3.xml
+;$applicationId ;Apply-For-Marriage-Certificate-Form-Step-1 ; ; ;doc-apply-for-marriage-certificate-step-1 ;Apply For Marriage Certificate ;Apply For Marriage Certificate;$xmlResource/form-apply-for-marriage-certificate-step-1.xml
+;$applicationId ;Apply-For-Marriage-Certificate-Form-Step-2 ; ; ;doc-apply-for-marriage-certificate-step-2 ;Apply For Marriage Certificate ;Apply For Marriage Certificate;$xmlResource/form-apply-for-marriage-certificate-step-2.xml
+;$applicationId ;Apply-For-Marriage-Certificate-Form-Step-3 ; ; ;doc-apply-for-marriage-certificate-step-3 ;Apply For Marriage Certificate ;Apply For Marriage Certificate;$xmlResource/form-apply-for-marriage-certificate-step-3.xml
+;$applicationId ;Register-Birth-Form-Step-1 ; ; ;doc-register-birth-step-1 ;Register a Birth ;Register a Birth;$xmlResource/form-register-birth-step-1.xml
+;$applicationId ;Register-Birth-Form-Step-2 ; ; ;doc-register-birth-step-2 ;Register a Birth ;Register a Birth;$xmlResource/form-register-birth-step-2.xml
+;$applicationId ;Register-Birth-Form-Step-3 ; ; ;doc-register-birth-step-3 ;Register a Birth ;Register a Birth;$xmlResource/form-register-birth-step-3.xml
+;$applicationId ;Apply-For-Tourist-Visa-Form-Step-1 ; ; ;doc-apply-for-tourist-visa-step-1 ;Apply For Tourist Visa ;Apply For Tourist Visa;$xmlResource/form-apply-for-tourist-visa-step-1.xml
+;$applicationId ;Apply-For-Tourist-Visa-Form-Step-2 ; ; ;doc-apply-for-tourist-visa-step-2 ;Apply For Tourist Visa ;Apply For Tourist Visa;$xmlResource/form-apply-for-tourist-visa-step-2.xml
+;$applicationId ;Apply-For-Tourist-Visa-Form-Step-3 ; ; ;doc-apply-for-tourist-visa-step-3 ;Apply For Tourist Visa ;Apply For Tourist Visa;$xmlResource/form-apply-for-tourist-visa-step-3.xml
+
+# for each YFormDefinition we need an empty YFormData for the Orbeon builder to work
+INSERT_UPDATE YFormData ;id[unique = true] ;type(code[unique=true])[default = 'DATA'] ;formDefinition(applicationId, formId, version)[default = '$systemFormDefinition'] ;system[default = true] ;applicationId ;formId ;content[translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;doc-library ; ; ; ;$applicationId ;library;$xmlResource/form-reusable-components.xml
+;doc-report-graffiti ; ; ; ;$applicationId ;Report-Graffiti-Form ;$xmlResource/form-report-graffiti.xml
+;doc-report-pothole ; ; ; ;$applicationId ;Report-Pothole-Form ;$xmlResource/form-report-pothole.xml
+;doc-pool-building-permit-step-1; ; ; ;$applicationId ;Pool-Building-Permit-Form-Step-1;$xmlResource/form-pool-building-permit-step-1.xml
+;doc-pool-building-permit-step-2; ; ; ;$applicationId ;Pool-Building-Permit-Form-Step-2;$xmlResource/form-pool-building-permit-step-2.xml
+;doc-working-with-children-check-step-1 ; ; ; ;$applicationId ;Working-With-Children-Check-Form-Step-1;$xmlResource/form-working-with-children-check-step-1.xml
+;doc-working-with-children-check-step-2 ; ; ; ;$applicationId ;Working-With-Children-Check-Form-Step-2;$xmlResource/form-working-with-children-check-step-2.xml
+;doc-apply-for-death-certificate-step-1 ; ; ; ;$applicationId ;Apply-For-Death-Certificate-Form-Step-1;$xmlResource/form-apply-for-death-certificate-step-1.xml
+;doc-apply-for-death-certificate-step-2 ; ; ; ;$applicationId ;Apply-For-Death-Certificate-Form-Step-2;$xmlResource/form-apply-for-death-certificate-step-2.xml
+;doc-apply-disabled-parking-permit-step-1 ; ; ; ;$applicationId ;Apply-Disabled-Parking-Permit-Form-Step-1;$xmlResource/form-apply-disabled-parking-permit-step-1.xml
+;doc-apply-disabled-parking-permit-step-2 ; ; ; ;$applicationId ;Apply-Disabled-Parking-Permit-Form-Step-2;$xmlResource/form-apply-disabled-parking-permit-step-2.xml
+;doc-event-permit-application-step-1 ; ; ; ;$applicationId ;Event-Permit-Application-Form-Step-1;$xmlResource/form-event-permit-application-step-1.xml
+;doc-event-permit-application-step-2 ; ; ; ;$applicationId ;Event-Permit-Application-Form-Step-2;$xmlResource/form-event-permit-application-step-2.xml
+;doc-event-permit-application-step-3 ; ; ; ;$applicationId ;Event-Permit-Application-Form-Step-3;$xmlResource/form-event-permit-application-step-3.xml
+;doc-apply-learner-driver-licence-step-1 ; ; ; ;$applicationId ;Apply-Learner-Driver-Licence-Form-Step-1;$xmlResource/form-apply-learner-driver-licence-step-1.xml
+;doc-apply-learner-driver-licence-step-2 ; ; ; ;$applicationId ;Apply-Learner-Driver-Licence-Form-Step-2;$xmlResource/form-apply-learner-driver-licence-step-2.xml
+;doc-apply-learner-driver-licence-step-3 ; ; ; ;$applicationId ;Apply-Learner-Driver-Licence-Form-Step-3;$xmlResource/form-apply-learner-driver-licence-step-3.xml
+;doc-apply-for-marriage-certificate-step-1 ; ; ; ;$applicationId ;Apply-For-Marriage-Certificate-Form-Step-1;$xmlResource/form-apply-for-marriage-certificate-step-1.xml
+;doc-apply-for-marriage-certificate-step-2 ; ; ; ;$applicationId ;Apply-For-Marriage-Certificate-Form-Step-2;$xmlResource/form-apply-for-marriage-certificate-step-2.xml
+;doc-apply-for-marriage-certificate-step-3 ; ; ; ;$applicationId ;Apply-For-Marriage-Certificate-Form-Step-3;$xmlResource/form-apply-for-marriage-certificate-step-3.xml
+;doc-register-birth-step-1 ; ; ; ;$applicationId ;Register-Birth-Form-Step-1;$xmlResource/form-register-birth-step-1.xml
+;doc-register-birth-step-2 ; ; ; ;$applicationId ;Register-Birth-Form-Step-2;$xmlResource/form-register-birth-step-2.xml
+;doc-register-birth-step-3 ; ; ; ;$applicationId ;Register-Birth-Form-Step-3;$xmlResource/form-register-birth-step-3.xml
+;doc-apply-for-tourist-visa-step-1 ; ; ; ;$applicationId ;Apply-For-Tourist-Visa-Form-Step-1;$xmlResource/form-apply-for-tourist-visa-step-1.xml
+;doc-apply-for-tourist-visa-step-2 ; ; ; ;$applicationId ;Apply-For-Tourist-Visa-Form-Step-2;$xmlResource/form-apply-for-tourist-visa-step-2.xml
+;doc-apply-for-tourist-visa-step-3 ; ; ; ;$applicationId ;Apply-For-Tourist-Visa-Form-Step-3;$xmlResource/form-apply-for-tourist-visa-step-3.xml
+
+#################################################################
+# Assign YFormDefinition to the Product
+#################################################################
+
+UPDATE PSServiceProduct;code[unique=true];$catalogVersion;allYFormDefinitionList(applicationId, formId, version)[default = '$systemFormDefinition']
+ ;report-graffiti;;$applicationId:Report-Graffiti-Form:1
+ ;report-pothole;;$applicationId:Report-Pothole-Form:1
+ ;pool-building-permit;;$applicationId:Pool-Building-Permit-Form-Step-1:1,$applicationId:Pool-Building-Permit-Form-Step-2:1
+ ;working-with-children-check;;$applicationId:Working-With-Children-Check-Form-Step-1:1,$applicationId:Working-With-Children-Check-Form-Step-2:1
+ ;apply-for-death-certificate;;$applicationId:Apply-For-Death-Certificate-Form-Step-1:1,$applicationId:Apply-For-Death-Certificate-Form-Step-2:1 
+ ;apply-disabled-parking-permit;;$applicationId:Apply-Disabled-Parking-Permit-Form-Step-1:1,$applicationId:Apply-Disabled-Parking-Permit-Form-Step-2:1
+ ;event-permit-application;;$applicationId:Event-Permit-Application-Form-Step-1:1,$applicationId:Event-Permit-Application-Form-Step-2:1
+ ;apply-learner-driver-licence;;$applicationId:Apply-Learner-Driver-Licence-Form-Step-1:1,$applicationId:Apply-Learner-Driver-Licence-Form-Step-2:1,$applicationId:Apply-Learner-Driver-Licence-Form-Step-3:1
+ ;apply-for-marriage-certificate;;$applicationId:Apply-For-Marriage-Certificate-Form-Step-1:1,$applicationId:Apply-For-Marriage-Certificate-Form-Step-2:1,$applicationId:Apply-For-Marriage-Certificate-Form-Step-3:1
+ ;register-birth;;$applicationId:Register-Birth-Form-Step-1:1,$applicationId:Register-Birth-Form-Step-2:1,$applicationId:Register-Birth-Form-Step-3:1
+ ;apply-for-tourist-visa;;$applicationId:Apply-For-Tourist-Visa-Form-Step-1:1,$applicationId:Apply-For-Tourist-Visa-Form-Step-2:1,$applicationId:Apply-For-Tourist-Visa-Form-Step-3:1
+
+UPDATE PSServiceProductAddOn;code[unique=true];$catalogVersion;allYFormDefinitionList(applicationId, formId, version)[default = '$systemFormDefinition']
+;event-serve-alcohol-addon;;$applicationId:Event-Permit-Application-Form-Step-3:1
+
+#################################################################
+# Provide mapping for yForms 
+#################################################################
+INSERT_UPDATE YFormDefinitionFieldMappings; applicationId[unique = true]; formId[unique = true]; formToUserMappings(key, value)[map-delimiter=|]
+# Report graffiti
+;$applicationId;Report-Graffiti-Form;/form/section-report-graffiti/address-line1->addressLine1|/form/section-report-graffiti/address-line2->addressLine2|/form/section-report-graffiti/address-city->city|/form/section-report-graffiti/address-postcode->postcode|/form/section-update-me/user-name->fullName|/form/section-update-me/user-email->email|/form/section-update-me/is-user-logged-in->isUserLoggedIn
+# Report Pothole 
+;$applicationId;Report-Pothole-Form;/form/section-report-pothole/address-line1->addressLine1|/form/section-report-pothole/address-line2->addressLine2|/form/section-report-pothole/address-city->city|/form/section-report-pothole/address-postcode->postcode|/form/section-update-me/user-name->fullName|/form/section-update-me/user-email->email|/form/section-update-me/is-user-logged-in->isUserLoggedIn
+# Pool Building Permit
+;$applicationId;Pool-Building-Permit-Form-Step-1;/form/section-1/title-1->title|/form/section-1/first-name-1->firstName|/form/section-1/last-name-1->lastName|/form/section-1/email-1->email|/form/section-34/title-2->title|/form/section-34/first-name-2->firstName|/form/section-34/last-name-2->lastName|/form/section-31/address-line1-2->addressLine1|/form/section-31/address-line2-2->addressLine2|/form/section-31/city-2->city|/form/section-31/post-code-2->postcode|/form/section-31/phone-number-2->phone|/form/section-30/email-2->email|/form/section-36/primary-address-country->country|/form/section-36/primary-address-line1->addressLine1|/form/section-36/primary-address-line2->addressLine2|/form/section-36/primary-address-city->city|/form/section-36/primary-address-post-code->postcode|/form/section-36/primary-address-phone-number->phone
+# Working with children check
+;$applicationId;Working-With-Children-Check-Form-Step-2;/form/section-1/dropdown-title->title|/form/section-1/first-name-1->firstName|/form/section-1/last-name-1->lastName|/form/section-34/first-name-2->firstName|/form/section-34/last-name-2->lastName|/form/section-30/primary-address-country->country|/form/section-30/primary-address-line1->addressLine1|/form/section-30/primary-address-line2->addressLine2|/form/section-30/primary-address-city->city|/form/section-30/primary-address-post-code->postcode|/form/section-30/primary-address-phone-number->phone|/form/section-31/country-3->country|/form/section-31/address-line1-3->addressLine1|/form/section-31/address-line2-3->addressLine2|/form/section-31/city-3->city|/form/section-31/post-code-3->postcode|/form/section-31/phone-number-3->phone|/form/section-32/email-1->email
+# Register Birth
+;$applicationId;Register-Birth-Form-Step-2;/form/section-1/dropdown-title->title|/form/section-1/first-name-2->firstName|/form/section-1/last-name-2->lastName|/form/section-1/first-name-1->firstName|/form/section-1/last-name-1->lastName|/form/section-1/dropdown-country->country|/form/section-1/address-line1-2->addressLine1|/form/section-1/address-line2-2->addressLine2|/form/section-1/city-2->city|/form/section-1/postcode-2->postcode|/form/section-1/phonenumber-2->phone|/form/section-1/email-address-1->email|/form/section-17/primary-address-country->country|/form/section-17/primary-address-line1->addressLine1|/form/section-17/primary-address-line2->addressLine2|/form/section-17/primary-address-city->city|/form/section-17/primary-address-post-code->postcode|/form/section-17/primary-address-phone-number->phone
+# Apply for Marriage Certificate
+;$applicationId;Apply-For-Marriage-Certificate-Form-Step-2;/form/section-1/dropdown-title->title|/form/section-1/first-name-2->firstName|/form/section-1/last-name-2->lastName|/form/section-1/dropdown-country->country|/form/section-1/address-line1-2->addressLine1|/form/section-1/address-line2-2->addressLine2|/form/section-1/city-2->city|/form/section-1/postcode-2->postcode|/form/section-1/phonenumber-2->phone|/form/section-1/email-address->email|/form/section-22/primary-address-country->country|/form/section-22/primary-address-line1->addressLine1|/form/section-22/primary-address-line2->addressLine2|/form/section-22/primary-address-city->city|/form/section-22/primary-address-post-code->postcode|/form/section-22/primary-address-phone-number->phone
+# Apply for Death Certificate
+;$applicationId;Apply-For-Death-Certificate-Form-Step-2;/form/section-1/dropdown-title->title|/form/section-1/first-name-2->firstName|/form/section-1/last-name-2->lastName|/form/section-1/dropdown-country->country|/form/section-1/address-line1-2->addressLine1|/form/section-1/address-line2-2->addressLine2|/form/section-1/city-2->city|/form/section-1/postcode-2->postcode|/form/section-1/phonenumber-2->phone|/form/section-1/email-address->email|/form/section-21/primary-address-country->country|/form/section-21/primary-address-line1->addressLine1|/form/section-21/primary-address-line2->addressLine2|/form/section-21/primary-address-city->city|/form/section-21/primary-address-post-code->postcode|/form/section-21/primary-address-phone-number->phone
+# Apply for Learner Driver Licence
+;$applicationId;Apply-Learner-Driver-Licence-Form-Step-1;/form/section-1/dropdown-title->title|/form/section-1/first-name->firstName|/form/section-1/last-name->lastName
+# Apply for Disabled Parking Permit
+;$applicationId;Apply-Disabled-Parking-Permit-Form-Step-1;/form/section-1/dropdown-title->title|/form/section-1/first-name->firstName|/form/section-1/last-name->lastName
+# Event Permit
+;$applicationId;Event-Permit-Application-Form-Step-1;/form/section-1/addressline-1->addressLine1|/form/section-1/addressline-2->addressLine2|/form/section-1/city-1->city|/form/section-1/postcode-1->postcode|/form/section-9/primary-address-country->country|/form/section-9/primary-address-line1->addressLine1|/form/section-9/primary-address-line2->addressLine2|/form/section-9/primary-address-city->city|/form/section-9/primary-address-post-code->postcode|/form/section-9/primary-address-phone-number->phone
+;$applicationId;Event-Permit-Application-Form-Step-2;/form/section-1/dropdown-title->title|/form/section-1/first-name->firstName|/form/section-1/last-name->lastName
+# Apply for Tourist visa
+;$applicationId;Apply-For-Tourist-Visa-Form-Step-1;/form/section-1/Title-Name-1->title|/form/section-1/first-name-1->firstName|/form/section-1/last-name-1->lastName|/form/section-16/Dropdown-title-1->title|/form/section-16/first-name-2->firstName|/form/section-16/last-name-2->lastName

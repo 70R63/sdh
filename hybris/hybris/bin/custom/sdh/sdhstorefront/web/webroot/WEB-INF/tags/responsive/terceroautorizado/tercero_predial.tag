@@ -15,7 +15,7 @@
 			<span class="col-md-10 "><spring:theme code="terceros.objeto.predial.titulo" /></span>
 		</h2>
 	</div>
-	<div class="row">
+	<div class="row" class="table-responsive">
 		<div class="col-md-12">
 			<div class="table-responsive" >
 				<table id="table-predial1" 

@@ -1,0 +1,12 @@
+#
+# Update the Product Catalog Sync Job
+#
+
+$productCatalog=sdhProductCatalog
+
+
+# adding itemtypes to the root types of the sdhProductCatalog Sync Job
+UPDATE CatalogVersionSyncJob;code[unique=true];roottypes(code)[mode=append];
+# Adding catalog aware items to sync job
+;sync $productCatalog:Staged->Online;PSApplyOnline,PSApplyByEmail,PSApplyByPhone,PSRelatedLinks,PSKeyFacts,PSLink,PSConsentDeclaration;
+;sync $productCatalog:Staged->Online;BundleTemplate,BundleTemplateStatus;

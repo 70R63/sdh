@@ -355,7 +355,7 @@
 		</table>
 	</c:if>
 
-	<div class="row" id="table-vehicular" style="display: none;">
+	<div class="row" id="table-vehicular" style="display: none;" class="table-responsive">
 		<div class="col-md-12 col-md-offset-2">
 			<table class="table tabPaginacion" id="table-vehicular1">
 				<thead style="cellspacing: 10 !important">
@@ -391,7 +391,7 @@
 		</div>
 	</div>
 	
-	 <div class="row" id="table-predial" style="display: none;">
+	 <div class="row" id="table-predial" style="display: none;" class="table-responsive">
         <div class="col-md-6 col-md-offset-2">
             <table class="table tabPaginacion" id="table-predial1">
                 <thead style="cellspacing: 10 !important">

@@ -36,10 +36,14 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.jalo.c2l.LocalizableItem;
 import de.hybris.platform.servicelayer.model.AbstractItemModel;
+import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
+import de.hybris.platform.servicelayer.search.FlexibleSearchService;
+import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.type.TypeService;
 import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
+import de.hybris.sdh.core.model.SdhAccesoMenuContrib1Model;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.questions.data.SDHAgentData;
@@ -48,8 +52,10 @@ import de.hybris.sdh.storefront.filters.cms.CMSSiteFilter;
 import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -111,6 +117,9 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 
 	@Resource(name="sdhCustomerFacade")
 	SDHCustomerFacade sdhCustomerFacade;
+
+	@Resource(name = "flexibleSearchService")
+	private FlexibleSearchService defaultFlexibleSearchService;
 
 	@Override
 	public void beforeView(final HttpServletRequest request, final HttpServletResponse response, final ModelAndView modelAndView)
@@ -178,6 +187,7 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 			final UIMenuForm uiMenuForm = new UIMenuForm();
 
 			uiMenuForm.fillForm(customerData);
+			uiMenuForm.setbNoFiltrarMenuContrib(determinarFiltroMenuContrib(customerData));
 			modelAndView.addObject("uiMenuForm", uiMenuForm);
 			if(sessionService.getAttribute("representado")!= null) {
 
@@ -217,6 +227,46 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 			}
 		}
 
+	}
+
+	/**
+	 * @param customerData
+	 * @return
+	 */
+	private Boolean determinarFiltroMenuContrib(final CustomerData customerData)
+	{
+		Boolean flagFiltro = null;
+		if (customerData != null && customerData.getNumBP() != null)
+		{
+			final Map<String, String> tablaBPsValidos = new HashMap<String, String>();
+			final String query2 =
+					"SELECT {" + SdhAccesoMenuContrib1Model.PK + "}, " + "{" + SdhAccesoMenuContrib1Model.BP + "} " + "FROM {"
+							+ SdhAccesoMenuContrib1Model._TYPECODE + "} " + "WHERE {" + SdhAccesoMenuContrib1Model.BP + "} = ?bp "
+							+
+							"AND {" + SdhAccesoMenuContrib1Model.ACTIVEFLAG + "} = 'true'";
+
+			final Map<String, Object> params = new HashMap<String, Object>();
+			params.put("bp", customerData.getNumBP());
+
+			final FlexibleSearchQuery searchQuery2 = new FlexibleSearchQuery(query2, params);
+			final SearchResult<SdhAccesoMenuContrib1Model> searchResult2 = defaultFlexibleSearchService.search(searchQuery2);
+			final SdhAccesoMenuContrib1Model itemRead = null;
+			final List<SdhAccesoMenuContrib1Model> resultado = searchResult2.getResult();
+
+			for (final SdhAccesoMenuContrib1Model itemRead2 : resultado)
+			{
+				if (itemRead2 != null && customerData.getNumBP().equals(itemRead2.getBp()))
+				{
+					tablaBPsValidos.put(customerData.getNumBP(), "true");
+				}
+			}
+			if (tablaBPsValidos.get(customerData.getNumBP()) != null)
+			{
+				flagFiltro = true;
+			}
+		}
+
+		return flagFiltro;
 	}
 
 	protected boolean isCaptchaEnabledForCurrentStore()

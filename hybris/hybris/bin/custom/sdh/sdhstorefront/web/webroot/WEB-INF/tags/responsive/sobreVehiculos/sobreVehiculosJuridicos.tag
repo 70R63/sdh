@@ -19,7 +19,7 @@
 	</div>
 
 	
-		<div class="row">
+		<div class="row table-responsive">
 			<div class="col-md-5">
 				<br>
 				<table class="table tableJur" id="tableJur">

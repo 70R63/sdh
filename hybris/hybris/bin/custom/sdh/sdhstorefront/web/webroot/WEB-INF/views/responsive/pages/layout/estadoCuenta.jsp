@@ -31,15 +31,26 @@
 			var contrib_select = document.getElementById('idImpuestoAgente');
 			var impblock = document.getElementById('impRetenedor');
 		
-			contrib_select.style.display = 'block';
-			impblock.style.display = 'block';
+			if(contrib_select != null){
+				contrib_select.style.display = 'block';
+			}
+			if(impblock != null){
+				impblock.style.display = 'block';				
+			}
 		}else{
 			var contrib_select = document.getElementById('idImpuesto');
 			var impblock = document.getElementById('impContribuyente');
 			var btn = document.getElementById('btnBuscar');
-			contrib_select.style.display = 'block';
-			impblock.style.display = 'block';
-			btn.style.display = 'block';
+			
+			if(contrib_select != null){
+				contrib_select.style.display = 'block';
+			}
+			if(impblock != null){
+				impblock.style.display = 'block';
+			}
+			if(btn != null){
+				btn.style.display = 'block';
+			}
 		}
 
 		$(".loader").fadeOut("slow");
@@ -53,13 +64,52 @@
 	function Selectedver(selectObject) {
 		var contrib_select = document.getElementById('idImpuesto');
 		var impblock = document.getElementById('impContribuyente');
-		contrib_select.style.display = 'block';
-		impblock.style.display = 'block';
+		
+		if(contrib_select != null){
+			contrib_select.style.display = 'block';			
+		}
+		if(impblock != null){
+			impblock.style.display = 'block';			
+		}
 		var value = selectObject.value;
 		var xx = document.getElementById('impuesto');
 		var x = xx.value;
 
-		// 		var todo = document.getElementById('idtodos');
+		establecerVisibles("ninguno");
+		switch(x){
+			case "1":
+				establecerVisibles("detpred");
+				break;
+			case "2":
+				establecerVisibles("detvehi");
+				break;
+			case "3":
+				establecerVisibles("detica");
+				break;
+			case "4":
+				establecerVisibles("detplubliext");
+				break;
+			case "5":
+				establecerVisibles("detgas");
+				break;
+			case "6":
+				establecerVisibles("detdeli");
+				break;
+			case "7":
+				establecerVisibles("oblig");
+				break;
+			case "0":
+				establecerVisibles("todos");
+				break;
+			default:
+				establecerVisibles("todos");
+				break;
+		}
+
+	}
+	
+	function establecerVisibles(opcionVisible){
+		
 		var detpred = document.getElementById('predial');
 		var detica = document.getElementById('ica');
 		var detvehi = document.getElementById('vehiculos');
@@ -68,105 +118,90 @@
 		var detplubliext = document.getElementById('publiext');
 		var oblig = document.getElementById('obli-no-tributarias')
 
-		if (x == '1') {
-
-			// 			todo.style.display = 'none';
-			detpred.style.display = 'block';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'none';
-			oblig.style.display = 'none';
-
-		} else if (x == '2') {
-
-			// 			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'block';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'none';
-			oblig.style.display = 'none';
-
-		} else if (x == '3') {
-
-			// 			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'block';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'none';
-			oblig.style.display = 'none';
-
-		} else if (x == '4') {
-
-			// 			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'block';
-			oblig.style.display = 'none';
-
-		} else if (x == '5') {
-
-			// 			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'block';
-			detplubliext.style.display = 'none';
-			oblig.style.display = 'none';
-
-		} else if (x == '6') {
-
-			// 			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detgas.style.display = 'none';
-			detdeli.style.display = 'block';
-			detplubliext.style.display = 'none';
-			oblig.style.display = 'none';
-
-		} else if (x == '7') {
-
-			// 			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detgas.style.display = 'none';
-			detdeli.style.display = 'none';
-			detplubliext.style.display = 'none';
-			oblig.style.display = 'block';
-
-		} else if (x == '0') {
-
-			// 			todo.style.display = 'block';
-			detpred.style.display = 'block';
-			detica.style.display = 'block';
-			detvehi.style.display = 'block';
-			detdeli.style.display = 'block';
-			detgas.style.display = 'block';
-			detplubliext.style.display = 'block';
-			oblig.style.display = 'block';
-		} else {
-
-			// 			todo.style.display = 'block';
-			detpred.style.display = 'block';
-			detica.style.display = 'block';
-			detvehi.style.display = 'block';
-			detdeli.style.display = 'block';
-			detgas.style.display = 'block';
-			detplubliext.style.display = 'block';
-			oblig.style.display = 'block';
+		
+		switch(opcionVisible){
+			case "ninguno":
+				if(detpred != null){
+					detpred.style.display = 'none';
+				}
+				if(detica != null){
+					detica.style.display = 'none';
+				}
+				if(detvehi != null){
+					detvehi.style.display = 'none';
+				}
+				if(detdeli != null){
+					detdeli.style.display = 'none';
+				}
+				if(detgas != null){
+					detgas.style.display = 'none';
+				}
+				if(detplubliext != null){
+					detplubliext.style.display = 'none';
+				}
+				if(oblig != null){
+					oblig.style.display = 'none';
+				}
+				break;
+			case "todos":
+				if(detpred != null){
+					detpred.style.display = 'block';
+				}
+				if(detica != null){
+					detica.style.display = 'block';
+				}
+				if(detvehi != null){
+					detvehi.style.display = 'block';
+				}
+				if(detdeli != null){
+					detdeli.style.display = 'block';
+				}
+				if(detgas != null){
+					detgas.style.display = 'block';
+				}
+				if(detplubliext != null){
+					detplubliext.style.display = 'block';
+				}
+				if(oblig != null){
+					oblig.style.display = 'block';
+				}
+				break;
+			case "detpred":
+				if(detpred != null){
+					detpred.style.display = 'block';
+				}
+				break;
+			case "detica":
+				if(detica != null){
+					detica.style.display = 'block';
+				}
+				break;
+			case "detvehi":
+				if(detvehi != null){
+					detvehi.style.display = 'block';
+				}
+				break;
+			case "detdeli":
+				if(detdeli != null){
+					detdeli.style.display = 'block';
+				}
+				break;
+			case "detgas":
+				if(detgas != null){
+					detgas.style.display = 'block';
+				}
+				break;
+			case "detplubliext":
+				if(detplubliext != null){
+					detplubliext.style.display = 'block';
+				}
+				break;
+			case "oblig":
+				if(oblig != null){
+					oblig.style.display = 'block';
+				}
+				break;
 		}
-
 	}
 
 	function cancelfun(selectObject) {

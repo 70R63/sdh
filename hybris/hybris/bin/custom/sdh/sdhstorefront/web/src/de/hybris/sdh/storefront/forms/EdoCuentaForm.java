@@ -50,7 +50,7 @@ public class EdoCuentaForm
 	private String fechageneracion;
 	private ReteICA tablaReteica;
 
-	private EdoCtaReteIcaCabecera reteica;
+	private List<EdoCtaReteIcaCabecera> reteica;
 
 	private String reteicaSaldoCargo;
 	private String reteicaSaldoFavor;
@@ -499,12 +499,10 @@ public class EdoCuentaForm
 		this.tablaReteica = tablaReteica;
 	}
 
-
-
 	/**
 	 * @return the reteica
 	 */
-	public EdoCtaReteIcaCabecera getReteica()
+	public List<EdoCtaReteIcaCabecera> getReteica()
 	{
 		return reteica;
 	}
@@ -513,7 +511,7 @@ public class EdoCuentaForm
 	 * @param reteica
 	 *           the reteica to set
 	 */
-	public void setReteica(final EdoCtaReteIcaCabecera reteica)
+	public void setReteica(final List<EdoCtaReteIcaCabecera> reteica)
 	{
 		this.reteica = reteica;
 	}
