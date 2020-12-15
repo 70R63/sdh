@@ -141,6 +141,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 			String responseStr = sdhEdoCuentaService.detalleEdoCta(edoCuentaRequest);
 			responseStr = responseStr.replace(",{\"detalleReteica\":[\"\",\"\"]}", "");
+			responseStr = responseStr.replace("{\"detalleReteica\":[\"\",\"\"]}", "");
 
 			final EdoCuentaResponse edoCuentaResponse = mapper.readValue(responseStr, EdoCuentaResponse.class);
 
