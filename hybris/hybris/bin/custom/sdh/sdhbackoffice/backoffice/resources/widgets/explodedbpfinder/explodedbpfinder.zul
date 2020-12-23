@@ -53,9 +53,18 @@
                             <label value="Business Partner (BP):"/>
                         </cell>
                         <cell>
-                                <textbox id="businessPartnerOutput" readonly="true" width="100%"/>
+                             <textbox id="businessPartnerOutput" readonly="true" width="100%"/>
                         </cell>
                     </row>
+                    <row>
+                        <cell>
+                            <label value="Email:"/>
+                        </cell>
+                        <cell>
+                             <textbox id="businessPartnerEmailOutput" readonly="true" width="100%"/>
+                        </cell>
+                    </row>
+
                     <row>
                         <cell></cell>
                         <cell>
