@@ -1491,7 +1491,7 @@ ACC.opcionDeclaraciones = {
 		var ocultarPeriodo2 = false;
         var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = 5;
+		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto);
 		
 		debugger;
         
@@ -1618,7 +1618,7 @@ ACC.opcionDeclaraciones = {
 
 		var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = 5;
+		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto);
 		
 		$("#anoGravable").find("option:gt(0)").remove();
 		if(claveImpuesto == '1' || claveImpuesto == '2'){ // predial vehicular 
@@ -1667,7 +1667,7 @@ ACC.opcionDeclaraciones = {
 		var claveImpuesto = document.getElementById('seleccion').value;
 		var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = 1;
+		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto.substring(3,4));
 		
 		$("#aniograv").find("option:gt(0)").remove();
 		if(claveImpuesto == '0001' || claveImpuesto == '0002'){ // predial vehicular 
@@ -1774,6 +1774,22 @@ ACC.opcionDeclaraciones = {
 		
 		
 		return obtenerURLGenDec;
+	},
+	
+	
+	detCantidadAnoGravable : function(claveImpuesto){
+		var cantidadAnoGravable = 0;
+		
+        switch (claveImpuesto) {
+		case "6":
+			cantidadAnoGravable = 7;
+			break;
+		default:
+			cantidadAnoGravable = 5;
+			break;
+		}
+        
+        return cantidadAnoGravable;
 	}
 	
 	
