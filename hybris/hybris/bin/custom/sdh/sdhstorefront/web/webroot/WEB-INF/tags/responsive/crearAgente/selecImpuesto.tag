@@ -361,65 +361,66 @@
 						</div>
 					</div>
 				</div>
-				<div class="row mt-3">
-					<div class="col-md-12"
-						style="background: #d2d2d2; margin-top: 20px !important;">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="autorizado.crear.impuesto.nota2" /></label>
-						</div>
-					</div>
-				</div>
-				<div class="row mt-3">
-					<div class="col-md-12">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="autorizado.crear.impuesto.impu" /></label><input id="" name=""
-								class="newalto form-control" aria-required="true" type="text"
-								value="" maxlength="240">
-						</div>
-					</div>
-				</div>
-				<div class="row mt-3">
-					<div class="col-md-12">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="autorizado.crear.impuesto.objetos" /></label>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2">
-						<table class="table">
-							<thead>
-								<tr>
-									<th><label class="control-label labeltabletd" for=""><spring:theme
-												code="autorizado.crear.impuesto.cdu" /></label></th>
-									<th><label class="control-label labeltabletd" for=""><spring:theme
-												code="autorizado.crear.impuesto.radicado" /></label></th>
-									<th><label class="control-label labeltabletd" for="">
-											<spring:theme code="autorizado.crear.impuesto.selec" />
-									</label></th>
+				
+<!-- 				<div class="row mt-3"> -->
+<!-- 					<div class="col-md-12" -->
+<!-- 						style="background: #d2d2d2; margin-top: 20px !important;"> -->
+<!-- 						<div class="form-group"> -->
+<%-- 							<label class="control-label"><spring:theme --%>
+<%-- 									code="autorizado.crear.impuesto.nota2" /></label> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="row mt-3"> -->
+<!-- 					<div class="col-md-12"> -->
+<!-- 						<div class="form-group"> -->
+<%-- 							<label class="control-label"><spring:theme --%>
+<%-- 									code="autorizado.crear.impuesto.impu" /></label><input id="" name="" --%>
+<!-- 								class="newalto form-control" aria-required="true" type="text" -->
+<!-- 								value="" maxlength="240"> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="row mt-3"> -->
+<!-- 					<div class="col-md-12"> -->
+<!-- 						<div class="form-group"> -->
+<%-- 							<label class="control-label"><spring:theme --%>
+<%-- 									code="autorizado.crear.impuesto.objetos" /></label> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="row"> -->
+<!-- 					<div class="col-md-2"> -->
+<!-- 						<table class="table"> -->
+<!-- 							<thead> -->
+<!-- 								<tr> -->
+<%-- 									<th><label class="control-label labeltabletd" for=""><spring:theme --%>
+<%-- 												code="autorizado.crear.impuesto.cdu" /></label></th> --%>
+<%-- 									<th><label class="control-label labeltabletd" for=""><spring:theme --%>
+<%-- 												code="autorizado.crear.impuesto.radicado" /></label></th> --%>
+<!-- 									<th><label class="control-label labeltabletd" for=""> -->
+<%-- 											<spring:theme code="autorizado.crear.impuesto.selec" /> --%>
+<!-- 									</label></th> -->
 
-								</tr>
-							</thead>
-							<tbody>
+<!-- 								</tr> -->
+<!-- 							</thead> -->
+<!-- 							<tbody> -->
 
-								<tr>
-									<td><input class="inputtextnew tablefechas" maxlength="30"
-										size="30" disabled="disabled" type="text"
-										value="<c:out value=""></c:out>" /></td>
-									<td><input class="inputtextnew tablefechas" maxlength="30"
-										size="30" disabled="disabled" type="text"
-										value="<c:out value=""></c:out>" /></td>
-									<td><label tabindex="0" class="control-label  "> <input
-											id="" name="" type="checkbox" value="true"
-											style="visibility: visible !important"></label></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
+<!-- 								<tr> -->
+<!-- 									<td><input class="inputtextnew tablefechas" maxlength="30" -->
+<!-- 										size="30" disabled="disabled" type="text" -->
+<%-- 										value="<c:out value=""></c:out>" /></td> --%>
+<!-- 									<td><input class="inputtextnew tablefechas" maxlength="30" -->
+<!-- 										size="30" disabled="disabled" type="text" -->
+<%-- 										value="<c:out value=""></c:out>" /></td> --%>
+<!-- 									<td><label tabindex="0" class="control-label  "> <input -->
+<!-- 											id="" name="" type="checkbox" value="true" -->
+<!-- 											style="visibility: visible !important"></label></td> -->
+<!-- 								</tr> -->
+<!-- 							</tbody> -->
+<!-- 						</table> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 
 
 

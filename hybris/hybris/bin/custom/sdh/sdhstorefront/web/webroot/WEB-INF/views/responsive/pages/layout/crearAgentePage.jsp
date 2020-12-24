@@ -103,6 +103,19 @@ Number.prototype.pad = function(size) {
   return s;
 }
 
+function fechaExpedicion(){
+	
+	var tipDoc =  document.getElementById("documentType").value;
+	
+	if(tipDoc.includes("CC")){
+	
+	 document.getElementById("fechaExpedicion").style.display = "block";
+	}else{
+		document.getElementById("fechaExpedicion").style.display = "none";
+	}
+	
+}
+
 
 
 </script>

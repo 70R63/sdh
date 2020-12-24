@@ -58,13 +58,13 @@
 					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label"> <spring:theme
-									code="autorizado.asignarse.buscar.tipdoc" text="" /></label> <select id=""
-								class="newalto form-control">
+									code="autorizado.crear.buscar.tipdoc" text="" /></label> <select id="documentType"
+								class="newalto form-control" onchange="fechaExpedicion(this)">
 								<option value="">Seleccionar</option>
-								<option value="">Cedula de Ciudadania</option>
-								<option value="">Cedula de Extranjería</option>
-								<option value="">N.I.T</option>
-								<option value="">Pasaporte</option>
+								<option value="CC">Cedula de Ciudadania</option>
+								<option value="CE">Cedula de Extranjería</option>
+								<option value="NIT">N.I.T</option>
+								<option value="PA">Pasaporte</option>
 							</select>
 						</div>
 					</div>
@@ -78,8 +78,8 @@
 					</div>
 
 					<div class="col-md-2">
-						<div class="form-group ">
-							<label class="control-label required"> <spring:theme
+						<div class="form-group " style="display:none" id="fechaExpedicion">
+							<label class="control-label" > <spring:theme
 									code="autorizado.asignarse.buscar.fecexpe" />
 							</label> <input id="" name="" class="newalto form-control"
 								aria-required="true" type="text" value="" maxlength="240"
@@ -100,6 +100,7 @@
 					</div>
 
 				</div>
+
 			</div>
 		</div>
 	</div>

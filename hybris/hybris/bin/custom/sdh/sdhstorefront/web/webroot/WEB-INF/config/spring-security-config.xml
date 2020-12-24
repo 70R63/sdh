@@ -210,6 +210,8 @@
 			<value>/trmService/**</value>
 			<value>/faqs</value>
 			<value>/faqs/**</value>
+			<value>/sdhCustomer</value>
+			<value>/sdhCustomer/**</value>
 		</set>
 	</property>
 	<property name="pathMatcher" ref="defaultPathMatcher" />

@@ -224,6 +224,8 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 
 
 			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+			model.addAttribute("listaImpuestosCat", gasolinaService.obtenerListaImpuestosActivosCatC(customerData));
+			model.addAttribute("listaImpuestosCatStr", gasolinaService.obtenerListaImpuestosActivosCStr(customerData));
 		}
 		else if (referrer.contains("retenedor") || referrer.contains("agenteRetenedor"))
 		{
@@ -239,14 +241,15 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 				wsResponseReteica = sdhReteICAInfObjetoService.reteIcaObligaciones(reteicaRequest);
 				if (wsResponseReteica != null)
 				{
-					final ReteicaObligacionesResponse reteicaObligacionesResponse = mapper.readValue(wsResponse,
+						final ReteicaObligacionesResponse reteicaObligacionesResponse = mapper.readValue(wsResponseReteica,
 							ReteicaObligacionesResponse.class);
 
 					obligacionesFormuno.setHeaderreteica(reteicaObligacionesResponse.getHeader());
 				}
 				}
 
-
+				model.addAttribute("listaImpuestosCat", gasolinaService.obtenerListaImpuestosActivosCatAR(customerData));
+				model.addAttribute("listaImpuestosCatStr", gasolinaService.obtenerListaImpuestosActivosARStr(customerData));
 			}
 			catch (final Exception e)
 			{
@@ -264,10 +267,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		model.addAttribute("obligacionesFormuno", obligacionesFormuno);
 		model.addAttribute("customerData", customerData);
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
-		model.addAttribute("listaImpuestosCatC", gasolinaService.obtenerListaImpuestosActivosCatC(customerData));
-		model.addAttribute("listaImpuestosCatAR", gasolinaService.obtenerListaImpuestosActivosCatAR(customerData));
-		model.addAttribute("listaImpuestosCStr", gasolinaService.obtenerListaImpuestosActivosCStr(customerData));
-		model.addAttribute("listaImpuestosARStr", gasolinaService.obtenerListaImpuestosActivosARStr(customerData));
+
 
 
 
