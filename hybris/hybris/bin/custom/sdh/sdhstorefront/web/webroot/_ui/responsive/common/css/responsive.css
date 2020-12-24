@@ -1,86 +1,9 @@
-.containertriangulo {
-	position: relative;
-	height: 1000px;
-	background: #ededed;
+@media (max-width: 640px)
+{
+	.containertriangulo {
+    position: relative;
+    height: 3000px;
+    background: #ededed;
+    width: 1240px;
 }
-
-.inner-triangle {
-	border-left: 29px solid transparent;
-	border-right: 1330px solid #c91e26;
-	border-bottom: 300px solid transparent;
-	height: 0;
-	width: 0;
-	position: absolute;
-	right: 0px;
-	z-index: 2;
-}
-
-.outer-triangle {
-	border-left: 22px solid transparent;
-	border-right: 22px solid #e94a37;
-	border-bottom: 22px solid transparent;
-	height: 0;
-	width: 0;
-	position: absolute;
-	right: 0px;
-	z-index: 1;
-}
-
-.titulo {
-	font-size: xxx-large;
-	align-content: center;
-	margin-top: 16%;
-	position: absolute;
-	margin-left: 10%;
-}
-
-.label-yellow {
-	color: #f5b342;
-}
-
-.label-red-small {
-	color: #d14249;
-	font-size: 32px;
-}
-.nuevodiv{
-    position: absolute;
-    z-index: 1;
-}
-.nuevodivdos{
-    position: absolute;
-    z-index: 2;
-    margin-left: 120px;
-    margin-top: -15px;
-}
-.nuevodivtres{
-    position: absolute;
-    z-index: 3;
-    margin-left: 120px;
-    margin-top: 40px;
-}
-
-.nuevodivcuatro{
-position: absolute;
-  z-index: 4;
-    margin-top: 135px;
-}
-
-.nuevodivcinco{
-    position: absolute;
-     z-index: 5;
-    margin-left: 405px;
-    width: 600px;
-    margin-top: 75px;
-    font-size: 35px;
-}
-
-
-.label-red {
-	color: #d14249;
-}
-
-
-.divfooter{
-    margin-left: 150%;
-    margin-top: 70%;
 }
