@@ -1314,6 +1314,10 @@
 								<tbody>
 									<c:forEach items="${obligacionesFormuno.headerreteica}"
 										var="eachReteIca">
+										<c:set var="clavePeriodo" value="${fn:substring(eachReteIca.anioGravable, 2, 5)}A1"/>
+										<c:if test="${not empty eachReteIca.periodo}">
+											<c:set var="clavePeriodo" value="${fn:substring(eachReteIca.anioGravable, 2, 5)}B${fn:substring(eachReteIca.periodo, 1, 2)}"/>
+										</c:if>
 										<c:forEach items="${eachReteIca.details}" var="eachReteIcaDet">
 											<c:if test="${not empty eachReteIcaDet.numReferencia}">
 												<tr>
@@ -1349,12 +1353,12 @@
 													<c:choose>
 														<c:when test="${eachReteIca.facilidad == '00'}">
 															<td><a
-															href="<c:url value="/contribuyentes/rop?obligacion=${eachReteIcaDet.obligacion}&totalPagar=${eachReteIcaDet.obligacion}&tpImp=02&objCont=${eachReteIcaDet.objetoContrato}&clvPer=${eachReteIcaDet.objetoContrato}" />">Generar
+															href="<c:url value="/contribuyentes/rop?obligacion=${eachReteIcaDet.obligacion}&totalPagar=${eachReteIcaDet.obligacion}&tpImp=31&objCont=${eachReteIcaDet.objetoContrato}&clvPer=${clavePeriodo}" />">Generar
 																ROP</a></td>
 														</c:when>
 														<c:when test="${eachReteIca.facilidad == '01'}">
 															<td><a
-															href="<c:url value="/contribuyentes/rop?obligacion=${eachReteIcaDet.obligacion}&totalPagar=${eachReteIca.montoFacilidad}&tpImp=02&objCont=${eachReteIcaDet.objetoContrato}&clvPer=${eachReteIcaDet.objetoContrato}" />">Generar
+															href="<c:url value="/contribuyentes/rop?obligacion=${eachReteIcaDet.obligacion}&totalPagar=${eachReteIca.montoFacilidad}&tpImp=31&objCont=${eachReteIcaDet.objetoContrato}&clvPer=${clavePeriodo}" />">Generar
 																ROP</a></td>
 														</c:when>
 														<c:when test="${eachReteIca.facilidad == '02'}">
@@ -1363,7 +1367,7 @@
 														</c:when>
 														<c:otherwise>
 															<td><a
-															href="<c:url value="/contribuyentes/rop?obligacion=${eachReteIcaDet.obligacion}&totalPagar=${eachReteIcaDet.obligacion}&tpImp=02&objCont=${eachReteIcaDet.objetoContrato}&clvPer=${eachReteIcaDet.objetoContrato}" />">Generar
+															href="<c:url value="/contribuyentes/rop?obligacion=${eachReteIcaDet.obligacion}&totalPagar=${eachReteIcaDet.obligacion}&tpImp=31&objCont=${eachReteIcaDet.objetoContrato}&clvPer=${clavePeriodo}" />">Generar
 																ROP</a></td>
 														</c:otherwise>
 													</c:choose>									
