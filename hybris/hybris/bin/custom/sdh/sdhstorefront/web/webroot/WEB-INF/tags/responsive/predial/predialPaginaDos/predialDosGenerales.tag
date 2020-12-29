@@ -6,7 +6,8 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-
+	<!-- Agregar el valor del acto que venga del form para determinar si se muestran los campos de acto o no -->
+<c:set var="idacto" value=""/>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container_new_page">
 	<div class="row">
@@ -86,6 +87,53 @@
 						maxlength="240"></input>
 				</div>
 			</div>
+			<c:if test="${idacto != ''}">
+			<div class="col-md-1">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="predial.declaracion.vehiculo.idacto" /></label> <input id=""
+						name="" class="newalto form-control"
+						value=""
+						aria-required="false" type="text" maxlength="30"
+						disabled="disabled">
+
+				</div>
+			</div>
+					<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.fechanotiacto" /></label> <input id=""
+						name="" class="newalto form-control"
+						value=""
+						aria-required="false" type="text" maxlength="30"
+						disabled="disabled">
+
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="predial.declaracion.vehiculo.descriacto" /></label> <input id=""
+						name="" class="newalto form-control"
+						value=""
+						aria-required="false" type="text" maxlength="30"
+						disabled="disabled">
+
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="predial.declaracion.vehiculo.numeroexpediente" /></label> <input id=""
+						name="" class="newalto form-control"
+						value=""
+						aria-required="false" type="text" maxlength="30"
+						disabled="disabled">
+
+				</div>
+			</div>
+			</c:if>
+			
 		</div>
 
 	</form:form>
