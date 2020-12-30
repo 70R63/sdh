@@ -4,12 +4,10 @@ ACC.opcionDeclaraciones = {
 	dataResponse_backup:{},
 	
 	_autoload : [ "bindDeclaracionPDF", "bindCertiPagosImprime", "bindDeclaracionImprime","bindDialogDeclaracionGenerica"],
-
 	
 	bindDeclaracionPDF : function() {
 		$(document).on("click", ".consultaDecPDF", function(e) {
 			e.preventDefault();	
-			debugger;
 			ACC.spinner.show();
 			if(ACC.opcionDeclaraciones.validarAntesSubmit()){
 				var nombreCampo;
@@ -67,10 +65,8 @@ ACC.opcionDeclaraciones = {
 	bindDeclaracionImprime : function() {
 		$(document).on("click", ".declaracionImprime", function(e) {
 			e.preventDefault();	
-			debugger;
 			ACC.spinner.show();
 			if(ACC.opcionDeclaraciones.validarAntesSubmit()){
-				debugger;
 				var nombreCampo;
 				var valorCampo;
 				var valNumObjeto;
@@ -126,7 +122,6 @@ ACC.opcionDeclaraciones = {
 	bindCertiPagosImprime : function() {
 		$(document).on("click", ".certiPagosImprime", function(e) {
 			e.preventDefault();	
-			debugger;
 			ACC.spinner.show();
 
 			if(ACC.opcionDeclaraciones.validarAntesSubmit()){
@@ -245,7 +240,6 @@ ACC.opcionDeclaraciones = {
 	
 	
 	obtenerListaDeclaraciones_certiPagos : function() {
-		debugger;
 		ACC.spinner.show();
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.publicidadexterior.bindDataTable_Class_refresh();
@@ -286,7 +280,6 @@ ACC.opcionDeclaraciones = {
 	
 	
 	obtenerListaDeclaraciones : function() {
-		debugger;
 		ACC.spinner.show();
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.publicidadexterior.bindDataTable_Class_refresh();
@@ -342,7 +335,6 @@ ACC.opcionDeclaraciones = {
 	
 	
 	prepararPeriodo : function() {
-		debugger;
 		ACC.spinner.show();
 		if(ACC.opcionDeclaraciones.validarAntesSubmitPeriodo()){
 	        var claveImpuesto = $("#seleccion").val();  	       
@@ -372,7 +364,6 @@ ACC.opcionDeclaraciones = {
 	},
 	
 	obtenerListaDeclaraciones_porAnio : function() {
-		debugger;
 		ACC.spinner.show();
 		if(ACC.opcionDeclaraciones.validarAntesSubmitPeriodo()){
 	        var claveImpuesto = $("#seleccion").val();  	       
@@ -406,7 +397,6 @@ ACC.opcionDeclaraciones = {
 	},
 	
 	obtenerListaDeclaraciones_certiPagos_porAnio : function() {
-		debugger;
 		ACC.spinner.show();
 		if(ACC.opcionDeclaraciones.validarAntesSubmitPeriodo()){
 	        var claveImpuesto = $("#seleccion").val();  	       
@@ -861,9 +851,15 @@ ACC.opcionDeclaraciones = {
 							    		}
 							    	});
 								 }
+							
+							var idActo = 12345;
+							var fechActo = 12/03/2020;
+							var desActo = "Ejemplo de acto";
+							var expActo = "12345ABC";
 
 
 							 var obtenerURLGenDec = ACC.opcionDeclaraciones.verificarGenerarDec(value,url);
+						
 							$('#table-vehicular1').append("<tr>"+
 									'<td>' + value.placa + '</td>'+
 									'<td>' + value.marca + '</td>'+
@@ -874,6 +870,8 @@ ACC.opcionDeclaraciones = {
 									'<td>' + value.numPuertas + '</td>'+
 									'<td>' + value.blindado + '</td>'+
 									'<td>' + value.cilindraje + '</td>'+
+							
+									'<td>'+'<div data-toggle="tooltip" title="ID Acto: '+idActo+' Fecha de Notificación: '+fechActo+' Descripción: '+desActo+' Expediente: '+expActo+'">'+'<a href="#" onclick="ACC.opcionDeclaraciones.detalleActo();">?</a>'+'</div></td>'+
 //									'<td><a href="#" onclick="ACC.opcionDeclaraciones.validarDeclaracion(\''+url+'\',\''+value.placa+'\');">Generar Declaracion</a> </td>'+
 									'<td>' + obtenerURLGenDec + '</td>'+
 									"</tr>");
@@ -897,6 +895,10 @@ ACC.opcionDeclaraciones = {
 					var strPeriodo = "''";
 					var strNumObjeto = "'"+value.numObjeto+"'";
 
+							var idActo = 12345;
+							var fechActo = 12/03/2020;
+							var desActo = "Ejemplo de acto";
+							var expActo = "12345ABC";
 
 
 					$('#table-predial1').append("<tr>"+
@@ -904,6 +906,8 @@ ACC.opcionDeclaraciones = {
 							'<td>' + value.matrInmobiliaria + '</td>'+
 							'<td>' + value.direccionPredio + '</td>'+
 							'<td>' + value.contratoArrenda + '</td>'+
+					//		'<td><div data-toggle="tooltip" title="tooltip">'+'<a href="#" onclick="ACC.opcionDeclaraciones.detalleActo();">?</a>'+'</div></td>'+
+				'<td>'+'<div data-toggle="tooltip" title="ID Acto: '+idActo+' Fecha de Notificación: '+fechActo+' Descripción: '+desActo+' Expediente: '+expActo+'">'+'<a href="#" onclick="ACC.opcionDeclaraciones.detalleActo();">?</a>'+'</div></td>'+
 //							'<td>' + '<button type="button" id="' + nombrePresentarDec +
 //							'" name="'+ nombrePresentarDec+ '" value="presentarDec" class="btn-primary"'+
 //							' onclick="presentarDeclaracion('+strChip+','+strAnioGravable+')">' +
@@ -1790,7 +1794,13 @@ ACC.opcionDeclaraciones = {
 		}
         
         return cantidadAnoGravable;
-	}
+	},
+	
+	detalleActo : function(){
+		var urlDetalleActo = "/contribuyentes/detalleActo";
+				var urlPrefijo = obtenerURLBase();
+		 window.location.href =  urlPrefijo + urlDetalleActo;
+		}
 	
 	
 };

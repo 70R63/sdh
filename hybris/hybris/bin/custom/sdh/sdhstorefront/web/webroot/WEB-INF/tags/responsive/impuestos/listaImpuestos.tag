@@ -356,7 +356,7 @@
 	</c:if>
 
 	<div class="row" id="table-vehicular" style="display: none;" class="table-responsive">
-		<div class="col-md-12 col-md-offset-2">
+		<div class="col-md-12">
 			<table class="table tabPaginacion" id="table-vehicular1">
 				<thead style="cellspacing: 10 !important">
 					<tr>
@@ -379,6 +379,8 @@
 						<th><label class="control-label labeltabletd"><spring:theme
 									code="sobre.vehiculo.table.cilindraje" /></label></th>
 						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.idacto" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
 									code="sobre.vehiculo.table.presndecla" /></label></th>
 						<!-- 						<th style="text-align: center"><label class="control-label" -->
 						<%-- 							for=""> <spring:theme --%>
@@ -392,7 +394,7 @@
 	</div>
 	
 	 <div class="row" id="table-predial" style="display: none;" class="table-responsive">
-        <div class="col-md-6 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-2">
             <table class="table tabPaginacion" id="table-predial1">
                 <thead style="cellspacing: 10 !important">
                     <tr>
@@ -404,6 +406,8 @@
                                     code="predial.inicial.table.dir" /></label></th>
                         <th><label class="control-label labeltabletd "><spring:theme
                                     code="predial.inicial.table.nocotrato" /></label></th>
+                        <th><label class="control-label labeltabletd "><spring:theme
+                                    code="predial.inicial.table.idacto" /></label></th>
                         <th><label class="control-label labeltabletd "><spring:theme
                                     code="predial.inicial.table.presentarDeclaracion" /></label></th>
                      

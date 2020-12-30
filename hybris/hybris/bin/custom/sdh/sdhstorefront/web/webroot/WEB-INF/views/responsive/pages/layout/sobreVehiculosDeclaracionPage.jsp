@@ -11,7 +11,7 @@
 <div class="loader"></div>
 <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 	
-	
+
 <sobreVehiculos:sobreVehiculosDeclaraInicial />
 <sobreVehiculos:sobreVehiculosDeclaraInfo />
 <sobreVehiculos:sobreVehiculosDeclaraLiqui />
