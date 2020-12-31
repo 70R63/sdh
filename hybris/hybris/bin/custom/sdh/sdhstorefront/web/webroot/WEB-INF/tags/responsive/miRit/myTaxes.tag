@@ -5,7 +5,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
+
+
 <spring:htmlEscape defaultHtmlEscape="true" />
+
+
+
+
 <div id="acordeon" class="container">
 	<div class="card cardmirit ">
 		<div class="card-header" id="head6">
@@ -97,30 +103,208 @@
 										<spring:theme code="mirit.ica"/>
 							</label>
 						</div>
-						<div class="row">
-							<div class="col-md-3">
-								<div class="form-group ">
-									<label class="control-label required" for="address.surname">
-										<spring:theme code="mirit.gas.tax.numDoc" />
-									</label> 
-									<input id="address.surname" disabled="disabled" name="lastName" class="newalto form-control form-control" aria-required="true" type="text" value="<spring:theme  code='register.id.types.${miRitForm.tipoDoc}' />" maxlength="240">
-									<div class="help-block">
-										<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-2">
-								<div class="form-group ">
-									<label class="control-label required" for="address.surname">
-										<spring:theme code="mirit.gas.tax.numDoc" />
-									</label> 
-									<input id="address.surname" disabled="disabled" name="lastName" class=" newalto form-control form-control" aria-required="true" type="text" value="${miRitForm.numDoc }" maxlength="240">
-									<div class="help-block">
-										<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-									</div>
-								</div>
-							</div>
-						</div>
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col-md-3"> -->
+<!-- 								<div class="form-group "> -->
+<!-- 									<label class="control-label required" for="address.surname"> -->
+<%-- 										<spring:theme code="mirit.gas.tax.numDoc" /> --%>
+<!-- 									</label>  -->
+<%-- 									<input id="address.surname" disabled="disabled" name="lastName" class="newalto form-control form-control" aria-required="true" type="text" value="<spring:theme  code='register.id.types.${miRitForm.tipoDoc}' />" maxlength="240"> --%>
+<!-- 									<div class="help-block"> -->
+<!-- 										<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-md-2"> -->
+<!-- 								<div class="form-group "> -->
+<!-- 									<label class="control-label required" for="address.surname"> -->
+<%-- 										<spring:theme code="mirit.gas.tax.numDoc" /> --%>
+<!-- 									</label>  -->
+<%-- 									<input id="address.surname" disabled="disabled" name="lastName" class=" newalto form-control form-control" aria-required="true" type="text" value="${miRitForm.numDoc }" maxlength="240"> --%>
+<!-- 									<div class="help-block"> -->
+<!-- 										<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+						
+						
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<div class="table-responsive">
+					<table class="col-md-10 table" id="tabPaginacion5">
+						<thead>
+							<tr>
+								<td><label class="control-label labeltabletd tablefechas"><spring:theme
+											code="ica.inicial.activecono.actprin" /></label></td>
+								<td><label class="control-label labeltabletd inputcodciuu"><spring:theme
+											code="ica.inicial.activecono.ciiu" /></label></td>
+								<td style="width:150%"><label class="control-label labeltabletd"><spring:theme
+											code="ica.inicial.activecono.denomi" /></label></td>
+								<td><label class="control-label labeltabletd tablefechas"><spring:theme
+											code="ica.inicial.activecono.feciniact" /></label></td>
+								<td><label class="control-label labeltabletd tablefechas"><spring:theme
+											code="ica.inicial.activecono.fecceseact" /></label></td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${miRitForm.activEconomicas}" var="actEconomicas" varStatus="loopVar">
+								<c:set var="checkAEP" value=""/>
+								<c:if test="${not empty actEconomicas.activPrincipal}">
+									<c:set var="checkAEP" value="checked"/>
+								</c:if>
+								<c:set var="idInputCIIU" value="myInput${loopVar.index}"/>
+								<c:set var="idListaOpcionesCIIU" value="myList${loopVar.index}"/>
+								<c:set var="inputCIIU_clickB" value="verLista_click(event,'${loopVar.index}','block')"/>
+								<c:set var="inputCIIU_clickN" value="verLista_click(event,'${loopVar.index}','none')"/>
+								<tr>
+									<td><input type="checkbox" name="actPrincipal"
+										class="form-check-input mr-2 actividad actPrincipal"
+										style="visibility: visible !important; min-height: 4px !important; width: 20px;"
+										size="10" ${checkAEP} ${roIngNetosGrava} id="${idAEP_principal}">
+									</td>
+									<td>
+										<div>
+											<input class="inputtextnew inputcodciuu" id="${idInputCIIU}" value="${actEconomicas.ciiu}" 
+											size="50" min="40" type="text" width="200" placeholder="Código CIIU" 
+											onclick="${inputCIIU_clickB}" onfocus="${inputCIIU_clickB}"
+											onblur="${inputCIIU_clickN}" name="codciiu">
+											<br>
+											<ul class="list-group filtroCIIU" id="${idListaOpcionesCIIU}" style="display:none"></ul>
+										</div>
+									</td>
+									<td>
+										<input class="inputtextnew deno" value="${actEconomicas.denominacion}" size="50" min="40" type="text" width="200" disabled="disabled" name="deno">
+									</td>
+									<td>
+										<input class="inputtextnew fechaI" value="${actEconomicas.fechaIniAct}" size="50" min="40" type="text" width="200" name="fechaIniAct">
+									</td>
+									<td>
+										<input class="inputtextnew fechaC" value="${actEconomicas.fechaCeseAct}" size="50" min="40" type="text" width="200" name="fechaCeseAct">
+									</td>
+									<td>
+										<img onclick="agregarActEco()" src="${themeResourcePath}/images/adddelineacion.png" style="width: 25px"></img> 
+										<img onclick="borrarActEco()" src="${themeResourcePath}/images/deledelineacion.png" style="width: 25px"></img>
+									</td>
+								</tr>
+							</c:forEach>
+
+
+
+
+
+						
+<%-- 							<c:forEach varStatus="loop" --%>
+<%-- 								items="${icaInfObjetoFormResp.icaInfObjetoResponse.activEconomicas}" --%>
+<%-- 								var="eachActivEconomicas"> --%>
+<!-- 								<tr> -->
+<%-- 									<c:if test='${eachActivEconomicas.activPrincipal == "X"}'> --%>
+<%-- 										<td><label class="control-label tablefechas "><spring:theme --%>
+<%-- 													code="ica.inicial.activecono.principal" /></label></td> --%>
+<%-- 									</c:if> --%>
+<%-- 									<c:if test='${eachActivEconomicas.activPrincipal != "X"}'> --%>
+<!-- 										<td><label class="control-label "></label></td> -->
+<%-- 									</c:if> --%>
+<!-- 									<td><input class="inputtextnew inputcodciuu" -->
+<%-- 										disabled="disabled" value="${eachActivEconomicas.ciiu}" --%>
+<!-- 										type="text" /></td> -->
+<!-- 									<td><input class="inputtextnew" -->
+<!-- 										disabled="disabled" -->
+<%-- 										value="${eachActivEconomicas.denominacion}" type="text"  style="width: 100%" /></td> --%>
+<!-- 									<td><input class="inputtextnew tablefechas" -->
+<%-- 										disabled="disabled" value="${eachActivEconomicas.fechaIniAct}" --%>
+<!-- 										type="text" /></td> -->
+<!-- 									<td><input class="inputtextnew tablefechas" -->
+<!-- 										disabled="disabled" -->
+<%-- 										value="${eachActivEconomicas.fechaCeseAct}" type="text" /></td> --%>
+<!-- 								</tr> -->
+<%-- 							</c:forEach> --%>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="row">
+				<div class="col-12 col-md-2">
+					<div>
+						<button
+							class="btn btn-primary btn-lg btn-block addressHelperField"
+							type="button"
+							style="margin-bottom: 10px;" id="btnActualizarInfoActEco">
+							<spring:theme code="mirit.taxesData.actualizarInfo" />
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						
+						
+						
 						</c:if>
 						<br>
 						<br>
@@ -503,3 +687,135 @@
 	</div>
 </div>
 
+
+
+<script>
+
+
+
+
+
+function verLista_click(event,idCampo,flagVisualizacion){
+    
+    debugger;
+    verLista(idCampo,flagVisualizacion);
+    var value = event.target.value.toLowerCase();
+    
+    $(".filtroCIIU li").filter(function() {
+		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+    
+    
+}
+
+
+function verLista(idCampo,flagVisualizacion){
+	debugger;
+	var idLista = "myList"+idCampo;
+    var lista = document.getElementById(idLista);
+    if(lista != null){
+    	if(flagVisualizacion === "block"){
+    		$("#"+idLista).empty();
+        	llenarLista(idLista);    		
+    	}
+    	
+    	lista.style.display = flagVisualizacion;
+    }
+}
+
+
+function filtrarLista(idCampo,flagVisualizacion){
+	
+	debugger;
+	var idLista = "myList"+idCampo;
+    var value = $(this).val().toLowerCase();
+    $("#" + idLista + " li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+}
+
+function llenarLista(idLista){
+	
+	for(var i = 0;i<codigos_ciiu.length;i++){
+		$("#"+idLista).append('<li class="itemUL">'+codigos_ciiu[i].id_ciiu+" - "+ codigos_ciiu[i].item_ciiu +"</li>");
+	}
+
+	
+}
+
+
+function validarValorLista(){
+	debugger;
+// 	var value1 = e.target.value;
+//     var value = $(this).val().toLowerCase();
+//     if(value.length <5){
+//     	$(this).value = "";
+//     }
+    
+//     verLista('none');
+}
+
+
+$(document).ready(function(){
+  $(".inputcodciuu").on("keyup", function() {
+// 	  alert("keyup");
+	debugger;
+    var value = $(this).val().toLowerCase();
+    $(".filtroCIIU li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+    
+//     verLista('block');
+
+  });
+    
+});
+
+function agregarActEco() {
+
+	debugger;
+	var tam = $("#tabPaginacion5 tbody").length;
+	$($("#tabPaginacion5 tbody")).parent().append($($("#tabPaginacion5 tbody tr")[0]).clone());
+	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".actPrincipal").prop("checked", false);
+	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".inputcodciuu").val("");
+	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".deno").val("");
+	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".fechaI").val("");
+	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".fechaC").val("");
+
+}
+
+function borrarActEco(selectObject) {
+	debugger;
+	var elem = document.getElementsByTagName("img");
+	var ElementosClick = new Array();
+	var HaHechoClick;
+
+	HaHechoClick = event.srcElement;
+	ElementosClick.push(HaHechoClick);
+	var cual2 = ElementosClick[0];
+
+	for (var i = 0; i < elem.length; i++) {
+		var cual = elem[i];
+
+		if (cual == cual2) {
+			var eliminar = (cual.parentNode).parentNode;
+			var h = $("#tabPaginacion5 tbody tr").length;
+			if ($("#tabPaginacion5 tbody tr").length <= 100
+					&& $("#tabPaginacion5 tbody tr").length > 1) {
+				for (var j = 0; j < $("#tabPaginacion5 tbody tr").length; j++) {
+					eliminar.remove();
+				}
+			} else if ($("#tabPaginacion5 tbody tr").length <= 1) {
+				alert("No puede eliminar todos los registros");
+			}
+			break;
+		} else {
+		}
+	}
+}
+
+
+
+
+
+</script>

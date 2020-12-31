@@ -6,6 +6,7 @@ package de.hybris.sdh.core.services;
 import de.hybris.sdh.core.pojos.requests.UpdateAddressRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAutorizacionesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateEmailRitRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateICAActEcoRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateNameRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRedesSocialesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
@@ -30,4 +31,6 @@ public interface SDHUpdateRitService
 	String updateAddressRit(UpdateAddressRitRequest request);
 
 	String updateNameRit(UpdateNameRitRequest request);
+
+	String updateICAActEcoRit(UpdateICAActEcoRitRequest request);
 }

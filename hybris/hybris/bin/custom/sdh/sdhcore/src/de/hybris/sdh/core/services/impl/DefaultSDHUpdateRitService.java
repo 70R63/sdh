@@ -466,7 +466,7 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.hybris.sdh.core.services.SDHUpdateRitService#updateNameRit(de.hybris.sdh.core.pojos.requests.
 	 * UpdateNameRitRequest)
 	 */
@@ -529,6 +529,79 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 		catch (final Exception e)
 		{
 			LOG.error("There was an error updating name contribuyente: " + e.getMessage());
+		}
+
+
+
+		return null;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.hybris.sdh.core.services.SDHUpdateRitService#updateICAActEcoRit(de.hybris.sdh.core.pojos.requests.
+	 * UpdateICAActEcoRitRequest)
+	 */
+	@Override
+	public String updateICAActEcoRit(final de.hybris.sdh.core.pojos.requests.UpdateICAActEcoRitRequest request)
+	{
+		final String urlString = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.url");
+		final String user = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.user");
+		final String password = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.password");
+
+
+		try
+		{
+			if (StringUtils.isAnyBlank(urlString, user, password))
+			{
+				throw new RuntimeException("Error while  updating name contribuyente: Empty credentials");
+			}
+
+			final URL url = new URL(urlString);
+
+			final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+
+			final String authString = user + ":" + password;
+			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
+			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setUseCaches(false);
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			LOG.info("connection to: " + conn.toString());
+
+			final String requestJson = request.toString();
+			LOG.info("request: " + requestJson);
+
+			final OutputStream os = conn.getOutputStream();
+			os.write(requestJson.getBytes());
+			os.flush();
+			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
+			{
+				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+
+			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+			final StringBuilder builder = new StringBuilder();
+
+			String inputLine;
+			while ((inputLine = br.readLine()) != null)
+			{
+				builder.append(inputLine);
+			}
+
+
+			final String result = builder.toString();
+			LOG.info("response: " + result);
+
+			return result;
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("There was an error updating Actividades Economicas contribuyente: " + e.getMessage());
 		}
 
 

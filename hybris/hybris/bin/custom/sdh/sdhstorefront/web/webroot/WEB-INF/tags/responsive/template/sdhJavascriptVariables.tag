@@ -171,6 +171,8 @@
 			ACC.consultaTerceroAutorizado= "<c:url value='/terceros/consultaTA' />";
 
 			ACC.trmPDFString= "<c:url value='/trmService/getPdfString' />";
+			
+			ACC.actualizaICAActEcoURL= "<c:url value='/contribuyentes/mirit/updateICAActEco' />";
 
 
 		  	ACC.currentURL = "${currentURL}";

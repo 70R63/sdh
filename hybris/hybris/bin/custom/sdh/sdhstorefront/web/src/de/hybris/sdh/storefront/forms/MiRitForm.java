@@ -6,6 +6,7 @@ package de.hybris.sdh.storefront.forms;
 import de.hybris.sdh.core.pojos.responses.ContribAgente;
 import de.hybris.sdh.core.pojos.responses.ContribDireccion;
 import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
+import de.hybris.sdh.core.pojos.responses.DetalleActivEconomicas;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
@@ -78,6 +79,7 @@ public class MiRitForm
 	private List<ImpuestoDelineacionUrbana> delineacion;
 	private List<ImpuestoVehiculos> vehicular;
 	private List<PredialResponse> predial;
+	private List<DetalleActivEconomicas> activEconomicas;
 
 
 	//*->INI dev-eduardo ajuste de menu impuestos
@@ -156,6 +158,23 @@ public class MiRitForm
 	public void setbPredial(final String bPredial)
 	{
 		this.bPredial = bPredial;
+	}
+
+	/**
+	 * @return the activEconomicas
+	 */
+	public List<DetalleActivEconomicas> getActivEconomicas()
+	{
+		return activEconomicas;
+	}
+
+	/**
+	 * @param activEconomicas
+	 *           the activEconomicas to set
+	 */
+	public void setActivEconomicas(final List<DetalleActivEconomicas> activEconomicas)
+	{
+		this.activEconomicas = activEconomicas;
 	}
 
 	/**

@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="miRit" tagdir="/WEB-INF/tags/responsive/miRit"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
+<template:sdhJavascriptVariables5/>
 
 <div class="loader"></div>
 

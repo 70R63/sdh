@@ -1,6 +1,6 @@
 ACC.mirit = {
 
-		 _autoload: ["bindUpdateNombreButton","bindUpdateNotificationAddressButton","bindUpdateContactAddressButton","bindUpdateTelefonoButton","bindUpdateRedesSocialesButton","bindUpdateAutorizacionesButton","bindUpdatePasswordButton", "bindUpdateEmailButton", "bindCertifNombButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton", "bindTermnsandConditions","bindTermnsandConditionsRegister" ],
+		 _autoload: ["bindUpdateNombreButton","bindUpdateNotificationAddressButton","bindUpdateContactAddressButton","bindUpdateTelefonoButton","bindUpdateRedesSocialesButton","bindUpdateAutorizacionesButton","bindUpdatePasswordButton", "bindUpdateEmailButton", "bindCertifNombButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton", "bindTermnsandConditions","bindTermnsandConditionsRegister", "bindActEco" ],
 		 
 
 	
@@ -1239,6 +1239,111 @@ parent.attributes[4]=true;
     	    } 
     	});
     	
+    },
+    
+
+    bindActEco: function(){
+    	
+		$(document).on("click", "#btnActualizarInfoActEco", function (e) {
+    		e.preventDefault();
+    		if(ACC.mirit.validarAntesActualizar() == true){
+        		ACC.spinner.show();
+        		var updateICAActEcoRitForm = {};
+        		
+        		updateICAActEcoRitForm.activEconomicas = ACC.mirit.obtenerInfo_ActEco();
+        		debugger;
+        		
+       				$.ajax({
+					url : ACC.actualizaICAActEcoURL,
+					data : JSON.stringify(updateICAActEcoRitForm),
+					type : "POST",
+					dataType: "json",
+					contentType: "application/json",
+					success : function(dataResponse) {
+						ACC.spinner.close();
+						$( "#dialog" ).dialog( "open" );
+//        	        	if(dataResponse.ritUpdated==true)
+//        	        	{
+//        	        		$("#ritDialogContent").html("");
+//	    	            	$("#ritDialogContent").html("Tu registro de información tributaria ha sido actualizado.");
+//        	        	}else
+//        	        	{
+        	        		$("#ritDialogContent").html("");
+//	    	            	$("#ritDialogContent").html("Tu registro de información tributaria no ha sido actualizado.");
+	    	            	$.each(dataResponse.errores,function (index, value)
+	    	            	{
+	    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+value.txtmsj);
+	    	            	});
+	    	            	
+//        	        	}
+       				},
+					error : function() {
+						ACC.spinner.close();
+					}
+				});
+        		
+    		}
+    		
+		});
+    	
+    },
+    
+    
+    obtenerInfo_ActEco: function(){
+    	var registrosTabla = new Array();
+    	$("#tabPaginacion5 tbody tr").each(function(index){
+        	var registro_leido = {};
+    		registro_leido.activPrincipal = "";
+    		registro_leido.ciiu = "";
+    		registro_leido.denominacion = "";
+    		registro_leido.fechaIniAct = "";
+    		registro_leido.fechaCeseAct = "";
+    		$(this).find('input').each (function() {
+    			switch((this).name){
+    			case "actPrincipal":
+    				if((this).checked == true){
+    					registro_leido.activPrincipal = "X";
+    				}
+    				break;
+    			case "codciiu":
+    				registro_leido.ciiu = (this).value;
+    				break;
+    			case "deno":
+    				registro_leido.denominacion = (this).value;
+    				break;
+    			case "fechaIniAct":
+    				registro_leido.fechaIniAct = (this).value;
+    				break;
+    			case "fechaCeseAct":
+    				registro_leido.fechaCeseAct = (this).value;
+    				break;
+    			}
+    		});
+    		
+    		registrosTabla.push(registro_leido);
+    	});
+
+    	return registrosTabla;
+    },
+    
+    
+    validarAntesActualizar: function(){
+    	
+    	var flagValidacion = true;
+    	var conteoActPrincipal = 0;
+    	
+    	$(".actPrincipal").each(function(index){
+    		if((this).checked == true){
+    			conteoActPrincipal++;
+    		}
+    	});
+    	
+    	if(conteoActPrincipal>1){
+    		alert("Solamente se puede marcar una actividad económica como principal");
+    		flagValidacion = false;
+    	}
+
+    	return flagValidacion;
     }
 
     

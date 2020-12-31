@@ -7,6 +7,7 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAddressRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAutorizacionesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateEmailRitRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateICAActEcoRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateNameRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRedesSocialesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
@@ -325,6 +326,49 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
 						SDHValidaMailRolResponse.class);
 				sdhCustomerAccountService.updateNameRit(sdhConsultaContribuyenteBPResponse);
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("there was an error while parsing update rit reponse: " + e.getMessage());
+			}
+		}
+
+		return response;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.facades.SDHUpdateRitFacade#updateICAActEcoRit(de.hybris.sdh.core.pojos.requests.
+	 * UpdateICAActEcoRitRequest)
+	 */
+	@Override
+	public UpdateRitResponse updateICAActEcoRit(final UpdateICAActEcoRitRequest request)
+	{
+
+		UpdateRitResponse response = new UpdateRitResponse();
+		response.setRitUpdated(false);
+		final String strinResponse = sdhUpdateRitService.updateICAActEcoRit(request);
+
+		if (StringUtils.isNotBlank(strinResponse))
+		{
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				response = mapper.readValue(strinResponse, UpdateRitResponse.class);
+				response.setRitUpdated(true);
+
+				//				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+				//
+				//				consultaContribuyenteBPRequest.setNumBP(request.getNumBP());
+				//
+				//				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+				//						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+				//						SDHValidaMailRolResponse.class);
+				//				sdhCustomerAccountService.updateNameRit(sdhConsultaContribuyenteBPResponse);
 
 			}
 			catch (final Exception e)

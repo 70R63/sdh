@@ -30,9 +30,11 @@ import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CertifNombRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAddressRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAutorizacionesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateEmailRitRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateICAActEcoRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateNameRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRedesSocialesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
@@ -41,6 +43,7 @@ import de.hybris.sdh.core.pojos.responses.CertifNombResponse;
 import de.hybris.sdh.core.pojos.responses.ContribDireccion;
 import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ContribTelefono;
+import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.pojos.responses.UpdateRitErrorResponse;
@@ -48,6 +51,8 @@ import de.hybris.sdh.core.pojos.responses.UpdateRitResponse;
 import de.hybris.sdh.core.pojos.responses.ValidEmailResponse;
 import de.hybris.sdh.core.pojos.responses.ValidPasswordResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHICAInfObjetoService;
+import de.hybris.sdh.facades.SDHCalculaICA2Facade;
 import de.hybris.sdh.facades.SDHCertifNombFacade;
 import de.hybris.sdh.facades.SDHUpdateRitFacade;
 import de.hybris.sdh.storefront.forms.CertifNombForm;
@@ -55,6 +60,7 @@ import de.hybris.sdh.storefront.forms.MiRitForm;
 import de.hybris.sdh.storefront.forms.UpdateAddressRitForm;
 import de.hybris.sdh.storefront.forms.UpdateAutorizacionesRitForm;
 import de.hybris.sdh.storefront.forms.UpdateEmailRitForm;
+import de.hybris.sdh.storefront.forms.UpdateICAActEcoRitForm;
 import de.hybris.sdh.storefront.forms.UpdatePasswordRitForm;
 import de.hybris.sdh.storefront.forms.UpdateRedesSocialesRitForm;
 import de.hybris.sdh.storefront.forms.UpdateRitForm;
@@ -83,6 +89,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -138,6 +145,12 @@ public class MiRitPageController extends AbstractPageController
 
 	@Resource(name = "baseStoreService")
 	private BaseStoreService baseStoreService;
+
+	@Resource(name = "sdhCalculaICA2Facade")
+	SDHCalculaICA2Facade sdhCalculaICA2Facade;
+
+	@Resource(name = "sdhICAInfObjetoService")
+	SDHICAInfObjetoService sdhICAInfObjetoService;
 
 	@ModelAttribute("socialNetworks")
 	public List<String> getSocialNetworks()
@@ -415,6 +428,8 @@ public class MiRitPageController extends AbstractPageController
 						.filter(d -> StringUtils.isNotBlank(d.getCHIP())).collect(Collectors.toList()));
 			}
 
+			mapearActEconomicas(miRitForm, customerModel.getNumBP(), sdhConsultaContribuyenteBPResponse.getIca().getNumObjeto());
+
 			model.addAttribute("miRitForm", miRitForm);
 
 		}
@@ -451,6 +466,57 @@ public class MiRitPageController extends AbstractPageController
 
 		return getViewForPage(model);
 	}
+
+	/**
+	 * @param miRitForm
+	 * @param numBP
+	 * @param numObjeto
+	 */
+	private void mapearActEconomicas(final MiRitForm miRitForm, final String numBP, final String numObjeto)
+	{
+
+		final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
+		ICAInfObjetoResponse icaInfObjetoResponse = null;
+		icaInfObjetoRequest.setNumBP(numBP);
+		icaInfObjetoRequest.setNumObjeto(numObjeto);
+		final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+		}
+		catch (final Exception e)
+		{
+
+		}
+
+		miRitForm.setActivEconomicas(icaInfObjetoResponse.getActivEconomicas());
+
+	}
+
+	@RequestMapping(value = "/updateICAActEco", method = RequestMethod.POST)
+	@ResponseBody
+	public UpdateRitResponse updateICAActEco(@RequestBody
+	final UpdateICAActEcoRitForm updateICAActEcoRitForm)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final UpdateICAActEcoRitRequest request = new UpdateICAActEcoRitRequest();
+		request.setNumBP(customerModel.getNumBP());
+		request.setActivEconomicas(updateICAActEcoRitForm.getActivEconomicas());
+
+		UpdateRitResponse udpateRitResponse = new UpdateRitResponse();
+
+		udpateRitResponse = sdhUpdateRitFacade.updateICAActEcoRit(request);
+
+
+
+		return udpateRitResponse;
+	}
+
 
 	@RequestMapping(value = "/certifNomb", method = RequestMethod.POST)
 	@ResponseBody

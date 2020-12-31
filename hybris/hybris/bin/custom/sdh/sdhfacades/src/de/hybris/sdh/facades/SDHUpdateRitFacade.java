@@ -6,6 +6,7 @@ package de.hybris.sdh.facades;
 import de.hybris.sdh.core.pojos.requests.UpdateAddressRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAutorizacionesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateEmailRitRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateICAActEcoRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateNameRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRedesSocialesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
@@ -31,4 +32,6 @@ public interface SDHUpdateRitFacade
 	UpdateRitResponse updateAddressRit(UpdateAddressRitRequest request);
 
 	UpdateRitResponse updateNameRit(UpdateNameRitRequest request);
+
+	UpdateRitResponse updateICAActEcoRit(UpdateICAActEcoRitRequest request);
 }
