@@ -24,7 +24,7 @@
 
 <script type="text/javascript">
 	window.onload = function() {
-
+		$('[data-toggle="tooltip"]').tooltip();
 		$(".loader").fadeOut("slow");
 		var tipoImpuesto = document.getElementById("impuesto").value;
 		var anio = document.getElementById("anoGravable").value;
@@ -34,7 +34,7 @@
 			var nota = document.getElementById("notas_deli");
 			nota.style.display = 'block'
 		}
-		debugger;
+	
 		if (anio != "") {
 			if (tipoImpuesto == '2' || tipoImpuesto == '1') { //vehicular predial
 				nota2.style.display = 'block';

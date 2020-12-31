@@ -6,6 +6,8 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+	<!-- Agregar el valor del acto que venga del form para determinar si se muestran los campos de acto o no -->
+<c:set var="idacto" value=""/>
 <input type="hidden" value="${predialForm.mostrarAporteVoluntario}"
 	id="mostrarAporteVoluntario" />
 
@@ -243,12 +245,40 @@
 				</div>
 			</div>
 		</div>
+		<c:if test="${idacto != ''}">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-check">
+					<label class="form-check-label"
+						style="text-transform: none !important; font-weight: normal !important"><spring:theme
+							code="predial.declaracion.vehiculo.liq.acogerseacto" /> </label> <label
+						class="form-check-label"
+						style="text-transform: capitalize !important; font-weight: normal !important">
+						<input type="radio" name="acogerse" id="acogerseSi"
+						class="form-check-input mr-2"
+						style="visibility: visible !important; min-height: 4px !important;"
+						value="si" onclick=""> Si
+					</label> <label class="form-check-label"
+						style="text-transform: capitalize !important; font-weight: normal !important">
+						<input type="radio" name="acogerse" id="acogerseNo"
+						class="form-check-input mr-2"
+						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
+						value="no" onclick="punto()"> No
+					</label>
+				</div>
+			</div>
+			</div>
+			</c:if>
 	</div>
 </form:form>
 
 <script type="text/javascript">
 	function calculoPred() {
 		ACC.predial.calculoPredial();
+	}
+	
+	function punto(){
+		alert("Favor de acudir a punto de contacto para que un funcionario le apoye a generar su declaración");
 	}
 </script>
 

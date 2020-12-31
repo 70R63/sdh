@@ -9,8 +9,11 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container">
+<!-- Agregar el valor del acto que venga del form para determinar si se muestran los campos de acto o no -->
+<c:set var="idacto" value="123"/>
 
+
+<div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
@@ -45,7 +48,7 @@
 
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.placa" /></label> <input
@@ -70,6 +73,52 @@
 
 				</div>
 			</div>
+			<c:if test="${idacto != ''}">
+			<div class="col-md-1">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.idacto" /></label> <input id=""
+						name="" class="newalto form-control"
+						value=""
+						aria-required="false" type="text" maxlength="30"
+						disabled="disabled">
+
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.fechanotiacto" /></label> <input id=""
+						name="" class="newalto form-control"
+						value=""
+						aria-required="false" type="text" maxlength="30"
+						disabled="disabled">
+
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.descriacto" /></label> <input id=""
+						name="" class="newalto form-control"
+						value=""
+						aria-required="false" type="text" maxlength="30"
+						disabled="disabled">
+
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.numeroexpediente" /></label> <input id=""
+						name="" class="newalto form-control"
+						value=""
+						aria-required="false" type="text" maxlength="30"
+						disabled="disabled">
+
+				</div>
+			</div>
+			</c:if>
 		</div>
 	</form:form>
 </div>
