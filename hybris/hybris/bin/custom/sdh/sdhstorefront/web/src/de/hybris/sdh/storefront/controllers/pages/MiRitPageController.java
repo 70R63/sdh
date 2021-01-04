@@ -428,7 +428,11 @@ public class MiRitPageController extends AbstractPageController
 						.filter(d -> StringUtils.isNotBlank(d.getCHIP())).collect(Collectors.toList()));
 			}
 
-			mapearActEconomicas(miRitForm, customerModel.getNumBP(), sdhConsultaContribuyenteBPResponse.getIca().getNumObjeto());
+			if (sdhConsultaContribuyenteBPResponse != null && sdhConsultaContribuyenteBPResponse.getIca() != null
+					&& sdhConsultaContribuyenteBPResponse.getIca().getNumObjeto() != null)
+			{
+				mapearActEconomicas(miRitForm, customerModel.getNumBP(), sdhConsultaContribuyenteBPResponse.getIca().getNumObjeto());
+			}
 
 			model.addAttribute("miRitForm", miRitForm);
 
@@ -477,13 +481,14 @@ public class MiRitPageController extends AbstractPageController
 
 		final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
 		ICAInfObjetoResponse icaInfObjetoResponse = null;
-		icaInfObjetoRequest.setNumBP(numBP);
-		icaInfObjetoRequest.setNumObjeto(numObjeto);
-		final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
-
+		String response = null;
 
 		try
 		{
+			icaInfObjetoRequest.setNumBP(numBP);
+			icaInfObjetoRequest.setNumObjeto(numObjeto);
+			response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
