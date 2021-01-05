@@ -50,25 +50,59 @@ ACC.predial = {
 	},	
 	
 	bindprophorizontal : function() {
-		$(document).on("change", ".prophorizontal", function(e) {
-			e.preventDefault();
+		$(document).on("change", ".prophorizontal", function() {
+	
 			var val = this.value;
+			debugger;
+			var URLactual = window.location.href;
+			var destinooption = "no";
 
 			if (val == '1') {
 				$('#areaconstruccion').prop('disabled', false);
-				;
 				$('#areaterreno').prop('disabled', true);
-				;
+					if(URLactual.includes("basespresuntivas")){
+						var destino = document.getElementById('DestinoHacendario');
+						var tam = destino.length;
+					for(i=0; i<tam; i++){
+						var valoption = destino.options[i].value;
+					if(valoption == 67){destino.options[i].remove();}
+					if(valoption == 65){destinooption = "ok";}
+					}
+					if(destinooption == "no"){
+						 const option = document.createElement('option');
+					 const valor = "65";
+  						 const text = "DEPOSITO Y PARQUEADERO";
+ 						 option.value = valor;
+  						 option.text = text;
+  						destino.appendChild(option);
+						}
+					
+					}
 			} else if (val == '2') {
 				$('#areaconstruccion').prop('disabled', false);
-				;
 				$('#areaterreno').prop('disabled', false);
-				;
+				
+				if(URLactual.includes("basespresuntivas")){
+					var destino = document.getElementById('DestinoHacendario');
+					var tam = destino.length;
+					for(i=0; i<tam; i++){
+						var valoption = destino.options[i].value;
+					if(valoption == 65){destino.options[i].remove();}
+					if(valoption == 67){destinooption = "ok";}
+					}
+					if(destinooption == "no"){
+						 const option = document.createElement('option');
+					 const valor = "67";
+  						 const text = "URBANIZABLE NO URBANIZADO Y URBANIZADO NO EDIFICADO";
+ 						 option.value = valor;
+  						 option.text = text;
+  						destino.appendChild(option);
+						}
+					
+				}
 			} else {
 				$('#areaconstruccion').prop('disabled', true);
-				;
 				$('#areaterreno').prop('disabled', true);
-				;
 			}
 
 		});
@@ -500,7 +534,6 @@ ACC.predial = {
 	},
 
 	calculoPredial : function() {
-		debugger;
 		ACC.spinner.show();
 		var dataForm = {};
 		dataForm.numBP = $("#NumBP").val();
@@ -657,7 +690,6 @@ ACC.predial = {
 	},
 	
 	calculoPredialSinAporte : function(){
-		debugger;
 		ACC.spinner.show();
 		var dataForm = {};
 		dataForm.numBP = $("#NumBP").val();
@@ -755,7 +787,6 @@ ACC.predial = {
 	 
 	 
 	 ejecutarPreCalculoPB : function (numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario){
-		debugger;
 		ACC.spinner.show();
 		ACC.predial.visualizacionBasesDetalle(false);
 		if(ACC.predial.validarAntesSubmit_precalculoBP()){
