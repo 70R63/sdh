@@ -282,6 +282,7 @@ public class PSEPaymentController extends AbstractPageController
 	{
 		String flagSuccessView = null;
 		String flagReintetarPago = null;
+		SdhTaxTypesEnum tax = null;
 
 		if (error == "sinPdf")
 		{
@@ -304,8 +305,8 @@ public class PSEPaymentController extends AbstractPageController
 		if (psePaymentForm != null)
 		{
 			model.addAttribute("psePaymentForm", psePaymentForm);
-			final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade.getTaxByCode(psePaymentForm.getTipoDeImpuesto());
-			model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
+			tax = sdhOnlinePaymentProviderMatcherFacade.getTaxByCode(psePaymentForm.getTipoDeImpuesto());
+
 
 			if (psePaymentForm.getReturnCode().equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS)
 					|| psePaymentForm.getReturnCode()
@@ -353,13 +354,14 @@ public class PSEPaymentController extends AbstractPageController
 					.equals(GetTransactionInformationResponseTransactionStateCodeList.NOT_AUTHORIZED.getValue())) //Transaccion no autorizada
 			{
 				GlobalMessages.addInfoMessage(model, "pse.message.info.success.NOT_AUTHORIZED");
-				flagSuccessView = "X";
+				flagSuccessView = "";
 			}
 			else if (psePaymentForm.getTransactionState()
 					.equals(GetTransactionInformationResponseTransactionStateCodeList.FAILED.getValue())) //Transaccion fallida
 			{
 				GlobalMessages.addInfoMessage(model, "pse.message.info.success.FAILED");
-				flagSuccessView = "X";
+				flagSuccessView = "";
+				flagReintetarPago = "E";
 			}
 			else
 			{ //Transaccion con error
@@ -369,7 +371,7 @@ public class PSEPaymentController extends AbstractPageController
 			}
 		}else {
 			//model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
-			final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade
+			tax = sdhOnlinePaymentProviderMatcherFacade
 					.getTaxByCode(this.getPSEPaymentForm(ticketId).getTipoDeImpuesto());
 			model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
 			GlobalMessages.addErrorMessage(model, "pse.message.error.no._FAIL_EXCEPTION");
@@ -381,11 +383,12 @@ public class PSEPaymentController extends AbstractPageController
 		{
 			//			model.addAttribute("psePaymentForm", psePaymentFormResp);
 			model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
-			final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade
+			tax = sdhOnlinePaymentProviderMatcherFacade
 					.getTaxByCode(this.getPSEPaymentForm(ticketId).getTipoDeImpuesto());
-			model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
+			//model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
 		}
 
+		model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 		model.addAttribute("disableFields", "true");
 		model.addAttribute("flagSuccessView", flagSuccessView);
@@ -834,10 +837,8 @@ public class PSEPaymentController extends AbstractPageController
 			{
 
 				//Only for test
-				this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
-						psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
-
-				model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
+				//this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
+				//		psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
 
 				GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
 
@@ -845,6 +846,7 @@ public class PSEPaymentController extends AbstractPageController
 			LOG.info(response);
 		}
 
+		model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
 		model.addAttribute("psePaymentForm", psePaymentForm);
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 
@@ -882,6 +884,8 @@ public class PSEPaymentController extends AbstractPageController
 		createTransactionPaymentInformationType.setPaymentDescription(
 				psePaymentForm.getTipoDeIdentificacion().concat("-".concat(psePaymentForm.getNumeroDeReferencia())));
 		createTransactionPaymentInformationType.setTicketId(new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()));
+		psePaymentForm.setValorAPagar(psePaymentForm.getValorAPagar().replace("$", ""));
+		psePaymentForm.setValorAPagar(psePaymentForm.getValorAPagar().replace(",00", ""));
 		createTransactionPaymentInformationType.setTransactionValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
 		createTransactionPaymentInformationType.setVatValue(this.getAmount("COP", "0"));
 
