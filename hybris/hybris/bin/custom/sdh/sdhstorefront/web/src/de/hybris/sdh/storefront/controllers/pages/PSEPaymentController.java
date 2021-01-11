@@ -708,6 +708,8 @@ public class PSEPaymentController extends AbstractPageController
 		String flagSuccessView = null;
 		String ref;
 
+		final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade.getTaxByCode(psePaymentForm.getTipoDeImpuesto());
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_REALIZAR_PAGO));
@@ -830,6 +832,13 @@ public class PSEPaymentController extends AbstractPageController
 			}
 			else
 			{
+
+				//Only for test
+				this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
+						psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
+
+				model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
+
 				GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
 
 			}
