@@ -39,15 +39,20 @@
 	function sdhOnChange(selectPaymentMethod){
 		debugger;
 		
+		
+		
 	    var url = window.location.href;
 	    var n = url.indexOf("impuestos");
 	    url = url.substring(0,n);
 	    url = url.concat("onlinePaymentMatcher/getBanks")
 	    //url = url.replace("impuestos/pagoEnLinea/form", "onlinePaymentMatcher/getBanks");
+	    
+	    
 
 	    var paymentMethod = document.getElementById("psePaymentForm.tipoDeTarjeta").value;
 	    var tax = document.getElementById("psePaymentForm.tipoDeImpuesto").value;
-
+	    
+	   
         var bankSelect = document.getElementById("psePaymentForm.banco");
         while (bankSelect.hasChildNodes()) {
           bankSelect.removeChild(bankSelect.firstChild);
@@ -58,6 +63,8 @@
         option.text = "------ Seleccionar ------";
         option.innerHTML = "------ Seleccionar ------";
         bankSelect.appendChild(option);
+        
+        
 
         $.ajax({
             url     : url + '?tax='+tax+'&paymentMethod='+paymentMethod,
@@ -203,17 +210,19 @@
 					</c:if>
 					<c:if test = "${tipoDeImpuestoSeleccionado ne ControllerPseConstants.GASOLINA || disabled ne true}">
 					 -->
-						<div class="row">
+										
+					<!-- 
+					</c:if>
+					 -->
+					 
+					 	<div class="row">
 							<div class="col-xs-6">
 								<formElement:formInputBox  idKey="psePaymentForm.numeroDeReferencia" maxlength="240" labelKey="psePaymentForm.numeroDeReferencia" path="numeroDeReferencia"  mandatory="true" tabindex="0" disabled="${debugMode}"/>
 							</div>
 							<div class="col-xs-6">
 								<formElement:formSelectBox idKey="psePaymentForm.tipoDeImpuesto" labelKey="psePaymentForm.tipoDeImpuesto" path="tipoDeImpuesto" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${tipoDeImpuesto}" selectCSSClass="form-control" disabled="${debugMode}"/>
 							</div>
-						</div>					
-					<!-- 
-					</c:if>
-					 -->
+						</div>	
 
 						<div class="row">
 							<div class="col-xs-6">
