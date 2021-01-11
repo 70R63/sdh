@@ -402,9 +402,19 @@
 			</div>
 		</div>
 	</c:if>
+	<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.mensaje.spac" /></label>
+				</div>
+			</div>
+		</div>
+
+	
 </div>
 
-
+	
 <script>
 	function proyecthabi() {
 		debugger;
