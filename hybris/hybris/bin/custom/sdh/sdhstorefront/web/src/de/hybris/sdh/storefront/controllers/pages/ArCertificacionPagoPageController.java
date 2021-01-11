@@ -65,6 +65,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sun.misc.BASE64Decoder;
@@ -903,6 +904,14 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 
 
 		return "redirect:/agenteRetenedor/consultas/arCertipagos";
+	}
+
+	@RequestMapping(value = "/setComplete10", method = RequestMethod.POST)
+	public String setComplete(final SessionStatus status)
+	{
+		status.setComplete();
+
+		return null;
 	}
 
 }

@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -112,6 +113,14 @@ public class AgentesAutorizadosInicialContribuyentePageController extends Abstra
 		System.out.println("------------------Entro al POST de Agentes Autorizados Repese------------------------");
 
 		return REDIRECT_TO_AUTORIZADOS_REPRE_PAGE;
+	}
+
+	@RequestMapping(value = "/setComplete9", method = RequestMethod.POST)
+	public String setComplete(final SessionStatus status)
+	{
+		status.setComplete();
+
+		return null;
 	}
 
 }

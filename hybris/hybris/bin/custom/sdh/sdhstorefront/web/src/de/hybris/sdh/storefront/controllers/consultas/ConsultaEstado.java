@@ -59,6 +59,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 /**
  * @author Federico Flores Dimas
@@ -460,6 +461,14 @@ public class ConsultaEstado extends AbstractSearchPageController
 		}
 
 		return URLdeterminada;
+	}
+
+	@RequestMapping(value = "/setComplete6", method = RequestMethod.POST)
+	public String setComplete(final SessionStatus status)
+	{
+		status.setComplete();
+
+		return null;
 	}
 
 

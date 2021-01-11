@@ -147,6 +147,7 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 		final String ftpUsername = configurationService.getConfiguration().getString("sdh.reteica.ftp.username");
 		final String ftpPassword = configurationService.getConfiguration().getString("sdh.reteica.ftp.password");
 		final String ftpDir = configurationService.getConfiguration().getString("sdh.reteica.ftp.dir");
+		Boolean returnValue = true;
 
 		final FTPClient client = new FTPClient();
 
@@ -159,7 +160,7 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 		catch (final IOException e1)
 		{
 			LOG.error("Error connecting to FTP Server");
-			return false;
+			returnValue = false;
 		}
 
 
@@ -171,7 +172,7 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 			if (!Boolean.TRUE.equals(fileSent))
 			{
 				LOG.error("Error sending ReteICA file to FTP");
-				return false;
+				returnValue = false;
 			}
 
 			client.logout();
@@ -179,7 +180,7 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 		catch (final Exception ex)
 		{
 			LOG.error("Error sending ReteICA file to FTP" + ex.getMessage());
-			return false;
+			returnValue = false;
 		}
 		finally
 		{
@@ -190,11 +191,11 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 			catch (final IOException e)
 			{
 				LOG.error("Error disconecting FTP client after sending ReteICA file to FTP" + e.getMessage());
-				return false;
+				returnValue = false;
 			}
 		}
 
-		return true;
+		return returnValue;
 	}
 
 	@Override
