@@ -274,7 +274,7 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 					//					}
 				}
 
-				if (response.getRitUpdated() == true)
+				if (response != null && response.getRitUpdated() == true)
 				{
 					final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 

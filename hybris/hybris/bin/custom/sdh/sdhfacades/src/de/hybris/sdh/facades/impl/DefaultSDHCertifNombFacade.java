@@ -49,16 +49,20 @@ public class DefaultSDHCertifNombFacade implements SDHCertifNombFacade
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			final CertifNombResponse certifNombResponse = mapper.readValue(response, CertifNombResponse.class);
 
-			if(certifNombResponse != null && certifNombResponse.getPorcentaje()!= null && certifNombResponse.getPorcentaje() >= minPercentage)
+			if (certifNombResponse != null)
 			{
-				certifNombResponse.setSuccess(Boolean.TRUE);
-			}
-			else
-			{
-				certifNombResponse.setSuccess(Boolean.FALSE);
+				if (certifNombResponse.getPorcentaje() != null && certifNombResponse.getPorcentaje() >= minPercentage)
+				{
+					certifNombResponse.setSuccess(Boolean.TRUE);
+				}
+				else
+				{
+					certifNombResponse.setSuccess(Boolean.FALSE);
+				}
+				certifNombResponse.setMinPercentage(minPercentage);
 			}
 
-			certifNombResponse.setMinPercentage(minPercentage);
+
 
 			return certifNombResponse;
 
