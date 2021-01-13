@@ -875,7 +875,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 				for (final PredialResponse eachPredialTax : predial)
 				{
-					if (StringUtils.isBlank(eachPredialTax.getCHIP()))
+					if (StringUtils.isBlank(eachPredialTax.getCHIP()) && StringUtils.isBlank(eachPredialTax.getMatrInmobiliaria()))
 					{
 						continue;
 					}
