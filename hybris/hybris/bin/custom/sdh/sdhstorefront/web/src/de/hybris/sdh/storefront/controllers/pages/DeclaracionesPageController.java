@@ -8,6 +8,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -387,7 +388,7 @@ public class DeclaracionesPageController extends AbstractPageController
 
 				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
 				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
-				mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
+				mediaModel.setDeleteByCronjob(Boolean.TRUE);
 				modelService.save(mediaModel);
 				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
 				modelService.refresh(mediaModel);

@@ -16,6 +16,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -803,7 +804,6 @@ public class ContribuyentesPageController2 extends AbstractPageController
 			model.addAttribute("anio", dataform1.getAnoGravable());
 			model.addAttribute("numResolu", dataform1.getNumResolu());
 
-			returnURL = REDIRECT_TO_DETALLE_PUBLICIDAD_PAGE;
 		}
 		else
 		{

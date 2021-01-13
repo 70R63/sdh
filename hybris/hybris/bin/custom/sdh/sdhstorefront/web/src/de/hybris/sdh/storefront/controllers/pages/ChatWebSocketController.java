@@ -3,7 +3,6 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.sdh.core.pojos.chatws.Message;
 import de.hybris.sdh.core.pojos.chatws.MessageDecoder;
 import de.hybris.sdh.core.pojos.chatws.MessageEncoder;
-import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,6 +18,8 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
+
+import org.apache.log4j.Logger;
 
 
 @ServerEndpoint(value = "/chatEndPoint/{userType}/{userId}/{username}/{comment}/{subjectType}", decoders = MessageDecoder.class, encoders = MessageEncoder.class)
@@ -57,14 +58,14 @@ public class ChatWebSocketController {
     private final static  String INITIAL_SESSION_MESSAGE = "En un momento unos de nuestros agentes tomara su session...";
 
     @OnOpen
-    public void onOpen(Session session,
-                @PathParam("userType") String userType,
-                @PathParam("userId") String userId,
-                @PathParam("username") String username,
-                @PathParam("comment") String comment,
-                @PathParam("subjectType") String subjectType) throws IOException, EncodeException {
+    public void onOpen(final Session session,
+                @PathParam("userType") final String userType,
+                @PathParam("userId") final String userId,
+                @PathParam("username") final String username,
+                @PathParam("comment") final String comment,
+                @PathParam("subjectType") final String subjectType) throws IOException, EncodeException {
 
-        Message message = new Message();
+        final Message message = new Message();
         message.setFrom(userId);
         message.setUserType(userType);
         message.setUserName(username);
@@ -74,16 +75,19 @@ public class ChatWebSocketController {
     }
 
     @OnMessage
-    public void onMessage(Session session, Message message) throws IOException, EncodeException {
+    public void onMessage(final Session session, final Message message) throws IOException, EncodeException {
         if(message.getContentType().equals("AgentUserMessage")){
             message.setFrom(session.getId());
             activedCustomerSession.get(message.getTo()).getBasicRemote().sendObject(message);
             LOG.info("New message ["+message+"] sent by: AgentSession " + session);
         }else if(message.getContentType().equals("CustomerUserMessage") ||
                 message.getContentType().equals("closeSession")){
-            Session chatSession = activeAgentConversation.stream().filter(agentChatSession ->
+            final Session chatSession = activeAgentConversation.stream().filter(agentChatSession ->
                     message.getTo().equals(agentChatSession.getId())).findAny().orElse(null);
+			if (chatSession != null && chatSession.getBasicRemote() != null)
+			{
             chatSession.getBasicRemote().sendObject(message);
+			}
             LOG.info("New message ["+message+"] sent by: CustomerSession " + session);
         }else if(message.getContentType().equals("blockSession")){
             sendCustomerBlocked(message);
@@ -95,9 +99,9 @@ public class ChatWebSocketController {
     }
 
     @OnClose
-    public void onClose(Session session) throws IOException, EncodeException {
-        Message removedCustomer = activedCustomer.remove(session.getId());
-        boolean removedAgent = activedAgents.remove(session);
+    public void onClose(final Session session) throws IOException, EncodeException {
+        final Message removedCustomer = activedCustomer.remove(session.getId());
+        final boolean removedAgent = activedAgents.remove(session);
 
         if(Objects.nonNull(removedCustomer)){
             sendCustomerDeleted(removedCustomer);
@@ -110,12 +114,12 @@ public class ChatWebSocketController {
     }
 
     @OnError
-    public void onError(Session session, Throwable throwable) {
+    public void onError(final Session session, final Throwable throwable) {
         LOG.debug("Error: " + throwable.toString());
     }
 
 
-    private static void messageBroadCaster(Message message, Session session) throws IOException, EncodeException {
+    private static void messageBroadCaster(final Message message, final Session session) throws IOException, EncodeException {
         if(message.getUserType().equals(CUSTOMER_USER_TYPE)){ //Customer has connected
             activedCustomer.put(session.getId(),message);
             activedCustomerSession.put(session.getId(), session);
@@ -132,48 +136,48 @@ public class ChatWebSocketController {
         }
     }
 
-    private static void sendWelcomeMessageToCustomer(Session targetSession) throws IOException, EncodeException{
-        Message replyMessage = botMessage();
+    private static void sendWelcomeMessageToCustomer(final Session targetSession) throws IOException, EncodeException{
+        final Message replyMessage = botMessage();
         replyMessage.setContent(INITIAL_SESSION_MESSAGE);
         replyMessage.setContentType(CONTENT_TYPE_MESSAGE);
         targetSession.getBasicRemote().sendObject(replyMessage);
     }
 
-    private static void sendAllActivedCustomerList(Session targetSession) throws IOException, EncodeException{
-        Message replyMessage = botMessage();
+    private static void sendAllActivedCustomerList(final Session targetSession) throws IOException, EncodeException{
+        final Message replyMessage = botMessage();
         replyMessage.setActivedCustomer(activedCustomer);
         replyMessage.setContentType(CONTENT_TYPE_LIST);
         targetSession.getBasicRemote().sendObject(replyMessage);
     }
 
-    private static void sendCustomerBlocked(Message message){
-        Message replyMessage = botMessage();
+    private static void sendCustomerBlocked(final Message message){
+        final Message replyMessage = botMessage();
         replyMessage.setFrom(message.getFrom());
         replyMessage.setContentType(CONTENT_TYPE_BLK_CUSTM);
         sendMessageToAgents(replyMessage);
         activedCustomer.get(message.getUserSessionId()).setPicked(true);
     }
 
-    private static void sendCustomerUnBlocked(Message message){
-        Message replyMessage = botMessage();
+    private static void sendCustomerUnBlocked(final Message message){
+        final Message replyMessage = botMessage();
         replyMessage.setFrom(message.getFrom());
         replyMessage.setContentType(CONTENT_TYPE_UNBLK_CUSTM);
         sendMessageToAgents(replyMessage);
         activedCustomer.get(message.getUserSessionId()).setPicked(false);
     }
 
-    private static void sendCustomerDeleted(Message message){
+    private static void sendCustomerDeleted(final Message message){
         message.setContentType(CONTENT_TYPE_DEL_CUSTM);
         sendMessageToAgents(message);
     }
 
-    private static void sendNewCustomerToAllAgents(Message message, Session session){
+    private static void sendNewCustomerToAllAgents(final Message message, final Session session){
         message.setContentType(CONTENT_TYPE_NEW_CUSTM);
         message.setUserSessionId(session.getId());
         sendMessageToAgents(message);
     }
 
-    private static void sendMessageToAgents(Message message){
+    private static void sendMessageToAgents(final Message message){
         activedAgents.forEach(endpointSession -> {
             synchronized (endpointSession) {
                 try {
@@ -186,7 +190,7 @@ public class ChatWebSocketController {
     }
 
     private static Message botMessage(){
-        Message botMessage = new Message();
+        final Message botMessage = new Message();
         botMessage.setFrom(BOT_USER_ID);
         botMessage.setUserType(BOT_USER_TYPE);
         botMessage.setUserName(BOT_USER_NAME);

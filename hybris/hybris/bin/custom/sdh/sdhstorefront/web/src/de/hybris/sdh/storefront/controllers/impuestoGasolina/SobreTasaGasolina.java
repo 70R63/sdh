@@ -9,6 +9,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -1003,15 +1004,14 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		//		detalleGasolinaResponse = gasolinaService.consultaDetGasolina(detalleGasolinaRequest, sdhDetalleGasolinaWS, LOG);
 		//		System.out.println("Response de infObjeto/Gasolina: " + detalleGasolinaResponse);
 		//		if (gasolinaService.ocurrioErrorDetalle(detalleGasolinaResponse) != true)
-		if (true)
-		{
 			final DetGasValoresDeclaraResponse valoresDeclara = new DetGasValoresDeclaraResponse();
 			detalleGasolinaResponse = new DetGasResponse();
 			detalleGasolinaResponse.setAlmacProd(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacProd()));
 			detalleGasolinaResponse.setNumTanques(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getNumTanques()));
 			detalleGasolinaResponse.setAlmacTanque(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacTanque()));
 
-
+		if (calcGasolina2Response != null)
+		{
 			valoresDeclara.setTotalSobretasa(calcGasolina2Response.getTotal_sobretasa());
 			valoresDeclara.setVlrSancTotales(calcGasolina2Response.getVlr_sanc_totales());
 			valoresDeclara.setTotalCargo(calcGasolina2Response.getTotal_cargo());
@@ -1023,12 +1023,12 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 			dataForm.setAnoGravable(calcGasolina2Response.getAnio_gravable());
 			dataForm.setPeriodo(calcGasolina2Response.getPeriodo());
-			dataForm.setNumDoc(contribuyenteData.getDocumentNumber());
 			dataForm.setOpcionUso(calcGasolina2Response.getOpcion_uso());
+			detalleGasolinaResponse.setInfoDeclara(calcGasolina2Response.getInfo_declara());
+		}
 			dataForm.setNumForm(numForm);
 			dataForm.setTipoDoc(contribuyenteData.getDocumentType());
-			detalleGasolinaResponse.setInfoDeclara(calcGasolina2Response.getInfo_declara());
-
+		dataForm.setNumDoc(contribuyenteData.getDocumentNumber());
 
 			infoDeclaraDefaultTMP = gasolinaService.prepararInfoDeclara(detalleGasolinaResponse.getInfoDeclara());
 			if (infoDeclaraDefaultTMP != null && infoDeclaraDefaultTMP.size() > 0)
@@ -1045,7 +1045,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 			detalleGasolinaResponse.setValoresDeclara(valoresDeclara);
 			dataForm.setDataForm(detalleGasolinaResponse);
 
-			if (calcGasolina2Response.getFirmantes() != null)
+		if (calcGasolina2Response != null && calcGasolina2Response.getFirmantes() != null)
 			{
 				for (int i = 0; i < calcGasolina2Response.getFirmantes().size(); i++)
 				{
@@ -1057,14 +1057,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 					interlocutor.setNombres(calcGasolina2Response.getFirmantes().get(i).getNombre());
 					interlocutor.setTarjetaProf(""); //FALTA EN WS
 
-					if (true == false)
-					{
-						dataForm.setRevisor(interlocutor);
-					}
-					else
-					{
-						dataForm.setDeclarante(interlocutor);
-					}
+					dataForm.setDeclarante(interlocutor);
 				}
 			}
 
@@ -1098,25 +1091,6 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 				//				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 				//						"error.impuestoGasolina.sobretasa.error2", mensajesError);
 			}
-		}
-		else
-		{
-			//			mensajesError = gasolinaService.prepararMensajesError(detalleGasolinaResponse.getErrores());
-			//			LOG.error("Error al leer detalle de gasolina: " + mensajesError);
-			//			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-			//					"error.impuestoGasolina.sobretasa.error1", mensajesError);
-			//
-			//			final DetGasInfoDeclaraResponse infoDeclara = new DetGasInfoDeclaraResponse();
-			//			final List listaInfoDeclara = new ArrayList<DetGasInfoDeclaraResponse>();
-			//			listaInfoDeclara.add(new DetGasInfoDeclaraResponse());
-			//
-			//			detalleGasolinaResponse = new DetGasResponse();
-			//
-			//			detalleGasolinaResponse.setInfoDeclara(listaInfoDeclara);
-			//			dataForm.setDataForm(detalleGasolinaResponse);
-			//			dataForm.setCatalogosSo(catalogos);
-
-		}
 		model.addAttribute("dataForm", dataForm);
 		model.addAttribute("detallePagoRequest", detallePagoRequest);
 
