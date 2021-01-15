@@ -27,10 +27,13 @@
 		<script type="text/javascript">
 window.onload = function() {
 	
+	ACC.facturacion.establecerCat_aniograv();
     $(".loader").fadeOut("slow");
 }
 	function goBack() {
 		window.history.back();
 	}
+
+
 </script>
 
