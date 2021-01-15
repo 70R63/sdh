@@ -5,53 +5,64 @@ ACC.facturacion = {
 	
 	bindBuscar : function(){
 		$(document).on("click", ".facBuscar", function(){
+
 			var imp = document.getElementById('impuesto').value;
 			var tabpred = document.getElementById('table-predial');
 			var tabveh = document.getElementById('table-vehiculos');
-			var buscar = document.getElementById('aniograv').value;
+			var aniogravFiltro = document.getElementById('aniograv').value;
+			var borrar = false;
 			
+			tabpred.style.display = 'none';
+			tabveh.style.display = 'none';
 
-			if (imp == '0001') {
-				
-				$("#tabPaginacion0 tr").find('td:eq(0)').each(function () {
-					 
-					
-					  valor = $(this).html();
-					  if(valor == buscar){
-						  $("#tabPaginacion0 tr").show();
-						  
-					  }else{
-						  $("#tabPaginacion0 tr").show();
-					  }
-					})
-					 
-				
+			
+			switch(imp){
+			case "0001":
+				ACC.facturacion.filtrarRegistros_aniograv("tabPaginacion0","0",aniogravFiltro);
 				tabpred.style.display = 'block';
-				tabveh.style.display = 'none';
-
-
-		        
-			} else if (imp == '0002') {
-				$("#tabPaginacion1 tr").find('td:eq(0)').each(function () {
-					 
-					  valor = $(this).html();
-					  if(valor == buscar && valor != " "){
-						  $("#tabPaginacion1 tr").show();
-						  
-					  }else{
-						  $("#tabPaginacion1 tr").show();
-//						  $("#tabPaginacion1 tr").hide();
-					  }
-					})
-				tabpred.style.display = 'none';
+				break;
+			case "0002":
+				ACC.facturacion.filtrarRegistros_aniograv("tabPaginacion1","0",aniogravFiltro);
 				tabveh.style.display = 'block';
-			} else {
-				tabpred.style.display = 'none';
-				tabveh.style.display = 'none';
+				break;
+				
+			default:
+				break;
 			}
-
 			
-		});
+		}
+		);
+	},
+	
+	
+	filtrarRegistros_aniograv : function(nombreTabla,indiceFiltro,aniogravFiltro){
+		
+		$("#"+nombreTabla+" tbody tr").each(function(index){
+			var borrar = false;
+			
+			$(this).find('td:eq('+indiceFiltro+')').each(function (index){
+				var valor = $(this).html();
+				if(valor != aniogravFiltro && valor != "No se encontraron registros"){
+					borrar = true;
+				}
+			});
+			if(borrar == true){
+				$(this).hide();
+			}else{
+				$(this).show();
+			}
+		}
+		);
+		
+	},
+	
+	establecerCat_aniograv : function(){
+		var aniograv = new Date().getFullYear();
+		
+		$("#aniograv").empty();
+		$("#aniograv").append('<option value="">Seleccionar</option>');
+		$("#aniograv").append('<option value="'+ aniograv + '">'+ aniograv + '</option>');
+		
 	},
 	
 	
