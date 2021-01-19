@@ -36,14 +36,23 @@
 				</div>
 				<div class="row" style="margin-top: 10px">
 					<div class="col-md-12">
-						<input id="" name="" class="form-control"
-							aria-required="true" type="file" value="" maxlength="240">
+						<input id="" name="" class="form-control" aria-required="true"
+							type="file" value="" maxlength="240">
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="alert alert-warning">
+							<spring:theme code="autorizado.crear.documentos.notaanexar" />
+						</div>
 					</div>
 				</div>
 
 				<div class="row" style="margin-top: 10px">
-					<div class="col-md-2">
-						<button class="btn btn-primary" type="button" id="" onclick="continuar()">
+					<div class="col-md-2 col-md-offset-5">
+						<button class="btn btn-primary" type="button" id=""
+							onclick="continuar()">
 							<spring:theme code="autorizado.crear.documentos.continuar" />
 						</button>
 					</div>

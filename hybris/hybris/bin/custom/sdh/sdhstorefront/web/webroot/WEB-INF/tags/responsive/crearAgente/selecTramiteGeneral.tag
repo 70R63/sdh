@@ -36,666 +36,108 @@
 
 					<!-- 				primera columna representaci�n-->
 					<div class="col-md-2 ">
-
-						<label class="control-label"><spring:theme
-								code="autorizado.crear.tramgen.represen.titulo" /></label>
 						<div class="fomchk  form-group">
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label"> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.represen.general" />
+									<spring:theme code="autorizado.crear.tramgen.proce.todos" />
 								</label>
 							</div>
 						</div>
+					</div>
+					<div class="col-md-2 ">
 						<div class=" fomchk form-group ">
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="control-label chkagent"> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.represen.proceso" />
+									<spring:theme code="autorizado.crear.tramgen.proce.miRit" />
 								</label>
 							</div>
 						</div>
+					</div>
+					<div class="col-md-2 ">
 						<div class=" fomchk form-group ">
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label"> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.represen.tramites" />
+									<spring:theme code="autorizado.crear.tramgen.proce.miBuzon" />
 								</label>
 							</div>
 						</div>
 					</div>
-
-					<!-- 					segunda columna proceso -->
 					<div class="col-md-2 ">
-
-						<label class="control-label"><spring:theme
-								code="autorizado.crear.tramgen.proce.titulo" /></label>
-
-						<div class=" fomchk form-group ">
-                            <div class="checkbox chkagent" role="checkbox"
-                                aria-checked="false">
-                                <label tabindex="0" class="chkagent control-label  "> <input
-                                    id="ZM01" name="" type="checkbox" value="true"> <input
-                                    type="hidden" name="_consentForm.consentGiven" value="on">
-                                    <spring:theme code="autorizado.crear.tramgen.proce.todos" />
-                                </label>
-                            </div>
-                        </div>
-						<div class=" fomchk form-group ">
-                            <div class="checkbox chkagent" role="checkbox"
-                                aria-checked="false">
-                                <label tabindex="0" class="chkagent control-label  "> <input
-                                    id="ZM02" name="" type="checkbox" value="true"> <input
-                                    type="hidden" name="_consentForm.consentGiven" value="on">
-                                    <spring:theme code="autorizado.crear.tramgen.proce.miRit" />
-                                </label>
-                            </div>
-                        </div>
-						<div class=" fomchk form-group ">
-                            <div class="checkbox chkagent" role="checkbox"
-                                aria-checked="false">
-                                <label tabindex="0" class="chkagent control-label  "> <input
-                                    id="ZM03" name="" type="checkbox" value="true"> <input
-                                    type="hidden" name="_consentForm.consentGiven" value="on">
-                                    <spring:theme code="autorizado.crear.tramgen.proce.miBuzon" />
-                                </label>
-                            </div>
-                        </div>
-						<div class=" fomchk form-group ">
-                            <div class="checkbox chkagent" role="checkbox"
-                                aria-checked="false">
-                                <label tabindex="0" class="chkagent control-label  "> <input
-                                    id="ZM04" name="" type="checkbox" value="true"> <input
-                                    type="hidden" name="_consentForm.consentGiven" value="on">
-                                    <spring:theme code="autorizado.crear.tramgen.proce.impuestos" />
-                                </label>
-                            </div>
-                        </div>
-						<div class=" fomchk form-group ">
-                            <div class="checkbox chkagent" role="checkbox"
-                                aria-checked="false">
-                                <label tabindex="0" class="chkagent control-label  "> <input
-                                    id="ZM05" name="" type="checkbox" value="true"> <input
-                                    type="hidden" name="_consentForm.consentGiven" value="on">
-                                    <spring:theme code="autorizado.crear.tramgen.proce.tramites" />
-                                </label>
-                            </div>
-                        </div>
-						<div class=" fomchk form-group ">
-                            <div class="checkbox chkagent" role="checkbox"
-                                aria-checked="false">
-                                <label tabindex="0" class="chkagent control-label  "> <input
-                                    id="ZM06" name="" type="checkbox" value="true"> <input
-                                    type="hidden" name="_consentForm.consentGiven" value="on">
-                                    <spring:theme code="autorizado.crear.tramgen.proce.facturacion" />
-                                </label>
-                            </div>
-                        </div>
-						<div class=" fomchk form-group ">
-                            <div class="checkbox chkagent" role="checkbox"
-                                aria-checked="false">
-                                <label tabindex="0" class="chkagent control-label  "> <input
-                                    id="ZM07" name="" type="checkbox" value="true"> <input
-                                    type="hidden" name="_consentForm.consentGiven" value="on">
-                                    <spring:theme code="autorizado.crear.tramgen.proce.declaraciones" />
-                                </label>
-                            </div>
-                        </div>
-						<div class=" fomchk form-group ">
-                            <div class="checkbox chkagent" role="checkbox"
-                                aria-checked="false">
-                                <label tabindex="0" class="chkagent control-label  "> <input
-                                    id="ZM08" name="" type="checkbox" value="true"> <input
-                                    type="hidden" name="_consentForm.consentGiven" value="on">
-                                    <spring:theme code="autorizado.crear.tramgen.proce.consultas" />
-                                </label>
-                            </div>
-                        </div>
-
-						<!--
 						<div class=" fomchk form-group ">
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
+								<label tabindex="0" class="chkagent control-label"> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.proce.todos" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.proce.cobco" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.proce.cobprej" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.proce.fisca" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.proce.liqui" />
-								</label>
-							</div>
-						</div>
-						-->
-
-					</div>
-
-					<!-- 					tercer columna tramites 1 -->
-					<div class="col-md-2 ">
-
-						<label class="control-label"><spring:theme
-								code="autorizado.crear.tramgen.tramite.titulo" /></label>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.todos" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.actut" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.actnov" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.acpro" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.ajfact" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.ancuenta" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.anfact" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.aptitt" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.audec" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.autdecla" />
-								</label>
-							</div>
-						</div>
-					</div>
-
-
-
-					<!-- 					tercer columna tramites 2 -->
-					<div class="col-md-2 ">
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.cadacc" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.cerres" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.capact" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.declar" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.demba" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.desglo" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme
-										code="autorizado.crear.tramgen.tramite.devoluciones" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.excep" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.expedi" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.facpag" />
-								</label>
-							</div>
-						</div>
-					</div>
-
-					<!-- 					tercer columna tramites 3 -->
-					<div class="col-md-2 ">
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.incidente" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme
-										code="autorizado.crear.tramgen.tramite.informacion" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.insrit" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.invali" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.modfact" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.nulidad" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.presc" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme
-										code="autorizado.crear.tramgen.tramite.recreconsi" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.recrepos" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.redsan" />
-								</label>
-							</div>
-						</div>
-					</div>
-
-					<!-- 					tercer columna tramites 4 -->
-					<div class="col-md-2 ">
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.reexfac" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.remisi" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.retbole" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox chkagent"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.revdirec" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox chkagent"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.sanea" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.solicitud" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme
-										code="autorizado.crear.tramgen.tramite.sucesiones" />
-								</label>
-							</div>
-						</div>
-						<div class="fomchk form-group ">
-							<div class="checkbox chkagent" role="checkbox"
-								aria-checked="false">
-								<label tabindex="0" class="chkagent control-label  "> <input
-									id="" name="" type="checkbox" value="true"> <input
-									type="hidden" name="_consentForm.consentGiven" value="on">
-									<spring:theme code="autorizado.crear.tramgen.tramite.susproces" />
+									<spring:theme code="autorizado.crear.tramgen.proce.impuestos" />
 								</label>
 							</div>
 						</div>
 					</div>
 				</div>
-
-<!-- 				<div class="row mt-3"> -->
-<!-- 					<div class="col-md-12" -->
-<!-- 						style="background: #d2d2d2; margin-top: 20px !important;"> -->
-<!-- 						<div class="form-group"> -->
-<%-- 							<label class="control-label"><spring:theme --%>
-<%-- 									code="autorizado.crear.tramgen.nota2" /></label> --%>
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 				<div class="row"> -->
-<!-- 					<div class="col-md-1"> -->
-<!-- 						<div class="fomchk  form-group "> -->
-<!-- 							<div class="checkbox chkagent" role="checkbox" -->
-<!-- 								aria-checked="false"> -->
-<!-- 								<label tabindex="0" class="chkagent control-label"> <input -->
-<!-- 									id="" name="" type="checkbox" value="true"> <input -->
-<!-- 									type="hidden" name="_consentForm.consentGiven" value="on"> -->
-<%-- 									<spring:theme code="autorizado.crear.tramgen.tramite.todos" /> --%>
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-
-<!-- 					<div class="col-md-1"> -->
-<!-- 						<div class="fomchk  form-group "> -->
-<!-- 							<div class="checkbox chkagent" role="checkbox" -->
-<!-- 								aria-checked="false"> -->
-<!-- 								<label tabindex="0" class="chkagent control-label"> <input -->
-<!-- 									id="" name="" type="checkbox" value="true"> <input -->
-<!-- 									type="hidden" name="_consentForm.consentGiven" value="on"> -->
-<%-- 									<spring:theme code="autorizado.crear.tramgen.tramite.2018" /> --%>
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-
-<!-- 					<div class="col-md-1"> -->
-<!-- 						<div class="fomchk  form-group "> -->
-<!-- 							<div class="checkbox chkagent" role="checkbox" -->
-<!-- 								aria-checked="false"> -->
-<!-- 								<label tabindex="0" class="chkagent control-label"> <input -->
-<!-- 									id="" name="" type="checkbox" value="true"> <input -->
-<!-- 									type="hidden" name="_consentForm.consentGiven" value="on"> -->
-<%-- 									<spring:theme code="autorizado.crear.tramgen.tramite.2017" /> --%>
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-md-1"> -->
-<!-- 						<div class="fomchk  form-group "> -->
-<!-- 							<div class="checkbox chkagent" role="checkbox" -->
-<!-- 								aria-checked="false"> -->
-<!-- 								<label tabindex="0" class="chkagent control-label"> <input -->
-<!-- 									id="" name="" type="checkbox" value="true"> <input -->
-<!-- 									type="hidden" name="_consentForm.consentGiven" value="on"> -->
-<%-- 									<spring:theme code="autorizado.crear.tramgen.tramite.2016" /> --%>
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-md-1"> -->
-<!-- 						<div class="fomchk  form-group "> -->
-<!-- 							<div class="checkbox chkagent" role="checkbox" -->
-<!-- 								aria-checked="false"> -->
-<!-- 								<label tabindex="0" class="chkagent control-label"> <input -->
-<!-- 									id="" name="" type="checkbox" value="true"> <input -->
-<!-- 									type="hidden" name="_consentForm.consentGiven" value="on"> -->
-<%-- 									<spring:theme code="autorizado.crear.tramgen.tramite.2015" /> --%>
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-
-
-
+			</div>
+			<div class="row">
+				<div class="col-md-2 ">
+					<div class="fomchk  form-group">
+						<div class="checkbox chkagent" role="checkbox"
+							aria-checked="false">
+							<label tabindex="0" class="chkagent control-label"> <input
+								id="" name="" type="checkbox" value="true"> <input
+								type="hidden" name="_consentForm.consentGiven" value="on">
+								<spring:theme code="autorizado.crear.tramgen.proce.tramites" />
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2 ">
+					<div class=" fomchk form-group ">
+						<div class="checkbox chkagent" role="checkbox"
+							aria-checked="false">
+							<label tabindex="0" class="control-label chkagent"> <input
+								id="" name="" type="checkbox" value="true"> <input
+								type="hidden" name="_consentForm.consentGiven" value="on">
+								<spring:theme code="autorizado.crear.tramgen.proce.facturacion" />
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2 ">
+					<div class=" fomchk form-group ">
+						<div class="checkbox chkagent" role="checkbox"
+							aria-checked="false">
+							<label tabindex="0" class="chkagent control-label"> <input
+								id="" name="" type="checkbox" value="true"> <input
+								type="hidden" name="_consentForm.consentGiven" value="on">
+								<spring:theme
+									code="autorizado.crear.tramgen.proce.declaraciones" />
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2 ">
+					<div class=" fomchk form-group ">
+						<div class="checkbox chkagent" role="checkbox"
+							aria-checked="false">
+							<label tabindex="0" class="chkagent control-label"> <input
+								id="" name="" type="checkbox" value="true"> <input
+								type="hidden" name="_consentForm.consentGiven" value="on">
+								<spring:theme code="autorizado.crear.tramgen.proce.consultas" />
+							</label>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+
+
 	</div>
 </div>
