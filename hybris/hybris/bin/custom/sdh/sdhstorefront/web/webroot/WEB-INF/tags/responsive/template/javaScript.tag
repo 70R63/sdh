@@ -13,7 +13,10 @@
 <c:choose>
 	<c:when test="${wro4jEnabled}">
 		<c:if test="${not empty representado}">
-			<script type="text/javascript" src="${commonResourcePath}/js/acc.aamenu.js"></script>
+			<script type="text/javascript" src="${commonResourcePath}/js/acc.aamenu.js"></script>			
+			<script type="text/javascript">
+				ACC.aamenu.updateAAMenu();
+			</script>
 		</c:if>
 		<script type="text/javascript" src="${contextPath}/wro/all_responsive.js"></script>
 		<script type="text/javascript" src="${contextPath}/wro/addons_responsive.js"></script>
@@ -29,10 +32,11 @@
 	<c:otherwise>
 		<%-- jquery --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery-3.2.1.min.js"></script>
-
-
 		<c:if test="${not empty representado}">
-			<script type="text/javascript" src="${commonResourcePath}/js/acc.aamenu.js"></script>
+			<script type="text/javascript" src="${commonResourcePath}/js/acc.aamenu.js"></script>			
+			<script type="text/javascript">
+				ACC.aamenu.updateAAMenu();
+			</script>
 		</c:if>
 		<%-- plugins --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/enquire.min.js"></script>
