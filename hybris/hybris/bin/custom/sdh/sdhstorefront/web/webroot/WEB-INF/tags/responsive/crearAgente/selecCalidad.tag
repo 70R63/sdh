@@ -31,26 +31,27 @@
 		</div>
 	</div>
 	<br>
-				<div class="row">
-				<div class="col-md-2">
-						<div class="form-group ">
-							<label class="control-label"> <spring:theme
-									code="autorizado.crear.buscar.fechinivali" />
-							</label> <input id="iniDate" name="" class="newalto form-control"
-								aria-required="true" type="date" value="" maxlength="240"
-								placeholder="dd/mm/aaaa">
-						</div>
-					</div>
-					<div class="col-md-2">
-						<div class="form-group ">
-							<label class="control-label"> <spring:theme
-									code="autorizado.crear.buscar.fechfinvali" />
-							</label> <input id="finDate" name="" class="newalto form-control"
-								aria-required="true" type="date" value="" maxlength="240"
-								placeholder="dd/mm/aaaa">
-						</div>
-					</div>
-				</div>
+<!-- 	Se comentan fechas para ajustar a ultima versión de mockoup 15/01/2021 -->
+<!-- 				<div class="row"> -->
+<!-- 				<div class="col-md-2"> -->
+<!-- 						<div class="form-group "> -->
+<%-- 							<label class="control-label"> <spring:theme --%>
+<%-- 									code="autorizado.crear.buscar.fechinivali" /> --%>
+<!-- 							</label> <input id="iniDate" name="" class="newalto form-control" -->
+<!-- 								aria-required="true" type="date" value="" maxlength="240" -->
+<!-- 								placeholder="dd/mm/aaaa"> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-md-2"> -->
+<!-- 						<div class="form-group "> -->
+<%-- 							<label class="control-label"> <spring:theme --%>
+<%-- 									code="autorizado.crear.buscar.fechfinvali" /> --%>
+<!-- 							</label> <input id="finDate" name="" class="newalto form-control" -->
+<!-- 								aria-required="true" type="date" value="" maxlength="240" -->
+<!-- 								placeholder="dd/mm/aaaa"> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 </div>
 
 <div id="acordeon" class="container">
@@ -275,6 +276,10 @@
 							<spring:theme code="autorizado.crear.calidad.nota3" />
 							<br>
 							<spring:theme code="autorizado.crear.calidad.nota4" />
+							<br>
+							<spring:theme code="autorizado.crear.calidad.nota8" />
+							<br>
+							<spring:theme code="autorizado.crear.calidad.nota9" />
 							<br>
 							<spring:theme code="autorizado.crear.calidad.nota5" />
 							<br>
