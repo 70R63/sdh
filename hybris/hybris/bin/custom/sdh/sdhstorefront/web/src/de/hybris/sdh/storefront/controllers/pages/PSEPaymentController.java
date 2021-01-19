@@ -8,6 +8,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
@@ -307,7 +308,7 @@ public class PSEPaymentController extends AbstractPageController
 			model.addAttribute("psePaymentForm", psePaymentForm);
 			tax = sdhOnlinePaymentProviderMatcherFacade.getTaxByCode(psePaymentForm.getTipoDeImpuesto());
 
-
+			String transState = (psePaymentForm.getTransactionState() != null) ? psePaymentForm.getTransactionState() : "";
 			if (psePaymentForm.getReturnCode().equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS)
 					|| psePaymentForm.getReturnCode()
 							.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_ENTITYNOTEXISTSORDISABLED)
@@ -338,26 +339,23 @@ public class PSEPaymentController extends AbstractPageController
 				GlobalMessages.addInfoMessage(model, "pse.message.error.no._FAIL_EXCEEDEDLIMIT");
 				flagSuccessView = "E";
 			}
-			else if (psePaymentForm.getTransactionState()
-					.equals(GetTransactionInformationResponseTransactionStateCodeList.OK.getValue())) //Transaccion exitosa
+			else if (transState.equals(GetTransactionInformationResponseTransactionStateCodeList.OK.getValue())) //Transaccion exitosa
 			{
 				GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
 				flagSuccessView = "X";
 			}
-			else if (psePaymentForm.getTransactionState()
-					.equals(GetTransactionInformationResponseTransactionStateCodeList.PENDING.getValue())) //Transaccion pendiente
+			else if (transState.equals(GetTransactionInformationResponseTransactionStateCodeList.PENDING.getValue())) //Transaccion pendiente
 			{
 				GlobalMessages.addInfoMessage(model, "pse.message.info.success.PENDING");
 				flagSuccessView = "X";
 			}
-			else if (psePaymentForm.getTransactionState()
-					.equals(GetTransactionInformationResponseTransactionStateCodeList.NOT_AUTHORIZED.getValue())) //Transaccion no autorizada
+			else if (transState.equals(GetTransactionInformationResponseTransactionStateCodeList.NOT_AUTHORIZED.getValue())) //Transaccion no autorizada
 			{
 				GlobalMessages.addInfoMessage(model, "pse.message.info.success.NOT_AUTHORIZED");
 				flagSuccessView = "";
+				flagReintetarPago = "E";
 			}
-			else if (psePaymentForm.getTransactionState()
-					.equals(GetTransactionInformationResponseTransactionStateCodeList.FAILED.getValue())) //Transaccion fallida
+			else if (transState.equals(GetTransactionInformationResponseTransactionStateCodeList.FAILED.getValue())) //Transaccion fallida
 			{
 				GlobalMessages.addInfoMessage(model, "pse.message.info.success.FAILED");
 				flagSuccessView = "";
@@ -789,6 +787,7 @@ public class PSEPaymentController extends AbstractPageController
 		{
 			LOG.info("--------- Calling PSE/Bank Web Service ---------");
 			final CreateTransactionPaymentResponseInformationType response = this.doPsePayment(psePaymentForm);
+			LOG.info("doPsePayment response: " + response);
 			if (response != null)
 			{
 				final String returnCode = response.getReturnCode().getValue();
@@ -840,7 +839,10 @@ public class PSEPaymentController extends AbstractPageController
 				//this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
 				//		psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
 
+				LOG.info("doPsePayment respuesta nula");
 				GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
+				flagSuccessView = "E";
+				model.addAttribute("flagSuccessView", flagSuccessView);
 
 			}
 			LOG.info(response);

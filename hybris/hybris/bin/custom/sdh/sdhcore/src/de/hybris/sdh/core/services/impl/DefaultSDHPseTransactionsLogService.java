@@ -229,8 +229,11 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationDetailedResponseBodyType response1 = pseServices.getTransactionInformationDetailed(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationDetailedBodyType);
 
-            LOG.info("Actualizando Informacion PSE Transaction[" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
-                    + pseTransactionsLogModel.getTransactionState() + " -> " + response.getTransactionState().getValue() + "] ");
+			final String tranState = (response.getTransactionState().getValue() != null) ? response.getTransactionState().getValue()
+					: "Null";
+
+			LOG.info("Actualizando Informacion PSE Transaction[" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
+					+ pseTransactionsLogModel.getTransactionState() + " -> " + tranState + "] ");
 
 			this.updateResponse(pseTransactionsLogModel, response, response1);
 
