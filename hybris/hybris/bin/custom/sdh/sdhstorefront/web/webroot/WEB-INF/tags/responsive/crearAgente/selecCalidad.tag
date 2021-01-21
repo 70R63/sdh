@@ -7,9 +7,9 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
-	<div class="row" style="margin-top:10px !important">
+	<div class="row" style="margin-top: 10px !important">
 		<div class="col-md-7">
-			<table class="table" id="contribuyenteTable" >
+			<table class="table" id="contribuyenteTable">
 				<thead>
 					<tr>
 						<th><label class="control-label labeltabletd" for=""><spring:theme
@@ -26,32 +26,31 @@
 					</tr>
 				</thead>
 				<tbody id="contribuyenteTbody">
-                </tbody>
+				</tbody>
 			</table>
 		</div>
 	</div>
 	<br>
-<!-- 	Se comentan fechas para ajustar a ultima versión de mockoup 15/01/2021 -->
-<!-- 				<div class="row"> -->
-<!-- 				<div class="col-md-2"> -->
-<!-- 						<div class="form-group "> -->
-<%-- 							<label class="control-label"> <spring:theme --%>
-<%-- 									code="autorizado.crear.buscar.fechinivali" /> --%>
-<!-- 							</label> <input id="iniDate" name="" class="newalto form-control" -->
-<!-- 								aria-required="true" type="date" value="" maxlength="240" -->
-<!-- 								placeholder="dd/mm/aaaa"> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-md-2"> -->
-<!-- 						<div class="form-group "> -->
-<%-- 							<label class="control-label"> <spring:theme --%>
-<%-- 									code="autorizado.crear.buscar.fechfinvali" /> --%>
-<!-- 							</label> <input id="finDate" name="" class="newalto form-control" -->
-<!-- 								aria-required="true" type="date" value="" maxlength="240" -->
-<!-- 								placeholder="dd/mm/aaaa"> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
+	<div class="row">
+		<div class="col-md-2">
+			<div class="form-group ">
+				<label class="control-label"> <spring:theme
+						code="autorizado.crear.buscar.fechinivali" />
+				</label> <input id="iniDate" name="" class="newalto form-control"
+					aria-required="true" type="date" value="" maxlength="240"
+					placeholder="dd/mm/aaaa">
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="form-group ">
+				<label class="control-label"> <spring:theme
+						code="autorizado.crear.buscar.fechfinvali" />
+				</label> <input id="finDate" name="" class="newalto form-control"
+					aria-required="true" type="date" value="" maxlength="240"
+					placeholder="dd/mm/aaaa">
+			</div>
+		</div>
+	</div>
 </div>
 
 <div id="acordeon" class="container">
@@ -68,7 +67,8 @@
 				</button>
 			</h5>
 		</div>
-		<div id="collapse1" class="collapse" aria-ladelledby="head1" data-parent="#acordeon">
+		<div id="collapse1" class="collapse" aria-ladelledby="head1"
+			data-parent="#acordeon">
 			<div class="card-body">
 				<div class="row mt-3">
 					<div class="col-md-12"
@@ -78,15 +78,17 @@
 									code="autorizado.crear.calidad.nota1" /></label><br> <label
 								class="control-label"><spring:theme
 									code="autorizado.crear.calidad.nota2" /></label>
-						</div></br>
+						</div>
+						</br>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
-							<div class="checkbox chkagent" role="checkbox" aria-checked="false">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label"> <input
-									id="TZRE090" name="" type="checkbox" value > <input
+									id="TZRE090" name="" type="checkbox" value> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.crear.calidad.admin" />
 								</label>
@@ -98,7 +100,7 @@
 							<div class="checkbox chkagent" role="checkbox"
 								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
-									id="TZRE010"  name="" type="checkbox" value="true"> <input
+									id="TZRE010" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
 									<spring:theme code="autorizado.crear.calidad.apgeneral" />
 								</label>
@@ -282,11 +284,9 @@
 							<spring:theme code="autorizado.crear.calidad.nota9" />
 							<br>
 							<spring:theme code="autorizado.crear.calidad.nota5" />
-							<br>
-							<br>
+							<br> <br>
 							<spring:theme code="autorizado.crear.calidad.nota6" />
-							<br>
-							<br>
+							<br> <br>
 							<spring:theme code="autorizado.crear.calidad.nota7" />
 						</div>
 					</div>

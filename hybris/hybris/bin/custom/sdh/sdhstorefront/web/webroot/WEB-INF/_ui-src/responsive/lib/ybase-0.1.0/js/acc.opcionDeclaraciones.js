@@ -871,8 +871,9 @@ ACC.opcionDeclaraciones = {
 									'<td>' + value.blindado + '</td>'+
 									'<td>' + value.cilindraje + '</td>'+
 							
-									'<td>'+'<div data-toggle="tooltip" title="ID Acto: '+idActo+' Fecha de Notificación: '+fechActo+' Descripción: '+desActo+' Expediente: '+expActo+'">'+'<a href="#" onclick="ACC.opcionDeclaraciones.detalleActo();">?</a>'+'</div></td>'+
+									'<td>'+'<div data-toggle="tooltip" title="ID Acto: '+idActo+'&#10 Fecha de Notificación: '+fechActo+'&#10 Descripción: '+desActo+'&#10 Expediente: '+expActo+'">'+'<a href="#" onclick="">?</a>'+'</div></td>'+
 //									'<td><a href="#" onclick="ACC.opcionDeclaraciones.validarDeclaracion(\''+url+'\',\''+value.placa+'\');">Generar Declaracion</a> </td>'+
+// ACC.opcionDeclaraciones.detalleActo(); Agregar para mandar a la siguiente página
 									'<td>' + obtenerURLGenDec + '</td>'+
 									"</tr>");
 						}
@@ -907,7 +908,8 @@ ACC.opcionDeclaraciones = {
 							'<td>' + value.direccionPredio + '</td>'+
 							'<td>' + value.contratoArrenda + '</td>'+
 					//		'<td><div data-toggle="tooltip" title="tooltip">'+'<a href="#" onclick="ACC.opcionDeclaraciones.detalleActo();">?</a>'+'</div></td>'+
-				'<td>'+'<div data-toggle="tooltip" title="ID Acto: '+idActo+' Fecha de Notificación: '+fechActo+' Descripción: '+desActo+' Expediente: '+expActo+'">'+'<a href="#" onclick="ACC.opcionDeclaraciones.detalleActo();">?</a>'+'</div></td>'+
+				'<td>'+'<div data-toggle="tooltip" title="ID Acto: '+idActo+'&#10 Fecha de Notificación: '+fechActo+'&#10 Descripción: '+desActo+'&#10 Expediente: '+expActo+'">'+'<a href="#" onclick="">?</a>'+'</div></td>'+
+				// ACC.opcionDeclaraciones.detalleActo(); agregara para funcionamiento de id acto ?
 //							'<td>' + '<button type="button" id="' + nombrePresentarDec +
 //							'" name="'+ nombrePresentarDec+ '" value="presentarDec" class="btn-primary"'+
 //							' onclick="presentarDeclaracion('+strChip+','+strAnioGravable+')">' +
