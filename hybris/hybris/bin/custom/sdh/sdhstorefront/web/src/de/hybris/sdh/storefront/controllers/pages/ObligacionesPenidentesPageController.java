@@ -9,6 +9,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
@@ -163,7 +164,8 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 					{
 						final ObligacionesICAResponse obligacionesICAResponse = mapper.readValue(wsResponse,
 								ObligacionesICAResponse.class);
-						obligacionesFormuno.setHeaderica(obligacionesICAResponse.getHeader());
+						obligacionesFormuno.setHeaderica(obligacionesICAResponse.getHeader().stream()
+								.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
 
 					}
 				}

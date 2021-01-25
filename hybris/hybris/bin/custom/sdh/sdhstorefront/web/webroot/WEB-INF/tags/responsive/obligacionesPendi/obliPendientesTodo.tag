@@ -35,8 +35,8 @@
 					</h2>
 				</div>
 			</div>
-
 			<c:if test="${not empty obligacionesFormuno.headerPred}">
+			
 				<div class="row">
 					<div class="col-md-12">
 						<table class="tablesearch table" id="tabPaginacion0">
@@ -222,9 +222,11 @@
 					</div>
 				</div>
 			</c:if>
-		
+			<c:if test="${empty obligacionesFormuno.headerPred}">
+				<label class="control-label"><spring:theme code="obligaciones.predial.noCuentaPendientes"/></label>
+			</c:if>
 		</div>
-	<div class="col-md-8" id="tableSpac" style="visibility:hidden;">
+	<div class="col-md-8" id="tableSpac" style="display:none;">
 	<br>
 	<input type="hidden" value="" id="anioGravPDF" class="anioGravPDF"/>
 	<input type="hidden" value="" id="objcontPDF"/>
@@ -461,9 +463,12 @@
 					</div>
 				</div>
 			</c:if>
+			<c:if test="${empty obligacionesFormuno.headerVehiculos}">
+				<label class="control-label"><spring:theme code="obligaciones.vehiculos.noCuentaPendientes"/></label>
+			</c:if>
 		</div>
 		
-	<div class="col-md-8" id="tableSpacVehicular" style="visibility:hidden;">
+	<div class="col-md-8" id="tableSpacVehicular" style="display:none;">
 	<br>
 		<input type="hidden" value="" id="anioGravPDFVehicular" class="anioGravPDF"/>
 		<input type="hidden" value="" id="objcontPDFVehicular"/>
@@ -701,6 +706,9 @@
 					</div>-->
 				</div>
 			</c:if>
+			<c:if test="${empty obligacionesFormuno.headerica}">
+				<label class="control-label"><spring:theme code="obligaciones.ica.noCuentaPendientes"/></label>
+			</c:if>
 		</div>
 </div>
 
@@ -881,6 +889,9 @@
 						</div>
 					</div>
 				</div>
+			</c:if>
+			<c:if test="${empty obligacionesFormuno.header}">
+				<label class="control-label"><spring:theme code="obligaciones.publicidadExt.noCuentaPendientes"/></label>
 			</c:if>
 		</div>
 </div>
@@ -1075,6 +1086,9 @@
 					</div>
 				</div>
 			</c:if>
+			<c:if test="${empty obligacionesFormuno.headergas}">
+				<label class="control-label"><spring:theme code="obligaciones.gasolina.noCuentaPendientes"/></label>
+			</c:if>
 		</div>
 </div>
 
@@ -1258,8 +1272,7 @@
 				</div>
 			</c:if>
 			<c:if test="${empty obligacionesFormuno.headerdeli}">
-				<label class="control-label">No cuenta con obligaciones
-					pendientes de Delineaci&oacuten Urbana</label>
+				<label class="control-label"><spring:theme code="obligaciones.delineacion.noCuentaPendientes"/></label>
 
 			</c:if>
 		</div>
