@@ -153,7 +153,7 @@ ACC.predial = {
 						$('#DatosEconomicos')
 								.append(
 										"<tr>"
-												+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+												+ '<td><input style="width: 123px !important; text-align: center" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
 												+ econo.baseGravable
 												+ '" /></td>'
 												+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
@@ -196,7 +196,7 @@ ACC.predial = {
 						$('#DatosFisicosPredial')
 								.append(
 										"<tr>"
-												+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+												+ '<td><input style="width: 123px !important; text-align: center" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
 												+ datFis.areaConstruida
 												+ '" /></td>'
 												+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
@@ -248,7 +248,7 @@ ACC.predial = {
 						$('#DatosLiquidaPredial')
 								.append(
 										"<tr>"
-												+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+												+ '<td><input style="width: 123px !important; text-align: center" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
 												+ datLiq.baseGravable
 												+ '" /></td>'
 												+ '<td><input style="width: 403px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
@@ -448,7 +448,7 @@ ACC.predial = {
 								$('#MarcasPredial')
 										.append(
 												"<tr>"
-														+ '<td><input style="width: 190px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+														+ '<td><input style="width: 190px !important; text-align: center" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
 														+ desmarc
 														+ '" /></td>'
 														+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
