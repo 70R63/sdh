@@ -1272,7 +1272,9 @@ parent.attributes[4]=true;
 //	    	            	$("#ritDialogContent").html("Tu registro de información tributaria no ha sido actualizado.");
 	    	            	$.each(dataResponse.errores,function (index, value)
 	    	            	{
-	    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+value.txtmsj);
+	    	            		if(value.idmsj != ""){
+		    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+value.txtmsj);	    	            			
+	    	            		}
 	    	            	});
 	    	            	
 //        	        	}
@@ -1333,7 +1335,10 @@ parent.attributes[4]=true;
     	var flagValidacion_conteoAEP = ACC.mirit.validar_conteoAEP();
     	var flagValidacion_camposObligatorios = ACC.mirit.validar_camposObligatorios();
     	
-    	if(flagValidacion_conteoAEP == false || flagValidacion_camposObligatorios == false){
+    	if(flagValidacion_conteoAEP.value == false || flagValidacion_camposObligatorios.value == false){
+			$( "#dialog" ).dialog( "open" );
+    		$("#ritDialogContent").html("");
+    		$("#ritDialogContent").html(flagValidacion_conteoAEP.mensaje+"<br>"+flagValidacion_camposObligatorios.mensaje);
     		flagValidacion = false;
     	}
 
@@ -1342,7 +1347,9 @@ parent.attributes[4]=true;
     
     
     validar_conteoAEP : function(){
-    	var flagValidacion = true;
+    	var flagValidacion = {};
+    	flagValidacion.value = true;
+    	flagValidacion.mensaje = "";
     	var conteoActPrincipal = 0;
     	
     	$(".actPrincipal").each(function(index){
@@ -1352,37 +1359,35 @@ parent.attributes[4]=true;
     	});
     	
     	if(conteoActPrincipal>1){
-    		alert("Solamente se puede marcar una actividad económica como principal");
-    		flagValidacion = false;
+    		flagValidacion.mensaje = "\n"+"Solamente se puede marcar una actividad económica como principal";
+    		flagValidacion.value = false;
     	}
     	
     	return flagValidacion
     },
     
-    
     validar_camposObligatorios : function(){
-    	var flagValidacion = true;
+    	var flagValidacion = {};
     	
-    	var flagValidacion_inputcodciuu = ACC.mirit.validar_camposObligatorios_campo(".inputcodciuu");
-    	var flagValidacion_fechaI = ACC.mirit.validar_camposObligatorios_campo(".fechaI");
-    	var mensaje = "";
+    	flagValidacion.value = true;
+    	flagValidacion.mensaje = "";
+    	flagValidacion.inputcodciuu = ACC.mirit.validar_camposObligatorios_campo(".inputcodciuu");
+    	flagValidacion.fechaI = ACC.mirit.validar_camposObligatorios_campo(".fechaI");
     	
-    	if(flagValidacion_inputcodciuu == false){
-    		mensaje = mensaje + "\n"+"Se debe ingresar el código de la actividad";
+    	if(flagValidacion.inputcodciuu == false){
+    		flagValidacion.mensaje = flagValidacion.mensaje + "\n"+"Se debe ingresar el código de la actividad";
     	}
     	
-    	if(flagValidacion_fechaI == false){
-    		mensaje = mensaje + "\n"+"Se debe ingresar la fecha de inicio";
+    	if(flagValidacion.fechaI == false){
+    		flagValidacion.mensaje = flagValidacion.mensaje + "\n"+"Se debe ingresar la fecha de inicio";
     	}
     	
-    	if(flagValidacion_inputcodciuu == false || flagValidacion_fechaI == false){
-    		alert(mensaje);
-    		flagValidacion = false;
+    	if(flagValidacion.inputcodciuu == false || flagValidacion.fechaI == false){
+    		flagValidacion.value = false;
     	}
     	
     	return flagValidacion;
     },
-    
     
     validar_camposObligatorios_campo : function(campoBuscar){
     	var flagValidacion = true;
