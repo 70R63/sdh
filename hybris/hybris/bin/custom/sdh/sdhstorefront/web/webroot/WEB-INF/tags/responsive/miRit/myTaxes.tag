@@ -109,7 +109,7 @@
 							<tr>
 								<td><label class="control-label labeltabletd tablefechas"><spring:theme
 											code="ica.inicial.activecono.actprin" /></label></td>
-								<td><label class="control-label labeltabletd inputcodciuu"><spring:theme
+								<td><label class="control-label labeltabletd "><spring:theme
 											code="ica.inicial.activecono.ciiu" /></label></td>
 								<td style="width:150%"><label class="control-label labeltabletd"><spring:theme
 											code="ica.inicial.activecono.denomi" /></label></td>

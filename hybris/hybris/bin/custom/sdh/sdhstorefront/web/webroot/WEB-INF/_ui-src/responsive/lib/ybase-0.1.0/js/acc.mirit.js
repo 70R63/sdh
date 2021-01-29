@@ -1330,6 +1330,19 @@ parent.attributes[4]=true;
     validarAntesActualizar: function(){
     	
     	var flagValidacion = true;
+    	var flagValidacion_conteoAEP = ACC.mirit.validar_conteoAEP();
+    	var flagValidacion_camposObligatorios = ACC.mirit.validar_camposObligatorios();
+    	
+    	if(flagValidacion_conteoAEP == false || flagValidacion_camposObligatorios == false){
+    		flagValidacion = false;
+    	}
+
+    	return flagValidacion;
+    },
+    
+    
+    validar_conteoAEP : function(){
+    	var flagValidacion = true;
     	var conteoActPrincipal = 0;
     	
     	$(".actPrincipal").each(function(index){
@@ -1342,7 +1355,44 @@ parent.attributes[4]=true;
     		alert("Solamente se puede marcar una actividad económica como principal");
     		flagValidacion = false;
     	}
-
+    	
+    	return flagValidacion
+    },
+    
+    
+    validar_camposObligatorios : function(){
+    	var flagValidacion = true;
+    	
+    	var flagValidacion_inputcodciuu = ACC.mirit.validar_camposObligatorios_campo(".inputcodciuu");
+    	var flagValidacion_fechaI = ACC.mirit.validar_camposObligatorios_campo(".fechaI");
+    	var mensaje = "";
+    	
+    	if(flagValidacion_inputcodciuu == false){
+    		mensaje = mensaje + "\n"+"Se debe ingresar el código de la actividad";
+    	}
+    	
+    	if(flagValidacion_fechaI == false){
+    		mensaje = mensaje + "\n"+"Se debe ingresar la fecha de inicio";
+    	}
+    	
+    	if(flagValidacion_inputcodciuu == false || flagValidacion_fechaI == false){
+    		alert(mensaje);
+    		flagValidacion = false;
+    	}
+    	
+    	return flagValidacion;
+    },
+    
+    
+    validar_camposObligatorios_campo : function(campoBuscar){
+    	var flagValidacion = true;
+    	
+    	$(campoBuscar).each(function(index){
+    		if($(this).val().trim() == ""){
+    			flagValidacion = false; 
+    		}
+    	});
+    	
     	return flagValidacion;
     }
 
