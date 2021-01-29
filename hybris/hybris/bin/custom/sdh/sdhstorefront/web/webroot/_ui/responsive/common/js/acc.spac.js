@@ -102,6 +102,7 @@ ACC.spac = {
 		$(objetosPantalla.tableSpacPagoTbody).empty();
 		var divtable = document.getElementById(objetosPantalla.tableSpac);
 		if(divtable!=null){
+			divtable.style.display = 'none';
 			divtable.style.visibility = 'hidden';
 		}
 
@@ -126,6 +127,7 @@ ACC.spac = {
 						$(objetosPantalla.tableSpacPago).append('<tr><td>' + cuotas[i].numCuotas + '</td><td>' + cuotas[i].fechaPago + '</td><td>' + cuotas[i].monto + '</td><td>' + cuotas[i].status + '</td></tr>');
 					}
 					divtable.style.visibility = 'visible';
+					divtable.style.display = 'block';
 				}else{
 					var errores = spacform.errores;
 					for (var i = 0; i < errores.length; i++){

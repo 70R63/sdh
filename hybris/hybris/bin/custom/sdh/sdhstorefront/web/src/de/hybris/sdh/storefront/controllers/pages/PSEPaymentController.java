@@ -8,7 +8,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
@@ -110,7 +109,6 @@ public class PSEPaymentController extends AbstractPageController
 
 	@Resource(name = "defaultPseServices")
 	private PseServices pseServices;
-
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
@@ -308,7 +306,7 @@ public class PSEPaymentController extends AbstractPageController
 			model.addAttribute("psePaymentForm", psePaymentForm);
 			tax = sdhOnlinePaymentProviderMatcherFacade.getTaxByCode(psePaymentForm.getTipoDeImpuesto());
 
-			String transState = (psePaymentForm.getTransactionState() != null) ? psePaymentForm.getTransactionState() : "";
+			final String transState = (psePaymentForm.getTransactionState() != null) ? psePaymentForm.getTransactionState() : "";
 			if (psePaymentForm.getReturnCode().equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_SERVICENOTEXISTS)
 					|| psePaymentForm.getReturnCode()
 							.equals(CreateTransactionPaymentResponseReturnCodeList._FAIL_ENTITYNOTEXISTSORDISABLED)
@@ -958,8 +956,12 @@ public class PSEPaymentController extends AbstractPageController
 		}
 
 
+		//Depende de la sequencia NUSSEQUENCE y la tabla SDHPaymentProvType
+		final String nusSequence = pseTransactionsLogService.transactionNusSequence();
+
 		final InititalizeTransactionRequest inititalizeTransactionRequest = new InititalizeTransactionRequest(
-				psePaymentForm.getNumeroDeReferencia(),
+				//psePaymentForm.getNumeroDeReferencia(),
+				nusSequence,
 				concept,
 				description,
 				//psePaymentForm.getTipoDeIdentificacion() + "-" + psePaymentForm.getObjPago() + "-" + psePaymentForm.getTipoDeImpuesto() + "-" + psePaymentForm.getTipoDeIdentificacion(),

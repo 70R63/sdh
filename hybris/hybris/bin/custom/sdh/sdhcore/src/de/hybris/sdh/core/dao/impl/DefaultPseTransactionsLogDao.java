@@ -11,6 +11,9 @@ import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
 import de.hybris.sdh.core.model.PseTransactionsLogModel;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
@@ -148,5 +151,32 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 
 		return transactionState;
 	}
+
+	@Override
+	public String getNusSequence()
+	{
+		String GET_NUS_SEQUENCE = new String();
+		String nus = new String("0");
+
+
+		GET_NUS_SEQUENCE = "select NEXT VALUE FOR NUSSEQUENCE as NUS from {SDHPaymentProvType} where {code} = 'ACH'";
+
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_NUS_SEQUENCE);
+
+		query.setResultClassList(Arrays.asList(String.class));
+		final SearchResult<String> resultSet = getFlexibleSearchService().search(query);
+		final List<String> resultList = resultSet.getResult();
+
+		for (int i = 0; i < resultList.size(); i++)
+		{
+			nus = resultList.get(0);
+		}
+
+
+		return nus;
+
+	}
+
+
 
 }

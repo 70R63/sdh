@@ -35,6 +35,6 @@ public interface SDHPseTransactionsLogService
 
 	public void updateAllCredibancoTransactions(final String transactionState);
 
-
+	public String transactionNusSequence();
 
 }

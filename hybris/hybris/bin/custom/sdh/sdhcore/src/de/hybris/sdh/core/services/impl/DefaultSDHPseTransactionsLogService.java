@@ -531,4 +531,20 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 
 		return map;
 	}
+
+
+	@Override
+	public String transactionNusSequence()
+	{
+		String nusSecuancia = pseTransactionsLogDao.getNusSequence();
+
+		if (nusSecuancia == null)
+		{
+			nusSecuancia = new String("0");
+		}
+
+		return nusSecuancia;
+	}
+
+
 }
