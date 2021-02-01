@@ -7,6 +7,7 @@ import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
+import de.hybris.platform.servicelayer.search.exceptions.FlexibleSearchException;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
 import de.hybris.sdh.core.model.PseTransactionsLogModel;
@@ -160,17 +161,35 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 
 
 		GET_NUS_SEQUENCE = "select NEXT VALUE FOR NUSSEQUENCE as NUS from {SDHPaymentProvType} where {code} = 'ACH'";
+		FlexibleSearchQuery query;
+		SearchResult<String> resultSet;
 
-		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_NUS_SEQUENCE);
 
-		query.setResultClassList(Arrays.asList(String.class));
-		final SearchResult<String> resultSet = getFlexibleSearchService().search(query);
+		try
+		{
+			//Consulta para secuencia NUSSEQUENCE en HANA
+			GET_NUS_SEQUENCE = "select (NUSSEQUENCE.nextval) as NUS from {SDHPaymentProvType} where {code} = 'ACH'";
+			query = new FlexibleSearchQuery(GET_NUS_SEQUENCE);
+			query.setResultClassList(Arrays.asList(String.class));
+			resultSet = getFlexibleSearchService().search(query);
+
+		}
+		catch (final FlexibleSearchException fse)
+		{
+			//Consulta para secuencia NUSSEQUENCE en HSQLDB
+			GET_NUS_SEQUENCE = "select NEXT VALUE FOR NUSSEQUENCE as NUS from {SDHPaymentProvType} where {code} = 'ACH'";
+			query = new FlexibleSearchQuery(GET_NUS_SEQUENCE);
+			query.setResultClassList(Arrays.asList(String.class));
+			resultSet = getFlexibleSearchService().search(query);
+		}
+
 		final List<String> resultList = resultSet.getResult();
 
 		for (int i = 0; i < resultList.size(); i++)
 		{
 			nus = resultList.get(0);
 		}
+
 
 
 		return nus;
