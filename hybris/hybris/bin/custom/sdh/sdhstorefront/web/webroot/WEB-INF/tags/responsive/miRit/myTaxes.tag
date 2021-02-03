@@ -102,9 +102,9 @@
 			<label class="control-label " ><spring:theme code="mirit.ica"/></label>
 		</div>
 		<div class="row">
-			<div class="col-md-12 text-center">
-				<div class="table-responsive">
-					<table class="col-md-10 table" id="tabPaginacion5">
+			<div class="col-md-10">
+				<div class="table">
+					<table class="col-md-12 table" id="tabPaginacion5">
 						<thead>
 							<tr>
 								<td><label class="control-label labeltabletd tablefechas"><spring:theme
