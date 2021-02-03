@@ -36,7 +36,7 @@
 						</label>
 					</div>
 					<div class="row">
-						<div class="col-md-10">
+						<div class="col-md-6">
 							<table class="table" id="tabPaginacion0" class="newtd">
 								<thead>
 									<tr>
@@ -67,7 +67,7 @@
 						</label>
 					</div>
 					<div class="row">
-						<div class="col-md-10">
+						<div class="col-md-6">
 							<table class="table" id="tabPaginacion1" class="newtd">
 								<thead>
 									<tr>
@@ -102,7 +102,7 @@
 			<label class="control-label " ><spring:theme code="mirit.ica"/></label>
 		</div>
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-6">
 				<div class="table">
 					<table class="col-md-12 table" id="tabPaginacion5">
 						<thead>
@@ -196,7 +196,7 @@
 							</label>
 						</div>
 						<div class="row">
-							<div class="col-md-10">
+							<div class="col-md-6">
 								<table class="table" id="tabPaginacion2" class="newtd">
 									<thead>
 										<tr>
@@ -281,7 +281,7 @@
 						</label>
 					</div>
 					<div class="row table-responsive">
-						<div class="col-md-10">
+						<div class="col-md-6">
 							<table class="table" id="tabPaginacion4" class="newtd">
 								<thead>
 									<tr>
