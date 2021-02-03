@@ -668,6 +668,12 @@ function agregarActEco() {
 	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".fechaI").val("");
 	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".fechaC").val("");
 	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".filtroCIIU").hide();
+	
+	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".actPrincipal").prop("disabled", false);
+	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".inputcodciuu").prop("disabled", false);
+	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".deno").prop("disabled", false);
+	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".fechaI").prop("disabled", false);
+	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".fechaC").prop("disabled", false);
 
 	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().prop("id", "myRow_"+numeradorUltimoId);
 
@@ -689,16 +695,47 @@ function borrarActEco(selectObject) {
 			var cual = elem[i];
 	
 			if (cual == cual2) {
-				var eliminar = (cual.parentNode).parentNode;
 				var h = $("#tabPaginacion5 tbody tr").length;
-				if ($("#tabPaginacion5 tbody tr").length <= 100
-						&& $("#tabPaginacion5 tbody tr").length > 1) {
-					for (var j = 0; j < $("#tabPaginacion5 tbody tr").length; j++) {
-						eliminar.remove();
+				var contador_actPrincipal = 0;
+				
+				$("#tabPaginacion5 tbody tr").each( function(){
+					var actPrincipal = $(this).children().find(".actPrincipal");
+					if($(actPrincipal).prop("disabled") == false){
+					contador_actPrincipal++;
+				}
+				});
+				
+				if(contador_actPrincipal > 1){
+					var d = new Date();
+					var fechaActual = d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear();
+					$(cual).parent().parent().children().find(".actPrincipal").prop("checked", false);
+					$(cual).parent().parent().children().find(".actPrincipal").prop("disabled", true);
+					$(cual).parent().parent().children().find(".inputcodciuu").prop("disabled", true);
+					$(cual).parent().parent().children().find(".deno").prop("disabled", true);
+					$(cual).parent().parent().children().find(".fechaI").prop("disabled", true);
+					$(cual).parent().parent().children().find(".fechaC").val(fechaActual);
+					$(cual).parent().parent().children().find(".fechaC").prop("disabled", true);
+					
+					var flagActividadEstablecida = false;
+					$("#tabPaginacion5 tbody tr").each( function(){
+						var actPrincipal = $(this).children().find(".actPrincipal");
+						
+						if($(actPrincipal).prop("disabled") == false && flagActividadEstablecida == false){
+							$(actPrincipal).prop("checked", true);
+							flagActividadEstablecida = true;
 					}
-				} else if ($("#tabPaginacion5 tbody tr").length <= 1) {
+					});
+				}else{
 					alert("No puede eliminar todos los registros");
 				}
+// 				if ($("#tabPaginacion5 tbody tr").length <= 100 && $("#tabPaginacion5 tbody tr").length > 1) {
+// 					for (var j = 0; j < $("#tabPaginacion5 tbody tr").length; j++) {
+// 						eliminar.remove();
+// 					}
+// 				} else if ($("#tabPaginacion5 tbody tr").length <= 1) {
+// 					alert("No puede eliminar todos los registros");
+// 				}
+
 				break;
 			} else {
 			}
