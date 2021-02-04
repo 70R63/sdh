@@ -497,7 +497,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
 				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
-				mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
+				mediaModel.setDeleteByCronjob(Boolean.TRUE);
 				modelService.save(mediaModel);
 				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
 				modelService.refresh(mediaModel);
@@ -564,8 +564,11 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		}
 		//		inicio de remapeo
 		vehiculosFormDeclaracion.setNumBP(representado);
-		vehiculosFormDeclaracion.setAnioGravable(vehicular2response.getInfo_vehiculo().getAnio_Gravable());
-		vehiculosFormDeclaracion.setPlaca(vehicular2response.getInfo_vehiculo().getPlaca());
+		if (vehicular2response != null && vehicular2response.getInfo_vehiculo() != null)
+		{
+			vehiculosFormDeclaracion.setAnioGravable(vehicular2response.getInfo_vehiculo().getAnio_Gravable());
+			vehiculosFormDeclaracion.setPlaca(vehicular2response.getInfo_vehiculo().getPlaca());
+		}
 		vehiculosFormDeclaracion.setNumForm(numForm);
 
 		vehiculosFormDeclaracion.setOpcionUso(vehicular2response.getInfo_vehiculo().getOpcion_uso());

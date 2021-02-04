@@ -204,7 +204,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		model.addAttribute("predial", predialFormIni);
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
-		model.addAttribute("infoContrib", sdhConsultaContribuyenteBPResponse.getInfoContrib());
+		if (sdhConsultaContribuyenteBPResponse != null)
+		{
+			model.addAttribute("infoContrib", sdhConsultaContribuyenteBPResponse.getInfoContrib());
+		}
 
 		return getViewForPage(model);
 	}

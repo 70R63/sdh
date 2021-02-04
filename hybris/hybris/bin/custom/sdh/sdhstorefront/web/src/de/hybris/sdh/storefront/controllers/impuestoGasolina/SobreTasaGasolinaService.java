@@ -1689,16 +1689,14 @@ public class SobreTasaGasolinaService
 	{
 		boolean ocurrioError = false;
 
-		if (detalleContribuyente.getInfoContrib() == null && detalleContribuyente.getRoles() == null
+		if ((detalleContribuyente.getInfoContrib() == null && detalleContribuyente.getRoles() == null
 				&& detalleContribuyente.getAgentes() == null && detalleContribuyente.getPublicidadExt() == null
 				&& detalleContribuyente.getGasolina() == null && detalleContribuyente.getIca() == null)
+				|| (detalleContribuyente.getIdmsj() != 0))
 		{
 			ocurrioError = true;
 		}
-		else if (detalleContribuyente.getIdmsj() != 0)
-		{
-			ocurrioError = true;
-		}
+
 
 		return ocurrioError;
 	}

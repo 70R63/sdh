@@ -894,7 +894,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 
 				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
 				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
-				mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
+				mediaModel.setDeleteByCronjob(Boolean.TRUE);
 				modelService.save(mediaModel);
 				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
 				modelService.refresh(mediaModel);
@@ -981,8 +981,12 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		String radicado = "";
 
 
-		final String anticipo = infoImpuesto2Response.getRetencion().equals("X") ? "X" : "";
-		tipoImpuesto = anticipo.equals("X")
+		String anticipo = null;
+		if (infoImpuesto2Response != null && infoImpuesto2Response.getRetencion() != null)
+		{
+			anticipo = infoImpuesto2Response.getRetencion().equals("X") ? "X" : "";
+		}
+		tipoImpuesto = "X".equals(anticipo)
 				? new ControllerPseConstants().getRETENCIONDU()
 				: new ControllerPseConstants().getDELINEACION();
 		numBP = contribuyenteData.getNumBP();
@@ -990,11 +994,14 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		tipoDoc = contribuyenteData.getDocumentType();
 
 		final InfoObjetoDelineacionResponse infObjetoDelineacion = new InfoObjetoDelineacionResponse();
+		if (infoImpuesto2Response != null)
+		{
 		remapeoDesdeDelineacion2(infObjetoDelineacion, infoImpuesto2Response);
+		}
 		remapeoDesdeParametros(infObjetoDelineacion, numForm);
 
 		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
-		if (infoImpuesto2Response.getAnoGravable() == null)
+		if (infoImpuesto2Response != null && infoImpuesto2Response.getAnoGravable() == null)
 		{
 			infObjetoDelineacionExtras.setAnoGravable(Integer.toString(gasolinaService.obtenerAnoGravableActual()));
 		}
@@ -1118,7 +1125,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 			final InfoObjetoDelineacion2Response infoImpuesto2Response)
 	{
 
-		if (responseRemapeo != null)
+		if (responseRemapeo != null && infoImpuesto2Response != null)
 		{
 			final DelineacionUInfoDeclara infoDeclara = new DelineacionUInfoDeclara();
 			infoDeclara.setCdu(infoImpuesto2Response.getCdu());
