@@ -134,7 +134,7 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
 
                             //Write to file
                             System.out.println(item.getPath());
-                            FileOutputStream fos;
+							FileOutputStream fos = null;
                             try {
                                 final File file = new File(targetFilePath + item.getPath());
                                 file.getParentFile().mkdirs();
@@ -148,7 +148,21 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
                             } catch (final IOException e) {
                                 // TODO Auto-generated catch block
                                 LOG.error("Error extracting item: " + e.toString());
-                            }
+							}
+							finally
+							{
+								if (fos != null)
+								{
+									try
+									{
+										fos.close();
+									}
+									catch (final IOException e)
+									{
+										LOG.error("Error closing file: " + e);
+									}
+								}
+							}
 
                             hash[0] ^= Arrays.hashCode(data); // Consume data
                             sizeArray[0] += data.length;
@@ -180,6 +194,7 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
                     LOG.error("Error closing file: " + e);
                 }
             }
+
         }
     }
 

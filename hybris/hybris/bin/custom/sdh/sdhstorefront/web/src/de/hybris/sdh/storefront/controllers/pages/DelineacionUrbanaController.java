@@ -1007,12 +1007,18 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		}
 		else
 		{
-			infObjetoDelineacionExtras.setAnoGravable(infoImpuesto2Response.getAnoGravable());
+			if (infoImpuesto2Response != null)
+			{
+				infObjetoDelineacionExtras.setAnoGravable(infoImpuesto2Response.getAnoGravable());
+			}
 		}
 
 		final InfoDelineacionInput input = new InfoDelineacionInput();
 		input.setSelectedAnoPresDeclaracion(infObjetoDelineacionExtras.getAnoGravable());
-		input.setSelectedCDU(infoImpuesto2Response.getCdu());
+		if (infoImpuesto2Response != null)
+		{
+			input.setSelectedCDU(infoImpuesto2Response.getCdu());
+		}
 		input.setSelectedRadicado(infoImpuesto2Response.getNumRadicado());
 		input.setSelectedTipoLicencia(infoImpuesto2Response.getTipoLicencia());
 		if(infoImpuesto2Response.getRetencion().equals("X")) {

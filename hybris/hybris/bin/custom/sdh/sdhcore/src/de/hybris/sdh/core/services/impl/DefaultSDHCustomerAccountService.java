@@ -536,9 +536,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 					customerModel.setLegalEntity(adicionales.getLEGAL_ENTY());
 					customerModel.setLegalOrg(adicionales.getLEGALORG());
 					customerModel.setUseEmailForNotifications(
-							Boolean.TRUE.equals(adicionales.getZZAUTOBUZONE()) ? Boolean.TRUE : Boolean.FALSE);
+							(1 == adicionales.getZZAUTOBUZONE()) ? Boolean.TRUE : Boolean.FALSE);
 					customerModel.setUseInformationForInstitutionalPurposes(
-							Boolean.TRUE.equals(adicionales.getZZAUTOUSOINF()) ? Boolean.TRUE : Boolean.FALSE);
+							(1 == adicionales.getZZAUTOUSOINF()) ? Boolean.TRUE : Boolean.FALSE);
 					//TODO: fecha de autorizacion de uso de buzon
 
 				}
@@ -1047,16 +1047,16 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		{
 			final ContribAdicionales adicionales = infoContribuyente.getAdicionales();
 				customerModel
-						.setUseEmailForNotifications(Boolean.TRUE.equals(adicionales.getZZAUTOBUZONE()) ? Boolean.TRUE : Boolean.FALSE);
+					.setUseEmailForNotifications((1 == adicionales.getZZAUTOBUZONE()) ? Boolean.TRUE : Boolean.FALSE);
 				customerModel.setUseInformationForInstitutionalPurposes(
-						Boolean.TRUE.equals(adicionales.getZZAUTOUSOINF()) ? Boolean.TRUE : Boolean.FALSE);
+					(1 == adicionales.getZZAUTOUSOINF()) ? Boolean.TRUE : Boolean.FALSE);
 				//TODO: fecha de autorizacion de uso de buzon
 
 		}
 		else
 		{
-			customerModel.setUseEmailForNotifications(Boolean.FALSE.booleanValue());
-			customerModel.setUseInformationForInstitutionalPurposes(Boolean.FALSE.booleanValue());
+			customerModel.setUseEmailForNotifications(Boolean.FALSE);
+			customerModel.setUseInformationForInstitutionalPurposes(Boolean.FALSE);
 
 		}
 
@@ -1375,9 +1375,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 				customerModel.setLegalEntity(adicionales.getLEGAL_ENTY());
 				customerModel.setLegalOrg(adicionales.getLEGALORG());
 				customerModel
-						.setUseEmailForNotifications(Boolean.TRUE.equals(adicionales.getZZAUTOBUZONE()) ? Boolean.TRUE : Boolean.FALSE);
+						.setUseEmailForNotifications((1 == adicionales.getZZAUTOBUZONE()) ? Boolean.TRUE : Boolean.FALSE);
 				customerModel.setUseInformationForInstitutionalPurposes(
-						Boolean.TRUE.equals(adicionales.getZZAUTOUSOINF()) ? Boolean.TRUE : Boolean.FALSE);
+						(1 == adicionales.getZZAUTOUSOINF()) ? Boolean.TRUE : Boolean.FALSE);
 				//TODO: fecha de autorizacion de uso de buzon
 
 			}

@@ -125,50 +125,50 @@ public class SDHRegistrationValidator implements Validator
 
 	protected void validateEmail(final Errors errors, final String email)
 	{
-		if (StringUtils.isEmpty(email))
+		if (StringUtils.isEmpty(email) || (StringUtils.length(email) > 255 || !validateEmailAddress(email)))
 		{
 			errors.rejectValue("email", "register.email.invalid");
 		}
-		else if (StringUtils.length(email) > 255 || !validateEmailAddress(email))
-		{
-			errors.rejectValue("email", "register.email.invalid");
-		}
+		//		else if (StringUtils.length(email) > 255 || !validateEmailAddress(email))
+		//		{
+		//			errors.rejectValue("email", "register.email.invalid");
+		//		}
 	}
 
 	protected void validateConfirmEmail(final Errors errors, final String confirmEmail)
 	{
-		if (StringUtils.isEmpty(confirmEmail))
+		if (StringUtils.isEmpty(confirmEmail) || (StringUtils.length(confirmEmail) > 255 || !validateEmailAddress(confirmEmail)))
 		{
 			errors.rejectValue("confirmEmail", "register.confirmEmail.invalid");
 		}
-		else if (StringUtils.length(confirmEmail) > 255 || !validateEmailAddress(confirmEmail))
-		{
-			errors.rejectValue("confirmEmail", "register.confirmEmail.invalid");
-		}
+		//		else if (StringUtils.length(confirmEmail) > 255 || !validateEmailAddress(confirmEmail))
+		//		{
+		//			errors.rejectValue("confirmEmail", "register.confirmEmail.invalid");
+		//		}
 	}
 
 	protected void validateName(final Errors errors, final String name, final String propertyName, final String property)
 	{
-		if (StringUtils.isBlank(name))
+		if (StringUtils.isBlank(name) || (StringUtils.length(name) > 255))
 		{
 			errors.rejectValue(propertyName, property);
 		}
-		else if (StringUtils.length(name) > 255)
-		{
-			errors.rejectValue(propertyName, property);
-		}
+		//		else if (StringUtils.length(name) > 255)
+		//		{
+		//			errors.rejectValue(propertyName, property);
+		//		}
 	}
 
 	protected void validateTitleCode(final Errors errors, final String titleCode)
 	{
-		if (StringUtils.isEmpty(titleCode))
+		if (StringUtils.isEmpty(titleCode) || (StringUtils.length(titleCode) > 255))
 		{
 			errors.rejectValue("titleCode", "register.title.invalid");
 		}
-		else if (StringUtils.length(titleCode) > 255)
-		{
-			errors.rejectValue("titleCode", "register.title.invalid");
-		}
+		//		else if (StringUtils.length(titleCode) > 255)
+		//		{
+		//			errors.rejectValue("titleCode", "register.title.invalid");
+		//		}
 	}
 
 	public boolean validateEmailAddress(final String email)
