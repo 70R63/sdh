@@ -671,7 +671,7 @@ function agregarActEco() {
 	
 	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".actPrincipal").prop("disabled", false);
 	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".inputcodciuu").prop("disabled", false);
-	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".deno").prop("disabled", false);
+	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".deno").prop("disabled", true);
 	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".fechaI").prop("disabled", false);
 	$($("#tabPaginacion5 tbody tr")[0]).parent().children().last().find(".fechaC").prop("disabled", false);
 
@@ -707,7 +707,7 @@ function borrarActEco(selectObject) {
 				
 				if(contador_actPrincipal > 1){
 					var d = new Date();
-					var fechaActual = d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear();
+					var fechaActual = obtenerNumero2Posiciones(d.getDate()) + "/" + obtenerNumero2Posiciones(d.getMonth()+1) + "/" + d.getFullYear();
 					$(cual).parent().parent().children().find(".actPrincipal").prop("checked", false);
 					$(cual).parent().parent().children().find(".actPrincipal").prop("disabled", true);
 					$(cual).parent().parent().children().find(".inputcodciuu").prop("disabled", true);
@@ -741,6 +741,15 @@ function borrarActEco(selectObject) {
 			}
 		}
 	}
+}
+
+function obtenerNumero2Posiciones(numero){
+	var numero2Posiciones = numero.toString();
+	if(numero < 10){
+		numero2Posiciones = "0"+numero2Posiciones;
+	}
+	
+	return numero2Posiciones;
 }
 
 </script>
