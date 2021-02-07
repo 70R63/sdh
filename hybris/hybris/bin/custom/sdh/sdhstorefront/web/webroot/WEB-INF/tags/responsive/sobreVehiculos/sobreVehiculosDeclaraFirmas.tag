@@ -108,7 +108,8 @@
 	function validaBotonPago(){
 		debugger;
 		var totPagar = document.getElementById('totpag');
-		if(totPagar.value == '0'){
+		var negativePos = totPagar.value.search("-");
+		if(totPagar.value == '0' || totPagar.value == '0.00' || negativePos >= 0 ){
 			alert('El total a pagar debe ser mayor a 0');
 		var btnPagar = document.getElementById("action");
 		btnPagar.disabled = true;
