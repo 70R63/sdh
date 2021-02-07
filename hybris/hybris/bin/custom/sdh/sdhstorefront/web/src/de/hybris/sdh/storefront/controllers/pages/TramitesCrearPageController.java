@@ -230,12 +230,12 @@ public class TramitesCrearPageController extends AbstractPageController
 				System.out.println("Request para crm/docTramites: " + docTramitesRequest);
 				docTramitesResponse = gasolinaService.consultaDocTramites(docTramitesRequest, sdhDetalleGasolinaWS, LOG);
 				System.out.println("Response de crm/docTramites: " + docTramitesResponse);
-				if (gasolinaService.ocurrioErrorDocTramites(docTramitesResponse) != true)
-				{
-				}
-				else
-				{
-				}
+				//				if (gasolinaService.ocurrioErrorDocTramites(docTramitesResponse) != true)
+				//				{
+				//				}
+				//				else
+				//				{
+				//				}
 			}
 			if (elementoSeleccionado.getUrlAccion() != null)
 			{
@@ -524,12 +524,12 @@ public class TramitesCrearPageController extends AbstractPageController
 				System.out.println("Request para crm/creaCasos: " + creaCasosRequest);
 				creaCasosResponse = gasolinaService.creacionCaso(creaCasosRequest, sdhDetalleGasolinaWS, LOG);
 				System.out.println("Response de crm/creaCasos: " + creaCasosResponse);
-				if (gasolinaService.ocurrioErrorCreacionCaso(creaCasosResponse) != true)
-				{
-				}
-				else
-				{
-				}
+				//				if (gasolinaService.ocurrioErrorCreacionCaso(creaCasosResponse) != true)
+				//				{
+				//				}
+				//				else
+				//				{
+				//				}
 			}
 		}
 

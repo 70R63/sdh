@@ -378,8 +378,8 @@ public class CertificacionPagoPageController extends AbstractPageController
 	private ListaDeclaracionesResponse ajustaListaDeclaracion(final String impuesto, final OpcionDeclaracionesVista infoVista,
 			final ListaDeclaracionesResponse listaDeclaracionesResponse)
 	{
-		ListaDeclaracionesResponse listaDeclaracionesResponseSorted = new ListaDeclaracionesResponse();
-		listaDeclaracionesResponseSorted = listaDeclaracionesResponse;
+		//		ListaDeclaracionesResponse listaDeclaracionesResponseSorted = new ListaDeclaracionesResponse();
+		final ListaDeclaracionesResponse listaDeclaracionesResponseSorted = listaDeclaracionesResponse;
 
 		if (impuesto.equals("0006"))
 		{

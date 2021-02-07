@@ -497,7 +497,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
 				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
-				mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
+				mediaModel.setDeleteByCronjob(Boolean.TRUE);
 				modelService.save(mediaModel);
 				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
 				modelService.refresh(mediaModel);
@@ -564,31 +564,36 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		}
 		//		inicio de remapeo
 		vehiculosFormDeclaracion.setNumBP(representado);
-		vehiculosFormDeclaracion.setAnioGravable(vehicular2response.getInfo_vehiculo().getAnio_Gravable());
-		vehiculosFormDeclaracion.setPlaca(vehicular2response.getInfo_vehiculo().getPlaca());
 		vehiculosFormDeclaracion.setNumForm(numForm);
+		if (vehicular2response != null && vehicular2response.getInfo_vehiculo() != null)
+		{
+			vehiculosFormDeclaracion.setAnioGravable(vehicular2response.getInfo_vehiculo().getAnio_Gravable());
+			vehiculosFormDeclaracion.setPlaca(vehicular2response.getInfo_vehiculo().getPlaca());
 
-		vehiculosFormDeclaracion.setOpcionUso(vehicular2response.getInfo_vehiculo().getOpcion_uso());
-		vehiculosFormDeclaracion.setCapacidadTon(vehicular2response.getInfo_vehiculo().getCapacidad_ton());
-		vehiculosFormDeclaracion.setTipoVeh(vehicular2response.getInfo_vehiculo().getTipo_vehiculo());
-		vehiculosFormDeclaracion.setCapacidadPas(vehicular2response.getInfo_vehiculo().getCapacidad_pas());
-		vehiculosFormDeclaracion.setIdServicio(vehicular2response.getInfo_vehiculo().getId_servicio());
-		vehiculosFormDeclaracion.setWatts(vehicular2response.getInfo_vehiculo().getWatts());
-		vehiculosFormDeclaracion.setClasicoAntig(vehicular2response.getInfo_vehiculo().getClasico_antiguo());
+			vehiculosFormDeclaracion.setOpcionUso(vehicular2response.getInfo_vehiculo().getOpcion_uso());
+			vehiculosFormDeclaracion.setCapacidadTon(vehicular2response.getInfo_vehiculo().getCapacidad_ton());
+			vehiculosFormDeclaracion.setTipoVeh(vehicular2response.getInfo_vehiculo().getTipo_vehiculo());
+			vehiculosFormDeclaracion.setCapacidadPas(vehicular2response.getInfo_vehiculo().getCapacidad_pas());
+			vehiculosFormDeclaracion.setIdServicio(vehicular2response.getInfo_vehiculo().getId_servicio());
+			vehiculosFormDeclaracion.setWatts(vehicular2response.getInfo_vehiculo().getWatts());
+			vehiculosFormDeclaracion.setClasicoAntig(vehicular2response.getInfo_vehiculo().getClasico_antiguo());
 
-		vehiculosFormDeclaracion.setClase(vehicular2response.getInfo_vehiculo().getClase());
-		vehiculosFormDeclaracion.setCarroceria(vehicular2response.getInfo_vehiculo().getCarroceria());
-		vehiculosFormDeclaracion.setMarca(vehicular2response.getInfo_vehiculo().getMarca());
-		vehiculosFormDeclaracion.setCilindraje(vehicular2response.getInfo_vehiculo().getCilindraje());
-		vehiculosFormDeclaracion.setLinea(vehicular2response.getInfo_vehiculo().getLinea());
-		vehiculosFormDeclaracion.setModelo(vehicular2response.getInfo_vehiculo().getModelo());
-		vehiculosFormDeclaracion.setBlindado(vehicular2response.getInfo_vehiculo().getBlindado());
+			vehiculosFormDeclaracion.setClase(vehicular2response.getInfo_vehiculo().getClase());
+			vehiculosFormDeclaracion.setCarroceria(vehicular2response.getInfo_vehiculo().getCarroceria());
+			vehiculosFormDeclaracion.setMarca(vehicular2response.getInfo_vehiculo().getMarca());
+			vehiculosFormDeclaracion.setCilindraje(vehicular2response.getInfo_vehiculo().getCilindraje());
+			vehiculosFormDeclaracion.setLinea(vehicular2response.getInfo_vehiculo().getLinea());
+			vehiculosFormDeclaracion.setModelo(vehicular2response.getInfo_vehiculo().getModelo());
+			vehiculosFormDeclaracion.setBlindado(vehicular2response.getInfo_vehiculo().getBlindado());
+		}
 
 		vehiculosFormDeclaracion.setAvaluo(vehicular2response.getLiquidacion().getAvaluo_actual());
 		vehiculosFormDeclaracion.setImpuestoCargo(vehicular2response.getLiquidacion().getImpuesto_cargo());
 
 		final Infovehic infoVeh = new Infovehic();
 
+		if (vehicular2response != null && vehicular2response.getInfo_vehiculo() != null)
+		{
 		infoVeh.setOpcionUso(vehicular2response.getInfo_vehiculo().getOpcion_uso());
 		infoVeh.setObjetoCont(vehicular2response.getInfo_vehiculo().getObjeto_cont());
 		infoVeh.setClase(vehicular2response.getInfo_vehiculo().getClase());
@@ -602,23 +607,31 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		infoVeh.setCarroceria(vehicular2response.getInfo_vehiculo().getCarroceria());
 		infoVeh.setCilindraje(vehicular2response.getInfo_vehiculo().getCilindraje());
 		infoVeh.setTipoVehiculo(vehicular2response.getInfo_vehiculo().getTipo_vehiculo());
-		infoVeh.setAvaluo(vehicular2response.getLiquidacion().getAvaluo_actual());
 		infoVeh.setClasicoAntiguo(vehicular2response.getInfo_vehiculo().getClasico_antiguo());
 		infoVeh.setIdServicio(vehicular2response.getInfo_vehiculo().getId_servicio());
+		}
+		if (vehicular2response != null && vehicular2response.getLiquidacion() != null)
+		{
+			infoVeh.setAvaluo(vehicular2response.getLiquidacion().getAvaluo_actual());
+		}
+
 		infoVeh.setNumForm(numForm);
 
 		vehiculosFormDeclaracion.setInfoVeh(infoVeh);
 		vehiculosFormDeclaracion.setNumForm(numForm);
-		vehiculosFormDeclaracion.setCheckAporte(vehicular2response.getLiquidacion().getCheck_aporte());
-		vehiculosFormDeclaracion.setProyectoAporte(vehicular2response.getLiquidacion().getProyecto_aporte());
-		vehiculosFormDeclaracion.setTarifaActual(vehicular2response.getLiquidacion().getTarifa_actual());
-		vehiculosFormDeclaracion.setSancion(vehicular2response.getLiquidacion().getSancion());
-		vehiculosFormDeclaracion.setIntereses(vehicular2response.getLiquidacion().getIntereses());
-		vehiculosFormDeclaracion.setValorSemafor(vehicular2response.getLiquidacion().getValor_semafo());
-		vehiculosFormDeclaracion.setDescuentoProntop(vehicular2response.getLiquidacion().getDesc_pronto_pago());
-		vehiculosFormDeclaracion.setTotalPagar(vehicular2response.getLiquidacion().getTotal_pagar());
-		vehiculosFormDeclaracion.setValorPagar(vehicular2response.getLiquidacion().getValor_pagar());
-		vehiculosFormDeclaracion.setTotalPagoVol(vehicular2response.getLiquidacion().getTotal_pago_volunt());
+		if (vehicular2response != null && vehicular2response.getLiquidacion() != null)
+		{
+			vehiculosFormDeclaracion.setCheckAporte(vehicular2response.getLiquidacion().getCheck_aporte());
+			vehiculosFormDeclaracion.setProyectoAporte(vehicular2response.getLiquidacion().getProyecto_aporte());
+			vehiculosFormDeclaracion.setTarifaActual(vehicular2response.getLiquidacion().getTarifa_actual());
+			vehiculosFormDeclaracion.setSancion(vehicular2response.getLiquidacion().getSancion());
+			vehiculosFormDeclaracion.setIntereses(vehicular2response.getLiquidacion().getIntereses());
+			vehiculosFormDeclaracion.setValorSemafor(vehicular2response.getLiquidacion().getValor_semafo());
+			vehiculosFormDeclaracion.setDescuentoProntop(vehicular2response.getLiquidacion().getDesc_pronto_pago());
+			vehiculosFormDeclaracion.setTotalPagar(vehicular2response.getLiquidacion().getTotal_pagar());
+			vehiculosFormDeclaracion.setValorPagar(vehicular2response.getLiquidacion().getValor_pagar());
+			vehiculosFormDeclaracion.setTotalPagoVol(vehicular2response.getLiquidacion().getTotal_pago_volunt());
+		}
 		//fin de remapeo
 
 

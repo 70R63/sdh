@@ -211,7 +211,7 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 
 				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
 				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
-				mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
+				mediaModel.setDeleteByCronjob(Boolean.TRUE);
 				modelService.save(mediaModel);
 				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
 				modelService.refresh(mediaModel);

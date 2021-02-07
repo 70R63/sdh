@@ -374,12 +374,12 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 				System.out.println("Request para crm/creaCasos: " + creaCasosRequest);
 				creaCasosResponse = gasolinaService.creacionCaso(creaCasosRequest, sdhDetalleGasolinaWS, LOG);
 				System.out.println("Response de crm/creaCasos: " + creaCasosResponse);
-				if (gasolinaService.ocurrioErrorCreacionCaso(creaCasosResponse) != true)
-				{
-				}
-				else
-				{
-				}
+				//				if (gasolinaService.ocurrioErrorCreacionCaso(creaCasosResponse) != true)
+				//				{
+				//				}
+				//				else
+				//				{
+				//				}
 			}
 		}
 

@@ -498,7 +498,10 @@ public class MiRitPageController extends AbstractPageController
 
 		}
 
-		miRitForm.setActivEconomicas(icaInfObjetoResponse.getActivEconomicas());
+		if (icaInfObjetoResponse != null)
+		{
+			miRitForm.setActivEconomicas(icaInfObjetoResponse.getActivEconomicas());
+		}
 
 	}
 
