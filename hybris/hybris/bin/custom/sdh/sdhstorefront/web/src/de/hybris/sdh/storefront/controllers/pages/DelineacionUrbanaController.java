@@ -1014,18 +1014,23 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		}
 
 		final InfoDelineacionInput input = new InfoDelineacionInput();
-		input.setSelectedAnoPresDeclaracion(infObjetoDelineacionExtras.getAnoGravable());
+		if (infObjetoDelineacionExtras != null)
+		{
+			input.setSelectedAnoPresDeclaracion(infObjetoDelineacionExtras.getAnoGravable());
+		}
 		if (infoImpuesto2Response != null)
 		{
 			input.setSelectedCDU(infoImpuesto2Response.getCdu());
-		}
-		input.setSelectedRadicado(infoImpuesto2Response.getNumRadicado());
-		input.setSelectedTipoLicencia(infoImpuesto2Response.getTipoLicencia());
-		if(infoImpuesto2Response.getRetencion().equals("X")) {
-			input.setTipoFlujo("R");
-		}
-		else {
-			input.setTipoFlujo("D");
+			input.setSelectedRadicado(infoImpuesto2Response.getNumRadicado());
+			input.setSelectedTipoLicencia(infoImpuesto2Response.getTipoLicencia());
+			if (infoImpuesto2Response.getRetencion().equals("X"))
+			{
+				input.setTipoFlujo("R");
+			}
+			else
+			{
+				input.setTipoFlujo("D");
+			}
 		}
 
 
@@ -1041,7 +1046,10 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		clavePeriodo = gasolinaService.prepararPeriodoAnualPago(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
 		dv = contribuyenteData.getDigVer();
 		numObjeto = gasolinaService.obtenerNumeroObjetoDU(infoDelineacion);
-		CDU = infoImpuesto2Response.getCdu();
+		if (infoImpuesto2Response != null)
+		{
+			CDU = infoImpuesto2Response.getCdu();
+		}
 
 		cauex = infoDelineacion.getInfObjetoDelineacion().getInfoDeclara().getCausalExcepDESCRIPCION();
 		if (cauex == null)
