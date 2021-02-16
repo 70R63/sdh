@@ -586,9 +586,11 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 			vehiculosFormDeclaracion.setModelo(vehicular2response.getInfo_vehiculo().getModelo());
 			vehiculosFormDeclaracion.setBlindado(vehicular2response.getInfo_vehiculo().getBlindado());
 		}
-
-		vehiculosFormDeclaracion.setAvaluo(vehicular2response.getLiquidacion().getAvaluo_actual());
-		vehiculosFormDeclaracion.setImpuestoCargo(vehicular2response.getLiquidacion().getImpuesto_cargo());
+		if (vehicular2response != null && vehicular2response.getLiquidacion() != null)
+		{
+			vehiculosFormDeclaracion.setAvaluo(vehicular2response.getLiquidacion().getAvaluo_actual());
+			vehiculosFormDeclaracion.setImpuestoCargo(vehicular2response.getLiquidacion().getImpuesto_cargo());
+		}
 
 		final Infovehic infoVeh = new Infovehic();
 

@@ -680,14 +680,11 @@ function agregarActEco() {
 }
 
 function borrarActEco(selectObject) {
-	;
 	var result = confirm("¿Desea borrar el registro?");
 	if (result == true) {
 		var elem = document.getElementsByTagName("img");
 		var ElementosClick = new Array();
-		var HaHechoClick;
-	
-		HaHechoClick = event.srcElement;
+		var HaHechoClick = event.srcElement;
 		ElementosClick.push(HaHechoClick);
 		var cual2 = ElementosClick[0];
 	
@@ -695,19 +692,27 @@ function borrarActEco(selectObject) {
 			var cual = elem[i];
 	
 			if (cual == cual2) {
-				var h = $("#tabPaginacion5 tbody tr").length;
-				var contador_actPrincipal = 0;
+				var contador_actsActivas = 0;
+				var contador_actsPrincipales = 0;
+				var actBorradaEraPrincipal = false;
 				
 				$("#tabPaginacion5 tbody tr").each( function(){
 					var actPrincipal = $(this).children().find(".actPrincipal");
 					if($(actPrincipal).prop("disabled") == false){
-					contador_actPrincipal++;
-				}
+						contador_actsActivas++;
+						if($(actPrincipal).prop("checked") == true){
+							contador_actsPrincipales++;
+						}
+					}
 				});
+
 				
-				if(contador_actPrincipal > 1){
+				if(contador_actsActivas > 1){
 					var d = new Date();
 					var fechaActual = obtenerNumero2Posiciones(d.getDate()) + "/" + obtenerNumero2Posiciones(d.getMonth()+1) + "/" + d.getFullYear();
+					if($(cual).parent().parent().children().find(".actPrincipal").prop("checked")){
+						actBorradaEraPrincipal = true;
+					}
 					$(cual).parent().parent().children().find(".actPrincipal").prop("checked", false);
 					$(cual).parent().parent().children().find(".actPrincipal").prop("disabled", true);
 					$(cual).parent().parent().children().find(".inputcodciuu").prop("disabled", true);
@@ -716,15 +721,17 @@ function borrarActEco(selectObject) {
 					$(cual).parent().parent().children().find(".fechaC").val(fechaActual);
 					$(cual).parent().parent().children().find(".fechaC").prop("disabled", true);
 					
-					var flagActividadEstablecida = false;
-					$("#tabPaginacion5 tbody tr").each( function(){
-						var actPrincipal = $(this).children().find(".actPrincipal");
-						
-						if($(actPrincipal).prop("disabled") == false && flagActividadEstablecida == false){
-							$(actPrincipal).prop("checked", true);
-							flagActividadEstablecida = true;
+					if((actBorradaEraPrincipal == true && contador_actsPrincipales == 1) || contador_actsPrincipales == 0){
+						var flagActividadEstablecida = false;
+						$("#tabPaginacion5 tbody tr").each( function(){
+							var actPrincipal = $(this).children().find(".actPrincipal");
+							
+							if($(actPrincipal).prop("disabled") == false && flagActividadEstablecida == false){
+								$(actPrincipal).prop("checked", true);
+								flagActividadEstablecida = true;
+						}
+						});
 					}
-					});
 				}else{
 					alert("No puede eliminar todos los registros");
 				}
