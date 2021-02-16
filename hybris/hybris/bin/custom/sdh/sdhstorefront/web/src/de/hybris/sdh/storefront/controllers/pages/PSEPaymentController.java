@@ -834,8 +834,8 @@ public class PSEPaymentController extends AbstractPageController
 			{
 
 				//Only for test
-				//this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
-				//		psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
+				this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
+						psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
 
 				LOG.info("doPsePayment respuesta nula");
 				GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");

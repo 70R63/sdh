@@ -513,7 +513,23 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 	@Override
 	public void updateAllCredibancoTransactions(final String transactionState)
 	{
-		// XXX Auto-generated method stub
+		final List<PseTransactionsLogModel> transactions = pseTransactionsLogDao
+				.getAllOutstandingCredibancoTransactions(transactionState).getResult();
+
+
+		for (final PseTransactionsLogModel pseTransactionsLogModel : transactions)
+		{
+
+			final String numeroDeReferencia = pseTransactionsLogModel.getNumeroDeReferencia();
+
+			final String transState_old = pseTransactionsLogModel.getTransactionState();
+
+			final String transState_new = updateCredibancoTransaction(numeroDeReferencia);
+
+			LOG.info("Actualizando Informacion Credibanco Transaction[" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
+					+ transState_old + " -> " + transState_new + "] ");
+
+		}
 
 	}
 

@@ -196,6 +196,34 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 
 	}
 
+	@Override
+	public SearchResult<PseTransactionsLogModel> getAllOutstandingCredibancoTransactions(final String transactionState)
+	{
+		String GET_ALL_OUTSTANDING_CREDIBANCO_TRANSACTIONS = new String();
+		final String NOTIFICACIONDERECAUDO_NO = new String("NO");
+		final String CREDIBANCO_TRANSACTION = new String("CREDIBANCO_TRANSACTION");
+
+		if (transactionState.length() == 0)
+		{
+			GET_ALL_OUTSTANDING_CREDIBANCO_TRANSACTIONS = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
+					+ PseTransactionsLogModel._TYPECODE + " AS p} Where " + "{p:" + PseTransactionsLogModel.ENTITYCODE + "}  = '"
+					+ CREDIBANCO_TRANSACTION + "' and " + "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "}  in (null, '')  and "
+					+ "{p:" + PseTransactionsLogModel.CREAPPROVALNUMBER + "} not in (null, '') ";
+		}
+		else
+		{
+			GET_ALL_OUTSTANDING_CREDIBANCO_TRANSACTIONS = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
+					+ PseTransactionsLogModel._TYPECODE + " AS p} Where " + "{p:" + PseTransactionsLogModel.ENTITYCODE + "}  = '"
+					+ CREDIBANCO_TRANSACTION + "' and " + "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '"
+					+ transactionState + "' and " + "{p:" + PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '"
+					+ NOTIFICACIONDERECAUDO_NO + "'";
+		}
+
+
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_ALL_OUTSTANDING_CREDIBANCO_TRANSACTIONS);
+		return getFlexibleSearchService().search(query);
+	}
+
 
 
 }

@@ -9,7 +9,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -40,6 +39,7 @@ import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.core.services.SDHPseTransactionsLogService;
 import de.hybris.sdh.facades.SDHCalculaGasolina2Facade;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
@@ -151,6 +151,9 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 	@Resource(name = "sdhEnviaFirmasFacade")
 	SDHEnviaFirmasFacade sdhEnviaFirmasFacade;
+
+	@Resource(name = "pseTransactionsLogService")
+	private SDHPseTransactionsLogService pseTransactionsLogService;
 
 	@ModelAttribute("productClassMaximumOccurrencies")
 	public Map<String, Integer> getProductClassMaximumOccurrencies()
