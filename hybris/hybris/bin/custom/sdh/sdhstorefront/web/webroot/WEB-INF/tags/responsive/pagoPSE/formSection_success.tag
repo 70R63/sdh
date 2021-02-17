@@ -53,6 +53,24 @@
 					</c:if>
 					<c:if test = "${tipoDeImpuestoSeleccionado ne ControllerPseConstants.GASOLINA || disabled ne true}">
 					-->
+					
+						<div class="row">
+							<div class="col-xs-6">
+								<formElement:formInputBox  idKey="psePaymentForm.tipoDeIdentificacion" maxlength="240" labelKey="psePaymentForm.tipoDeIdentificacion" path="tipoDeIdentificacion"  mandatory="true" tabindex="0" disabled="${debugMode}"/>
+							</div>
+							<div class="col-xs-6">
+								<formElement:formInputBox  idKey="psePaymentForm.noIdentificacion" maxlength="240" labelKey="psePaymentForm.noIdentificacion" path="noIdentificacion"  mandatory="true" tabindex="0" disabled="${debugMode}"/>
+							</div>
+						</div>	
+						
+						<div class="row">
+							<div class="col-xs-6">
+								<formElement:formInputBox  idKey="psePaymentForm.completeName" maxlength="240" labelKey="psePaymentForm.completeName" path="completeName" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
+							</div>							
+						</div>	
+					
+					
+					
 						<div class="row">
 							<div class="col-xs-6">
 								<formElement:formInputBox  idKey="psePaymentForm.numeroDeReferencia" maxlength="240" labelKey="psePaymentForm.numeroDeReferencia" path="numeroDeReferencia"  mandatory="true" tabindex="0" disabled="${debugMode}"/>
@@ -67,7 +85,8 @@
 
 						<div class="row">
 							<div class="col-xs-6">
-								<formElement:formSelectBox idKey="psePaymentForm.anoGravable" labelKey="psePaymentForm.anoGravable" path="anoGravable" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${anoGravable}" selectCSSClass="form-control" disabled="${debugMode}"/>
+								<!--<formElement:formSelectBox idKey="psePaymentForm.anoGravable" labelKey="psePaymentForm.anoGravable" path="anoGravable" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${anoGravable}" selectCSSClass="form-control" disabled="${debugMode}"/>-->
+								<formElement:formInputBox  idKey="psePaymentForm.anoGravable" maxlength="240" labelKey="psePaymentForm.anoGravable" path="anoGravable" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
 							</div>
 							<c:if test = "${tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA or tipoDeImpuestoSeleccionado eq ControllerPseConstants.ICA or
 											tipoDeImpuestoSeleccionado eq ControllerPseConstants.VEHICULAR}">

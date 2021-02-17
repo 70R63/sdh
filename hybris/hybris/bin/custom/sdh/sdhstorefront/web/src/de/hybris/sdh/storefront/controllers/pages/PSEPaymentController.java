@@ -300,6 +300,9 @@ public class PSEPaymentController extends AbstractPageController
 		final String codeResponse = pseTransactionsLogService.updateTransaction(ticketId);
 		final PSEPaymentForm psePaymentForm = this.getPSEPaymentForm(ticketId);
 
+		final Map<String, Object> modelMap = model.asMap();
+		final CustomerData cutomer = (CustomerData) modelMap.get("user");
+		psePaymentForm.setCompleteName(cutomer.getCompleteName());
 
 		if (psePaymentForm != null)
 		{
@@ -834,8 +837,8 @@ public class PSEPaymentController extends AbstractPageController
 			{
 
 				//Only for test
-				this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
-						psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
+				//this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
+				//		psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
 
 				LOG.info("doPsePayment respuesta nula");
 				GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");

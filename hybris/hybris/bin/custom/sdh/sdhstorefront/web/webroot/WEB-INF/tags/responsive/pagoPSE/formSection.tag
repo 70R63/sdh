@@ -226,7 +226,8 @@
 
 						<div class="row">
 							<div class="col-xs-6">
-								<formElement:formSelectBox idKey="psePaymentForm.anoGravable" labelKey="psePaymentForm.anoGravable" path="anoGravable" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${anoGravable}" selectCSSClass="form-control" disabled="${debugMode}"/>
+								<!--<formElement:formSelectBox idKey="psePaymentForm.anoGravable" labelKey="psePaymentForm.anoGravable" path="anoGravable" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${anoGravable}" selectCSSClass="form-control" disabled="${debugMode}"/>-->
+								<formElement:formInputBox  idKey="psePaymentForm.anoGravable" maxlength="240" labelKey="psePaymentForm.anoGravable" path="anoGravable" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
 							</div>
 							<c:if test = "${tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA or tipoDeImpuestoSeleccionado eq ControllerPseConstants.ICA or
 											tipoDeImpuestoSeleccionado eq ControllerPseConstants.VEHICULAR}">

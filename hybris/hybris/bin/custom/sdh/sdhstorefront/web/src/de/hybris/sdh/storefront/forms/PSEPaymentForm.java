@@ -34,8 +34,28 @@ public class PSEPaymentForm
 	private String transactionState;
 	private String cdu;
 	private String placa;
+	private String completeName;
 
 
+
+
+
+	/**
+	 * @return the completeName
+	 */
+	public String getCompleteName()
+	{
+		return completeName;
+	}
+
+	/**
+	 * @param completeName
+	 *           the completeName to set
+	 */
+	public void setCompleteName(final String completeName)
+	{
+		this.completeName = completeName;
+	}
 
 	/**
 	 * @return the cdu
