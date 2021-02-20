@@ -14,4 +14,6 @@ public interface SDHNotificacionPagoService
 	public void realizarNotificacion(PseNotificacionDePagoRequest pseNotificacionDePagoRequest);
 
 	public void notifyAllTransactionWithStatusOkAndNotNotifiedBefore();
+
+	public void notifyTransactionWithStatusOkAndNotNotified(String numeroDeReferencia);
 }

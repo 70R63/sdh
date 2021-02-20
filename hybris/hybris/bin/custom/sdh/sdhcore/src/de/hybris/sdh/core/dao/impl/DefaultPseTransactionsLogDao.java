@@ -224,6 +224,39 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 		return getFlexibleSearchService().search(query);
 	}
 
+	@Override
+	public SearchResult<PseTransactionsLogModel> getTransactionsNotNotifiedPaymentAndStatusOk(final String numeroDeReferencia,
+			final String transactionStateStatus,
+			final String notificacionRecaudoStatus)
+	{
+		final String GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
+				+ PseTransactionsLogModel._TYPECODE + " AS p} Where {p:" + PseTransactionsLogModel.NUMERODEREFERENCIA + "} = '"
+				+ numeroDeReferencia + "' AND " + "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '"
+				+ transactionStateStatus + "' AND " + "{p:" + PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '"
+				+ notificacionRecaudoStatus + "' AND " + "{p:" + PseTransactionsLogModel.ENTITYCODE + "} NOT IN ('"
+				+ ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION + "')";
+
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT);
+		final SearchResult<PseTransactionsLogModel> transactions = getFlexibleSearchService().search(query);
+		return getFlexibleSearchService().search(query);
+	}
+
+	@Override
+	public SearchResult<PseTransactionsLogModel> getCredibancoTransactionsNotNotifiedPaymentAndStatusAproved(
+			final String numeroDeReferencia, final String transactionStateStatus, final String notificacionRecaudoStatus)
+	{
+		final String GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
+				+ PseTransactionsLogModel._TYPECODE + " AS p} Where " + "{p:" + PseTransactionsLogModel.NUMERODEREFERENCIA + "} = '"
+				+ numeroDeReferencia + "' AND " + "{p:" + PseTransactionsLogModel.CRERESPONSESTATUS + "} = '"
+				+ transactionStateStatus + "' AND " + "{p:" + PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '"
+				+ notificacionRecaudoStatus + "' AND " + "{p:" + PseTransactionsLogModel.ENTITYCODE + "} = '"
+				+ ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION + "'";
+
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT);
+		final SearchResult<PseTransactionsLogModel> transactions = getFlexibleSearchService().search(query);
+		return getFlexibleSearchService().search(query);
+	}
+
 
 
 }

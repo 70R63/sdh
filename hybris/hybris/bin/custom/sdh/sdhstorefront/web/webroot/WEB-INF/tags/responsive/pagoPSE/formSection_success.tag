@@ -188,7 +188,11 @@
 											<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/contribuyentes/consultas/certipagos' />';">
 													<spring:theme code="impuestos.Pago.PSE.Impimir"/>
 										    </button>
-										</div>										
+										    
+										    <button class="btn btn-secondary btn-lg" type="submit">
+												<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/>
+											</button>
+										</div>							
 									</c:when>
 								</c:choose>
 								<!-- 

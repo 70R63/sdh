@@ -29,6 +29,7 @@ import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
 import de.hybris.sdh.core.services.SDHCredibancoJwt;
 import de.hybris.sdh.core.services.SDHImprimePagoService;
+import de.hybris.sdh.core.services.SDHNotificacionPagoService;
 import de.hybris.sdh.core.services.SDHPseTransactionsLogService;
 import de.hybris.sdh.core.soap.pse.PseServices;
 import de.hybris.sdh.core.soap.pse.beans.ConstantConnectionData;
@@ -142,6 +143,9 @@ public class PSEPaymentController extends AbstractPageController
 
 	@Resource(name = "sessionService")
 	SessionService sessionService;
+
+	@Resource(name = "sdhNotificacionPagoService")
+	private SDHNotificacionPagoService sdhNotificacionPagoService;
 
 	@ModelAttribute("tipoDeImpuesto")
 	public List<SelectAtomValue> getIdTipoDeImpuesto()
@@ -403,6 +407,8 @@ public class PSEPaymentController extends AbstractPageController
 			model.addAttribute("representado", "false");
 		}
 
+		sdhNotificacionPagoService.notifyTransactionWithStatusOkAndNotNotified(psePaymentForm.getNumeroDeReferencia());
+
 		return getViewForPage(model);
 	}
 
@@ -460,6 +466,9 @@ public class PSEPaymentController extends AbstractPageController
 		{
 			model.addAttribute("representado", "false");
 		}
+
+		sdhNotificacionPagoService
+				.notifyTransactionWithStatusOkAndNotNotified(this.getPSEPaymentForm(ticketId).getNumeroDeReferencia());
 
 		return getViewForPage(model);
 	}

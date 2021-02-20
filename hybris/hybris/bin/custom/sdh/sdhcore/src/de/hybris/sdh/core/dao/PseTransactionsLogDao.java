@@ -27,6 +27,16 @@ public interface PseTransactionsLogDao
 	public SearchResult<PseTransactionsLogModel> getAllCredibancoTransactionsNotNotifiedPaymentAndStatusAproved(
 			String transactionStateStatus, String notificacionRecaudoStatus);
 
+
+	public SearchResult<PseTransactionsLogModel> getTransactionsNotNotifiedPaymentAndStatusOk(String numeroDeReferencia,
+			String transactionStateStatus,
+			String notificacionRecaudoStatus);
+
+	public SearchResult<PseTransactionsLogModel> getCredibancoTransactionsNotNotifiedPaymentAndStatusAproved(
+			String numeroDeReferencia, String transactionStateStatus, String notificacionRecaudoStatus);
+
+
+
 	public String getNusSequence();
 
 	public SearchResult<PseTransactionsLogModel> getAllOutstandingCredibancoTransactions(String transactionState);
