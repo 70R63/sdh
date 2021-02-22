@@ -184,5 +184,96 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 		return Objects.nonNull(tipoDeImpuesto) ? tipoDeImpuesto.substring(2, 4) : null;
 	}
 
+	@Override
+	public void notifyTransactionWithStatusOkAndNotNotified(final String numeroDeReferencia)
+	{
+		final List<PseTransactionsLogModel> transactions = new ArrayList<PseTransactionsLogModel>();
+		final List<PseTransactionsLogModel> psetransactions = pseTransactionsLogDao
+				.getTransactionsNotNotifiedPaymentAndStatusOk(numeroDeReferencia,
+						ControllerPseConstants.PSE_ACH_RESPONSE_TRANSACTION_OK,
+						ControllerPseConstants.ONLINE_PAYMENT_NOT_NOTIFIED_TRANSACTION).getResult();
+
+		final List<PseTransactionsLogModel> credibancoTransactions = pseTransactionsLogDao
+				.getCredibancoTransactionsNotNotifiedPaymentAndStatusAproved(numeroDeReferencia,
+						ControllerPseConstants.CREDIBANCO_RESPONSE_APROBADA,
+						ControllerPseConstants.ONLINE_PAYMENT_NOT_NOTIFIED_TRANSACTION).getResult();
+
+		PseNotificacionDePagoRequest pseNotificacionDePagoRequest;
+		transactions.addAll(psetransactions);
+		transactions.addAll(credibancoTransactions);
+
+		for (final PseTransactionsLogModel transaction : transactions)
+		{
+			final String bankProcessDate = transaction.getBankProcessDate();
+			String fechaRecaudo = "";
+			String horaRecaudo = "";
+
+			if (bankProcessDate != null)
+			{
+				if (bankProcessDate.split(" ").length == 2)
+				{
+					fechaRecaudo = bankProcessDate.split(" ")[0];
+					horaRecaudo = bankProcessDate.split(" ")[1];
+				}/*else{
+					fechaRecaudo = bankProcessDate.replace("-","/");
+					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+					LocalDateTime now = LocalDateTime.now();
+					horaRecaudo = dtf.format(now);
+				}*/
+			}
+
+
+
+
+			pseNotificacionDePagoRequest = new PseNotificacionDePagoRequest();
+			pseNotificacionDePagoRequest.setIdBancos(getBankId(transaction.getBanco()));
+			pseNotificacionDePagoRequest.setModalidad(transaction.getTipoDeTarjeta());
+			pseNotificacionDePagoRequest.setProcPago(ControllerPseConstants.PSE_PROC_PAGO.get(transaction.getTipoDeTarjeta()));
+			pseNotificacionDePagoRequest.setFchRecaudo(fechaRecaudo);
+			pseNotificacionDePagoRequest.setHorRecaudo(horaRecaudo);
+			pseNotificacionDePagoRequest.setCodImpuesto(getImpuestoId(transaction.getTipoDeImpuesto()));
+			pseNotificacionDePagoRequest.setRefPago(transaction.getNumeroDeReferencia());
+			pseNotificacionDePagoRequest.setVlrRecuado(transaction.getValorAPagar());
+
+			pseNotificacionDePagoRequest.setNumOperacion(transaction.getTrazabilityCode());
+			pseNotificacionDePagoRequest.setObjPago(transaction.getObjPago());
+
+
+
+
+
+			if(transaction.getEntityCode().equals(ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION))
+			{ //Credibanco transaction
+                LOG.info("---- CREDIBANCO TRANSACTION ----");
+				pseNotificacionDePagoRequest.setMedioPago(
+						ControllerPseConstants.CREDIBANCO_NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(
+								transaction.getCrePaymentMethod()));
+			}else { //ACH PSE Transaction
+                LOG.info("---- ACH/PSE TRANSACTION ----");
+				if (transaction.getPaymentMode() != null)
+				{
+					pseNotificacionDePagoRequest.setMedioPago(transaction.getPaymentMode());
+				}
+				else
+				{
+					pseNotificacionDePagoRequest.setMedioPago("");
+				}
+
+			}
+
+
+			this.realizarNotificacion(pseNotificacionDePagoRequest);
+
+			transaction.setNotificacionDeRecaudo("SI");
+			modelService.saveAll(transaction);
+		}
+
+	}
+
+
+
+
+
+
 
 }
