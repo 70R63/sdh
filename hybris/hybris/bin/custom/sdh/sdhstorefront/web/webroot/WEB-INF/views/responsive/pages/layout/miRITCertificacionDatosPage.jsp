@@ -158,7 +158,7 @@ window.onload = function() {
 
 					<c:if test="${uiMenuForm.bPublicidadExt == 'X'}">
 						<input type="radio" name="tipoImp" id="tipoImp" value="07"
-							style="visibility: visible" onclick="mostrarTabla('6')">
+							style="visibility: visible" onclick="mostrarTabla('7')">
 						<spring:theme code="mirit.certificacion.opPublicidadExterior" />
 						<br>
 					</c:if>
@@ -172,7 +172,7 @@ window.onload = function() {
 
 					<c:if test="${uiMenuForm.bDelineacionUrbana == 'X'}">
 						<input type="radio" name="tipoImp" id="tipoImp" value="06"
-							style="visibility: visible" onclick="mostrarTabla('4')">
+							style="visibility: visible" onclick="mostrarTabla('6')">
 						<spring:theme code="mirit.certificacion.opDelineaciónUrbana" />
 						<br>
 					</c:if>

@@ -86,6 +86,7 @@ ACC.oblipend = {
  $(document).on("click", "#ImprimirPopUp", function(e) {
  e.preventDefault();
 
+ ACC.publicidadexterior.bindDataTable_ID_refresh("#example");
 	var impuestoSelc = $(this).data("impuesto");
 	var tablePred = document.getElementsByClassName("table ImprimirPredial");
 	tablePred[0].setAttribute("id","example1");
@@ -222,7 +223,7 @@ ACC.oblipend = {
 	}
 	
 	else if(impuestoSelc=="8"){
-		tablePub[0].setAttribute("id","example");
+		tableReteIca[0].setAttribute("id","example");
 		   var selectRefinementsTitle = "RETEICA";
 	        ACC.colorbox.open(selectRefinementsTitle, {
 	            href: ".js-reteica-facet",
@@ -242,38 +243,9 @@ ACC.oblipend = {
 	        });
 	}
 	
-		if ($.fn.dataTable.isDataTable('#example')) {
-			table = $('#example').DataTable();
-			table.destroy();
-		}
-		var tabla = $("#example")
-				.DataTable(
-						{
-							"sPaginationType" : "full_numbers",
-							"oLanguage" : {
-								"oPaginate" : {
-									"sPrevious" : "Anterior",
-									"sNext" : "Siguiente",
-									"sLast" : "Ultima",
-									"sFirst" : "Primera"
-								},
-								"sLengthMenu" : 'Mostrar <select>'
-										+ '<option value="5">5</option>'
-										+ '<option value="10">10</option>'
-										+ '<option value="15">15</option>'
-										+ '<option value="20">20</option>'
-										+ '<option value="30">30</option>'
-										+ '</select> registros',
-								"sInfo" : "Mostrando del START a END (Total: TOTAL resultados)",
-								"sInfoFiltered" : " Filtrados de MAX registros",
-								"sInfoEmpty" : " ",
-								"sZeroRecords" : "No se encontraron registros",
-								"sProcessing" : "Espere, por favor...",
-								"sSearch" : "Buscar:",
-							}
-						});
+	ACC.publicidadexterior.bindDataTable_id("#example");
+		 
 	
-
 	});
 		
 	},
