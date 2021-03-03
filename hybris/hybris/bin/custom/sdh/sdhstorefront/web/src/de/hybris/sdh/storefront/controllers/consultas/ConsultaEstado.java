@@ -141,6 +141,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			String responseStr = sdhEdoCuentaService.detalleEdoCta(edoCuentaRequest);
+			responseStr = responseStr.replace(",\"\"]},{\"detalleReteica\":[\"\",\"\"]}", "]}");
 			responseStr = responseStr.replace(",{\"detalleReteica\":[\"\",\"\"]}", "");
 			responseStr = responseStr.replace("{\"detalleReteica\":[\"\",\"\"]}", "");
 
