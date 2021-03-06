@@ -112,8 +112,20 @@ public class ConsulPagosRequest
 		stringBuilder.append(obtenerValorJson("\"BP\":\"", this.getBp(), "\","));
 		stringBuilder.append(obtenerValorJson("\"impuesto\":\"", this.getImpuesto(), "\","));
 		stringBuilder.append(obtenerValorJson("\"anioGravable\":\"", this.getAnioGravable(), "\","));
-		stringBuilder.append(obtenerValorJson("\"periodo\":\"", this.getPeriodo(), "\","));
-		stringBuilder.append(obtenerValorJson("\"numObjeto\":\"", this.getNumObjeto(), "\""));
+
+		if (this.getNumObjeto() != null)
+		{
+			stringBuilder.append(obtenerValorJson("\"periodo\":\"", this.getPeriodo(), "\","));
+		}
+		else
+		{
+			stringBuilder.append(obtenerValorJson("\"periodo\":\"", this.getPeriodo(), "\""));
+		}
+
+		if (this.getNumObjeto() != null)
+		{
+			stringBuilder.append(obtenerValorJson("\"numObjeto\":\"", this.getNumObjeto(), "\""));
+		}
 		stringBuilder.append("}");
 
 		return stringBuilder.toString();

@@ -3,7 +3,7 @@ ACC.opcionDeclaraciones = {
 	dataActual_backup:{},
 	dataResponse_backup:{},
 	
-	_autoload : [ "bindDeclaracionPDF", "bindCertiPagosImprime", "bindDeclaracionImprime","bindDialogDeclaracionGenerica"],
+	_autoload : [ "bindDeclaracionPDF", "bindCertiPagosImprime", "bindCertiPagosImprimeForm", "bindDeclaracionImprime","bindDialogDeclaracionGenerica"],
 	
 	bindDeclaracionPDF : function() {
 		$(document).on("click", ".consultaDecPDF", function(e) {
@@ -121,6 +121,7 @@ ACC.opcionDeclaraciones = {
 	
 	bindCertiPagosImprime : function() {
 		$(document).on("click", ".certiPagosImprime", function(e) {
+			debugger;
 			e.preventDefault();	
 			ACC.spinner.show();
 
@@ -197,6 +198,51 @@ ACC.opcionDeclaraciones = {
 	},
 	
 	
+	bindCertiPagosImprimeForm : function() {
+		$(document).on("click", ".certiPagosImprimeForm", function(e) {
+			debugger;
+			e.preventDefault();	
+			ACC.spinner.show();
+
+			
+			var dataActual = {};
+			
+			dataActual.bp = document.getElementById("psePaymentForm.bp").value;
+			dataActual.tipoDeImpuesto = document.getElementById("psePaymentForm.tipoDeImpuesto").value;
+			dataActual.anoGravable = document.getElementById("psePaymentForm.anoGravable").value;
+			dataActual.periodo = document.getElementById("psePaymentForm.periodo").value;
+			dataActual.numeroDeReferencia = document.getElementById("psePaymentForm.numeroDeReferencia").value;
+			
+			$.ajax({
+				url : ACC.certiPagoImprimeFormURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					debugger;
+					ACC.spinner.close();
+					ACC.opcionDeclaraciones.updateFromResponseImprimirForm(dataActual,dataResponse);
+				},
+				error : function() {
+					debugger;
+					ACC.spinner.close();
+					alert("Error la procesar la solicitud");	
+				}
+			});
+			
+		});
+	},
+	
+	updateFromResponseImprimirForm : function(infoActual,infoResponse) {
+		if(infoResponse.urlDownload != null){
+			$("#downloadHelper").attr("href",infoResponse.urlDownload);
+			document.getElementById("downloadHelper").click();
+		}
+		else{
+			alert(infoResponse.impresionResponse.errores[0].txtmsj);
+		}		
+	},
+	
+	
 	updateFromResponsePDF : function(infoActual,infoResponse) {
 		if (infoResponse.declaraPDFResponse.errores != null){
 			if (infoResponse.declaraPDFResponse.errores.idMensaje == "0"){
@@ -218,6 +264,9 @@ ACC.opcionDeclaraciones = {
 	},
 	
 	
+	
+	
+	
 	updateFromResponseImprimir : function(infoActual,infoResponse) {
 		if (infoResponse.impresionResponse.errores != null){
 			if (infoResponse.impresionResponse.errores[0].idmsj == "0" || infoResponse.impresionResponse.errores[0].idmsj == ""){
@@ -237,6 +286,9 @@ ACC.opcionDeclaraciones = {
 		
 				
 	},
+	
+	
+	
 	
 	
 	obtenerListaDeclaraciones_certiPagos : function() {

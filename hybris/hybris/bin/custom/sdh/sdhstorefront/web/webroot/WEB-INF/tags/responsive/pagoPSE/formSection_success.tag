@@ -10,6 +10,8 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<a id="downloadHelper" target="_blank"></a>
+
 <%-- --disabled:${disabled}-- --%>
 <c:choose>
   <c:when test="${disableFields eq 'true'}">
@@ -36,7 +38,6 @@
 			
 				<form:form method="post" commandName="psePaymentForm" action="">
 				<div class="row" >
-				<!-- --psePaymentForm.numeroDeReferencia:${psePaymentForm.numeroDeReferencia}-- -->
 				</div>
 					<fieldset>
 					<!--					
@@ -133,18 +134,30 @@
 						<formElement:formInputBox  idKey="psePaymentForm.tipoDeTarjeta" maxlength="240" labelKey="psePaymentForm.tipoDeTarjeta" path="tipoDeTarjeta" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
 						<formElement:formInputBox  idKey="psePaymentForm.bankDateResponse" maxlength="240" labelKey="psePaymentForm.bankDateResponse" path="bankDateResponse" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
 						<formElement:formInputBox  idKey="psePaymentForm.trazabilityCode" maxlength="240" labelKey="psePaymentForm.trazabilityCode" path="trazabilityCode" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
-
+						
+						
+						
 					<!--  
 					<c:if test = "${(tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA || tipoDeImpuestoSeleccionado eq ControllerPseConstants.PUBLICIDAD) && !empty psePaymentForm.bankDateResponse }">
    						<formElement:formInputBox  idKey="psePaymentForm.bankDateResponse" maxlength="240" labelKey="psePaymentForm.bankDateResponse" path="bankDateResponse" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
    						<formElement:formInputBox  idKey="psePaymentForm.bankTimeResponse" maxlength="240" labelKey="psePaymentForm.bankDateResponse" path="bankDateResponse" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
 					</c:if>
 					-->
+					
+					<form:hidden id="psePaymentForm.bp" path="bp" value="${psePaymentForm.bp}"/>
+					<form:hidden id="psePaymentForm.tipoDeImpuesto" path="tipoDeImpuesto" value="${psePaymentForm.tipoDeImpuesto}"/>
+					<form:hidden id="psePaymentForm.anoGravable" path="anoGravable" value="${psePaymentForm.anoGravable}"/>
+					<form:hidden id="psePaymentForm.periodo" path="periodo" value="${psePaymentForm.periodo}"/>
+					
+					
+					
 					</fieldset>
+					
+					
 				</form:form>
 				
 				
-				<form:form method="post" commandName="psePaymentForm" action="/sdhstorefront/es/impuestos/pagoEnLinea/pseResponse">		
+				<form:form method="post" commandName="psePaymentForm" action="/pagoEnLinea/pseResponse">		
 					<form:hidden path="tipoDeImpuesto" value="${psePaymentForm.tipoDeImpuesto}"/>
 					<form:hidden path="trazabilityCode" value="${psePaymentForm.trazabilityCode}"/>
 					<form:hidden path="numeroDeReferencia" value="${psePaymentForm.numeroDeReferencia}"/>
@@ -189,7 +202,7 @@
 													<spring:theme code="impuestos.Pago.PSE.Impimir"/>
 										    </button>
 										    
-										    <button class="btn btn-secondary btn-lg" type="submit">
+										    <button class="btn btn-secondary btn-lg certiPagosImprimeForm" type="button"  id="certiPagosImprimeFormButton" name="certiPagosImprimeFormButton" style="margin-top: 3px">
 												<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/>
 											</button>
 										</div>							
