@@ -35,10 +35,50 @@ public class PSEPaymentForm
 	private String cdu;
 	private String placa;
 	private String completeName;
+	private String bp;
+	private String urlDownload;
 
 
 
 
+
+
+
+
+
+	/**
+	 * @return the urlDownload
+	 */
+	public String getUrlDownload()
+	{
+		return urlDownload;
+	}
+
+	/**
+	 * @param urlDownload
+	 *           the urlDownload to set
+	 */
+	public void setUrlDownload(final String urlDownload)
+	{
+		this.urlDownload = urlDownload;
+	}
+
+	/**
+	 * @return the bp
+	 */
+	public String getBp()
+	{
+		return bp;
+	}
+
+	/**
+	 * @param bp
+	 *           the bp to set
+	 */
+	public void setBp(final String bp)
+	{
+		this.bp = bp;
+	}
 
 	/**
 	 * @return the completeName

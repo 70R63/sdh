@@ -129,6 +129,8 @@
 			
 			ACC.certiPagoImprimeURL= "<c:url value='/contribuyentes/consultas/certipagos/pagoImprimir' />";	
 			
+			ACC.certiPagoImprimeFormURL= "<c:url value='/impuestos/pagoEnLinea/pseResponse/pagoImprimirForm' />";	
+			
 			ACC.predial_presentarDecURL= "<c:url value='/contribuyentes/predialunificado_inicio/presentarDec' />";
 			
 			ACC.vehiculosDetalleURL = "<c:url value='/contribuyentes/sobrevehiculosautomotores/detalle/vehiculo' />";

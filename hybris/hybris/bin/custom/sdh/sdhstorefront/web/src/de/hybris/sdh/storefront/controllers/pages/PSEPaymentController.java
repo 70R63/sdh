@@ -5,10 +5,13 @@ import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadc
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.media.MediaService;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionRequest;
@@ -21,13 +24,19 @@ import de.hybris.sdh.core.enums.SdhTaxTypesEnum;
 import de.hybris.sdh.core.model.PseBankListCatalogModel;
 import de.hybris.sdh.core.model.PseTransactionsLogModel;
 import de.hybris.sdh.core.model.SDHPaymentMethodModel;
+import de.hybris.sdh.core.pojos.requests.ConsulPagosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimePagoRequest;
+import de.hybris.sdh.core.pojos.requests.OpcionCertiPagosImprimeRequest;
 import de.hybris.sdh.core.pojos.responses.ConsultaPagoDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ConsultaPagoResponse;
 import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
+import de.hybris.sdh.core.pojos.responses.ItemListaDeclaraciones;
+import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
+import de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
 import de.hybris.sdh.core.services.SDHCredibancoJwt;
+import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHImprimePagoService;
 import de.hybris.sdh.core.services.SDHNotificacionPagoService;
 import de.hybris.sdh.core.services.SDHPseTransactionsLogService;
@@ -45,6 +54,8 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaSe
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.NumberFormat;
@@ -62,6 +73,7 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -69,12 +81,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import sun.misc.BASE64Decoder;
+
 
 /**
  * @author Consultor
  *
  */
 @Controller
+
+
 @RequestMapping("/impuestos")
 public class PSEPaymentController extends AbstractPageController
 {
@@ -133,6 +149,15 @@ public class PSEPaymentController extends AbstractPageController
 
 	@Resource(name = "sdhImprimePagoService")
 	SDHImprimePagoService sdhImprimePagoService;
+
+	@Resource(name = "modelService")
+	private ModelService modelService;
+
+	@Resource(name = "mediaService")
+	private MediaService mediaService;
+
+	@Resource(name = "sdhDetalleGasolina")
+	SDHDetalleGasolina sdhDetalleGasolinaWS;
 
 	@Resource(name = "sdhCredibancoJwt")
 	SDHCredibancoJwt sdhCredibancoJwt;
@@ -307,6 +332,7 @@ public class PSEPaymentController extends AbstractPageController
 		final Map<String, Object> modelMap = model.asMap();
 		final CustomerData cutomer = (CustomerData) modelMap.get("user");
 		psePaymentForm.setCompleteName(cutomer.getCompleteName());
+		psePaymentForm.setBp(cutomer.getNumBP());
 
 		if (psePaymentForm != null)
 		{
@@ -425,13 +451,22 @@ public class PSEPaymentController extends AbstractPageController
 
 		String flagSuccessView = null;
 
+
+		final PSEPaymentForm psePaymentForm = this.getPSEPaymentForm(ticketId);
+
+		final Map<String, Object> modelMap = model.asMap();
+		final CustomerData cutomer = (CustomerData) modelMap.get("user");
+		psePaymentForm.setCompleteName(cutomer.getCompleteName());
+		psePaymentForm.setBp(cutomer.getNumBP());
+
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_RESPUESTA));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		final String codeResponse = pseTransactionsLogService.updateCredibancoTransaction(ticketId);
-		model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
+		model.addAttribute("psePaymentForm", psePaymentForm);
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 		model.addAttribute("disableFields", "true");
 
@@ -468,7 +503,7 @@ public class PSEPaymentController extends AbstractPageController
 		}
 
 		sdhNotificacionPagoService
-				.notifyTransactionWithStatusOkAndNotNotified(this.getPSEPaymentForm(ticketId).getNumeroDeReferencia());
+				.notifyTransactionWithStatusOkAndNotNotified(psePaymentForm.getNumeroDeReferencia());
 
 		return getViewForPage(model);
 	}
@@ -605,69 +640,113 @@ public class PSEPaymentController extends AbstractPageController
 	}
 
 
-	@RequestMapping(value = "/pagoEnLinea/pseResponse", method = RequestMethod.POST)
-	public String imprimirpagoPdf(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("psePaymentForm")
-	final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
+	@RequestMapping(value = "/pagoEnLinea/pseResponse/pagoImprimirForm", method = RequestMethod.GET)
+	@ResponseBody
+	public PSEPaymentForm imprimirpagoPdf(@ModelAttribute("psePaymentForm")
+	final PSEPaymentForm psePaymentForm, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- En imprimir comprobante pago POST --------------------------");
-		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		final ImprimePagoRequest imprimePagoRequest = new ImprimePagoRequest();
-		ImprimePagoResponse imprimePagoResponse = null;
+		System.out.println("---------------- En imprimir comprobante pago GET --------------------------");
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final ConsulPagosRequest listaDeclaracionesRequest = new ConsulPagosRequest();
+		ListaDeclaracionesResponse listaDeclaracionesResponse = null;
+		ItemListaDeclaraciones declaracion = new ItemListaDeclaraciones();
+		final OpcionCertiPagosImprimeRequest impresionRequest = new OpcionCertiPagosImprimeRequest();
+		OpcionCertiPagosImprimeResponse impresionResponse = null;
 
-		final String numBP = customerData.getNumBP();
-		final String cuentaContrato = "";
-		final String numObjeto = "";
-		final String clavePeriodo = "";
-		final String referencia = psePaymentForm.getNumeroDeReferencia();
-		final String fechaCompensa = "";
-		final String importe = psePaymentForm.getValorAPagar();
-		final String moneda = "";
-		final String numfactForm = "";
-		final String numDocPago = "";
-		final String refROP = "";
+		final Map<String, String> claveImpuestos = new HashMap<String, String>();
+		claveImpuestos.put("5101", "0001");
+		claveImpuestos.put("5103", "0002");
+		claveImpuestos.put("5102", "0003");
+		claveImpuestos.put("5131", "0004");
+		claveImpuestos.put("0108", "0005");
+		claveImpuestos.put("5106", "0006");
+		claveImpuestos.put("5132", "0006");
+		claveImpuestos.put("5154", "0007");
 
+
+		listaDeclaracionesRequest.setBp(psePaymentForm.getBp());
+		listaDeclaracionesRequest.setImpuesto(claveImpuestos.get(psePaymentForm.getTipoDeImpuesto()));
+		listaDeclaracionesRequest.setAnioGravable(psePaymentForm.getAnoGravable());
+		listaDeclaracionesRequest.setPeriodo(psePaymentForm.getPeriodo().substring(2));
+
+
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		try
 		{
-			imprimePagoRequest.setNumBP(numBP);
-			imprimePagoRequest.setCtaContrato(cuentaContrato);
-			imprimePagoRequest.setNumObjeto(numObjeto);
-			imprimePagoRequest.setClavePeriodo(clavePeriodo);
-			imprimePagoRequest.setReferencia(referencia);
-			imprimePagoRequest.setFechaCompensa(fechaCompensa);
-			imprimePagoRequest.setImporte(importe);
-			imprimePagoRequest.setMoneda(moneda);
-			imprimePagoRequest.setNumfactForm(numfactForm);
-			imprimePagoRequest.setNumDocPago(numDocPago);
-			imprimePagoRequest.setRefROP(refROP);
-
-			System.out.println("Request de docs/imprimePago: " + imprimePagoRequest);
-			final String resp = sdhImprimePagoService.imprimePago(imprimePagoRequest);
-			System.out.println("Response de docs/imprimePago: " + resp);
-
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			imprimePagoResponse = mapper.readValue(resp, ImprimePagoResponse.class);
-
+			System.out.println("Request para docs/consulPagos: " + listaDeclaracionesRequest);
+			listaDeclaracionesResponse = gasolinaService.consultaListaDeclaraciones_consulPagos(listaDeclaracionesRequest,
+					sdhDetalleGasolinaWS, LOG);
+			System.out.println("Request para docs/consulPagos: " + listaDeclaracionesResponse);
 		}
 		catch (final Exception e)
 		{
-			LOG.error("error al leer in: " + e.getMessage());
-			GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
-			redirectModel.addFlashAttribute("error", "sinPdf");
-			return "redirect:/impuestos/pagoEnLinea/pseResponse";
+			LOG.error("error servicio ConsulPagos: " + e.getMessage());
 
 		}
-		redirectModel.addFlashAttribute("imprimePagoResponse", imprimePagoResponse);
-		redirectModel.addFlashAttribute("psePaymentFormResp", psePaymentForm);
-		redirectModel.addFlashAttribute("estatus", "impreso");
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_RESPUESTA));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-		return "redirect:/impuestos/pagoEnLinea/pseResponse";
+
+		for (final ItemListaDeclaraciones declaracionItem : listaDeclaracionesResponse.getDeclaraciones())
+		{
+			if (declaracionItem.getReferencia().contains(psePaymentForm.getNumeroDeReferencia()))
+			{
+				declaracion = declaracionItem;
+			}
+		}
+
+
+		if (declaracion != null)
+		{
+			impresionRequest.setNumBP(declaracion.getNumBP());
+			impresionRequest.setNumObjeto(declaracion.getNumObjeto());
+			impresionRequest.setCtaContrato(declaracion.getCtaContrato());
+			impresionRequest.setAnoGravable(psePaymentForm.getAnoGravable());
+			impresionRequest.setPeriodo(psePaymentForm.getPeriodo());
+			impresionRequest.setNumDoc(psePaymentForm.getNoIdentificacion());
+			impresionRequest.setTipoDoc(psePaymentForm.getTipoDeIdentificacion());
+			impresionRequest.setClavePeriodo(psePaymentForm.getPeriodo().substring(2));
+			impresionRequest.setImporte(declaracion.getImporte());
+			impresionRequest.setReferencia(declaracion.getReferencia());
+			impresionRequest.setFechaCompensa(declaracion.getFechaCompensa());
+			impresionRequest.setMoneda(declaracion.getMoneda());
+			impresionRequest.setNumDocPago(declaracion.getNumDocPago());
+			impresionRequest.setNumfactForm(declaracion.getNumfactForm());
+
+
+			System.out.println("Request para docs/imprimePago: " + impresionRequest);
+			impresionResponse = gasolinaService.certiPagosImprimir(impresionRequest, sdhDetalleGasolinaWS, LOG);
+			System.out.println("Response de docs/imprimePago: " + impresionResponse);
+
+
+			if (gasolinaService.ocurrioErrorImprimePago(impresionResponse) != true)
+			{
+				byte[] decodedBytes;
+				try
+				{
+					decodedBytes = new BASE64Decoder().decodeBuffer(impresionResponse.getPdf());
+					final String fileName = "declaracion" + "-" + psePaymentForm.getPeriodo() + "-" + declaracion.getNumBP() + ".pdf";
+
+					final InputStream is = new ByteArrayInputStream(decodedBytes);
+
+					final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
+					mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
+					mediaModel.setDeleteByCronjob(Boolean.TRUE);
+					modelService.save(mediaModel);
+					mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
+					modelService.refresh(mediaModel);
+
+					psePaymentForm.setUrlDownload(mediaModel.getDownloadURL());
+				}
+				catch (final Exception e)
+				{
+				}
+			}
+		}
+
+		return psePaymentForm;
 
 	}
 
