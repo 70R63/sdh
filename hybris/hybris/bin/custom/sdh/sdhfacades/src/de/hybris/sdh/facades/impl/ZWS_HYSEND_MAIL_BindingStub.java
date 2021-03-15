@@ -12,6 +12,7 @@ public class ZWS_HYSEND_MAIL_BindingStub extends org.apache.axis.client.Stub imp
     private java.util.Vector cachedSerQNames = new java.util.Vector();
     private java.util.Vector cachedSerFactories = new java.util.Vector();
     private java.util.Vector cachedDeserFactories = new java.util.Vector();
+    private final static String URN_SAP_DOCUMENT_FUNCTION = "urn:sap-com:document:sap:rfc:functions";
 
     static org.apache.axis.description.OperationDesc [] _operations;
 
@@ -25,15 +26,15 @@ public class ZWS_HYSEND_MAIL_BindingStub extends org.apache.axis.client.Stub imp
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("ZcrmfHysendMail");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "PiEmail"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:sap-com:document:sap:rfc:functions", "char241"), java.lang.String.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "PiEmail"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName(URN_SAP_DOCUMENT_FUNCTION, "char241"), java.lang.String.class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "PiMessage"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:sap-com:document:sap:rfc:functions", "string"), java.lang.String.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "PiMessage"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName(URN_SAP_DOCUMENT_FUNCTION, "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "PiSubject"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:sap-com:document:sap:rfc:functions", "string"), java.lang.String.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "PiSubject"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName(URN_SAP_DOCUMENT_FUNCTION, "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "EpCode"), org.apache.axis.description.ParameterDesc.OUT, new javax.xml.namespace.QName("urn:sap-com:document:sap:rfc:functions", "char2"), java.lang.String.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "EpCode"), org.apache.axis.description.ParameterDesc.OUT, new javax.xml.namespace.QName(URN_SAP_DOCUMENT_FUNCTION, "char2"), java.lang.String.class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "EpMessage"), org.apache.axis.description.ParameterDesc.OUT, new javax.xml.namespace.QName("urn:sap-com:document:sap:rfc:functions", "string"), java.lang.String.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "EpMessage"), org.apache.axis.description.ParameterDesc.OUT, new javax.xml.namespace.QName(URN_SAP_DOCUMENT_FUNCTION, "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(org.apache.axis.encoding.XMLType.AXIS_VOID);
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
@@ -71,21 +72,21 @@ public class ZWS_HYSEND_MAIL_BindingStub extends org.apache.axis.client.Stub imp
             java.lang.Class simpledf = org.apache.axis.encoding.ser.SimpleDeserializerFactory.class;
             java.lang.Class simplelistsf = org.apache.axis.encoding.ser.SimpleListSerializerFactory.class;
             java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
-            qName = new javax.xml.namespace.QName("urn:sap-com:document:sap:rfc:functions", "char2");
+            qName = new javax.xml.namespace.QName(URN_SAP_DOCUMENT_FUNCTION, "char2");
             cachedSerQNames.add(qName);
             cls = java.lang.String.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(org.apache.axis.encoding.ser.BaseSerializerFactory.createFactory(org.apache.axis.encoding.ser.SimpleSerializerFactory.class, cls, qName));
             cachedDeserFactories.add(org.apache.axis.encoding.ser.BaseDeserializerFactory.createFactory(org.apache.axis.encoding.ser.SimpleDeserializerFactory.class, cls, qName));
 
-            qName = new javax.xml.namespace.QName("urn:sap-com:document:sap:rfc:functions", "char241");
+            qName = new javax.xml.namespace.QName(URN_SAP_DOCUMENT_FUNCTION, "char241");
             cachedSerQNames.add(qName);
             cls = java.lang.String.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(org.apache.axis.encoding.ser.BaseSerializerFactory.createFactory(org.apache.axis.encoding.ser.SimpleSerializerFactory.class, cls, qName));
             cachedDeserFactories.add(org.apache.axis.encoding.ser.BaseDeserializerFactory.createFactory(org.apache.axis.encoding.ser.SimpleDeserializerFactory.class, cls, qName));
 
-            qName = new javax.xml.namespace.QName("urn:sap-com:document:sap:rfc:functions", "string");
+            qName = new javax.xml.namespace.QName(URN_SAP_DOCUMENT_FUNCTION, "string");
             cachedSerQNames.add(qName);
             cls = java.lang.String.class;
             cachedSerClasses.add(cls);

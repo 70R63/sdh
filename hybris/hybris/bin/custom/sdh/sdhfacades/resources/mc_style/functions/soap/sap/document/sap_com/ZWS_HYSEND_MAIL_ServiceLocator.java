@@ -8,6 +8,7 @@
 package mc_style.functions.soap.sap.document.sap_com;
 
 public class ZWS_HYSEND_MAIL_ServiceLocator extends org.apache.axis.client.Service implements mc_style.functions.soap.sap.document.sap_com.ZWS_HYSEND_MAIL_Service {
+    private final static String ZWS_HYSEND_MAIL = "ZWS_HYSEND_MAIL";
 
     public ZWS_HYSEND_MAIL_ServiceLocator() {
     }
@@ -29,7 +30,7 @@ public class ZWS_HYSEND_MAIL_ServiceLocator extends org.apache.axis.client.Servi
     }
 
     // The WSDD service name defaults to the port name.
-    private java.lang.String ZWS_HYSEND_MAILWSDDServiceName = "ZWS_HYSEND_MAIL";
+    private java.lang.String ZWS_HYSEND_MAILWSDDServiceName = ZWS_HYSEND_MAIL;
 
     public java.lang.String getZWS_HYSEND_MAILWSDDServiceName() {
         return ZWS_HYSEND_MAILWSDDServiceName;
@@ -94,7 +95,7 @@ public class ZWS_HYSEND_MAIL_ServiceLocator extends org.apache.axis.client.Servi
             return getPort(serviceEndpointInterface);
         }
         java.lang.String inputPortName = portName.getLocalPart();
-        if ("ZWS_HYSEND_MAIL".equals(inputPortName)) {
+        if (ZWS_HYSEND_MAIL.equals(inputPortName)) {
             return getZWS_HYSEND_MAIL();
         }
         else  {
@@ -105,7 +106,7 @@ public class ZWS_HYSEND_MAIL_ServiceLocator extends org.apache.axis.client.Servi
     }
 
     public javax.xml.namespace.QName getServiceName() {
-        return new javax.xml.namespace.QName("urn:sap-com:document:sap:soap:functions:mc-style", "ZWS_HYSEND_MAIL");
+        return new javax.xml.namespace.QName("urn:sap-com:document:sap:soap:functions:mc-style", ZWS_HYSEND_MAIL);
     }
 
     private java.util.HashSet ports = null;
@@ -113,7 +114,7 @@ public class ZWS_HYSEND_MAIL_ServiceLocator extends org.apache.axis.client.Servi
     public java.util.Iterator getPorts() {
         if (ports == null) {
             ports = new java.util.HashSet();
-            ports.add(new javax.xml.namespace.QName("urn:sap-com:document:sap:soap:functions:mc-style", "ZWS_HYSEND_MAIL"));
+            ports.add(new javax.xml.namespace.QName("urn:sap-com:document:sap:soap:functions:mc-style", ZWS_HYSEND_MAIL));
         }
         return ports.iterator();
     }
@@ -123,7 +124,7 @@ public class ZWS_HYSEND_MAIL_ServiceLocator extends org.apache.axis.client.Servi
     */
     public void setEndpointAddress(java.lang.String portName, java.lang.String address) throws javax.xml.rpc.ServiceException {
         
-if ("ZWS_HYSEND_MAIL".equals(portName)) {
+if (ZWS_HYSEND_MAIL.equals(portName)) {
             setZWS_HYSEND_MAILEndpointAddress(address);
         }
         else 
