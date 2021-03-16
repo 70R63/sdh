@@ -14,6 +14,8 @@ import de.hybris.sdh.core.services.SDHNotificacionPagoService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
@@ -235,7 +237,18 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			pseNotificacionDePagoRequest.setRefPago(transaction.getNumeroDeReferencia());
 			pseNotificacionDePagoRequest.setVlrRecuado(transaction.getValorAPagar());
 
-			pseNotificacionDePagoRequest.setNumOperacion(transaction.getTrazabilityCode());
+			final Pattern pattern = Pattern.compile("(nus=)(\\d+)");
+			final Matcher matcher = pattern.matcher(transaction.getBankUrl());
+
+			if (matcher.find())
+			{
+				pseNotificacionDePagoRequest.setNumOperacion(matcher.group(2));
+			}
+			else
+			{
+				pseNotificacionDePagoRequest.setNumOperacion(transaction.getTrazabilityCode());
+			}
+
 			pseNotificacionDePagoRequest.setObjPago(transaction.getObjPago());
 
 
