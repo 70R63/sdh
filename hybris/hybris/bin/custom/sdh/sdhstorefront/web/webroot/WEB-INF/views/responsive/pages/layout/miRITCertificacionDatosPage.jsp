@@ -5,9 +5,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="consultas"
+<%@ taglib prefix="edoCuenta"
 	tagdir="/WEB-INF/tags/responsive/edoCuenta"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
+<template:sdhJavascriptVariables4/>
 
 <div class="loader"></div>
 <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
@@ -44,7 +45,7 @@ window.onload = function() {
 	$(".loader").fadeOut("slow");
 }
 	function downloadPDF(pdf) {
-		debugger;
+// 		debugger;
 		if (pdf) {
 			const linkSource = 'data:application/pdf;base64,' + pdf;
 			const downloadLink = document.createElement("a");
@@ -190,16 +191,12 @@ window.onload = function() {
 </button>
 </div>
 
-<consultas:edoCuentaImprimir mostrarBotonCertiRit="true" />
+<edoCuenta:edoCuentaImprimir mostrarBotonCertiRit="true" />
 
 
 <script type="text/javascript">
 function mostrarTabla(claveImpuesto){
-	var botonImprimir = document.getElementById('ImprimirPopUp');
-	if(botonImprimir != null){
-		$("#ImprimirPopUp").data("impuesto",claveImpuesto);
-		botonImprimir.click();
-	}
+	ACC.oblipend.llenarTablas_CertificacionDatos(claveImpuesto);
 	
 }
 
