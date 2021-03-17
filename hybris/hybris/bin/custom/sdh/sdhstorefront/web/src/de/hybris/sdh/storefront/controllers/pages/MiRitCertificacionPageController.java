@@ -32,6 +32,7 @@ import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.EdoCuentaForm;
+import de.hybris.sdh.storefront.forms.EdoCuentaFormGlobal;
 import de.hybris.sdh.storefront.forms.MiRitCertificacionForm;
 import de.hybris.sdh.storefront.forms.MiRitForm;
 import de.hybris.sdh.storefront.forms.PredialForm;
@@ -58,6 +59,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -211,9 +213,9 @@ public class MiRitCertificacionPageController extends AbstractPageController
 		final String referrer = request.getHeader("referer");
 
 		final MiRitCertificacionForm miRitCertificacionForm = new MiRitCertificacionForm();
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		final CertificaRITRequest certificaRITRequest = new CertificaRITRequest();
+		//		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		//		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		//		final CertificaRITRequest certificaRITRequest = new CertificaRITRequest();
 
 
 		if (error == "sinPdf")
@@ -243,9 +245,219 @@ public class MiRitCertificacionPageController extends AbstractPageController
 
 
 
+		//		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
+		//		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
+		//		model.addAttribute("dataForm", dataForm);
+		//
+		//		final EdoCuentaForm ctaForm = new EdoCuentaForm();
+		//		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		//		final EdoCuentaRequest edoCuentaRequest = new EdoCuentaRequest();
+		//
+		//		ctaForm.setCompleName(customerData.getCompleteName());
+		//		ctaForm.setTipoDoc(customerData.getDocumentType());
+		//		ctaForm.setNumBP(customerModel.getNumBP());
+		//		ctaForm.setNumDoc(customerData.getDocumentNumber());
+		//
+		//		try
+		//		{
+		//			edoCuentaRequest.setBp(customerModel.getNumBP());
+		//
+		//			final ObjectMapper mapper = new ObjectMapper();
+		//			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		//
+		//			final EdoCuentaResponse edoCuentaResponse = mapper.readValue(sdhEdoCuentaService.detalleEdoCta(edoCuentaRequest),
+		//					EdoCuentaResponse.class);
+		//
+		//
+		//			ctaForm.setCompleName(customerData.getCompleteName());
+		//			ctaForm.setTipoDoc(customerData.getDocumentType());
+		//			ctaForm.setNumBP(customerModel.getNumBP());
+		//			ctaForm.setTasaInteres(edoCuentaResponse.getTasaInteres());
+		//			ctaForm.setPredialSaldoCargo(edoCuentaResponse.getNewPredialSaldoCargo());
+		//			ctaForm.setPredialSaldoFavor(edoCuentaResponse.getNewPredialSaldoFavor());
+		//			ctaForm.setiCASaldoCargo(edoCuentaResponse.getNewICASaldoCargo());
+		//			ctaForm.setiCASaldoFavor(edoCuentaResponse.getNewICASaldoFavor());
+		//			ctaForm.setVehicularSaldoCargo(edoCuentaResponse.getNewVehicularSaldoCargo());
+		//			ctaForm.setVehicularSaldoFavor(edoCuentaResponse.getNewVehicularSaldoFavor());
+		//			ctaForm.setDelineacionSaldoCargo(edoCuentaResponse.getNewDelineacionSaldoCargo());
+		//			ctaForm.setDelineacionSaldoFavor(edoCuentaResponse.getNewDelineacionSaldoFavor());
+		//			ctaForm.setGasolinaSaldoCargo(edoCuentaResponse.getNewGasolinaSaldoCargo());
+		//			ctaForm.setGasolinaSaldoFavor(edoCuentaResponse.getNewGasolinaSaldoFavor());
+		//			ctaForm.setPublicidadSaldoCargo(edoCuentaResponse.getNewPublicidadSaldoCargo());
+		//			ctaForm.setPublicidadSaldoFavor(edoCuentaResponse.getNewPublicidadSaldoFavor());
+		//			if (edoCuentaResponse.getPredial() != null && !edoCuentaResponse.getPredial().isEmpty())
+		//			{
+		//				//				ctaForm.setPredial(edoCuentaResponse.getPredial().stream()
+		//				//						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCHIP())).collect(Collectors.toList()));
+		//				ctaForm.setPredial(edoCuentaResponse.getPredial());
+		//			}
+		//
+		//			//ctaForm.setPredial(edoCuentaResponse.getPredial());
+		//			ctaForm.setTablaICA(edoCuentaResponse.getTablaICA());
+		//
+		//			if (edoCuentaResponse.getTablaVehicular() != null && !edoCuentaResponse.getTablaVehicular().isEmpty())
+		//			{
+		//				ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular().stream()
+		//						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getPlaca())).collect(Collectors.toList()));
+		//			}
+		//			//ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular());
+		//			if (edoCuentaResponse.getTablaDelineacion() != null && !edoCuentaResponse.getTablaDelineacion().isEmpty())
+		//			{
+		//				ctaForm.setTablaDelineacion(edoCuentaResponse.getTablaDelineacion().stream()
+		//						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCDU())).collect(Collectors.toList()));
+		//			}
+		//			//ctaForm.setTablaDelineacion(edoCuentaResponse.getTablaDelineacion());
+		//			ctaForm.setTablaGasolina(edoCuentaResponse.getTablaGasolina());
+		//			ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad());
+		//
+		//			final Date date = new Date();
+		//
+		//			//Caso 2: obtener la fecha y salida por pantalla con formato:
+		//			final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		//			System.out.println("Fecha: " + dateFormat.format(date));
+		//
+		//			ctaForm.setFechageneracion(dateFormat.format(date));
+		//
+		//		}
+		//		catch (final Exception e)
+		//		{
+		//			LOG.error("there was an error while parsing redsocial JSON");
+		//			LOG.error("Error en el servicio: " + e.getMessage());
+		//		}
+
+		//		//		Consumo de pedial
+		//		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
+		//		final PredialForm predialFormIni = new PredialForm();
+		//		final VehiculosInfObjetoForm vehiculosForm = new VehiculosInfObjetoForm();
+		//		final InfoDelineacion infoDelineacion = new InfoDelineacion();
+		//		final MiRitForm miRitForm = new MiRitForm();
+		//		final PublicidadForm publicidadForm = new PublicidadForm();
+		//
+		//		//		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		//		consultaContribuyenteBPRequest.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
+		//
+		//		final ObjectMapper mapper = new ObjectMapper();
+		//		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		//
+		//		try
+		//		{
+		//			sdhConsultaContribuyenteBPResponse = mapper.readValue(
+		//					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+		//					SDHValidaMailRolResponse.class);
+		//			predialFormIni.setPredial(sdhConsultaContribuyenteBPResponse.getPredial());
+		//
+		//
+		//			if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
+		//					&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getVehicular()))
+		//			{
+		//				vehiculosForm.setImpvehicular(sdhConsultaContribuyenteBPResponse.getVehicular().stream()
+		//						.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
+		//			}
+		//
+		//			if (sdhConsultaContribuyenteBPResponse.getDelineacion() != null
+		//					&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getDelineacion()))
+		//			{
+		//				miRitForm.setDelineacion(sdhConsultaContribuyenteBPResponse.getDelineacion().stream()
+		//						.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
+		//			}
+		//
+		//			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
+		//					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
+		//			{
+		//				miRitForm.setGasolina(sdhConsultaContribuyenteBPResponse.getGasolina().stream()
+		//						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumDoc())).collect(Collectors.toList()));
+		//			}
+		//
+		//
+		//
+		//			if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
+		//			{
+		//				final List<SDHExteriorPublicityTaxData> exteriorPublicityList = customerData.getExteriorPublicityTaxList();
+		//
+		//				final List<ImpuestoPublicidadExterior> listImpuestoPublicdadExterior = new ArrayList<ImpuestoPublicidadExterior>();
+		//
+		//				for (final SDHExteriorPublicityTaxData eachPublicityTax : exteriorPublicityList)
+		//				{
+		//					final ImpuestoPublicidadExterior eachImpuestoPE = new ImpuestoPublicidadExterior();
+		//
+		//					eachImpuestoPE.setNumObjeto(eachPublicityTax.getObjectNumber());
+		//					eachImpuestoPE.setNumResolu(eachPublicityTax.getResolutionNumber());
+		//					eachImpuestoPE.setTipoValla(eachPublicityTax.getFenceType());
+		//					eachImpuestoPE.setAnoGravable(eachPublicityTax.getAnoGravable());
+		//					if ("VALLA VEHICULOS".equalsIgnoreCase(eachPublicityTax.getFenceType())
+		//							|| "VALLA VEHíCULOS".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+		//					{
+		//						eachImpuestoPE.setTipoVallaCode("02");
+		//					}
+		//					else if ("Valla Tubular de Obra".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+		//					{
+		//						eachImpuestoPE.setTipoVallaCode("03");
+		//					}
+		//					else if ("Valla de Obra Convencional".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+		//					{
+		//						eachImpuestoPE.setTipoVallaCode("04");
+		//					}
+		//					else if ("Valla Tubular Comercial".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+		//					{
+		//						eachImpuestoPE.setTipoVallaCode("01");
+		//					}
+		//					else if ("Pantalla LED".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+		//					{
+		//						eachImpuestoPE.setTipoVallaCode("05");
+		//					}
+		//					listImpuestoPublicdadExterior.add(eachImpuestoPE);
+		//				}
+		//
+		//				publicidadForm.setPublicidadExt(listImpuestoPublicdadExterior);
+		//
+		//			}
+		//
+		//			if (sdhConsultaContribuyenteBPResponse.getIca() != null
+		//					&& StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getIca().getNumObjeto()))
+		//			{
+		//				miRitForm.setImpuestoICA(sdhConsultaContribuyenteBPResponse.getIca());
+		//			}
+		//
+		//		}
+		//		catch (final IOException e)
+		//		{
+		//			e.printStackTrace();
+		//		}
+
+
+
+		//		model.addAttribute("dataForm", miRitForm);
+		//		model.addAttribute("vehiculosForm", vehiculosForm);
+		//		model.addAttribute("predial", predialFormIni);
+		//		model.addAttribute("ctaForm", ctaForm);
+		//		model.addAttribute("publicidadForm", publicidadForm);
+
+
+
+
+
+		returnURL = getViewForPage(model);
+
+		return returnURL;
+	}
+
+	@RequestMapping(value = "/contribuyentes/mirit/consultaEstadoCuenta", method = RequestMethod.GET)
+	@ResponseBody
+	public EdoCuentaFormGlobal consultaEstadoCuenta(final HttpServletRequest request)
+	{
+		final EdoCuentaFormGlobal edoCuentaGlobal = new EdoCuentaFormGlobal();
+		final String referrer = request.getHeader("referer");
+
+
+		final MiRitCertificacionForm miRitCertificacionForm = new MiRitCertificacionForm();
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final CertificaRITRequest certificaRITRequest = new CertificaRITRequest();
+
+
+
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
-		model.addAttribute("dataForm", dataForm);
 
 		final EdoCuentaForm ctaForm = new EdoCuentaForm();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
@@ -263,8 +475,12 @@ public class MiRitCertificacionPageController extends AbstractPageController
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			final EdoCuentaResponse edoCuentaResponse = mapper.readValue(sdhEdoCuentaService.detalleEdoCta(edoCuentaRequest),
-					EdoCuentaResponse.class);
+			String responseStr = sdhEdoCuentaService.detalleEdoCta(edoCuentaRequest);
+			responseStr = responseStr.replace(",\"\"]},{\"detalleReteica\":[\"\",\"\"]}", "]}");
+			responseStr = responseStr.replace(",{\"detalleReteica\":[\"\",\"\"]}", "");
+			responseStr = responseStr.replace("{\"detalleReteica\":[\"\",\"\"]}", "");
+
+			final EdoCuentaResponse edoCuentaResponse = mapper.readValue(responseStr, EdoCuentaResponse.class);
 
 
 			ctaForm.setCompleName(customerData.getCompleteName());
@@ -285,12 +501,12 @@ public class MiRitCertificacionPageController extends AbstractPageController
 			ctaForm.setPublicidadSaldoFavor(edoCuentaResponse.getNewPublicidadSaldoFavor());
 			if (edoCuentaResponse.getPredial() != null && !edoCuentaResponse.getPredial().isEmpty())
 			{
-				//				ctaForm.setPredial(edoCuentaResponse.getPredial().stream()
-				//						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCHIP())).collect(Collectors.toList()));
+								ctaForm.setPredial(edoCuentaResponse.getPredial().stream()
+										.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCHIP())).collect(Collectors.toList()));
 				ctaForm.setPredial(edoCuentaResponse.getPredial());
 			}
 
-			//ctaForm.setPredial(edoCuentaResponse.getPredial());
+			ctaForm.setPredial(edoCuentaResponse.getPredial());
 			ctaForm.setTablaICA(edoCuentaResponse.getTablaICA());
 
 			if (edoCuentaResponse.getTablaVehicular() != null && !edoCuentaResponse.getTablaVehicular().isEmpty())
@@ -298,19 +514,19 @@ public class MiRitCertificacionPageController extends AbstractPageController
 				ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular().stream()
 						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getPlaca())).collect(Collectors.toList()));
 			}
-			//ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular());
+			ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular());
 			if (edoCuentaResponse.getTablaDelineacion() != null && !edoCuentaResponse.getTablaDelineacion().isEmpty())
 			{
 				ctaForm.setTablaDelineacion(edoCuentaResponse.getTablaDelineacion().stream()
 						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCDU())).collect(Collectors.toList()));
 			}
-			//ctaForm.setTablaDelineacion(edoCuentaResponse.getTablaDelineacion());
+			ctaForm.setTablaDelineacion(edoCuentaResponse.getTablaDelineacion());
 			ctaForm.setTablaGasolina(edoCuentaResponse.getTablaGasolina());
 			ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad());
 
 			final Date date = new Date();
 
-			//Caso 2: obtener la fecha y salida por pantalla con formato:
+			//			Caso 2: obtener la fecha y salida por pantalla con formato:
 			final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			System.out.println("Fecha: " + dateFormat.format(date));
 
@@ -323,7 +539,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 			LOG.error("Error en el servicio: " + e.getMessage());
 		}
 
-		//		Consumo de pedial
+//				Consumo de pedial
 		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
 		final PredialForm predialFormIni = new PredialForm();
 		final VehiculosInfObjetoForm vehiculosForm = new VehiculosInfObjetoForm();
@@ -331,7 +547,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 		final MiRitForm miRitForm = new MiRitForm();
 		final PublicidadForm publicidadForm = new PublicidadForm();
 
-		//		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		//				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		consultaContribuyenteBPRequest.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
 
 		final ObjectMapper mapper = new ObjectMapper();
@@ -423,20 +639,13 @@ public class MiRitCertificacionPageController extends AbstractPageController
 		}
 
 
+		edoCuentaGlobal.setCtaForm(ctaForm);
+		edoCuentaGlobal.setDataForm(miRitForm);
+		edoCuentaGlobal.setVehiculosForm(vehiculosForm);
+		edoCuentaGlobal.setPredial(predialFormIni);
+		edoCuentaGlobal.setPublicidadForm(publicidadForm);
 
-		model.addAttribute("dataForm", miRitForm);
-		model.addAttribute("vehiculosForm", vehiculosForm);
-		model.addAttribute("predial", predialFormIni);
-		model.addAttribute("ctaForm", ctaForm);
-		model.addAttribute("publicidadForm", publicidadForm);
-
-
-
-
-
-		returnURL = getViewForPage(model);
-
-		return returnURL;
+		return edoCuentaGlobal;
 	}
 
 

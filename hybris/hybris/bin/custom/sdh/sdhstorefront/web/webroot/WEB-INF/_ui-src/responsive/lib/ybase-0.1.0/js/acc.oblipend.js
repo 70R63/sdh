@@ -85,7 +85,7 @@ ACC.oblipend = {
 	bindPopupPDF : function(){
  $(document).on("click", "#ImprimirPopUp", function(e) {
  e.preventDefault();
-
+debugger;
  ACC.publicidadexterior.bindDataTable_ID_refresh("#example");
 	var impuestoSelc = $(this).data("impuesto");
 	var tablePred = document.getElementsByClassName("table ImprimirPredial");
@@ -591,5 +591,213 @@ ACC.oblipend = {
 		}
 		
 		return flagValidacion;
+	},
+	
+	
+	llenarTablas_CertificacionDatos : function (claveImpuesto){
+		ACC.spinner.show();
+		
+		
+		$.ajax({
+			url: ACC.consultaEstadoCuentaURL,
+			type: "GET",
+			success: function (dataResponse) {
+				ACC.spinner.close();
+				switch (claveImpuesto) {
+				case "1":
+					ACC.oblipend.llenarTabla_CD_1(".ImprimirPredial",dataResponse); //predial					
+					break;
+				case "2":
+					ACC.oblipend.llenarTabla_CD_2(".ImprimirVehicular",dataResponse); //vehicular
+					break;
+				case "3":
+					ACC.oblipend.llenarTabla_CD_3(".ImprimirIca",dataResponse); //ica
+					break;
+				case "4":
+					ACC.oblipend.llenarTabla_CD_4(".ImprimirReteIca",dataResponse); //reteica
+					break;
+				case "5":
+					ACC.oblipend.llenarTabla_CD_5(".ImprimirGasolina",dataResponse); //gasolina
+					break;
+				case "6":
+					ACC.oblipend.llenarTabla_CD_6(".ImprimirDelineacion",dataResponse); //delineacion
+					break;
+				case "7":
+					ACC.oblipend.llenarTabla_CD_7(".ImprimirPublicidad",dataResponse); //publicidad
+					break;
+
+				default:
+					break;
+				}
+		
+				var botonImprimir = document.getElementById('ImprimirPopUp');
+				if(botonImprimir != null){
+					$("#ImprimirPopUp").data("impuesto",claveImpuesto);
+					botonImprimir.click();
+				}
+			            	
+			},
+		    error: function () {
+		    	ACC.spinner.close();
+		    	}
+		});
+		
+		
+	},
+	
+	
+	llenarTabla_CD_1 : function (claveCSSTabla,dataResponse){
+
+		$(claveCSSTabla+" tbody tr").remove();
+		var rowContent = "";
+		var chip = "";
+		var matrInmobiliaria = "";
+
+		
+		$.each(dataResponse.predial.predial, function( index, current ) {
+			
+			if(current.CHIP != '' || current.matrInmobiliaria != ''){
+				chip = "";
+				matrInmobiliaria = "";
+				
+				if(current.CHIP != null){
+					chip = current.CHIP
+				}
+				if(current.matrInmobiliaria){
+					matrInmobiliaria = current.matrInmobiliaria
+				}
+				
+				rowContent=
+					'<tr>'+
+					'<td>' + chip + '</td>' + 
+					'<td>' + matrInmobiliaria + '</td>' + 
+					'<td>' + current.direccionPredio + '</td>' + 
+					'<td><label onclick="generarCertiRit(\''+ current.numObjeto + '\')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>'+
+					'</tr>';
+				
+				$(claveCSSTabla+" tbody").append(rowContent);				
+			}
+
+		});
+		
+	},
+	
+	
+	llenarTabla_CD_2 : function (claveCSSTabla,dataResponse){
+
+		$(claveCSSTabla+" tbody tr").remove();
+		var rowContent = "";
+		
+		$.each(dataResponse.vehiculosForm.impvehicular, function( index, eachVehiculo ) {
+			var marcaDescripcion = "";
+			marca_vehi.forEach(function (eachMAR) {
+				if(eachMAR.id_marca == eachVehiculo.marca)
+				{
+					marcaDescripcion= eachMAR.item_marca;
+					return false;
+				}
+			});
+			
+			rowContent=
+				'<tr>'+
+				'<td>' + eachVehiculo.placa + '</td>' + 
+				'<td>' + marcaDescripcion + '</td>' + 
+				'<td><label onclick="generarCertiRit(\''+ eachVehiculo.numObjeto + '\')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>'+
+				'</tr>';
+			
+			$(claveCSSTabla+" tbody").append(rowContent);
+		});
+		
+	},
+	
+	
+	llenarTabla_CD_3 : function (claveCSSTabla,dataResponse){
+
+		$(claveCSSTabla+" tbody tr").remove();
+
+		var rowContent=
+			'<tr>'+
+			'<td>'+ dataResponse.ctaForm.tipoDoc + '</td>' +
+			'<td>'+ dataResponse.ctaForm.numDoc + '</td>' +
+			'<td><label onclick="generarCertiRit(\''+ dataResponse.dataForm.impuestoICA.numObjeto + '\')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>'+
+			'</tr>';
+		
+		$(claveCSSTabla+" tbody").append(rowContent);
+	},
+	
+	
+	llenarTabla_CD_4 : function (claveCSSTabla,dataResponse){
+
+		$(claveCSSTabla+" tbody tr").remove();
+
+		var rowContent=
+			'<tr>'+
+			'<td>'+ dataResponse.ctaForm.tipoDoc + '</td>' +
+			'<td>'+ dataResponse.ctaForm.numDoc + '</td>' +
+			'<td><label onclick="generarCertiRit(\''+ dataResponse.ctaForm.tablaReteica.numObjeto + '\')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>'+
+			'</tr>';
+		
+		$(claveCSSTabla+" tbody").append(rowContent);
+	},
+	
+	
+	llenarTabla_CD_5 : function (claveCSSTabla,dataResponse){
+
+		$(claveCSSTabla+" tbody tr").remove();
+		var rowContent = "";
+		
+		$.each(dataResponse.dataForm.gasolina, function( index, eachgas ) {
+			rowContent=
+				'<tr>'+
+				'<td>' + eachgas.tipoDoc + '</td>' + 
+				'<td>' + eachgas.numDoc + '</td>' + 
+				'<td><label onclick="generarCertiRit(\''+ eachgas.numObjeto + '\')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>'+
+				'</tr>';
+			
+			$(claveCSSTabla+" tbody").append(rowContent);
+		});
+		
+	},
+	
+	
+	llenarTabla_CD_6 : function (claveCSSTabla,dataResponse){
+
+		$(claveCSSTabla+" tbody tr").remove();
+		var rowContent = "";
+		
+		$.each(dataResponse.dataForm.delineacion, function( index, delineacion ) {
+			if(delineacion.cdu != ""){
+				rowContent=
+					'<tr>'+
+					'<td>' + delineacion.cdu + '</td>' + 
+					'<td><label onclick="generarCertiRit(\''+ delineacion.numObjeto + '\')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>'+
+					'</tr>';
+				
+				$(claveCSSTabla+" tbody").append(rowContent);				
+			}
+		});
+		
+	},
+	
+	
+	llenarTabla_CD_7 : function (claveCSSTabla,dataResponse){
+
+		$(claveCSSTabla+" tbody tr").remove();
+		var rowContent = "";
+		
+		$.each(dataResponse.publicidadForm.publicidadExt, function( index, eachPubExtTax ) {
+			rowContent=
+				'<tr>'+
+				'<td>' + eachPubExtTax.numResolu + '</td>' + 
+				'<td>' + eachPubExtTax.tipoValla + '</td>' + 
+				'<td><label onclick="generarCertiRit(\''+ eachPubExtTax.numObjeto + '\')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>'+
+				'</tr>';
+			
+			$(claveCSSTabla+" tbody").append(rowContent);
+		});
+		
 	}
+	
+	
+	
 };
