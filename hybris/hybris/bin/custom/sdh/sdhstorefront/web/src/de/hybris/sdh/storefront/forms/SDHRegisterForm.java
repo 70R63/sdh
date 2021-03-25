@@ -14,6 +14,7 @@ public class SDHRegisterForm extends RegisterForm
 	private String confirmEmail;
 	private Boolean useEmailForNotifications;
 	private Boolean useInformationForInstitutionalPurposes;
+	private String numBP;
 
 	/**
 	 * @return the confirmEmail
@@ -64,6 +65,23 @@ public class SDHRegisterForm extends RegisterForm
 	public void setUseInformationForInstitutionalPurposes(final Boolean useInformationForInstitutionalPurposes)
 	{
 		this.useInformationForInstitutionalPurposes = useInformationForInstitutionalPurposes;
+	}
+
+	/**
+	 * @return the numBP
+	 */
+	public String getNumBP()
+	{
+		return numBP;
+	}
+
+	/**
+	 * @param numBP
+	 *           the numBP to set
+	 */
+	public void setNumBP(final String numBP)
+	{
+		this.numBP = numBP;
 	}
 
 

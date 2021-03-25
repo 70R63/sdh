@@ -243,6 +243,7 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 		sdhCustomerAccountService.validateToken(token,bpNumbre);
 		model.addAttribute("valorBuzon", valorBuzon);
 		model.addAttribute("currentSection", "personalDataSection");
+		model.addAttribute("numBP", bpNumbre);
 		return getDefaultRegistrationPage(model);
 	}
 
@@ -990,6 +991,7 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 			final HttpServletRequest request, final HttpServletResponse response, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
+		form.setNumBP(getSessionService().getAttribute("numBP"));
 		sdhRegistrationValidator.validate(form, bindingResult);
 
 		return processRegisterUserRequest(null, form, bindingResult, model, request, response, redirectModel);

@@ -11,10 +11,13 @@
 package de.hybris.sdh.storefront.checkout.steps.validation.impl;
 
 import de.hybris.platform.acceleratorstorefrontcommons.forms.RegisterForm;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.storefront.forms.SDHRegisterForm;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
@@ -29,6 +32,9 @@ import org.springframework.validation.Validator;
 public class SDHRegistrationValidator implements Validator
 {
 	public static final Pattern EMAIL_REGEX = Pattern.compile("\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b");
+
+	@Resource(name = "sdhCustomerAccountService")
+	private SDHCustomerAccountService sdhCustomerAccountService;
 
 	@Override
 	public boolean supports(final Class<?> aClass)
@@ -48,6 +54,7 @@ public class SDHRegistrationValidator implements Validator
 		final String confirmEmail = registerForm.getConfirmEmail();
 		final String pwd = registerForm.getPwd();
 		final String checkPwd = registerForm.getCheckPwd();
+		final String numBP = registerForm.getNumBP();
 		//		final boolean termsCheck = registerForm.isTermsCheck();
 
 		//		validateTitleCode(errors, titleCode);
@@ -60,6 +67,7 @@ public class SDHRegistrationValidator implements Validator
 		//			errors.rejectValue("firstName", "register.name.invalid");
 		//		}
 
+		validateNumBPUnique(errors, numBP);
 		validateEmail(errors, email);
 		validateConfirmEmail(errors, confirmEmail);
 		validatePassword(errors, pwd);
@@ -133,6 +141,16 @@ public class SDHRegistrationValidator implements Validator
 		//		{
 		//			errors.rejectValue("email", "register.email.invalid");
 		//		}
+	}
+
+	protected void validateNumBPUnique(final Errors errors, final String numBP)
+	{
+
+		if (!StringUtils.isEmpty(numBP) && sdhCustomerAccountService.isUserRegisteredByNumBP(numBP))
+		{
+			errors.rejectValue("email", "register.numBP.invalid");
+		}
+
 	}
 
 	protected void validateConfirmEmail(final Errors errors, final String confirmEmail)

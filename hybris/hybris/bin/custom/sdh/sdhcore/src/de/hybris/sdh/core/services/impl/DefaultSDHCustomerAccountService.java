@@ -1501,5 +1501,32 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 	}
 
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHCustomerAccountService#isUserRegisteredByNumBP(java.lang.String)
+	 */
+	@Override
+	public boolean isUserRegisteredByNumBP(final String numBP)
+	{
+		boolean resultValidation = false;
+		final String query = "SELECT {pk} FROM {Customer AS C } WHERE {numBP} = ?numBP";
+
+		final Map<String, Object> queryParams = new HashMap<String, Object>();
+		queryParams.put("numBP", numBP);
+
+		final SearchResult<CustomerModel> usersResults;
+
+		usersResults = flexibleSearchService.search(query, queryParams);
+
+		if (usersResults.getTotalCount() > 0)
+		{
+			resultValidation = true;
+		}
+
+		return resultValidation;
+	}
+
+
 }
 
