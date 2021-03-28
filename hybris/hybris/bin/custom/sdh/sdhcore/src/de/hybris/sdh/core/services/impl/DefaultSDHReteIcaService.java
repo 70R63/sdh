@@ -32,6 +32,14 @@ public class DefaultSDHReteIcaService implements SDHReteIcaService
 {
 
 	private static final Logger LOG = Logger.getLogger(DefaultSDHReteIcaService.class);
+	private static final String ATHORIZATION = "Authorization";
+	private static final String BASIC = "Basic " ;
+	private static final String APPLICATION_JSON = "application/json1";
+	private static final String CONTENT_TYPE = "Content-Type";
+	private static final String CONNECTION_TO = "connection to: ";
+	private static final String REQUEST = "request: " ;
+	private static final String FAILED_HTTP= "Failed : HTTP error code : ";
+	private static final String RESPONSES = "response: ";
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
@@ -57,22 +65,22 @@ public class DefaultSDHReteIcaService implements SDHReteIcaService
 
 			final String authString = user + ":" + password;
 			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
-			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty(ATHORIZATION, BASIC + authStringEnc);
+			conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-			LOG.info("connection to: " + conn.toString());
+			LOG.info(CONNECTION_TO + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+			LOG.info(REQUEST + requestJson);
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
 			{
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new RuntimeException(FAILED_HTTP + conn.getResponseCode());
 			}
 
 			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -85,7 +93,7 @@ public class DefaultSDHReteIcaService implements SDHReteIcaService
 			}
 
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+			LOG.info(RESPONSES + result);
 
 			return result;
 
@@ -125,22 +133,22 @@ public class DefaultSDHReteIcaService implements SDHReteIcaService
 
 			final String authString = user + ":" + password;
 			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
-			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty(ATHORIZATION, BASIC + authStringEnc);
+			conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-			LOG.info("connection to: " + conn.toString());
+			LOG.info(CONNECTION_TO + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+			LOG.info(REQUEST + requestJson);
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
 			{
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new RuntimeException(FAILED_HTTP + conn.getResponseCode());
 			}
 
 			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -153,7 +161,7 @@ public class DefaultSDHReteIcaService implements SDHReteIcaService
 			}
 
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+			LOG.info(RESPONSES + result);
 
 			return result;
 
@@ -192,22 +200,22 @@ public class DefaultSDHReteIcaService implements SDHReteIcaService
 
 			final String authString = user + ":" + password;
 			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
-			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty(ATHORIZATION, BASIC + authStringEnc);
+			conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-			LOG.info("connection to: " + conn.toString());
+			LOG.info(CONNECTION_TO + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+			LOG.info(REQUEST + requestJson);
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
 			{
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new RuntimeException(FAILED_HTTP + conn.getResponseCode());
 			}
 
 			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -220,7 +228,7 @@ public class DefaultSDHReteIcaService implements SDHReteIcaService
 			}
 
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+			LOG.info(RESPONSES + result);
 
 			return result;
 
@@ -260,22 +268,22 @@ public class DefaultSDHReteIcaService implements SDHReteIcaService
 
 			final String authString = user + ":" + password;
 			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
-			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty(ATHORIZATION, BASIC + authStringEnc);
+			conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-			LOG.info("connection to: " + conn.toString());
+			LOG.info(CONNECTION_TO + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+			LOG.info(REQUEST + requestJson);
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_ACCEPTED)
 			{
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new RuntimeException(FAILED_HTTP + conn.getResponseCode());
 			}
 
 			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -288,7 +296,7 @@ public class DefaultSDHReteIcaService implements SDHReteIcaService
 			}
 
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+			LOG.info(RESPONSES + result);
 
 			return Boolean.TRUE;
 
@@ -322,22 +330,22 @@ public class DefaultSDHReteIcaService implements SDHReteIcaService
 
 			final String authString = user + ":" + password;
 			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
-			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty(ATHORIZATION, BASIC + authStringEnc);
+			conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-			LOG.info("connection to: " + conn.toString());
+			LOG.info(CONNECTION_TO + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+			LOG.info(REQUEST + requestJson);
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
 			{
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new RuntimeException(FAILED_HTTP + conn.getResponseCode());
 			}
 
 			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -351,7 +359,7 @@ public class DefaultSDHReteIcaService implements SDHReteIcaService
 
 
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+			LOG.info(RESPONSES + result);
 
 			return result;
 

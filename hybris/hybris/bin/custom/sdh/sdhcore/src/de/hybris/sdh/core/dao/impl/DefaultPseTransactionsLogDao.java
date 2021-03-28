@@ -27,6 +27,13 @@ import org.apache.log4j.Logger;
 public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransactionsLogModel> implements PseTransactionsLogDao
 {
 	private static final Logger LOG = Logger.getLogger(DefaultPseTransactionsLogDao.class); //new
+	private static final String SELECT_STATEMENT = "Select {p:";
+	private static final String FROM_STATEMENT = "} from {";
+	private static final String EQUAL_STATEMENT = "} = '" ;
+	private static final String AS_WHERE_STATEMENT = " AS p} Where {p:";
+	private static final String WHERE_STATEMENT = " AS p} Where ";
+	private static final String AND_STATEMENT = "' AND ";
+	private static final String P_STATEMENT = "{p:";
 
 	public DefaultPseTransactionsLogDao(final String typecode)
 	{
@@ -44,14 +51,14 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 
 		if (transactionState.length() == 0)
 		{
-			GET_ALL_OUTSTANDING_TRANSACTIONS = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
-					+ PseTransactionsLogModel._TYPECODE + " AS p} Where " + "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE
-					+ "}  in (null, '')  and " + "{p:" + PseTransactionsLogModel.TRAZABILITYCODE + "} not in ('-1', '') ";
+			GET_ALL_OUTSTANDING_TRANSACTIONS = SELECT_STATEMENT + PseTransactionsLogModel.PK + FROM_STATEMENT
+					+ PseTransactionsLogModel._TYPECODE + WHERE_STATEMENT + P_STATEMENT + PseTransactionsLogModel.TRANSACTIONSTATE
+					+ "}  in (null, '')  and " + P_STATEMENT + PseTransactionsLogModel.TRAZABILITYCODE + "} not in ('-1', '') ";
 		}
 		else
 		{
-			GET_ALL_OUTSTANDING_TRANSACTIONS = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
-					+ PseTransactionsLogModel._TYPECODE + " AS p} Where " + "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '"
+			GET_ALL_OUTSTANDING_TRANSACTIONS = SELECT_STATEMENT + PseTransactionsLogModel.PK + FROM_STATEMENT
+					+ PseTransactionsLogModel._TYPECODE + WHERE_STATEMENT + P_STATEMENT + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '"
 					+ transactionState + "' ";
 		}
 
@@ -64,8 +71,8 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 	public PseTransactionsLogModel getTransaction(final String numeroDeReferencia)
 	{
 		PseTransactionsLogModel transactionModel = null;
-		final String GET_TRANSACTION = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
-				+ PseTransactionsLogModel._TYPECODE + " AS p} Where {p:" + PseTransactionsLogModel.NUMERODEREFERENCIA + "} = '"
+		final String GET_TRANSACTION = SELECT_STATEMENT + PseTransactionsLogModel.PK + FROM_STATEMENT
+				+ PseTransactionsLogModel._TYPECODE + AS_WHERE_STATEMENT + PseTransactionsLogModel.NUMERODEREFERENCIA + "} = '"
 				+ numeroDeReferencia + "'";
 
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_TRANSACTION);
@@ -88,10 +95,10 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 	public SearchResult<PseTransactionsLogModel> getAllTransactionsNotNotifiedPaymentAndStatusOk(
 			final String transactionStateStatus, final String notificacionRecaudoStatus)
 	{
-		final String GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
-		      + PseTransactionsLogModel._TYPECODE + " AS p} Where "
-				+ "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '" + transactionStateStatus + "' AND " + "{p:"
-				+ PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '" + notificacionRecaudoStatus + "' AND " + "{p:"
+		final String GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT = SELECT_STATEMENT + PseTransactionsLogModel.PK + FROM_STATEMENT
+		      + PseTransactionsLogModel._TYPECODE + WHERE_STATEMENT
+				+ P_STATEMENT + PseTransactionsLogModel.TRANSACTIONSTATE + EQUAL_STATEMENT+ transactionStateStatus + AND_STATEMENT + P_STATEMENT
+				+ PseTransactionsLogModel.NOTIFICACIONDERECAUDO + EQUAL_STATEMENT+ notificacionRecaudoStatus + AND_STATEMENT + P_STATEMENT
 				+ PseTransactionsLogModel.ENTITYCODE + "} NOT IN ('" + ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION
 				+ "')";
 
@@ -111,10 +118,10 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 	public SearchResult<PseTransactionsLogModel> getAllCredibancoTransactionsNotNotifiedPaymentAndStatusAproved(
 			final String transactionStateStatus, final String notificacionRecaudoStatus)
 	{
-		final String GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
-				+ PseTransactionsLogModel._TYPECODE + " AS p} Where " + "{p:" + PseTransactionsLogModel.CRERESPONSESTATUS + "} = '"
-				+ transactionStateStatus + "' AND " + "{p:" + PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '"
-				+ notificacionRecaudoStatus + "' AND " + "{p:" + PseTransactionsLogModel.ENTITYCODE + "} = '"
+		final String GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT = SELECT_STATEMENT + PseTransactionsLogModel.PK + FROM_STATEMENT
+				+ PseTransactionsLogModel._TYPECODE + WHERE_STATEMENT + P_STATEMENT + PseTransactionsLogModel.CRERESPONSESTATUS + "} = '"
+				+ transactionStateStatus + AND_STATEMENT + P_STATEMENT + PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '"
+				+ notificacionRecaudoStatus + AND_STATEMENT + P_STATEMENT + PseTransactionsLogModel.ENTITYCODE + "} = '"
 				+ ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION + "'";
 
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT);
@@ -130,12 +137,12 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 		final String ok = "OK";
 
 		final PseTransactionsLogModel transactionModel = null;
-		final String GET_TRANSACTION = "Select {p:" + PseTransactionsLogModel.PK + "} from {" + PseTransactionsLogModel._TYPECODE
-				+ " AS p} Where {p:" + PseTransactionsLogModel.TIPODEIMPUESTO + "} = '" + impuesto + "'" + " AND {p:"
-				+ PseTransactionsLogModel.ANOGRAVABLE + "} = '" + anogravable + "'" + " AND {p:" + PseTransactionsLogModel.PERIODO
-				+ "} = '" + periodo + "'" + " AND {p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '" + pending + "' AND {p:"
-				+ PseTransactionsLogModel.TIPODEIDENTIFICACION + "} = '" + tipoDeIdentificacion + "' AND {p:"
-				+ PseTransactionsLogModel.NOIDENTIFICACION + "} = '" + noIdentificacion + "' ORDER BY {p:"
+		final String GET_TRANSACTION = SELECT_STATEMENT + PseTransactionsLogModel.PK + FROM_STATEMENT + PseTransactionsLogModel._TYPECODE
+				+ AS_WHERE_STATEMENT + PseTransactionsLogModel.TIPODEIMPUESTO + EQUAL_STATEMENT+ impuesto + "'" + " AND {p:"
+				+ PseTransactionsLogModel.ANOGRAVABLE + EQUAL_STATEMENT+ anogravable + "'" + " AND {p:" + PseTransactionsLogModel.PERIODO
+				+ EQUAL_STATEMENT+ periodo + "'" + " AND {p:" + PseTransactionsLogModel.TRANSACTIONSTATE + EQUAL_STATEMENT+ pending + "' AND {p:"
+				+ PseTransactionsLogModel.TIPODEIDENTIFICACION + EQUAL_STATEMENT+ tipoDeIdentificacion + "' AND {p:"
+				+ PseTransactionsLogModel.NOIDENTIFICACION + EQUAL_STATEMENT+ noIdentificacion + "' ORDER BY {p:"
 				+ PseTransactionsLogModel.TRANSACTIONSTATE + "}";
 
 		LOG.info("-------------INI PENDING QUERY-------------");
@@ -205,17 +212,17 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 
 		if (transactionState.length() == 0)
 		{
-			GET_ALL_OUTSTANDING_CREDIBANCO_TRANSACTIONS = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
-					+ PseTransactionsLogModel._TYPECODE + " AS p} Where " + "{p:" + PseTransactionsLogModel.ENTITYCODE + "}  = '"
-					+ CREDIBANCO_TRANSACTION + "' and " + "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "}  in (null, '')  and "
-					+ "{p:" + PseTransactionsLogModel.CREAPPROVALNUMBER + "} not in (null, '') ";
+			GET_ALL_OUTSTANDING_CREDIBANCO_TRANSACTIONS = SELECT_STATEMENT + PseTransactionsLogModel.PK + FROM_STATEMENT
+					+ PseTransactionsLogModel._TYPECODE + WHERE_STATEMENT + P_STATEMENT + PseTransactionsLogModel.ENTITYCODE + "}  = '"
+					+ CREDIBANCO_TRANSACTION + AND_STATEMENT + P_STATEMENT + PseTransactionsLogModel.TRANSACTIONSTATE + "}  in (null, '')  and "
+					+ P_STATEMENT + PseTransactionsLogModel.CREAPPROVALNUMBER + "} not in (null, '') ";
 		}
 		else
 		{
-			GET_ALL_OUTSTANDING_CREDIBANCO_TRANSACTIONS = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
-					+ PseTransactionsLogModel._TYPECODE + " AS p} Where " + "{p:" + PseTransactionsLogModel.ENTITYCODE + "}  = '"
-					+ CREDIBANCO_TRANSACTION + "' and " + "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '"
-					+ transactionState + "' and " + "{p:" + PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '"
+			GET_ALL_OUTSTANDING_CREDIBANCO_TRANSACTIONS = SELECT_STATEMENT + PseTransactionsLogModel.PK + FROM_STATEMENT
+					+ PseTransactionsLogModel._TYPECODE + WHERE_STATEMENT + P_STATEMENT + PseTransactionsLogModel.ENTITYCODE + "}  = '"
+					+ CREDIBANCO_TRANSACTION + AND_STATEMENT + P_STATEMENT + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '"
+					+ transactionState + AND_STATEMENT + P_STATEMENT + PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '"
 					+ NOTIFICACIONDERECAUDO_NO + "'";
 		}
 
@@ -229,11 +236,11 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 			final String transactionStateStatus,
 			final String notificacionRecaudoStatus)
 	{
-		final String GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
-				+ PseTransactionsLogModel._TYPECODE + " AS p} Where {p:" + PseTransactionsLogModel.NUMERODEREFERENCIA + "} = '"
-				+ numeroDeReferencia + "' AND " + "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '"
-				+ transactionStateStatus + "' AND " + "{p:" + PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '"
-				+ notificacionRecaudoStatus + "' AND " + "{p:" + PseTransactionsLogModel.ENTITYCODE + "} NOT IN ('"
+		final String GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT = SELECT_STATEMENT + PseTransactionsLogModel.PK + FROM_STATEMENT
+				+ PseTransactionsLogModel._TYPECODE + AS_WHERE_STATEMENT + PseTransactionsLogModel.NUMERODEREFERENCIA + "} = '"
+				+ numeroDeReferencia + AND_STATEMENT + P_STATEMENT + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '"
+				+ transactionStateStatus + AND_STATEMENT + P_STATEMENT + PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '"
+				+ notificacionRecaudoStatus + AND_STATEMENT + P_STATEMENT + PseTransactionsLogModel.ENTITYCODE + "} NOT IN ('"
 				+ ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION + "')";
 
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT);
@@ -245,11 +252,11 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 	public SearchResult<PseTransactionsLogModel> getCredibancoTransactionsNotNotifiedPaymentAndStatusAproved(
 			final String numeroDeReferencia, final String transactionStateStatus, final String notificacionRecaudoStatus)
 	{
-		final String GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
-				+ PseTransactionsLogModel._TYPECODE + " AS p} Where " + "{p:" + PseTransactionsLogModel.NUMERODEREFERENCIA + "} = '"
-				+ numeroDeReferencia + "' AND " + "{p:" + PseTransactionsLogModel.CRERESPONSESTATUS + "} = '"
-				+ transactionStateStatus + "' AND " + "{p:" + PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '"
-				+ notificacionRecaudoStatus + "' AND " + "{p:" + PseTransactionsLogModel.ENTITYCODE + "} = '"
+		final String GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT = SELECT_STATEMENT + PseTransactionsLogModel.PK + FROM_STATEMENT
+				+ PseTransactionsLogModel._TYPECODE + WHERE_STATEMENT + P_STATEMENT + PseTransactionsLogModel.NUMERODEREFERENCIA + "} = '"
+				+ numeroDeReferencia + AND_STATEMENT + P_STATEMENT + PseTransactionsLogModel.CRERESPONSESTATUS + "} = '"
+				+ transactionStateStatus + AND_STATEMENT + P_STATEMENT + PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '"
+				+ notificacionRecaudoStatus + AND_STATEMENT + P_STATEMENT + PseTransactionsLogModel.ENTITYCODE + "} = '"
 				+ ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION + "'";
 
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT);

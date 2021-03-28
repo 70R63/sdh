@@ -34,6 +34,18 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 {
 
 	private static final Logger LOG = Logger.getLogger(DefaultSDHUpdateRitService.class);
+	private static final String MODCONTRIBUYENTE_USER = "sdh.creamodcontribuyente.user";
+	private static final String MODCONTRIBUYENTE_PASSWORD = "sdh.creamodcontribuyente.password";
+	private static final String MODCONTRIBUYENTE_URL = "sdh.creamodcontribuyente.url";
+	private static final String AUTORIZATION_STATEMENT = "Authorization";
+	private static final String BASIC_STATEMENT = "Basic ";
+	private static final String APPLICATION_JSON = "application/json";
+	private static final String CONTENT_TYPE = "Content-Type";
+	private static final String CONNECT_TO_STATEMENT = "connection to: ";
+	private static final String REQUESTS_STATEMENT = "request: ";
+	private static final String FAIL_HTTP = "Failed : HTTP error code : ";
+	private static final String RESPONSE_STATEMENT = "response: 1";
+
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
@@ -41,9 +53,9 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 	@Override
 	public String updateRit(final UpdateRitRequest request)
 	{
-		final String urlString = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.url");
-		final String user = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.user");
-		final String password = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.password");
+		final String urlString = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_URL);
+		final String user = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_USER);
+		final String password = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_PASSWORD);
 
 
 		try
@@ -60,22 +72,22 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 			final String authString = user + ":" + password;
 			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
-			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty(AUTORIZATION_STATEMENT, BASIC_STATEMENT + authStringEnc);
+			conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-			LOG.info("connection to: " + conn.toString());
+			LOG.info(CONNECT_TO_STATEMENT + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+			LOG.info(REQUESTS_STATEMENT + requestJson);
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
 			{
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new RuntimeException(FAIL_HTTP + conn.getResponseCode());
 			}
 
 			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -89,7 +101,7 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+			LOG.info(RESPONSE_STATEMENT + result);
 
 			return result;
 
@@ -113,9 +125,9 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 	@Override
 	public String updateEmailRit(final UpdateEmailRitRequest request)
 	{
-		final String urlString = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.url");
-		final String user = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.user");
-		final String password = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.password");
+		final String urlString = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_URL);
+		final String user = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_USER);
+		final String password = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_PASSWORD);
 
 
 		try
@@ -132,22 +144,22 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 			final String authString = user + ":" + password;
 			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
-			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty(AUTORIZATION_STATEMENT, BASIC_STATEMENT + authStringEnc);
+			conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-			LOG.info("connection to: " + conn.toString());
+			LOG.info(CONNECT_TO_STATEMENT + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+			LOG.info(REQUESTS_STATEMENT + requestJson);
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
 			{
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new RuntimeException(FAIL_HTTP + conn.getResponseCode());
 			}
 
 			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -161,7 +173,7 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+			LOG.info(RESPONSE_STATEMENT + result);
 
 			return result;
 
@@ -185,9 +197,9 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 	@Override
 	public String updateAutorizacionesRit(final UpdateAutorizacionesRitRequest request)
 	{
-		final String urlString = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.url");
-		final String user = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.user");
-		final String password = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.password");
+		final String urlString = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_URL);
+		final String user = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_USER);
+		final String password = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_PASSWORD);
 
 
 		try
@@ -204,22 +216,22 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 			final String authString = user + ":" + password;
 			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
-			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty(AUTORIZATION_STATEMENT, BASIC_STATEMENT + authStringEnc);
+			conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-			LOG.info("connection to: " + conn.toString());
+			LOG.info(CONNECT_TO_STATEMENT + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+			LOG.info(REQUESTS_STATEMENT + requestJson);
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
 			{
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new RuntimeException(FAIL_HTTP + conn.getResponseCode());
 			}
 
 			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -233,7 +245,7 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+			LOG.info(RESPONSE_STATEMENT + result);
 
 			return result;
 
@@ -257,9 +269,9 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 	@Override
 	public String updateRedesSocialesRit(final UpdateRedesSocialesRitRequest request)
 	{
-		final String urlString = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.url");
-		final String user = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.user");
-		final String password = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.password");
+		final String urlString = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_URL);
+		final String user = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_USER);
+		final String password = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_PASSWORD);
 
 
 		try
@@ -276,22 +288,22 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 			final String authString = user + ":" + password;
 			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
-			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty(AUTORIZATION_STATEMENT, BASIC_STATEMENT + authStringEnc);
+			conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-			LOG.info("connection to: " + conn.toString());
+			LOG.info(CONNECT_TO_STATEMENT + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+			LOG.info(REQUESTS_STATEMENT + requestJson);
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
 			{
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new RuntimeException(FAIL_HTTP + conn.getResponseCode());
 			}
 
 			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -305,7 +317,7 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+			LOG.info(RESPONSE_STATEMENT + result);
 
 			return result;
 
@@ -329,9 +341,9 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 	@Override
 	public String updateTelefonoRit(final UpdateTelefonoRitRequest request)
 	{
-		final String urlString = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.url");
-		final String user = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.user");
-		final String password = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.password");
+		final String urlString = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_URL);
+		final String user = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_USER);
+		final String password = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_PASSWORD);
 
 
 		try
@@ -348,22 +360,22 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 			final String authString = user + ":" + password;
 			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
-			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty(AUTORIZATION_STATEMENT, BASIC_STATEMENT + authStringEnc);
+			conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-			LOG.info("connection to: " + conn.toString());
+			LOG.info(CONNECT_TO_STATEMENT + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+			LOG.info(REQUESTS_STATEMENT + requestJson);
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
 			{
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new RuntimeException(FAIL_HTTP + conn.getResponseCode());
 			}
 
 			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -377,7 +389,7 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+			LOG.info(RESPONSE_STATEMENT + result);
 
 			return result;
 
@@ -401,9 +413,9 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 	@Override
 	public String updateAddressRit(final UpdateAddressRitRequest request)
 	{
-		final String urlString = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.url");
-		final String user = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.user");
-		final String password = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.password");
+		final String urlString = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_URL);
+		final String user = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_USER);
+		final String password = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_PASSWORD);
 
 
 		try
@@ -420,22 +432,22 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 			final String authString = user + ":" + password;
 			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
-			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty(AUTORIZATION_STATEMENT, BASIC_STATEMENT + authStringEnc);
+			conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-			LOG.info("connection to: " + conn.toString());
+			LOG.info(CONNECT_TO_STATEMENT + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+			LOG.info(REQUESTS_STATEMENT + requestJson);
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
 			{
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new RuntimeException(FAIL_HTTP + conn.getResponseCode());
 			}
 
 			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -449,7 +461,7 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+			LOG.info(RESPONSE_STATEMENT + result);
 
 			return result;
 
@@ -473,9 +485,9 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 	@Override
 	public String updateNameRit(final UpdateNameRitRequest request)
 	{
-		final String urlString = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.url");
-		final String user = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.user");
-		final String password = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.password");
+		final String urlString = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_URL);
+		final String user = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_USER);
+		final String password = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_PASSWORD);
 
 
 		try
@@ -492,22 +504,22 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 			final String authString = user + ":" + password;
 			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
-			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty(AUTORIZATION_STATEMENT, BASIC_STATEMENT + authStringEnc);
+			conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-			LOG.info("connection to: " + conn.toString());
+			LOG.info(CONNECT_TO_STATEMENT + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+			LOG.info(REQUESTS_STATEMENT + requestJson);
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
 			{
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new RuntimeException(FAIL_HTTP + conn.getResponseCode());
 			}
 
 			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -521,7 +533,7 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+			LOG.info(RESPONSE_STATEMENT + result);
 
 			return result;
 
@@ -546,9 +558,9 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 	@Override
 	public String updateICAActEcoRit(final de.hybris.sdh.core.pojos.requests.UpdateICAActEcoRitRequest request)
 	{
-		final String urlString = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.url");
-		final String user = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.user");
-		final String password = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.password");
+		final String urlString = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_URL);
+		final String user = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_USER);
+		final String password = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_PASSWORD);
 
 
 		try
@@ -565,22 +577,22 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 			final String authString = user + ":" + password;
 			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
-			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty(AUTORIZATION_STATEMENT, BASIC_STATEMENT + authStringEnc);
+			conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-			LOG.info("connection to: " + conn.toString());
+			LOG.info(CONNECT_TO_STATEMENT + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+			LOG.info(REQUESTS_STATEMENT + requestJson);
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
 			{
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new RuntimeException(FAIL_HTTP + conn.getResponseCode());
 			}
 
 			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -594,7 +606,7 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+			LOG.info(RESPONSE_STATEMENT + result);
 
 			return result;
 
