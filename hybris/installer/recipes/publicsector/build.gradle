@@ -27,12 +27,12 @@ def pl = platform {
 	extensions {
 
 		/*SDH Custom Extension*/
-			"sdhcore",
-			"sdhfacades",
-			"sdhstorefront",
-			"sdhinitialdata",
-			"sdhtest",
-			"sdhcockpits",
+		extName 'sdhcore'
+		extName 'sdhfacades'
+		extName 'sdhstorefront'
+		extName 'sdhinitialdata'
+		extName 'sdhtest'
+		extName 'sdhcockpits'
 		/* publicsector extensions */
 		extName 'publicsectoracceleratoraddon'
 		extName 'publicsectorbackoffice'
