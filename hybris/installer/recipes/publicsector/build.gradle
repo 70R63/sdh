@@ -23,7 +23,7 @@ def pl = platform {
 	extensions {
 
 		/*SDH Custom Extension*/
-		extName 'sdhcore'
+		
 		extName 'sdhfacades'
 		extName 'sdhstorefront'
 		extName 'sdhinitialdata'
