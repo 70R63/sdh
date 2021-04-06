@@ -4,11 +4,7 @@ apply plugin: 'installer-addon2-plugin'
 def pl = platform {
 	localProperties {
 		property 'storefront.show.debug.info', 'false'
-		property 'datahub.extension.exportURL', 'http://localhost:9001/datahubadapter'
-		property 'datahub.extension.userName', 'admin'
-		property 'datahub.extension.password', 'nimda'
-		property 'datahub.server.url', 'http://localhost:8080/datahub-webapp/v1'
-		property 'datahubadapter.datahuboutbound.url', 'http://localhost:8080/datahub-webapp/v1'
+
 		property 'registration.consent.id.publicsector', 'MARKETING_NEWSLETTER'
 		property 'impex.generation.supported.locales', 'de,en,fr,es'
 		property 'publicsector.application.domain.whitelist', 'publicsector.local'
@@ -31,8 +27,9 @@ def pl = platform {
 		extName 'sdhfacades'
 		extName 'sdhstorefront'
 		extName 'sdhinitialdata'
-		extName 'sdhtest'
-		extName 'sdhcockpits'
+		extName 'sdhbackoffice'
+		
+	
 		/* publicsector extensions */
 		extName 'publicsectoracceleratoraddon'
 		extName 'publicsectorbackoffice'
@@ -65,25 +62,24 @@ def pl = platform {
 		extName 'commerceservicesbackoffice'
 		extName 'solrfacetsearchbackoffice'
 		extName 'solrserver'
-		extName 'yacceleratorinitialdata'
-		extName 'yacceleratorstorefront'
+		
 		extName 'commercewebservices'
 
 		extName 'acceleratorocc'
 
 		extName 'assistedservicestorefront'
 		extName 'cmswebservices'
-		extName 'smarteditwebservices'
-		extName 'cmssmarteditwebservices'
+		
+		
 		extName 'permissionswebservices'
 		extName 'smarteditaddon'
-		extName 'cmssmartedit'
+		
 		extName 'cmsbackoffice'
 		extName 'cmsocc'
 		extName 'xyformsbackoffice'
 		extName 'xyformsstorefrontcommons'
 		extName 'xyformsweb'
-		extName 'orbeonweb'
+		
 		extName 'auditreportservices'
 		extName 'backoffice'
 
@@ -91,9 +87,7 @@ def pl = platform {
 		extName 'configurablebundleservices'
 		extName 'configurablebundlebackoffice'
 		extName 'customersupportbackoffice'
-		extName 'datahubadapter'
-		extName 'datahubbackoffice'
-		extName 'datahubclient'
+		
 		extName 'previewwebservices'
 		extName 'pcmbackoffice'
 		extName 'backofficesolrsearch'
