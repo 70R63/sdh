@@ -37,9 +37,9 @@ def pl = platform {
 		extName 'publicsectordocmanagement'
 		extName 'publicsectordocmanagementexchange'
 		extName 'publicsectorfacades'
-		extName 'publicsectorfulfilment'
-		extName 'publicsectorocc'
-		extName 'publicsectorservices'
+		
+	
+		
 		extName 'publicsectorstore'
 		extName 'xyformscommercebackoffice'
 		extName 'xyformscommerceservices'
@@ -65,17 +65,17 @@ def pl = platform {
 		
 		extName 'commercewebservices'
 
-		extName 'acceleratorocc'
+		
 
-		extName 'assistedservicestorefront'
-		extName 'cmswebservices'
+		
+	
 		
 		
 		extName 'permissionswebservices'
 		extName 'smarteditaddon'
 		
-		extName 'cmsbackoffice'
-		extName 'cmsocc'
+		
+		
 		extName 'xyformsbackoffice'
 		extName 'xyformsstorefrontcommons'
 		extName 'xyformsweb'
@@ -89,7 +89,7 @@ def pl = platform {
 		extName 'customersupportbackoffice'
 		
 		extName 'previewwebservices'
-		extName 'pcmbackoffice'
+		
 		extName 'backofficesolrsearch'
 
 	}
