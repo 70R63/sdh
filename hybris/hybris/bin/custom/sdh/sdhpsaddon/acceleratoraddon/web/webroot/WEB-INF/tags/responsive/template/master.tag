@@ -54,6 +54,7 @@
 	<%-- Inject any additional CSS required by the page --%>
 	<jsp:invoke fragment="pageCss" />
 	<analytics:analytics />
+	<analytics:googleAnalytics2/>
 	<generatedVariables:generatedVariables />
 </head>
 
