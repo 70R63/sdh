@@ -11,12 +11,6 @@
 -->
 <widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
 
-    <!--widget-extension widgetId="backofficeMainSlot">
-        <widget id="sdhbackoffice-perspective" widgetDefinitionId="com.sdh.widgets.sdhbackofficewidget" template="false" slotId="perspectives" title="sdh.customer.service.chat">
-            <setting key="perspectiveImageUrl" value="/cng/images/perspective.png" type="String" />
-        </widget>
-    </widget-extension-->
-
     <widget id="sdhbackofficeBpNumberFinder" widgetDefinitionId="com.sdh.widgets.sdhasmbackofficewidget"
             template="false" slotId="cockpitWidgetChildrenInvisible">
         <setting key="socketDataType_$T" type="String">de.hybris.platform.core.model.user.CustomerModel</setting>
@@ -53,34 +47,6 @@
                        outputId="sdhBpFdrCtx" targetWidgetId="backofficeSdhBpNumberFinderPopup"
                        inputId="inputObject"/>
 
-
-    <widget-extension widgetId="backofficeMainSlot">
-        <widget id="explodedPictureWidget" widgetDefinitionId="com.sdh.widgets.explodedpicture"
-                slotId="cockpitWidgetChildrenInvisible" template="true">
-            <instance-settings socketEventRoutingMode="LAST_USED">
-                <create onInit="false" reuseExisting="true">
-                    <all-incoming-events/>
-                </create>
-                <select onInit="false">
-                    <all-incoming-events/>
-                </select>
-                <close>
-                    <all-outgoing-events/>
-                </close>
-            </instance-settings>
-            <setting key="widgetStyleClass" type="String"></setting>
-            <setting key="__externalLocationPath" type="String">extension://platformbackoffice</setting>
-            <setting key="widgetStyleAttribute" type="String"></setting>
-            <setting key="_width" type="String">500px</setting>
-            <setting key="_height" type="String">auto</setting>
-            <virtual-sockets/>
-        </widget>
-    </widget-extension>
-
-    <widget-connection sourceWidgetId="STUB_com.sdh.actions.assemblygroup"
-                       outputId="assemblyGroupContext" targetWidgetId="explodedPictureWidget"
-                       inputId="explodedPictureInput"/>
-
     <widget-extension widgetId="backofficeMainSlot">
         <widget id="explodedBpFinderWidget" widgetDefinitionId="com.sdh.widgets.explodedbpfinder"
                 slotId="cockpitWidgetChildrenInvisible" template="true" title="sdh.bpNumberFinder.popup">
@@ -108,198 +74,19 @@
                        outputId="bpFinderContext" targetWidgetId="explodedBpFinderWidget"
                        inputId="explodedBpFinderInput"/>
 
-
-    <!--widget-extension widgetId="backofficeMainSlot">
-        <widget id="sdhAsmBackoffice-perspective" widgetDefinitionId="com.sdh.widgets.sdhasmbackofficewidget" template="false" slotId="perspectives" title="sdh.asm.service">
-            <setting key="perspectiveImageUrl" value="/cng/images/perspective.png" type="String" />
-        </widget>
-    </widget-extension-->
-
-    <!--widget-extension widgetId="backofficeMainSlot">
-        <widget id="sdhAsmBackoffice-perspective" widgetDefinitionId="com.hybris.cockpitng.borderlayout" slotId="perspectives" title="sdh.asm.service.two" template="false">
-            <widget id="explorerTree" widgetDefinitionId="com.hybris.cockpitng.widgets.common.explorertree" slotId="leftSlot" template="false">
-                <widget id="explorerTreeSelectionProxy" widgetDefinitionId="com.hybris.cockpitng.widgets.common.multiplexer" slotId="cockpitWidgetChildrenInvisible" template="false">
-                    <widget id="typeNodeNameExtractor" widgetDefinitionId="com.hybris.cockpitng.widgets.common.propextractor" slotId="cockpitWidgetChildrenInvisible" template="false">
-                        <setting key="expression" type="String">name</setting>
-                        <setting key="socketDataType_$T" type="String">java.lang.String</setting>
-                        <virtual-sockets/>
-                    </widget>
-
-                    <setting key="typeNode_expression" type="String">#root instanceof T(com.hybris.cockpitng.tree.node.TypeNode)</setting>
-                    <setting key="dashboard_expression" type="String">#root.id EQ 'backoffice_dashboard'</setting>
-
-                    <virtual-sockets>
-                        <output id="typeNode" type="com.hybris.backoffice.navigation.NavigationNode" />
-                        <output id="dashboard" type="com.hybris.backoffice.navigation.NavigationNode" />
-                    </virtual-sockets>
-                </widget>
-                <setting key="explorerTreeConfigCtx" type="String">sdh-explorer-tree</setting>
-                <setting key="widgetStyleAttribute" type="String"></setting>
-                <setting key="widgetStyleClass" type="String"></setting>
-                <setting key="allowFilteringEntries" type="Boolean">true</setting>
-                <virtual-sockets/>
-            </widget>
-            <widget id="backoffice_content_container" widgetDefinitionId="com.hybris.backoffice.perspectiveContainer" slotId="centerSlot" template="false">
-                <widget id="backoffice_dashboard" widgetDefinitionId="com.hybris.cockpitng.dashboard" slotId="perspectives" template="false">
-                    <virtual-sockets>
-                        <output id="com.hybris.cockpitng.action.misc.refresh.success" type="java.lang.Object" visibility="external"/>
-                        <output id="com.hybris.cockpitng.action.run.gc.success" type="java.lang.Object" visibility="external"/>
-                    </virtual-sockets>
-                </widget>
-
-                <widget id="collapsibleContainer" widgetDefinitionId="com.hybris.cockpitng.collapsiblecontainer" slotId="perspectives" template="false">
-                    <widget id="advancedSearch" widgetDefinitionId="com.hybris.cockpitng.advancedsearch" slotId="center" template="false">
-                        <widget id="advancedSearchEngine" widgetDefinitionId="com.hybris.cockpitng.widgets.common.advancedsearchengine"  slotId="cockpitWidgetChildrenInvisible" template="false">
-                            <setting key="widgetStyleAttribute" type="String"></setting>
-                            <setting key="widgetStyleClass" type="String"></setting>
-                            <setting key="defaultPageSize" type="Integer">50</setting>
-                            <virtual-sockets/>
-                        </widget>
-                        <widget id="hmc2list" widgetDefinitionId="com.hybris.cockpitng.collectionBrowser" slotId="nestedWidget" template="false">
-                            <setting key="listSubtitle" type="String">emptylist</setting>
-                            <setting key="socketDataType_$T" type="String">java.lang.Object</setting>
-                            <setting key="widgetStyleAttribute" type="String"></setting>
-                            <setting key="pageSize" type="Integer">10</setting>
-                            <setting key="maxCharsInCell" type="Integer">70</setting>
-                            <setting key="actionSlotComponentId" type="String">listviewactions</setting>
-                            <setting key="multiSelect" type="Boolean">true</setting>
-                            <setting key="colConfigCtxCode" type="String">listview</setting>
-                            <setting key="itemRenderer" type="String">listViewRenderer</setting>
-                            <setting key="listTitle" type="String"></setting>
-                            <setting key="sortableListHeader" type="Boolean">true</setting>
-                            <setting key="widgetStyleClass" type="String"></setting>
-                            <setting key="asyncLoading" type="Boolean">true</setting>
-                            <setting key="sendItemsOnSelect" type="Boolean">true</setting>
-                            <setting key="dragAndDropConfigCtx" type="String" value="dragItemsDnDComponent"/>
-                        </widget>
-                        <setting key="advancedSearchConfigCtxCode" type="String">advanced-search</setting>
-                        <setting key="widgetStyleAttribute" type="String"></setting>
-                        <setting key="addRowPosition" type="String">Bottom</setting>
-                        <setting key="widgetStyleClass" type="String"></setting>
-                        <setting key="enableNestedWidgetView" type="Boolean">true</setting>
-                        <setting key="isNestedObjectCreationDisabled" type="Boolean">true</setting>
-                        <setting key="simpleSearchConfigCtxCode" type="String">simple-search</setting>
-                        <setting key="forceSearchForCode" type="String">WorkflowAction</setting>
-                        <virtual-sockets/>
-                    </widget>
-                    <widget id="editorArea" widgetDefinitionId="com.hybris.cockpitng.backoffice.defaultEditorArea" slotId="bottom" template="false">
-                        <widget id="previousItemSelector"
-                                widgetDefinitionId="com.hybris.cockpitng.previousItemSelector"
-                                slotId="previousItemSelectorSlot" template="false">
-                            <setting key="widgetStyleAttribute" type="String"></setting>
-                            <setting key="widgetStyleClass" type="String"></setting>
-                            <virtual-sockets/>
-                        </widget>
-                        <widget id="nextItemSelector" widgetDefinitionId="com.hybris.cockpitng.nextItemSelector"
-                                slotId="nextItemSelectorSlot" template="false">
-                            <setting key="widgetStyleAttribute" type="String"></setting>
-                            <setting key="widgetStyleClass" type="String"></setting>
-                            <virtual-sockets/>
-                        </widget>
-                        <setting key="widgetStyleAttribute" type="String"></setting>
-                        <setting key="viewModeBtnVisible" type="Boolean">false</setting>
-                        <setting key="widgetStyleClass" type="String"></setting>
-                        <setting key="initViewMode" type="String">fluid</setting>
-                        <setting key="fluidViewCode" type="String">fluid</setting>
-                        <setting key="editorAreaConfigCtx" type="String">editor-area</setting>
-                        <setting key="bottomToolbar" type="Boolean">false</setting>
-                        <setting key="actionSlotComponentId" type="String">editorareaactions</setting>
-                        <virtual-sockets>
-                            <output id="com.hybris.cockpitng.action.delete.success" type="java.lang.Object" />
-                            <output id="com.hybris.cockpitng.action.clone.success" type="java.lang.Object" />
-                            <output id="selectivesyncobject" type="java.lang.Object" />
-                        </virtual-sockets>
-                    </widget>
-                    <widget id="backofficeSpaceManagement"
-                            widgetDefinitionId="com.hybris.backoffice.spaceManagement"
-                            slotId="cockpitWidgetChildrenInvisible" template="false">
-                        <setting key="widgetStyleAttribute" type="String"></setting>
-                        <setting key="widgetStyleClass" type="String"></setting>
-                        <virtual-sockets/>
-                    </widget>
-                    <setting key="widgetStyleAttribute" type="String"></setting>
-                    <setting key="allowLockingCenterPanel" type="Boolean">true</setting>
-                    <setting key="bottomPanelCollapsed" type="Boolean">false</setting>
-                    <setting key="topHeight" type="String">33%</setting>
-                    <setting key="centerCaption" type="String">List</setting>
-                    <setting key="bottomPanelInitiallyLocked" type="Boolean">false</setting>
-                    <setting key="centerHeight" type="String">50%</setting>
-                    <setting key="topPanelInitiallyLocked" type="Boolean">false</setting>
-                    <setting key="thirdSectionDisabled" type="Boolean">true</setting>
-                    <setting key="allowLockingBottomPanel" type="Boolean">true</setting>
-                    <setting key="bottomCaption" type="String">Edit</setting>
-                    <setting key="centerPanelCollapsed" type="Boolean">false</setting>
-                    <setting key="widgetStyleClass" type="String"></setting>
-                    <setting key="topCaption" type="String">Search</setting>
-                    <setting key="centerPanelInitiallyLocked" type="Boolean">false</setting>
-                    <setting key="topPanelCollapsed" type="Boolean">true</setting>
-                    <setting key="allowLockingTopPanel" type="Boolean">true</setting>
-                    <setting key="centerPanelInitiallyLocked" type="Boolean">true</setting>
-                    <virtual-sockets/>
-                </widget>
-                <setting key="selectTypeNodePerspective_eval" type="String">'collapsibleContainer'</setting>
-                <virtual-sockets>
-                    <input id="selectTypeNodePerspective" type="java.lang.Object" visibility="external" />
-                </virtual-sockets>
-            </widget>
-            <setting key="northHeight" type="String">50px</setting>
-            <setting key="northBorder" type="String">none</setting>
-            <setting key="broadcastHorizontalResize" type="Boolean">true</setting>
-            <setting key="eastDisabled" type="Boolean">true</setting>
-            <setting key="eastBorder" type="String">none</setting>
-            <setting key="westCollapsible" type="Boolean">true</setting>
-            <setting key="northCollapsible" type="Boolean">true</setting>
-            <setting key="border" type="String">none</setting>
-            <setting key="centerBorder" type="String">none</setting>
-            <setting key="westDisabled" type="Boolean">false</setting>
-            <setting key="opaqueBG" type="String">true</setting>
-            <setting key="southHeight" type="String">50px</setting>
-            <setting key="widgetStyleAttribute" type="String"></setting>
-            <setting key="westBorder" type="String">none</setting>
-            <setting key="southBorder" type="String">none</setting>
-            <setting key="southDisabled" type="Boolean">true</setting>
-            <setting key="eastWidth" type="String">25%</setting>
-            <setting key="northDisabled" type="Boolean">true</setting>
+    <widget-extension widgetId="backofficeMainSlot">
+        <widget id="sdhAsmBackoffice-perspective"
+                widgetDefinitionId="com.sdh.widgets.sdhbackofficewidget"
+                slotId="perspectives"
+                title="sdh.asm.service.two"
+                template="false">
             <setting key="widgetStyleClass" type="String"></setting>
-            <setting key="autoCloseWest" type="Boolean">true</setting>
-            <setting key="southCollapsible" type="Boolean">true</setting>
-            <setting key="westWidth" type="String">300px</setting>
-            <setting key="perspectiveImageUrl" type="String">/cng/images/admin_cockpit.png</setting>
-            <setting key="eastCollapsible" type="Boolean">true</setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
             <virtual-sockets/>
         </widget>
-        <setting key="autoCloseInactive" type="Boolean">false</setting>
-        <setting key="perspectiveContainerConfigCtx" type="String" value="perspective-view-switcher"/>
+        <setting key="widgetStyleClass" type="String"></setting>
+        <setting key="perspectiveContainerConfigCtx" type="String">perspective-view-switcher</setting>
+        <setting key="widgetStyleAttribute" type="String"></setting>
         <virtual-sockets/>
-    </widget-extension-->
-
-
-    <!--widget-extension widgetid="mainslot">
-        <widget id="cart_address_condition_evaluator" widgetdefinitionid="com.hybris.cockpitng.conditionevaluator" slotid="cockpitwidgetchildreninvisible" template="false">
-            <widget id="cart_address_prop_extractor" widgetdefinitionid="com.hybris.cockpitng.widgets.common.propextractor" slotid="cockpitwidgetchildreninvisible" template="false">
-                <setting key="expression" type="string" value="id"></setting>
-                <setting key="socketdatatype_$t" type="string" value="java.lang.string"></setting>
-                <setting key="widgetstyleattribute" type="string" value=""></setting>
-                <setting key="widgetstyleclass" type="string" value=""></setting>
-                <virtual-sockets />
-            </widget>
-            <setting key="expression" type="string" value="#root.id eq 'cart address'"></setting>
-            <setting key="socketdatatype_$t" type="string" value="com.hybris.backoffice.navigation.navigationnode"></setting>
-            <setting key="widgetstyleattribute" type="string" value=""></setting>
-            <setting key="widgetstyleclass" type="string" value=""></setting>
-            <virtual-sockets />
-        </widget>
     </widget-extension>
-
-    <widget-connection sourcewidgetid="explorertree"  outputid="nodeselected" targetwidgetid="cart_address_condition_evaluator" inputid="input" />
-    <widget-connection sourcewidgetid="cart_address_condition_evaluator" outputid="true" targetwidgetid="cart_address_prop_extractor" inputid="genericinput" />
-    <widget-connection sourcewidgetid="cart_address_prop_extractor" outputid="genericoutput" targetwidgetid="cart_address" inputid="refresh"/>
-
-    <widget-extension widgetid="backoffice_content_container">
-        <widget id="cart_address" widgetdefinitionid="com.custom.widgets.cartaddress" slotid="perspectives" template="true">
-            <virtual-sockets/>
-        </widget>
-    </widget-extension-->
-
-
 </widgets>
