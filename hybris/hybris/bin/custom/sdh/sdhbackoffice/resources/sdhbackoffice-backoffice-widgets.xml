@@ -78,8 +78,9 @@
         <widget id="sdhAsmBackoffice-perspective"
                 widgetDefinitionId="com.sdh.widgets.sdhbackofficewidget"
                 slotId="perspectives"
-                title="sdh.asm.service.two"
-                template="false">
+                title=" Customer Support (Chat)"
+                template="false"
+                access="sdhCustomerSupportChat">
             <setting key="widgetStyleClass" type="String"></setting>
             <setting key="widgetStyleAttribute" type="String"></setting>
             <virtual-sockets/>

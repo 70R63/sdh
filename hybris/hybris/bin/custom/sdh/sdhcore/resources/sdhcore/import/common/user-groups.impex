@@ -41,7 +41,7 @@ INSERT_UPDATE BackofficeRole;uid[unique=true]                    ;locName[lang=e
 
 #SDH Backoffice roles
 INSERT_UPDATE BackofficeRole	;UID[unique=true]		            ;authorities
-                                ;backofficeadministratorrole	;backofficeworkflowadmin	sdhBackOfficeAdmin
+                                ;backofficeadministratorrole	;backofficeworkflowadmin,	sdhBackOfficeAdmin
 
 
 INSERT_UPDATE Employee;UID[unique=true];name                                 ;password[default=$defaultPassword] ;description                     ;groups(uid)[mode=append]     ;backOfficeLoginDisabled

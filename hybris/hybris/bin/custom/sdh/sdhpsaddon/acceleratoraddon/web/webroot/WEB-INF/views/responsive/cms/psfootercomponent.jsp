@@ -85,7 +85,6 @@
 				<spring:theme code="chat.box.mobile.title" />
 			</button>
 			<div class="col-sm-6 chat-footer">
-				<!--
 				<button type="button"
 					class="btn btn-lg pop-over pop-over-toggle" onclick="openChatWindow();"
 					id="pop-over-toggle" data-placement="top" >
@@ -93,7 +92,6 @@
 						<spring:theme code="chatbox.title" />
 					</div>
 				</button>
-				-->
 			</div>
 		</div>
 	</div>
