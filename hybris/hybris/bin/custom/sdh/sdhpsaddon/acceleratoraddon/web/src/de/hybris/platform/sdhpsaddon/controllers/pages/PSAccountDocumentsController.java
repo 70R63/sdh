@@ -88,11 +88,13 @@ public class PSAccountDocumentsController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String getMyDocuments(final Model model) throws CMSItemNotFoundException
 	{
+		//TODO revisar que este cambio sea correcto, los metodos cambiaron y se adaptó de acuerdo a lo entendido
+		//TODO en el contexto que otroga el código
 		final List<PSDocumentData> documents = getDocumentManagementFacade()
-				.getDocumentsForCustomer(getCustomerFacade().getCurrentCustomerUid());
+				.getDocumentsForUserRelationshipsByStatus(getCustomerFacade().getCurrentCustomerUid(), false);
 
 		final List<PSDocumentData> expiredDocuments = getDocumentManagementFacade()
-				.getExpiredDocumentsForCustomer(customerFacade.getCurrentCustomerUid());
+				.getDocumentsForUserRelationshipsByStatus(customerFacade.getCurrentCustomerUid(), true);
 
 		model.addAttribute(DOCUMENTS, documents);
 		model.addAttribute("expiredDocuments", expiredDocuments);
@@ -115,8 +117,10 @@ public class PSAccountDocumentsController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String getMyExpiredDocuments(final Model model) throws CMSItemNotFoundException
 	{
+		//TODO revisar que este cambio sea correcto, los metodos cambiaron y se adaptó de acuerdo a lo entendido
+		//TODO en el contexto que otroga el código
 		final List<PSDocumentData> documents = getDocumentManagementFacade()
-				.getExpiredDocumentsForCustomer(getCustomerFacade().getCurrentCustomerUid());
+				.getDocumentsForUserRelationshipsByStatus(getCustomerFacade().getCurrentCustomerUid(), true);
 		model.addAttribute(DOCUMENTS, documents);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MY_EXPIRED_DOCUMENTS_CMS_PAGE));
@@ -262,9 +266,13 @@ public class PSAccountDocumentsController extends AbstractSearchPageController
 	{
 		if (psPermissionFacade.isPermitted(getUser().getUid(), customerId, PSDOCUMENT_TYPECODE))
 		{
-			final List<PSDocumentData> documents = getDocumentManagementFacade().getDocumentsForCustomer(customerId);
+			//TODO revisar que este cambio sea correcto, los metodos cambiaron y se adaptó de acuerdo a lo entendido
+			//TODO en el contexto que otroga el código
+			final List<PSDocumentData> documents = getDocumentManagementFacade()
+					.getDocumentsForUserRelationshipsByStatus(customerId, false);
 			model.addAttribute("results", documents);
-			final List<PSDocumentData> expiredDocuments = getDocumentManagementFacade().getExpiredDocumentsForCustomer(customerId);
+			final List<PSDocumentData> expiredDocuments = getDocumentManagementFacade()
+					.getDocumentsForUserRelationshipsByStatus(customerId, true);
 			model.addAttribute("expiredDocuments", expiredDocuments);
 			final CustomerData customer = psRelationshipFacade.getCustomerDataForUid(customerId);
 			model.addAttribute("customer", customer);
@@ -289,7 +297,10 @@ public class PSAccountDocumentsController extends AbstractSearchPageController
 			final String customerId = relationshipCustomer.getUid();
 			if (psPermissionFacade.isPermitted(getUser().getUid(), customerId, PSDOCUMENT_TYPECODE))
 			{
-				final List<PSDocumentData> documents = getDocumentManagementFacade().getExpiredDocumentsForCustomer(customerId);
+				//TODO revisar que este cambio sea correcto, los metodos cambiaron y se adaptó de acuerdo a lo entendido
+				//TODO en el contexto que otroga el código
+				final List<PSDocumentData> documents = getDocumentManagementFacade()
+						.getDocumentsForUserRelationshipsByStatus(customerId, true);
 				model.addAttribute(DOCUMENTS, documents);
 				storeCmsPageInModel(model, getContentPageForLabelOrId(MY_EXPIRED_DOCUMENTS_CMS_PAGE));
 				model.addAttribute(BREADCRUMBS_ATTR, getAccountBreadcrumbBuilder().getBreadcrumbs(ACCOUNT_MY_EXPIRED_DOCUMENTS));

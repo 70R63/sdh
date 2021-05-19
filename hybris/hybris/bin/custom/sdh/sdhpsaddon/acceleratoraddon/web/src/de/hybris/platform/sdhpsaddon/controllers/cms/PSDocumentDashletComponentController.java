@@ -50,11 +50,13 @@ public class PSDocumentDashletComponentController extends SubstitutingCMSAddOnCo
 	@Override
 	protected void fillModel(final HttpServletRequest request, final Model model, final PSDocumentDashletComponentModel component)
 	{
+		//TODO revisar que este cambio sea correcto, los metodos cambiaron y se adaptó de acuerdo a lo entendido
+		//TODO en el contexto que otroga el código
 		final List<PSDocumentData> documents = documentManagementFacade
-				.getDocumentsForCustomer(customerFacade.getCurrentCustomerUid());
+				.getDocumentsForUserRelationshipsByStatus(customerFacade.getCurrentCustomerUid(), false);
 
 		final List<PSDocumentData> expiredDocuments = documentManagementFacade
-				.getExpiredDocumentsForCustomer(customerFacade.getCurrentCustomerUid());
+				.getDocumentsForUserRelationshipsByStatus(customerFacade.getCurrentCustomerUid(), true);
 
 		//latest 3 documents only
 		if (CollectionUtils.isNotEmpty(documents))

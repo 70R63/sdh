@@ -66,7 +66,10 @@ public class PSBillsDashletComponentController extends SubstitutingCMSAddOnCompo
 
 		//get customer's bill
 		//this should bring the bills in the given status sorted by ASC by due date in 2 groups NOT PAID (unpaid/part-paid) and PAID
-		final List<PSBillPaymentData> userBills = psBillPaymentFacade.getBillsByStatusList(customerFacade.getCurrentCustomer(), createPageableDataForBillsOverview(), statuses).getResults();
+
+		//TODO revisar este metodo, se agregó un null al parametro nuevo billsAccessor
+		final List<PSBillPaymentData> userBills = psBillPaymentFacade.getBillsByStatusList(customerFacade.getCurrentCustomer(),
+				null, createPageableDataForBillsOverview(), statuses).getResults();
 		//set retrieved user bills into the dashlet model attribute up to BILLS_MAX_COUNT
 		model.addAttribute("bills", userBills.stream().limit(BILLS_MAX_COUNT).collect(Collectors.toList()));
 
