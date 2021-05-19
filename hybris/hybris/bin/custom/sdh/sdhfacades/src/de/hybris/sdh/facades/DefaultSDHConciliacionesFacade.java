@@ -28,8 +28,8 @@ import net.sf.sevenzipjbinding.SevenZipException;
 import net.sf.sevenzipjbinding.impl.RandomAccessFileInStream;
 import net.sf.sevenzipjbinding.simple.ISimpleInArchive;
 import net.sf.sevenzipjbinding.simple.ISimpleInArchiveItem;
-import sun.security.provider.certpath.OCSP.RevocationStatus;
-import sun.security.provider.certpath.OCSP.RevocationStatus.CertStatus;
+//import sun.security.provider.certpath.OCSP.RevocationStatus;
+//import sun.security.provider.certpath.OCSP.RevocationStatus.CertStatus;
 
 
 /**
@@ -197,11 +197,12 @@ public class DefaultSDHConciliacionesFacade implements SDHConciliacionesFacade
 	 * @see
 	 * de.hybris.sdh.facades.SDHConciliacionesFacade#checkCertificates(org.springframework.web.multipart.MultipartFile)
 	 */
-	@Override
+	//TODO revisar este metodo para utilizar otra alternativa o buscar la librería correspondiente
+	/*@Override
 	public CertStatus checkCertificates(final MultipartFile multipartFile)
 	{
 		return RevocationStatus.CertStatus.GOOD;
-	}
+	}*/
 
 
 

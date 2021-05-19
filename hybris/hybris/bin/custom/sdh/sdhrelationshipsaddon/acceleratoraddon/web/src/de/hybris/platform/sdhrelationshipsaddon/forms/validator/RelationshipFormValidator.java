@@ -26,7 +26,7 @@ import org.springframework.validation.Validator;
  * RelationshipFormValidator used for validating {@link RelationshipForm}
  */
 @Component("relationshipFormValidator")
-public class RelationshipFormValidator implements Validator
+public class RelationshipFormValidator extends EmailValidator implements Validator
 {
 
 	private static final int MAX_LENGTH_240 = 240;
@@ -112,7 +112,7 @@ public class RelationshipFormValidator implements Validator
 		{
 			errors.rejectValue(EMAIL_ADDRESS, RELATIONSHIP_EMAIL_MAXLENGTH);
 		}
-		else if (!EmailValidator.EMAIL_REGEX.matcher(form.getEmailAddress()).matches())
+		else if (!validateEmailAddress(form.getEmailAddress()))
 		{
 			errors.rejectValue(EMAIL_ADDRESS, RELATIONSHIP_EMAIL_INVALID);
 		}

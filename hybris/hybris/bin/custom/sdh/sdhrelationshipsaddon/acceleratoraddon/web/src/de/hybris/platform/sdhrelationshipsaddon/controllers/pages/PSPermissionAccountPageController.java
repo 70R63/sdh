@@ -192,8 +192,9 @@ public class PSPermissionAccountPageController extends PSAbstractRelationshipAcc
 
 		final CustomerData sourceUser = psRelationshipFacade.getCustomerForPK(sourceUserPK);
 		final CustomerData targetUser = psRelationshipFacade.getCustomerForPK(targetUserPK);
+		//TODO revisar este metodo, se agregó un null al parametro nuevo permissibleAreaCode
 		final List<PSPermissionData> permissions = psPermissionFacade.getGivenOrRequestedPermissionsForTargetUser(
-				sourceUser.getUid(), targetUser.getUid(), Collections.singletonList(PSPermissionStatus.PENDING), isGiven);
+				sourceUser.getUid(), targetUser.getUid(), null, Collections.singletonList(PSPermissionStatus.PENDING), isGiven);
 		if (CollectionUtils.isNotEmpty(permissions))
 		{
 			model.addAttribute("sourceUserName", permissions.get(0).getSourceUser().getName());
@@ -226,8 +227,10 @@ public class PSPermissionAccountPageController extends PSAbstractRelationshipAcc
 		{
 			final CustomerData sourceUser = psRelationshipFacade.getCustomerForPK(sourceUserPK);
 			final CustomerData targetUser = psRelationshipFacade.getCustomerForPK(targetUserPK);
+			//TODO revisar este metodo, se agregó un null al parametro nuevo permissibleAreaCode
 			final List<PSPermissionData> permissions = psPermissionFacade.getGivenOrRequestedPermissionsForTargetUser(
-					sourceUser.getUid(), targetUser.getUid(), Collections.singletonList(PSPermissionStatus.PENDING), isGiven);
+					sourceUser.getUid(), targetUser.getUid(), null,
+					Collections.singletonList(PSPermissionStatus.PENDING), isGiven);
 
 			if (CollectionUtils.isNotEmpty(permissions))
 			{
@@ -524,8 +527,9 @@ public class PSPermissionAccountPageController extends PSAbstractRelationshipAcc
 			final String userFirstName = relationshipData.getTargetUser().getUid().equals(currCustomer.getUid())
 					? relationshipData.getSourceUser().getFirstName() : relationshipData.getTargetUser().getFirstName();
 
-			psPermissionFacade.changePermissions(currCustomer.getUid(), permissionTargetUser.getUid(),
-					permissionForm.getSourcePermissibleItemTypes(), false);
+			//TODO se necesita revisar este metodo y actualizarlo a la nueva version del relationshipfacades
+			/*psPermissionFacade.changePermissions(currCustomer.getUid(), permissionTargetUser.getUid(),
+					permissionForm.getSourcePermissibleItemTypes(), false);*/
 
 			final String messageKey = "message.requested.change.permissions.acceptance";
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, messageKey, new Object[]

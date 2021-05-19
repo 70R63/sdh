@@ -77,8 +77,9 @@ public class PSBillAccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String getMyBills(final Model model) throws CMSItemNotFoundException
 	{
+		//TODO revisar este metodo, se agregó un null al parametro nuevo billsAccessor
 		final SearchPageData<PSBillPaymentData> bills = getPsBillPaymentFacade().getBillsByStatusList(getUser(),
-				createPageableDataForBillsOverview(), null);
+				null, createPageableDataForBillsOverview(), null);
 		model.addAttribute("bills", bills);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MY_BILLS_CMS_PAGE));
@@ -151,8 +152,9 @@ public class PSBillAccountPageController extends AbstractSearchPageController
 			statuses.add(BillPaymentStatus.UNPAID);
 			statuses.add(BillPaymentStatus.PARTPAID);
 		}
+		//TODO revisar este metodo, se agregó un null al parametro nuevo billsAccessor
 		final SearchPageData<PSBillPaymentData> searchPageData = psBillPaymentFacade.getBillsByStatusList(customerData,
-				pageableData, statuses);
+				null, pageableData, statuses);
 		populateModel(model, searchPageData, showMode);
 		model.addAttribute("bills", searchPageData.getResults());
 		model.addAttribute("billPaymentByStatus", searchPageData);
