@@ -288,8 +288,9 @@ public class PSAbstractRelationshipAccountPageController extends AbstractAddOnPa
 		if (permissionForm.getPermissionType().equalsIgnoreCase(GIVE_PERMISSION))
 		{
 			selectedTypeCodes = permissionForm.getSourcePermissibleItemTypes();
+			//TODO revisar este metodo, se agregó un null al parametro nuevo permissibleAreaCode
 			psPermissionFacade.updatePendingRequestForTypeCodes(relationId, isAccepted, true, isAccepted ? selectedTypeCodes : null,
-					isAccepted ? null : selectedTypeCodes);
+					isAccepted ? null : selectedTypeCodes, null);
 			if (!isPoaCase)
 			{
 				messageKey = isAccepted ? "message.given.permissions.acceptance" : "message.given.permissions.rejection";
@@ -321,8 +322,9 @@ public class PSAbstractRelationshipAccountPageController extends AbstractAddOnPa
 				rejectedTypeCodes = permissionTypeCodes;
 			}
 
+			//TODO revisar este metodo, se agregó un null al parametro nuevo permissibleAreaCode
 			psPermissionFacade.updatePendingRequestForTypeCodes(relationId, isAccepted, false, isAccepted ? selectedTypeCodes : null,
-					rejectedTypeCodes);
+					rejectedTypeCodes, null);
 			if (!isPoaCase)
 			{
 				messageKey = isAccepted ? "message.requested.permissions.acceptance" : "message.requested.permissions.rejection";

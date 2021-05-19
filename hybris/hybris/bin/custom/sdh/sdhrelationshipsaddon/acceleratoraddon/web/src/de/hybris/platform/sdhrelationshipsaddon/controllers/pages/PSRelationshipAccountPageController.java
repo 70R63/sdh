@@ -324,7 +324,7 @@ public class PSRelationshipAccountPageController extends PSAbstractRelationshipA
 		final List<PSPermissibleAreaData> activePermissions = permission.stream().map(e -> e.getPermissibleAreaItem())
 				.collect(Collectors.toList());
 		final List<PSPermissibleAreaData> activeNonBasicPermissibleItem = permissibleItems.stream()
-				.filter(e -> e.getActive().equals(Boolean.TRUE)).filter(e -> StringUtils.isNotEmpty(e.getShareableType()))
+				.filter(e -> e.isActive()).filter(e -> StringUtils.isNotEmpty(e.getShareableType()))
 				.collect(Collectors.toList());
 
 		final List<PSPermissibleAreaData> nonAccessiblePermissions = new ArrayList<>();
@@ -575,7 +575,9 @@ public class PSRelationshipAccountPageController extends PSAbstractRelationshipA
 		String messageKey;
 		if (isGiven)
 		{
-			psPermissionFacade.updatePendingRequest(relationId, requestParam.equalsIgnoreCase(ACCEPT_PERMISSION), isGiven);
+			//TODO revisar este metodo, se agregó un null al parametro nuevo permissibleAreaType
+			psPermissionFacade.updatePendingRequest(relationId, requestParam.equalsIgnoreCase(ACCEPT_PERMISSION),
+					isGiven, null);
 			if (!isPoaCase)
 			{
 				messageKey = requestParam.equalsIgnoreCase(ACCEPT_PERMISSION) ? "message.given.permissions.acceptance"
@@ -591,7 +593,8 @@ public class PSRelationshipAccountPageController extends PSAbstractRelationshipA
 		}
 		else
 		{
-			psPermissionFacade.updatePendingRequest(relationId, requestParam.equalsIgnoreCase(ACCEPT_PERMISSION), isGiven);
+			//TODO revisar este metodo, se agregó un null al parametro nuevo permissibleAreaType
+			psPermissionFacade.updatePendingRequest(relationId, requestParam.equalsIgnoreCase(ACCEPT_PERMISSION), isGiven, null);
 			if (!isPoaCase)
 			{
 				messageKey = requestParam.equalsIgnoreCase(ACCEPT_PERMISSION) ? "message.requested.permissions.acceptance"
@@ -795,8 +798,9 @@ public class PSRelationshipAccountPageController extends PSAbstractRelationshipA
 						? relationship.getTargetUser().getUid() : relationship.getSourceUser().getUid();
 				model.addAttribute("requestedPermissionForTargetUser",
 						psPermissionFacade.getPermissionsForStatus(currentUser, targetUser, Arrays.asList(PSPermissionStatus.PENDING)));
+				//TODO revisar este metodo, se agregó un null al parametro nuevo permissibleAreaCode
 				model.addAttribute("givenPermissionToTargetUser", psPermissionFacade.getGivenOrRequestedPermissionsForTargetUser(
-						currentUser, targetUser, Arrays.asList(PSPermissionStatus.PENDING), false));
+						currentUser, targetUser, null, Arrays.asList(PSPermissionStatus.PENDING), false));
 			}
 		}
 	}
