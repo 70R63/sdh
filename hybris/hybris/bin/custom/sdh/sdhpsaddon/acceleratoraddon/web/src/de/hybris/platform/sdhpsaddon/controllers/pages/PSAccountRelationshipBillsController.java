@@ -82,8 +82,9 @@ public class PSAccountRelationshipBillsController extends AbstractSearchPageCont
 	@RequireHardLogIn
 	public String getMyBills(final Model model) throws CMSItemNotFoundException
 	{
+		//TODO revisar este metodo, se agregó un null al parametro nuevo billsAccessor
 		final SearchPageData<PSBillPaymentData> bills = psBillPaymentFacade.getBillsByStatusList(getUser(),
-				createPageableDataForBillsOverview(), null);
+				null, createPageableDataForBillsOverview(), null);
 		model.addAttribute(USER_BILLS, bills);
 
 		final List<CustomerData> relations = psRelationshipFacade
@@ -162,8 +163,9 @@ public class PSAccountRelationshipBillsController extends AbstractSearchPageCont
 			statuses.add(BillPaymentStatus.UNPAID);
 			statuses.add(BillPaymentStatus.PARTPAID);
 		}
+		//TODO revisar este metodo, se agregó un null al parametro nuevo billsAccessor
 		final SearchPageData<PSBillPaymentData> searchPageData = psBillPaymentFacade.getBillsByStatusList(customerData,
-				pageableData, statuses);
+				null, pageableData, statuses);
 		populateModel(model, searchPageData, showMode);
 		model.addAttribute(USER_BILLS, searchPageData.getResults());
 		model.addAttribute("billPaymentByStatus", searchPageData);
@@ -181,8 +183,9 @@ public class PSAccountRelationshipBillsController extends AbstractSearchPageCont
 	@RequestMapping(value = "/bills/loadCustomerBills", method = RequestMethod.GET)
 	public String getBillsForCustomer(@RequestParam("customerId") final String customerId, final Model model)
 	{
+		//TODO revisar este metodo, se agregó un null al parametro nuevo billsAccessor
 		final SearchPageData<PSBillPaymentData> bills = psBillPaymentFacade.getBillsByStatusList(
-				psBillPaymentFacade.getCustomerDataForUid(customerId), createPageableDataForBillsOverview(), null);
+				psBillPaymentFacade.getCustomerDataForUid(customerId), null, createPageableDataForBillsOverview(), null);
 		model.addAttribute("results", bills);
 		final CustomerData customer = psBillPaymentFacade.getCustomerDataForUid(customerId);
 
@@ -239,8 +242,9 @@ public class PSAccountRelationshipBillsController extends AbstractSearchPageCont
 			statuses.add(BillPaymentStatus.UNPAID);
 			statuses.add(BillPaymentStatus.PARTPAID);
 		}
+		//TODO revisar este metodo, se agregó un null al parametro nuevo billsAccessor
 		final SearchPageData<PSBillPaymentData> searchPageData = psBillPaymentFacade.getBillsByStatusList(customerData,
-				pageableData, statuses);
+				null, pageableData, statuses);
 		populateModel(model, searchPageData, showMode);
 		model.addAttribute(USER_BILLS, searchPageData.getResults());
 		model.addAttribute("billPaymentByStatus", searchPageData);

@@ -26,7 +26,7 @@ import org.springframework.validation.Validator;
  * Validator for retrieve draft forms.
  */
 @Component("retrieveDraftValidator")
-public class RetrieveDraftValidator implements Validator
+public class RetrieveDraftValidator extends EmailValidator implements Validator
 {
 
 	private static final String FORM_INVALID_DRAFT_EMAIL = "form.invalid.draft.email";
@@ -53,7 +53,7 @@ public class RetrieveDraftValidator implements Validator
 		{
 			errors.reject(FORM_INVALID_DRAFT_EMAIL);
 		}
-		else if (StringUtils.length(email) > 255 || !EmailValidator.EMAIL_REGEX.matcher(email).matches())
+		else if (StringUtils.length(email) > 255 || !validateEmailAddress(email))
 		{
 			errors.reject(FORM_INVALID_DRAFT_EMAIL);
 		}
