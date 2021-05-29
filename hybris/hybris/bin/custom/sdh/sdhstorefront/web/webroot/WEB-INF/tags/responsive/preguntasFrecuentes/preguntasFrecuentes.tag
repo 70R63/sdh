@@ -32,7 +32,7 @@
 			<h2 class="titulo-caja--ser-rel color-sr3 paso3">Categor�a</h2>
 			<p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Busqueda</p>
 			<div class="caja--ser-rel color-sr3">
-				<p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Categoria</p>
+				<p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Categoria: </p>
 				<select id="categoriaBuscar" class="new_alto form-control " name="categoria" onchange="showquestion(this)">
 					<option value="00">Seleccionar</option>
                     <c:forEach items="${sdhFAQsCategories}" var="category">
@@ -44,7 +44,7 @@
                 <input type="text" id="faqKeyWord" name="faqKeyWord" class="new_alto form-control "
                        minlength="4" maxlength="8" size="10">
 
-				<button class="btn btn-primary" onclick="keyWord()">Buscar palabra clave</button>
+				<button class="btn btn-primary" onclick="keyWord()">Buscar palabra clave: </button>
 			</div>
 		</div>
 
