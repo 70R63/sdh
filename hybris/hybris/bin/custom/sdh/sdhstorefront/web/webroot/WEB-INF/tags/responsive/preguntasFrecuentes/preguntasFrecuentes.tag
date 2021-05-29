@@ -29,8 +29,8 @@
 		<div class="col-md-3 col-xs-12 mb-20 no-marginleft Catego"
 			id="categoria">
 			<span class="paso--tres pasos color-sr3 rajdhani">1</span>
-			<h2 class="titulo-caja--ser-rel color-sr3 paso3">Categoría</h2>
-			<p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Selecciona la categoría.</p>
+			<h2 class="titulo-caja--ser-rel color-sr3 paso3">Categorï¿½a</h2>
+			<p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Selecciona la categorï¿½a.</p>
 			<div class="caja--ser-rel color-sr3">
 				<select id="categoriaBuscar" class="new_alto form-control " name="categoria" onchange="showquestion(this)">
 					<option value="00">Seleccionar</option>
@@ -38,7 +38,11 @@
                         <option value="${category.code}"><c:out value="${category.description}"/></option>
                     </c:forEach>
 				</select> <br>
-				<button class="btn btn-primary" onclick="showquestion()">Buscar</button>
+
+                <input type="text" id="faqKeyWord" name="faqKeyWord" class="new_alto form-control "
+                       minlength="4" maxlength="8" size="10">
+
+				<button class="btn btn-primary" onclick="keyWord()">Buscar palabra clave</button>
 			</div>
 		</div>
 
@@ -58,12 +62,27 @@
                 type: 'GET',
                 cache: false,
                 success: function (faqs){
-                    $.each(faqs, function(index, faq) {printFaq(faq); });
+                    $.each(faqs, function(index, faq) {printFaq(faq);});
                 },error: function (error){
                     console.log("Error");
                 }
             });
 		}
+
+		function keyWord(selection) {
+		    var keyWord = $("#faqKeyWord").val();
+		    document.getElementById("questionsDiv").innerHTML = "";
+            $.ajax({
+                url: "faqs/getByKeyWord?keyWord="+keyWord,
+                type: 'GET',
+                cache: false,
+                success: function (faqs){
+                    $.each(faqs, function(index, faq) {printFaq(faq);});
+                },error: function (error){
+                    console.log("Error");
+                }
+            });
+        }
 
 		function printFaq(faq){
 		    document.getElementById("questionsDiv").innerHTML +=

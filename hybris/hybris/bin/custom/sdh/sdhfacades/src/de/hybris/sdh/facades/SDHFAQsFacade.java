@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface SDHFAQsFacade {
     List<SDHFaqData> getAllFaqsByCategoryCode(String categoryCode);
+    List<SDHFaqData> getAllFaqsByKeyWord(String keyWord);
     List<SDHFaqCategoryData> getAllCategories();
 }
