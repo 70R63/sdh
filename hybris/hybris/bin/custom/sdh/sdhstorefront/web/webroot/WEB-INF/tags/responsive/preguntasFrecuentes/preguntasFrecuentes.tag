@@ -30,8 +30,9 @@
 			id="categoria">
 			<span class="paso--tres pasos color-sr3 rajdhani">1</span>
 			<h2 class="titulo-caja--ser-rel color-sr3 paso3">Categor�a</h2>
-			<p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Selecciona la categor�a.</p>
+			<p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Busqueda</p>
 			<div class="caja--ser-rel color-sr3">
+				<p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Categoria</p>
 				<select id="categoriaBuscar" class="new_alto form-control " name="categoria" onchange="showquestion(this)">
 					<option value="00">Seleccionar</option>
                     <c:forEach items="${sdhFAQsCategories}" var="category">
@@ -39,6 +40,7 @@
                     </c:forEach>
 				</select> <br>
 
+                <p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Palabra Clave</p>
                 <input type="text" id="faqKeyWord" name="faqKeyWord" class="new_alto form-control "
                        minlength="4" maxlength="8" size="10">
 
