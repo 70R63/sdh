@@ -25,7 +25,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<table class="table">
 						<thead style="cellspacing: 10 !important">
 							<tr>
@@ -121,45 +121,6 @@
 
 
 		<div id="table-ica" style="display: none;">
-			<div class="row">
-				<div class="headline">
-					<h2>
-						<span><spring:theme code="relacion.inicial.ica.titulo" /></span>
-					</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<table class="table">
-						<thead>
-							<tr>
-								<th><label class="control-label labeltabletd" for=""><spring:theme
-											code="relacion.inicial.ica.numdoc" /></label></th>
-								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="relacion.inicial.ica.tipdocu" />
-								</label></th>
-								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="relacion.inicial.ica.visualizar" />
-								</label></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="TIPO DOCUMENTO"></c:out>" /></td>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="NUM DOCUMENTO"></c:out>" /></td>
-								<td><label class="control-label"
-									style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-									id="" onclick="showdetail(this)">Detalle</label></td>
-
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
 		</div>
 
 		<div id="table-publicidad" style="display: none;">
@@ -207,108 +168,120 @@
 		</div>
 
 		<div id="table-gasolina" style="display: none;">
-			<div class="row">
-				<div class="headline">
-					<h2>
-						<span><spring:theme code="relacion.inicial.gasolina.titulo" /></span>
-					</h2>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-6">
-					<table class="table">
-						<thead style="cellspacing: 10 !important">
-							<tr>
-								<th><label class="control-label labeltabletd" for=""><spring:theme
-											code="relacion.inicial.gasolina.tipdoc" /></label></th>
-								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="relacion.inicial.gasolina.numdoc" />
-								</label></th>
-								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="relacion.inicial.gasolina.visualizar" />
-								</label></th>
-							</tr>
-						</thead>
-						<tbody>
-
-							<tr>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="identificación"></c:out>" /></td>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="numero"></c:out>" /></td>
-								<td><label class="control-label"
-									style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-									id="" onclick="showdetail(this)">Detalle</label></td>
-
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
 		</div>
 
 		
 		
-		<div id="table-delineacion" style="display: none;">
-			<div class="row">
-				<div class="headline">
-					<h2>
-						<span><spring:theme
-								code="obligacion.sujeto.delurbana.titulo" /></span>
-					</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<table class="table">
-						<thead style="cellspacing: 10 !important">
-							<tr>
-								<th><label class="control-label labeltabletd" for=""><spring:theme
-											code="relacion.inicial.delineacion.retencion.cdu" /></label></th>
-								<th><label class="control-label labeltabletd" for="">
-										<spring:theme
-											code="relacion.inicial.delineacion.retencion.liccons" />
-								</label></th>
-								<th><label class="control-label labeltabletd" for="">
-										<spring:theme
-											code="relacion.inicial.delineacion.retencion.direccion" />
-								</label></th>
-								<th><label class="control-label labeltabletd" for="">
-										<spring:theme
-											code="relacion.inicial.delineacion.retencion.visualizar" />
-								</label></th>
-							</tr>
-						</thead>
-						<tbody>
+<!-- 		<div id="table-delineacion" style="display: none;"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="headline"> -->
+<!-- 					<h2> -->
+<%-- 						<span><spring:theme --%>
+<%-- 								code="obligacion.sujeto.delurbana.titulo" /></span> --%>
+<!-- 					</h2> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-md-6"> -->
+<!-- 					<table class="table"> -->
+<!-- 						<thead style="cellspacing: 10 !important"> -->
+<!-- 							<tr> -->
+<%-- 								<th><label class="control-label labeltabletd" for=""><spring:theme --%>
+<%-- 											code="relacion.inicial.delineacion.retencion.cdu" /></label></th> --%>
+<!-- 								<th><label class="control-label labeltabletd" for=""> -->
+<%-- 										<spring:theme --%>
+<%-- 											code="relacion.inicial.delineacion.retencion.liccons" /> --%>
+<!-- 								</label></th> -->
+<!-- 								<th><label class="control-label labeltabletd" for=""> -->
+<%-- 										<spring:theme --%>
+<%-- 											code="relacion.inicial.delineacion.retencion.direccion" /> --%>
+<!-- 								</label></th> -->
+<!-- 								<th><label class="control-label labeltabletd" for=""> -->
+<%-- 										<spring:theme --%>
+<%-- 											code="relacion.inicial.delineacion.retencion.visualizar" /> --%>
+<!-- 								</label></th> -->
+<!-- 							</tr> -->
+<!-- 						</thead> -->
+<!-- 						<tbody> -->
 
-							<tr>
-								<td><label class="control-label"
-									style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-									id="" onclick="showdetail('7')">CDU</label></td>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="licencia"></c:out>" /></td>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="direccion"></c:out>" /></td>
-								<td><label class="control-label"
-									style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-									id="" onclick="showdetail(this)">Detalle</label></td>
+<!-- 							<tr> -->
+<!-- 								<td><label class="control-label" -->
+<!-- 									style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" -->
+<!-- 									id="" onclick="showdetail('7')">CDU</label></td> -->
+<!-- 								<td><input style="width: 100%" class="inputtextnew" -->
+<!-- 									maxlength="30" size="30" disabled="disabled" type="text" -->
+<%-- 									value="<c:out value="licencia"></c:out>" /></td> --%>
+<!-- 								<td><input style="width: 100%" class="inputtextnew" -->
+<!-- 									maxlength="30" size="30" disabled="disabled" type="text" -->
+<%-- 									value="<c:out value="direccion"></c:out>" /></td> --%>
+<!-- 								<td><label class="control-label" -->
+<!-- 									style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" -->
+<!-- 									id="" onclick="showdetail(this)">Detalle</label></td> -->
 
-							</tr>
-						</tbody>
-					</table>
-					<small class="form-text text-muted"
-							style="text-align: right !important"><spring:theme
-								code="relacion.inicial.delineacion.retencion.nota1" /></small>
-				</div>
-			</div>
-		</div>
+<!-- 							</tr> -->
+<!-- 						</tbody> -->
+<!-- 					</table> -->
+<!-- 					<small class="form-text text-muted" -->
+<%-- 							style="text-align: right !important"><spring:theme --%>
+<%-- 								code="relacion.inicial.delineacion.retencion.nota1" /></small> --%>
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		
-		<div id="table-delineacion-radicados" style="display: none;">
+<!-- 		<div id="table-delineacion-radicados" style="display: none;"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="headline"> -->
+<!-- 					<h2> -->
+<%-- 						<span><spring:theme --%>
+<%-- 								code="obligacion.sujeto.delurbana.titulo" /></span> --%>
+<!-- 					</h2> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-md-6"> -->
+<!-- 					<table class="table"> -->
+<!-- 						<thead style="cellspacing: 10 !important"> -->
+<!-- 							<tr> -->
+<%-- 								<th><label class="control-label labeltabletd" for=""><spring:theme --%>
+<%-- 											code="relacion.inicial.delineacion.radicados.cdu" /></label></th> --%>
+<!-- 								<th><label class="control-label labeltabletd" for=""> -->
+<%-- 										<spring:theme --%>
+<%-- 											code="relacion.inicial.delineacion.radicados.radicado" /> --%>
+<!-- 								</label></th> -->
+<!-- 								<th><label class="control-label labeltabletd" for=""> -->
+<%-- 										<spring:theme --%>
+<%-- 											code="relacion.inicial.delineacion.radicados.direccion" /> --%>
+<!-- 								</label></th> -->
+<!-- 								<th><label class="control-label labeltabletd" for=""> -->
+<%-- 										<spring:theme --%>
+<%-- 											code="relacion.inicial.delineacion.radicados.visualizar" /> --%>
+<!-- 								</label></th> -->
+<!-- 							</tr> -->
+<!-- 						</thead> -->
+<!-- 						<tbody> -->
+
+<!-- 							<tr> -->
+<!-- 								<td><input style="width: 100%" class="inputtextnew" -->
+<!-- 									maxlength="30" size="30" disabled="disabled" type="text" -->
+<%-- 									value="<c:out value="licencia"></c:out>" /></td> --%>
+<!-- 								<td><input style="width: 100%" class="inputtextnew" -->
+<!-- 									maxlength="30" size="30" disabled="disabled" type="text" -->
+<%-- 									value="<c:out value="licencia"></c:out>" /></td> --%>
+<!-- 								<td><input style="width: 100%" class="inputtextnew" -->
+<!-- 									maxlength="30" size="30" disabled="disabled" type="text" -->
+<%-- 									value="<c:out value="direccion"></c:out>" /></td> --%>
+<!-- 								<td><label class="control-label" -->
+<!-- 									style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" -->
+<!-- 									id="" onclick="showdetailrad(this)">Detalle</label></td> -->
+
+<!-- 							</tr> -->
+<!-- 						</tbody> -->
+<!-- 					</table> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+
+<div id="table-delineacion" style="display: none;">
 			<div class="row">
 				<div class="headline">
 					<h2>
@@ -361,32 +334,11 @@
 			</div>
 		</div>
 		
+		
 
 		<!-- 			tablas de detalle -->
 
 		<div id="detalle-predial" style="display: none;" class="table-responsive">
-			<div class="row">
-				<div class="col-md-2">
-					<div class="form-check">
-						<label class="form-check-label" style="text-transform: capitalize">
-							<input type="checkbox" name="regimen" id=""
-							class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-							<spring:theme code="relacion.inicial.conreserva" />
-						</label>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="form-check">
-						<label class="form-check-label" style="text-transform: capitalize">
-							<input type="checkbox" name="regimen" id=""
-							class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-							<spring:theme code="relacion.inicial.sinreserva" />
-						</label>
-					</div>
-				</div>
-			</div>
 			<div class="row">
 				<div class="col-md-8 text-center">
 					<div class="table-responsive">
@@ -441,25 +393,10 @@
 
 		<div id="detalle-ica" style="display: none;">
 			<div class="row">
-				<div class="col-md-2">
-					<div class="form-check">
-						<label class="form-check-label" style="text-transform: capitalize">
-							<input type="checkbox" name="regimen" id=""
-							class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-							<spring:theme code="relacion.inicial.conreserva" />
-						</label>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="form-check">
-						<label class="form-check-label" style="text-transform: capitalize">
-							<input type="checkbox" name="regimen" id=""
-							class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-							<spring:theme code="relacion.inicial.sinreserva" />
-						</label>
-					</div>
+				<div class="headline">
+					<h2>
+						<span><spring:theme code="relacion.inicial.ica.titulo" /></span>
+					</h2>
 				</div>
 			</div>
 			<div class="row">
@@ -482,6 +419,8 @@
 												code="relacion.inicial.ica.fecprese" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="relacion.inicial.ica.totpag" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.ica.totapovol" /> </label></th>
 
 								</tr>
 							</thead>
@@ -501,6 +440,8 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
 								</tr>
 							</tbody>
 						</table>
@@ -512,28 +453,6 @@
 
 
 		<div id="detalle-vehiculos" style="display: none;">
-			<div class="row">
-				<div class="col-md-2">
-					<div class="form-check">
-						<label class="form-check-label" style="text-transform: capitalize">
-							<input type="checkbox" name="regimen" id=""
-							class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-							<spring:theme code="relacion.inicial.conreserva" />
-						</label>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="form-check">
-						<label class="form-check-label" style="text-transform: capitalize">
-							<input type="checkbox" name="regimen" id=""
-							class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-							<spring:theme code="relacion.inicial.sinreserva" />
-						</label>
-					</div>
-				</div>
-			</div>
 			<div class="row">
 				<div class="col-md-8 text-center">
 					<div class="table-responsive">
@@ -549,7 +468,7 @@
 									<th><label class="control-label labeltabletd "><spring:theme
 												code="relacion.inicial.vehiculo.numrefrec" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="relacion.inicial.vehiculo.sticker" /> </label></th>
+												code="relacion.inicial.vehiculo.numform" /> </label></th>
 									<th><label class="control-label labeltabletd tablefechas"><spring:theme
 												code="relacion.inicial.vehiculo.fecprese" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -587,31 +506,8 @@
 
 
 		<div id="detalle-delurbana" style="display: none;">
-		
 			<div class="row">
-				<div class="col-md-2">
-					<div class="form-check">
-						<label class="form-check-label" style="text-transform: capitalize">
-							<input type="checkbox" name="regimen" id=""
-							class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-							<spring:theme code="relacion.inicial.conreserva" />
-						</label>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="form-check">
-						<label class="form-check-label" style="text-transform: capitalize">
-							<input type="checkbox" name="regimen" id=""
-							class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-							<spring:theme code="relacion.inicial.sinreserva" />
-						</label>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-8 text-center">
+				<div class="col-md-12 text-center">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="">
 							<thead>
@@ -619,19 +515,19 @@
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="relacion.inicial.delineacion.cdu" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.delineacion.radi" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="relacion.inicial.delineacion.tipo" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="relacion.inicial.delineacion.modalidad" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.delineacion.tipdocu" /> </label></th>
 									<th><label class="control-label labeltabletd"><spring:theme
 												code="relacion.inicial.delineacion.nurefrec" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="relacion.inicial.delineacion.sticker" /> </label></th>
-									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="relacion.inicial.delineacion.tipdocu" /> </label></th>
+												code="relacion.inicial.delineacion.numform" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="relacion.inicial.delineacion.fecprese" /> </label></th>
-									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="relacion.inicial.delineacion.totrete" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="relacion.inicial.delineacion.totpag" /> </label></th>
 								</tr>
@@ -645,10 +541,10 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew" disabled="disabled"
-										value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -748,28 +644,14 @@
 		
 
 		<div id="detalle-gasolina" style="display: none;">
-			<div class="row">
-				<div class="col-md-2">
-					<div class="form-check">
-						<label class="form-check-label" style="text-transform: capitalize">
-							<input type="checkbox" name="regimen" id=""
-							class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-							<spring:theme code="relacion.inicial.conreserva" />
-						</label>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="form-check">
-						<label class="form-check-label" style="text-transform: capitalize">
-							<input type="checkbox" name="regimen" id=""
-							class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-							<spring:theme code="relacion.inicial.sinreserva" />
-						</label>
-					</div>
+		<div class="row">
+				<div class="headline">
+					<h2>
+						<span><spring:theme code="relacion.inicial.gasolina.titulo" /></span>
+					</h2>
 				</div>
 			</div>
+
 			<div class="row">
 				<div class="col-md-8 text-center">
 					<div class="table-responsive">
@@ -780,12 +662,12 @@
 												code="relacion.inicial.gasolina.aniograv" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="relacion.inicial.gasolina.periodo" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.gasolina.tipdoc" /> </label></th>
 									<th><label class="control-label labeltabletd"><spring:theme
 												code="relacion.inicial.gasolina.nurefrec" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="relacion.inicial.gasolina.sticker" /> </label></th>
-									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="relacion.inicial.gasolina.tipdoc" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="relacion.inicial.gasolina.fecprese" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -820,28 +702,6 @@
 
 		<div id="detalle-publiext" style="display: none;">
 			<div class="row">
-				<div class="col-md-2">
-					<div class="form-check">
-						<label class="form-check-label" style="text-transform: capitalize">
-							<input type="checkbox" name="regimen" id=""
-							class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-							<spring:theme code="relacion.inicial.conreserva" />
-						</label>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="form-check">
-						<label class="form-check-label" style="text-transform: capitalize">
-							<input type="checkbox" name="regimen" id=""
-							class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-							<spring:theme code="relacion.inicial.sinreserva" />
-						</label>
-					</div>
-				</div>
-			</div>
-			<div class="row">
 				<div class="col-md-8 text-center">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="">
@@ -858,7 +718,7 @@
 									<th><label class="control-label labeltabletd"><spring:theme
 												code="relacion.inicial.publicidad.numrefrec" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="relacion.inicial.publicidad.sticker" /> </label></th>
+												code="relacion.inicial.publicidad.numForm" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="relacion.inicial.publicidad.tipdoc" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -1035,7 +895,7 @@
 		var detdeli = document.getElementById('detalle-delurbana');
 		var detgas = document.getElementById('detalle-gasolina');
 		var detplubliext = document.getElementById('detalle-publiext');
-		var detradic = document.getElementById('detalle-retenciones');
+		var detradic = document.getElementById('detalle-delurbana');
 		var tabdel = document.getElementById('table-delineacion');
 		var tabrad = document.getElementById('table-delineacion-radicados');
 		
@@ -1047,8 +907,7 @@
 		detdeli.style.display = 'none';
 		detplubliext.style.display = 'none';
 		detradic.style.display = 'block'; //este es el detalle de los radicados
-		tabdel.style.display='none';
-		tabrad.style.display = 'block';
+		tabdel.style.display='block';
 		
 	}
 </script>

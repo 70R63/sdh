@@ -44,12 +44,26 @@
 	<sf:form>
 		<div class="row">
 			<div class="col-md-6"></div>
-
-			<div class="col-md-3" id="idImpuesto">
+			<c:choose>
+			<c:when test="${not empty Retenedor}">
+						<div class="col-md-3" id="idImpuesto">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="relacion.inicial.selcimpuesto" /></label> <select id="impuesto"
-						class="new_alto form-control " name="impuesto" onchange="Selected(this)">
+						class="new_alto form-control " name="impuesto"
+						onchange="Selected(this)">
+						<option value="7">RETEICA</option>
+					</select>
+				</div>
+			</div>
+			</c:when>
+			<c:otherwise>
+				<div class="col-md-3" id="idImpuesto">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="relacion.inicial.selcimpuesto" /></label> <select id="impuesto"
+						class="new_alto form-control " name="impuesto"
+						onchange="Selected(this)">
 						<option value="0">Seleccionar</option>
 						<option value="1">Predial Unificado</option>
 						<option value="2">Vehículos</option>
@@ -60,23 +74,18 @@
 					</select>
 				</div>
 			</div>
+			</c:otherwise>
+			</c:choose>
+
 		</div>
 
-
-		<div class="row">
+		<div class="row" id="idinputImpuesto" style="display: none;">
 			<div class="col-md-6"></div>
 			<div class="col-md-3">
 				<div class="form-group">
-					<label class="control-label text-right"><spring:theme
-							code="relacion.inicial.aniograv" /></label> <select aria-required="true"
-						id="aniograva" class="new_alto form-control " name="aniograva" onchange="">
-						<option value="">Seleccionar</option>
-						<option value="2020">2020</option>
-						<option value="2019">2019</option>
-						<option value="2018">2018</option>
-						<option value="2017">2017</option>
-						<option value="2016">2016</option>
-					</select>
+					<label class="control-label text-right" id="labelSearch"></label><input
+						class="newalto form-control" value=""
+						type="text" />
 				</div>
 			</div>
 		</div>
@@ -100,23 +109,10 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-check">
-					<label class="form-check-label" style="text-transform: capitalize">
-						<input type="checkbox" name="regimen" id=""
-						class="form-check-input mr-2"
-						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-						<spring:theme code="relacion.inicial.conreserva" />
-					</label>
-				</div>
-				<div class="form-check">
-					<label class="form-check-label" style="text-transform: capitalize">
-						<input type="checkbox" name="regimen" id=""
-						class="form-check-input mr-2"
-						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-						<spring:theme code="relacion.inicial.sinreserva" />
-					</label>
+
 				</div>
 			</div>
-			
+
 			<div class="col-md-2">
 				<div class="form-group ">
 					<button type="button" class="btn btn-primary btn-lg" id="action"
