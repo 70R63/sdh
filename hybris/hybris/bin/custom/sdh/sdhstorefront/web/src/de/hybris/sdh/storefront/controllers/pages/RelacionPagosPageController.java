@@ -8,11 +8,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
-import de.hybris.sdh.core.services.SDHAnioTaxCatalogService;
-import de.hybris.sdh.facades.anio.data.SDHAnioGravableData;
-import de.hybris.sdh.facades.impl.DefaultSDHAnioTaxFacade;
-
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -43,12 +38,6 @@ public class RelacionPagosPageController extends AbstractPageController
 	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
-	@Resource(name = "sdhSDHAnioTaxCatalogService")
-	private SDHAnioTaxCatalogService sdhSDHAnioTaxCatalogService;
-
-	@Resource(name = "defaultSDHAnioTaxFacade")
-	private DefaultSDHAnioTaxFacade defaultSDHAnioTaxFacade;
-
 
 	@RequestMapping(value =
 	{ "/contribuyentes/consultas/relacionpagos", "/agenteRetenedor/consultas/relacionpagos" }, method = RequestMethod.GET)
@@ -58,11 +47,6 @@ public class RelacionPagosPageController extends AbstractPageController
 		System.out.println("---------------- Hola entro al GET Relaciones de Pago--------------------------");
 		final StringBuffer requestURL = request.getRequestURL();
 		final String url2 = String.valueOf(requestURL);
-
-
-
-
-		final List<SDHAnioGravableData> listAnioData = defaultSDHAnioTaxFacade.getAnioGravable();
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(RELACION_PAGOS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(RELACION_PAGOS_CMS_PAGE));
