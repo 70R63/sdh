@@ -24,6 +24,11 @@ public class ContribTelefono
 		// XXX Auto-generated constructor stub
 	}
 
+	public ContribTelefono(final String cadenaTexto)
+	{
+		// XXX Auto-generated constructor stub
+	}
+
 	/**
 	 * @return the tEL_TIPO
 	 */

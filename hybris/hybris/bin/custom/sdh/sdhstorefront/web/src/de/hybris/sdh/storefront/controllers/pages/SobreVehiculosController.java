@@ -28,15 +28,19 @@ import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.JuridicosVehiculos;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
 import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -95,6 +99,12 @@ public class SobreVehiculosController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+
+	@Resource(name = "sdhCustomerAccountService")
+	private SDHCustomerAccountService sdhCustomerAccountService;
+
 	/*
 	 * @Resource(name = "accountBreadcrumbBuilder") private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 	 */
@@ -129,12 +139,11 @@ public class SobreVehiculosController extends AbstractPageController
 
 			try
 			{
-				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-						SDHValidaMailRolResponse.class);
+				List<ImpuestoVehiculos> impuestoVehiculos = sdhConsultaImpuesto_simplificado
+						.consulta_impVehicular(consultaContribuyenteBPRequest);
+				sdhCustomerAccountService.updateImpuestoVehicular_simplificado(customerModel, impuestoVehiculos);
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
+				sdhConsultaContribuyenteBPResponse.setVehicular(impuestoVehiculos);
 
 				if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
 						&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getVehicular()))
@@ -196,8 +205,8 @@ public class SobreVehiculosController extends AbstractPageController
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			final DetalleVehiculosResponse detalleVehiculosResponse = mapper
-					.readValue(sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
+			String responseWS = sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest);
+			final DetalleVehiculosResponse detalleVehiculosResponse = mapper.readValue(responseWS, DetalleVehiculosResponse.class);
 
 			vehiculosForm.setDetalle(detalleVehiculosResponse.getDetalle());
 			if (detalleVehiculosResponse.getInfo_declara() != null)
