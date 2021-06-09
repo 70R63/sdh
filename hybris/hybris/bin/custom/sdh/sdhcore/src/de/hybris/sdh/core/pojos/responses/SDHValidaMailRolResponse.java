@@ -27,6 +27,7 @@ public class SDHValidaMailRolResponse {
 	//	private ImpuestoReteICA reteICA;
 	private List<ImpuestoVehiculos> vehicular; //Se agrega la  parte de vehiculos del response
 	private List<PredialResponse> predial;
+	private List<ImpuestosResponse> impuestos;
 
 	/**
 	 * @return the infoContrib
@@ -243,7 +244,26 @@ public class SDHValidaMailRolResponse {
 		return predial;
 	}
 
-	public void setPredial(List<PredialResponse> predial) {
+	public void setPredial(final List<PredialResponse> predial) {
 		this.predial = predial;
 	}
+
+	/**
+	 * @return the impuestos
+	 */
+	public List<ImpuestosResponse> getImpuestos()
+	{
+		return impuestos;
+	}
+
+	/**
+	 * @param impuestos
+	 *           the impuestos to set
+	 */
+	public void setImpuestos(final List<ImpuestosResponse> impuestos)
+	{
+		this.impuestos = impuestos;
+	}
+
+
 }

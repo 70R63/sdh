@@ -13,21 +13,71 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 	<relacionpagos:relacionPagosMenu />
-	<div id="idtodos" style="display: block;">
+		<c:choose>
+			<c:when test="${not empty Retenedor}">
+				<relacionpagos:relacionPagosRETEICA/>
+			</c:when>
+			<c:otherwise>
+	<div id="idtodos" style="display: none;">
 	<relacionpagos:relacionPagosTodo />
 	</div>
 	<relacionpagos:relacionPagosImpuesto/>
+	</c:otherwise>
+	</c:choose>
+
 	
 	
 	<script type="text/javascript">
 window.onload = function() {
 	
     $(".loader").fadeOut("slow");
+	var url = window.parent.location.href;
+	var contenido_url = url.includes('agenteRetenedor');
+	
 }
 
 	function Selected(selectObject) {
+		debugger;
 		var value = selectObject.value;
 		document.getElementById("Idimp").value = value;
+		
+		var inputSearch =  document.getElementById('idinputImpuesto')
+		
+
+		 switch (value) {
+		   case "0": // foo es 0, por lo tanto se cumple la condición y se ejecutara el siguiente bloque
+				inputSearch.style.display = 'none';
+		     break;
+		     // NOTA: el "break" olvidado debería estar aquí
+		   case "1": // No hay sentencia "break" en el 'case 0:', por lo tanto este caso también será ejecutado
+			   inputSearch.style.display = 'block';
+				 document.getElementById('labelSearch').innerHTML
+		         = 'CHIP/Matricula Inmobiliaria';
+		     break; // Al encontrar un "break", no será ejecutado el 'case 2:'
+		   case "2":
+			   inputSearch.style.display = 'block';
+				 document.getElementById('labelSearch').innerHTML
+		         = 'Placa';
+		     break;
+		   case "3":
+			   inputSearch.style.display = 'none';
+			     break;
+		   case "4":
+			   inputSearch.style.display = 'block';
+				 document.getElementById('labelSearch').innerHTML
+		         = 'Numero de resolucion';
+			     break;
+		   case "5":
+			   inputSearch.style.display = 'none';
+			     break;
+		   case "6":
+			   inputSearch.style.display = 'block';
+				 document.getElementById('labelSearch').innerHTML
+		         = 'CDU';
+			     break;
+		   default:
+		     console.log('default');
+		 }
 	}
 
 	function Selectedver(selectObject) {
@@ -90,13 +140,13 @@ window.onload = function() {
 		} else if (x == '3') {
 			tablepredial.style.display = 'none';
 			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'block';
+			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'none';
 			tabledeli.style.display = 'none';
 			tablegas.style.display = 'none';
 			todo.style.display = 'none';
 			detpred.style.display = 'none';
-			detica.style.display = 'none';
+			detica.style.display = 'block';
 			detvehi.style.display = 'none';
 			detdeli.style.display = 'none';
 			detgas.style.display = 'none';
@@ -128,12 +178,12 @@ window.onload = function() {
 			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'none';
 			tabledeli.style.display = 'none';
-			tablegas.style.display = 'block';
+			tablegas.style.display = 'none';
 			todo.style.display = 'none';
 			detpred.style.display = 'none';
 			detica.style.display = 'none';
 			detvehi.style.display = 'none';
-			detgas.style.display = 'none';
+			detgas.style.display = 'block';
 			detdeli.style.display = 'none';
 			detplubliext.style.display = 'none';
 			detradic.style.display = 'none';

@@ -779,4 +779,7 @@
 
 	<alias alias="sdhAgentesAutBPService" name="defaultSDHAgentesAutBPService"/>
 	<bean name="defaultSDHAgentesAutBPService" class="de.hybris.sdh.core.services.impl.DefaultSDHAgentesAutBPService" />
+
+	<alias alias="sdhConsultaImpuesto_simplificado" name="defaultSDHConsultaImpuesto_simplificado"/>
+	<bean name="defaultSDHConsultaImpuesto_simplificado" class="de.hybris.sdh.core.services.impl.DefaultSDHConsultaImpuesto_simplificado" />
 </beans>

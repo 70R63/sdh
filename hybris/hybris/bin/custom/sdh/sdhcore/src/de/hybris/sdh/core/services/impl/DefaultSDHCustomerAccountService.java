@@ -11,13 +11,13 @@
 package de.hybris.sdh.core.services.impl;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
-
 import de.hybris.platform.commerceservices.customer.CustomerAccountService;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService;
 import de.hybris.platform.commerceservices.event.ForgottenPwdEvent;
 import de.hybris.platform.commerceservices.security.SecureToken;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserGroupModel;
@@ -36,6 +36,7 @@ import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
 import de.hybris.sdh.core.model.SDHGasTaxModel;
 import de.hybris.sdh.core.model.SDHICATaxModel;
 import de.hybris.sdh.core.model.SDHPhoneModel;
+import de.hybris.sdh.core.model.SDHContribTaxModel;
 import de.hybris.sdh.core.model.SDHPredialTaxModel;
 import de.hybris.sdh.core.model.SDHReteICATaxModel;
 import de.hybris.sdh.core.model.SDHRolModel;
@@ -56,17 +57,18 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
+import de.hybris.sdh.core.pojos.responses.ImpuestosResponse;
 import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 //import de.hybris.sdh.core.services.;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHSendEmailService;
 import de.hybris.sdh.core.services.SDHUpdateCustomerCommPrefsService;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
@@ -125,6 +127,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	@Resource(name = "userGroupDao")
 	private UserGroupDao userGroupDao;
+
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
 
 	/*
 	 * (non-Javadoc)
@@ -483,7 +488,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
-		this.updateMiRitInfo(customerModel);
+		this.updateMiRitInfo_simplificado(customerModel);
 
 	}
 
@@ -633,310 +638,375 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 			}
 
-			if (customerModel.getPredialTaxList() != null && !customerModel.getPredialTaxList().isEmpty())
+
+
+
+
+			//clean old agents
+			final List<SDHAgentModel> oldAgentModels = customerModel.getAgentList();
+
+			if (oldAgentModels != null && !oldAgentModels.isEmpty())
 			{
-				modelService.removeAll(customerModel.getPredialTaxList());
-				customerModel.setPredialTaxList(null);
+				modelService.removeAll(oldAgentModels);
 			}
 
-			if (customerModel.getVehiculosTaxList() != null && !customerModel.getVehiculosTaxList().isEmpty())
+			final List<ContribAgente> agents = sdhConsultaContribuyenteBPResponse.getAgentes();
+
+			if (agents != null && !agents.isEmpty())
 			{
-				modelService.removeAll(customerModel.getVehiculosTaxList());
-				customerModel.setVehiculosTaxList(null);
+
+				final List<SDHAgentModel> newAgentModels = new ArrayList<SDHAgentModel>();
+
+				for (final ContribAgente eachAgentResponse : agents)
+				{
+					if (StringUtils.isBlank(eachAgentResponse.getNumDoc()))
+					{
+						continue;
+					}
+
+					final SDHAgentModel eachNewAgentModel = new SDHAgentModel();
+
+					eachNewAgentModel.setAgent(eachAgentResponse.getAgente());
+					eachNewAgentModel.setDocumentNumber(eachAgentResponse.getNumDoc());
+					eachNewAgentModel.setDocumentType(eachAgentResponse.getTipoDoc());
+					eachNewAgentModel.setCompleteName(eachAgentResponse.getNomCompleto());
+					eachNewAgentModel.setInternalFunction(eachAgentResponse.getFuncionInterl());
+					eachNewAgentModel.setBp(eachAgentResponse.getBp());
+					eachNewAgentModel.setMenu(eachAgentResponse.getMenu());
+
+					newAgentModels.add(eachNewAgentModel);
+
+				}
+
+				modelService.saveAll(newAgentModels);
+
+				customerModel.setAgentList(newAgentModels);
+			}
+			else
+			{
+				customerModel.setAgentList(null);
 			}
 
-			if (customerModel.getIcaTaxList() != null)
+
+
+			//clean old publicidad exterior taxes
+
+			final List<SDHExteriorPublicityTaxModel> oldPETaxModels = customerModel.getExteriorPublicityTaxList();
+
+			if (oldPETaxModels != null && !oldPETaxModels.isEmpty())
 			{
-				modelService.removeAll(customerModel.getIcaTaxList());
-				customerModel.setIcaTaxList(null);
+				modelService.removeAll(oldPETaxModels);
 			}
 
-			if (customerModel.getReteIcaTax() != null)
-			{
-				modelService.removeAll(customerModel.getReteIcaTax());
-				customerModel.setReteIcaTax(null);
-			}
+			final List<ImpuestoPublicidadExterior> publicidadExterior = sdhConsultaContribuyenteBPResponse.getPublicidadExt();
 
-			if (customerModel.getGasTaxList() != null && !customerModel.getGasTaxList().isEmpty())
+			if (publicidadExterior != null && !publicidadExterior.isEmpty())
 			{
-				modelService.removeAll(customerModel.getGasTaxList());
-				customerModel.setGasTaxList(null);
-			}
 
-			if (customerModel.getUrbanDelineationsTaxList() != null && !customerModel.getUrbanDelineationsTaxList().isEmpty())
-			{
-				modelService.removeAll(customerModel.getUrbanDelineationsTaxList());
-				customerModel.setUrbanDelineationsTaxList(null);
-			}
+				final List<SDHExteriorPublicityTaxModel> newPETaxModels = new ArrayList<SDHExteriorPublicityTaxModel>();
 
-			if (customerModel.getExteriorPublicityTaxList() != null && !customerModel.getExteriorPublicityTaxList().isEmpty())
+				for (final ImpuestoPublicidadExterior eachPETax : publicidadExterior)
+				{
+					if (StringUtils.isBlank(eachPETax.getNumResolu()))
+					{
+						continue;
+					}
+
+					final SDHExteriorPublicityTaxModel eachNewPETaxModel = new SDHExteriorPublicityTaxModel();
+					eachNewPETaxModel.setResolutionNumber(eachPETax.getNumResolu());
+					eachNewPETaxModel.setFenceType(eachPETax.getTipoValla());
+					eachNewPETaxModel.setObjectNumber(eachPETax.getNumObjeto());
+					eachNewPETaxModel.setAnoGravable(eachPETax.getAnoGravable());
+
+					newPETaxModels.add(eachNewPETaxModel);
+
+				}
+
+				modelService.saveAll(newPETaxModels);
+
+				customerModel.setExteriorPublicityTaxList(newPETaxModels);
+			}
+			else
 			{
-				modelService.removeAll(customerModel.getExteriorPublicityTaxList());
 				customerModel.setExteriorPublicityTaxList(null);
 			}
 
 
+			//clean old gas taxes
+
+			final List<SDHGasTaxModel> oldGasTaxModels = customerModel.getGasTaxList();
+
+			if (oldGasTaxModels != null && !oldGasTaxModels.isEmpty())
+			{
+				modelService.removeAll(oldGasTaxModels);
+			}
+
+			final List<ImpuestoGasolina> gasolina = sdhConsultaContribuyenteBPResponse.getGasolina();
+
+			if (gasolina != null && !gasolina.isEmpty())
+			{
+
+				final List<SDHGasTaxModel> newGasTaxModels = new ArrayList<SDHGasTaxModel>();
+
+				for (final ImpuestoGasolina eachGasolinaTax : gasolina)
+				{
+					if (StringUtils.isBlank(eachGasolinaTax.getNumDoc()))
+					{
+						continue;
+					}
+
+					final SDHGasTaxModel eachGasolinaModel = new SDHGasTaxModel();
+					eachGasolinaModel.setDocumentNumber(eachGasolinaTax.getNumDoc());
+					eachGasolinaModel.setDocumentType(eachGasolinaTax.getTipoDoc());
+					eachGasolinaModel.setObjectNumber(eachGasolinaTax.getNumObjeto());
+
+
+					newGasTaxModels.add(eachGasolinaModel);
+
+				}
+
+				modelService.saveAll(newGasTaxModels);
+
+				customerModel.setGasTaxList(newGasTaxModels);
+			}
+			else
+			{
+				customerModel.setGasTaxList(null);
+			}
+
+
+			//clean old rols
+			final List<SDHRolModel> rols = customerModel.getRolList();
+
+			if (rols != null && !rols.isEmpty())
+			{
+				modelService.removeAll(rols);
+			}
+
+			final List<NombreRolResponse> roles = sdhConsultaContribuyenteBPResponse.getRoles();
+
+			if (roles != null && !roles.isEmpty())
+			{
+				final List<SDHRolModel> newRolesModel = new ArrayList<SDHRolModel>();
+
+				for (final NombreRolResponse eachRolResponse : roles)
+				{
+					if (StringUtils.isBlank(eachRolResponse.getNombreRol()))
+					{
+						continue;
+					}
+
+					final SDHRolModel eachRolModel = new SDHRolModel();
+					eachRolModel.setRol(eachRolResponse.getNombreRol());
+					newRolesModel.add(eachRolModel);
+
+				}
+
+				modelService.saveAll(newRolesModel);
+
+				customerModel.setRolList(newRolesModel);
+			}
+			else
+			{
+				customerModel.setRolList(null);
+			}
+
+
+			//clean old vehiculos taxes
+
+			final List<SDHVehiculosTaxModel> oldVETaxModels = customerModel.getVehiculosTaxList();
+
+			if (oldVETaxModels != null && !oldVETaxModels.isEmpty())
+			{
+				modelService.removeAll(oldVETaxModels);
+			}
+
+			final List<ImpuestoVehiculos> vehiculos = sdhConsultaContribuyenteBPResponse.getVehicular();
+
+			if (vehiculos != null && !vehiculos.isEmpty())
+			{
+
+				final List<SDHVehiculosTaxModel> newVETaxModels = new ArrayList<SDHVehiculosTaxModel>();
+
+				for (final ImpuestoVehiculos eachVETax : vehiculos)
+				{
+					if (StringUtils.isBlank(eachVETax.getPlaca()))
+					{
+						continue;
+					}
+
+					final SDHVehiculosTaxModel eachNewVETaxModel = new SDHVehiculosTaxModel();
+					eachNewVETaxModel.setPlaca(eachVETax.getPlaca());
+					eachNewVETaxModel.setMarca(eachVETax.getMarca());
+					eachNewVETaxModel.setLinea(eachVETax.getLinea());
+					eachNewVETaxModel.setModelo(eachVETax.getModelo());
+					eachNewVETaxModel.setClase(eachVETax.getClase());
+					eachNewVETaxModel.setCarroceria(eachVETax.getCarroceria());
+					eachNewVETaxModel.setNumPuertas(eachVETax.getNumPuertas());
+					eachNewVETaxModel.setBlindado(eachVETax.getBlindado());
+					eachNewVETaxModel.setCilindraje(eachVETax.getCilindraje());
+					eachNewVETaxModel.setNumObjeto(eachVETax.getNumObjeto());
+
+					newVETaxModels.add(eachNewVETaxModel);
+
+				}
+
+				modelService.saveAll(newVETaxModels);
+
+				customerModel.setVehiculosTaxList(newVETaxModels);
+			}
+			else
+			{
+				customerModel.setVehiculosTaxList(null);
+			}
 
 
 
+			//clean old predial taxes
+
+			final List<SDHPredialTaxModel> oldPredialTaxModels = customerModel.getPredialTaxList();
+
+			if (oldPredialTaxModels != null && !oldPredialTaxModels.isEmpty())
+			{
+				modelService.removeAll(oldPredialTaxModels);
+			}
+
+			final List<PredialResponse> predial = sdhConsultaContribuyenteBPResponse.getPredial();
+
+			if (predial != null && !predial.isEmpty())
+			{
+
+				final List<SDHPredialTaxModel> newPredialTaxModels = new ArrayList<SDHPredialTaxModel>();
+
+				for (final PredialResponse eachPredialTax : predial)
+				{
+					if (StringUtils.isBlank(eachPredialTax.getCHIP()) && StringUtils.isBlank(eachPredialTax.getMatrInmobiliaria()))
+					{
+						continue;
+					}
+
+					final SDHPredialTaxModel eachNewPredialTaxModel = new SDHPredialTaxModel();
+					eachNewPredialTaxModel.setCHIP(eachPredialTax.getCHIP());
+					eachNewPredialTaxModel.setMatrInmobiliaria(eachPredialTax.getMatrInmobiliaria());
+					eachNewPredialTaxModel.setDireccionPredio(eachPredialTax.getDireccionPredio());
+					eachNewPredialTaxModel.setContratoArrenda(eachPredialTax.getContratoArrenda());
+					eachNewPredialTaxModel.setAnioGravable(eachPredialTax.getAnioGravable());
+					eachNewPredialTaxModel.setNumObjeto(eachPredialTax.getNumObjeto());
+
+					newPredialTaxModels.add(eachNewPredialTaxModel);
+
+				}
+
+				modelService.saveAll(newPredialTaxModels);
+
+				customerModel.setPredialTaxList(newPredialTaxModels);
+			}
+			else
+			{
+				customerModel.setPredialTaxList(null);
+			}
 
 
 
-			/*
-			 * //clean old agents final List<SDHAgentModel> oldAgentModels = customerModel.getAgentList();
-			 *
-			 * if (oldAgentModels != null && !oldAgentModels.isEmpty()) { modelService.removeAll(oldAgentModels); }
-			 *
-			 * final List<ContribAgente> agents = sdhConsultaContribuyenteBPResponse.getAgentes();
-			 *
-			 * if (agents != null && !agents.isEmpty()) {
-			 *
-			 * final List<SDHAgentModel> newAgentModels = new ArrayList<SDHAgentModel>();
-			 *
-			 * for (final ContribAgente eachAgentResponse : agents) { if
-			 * (StringUtils.isBlank(eachAgentResponse.getNumDoc())) { continue; }
-			 *
-			 * final SDHAgentModel eachNewAgentModel = new SDHAgentModel();
-			 *
-			 * eachNewAgentModel.setAgent(eachAgentResponse.getAgente());
-			 * eachNewAgentModel.setDocumentNumber(eachAgentResponse.getNumDoc());
-			 * eachNewAgentModel.setDocumentType(eachAgentResponse.getTipoDoc());
-			 * eachNewAgentModel.setCompleteName(eachAgentResponse.getNomCompleto());
-			 * eachNewAgentModel.setInternalFunction(eachAgentResponse.getFuncionInterl());
-			 * eachNewAgentModel.setBp(eachAgentResponse.getBp()); eachNewAgentModel.setMenu(eachAgentResponse.getMenu());
-			 *
-			 * newAgentModels.add(eachNewAgentModel);
-			 *
-			 * }
-			 *
-			 * modelService.saveAll(newAgentModels);
-			 *
-			 * customerModel.setAgentList(newAgentModels); } else { customerModel.setAgentList(null); }
-			 *
-			 *
-			 *
-			 * //clean old publicidad exterior taxes
-			 *
-			 * final List<SDHExteriorPublicityTaxModel> oldPETaxModels = customerModel.getExteriorPublicityTaxList();
-			 *
-			 * if (oldPETaxModels != null && !oldPETaxModels.isEmpty()) { modelService.removeAll(oldPETaxModels); }
-			 *
-			 * final List<ImpuestoPublicidadExterior> publicidadExterior =
-			 * sdhConsultaContribuyenteBPResponse.getPublicidadExt();
-			 *
-			 * if (publicidadExterior != null && !publicidadExterior.isEmpty()) {
-			 *
-			 * final List<SDHExteriorPublicityTaxModel> newPETaxModels = new ArrayList<SDHExteriorPublicityTaxModel>();
-			 *
-			 * for (final ImpuestoPublicidadExterior eachPETax : publicidadExterior) { if
-			 * (StringUtils.isBlank(eachPETax.getNumResolu())) { continue; }
-			 *
-			 * final SDHExteriorPublicityTaxModel eachNewPETaxModel = new SDHExteriorPublicityTaxModel();
-			 * eachNewPETaxModel.setResolutionNumber(eachPETax.getNumResolu());
-			 * eachNewPETaxModel.setFenceType(eachPETax.getTipoValla());
-			 * eachNewPETaxModel.setObjectNumber(eachPETax.getNumObjeto());
-			 * eachNewPETaxModel.setAnoGravable(eachPETax.getAnoGravable());
-			 *
-			 * newPETaxModels.add(eachNewPETaxModel);
-			 *
-			 * }
-			 *
-			 * modelService.saveAll(newPETaxModels);
-			 *
-			 * customerModel.setExteriorPublicityTaxList(newPETaxModels); } else {
-			 * customerModel.setExteriorPublicityTaxList(null); }
-			 *
-			 *
-			 * //clean old gas taxes
-			 *
-			 * final List<SDHGasTaxModel> oldGasTaxModels = customerModel.getGasTaxList();
-			 *
-			 * if (oldGasTaxModels != null && !oldGasTaxModels.isEmpty()) { modelService.removeAll(oldGasTaxModels); }
-			 *
-			 * final List<ImpuestoGasolina> gasolina = sdhConsultaContribuyenteBPResponse.getGasolina();
-			 *
-			 * if (gasolina != null && !gasolina.isEmpty()) {
-			 *
-			 * final List<SDHGasTaxModel> newGasTaxModels = new ArrayList<SDHGasTaxModel>();
-			 *
-			 * for (final ImpuestoGasolina eachGasolinaTax : gasolina) { if
-			 * (StringUtils.isBlank(eachGasolinaTax.getNumDoc())) { continue; }
-			 *
-			 * final SDHGasTaxModel eachGasolinaModel = new SDHGasTaxModel();
-			 * eachGasolinaModel.setDocumentNumber(eachGasolinaTax.getNumDoc());
-			 * eachGasolinaModel.setDocumentType(eachGasolinaTax.getTipoDoc());
-			 * eachGasolinaModel.setObjectNumber(eachGasolinaTax.getNumObjeto());
-			 *
-			 *
-			 * newGasTaxModels.add(eachGasolinaModel);
-			 *
-			 * }
-			 *
-			 * modelService.saveAll(newGasTaxModels);
-			 *
-			 * customerModel.setGasTaxList(newGasTaxModels); } else { customerModel.setGasTaxList(null); }
-			 *
-			 *
-			 * //clean old rols final List<SDHRolModel> rols = customerModel.getRolList();
-			 *
-			 * if (rols != null && !rols.isEmpty()) { modelService.removeAll(rols); }
-			 *
-			 * final List<NombreRolResponse> roles = sdhConsultaContribuyenteBPResponse.getRoles();
-			 *
-			 * if (roles != null && !roles.isEmpty()) { final List<SDHRolModel> newRolesModel = new
-			 * ArrayList<SDHRolModel>();
-			 *
-			 * for (final NombreRolResponse eachRolResponse : roles) { if
-			 * (StringUtils.isBlank(eachRolResponse.getNombreRol())) { continue; }
-			 *
-			 * final SDHRolModel eachRolModel = new SDHRolModel(); eachRolModel.setRol(eachRolResponse.getNombreRol());
-			 * newRolesModel.add(eachRolModel);
-			 *
-			 * }
-			 *
-			 * modelService.saveAll(newRolesModel);
-			 *
-			 * customerModel.setRolList(newRolesModel); } else { customerModel.setRolList(null); }
-			 *
-			 *
-			 * //clean old vehiculos taxes
-			 *
-			 * final List<SDHVehiculosTaxModel> oldVETaxModels = customerModel.getVehiculosTaxList();
-			 *
-			 * if (oldVETaxModels != null && !oldVETaxModels.isEmpty()) { modelService.removeAll(oldVETaxModels); }
-			 *
-			 * final List<ImpuestoVehiculos> vehiculos = sdhConsultaContribuyenteBPResponse.getVehicular();
-			 *
-			 * if (vehiculos != null && !vehiculos.isEmpty()) {
-			 *
-			 * final List<SDHVehiculosTaxModel> newVETaxModels = new ArrayList<SDHVehiculosTaxModel>();
-			 *
-			 * for (final ImpuestoVehiculos eachVETax : vehiculos) { if (StringUtils.isBlank(eachVETax.getPlaca())) {
-			 * continue; }
-			 *
-			 * final SDHVehiculosTaxModel eachNewVETaxModel = new SDHVehiculosTaxModel();
-			 * eachNewVETaxModel.setPlaca(eachVETax.getPlaca()); eachNewVETaxModel.setMarca(eachVETax.getMarca());
-			 * eachNewVETaxModel.setLinea(eachVETax.getLinea()); eachNewVETaxModel.setModelo(eachVETax.getModelo());
-			 * eachNewVETaxModel.setClase(eachVETax.getClase());
-			 * eachNewVETaxModel.setCarroceria(eachVETax.getCarroceria());
-			 * eachNewVETaxModel.setNumPuertas(eachVETax.getNumPuertas());
-			 * eachNewVETaxModel.setBlindado(eachVETax.getBlindado());
-			 * eachNewVETaxModel.setCilindraje(eachVETax.getCilindraje());
-			 * eachNewVETaxModel.setNumObjeto(eachVETax.getNumObjeto());
-			 *
-			 * newVETaxModels.add(eachNewVETaxModel);
-			 *
-			 * }
-			 *
-			 * modelService.saveAll(newVETaxModels);
-			 *
-			 * customerModel.setVehiculosTaxList(newVETaxModels); } else { customerModel.setVehiculosTaxList(null); }
-			 *
-			 *
-			 *
-			 * //clean old predial taxes
-			 *
-			 * final List<SDHPredialTaxModel> oldPredialTaxModels = customerModel.getPredialTaxList();
-			 *
-			 * if (oldPredialTaxModels != null && !oldPredialTaxModels.isEmpty()) {
-			 * modelService.removeAll(oldPredialTaxModels); }
-			 *
-			 * final List<PredialResponse> predial = sdhConsultaContribuyenteBPResponse.getPredial();
-			 *
-			 * if (predial != null && !predial.isEmpty()) {
-			 *
-			 * final List<SDHPredialTaxModel> newPredialTaxModels = new ArrayList<SDHPredialTaxModel>();
-			 *
-			 * for (final PredialResponse eachPredialTax : predial) { if (StringUtils.isBlank(eachPredialTax.getCHIP()) &&
-			 * StringUtils.isBlank(eachPredialTax.getMatrInmobiliaria())) { continue; }
-			 *
-			 * final SDHPredialTaxModel eachNewPredialTaxModel = new SDHPredialTaxModel();
-			 * eachNewPredialTaxModel.setCHIP(eachPredialTax.getCHIP());
-			 * eachNewPredialTaxModel.setMatrInmobiliaria(eachPredialTax.getMatrInmobiliaria());
-			 * eachNewPredialTaxModel.setDireccionPredio(eachPredialTax.getDireccionPredio());
-			 * eachNewPredialTaxModel.setContratoArrenda(eachPredialTax.getContratoArrenda());
-			 * eachNewPredialTaxModel.setAnioGravable(eachPredialTax.getAnioGravable());
-			 * eachNewPredialTaxModel.setNumObjeto(eachPredialTax.getNumObjeto());
-			 *
-			 * newPredialTaxModels.add(eachNewPredialTaxModel);
-			 *
-			 * }
-			 *
-			 * modelService.saveAll(newPredialTaxModels);
-			 *
-			 * customerModel.setPredialTaxList(newPredialTaxModels); } else { customerModel.setPredialTaxList(null); }
-			 *
-			 *
-			 *
-			 * //clean old urban delineations exterior taxes
-			 *
-			 * final List<SDHUrbanDelineationsTaxModel> oldUrbanDelineationsTaxModels =
-			 * customerModel.getUrbanDelineationsTaxList();
-			 *
-			 * if (oldUrbanDelineationsTaxModels != null && !oldUrbanDelineationsTaxModels.isEmpty()) {
-			 * modelService.removeAll(oldUrbanDelineationsTaxModels); }
-			 *
-			 * final List<ImpuestoDelineacionUrbana> delineacionUrbana =
-			 * sdhConsultaContribuyenteBPResponse.getDelineacion();
-			 *
-			 * if (delineacionUrbana != null && !delineacionUrbana.isEmpty()) {
-			 *
-			 * final List<SDHUrbanDelineationsTaxModel> newUrbanDelineationsTaxModels = new
-			 * ArrayList<SDHUrbanDelineationsTaxModel>();
-			 *
-			 * for (final ImpuestoDelineacionUrbana eachUrbanDelineationsTax : delineacionUrbana) { if
-			 * (StringUtils.isBlank(eachUrbanDelineationsTax.getCdu())) { continue; }
-			 *
-			 * final SDHUrbanDelineationsTaxModel eachNewUrbanDelineationsTaxModel = new SDHUrbanDelineationsTaxModel();
-			 * eachNewUrbanDelineationsTaxModel.setObjectNumber(eachUrbanDelineationsTax.getNumObjeto());
-			 * eachNewUrbanDelineationsTaxModel.setCdu(eachUrbanDelineationsTax.getCdu());
-			 * eachNewUrbanDelineationsTaxModel.setLicenConst(eachUrbanDelineationsTax.getLicenConst());
-			 * eachNewUrbanDelineationsTaxModel.setExpDate(eachUrbanDelineationsTax.getFechaExp());
-			 *
-			 * newUrbanDelineationsTaxModels.add(eachNewUrbanDelineationsTaxModel); }
-			 *
-			 * modelService.saveAll(newUrbanDelineationsTaxModels);
-			 *
-			 * customerModel.setUrbanDelineationsTaxList(newUrbanDelineationsTaxModels); } else {
-			 * customerModel.setUrbanDelineationsTaxList(null); }
-			 *
-			 *
-			 * //clean old ICA exterior taxes
-			 *
-			 *
-			 * final SDHICATaxModel oldIcaTaxModel = customerModel.getIcaTaxList();
-			 *
-			 * if (oldIcaTaxModel != null) { modelService.removeAll(oldIcaTaxModel); }
-			 *
-			 * final ImpuestoICA ica = sdhConsultaContribuyenteBPResponse.getIca();
-			 *
-			 * if (ica != null) { final SDHICATaxModel newIcaTaxModel = new SDHICATaxModel();
-			 *
-			 * if (!StringUtils.isBlank(ica.getNumObjeto())) { newIcaTaxModel.setObjectNumber(ica.getNumObjeto()); }
-			 *
-			 * modelService.saveAll(newIcaTaxModel);
-			 *
-			 * customerModel.setIcaTaxList(newIcaTaxModel);
-			 *
-			 * } else { customerModel.setIcaTaxList(null); }
-			 *
-			 *
-			 * // clean previous reteICA if (customerModel.getReteIcaTax() != null) { final SDHReteICATaxModel reteICAModel
-			 * = customerModel.getReteIcaTax(); modelService.remove(reteICAModel); }
-			 *
-			 * if (sdhConsultaContribuyenteBPResponse.getReteIca() != null) { final SDHReteICATaxModel newReteICAModel =
-			 * new SDHReteICATaxModel();
-			 * newReteICAModel.setObjectNumber(sdhConsultaContribuyenteBPResponse.getReteIca().getNumObjeto());
-			 * newReteICAModel.setConsecutive(sdhConsultaContribuyenteBPResponse.getReteIca().getConsecutive());
-			 * newReteICAModel.setNumID(sdhConsultaContribuyenteBPResponse.getReteIca().getNumID());
-			 *
-			 *
-			 * modelService.save(newReteICAModel);
-			 *
-			 * customerModel.setReteIcaTax(newReteICAModel);
-			 *
-			 * } else { customerModel.setReteIcaTax(null); }
-			 */
+			//clean old urban delineations exterior taxes
+
+			final List<SDHUrbanDelineationsTaxModel> oldUrbanDelineationsTaxModels = customerModel.getUrbanDelineationsTaxList();
+
+			if (oldUrbanDelineationsTaxModels != null && !oldUrbanDelineationsTaxModels.isEmpty())
+			{
+				modelService.removeAll(oldUrbanDelineationsTaxModels);
+			}
+
+			final List<ImpuestoDelineacionUrbana> delineacionUrbana = sdhConsultaContribuyenteBPResponse.getDelineacion();
+
+			if (delineacionUrbana != null && !delineacionUrbana.isEmpty())
+			{
+
+				final List<SDHUrbanDelineationsTaxModel> newUrbanDelineationsTaxModels = new ArrayList<SDHUrbanDelineationsTaxModel>();
+
+				for (final ImpuestoDelineacionUrbana eachUrbanDelineationsTax : delineacionUrbana)
+				{
+					if (StringUtils.isBlank(eachUrbanDelineationsTax.getCdu()))
+					{
+						continue;
+					}
+
+					final SDHUrbanDelineationsTaxModel eachNewUrbanDelineationsTaxModel = new SDHUrbanDelineationsTaxModel();
+					eachNewUrbanDelineationsTaxModel.setObjectNumber(eachUrbanDelineationsTax.getNumObjeto());
+					eachNewUrbanDelineationsTaxModel.setCdu(eachUrbanDelineationsTax.getCdu());
+					eachNewUrbanDelineationsTaxModel.setLicenConst(eachUrbanDelineationsTax.getLicenConst());
+					eachNewUrbanDelineationsTaxModel.setExpDate(eachUrbanDelineationsTax.getFechaExp());
+
+					newUrbanDelineationsTaxModels.add(eachNewUrbanDelineationsTaxModel);
+				}
+
+				modelService.saveAll(newUrbanDelineationsTaxModels);
+
+				customerModel.setUrbanDelineationsTaxList(newUrbanDelineationsTaxModels);
+			}
+			else
+			{
+				customerModel.setUrbanDelineationsTaxList(null);
+			}
+
+
+			//clean old ICA exterior taxes
+
+
+			final SDHICATaxModel oldIcaTaxModel = customerModel.getIcaTaxList();
+
+			if (oldIcaTaxModel != null)
+			{
+				modelService.removeAll(oldIcaTaxModel);
+			}
+
+			final ImpuestoICA ica = sdhConsultaContribuyenteBPResponse.getIca();
+
+			if (ica != null)
+			{
+				final SDHICATaxModel newIcaTaxModel = new SDHICATaxModel();
+
+				if (!StringUtils.isBlank(ica.getNumObjeto()))
+				{
+					newIcaTaxModel.setObjectNumber(ica.getNumObjeto());
+				}
+
+				modelService.saveAll(newIcaTaxModel);
+
+				customerModel.setIcaTaxList(newIcaTaxModel);
+
+			}
+			else
+			{
+				customerModel.setIcaTaxList(null);
+			}
+
+
+			// clean previous reteICA
+			if (customerModel.getReteIcaTax() != null)
+			{
+				final SDHReteICATaxModel reteICAModel = customerModel.getReteIcaTax();
+				modelService.remove(reteICAModel);
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getReteIca() != null)
+			{
+				final SDHReteICATaxModel newReteICAModel = new SDHReteICATaxModel();
+				newReteICAModel.setObjectNumber(sdhConsultaContribuyenteBPResponse.getReteIca().getNumObjeto());
+				newReteICAModel.setConsecutive(sdhConsultaContribuyenteBPResponse.getReteIca().getConsecutive());
+				newReteICAModel.setNumID(sdhConsultaContribuyenteBPResponse.getReteIca().getNumID());
+
+
+				modelService.save(newReteICAModel);
+
+				customerModel.setReteIcaTax(newReteICAModel);
+
+			}
+			else
+			{
+				customerModel.setReteIcaTax(null);
+			}
+
 
 
 			modelService.save(customerModel);
@@ -949,6 +1019,370 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 		return customerModel;
 	}
+
+
+	public CustomerModel updateMiRitInfo_simplificado(final CustomerModel customerModel)
+	{
+		final String numBP = customerModel.getNumBP();
+
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		consultaContribuyenteBPRequest.setNumBP(numBP);
+
+		final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+				.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
+
+		grabarInfoContrib(customerModel, sdhConsultaContribuyenteBPResponse);
+		grabarAgentes(customerModel, sdhConsultaContribuyenteBPResponse);
+		grabarRoles(customerModel, sdhConsultaContribuyenteBPResponse);
+		grabarImpuestos(customerModel, sdhConsultaContribuyenteBPResponse);
+
+		modelService.save(customerModel);
+
+
+		//			response = response.replace("\"infoContrib\":[", "\"infoContrib\": ");
+		//			response = response.replace("}],\"roles\":[", "},\"roles\":[");
+
+		return customerModel;
+	}
+
+
+	public CustomerModel updateImpuestoVehicular_simplificado(final CustomerModel customerModel, List<ImpuestoVehiculos> vehiculos)
+	{
+
+
+		final List<SDHVehiculosTaxModel> oldVETaxModels = customerModel.getVehiculosTaxList();
+
+		if (oldVETaxModels != null && !oldVETaxModels.isEmpty())
+		{
+			modelService.removeAll(oldVETaxModels);
+		}
+
+		//		final List<ImpuestoVehiculos> vehiculos = sdhConsultaContribuyenteBPResponse.getVehicular();
+
+		if (vehiculos != null && !vehiculos.isEmpty())
+		{
+
+			final List<SDHVehiculosTaxModel> newVETaxModels = new ArrayList<SDHVehiculosTaxModel>();
+
+			for (final ImpuestoVehiculos eachVETax : vehiculos)
+			{
+				if (StringUtils.isBlank(eachVETax.getPlaca()))
+				{
+					continue;
+				}
+
+				final SDHVehiculosTaxModel eachNewVETaxModel = new SDHVehiculosTaxModel();
+				eachNewVETaxModel.setPlaca(eachVETax.getPlaca());
+				eachNewVETaxModel.setMarca(eachVETax.getMarca());
+				eachNewVETaxModel.setLinea(eachVETax.getLinea());
+				eachNewVETaxModel.setModelo(eachVETax.getModelo());
+				eachNewVETaxModel.setClase(eachVETax.getClase());
+				eachNewVETaxModel.setCarroceria(eachVETax.getCarroceria());
+				eachNewVETaxModel.setNumPuertas(eachVETax.getNumPuertas());
+				eachNewVETaxModel.setBlindado(eachVETax.getBlindado());
+				eachNewVETaxModel.setCilindraje(eachVETax.getCilindraje());
+				eachNewVETaxModel.setNumObjeto(eachVETax.getNumObjeto());
+
+				newVETaxModels.add(eachNewVETaxModel);
+
+			}
+
+			modelService.saveAll(newVETaxModels);
+
+			customerModel.setVehiculosTaxList(newVETaxModels);
+			modelService.save(customerModel);
+		}
+		else
+		{
+			customerModel.setVehiculosTaxList(null);
+		}
+
+		return customerModel;
+	}
+
+
+
+	/**
+	 * @param customerModel
+	 * @param sdhConsultaContribuyenteBPResponse
+	 */
+	private void grabarImpuestos(final CustomerModel customerModel,
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse)
+	{
+		//establecer informacion correspondiente a impuestos:
+		final List<SDHContribTaxModel> oldContribTaxModels = customerModel.getContribTaxList();
+
+		if (oldContribTaxModels != null && !oldContribTaxModels.isEmpty())
+		{
+			modelService.removeAll(oldContribTaxModels);
+		}
+
+		final List<ImpuestosResponse> impuestosContrib = sdhConsultaContribuyenteBPResponse.getImpuestos();
+		if (impuestosContrib != null && !impuestosContrib.isEmpty())
+		{
+
+			final List<SDHContribTaxModel> newContribTaxModels = new ArrayList<SDHContribTaxModel>();
+
+			for (final ImpuestosResponse eachImpuestosContrib : impuestosContrib)
+			{
+				if (StringUtils.isBlank(eachImpuestosContrib.getClaseObjeto()))
+				{
+					continue;
+				}
+
+				final SDHContribTaxModel eachNewContribTaxModel = new SDHContribTaxModel();
+				eachNewContribTaxModel.setClaseObjeto(eachImpuestosContrib.getClaseObjeto());
+				eachNewContribTaxModel.setCantObjetos(eachImpuestosContrib.getCantObjetos());
+				//					eachNewContribTaxModel.setLinea(eachContribTax.getDescripcion());
+
+				newContribTaxModels.add(eachNewContribTaxModel);
+
+			}
+
+			modelService.saveAll(newContribTaxModels);
+
+			customerModel.setContribTaxList(newContribTaxModels);
+		}
+		else
+		{
+			customerModel.setContribTaxList(null);
+		}
+
+	}
+
+
+	/**
+	 * @param customerModel
+	 * @param sdhConsultaContribuyenteBPResponse
+	 */
+	private void grabarRoles(final CustomerModel customerModel, final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse)
+	{
+		//clean old rols
+		final List<SDHRolModel> rols = customerModel.getRolList();
+
+		if (rols != null && !rols.isEmpty())
+		{
+			modelService.removeAll(rols);
+		}
+
+		final List<NombreRolResponse> roles = sdhConsultaContribuyenteBPResponse.getRoles();
+
+		if (roles != null && !roles.isEmpty())
+		{
+			final List<SDHRolModel> newRolesModel = new ArrayList<SDHRolModel>();
+
+			for (final NombreRolResponse eachRolResponse : roles)
+			{
+				if (StringUtils.isBlank(eachRolResponse.getNombreRol()))
+				{
+					continue;
+				}
+
+				final SDHRolModel eachRolModel = new SDHRolModel();
+				eachRolModel.setRol(eachRolResponse.getNombreRol());
+				newRolesModel.add(eachRolModel);
+
+			}
+
+			modelService.saveAll(newRolesModel);
+
+			customerModel.setRolList(newRolesModel);
+		}
+		else
+		{
+			customerModel.setRolList(null);
+		}
+
+	}
+
+
+	/**
+	 * @param customerModel
+	 * @param sdhConsultaContribuyenteBPResponse
+	 */
+	private void grabarAgentes(final CustomerModel customerModel,
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse)
+	{
+		//clean old agents
+		final List<SDHAgentModel> oldAgentModels = customerModel.getAgentList();
+
+		if (oldAgentModels != null && !oldAgentModels.isEmpty())
+		{
+			modelService.removeAll(oldAgentModels);
+		}
+
+		final List<ContribAgente> agents = sdhConsultaContribuyenteBPResponse.getAgentes();
+
+		if (agents != null && !agents.isEmpty())
+		{
+
+			final List<SDHAgentModel> newAgentModels = new ArrayList<SDHAgentModel>();
+
+			for (final ContribAgente eachAgentResponse : agents)
+			{
+				if (StringUtils.isBlank(eachAgentResponse.getNumDoc()))
+				{
+					continue;
+				}
+
+				final SDHAgentModel eachNewAgentModel = new SDHAgentModel();
+
+				eachNewAgentModel.setAgent(eachAgentResponse.getAgente());
+				eachNewAgentModel.setDocumentNumber(eachAgentResponse.getNumDoc());
+				eachNewAgentModel.setDocumentType(eachAgentResponse.getTipoDoc());
+				eachNewAgentModel.setCompleteName(eachAgentResponse.getNomCompleto());
+				eachNewAgentModel.setInternalFunction(eachAgentResponse.getFuncionInterl());
+				eachNewAgentModel.setBp(eachAgentResponse.getBp());
+				eachNewAgentModel.setMenu(eachAgentResponse.getMenu());
+
+				newAgentModels.add(eachNewAgentModel);
+
+			}
+
+			modelService.saveAll(newAgentModels);
+
+			customerModel.setAgentList(newAgentModels);
+		}
+		else
+		{
+			customerModel.setAgentList(null);
+		}
+
+	}
+
+
+	/**
+	 * @param customerModel
+	 * @param sdhConsultaContribuyenteBPResponse
+	 */
+	private void grabarInfoContrib(final CustomerModel customerModel,
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse)
+	{
+
+		final InfoContribResponse infoContribuyente = sdhConsultaContribuyenteBPResponse.getInfoContrib();
+		if (null != infoContribuyente)
+		{
+			customerModel.setFirstName(infoContribuyente.getPrimNom());
+			customerModel.setMiddleName(infoContribuyente.getSegNom());
+			customerModel.setLastName(infoContribuyente.getPrimApe());
+			customerModel.setSecondLastName(infoContribuyente.getSegApe());
+
+			customerModel.setDocumentNumber(infoContribuyente.getNumDoc());
+			customerModel.setDocumentType(infoContribuyente.getTipoDoc());
+			//TODO: save document expedition date
+
+			customerModel.setDocumentNumber(infoContribuyente.getNumDoc());
+
+
+			final ContribAdicionales adicionales = infoContribuyente.getAdicionales();
+			if (null != adicionales)
+			{
+				customerModel.setSdhType(adicionales.getTYPE());
+				customerModel.setSdhTitle(adicionales.getTITLE());
+				customerModel.setNameOrg1(adicionales.getNAME_ORG1());
+				customerModel.setNameOrg2(adicionales.getNAME_ORG2());
+				customerModel.setNameOrg3(adicionales.getNAME_ORG3());
+				customerModel.setNameOrg4(adicionales.getNAME_ORG4());
+
+
+				customerModel.setDigVer(adicionales.getDIGVERIF());
+				customerModel.setLegalEntity(adicionales.getLEGAL_ENTY());
+				customerModel.setLegalOrg(adicionales.getLEGALORG());
+				customerModel.setUseEmailForNotifications((1 == adicionales.getZZAUTOBUZONE()) ? Boolean.TRUE : Boolean.FALSE);
+				customerModel
+						.setUseInformationForInstitutionalPurposes((1 == adicionales.getZZAUTOUSOINF()) ? Boolean.TRUE : Boolean.FALSE);
+				//TODO: fecha de autorizacion de uso de buzon
+
+			}
+
+			//clean old addresses
+			final List<SDHAddressModel> currentAddresses = customerModel.getAddressList();
+
+			if (currentAddresses != null && !currentAddresses.isEmpty())
+			{
+				modelService.removeAll(currentAddresses);
+			}
+
+			final List<ContribDireccion> direcciones = infoContribuyente.getDireccion();
+
+			if (direcciones != null && !direcciones.isEmpty())
+			{
+
+				final List<SDHAddressModel> newAddresses = new ArrayList<SDHAddressModel>();
+
+				for (final ContribDireccion eachAddress : direcciones)
+				{
+
+					if (StringUtils.isBlank(eachAddress.getADR_KIND()))
+					{
+						continue;
+					}
+
+					final SDHAddressModel eachAddressModel = new SDHAddressModel();
+					eachAddressModel.setAddKind(eachAddress.getADR_KIND());
+					eachAddressModel.setStreet(eachAddress.getSTREET());
+					eachAddressModel.setPostalCode(eachAddress.getPOST_CODE());
+					eachAddressModel.setCity(eachAddress.getCITY1());
+					eachAddressModel.setCountry(eachAddress.getCOUNTRY());
+					eachAddressModel.setRegion(eachAddress.getREGION());
+
+					newAddresses.add(eachAddressModel);
+
+				}
+
+				modelService.saveAll(newAddresses);
+
+				customerModel.setAddressList(newAddresses);
+
+			}
+			else
+			{
+				customerModel.setAddressList(null);
+			}
+
+
+			//clean old social networks
+			final List<SDHSocialNetworkModel> socialNetworks = customerModel.getNetworkList();
+
+			if (socialNetworks != null && !socialNetworks.isEmpty())
+			{
+				modelService.removeAll(socialNetworks);
+			}
+
+			final List<ContribRedSocial> redsocial = infoContribuyente.getRedsocial();
+
+			if (redsocial != null && !redsocial.isEmpty())
+			{
+
+				final List<SDHSocialNetworkModel> newSocialNetwork = new ArrayList<SDHSocialNetworkModel>();
+
+				for (final ContribRedSocial eachSocialNetwork : redsocial)
+				{
+					if (StringUtils.isBlank(eachSocialNetwork.getRED_SOCIAL()))
+					{
+						continue;
+					}
+
+					final SDHSocialNetworkModel eachSocialNetworkModel = new SDHSocialNetworkModel();
+					eachSocialNetworkModel.setSocialNetwork(eachSocialNetwork.getRED_SOCIAL());
+					eachSocialNetworkModel.setUsername(eachSocialNetwork.getUSUARIORED());
+					newSocialNetwork.add(eachSocialNetworkModel);
+
+				}
+
+				modelService.saveAll(newSocialNetwork);
+
+				customerModel.setNetworkList(newSocialNetwork);
+			}
+			else
+			{
+				customerModel.setNetworkList(null);
+			}
+
+		}
+
+	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -1374,20 +1808,21 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		LOG.info("Updating SDH Customer Tax Menu Restrictions");
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		SDHValidaMailRolResponse sdhConsultaContribuyenteBPRespons = null;
-		String response = null;
+		final String response = null;
 
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		response = sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest);
-		try {
-			if(Objects.nonNull(response)){
-				sdhConsultaContribuyenteBPRespons = mapper.readValue(response, SDHValidaMailRolResponse.class);
-			}
-		} catch (final IOException e) {
-			e.printStackTrace();
-		}
+		//		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		//		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+		//		final ObjectMapper mapper = new ObjectMapper();
+		//		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		//		response = sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest);
+		//		try {
+		//			if(Objects.nonNull(response)){
+		//				sdhConsultaContribuyenteBPRespons = mapper.readValue(response, SDHValidaMailRolResponse.class);
+		//			}
+		//		} catch (final IOException e) {
+		//			e.printStackTrace();
+		//		}
+		sdhConsultaContribuyenteBPRespons = sdhConsultaContribuyenteBPService.mapearInfo(customerModel);
 
 		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
 		final Set<PrincipalGroupModel> newGroupList = new HashSet<>();
@@ -1399,32 +1834,69 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		}
 
 		if(Objects.nonNull(sdhConsultaContribuyenteBPRespons)){
-			if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getGasolina())){
-				addUsrGrpModelToList("gasolinaUsrTaxGrp" , newGroupList);
-            }
-            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getPublicidadExt())){
-				addUsrGrpModelToList("publicidadExtUsrTaxGrp" , newGroupList);
-            }
-            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getDelineacion())){
-				addUsrGrpModelToList("delineacionUsrTaxGrp" , newGroupList);
-            }
-            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getIca())){
-				addUsrGrpModelToList("ICAUsrTaxGrp" , newGroupList);
-            }
-            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getReteIca())){
-				addUsrGrpModelToList("reteICAUsrTaxGrp" , newGroupList);
-            }
-            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getVehicular())){
-				addUsrGrpModelToList("vehicularUsrTaxGrp" , newGroupList);
-            }
-			if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getPredial())){
-				addUsrGrpModelToList("predialUsrTaxGrp" , newGroupList);
+			for (final ImpuestosResponse elementoImpuestosResponse : sdhConsultaContribuyenteBPRespons.getImpuestos())
+			{
+				if (elementoImpuestosResponse != null)
+				{
+					switch (elementoImpuestosResponse.getClaseObjeto())
+					{
+						case "01":
+							addUsrGrpModelToList("predialUsrTaxGrp", newGroupList);
+							break;
+						case "02":
+							addUsrGrpModelToList("vehicularUsrTaxGrp", newGroupList);
+							break;
+						case "03":
+							addUsrGrpModelToList("ICAUsrTaxGrp", newGroupList);
+							break;
+						case "04":
+							addUsrGrpModelToList("reteICAUsrTaxGrp", newGroupList);
+							break;
+						case "05":
+							addUsrGrpModelToList("gasolinaUsrTaxGrp", newGroupList);
+							break;
+						case "06":
+							addUsrGrpModelToList("delineacionUsrTaxGrp", newGroupList);
+							break;
+						case "07":
+							addUsrGrpModelToList("publicidadExtUsrTaxGrp", newGroupList);
+							break;
+
+						default:
+							break;
+					}
+				}
 			}
+
+			//			if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getGasolina())){
+			//				addUsrGrpModelToList("gasolinaUsrTaxGrp" , newGroupList);
+			//            }
+			//            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getPublicidadExt())){
+			//				addUsrGrpModelToList("publicidadExtUsrTaxGrp" , newGroupList);
+			//            }
+			//            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getDelineacion())){
+			//				addUsrGrpModelToList("delineacionUsrTaxGrp" , newGroupList);
+			//            }
+			//            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getIca())){
+			//				addUsrGrpModelToList("ICAUsrTaxGrp" , newGroupList);
+			//            }
+			//            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getReteIca())){
+			//				addUsrGrpModelToList("reteICAUsrTaxGrp" , newGroupList);
+			//            }
+			//            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getVehicular())){
+			//				addUsrGrpModelToList("vehicularUsrTaxGrp" , newGroupList);
+			//            }
+			//			if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getPredial())){
+			//				addUsrGrpModelToList("predialUsrTaxGrp" , newGroupList);
+			//			}
 		}
 
 		customerModel.setGroups(newGroupList);
 		modelService.saveAll(customerModel);
 	}
+
+
+
 
 	private void addUsrGrpModelToList(final String UserGroupUid, final Set<PrincipalGroupModel> newGroupList){
 		UserGroupModel usrGrpModel = null;
