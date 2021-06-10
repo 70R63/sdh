@@ -6,6 +6,7 @@ package de.hybris.sdh.core.services.impl;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.model.SDHContribTaxModel;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.ContribAgente;
 import de.hybris.sdh.core.pojos.responses.ImpuestosResponse;
@@ -121,7 +122,7 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 		return null;
 	}
 
-	public String consultaContribuyenteBP_simplificado_string(final ConsultaContribuyenteBPRequest request)
+	public String consultaContribuyenteBP_simplificado_string(final ConsultaContribBPRequest request)
 	{
 		final String urlString = configurationService.getConfiguration().getString("sdh.validacontribuyente_simplificado.url");
 		final String user = configurationService.getConfiguration().getString("sdh.validacontribuyente_simplificado.user");
@@ -193,7 +194,7 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 
 
 	@Override
-	public SDHValidaMailRolResponse consultaContribuyenteBP_simplificado(final ConsultaContribuyenteBPRequest wsRequest)
+	public SDHValidaMailRolResponse consultaContribuyenteBP_simplificado(final ConsultaContribBPRequest wsRequest)
 	{
 		SDHValidaMailRolResponse wsResponse = null;
 		final ObjectMapper mapper = new ObjectMapper();

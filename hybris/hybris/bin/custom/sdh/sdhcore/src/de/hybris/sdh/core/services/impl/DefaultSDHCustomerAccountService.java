@@ -43,6 +43,7 @@ import de.hybris.sdh.core.model.SDHRolModel;
 import de.hybris.sdh.core.model.SDHSocialNetworkModel;
 import de.hybris.sdh.core.model.SDHUrbanDelineationsTaxModel;
 import de.hybris.sdh.core.model.SDHVehiculosTaxModel;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.SendEmailRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateCustomerCommPrefsRequest;
@@ -488,7 +489,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
-		this.updateMiRitInfo_simplificado(customerModel);
+		this.updateMiRitInfo_simplificado(customerModel, "01,02");
 
 	}
 
@@ -1021,20 +1022,29 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 	}
 
 
-	public CustomerModel updateMiRitInfo_simplificado(final CustomerModel customerModel)
+	public CustomerModel updateMiRitInfo_simplificado(final CustomerModel customerModel, String indicador)
 	{
 		final String numBP = customerModel.getNumBP();
+		String indicadorBasica = "01";
+		String indicadorRolesYAgentes = "02";
 
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-		consultaContribuyenteBPRequest.setNumBP(numBP);
+		final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
+		consultaContribBPRequest.setNumBP(numBP);
+		consultaContribBPRequest.setIndicador(indicador);
 
 		final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
-				.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
+				.consultaContribuyenteBP_simplificado(consultaContribBPRequest);
 
+		if (indicador != null && indicador.contains(indicadorBasica))
+		{
 		grabarInfoContrib(customerModel, sdhConsultaContribuyenteBPResponse);
-		grabarAgentes(customerModel, sdhConsultaContribuyenteBPResponse);
-		grabarRoles(customerModel, sdhConsultaContribuyenteBPResponse);
 		grabarImpuestos(customerModel, sdhConsultaContribuyenteBPResponse);
+		}
+		if (indicador != null && indicador.contains(indicadorRolesYAgentes))
+		{
+			grabarRoles(customerModel, sdhConsultaContribuyenteBPResponse);
+			grabarAgentes(customerModel, sdhConsultaContribuyenteBPResponse);
+		}
 
 		modelService.save(customerModel);
 
@@ -1049,7 +1059,6 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 	public CustomerModel updateImpuestoVehicular_simplificado(final CustomerModel customerModel, List<ImpuestoVehiculos> vehiculos)
 	{
 
-
 		final List<SDHVehiculosTaxModel> oldVETaxModels = customerModel.getVehiculosTaxList();
 
 		if (oldVETaxModels != null && !oldVETaxModels.isEmpty())
@@ -1057,20 +1066,16 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			modelService.removeAll(oldVETaxModels);
 		}
 
-		//		final List<ImpuestoVehiculos> vehiculos = sdhConsultaContribuyenteBPResponse.getVehicular();
-
+		List<SDHVehiculosTaxModel> newVETaxModels = null;
 		if (vehiculos != null && !vehiculos.isEmpty())
 		{
-
-			final List<SDHVehiculosTaxModel> newVETaxModels = new ArrayList<SDHVehiculosTaxModel>();
-
+			newVETaxModels = new ArrayList<SDHVehiculosTaxModel>();
 			for (final ImpuestoVehiculos eachVETax : vehiculos)
 			{
 				if (StringUtils.isBlank(eachVETax.getPlaca()))
 				{
 					continue;
 				}
-
 				final SDHVehiculosTaxModel eachNewVETaxModel = new SDHVehiculosTaxModel();
 				eachNewVETaxModel.setPlaca(eachVETax.getPlaca());
 				eachNewVETaxModel.setMarca(eachVETax.getMarca());
@@ -1086,16 +1091,11 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 				newVETaxModels.add(eachNewVETaxModel);
 
 			}
-
 			modelService.saveAll(newVETaxModels);
+		}
+		customerModel.setVehiculosTaxList(newVETaxModels);
+		modelService.save(customerModel);
 
-			customerModel.setVehiculosTaxList(newVETaxModels);
-			modelService.save(customerModel);
-		}
-		else
-		{
-			customerModel.setVehiculosTaxList(null);
-		}
 
 		return customerModel;
 	}
