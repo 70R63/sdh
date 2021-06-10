@@ -529,6 +529,24 @@
         			<attribute qualifier="expDate" type="java.lang.String">
         				<persistence type="property"></persistence>
         			</attribute>
+        			<attribute qualifier="revalDate" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="totalPresup" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="valorEjecut" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="finObraDate" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="ejecutoriaDate" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="radicados" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
        			</attributes>
 	        </itemtype>
 	        

@@ -350,6 +350,7 @@
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="exteriorPublicityTaxList"/>
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="gasTaxList"/>
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="vehiculosTaxList"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="urbanDelineationsTaxList"/>
 				</editorArea:section>
 			</editorArea:tab>
 			<editorArea:tab merge-mode="remove" name="hmc.administration"/>
