@@ -884,6 +884,7 @@ ACC.predial = {
 	 
 	 
 	 establecerMensajeInfoObjeto :  function(mensaje){
+		 ACC.predial.flagMsjInfoObjeto = false;
 		if(mensaje.trim() != ""){
 			$("#dialogMensajesContent").html("");
     		$("#dialogMensajesContent").html(mensaje.trim()+"<br>");
