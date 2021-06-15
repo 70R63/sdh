@@ -174,7 +174,11 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 			}
 
 
-			final String result = builder.toString();
+			String result = builder.toString();
+
+			result = result.replaceAll(",\"\"", "");
+			result = result.replaceAll("\"\",", "");
+
 			LOG.info("response: " + result);
 
 			return result;

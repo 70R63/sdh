@@ -4,6 +4,8 @@
 package de.hybris.sdh.storefront.forms;
 
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.model.security.PrincipalGroupModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -13,6 +15,7 @@ import de.hybris.sdh.storefront.controllers.pages.MiRitCertificacionPageControll
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -87,7 +90,7 @@ public class UIMenuForm
 		}
 	}
 
-	public void fillForm(final CustomerData customerData)
+	public void fillForm(final CustomerData customerData, final CustomerModel customerModel)
 	{
 		try
 		{
@@ -106,62 +109,100 @@ public class UIMenuForm
 				this.setRoles(roles);
 			}
 
+			final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
+
+
+			for (final PrincipalGroupModel group : groupList)
+			{
+				final String groupUid = group.getUid();
+
+				if (this.getbPredial() == null || this.getbPredial().equals(""))
+				{
+					this.setbPredial(groupUid.contains("predialUsrTaxGrp") ? "X" : "");
+				}
+
+				if (this.getbVehicular() == null || this.getbVehicular().equals(""))
+				{
+					this.setbVehicular(groupUid.contains("vehicularUsrTaxGrp") ? "X" : "");
+				}
+
+				if (this.getbIca() == null || this.getbIca().equals(""))
+				{
+					this.setbIca(groupUid.contains("ICAUsrTaxGrp") ? "X" : "");
+				}
+
+				if (this.getbSobreGasolina() == null || this.getbSobreGasolina().equals(""))
+				{
+					this.setbSobreGasolina(groupUid.contains("gasolinaUsrTaxGrp") ? "X" : "");
+				}
+
+				if (this.getbDelineacionUrbana() == null || this.getbDelineacionUrbana().equals(""))
+				{
+					this.setbDelineacionUrbana(groupUid.contains("delineacionUsrTaxGrp") ? "X" : "");
+				}
+
+				if (this.getbPublicidadExt() == null || this.getbPublicidadExt().equals(""))
+				{
+					this.setbPublicidadExt(groupUid.contains("publicidadExtUsrTaxGrp") ? "X" : "");
+				}
+			}
+
 			//private String bPredial;
 			//private String bVehicular;
 			//private String bIca;
-			if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
-			{
-				this.setbVehicular("X");
-			}
-			else
-			{
-				this.setbVehicular("");
-			}
-
-			if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
-			{
-				this.setbPredial("X");
-			}
-			else
-			{
-				this.setbPredial("");
-			}
-
-			if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
-			{
-				this.setbSobreGasolina("X");
-			}
-			else
-			{
-				this.setbSobreGasolina("");
-			}
-
-			if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
-			{
-				this.setbPublicidadExt("X");
-			}
-			else
-			{
-				this.setbPublicidadExt("");
-			}
-
-			if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
-			{
-				this.setbDelineacionUrbana("X");
-			}
-			else
-			{
-				this.setbDelineacionUrbana("");
-			}
-
-			if (customerData.getIcaTax() != null )
-			{
-				this.setbIca("X");
-			}
-			else
-			{
-				this.setbIca("");
-			}
+			//			if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
+			//			{
+			//				this.setbVehicular("X");
+			//			}
+			//			else
+			//			{
+			//				this.setbVehicular("");
+			//			}
+			//
+			//			if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
+			//			{
+			//				this.setbPredial("X");
+			//			}
+			//			else
+			//			{
+			//				this.setbPredial("");
+			//			}
+			//
+			//			if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
+			//			{
+			//				this.setbSobreGasolina("X");
+			//			}
+			//			else
+			//			{
+			//				this.setbSobreGasolina("");
+			//			}
+			//
+			//			if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
+			//			{
+			//				this.setbPublicidadExt("X");
+			//			}
+			//			else
+			//			{
+			//				this.setbPublicidadExt("");
+			//			}
+			//
+			//			if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
+			//			{
+			//				this.setbDelineacionUrbana("X");
+			//			}
+			//			else
+			//			{
+			//				this.setbDelineacionUrbana("");
+			//			}
+			//
+			//			if (customerData.getIcaTax() != null )
+			//			{
+			//				this.setbIca("X");
+			//			}
+			//			else
+			//			{
+			//				this.setbIca("");
+			//			}
 
 		}
 		catch (final Exception e)
