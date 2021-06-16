@@ -1,111 +1,64 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!-- Generated via ant extensionsxml - please be aware that this file get overwritten each time!
-
-Parameters:
- production=true
-
--->
-<hybrisconfig xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='resources/schemas/extensions.xsd'>
-
-	<extensions>
-		<path dir='${HYBRIS_BIN_DIR}' autoload='false' />
-		<!-- 
-		     Please note that all extensions in platform/ext/* have been omitted 
-		     because they're automatically loaded. Please use <extensions autoload='false'> 
-		     in case you want to configure them explicitly. 
-		  -->
-		<extension name='voucher'/>
-		<extension name='embeddedserver'/>
-		<extension name='tomcatembeddedserver'/>
-		<extension name='dataimportcommons'/>
-		<extension name='promotions'/>
-		<extension name='springintegrationlibs'/>
-		<extension name='npmancillary'/>
-		<extension name='solrfacetsearch'/>
-		<extension name='basecommerce'/>
-		<extension name='customerreview'/>
-		<extension name='datahubclient'/>
-		<extension name='permissionsfacades'/>
-		<extension name='datahubadapter'/>
-		<extension name='cms2'/>
-		<extension name='cms2lib'/>
-		<extension name='payment'/>
-		<extension name='commerceservices'/>
-		<extension name='commercefacades'/>
-		<!--new-->
-		<extension name="adaptivesearch"/>
-		<!--<extension name='commercesearch'/>-->
-		<extension name='cmsfacades'/>
-		<extension name='ticketsystem'/>
-		<extension name='assistedserviceservices'/>
-		<extension name='assistedservicefacades'/>
-		<extension name='acceleratorservices'/>
-		<extension name='xyformsservices'/>
-		<extension name='xyformsfacades'/>
-		<extension name='xyformsweb'/>
-		<extension name='acceleratorcms'/>
-		<extension name='acceleratorfacades'/>
-		<extension name='acceleratorstorefrontcommons'/>
-		<extension name='addonsupport'/>
-		<extension name='smarteditaddon'/>
-		<extension name='solrserver'/>
-		<extension name='webservicescommons'/>
-		<extension name='commercewebservicescommons'/>
-		<extension name='smartedit'/>
-		<extension name='xyformsstorefrontcommons'/>
-		<extension name='groovynature'/>
-		<extension name='auditreportservices'/>
-		<extension name='relationshipservices'/>
-		<extension name='relationshipfacades'/>
-		<extension name='sdhrelationshipsaddon'/>
-		<extension name='billservices'/>
-		<extension name='billexchange'/>
-		<extension name='billfacades'/>
-		<extension name='sdhbillsaddon'/>
-		<extension name='relationshipexchange'/>
-		<extension name='publicsectorconsignmentexchange'/>
-		<extension name='publicsectorfulfilment'/>
-		<extension name='xyformscommerceservices'/>
-		<extension name='xyformscommercefacades'/>
-		<extension name='permissionswebservices'/>
-		<extension name='previewwebservices'/>
-		<extension name='cmswebservices'/>
-		<extension name='cmssmarteditwebservices'/>
-		<extension name='cmssmartedit'/>
-		<extension name='assistedservicestorefront'/>
-		<extension name='configurablebundleservices'/>
-		<extension name='configurablebundlefacades'/>
-		<extension name='publicsectorservices'/>
-		<extension name='publicsectordocmanagement'/>
-		<extension name='publicsectordocmanagementexchange'/>
-		<extension name='publicsectorfacades'/>
-		<extension name='publicsectorstore'/>
-		<extension name='ycommercewebservices'/>
-		<extension name='sdhpse'/>
-		<extension name='sdhpsaddon'/>
-		<extension name='sdhcore'/>
-		<extension name='sdhinitialdata'/>
-		<extension name='sdhfacades'/>
-		<extension name='sdhstorefront'/>
-		<extension name='backoffice'/>
-		<extension name='platformbackoffice'/>
-		<extension name='voucherbackoffice'/>
-		<extension name='ticketsystembackoffice'/>
-		<extension name='solrfacetsearchbackoffice'/>
-		<!--new-->
-		<extension name="backofficesolrsearch"/>
-		<!--<extension name='commercesearchbackoffice'/>-->
-		<extension name='promotionsbackoffice'/>
-		<extension name='basecommercebackoffice'/>
-		<extension name='commerceservicesbackoffice'/>
-		<extension name='customersupportbackoffice'/>
-		<extension name='relationshipbackoffice'/>
-		<extension name='billbackoffice'/>
-		<extension name='publicsectorbackoffice'/>
-		<extension name='xyformsbackoffice'/>
-		<extension name='sdhbackoffice'/>
-		<extension name='cmsbackoffice'/>
-		<extension name='maintenanceweb'/>
-	</extensions>
-
+<hybrisconfig xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../bin/platform/resources/schemas/extensions.xsd'>
+  <extensions>
+    <path dir='${HYBRIS_BIN_DIR}' autoload='false' />
+    <extension name='sdhrelationshipsaddon' />
+    <extension name='sdhbillsaddon' />
+    <extension name='sdhpsaddon' />
+    <extension name='sdhpse' />
+    <extension name='sdhbackoffice' />
+    <extension name='sdhcore' />
+    <extension name='sdhfacades' />
+    <extension name='sdhstorefront' />
+    <extension name='sdhinitialdata' />
+    <extension name='publicsectorbackoffice' />
+    <extension name='publicsectorconsignmentexchange' />
+    <extension name='publicsectordocmanagement' />
+    <extension name='publicsectordocmanagementexchange' />
+    <extension name='publicsectorfacades' />
+    <extension name='publicsectorfulfilment' />
+    <extension name='publicsectorocc' />
+    <extension name='publicsectorservices' />
+    <extension name='publicsectorstore' />
+    <extension name='xyformscommercebackoffice' />
+    <extension name='xyformscommerceservices' />
+    <extension name='xyformscommercefacades' />
+    <extension name='billbackoffice' />
+    <extension name='billexchange' />
+    <extension name='billfacades' />
+    <extension name='billservices' />
+    <extension name='relationshipbackoffice' />
+    <extension name='relationshipexchange' />
+    <extension name='relationshipfacades' />
+    <extension name='relationshipservices' />
+    <extension name='commerceservicesbackoffice' />
+    <extension name='solrfacetsearchbackoffice' />
+    <extension name='solrserver' />
+    <extension name='commercewebservices' />
+    <extension name='acceleratorocc' />
+    <extension name='assistedservicestorefront' />
+    <extension name='cmswebservices' />
+    <extension name='smarteditwebservices' />
+    <extension name='cmssmarteditwebservices' />
+    <extension name='permissionswebservices' />
+    <extension name='smarteditaddon' />
+    <extension name='cmssmartedit' />
+    <extension name='cmsbackoffice' />
+    <extension name='cmsocc' />
+    <extension name='xyformsbackoffice' />
+    <extension name='xyformsstorefrontcommons' />
+    <extension name='xyformsweb' />
+    <extension name='orbeonweb' />
+    <extension name='auditreportservices' />
+    <extension name='backoffice' />
+    <extension name='configurablebundlefacades' />
+    <extension name='configurablebundleservices' />
+    <extension name='configurablebundlebackoffice' />
+    <extension name='customersupportbackoffice' />
+    <extension name='datahubadapter' />
+    <extension name='datahubbackoffice' />
+    <extension name='datahubclient' />
+    <extension name='previewwebservices' />
+    <extension name='pcmbackoffice' />
+    <extension name='backofficesolrsearch' />
+  </extensions>
 </hybrisconfig>
