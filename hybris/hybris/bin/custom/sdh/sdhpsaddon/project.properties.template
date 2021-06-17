@@ -54,7 +54,7 @@ publicsector.orbeon.address.is-address-book-not-empty=primary-address-is-address
 publicsector.url.whitelist=/my-account,/my-account/my-relationships,/my-account/address-book
 
 ##### orbeon properties #####
-xyformsservices.orbeon.url.address=http://publicsector.local:9001/orbeon
+xyformsservices.orbeon.url.address=http://publicsector.local:9001/web-orbeon
 xyformsstorefrontcommons.orbeon.persistence-api.hostname=publicsector.local
 xyformsstorefrontcommons.orbeon.persistence-api.port=9002
 
