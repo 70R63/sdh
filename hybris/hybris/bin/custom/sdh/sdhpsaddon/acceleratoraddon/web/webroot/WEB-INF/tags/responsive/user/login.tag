@@ -16,7 +16,7 @@
 
 </div>
 
-<form:form action="${action}" method="post" commandName="loginForm">
+<form:form action="${action}" method="post" modelAttribute="loginForm">
 	<fieldset>
 		<legend class="visuallyhidden">
 			<spring:theme code="login.form" />
