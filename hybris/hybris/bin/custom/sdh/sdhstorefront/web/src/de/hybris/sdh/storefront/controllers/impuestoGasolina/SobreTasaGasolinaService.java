@@ -5,9 +5,11 @@ package de.hybris.sdh.storefront.controllers.impuestoGasolina;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.i18n.I18NService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
+import de.hybris.sdh.core.model.SDHGasTaxModel;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.CalculoReteIca2Request;
@@ -51,6 +53,7 @@ import de.hybris.sdh.core.pojos.responses.DetalleVehiculos2Response;
 import de.hybris.sdh.core.pojos.responses.DocTramitesResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
+import de.hybris.sdh.core.pojos.responses.ImpGasolinaSimpliResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbanaWithRadicados;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
@@ -1682,7 +1685,7 @@ public class SobreTasaGasolinaService
 
 
 	/**
-	 * @param detalleContribuyente
+	 * @param gasolinaSimpliResponse
 	 * @return
 	 */
 	public boolean ocurrioErrorValcont(final SDHValidaMailRolResponse detalleContribuyente)
@@ -3021,5 +3024,50 @@ public class SobreTasaGasolinaService
 		return descripcion;
 	}
 
+	/**
+	 * @param gasolinaSimpliResponse
+	 * @return
+	 */
+	public boolean ocurrioErrorValcontGas(final ImpGasolinaSimpliResponse gasolinaSimpliResponse)
+	{
+
+		boolean ocurrioError = false;
+
+		if (gasolinaSimpliResponse == null)
+		{
+			ocurrioError = true;
+		}
+
+
+		return ocurrioError;
+
+	}
+
+	/**
+	 * @param customerModel
+	 * @return
+	 */
+	public SDHValidaMailRolResponse consultaContribuyenteGas(final CustomerModel customerModel)
+	{
+		final List<ImpuestoGasolina> gasolina = new ArrayList<ImpuestoGasolina>();
+		final SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+
+		final List<SDHGasTaxModel> eachGasModel = customerModel.getGasTaxList();
+
+		for (final SDHGasTaxModel eachGasTax : eachGasModel)
+		{
+
+			final ImpuestoGasolina gasolinaData = new ImpuestoGasolina();
+
+			gasolinaData.setNumDoc(eachGasTax.getDocumentNumber());
+			gasolinaData.setNumObjeto(eachGasTax.getObjectNumber());
+			gasolinaData.setTipoDoc(eachGasTax.getDocumentType());
+
+			gasolina.add(gasolinaData);
+
+		}
+		detalleContribuyente.setGasolina(gasolina);
+		return detalleContribuyente;
+	}
 
 }

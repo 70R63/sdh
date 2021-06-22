@@ -11,13 +11,13 @@
 package de.hybris.sdh.core.services.impl;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
+
 import de.hybris.platform.commerceservices.customer.CustomerAccountService;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService;
 import de.hybris.platform.commerceservices.event.ForgottenPwdEvent;
 import de.hybris.platform.commerceservices.security.SecureToken;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserGroupModel;
@@ -32,11 +32,11 @@ import de.hybris.sdh.core.event.SDHRegistrationEvent;
 import de.hybris.sdh.core.exceptions.SameOldPasswordException;
 import de.hybris.sdh.core.model.SDHAddressModel;
 import de.hybris.sdh.core.model.SDHAgentModel;
+import de.hybris.sdh.core.model.SDHContribTaxModel;
 import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
 import de.hybris.sdh.core.model.SDHGasTaxModel;
 import de.hybris.sdh.core.model.SDHICATaxModel;
 import de.hybris.sdh.core.model.SDHPhoneModel;
-import de.hybris.sdh.core.model.SDHContribTaxModel;
 import de.hybris.sdh.core.model.SDHPredialTaxModel;
 import de.hybris.sdh.core.model.SDHReteICATaxModel;
 import de.hybris.sdh.core.model.SDHRolModel;
@@ -53,6 +53,7 @@ import de.hybris.sdh.core.pojos.responses.ContribAgente;
 import de.hybris.sdh.core.pojos.responses.ContribDireccion;
 import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ContribTelefono;
+import de.hybris.sdh.core.pojos.responses.ImpGasolinaSimpliResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
@@ -1022,11 +1023,11 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 	}
 
 
-	public CustomerModel updateMiRitInfo_simplificado(final CustomerModel customerModel, String indicador)
+	public CustomerModel updateMiRitInfo_simplificado(final CustomerModel customerModel, final String indicador)
 	{
 		final String numBP = customerModel.getNumBP();
-		String indicadorBasica = "01";
-		String indicadorRolesYAgentes = "02";
+		final String indicadorBasica = "01";
+		final String indicadorRolesYAgentes = "02";
 
 		final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
 		consultaContribBPRequest.setNumBP(numBP);
@@ -1056,7 +1057,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 	}
 
 
-	public CustomerModel updateImpuestoVehicular_simplificado(final CustomerModel customerModel, List<ImpuestoVehiculos> vehiculos)
+	public CustomerModel updateImpuestoVehicular_simplificado(final CustomerModel customerModel, final List<ImpuestoVehiculos> vehiculos)
 	{
 
 		final List<SDHVehiculosTaxModel> oldVETaxModels = customerModel.getVehiculosTaxList();
@@ -1934,6 +1935,45 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		return resultValidation;
 	}
 
+
+	@Override
+	public void updateImpuestoGasolina_simplificado(final CustomerModel customerModel,
+			final ImpGasolinaSimpliResponse gasolinaResponse)
+	{
+
+		final List<SDHGasTaxModel> oldGasTaxModels = customerModel.getGasTaxList();
+
+		if (oldGasTaxModels != null && !oldGasTaxModels.isEmpty())
+		{
+			modelService.removeAll(oldGasTaxModels);
+		}
+
+		List<SDHGasTaxModel> newGasTaxModels = null;
+		if (gasolinaResponse.getGasolina() != null && !gasolinaResponse.getGasolina().isEmpty())
+		{
+			newGasTaxModels = new ArrayList<SDHGasTaxModel>();
+			for (final ImpuestoGasolina eachGasTax : gasolinaResponse.getGasolina())
+			{
+
+				final SDHGasTaxModel eachNewGasTaxModel = new SDHGasTaxModel();
+
+				eachNewGasTaxModel.setDocumentNumber(eachGasTax.getNumDoc());
+				eachNewGasTaxModel.setDocumentType(eachGasTax.getTipoDoc());
+				eachNewGasTaxModel.setObjectNumber(eachGasTax.getNumObjeto());
+
+				newGasTaxModels.add(eachNewGasTaxModel);
+
+			}
+			modelService.saveAll(newGasTaxModels);
+		}
+
+		customerModel.setGasTaxList(newGasTaxModels);
+		modelService.save(customerModel);
+		modelService.refresh(customerModel);
+
+		//return customerModel;
+
+	}
 
 }
 

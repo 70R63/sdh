@@ -195,7 +195,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	final String action, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- En Presentar Declaracion POST --------------------------");
+		System.out.println("---------------- Presentar Declaracion POST --------------------------");
 		System.out.println("[" + dataFormResponse.getSkipReques() + "]");
 
 		String URLdeterminada = "";
@@ -613,8 +613,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		model.addAttribute("icaPeriodo", this.getIcaPeriodo());
 		model.addAttribute("icaAnioGravable", this.getIcaAnoGravable());
 		model.addAttribute("isPeriodoAnual", isPeriodoAnual);
-		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
-				dataForm.getOptionDeli(), dataForm.getOptionIca(), dataForm.getOptionVehicular(), dataForm.getOptionPredial()));
+		//		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
+		//				dataForm.getOptionDeli(), dataForm.getOptionIca(), dataForm.getOptionVehicular(), dataForm.getOptionPredial()));
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));

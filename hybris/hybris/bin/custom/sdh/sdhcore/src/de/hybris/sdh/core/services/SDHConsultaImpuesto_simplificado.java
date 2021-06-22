@@ -19,4 +19,10 @@ public interface SDHConsultaImpuesto_simplificado
 	List<ImpuestoVehiculos> consulta_impVehicular(ConsultaContribuyenteBPRequest request);
 
 	String consulta_impVehicular_string(ConsultaContribuyenteBPRequest request);
+
+	/**
+	 * @param request
+	 * @return
+	 */
+	String consulta_impGasolina_string(ConsultaContribuyenteBPRequest request);
 }
