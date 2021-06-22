@@ -1079,14 +1079,14 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 				}
 				final SDHVehiculosTaxModel eachNewVETaxModel = new SDHVehiculosTaxModel();
 				eachNewVETaxModel.setPlaca(eachVETax.getPlaca());
-				eachNewVETaxModel.setMarca(eachVETax.getMarca());
-				eachNewVETaxModel.setLinea(eachVETax.getLinea());
-				eachNewVETaxModel.setModelo(eachVETax.getModelo());
-				eachNewVETaxModel.setClase(eachVETax.getClase());
-				eachNewVETaxModel.setCarroceria(eachVETax.getCarroceria());
-				eachNewVETaxModel.setNumPuertas(eachVETax.getNumPuertas());
-				eachNewVETaxModel.setBlindado(eachVETax.getBlindado());
-				eachNewVETaxModel.setCilindraje(eachVETax.getCilindraje());
+				//				eachNewVETaxModel.setMarca(eachVETax.getMarca());
+				//				eachNewVETaxModel.setLinea(eachVETax.getLinea());
+				//				eachNewVETaxModel.setModelo(eachVETax.getModelo());
+				//				eachNewVETaxModel.setClase(eachVETax.getClase());
+				//				eachNewVETaxModel.setCarroceria(eachVETax.getCarroceria());
+				//				eachNewVETaxModel.setNumPuertas(eachVETax.getNumPuertas());
+				//				eachNewVETaxModel.setBlindado(eachVETax.getBlindado());
+				//				eachNewVETaxModel.setCilindraje(eachVETax.getCilindraje());
 				eachNewVETaxModel.setNumObjeto(eachVETax.getNumObjeto());
 
 				newVETaxModels.add(eachNewVETaxModel);
