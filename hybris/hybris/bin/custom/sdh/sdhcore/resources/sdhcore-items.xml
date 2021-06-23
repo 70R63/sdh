@@ -25,6 +25,7 @@
         <collectiontype code="SDHUrbanDelineationsTaxList" elementtype="SDHUrbanDelineationsTax" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SDHVehiculosTaxList" elementtype="SDHVehiculosTax" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SDHPredialTaxList" elementtype="SDHPredialTax" autocreate="true" generate="true" type="list"/>
+        <collectiontype code="SDHContribTaxList" elementtype="SDHContribTax" autocreate="true" generate="true" type="list"/>
 
         
         
@@ -302,6 +303,10 @@
         				<description>SDH custom field</description>
         				<persistence type="property"></persistence>
         			</attribute>
+ 					<attribute qualifier="contribTaxList" type="SDHContribTaxList">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
         		</attributes>
         	</itemtype>
         	<itemtype code="SDHAddress" autocreate="true" generate="true">
@@ -444,6 +449,22 @@
         				<persistence type="property"></persistence>
         			</attribute>
        			</attributes>
+	        </itemtype> 
+	        
+	        <itemtype code="SDHContribTax" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save Impuestos data</description>
+        		<deployment table="SDHIMPUESTOSTAX" typecode="15022"/>
+       			<attributes>
+       				<attribute qualifier="claseObjeto" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="descripcion" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="cantObjetos" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+       			</attributes>
 	        </itemtype>
 	        
 	        
@@ -506,6 +527,24 @@
         				<persistence type="property"></persistence>
         			</attribute>
         			<attribute qualifier="expDate" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="revalDate" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="totalPresup" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="valorEjecut" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="finObraDate" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="ejecutoriaDate" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="radicados" type="java.lang.String">
         				<persistence type="property"></persistence>
         			</attribute>
        			</attributes>

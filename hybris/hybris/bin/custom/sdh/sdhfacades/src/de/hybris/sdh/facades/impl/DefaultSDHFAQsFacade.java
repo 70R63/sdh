@@ -27,6 +27,19 @@ public class DefaultSDHFAQsFacade implements SDHFAQsFacade {
     }
 
     @Override
+    public List<SDHFaqData> getAllFaqsByKeyWord(String keyWord) {
+        List<SDHFaqData> faqDataList = new ArrayList<>();
+        getSdhFAQsService().getFAQsByKeyWord(keyWord).forEach(faq ->{
+            SDHFaqData faqData = new SDHFaqData();
+            faqData.setCode(faq.getCode());
+            faqData.setQuestion(faq.getQuestion());
+            faqData.setAnswer(faq.getAnswer());
+            faqDataList.add(faqData);
+        });
+        return faqDataList;
+    }
+
+    @Override
     public List<SDHFaqCategoryData> getAllCategories() {
         List<SDHFaqCategoryData> faqCategoriesDataList = new ArrayList<>();
         getSdhFAQsService().getAllCategories().forEach(categoryModel -> {

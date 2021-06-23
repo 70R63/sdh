@@ -83,10 +83,15 @@ public class ARListaDeclaracionesPageController extends AbstractPageController
 	{
 
 		final String pconfig = configurationService.getConfiguration().getString("sdh.pse.http.configuracion");
+		final String pconfigLog = configurationService.getConfiguration().getString("sdh.pse.http.configuracion.log");
 
 		if (pconfig.equals("3") || pconfig.equals("4"))
 		{
-			System.out.println("---------------- INI Seleccion Proxy --------------------------");
+			
+			if (pconfigLog.equals("true")){
+			  System.out.println("---------------- INI Seleccion Proxy --------------------------");
+			}  
+			
 			final String phttpProxyHostACH = configurationService.getConfiguration().getString("sdh.pse.http.proxyHostACH");
 			final String phttpProxyPortACH = configurationService.getConfiguration().getString("sdh.pse.http.proxyPortACH");
 			final String phttpProxyHostInternet = configurationService.getConfiguration()
@@ -95,10 +100,13 @@ public class ARListaDeclaracionesPageController extends AbstractPageController
 					.getString("sdh.pse.http.proxyPortInternet");
 			final String pproxyType = configurationService.getConfiguration().getString("sdh.pse.http.proxy.type");
 
-			final SDHProxySelector sdhps = new SDHProxySelector(ProxySelector.getDefault(), pconfig, phttpProxyHostACH,
+			final SDHProxySelector sdhps = new SDHProxySelector(ProxySelector.getDefault(), pconfig, pconfigLog, phttpProxyHostACH,
 					phttpProxyPortACH, phttpProxyHostInternet, phttpProxyPortInternet, pproxyType);
 			ProxySelector.setDefault(sdhps);
-			System.out.println("---------------- FIN Seleccion Proxy --------------------------");
+			
+			if (pconfigLog.equals("true")){
+				System.out.println("---------------- FIN Seleccion Proxy --------------------------");
+			}	
 		}
 
 		System.out.println("---------------- Hola entro al GET Contribuyentes --------------------------");

@@ -36,6 +36,7 @@ public class SDHProxySelector extends ProxySelector
 	private static final Logger LOG = Logger.getLogger(SDHProxySelector.class);
 
 	String config;
+	String configLog;
 	String httpProxyHostACH;
 	String httpProxyPortACH;
 	String httpProxyHostInternet;
@@ -86,7 +87,7 @@ public class SDHProxySelector extends ProxySelector
 	HashMap<SocketAddress, InnerProxy> proxiACH = new HashMap<SocketAddress, InnerProxy>();
 	HashMap<SocketAddress, InnerProxy> proxiInternet = new HashMap<SocketAddress, InnerProxy>();
 
-	public SDHProxySelector(final ProxySelector def, final String pconfig, final String phttpProxyHostACH,
+	public SDHProxySelector(final ProxySelector def, final String pconfig, final String pconfigLog, final String phttpProxyHostACH,
 			final String phttpProxyPortACH, final String phttpProxyHostInternet, final String phttpProxyPortInternet,
 			final String pproxyType)
 	{
@@ -94,6 +95,7 @@ public class SDHProxySelector extends ProxySelector
 		super();
 
 		config = pconfig;
+		configLog = pconfigLog;
 		httpProxyHostACH = phttpProxyHostACH;
 		httpProxyPortACH = phttpProxyPortACH;
 		httpProxyHostInternet = phttpProxyHostInternet;
@@ -104,8 +106,10 @@ public class SDHProxySelector extends ProxySelector
 
 
 
+		if (configLog.equals("true"))
+		{
 		LOG.info("---------------INI Carga de lista de proxys:------------------------");
-
+		}
 		if (config.equals("1"))
 		{
 
@@ -180,7 +184,10 @@ public class SDHProxySelector extends ProxySelector
 			 */
 		}
 
-		LOG.info("---------------FIN Carga de lista de proxys:------------------------");
+		if (configLog.equals("true"))
+		{
+			LOG.info("---------------FIN Carga de lista de proxys:------------------------");
+		}
 	}
 
 
@@ -201,7 +208,11 @@ public class SDHProxySelector extends ProxySelector
 		if (config.equals("1"))
 		{
 
-			LOG.info("---------------INI Configuracion 1:------------------------");
+			if (configLog.equals("true"))
+			{
+				LOG.info("---------------INI Configuracion 1:------------------------");
+			}
+
 			final String host = uri.getHost();
 			if ("200.1.124.65".equalsIgnoreCase(host))
 			{
@@ -210,11 +221,19 @@ public class SDHProxySelector extends ProxySelector
 				for (final InnerProxy p : proxiACH.values())
 				{
 					l.add(p.toProxy());
-					LOG.info(p.address());
+
+					if (configLog.equals("true"))
+					{
+						LOG.info(p.address());
+					}
 				}
 				return l;
 			}
-			LOG.info("---------------FIN Configuracion 1:------------------------");
+
+			if (configLog.equals("true"))
+			{
+				LOG.info("---------------FIN Configuracion 1:------------------------");
+			}
 
 		}
 
@@ -224,7 +243,11 @@ public class SDHProxySelector extends ProxySelector
 		if (config.equals("2"))
 		{
 
-			LOG.info("---------------INI Configuracion 2:------------------------");
+			if (configLog.equals("true"))
+			{
+				LOG.info("---------------INI Configuracion 2:------------------------");
+			}
+
 			final String protocol = uri.getScheme();
 			if ("http".equalsIgnoreCase(protocol) || "https".equalsIgnoreCase(protocol))
 			{
@@ -233,12 +256,20 @@ public class SDHProxySelector extends ProxySelector
 				for (final InnerProxy p : proxiInternet.values())
 				{
 					l.add(p.toProxy());
-					LOG.info(p.address());
+
+					if (configLog.equals("true"))
+					{
+						LOG.info(p.address());
+					}
 
 				}
 				return l;
 			}
-			LOG.info("---------------FIN Configuracion 2:------------------------");
+
+			if (configLog.equals("true"))
+			{
+				LOG.info("---------------FIN Configuracion 2:------------------------");
+			}
 
 		}
 
@@ -252,25 +283,37 @@ public class SDHProxySelector extends ProxySelector
 			final String host = uri.getHost();
 			if ("200.1.124.65".equalsIgnoreCase(host))
 			{
-				LOG.info("---------------INI Configuracion 3:------------------------");
+				if (configLog.equals("true"))
+				{
+					LOG.info("---------------INI Configuracion 3:------------------------");
 
-				LOG.info("Authority = " + uri.getAuthority());
-				LOG.info("Fragment = " + uri.getFragment());
-				LOG.info("Host = " + uri.getHost());
-				LOG.info("Path = " + uri.getPath());
-				LOG.info("Port = " + uri.getPort());
-				LOG.info("Query = " + uri.getQuery());
-				LOG.info("Scheme = " + uri.getScheme());
+					LOG.info("Authority = " + uri.getAuthority());
+					LOG.info("Fragment = " + uri.getFragment());
+					LOG.info("Host = " + uri.getHost());
+					LOG.info("Path = " + uri.getPath());
+					LOG.info("Port = " + uri.getPort());
+					LOG.info("Query = " + uri.getQuery());
+					LOG.info("Scheme = " + uri.getScheme());
+				}
 
 				final ArrayList<Proxy> l = new ArrayList<Proxy>();
 				final SocketAddress sa;
 				for (final InnerProxy p : proxiACH.values())
 				{
 					l.add(p.toProxy());
-					LOG.info(p.address());
+
+					if (configLog.equals("true"))
+					{
+						LOG.info(p.address());
+					}
 
 				}
-				LOG.info("---------------FIN Configuracion 3:------------------------");
+
+				if (configLog.equals("true"))
+				{
+					LOG.info("---------------FIN Configuracion 3:------------------------");
+				}
+
 				return l;
 			}
 
@@ -278,25 +321,38 @@ public class SDHProxySelector extends ProxySelector
 			final String protocol = uri.getScheme();
 			if ("http".equalsIgnoreCase(protocol) || "https".equalsIgnoreCase(protocol))
 			{
-				LOG.info("---------------INI Configuracion 3:------------------------");
 
-				LOG.info("Authority = " + uri.getAuthority());
-				LOG.info("Fragment = " + uri.getFragment());
-				LOG.info("Host = " + uri.getHost());
-				LOG.info("Path = " + uri.getPath());
-				LOG.info("Port = " + uri.getPort());
-				LOG.info("Query = " + uri.getQuery());
-				LOG.info("Scheme = " + uri.getScheme());
+				if (configLog.equals("true"))
+				{
+					LOG.info("---------------INI Configuracion 3:------------------------");
+
+					LOG.info("Authority = " + uri.getAuthority());
+					LOG.info("Fragment = " + uri.getFragment());
+					LOG.info("Host = " + uri.getHost());
+					LOG.info("Path = " + uri.getPath());
+					LOG.info("Port = " + uri.getPort());
+					LOG.info("Query = " + uri.getQuery());
+					LOG.info("Scheme = " + uri.getScheme());
+				}
 
 				final ArrayList<Proxy> l = new ArrayList<Proxy>();
 				final SocketAddress sa;
 				for (final InnerProxy p : proxiInternet.values())
 				{
 					l.add(p.toProxy());
-					LOG.info(p.address());
+
+					if (configLog.equals("true"))
+					{
+						LOG.info(p.address());
+					}
 
 				}
-				LOG.info("---------------FIN Configuracion 3:------------------------");
+
+				if (configLog.equals("true"))
+				{
+					LOG.info("---------------FIN Configuracion 3:------------------------");
+				}
+
 				return l;
 			}
 
@@ -308,16 +364,19 @@ public class SDHProxySelector extends ProxySelector
 		if (config.equals("4"))
 		{
 
-			LOG.info("---------------INI Configuracion 4:------------------------");
+			if (configLog.equals("true"))
+			{
+				LOG.info("---------------INI Configuracion 4:------------------------");
 
 
-			LOG.info("Authority = " +  uri.getAuthority ());
-			LOG.info("Fragment = " + uri.getFragment ());
-			LOG.info("Host = " + uri.getHost ());
-			LOG.info("Path = " + uri.getPath ());
-			LOG.info("Port = " + uri.getPort ());
-			LOG.info("Query = " + uri.getQuery ());
-			LOG.info("Scheme = " + uri.getScheme ());
+				LOG.info("Authority = " + uri.getAuthority());
+				LOG.info("Fragment = " + uri.getFragment());
+				LOG.info("Host = " + uri.getHost());
+				LOG.info("Path = " + uri.getPath());
+				LOG.info("Port = " + uri.getPort());
+				LOG.info("Query = " + uri.getQuery());
+				LOG.info("Scheme = " + uri.getScheme());
+			}
 
 			final String host = uri.getHost();
 			if ("200.1.124.65".equalsIgnoreCase(host))
@@ -331,9 +390,12 @@ public class SDHProxySelector extends ProxySelector
 					proxies.add(new Proxy(Proxy.Type.SOCKS,
 							new InetSocketAddress(httpProxyHostACH, new Integer(httpProxyPortACH).intValue())));
 
-					LOG.info("Proxy Type: SOCKS");
-					LOG.info("httpProxyHostACH: " + httpProxyHostACH);
-					LOG.info("httpProxyPortACH: " + httpProxyPortACH);
+					if (configLog.equals("true"))
+					{
+						LOG.info("Proxy Type: SOCKS");
+						LOG.info("httpProxyHostACH: " + httpProxyHostACH);
+						LOG.info("httpProxyPortACH: " + httpProxyPortACH);
+					}
 
 				}
 				else if (proxyType.equals("HTTP"))
@@ -341,17 +403,27 @@ public class SDHProxySelector extends ProxySelector
 					proxies.add(new Proxy(Proxy.Type.HTTP,
 							new InetSocketAddress(httpProxyHostACH, new Integer(httpProxyPortACH).intValue())));
 
-					LOG.info("Proxy Type: HTTP");
-					LOG.info("httpProxyHostACH: " + httpProxyHostACH);
-					LOG.info("httpProxyPortACH: " + httpProxyPortACH);
+					if (configLog.equals("true"))
+					{
+						LOG.info("Proxy Type: HTTP");
+						LOG.info("httpProxyHostACH: " + httpProxyHostACH);
+						LOG.info("httpProxyPortACH: " + httpProxyPortACH);
+					}
 				}
 
-				LOG.info("we enter to proxy server 186");
+
+				if (configLog.equals("true"))
+				{
+					LOG.info("we enter to proxy server 186");
+				}
 
 				return proxies;
 			}
 
-			LOG.info("---------------FIN Configuracion 4:------------------------");
+			if (configLog.equals("true"))
+			{
+				LOG.info("---------------FIN Configuracion 4:------------------------");
+			}
 		}
 
 

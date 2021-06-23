@@ -18,12 +18,15 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.model.SDHVehiculosTaxModel;
 import de.hybris.sdh.core.pojos.requests.CalcVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.CatalogoVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
@@ -303,37 +306,40 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		final String anoParaPSE = anioGravable;
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
-		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
-		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+		//		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		//		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
 		final String mensajeError = "";
 		String[] mensajesError;
 
 
-		contribuyenteRequest.setNumBP(numBP);
+		//		contribuyenteRequest.setNumBP(numBP);
 
-		System.out.println("Request de validaCont: " + contribuyenteRequest);
-		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
-		System.out.println("Response de validaCont: " + detalleContribuyente);
-		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
-		{
+		//		System.out.println("Request de validaCont: " + contribuyenteRequest);
+		//		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		//		System.out.println("Response de validaCont: " + detalleContribuyente);
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		//		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
+		//		{
 			infoPreviaPSE.setAnoGravable(anoParaPSE);
 			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
 			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
 			infoPreviaPSE.setNumBP(numBP);
 			infoPreviaPSE.setClavePeriodo(gasolinaService.prepararPeriodoAnualPago(anoParaPSE));
-			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoVehicular(detalleContribuyente, placa));
-			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
+			//			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoVehicular(detalleContribuyente, placa));
+			infoPreviaPSE.setNumObjeto(prepararNumObjetoVehicular(customerModel, placa));
+		//			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
+		infoPreviaPSE.setDv(prepararDV(customerModel));
 			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getVEHICULAR());
 			infoPreviaPSE.setPlaca(placa);
-		}
-		else
-		{
-			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
-			mensajesError = gasolinaService.prepararMensajesError(
-					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
-			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-					"error.impuestoGasolina.sobretasa.error2", mensajesError);
-		}
+		//		}
+		//		else
+		//		{
+		//			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
+		//			mensajesError = gasolinaService.prepararMensajesError(
+		//					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+		//			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+		//					"error.impuestoGasolina.sobretasa.error2", mensajesError);
+		//		}
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		//informacion para PSE
 
@@ -816,6 +822,41 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		}
 
 		return controlCampos;
+	}
+
+	public String prepararNumObjetoVehicular(CustomerModel customerModel, final String placa)
+	{
+		String numObjeto = "";
+		List<SDHVehiculosTaxModel> detalleImpuesto = customerModel.getVehiculosTaxList();
+
+		if (detalleImpuesto != null)
+		{
+			for (SDHVehiculosTaxModel sdhVehiculosTaxModel : detalleImpuesto)
+			{
+				if (sdhVehiculosTaxModel != null && sdhVehiculosTaxModel.getPlaca() != null
+						&& sdhVehiculosTaxModel.getPlaca().equals(placa))
+				{
+					numObjeto = sdhVehiculosTaxModel.getNumObjeto();
+					break;
+				}
+			}
+		}
+
+
+		return numObjeto;
+	}
+
+	public String prepararDV(CustomerModel customerModel)
+	{
+		String dv = "";
+
+		if (customerModel.getDigVer() != null)
+		{
+			dv = customerModel.getDigVer();
+		}
+
+
+		return dv;
 	}
 
 

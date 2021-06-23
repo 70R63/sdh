@@ -34,6 +34,7 @@ import de.hybris.platform.cms2.servicelayer.services.CMSPreviewService;
 import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.jalo.c2l.LocalizableItem;
 import de.hybris.platform.servicelayer.model.AbstractItemModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
@@ -41,6 +42,7 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.type.TypeService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.sdh.core.model.SdhAccesoMenuContrib1Model;
@@ -121,6 +123,9 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 	@Resource(name = "flexibleSearchService")
 	private FlexibleSearchService defaultFlexibleSearchService;
 
+	@Resource(name = "userService")
+	private UserService userService;
+
 	@Override
 	public void beforeView(final HttpServletRequest request, final HttpServletResponse response, final ModelAndView modelAndView)
 	{
@@ -186,7 +191,9 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 
 			final UIMenuForm uiMenuForm = new UIMenuForm();
 
-			uiMenuForm.fillForm(customerData);
+			final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+			uiMenuForm.fillForm(customerData, customerModel);
 			uiMenuForm.setbNoFiltrarMenuContrib(determinarFiltroMenuContrib(customerData));
 			modelAndView.addObject("uiMenuForm", uiMenuForm);
 			if(sessionService.getAttribute("representado")!= null) {

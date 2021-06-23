@@ -29,6 +29,11 @@ public class DefaultSDHFAQsService implements SDHFAQsService {
         return getSdhFAQsDao().getAllByCategory(categoryModel);
     }
 
+    @Override
+    public List<SdhFAQsModel> getFAQsByKeyWord(String keyWord) {
+        return getSdhFAQsDao().getAllByKeyWord(keyWord);
+    }
+
     public SdhFAQsDao getSdhFAQsDao() {
         return sdhFAQsDao;
     }

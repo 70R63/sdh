@@ -30,7 +30,9 @@ import de.hybris.sdh.core.pojos.responses.JuridicosVehiculos;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
@@ -127,6 +129,12 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	@Resource(name = "sdhCustomerFacade")
 	SDHCustomerFacade sdhCustomerFacade;
 
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+
+	@Resource(name = "sdhCustomerAccountService")
+	private SDHCustomerAccountService sdhCustomerAccountService;
+
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/presentar-declaracion", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -195,7 +203,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	final String action, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- En Presentar Declaracion POST --------------------------");
+		System.out.println("---------------- Presentar Declaracion POST --------------------------");
 		System.out.println("[" + dataFormResponse.getSkipReques() + "]");
 
 		String URLdeterminada = "";
@@ -613,8 +621,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		model.addAttribute("icaPeriodo", this.getIcaPeriodo());
 		model.addAttribute("icaAnioGravable", this.getIcaAnoGravable());
 		model.addAttribute("isPeriodoAnual", isPeriodoAnual);
-		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
-				dataForm.getOptionDeli(), dataForm.getOptionIca(), dataForm.getOptionVehicular(), dataForm.getOptionPredial()));
+		//		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
+		//				dataForm.getOptionDeli(), dataForm.getOptionIca(), dataForm.getOptionVehicular(), dataForm.getOptionPredial()));
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
@@ -725,54 +733,68 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		//		}
 		if (infoVista.getClaveImpuesto().equals("2"))
 		{
-			final List<ImpuestoVehiculos> listaInfoVehiculos = new ArrayList<ImpuestoVehiculos>();
-			ImpuestoVehiculos infoVehiculos = null;
-			DetalleVehiculosResponse detalleVehiculosResponse = null;
 
-			for (final ImpuestoVehiculos impuesto_element : sdhCustomerFacade.getRepresentadoFromSAP(numBP)
-					.getVehicular())
+			List<ImpuestoVehiculos> listaInfoVehiculos = null;
+			List<ImpuestoVehiculos> impuestoVehiculos = null;
+			if (customerModel != null && customerModel.getNumBP() != null)
 			{
-				if (!impuesto_element.getPlaca().isEmpty())
+				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+				impuestoVehiculos = sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest);
+				sdhCustomerAccountService.updateImpuestoVehicular_simplificado(customerModel, impuestoVehiculos);
+				//				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
+				//				sdhConsultaContribuyenteBPResponse.setVehicular(impuestoVehiculos);
+				listaInfoVehiculos = new ArrayList<ImpuestoVehiculos>();
+			}
+
+			ImpuestoVehiculos infoVehiculos = null;
+			//			DetalleVehiculosResponse detalleVehiculosResponse = null;
+			if (impuestoVehiculos != null)
+			{
+				for (final ImpuestoVehiculos impuesto_element : impuestoVehiculos)
 				{
-					infoVehiculos = new ImpuestoVehiculos();
-					infoVehiculos.setPlaca(impuesto_element.getPlaca());
-					infoVehiculos.setMarca(impuesto_element.getMarca());
-					infoVehiculos.setLinea(impuesto_element.getLinea());
-					infoVehiculos.setModelo(impuesto_element.getModelo());
-					infoVehiculos.setClase(impuesto_element.getClase());
-					infoVehiculos.setCarroceria(impuesto_element.getCarroceria());
-					infoVehiculos.setNumPuertas(impuesto_element.getNumPuertas());
-					infoVehiculos.setBlindado(impuesto_element.getBlindado());
-					infoVehiculos.setCilindraje(impuesto_element.getCilindraje());
-					infoVehiculos.setNumObjeto(impuesto_element.getNumObjeto());
-					infoVehiculos.setAnioGravable(impuesto_element.getAnioGravable());
-
-					final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
-					detalleVehiculosRequest.setBpNum(numBP);
-					detalleVehiculosRequest.setPlaca(impuesto_element.getPlaca());
-					detalleVehiculosRequest.setAnioGravable(infoVista.getAnoGravable());
-
-
-					final ObjectMapper mapper = new ObjectMapper();
-					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-					try
+					if (!impuesto_element.getPlaca().isEmpty())
 					{
-						detalleVehiculosResponse = mapper.readValue(
-								sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
-						if (detalleVehiculosResponse.getInfo_declara() != null
-								&& detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
-						{
-							infoVehiculos.setNumForm(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm());
-							infoVehiculos.setErrores(detalleVehiculosResponse.getInfo_declara().getErrores());
-						}
-					}
-					catch (final Exception e)
-					{
-						LOG.error("Error en la respuesta del servicio detalle de Vehiculos " + e.getMessage());
-					}
+						infoVehiculos = new ImpuestoVehiculos();
+						infoVehiculos.setPlaca(impuesto_element.getPlaca());
+						infoVehiculos.setMarca(impuesto_element.getMarca());
+						infoVehiculos.setLinea(impuesto_element.getLinea());
+						infoVehiculos.setModelo(impuesto_element.getModelo());
+						infoVehiculos.setClase(impuesto_element.getClase());
+						infoVehiculos.setCarroceria(impuesto_element.getCarroceria());
+						infoVehiculos.setNumPuertas(impuesto_element.getNumPuertas());
+						infoVehiculos.setBlindado(impuesto_element.getBlindado());
+						infoVehiculos.setCilindraje(impuesto_element.getCilindraje());
+						infoVehiculos.setNumObjeto(impuesto_element.getNumObjeto());
+						infoVehiculos.setAnioGravable(impuesto_element.getAnioGravable());
 
-					listaInfoVehiculos.add(infoVehiculos);
+						final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
+						detalleVehiculosRequest.setBpNum(numBP);
+						detalleVehiculosRequest.setPlaca(impuesto_element.getPlaca());
+						detalleVehiculosRequest.setAnioGravable(infoVista.getAnoGravable());
+
+
+						//					final ObjectMapper mapper = new ObjectMapper();
+						//					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+						//
+						//					try
+						//					{
+						//						detalleVehiculosResponse = mapper.readValue(
+						//								sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
+						//						if (detalleVehiculosResponse.getInfo_declara() != null
+						//								&& detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
+						//						{
+						//							infoVehiculos.setNumForm(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm());
+						//							infoVehiculos.setErrores(detalleVehiculosResponse.getInfo_declara().getErrores());
+						//						}
+						//					}
+						//					catch (final Exception e)
+						//					{
+						//						LOG.error("Error en la respuesta del servicio detalle de Vehiculos " + e.getMessage());
+						//					}
+
+						listaInfoVehiculos.add(infoVehiculos);
+					}
 				}
 			}
 			infoVista.setVehicular(listaInfoVehiculos);

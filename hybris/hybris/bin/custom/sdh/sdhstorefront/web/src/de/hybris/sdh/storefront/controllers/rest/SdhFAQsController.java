@@ -23,4 +23,9 @@ public class SdhFAQsController {
         List<SDHFaqData> faqsData = sdhFAQsFacade.getAllFaqsByCategoryCode(code);
         return faqsData;
     }
+
+    @RequestMapping("/getByKeyWord")
+    public List<SDHFaqData> getByKeyWord(@RequestParam(value="keyWord", defaultValue="") final String keyWord){
+        return sdhFAQsFacade.getAllFaqsByKeyWord(keyWord);
+    }
 }
