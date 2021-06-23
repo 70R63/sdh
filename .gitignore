@@ -23,6 +23,8 @@
 !/hybris/hybris/config-local
 !/hybris/hybris/config-prd
 !/hybris/hybris/config-stg
+!/hybris/hybris/config-stg
+!/hybris/hybris/config-upgrade
 
 !/hybris/hybris/bin/ext-publicsector
 /hybris/hybris/bin/ext-publicsector/*
