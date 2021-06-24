@@ -2,6 +2,7 @@ package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
@@ -47,7 +48,9 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 
 
 		return impuestosVehiculos;
-    }
+	}
+
+
 
 	public String consulta_impVehicular_string(final ConsultaContribuyenteBPRequest wsRequest)
 	{
@@ -57,6 +60,59 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 				.getString("sdh.validacontribuyente_simplificado_impVehicular.password");
 		final String urlService = configurationService.getConfiguration()
 				.getString("sdh.validacontribuyente_simplificado_impVehicular.url");
+
+		final RestTemplate restTemplate = new RestTemplate();
+		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
+		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
+
+		LOG.info(wsRequest);
+		final String wsResponse = restTemplate.postForObject(urlService, request, String.class);
+		LOG.info(wsResponse);
+
+
+		return wsResponse;
+	}
+
+
+
+
+
+
+
+	@Override
+	public List<ImpuestoDelineacionUrbana> consulta_impDelineacion(final ConsultaContribuyenteBPRequest wsRequest)
+	{
+		SDHValidaMailRolResponse wsResponse = null;
+		List<ImpuestoDelineacionUrbana> impuestosDelineacion = null;
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try
+		{
+			wsResponse = mapper.readValue(consulta_impDelineacion_string(wsRequest), SDHValidaMailRolResponse.class);
+			if (wsResponse != null)
+			{
+				impuestosDelineacion = wsResponse.getDelineacion();
+			}
+		}
+		catch (final Exception e)
+		{
+			LOG.info("Error al convertir response de consulta impuesto Delineacion");
+		}
+
+
+		return impuestosDelineacion;
+	}
+
+
+
+	public String consulta_impDelineacion_string(final ConsultaContribuyenteBPRequest wsRequest)
+	{
+		final String usuario = configurationService.getConfiguration()
+				.getString("sdh.validacontribuyente_simplificado_impDelineacion.user");
+		final String password = configurationService.getConfiguration()
+				.getString("sdh.validacontribuyente_simplificado_impDelineacion.password");
+		final String urlService = configurationService.getConfiguration()
+				.getString("sdh.validacontribuyente_simplificado_impDelineacion.url");
 
 		final RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));

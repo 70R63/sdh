@@ -51,4 +51,9 @@ public interface SDHCustomerAccountService
 	void cleanSessionAutorities();
 
 	void updateCustomerTaxRestrictions();
+
+	SDHValidaMailRolResponse getBPDataFromCustomer(final CustomerModel customerModel);
+
+	SDHValidaMailRolResponse getBPAndTaxDataFromCustomer(final CustomerModel customerModel, String taxCode);
+
 }
