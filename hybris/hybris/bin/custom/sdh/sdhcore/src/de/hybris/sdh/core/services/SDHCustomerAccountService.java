@@ -53,9 +53,14 @@ public interface SDHCustomerAccountService
 
 	void updateCustomerTaxRestrictions();
 
+	SDHValidaMailRolResponse getBPDataFromCustomer(final CustomerModel customerModel);
+
+	SDHValidaMailRolResponse getBPAndTaxDataFromCustomer(final CustomerModel customerModel, String taxCode);
+
 	/**
 	 * @param customerModel
 	 * @param gasolinaSimpliResponse
 	 */
 	void updateImpuestoGasolina_simplificado(CustomerModel customerModel, ImpGasolinaSimpliResponse gasolinaSimpliResponse);
+
 }
