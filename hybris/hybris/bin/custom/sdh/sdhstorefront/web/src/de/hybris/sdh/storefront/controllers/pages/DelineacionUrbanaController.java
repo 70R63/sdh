@@ -40,6 +40,7 @@ import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
@@ -139,6 +140,11 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 
 	@Resource(name = "sessionService")
 	SessionService sessionService;
+
+	@Resource(name = "sdhCustomerAccountService")
+	SDHCustomerAccountService sdhCustomerAccountService;
+
+
 	//
 	//	@Resource(name = "sdhDetallePublicidadService")
 	//	SDHDetallePublicidadService sdhDetallePublicidadService;
@@ -159,11 +165,15 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		final InfoDelineacion infoDelineacion = new InfoDelineacion();
 
 
-		contribuyenteRequest.setNumBP(customerModel.getNumBP());
+		//		contribuyenteRequest.setNumBP(customerModel.getNumBP());
 
-		System.out.println("Request para validaCont: " + contribuyenteRequest);
-		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
-		System.out.println("Response de validaCont: " + detalleContribuyente);
+		//		System.out.println("Request para validaCont: " + contribuyenteRequest);
+		//		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		//		System.out.println("Response de validaCont: " + detalleContribuyente);
+
+		detalleContribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
+
+
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
 			gasolinaService.prepararValortipoDocDESCRIPCIONDU(detalleContribuyente);

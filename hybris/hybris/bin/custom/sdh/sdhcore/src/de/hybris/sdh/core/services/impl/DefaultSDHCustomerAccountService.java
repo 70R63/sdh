@@ -1811,18 +1811,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		SDHValidaMailRolResponse sdhConsultaContribuyenteBPRespons = null;
 		final String response = null;
 
-		//		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-		//		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-		//		final ObjectMapper mapper = new ObjectMapper();
-		//		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		//		response = sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest);
-		//		try {
-		//			if(Objects.nonNull(response)){
-		//				sdhConsultaContribuyenteBPRespons = mapper.readValue(response, SDHValidaMailRolResponse.class);
-		//			}
-		//		} catch (final IOException e) {
-		//			e.printStackTrace();
-		//		}
+
 		sdhConsultaContribuyenteBPRespons = sdhConsultaContribuyenteBPService.mapearInfo(customerModel);
 
 		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
@@ -1868,28 +1857,6 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 					}
 				}
 			}
-
-			//			if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getGasolina())){
-			//				addUsrGrpModelToList("gasolinaUsrTaxGrp" , newGroupList);
-			//            }
-			//            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getPublicidadExt())){
-			//				addUsrGrpModelToList("publicidadExtUsrTaxGrp" , newGroupList);
-			//            }
-			//            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getDelineacion())){
-			//				addUsrGrpModelToList("delineacionUsrTaxGrp" , newGroupList);
-			//            }
-			//            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getIca())){
-			//				addUsrGrpModelToList("ICAUsrTaxGrp" , newGroupList);
-			//            }
-			//            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getReteIca())){
-			//				addUsrGrpModelToList("reteICAUsrTaxGrp" , newGroupList);
-			//            }
-			//            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getVehicular())){
-			//				addUsrGrpModelToList("vehicularUsrTaxGrp" , newGroupList);
-			//            }
-			//			if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getPredial())){
-			//				addUsrGrpModelToList("predialUsrTaxGrp" , newGroupList);
-			//			}
 		}
 
 		customerModel.setGroups(newGroupList);
@@ -1933,6 +1900,138 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		}
 
 		return resultValidation;
+	}
+
+	public SDHValidaMailRolResponse getBPDataFromCustomer(final CustomerModel customerModel)
+	{
+		final SDHValidaMailRolResponse sdhValidaMailRolResponse = new SDHValidaMailRolResponse();
+		final InfoContribResponse infoContrib = new InfoContribResponse();
+		final ContribAdicionales adicionales = new ContribAdicionales();
+		final List<ContribDireccion> direcciones = new ArrayList<ContribDireccion>();
+		List<SDHAddressModel> newAddresses = new ArrayList<SDHAddressModel>();
+		final List<ContribRedSocial> redsocial = new ArrayList<ContribRedSocial>();
+		List<SDHSocialNetworkModel> newSocialNetwork = new ArrayList<SDHSocialNetworkModel>();
+
+
+		if (customerModel != null)
+		{
+
+			infoContrib.setPrimNom(customerModel.getFirstName());
+			infoContrib.setSegNom(customerModel.getMiddleName());
+			infoContrib.setPrimApe(customerModel.getLastName());
+			infoContrib.setSegApe(customerModel.getSecondLastName());
+			infoContrib.setNumDoc(customerModel.getDocumentNumber());
+			infoContrib.setTipoDoc(customerModel.getDocumentType());
+			infoContrib.setNumDoc(customerModel.getDocumentNumber());
+
+
+			adicionales.setTYPE(customerModel.getSdhType());
+			adicionales.setTITLE(customerModel.getSdhTitle());
+			adicionales.setNAME_ORG1(customerModel.getNameOrg1());
+			adicionales.setNAME_ORG2(customerModel.getNameOrg2());
+			adicionales.setNAME_ORG3(customerModel.getNameOrg3());
+			adicionales.setNAME_ORG4(customerModel.getNameOrg4());
+			adicionales.setDIGVERIF(customerModel.getDigVer());
+			adicionales.setLEGAL_ENTY(customerModel.getLegalEntity());
+			adicionales.setLEGALORG(customerModel.getLegalOrg());
+			adicionales.setZZAUTOBUZONE(customerModel.getUseEmailForNotifications() == Boolean.TRUE ? 1 : 0);
+			adicionales.setZZAUTOUSOINF(customerModel.getUseInformationForInstitutionalPurposes() == Boolean.TRUE ? 1 : 0);
+
+
+
+			infoContrib.setAdicionales(adicionales);
+
+
+			sdhValidaMailRolResponse.setInfoContrib(infoContrib);
+
+			if (customerModel.getAddressList() != null && !customerModel.getAddressList().isEmpty())
+			{
+				newAddresses = customerModel.getAddressList();
+
+				for (final SDHAddressModel eachAddress : newAddresses)
+				{
+
+					if (StringUtils.isBlank(eachAddress.getAddKind()))
+					{
+						continue;
+					}
+
+					final ContribDireccion eachAddressModel = new ContribDireccion();
+					eachAddressModel.setADR_KIND(eachAddress.getAddKind());
+					eachAddressModel.setSTREET(eachAddress.getStreet());
+					eachAddressModel.setPOST_CODE(eachAddress.getPostalCode());
+					eachAddressModel.setCITY1(eachAddress.getCity());
+					eachAddressModel.setCOUNTRY(eachAddress.getCountry());
+					eachAddressModel.setREGION(eachAddress.getRegion());
+
+					direcciones.add(eachAddressModel);
+
+				}
+
+				infoContrib.setDireccion(direcciones);
+
+			}
+
+
+
+			if (customerModel.getNetworkList() != null && !customerModel.getNetworkList().isEmpty())
+			{
+
+				newSocialNetwork = customerModel.getNetworkList();
+
+				for (final SDHSocialNetworkModel eachSocialNetwork : newSocialNetwork)
+				{
+					if (StringUtils.isBlank(eachSocialNetwork.getSocialNetwork()))
+					{
+						continue;
+					}
+
+					final ContribRedSocial eachSocialNetworkModel = new ContribRedSocial();
+					eachSocialNetworkModel.setRED_SOCIAL(eachSocialNetwork.getSocialNetwork());
+					eachSocialNetworkModel.setUSUARIORED(eachSocialNetwork.getUsername());
+					redsocial.add(eachSocialNetworkModel);
+
+				}
+
+				infoContrib.setRedsocial(redsocial);
+
+			}
+
+		}
+
+
+		return sdhValidaMailRolResponse;
+	}
+
+	public SDHValidaMailRolResponse getBPAndTaxDataFromCustomer(final CustomerModel customerModel, final String taxCode)
+	{
+
+
+		SDHValidaMailRolResponse sdhValidaMailRolResponse = new SDHValidaMailRolResponse();
+		sdhValidaMailRolResponse = this.getBPDataFromCustomer(customerModel);
+
+		if (taxCode == "06")
+		{
+			List<ImpuestoDelineacionUrbana> delineacion = new ArrayList<ImpuestoDelineacionUrbana>();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+				delineacion = sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setDelineacion(delineacion);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+			}
+
+
+			sdhValidaMailRolResponse.setDelineacion(delineacion);
+		}
+
+		return sdhValidaMailRolResponse;
 	}
 
 

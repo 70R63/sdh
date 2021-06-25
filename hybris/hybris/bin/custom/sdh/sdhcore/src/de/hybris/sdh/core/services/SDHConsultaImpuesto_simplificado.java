@@ -5,6 +5,7 @@ package de.hybris.sdh.core.services;
 
 
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 
 import java.util.List;
@@ -20,9 +21,16 @@ public interface SDHConsultaImpuesto_simplificado
 
 	String consulta_impVehicular_string(ConsultaContribuyenteBPRequest request);
 
+	List<ImpuestoDelineacionUrbana> consulta_impDelineacion(ConsultaContribuyenteBPRequest request);
+
+	String consulta_impDelineacion_string(ConsultaContribuyenteBPRequest request);
+
+
 	/**
 	 * @param request
 	 * @return
 	 */
 	String consulta_impGasolina_string(ConsultaContribuyenteBPRequest request);
+
+
 }
