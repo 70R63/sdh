@@ -24,9 +24,11 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.ContribAgente;
+import de.hybris.sdh.core.pojos.responses.ImpPredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
+import de.hybris.sdh.core.services.SDHImpPredialService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
@@ -57,6 +59,9 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+
+	@Resource(name = "sdhImpPredialServiceImpl")
+	SDHImpPredialService sdhImpPredialServiceImpl;
 
 	@Override
 	public void register(final RegisterData registerData) throws DuplicateUidException
@@ -184,6 +189,7 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 
 	@Override
 	public SDHValidaMailRolResponse getRepresentadoFromSAP(String numBP) {
+		ImpPredialResponse impPredialResponse = null;
 
 		try
 		{
@@ -192,10 +198,11 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
 			consultaContribuyenteBPRequest.setNumBP(numBP);
 
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),SDHValidaMailRolResponse.class);
+			SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
+			impPredialResponse = mapper.readValue(sdhImpPredialServiceImpl.getImpuesto(numBP), ImpPredialResponse.class);
+			sdhConsultaContribuyenteBPResponse.setPredial(impPredialResponse.getPredial());
 
 			return sdhConsultaContribuyenteBPResponse;
 		}
