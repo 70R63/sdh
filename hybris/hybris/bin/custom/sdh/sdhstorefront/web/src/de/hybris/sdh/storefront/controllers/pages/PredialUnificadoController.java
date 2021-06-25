@@ -24,30 +24,8 @@ import de.hybris.sdh.core.pojos.requests.DetallePredialBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredialRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
-import de.hybris.sdh.core.pojos.responses.CalPredialErrores;
-import de.hybris.sdh.core.pojos.responses.CalculoPredialResponse;
-import de.hybris.sdh.core.pojos.responses.ContribAgente;
-import de.hybris.sdh.core.pojos.responses.DetallePredial2Response;
-import de.hybris.sdh.core.pojos.responses.DetallePredial2Response_marcas;
-import de.hybris.sdh.core.pojos.responses.DetallePredialBPResponse;
-import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
-import de.hybris.sdh.core.pojos.responses.ErrorPubli;
-import de.hybris.sdh.core.pojos.responses.FirmanteResponse;
-import de.hybris.sdh.core.pojos.responses.FirmanteResponsePredial2;
-import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
-import de.hybris.sdh.core.pojos.responses.PredialDatosEconomicos;
-import de.hybris.sdh.core.pojos.responses.PredialDatosFisicos;
-import de.hybris.sdh.core.pojos.responses.PredialDatosJuridicos;
-import de.hybris.sdh.core.pojos.responses.PredialEstDatosGenerales;
-import de.hybris.sdh.core.pojos.responses.PredialEstLiquidacion;
-import de.hybris.sdh.core.pojos.responses.PredialMarcas;
-import de.hybris.sdh.core.pojos.responses.PredialResponse;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
-import de.hybris.sdh.core.services.SDHCalculoPredialService;
-import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
-import de.hybris.sdh.core.services.SDHDetalleGasolina;
-import de.hybris.sdh.core.services.SDHDetallePredialService;
-import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.core.pojos.responses.*;
+import de.hybris.sdh.core.services.*;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
@@ -166,6 +144,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	@Resource(name = "sdhCustomerFacade")
 	SDHCustomerFacade sdhCustomerFacade;
 
+	@Resource(name = "sdhImpPredialServiceImpl")
+	SDHImpPredialService sdhImpPredialServiceImpl;
+
 	private static final Logger LOG = Logger.getLogger(PredialUnificadoController.class);
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_inicio", method = RequestMethod.GET)
@@ -177,6 +158,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 
 		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
+		ImpPredialResponse impPredialResponse = null;
 
 		final PredialForm predialFormIni = new PredialForm();
 
@@ -188,10 +170,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		try
 		{
-			sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-			predialFormIni.setPredial(sdhConsultaContribuyenteBPResponse.getPredial());
+			impPredialResponse = mapper.readValue(sdhImpPredialServiceImpl.getImpuesto(customerFacade
+					.getCurrentCustomer().getNumBP()), ImpPredialResponse.class);
+			predialFormIni.setPredial(impPredialResponse.getPredial());
+
 		}
 		catch (final IOException e)
 		{

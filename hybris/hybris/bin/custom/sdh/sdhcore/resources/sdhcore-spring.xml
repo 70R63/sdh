@@ -782,4 +782,7 @@
 
 	<alias alias="sdhConsultaImpuesto_simplificado" name="defaultSDHConsultaImpuesto_simplificado"/>
 	<bean name="defaultSDHConsultaImpuesto_simplificado" class="de.hybris.sdh.core.services.impl.DefaultSDHConsultaImpuesto_simplificado" />
+
+	<alias alias="sdhImpPredialServiceImpl" name="defaultSDHImpPredialServiceImpl"/>
+	<bean name="defaultSDHImpPredialServiceImpl" class="de.hybris.sdh.core.services.impl.SDHImpPredialServiceImpl" />
 </beans>
