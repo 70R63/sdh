@@ -1,0 +1,21 @@
+$contentCatalog=publicsectorContentCatalog
+$contentCV = catalogVersion(catalog(id[default='publicsectorContentCatalog']),version[default='Staged'])[unique=true,default='publicsectorContentCatalog:Staged']
+$picture = media(code, $contentCV)
+$medias = medias(code, $contentCV)
+$lang=es
+$mediaContainer = media(qualifier, $contentCV)[lang=$macroLang])
+# Load the storefront context root config param
+$storefrontContextRoot=$config-storefrontContextRoot
+
+UPDATE ContentPage;$contentCV;uid[unique=true];title[lang=$lang];keywords[lang=$lang];description[lang=$lang]
+;;all-bills;"Facturas";"todas-facturas";"Facturas"
+;;bill-payment;"Pagar mis facturas";"pago-factura";"Pagar mi factura"
+;;my-bills;"Facturas";"mis-facturas";"Facturas"
+;;retrieve-bill;"Recuperar mi factura";"recuperar-factura";"Recuperar mi factura"
+
+UPDATE PSRetrieveABillComponent;$contentCV;uid[unique = true];title[lang=$lang];description[lang=$lang];retrieveBillButtonLabel[lang=$lang];
+;;PSRetrieveABillComponent;Recuperar mi factura;Recupere fácilmente su factura. Solo necesita el ID de la factura y su apellido.;Recuperar una factura;
+
+# update linkname
+UPDATE CMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang]
+;;MyBillsLink;"Facturas"

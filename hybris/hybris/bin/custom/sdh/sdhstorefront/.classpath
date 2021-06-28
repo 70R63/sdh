@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <classpath>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -11,7 +16,12 @@
     
     
     <classpathentry kind="lib" path="C:/SDH/hybris/hybris/bin/platform/lib/dbdriver/mssql-jdbc-6.1.0.jre8.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -22,7 +32,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/acceleratorfacades"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -33,7 +48,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/npmtestancillary"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -44,7 +64,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/xyformscommercebackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -55,7 +80,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/relationshipexchange"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -66,7 +96,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/xyformscommerceservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -77,7 +112,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/basecommercebackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -88,7 +128,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/cms2"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -99,7 +144,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/relationshipservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -110,7 +160,12 @@
     
     
     <classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -121,7 +176,12 @@
     
     
     <classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/owasp-java-html-sanitizer-20160924.1.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -132,7 +192,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/addonsupport"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -143,7 +208,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/configurablebundlecockpits"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -154,7 +224,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/relationshipbackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -165,7 +240,12 @@
     
     
     <classpathentry exported="true" kind="lib" path="lib/sevenzipjbinding-AllPlatforms.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -176,7 +256,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/assistedservicefacades"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -187,7 +272,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/webservicescommons"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -198,7 +288,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/cmswebservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -209,7 +304,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/sdhcore"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -220,7 +320,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/platformbackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -231,7 +336,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/datahubadapter"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -242,7 +352,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/sdhfacades"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -253,7 +368,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/publicsectorconsignmentexchange"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -264,7 +384,12 @@
     
     
     <classpathentry kind="lib" path="/sdhcore/lib/axis-1.4.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -275,7 +400,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/ticketsystem"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -286,7 +416,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/commercefacades"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -297,7 +432,12 @@
     
     
     <classpathentry exported="true" kind="lib" path="lib/gson-2.5.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -308,7 +448,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/commerceservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -319,7 +464,12 @@
     
     
     <classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/wro4j-core-1.7.9.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -330,7 +480,12 @@
     
     
     <classpathentry kind="lib" path="C:/SDH/hybris/hybris/bin/platform/lib/ant-contrib-1.0b3.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -341,7 +496,7 @@
     
     
     <classpathentry kind="lib" path="C:/SDH/hybris/hybris/bin/custom/sdh/sdhstorefront/lib/gson-2.5.jar"/>
-                                        	
+                                                            	
     
     
     
@@ -361,8 +516,18 @@
     
     
     
+    
+    
+    
+    
+    
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/atddimpex"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -373,7 +538,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/billservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -384,7 +554,12 @@
     
     
     <classpathentry kind="src" output="eclipsebin/web/classes" path="web/src"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -395,7 +570,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/cockpit"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -406,7 +586,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/datahubclient"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -417,7 +602,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/voucherbackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -428,7 +618,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/xyformsweb"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -439,7 +634,12 @@
     
     
     <classpathentry exported="true" kind="lib" path="lib/javax.websocket-api-1.1.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -450,7 +650,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/billatddtests"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -461,7 +666,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/permissionswebservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -472,7 +682,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/springintegrationlibs"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -483,7 +698,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/xyformsbackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -494,7 +714,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/publicsectorfacades"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -505,7 +730,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/assistedserviceatddtests"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -516,7 +746,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/customersupportbackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -527,7 +762,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/platform"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -538,7 +778,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/cmssmarteditwebservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -549,7 +794,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/publicsectorcockpits"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -560,7 +810,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/sdhbackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -571,7 +826,12 @@
     
     
     <classpathentry exported="true" kind="src" path="/acceleratorstorefrontcommons"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -582,7 +842,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/publicsectordocmanagement"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -593,7 +858,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/publicsectoratddtests"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -604,7 +874,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/acceleratorservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -615,7 +890,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/publicsectorbackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -626,7 +906,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/xyformscommerceatddtests"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -637,7 +922,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/cmsfacades"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -648,7 +938,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/relationshipatddtests"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -659,7 +954,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/cms2lib"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -670,7 +970,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/acceleratorcms"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -681,7 +986,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/commercesearchbackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -692,7 +1002,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/payment"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -703,7 +1018,12 @@
     
     
     <classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/jstl-impl-1.2.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -714,7 +1034,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/xyformsfacades"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -725,7 +1050,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/customerreview"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -736,7 +1066,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/promotions"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -747,7 +1082,7 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/smarteditwebservices"/>
-                                        	
+                                                            	
     
     
     
@@ -766,8 +1101,18 @@
     
     
     
+    
+    
+    
+    
+    
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/commercesearch"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -778,7 +1123,12 @@
     
     
     <classpathentry kind="src" output="eclipsebin/web/classes" path="web/testsrc"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -789,7 +1139,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/xyformsservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -800,7 +1155,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/publicsectorservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -811,7 +1171,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/tomcatembeddedserver"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -822,7 +1187,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/config"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -833,7 +1203,7 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/admincockpit"/>
-                                        	
+                                                            	
     
     	
     
@@ -845,8 +1215,18 @@
     
     
     
+    
+    
+    
+    
+    
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/atddengine"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -857,7 +1237,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/productcockpit"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -868,7 +1253,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/relationshipfacades"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -879,7 +1269,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/solrfacetsearch"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -890,7 +1285,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/backoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -901,7 +1301,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/permissionsfacades"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -912,7 +1317,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/commercewebservicescommons"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -923,7 +1333,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/solrfacetsearchbackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -934,7 +1349,12 @@
     
     
     <classpathentry kind="lib" path="C:/SDH/hybris/hybris/bin/custom/sdh/sdhstorefront/lib/sevenzipjbinding-AllPlatforms.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -945,7 +1365,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/cscockpit"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -956,7 +1381,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/sdhinitialdata"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -967,7 +1397,12 @@
     
     
     <classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/jsoup-1.6.1.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -978,7 +1413,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/dataimportcommons"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -989,7 +1429,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/cmssmartedit"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1000,7 +1445,7 @@
     
     
     <classpathentry kind="lib" path="C:/SDH/hybris/hybris/bin/platform/lib/dbdriver/hsqldb-2.3.4.jar"/>
-                                        	
+                                                            	
     
     
         	
@@ -1013,8 +1458,18 @@
     
     
     
+    
+    
+    
+    
+    
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/auditreportservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1025,7 +1480,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/xyformscockpits"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1036,7 +1496,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/solrserver"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1047,7 +1512,7 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/voucher"/>
-                                        	
+                                                            	
     
     
     
@@ -1061,8 +1526,18 @@
     
     
     
+    
+    
+    
+    
+    
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/embeddedserver"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1073,7 +1548,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/previewwebservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1084,7 +1564,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/publicsectorfulfilment"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1095,7 +1580,12 @@
     
     
     <classpathentry kind="lib" path="C:/SDH/hybris/hybris/bin/custom/sdh/sdhstorefront/lib/sevenzipjbinding.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1106,7 +1596,12 @@
     
     
     <classpathentry exported="true" kind="lib" path="resources"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1117,7 +1612,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/ycommercewebservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1128,7 +1628,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/xyformsatddtests"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1139,7 +1644,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/commerceservicesatddtests"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1150,7 +1660,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/configurablebundleservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1161,7 +1676,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/billbackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1172,7 +1692,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/billfacades"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1183,7 +1708,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/smartedit"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1194,7 +1724,7 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/npmancillary"/>
-                                        	
+                                                            	
 	
     
     
@@ -1205,8 +1735,18 @@
     
     
     
+    
+    
+    
+    
+    
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/publicsectordocmanagementexchange"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1217,7 +1757,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/xyformscommercecockpits"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1228,7 +1773,12 @@
     
     
     <classpathentry exported="true" kind="lib" path="lib/sevenzipjbinding.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1239,7 +1789,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/billexchange"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1250,7 +1805,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/datahubbackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1261,7 +1821,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/xyformscommercefacades"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1272,7 +1837,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/cmsbackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1283,7 +1853,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/assistedserviceservices"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1294,7 +1869,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/ticketsystembackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1305,7 +1885,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/commerceservicesbackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1316,7 +1901,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/groovynature"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1327,7 +1917,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/configurablebundlefacades"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1338,7 +1933,12 @@
     
     
     <classpathentry kind="lib" path="C:/SDH/hybris/hybris/bin/platform/lib/dbdriver/ngdbc-2.3.18.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1349,7 +1949,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/publicsectorstore"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1360,7 +1965,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/sdhpse"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1371,7 +1981,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/basecommerce"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1382,7 +1997,12 @@
     
     
     <classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/json-taglib-0.4.1.jar"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1393,7 +2013,12 @@
     
     
     <classpathentry combineaccessrules="false" exported="true" kind="src" path="/promotionsbackoffice"/>
-                                        	
+                                                            	
+    
+    
+    
+    
+    
     
     
     
@@ -1404,7 +2029,7 @@
     
     
     <classpathentry kind="output" path="eclipsebin/notused"/>
-                                        
+                                                            
     
     
     
@@ -1425,12 +2050,42 @@
     
     
     
-    <classpathentry combineaccessrules="false" kind="src" path="/xyformsstorefrontcommons"/>
+    
                     
     
     
     
+    
+    
+    
+    
+    
     <classpathentry combineaccessrules="false" kind="src" path="/sdhrelationshipsaddon"/>
+                                    
+    
+    
+    
+    
+                
+    
+    
+    
+    
+                
+    
+    
+    
+    
+                
+    
+    
+    
+    
+                
+    
+    
+    
+    <classpathentry combineaccessrules="false" kind="src" path="/xyformsstorefrontcommons"/>
                 
     
     
@@ -1441,7 +2096,12 @@
         
     <classpathentry combineaccessrules="false" kind="src" path="/smarteditaddon"/>
     <classpathentry combineaccessrules="false" kind="src" path="/assistedservicestorefront"/>
-                                        
+                                                            
+
+
+
+
+
 
 
 

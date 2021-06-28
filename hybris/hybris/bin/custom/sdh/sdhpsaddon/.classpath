@@ -1,22 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <classpath>
-	<classpathentry kind="src" output="eclipsebin/classes" path="testsrc"/>
-	<classpathentry kind="src" path="/assistedservicestorefront"/>
-	<classpathentry exported="true" kind="src" path="/acceleratorstorefrontcommons"/>
-	<classpathentry exported="true" kind="lib" path="resources"/>
-	<classpathentry kind="src" output="eclipsebin/classes" path="src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/sdhcore"/>
-	<classpathentry exported="true" kind="src" path="/xyformsweb"/>
-	<classpathentry kind="src" output="eclipsebin/web/classes" path="acceleratoraddon/web/src"/>
-	<classpathentry kind="src" path="/relationshipservices"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/billfacades"/>
-	<classpathentry kind="src" path="gensrc"/>
-	<classpathentry kind="src" path="/relationshipfacades"/>
-	<classpathentry exported="true" kind="src" path="/xyformsstorefrontcommons"/>
-	<classpathentry exported="true" kind="src" path="/publicsectorfacades"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="/platform"/>
-	<classpathentry exported="true" kind="src" path="/addonsupport"/>
-	<classpathentry kind="src" path="/commerceservices"/>
-	<classpathentry kind="output" path="eclipsebin/notused"/>
+    	
+    <classpathentry kind="src" output="eclipsebin/classes" path="testsrc"/>
+    	
+    <classpathentry kind="src" path="/assistedservicestorefront"/>
+    	
+    <classpathentry exported="true" kind="src" path="/acceleratorstorefrontcommons"/>
+    	
+    <classpathentry exported="true" kind="lib" path="resources"/>
+    	
+    <classpathentry kind="src" output="eclipsebin/classes" path="src"/>
+    	
+    <classpathentry combineaccessrules="false" kind="src" path="/sdhcore"/>
+    	
+    <classpathentry exported="true" kind="src" path="/xyformsweb"/>
+    	
+    <classpathentry kind="src" output="eclipsebin/web/classes" path="acceleratoraddon/web/src"/>
+    	
+    <classpathentry kind="src" path="/relationshipservices"/>
+    	
+    <classpathentry combineaccessrules="false" kind="src" path="/billfacades"/>
+    	
+    <classpathentry kind="src" path="gensrc"/>
+    	
+    <classpathentry kind="src" path="/relationshipfacades"/>
+    	
+    <classpathentry exported="true" kind="src" path="/xyformsstorefrontcommons"/>
+    	
+    <classpathentry exported="true" kind="src" path="/publicsectorfacades"/>
+    	
+    <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+    	
+    <classpathentry kind="src" path="/platform"/>
+    	
+    <classpathentry exported="true" kind="src" path="/addonsupport"/>
+    	
+    <classpathentry kind="src" path="/commerceservices"/>
+    	
+    <classpathentry kind="output" path="eclipsebin/notused"/>
+    <classpathentry combineaccessrules="false" kind="src" path="/sdhrelationshipsaddon"/>
+    
 </classpath>

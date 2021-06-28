@@ -1,0 +1,23 @@
+$lang=fr
+
+INSERT_UPDATE PSBillMessage;psBillType(code)[unique=true];shortMessage[lang=$lang];longMessage[lang=$lang];messageCondition(code)[unique=true]
+ ;AGCA;;Veuillez saisir un montant équivalent ou inférieur au montant à régler (ex. 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;AGCA;;;PART_PAYMENT_NOT_ALLOWED
+ ;BIREP;;Veuillez saisir un montant équivalent ou inférieur au montant à régler (ex. 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;BIREP;;;PART_PAYMENT_NOT_ALLOWED
+ ;CORT;"Retard de paiement de la facture <br> le paiement n’est pas autorisé";Cette facture est en retard de paiement. Le paiement est impossible.;LATE_PAYMENT_NOT_ALLOWED
+ ;CORT;;Veuillez saisir un montant équivalent ou inférieur au montant à régler (ex. 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;KGFE;;Veuillez saisir un montant équivalent ou inférieur au montant à régler (ex. 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;KGFE;;;PART_PAYMENT_NOT_ALLOWED
+ ;PKFN;;Veuillez saisir un montant équivalent ou inférieur au montant à régler (ex. 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;PKFN;;;PART_PAYMENT_NOT_ALLOWED
+ ;SCTF;;Veuillez saisir un montant équivalent ou inférieur au montant à régler (ex. 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;SCTF;;;PART_PAYMENT_NOT_ALLOWED
+ ;SPFN;"Retard de paiement de la facture <br> le paiement n’est pas autorisé";Cette facture est en retard de paiement. Le paiement est impossible.;LATE_PAYMENT_NOT_ALLOWED
+ ;SPFN;;Veuillez saisir un montant équivalent ou inférieur au montant à régler (ex. 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;SPFN;;;PART_PAYMENT_NOT_ALLOWED
+ ;TXRP;"Retard de paiement de la facture <br> le paiement n’est pas autorisé";Cette facture est en retard de paiement. Le paiement est impossible.;LATE_PAYMENT_NOT_ALLOWED
+ ;TXRP;;Veuillez saisir un montant équivalent ou inférieur au montant à régler (ex. 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;TXRP;;;PART_PAYMENT_NOT_ALLOWED
+ ;WBIL;;Veuillez saisir un montant équivalent ou inférieur au montant à régler (ex. 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;WBIL;;;PART_PAYMENT_NOT_ALLOWED
