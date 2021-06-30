@@ -14,7 +14,7 @@
 				<div class="forgotten-password item_container ">
 					<c:url var="action" value="/register/newcustomer" />
 
-					<form:form method="post" commandName="SDHRegisterForm"
+					<form:form method="post" modelAttribute="SDHRegisterForm"
 						action="${action}">
 						<fieldset>
 							<div class="headline">

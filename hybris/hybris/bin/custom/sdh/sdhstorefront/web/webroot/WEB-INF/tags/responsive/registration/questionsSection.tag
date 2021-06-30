@@ -18,7 +18,7 @@
 			<div class="forgotten-password item_container ">
 				<c:url var="action" value="/register/validateAnswers"/> 
 			
-				<form:form method="post" commandName="SecretAnswerForm" action="${action}">
+				<form:form method="post" modelAttribute="SecretAnswerForm" action="${action}">
 					<fieldset>
 <!-- 						<div class="headline"> -->
 <!-- 							<h2> -->
