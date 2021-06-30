@@ -14,7 +14,7 @@
 				<div class="description text-center"><spring:theme code="register.description" htmlEscape="false"/></div>
 				
 				<c:url value="/register/searchUser" var="formAction"/>
-				<form:form method="post" commandName="searchUserForm" action="${formAction}">
+				<form:form method="post" modelAttribute="searchUserForm" action="${formAction}">
 					<div class="control-group">
 						<c:if test="${userFound eq false }">
 							<div class="has-error">
