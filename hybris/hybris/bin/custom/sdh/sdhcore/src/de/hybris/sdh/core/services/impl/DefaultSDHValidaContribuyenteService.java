@@ -3,7 +3,9 @@
  */
 package de.hybris.sdh.core.services.impl;
 
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.requests.SdhValidaContribuyenteRequest;
@@ -13,6 +15,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbanaWithRadicados
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 
 import java.io.BufferedReader;
@@ -45,6 +48,12 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
+
+	@Resource(name = "userService")
+	UserService userService;
+
+	@Resource(name = "sdhCustomerAccountService")
+	SDHCustomerAccountService sdhCustomerAccountService;
 
 	/* (non-Javadoc)
 	 * @see de.hybris.sdh.core.services.SDHValidaContribuyente#validaContribuyente(de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest)
@@ -112,7 +121,7 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 	}
 
 	@Override
-	public SDHValidaMailRolResponse validaContribuyente(SdhValidaContribuyenteRequest request) throws Exception{
+	public SDHValidaMailRolResponse validaContribuyente(final SdhValidaContribuyenteRequest request) throws Exception{
 		final String usuario = configurationService.getConfiguration().getString("sdh.validacontribuyente.user");
 		final String password = configurationService.getConfiguration().getString("sdh.validacontribuyente.password");
 		final String urlService = configurationService.getConfiguration().getString("sdh.validacontribuyente.url");
@@ -259,7 +268,11 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 	public List<ImpuestoDelineacionUrbanaWithRadicados> getDelineacionListByBpAndYearWithRadicados(final String stringBp,
 			final String stringYear)
 	{
-		final SDHValidaMailRolResponse contribuyente = this.validaContribuyente(stringBp);
+		//final SDHValidaMailRolResponse contribuyente = this.validaContribuyente(stringBp);
+
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final SDHValidaMailRolResponse contribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
+
 		final List<ImpuestoDelineacionUrbanaWithRadicados> returnList = new ArrayList<>();
 
 		if (Objects.nonNull(contribuyente))

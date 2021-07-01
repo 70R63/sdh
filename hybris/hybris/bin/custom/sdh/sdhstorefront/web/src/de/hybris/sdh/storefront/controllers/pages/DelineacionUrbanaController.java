@@ -331,7 +331,10 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 		SDHValidaMailRolResponse detalleContribuyente;
 		contribuyenteRequest.setNumBP(customerModel.getNumBP());
-		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		//detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+
+		detalleContribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
+
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
 			infoDelineacion.setValCont(detalleContribuyente);

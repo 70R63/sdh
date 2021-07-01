@@ -219,10 +219,10 @@ public class SdhInfoObjectUseOptionController {
         InfoObjetoDelineacionResponse infoDelineacionResponse = new InfoObjetoDelineacionResponse();
         final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
         final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
-        SDHValidaMailRolResponse detalleContribuyente;
+		//SDHValidaMailRolResponse detalleContribuyente;
 
         contribuyenteRequest.setNumBP(customerModel.getNumBP());
-        detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		//detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
 
         final InfoDelineacionInput infoDelineacionInput = new InfoDelineacionInput();
         infoDelineacionInput.setSelectedCDU(cdu);
