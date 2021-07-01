@@ -11,6 +11,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -53,6 +54,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -135,6 +137,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	@Resource(name = "sdhCustomerAccountService")
 	private SDHCustomerAccountService sdhCustomerAccountService;
 
+
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/presentar-declaracion", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -144,36 +147,51 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
 		//dataForm.setAnoGravable("2019");
 		//dataForm.setPeriodo("1");
-		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
-		{
-			dataForm.setOptionVehicular("2");
-		}
-		if (customerData.getIcaTax() != null && customerData.getIcaTax().getObjectNumber() != null)
-		{
-			dataForm.setOptionIca("3");
-		}
-		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
-		{
-			dataForm.setOptionPubliExt("4");
-		}
-		if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
-		{
-			dataForm.setOptionGas("5");
-		}
-		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
-		{
-			dataForm.setOptionDeli("6");
-		}
-		if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
-		{
-			dataForm.setOptionPredial("1");
-		}
+
+		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
 
 
+		for (final PrincipalGroupModel group : groupList)
+		{
+			final String groupUid = group.getUid();
+
+			if (groupUid.contains("predialUsrTaxGrp"))
+			{
+				dataForm.setOptionPredial("1");
+			}
+
+			if (groupUid.contains("vehicularUsrTaxGrp"))
+			{
+				dataForm.setOptionVehicular("2");
+			}
+
+			if (groupUid.contains("ICAUsrTaxGrp"))
+			{
+				dataForm.setOptionIca("3");
+			}
+
+			if (groupUid.contains("gasolinaUsrTaxGrp"))
+			{
+				dataForm.setOptionGas("5");
+			}
+
+			if (groupUid.contains("delineacionUsrTaxGrp"))
+			{
+				dataForm.setOptionDeli("6");
+			}
+
+			if (groupUid.contains("publicidadExtUsrTaxGrp"))
+			{
+				dataForm.setOptionPubliExt("4");
+			}
+
+		}
 
 		model.addAttribute("dataForm", dataForm);
 		model.addAttribute("tpImpuesto",
@@ -490,8 +508,11 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 						.getDelineacionListByBpAndYearWithRadicados(customerModel.getNumBP(), dataFormResponse.getAnoGravable()));
 
 				contribuyenteRequest.setNumBP(customerModel.getNumBP());
-				detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService,
-						LOG);
+				//detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService,
+				//		LOG);
+
+				detalleContribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
+
 				if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 				{
 					infoDelineacion.setValCont(detalleContribuyente);
@@ -528,18 +549,11 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
-		{
-			dataForm.setOptionVehicular("2");
-		}
-		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
-		{
-			dataForm.setOptionPubliExt("4");
-		}
-		if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
-		{
-			dataForm.setOptionGas("5");
-		}
+
+
+
+
+
 		if (customerData.getIcaTax() != null && dataFormResponse.getImpuesto().equals("3")
 				&& !dataFormResponse.getAnoGravable().equals(""))
 		{
@@ -589,30 +603,50 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		dataForm.setPeriodo(dataFormResponse.getPeriodo());
 		dataForm.setPeriodicidadImpuesto(dataFormResponse.getPeriodicidadImpuesto());
 
-		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
+
+
+		for (final PrincipalGroupModel group : groupList)
 		{
-			dataForm.setOptionVehicular("2");
+			final String groupUid = group.getUid();
+
+			if (groupUid.contains("predialUsrTaxGrp"))
+			{
+				dataForm.setOptionPredial("1");
+			}
+
+			if (groupUid.contains("vehicularUsrTaxGrp"))
+			{
+				dataForm.setOptionVehicular("2");
+			}
+
+			if (groupUid.contains("ICAUsrTaxGrp"))
+			{
+				dataForm.setOptionIca("3");
+			}
+
+			if (groupUid.contains("gasolinaUsrTaxGrp"))
+			{
+				dataForm.setOptionGas("5");
+			}
+
+			if (groupUid.contains("delineacionUsrTaxGrp"))
+			{
+				dataForm.setOptionDeli("6");
+			}
+
+			if (groupUid.contains("publicidadExtUsrTaxGrp"))
+			{
+				dataForm.setOptionPubliExt("4");
+			}
+
 		}
-		if (customerData.getIcaTax() != null && customerData.getIcaTax().getObjectNumber() != null)
-		{
-			dataForm.setOptionIca("3");
-		}
-		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
-		{
-			dataForm.setOptionPubliExt("4");
-		}
-		if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
-		{
-			dataForm.setOptionGas("5");
-		}
-		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
-		{
-			dataForm.setOptionDeli("6");
-		}
-		if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
-		{
-			dataForm.setOptionPredial("1");
-		}
+
+
+
+
 		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionVehicular(), dataForm.getOptionGas(),
 				dataForm.getOptionPubliExt(), dataForm.getOptionIca(), dataForm.getOptionDeli(), dataForm.getOptionPredial()));
 
