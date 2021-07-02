@@ -1091,13 +1091,14 @@ public class SobreTasaGasolinaService
 
 			String wsresponse = sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet);
 			wsresponse = wsresponse.replaceAll("\"ARCHIVOS\":\\{([\"])(.*)(\"\\})", "\"ARCHIVOS\":[{\"$2\"}]");
-			//			System.out.println("Response de crm/consCasos: " + wsresponse);
+			System.out.println("Response de crm/consCasos: " + wsresponse);
 
 
 
 			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse"))
 			{
 				wsresponse = wsresponse.replace("\"Uso\"", "\"uso\"");
+				wsresponse = wsresponse.replaceAll("(\"infoDeclara\":)(\\[\\{)(.*)(\\}\\])(,\"usos\")", "$1{$3}$5");
 			}
 			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.ConsCasosResponse"))
 			{
@@ -1132,6 +1133,7 @@ public class SobreTasaGasolinaService
 		catch (final Exception e)
 		{
 			LOG.error("Error al llamar WebService: " + wsNombre + "Detalle:" + e.getMessage());
+			e.printStackTrace();
 		}
 
 		return responseInfo;

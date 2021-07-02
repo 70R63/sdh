@@ -1916,6 +1916,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		if (customerModel != null)
 		{
 
+			infoContrib.setNumBP(customerModel.getNumBP());
 			infoContrib.setPrimNom(customerModel.getFirstName());
 			infoContrib.setSegNom(customerModel.getMiddleName());
 			infoContrib.setPrimApe(customerModel.getLastName());
