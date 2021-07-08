@@ -74,7 +74,7 @@
 	}
 
 	function onChangeAnioGravable() {
-		debugger;
+// 		debugger;
 
 		var impuestoVal = document.getElementById("impuesto").value;
 		var nota = document.getElementById("notaVehPre");
@@ -166,7 +166,7 @@
 	}
 
 	function obtenerURLBase() {
-		debugger;
+// 		debugger;
 		return '<c:url value="/" />';
 	}
 </script>

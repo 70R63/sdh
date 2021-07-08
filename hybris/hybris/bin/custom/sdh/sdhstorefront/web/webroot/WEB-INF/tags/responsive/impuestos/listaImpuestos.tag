@@ -378,8 +378,8 @@
 									code="sobre.vehiculo.table.blindado" /></label></th>
 						<th><label class="control-label labeltabletd"><spring:theme
 									code="sobre.vehiculo.table.cilindraje" /></label></th>
-						<th><label class="control-label labeltabletd"><spring:theme
-									code="sobre.vehiculo.table.idacto" /></label></th>
+<%-- 						<th><label class="control-label labeltabletd"><spring:theme --%>
+<%-- 									code="sobre.vehiculo.table.idacto" /></label></th> --%>
 						<th><label class="control-label labeltabletd"><spring:theme
 									code="sobre.vehiculo.table.presndecla" /></label></th>
 						<!-- 						<th style="text-align: center"><label class="control-label" -->
@@ -406,8 +406,8 @@
                                     code="predial.inicial.table.dir" /></label></th>
                         <th><label class="control-label labeltabletd "><spring:theme
                                     code="predial.inicial.table.nocotrato" /></label></th>
-                        <th><label class="control-label labeltabletd "><spring:theme
-                                    code="predial.inicial.table.idacto" /></label></th>
+<%--                         <th><label class="control-label labeltabletd "><spring:theme --%>
+<%--                                     code="predial.inicial.table.idacto" /></label></th> --%>
                         <th><label class="control-label labeltabletd "><spring:theme
                                     code="predial.inicial.table.presentarDeclaracion" /></label></th>
                      
