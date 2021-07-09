@@ -18,7 +18,7 @@
 <!-- 		<div class="account-section-form"> -->
 			<form:form
 				action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion"
-				method="post" commandName="declaPublicidadForm">
+				method="post" modelAttribute="declaPublicidadForm">
 				<DeclaraPubli:DecPuGeneral />
 				<DeclaraPubli:DecPuInfoValla />
 				<DeclaraPubli:DecPuTotalPag />

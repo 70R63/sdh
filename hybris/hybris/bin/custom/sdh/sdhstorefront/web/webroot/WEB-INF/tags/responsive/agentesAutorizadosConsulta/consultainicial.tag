@@ -47,7 +47,7 @@
 	</div>
 
 
-	<form:form method="post" commandName="fileConsultaForm" action="consultas">
+	<form:form method="post" modelAttribute="fileConsultaForm" action="consultas">
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group">

@@ -59,7 +59,7 @@
 		</div>
 	</div>
 	<c:url value="/retenedores/estadocargas" var="edoCargasAction" />
-	<form:form commandName="form" action="${edoCargasAction}"
+	<form:form modelAttribute="form" action="${edoCargasAction}"
 		id="edoCargasForm" name="edoCargasForm">
 		<div class="row">
 			<div class="col-md-3 col-md-offset-3">

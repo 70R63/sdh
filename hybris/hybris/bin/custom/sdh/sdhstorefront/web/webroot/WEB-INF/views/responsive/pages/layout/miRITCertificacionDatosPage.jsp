@@ -87,7 +87,7 @@ window.onload = function() {
 	<c:url var="post_url" value="/contribuyentes/mirit/certificacion-datos" />
 	<form:form id="form_pdf"
 		action="${post_url}"
-		method="post" commandName="miRitCertificacionForm">
+		method="post" modelAttribute="miRitCertificacionForm">
 		<form:hidden path="numObjeto" id="numObjeto" />
 
 		<br>

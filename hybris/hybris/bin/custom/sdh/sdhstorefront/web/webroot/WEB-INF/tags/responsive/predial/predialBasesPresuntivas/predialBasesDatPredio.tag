@@ -14,7 +14,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 
-	<form:form commandName="predialFormbases">
+	<form:form modelAttribute="predialFormbases">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="headline">

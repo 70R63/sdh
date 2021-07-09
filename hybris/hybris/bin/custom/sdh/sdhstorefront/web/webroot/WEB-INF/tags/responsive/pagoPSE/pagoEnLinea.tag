@@ -15,7 +15,7 @@
 			<div class="forgotten-password item_container ">
 				<c:url var="action" value="/register/validateAnswers"/> 
 			
-				<form:form method="post" commandName="psePaymentForm" action="pagoEnLinea/form">
+				<form:form method="post" modelAttribute="psePaymentForm" action="pagoEnLinea/form">
 					<fieldset>					
 						
 						<formElement:formSelectBox idKey="psePaymentForm.tipoDeImpuesto" labelKey="psePaymentForm.tipoDeImpuesto" path="tipoDeImpuesto" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${tipoDeImpuesto}" selectCSSClass="form-control" disabled="false"/>

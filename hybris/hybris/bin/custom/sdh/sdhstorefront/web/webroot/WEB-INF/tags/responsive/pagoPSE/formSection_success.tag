@@ -36,7 +36,7 @@
 			<div class="forgotten-password item_container ">
 			
 			
-				<form:form method="post" commandName="psePaymentForm" action="">
+				<form:form method="post" modelAttribute="psePaymentForm" action="">
 				<div class="row" >
 				</div>
 					<fieldset>
@@ -157,7 +157,7 @@
 				</form:form>
 				
 				
-				<form:form method="post" commandName="psePaymentForm" action="/pagoEnLinea/pseResponse">		
+				<form:form method="post" modelAttribute="psePaymentForm" action="/pagoEnLinea/pseResponse">		
 					<form:hidden path="tipoDeImpuesto" value="${psePaymentForm.tipoDeImpuesto}"/>
 					<form:hidden path="trazabilityCode" value="${psePaymentForm.trazabilityCode}"/>
 					<form:hidden path="numeroDeReferencia" value="${psePaymentForm.numeroDeReferencia}"/>
