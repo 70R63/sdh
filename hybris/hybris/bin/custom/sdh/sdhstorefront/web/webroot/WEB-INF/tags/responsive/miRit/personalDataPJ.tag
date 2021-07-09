@@ -27,7 +27,7 @@
 
 				<c:url value="/contribuyentes/mirit/updatePersonalData"
 					var="formAction" />
-				<form:form method="post" commandName="miRitForm"
+				<form:form method="post" modelAttribute="miRitForm"
 					action="${formAction}">
 					<div class="row">
 						<div class="col-md-3">
