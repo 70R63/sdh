@@ -265,6 +265,7 @@
 	<alias alias="sdhFAQsFacade" name="defaultSDHFAQsFacade" />
 	<bean id="defaultSDHFAQsFacade" class="de.hybris.sdh.facades.impl.DefaultSDHFAQsFacade">
 		<property name="sdhFAQsService" ref="sdhFAQsService"/>
+		<property name="modelService" ref="modelService"/>
 	</bean>
 
 

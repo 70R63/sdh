@@ -63,6 +63,7 @@
 			<list-view:column qualifier="code"/>
 			<list-view:column qualifier="category"/>
 			<list-view:column qualifier="question"/>
+			<list-view:column qualifier="searchCounter"/>
 		</list-view:list-view>
 	</context>
 
@@ -141,6 +142,7 @@
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="category"/>
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="question"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="searchCounter" readonly = "true"/>
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="answer"
 										  editor="com.hybris.cockpitng.editor.wysiwyg"/>
 				</editorArea:section>
