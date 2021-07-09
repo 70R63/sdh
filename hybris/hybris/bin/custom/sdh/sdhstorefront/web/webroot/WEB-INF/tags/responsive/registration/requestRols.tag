@@ -32,7 +32,7 @@
 	</div>
 	
 	<c:url value="/register/postRol" var="formAction"/>
-	<form:form method="post" modelAttribute="tramitesCreacionCasoInfo" action="${formAction}">
+	<form:form method="post" modelAttribute="tramitesCreacionCasoInfo" action="${formAction}"> 
 	
 	<input type="hidden" id="depe0" name="depe0" value="212110">
 	<input type="hidden" id="desA0" name="desA0" value="DOCUMENTO DE IDENTIFICACIÓN">
