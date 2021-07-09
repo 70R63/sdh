@@ -47,7 +47,7 @@
 	</div>
 
 
-	<sf:form commandName="obligacionesFormuno" >
+	<sf:form modelAttribute="obligacionesFormuno" >
 		<div class="row">
 			<div class="col-md-6"></div>
 			<div class="col-md-3" id="idImpuesto" style="display: none;">

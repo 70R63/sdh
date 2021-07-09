@@ -49,7 +49,7 @@ window.onload = function() {
 		</div>
 	</div>
 
-	<form:form id="" action="" method="post" commandName="dataForm">
+	<form:form id="" action="" method="post" modelAttribute="dataForm">
 	<input type="hidden" name="BanderaAgete" id="BanderaAgete" value="" />
 
 		<div class="row">

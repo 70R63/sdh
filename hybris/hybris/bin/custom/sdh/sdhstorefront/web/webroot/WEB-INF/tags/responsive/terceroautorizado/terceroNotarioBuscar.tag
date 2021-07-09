@@ -30,7 +30,7 @@
 </c:choose>
 
 <div class="container_new_page" id="buscarSujeto" style="display: ${flagMostrarSujeto}">
-	<form:form method="get" commandName="tercerosAutForm" action="${actionURL}" >
+	<form:form method="get" modelAttribute="tercerosAutForm" action="${actionURL}" >
 		<div class="row">
             <div class="col-sm-3">
                 <formElement:formSelectBox idKey="tipdoc" labelKey="terceros.notario.buscar.tipdoc"

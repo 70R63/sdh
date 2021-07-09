@@ -13,7 +13,7 @@
 <template:page>
 	<div class="container">
 		<c:url var="importGestion" value="uploadFile" />
-		 <form:form commandName="importConciliacionForm" enctype="multipart/form-data" method="post" action="${importGestion}" class="">
+		 <form:form modelAttribute="importConciliacionForm" enctype="multipart/form-data" method="post" action="${importGestion}" class="">
 		 	<div class="form-group">
 			    <label for="exampleInputFile">File input</label>
 			    <input type="file" id="conciliacionFile" name="conciliacionFile" >

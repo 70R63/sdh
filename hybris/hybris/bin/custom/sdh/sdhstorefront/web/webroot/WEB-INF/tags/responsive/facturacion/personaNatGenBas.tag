@@ -10,7 +10,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 
-	<sf:form commandName="dataForm">
+	<sf:form modelAttribute="dataForm">
 		<div class="row">
 			<div class="col-md-12">
 				<table class="table">

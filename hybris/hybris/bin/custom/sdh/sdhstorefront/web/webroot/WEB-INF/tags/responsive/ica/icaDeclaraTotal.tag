@@ -32,7 +32,7 @@
 	</div>
 </div>
 <br>
-<sf:form action="" style="padding-left: 0px !important" commandName="icaInfObjetoFormResp">
+<sf:form action="" style="padding-left: 0px !important" modelAttribute="icaInfObjetoFormResp">
 	<div class="container">
 		<div class="row mostrarMD">
 			<div class="col-md-1">

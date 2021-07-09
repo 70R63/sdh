@@ -18,7 +18,7 @@
 <br>
 <div class="container_new_page">
 	<sf:form action="${presentarDeclaracionUrl}"
-		method="POST" id="forma" commandName="dataForm">
+		method="POST" id="forma" modelAttribute="dataForm">
 		<c:if test="${mensajeDelinea != null}">
 			<div class="row">
 				<div class="col-12 notas_deli">
@@ -293,7 +293,7 @@
 						</td>
 						<td class="col-sm-3">
 							<c:url var="post_url" value="/contribuyentes/delineacion-urbana/declaracion" />
-							<form:form method="post" commandName="inputDelineacion"
+							<form:form method="post" modelAttribute="inputDelineacion"
 								action="${post_url}">
 								<c:set var="idCampoTipoLicencia"
 									value='tipoLicenciaSeleccionada_${item.cdu}' />
@@ -333,7 +333,7 @@
 							</td>
 							<td class="col-sm-3">
 								<c:url var="post_url" value="/contribuyentes/delineacion-urbana/declaracion" />
-								<form:form method="post" commandName="inputDelineacion"
+								<form:form method="post" modelAttribute="inputDelineacion"
 									action="${post_url}">
 									<form:hidden path="selectedCDU" value="${item.cdu}" />
 									<form:hidden path="selectedRadicado"
