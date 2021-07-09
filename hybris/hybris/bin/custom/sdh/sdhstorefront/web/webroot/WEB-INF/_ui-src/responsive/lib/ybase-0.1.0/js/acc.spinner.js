@@ -6,7 +6,7 @@ ACC.spinner = {
 
 
 	show: function() {
-		debugger;
+//		debugger;
 		var spinnerdiv = document.getElementById('cargandoSpinner');
 		$("#cargandoSpinner").html(ACC.spinner.spinner);
 		if(spinnerdiv != null){ 

@@ -1,5 +1,6 @@
 package de.hybris.sdh.storefront.controllers.rest;
 
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -166,6 +167,7 @@ public class SdhInfoObjectUseOptionController {
         final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
         final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
         DetalleVehiculosResponse detalleVehiculosResponse = null;
+		String opcionUso = "01";
 
         detalleVehiculosRequest.setBpNum(customerModel.getNumBP());
         detalleVehiculosRequest.setPlaca(placa);
@@ -175,11 +177,16 @@ public class SdhInfoObjectUseOptionController {
         try {
             detalleVehiculosResponse = mapper.readValue(
                     sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
+			if (detalleVehiculosResponse != null && detalleVehiculosResponse.getInfo_declara() != null
+					&& detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
+			{
+				opcionUso = detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso();
+			}
         } catch (final IOException e) {
             e.printStackTrace();
         }
 
-        return detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso();
+		return opcionUso;
     }
 
 	private String getOpcionUsoPublicidad(final String anioGravable, final String numResolu, final String tipoValla)
