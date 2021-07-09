@@ -166,7 +166,11 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 	@Override
 	public List<ImpuestoPublicidadExterior> getpublicidadExtListByBpAndYear(final String stringBp, final String stringYear)
 	{
-		final SDHValidaMailRolResponse contribuyente = this.validaContribuyente(stringBp);
+		//final SDHValidaMailRolResponse contribuyente = this.validaContribuyente(stringBp);
+
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final SDHValidaMailRolResponse contribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "07");
+
 		final List<ImpuestoPublicidadExterior> returnList = new ArrayList<>();
 		if (Objects.nonNull(contribuyente))
 		{

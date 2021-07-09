@@ -11,6 +11,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
@@ -767,71 +768,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		//		}
 		if (infoVista.getClaveImpuesto().equals("2"))
 		{
-
-			List<ImpuestoVehiculos> listaInfoVehiculos = null;
-			List<ImpuestoVehiculos> impuestoVehiculos = null;
-			if (customerModel != null && customerModel.getNumBP() != null)
-			{
-				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-				impuestoVehiculos = sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest);
-				sdhCustomerAccountService.updateImpuestoVehicular_simplificado(customerModel, impuestoVehiculos);
-				//				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
-				//				sdhConsultaContribuyenteBPResponse.setVehicular(impuestoVehiculos);
-				listaInfoVehiculos = new ArrayList<ImpuestoVehiculos>();
-			}
-
-			ImpuestoVehiculos infoVehiculos = null;
-			//			DetalleVehiculosResponse detalleVehiculosResponse = null;
-			if (impuestoVehiculos != null)
-			{
-				for (final ImpuestoVehiculos impuesto_element : impuestoVehiculos)
-				{
-					if (!impuesto_element.getPlaca().isEmpty())
-					{
-						infoVehiculos = new ImpuestoVehiculos();
-						infoVehiculos.setPlaca(impuesto_element.getPlaca());
-						infoVehiculos.setMarca(impuesto_element.getMarca());
-						infoVehiculos.setLinea(impuesto_element.getLinea());
-						infoVehiculos.setModelo(impuesto_element.getModelo());
-						infoVehiculos.setClase(impuesto_element.getClase());
-						infoVehiculos.setCarroceria(impuesto_element.getCarroceria());
-						infoVehiculos.setNumPuertas(impuesto_element.getNumPuertas());
-						infoVehiculos.setBlindado(impuesto_element.getBlindado());
-						infoVehiculos.setCilindraje(impuesto_element.getCilindraje());
-						infoVehiculos.setNumObjeto(impuesto_element.getNumObjeto());
-						infoVehiculos.setAnioGravable(impuesto_element.getAnioGravable());
-
-						final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
-						detalleVehiculosRequest.setBpNum(numBP);
-						detalleVehiculosRequest.setPlaca(impuesto_element.getPlaca());
-						detalleVehiculosRequest.setAnioGravable(infoVista.getAnoGravable());
-
-
-						//					final ObjectMapper mapper = new ObjectMapper();
-						//					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-						//
-						//					try
-						//					{
-						//						detalleVehiculosResponse = mapper.readValue(
-						//								sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
-						//						if (detalleVehiculosResponse.getInfo_declara() != null
-						//								&& detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
-						//						{
-						//							infoVehiculos.setNumForm(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm());
-						//							infoVehiculos.setErrores(detalleVehiculosResponse.getInfo_declara().getErrores());
-						//						}
-						//					}
-						//					catch (final Exception e)
-						//					{
-						//						LOG.error("Error en la respuesta del servicio detalle de Vehiculos " + e.getMessage());
-						//					}
-
-						listaInfoVehiculos.add(infoVehiculos);
-					}
-				}
-			}
-			infoVista.setVehicular(listaInfoVehiculos);
+			infoVista.setVehicular(obtenerListaVehicular(customerModel, infoVista));
 			infoVista.setNumBP(numBP);
 		}
 		else if (infoVista.getClaveImpuesto().equals("1")) //predial
@@ -854,6 +791,81 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 
 		return infoVista;
+	}
+
+	public List<ImpuestoVehiculos> obtenerListaVehicular(final CustomerModel customerModel,
+			final OpcionDeclaracionesVista infoVista)
+	{
+		List<ImpuestoVehiculos> listaInfoVehiculos = null;
+		List<ImpuestoVehiculos> impuestoVehiculos = null;
+		String numBP = null;
+		if (customerModel != null)
+		{
+			numBP = customerModel.getNumBP();
+			if (numBP != null)
+			{
+				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+				impuestoVehiculos = sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest);
+				sdhCustomerAccountService.updateImpuestoVehicular_simplificado(customerModel, impuestoVehiculos);
+				//				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
+				//				sdhConsultaContribuyenteBPResponse.setVehicular(impuestoVehiculos);
+				listaInfoVehiculos = new ArrayList<ImpuestoVehiculos>();
+			}
+		}
+
+		ImpuestoVehiculos infoVehiculos = null;
+		//			DetalleVehiculosResponse detalleVehiculosResponse = null;
+		if (impuestoVehiculos != null)
+		{
+			for (final ImpuestoVehiculos impuesto_element : impuestoVehiculos)
+			{
+				if (!impuesto_element.getPlaca().isEmpty())
+				{
+					infoVehiculos = new ImpuestoVehiculos();
+					infoVehiculos.setPlaca(impuesto_element.getPlaca());
+					infoVehiculos.setMarca(impuesto_element.getMarca());
+					infoVehiculos.setLinea(impuesto_element.getLinea());
+					infoVehiculos.setModelo(impuesto_element.getModelo());
+					infoVehiculos.setClase(impuesto_element.getClase());
+					infoVehiculos.setCarroceria(impuesto_element.getCarroceria());
+					infoVehiculos.setNumPuertas(impuesto_element.getNumPuertas());
+					infoVehiculos.setBlindado(impuesto_element.getBlindado());
+					infoVehiculos.setCilindraje(impuesto_element.getCilindraje());
+					infoVehiculos.setNumObjeto(impuesto_element.getNumObjeto());
+					infoVehiculos.setAnioGravable(impuesto_element.getAnioGravable());
+
+					final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
+					detalleVehiculosRequest.setBpNum(numBP);
+					detalleVehiculosRequest.setPlaca(impuesto_element.getPlaca());
+					detalleVehiculosRequest.setAnioGravable(infoVista.getAnoGravable());
+
+
+					//					final ObjectMapper mapper = new ObjectMapper();
+					//					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+					//
+					//					try
+					//					{
+					//						detalleVehiculosResponse = mapper.readValue(
+					//								sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
+					//						if (detalleVehiculosResponse.getInfo_declara() != null
+					//								&& detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
+					//						{
+					//							infoVehiculos.setNumForm(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm());
+					//							infoVehiculos.setErrores(detalleVehiculosResponse.getInfo_declara().getErrores());
+					//						}
+					//					}
+					//					catch (final Exception e)
+					//					{
+					//						LOG.error("Error en la respuesta del servicio detalle de Vehiculos " + e.getMessage());
+					//					}
+
+					listaInfoVehiculos.add(infoVehiculos);
+				}
+			}
+		}
+
+		return listaInfoVehiculos;
 	}
 
 	@RequestMapping(value = "/setComplete7", method = RequestMethod.POST)

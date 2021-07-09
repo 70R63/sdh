@@ -20,8 +20,7 @@ public class SdhFAQsController {
     @RequestMapping("/getByCategory")
     public List<SDHFaqData> getFaqs(@RequestParam(value="code",
             defaultValue="") final String code){
-        List<SDHFaqData> faqsData = sdhFAQsFacade.getAllFaqsByCategoryCode(code);
-        return faqsData;
+        return sdhFAQsFacade.getAllFaqsByCategoryCode(code);
     }
 
     @RequestMapping("/getByKeyWord")

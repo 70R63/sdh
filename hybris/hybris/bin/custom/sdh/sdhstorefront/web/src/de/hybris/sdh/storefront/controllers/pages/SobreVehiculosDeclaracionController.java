@@ -46,6 +46,8 @@ import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalVehiculosService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
@@ -86,7 +88,6 @@ import Decoder.BASE64Decoder;
  * Controller for home page
  */
 @Controller
-@RequestMapping("/contribuyentes/sobrevehiculosautomotores/declaracion")
 public class SobreVehiculosDeclaracionController extends SDHAbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(SobreVehiculosDeclaracionController.class);
@@ -145,13 +146,20 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 	@Resource(name = "sdhDetalleGasolina")
 	SDHDetalleGasolina sdhDetalleGasolinaWS;
 
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+
+	@Resource(name = "sdhCustomerAccountService")
+	private SDHCustomerAccountService sdhCustomerAccountService;
+
+
 	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)
 	{
 		storeContentPageTitleInModel(model, getPageTitleResolver().resolveHomePageTitle(cmsPage.getTitle()));
 	}
 
 	@RequireHardLogIn
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/contribuyentes/sobrevehiculosautomotores/declaracion", method = RequestMethod.GET)
 	public String sobrevehiculosdecla(final Model model, @RequestParam(required = true, value = "anioGravable")
 	final String anioGravable, @RequestParam(required = true, value = "placa")
 	final String placa, @RequestParam(required = false, value = "numForma")
@@ -160,6 +168,15 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 	{
 		System.out.println("---------------- Hola entro Sobre Vehiculos declaracion --------------------------");
 
+
+		return sobreVehiculosDeclaracionGET(model, anioGravable, placa, numForma, numBPP, redirectAttributes);
+	}
+
+
+
+	private String sobreVehiculosDeclaracionGET(Model model, String anioGravable, String placa, String numForma, String numBPP,
+			RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		model.addAttribute("customerData", customerData);
 		addAgentsToModel(model, customerData, null);
@@ -193,9 +210,9 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 			else
 			{
 
-				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-						SDHValidaMailRolResponse.class);
+				//				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+				//						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+				//						SDHValidaMailRolResponse.class);
 
 				vehiculosFormDeclaracion.setOpcionUso(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso());
 				vehiculosFormDeclaracion.setCapacidadTon(detalleVehiculosResponse.getDetalle().getCapacidadTon());
@@ -210,6 +227,29 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 						&& detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
 				{
 					vehiculosFormDeclaracion.setObjetoCont(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getObjetoCont());
+				}
+
+				List<ImpuestoVehiculos> impuestoVehiculos = null;
+				SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
+				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+				try
+				{
+					impuestoVehiculos = sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest);
+					sdhCustomerAccountService.updateImpuestoVehicular_simplificado(customerModel, impuestoVehiculos);
+					sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
+					sdhConsultaContribuyenteBPResponse.setVehicular(impuestoVehiculos);
+
+					//					if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
+					//							&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getVehicular()))
+					//					{
+					//						vehiculosForm.setImpvehicular(sdhConsultaContribuyenteBPResponse.getVehicular().stream()
+					//								.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
+					//					}
+
+				}
+				catch (final Exception e)
+				{
+
 				}
 
 				if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
@@ -320,17 +360,17 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		//		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		//		{
-			infoPreviaPSE.setAnoGravable(anoParaPSE);
-			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
-			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
-			infoPreviaPSE.setNumBP(numBP);
-			infoPreviaPSE.setClavePeriodo(gasolinaService.prepararPeriodoAnualPago(anoParaPSE));
-			//			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoVehicular(detalleContribuyente, placa));
-			infoPreviaPSE.setNumObjeto(prepararNumObjetoVehicular(customerModel, placa));
+		infoPreviaPSE.setAnoGravable(anoParaPSE);
+		infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
+		infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
+		infoPreviaPSE.setNumBP(numBP);
+		infoPreviaPSE.setClavePeriodo(gasolinaService.prepararPeriodoAnualPago(anoParaPSE));
+		//			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoVehicular(detalleContribuyente, placa));
+		infoPreviaPSE.setNumObjeto(prepararNumObjetoVehicular(customerModel, placa));
 		//			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
 		infoPreviaPSE.setDv(prepararDV(customerModel));
-			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getVEHICULAR());
-			infoPreviaPSE.setPlaca(placa);
+		infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getVEHICULAR());
+		infoPreviaPSE.setPlaca(placa);
 		//		}
 		//		else
 		//		{
@@ -345,9 +385,71 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 
 		return getViewForPage(model);
+
 	}
 
-	@RequestMapping(value = "/calculo", method = RequestMethod.POST)
+
+	@RequireHardLogIn
+	@RequestMapping(value = "/contribuyentes/sobrevehiculosautomotores/prepararParaDeclaracion", method = RequestMethod.GET)
+	public String prepararParaDeclaracion(final Model model, @RequestParam(required = true, value = "anioGravable")
+	final String anioGravable, @RequestParam(required = true, value = "placa")
+	final String placa, @RequestParam(required = true, value = "numBPP")
+	final String numBPP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En Sobre Vehiculos preparacion para declaracion --------------------------");
+
+		String numForma = "";
+		final VehiculosInfObjetoForm vehiculosFormDeclaracion = new VehiculosInfObjetoForm();
+		final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
+		if (numBPP != null && placa != null && anioGravable != null)
+		{
+			detalleVehiculosRequest.setBpNum(numBPP);
+			detalleVehiculosRequest.setPlaca(placa);
+			detalleVehiculosRequest.setAnioGravable(anioGravable);
+
+			final ObjectMapper mapper = new ObjectMapper();
+			DetalleVehiculosResponse detalleVehiculosResponse = null;
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			try
+			{
+				detalleVehiculosResponse = mapper.readValue(sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest),
+						DetalleVehiculosResponse.class);
+			}
+			catch (final Exception e)
+			{
+				LOG.error("Error en la respuesta del servicio detalle de Vehiculos " + e.getMessage());
+				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+			}
+
+
+			if (detalleVehiculosResponse != null && detalleVehiculosResponse.getInfo_declara() != null
+					&& detalleVehiculosResponse.getInfo_declara().getErrores() != null
+					&& detalleVehiculosResponse.getInfo_declara().getErrores().get(0) != null
+					&& detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getId_msj() != null
+					&& !detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getId_msj().equals(""))
+			{
+				GlobalMessages.addErrorMessage(model, detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getTxt_msj());
+			}
+			else
+			{
+				if (detalleVehiculosResponse != null && detalleVehiculosResponse.getInfo_declara() != null
+						&& detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
+				{
+					numForma = detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm();
+				}
+			}
+
+		}
+
+
+		return sobreVehiculosDeclaracionGET(model, anioGravable, placa, numForma, numBPP, redirectAttributes);
+	}
+
+
+
+
+	@RequestMapping(value = "/contribuyentes/sobrevehiculosautomotores/declaracion/calculo", method = RequestMethod.POST)
 	@ResponseBody
 	public CalcVehiculosResponse calculo(@ModelAttribute("vehiculosFormDeclaracion")
 	final VehiculosInfObjetoForm dataForm) throws CMSItemNotFoundException
@@ -456,7 +558,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 	}
 
-	@RequestMapping(value = "/generar", method = RequestMethod.POST)
+	@RequestMapping(value = "/contribuyentes/sobrevehiculosautomotores/declaracion/generar", method = RequestMethod.POST)
 	@ResponseBody
 	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm, final HttpServletResponse response,
 			final HttpServletRequest request) throws CMSItemNotFoundException
@@ -536,7 +638,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 	}
 
 
-	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	@RequestMapping(value = "/contribuyentes/sobrevehiculosautomotores/declaracion/show", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String show(final Model model, @RequestParam(required = true, value = "numForm")
 	final String numForm, @RequestParam(required = true, value = "representado")
@@ -697,7 +799,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 	}
 
 
-	@RequestMapping(value = "/catalogos", method = RequestMethod.GET)
+	@RequestMapping(value = "/contribuyentes/sobrevehiculosautomotores/declaracion/catalogos", method = RequestMethod.GET)
 	@ResponseBody
 	public VehiculosInfObjetoForm catalogo(@ModelAttribute("dataForm")
 	final VehiculosInfObjetoForm dataForm) throws CMSItemNotFoundException

@@ -4,9 +4,11 @@ ACC.aamenu = {
 
 
 	 updateMenuContrib: function(){
-
+		debugger;
 
 		if(window.location.pathname.indexOf("retenedores") < 0 && ACC.flagFiltrarMenuContrib == true){
+			
+			
 			$("a:contains('Mi Buzón')").closest("li").remove()
 			$("a:contains('Impuestos')").closest("li").remove()
 			$("a:contains('Trámites')").closest("li").remove()
