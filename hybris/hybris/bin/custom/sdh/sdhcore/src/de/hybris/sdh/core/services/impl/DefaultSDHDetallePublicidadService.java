@@ -88,7 +88,9 @@ public class DefaultSDHDetallePublicidadService implements SDHDetallePublicidadS
 			}
 
 
-			final String result = builder.toString();
+			String result = builder.toString();
+			result = result.replaceAll("(\"infoDeclara\":)(\\[\\{)(.*)(\\}\\])(,\"detalle\")", "$1{$3}$5");
+
 			LOG.info("response: " + result);
 
 			return result;

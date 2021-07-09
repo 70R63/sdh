@@ -3,6 +3,7 @@ ACC.aaEntidadBancariaMenu = {
 
 
 	 updateAAEntidadBancariaMenu: function(){
+		 debugger;
 		if(ACC.aaEntidadBancariaMenuflagEjecutar == true){
 			$("a:contains('Mi RIT')").closest("li").remove();
 			$("a:contains('Mi Buzón')").closest("li").remove();

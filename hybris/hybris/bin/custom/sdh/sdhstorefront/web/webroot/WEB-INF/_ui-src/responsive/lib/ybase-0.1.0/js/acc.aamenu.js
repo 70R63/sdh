@@ -4,7 +4,7 @@ ACC.aamenu = {
 
 
 	updateAAMenu: function(){
-
+		debugger;
 
 		if(ACC.aamenus.indexOf("ZM01") === -1)
 		{

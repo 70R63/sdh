@@ -18,8 +18,10 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
@@ -29,8 +31,8 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalPublicidadService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
-import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
 
@@ -96,6 +98,13 @@ public class PublicidadExteriorPageController extends AbstractPageController
 	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
+	@Resource(name = "userService")
+	UserService userService;
+
+	@Resource(name = "sdhCustomerAccountService")
+	SDHCustomerAccountService sdhCustomerAccountService;
+
+
 
 	private static final String ERROR_CMS_PAGE = "notFound";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
@@ -112,38 +121,53 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		//TODO: this call should be replace for code getting data from model
 		model.addAttribute("name", customerData.getCompleteName());
 
-		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		SDHValidaMailRolResponse detalleContribuyente;
+		detalleContribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "07");
+
+
+		//if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
+		if (detalleContribuyente.getPublicidadExt() != null && !detalleContribuyente.getPublicidadExt().isEmpty())
 		{
-			final List<SDHExteriorPublicityTaxData> exteriorPublicityList = customerData.getExteriorPublicityTaxList();
+			//final List<SDHExteriorPublicityTaxData> exteriorPublicityList = ;
 
 			final List<ImpuestoPublicidadExterior> listImpuestoPublicdadExterior = new ArrayList<ImpuestoPublicidadExterior>();
 
-			for (final SDHExteriorPublicityTaxData eachPublicityTax : exteriorPublicityList)
+			//for (final SDHExteriorPublicityTaxData eachPublicityTax : exteriorPublicityList)
+			for (final ImpuestoPublicidadExterior eachPublicityTax : detalleContribuyente.getPublicidadExt())
+
 			{
 				final ImpuestoPublicidadExterior eachImpuestoPE = new ImpuestoPublicidadExterior();
 
-				eachImpuestoPE.setNumObjeto(eachPublicityTax.getObjectNumber());
-				eachImpuestoPE.setNumResolu(eachPublicityTax.getResolutionNumber());
-				eachImpuestoPE.setTipoValla(eachPublicityTax.getFenceType());
+				//eachImpuestoPE.setNumObjeto(eachPublicityTax.getObjectNumber());
+				//eachImpuestoPE.setNumResolu(eachPublicityTax.getResolutionNumber());
+				//eachImpuestoPE.setTipoValla(eachPublicityTax.getFenceType());
+				//eachImpuestoPE.setAnoGravable(eachPublicityTax.getAnoGravable());
+
+				eachImpuestoPE.setNumObjeto(eachPublicityTax.getNumObjeto());
+				eachImpuestoPE.setNumResolu(eachPublicityTax.getNumResolu());
+				eachImpuestoPE.setTipoValla(eachPublicityTax.getTipoValla());
 				eachImpuestoPE.setAnoGravable(eachPublicityTax.getAnoGravable());
-				if ("VALLA VEHICULOS".equalsIgnoreCase(eachPublicityTax.getFenceType())
-						|| "VALLA VEHíCULOS".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+
+
+				if ("VALLA VEHICULOS".equalsIgnoreCase(eachPublicityTax.getNumResolu())
+						|| "VALLA VEHíCULOS".equalsIgnoreCase(eachPublicityTax.getNumResolu()))
 				{
 					eachImpuestoPE.setTipoVallaCode("02");
 				}
-				else if ("Valla Tubular de Obra".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+				else if ("Valla Tubular de Obra".equalsIgnoreCase(eachPublicityTax.getNumResolu()))
 				{
 					eachImpuestoPE.setTipoVallaCode("03");
 				}
-				else if ("Valla de Obra Convencional".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+				else if ("Valla de Obra Convencional".equalsIgnoreCase(eachPublicityTax.getNumResolu()))
 				{
 					eachImpuestoPE.setTipoVallaCode("04");
 				}
-				else if ("Valla Tubular Comercial".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+				else if ("Valla Tubular Comercial".equalsIgnoreCase(eachPublicityTax.getNumResolu()))
 				{
 					eachImpuestoPE.setTipoVallaCode("01");
 				}
-				else if ("Pantalla LED".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+				else if ("Pantalla LED".equalsIgnoreCase(eachPublicityTax.getNumResolu()))
 				{
 					eachImpuestoPE.setTipoVallaCode("05");
 				}
@@ -368,8 +392,12 @@ public class PublicidadExteriorPageController extends AbstractPageController
 
 		contribuyenteRequest.setNumBP(numBP);
 
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
 		System.out.println("Request para validaCont: " + contribuyenteRequest);
-		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		detalleContribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "07");
+		//detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+
 		System.out.println("Response de validaCont: " + detalleContribuyente);
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{

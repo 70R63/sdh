@@ -2026,10 +2026,29 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			catch (final Exception e)
 			{
 				e.printStackTrace();
+				sdhValidaMailRolResponse.setDelineacion(delineacion);
 			}
 
+		}
 
-			sdhValidaMailRolResponse.setDelineacion(delineacion);
+		if (taxCode == "07")
+		{
+			List<ImpuestoPublicidadExterior> publicidad = new ArrayList<ImpuestoPublicidadExterior>();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+				publicidad = sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setPublicidadExt(publicidad);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setPublicidadExt(publicidad);
+			}
+
 		}
 
 		return sdhValidaMailRolResponse;
