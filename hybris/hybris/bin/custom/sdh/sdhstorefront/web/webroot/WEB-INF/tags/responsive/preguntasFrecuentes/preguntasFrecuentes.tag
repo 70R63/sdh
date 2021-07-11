@@ -29,7 +29,7 @@
 		<div class="col-md-3 col-xs-12 mb-20 no-marginleft Catego"
 			id="categoria">
 			<span class="paso--tres pasos color-sr3 rajdhani">1</span>
-			<h2 class="titulo-caja--ser-rel color-sr3 paso3">Categor�a</h2>
+			<h2 class="titulo-caja--ser-rel color-sr3 paso3">Categoria</h2>
 			<p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Busqueda</p>
 			<div class="caja--ser-rel color-sr3">
 				<p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Categoria: </p>
