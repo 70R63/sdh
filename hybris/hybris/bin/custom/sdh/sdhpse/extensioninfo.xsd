@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- [y] hybris Platform
-
- Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
-
- This software is the confidential and proprietary information of SAP
- ("Confidential Information"). You shall not disclose such Confidential
- Information and shall use it only in accordance with the terms of the
- license agreement you entered into with SAP.
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
@@ -105,6 +98,11 @@
 		<xs:attribute name="usemaven" type="xs:string" use="optional">
 			<xs:annotation>
 				<xs:documentation>If 'true' uses maven and external-dependencies.xml file for fetching required libraries into \lib and \web\webroot\WEB-INF\lib.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="jaloLogicFree" type="xs:boolean" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation>If 'true' types introduced by this extension are SLD safe by default and contains no JALO logic.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>

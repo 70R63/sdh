@@ -1,0 +1,23 @@
+$lang=es
+
+INSERT_UPDATE PSBillMessage;psBillType(code)[unique=true];shortMessage[lang=$lang];longMessage[lang=$lang];messageCondition(code)[unique=true]
+ ;AGCA;;Introduzca un importe que sea igual o inferior al importe restante (ejemplo: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;AGCA;;;PART_PAYMENT_NOT_ALLOWED
+ ;BIREP;;Introduzca un importe que sea igual o inferior al importe restante (ejemplo: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;BIREP;;;PART_PAYMENT_NOT_ALLOWED
+ ;CORT;"El pago de la factura atrasada <br> no está permitido";Esta factura está atrasada. No es posible pagarla.;LATE_PAYMENT_NOT_ALLOWED
+ ;CORT;;Introduzca un importe que sea igual o inferior al importe restante (ejemplo: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;KGFE;;Introduzca un importe que sea igual o inferior al importe restante (ejemplo: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;KGFE;;;PART_PAYMENT_NOT_ALLOWED
+ ;PKFN;;Introduzca un importe que sea igual o inferior al importe restante (ejemplo: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;PKFN;;;PART_PAYMENT_NOT_ALLOWED
+ ;SCTF;;Introduzca un importe que sea igual o inferior al importe restante (ejemplo: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;SCTF;;;PART_PAYMENT_NOT_ALLOWED
+ ;SPFN;"El pago de la factura atrasada <br> no está permitido";Esta factura está atrasada. No es posible pagarla.;LATE_PAYMENT_NOT_ALLOWED
+ ;SPFN;;Introduzca un importe que sea igual o inferior al importe restante (ejemplo: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;SPFN;;;PART_PAYMENT_NOT_ALLOWED
+ ;TXRP;"El pago de la factura atrasada <br> no está permitido";Esta factura está atrasada. No es posible pagarla.;LATE_PAYMENT_NOT_ALLOWED
+ ;TXRP;;Introduzca un importe que sea igual o inferior al importe restante (ejemplo: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;TXRP;;;PART_PAYMENT_NOT_ALLOWED
+ ;WBIL;;Introduzca un importe que sea igual o inferior al importe restante (ejemplo: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;WBIL;;;PART_PAYMENT_NOT_ALLOWED

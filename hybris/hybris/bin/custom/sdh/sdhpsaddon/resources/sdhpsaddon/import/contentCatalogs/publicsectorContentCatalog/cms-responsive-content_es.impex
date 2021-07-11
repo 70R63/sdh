@@ -1,0 +1,36 @@
+$contentCatalog=publicsectorContentCatalog
+$contentCV=catalogVersion(catalog(id[default=$contentCatalog]),version[default=Staged])[unique=true,default=$contentCatalog:Staged]
+$picture=media(code, $contentCV)
+$medias=medias(code, $contentCV)
+$lang=es
+$mediaContainer=media(qualifier, $contentCV)[lang=$lang]
+$siteUid=publicsector
+$storefrontContextRoot=$config-storefrontContextRoot
+$jarResourceAssetTemplates=jar:de.hybris.platform.sdhpsaddon.constants.PublicsectoracceleratoraddonConstants&/sdhpsaddon/import/asset/template
+
+UPDATE CMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang]
+ ;;RetrieveBillLink;"Recuperar factura"
+
+UPDATE PSDocumentDashletComponent;$contentCV;uid[unique = true];title[lang=$lang];summary[lang=$lang]
+ ;;PSDocumentDashletComponent;Documentos;Sus últimos documentos
+
+UPDATE PSAboutMeDashletComponent;$contentCV;uid[unique = true];title[lang=$lang]
+ ;;PSAboutMeDashletComponent;Acerca de mí;
+
+UPDATE PSApplicationsDashletComponent;$contentCV;uid[unique = true];title[lang=$lang];draftsSummary[lang=$lang];historySummary[lang=$lang];
+ ;;PSApplicationsDashletComponent;Peticiones y solicitudes;Borradores;Historial
+
+UPDATE PSBillsDashletComponent;$contentCV;uid[unique = true];title[lang=$lang];summary[lang=$lang]
+ ;;PSBillsDashletComponent;Facturas;Sus últimas facturas
+
+UPDATE PSAddressBookDashletComponent;$contentCV;uid[unique = true];title[lang=$lang];summary[lang=$lang]
+ ;;PSAddressBookDashletComponent;Libreta de direcciones;Su dirección principal
+
+UPDATE PSRelationshipsDashletComponent;$contentCV;uid[unique = true];title[lang=$lang]
+ ;;PSRelationshipsDashletComponent;Autorizaciones y relaciones
+
+#Consent Management  
+INSERT_UPDATE ConsentTemplate;id[unique=true];name[lang=$lang];description[lang=$lang];version[unique=true];baseSite(uid)[unique=true,default=$siteUid]
+ ;MARKETING_NEWSLETTER;"Recepción de correos electrónicos para campañas de marketing";"Autorizo que se utilicen mis datos personales para recibir newsletters por correo electrónico de campañas de marketing.";0;;
+
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]

@@ -1,23 +1,18 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 8/07/2021 12:20:51 AM                       ---
+ * --- Generated at 10 jul 2021 21:19:01                        ---
  * ----------------------------------------------------------------
  *  
- * [y] hybris Platform
  * Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
- * This software is the confidential and proprietary information of SAP
- * ("Confidential Information"). You shall not disclose such Confidential
- * Information and shall use it only in accordance with the terms of the
- * license agreement you entered into with SAP.
  */
 package de.hybris.sdh.core.constants;
 
 /**
  * @deprecated since ages - use constants in Model classes instead
  */
-@Deprecated
-@SuppressWarnings({"unused","cast","PMD"})
+@Deprecated(since = "ages", forRemoval = false)
+@SuppressWarnings({"unused","cast"})
 public class GeneratedSdhpseConstants
 {
 	public static final String EXTENSIONNAME = "sdhpse";

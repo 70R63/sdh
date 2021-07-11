@@ -24,8 +24,32 @@ import de.hybris.sdh.core.pojos.requests.DetallePredialBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredialRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
-
-
+import de.hybris.sdh.core.pojos.responses.CalPredialErrores;
+import de.hybris.sdh.core.pojos.responses.CalculoPredialResponse;
+import de.hybris.sdh.core.pojos.responses.ContribAgente;
+import de.hybris.sdh.core.pojos.responses.DetallePredial2Response;
+import de.hybris.sdh.core.pojos.responses.DetallePredial2Response_marcas;
+import de.hybris.sdh.core.pojos.responses.DetallePredialBPResponse;
+import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
+import de.hybris.sdh.core.pojos.responses.ErrorPubli;
+import de.hybris.sdh.core.pojos.responses.FirmanteResponse;
+import de.hybris.sdh.core.pojos.responses.FirmanteResponsePredial2;
+import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
+import de.hybris.sdh.core.pojos.responses.ImpPredialResponse;
+import de.hybris.sdh.core.pojos.responses.PredialDatosEconomicos;
+import de.hybris.sdh.core.pojos.responses.PredialDatosFisicos;
+import de.hybris.sdh.core.pojos.responses.PredialDatosJuridicos;
+import de.hybris.sdh.core.pojos.responses.PredialEstDatosGenerales;
+import de.hybris.sdh.core.pojos.responses.PredialEstLiquidacion;
+import de.hybris.sdh.core.pojos.responses.PredialMarcas;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHCalculoPredialService;
+import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.core.services.SDHDetallePredialService;
+import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.core.services.SDHImpPredialService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
@@ -52,7 +76,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -65,6 +88,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Decoder.BASE64Decoder;
 
@@ -157,7 +183,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		System.out.println("---------------- Hola entro predial unificadoINICIO --------------------------");
 
 
-		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
+		final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
 		ImpPredialResponse impPredialResponse = null;
 
 		final PredialForm predialFormIni = new PredialForm();
@@ -166,7 +192,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		consultaContribuyenteBPRequest.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
 
 		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		try
 		{
@@ -228,7 +254,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
@@ -838,7 +864,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setMatrInmobiliaria(predialInfoInitres.getMatrInmobiliaria());
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
@@ -1030,7 +1056,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
@@ -1225,7 +1251,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setMatrInmobiliaria(predialInfoInicinco.getMatrInmobiliaria());
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
@@ -1614,7 +1640,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
@@ -1806,7 +1832,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setMatrInmobiliaria(predialInfoIniocho.getMatrInmobiliaria());
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
@@ -2152,7 +2178,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
 					GeneraDeclaracionResponse.class);
@@ -2232,7 +2258,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final String responseCalculo = sdhCalculoPredialService.calculoPredial(calculoPredialRequest);
 			calculoPredialResponse = mapper.readValue(responseCalculo, CalculoPredialResponse.class);
@@ -2292,7 +2318,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequestcalc), DetallePredialResponse.class);
@@ -2885,7 +2911,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		else
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			try
 			{

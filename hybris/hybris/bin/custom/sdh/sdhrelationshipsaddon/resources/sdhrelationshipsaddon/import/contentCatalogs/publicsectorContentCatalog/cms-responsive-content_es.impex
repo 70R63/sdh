@@ -1,0 +1,19 @@
+$contentCatalog=publicsectorContentCatalog
+$contentCV=catalogVersion(catalog(id[default=$contentCatalog]),version[default='Staged'])[unique=true,default=$contentCatalog:Staged]
+$lang=es
+$storefrontContextRoot=$config-storefrontContextRoot
+
+# Content Pages
+UPDATE ContentPage;$contentCV;uid[unique=true];title[lang=$lang];keywords[lang=$lang];description[lang=$lang]
+;;addPermissionPage;"Añadir autorización";"AddPermissionPage";"Añadir autorización"
+;;addRelationshipPage;"Añadir relación";"AddRelationshipPage";"Añadir relación"
+;;changePermissionsPage;"Modificar página de autorizaciones";"ChangePermissionsPage";"Modificar autorización"
+;;manage-details;"Gestionar detalles de relación";"Manage-Details";"Gestionar detalles de relación"
+;;my-relationships;"Autorizaciones y relaciones";"Mis relaciones";"Autorizaciones y relaciones"
+;;pending-requests;"Solicitudes pendientes";"Solicitudes pendientes";"Solicitudes pendientes"
+;;relationship-confirmation;"Confirmación de relación";"Relationship-Confirmation";"Confirmación de relación"
+;;requestMorePermissionsPage;"Solicitar más autorizaciones";"RequestMorePermissionsPage";"Solicitar más autorizaciones"
+ 
+# Update linkName
+UPDATE CMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang]
+;;MyRelationshipsLink;"Autorizaciones y relaciones"

@@ -1,0 +1,7 @@
+$lang=fr
+
+INSERT_UPDATE PSPermissibleAreaItemType;code[unique=true];name[lang=$lang]
+ ;addressBook;Carnet d'adresses
+ ;emailAddress;Adresse e-mail
+ ;personalDetails;Détails personnels
+ ;relationships;Relations
