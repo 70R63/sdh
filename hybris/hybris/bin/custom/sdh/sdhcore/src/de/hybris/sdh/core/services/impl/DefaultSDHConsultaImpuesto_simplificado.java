@@ -216,7 +216,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		}
 		catch (final Exception e)
 		{
-			LOG.info("Error al convertir response de consulta impuesto Delineacion");
+			LOG.info("Error al convertir response de consulta impuesto Publicidad Exterior");
 		}
 
 
