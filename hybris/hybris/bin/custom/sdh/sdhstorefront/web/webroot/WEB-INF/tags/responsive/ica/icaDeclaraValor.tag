@@ -39,7 +39,7 @@
 
 <br>
 
-<sf:form action="" commandName="icaInfObjetoFormResp">
+<sf:form action="" modelAttribute="icaInfObjetoFormResp">
 	<!-- 13/10/2020 se esconden campos Se agrego el style por que se ocultaron campos, en caso de quitar el hidden a los demás campos se deberá quitar el style de la linea 44 o renglon de abajo -->
 	<div class="row centrar_rowICA">
 		<div class="row mostrarMD" style="padding-left: 46px;">

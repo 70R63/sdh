@@ -38,7 +38,7 @@
 		</div>
 	</div>
 
-	<form:form id="form_pdf" action="" method="post" commandName="dataForm">
+	<form:form id="form_pdf" action="" method="post" modelAttribute="dataForm">
 
 		<input type="hidden" name="numBP" value="${certiForm.numBP}" />
 		<input type="hidden" name="rowFrompublicidadTable" value="" />

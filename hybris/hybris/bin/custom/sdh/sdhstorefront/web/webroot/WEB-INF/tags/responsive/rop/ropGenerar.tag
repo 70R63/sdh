@@ -43,7 +43,7 @@
 <c:url var="post_url" value="/contribuyentes/rop" />
 <form:form id="form_pdf"
 		action="${post_url}"
-		method="post" commandName="ropForm">
+		method="post" modelAttribute="ropForm">
 <div class="container_new_page">
 	<div class="row">
 		<div class="col-md-2">

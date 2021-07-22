@@ -35,7 +35,7 @@
 
 
 
-	<!-- <form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadFormReq"> -->
+	<!-- <form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" modelAttribute="publicidadFormReq"> -->
 
 	<input type="hidden" value="" id="selectedTipoValla" /> <input
 		type="hidden" value="" id="selectedNumRes" />

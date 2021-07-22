@@ -32,7 +32,7 @@
 
 <div class="container_new_page" id="buscarObjeto" style="display: ${flagMostrarObjeto}">
     <div class="row">
-        <form:form method="get" commandName="tercerosAutForm" action="${actionURL}" >
+        <form:form method="get" modelAttribute="tercerosAutForm" action="${actionURL}" >
              <div class="col-md-5">
 				<formElement:formInputBox idKey="numObjeto" labelKey="terceros.sim.buscar.numeroObjeto" path="numObjeto" />
              </div>

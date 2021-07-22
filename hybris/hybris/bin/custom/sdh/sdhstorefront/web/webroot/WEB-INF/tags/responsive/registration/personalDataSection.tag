@@ -15,7 +15,7 @@
 					<c:url var="action" value="/register/newcustomer" />
 
 					<form:form method="post" modelAttribute="SDHRegisterForm"
-						action="${action}">
+						action="${action}"> 
 						<fieldset>
 							<div class="headline">
 								<h2>

@@ -20,7 +20,7 @@
 <div class="container_new_page">
 	<c:url var="post_url" value="/contribuyentes/rop" />
 	<form:form id="form_pdf" action="${post_url}"
-		method="post" commandName="ropForm">
+		method="post" modelAttribute="ropForm">
 
 		<form:hidden path="tipoImp" value="${ropFormRequest.tipoImp}"/>
 		<form:hidden path="numObjeto" value="${ropFormRequest.numObjeto}"/>

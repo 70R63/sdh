@@ -191,7 +191,7 @@
 			<div class="forgotten-password item_container ">
 				<c:url var="action" value="/register/validateAnswers"/> 
 			
-				<form:form method="post" commandName="psePaymentForm" action="">
+				<form:form method="post" modelAttribute="psePaymentForm" action="">
 				<div class="row" >
 				<!-- --psePaymentForm.numeroDeReferencia:${psePaymentForm.numeroDeReferencia}-- -->
 				</div>
@@ -283,7 +283,7 @@
 					</fieldset>
 				</form:form>
 
-				<form:form id="psePaymentFormSubmition" method="post" commandName="psePaymentForm" action="realizarPago">					
+				<form:form id="psePaymentFormSubmition" method="post" modelAttribute="psePaymentForm" action="realizarPago">					
 					<form:hidden path="tipoDeImpuesto" value="${psePaymentForm.tipoDeImpuesto}"/>
 					<form:hidden path="trazabilityCode" value="${psePaymentForm.trazabilityCode}"/>
 					<form:hidden path="numeroDeReferencia" value="${psePaymentForm.numeroDeReferencia}"/>
@@ -336,7 +336,7 @@
 				
 				
 
-<%-- 				<form:form method="post" commandName="psePaymentForm" action="/sdhstorefront/es/impuestos/pagoEnLinea/pseResponse">		 --%>
+<%-- 				<form:form method="post" modelAttribute="psePaymentForm" action="/sdhstorefront/es/impuestos/pagoEnLinea/pseResponse">		 --%>
 <%-- 					<form:hidden path="tipoDeImpuesto" value="${psePaymentForm.tipoDeImpuesto}"/> --%>
 <%-- 					<form:hidden path="trazabilityCode" value="${psePaymentForm.trazabilityCode}"/> --%>
 <%-- 					<form:hidden path="numeroDeReferencia" value="${psePaymentForm.numeroDeReferencia}"/> --%>

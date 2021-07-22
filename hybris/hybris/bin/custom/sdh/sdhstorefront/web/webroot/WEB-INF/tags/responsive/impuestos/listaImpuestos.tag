@@ -18,7 +18,7 @@
 <br>
 <div class="container_new_page">
 	<sf:form action="${presentarDeclaracionUrl}"
-		method="POST" id="forma" commandName="dataForm">
+		method="POST" id="forma" modelAttribute="dataForm">
 		<c:if test="${mensajeDelinea != null}">
 			<div class="row">
 				<div class="col-12 notas_deli">
@@ -293,7 +293,7 @@
 						</td>
 						<td class="col-sm-3">
 							<c:url var="post_url" value="/contribuyentes/delineacion-urbana/declaracion" />
-							<form:form method="post" commandName="inputDelineacion"
+							<form:form method="post" modelAttribute="inputDelineacion"
 								action="${post_url}">
 								<c:set var="idCampoTipoLicencia"
 									value='tipoLicenciaSeleccionada_${item.cdu}' />
@@ -333,7 +333,7 @@
 							</td>
 							<td class="col-sm-3">
 								<c:url var="post_url" value="/contribuyentes/delineacion-urbana/declaracion" />
-								<form:form method="post" commandName="inputDelineacion"
+								<form:form method="post" modelAttribute="inputDelineacion"
 									action="${post_url}">
 									<form:hidden path="selectedCDU" value="${item.cdu}" />
 									<form:hidden path="selectedRadicado"
@@ -378,8 +378,8 @@
 									code="sobre.vehiculo.table.blindado" /></label></th>
 						<th><label class="control-label labeltabletd"><spring:theme
 									code="sobre.vehiculo.table.cilindraje" /></label></th>
-						<th><label class="control-label labeltabletd"><spring:theme
-									code="sobre.vehiculo.table.idacto" /></label></th>
+<%-- 						<th><label class="control-label labeltabletd"><spring:theme --%>
+<%-- 									code="sobre.vehiculo.table.idacto" /></label></th> --%>
 						<th><label class="control-label labeltabletd"><spring:theme
 									code="sobre.vehiculo.table.presndecla" /></label></th>
 						<!-- 						<th style="text-align: center"><label class="control-label" -->
@@ -406,8 +406,8 @@
                                     code="predial.inicial.table.dir" /></label></th>
                         <th><label class="control-label labeltabletd "><spring:theme
                                     code="predial.inicial.table.nocotrato" /></label></th>
-                        <th><label class="control-label labeltabletd "><spring:theme
-                                    code="predial.inicial.table.idacto" /></label></th>
+<%--                         <th><label class="control-label labeltabletd "><spring:theme --%>
+<%--                                     code="predial.inicial.table.idacto" /></label></th> --%>
                         <th><label class="control-label labeltabletd "><spring:theme
                                     code="predial.inicial.table.presentarDeclaracion" /></label></th>
                      
