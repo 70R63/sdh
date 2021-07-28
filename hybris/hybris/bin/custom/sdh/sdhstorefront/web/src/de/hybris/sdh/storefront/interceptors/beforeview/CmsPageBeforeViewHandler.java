@@ -200,7 +200,7 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 
 				final String representado = sessionService.getAttribute("representado");
 
-				final SDHValidaMailRolResponse representadoData = sdhCustomerFacade.getRepresentadoFromSAP(representado);
+				final SDHValidaMailRolResponse representadoData = sdhCustomerFacade.getRepresentadoFromSAP(representado, "01,02");
 
 				modelAndView.addObject("representado", representadoData);
 
@@ -211,8 +211,11 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 					if (representadoData.getInfoContrib().getNumBP().equalsIgnoreCase(eachAgent.getBp()) || StringUtils
 							.leftPad(representadoData.getInfoContrib().getNumBP(), 10, "0").equalsIgnoreCase(eachAgent.getBp()))
 					{
-						aamenus = eachAgent.getMenu();
+						if (eachAgent.getMenu() != null)
+						{
+							aamenus = eachAgent.getMenu();
 						break;
+						}
 					}
 
 				}

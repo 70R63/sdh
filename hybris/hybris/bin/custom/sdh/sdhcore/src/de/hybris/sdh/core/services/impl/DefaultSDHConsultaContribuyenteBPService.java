@@ -3,13 +3,10 @@
  */
 package de.hybris.sdh.core.services.impl;
 
-import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
-import de.hybris.sdh.core.model.SDHContribTaxModel;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.ContribAgente;
-import de.hybris.sdh.core.pojos.responses.ImpuestosResponse;
 import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -19,7 +16,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -209,7 +205,7 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 		}
 		catch (final Exception e)
 		{
-			LOG.info("Error al convertir response de consulta impuesto Vehicular");
+			LOG.info("Error al convertir response de validaContrib");
 		}
 
 		return wsResponse;
@@ -253,47 +249,6 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 		return entidad;
 	}
 
-	public SDHValidaMailRolResponse mapearInfo(final CustomerModel customerModel)
-	{
-		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
-
-		if (customerModel != null)
-		{
-			sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
-
-			sdhConsultaContribuyenteBPResponse.setImpuestos(mapearImpuestos(customerModel.getContribTaxList()));
-		}
-
-		return sdhConsultaContribuyenteBPResponse;
-	}
-
-	/**
-	 * @param contribTaxList
-	 * @return
-	 */
-	public List<ImpuestosResponse> mapearImpuestos(final List<SDHContribTaxModel> contribTaxList)
-	{
-		List<ImpuestosResponse> impuestosResponse = null;
-
-		if (contribTaxList != null)
-		{
-			impuestosResponse = new ArrayList<ImpuestosResponse>();
-			ImpuestosResponse elementoImpuestosResponse = null;
-
-			for (final SDHContribTaxModel elementoContribTaxList : contribTaxList)
-			{
-				elementoImpuestosResponse = new ImpuestosResponse();
-
-				elementoImpuestosResponse.setCantObjetos(elementoContribTaxList.getCantObjetos());
-				elementoImpuestosResponse.setClaseObjeto(elementoContribTaxList.getClaseObjeto());
-
-				impuestosResponse.add(elementoImpuestosResponse);
-			}
-		}
-
-
-		return impuestosResponse;
-	}
 
 	public InfoContribResponse mapearInfoContrib()
 	{

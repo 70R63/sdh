@@ -15,6 +15,7 @@ import de.hybris.sdh.core.pojos.requests.ConsulFirmasRequest;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.facades.SDHConsultaFirmasFacade;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
@@ -75,15 +76,24 @@ public class AgentesAutorizadosInicialContribuyentePageController extends Abstra
 	@Resource(name = "customerFacade")
 	CustomerFacade customerFacade;
 
+	@Resource(name = "sdhCustomerAccountService")
+	private SDHCustomerAccountService sdhCustomerAccountService;
+
+
 	@RequestMapping(value = "/autorizados/contribuyente/representando", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String autorizadoscontrib(final Model model, @RequestParam final String representado) throws CMSItemNotFoundException
 	{
 		final CustomerData currentUser = customerFacade.getCurrentCustomer();
 
-		final SDHValidaMailRolResponse representadoData = sdhCustomerFacade.getRepresentadoFromSAP(representado);
+		//				final SDHValidaMailRolResponse representadoData = sdhCustomerFacade.getRepresentadoFromSAP(representado);
+		final SDHValidaMailRolResponse representadoData = sdhCustomerAccountService
+				.consultaContribuyenteBP_simplificado(representado, "01");
+		//		final SDHValidaMailRolResponse representadoInfo =
+		//		final CustomerModel representadoData = sdhCustomerAccountService.mapearInfo(representadoInfo);
 
-		sessionService.getCurrentSession().setAttribute("representado",representado);
+		sessionService.getCurrentSession().setAttribute("representado", representado);
+		sessionService.getCurrentSession().setAttribute("representadoData", representadoData);
 
 		model.addAttribute("representado", representadoData);
 
