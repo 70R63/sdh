@@ -342,6 +342,7 @@ ACC.reteica = {
 			 
 			 if(periodo == "")
 			 {
+				ACC.spinner.close();
 				 $( "#dialogReteICA" ).dialog( "open" );
      	 		$("#reteICADialogContent").html("");
      	 		$("#reteICADialogContent").html("Por favor seleccione un periodo");
@@ -352,6 +353,7 @@ ACC.reteica = {
 			 
 			 if(!($("#retencionesFile").prop('files')[0].name.indexOf(".txt") != -1) && !($("#retencionesFile").prop('files')[0].name.indexOf(".TXT") != -1))
 			 {
+				ACC.spinner.close();
 				 $( "#dialogReteICA" ).dialog( "open" );
 	     	 		$("#reteICADialogContent").html("");
 	     	 		$("#reteICADialogContent").html("Tipo de archivo no permitido");
@@ -365,6 +367,7 @@ ACC.reteica = {
 			 
 			 if(fileName.length-4 != 21 || fileName.substring(0,2) != taxNumber || fileName.substring(2,6) != anoGravable || fileName.substring(6,8) != periodo || fileName.substring(8,19)  != numIDesperado)
 			 {
+				ACC.spinner.close();
 				 $( "#dialogReteICA" ).dialog( "open" );
 	     	 		$("#reteICADialogContent").html("");
 	     	 		$("#reteICADialogContent").html("Nombre de archivo no válido");

@@ -1,4 +1,3 @@
-<%@ tag body-content="empty" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -36,7 +35,7 @@
                     <div class="col-md-3 ">
                         <div class="fomchk form-group ">
                             <div class="chkagent checkbox" role="checkbox"
-                                aria-checked="false">
+                                aria-checked="false" style=" cursor: not-allowed; pointer-events: none;">
                                 <label tabindex="0" class="chkagent control-label  "> <input
                                     id="" name="" type="checkbox" value="true"> <input
                                     type="hidden" name="_consentForm.consentGiven" value="on">
@@ -48,11 +47,11 @@
                     <div class="col-md-3 ">
                         <div class="fomchk form-group ">
                             <div class="chkagent checkbox" role="checkbox"
-                                aria-checked="false">
-                                <label tabindex="0" class="chkagent control-label  "> <input
-                                    id="0001" name="" type="checkbox" value="true"> <input
-                                    type="hidden" name="_consentForm.consentGiven" value="on">
-                                    <spring:theme code="autorizado.crear.impuesto.estamp" />
+                                aria-checked="false" style=" cursor: not-allowed; pointer-events: none;">
+                                <label tabindex="0" class="chkagent control-label  " > <input
+                                    id="0001" name="" type="checkbox" value="true" disabled="disabled"> <input
+                                    type="hidden" name="_consentForm.consentGiven" value="on" disabled>
+                                    <spring:theme code="autorizado.crear.impuesto.estamp"/>
                                 </label>
                             </div>
                         </div>
@@ -86,7 +85,7 @@
                     <div class="col-md-3 ">
                         <div class="fomchk form-group ">
                             <div class="chkagent checkbox" role="checkbox"
-                                aria-checked="false">
+                                aria-checked="false" style=" cursor: not-allowed; pointer-events: none;">
                                 <label tabindex="0" class="chkagent control-label  "> <input
                                     id="0004" name="" type="checkbox" value="true"> <input
                                     type="hidden" name="_consentForm.consentGiven" value="on">
@@ -98,7 +97,7 @@
                     <div class="col-md-3 ">
                         <div class="fomchk form-group ">
                             <div class="chkagent checkbox" role="checkbox"
-                                aria-checked="false">
+                                aria-checked="false" style=" cursor: not-allowed; pointer-events: none;">
                                 <label tabindex="0" class="chkagent control-label  "> <input
                                     id="0005" name="" type="checkbox" value="true"> <input
                                     type="hidden" name="_consentForm.consentGiven" value="on">
@@ -122,7 +121,7 @@
                     <div class="col-md-3 ">
                         <div class="fomchk form-group ">
                             <div class="chkagent checkbox" role="checkbox"
-                                aria-checked="false">
+                                aria-checked="false" style=" cursor: not-allowed; pointer-events: none;">
                                 <label tabindex="0" class="chkagent control-label  "> <input
                                     id="0007" name="" type="checkbox" value="true"> <input
                                     type="hidden" name="_consentForm.consentGiven" value="on">
@@ -136,7 +135,7 @@
 					<div class="col-md-3 ">
 						<div class="fomchk form-group ">
 							<div class="chkagent checkbox" role="checkbox"
-								aria-checked="false">
+								aria-checked="false" style=" cursor: not-allowed; pointer-events: none;">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -148,7 +147,7 @@
 					<div class="col-md-3 ">
 						<div class="fomchk form-group ">
 							<div class="chkagent checkbox" role="checkbox"
-								aria-checked="false">
+								aria-checked="false" style=" cursor: not-allowed; pointer-events: none;">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -172,7 +171,7 @@
 							<div class="col-md-3 ">
 						<div class="fomchk form-group ">
 							<div class="chkagent checkbox" role="checkbox"
-								aria-checked="false">
+								aria-checked="false" style=" cursor: not-allowed; pointer-events: none;">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -186,7 +185,7 @@
 					<div class="col-md-3 ">
 						<div class="fomchk form-group ">
 							<div class="chkagent checkbox" role="checkbox"
-								aria-checked="false">
+								aria-checked="false" style=" cursor: not-allowed; pointer-events: none;">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -210,7 +209,7 @@
 					<div class="col-md-3 ">
 						<div class="fomchk form-group ">
 							<div class="chkagent checkbox" role="checkbox"
-								aria-checked="false">
+								aria-checked="false" style=" cursor: not-allowed; pointer-events: none;">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -237,7 +236,7 @@
 					<div class="col-md-3 ">
 						<div class="fomchk form-group ">
 							<div class="chkagent checkbox" role="checkbox"
-								aria-checked="false">
+								aria-checked="false" style=" cursor: not-allowed; pointer-events: none;">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -330,4 +329,3 @@
 		</div>
 	</div>
 </div>
-
