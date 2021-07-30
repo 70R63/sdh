@@ -83,6 +83,19 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-2 ">
+						<div class="fomchk  form-group">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false" onclick="showActos()" id="selectActos">
+								<label tabindex="0" class="chkagent control-label"> <input
+									id="" name="" type="checkbox" value="true"> <input
+									type="hidden" name="_consentForm.consentGiven" value="on">
+									<spring:theme
+										code="autorizado.crear.tramgen.proce.actosOficiales" />
+								</label>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="row">
@@ -136,8 +149,56 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- 			Seccion de actos oficiales -->
+			<div id="actosOficiales" class="row justify-content-center"
+				style="display: none">
+				<div class="row justify-content-center">
+					<div class="col-md-12 col-md-offset-3"
+						style="background: #d2d2d2; margin-top: 20px !important; width: 50% !important">
+						<div class="form-group">
+							<br> <br>
+						</div>
+					</div>
+				</div>
+				<div class="row mt-3">
+					<div class="col-md-6">
+						<div style="text-align: end; padding: 17px;">
+							<label class="control-label"><spring:theme
+									code="autorizado.crear.tramgen.proce.actosOficiales" /></label>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div style="padding: 17px;">
+							<label class="control-label"><spring:theme
+									code="autorizado.crear.tramgen.proce.idacto" /><input
+								id="inputActos" class="form-control"
+								style="min-height: 12px !important;" /></label>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-
-
 	</div>
 </div>
+
+<script type="text/javascript">
+
+function showActos() {
+	var selectActos =  document.getElementById("selectActos");
+	var divActos = document.getElementById("actosOficiales");
+	var inputActos = document.getElementById("inputActos");
+	var seleccionado = selectActos.ariaChecked;
+	
+	if(seleccionado != "true"){
+		divActos.style.display="none";
+		inputActos.value="";
+		
+		
+	}else{
+		divActos.style.display="block";
+		inputActos.value="";		
+	}
+
+}
+</script>

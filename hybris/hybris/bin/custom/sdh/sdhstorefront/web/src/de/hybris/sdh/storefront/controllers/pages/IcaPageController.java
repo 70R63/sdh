@@ -9,6 +9,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -81,7 +82,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -92,6 +92,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Decoder.BASE64Decoder;
 
@@ -221,77 +224,77 @@ public class IcaPageController extends SDHAbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
 
-		if (customerModel.getNumBP() != null)
-		{
-			icaInfObjetoRequest.setNumBP(customerModel.getNumBP());
-		}
-		else
-		{
-			icaInfObjetoRequest.setNumBP(VACIO);
-		}
-
-		if (customerModel.getIcaTaxList().getObjectNumber() != null)
-		{
-			icaInfObjetoRequest.setNumObjeto(customerModel.getIcaTaxList().getObjectNumber());
-		}
-		else
-		{
-			icaInfObjetoRequest.setNumBP(VACIO);
-		}
-
-		final String anoGravable = request.getParameter("anoGravable");
-
-		if (StringUtils.isBlank(anoGravable))
-		{
-
-			icaInfObjetoRequest.setAnoGravable("");
-		}
-		else
-		{
-			icaInfObjetoRequest.setAnoGravable(anoGravable);
-		}
-
-		final String periodo = request.getParameter("periodo");
-
-		if (!StringUtils.isBlank(periodo))
-		{
-			icaInfObjetoRequest.setPeriodo(periodo);
-		}
-		else
-		{
-			icaInfObjetoRequest.setPeriodo("");
-		}
-
-		try
-		{
-			final ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
-
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-
-			final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
-
-			final ICAInfObjetoResponse icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
-
-			icaInfObjetoFormResp.setDocumentType(customerModel.getDocumentType());
-			icaInfObjetoFormResp.setDocumentNumber(customerModel.getDocumentNumber());
-			icaInfObjetoFormResp.setCompleteName(customerModel.getFirstName() + " " + customerModel.getLastName());
-			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
-
-			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
-			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
-			model.addAttribute("anoGravable", icaInfObjetoResponse.getAnoGravable());
-			model.addAttribute("periodo", icaInfObjetoResponse.getPeriodo());
-			model.addAttribute("opcionUso",
-					Objects.isNull(icaInfObjetoResponse.getOpcionUso()) ?
-							null :
-							icaInfObjetoResponse.getOpcionUso().replace(" ","").split("-")[0]);
-		}
-		catch (final Exception e)
-		{
-			LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
-		}
+		//		if (customerModel.getNumBP() != null)
+		//		{
+		//			icaInfObjetoRequest.setNumBP(customerModel.getNumBP());
+		//		}
+		//		else
+		//		{
+		//			icaInfObjetoRequest.setNumBP(VACIO);
+		//		}
+		//
+		//		if (customerModel.getIcaTaxList().getObjectNumber() != null)
+		//		{
+		//			icaInfObjetoRequest.setNumObjeto(customerModel.getIcaTaxList().getObjectNumber());
+		//		}
+		//		else
+		//		{
+		//			icaInfObjetoRequest.setNumBP(VACIO);
+		//		}
+		//
+		//		final String anoGravable = request.getParameter("anoGravable");
+		//
+		//		if (StringUtils.isBlank(anoGravable))
+		//		{
+		//
+		//			icaInfObjetoRequest.setAnoGravable("");
+		//		}
+		//		else
+		//		{
+		//			icaInfObjetoRequest.setAnoGravable(anoGravable);
+		//		}
+		//
+		//		final String periodo = request.getParameter("periodo");
+		//
+		//		if (!StringUtils.isBlank(periodo))
+		//		{
+		//			icaInfObjetoRequest.setPeriodo(periodo);
+		//		}
+		//		else
+		//		{
+		//			icaInfObjetoRequest.setPeriodo("");
+		//		}
+		//
+		//		try
+		//		{
+		//			final ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
+		//
+		//			final ObjectMapper mapper = new ObjectMapper();
+		//			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		//
+		//
+		//			final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+		//
+		//			final ICAInfObjetoResponse icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+		//
+		//			icaInfObjetoFormResp.setDocumentType(customerModel.getDocumentType());
+		//			icaInfObjetoFormResp.setDocumentNumber(customerModel.getDocumentNumber());
+		//			icaInfObjetoFormResp.setCompleteName(customerModel.getFirstName() + " " + customerModel.getLastName());
+		//			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
+		//
+		//			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
+		//			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
+		//			model.addAttribute("anoGravable", icaInfObjetoResponse.getAnoGravable());
+		//			model.addAttribute("periodo", icaInfObjetoResponse.getPeriodo());
+		//			model.addAttribute("opcionUso",
+		//					Objects.isNull(icaInfObjetoResponse.getOpcionUso()) ?
+		//							null :
+		//							icaInfObjetoResponse.getOpcionUso().replace(" ","").split("-")[0]);
+		//		}
+		//		catch (final Exception e)
+		//		{
+		//			LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
+		//		}
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ICA_CMS_PAGE));
@@ -381,7 +384,7 @@ public class IcaPageController extends SDHAbstractPageController
 			icaInfObjetoFormResp = new ICAInfObjetoForm();
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 			final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
@@ -852,7 +855,7 @@ public class IcaPageController extends SDHAbstractPageController
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			icaCalculoImpResponse = mapper.readValue(sdhICACalculoImpService.consultaICACalculoImp(icaCalculoImpRequest),
 					ICACalculoImpResponse.class);
@@ -938,7 +941,7 @@ public class IcaPageController extends SDHAbstractPageController
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
 					GeneraDeclaracionResponse.class);
