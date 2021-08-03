@@ -3,8 +3,10 @@ package de.hybris.sdh.core.services.impl;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
+import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 
@@ -20,10 +22,12 @@ import javax.annotation.Resource;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpuesto_simplificado
@@ -34,13 +38,15 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
     @Resource(name = "configurationService")
     private ConfigurationService configurationService;
 
+
+	//Vehicular
     @Override
 	public List<ImpuestoVehiculos> consulta_impVehicular(final ConsultaContribuyenteBPRequest wsRequest)
 	{
 		SDHValidaMailRolResponse wsResponse = null;
 		List<ImpuestoVehiculos> impuestosVehiculos = null;
 		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		try
 		{
 			wsResponse = mapper.readValue(consulta_impVehicular_string(wsRequest), SDHValidaMailRolResponse.class);
@@ -79,6 +85,32 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 
 
 		return wsResponse;
+	}
+
+
+	//Gasolina
+	@Override
+	public List<ImpuestoGasolina> consulta_impGasolina(final ConsultaContribuyenteBPRequest wsRequest)
+	{
+		SDHValidaMailRolResponse wsResponse = null;
+		List<ImpuestoGasolina> impuestosGasolina = null;
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try
+		{
+			wsResponse = mapper.readValue(consulta_impGasolina_string(wsRequest), SDHValidaMailRolResponse.class);
+			if (wsResponse != null)
+			{
+				impuestosGasolina = wsResponse.getGasolina();
+			}
+		}
+		catch (final Exception e)
+		{
+			LOG.info("Error al convertir response de consulta impuesto Gasolina");
+		}
+
+
+		return impuestosGasolina;
 	}
 
 
@@ -150,13 +182,16 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 
 	}
 
+
+
+	//Delineacion
 	@Override
 	public List<ImpuestoDelineacionUrbana> consulta_impDelineacion(final ConsultaContribuyenteBPRequest wsRequest)
 	{
 		SDHValidaMailRolResponse wsResponse = null;
 		List<ImpuestoDelineacionUrbana> impuestosDelineacion = null;
 		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		try
 		{
 			wsResponse = mapper.readValue(consulta_impDelineacion_string(wsRequest), SDHValidaMailRolResponse.class);
@@ -199,13 +234,14 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 
 
 
+	//Publicidad
 	@Override
 	public List<ImpuestoPublicidadExterior> consulta_impPublicidad(final ConsultaContribuyenteBPRequest wsRequest)
 	{
 		SDHValidaMailRolResponse wsResponse = null;
 		List<ImpuestoPublicidadExterior> impuestosPublicidad = null;
 		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		try
 		{
 			wsResponse = mapper.readValue(consulta_impPublicidad_string(wsRequest), SDHValidaMailRolResponse.class);
@@ -245,6 +281,74 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 
 
 		return wsResponse;
+	}
+
+
+
+
+
+	//Predial
+	@Override
+	public List<PredialResponse> consulta_impPredial(final ConsultaContribuyenteBPRequest request)
+	{
+		SDHValidaMailRolResponse wsResponse = null;
+		List<PredialResponse> impuestosPredial = null;
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try
+		{
+			wsResponse = mapper.readValue(consulta_impPredial_string(request), SDHValidaMailRolResponse.class);
+			if (wsResponse != null)
+			{
+				impuestosPredial = wsResponse.getPredial();
+			}
+		}
+		catch (final Exception e)
+		{
+			LOG.info("Error al convertir response de consulta impuesto Predial");
+		}
+
+
+		return impuestosPredial;
+	}
+
+
+
+	@Override
+	public String consulta_impPredial_string(final ConsultaContribuyenteBPRequest wsRequest)
+	{
+		final String usuario = configurationService.getConfiguration().getString("sdh.ingreso.impPredial.user");
+		final String password = configurationService.getConfiguration().getString("sdh.ingreso.impPredial.password");
+		final String urlService = configurationService.getConfiguration().getString("sdh.ingreso.impPredial.url");
+
+		final RestTemplate restTemplate = new RestTemplate();
+		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
+		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
+
+		LOG.info(wsRequest);
+		final String wsResponse = restTemplate.postForObject(urlService, request, String.class);
+		LOG.info(wsResponse);
+
+
+		return wsResponse;
+	}
+
+
+
+	@Override
+	public List<ImpuestoVehiculos> consulta_impICA(final ConsultaContribuyenteBPRequest request)
+	{
+		// XXX Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public String consulta_impICA_string(final ConsultaContribuyenteBPRequest request)
+	{
+		// XXX Auto-generated method stub
+		return null;
 	}
 
 }

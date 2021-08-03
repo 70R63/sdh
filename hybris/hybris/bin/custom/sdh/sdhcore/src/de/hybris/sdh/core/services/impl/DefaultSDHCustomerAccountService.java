@@ -91,8 +91,10 @@ import javax.xml.rpc.holders.StringHolder;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.util.Assert;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.hybirs.sdh.core.soap.ZWS_HYSEND_MAIL_INT;
 
@@ -182,7 +184,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
 					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
@@ -506,7 +508,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 			consultaContribuyenteBPRequest.setNumBP(numBP);
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 			final String response = sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest);
@@ -2030,7 +2032,70 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		SDHValidaMailRolResponse sdhValidaMailRolResponse = new SDHValidaMailRolResponse();
 		sdhValidaMailRolResponse = this.getBPDataFromCustomer(customerModel);
 
-		if (taxCode == "06")
+
+		if (taxCode == "01") //Predial
+		{
+			List<PredialResponse> predial = new ArrayList<PredialResponse>();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+				predial = sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setPredial(predial);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setPredial(predial);
+			}
+		}
+		else if (taxCode == "02")//Vehicular
+		{
+			List<ImpuestoVehiculos> vehicular = new ArrayList<ImpuestoVehiculos>();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+				vehicular = sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setVehicular(vehicular);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setVehicular(vehicular);
+			}
+		}
+		else if (taxCode == "03")//ICA
+		{
+
+		}
+		else if (taxCode == "04")//RETEICA
+		{
+
+		}
+		else if (taxCode == "05")//Gasolina
+		{
+			List<ImpuestoGasolina> gasolina = new ArrayList<ImpuestoGasolina>();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+				gasolina = sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setGasolina(gasolina);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setGasolina(gasolina);
+			}
+		}
+		else if (taxCode == "06")//Delineacion
 		{
 			List<ImpuestoDelineacionUrbana> delineacion = new ArrayList<ImpuestoDelineacionUrbana>();
 
@@ -2049,8 +2114,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			}
 
 		}
-
-		if (taxCode == "07")
+		else if (taxCode == "07")//Publicidad
 		{
 			List<ImpuestoPublicidadExterior> publicidad = new ArrayList<ImpuestoPublicidadExterior>();
 
@@ -2198,7 +2262,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * de.hybris.sdh.core.services.SDHCustomerAccountService#mapearInfo_CustomerData(de.hybris.sdh.core.pojos.responses.
 	 * SDHValidaMailRolResponse)
