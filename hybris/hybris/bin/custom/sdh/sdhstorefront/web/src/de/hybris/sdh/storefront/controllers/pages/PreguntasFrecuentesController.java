@@ -6,20 +6,17 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
-import de.hybris.sdh.core.model.SdhFAQsCategoryModel;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
-import de.hybris.sdh.core.services.SDHFAQsService;
 import de.hybris.sdh.facades.SDHFAQsFacade;
 import de.hybris.sdh.facades.faqs.data.SDHFaqCategoryData;
-import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
+import de.hybris.sdh.facades.faqs.data.SDHFaqData;
 import de.hybris.sdh.storefront.forms.PreguntasFrecuentesForm;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,14 +24,15 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -73,7 +71,10 @@ public class PreguntasFrecuentesController extends AbstractPageController
 
 	@RequestMapping(value =
 	{ "/preguntasfrecuentes" }, method = RequestMethod.GET)
-	public String preguntasinicial(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
+	public String preguntasinicial(final Model model, final HttpServletRequest request,
+			@RequestParam(required = false, value = "categoryId")
+			final String categoryId, @RequestParam(required = false, value = "keyWord")
+			final String keyWord) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET preguntas frecuentes --------------------------");
 
@@ -91,32 +92,32 @@ public class PreguntasFrecuentesController extends AbstractPageController
 
 		preguntasForm.setFecha(fecha);
 
+		List<SDHFaqData> faqDataList = new ArrayList<>();
+
+		if (categoryId != null)
+		{
+			faqDataList = sdhFAQsFacade.getAllFaqsByCategoryCode(categoryId);
+
+		}
+
+		if (keyWord != null)
+		{
+			faqDataList = sdhFAQsFacade.getAllFaqsByKeyWord(keyWord);
+		}
+
+		model.addAttribute("faqDataList", faqDataList);
 
 		model.addAttribute("preguntasForm", preguntasForm);
 
-		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREGUNTAS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREGUNTAS_CMS_PAGE));
 
-
-
-		//	model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
-
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
-	}
-
-	@RequestMapping(value = "/preguntasfrecuentes", method = RequestMethod.POST)
-
-	public String preguntasPost(final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
-			throws CMSItemNotFoundException
-	{
-		System.out.println("------------------Entro al POST de preguntas frecuentes------------------------");
-
-		return REDIRECT_TO_PREGUNTAS_PAGE;
 	}
 
 }
