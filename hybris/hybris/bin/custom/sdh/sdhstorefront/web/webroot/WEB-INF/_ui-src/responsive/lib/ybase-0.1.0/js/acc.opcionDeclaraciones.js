@@ -292,6 +292,8 @@ ACC.opcionDeclaraciones = {
 	
 	
 	obtenerListaDeclaraciones_certiPagos : function() {
+		debugger;
+		
 		ACC.spinner.show();
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.publicidadexterior.bindDataTable_Class_refresh();
@@ -312,6 +314,7 @@ ACC.opcionDeclaraciones = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
+					debugger;
 					ACC.spinner.close();
 //					ACC.opcionDeclaraciones.dataActual_backup = dataActual;
 //					ACC.opcionDeclaraciones.dataResponse_backup = dataResponse;
@@ -464,6 +467,7 @@ ACC.opcionDeclaraciones = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
+					debugger;
 					ACC.spinner.close();
 					ACC.opcionDeclaraciones.updateFromResponsePeriodo_porAnio(dataActual,dataResponse);
 					ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
