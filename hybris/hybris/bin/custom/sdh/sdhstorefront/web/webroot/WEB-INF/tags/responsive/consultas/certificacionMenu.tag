@@ -414,6 +414,7 @@
 
 	
 	function SelectedAnio(selectObject) {
+		debugger;
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos_porAnio();
 	}
 	
