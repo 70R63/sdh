@@ -313,7 +313,9 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 			if (groupUid.contains("ICAUsrTaxGrp"))
 			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "03");
 
+				customerData.setIca(contImpuestos.getIca());
 			}
 
 			if (groupUid.contains("gasolinaUsrTaxGrp"))

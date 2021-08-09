@@ -2071,7 +2071,21 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		}
 		else if (taxCode == "03")//ICA
 		{
+			ImpuestoICA ica = new ImpuestoICA();
 
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+				ica = sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setIca(ica);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setIca(ica);
+			}
 		}
 		else if (taxCode == "04")//RETEICA
 		{
