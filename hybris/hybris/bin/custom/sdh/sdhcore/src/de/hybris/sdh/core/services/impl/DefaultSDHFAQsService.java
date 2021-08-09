@@ -5,9 +5,10 @@ import de.hybris.sdh.core.dao.SdhFAQsDao;
 import de.hybris.sdh.core.model.SdhFAQsCategoryModel;
 import de.hybris.sdh.core.model.SdhFAQsModel;
 import de.hybris.sdh.core.services.SDHFAQsService;
-import org.springframework.beans.factory.annotation.Required;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Required;
 
 public class DefaultSDHFAQsService implements SDHFAQsService {
 
@@ -20,17 +21,17 @@ public class DefaultSDHFAQsService implements SDHFAQsService {
     }
 
     @Override
-    public SdhFAQsCategoryModel getCategoryByCode(String catecoryCode) {
+    public SdhFAQsCategoryModel getCategoryByCode(final String catecoryCode) {
         return getSdhFAQsCategoryDao().getByCode(catecoryCode);
     }
 
     @Override
-    public List<SdhFAQsModel> getFAQsByCategory(SdhFAQsCategoryModel categoryModel) {
+    public List<SdhFAQsModel> getFAQsByCategory(final SdhFAQsCategoryModel categoryModel) {
         return getSdhFAQsDao().getAllByCategory(categoryModel);
     }
 
     @Override
-    public List<SdhFAQsModel> getFAQsByKeyWord(String keyWord) {
+    public List<SdhFAQsModel> getFAQsByKeyWord(final String keyWord) {
         return getSdhFAQsDao().getAllByKeyWord(keyWord);
     }
 
@@ -39,7 +40,7 @@ public class DefaultSDHFAQsService implements SDHFAQsService {
     }
 
     @Required
-    public void setSdhFAQsDao(SdhFAQsDao sdhFAQsDao) {
+    public void setSdhFAQsDao(final SdhFAQsDao sdhFAQsDao) {
         this.sdhFAQsDao = sdhFAQsDao;
     }
 
@@ -48,7 +49,13 @@ public class DefaultSDHFAQsService implements SDHFAQsService {
     }
 
     @Required
-    public void setSdhFAQsCategoryDao(SdhFAQsCategoryDao sdhFAQsCategoryDao) {
+    public void setSdhFAQsCategoryDao(final SdhFAQsCategoryDao sdhFAQsCategoryDao) {
         this.sdhFAQsCategoryDao = sdhFAQsCategoryDao;
     }
+
+	 @Override
+	 public List<SdhFAQsModel> getFAQsByCode(final String code)
+	 {
+		 return getSdhFAQsDao().getAllByCode(code);
+	 }
 }

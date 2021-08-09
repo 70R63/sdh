@@ -5,6 +5,7 @@ package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
@@ -74,14 +75,17 @@ public class PreguntasFrecuentesController extends AbstractPageController
 	public String preguntasinicial(final Model model, final HttpServletRequest request,
 			@RequestParam(required = false, value = "categoryId")
 			final String categoryId, @RequestParam(required = false, value = "keyWord")
-			final String keyWord) throws CMSItemNotFoundException
+			final String keyWord, @RequestParam(required = false, value = "code")
+			final String code, final BaseSiteModel site) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET preguntas frecuentes --------------------------");
 
 		final ObjectMapper mapper = new ObjectMapper();
 		final PreguntasFrecuentesForm preguntasForm = new PreguntasFrecuentesForm();
-
+		model.addAttribute("path", request.getContextPath());
+		model.addAttribute("name", request.getLocalName());
 		final Date date = new Date();
+
 
 		//Caso 2: obtener la fecha y salida por pantalla con formato:
 		final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -97,12 +101,19 @@ public class PreguntasFrecuentesController extends AbstractPageController
 		if (categoryId != null)
 		{
 			faqDataList = sdhFAQsFacade.getAllFaqsByCategoryCode(categoryId);
+			model.addAttribute("categoryId", categoryId);
 
 		}
 
 		if (keyWord != null)
 		{
 			faqDataList = sdhFAQsFacade.getAllFaqsByKeyWord(keyWord);
+			model.addAttribute("keyWord", keyWord);
+		}
+
+		if (code != null)
+		{
+			faqDataList = sdhFAQsFacade.getAllFaqsByCode(code);
 		}
 
 		model.addAttribute("faqDataList", faqDataList);
