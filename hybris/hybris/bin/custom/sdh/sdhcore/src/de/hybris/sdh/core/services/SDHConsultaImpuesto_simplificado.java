@@ -7,6 +7,7 @@ package de.hybris.sdh.core.services;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
+import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
@@ -33,7 +34,7 @@ public interface SDHConsultaImpuesto_simplificado
 
 
 	//ICA
-	List<ImpuestoVehiculos> consulta_impICA(ConsultaContribuyenteBPRequest request);
+	ImpuestoICA consulta_impICA(ConsultaContribuyenteBPRequest request);
 
 	String consulta_impICA_string(ConsultaContribuyenteBPRequest request);
 
