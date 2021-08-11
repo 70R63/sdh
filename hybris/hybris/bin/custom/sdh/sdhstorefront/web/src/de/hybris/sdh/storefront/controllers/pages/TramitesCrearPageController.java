@@ -670,8 +670,8 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "010102____", "02", "Creación de Calidad Sujeción Pasiva");
 		//RIT-Creación-Registro / Rol Tributario
 		agregarElementoTramites(elementos, "01010100__", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "01010101__", "01", "Persona Natural", "ZT02", "A1ZTRT0004Z065");
-		agregarElementoTramites(elementos, "01010102__", "02", "Persona Jurídica", "ZT02", "A1ZTRT0004Z065");
+		agregarElementoTramites(elementos, "01010101__", "01", "Persona Natural");
+		agregarElementoTramites(elementos, "01010102__", "02", "Persona Jurídica");
 		//RIT-Creación-Registro / Rol Tributario - Persona Natural
 		agregarElementoTramites(elementos, "0101010100", "00", "Seleccionar");
 		//		agregarElementoTramites(elementos, "0101010101", "01", "Contribuyente");
