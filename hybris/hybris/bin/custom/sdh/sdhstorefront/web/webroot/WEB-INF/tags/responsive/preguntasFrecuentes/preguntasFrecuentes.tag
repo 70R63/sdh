@@ -34,7 +34,6 @@
 
 		</div>
 	</div>
-
 	<div class="row">
 		<div class="col-md-12 col-md-offset-5 headline">
 			<h2>
@@ -152,6 +151,12 @@
 												</button>
 											</a>
 										</div>
+											<div class="col-md-1">
+											<input type="text" value="https://${name}${path}/preguntasfrecuentes?code=${faqs.code}" id="urlCopy" style= "display:none">
+												<button class="buttonCopy" id="btnCopyUrl">
+												</button>	
+
+									    	</div>
 									</div>
 								</div>
 							</div>
@@ -164,3 +169,5 @@
 		</c:choose>
 	</div>
 </div>
+
+
