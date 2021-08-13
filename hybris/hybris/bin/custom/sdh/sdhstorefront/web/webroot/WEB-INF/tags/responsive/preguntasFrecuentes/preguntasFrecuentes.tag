@@ -154,8 +154,9 @@
 										<div class="col-md-1">
 											<input type="text"
 												value="https://${name}${path}/preguntasfrecuentes?code=${faqs.code}"
-												id="urlCopy" style="display: none">
-											<button class="buttonCopy" id="btnCopyUrls" onclick="copyText()"></button>
+												id="urlCopied" style="display: none">
+											<button class="buttonCopy" id="btnCopyUrl" onclick="copyText()"></button>
+											<textarea id="asmCopyHoldtext" style="display: none"></textarea>
 
 										</div>
 									</div>
@@ -191,15 +192,24 @@
 		window.location.href = currentUrl + "?keyWord=" + keyWord;
 	}
 	
-	function copyText() {
-	var copyText = document.getElementById("urlCopy");
-	copyText.select();
-	copyText.setSelectionRange(0, 99999); 
-	document.execCommand("copy");
+	function copyText() {	
+    var codigo = document.getElementById('urlCopied');    //Elemento a copiar
+    var codigoACopiar = codigo.value;
 
-	// alert("Copied the text: " + copyText.value);
-	alert("Copiado");
-	}
+ $("#asmCopyHoldtext").val(codigoACopiar);
+    $("#asmCopyHoldtext").show();
+    $("#asmCopyHoldtext").select();
+    try {
+        return document.execCommand("copy");
+    } catch (ex) {
+        console.debug("Copy to clipboard failed.", ex);
+        return false;
+    } finally {
+        $("#asmCopyHoldtext").hide();
+    }
+    
+}
+	
 
 </script>
 
