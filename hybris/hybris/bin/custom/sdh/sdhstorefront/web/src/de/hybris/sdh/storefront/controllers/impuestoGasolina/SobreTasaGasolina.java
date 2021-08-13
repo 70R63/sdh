@@ -989,7 +989,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		DetGasRevisorDeclaranteResponse interlocutor = null;
 
 		final CustomerData currentUserData = this.getCustomerFacade().getCurrentCustomer();
-		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSession();
 
 		model.addAttribute("contribuyenteData", contribuyenteData);
 		model.addAttribute("currentUserData", currentUserData);
@@ -1098,12 +1098,13 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 
 		//			numBP = customerModel.getNumBP();
-		contribuyenteRequest.setNumBP(representado);
-		final ImpGasolinaSimpliResponse gasolinaSimpliResponse = new ImpGasolinaSimpliResponse();
-		System.out.println("Request de validaCont: " + contribuyenteRequest);
-		detalleContribuyente = gasolinaService.consultaContribuyenteGas(customerModel);
-		System.out.println("Response de validaCont: " + detalleContribuyente);
-		if (gasolinaService.ocurrioErrorValcontGas(gasolinaSimpliResponse) != true)
+		//		contribuyenteRequest.setNumBP(representado);
+		//		final ImpGasolinaSimpliResponse gasolinaSimpliResponse = new ImpGasolinaSimpliResponse();
+		//		System.out.println("Request de validaCont: " + contribuyenteRequest);
+		//		detalleContribuyente = gasolinaService.consultaContribuyenteGas(customerModel);
+		//		System.out.println("Response de validaCont: " + detalleContribuyente);
+		detalleContribuyente = sessionService.getCurrentSession().getAttribute("representadoData");
+		if (detalleContribuyente != null)
 		{
 			declarante.setTipoDoc(detalleContribuyente.getInfoContrib().getTipoDoc());
 			declarante.setTipoDocDESC(gasolinaService.getDescripcion(declarante.getTipoDoc(), catalogos.getTipoIdRev()));

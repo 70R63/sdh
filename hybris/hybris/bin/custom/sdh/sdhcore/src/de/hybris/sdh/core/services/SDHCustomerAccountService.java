@@ -3,6 +3,7 @@
  */
 package de.hybris.sdh.core.services;
 
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.sdh.core.pojos.requests.UpdateEmailRitRequest;
@@ -45,6 +46,8 @@ public interface SDHCustomerAccountService
 
 	CustomerModel updateMiRitInfo(CustomerModel customerModel);
 
+	public CustomerModel updateMiRitInfo_simplificado(final CustomerModel customerModel, final String indicador);
+
 	CustomerModel updateImpuestoVehicular_simplificado(final CustomerModel customerModel, List<ImpuestoVehiculos> vehiculos);
 
 	void setAutorityOnSession(String role);
@@ -53,14 +56,27 @@ public interface SDHCustomerAccountService
 
 	void updateCustomerTaxRestrictions();
 
+	//mapea infoContrib, adicionales, redes sociales del CustomerModel a SDHValidaMailRolResponse
 	SDHValidaMailRolResponse getBPDataFromCustomer(final CustomerModel customerModel);
 
+	//mapea usando getBPDataFromCustomer y despues lee de SAP los impuestos (06 y 07) (no se graba esa informacion)
 	SDHValidaMailRolResponse getBPAndTaxDataFromCustomer(final CustomerModel customerModel, String taxCode);
 
-	/**
-	 * @param customerModel
-	 * @param gasolinaSimpliResponse
-	 */
+	//leer customer desde SAP con validaContrib
+	public SDHValidaMailRolResponse consultaContribuyenteBP_simplificado(String numBP, String indicador);
+
+	//leer Representado de Agente Autorizado al seleccionar ingresar
+	SDHValidaMailRolResponse getRepresentadoFromSAP_ingresar(final String numBP);
+
+	//mapea de customer model a SDHValidaMailRolResponse
+	SDHValidaMailRolResponse mapearInfo(CustomerModel customerModel);
+
+	//mapea de SDHValidaMailRolResponse a CustomerData
+	CustomerData mapearInfo_CustomerData(SDHValidaMailRolResponse sdhValidaMailRolResponse);
+
+	//mapea de SDHValidaMailRolResponse a customerModel
+	CustomerModel mapearInfo(SDHValidaMailRolResponse sdhValidaMailRolResponse);
+
 	void updateImpuestoGasolina_simplificado(CustomerModel customerModel, ImpGasolinaSimpliResponse gasolinaSimpliResponse);
 
 }

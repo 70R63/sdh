@@ -11,7 +11,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
+import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -36,6 +36,7 @@ import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.core.services.SDHImprimePagoService;
@@ -54,12 +55,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -69,6 +70,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Decoder.BASE64Decoder;
 
@@ -127,6 +131,9 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 	@Resource(name = "modelService")
 	private ModelService modelService;
+
+	@Resource(name = "sdhCustomerAccountService")
+	SDHCustomerAccountService sdhCustomerAccountService;
 
 	@Resource(name = "mediaService")
 	private MediaService mediaService;
@@ -190,7 +197,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 			try
 			{
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 				final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
@@ -280,9 +287,60 @@ public class CertificacionPagoPageController extends AbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final OpcionDeclaracionesVista infoVista = new OpcionDeclaracionesVista();
 		SDHValidaMailRolResponse customerData = null;
+		SDHValidaMailRolResponse contImpuestos = null;
 
+		customerData = sdhCustomerAccountService.getBPDataFromCustomer(customerModel);
 
-		customerData = sdhCustomerFacade.getRepresentadoFromSAP(customerModel.getNumBP());
+		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
+
+		for (final PrincipalGroupModel group : groupList)
+		{
+			final String groupUid = group.getUid();
+
+			if (groupUid.contains("predialUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
+
+				customerData.setPredial(contImpuestos.getPredial());
+			}
+
+			if (groupUid.contains("vehicularUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "02");
+
+				customerData.setVehicular(contImpuestos.getVehicular());
+			}
+
+			if (groupUid.contains("ICAUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "03");
+
+				customerData.setIca(contImpuestos.getIca());
+			}
+
+			if (groupUid.contains("gasolinaUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "05");
+
+				customerData.setGasolina(contImpuestos.getGasolina());
+			}
+
+			if (groupUid.contains("delineacionUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
+
+				customerData.setDelineacion(contImpuestos.getDelineacion());
+			}
+
+			if (groupUid.contains("publicidadExtUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "07");
+
+				customerData.setPublicidadExt(contImpuestos.getPublicidadExt());
+			}
+
+		}
+
 		infoVista.setCatalogos(gasolinaService.prepararCatalogosOpcionDeclaraciones(customerData));
 		infoVista.setCustomerData(customerData);
 
@@ -568,7 +626,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 				}
 
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				String consultaPagoResp = sdhConsultaPagoService.consultaPago(consultaPagoRequest);
 				consultaPagoResp = consultaPagoResp.replaceAll("(\"declaraciones\"):\\{((\"\\w*\":(\"\\w*\"|\\w*),*\\s*)*\\s*)\\}",
 						"$1:\\[\\{$2\\}\\]");
@@ -712,7 +770,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				final ConsultaPagoResponse consultaPagoResponse = mapper
 						.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
 
@@ -800,7 +858,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				final ConsultaPagoResponse consultaPagoResponse = mapper
 						.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
 
@@ -888,7 +946,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				final ConsultaPagoResponse consultaPagoResponse = mapper
 						.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
 

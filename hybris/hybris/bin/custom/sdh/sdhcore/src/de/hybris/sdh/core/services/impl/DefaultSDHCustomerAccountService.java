@@ -12,6 +12,7 @@ package de.hybris.sdh.core.services.impl;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commerceservices.customer.CustomerAccountService;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
@@ -70,6 +71,7 @@ import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHSendEmailService;
 import de.hybris.sdh.core.services.SDHUpdateCustomerCommPrefsService;
+import de.hybris.sdh.facades.questions.data.SDHAgentData;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -89,8 +91,10 @@ import javax.xml.rpc.holders.StringHolder;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.util.Assert;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.hybirs.sdh.core.soap.ZWS_HYSEND_MAIL_INT;
 
@@ -180,7 +184,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
 					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
@@ -504,7 +508,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 			consultaContribuyenteBPRequest.setNumBP(numBP);
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 			final String response = sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest);
@@ -1025,36 +1029,53 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	public CustomerModel updateMiRitInfo_simplificado(final CustomerModel customerModel, final String indicador)
 	{
-		final String numBP = customerModel.getNumBP();
-		final String indicadorBasica = "01";
-		final String indicadorRolesYAgentes = "02";
 
-		final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
-		consultaContribBPRequest.setNumBP(numBP);
-		consultaContribBPRequest.setIndicador(indicador);
-
-		final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
-				.consultaContribuyenteBP_simplificado(consultaContribBPRequest);
-
-		if (indicador != null && indicador.contains(indicadorBasica))
+		if (customerModel != null)
 		{
-		grabarInfoContrib(customerModel, sdhConsultaContribuyenteBPResponse);
-		grabarImpuestos(customerModel, sdhConsultaContribuyenteBPResponse);
-		}
-		if (indicador != null && indicador.contains(indicadorRolesYAgentes))
-		{
-			grabarRoles(customerModel, sdhConsultaContribuyenteBPResponse);
-			grabarAgentes(customerModel, sdhConsultaContribuyenteBPResponse);
-		}
+			final String numBP = customerModel.getNumBP();
+			final String indicadorBasica = "01";
+			final String indicadorRolesYAgentes = "02";
 
-		modelService.save(customerModel);
 
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = consultaContribuyenteBP_simplificado(
+					customerModel.getNumBP(), indicador);
+			if (indicador != null && indicador.contains(indicadorBasica))
+			{
+				grabarInfoContrib(customerModel, sdhConsultaContribuyenteBPResponse);
+				grabarImpuestos(customerModel, sdhConsultaContribuyenteBPResponse);
+			}
+			if (indicador != null && indicador.contains(indicadorRolesYAgentes))
+			{
+				grabarRoles(customerModel, sdhConsultaContribuyenteBPResponse);
+				grabarAgentes(customerModel, sdhConsultaContribuyenteBPResponse);
+			}
+
+			modelService.save(customerModel);
+		}
 
 		//			response = response.replace("\"infoContrib\":[", "\"infoContrib\": ");
 		//			response = response.replace("}],\"roles\":[", "},\"roles\":[");
 
 		return customerModel;
 	}
+
+
+	public SDHValidaMailRolResponse consultaContribuyenteBP_simplificado(final String numBP, final String indicador)
+	{
+
+		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
+
+		final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
+		consultaContribBPRequest.setNumBP(numBP);
+		consultaContribBPRequest.setIndicador(indicador);
+
+		sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+				.consultaContribuyenteBP_simplificado(consultaContribBPRequest);
+
+
+		return sdhConsultaContribuyenteBPResponse;
+	}
+
 
 
 	public CustomerModel updateImpuestoVehicular_simplificado(final CustomerModel customerModel, final List<ImpuestoVehiculos> vehiculos)
@@ -1812,7 +1833,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		final String response = null;
 
 
-		sdhConsultaContribuyenteBPRespons = sdhConsultaContribuyenteBPService.mapearInfo(customerModel);
+		sdhConsultaContribuyenteBPRespons = mapearInfo(customerModel);
 
 		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
 		final Set<PrincipalGroupModel> newGroupList = new HashSet<>();
@@ -2011,7 +2032,84 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		SDHValidaMailRolResponse sdhValidaMailRolResponse = new SDHValidaMailRolResponse();
 		sdhValidaMailRolResponse = this.getBPDataFromCustomer(customerModel);
 
-		if (taxCode == "06")
+
+		if (taxCode == "01") //Predial
+		{
+			List<PredialResponse> predial = new ArrayList<PredialResponse>();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+				predial = sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setPredial(predial);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setPredial(predial);
+			}
+		}
+		else if (taxCode == "02")//Vehicular
+		{
+			List<ImpuestoVehiculos> vehicular = new ArrayList<ImpuestoVehiculos>();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+				vehicular = sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setVehicular(vehicular);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setVehicular(vehicular);
+			}
+		}
+		else if (taxCode == "03")//ICA
+		{
+			ImpuestoICA ica = new ImpuestoICA();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+				ica = sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setIca(ica);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setIca(ica);
+			}
+		}
+		else if (taxCode == "04")//RETEICA
+		{
+
+		}
+		else if (taxCode == "05")//Gasolina
+		{
+			List<ImpuestoGasolina> gasolina = new ArrayList<ImpuestoGasolina>();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+				gasolina = sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setGasolina(gasolina);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setGasolina(gasolina);
+			}
+		}
+		else if (taxCode == "06")//Delineacion
 		{
 			List<ImpuestoDelineacionUrbana> delineacion = new ArrayList<ImpuestoDelineacionUrbana>();
 
@@ -2030,8 +2128,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			}
 
 		}
-
-		if (taxCode == "07")
+		else if (taxCode == "07")//Publicidad
 		{
 			List<ImpuestoPublicidadExterior> publicidad = new ArrayList<ImpuestoPublicidadExterior>();
 
@@ -2092,6 +2189,141 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 		//return customerModel;
 
+	}
+
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHCustomerAccountService#getRepresentadoFromSAP_ingresar(java.lang.String)
+	 */
+	@Override
+	public SDHValidaMailRolResponse getRepresentadoFromSAP_ingresar(final String numBP)
+	{
+		// XXX Auto-generated method stub
+		return null;
+	}
+
+
+	public SDHValidaMailRolResponse mapearInfo(final CustomerModel customerModel)
+	{
+		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
+
+		if (customerModel != null)
+		{
+			sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
+
+			sdhConsultaContribuyenteBPResponse.setImpuestos(mapearImpuestos(customerModel.getContribTaxList()));
+		}
+
+		return sdhConsultaContribuyenteBPResponse;
+	}
+
+	/**
+	 * @param contribTaxList
+	 * @return
+	 */
+	public List<ImpuestosResponse> mapearImpuestos(final List<SDHContribTaxModel> contribTaxList)
+	{
+		List<ImpuestosResponse> impuestosResponse = null;
+
+		if (contribTaxList != null)
+		{
+			impuestosResponse = new ArrayList<ImpuestosResponse>();
+			ImpuestosResponse elementoImpuestosResponse = null;
+
+			for (final SDHContribTaxModel elementoContribTaxList : contribTaxList)
+			{
+				elementoImpuestosResponse = new ImpuestosResponse();
+
+				elementoImpuestosResponse.setCantObjetos(elementoContribTaxList.getCantObjetos());
+				elementoImpuestosResponse.setClaseObjeto(elementoContribTaxList.getClaseObjeto());
+
+				impuestosResponse.add(elementoImpuestosResponse);
+			}
+		}
+
+
+		return impuestosResponse;
+	}
+
+
+	@Override
+	public CustomerModel mapearInfo(final SDHValidaMailRolResponse sdhValidaMailRolResponse)
+	{
+		CustomerModel customerModel = null;
+
+		if (sdhValidaMailRolResponse != null)
+		{
+			customerModel = new CustomerModel();
+
+			//			sdhConsultaContribuyenteBPResponse.setImpuestos(mapearImpuestos(customerModel.getContribTaxList()));
+			if (sdhValidaMailRolResponse.getInfoContrib() != null)
+			{
+				customerModel.setNumBP(sdhValidaMailRolResponse.getInfoContrib().getNumBP());
+				customerModel.setDocumentType(sdhValidaMailRolResponse.getInfoContrib().getTipoDoc());
+				customerModel.setDocumentNumber(sdhValidaMailRolResponse.getInfoContrib().getNumDoc());
+				//convertir campos restantes
+			}
+
+		}
+
+		return customerModel;
+
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * de.hybris.sdh.core.services.SDHCustomerAccountService#mapearInfo_CustomerData(de.hybris.sdh.core.pojos.responses.
+	 * SDHValidaMailRolResponse)
+	 */
+	@Override
+	public CustomerData mapearInfo_CustomerData(final SDHValidaMailRolResponse sdhValidaMailRolResponse)
+	{
+		CustomerData customerData = null;
+
+
+		if (sdhValidaMailRolResponse != null)
+		{
+			customerData = new CustomerData();
+
+			customerData.setNumBP(sdhValidaMailRolResponse.getInfoContrib().getNumBP());
+			customerData.setDocumentNumber(sdhValidaMailRolResponse.getInfoContrib().getNumDoc());
+			customerData.setDocumentType(sdhValidaMailRolResponse.getInfoContrib().getTipoDoc());
+
+
+			if (sdhValidaMailRolResponse.getAgentes() != null)
+			{
+				final List<SDHAgentData> list = new ArrayList<SDHAgentData>();
+
+				for (final ContribAgente eachAgent : sdhValidaMailRolResponse.getAgentes())
+				{
+					final SDHAgentData eachAgentData = new SDHAgentData();
+
+					eachAgentData.setBp(eachAgent.getBp());
+					eachAgentData.setInternalFunction(eachAgent.getFuncionInterl());
+					eachAgentData.setDocumentType(eachAgent.getTipoDoc());
+					eachAgentData.setDocumentNumber(eachAgent.getNumDoc());
+					eachAgentData.setCompleteName(eachAgent.getNomCompleto());
+					eachAgentData.setAgent(eachAgent.getAgente());
+
+					list.add(eachAgentData);
+
+				}
+
+				customerData.setAgentList(list);
+			}
+
+			final StringBuilder nameBuilder = new StringBuilder();
+
+			customerData.setCompleteName(sdhValidaMailRolResponse.getCompleteName());
+		}
+
+		return customerData;
 	}
 
 }
