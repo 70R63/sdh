@@ -53,8 +53,8 @@
 				<p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Categoria:
 				</p>
 				<!-- 				<select id="categoriaBuscar" class="new_alto form-control " name="categoria" onchange="showquestion(this)"> -->
-				<select id="categoriaBuscar" class="new_alto form-control "
-					name="categoria">
+				<select id="categoriaBusca" class="new_alto form-control "
+					name="categoria" onchange="showquestion()">
 					<option hidden="true" value="00">Seleccionar</option>
 					<c:forEach items="${sdhFAQsCategories}" var="category">
 						<option value="${category.code}"
@@ -69,8 +69,8 @@
 					class="new_alto form-control " minlength="4" maxlength="8"
 					size="10" value="${word}">
 
-				<button class="btn btn-primary" id="keyWordSearch">Buscar
-					palabra clave:</button>
+				<button class="btn btn-primary" id="keyWordSearchs"
+					onclick="searchKeyWord()">Buscar palabra clave:</button>
 			</div>
 		</div>
 
@@ -151,12 +151,13 @@
 												</button>
 											</a>
 										</div>
-											<div class="col-md-1">
-											<input type="text" value="https://${name}${path}/preguntasfrecuentes?code=${faqs.code}" id="urlCopy" style= "display:none">
-												<button class="buttonCopy" id="btnCopyUrl">
-												</button>	
+										<div class="col-md-1">
+											<input type="text"
+												value="https://${name}${path}/preguntasfrecuentes?code=${faqs.code}"
+												id="urlCopy" style="display: none">
+											<button class="buttonCopy" id="btnCopyUrls" onclick="copyText()"></button>
 
-									    	</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -170,4 +171,35 @@
 	</div>
 </div>
 
+<script>
+	function showquestion() {
+		var currentUrl = window.location.href;
+		var categoryId = document.getElementById("categoriaBusca").value;
+		if (currentUrl.includes("?")) {
+			currentUrl = currentUrl.split('?')[0];
+		}
+
+		window.location.href = currentUrl + "?categoryId=" + categoryId;
+	}
+
+	function searchKeyWord() {
+		var currentUrl = window.location.href;
+		var keyWord = $("#faqKeyWord").val();
+		if (currentUrl.includes("?")) {
+			currentUrl = currentUrl.split('?')[0];
+		}
+		window.location.href = currentUrl + "?keyWord=" + keyWord;
+	}
+	
+	function copyText() {
+	var copyText = document.getElementById("urlCopy");
+	copyText.select();
+	copyText.setSelectionRange(0, 99999); 
+	document.execCommand("copy");
+
+	// alert("Copied the text: " + copyText.value);
+	alert("Copiado");
+	}
+
+</script>
 
