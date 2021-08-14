@@ -51,7 +51,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -60,6 +59,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Federico Flores Dimas
@@ -138,12 +140,17 @@ public class ConsultaEstado extends AbstractSearchPageController
 			edoCuentaRequest.setBp(customerModel.getNumBP());
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			String responseStr = sdhEdoCuentaService.detalleEdoCta(edoCuentaRequest);
 			responseStr = responseStr.replace(",\"\"]},{\"detalleReteica\":[\"\",\"\"]}", "]}");
 			responseStr = responseStr.replace(",{\"detalleReteica\":[\"\",\"\"]}", "");
 			responseStr = responseStr.replace("{\"detalleReteica\":[\"\",\"\"]}", "");
+			responseStr = responseStr.replace("[{\"detalleReteica\":[\"\"]}],",
+					"[{\"detalleReteica\":[\"anioGravable\":\"\",\"periodo\":\"\",\"estado\":\"\",\"saldoCargo\":\"\",\"saldoFavor\":\"\"]}],");
+
+			System.out.println("---------------- Despues de ajustes --------------------------");
+			System.out.println(responseStr);
 
 			final EdoCuentaResponse edoCuentaResponse = mapper.readValue(responseStr, EdoCuentaResponse.class);
 
@@ -242,7 +249,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 		consultaContribuyenteBPRequest.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
 
 		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		try
 		{
