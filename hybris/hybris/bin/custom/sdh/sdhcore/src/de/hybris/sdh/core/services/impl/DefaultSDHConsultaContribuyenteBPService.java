@@ -198,6 +198,10 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 	{
 		SDHValidaMailRolResponse wsResponse = null;
 		final ObjectMapper mapper = new ObjectMapper();
+		if (wsRequest.getIndicador() == null)
+		{
+			wsRequest.setIndicador("01");
+		}
 		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		try
 		{

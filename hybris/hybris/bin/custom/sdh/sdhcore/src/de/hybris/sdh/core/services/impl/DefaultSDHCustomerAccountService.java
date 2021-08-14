@@ -181,15 +181,13 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 
 
-		try
+		final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
+		consultaContribBPRequest.setNumBP(customerModel.getNumBP());
+
+		final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+				.consultaContribuyenteBP_simplificado(consultaContribBPRequest);
+		if (sdhConsultaContribuyenteBPResponse != null)
 		{
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-
 			if ("nit".equalsIgnoreCase(customerModel.getDocumentType()) || "nite".equalsIgnoreCase(customerModel.getDocumentType()))
 			{
 				customerModel.setName(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1());
@@ -199,18 +197,13 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 				customerModel.setName(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom());
 			}
 
-
 			customerModel.setMiddleName(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom());
 			customerModel.setSecondLastName(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe());
-
 		}
-		catch (final Exception e)
+		else
 		{
-			// XXX Auto-generated catch block
-			LOG.error("error getting customer info from SAP: " + e.getMessage());
+			LOG.error("error getting customer info from SAP: ");
 		}
-
-
 
 
 		registerCustomer(customerModel, password);
