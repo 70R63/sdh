@@ -32,35 +32,35 @@
 					<div class="row">
 						<div class="col-md-3">
 							<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.documentType" />
 								</label>
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.documentNumber" />
 								</label>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.name" />
 								</label>
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.as" />
 								</label>
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="form-group ">
-								<label class="control-label required" for="address.surname"  style="margin-left: 50px !important">
+								<label class="control-label" for="address.surname"  style="margin-left: 50px !important">
 									<spring:theme code="mirit.myRepresentants.refentTo" />
 								</label>
 							</div>
@@ -72,7 +72,7 @@
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
 										class="newalto_dir form-control" disabled="disabled"
-										aria-required="true" type="text"
+									type="text"
 										value="<spring:theme code="register.id.types.${eachAgent.tipoDoc}"/>"
 										maxlength="240">
 									<div class="help-block">
@@ -85,7 +85,7 @@
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
-										aria-required="true" type="text" value="${eachAgent.numDoc}"
+										 type="text" value="${eachAgent.numDoc}"
 										maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -97,7 +97,7 @@
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
 										class="newalto_dir form-control" disabled="disabled"
-										aria-required="true" type="text"
+									 type="text"
 										value="${eachAgent.nomCompleto}" maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -109,7 +109,7 @@
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
-										aria-required="true" type="text"
+										 type="text"
 										value="${eachAgent.funcionInterl }" maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -121,7 +121,7 @@
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
-										aria-required="true" type="text" value="${eachAgent.impuesto}"
+										¿ type="text" value="${eachAgent.impuesto}"
 										maxlength="240" style="margin-left: 50px !important">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -149,35 +149,35 @@
 					<div class="row">
 						<div class="col-md-3">
 							<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.documentType" />
 								</label>
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.documentNumber" />
 								</label>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.name" />
 								</label>
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.as" />
 								</label>
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="form-group ">
-								<label class="control-label required" for="address.surname"  style="margin-left: 50px !important">
+								<label class="control-label" for="address.surname"  style="margin-left: 50px !important">
 									<spring:theme code="mirit.myRepresentants.refentTo" />
 								</label>
 							</div>
@@ -189,7 +189,7 @@
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
 										class="newalto_dir form-control" disabled="disabled"
-										aria-required="true" type="text"
+										type="text"
 										value="<spring:theme code="register.id.types.${eachAgent.tipoDoc}"/>"
 										maxlength="240">
 									<div class="help-block">
@@ -202,7 +202,7 @@
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
-										aria-required="true" type="text" value="${eachAgent.numDoc}"
+										 type="text" value="${eachAgent.numDoc}"
 										maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -214,7 +214,7 @@
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
 										class="newalto_dir form-control" disabled="disabled"
-										aria-required="true" type="text"
+										 type="text"
 										value="${eachAgent.nomCompleto}" maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -226,7 +226,7 @@
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
-										aria-required="true" type="text"
+										 type="text"
 										value="${eachAgent.funcionInterl}" maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -238,7 +238,7 @@
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
-										aria-required="true" type="text" value="${eachAgent.impuesto}"
+									type="text" value="${eachAgent.impuesto}"
 										maxlength="240"  style="margin-left: 50px !important">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -393,12 +393,12 @@
 						<div class="row">
 							<div class="col-md-3">
 								<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.documentType" />
 								</label>
 									<input id="address.surname" name="lastName"
 										class="newalto_dir form-control" disabled="disabled"
-										aria-required="true" type="text"
+										type="text"
 										value="<spring:theme code="register.id.types.${eachAgent.tipoDoc}"/>"
 										maxlength="240">
 									<div class="help-block">
@@ -409,12 +409,12 @@
 							</div>
 							<div class="col-md-2">
 								<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.documentNumber" />
 								</label>
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
-										aria-required="true" type="text" value="${eachAgent.numDoc}"
+										 type="text" value="${eachAgent.numDoc}"
 										maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -424,12 +424,12 @@
 							</div>
 							<div class="col-md-3">
 								<div class="form-group ">
-									<label class="control-label required" for="address.surname">
+									<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.name" />
 								</label>
 									<input id="address.surname" name="lastName"
 										class="newalto_dir form-control" disabled="disabled"
-										aria-required="true" type="text"
+										 type="text"
 										value="${eachAgent.nomCompleto}" maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -439,12 +439,12 @@
 							</div>
 							<div class="col-md-2">
 								<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.as" />
 								</label>
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
-										aria-required="true" type="text"
+										type="text"
 										value="${eachAgent.funcionInterl }" maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -454,12 +454,12 @@
 							</div>
 							<div class="col-md-2">
 								<div class="form-group ">
-								<label class="control-label required" for="address.surname"  style="margin-left: 50px !important">
+								<label class="control-label" for="address.surname"  style="margin-left: 50px !important">
 									<spring:theme code="mirit.myRepresentants.refentTo" />
 								</label>
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
-										aria-required="true" type="text" value="${eachAgent.impuesto}"
+										type="text" value="${eachAgent.impuesto}"
 										maxlength="240" style="margin-left: 50px !important">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -520,12 +520,12 @@
 						<div class="row">
 							<div class="col-md-3">
 								<div class="form-group ">
-									<label class="control-label required" for="address.surname">
+									<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.documentType" />
 								</label>
 									<input id="address.surname" name="lastName"
 										class="newalto_dir form-control" disabled="disabled"
-										aria-required="true" type="text"
+										 type="text"
 										value="<spring:theme code="register.id.types.${eachAgent.tipoDoc}"/>"
 										maxlength="240">
 									<div class="help-block">
@@ -536,12 +536,12 @@
 							</div>
 							<div class="col-md-2">
 								<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.documentNumber" />
 								</label>
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
-										aria-required="true" type="text" value="${eachAgent.numDoc}"
+										 type="text" value="${eachAgent.numDoc}"
 										maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -551,12 +551,12 @@
 							</div>
 							<div class="col-md-3">
 								<div class="form-group ">
-									<label class="control-label required" for="address.surname">
+									<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.name" />
 								</label>
 									<input id="address.surname" name="lastName"
 										class="newalto_dir form-control" disabled="disabled"
-										aria-required="true" type="text"
+										 type="text"
 										value="${eachAgent.nomCompleto}" maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -566,12 +566,12 @@
 							</div>
 							<div class="col-md-2">
 								<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.as" />
 								</label>
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
-										aria-required="true" type="text"
+										 type="text"
 										value="${eachAgent.funcionInterl}" maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
@@ -581,12 +581,12 @@
 							</div>
 							<div class="col-md-2">
 								<div class="form-group ">
-								<label class="control-label required" for="address.surname"  style="margin-left: 50px !important">
+								<label class="control-label" for="address.surname"  style="margin-left: 50px !important">
 									<spring:theme code="mirit.myRepresentants.refentTo" />
 								</label>
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
-										aria-required="true" type="text" value="${eachAgent.impuesto}"
+										type="text" value="${eachAgent.impuesto}"
 										maxlength="240"  style="margin-left: 50px !important">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
