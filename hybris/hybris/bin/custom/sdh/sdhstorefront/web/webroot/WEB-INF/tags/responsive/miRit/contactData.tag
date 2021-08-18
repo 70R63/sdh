@@ -282,6 +282,19 @@ var toddir = document.getElementById('address.assistant.output');
 toddir.style.width= '900px'
 
 	}
+	
+	function showExt(){
+		var selectOption = document.getElementById("phoneSelect").value;
+		var exte = document.getElementById("phoneExtension");
+		
+		if(selectOption == "02"){
+			exte.style.display = "block";
+		}else{
+			exte.style.display = "none";
+		}
+		
+		
+	}
 </script>
 <div id="acordeon" class="container">
 	<div class="card cardmirit ">
@@ -1018,11 +1031,17 @@ toddir.style.width= '900px'
 				<div class="row">
 					<div class="col-md-2">
 						<div class="form-group ">
-							<label class="control-label required" for="telefonoPricipal">
-								<spring:theme code="mirit.contactData.landPhone" />
-							</label> <input id="telefonoPricipal" name="telefonoPricipal"
-								class="newalto form-control" aria-required="true"
-								type="text" value="${miRitForm.telefonoPricipal }"
+<!-- 							<label class="control-label" for="telefonoPricipal"> -->
+<%-- 								<spring:theme code="mirit.contactData.landPhone" /> --%>
+<!-- 							</label>  -->
+						<select class="newalto form-control" id="phoneSelect" onchange="showExt()">
+							<option value="00">Seleccionar</option>
+							<option value="01">Movil</option>
+							<option value="02">Oficina</option>
+							<option value="03">Fijo</option>
+						</select>
+							<input id="telefonoPricipal" name="telefonoPricipal"
+								class="newalto form-control" type="text" value="${miRitForm.telefonoPricipal }"
 								maxlength="240" onkeyup="ajustar(this)">
 							<div class="help-block">
 								<span id="telefonoPricipal.errors" class="hidden">Seleccione
@@ -1030,7 +1049,7 @@ toddir.style.width= '900px'
 							</div>
 						</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-2" id="phoneExtension" style="display: none">
 						<div class="form-group ">
 							<label class="control-label required" for="extensionTelefono">
 								<spring:theme code="mirit.contactData.extension" />
@@ -1038,10 +1057,7 @@ toddir.style.width= '900px'
 								class="newalto form-control" aria-required="true"
 								type="text" value="${miRitForm.extensionTelefono }"
 								maxlength="240" onkeyup="ajustar(this)">
-							<div class="help-block">
-								<span id="lastName.errors" class="hidden">Seleccione un
-									tipo de documento</span>
-							</div>
+						
 						</div>
 					</div>
 				</div>

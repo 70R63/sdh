@@ -38,10 +38,10 @@
 						<!-- 					</div> -->
 						<!-- 				</div> -->
 						<div class="form-group ">
-							<label class="control-label required" for="sexo"> <spring:theme
+							<label class="control-label" for="sexo"> <spring:theme
 									code="mirit.generalData.gender" />
 							</label> <input id="sexo" name="sexo" class="newalto form-control"
-								disabled="disabled" aria-required="true" type="text"
+								disabled="disabled" type="text"
 								value="<spring:theme code="rit.sexo.s${miRitForm.sexo}" />"
 								maxlength="240">
 							<div class="help-block">
@@ -52,7 +52,7 @@
 					</div>
 						<div class="col-md-2">
 						<div class="form-group ">
-							<label class="control-label required" for="claseIC"> <spring:theme
+							<label class="control-label" for="claseIC"> <spring:theme
 									code="mirit.generalData.classIC" />
 							</label> <select id="claseIC" name="claseIC" class="alto_select form-control"
 								disabled="disabled">
@@ -67,11 +67,11 @@
 					</div>
 					<div class="col-md-2">
 						<div class="form-group ">
-							<label class="control-label required" for="birthDate"> <spring:theme
+							<label class="control-label" for="birthDate"> <spring:theme
 									code="mirit.generalData.birthDate" />
 							</label> <input id="birthDate" name="birthDate"
 								class="newseis newalto form-control" disabled="disabled"
-								aria-required="true" type="text"
+							 type="text"
 								value="${miRitForm.fechaNacimiento}" maxlength="240">
 							<div class="help-block">
 								<span id="lastName.errors" class="hidden">Seleccione un
@@ -81,10 +81,10 @@
 					</div>
 						<div class="col-md-2">
 						<div class="form-group ">
-							<label class="control-label required" for="nacionalidad">
+							<label class="control-label" for="nacionalidad">
 								<spring:theme code="mirit.generalData.nationality" />
 							</label> <input id="nacionalidad" name="nacionalidad" disabled="disabled"
-								class="newalto form-control  " aria-required="true" type="text"
+								class="newalto form-control" type="text"
 								value="<spring:theme code="rit.pais.p${miRitForm.nacionalidad}" />"
 								maxlength="240">
 							<div class="help-block">
@@ -95,11 +95,10 @@
 					</div>
 					<div class="col-md-2">
 						<div class="form-group ">
-							<label class="control-label required" for="paisOrigen"> <spring:theme
+							<label class="control-label" for="paisOrigen"> <spring:theme
 									code="mirit.generalData.originCountry" />
 							</label> <input id="paisOrigen" name="paisOrigen"
-								class="newalto form-control " disabled="disabled"
-								aria-required="true" type="text"
+								class="newalto form-control " disabled="disabled" type="text"
 								value="<spring:theme code="rit.pais.p${miRitForm.paisOrigen}" />"
 								maxlength="240">
 							<div class="help-block">
@@ -116,11 +115,10 @@
 				
 					<div class="col-md-2">
 						<div class="form-group ">
-							<label class="control-label required" for="lugarNacimiento">
+							<label class="control-label" for="lugarNacimiento">
 								<spring:theme code="mirit.generalData.birthPlace" />
 							</label> <input id="lugarNacimiento" name="lugarNacimiento"
-								class="newalto form-control  " disabled="disabled"
-								aria-required="true" type="text"
+								class="newalto form-control  " disabled="disabled" type="text"
 								value="${miRitForm.lugarNacimiento}" maxlength="240">
 							<div class="help-block">
 								<span id="lastName.errors" class="hidden">Seleccione un
