@@ -1094,6 +1094,7 @@ ACC.opcionDeclaraciones = {
     },
 
 	validarDeclaracion : function(url,placa){
+		debugger;
 		ACC.spinner.show();
 	    var anioGravable = document.getElementById("anoGravable").value;
 	    var impuesto = document.getElementById("impuesto");
@@ -1116,6 +1117,7 @@ ACC.opcionDeclaraciones = {
             url : currentUrl,
             type : "GET",
             success : function(data) {
+				debugger;
 				ACC.spinner.close();
                 if(data == "02"){
                     ACC.opcionDeclaraciones.promtConfirmation(url);

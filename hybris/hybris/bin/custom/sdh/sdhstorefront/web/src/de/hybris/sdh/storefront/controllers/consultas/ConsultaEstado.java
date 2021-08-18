@@ -10,6 +10,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -147,7 +148,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 			responseStr = responseStr.replace(",{\"detalleReteica\":[\"\",\"\"]}", "");
 			responseStr = responseStr.replace("{\"detalleReteica\":[\"\",\"\"]}", "");
 			responseStr = responseStr.replace("[{\"detalleReteica\":[\"\"]}],",
-					"[{\"detalleReteica\":[\"anioGravable\":\"\",\"periodo\":\"\",\"estado\":\"\",\"saldoCargo\":\"\",\"saldoFavor\":\"\"]}],");
+					"[{\"detalleReteica\":[{\"anioGravable\":\"\",\"periodo\":\"\",\"estado\":\"\",\"saldoCargo\":\"\",\"saldoFavor\":\"\"}]}],");
 
 			System.out.println("---------------- Despues de ajustes --------------------------");
 			System.out.println(responseStr);

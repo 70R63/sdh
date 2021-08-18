@@ -129,6 +129,24 @@ ACC.facturacion = {
 			 flagValidacion = true;
 		 }
 		 return flagValidacion;
-	 }
+	 },
+
+	copieied: function(text) {
+
+	 $("#asmCopyHoldtext").val(text);
+    $("#asmCopyHoldtext").show();
+    $("#asmCopyHoldtext").select();
+    try {
+        return document.execCommand("copy");
+    } catch (ex) {
+        console.debug("Copy to clipboard failed.", ex);
+        return false;
+    } finally {
+        $("#asmCopyHoldtext").hide();
+    }
+
+		
+
+	},
 	
 };
