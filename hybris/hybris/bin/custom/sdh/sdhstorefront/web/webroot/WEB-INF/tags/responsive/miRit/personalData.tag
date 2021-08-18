@@ -41,7 +41,7 @@
 					<div class="row">
 						<div class="col-md-3">
 							<div class="form-group ">
-								<label class="control-label required" for="tipoDoc"> <spring:theme
+								<label class="control-label" for="tipoDoc"> <spring:theme
 										code="mirit.personalData.documentType"
 										text="Mis datos personales" />
 								</label> <select id="documentType" class="alto_select form-control "
@@ -58,10 +58,10 @@
 						</div>
 						<div class="col-md-3">
 							<div class="form-group ">
-								<label class="control-label required" for="numDoc"> <spring:theme
+								<label class="control-label" for="numDoc"> <spring:theme
 										code="mirit.personalData.documentNumber" />
 								</label> <input id="numDoc" name="numDoc"
-									class="newseis newalto form-control" aria-required="true"
+									class="newseis newalto form-control"
 									disabled="disabled" type="text" value="${miRitForm.numDoc }"
 									maxlength="240">
 								<div class="help-block">
@@ -74,10 +74,10 @@
 					<div class="row">
 						<div class="col-md-2">
 							<div class="form-group ">
-								<label class="control-label required" for="primNom"> <spring:theme
+								<label class="control-label" for="primNom"> <spring:theme
 										code="mirit.personalData.firstName" />
 								</label> <input id="primNom" name="primNom" class="newalto form-control"
-									aria-required="true" type="text"
+									 type="text"
 									data-original="${miRitForm.primNom }"
 									value="${miRitForm.primNom }" maxlength="240"
 									onkeyup="ajustar(this)">
@@ -89,10 +89,10 @@
 						</div>
 						<div class="col-md-2">
 							<div class="form-group ">
-								<label class="control-label required" for="segNom"> <spring:theme
+								<label class="control-label" for="segNom"> <spring:theme
 										code="mirit.personalData.secondFirstName" />
 								</label> <input id="segNom" name="segNom" class="newalto form-control"
-									aria-required="true" type="text"
+									 type="text"
 									data-original="${miRitForm.segNom }"
 									value="${miRitForm.segNom }" maxlength="240"
 									onkeyup="ajustar(this)">
@@ -104,10 +104,10 @@
 						</div>
 						<div class="col-md-2">
 							<div class="form-group ">
-								<label class="control-label  required" for="primApe"> <spring:theme
+								<label class="control-label" for="primApe"> <spring:theme
 										code="mirit.personalData.firstLastName" />
 								</label> <input id="primApe" name="primApe" class="newalto form-control"
-									aria-required="true" type="text"
+									 type="text"
 									data-original="${miRitForm.primApe }"
 									value="${miRitForm.primApe }" maxlength="240"
 									onkeyup="ajustar(this)">
@@ -119,10 +119,10 @@
 						</div>
 						<div class="col-md-2">
 							<div class="form-group ">
-								<label class="control-label required" for="segApe"> <spring:theme
+								<label class="control-label" for="segApe"> <spring:theme
 										code="mirit.personalData.secondLasName" />
 								</label> <input id="segApe" name="segApe" class="newalto form-control"
-									aria-required="true" type="text"
+									 type="text"
 									data-original="${miRitForm.segApe }"
 									value="${miRitForm.segApe }" maxlength="240"
 									onkeyup="ajustar(this)">
@@ -136,10 +136,10 @@
 					<div class="row">
 						<div class="col-md-3">
 							<div class="form-group ">
-								<label class="control-label required" for="fchExp"> <spring:theme
+								<label class="control-label" for="fchExp"> <spring:theme
 										code="mirit.personalData.documnetIssueDate" />
 								</label> <input id="fchExp" name="fchExp"
-									class="newalto form-control" aria-required="true"
+									class="newalto form-control"
 									type="text" value="${miRitForm.fchExp }" maxlength="240"
 									placeholder="dd/mm/aaaa">
 								<div class="help-block">
