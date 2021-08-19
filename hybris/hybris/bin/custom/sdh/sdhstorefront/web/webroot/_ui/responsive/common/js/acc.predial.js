@@ -109,6 +109,7 @@ ACC.predial = {
 	},
 
 	detalle_tres : function(anioGravable, chip, matrInmobiliaria) {
+		debugger;
 		ACC.spinner.show();
 		var show = document.getElementById('InicialDetalle');
 		show.style.display = 'block';
@@ -138,7 +139,8 @@ ACC.predial = {
 					url : ACC.predialDetalleURL,
 					data : data,
 					type : "GET",
-					success : function(result) {						
+					success : function(result) {	
+						debugger;
 						ACC.spinner.close();
 						ACC.predial.leerMensajesInfoObjeto2(result);
 						$(".chip").val(result.chip);

@@ -10,6 +10,7 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.core.GenericSearchConstants.LOG;
+import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
@@ -25,6 +26,8 @@ import de.hybris.sdh.core.pojos.responses.ObligacionesPredialResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ReteicaObligacionesResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHObligacionesDeliService;
 import de.hybris.sdh.core.services.SDHObligacionesGasolinaService;
 import de.hybris.sdh.core.services.SDHObligacionesICAService;
@@ -37,6 +40,7 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaSe
 import de.hybris.sdh.storefront.forms.ObligacionesForm;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -44,13 +48,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -108,6 +114,9 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
 
+	@Resource(name = "sdhCustomerAccountService")
+	SDHCustomerAccountService sdhCustomerAccountService;
+
 
 	private static final Logger LOG = Logger.getLogger(SobreTasaGasolina.class);
 
@@ -125,15 +134,80 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		String wsResponse = null;
 		String wsResponseReteica = null;
+		final SDHValidaMailRolResponse contImpuestos = null;
+
 
 		final ObligacionesRequest obligacionesRequest = new ObligacionesRequest();
 		obligacionesRequest.setBp(customerModel.getNumBP());
 		final ObligacionesForm obligacionesFormuno = new ObligacionesForm();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+
+		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
+
+		for (final PrincipalGroupModel group : groupList)
+		{
+			final String groupUid = group.getUid();
+
+			//			if (groupUid.contains("predialUsrTaxGrp"))
+			//			{
+			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
+			//				
+			//				for(contImpuestos.getPredial())
+			//				final List<SDHPredialTaxData> predialTaxList = (List<SDHPredialTaxData>) (SDHPredialTaxData) contImpuestos.getPredial();
+			//				customerData.setPredialTaxList(predialTaxList);
+			//			}
+			//
+			//			if (groupUid.contains("vehicularUsrTaxGrp"))
+			//			{
+			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "02");
+			//
+			//				final List<SDHVehiculosTaxData> vehiculosTaxList = (List<SDHVehiculosTaxData>) (SDHVehiculosTaxData) contImpuestos
+			//						.getVehicular();
+			//				customerData.setVehiculosTaxList(vehiculosTaxList);
+			//			}
+			//
+			//			if (groupUid.contains("ICAUsrTaxGrp"))
+			//			{
+			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "03");
+			//
+			//				final SDHICATaxData icaTax = new SDHICATaxData();
+			//				icaTax.setObjectNumber(contImpuestos.getIca().getNumObjeto());
+			//				customerData.setIcaTax(icaTax);
+			//			}
+			//
+			//			if (groupUid.contains("gasolinaUsrTaxGrp"))
+			//			{
+			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "05");
+			//
+			//				final List<SDHGasTaxData> gasTaxList = (List<SDHGasTaxData>) (SDHGasTaxData) contImpuestos.getGasolina();
+			//				customerData.setGasTaxList(gasTaxList);
+			//			}
+			//
+			//			if (groupUid.contains("delineacionUsrTaxGrp"))
+			//			{
+			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
+			//
+			//				final List<SDHUrbanDelineationsTaxData> urbanDelineationsTaxList = (List<SDHUrbanDelineationsTaxData>) (SDHUrbanDelineationsTaxData) contImpuestos
+			//						.getDelineacion();
+			//				customerData.setUrbanDelineationsTaxList(urbanDelineationsTaxList);
+			//			}
+			//
+			//			if (groupUid.contains("publicidadExtUsrTaxGrp"))
+			//			{
+			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "07");
+			//
+			//				final List<SDHExteriorPublicityTaxData> exteriorPublicityTaxList = (List<SDHExteriorPublicityTaxData>) (SDHExteriorPublicityTaxData) contImpuestos
+			//						.getPublicidadExt();
+			//				customerData.setExteriorPublicityTaxList(exteriorPublicityTaxList);
+			//			}
+
+		}
+
+
 		final Map listaImpuestosCustomer = gasolinaService.obtenerListaImpuestosActivos(customerData);
 
 		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 

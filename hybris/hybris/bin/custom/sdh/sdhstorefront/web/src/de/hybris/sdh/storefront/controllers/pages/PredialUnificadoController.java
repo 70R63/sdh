@@ -46,6 +46,7 @@ import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalculoPredialService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePredialService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
@@ -172,6 +173,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@Resource(name = "sdhImpPredialServiceImpl")
 	SDHImpPredialService sdhImpPredialServiceImpl;
+
+	@Resource(name = "sdhCustomerAccountService")
+	SDHCustomerAccountService sdhCustomerAccountService;
 
 	private static final Logger LOG = Logger.getLogger(PredialUnificadoController.class);
 
@@ -2105,6 +2109,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		}
 
 		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		SDHValidaMailRolResponse contImpuestos = null;
+
+		contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
+		contribuyenteData.setPredial(contImpuestos.getPredial());
+
 		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
 				.filter(d -> predialFormbases.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormbases.setContribuyenteData(contribuyenteData);
