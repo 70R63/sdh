@@ -2145,6 +2145,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 	}
 
 
+
+
+
 	@Override
 	public void updateImpuestoGasolina_simplificado(final CustomerModel customerModel,
 			final ImpGasolinaSimpliResponse gasolinaResponse)
@@ -2317,6 +2320,132 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		}
 
 		return customerData;
+	}
+
+
+	@Override
+	public SDHValidaMailRolResponse getBPAndTaxDataFromCustomer(final String numBP, final String taxCode)
+	{
+		final SDHValidaMailRolResponse sdhValidaMailRolResponse = new SDHValidaMailRolResponse();
+
+
+
+		if (taxCode == "01") //Predial
+		{
+			List<PredialResponse> predial = new ArrayList<PredialResponse>();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(numBP);
+				predial = sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setPredial(predial);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setPredial(predial);
+			}
+		}
+		else if (taxCode == "02")//Vehicular
+		{
+			List<ImpuestoVehiculos> vehicular = new ArrayList<ImpuestoVehiculos>();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(numBP);
+				vehicular = sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setVehicular(vehicular);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setVehicular(vehicular);
+			}
+		}
+		else if (taxCode == "03")//ICA
+		{
+			ImpuestoICA ica = new ImpuestoICA();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(numBP);
+				ica = sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setIca(ica);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setIca(ica);
+			}
+		}
+		else if (taxCode == "04")//RETEICA
+		{
+
+		}
+		else if (taxCode == "05")//Gasolina
+		{
+			List<ImpuestoGasolina> gasolina = new ArrayList<ImpuestoGasolina>();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(numBP);
+				gasolina = sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setGasolina(gasolina);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setGasolina(gasolina);
+			}
+		}
+		else if (taxCode == "06")//Delineacion
+		{
+			List<ImpuestoDelineacionUrbana> delineacion = new ArrayList<ImpuestoDelineacionUrbana>();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(numBP);
+				delineacion = sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setDelineacion(delineacion);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setDelineacion(delineacion);
+			}
+
+		}
+		else if (taxCode == "07")//Publicidad
+		{
+			List<ImpuestoPublicidadExterior> publicidad = new ArrayList<ImpuestoPublicidadExterior>();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(numBP);
+				publicidad = sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setPublicidadExt(publicidad);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setPublicidadExt(publicidad);
+			}
+
+		}
+
+		return sdhValidaMailRolResponse;
 	}
 
 }

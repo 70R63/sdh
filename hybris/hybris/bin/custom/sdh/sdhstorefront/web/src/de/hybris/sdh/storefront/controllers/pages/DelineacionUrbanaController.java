@@ -61,7 +61,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -74,8 +73,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import Decoder.BASE64Decoder;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import Decoder.BASE64Decoder;
 
 /**
  * @author Maria Luisa/Federico Flores Dimas
@@ -882,7 +883,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			System.out.println("Request para generaDeclaracion : " + generaDeclaracionRequest);
 			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
@@ -954,7 +955,13 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final CustomerData currentUserData = customerFacade.getCurrentCustomer();
 		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+
 		final SDHValidaMailRolResponse valCont = sdhCustomerFacade.getRepresentadoFromSAP(representado);
+		SDHValidaMailRolResponse contImpuestos = null;
+
+		contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(representado, "06");
+		valCont.setDelineacion(contImpuestos.getDelineacion());
+
 		String paginaDestino = "";
 		String breadcrumbs = "";
 
