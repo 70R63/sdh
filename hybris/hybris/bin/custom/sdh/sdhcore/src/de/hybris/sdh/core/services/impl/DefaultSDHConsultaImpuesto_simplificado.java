@@ -211,6 +211,27 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 	}
 
 
+	@Override
+	public SDHValidaMailRolResponse consulta_impDelineacion_valCont(final ConsultaContribuyenteBPRequest wsRequest)
+	{
+		SDHValidaMailRolResponse wsResponse = null;
+		final List<ImpuestoDelineacionUrbana> impuestosDelineacion = null;
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try
+		{
+			wsResponse = mapper.readValue(consulta_impDelineacion_string(wsRequest), SDHValidaMailRolResponse.class);
+		}
+		catch (final Exception e)
+		{
+			LOG.info("Error al convertir response de consulta impuesto Delineacion");
+		}
+
+
+		return wsResponse;
+	}
+
+
 
 	public String consulta_impDelineacion_string(final ConsultaContribuyenteBPRequest wsRequest)
 	{

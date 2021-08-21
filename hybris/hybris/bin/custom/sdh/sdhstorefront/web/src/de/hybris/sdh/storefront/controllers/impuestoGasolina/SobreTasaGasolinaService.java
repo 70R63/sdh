@@ -1092,9 +1092,12 @@ public class SobreTasaGasolinaService
 
 
 			String wsresponse = sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet);
-			wsresponse = wsresponse.replaceAll("\"ARCHIVOS\":\\{([\"])(.*)(\"\\})", "\"ARCHIVOS\":[{\"$2\"}]");
-			System.out.println(confUrl + ": " + wsresponse);
-
+			//			wsresponse = wsresponse.replaceAll("\"ARCHIVOS\":\\{([\"])(.*)(\"\\})", "\"ARCHIVOS\":[{\"$2\"}]");
+			//			System.out.println(confUrl + ": " + wsresponse);
+			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.CreaCasosResponse"))
+			{
+				wsresponse = wsresponse.replaceAll("\"ARCHIVOS\":\\{([\"])(.*)(\"\\})", "\"ARCHIVOS\":[{\"$2\"}]");
+			}
 
 
 			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse"))
@@ -2053,14 +2056,18 @@ public class SobreTasaGasolinaService
 	public String obtenerNumeroObjetoDU(final InfoDelineacion infoDelineacion)
 	{
 		String numObjeto = "";
-		final List<ImpuestoDelineacionUrbana> dealineaciones = infoDelineacion.getValCont().getDelineacion();
-		final String cduSeleccionado = infoDelineacion.getInput().getSelectedCDU();
-
-		for (int i = 0; i < dealineaciones.size(); i++)
+		if (infoDelineacion != null && infoDelineacion.getValCont() != null && infoDelineacion.getValCont().getDelineacion() != null
+				&& infoDelineacion.getInput() != null && infoDelineacion.getInput().getSelectedCDU() != null)
 		{
-			if (dealineaciones.get(i).getCdu().equals(cduSeleccionado))
+			final List<ImpuestoDelineacionUrbana> dealineaciones = infoDelineacion.getValCont().getDelineacion();
+			final String cduSeleccionado = infoDelineacion.getInput().getSelectedCDU();
+
+			for (int i = 0; i < dealineaciones.size(); i++)
 			{
-				numObjeto = dealineaciones.get(i).getNumObjeto();
+				if (dealineaciones.get(i).getCdu().equals(cduSeleccionado))
+				{
+					numObjeto = dealineaciones.get(i).getNumObjeto();
+				}
 			}
 		}
 

@@ -40,6 +40,7 @@ import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
@@ -144,6 +145,10 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 
 	@Resource(name = "sdhCustomerAccountService")
 	SDHCustomerAccountService sdhCustomerAccountService;
+
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+
 
 
 	//
@@ -955,8 +960,10 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final CustomerData currentUserData = customerFacade.getCurrentCustomer();
 		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
-
-		final SDHValidaMailRolResponse valCont = sdhCustomerFacade.getRepresentadoFromSAP(representado);
+		final ConsultaContribuyenteBPRequest consultaContribRequest = new ConsultaContribuyenteBPRequest();
+		consultaContribRequest.setNumBP(representado);
+		final SDHValidaMailRolResponse valCont = sdhConsultaImpuesto_simplificado
+				.consulta_impDelineacion_valCont(consultaContribRequest);
 		SDHValidaMailRolResponse contImpuestos = null;
 
 		contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(representado, "06");

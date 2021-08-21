@@ -123,7 +123,8 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 		final String urlString = configurationService.getConfiguration().getString("sdh.validacontribuyente_simplificado.url");
 		final String user = configurationService.getConfiguration().getString("sdh.validacontribuyente_simplificado.user");
 		final String password = configurationService.getConfiguration().getString("sdh.validacontribuyente_simplificado.password");
-
+		final String timeout = configurationService.getConfiguration().getString("sdh.validacontribuyente_simplificado.timeout");
+		int valTimeOut = 0;
 
 		final long startTime = System.currentTimeMillis();
 
@@ -131,6 +132,10 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
 			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+		}
+		if (!StringUtils.isBlank(timeout))
+		{
+			valTimeOut = Integer.valueOf(timeout).intValue();
 		}
 
 		try
@@ -147,6 +152,7 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
+			conn.setConnectTimeout(valTimeOut);
 			LOG.info("connection to: " + conn.toString());
 
 			final String requestJson = request.toString();
