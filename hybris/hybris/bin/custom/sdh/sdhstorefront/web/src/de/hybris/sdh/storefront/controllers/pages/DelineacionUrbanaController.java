@@ -1043,7 +1043,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 			input.setSelectedCDU(infoImpuesto2Response.getCdu());
 			input.setSelectedRadicado(infoImpuesto2Response.getNumRadicado());
 			input.setSelectedTipoLicencia(infoImpuesto2Response.getTipoLicencia());
-			if (infoImpuesto2Response.getRetencion().equals("X"))
+			if (infoImpuesto2Response.getRetencion() != null && infoImpuesto2Response.getRetencion().equals("X"))
 			{
 				input.setTipoFlujo("R");
 			}
