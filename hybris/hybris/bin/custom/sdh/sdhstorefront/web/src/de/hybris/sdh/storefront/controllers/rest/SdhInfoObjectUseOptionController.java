@@ -1,6 +1,5 @@
 package de.hybris.sdh.storefront.controllers.rest;
 
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -33,10 +32,12 @@ import java.util.Objects;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/infoObject")
@@ -151,7 +152,7 @@ public class SdhInfoObjectUseOptionController {
         final SDHValidaMailRolResponse customerData = sdhCustomerFacade.getRepresentadoFromSAP(customerModel.getNumBP());
         icaInfObjetoRequest.setNumObjeto(customerData.getIca().getNumObjeto());
 
-        mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
         try {
             icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
@@ -203,7 +204,7 @@ public class SdhInfoObjectUseOptionController {
 
 		try
 		{
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
 					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
@@ -257,6 +258,7 @@ public class SdhInfoObjectUseOptionController {
 				|| infoDelineacionResponse.getInfoDeclara().getFechaEjecutaria() == null))
 		{
 			opcionUso = "99";
+			LOG.info("Fecha ejecutoria vacia por tanto la opcion uso es 99");
 		}
 
 

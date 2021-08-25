@@ -550,12 +550,15 @@
     }
 
     function validarDelineacionform(hiddenCdu){
-        var btnSelected = document.getElementById("auxbtn_"+hiddenCdu);
+        
+    	debugger;
+    	var btnSelected = document.getElementById("auxbtn_"+hiddenCdu);
 
         var nowUrl = window.location.href;
         var targetUrl = "infoObject/getUseOption?cdu="+hiddenCdu+"&taxType=6";
         currentUrl = nowUrl.replace("contribuyentes/presentar-declaracion",targetUrl);
-
+		
+		
 	    $.ajax({
             url : currentUrl,
            	type : "GET",
@@ -580,6 +583,7 @@
       			}	
         	},
         	error : function() {
+				debugger;
         	}
         });
 	    
