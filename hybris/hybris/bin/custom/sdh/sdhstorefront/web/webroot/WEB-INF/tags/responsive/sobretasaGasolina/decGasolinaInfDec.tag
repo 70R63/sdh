@@ -55,15 +55,17 @@
 						code="impuestos.decGasolina.InformacionDec.valorSobretasa" /></label>
 			</div>
 			<div class="col-md-1">
-				<div class="form-group ">
-					<img onclick="addinformadeclara()"
-						src="${themeResourcePath}/images/adddelineacion.png"
-						style="width: 25px"></img> <img onclick="deleinformadeclara()"
-						src="${themeResourcePath}/images/deledelineacion.png"
-						style="width: 25px"></img>
+				<div class="form-group" style="display: flex">
+<!-- 					<img onclick="addinformadeclara()" -->
+<%-- 						src="${themeResourcePath}/images/adddelineacion.png" --%>
+<!-- 						style="width: 25px"></img> <img onclick="deleinformadeclara()" -->
+<%-- 						src="${themeResourcePath}/images/deledelineacion.png" --%>
+<!-- 						style="width: 25px"></img> -->
+					<button type="button" onclick="addinformadeclara()" class="btn btn-default btn-sm" style="font-size: 9px!important; border-color: green; background: green; padding: 5px; float: left">Agregar</button>
+						<button type="button" onclick="deleinformadeclara()" class="btn btn-default btn-sm" style="font-size: 9px!important; border-color: red; background: red; padding: 5px; float: right; margin-left: 1px">Eliminar</button>
 				</div>
 			</div>
-		</div>
+	</div>
 
 		<div class="">
 			<input type='hidden' name='dataForm.dataForm.infoDeclara' value='' />
