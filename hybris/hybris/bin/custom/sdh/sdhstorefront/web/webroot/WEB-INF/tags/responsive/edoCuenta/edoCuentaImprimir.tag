@@ -364,24 +364,25 @@
 		<div class="facet js-facet-pub">
 			<div class="facet__name js-facet-name-pub">
 				<spring:theme code="" />
-
 				<table class="table ImprimirPublicidad">
-					<thead>
+					<thead style="background-color: #006DCC !important">
 						<tr>
-							<th><label class="control-label " for=""><spring:theme
+							<th style="text-align: center">
+							  <label class="control-label labeltabletd"><spring:theme
 										code="publicidad.exterior.resolutionnumber" /></label></th>
-							<th><label class="control-label " for=""> <spring:theme
+							<th style="text-align: center">
+							  <label class="control-label labeltabletd"> <spring:theme
 										code="publicidad.exterior.typefence" /></label></th>
-							<th><label class="control-label " for=""> <spring:theme
+							<th style="text-align: center">
+							  <label class="control-label labeltabletd"> <spring:theme
 										code="Imprimir" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach varStatus="loop"
-							items="${publicidadForm.publicidadExt}" var="eachPubExtTax">
+						<c:forEach items="${publicidadForm.publicidadExt}" var="eachPubExtTax">
 							<tr>
-								<td><c:out value="${eachPubExtTax.numResolu}"></c:out></td>
-								<td><c:out value="${eachPubExtTax.tipoValla}"></c:out></td>
+								<td><c:out value="${eachPubExtTax.numResolu}"/></td>
+								<td><c:out value="${eachPubExtTax.tipoValla}"/></td>
 								<!-- 							<td><label style="color: #0358d8 !important" -->
 								<%-- 								data-numRes="${eachPubExtTax.numResolu}" --%>
 								<%-- 								data-anoGravable="${eachPubExtTax.anoGravable}" --%>

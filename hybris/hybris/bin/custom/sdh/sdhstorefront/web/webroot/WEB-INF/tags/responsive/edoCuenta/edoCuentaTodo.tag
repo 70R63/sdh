@@ -331,9 +331,9 @@
 									<tr>
 										<td colspan="3" class="td-colspann"
 											style="border: 0px !important;"></td>
-										<td class="td-total" style="width: 264px;"><label
-											class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.deliurbana.total" /></td>
+										<td class="td-total" style="width: 264px;">
+										<label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.deliurbana.total" /></label></td>
 										<td><c:out value="${ctaForm.delineacionSaldoCargo}" /></td>
 										<td><c:out value="${ctaForm.delineacionSaldoFavor}" /></td>
 									</tr>
@@ -350,7 +350,7 @@
 						<div class="col-md-3 col-md-offset-8">
 							<button type="button" class="btn btn-primary btn-lg"
 								id="ImprimirPopUp" name="ImprimirPopUp" value="ImprimirPopUp"
-								style="margin-top: 3px" data-impuesto="4">
+								style="margin-top: 3px" data-impuesto="6">
 								<spring:theme code="obligacion.inicial.imprimir" />
 							</button>
 						</div>
@@ -416,9 +416,9 @@
 									<tr>
 										<td colspan="2" class="td-colspann"
 											style="border: 0px !important;"></td>
-										<td class="td-total" style="width: 264px;"><label
-											class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.gasolina.total" /></td>
+										<td class="td-total" style="width: 264px;">
+										<label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.gasolina.total" /></label></td>
 										<td><c:out value="${ctaForm.gasolinaSaldoCargo}" /></td>
 										<td><c:out value="${ctaForm.gasolinaSaldoFavor}" /></td>
 									</tr>
@@ -521,7 +521,7 @@
 						<div class="col-md-3 col-md-offset-8">
 							<button type="button" class="btn btn-primary btn-lg"
 								id="ImprimirPopUp" name="ImprimirPopUp" value="ImprimirPopUp"
-								style="margin-top: 3px" data-impuesto="6">
+								style="margin-top: 3px" data-impuesto="4">
 								<spring:theme code="obligacion.inicial.imprimir" />
 							</button>
 						</div>
