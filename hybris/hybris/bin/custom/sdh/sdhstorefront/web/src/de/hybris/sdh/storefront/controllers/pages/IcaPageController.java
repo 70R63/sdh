@@ -46,6 +46,7 @@ import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.core.services.SDHICACalculoImpService;
@@ -178,6 +179,9 @@ public class IcaPageController extends SDHAbstractPageController
 
 	@Resource(name = "sdhCustomerAccountService")
 	SDHCustomerAccountService sdhCustomerAccountService;
+
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
 
 	@ModelAttribute("cities")
 	public List<SDHICACityModel> getCities()
@@ -554,6 +558,12 @@ public class IcaPageController extends SDHAbstractPageController
 		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
 		final SDHValidaMailRolResponse contribuyenteData2 = sdhCustomerFacade.getRepresentadoFromSAP(representado);
 
+		final ConsultaContribuyenteBPRequest consultaContribRequest = new ConsultaContribuyenteBPRequest();
+		consultaContribRequest.setNumBP(representado);
+		contribuyenteData2.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribRequest));
+
+
+
 		model.addAttribute("contribuyenteData", contribuyenteData);
 		model.addAttribute("currentUserData", currentUserData);
 		model.addAttribute("redirectURL", "/autorizados/contribuyente/representando?representado=" + contribuyenteData.getNumBP());
@@ -568,7 +578,13 @@ public class IcaPageController extends SDHAbstractPageController
 			super.addFirmantes_impuesto(model, calcula2ImpuestoResponse.getFirmantes(), currentUserData);
 		}
 
-		final String pnumObjeto = contribuyenteData2.getIca().getNumObjeto();
+		String pnumObjeto = null;
+		if (contribuyenteData2 != null && contribuyenteData2.getIca() != null)
+		{
+			pnumObjeto = contribuyenteData2.getIca().getNumObjeto();
+		}
+
+
 
 		String numObjeto;
 		String anoGravable;
