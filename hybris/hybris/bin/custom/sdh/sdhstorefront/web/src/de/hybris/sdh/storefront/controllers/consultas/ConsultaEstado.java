@@ -10,7 +10,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -23,6 +22,7 @@ import de.hybris.sdh.core.pojos.responses.EdoCuentaResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHEdoCuentaService;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
@@ -109,6 +109,9 @@ public class ConsultaEstado extends AbstractSearchPageController
 	@Resource(name = "sdhEdoCuentaService")
 	SDHEdoCuentaService sdhEdoCuentaService;
 
+	@Resource(name = "sdhCustomerAccountService")
+	SDHCustomerAccountService sdhCustomerAccountService;
+
 
 
 
@@ -120,7 +123,13 @@ public class ConsultaEstado extends AbstractSearchPageController
 	public String handleGET_PD(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Estado de Cuenta GET --------------------------");
-		final String referrer = request.getHeader("referer");
+		String referrer = request.getHeader("referer");
+		if (referrer == null)
+		{
+			referrer = request.getServletPath();
+		}
+
+
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
@@ -130,6 +139,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final EdoCuentaRequest edoCuentaRequest = new EdoCuentaRequest();
+
 
 		ctaForm.setCompleName(customerData.getCompleteName());
 		ctaForm.setTipoDoc(customerData.getDocumentType());
@@ -280,6 +290,19 @@ public class ConsultaEstado extends AbstractSearchPageController
 				miRitForm.setGasolina(sdhConsultaContribuyenteBPResponse.getGasolina().stream()
 						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumDoc())).collect(Collectors.toList()));
 			}
+
+			final SDHExteriorPublicityTaxData cutomerPublicidadRow = new SDHExteriorPublicityTaxData();
+			final List<SDHExteriorPublicityTaxData> cutomerPublicidadList = new ArrayList<SDHExteriorPublicityTaxData>();
+			for (final ImpuestoPublicidadExterior publicidadRow : sdhConsultaContribuyenteBPResponse.getPublicidadExt())
+			{
+				cutomerPublicidadRow.setAnoGravable(publicidadRow.getAnoGravable());
+				cutomerPublicidadRow.setFenceType(publicidadRow.getTipoValla());
+				cutomerPublicidadRow.setResolutionNumber(publicidadRow.getNumResolu());
+				cutomerPublicidadRow.setObjectNumber(publicidadRow.getNumObjeto());
+
+				cutomerPublicidadList.add(cutomerPublicidadRow);
+			}
+			customerData.setExteriorPublicityTaxList(cutomerPublicidadList);
 
 
 

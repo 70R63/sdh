@@ -161,6 +161,25 @@ debugger;
 	                $(document).off("click", ".js-ica-facet .js-facet-name-ica");
 	            }
 	        });
+	}else if(impuestoSelc=="4"){
+		tableIca[0].setAttribute("id","example");
+		   var selectRefinementsTitle = "Publicidad";
+	        ACC.colorbox.open(selectRefinementsTitle, {
+	            href: ".js-publicidad-facet",
+	            inline: true,
+	            width: "90%",
+	            onComplete: function () {
+	                $(document).on("click", ".js-publicidad-facet .js-facet-name-pub", function (e) {
+	                    e.preventDefault();
+	                    $(".js-publicidad-facet  .js-facet-pub").removeClass("active");
+	                    $(this).parents(".js-facet-pub").addClass("active");
+	                    $.colorbox.resize()
+	                })
+	            },
+	            onClosed: function () {
+	                $(document).off("click", ".js-publicidad-facet .js-facet-name-pub");
+	            }
+	        });
 	}else if(impuestoSelc=="6"){
 		tableDel[0].setAttribute("id","example");
 		   var selectRefinementsTitle = "Delineación Urbana";
