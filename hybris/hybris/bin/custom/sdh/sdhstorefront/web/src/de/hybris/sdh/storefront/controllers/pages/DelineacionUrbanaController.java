@@ -19,12 +19,14 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacion2Request;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
+import de.hybris.sdh.core.pojos.responses.ContribAdicionales;
 import de.hybris.sdh.core.pojos.responses.DelineacionU2_areaIntervenida;
 import de.hybris.sdh.core.pojos.responses.DelineacionU2_areaProyecto;
 import de.hybris.sdh.core.pojos.responses.DelineacionU2_usos;
@@ -35,6 +37,7 @@ import de.hybris.sdh.core.pojos.responses.DelineacionUUsos;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
+import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacion2Response;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
@@ -702,12 +705,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		String[] mensajesError;
 		//		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
 
-		String numeroBP = sessionService.getCurrentSession().getAttribute("representado");
-		if (numeroBP == null)
-		{
-			numeroBP = customerModel.getNumBP();
-		}
-		infoDelineacion.getValCont().getInfoContrib().setNumBP(numeroBP);
+		determinarInfoDelineacion(infoDelineacion, customerModel);
 
 
 		infoDelineacionRequest.setNumBP(infoDelineacion.getValCont().getInfoContrib().getNumBP());
@@ -825,6 +823,68 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 
 
 		return paginaDestino;
+	}
+
+
+
+	/**
+	 * @param infoDelineacion
+	 * @param customerModel
+	 */
+	private void determinarInfoDelineacion(final InfoDelineacion infoDelineacion, final CustomerModel customerModel)
+	{
+		String numeroBP = sessionService.getCurrentSession().getAttribute("representado");
+		String numeroDocumento = null;
+		String tipoDocumento = null;
+		String digitoVer = null;
+
+		if (numeroBP == null)
+		{
+			numeroBP = customerModel.getNumBP();
+			numeroDocumento = customerModel.getDocumentNumber();
+			tipoDocumento = customerModel.getDocumentType();
+			digitoVer = customerModel.getDigVer();
+		}
+		else
+		{
+			SDHValidaMailRolResponse representadoValCont = sessionService.getCurrentSession().getAttribute("representadoValCont");
+			if (representadoValCont == null)
+			{
+				final ConsultaContribBPRequest requestRepresentado = new ConsultaContribBPRequest();
+				requestRepresentado.setNumBP(numeroBP);
+				representadoValCont = sdhConsultaContribuyenteBPService.consultaContribuyenteBP_simplificado(requestRepresentado);
+				infoDelineacion.setValCont(representadoValCont);
+				sessionService.getCurrentSession().setAttribute("representadoValCont", representadoValCont);
+			}
+		}
+		if (infoDelineacion != null && infoDelineacion.getValCont() == null)
+		{
+			infoDelineacion.setValCont(new SDHValidaMailRolResponse());
+		}
+		if (infoDelineacion != null && infoDelineacion.getValCont() != null
+				&& infoDelineacion.getValCont().getInfoContrib() == null)
+		{
+			infoDelineacion.getValCont().setInfoContrib(new InfoContribResponse());
+		}
+		if (numeroBP != null)
+		{
+			infoDelineacion.getValCont().getInfoContrib().setNumBP(numeroBP);
+		}
+		if (numeroDocumento != null)
+		{
+			infoDelineacion.getValCont().getInfoContrib().setNumDoc(numeroDocumento);
+			;
+		}
+		if (tipoDocumento != null)
+		{
+			infoDelineacion.getValCont().getInfoContrib().setTipoDoc(tipoDocumento);
+			;
+		}
+		if (digitoVer != null)
+		{
+			infoDelineacion.getValCont().getInfoContrib().setAdicionales(new ContribAdicionales());
+			infoDelineacion.getValCont().getInfoContrib().getAdicionales().setDIGVERIF(digitoVer);
+		}
 	}
 
 
