@@ -380,7 +380,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${publicidadForm.publicidadExt}" var="eachPubExtTax">
-							<tr>
+						    <tr>
 								<td><c:out value="${eachPubExtTax.numResolu}"/></td>
 								<td><c:out value="${eachPubExtTax.tipoValla}"/></td>
 								<!-- 							<td><label style="color: #0358d8 !important" -->
@@ -418,6 +418,7 @@
 		</div>
 	</div>
 </div>
+
 
 <!-- 		Impresion ReteICA-->
 <div class="newReteicaImp" style="display: none;">
