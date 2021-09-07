@@ -12,6 +12,7 @@ public class UpdateTelefonoRitForm
 
 	private String telfonoPrincipal;
 	private String extension;
+	private String tel_tipo;
 
 	/**
 	 * @return the telfonoPrincipas
@@ -45,6 +46,23 @@ public class UpdateTelefonoRitForm
 	public void setExtension(final String extension)
 	{
 		this.extension = extension;
+	}
+
+	/**
+	 * @return the tel_tipo
+	 */
+	public String getTel_tipo()
+	{
+		return tel_tipo;
+	}
+
+	/**
+	 * @param tel_tipo
+	 *           the tel_tipo to set
+	 */
+	public void setTel_tipo(final String tel_tipo)
+	{
+		this.tel_tipo = tel_tipo;
 	}
 
 

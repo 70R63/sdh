@@ -221,6 +221,31 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 		return wsResponse;
 	}
 
+	@Override
+	public SDHValidaMailRolResponse consultaContribuyenteBP_simplificado(final ConsultaContribuyenteBPRequest wsRequestOriginal)
+	{
+		SDHValidaMailRolResponse wsResponse = null;
+
+
+		if (wsRequestOriginal != null)
+		{
+			final ConsultaContribBPRequest wsRequest = new ConsultaContribBPRequest();
+			final ObjectMapper mapper = new ObjectMapper();
+
+			wsRequest.setIndicador("01");
+			wsRequest.setNumBP(wsRequestOriginal.getNumBP());
+			wsResponse = consultaContribuyenteBP_simplificado(wsRequest);
+
+		}
+		else
+		{
+			LOG.info("El request para el WS es null");
+		}
+
+
+		return wsResponse;
+	}
+
 
 	@Override
 	public String getEntidadBancaria(final String bp) {

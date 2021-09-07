@@ -16,6 +16,7 @@ public class UpdateTelefonoRitRequest
 
 	private String telfonoPrincipal;
 	private String extension;
+	private String tel_tipo;
 
 
 	/**
@@ -48,14 +49,16 @@ public class UpdateTelefonoRitRequest
 
 		final String tel = this.getTelfonoPrincipal();
 		final String ext = this.getExtension();
+		final String tel_tipo = this.getTel_tipo();
 
-		stringBuilder.append("{\"TEL_TIPO\": \" 1\",");
+		stringBuilder.append("{");
+		stringBuilder.append("\"TEL_TIPO\": \"" + ((StringUtils.isBlank(tel_tipo)) ? "" : tel_tipo) + "\",");
 		stringBuilder.append("\"TEL_NUMBER\": \"" + ((StringUtils.isBlank(tel)) ? "" : tel) + "\",");
 		stringBuilder.append("\"TEL_EXTENS\": \"" + ((StringUtils.isBlank(ext)) ? "" : ext) + "\",");
 		stringBuilder.append("\"MOB_NUMBER\": \"\"");
-		stringBuilder.append("    }");
+		stringBuilder.append("}");
 
-		stringBuilder.append("               ]");
+		stringBuilder.append("]");
 
 
 		stringBuilder.append("}");
@@ -95,6 +98,23 @@ public class UpdateTelefonoRitRequest
 	public void setExtension(final String extension)
 	{
 		this.extension = extension;
+	}
+
+	/**
+	 * @return the tel_tipo
+	 */
+	public String getTel_tipo()
+	{
+		return tel_tipo;
+	}
+
+	/**
+	 * @param tel_tipo
+	 *           the tel_tipo to set
+	 */
+	public void setTel_tipo(final String tel_tipo)
+	{
+		this.tel_tipo = tel_tipo;
 	}
 
 }

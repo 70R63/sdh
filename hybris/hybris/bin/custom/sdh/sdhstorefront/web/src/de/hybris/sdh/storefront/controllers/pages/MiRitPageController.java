@@ -764,11 +764,22 @@ public class MiRitPageController extends AbstractPageController
 	public UpdateRitResponse updateTelefono(final UpdateTelefonoRitForm updateTelefonoRitForm)
 	{
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final String valorOficina = "2";
+		boolean considerarExtension = false;
 
 		final UpdateTelefonoRitRequest request = new UpdateTelefonoRitRequest();
 		request.setNumBP(customerModel.getNumBP());
-		request.setExtension(updateTelefonoRitForm.getExtension());
 		request.setTelfonoPrincipal(updateTelefonoRitForm.getTelfonoPrincipal());
+		request.setTel_tipo(updateTelefonoRitForm.getTel_tipo());
+
+		if (valorOficina.equals(updateTelefonoRitForm.getTel_tipo()))
+		{
+			considerarExtension = true;
+		}
+		if (considerarExtension == true)
+		{
+			request.setExtension(updateTelefonoRitForm.getExtension());
+		}
 
 		UpdateRitResponse udpateRitResponse = new UpdateRitResponse();
 
