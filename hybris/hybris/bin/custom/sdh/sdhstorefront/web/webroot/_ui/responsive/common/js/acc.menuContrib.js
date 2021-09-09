@@ -4,7 +4,6 @@ ACC.aamenu = {
 
 
 	 updateMenuContrib: function(){
-		debugger;
 
 		if(window.location.pathname.indexOf("retenedores") < 0 && ACC.flagFiltrarMenuContrib == true){
 			
