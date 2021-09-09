@@ -558,12 +558,14 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		final ImpuestoICA icaWS = sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest);
 		final SDHICATaxData icaTax = new SDHICATaxData();
-		icaTax.setObjectNumber(icaWS.getNumObjeto());
-		if (customerData != null)
+		if (icaWS != null)
 		{
-			customerData.setIcaTax(icaTax);
+			icaTax.setObjectNumber(icaWS.getNumObjeto());
+			if (customerData != null)
+			{
+				customerData.setIcaTax(icaTax);
+			}
 		}
-
 
 
 		if (customerData.getIcaTax() != null && dataFormResponse.getImpuesto().equals("3")
