@@ -13,9 +13,11 @@ import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
@@ -66,6 +68,10 @@ public class SdhInfoObjectUseOptionController {
 
     @Resource(name = "sdhDetalleVehiculosService")
     SDHDetalleVehiculosService sdhDetalleVehiculosService;
+
+	 @Resource(name = "sdhConsultaImpuesto_simplificado")
+	 SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+
 
     private static final Logger LOG = Logger.getLogger(SdhInfoObjectUseOptionController.class);
 
@@ -149,8 +155,15 @@ public class SdhInfoObjectUseOptionController {
         icaInfObjetoRequest.setAnoGravable(anioGravable);
         icaInfObjetoRequest.setPeriodo(periodo);
 
-        final SDHValidaMailRolResponse customerData = sdhCustomerFacade.getRepresentadoFromSAP(customerModel.getNumBP());
-        icaInfObjetoRequest.setNumObjeto(customerData.getIca().getNumObjeto());
+		  final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		  consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+
+		  final ImpuestoICA icaWS = sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest);
+		  if (icaWS != null)
+		  {
+			  icaInfObjetoRequest.setNumObjeto(icaWS.getNumObjeto());
+		  }
+
 
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);

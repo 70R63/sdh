@@ -179,7 +179,7 @@
 				<div class="col-xs-12 col-sm-12 col-md-9 text-center">
 					<sf:button type="button"
 						class="btn btn-primary btn-lg" id="action" name="action"
-						onClick="validateForm();"
+						onClick="validateFormUso();"
 						value="presentarDeclaracion"
 						style="margin-top: 15px">
 						<spring:theme
@@ -498,7 +498,8 @@
 
 	}
 
-	function validateForm() {
+	function validateFormUso() {
+
 	    var anioGravable = document.getElementById("anoGravable").value;
 	    var impuesto = document.getElementById("impuesto");
 	    var periodo = "00";

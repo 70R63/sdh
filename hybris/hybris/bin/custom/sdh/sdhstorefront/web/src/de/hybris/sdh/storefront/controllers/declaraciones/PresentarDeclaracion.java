@@ -11,7 +11,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
@@ -26,6 +25,7 @@ import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.JuridicosVehiculos;
@@ -40,6 +40,7 @@ import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
+import de.hybris.sdh.facades.questions.data.SDHICATaxData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaCatalogos;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
@@ -552,6 +553,16 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
 
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		consultaContribuyenteBPRequest.setNumBP(customerData.getNumBP());
+
+		final ImpuestoICA icaWS = sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest);
+		final SDHICATaxData icaTax = new SDHICATaxData();
+		icaTax.setObjectNumber(icaWS.getNumObjeto());
+		if (customerData != null)
+		{
+			customerData.setIcaTax(icaTax);
+		}
 
 
 
@@ -761,11 +772,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		infoVista.setErrores(null);
 		infoVista.setPredial(null);
 
-		//		if (infoVista.getCustomerData() == null)
-		//		{
-		//
-		//			infoVista.setCustomerData(sdhCustomerFacade.getRepresentadoFromSAP(customerModel.getNumBP()));
-		//		}
+
 		if (infoVista.getClaveImpuesto().equals("2"))
 		{
 			infoVista.setVehicular(obtenerListaVehicular(customerModel, infoVista));
@@ -773,19 +780,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		}
 		else if (infoVista.getClaveImpuesto().equals("1")) //predial
 		{
-			final List<PredialResponse> predial_listaInicial = sdhCustomerFacade.getRepresentadoFromSAP(numBP).getPredial();
-			List<PredialResponse> predial_filtrado = null;
-
-			//			obligacionesFormuno.setHeaderdeli(obligacionesDeliResponse.getHeader().stream()
-			//					.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
-
-			//			predial_filtrado = predial_listaInicial.stream().filter(d -> StringUtils.isNotBlank(d.getCHIP()))
-			//					.collect(Collectors.toList());
-
-			predial_filtrado = predial_listaInicial.stream().filter(d -> infoVista.getAnoGravable().equals(d.getAnioGravable()))
-					.collect(Collectors.toList());
-
-			infoVista.setPredial(predial_filtrado);
+			infoVista.setPredial(obtenerListaPredial(customerModel, infoVista));
 			infoVista.setNumBP(numBP);
 		}
 
@@ -835,10 +830,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 					infoVehiculos.setNumObjeto(impuesto_element.getNumObjeto());
 					infoVehiculos.setAnioGravable(impuesto_element.getAnioGravable());
 
-					final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
-					detalleVehiculosRequest.setBpNum(numBP);
-					detalleVehiculosRequest.setPlaca(impuesto_element.getPlaca());
-					detalleVehiculosRequest.setAnioGravable(infoVista.getAnoGravable());
+					//					final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
+					//					detalleVehiculosRequest.setBpNum(numBP);
+					//					detalleVehiculosRequest.setPlaca(impuesto_element.getPlaca());
+					//					detalleVehiculosRequest.setAnioGravable(infoVista.getAnoGravable());
 
 
 					//					final ObjectMapper mapper = new ObjectMapper();
@@ -867,6 +862,51 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		return listaInfoVehiculos;
 	}
+
+
+	public List<PredialResponse> obtenerListaPredial(final CustomerModel customerModel, final OpcionDeclaracionesVista infoVista)
+	{
+		List<PredialResponse> listaInfoImpuesto = null;
+		List<PredialResponse> impuestoWS = null;
+		String numBP = null;
+		if (customerModel != null)
+		{
+			numBP = customerModel.getNumBP();
+			if (numBP != null)
+			{
+				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+				impuestoWS = sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest);
+				//				sdhCustomerAccountService.updateImpuestoP(customerModel, impuestoWS);
+				listaInfoImpuesto = new ArrayList<PredialResponse>();
+			}
+		}
+
+		PredialResponse infoImpuesto = null;
+		if (impuestoWS != null)
+		{
+			for (final PredialResponse impuesto_element : impuestoWS)
+			{
+				if (impuesto_element != null && impuesto_element.getAnioGravable() != null
+						&& impuesto_element.getAnioGravable().equals(infoVista.getAnoGravable()))
+				{
+					infoImpuesto = new PredialResponse();
+					infoImpuesto.setAnioGravable(impuesto_element.getAnioGravable());
+					infoImpuesto.setCHIP(impuesto_element.getCHIP());
+					infoImpuesto.setContratoArrenda(impuesto_element.getContratoArrenda());
+					infoImpuesto.setDireccionPredio(impuesto_element.getDireccionPredio());
+					infoImpuesto.setMatrInmobiliaria(impuesto_element.getMatrInmobiliaria());
+					infoImpuesto.setNumObjeto(impuesto_element.getNumObjeto());
+
+					listaInfoImpuesto.add(infoImpuesto);
+				}
+			}
+		}
+
+		return listaInfoImpuesto;
+	}
+
+
 
 	@RequestMapping(value = "/setComplete7", method = RequestMethod.POST)
 	public String setComplete(final SessionStatus status)
