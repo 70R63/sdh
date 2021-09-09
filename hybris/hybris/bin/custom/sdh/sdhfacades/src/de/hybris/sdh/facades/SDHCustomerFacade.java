@@ -37,6 +37,8 @@ public interface SDHCustomerFacade
 
 	CustomerData getRepresentadoDataFromSAP(String numBP);
 
+	CustomerData getRepresentadoDataFromSAP(String numBP, String indicador);
+
 	CustomerData getRepresentadoDataFromSession();
 
 	void updateCustomerTaxRestrictions();

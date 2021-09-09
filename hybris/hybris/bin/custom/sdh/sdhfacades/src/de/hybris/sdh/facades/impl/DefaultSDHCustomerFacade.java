@@ -274,9 +274,17 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 
 	@Override
 	public CustomerData getRepresentadoDataFromSAP(final String numBP) {
+		final CustomerData customerData = getRepresentadoDataFromSAP(numBP, "01");
+
+		return customerData;
+	}
+
+	@Override
+	public CustomerData getRepresentadoDataFromSAP(final String numBP, final String indicador)
+	{
 		CustomerData customerData = null;
 
-		final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = this.getRepresentadoFromSAP(numBP);
+		final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = this.getRepresentadoFromSAP(numBP, indicador);
 
 		customerData = sdhCustomerAccountService.mapearInfo_CustomerData(sdhConsultaContribuyenteBPResponse);
 

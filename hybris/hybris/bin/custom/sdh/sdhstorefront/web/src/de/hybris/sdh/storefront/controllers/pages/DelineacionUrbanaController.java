@@ -1019,7 +1019,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		final InfoDelineacion infoDelineacion = new InfoDelineacion();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final CustomerData currentUserData = customerFacade.getCurrentCustomer();
-		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado, "01,02");
 		final ConsultaContribuyenteBPRequest consultaContribRequest = new ConsultaContribuyenteBPRequest();
 		consultaContribRequest.setNumBP(representado);
 		final SDHValidaMailRolResponse valCont = sdhConsultaImpuesto_simplificado
