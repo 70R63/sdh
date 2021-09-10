@@ -486,6 +486,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 					dataForm.setTipoDoc(tipoDoc);
 					dataForm.setDataForm(detalleGasolinaResponse);
 				}
+				dataForm.setOpcionUso(detalleGasolinaResponse.getOpcionUso());
 			}
 			else
 			{

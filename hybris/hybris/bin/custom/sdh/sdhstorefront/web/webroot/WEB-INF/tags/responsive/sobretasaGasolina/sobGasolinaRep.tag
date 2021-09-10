@@ -136,9 +136,13 @@
 	<%-- 	</sf:button> --%>
 
 	<sf:button action="" type="submit" class="btn btn-primary btn-lg"
-		id="action" name="action" value="regresar">
+		id="action" name="action" value="regresar" style="display:none;">
 		<spring:theme
 			code="impuestos.sobreTasaGasolina.menu.presentarDeclaracion" />
+	</sf:button>
+	
+	<sf:button action="" type="button" class="btn btn-primary btn-lg" id="presentarDeclaracionButton_0005" name="action">
+		<spring:theme code="impuestos.sobreTasaGasolina.menu.presentarDeclaracion" />
 	</sf:button>
 
 	<%-- 	<button type="button" class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina/generar?numForm=${ dataForm.dataForm.numForm}' />';">Generar Declaración</button> --%>
