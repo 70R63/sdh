@@ -9,4 +9,6 @@ public interface SDHFAQsFacade {
     List<SDHFaqData> getAllFaqsByCategoryCode(String categoryCode);
     List<SDHFaqData> getAllFaqsByKeyWord(String keyWord);
     List<SDHFaqCategoryData> getAllCategories();
+
+	 List<SDHFaqData> getAllFaqsByCode(String code);
 }

@@ -7,9 +7,11 @@ package de.hybris.sdh.core.services;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
+import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 
 import java.util.List;
 
@@ -33,7 +35,7 @@ public interface SDHConsultaImpuesto_simplificado
 
 
 	//ICA
-	List<ImpuestoVehiculos> consulta_impICA(ConsultaContribuyenteBPRequest request);
+	ImpuestoICA consulta_impICA(ConsultaContribuyenteBPRequest request);
 
 	String consulta_impICA_string(ConsultaContribuyenteBPRequest request);
 
@@ -47,6 +49,7 @@ public interface SDHConsultaImpuesto_simplificado
 	//Delineacion
 	List<ImpuestoDelineacionUrbana> consulta_impDelineacion(ConsultaContribuyenteBPRequest request);
 
+	SDHValidaMailRolResponse consulta_impDelineacion_valCont(ConsultaContribuyenteBPRequest request);
 	String consulta_impDelineacion_string(ConsultaContribuyenteBPRequest request);
 
 

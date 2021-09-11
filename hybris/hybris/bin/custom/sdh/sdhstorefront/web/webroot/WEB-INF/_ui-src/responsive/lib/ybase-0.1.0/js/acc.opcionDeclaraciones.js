@@ -292,6 +292,8 @@ ACC.opcionDeclaraciones = {
 	
 	
 	obtenerListaDeclaraciones_certiPagos : function() {
+		debugger;
+		
 		ACC.spinner.show();
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.publicidadexterior.bindDataTable_Class_refresh();
@@ -312,6 +314,7 @@ ACC.opcionDeclaraciones = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
+					debugger;
 					ACC.spinner.close();
 //					ACC.opcionDeclaraciones.dataActual_backup = dataActual;
 //					ACC.opcionDeclaraciones.dataResponse_backup = dataResponse;
@@ -464,6 +467,7 @@ ACC.opcionDeclaraciones = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
+					debugger;
 					ACC.spinner.close();
 					ACC.opcionDeclaraciones.updateFromResponsePeriodo_porAnio(dataActual,dataResponse);
 					ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
@@ -1090,6 +1094,7 @@ ACC.opcionDeclaraciones = {
     },
 
 	validarDeclaracion : function(url,placa){
+		debugger;
 		ACC.spinner.show();
 	    var anioGravable = document.getElementById("anoGravable").value;
 	    var impuesto = document.getElementById("impuesto");
@@ -1112,6 +1117,7 @@ ACC.opcionDeclaraciones = {
             url : currentUrl,
             type : "GET",
             success : function(data) {
+				debugger;
 				ACC.spinner.close();
                 if(data == "02"){
                     ACC.opcionDeclaraciones.promtConfirmation(url);

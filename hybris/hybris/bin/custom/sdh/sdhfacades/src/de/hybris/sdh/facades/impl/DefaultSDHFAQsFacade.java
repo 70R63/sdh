@@ -6,68 +6,95 @@ import de.hybris.sdh.core.services.SDHFAQsService;
 import de.hybris.sdh.facades.SDHFAQsFacade;
 import de.hybris.sdh.facades.faqs.data.SDHFaqCategoryData;
 import de.hybris.sdh.facades.faqs.data.SDHFaqData;
-import org.springframework.beans.factory.annotation.Required;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultSDHFAQsFacade implements SDHFAQsFacade {
-    private SDHFAQsService sdhFAQsService;
-    private ModelService modelService;
+import org.springframework.beans.factory.annotation.Required;
 
-    @Override
-    public List<SDHFaqData> getAllFaqsByCategoryCode(String categoryCode) {
-        List<SDHFaqData> faqDataList = new ArrayList<>();
-        getSdhFAQsService().getFAQsByCategory(getSdhFAQsService()
-                .getCategoryByCode(categoryCode)).forEach( faqModel ->{
-            faqDataList.add(buildFaqData(faqModel));
-        });
-        return faqDataList;
-    }
 
-    @Override
-    public List<SDHFaqData> getAllFaqsByKeyWord(String keyWord) {
-        List<SDHFaqData> faqDataList = new ArrayList<>();
-        getSdhFAQsService().getFAQsByKeyWord(keyWord).forEach(faqModel ->{
-            faqDataList.add(buildFaqData(faqModel));
-        });
-        return faqDataList;
-    }
+public class DefaultSDHFAQsFacade implements SDHFAQsFacade
+{
+	private SDHFAQsService sdhFAQsService;
+	private ModelService modelService;
 
-    private SDHFaqData buildFaqData(SdhFAQsModel sdhFAQsModel){
-        SDHFaqData faqData = new SDHFaqData();
-        faqData.setCode(sdhFAQsModel.getCode());
-        faqData.setQuestion(sdhFAQsModel.getQuestion());
-        faqData.setAnswer(sdhFAQsModel.getAnswer());
+	@Override
+	public List<SDHFaqData> getAllFaqsByCategoryCode(final String categoryCode)
+	{
+		final List<SDHFaqData> faqDataList = new ArrayList<>();
+		getSdhFAQsService().getFAQsByCategory(getSdhFAQsService().getCategoryByCode(categoryCode)).forEach(faqModel -> {
+			faqDataList.add(buildFaqData(faqModel));
+		});
+		return faqDataList;
+	}
 
-        sdhFAQsModel.setSearchCounter(sdhFAQsModel.getSearchCounter() + 1);
-        getModelService().save(sdhFAQsModel);
-        return faqData;
-    }
+	@Override
+	public List<SDHFaqData> getAllFaqsByKeyWord(final String keyWord)
+	{
+		final List<SDHFaqData> faqDataList = new ArrayList<>();
+		getSdhFAQsService().getFAQsByKeyWord(keyWord).forEach(faqModel -> {
+			faqDataList.add(buildFaqData(faqModel));
+		});
+		return faqDataList;
+	}
 
-    @Override
-    public List<SDHFaqCategoryData> getAllCategories() {
-        List<SDHFaqCategoryData> faqCategoriesDataList = new ArrayList<>();
-        getSdhFAQsService().getAllCategories().forEach(categoryModel -> {
-            SDHFaqCategoryData categoryData = new SDHFaqCategoryData();
-            categoryData.setCode(categoryModel.getCode());
-            categoryData.setDescription(categoryModel.getDescription());
-            faqCategoriesDataList.add(categoryData);
-        });
-        return faqCategoriesDataList;
-    }
+	private SDHFaqData buildFaqData(final SdhFAQsModel sdhFAQsModel)
+	{
+		final SDHFaqData faqData = new SDHFaqData();
+		faqData.setCode(sdhFAQsModel.getCode());
+		faqData.setQuestion(sdhFAQsModel.getQuestion());
+		faqData.setAnswer(sdhFAQsModel.getAnswer());
 
-    public SDHFAQsService getSdhFAQsService() {
-        return sdhFAQsService;
-    }
+		sdhFAQsModel.setSearchCounter(sdhFAQsModel.getSearchCounter() + 1);
+		getModelService().save(sdhFAQsModel);
+		return faqData;
+	}
 
-    @Required
-    public void setSdhFAQsService(SDHFAQsService sdhFAQsService) {
-        this.sdhFAQsService = sdhFAQsService;
-    }
+	@Override
+	public List<SDHFaqCategoryData> getAllCategories()
+	{
+		final List<SDHFaqCategoryData> faqCategoriesDataList = new ArrayList<>();
+		getSdhFAQsService().getAllCategories().forEach(categoryModel -> {
+			final SDHFaqCategoryData categoryData = new SDHFaqCategoryData();
+			categoryData.setCode(categoryModel.getCode());
+			categoryData.setDescription(categoryModel.getDescription());
+			faqCategoriesDataList.add(categoryData);
+		});
+		return faqCategoriesDataList;
+	}
 
-    public ModelService getModelService() { return modelService; }
+	@Override
+	public List<SDHFaqData> getAllFaqsByCode(final String code)
+	{
+		final List<SDHFaqData> faqDataList = new ArrayList<>();
+		getSdhFAQsService().getFAQsByCode(code).forEach(faqModel -> {
+			faqDataList.add(buildFaqData(faqModel));
+		});
 
-    @Required
-    public void setModelService(ModelService modelService) { this.modelService = modelService; }
+		return faqDataList;
+	}
+
+	public SDHFAQsService getSdhFAQsService()
+	{
+		return sdhFAQsService;
+	}
+
+	@Required
+	public void setSdhFAQsService(final SDHFAQsService sdhFAQsService)
+	{
+		this.sdhFAQsService = sdhFAQsService;
+	}
+
+	public ModelService getModelService()
+	{
+		return modelService;
+	}
+
+	@Required
+	public void setModelService(final ModelService modelService)
+	{
+		this.modelService = modelService;
+	}
+
+
 }

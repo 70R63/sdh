@@ -1,6 +1,5 @@
 package de.hybris.sdh.storefront.controllers.rest;
 
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -14,9 +13,11 @@ import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
@@ -33,10 +34,12 @@ import java.util.Objects;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/infoObject")
@@ -65,6 +68,10 @@ public class SdhInfoObjectUseOptionController {
 
     @Resource(name = "sdhDetalleVehiculosService")
     SDHDetalleVehiculosService sdhDetalleVehiculosService;
+
+	 @Resource(name = "sdhConsultaImpuesto_simplificado")
+	 SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+
 
     private static final Logger LOG = Logger.getLogger(SdhInfoObjectUseOptionController.class);
 
@@ -148,10 +155,17 @@ public class SdhInfoObjectUseOptionController {
         icaInfObjetoRequest.setAnoGravable(anioGravable);
         icaInfObjetoRequest.setPeriodo(periodo);
 
-        final SDHValidaMailRolResponse customerData = sdhCustomerFacade.getRepresentadoFromSAP(customerModel.getNumBP());
-        icaInfObjetoRequest.setNumObjeto(customerData.getIca().getNumObjeto());
+		  final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		  consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
 
-        mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		  final ImpuestoICA icaWS = sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest);
+		  if (icaWS != null)
+		  {
+			  icaInfObjetoRequest.setNumObjeto(icaWS.getNumObjeto());
+		  }
+
+
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
         try {
             icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
@@ -203,7 +217,7 @@ public class SdhInfoObjectUseOptionController {
 
 		try
 		{
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
 					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
@@ -257,6 +271,7 @@ public class SdhInfoObjectUseOptionController {
 				|| infoDelineacionResponse.getInfoDeclara().getFechaEjecutaria() == null))
 		{
 			opcionUso = "99";
+			LOG.info("Fecha ejecutoria vacia por tanto la opcion uso es 99");
 		}
 
 

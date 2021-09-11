@@ -440,14 +440,25 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 			}
 		}
 
-		model.addAttribute("questionAndOptions", response.getQuestionAndOptions());
-		model.addAttribute("questionCatalog", response.getMapQuestionsCatalog());
+		String returnValue = null;
+		if (response != null)
+		{
+			model.addAttribute("questionAndOptions", response.getQuestionAndOptions());
+			model.addAttribute("questionCatalog", response.getMapQuestionsCatalog());
+			if (Objects.nonNull(response.getQuestionAndOptions()))
+			{
+				returnValue = response.getQuestionAndOptions().size() < 3 ? "redirect:/login" : getDefaultRegistrationPage(model);
+			}
+			else
+			{
+				returnValue = getDefaultRegistrationPage(model);
+			}
+		}
 		model.addAttribute("currentSection", "questionsSection");
 		model.addAttribute("SecretAnswerForm", new SecretAnswerForm());
 
-		return Objects.nonNull(response.getQuestionAndOptions())
-				? response.getQuestionAndOptions().size() < 3 ? "redirect:/login" : getDefaultRegistrationPage(model)
-				: getDefaultRegistrationPage(model);
+
+		return returnValue;
 	}
 
 	@RequestMapping(value = "/validateAnswers", method = RequestMethod.POST)

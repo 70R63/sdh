@@ -1,6 +1,6 @@
 ACC.gasolina = {
 
-	 _autoload: ["bindGeneraDeclaracionButton","bindDialogGasolina","bindProductClass"],
+	 _autoload: ["bindGeneraDeclaracionButton","bindDialogGasolina","bindProductClass","bindPresentarDeclaracionButton"],
 	 
 	 bindProductClass: function () {
 		 $(document).on("change", ".form-control-gasolina", function (e) {
@@ -90,7 +90,52 @@ ACC.gasolina = {
     	    } 
     	});
     	
-    }
+    },
+
+
+	 bindPresentarDeclaracionButton: function () {
+		 $(document).on("click", "#presentarDeclaracionButton_0005", function (e) {
+	 	        e.preventDefault();
+
+			  var irDeclaracion = false;
+	 	        
+	 	      var anoGravable  = $.trim($("#anoGravable").val());
+	 	      var periodo =  $("#periodo").val();
+	 	      var tipoValla = $("#selectedTipoValla").val();
+
+	 	      if(anoGravable == "0")
+	 	        {
+	 	        	alert("Por favor, selecciona el año a consultar");
+	 	        	return;
+	 	        }
+
+	 	        if(periodo == "" || periodo == "")
+	 	        {
+	 	        	alert("Por favor, selecciona el impuesto a consultar");
+	 	        	return;
+	 	        }
+
+	 	        var opcUso = $.trim($("#opcionUsoHidden").val());
+                opcUso = opcUso.replace(" ", "");
+                opcUso = opcUso.split("-")[0];
+
+	 	        if(opcUso == '02'){
+                    var response = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+                    if (response == true) {
+						irDeclaracion = true;
+                    } else {
+                      return;
+                    }
+	 	        }else{
+					irDeclaracion = true;
+	 	        }
+
+				if(irDeclaracion == true){
+					var botonAction = document.getElementById("action");
+					botonAction.click();
+				}
+	 	 });
+	 },
 
     
 

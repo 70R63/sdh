@@ -17,6 +17,8 @@ public interface SDHConsultaContribuyenteBPService
 
 	SDHValidaMailRolResponse consultaContribuyenteBP_simplificado(ConsultaContribBPRequest request);
 
+	SDHValidaMailRolResponse consultaContribuyenteBP_simplificado(ConsultaContribuyenteBPRequest request);
+
 	String consultaContribuyenteBP_simplificado_string(ConsultaContribBPRequest request);
 
 	String getEntidadBancaria(String bp);

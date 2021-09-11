@@ -4,6 +4,7 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
+import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
@@ -210,6 +211,27 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 	}
 
 
+	@Override
+	public SDHValidaMailRolResponse consulta_impDelineacion_valCont(final ConsultaContribuyenteBPRequest wsRequest)
+	{
+		SDHValidaMailRolResponse wsResponse = null;
+		final List<ImpuestoDelineacionUrbana> impuestosDelineacion = null;
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try
+		{
+			wsResponse = mapper.readValue(consulta_impDelineacion_string(wsRequest), SDHValidaMailRolResponse.class);
+		}
+		catch (final Exception e)
+		{
+			LOG.info("Error al convertir response de consulta impuesto Delineacion");
+		}
+
+
+		return wsResponse;
+	}
+
+
 
 	public String consulta_impDelineacion_string(final ConsultaContribuyenteBPRequest wsRequest)
 	{
@@ -336,19 +358,51 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 
 
 	@Override
-	public List<ImpuestoVehiculos> consulta_impICA(final ConsultaContribuyenteBPRequest request)
+	public ImpuestoICA consulta_impICA(final ConsultaContribuyenteBPRequest request)
 	{
-		// XXX Auto-generated method stub
-		return null;
+		SDHValidaMailRolResponse wsResponse = null;
+		ImpuestoICA impuestosICA = null;
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try
+		{
+			wsResponse = mapper.readValue(consulta_impICA_string(request), SDHValidaMailRolResponse.class);
+			if (wsResponse != null)
+			{
+				impuestosICA = wsResponse.getIca();
+			}
+		}
+		catch (final Exception e)
+		{
+			LOG.info("Error al convertir response de consulta impuesto ICA");
+		}
+
+
+		return impuestosICA;
+
 	}
 
-
-
 	@Override
-	public String consulta_impICA_string(final ConsultaContribuyenteBPRequest request)
+	public String consulta_impICA_string(final ConsultaContribuyenteBPRequest wsRequest)
 	{
-		// XXX Auto-generated method stub
-		return null;
+		final String usuario = configurationService.getConfiguration()
+				.getString("sdh.validacontribuyente_simplificado_impICA.user");
+		final String password = configurationService.getConfiguration()
+				.getString("sdh.validacontribuyente_simplificado_impICA.password");
+		final String urlService = configurationService.getConfiguration()
+				.getString("sdh.validacontribuyente_simplificado_impICA.url");
+
+		final RestTemplate restTemplate = new RestTemplate();
+		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
+		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
+
+		LOG.info(wsRequest);
+		String wsResponse = restTemplate.postForObject(urlService, request, String.class);
+		wsResponse = wsResponse.replaceAll("numOjbeto", "numObjeto");
+		LOG.info(wsResponse);
+
+
+		return wsResponse;
 	}
 
 }

@@ -282,6 +282,19 @@ var toddir = document.getElementById('address.assistant.output');
 toddir.style.width= '900px'
 
 	}
+	
+	function showExt(){
+		var selectOption = document.getElementById("phoneSelect").value;
+		var exte = document.getElementById("phoneExtension");
+		
+		if(selectOption == "2"){
+			exte.style.display = "block";
+		}else{
+			exte.style.display = "none";
+		}
+		
+		
+	}
 </script>
 <div id="acordeon" class="container">
 	<div class="card cardmirit ">
@@ -302,51 +315,6 @@ toddir.style.width= '900px'
 
 			<div class="card-body">
 				<!--  First column of form -->
-				<c:choose>
-				<c:when test="${ PJUR eq true || PNAT eq true}">
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group ">
-							<label class="control-label required" for="direccionNotificacion">
-								<spring:theme code="mirit.contactData.notificationAddress" />
-							</label> <input id="direccionNotificacion" name="direccionNotificacion"
-								class="newalto_dir form-control" aria-required="true" type="text"
-								data-original="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }"
-								" disabled="disabled"
-								value="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }"
-								maxlength="240"> <input id="direccionNotificacionStreet"
-								name="direccionNotificacionStreet" type="hidden"
-								data-original="${miRitForm.direccionNotificacion.STREET}"
-								value="${miRitForm.direccionNotificacion.STREET}"> <input
-								id="direccionNotificacionSuppl1"
-								name="direccionNotificacionStreet" type="hidden"
-								data-original="${miRitForm.direccionNotificacion.STR_SUPPL1 }"
-								value="${miRitForm.direccionNotificacion.STR_SUPPL1}"> <input
-								id="direccionNotificacionSuppl2"
-								name="direccionNotificacionStreet" type="hidden"
-								data-original="${miRitForm.direccionNotificacion.STR_SUPPL2 }"
-								value="${miRitForm.direccionNotificacion.STR_SUPPL2 }">
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="row">
-						<div class="col-12 col-md-2">
-							<div>
-								<button
-									class="btn btn-primary btn-lg btn-block addressHelperField"
-									type="button" onclick="toggleAssistant();"
-									style="margin-bottom: 10px;">
-									<spring:theme code="mirit.contactData.editarAddress" />
-								</button>
-							</div>
-						</div>
-					</div>
-					
-
-				</div>
-			</c:when>
-				<c:otherwise>
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group ">
@@ -356,7 +324,7 @@ toddir.style.width= '900px'
 							</label> <input id="direccionNotificacion" name="direccionNotificacion"
 								class="newalto_dir form-control" aria-required="true" type="text"
 								data-original="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }"
-								" disabled="disabled"
+								disabled="disabled"
 								value="${direccionOutput}"
 								maxlength="240"> <input id="direccionNotificacionStreet"
 								name="direccionNotificacionStreet" type="hidden"
@@ -524,8 +492,6 @@ toddir.style.width= '900px'
 					
 
 				</div>
-				</c:otherwise>
-				</c:choose>
 					
 				
 				<div id="addressAssistant"
@@ -1018,11 +984,17 @@ toddir.style.width= '900px'
 				<div class="row">
 					<div class="col-md-2">
 						<div class="form-group ">
-							<label class="control-label required" for="telefonoPricipal">
-								<spring:theme code="mirit.contactData.landPhone" />
-							</label> <input id="telefonoPricipal" name="telefonoPricipal"
-								class="newalto form-control" aria-required="true"
-								type="text" value="${miRitForm.telefonoPricipal }"
+<!-- 							<label class="control-label" for="telefonoPricipal"> -->
+<%-- 								<spring:theme code="mirit.contactData.landPhone" /> --%>
+<!-- 							</label>  -->
+						<select class="newalto form-control" id="phoneSelect" onchange="showExt()">
+							<option value="00">Seleccionar</option>
+							<option value="1">Movil</option>
+							<option value="2">Oficina</option>
+							<option value="3">Fijo</option>
+						</select>
+							<input id="telefonoPricipal" name="telefonoPricipal"
+								class="newalto form-control" type="text" value="${miRitForm.telefonoPricipal }"
 								maxlength="240" onkeyup="ajustar(this)">
 							<div class="help-block">
 								<span id="telefonoPricipal.errors" class="hidden">Seleccione
@@ -1030,7 +1002,7 @@ toddir.style.width= '900px'
 							</div>
 						</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-2" id="phoneExtension" style="display: none">
 						<div class="form-group ">
 							<label class="control-label required" for="extensionTelefono">
 								<spring:theme code="mirit.contactData.extension" />
@@ -1038,10 +1010,7 @@ toddir.style.width= '900px'
 								class="newalto form-control" aria-required="true"
 								type="text" value="${miRitForm.extensionTelefono }"
 								maxlength="240" onkeyup="ajustar(this)">
-							<div class="help-block">
-								<span id="lastName.errors" class="hidden">Seleccione un
-									tipo de documento</span>
-							</div>
+						
 						</div>
 					</div>
 				</div>

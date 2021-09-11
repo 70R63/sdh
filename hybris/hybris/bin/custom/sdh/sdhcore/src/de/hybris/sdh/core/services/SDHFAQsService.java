@@ -10,4 +10,6 @@ public interface SDHFAQsService {
     SdhFAQsCategoryModel getCategoryByCode(String catecoryCode);
     List<SdhFAQsModel> getFAQsByCategory(SdhFAQsCategoryModel categoryModel);
     List<SdhFAQsModel> getFAQsByKeyWord(String keyWord);
+
+	 List<SdhFAQsModel> getFAQsByCode(String code);
 }

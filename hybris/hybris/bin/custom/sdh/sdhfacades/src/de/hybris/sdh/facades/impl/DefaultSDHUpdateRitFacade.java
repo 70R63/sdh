@@ -136,9 +136,8 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 
 				consultaContribuyenteBPRequest.setNumBP(request.getNumBP());
 
-				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-						SDHValidaMailRolResponse.class);
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+						.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
 				sdhCustomerAccountService.updateAutorizacionesRit(sdhConsultaContribuyenteBPResponse);
 
 			}
@@ -178,9 +177,8 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 
 				consultaContribuyenteBPRequest.setNumBP(request.getNumBP());
 
-				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-						SDHValidaMailRolResponse.class);
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+						.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
 				sdhCustomerAccountService.updateRedesSocialesRit(sdhConsultaContribuyenteBPResponse);
 
 			}
@@ -220,9 +218,8 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 
 				consultaContribuyenteBPRequest.setNumBP(request.getNumBP());
 
-				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-						SDHValidaMailRolResponse.class);
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+						.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
 				sdhCustomerAccountService.updateTelefonoRit(sdhConsultaContribuyenteBPResponse);
 
 			}
@@ -280,9 +277,8 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 
 					consultaContribuyenteBPRequest.setNumBP(request.getNumBP());
 
-					final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-							sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-							SDHValidaMailRolResponse.class);
+					final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+							.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
 					sdhCustomerAccountService.updateAddressRit(sdhConsultaContribuyenteBPResponse);
 				}
 			}
@@ -322,9 +318,8 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 
 				consultaContribuyenteBPRequest.setNumBP(request.getNumBP());
 
-				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-						SDHValidaMailRolResponse.class);
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+						.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
 				sdhCustomerAccountService.updateNameRit(sdhConsultaContribuyenteBPResponse);
 
 			}

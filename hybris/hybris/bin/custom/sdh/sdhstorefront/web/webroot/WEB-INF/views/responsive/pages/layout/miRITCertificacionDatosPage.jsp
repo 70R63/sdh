@@ -196,6 +196,7 @@ window.onload = function() {
 
 <script type="text/javascript">
 function mostrarTabla(claveImpuesto){
+	debugger;
 	ACC.oblipend.llenarTablas_CertificacionDatos(claveImpuesto);
 	
 }

@@ -12,7 +12,6 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
@@ -53,7 +52,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -61,6 +59,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class MiRitCertificacionPageController extends AbstractPageController
@@ -158,7 +159,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 			final MiRitCertificacionForm miRitCertificacionFormResp = new MiRitCertificacionForm();
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 			final CertificacionRITResponse certificaRITResponse = mapper.readValue(
@@ -210,7 +211,12 @@ public class MiRitCertificacionPageController extends AbstractPageController
 			throws CMSItemNotFoundException
 	{
 		String returnURL = "/";
-		final String referrer = request.getHeader("referer");
+
+		String referrer = request.getHeader("referer");
+		if (referrer == null)
+		{
+			referrer = request.getServletPath();
+		}
 
 		final MiRitCertificacionForm miRitCertificacionForm = new MiRitCertificacionForm();
 		//		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
@@ -473,7 +479,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 			edoCuentaRequest.setBp(customerModel.getNumBP());
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			String responseStr = sdhEdoCuentaService.detalleEdoCta(edoCuentaRequest);
 			responseStr = responseStr.replace(",\"\"]},{\"detalleReteica\":[\"\",\"\"]}", "]}");
@@ -551,7 +557,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 		consultaContribuyenteBPRequest.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
 
 		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		try
 		{
@@ -581,6 +587,26 @@ public class MiRitCertificacionPageController extends AbstractPageController
 				miRitForm.setGasolina(sdhConsultaContribuyenteBPResponse.getGasolina().stream()
 						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumDoc())).collect(Collectors.toList()));
 			}
+
+
+			SDHExteriorPublicityTaxData cutomerPublicidadRow = null;
+			final List<SDHExteriorPublicityTaxData> cutomerPublicidadList = new ArrayList<SDHExteriorPublicityTaxData>();
+			for (final ImpuestoPublicidadExterior publicidadRow : sdhConsultaContribuyenteBPResponse.getPublicidadExt())
+			{
+				if (publicidadRow.getNumObjeto() != null && !publicidadRow.getNumObjeto().isEmpty())
+				{
+					cutomerPublicidadRow = new SDHExteriorPublicityTaxData();
+					cutomerPublicidadRow.setAnoGravable(publicidadRow.getAnoGravable());
+					cutomerPublicidadRow.setFenceType(publicidadRow.getTipoValla());
+					cutomerPublicidadRow.setResolutionNumber(publicidadRow.getNumResolu());
+					cutomerPublicidadRow.setObjectNumber(publicidadRow.getNumObjeto());
+
+					cutomerPublicidadList.add(cutomerPublicidadRow);
+				}
+
+
+			}
+			customerData.setExteriorPublicityTaxList(cutomerPublicidadList);
 
 
 

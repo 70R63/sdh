@@ -145,7 +145,7 @@
 			
 			ACC.vehiculosGeneraDeclaracionURL = "<c:url value='/contribuyentes/sobrevehiculosautomotores/declaracion/generar' />";
 
-			ACC.tramiteExitosoURL = "<c:url value='/contribuyentes/tramites' />";
+			ACC.tramiteExitosoURL = "<c:url value='/contibuyentes/tramites' />";
 			
 			ACC.predialDetalleURL="<c:url value='/contribuyentes/predialunificado_inicio/detalle' />";
 			ACC.precalculoPredialBPURL="<c:url value='/contribuyentes/predialunificado_inicio/precalculoPredialBP' />";

@@ -15,6 +15,7 @@
 		<sobreTasaGasolina:sobGasolinaMenu />
 		<sobreTasaGasolina:sobGasolinaBasicos />
 		<sobreTasaGasolina:sobGasolinaRep />
+        <input type="hidden" id="opcionUsoHidden" name="opcionUsoHidden" value="${dataForm.opcionUso}">
 		
 <%-- 		<sobreTasaGasolina:sobGasolinaBuscar /> --%>
 	</sf:form>

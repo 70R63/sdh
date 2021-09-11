@@ -19,12 +19,14 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacion2Request;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
+import de.hybris.sdh.core.pojos.responses.ContribAdicionales;
 import de.hybris.sdh.core.pojos.responses.DelineacionU2_areaIntervenida;
 import de.hybris.sdh.core.pojos.responses.DelineacionU2_areaProyecto;
 import de.hybris.sdh.core.pojos.responses.DelineacionU2_usos;
@@ -35,11 +37,13 @@ import de.hybris.sdh.core.pojos.responses.DelineacionUUsos;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
+import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacion2Response;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
@@ -61,7 +65,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -74,8 +77,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import Decoder.BASE64Decoder;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import Decoder.BASE64Decoder;
 
 /**
  * @author Maria Luisa/Federico Flores Dimas
@@ -143,6 +148,10 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 
 	@Resource(name = "sdhCustomerAccountService")
 	SDHCustomerAccountService sdhCustomerAccountService;
+
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+
 
 
 	//
@@ -696,12 +705,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		String[] mensajesError;
 		//		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
 
-		String numeroBP = sessionService.getCurrentSession().getAttribute("representado");
-		if (numeroBP == null)
-		{
-			numeroBP = customerModel.getNumBP();
-		}
-		infoDelineacion.getValCont().getInfoContrib().setNumBP(numeroBP);
+		determinarInfoDelineacion(infoDelineacion, customerModel);
 
 
 		infoDelineacionRequest.setNumBP(infoDelineacion.getValCont().getInfoContrib().getNumBP());
@@ -823,6 +827,68 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 
 
 
+	/**
+	 * @param infoDelineacion
+	 * @param customerModel
+	 */
+	private void determinarInfoDelineacion(final InfoDelineacion infoDelineacion, final CustomerModel customerModel)
+	{
+		String numeroBP = sessionService.getCurrentSession().getAttribute("representado");
+		String numeroDocumento = null;
+		String tipoDocumento = null;
+		String digitoVer = null;
+
+		if (numeroBP == null)
+		{
+			numeroBP = customerModel.getNumBP();
+			numeroDocumento = customerModel.getDocumentNumber();
+			tipoDocumento = customerModel.getDocumentType();
+			digitoVer = customerModel.getDigVer();
+		}
+		else
+		{
+			SDHValidaMailRolResponse representadoValCont = sessionService.getCurrentSession().getAttribute("representadoValCont");
+			if (representadoValCont == null)
+			{
+				final ConsultaContribBPRequest requestRepresentado = new ConsultaContribBPRequest();
+				requestRepresentado.setNumBP(numeroBP);
+				representadoValCont = sdhConsultaContribuyenteBPService.consultaContribuyenteBP_simplificado(requestRepresentado);
+				infoDelineacion.setValCont(representadoValCont);
+				sessionService.getCurrentSession().setAttribute("representadoValCont", representadoValCont);
+			}
+		}
+		if (infoDelineacion != null && infoDelineacion.getValCont() == null)
+		{
+			infoDelineacion.setValCont(new SDHValidaMailRolResponse());
+		}
+		if (infoDelineacion != null && infoDelineacion.getValCont() != null
+				&& infoDelineacion.getValCont().getInfoContrib() == null)
+		{
+			infoDelineacion.getValCont().setInfoContrib(new InfoContribResponse());
+		}
+		if (numeroBP != null)
+		{
+			infoDelineacion.getValCont().getInfoContrib().setNumBP(numeroBP);
+		}
+		if (numeroDocumento != null)
+		{
+			infoDelineacion.getValCont().getInfoContrib().setNumDoc(numeroDocumento);
+			;
+		}
+		if (tipoDocumento != null)
+		{
+			infoDelineacion.getValCont().getInfoContrib().setTipoDoc(tipoDocumento);
+			;
+		}
+		if (digitoVer != null)
+		{
+			infoDelineacion.getValCont().getInfoContrib().setAdicionales(new ContribAdicionales());
+			infoDelineacion.getValCont().getInfoContrib().getAdicionales().setDIGVERIF(digitoVer);
+		}
+	}
+
+
+
 	@RequestMapping(value = "/contribuyentes/delineacion-urbana/detalle", method = RequestMethod.GET)
 	@ResponseBody
 	public RadicaDelinResponse delineacionUrbanaCDUDetalleGET(@ModelAttribute("radicadoInfoRequest")
@@ -882,7 +948,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			System.out.println("Request para generaDeclaracion : " + generaDeclaracionRequest);
 			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
@@ -953,8 +1019,16 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		final InfoDelineacion infoDelineacion = new InfoDelineacion();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final CustomerData currentUserData = customerFacade.getCurrentCustomer();
-		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
-		final SDHValidaMailRolResponse valCont = sdhCustomerFacade.getRepresentadoFromSAP(representado);
+		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado, "01,02");
+		final ConsultaContribuyenteBPRequest consultaContribRequest = new ConsultaContribuyenteBPRequest();
+		consultaContribRequest.setNumBP(representado);
+		final SDHValidaMailRolResponse valCont = sdhConsultaImpuesto_simplificado
+				.consulta_impDelineacion_valCont(consultaContribRequest);
+		SDHValidaMailRolResponse contImpuestos = null;
+
+		contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(representado, "06");
+		valCont.setDelineacion(contImpuestos.getDelineacion());
+
 		String paginaDestino = "";
 		String breadcrumbs = "";
 
@@ -1036,7 +1110,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 			input.setSelectedCDU(infoImpuesto2Response.getCdu());
 			input.setSelectedRadicado(infoImpuesto2Response.getNumRadicado());
 			input.setSelectedTipoLicencia(infoImpuesto2Response.getTipoLicencia());
-			if (infoImpuesto2Response.getRetencion().equals("X"))
+			if (infoImpuesto2Response.getRetencion() != null && infoImpuesto2Response.getRetencion().equals("X"))
 			{
 				input.setTipoFlujo("R");
 			}

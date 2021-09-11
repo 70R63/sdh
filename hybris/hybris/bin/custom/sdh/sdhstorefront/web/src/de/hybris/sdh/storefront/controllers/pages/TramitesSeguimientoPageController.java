@@ -50,7 +50,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 //@RequestMapping("")
 public class TramitesSeguimientoPageController extends AbstractPageController
 {
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(TramitesSeguimientoPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "Seguimiento Trámites";
@@ -176,15 +176,15 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 						{
 							mapResultado.remove(resultadoActual.getProcess_type());
 						}
-						if (resultadoActual.getCampo().equals("TRÁMITE"))
+						if (resultadoActual.getCampo().equals("TRAMITE"))
 						{
 							infoConsulCasos.setTramite(resultadoActual.getFactor());
 						}
-						if (resultadoActual.getCampo().equals("NÚMERO DE CASO"))
+						if (resultadoActual.getCampo().equals("NUMERO DE CASO"))
 						{
 							infoConsulCasos.setNum_caso(resultadoActual.getFactor());
 						}
-						if (resultadoActual.getCampo().equals("NÚMERO DE RADICADO"))
+						if (resultadoActual.getCampo().equals("NUMERO DE RADICADO"))
 						{
 							infoConsulCasos.setNum_radicado(resultadoActual.getFactor());
 						}

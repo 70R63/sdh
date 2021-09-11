@@ -59,8 +59,11 @@ public interface SDHCustomerAccountService
 	//mapea infoContrib, adicionales, redes sociales del CustomerModel a SDHValidaMailRolResponse
 	SDHValidaMailRolResponse getBPDataFromCustomer(final CustomerModel customerModel);
 
-	//mapea usando getBPDataFromCustomer y despues lee de SAP los impuestos (06 y 07) (no se graba esa informacion)
+	//mapea usando getBPDataFromCustomer y despues lee de SAP los impuestos
 	SDHValidaMailRolResponse getBPAndTaxDataFromCustomer(final CustomerModel customerModel, String taxCode);
+
+	//mapea usando getBPDataFromCustomer y despues lee de SAP los impuestos 
+	SDHValidaMailRolResponse getBPAndTaxDataFromCustomer(final String numBP, String taxCode);
 
 	//leer customer desde SAP con validaContrib
 	public SDHValidaMailRolResponse consultaContribuyenteBP_simplificado(String numBP, String indicador);

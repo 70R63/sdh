@@ -22,6 +22,7 @@ import de.hybris.sdh.core.pojos.responses.EdoCuentaResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHEdoCuentaService;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
@@ -51,7 +52,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -60,6 +60,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Federico Flores Dimas
@@ -106,6 +109,9 @@ public class ConsultaEstado extends AbstractSearchPageController
 	@Resource(name = "sdhEdoCuentaService")
 	SDHEdoCuentaService sdhEdoCuentaService;
 
+	@Resource(name = "sdhCustomerAccountService")
+	SDHCustomerAccountService sdhCustomerAccountService;
+
 
 
 
@@ -117,7 +123,13 @@ public class ConsultaEstado extends AbstractSearchPageController
 	public String handleGET_PD(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Estado de Cuenta GET --------------------------");
-		final String referrer = request.getHeader("referer");
+		String referrer = request.getHeader("referer");
+		if (referrer == null)
+		{
+			referrer = request.getServletPath();
+		}
+
+
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
@@ -127,6 +139,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final EdoCuentaRequest edoCuentaRequest = new EdoCuentaRequest();
+
 
 		ctaForm.setCompleName(customerData.getCompleteName());
 		ctaForm.setTipoDoc(customerData.getDocumentType());
@@ -138,12 +151,17 @@ public class ConsultaEstado extends AbstractSearchPageController
 			edoCuentaRequest.setBp(customerModel.getNumBP());
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			String responseStr = sdhEdoCuentaService.detalleEdoCta(edoCuentaRequest);
 			responseStr = responseStr.replace(",\"\"]},{\"detalleReteica\":[\"\",\"\"]}", "]}");
 			responseStr = responseStr.replace(",{\"detalleReteica\":[\"\",\"\"]}", "");
 			responseStr = responseStr.replace("{\"detalleReteica\":[\"\",\"\"]}", "");
+			responseStr = responseStr.replace("[{\"detalleReteica\":[\"\"]}],",
+					"[{\"detalleReteica\":[{\"anioGravable\":\"\",\"periodo\":\"\",\"estado\":\"\",\"saldoCargo\":\"\",\"saldoFavor\":\"\"}]}],");
+
+			System.out.println("---------------- Despues de ajustes --------------------------");
+			System.out.println(responseStr);
 
 			final EdoCuentaResponse edoCuentaResponse = mapper.readValue(responseStr, EdoCuentaResponse.class);
 
@@ -242,7 +260,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 		consultaContribuyenteBPRequest.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
 
 		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		try
 		{
@@ -272,6 +290,25 @@ public class ConsultaEstado extends AbstractSearchPageController
 				miRitForm.setGasolina(sdhConsultaContribuyenteBPResponse.getGasolina().stream()
 						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumDoc())).collect(Collectors.toList()));
 			}
+
+			SDHExteriorPublicityTaxData cutomerPublicidadRow = null;
+			final List<SDHExteriorPublicityTaxData> cutomerPublicidadList = new ArrayList<SDHExteriorPublicityTaxData>();
+			for (final ImpuestoPublicidadExterior publicidadRow : sdhConsultaContribuyenteBPResponse.getPublicidadExt())
+			{
+				if (publicidadRow.getNumObjeto() != null && !publicidadRow.getNumObjeto().isEmpty())
+				{
+					cutomerPublicidadRow = new SDHExteriorPublicityTaxData();
+					cutomerPublicidadRow.setAnoGravable(publicidadRow.getAnoGravable());
+					cutomerPublicidadRow.setFenceType(publicidadRow.getTipoValla());
+					cutomerPublicidadRow.setResolutionNumber(publicidadRow.getNumResolu());
+					cutomerPublicidadRow.setObjectNumber(publicidadRow.getNumObjeto());
+
+					cutomerPublicidadList.add(cutomerPublicidadRow);
+				}
+
+
+			}
+			customerData.setExteriorPublicityTaxList(cutomerPublicidadList);
 
 
 

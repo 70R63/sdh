@@ -303,6 +303,7 @@ parent.attributes[4]=true;
 		    	        
 		    	        updateTelefonoRitData.telfonoPrincipal = $.trim($("#telefonoPricipal").val());
 		    	        updateTelefonoRitData.extension = $.trim($("#extensionTelefono").val());
+		    	        updateTelefonoRitData.tel_tipo = $.trim($("#phoneSelect").val());
 		    	        
     	        
 			   	        $.ajax({

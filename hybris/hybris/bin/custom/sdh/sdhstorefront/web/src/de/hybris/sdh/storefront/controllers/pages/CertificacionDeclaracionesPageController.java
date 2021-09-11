@@ -11,7 +11,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
+import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -33,6 +33,7 @@ import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.core.services.SDHImprimeCertDeclaraService;
@@ -49,13 +50,13 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,6 +67,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Decoder.BASE64Decoder;
 
@@ -137,6 +141,9 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 	@Resource(name = "sdhDetalleGasolina")
 	SDHDetalleGasolina sdhDetalleGasolinaWS;
 
+	@Resource(name = "sdhCustomerAccountService")
+	SDHCustomerAccountService sdhCustomerAccountService;
+
 
 	@ModelAttribute("anoGravableGasolina")
 	public List<SelectAtomValue> getIdAnoGravableGasolina()
@@ -201,6 +208,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		final OpcionDeclaracionesVista infoVista = new OpcionDeclaracionesVista();
 		final String urlIni;
 		SDHValidaMailRolResponse customerData = null;
+		SDHValidaMailRolResponse contImpuestos = null;
 
 		request.getHeaders(CMS_PAGE_MODEL);
 		request.getAttribute(getSiteName());
@@ -210,6 +218,59 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 
 
 		customerData = sdhCustomerFacade.getRepresentadoFromSAP(customerModel.getNumBP());
+
+
+		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
+
+		for (final PrincipalGroupModel group : groupList)
+		{
+			final String groupUid = group.getUid();
+
+			if (groupUid.contains("predialUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
+
+				customerData.setPredial(contImpuestos.getPredial());
+			}
+
+			if (groupUid.contains("vehicularUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "02");
+
+				customerData.setVehicular(contImpuestos.getVehicular());
+			}
+
+			if (groupUid.contains("ICAUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "03");
+
+				customerData.setIca(contImpuestos.getIca());
+			}
+
+			if (groupUid.contains("gasolinaUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "05");
+
+				customerData.setGasolina(contImpuestos.getGasolina());
+			}
+
+			if (groupUid.contains("delineacionUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
+
+				customerData.setDelineacion(contImpuestos.getDelineacion());
+			}
+
+			if (groupUid.contains("publicidadExtUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "07");
+
+				customerData.setPublicidadExt(contImpuestos.getPublicidadExt());
+			}
+
+		}
+
+
 		infoVista.setCatalogos(gasolinaService.prepararCatalogosOpcionDeclaraciones(customerData));
 		infoVista.setCustomerData(customerData);
 
@@ -425,7 +486,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 				{
 
 					final ObjectMapper mapper = new ObjectMapper();
-					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+					mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 					if (certiFormPost.getIdimp().equals("4"))
 					{
@@ -600,7 +661,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 				try
 				{
 					final ObjectMapper mapper = new ObjectMapper();
-					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+					mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 					final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
@@ -642,7 +703,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 				{
 
 					final ObjectMapper mapper = new ObjectMapper();
-					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+					mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 					imprimeCertDeclaraRequest.setNumBP(customerData.getNumBP());
 					imprimeCertDeclaraRequest.setNumObjeto(customerData.getIcaTax().getObjectNumber());
@@ -688,7 +749,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 				{
 
 					final ObjectMapper mapper = new ObjectMapper();
-					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+					mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 					final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
 

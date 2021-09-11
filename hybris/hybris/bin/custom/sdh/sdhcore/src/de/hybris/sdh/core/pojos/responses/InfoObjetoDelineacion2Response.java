@@ -5,7 +5,7 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 
 /**
@@ -69,7 +69,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param anoGravable
 	 *           the anoGravable to set
 	 */
-	@JsonProperty("Anio_gravable")
+	@JsonSetter("Anio_gravable")
 	public void setAnoGravable(final String anoGravable)
 	{
 		this.anoGravable = anoGravable;
@@ -87,7 +87,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param periodo
 	 *           the periodo to set
 	 */
-	@JsonProperty("Periodo")
+	@JsonSetter("Periodo")
 	public void setPeriodo(final String periodo)
 	{
 		this.periodo = periodo;
@@ -105,7 +105,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param cdu
 	 *           the cdu to set
 	 */
-	@JsonProperty("CDU")
+	@JsonSetter("CDU")
 	public void setCdu(final String cdu)
 	{
 		this.cdu = cdu;
@@ -123,7 +123,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param numRadicado
 	 *           the numRadicado to set
 	 */
-	@JsonProperty("Radicado")
+	@JsonSetter("Radicado")
 	public void setNumRadicado(final String numRadicado)
 	{
 		this.numRadicado = numRadicado;
@@ -141,7 +141,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param retencion
 	 *           the retencion to set
 	 */
-	@JsonProperty("Retencion")
+	@JsonSetter("Retencion")
 	public void setRetencion(final String retencion)
 	{
 		this.retencion = retencion;
@@ -159,7 +159,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param opcionUso
 	 *           the opcionUso to set
 	 */
-	@JsonProperty("Opcion_uso")
+	@JsonSetter("Opcion_uso")
 	public void setOpcionUso(final String opcionUso)
 	{
 		this.opcionUso = opcionUso;
@@ -177,7 +177,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param tipoLicencia
 	 *           the tipoLicencia to set
 	 */
-	@JsonProperty("Tipo_licencia")
+	@JsonSetter("Tipo_licencia")
 	public void setTipoLicencia(final String tipoLicencia)
 	{
 		this.tipoLicencia = tipoLicencia;
@@ -195,7 +195,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param objetoLicen
 	 *           the objetoLicen to set
 	 */
-	@JsonProperty("Objeto_licen")
+	@JsonSetter("Objeto_licen")
 	public void setObjetoLicen(final String objetoLicen)
 	{
 		this.objetoLicen = objetoLicen;
@@ -213,7 +213,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param modalidad
 	 *           the modalidad to set
 	 */
-	@JsonProperty("Modalidad")
+	@JsonSetter("Modalidad")
 	public void setModalidad(final String modalidad)
 	{
 		this.modalidad = modalidad;
@@ -231,7 +231,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param presupuestoObra
 	 *           the presupuestoObra to set
 	 */
-	@JsonProperty("Presupuesto_obra")
+	@JsonSetter("Presupuesto_obra")
 	public void setPresupuestoObra(final String presupuestoObra)
 	{
 		this.presupuestoObra = presupuestoObra;
@@ -249,7 +249,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param causalExcep
 	 *           the causalExcep to set
 	 */
-	@JsonProperty("Causal_exep")
+	@JsonSetter("Causal_exep")
 	public void setCausalExcep(final String causalExcep)
 	{
 		this.causalExcep = causalExcep;
@@ -267,7 +267,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param firmantes
 	 *           the firmantes to set
 	 */
-	@JsonProperty("Firmantes")
+	@JsonSetter("Firmantes")
 	public void setFirmantes(final List<FirmanteResponse> firmantes)
 	{
 		this.firmantes = firmantes;
@@ -285,7 +285,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param totalPresupuesto
 	 *           the totalPresupuesto to set
 	 */
-	@JsonProperty("Total_presupuesto")
+	@JsonSetter("Total_presupuesto")
 	public void setTotalPresupuesto(final String totalPresupuesto)
 	{
 		this.totalPresupuesto = totalPresupuesto;
@@ -303,7 +303,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param totalRetencion
 	 *           the totalRetencion to set
 	 */
-	@JsonProperty("Total_retencion")
+	@JsonSetter("Total_retencion")
 	public void setTotalRetencion(final String totalRetencion)
 	{
 		this.totalRetencion = totalRetencion;
@@ -321,7 +321,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param totalPagar
 	 *           the totalPagar to set
 	 */
-	@JsonProperty("Total_pagar")
+	@JsonSetter("Total_pagar")
 	public void setTotalPagar(final String totalPagar)
 	{
 		this.totalPagar = totalPagar;
@@ -372,7 +372,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param usos
 	 *           the usos to set
 	 */
-	@JsonProperty("Usos")
+	@JsonSetter("Usos")
 	public void setUsos(final List<DelineacionU2_usos> usos)
 	{
 		this.usos = usos;
@@ -389,7 +389,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param areaIntervenida
 	 *           the areaIntervenida to set
 	 */
-	@JsonProperty("Area_intervenida")
+	@JsonSetter("Area_intervenida")
 	public void setAreaIntervenida(final List<DelineacionU2_areaIntervenida> areaIntervenida)
 	{
 		this.areaIntervenida = areaIntervenida;
@@ -406,7 +406,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param areaProyecto
 	 *           the areaProyecto to set
 	 */
-	@JsonProperty("Area_proyecto")
+	@JsonSetter("Area_proyecto")
 	public void setAreaProyecto(final List<DelineacionU2_areaProyecto> areaProyecto)
 	{
 		this.areaProyecto = areaProyecto;
@@ -456,7 +456,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param fechaEjecutaria
 	 *           the fechaEjecutaria to set
 	 */
-	@JsonProperty("Fecha_ejecutoria")
+	@JsonSetter("Fecha_ejecutoria")
 	public void setFechaEjecutaria(final String fechaEjecutaria)
 	{
 		this.fechaEjecutaria = fechaEjecutaria;
@@ -474,7 +474,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param fechaFinalObra
 	 *           the fechaFinalObra to set
 	 */
-	@JsonProperty("Fecha_fin_obra")
+	@JsonSetter("Fecha_fin_obra")
 	public void setFechaFinalObra(final String fechaFinalObra)
 	{
 		this.fechaFinalObra = fechaFinalObra;
@@ -492,7 +492,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param fechaUltAbono
 	 *           the fechaUltAbono to set
 	 */
-	@JsonProperty("Fecha_ult_abono")
+	@JsonSetter("Fecha_ult_abono")
 	public void setFechaUltAbono(final String fechaUltAbono)
 	{
 		this.fechaUltAbono = fechaUltAbono;
@@ -510,7 +510,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param valorExen
 	 *           the valorExen to set
 	 */
-	@JsonProperty("Valor_exen")
+	@JsonSetter("Valor_exen")
 	public void setValorExen(final String valorExen)
 	{
 		this.valorExen = valorExen;
@@ -528,7 +528,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param valorEjecutado
 	 *           the valorEjecutado to set
 	 */
-	@JsonProperty("Valor_ejecutado")
+	@JsonSetter("Valor_ejecutado")
 	public void setValorEjecutado(final String valorEjecutado)
 	{
 		this.valorEjecutado = valorEjecutado;
@@ -546,7 +546,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param impuestoCargo
 	 *           the impuestoCargo to set
 	 */
-	@JsonProperty("Impuesto_cargo")
+	@JsonSetter("Impuesto_cargo")
 	public void setImpuestoCargo(final String impuestoCargo)
 	{
 		this.impuestoCargo = impuestoCargo;
@@ -564,7 +564,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param valorSancion
 	 *           the valorSancion to set
 	 */
-	@JsonProperty("Valor_sancion")
+	@JsonSetter("Valor_sancion")
 	public void setValorSancion(final String valorSancion)
 	{
 		this.valorSancion = valorSancion;
@@ -582,7 +582,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param saldoImpCargo
 	 *           the saldoImpCargo to set
 	 */
-	@JsonProperty("Saldo_imp_cargo")
+	@JsonSetter("Saldo_imp_cargo")
 	public void setSaldoImpCargo(final String saldoImpCargo)
 	{
 		this.saldoImpCargo = saldoImpCargo;
@@ -600,7 +600,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param saldoFavor
 	 *           the saldoFavor to set
 	 */
-	@JsonProperty("Saldo_favor")
+	@JsonSetter("Saldo_favor")
 	public void setSaldoFavor(final String saldoFavor)
 	{
 		this.saldoFavor = saldoFavor;
@@ -618,7 +618,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param valorPagar
 	 *           the valorPagar to set
 	 */
-	@JsonProperty("Valor_pagar")
+	@JsonSetter("Valor_pagar")
 	public void setValorPagar(final String valorPagar)
 	{
 		this.valorPagar = valorPagar;
@@ -636,7 +636,7 @@ public class InfoObjetoDelineacion2Response
 	 * @param interesMora
 	 *           the interesMora to set
 	 */
-	@JsonProperty("Interes_mora")
+	@JsonSetter("Interes_mora")
 	public void setInteresMora(final String interesMora)
 	{
 		this.interesMora = interesMora;
@@ -695,7 +695,7 @@ public class InfoObjetoDelineacion2Response
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

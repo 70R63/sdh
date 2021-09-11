@@ -89,8 +89,10 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.context.MessageSource;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -983,7 +985,7 @@ public class SobreTasaGasolinaService
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			detalleContribuyente = mapper.readValue(sdhConsultaContribuyenteBPService.consultaContribuyenteBP(requestInfo),
 					SDHValidaMailRolResponse.class);
@@ -1018,7 +1020,7 @@ public class SobreTasaGasolinaService
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			detalleGasolinaResponse = mapper.readValue(
 					sdhConsultaWS.consultaWS(detalleGasolinaRequest, confUrl, confUser, confPass, wsNombre, wsReqMet),
@@ -1041,7 +1043,7 @@ public class SobreTasaGasolinaService
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			consultaGasolinaResponse = mapper.readValue(
 					sdhConsultaWS.consultaWS(consultaGasolinaRequest, confUrl, confUser, confPass, wsNombre, wsReqMet),
@@ -1064,7 +1066,7 @@ public class SobreTasaGasolinaService
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			responseInfo = mapper.readValue(sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet),
 					DetallePagoResponse.class);
@@ -1086,13 +1088,16 @@ public class SobreTasaGasolinaService
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 			String wsresponse = sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet);
-			wsresponse = wsresponse.replaceAll("\"ARCHIVOS\":\\{([\"])(.*)(\"\\})", "\"ARCHIVOS\":[{\"$2\"}]");
-			System.out.println("Response de crm/consCasos: " + wsresponse);
-
+			//			wsresponse = wsresponse.replaceAll("\"ARCHIVOS\":\\{([\"])(.*)(\"\\})", "\"ARCHIVOS\":[{\"$2\"}]");
+			//			System.out.println(confUrl + ": " + wsresponse);
+			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.CreaCasosResponse"))
+			{
+				wsresponse = wsresponse.replaceAll("\"ARCHIVOS\":\\{([\"])(.*)(\"\\})", "\"ARCHIVOS\":[{\"$2\"}]");
+			}
 
 
 			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse"))
@@ -2051,14 +2056,18 @@ public class SobreTasaGasolinaService
 	public String obtenerNumeroObjetoDU(final InfoDelineacion infoDelineacion)
 	{
 		String numObjeto = "";
-		final List<ImpuestoDelineacionUrbana> dealineaciones = infoDelineacion.getValCont().getDelineacion();
-		final String cduSeleccionado = infoDelineacion.getInput().getSelectedCDU();
-
-		for (int i = 0; i < dealineaciones.size(); i++)
+		if (infoDelineacion != null && infoDelineacion.getValCont() != null && infoDelineacion.getValCont().getDelineacion() != null
+				&& infoDelineacion.getInput() != null && infoDelineacion.getInput().getSelectedCDU() != null)
 		{
-			if (dealineaciones.get(i).getCdu().equals(cduSeleccionado))
+			final List<ImpuestoDelineacionUrbana> dealineaciones = infoDelineacion.getValCont().getDelineacion();
+			final String cduSeleccionado = infoDelineacion.getInput().getSelectedCDU();
+
+			for (int i = 0; i < dealineaciones.size(); i++)
 			{
-				numObjeto = dealineaciones.get(i).getNumObjeto();
+				if (dealineaciones.get(i).getCdu().equals(cduSeleccionado))
+				{
+					numObjeto = dealineaciones.get(i).getNumObjeto();
+				}
 			}
 		}
 

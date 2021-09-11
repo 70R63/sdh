@@ -486,6 +486,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 					dataForm.setTipoDoc(tipoDoc);
 					dataForm.setDataForm(detalleGasolinaResponse);
 				}
+				dataForm.setOpcionUso(detalleGasolinaResponse.getOpcionUso());
 			}
 			else
 			{
@@ -588,7 +589,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 			dataForm.setAnoGravable(anoGravable);
 			dataForm.setPeriodo(periodo);
 			dataForm.setNumDoc(numDoc);
-			dataForm.setOpcionUso(detalleGasolinaResponse.getOpcionUso());
+			dataForm.setOpcionUso(prepararOpcionUso(detalleGasolinaResponse.getOpcionUso()));
 			dataForm.setNumForm(detalleGasolinaResponse.getNumForm());
 			infoDeclaraDefaultTMP = gasolinaService.prepararInfoDeclara(detalleGasolinaResponse.getInfoDeclara());
 			if (infoDeclaraDefaultTMP != null && infoDeclaraDefaultTMP.size() > 0)
@@ -782,7 +783,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		consultaGasolinaRequest.setAnoGravable(anoGravable);
 		consultaGasolinaRequest.setPeriodo(periodo);
 		consultaGasolinaRequest.setNumForm(numForm);
-		consultaGasolinaRequest.setOpcionUso(opcionUso);
+		consultaGasolinaRequest.setOpcionUso(prepararOpcionUso(opcionUso));
 		consultaGasolinaRequest.setInfoDeclara(infoDeclaraDefault);
 		consultaGasolinaRequest.setRevisorDeclarante(revisorDeclaranteDefault);
 
@@ -1058,7 +1059,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 			dataForm.setAnoGravable(calcGasolina2Response.getAnio_gravable());
 			dataForm.setPeriodo(calcGasolina2Response.getPeriodo());
-			dataForm.setOpcionUso(calcGasolina2Response.getOpcion_uso());
+			dataForm.setOpcionUso(prepararOpcionUso(calcGasolina2Response.getOpcion_uso()));
 			detalleGasolinaResponse.setInfoDeclara(calcGasolina2Response.getInfo_declara());
 		}
 		dataForm.setNumForm(numForm);
@@ -1148,6 +1149,20 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 		return null;
 	}
+
+	private String prepararOpcionUso(final String opcionUso)
+	{
+		String valorRetorno = null;
+
+		if (opcionUso != null && opcionUso.length() >= 2)
+		{
+			valorRetorno = opcionUso.substring(0, 2);
+		}
+
+
+		return valorRetorno;
+	}
+
 
 }
 

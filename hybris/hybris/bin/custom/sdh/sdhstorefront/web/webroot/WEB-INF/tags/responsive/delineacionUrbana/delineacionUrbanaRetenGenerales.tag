@@ -158,5 +158,4 @@
 
 	}
 
-	function presupuestoObraLOAD();
 </script>

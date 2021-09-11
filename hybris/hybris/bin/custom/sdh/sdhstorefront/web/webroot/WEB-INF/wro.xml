@@ -91,6 +91,7 @@
 		<js>/_ui/responsive/common/js/acc.facturacion.js</js>
 		<js>/_ui/responsive/common/js/acc.spac.js</js>
 		<js>/_ui/responsive/common/js/acc.spinner.js</js>
+		<js>/_ui/responsive/common/js/acc.faqs.js</js>
 
 		<js>/_ui/responsive/common/js/_autoload.js</js>
 
