@@ -5,6 +5,9 @@ public class PaymentServiceRegisterResponse {
     private Integer nus;
     private String paymentUrl;
 
+    public PaymentServiceRegisterResponse() {
+    }
+
     public PaymentServiceRegisterResponse(String message, Integer nus, String paymentUrl) {
         this.message = message;
         this.nus = nus;
