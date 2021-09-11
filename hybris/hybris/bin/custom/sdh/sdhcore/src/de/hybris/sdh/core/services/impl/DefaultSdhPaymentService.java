@@ -20,10 +20,8 @@ public class DefaultSdhPaymentService implements SdhPaymentService {
     @Override
     public PaymentServiceRegisterResponse register(PaymentServiceRegisterRequest paymentServiceRegisterRequest) {
         final String urlService = configurationService.getConfiguration().getString("sdh.payment.service.register.url");
-
         final RestTemplate restTemplate = new RestTemplate();
         final HttpEntity<PaymentServiceRegisterRequest> request = new HttpEntity<>(paymentServiceRegisterRequest);
-
         return restTemplate.postForObject(urlService, request, PaymentServiceRegisterResponse.class);
     }
 }

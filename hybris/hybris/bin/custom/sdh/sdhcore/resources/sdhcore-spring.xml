@@ -785,4 +785,7 @@
 
 	<alias alias="sdhImpPredialServiceImpl" name="defaultSDHImpPredialServiceImpl"/>
 	<bean name="defaultSDHImpPredialServiceImpl" class="de.hybris.sdh.core.services.impl.SDHImpPredialServiceImpl" />
+
+	<alias alias="sdhPaymentService" name="defaultSdhPaymentService"/>
+	<bean name="defaultSdhPaymentService" class="de.hybris.sdh.core.services.impl.DefaultSdhPaymentService"/>
 </beans>
