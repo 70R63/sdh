@@ -11,6 +11,12 @@
 <spring:url
 	value="/contribuyentes/sobretasa-gasolina/declaracion-gasolina"
 	var="presentarDeclaracionUrl" htmlEscape="false" />
+
+<c:set var="flagHabilitarCalculo" value="true" />
+<c:if test="${contribuyente.numBP ne currentUser.numBP }">
+	<c:set var="flagHabilitarCalculo" value="false" />
+</c:if>
+
 <div class="container">
 	<sf:form action="${declaracionURL}" method="POST"
 		modelAttribute="dataForm" id="forma">
@@ -158,17 +164,19 @@
 		</div>
 		<br>
 		<br>
-		<div class="row">
-			<div class="col-md-12 col-md-offset-4">
-				<div class="form-group ">
-					<sf:button action="${presentarDeclaracionUrl}" type="submit"
-						class="btn btn-primary btn-lg" id="calcular" name="action"
-						value="calcular">
-						<spring:theme code="impuestos.decGasolina.InformacionDec.calcular" />
-					</sf:button>
+		<c:if test="${flagHabilitarCalculo eq true}">
+			<div class="row">
+				<div class="col-md-12 col-md-offset-4">
+					<div class="form-group ">
+						<sf:button action="${presentarDeclaracionUrl}" type="submit"
+							class="btn btn-primary btn-lg" id="calcular" name="action"
+							value="calcular">
+							<spring:theme code="impuestos.decGasolina.InformacionDec.calcular" />
+						</sf:button>
+					</div>
 				</div>
 			</div>
-		</div>
+		</c:if>
 	</sf:form>
 	<div class="row"></div>
 </div>
