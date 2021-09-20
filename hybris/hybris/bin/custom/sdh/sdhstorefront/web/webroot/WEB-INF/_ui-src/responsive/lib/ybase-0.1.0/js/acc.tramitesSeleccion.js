@@ -3,7 +3,7 @@ ACC.tramitesSeleccion = {
 	dataCreacionCaso : {},
 	cantidadArchivos : {},
 
-	_autoload : [ "bindTramitesSelect", "bindTramitesEnviar",
+	_autoload : [ "bindTramitesSelect", "bindTramitesSelectRol", "bindTramitesEnviar", "bindTramitesEnviarRol",
 			"bindConsCasoEnviar", "bindSelectCaso" ],
 
 	bindTramitesSelect : function() {
@@ -24,7 +24,7 @@ ACC.tramitesSeleccion = {
 					dataActual.valorN3 = "";
 					dataActual.valorN4 = "";
 
-					// debugger;
+					debugger;
 					var doc = document.getElementById('documentos');
 					doc.style.display = 'none';
 
@@ -66,6 +66,79 @@ ACC.tramitesSeleccion = {
 						data : dataActual,
 						type : "GET",
 						success : function(dataResponse) {
+							debugger;
+							ACC.spinner.close();
+							ACC.tramitesSeleccion.mostrarMensaje(dataResponse);
+							ACC.tramitesSeleccion.updateFromResponse(
+									dataActual, dataResponse);
+						},
+						error : function() {
+							ACC.spinner.close();
+						}
+					});
+				});
+	},
+	
+	
+	bindTramitesSelectRol : function() {
+		$(document).on(
+				"change",
+				".tramitestSNRol",
+				function(e) {
+					ACC.spinner.show();
+
+					var valorNivel = $.trim($(this).attr("data-nivel"));
+					var valorActual = this.value;
+					var dataActual = {};
+//debugger;
+					dataActual.nivelSeleccion = valorNivel;
+					dataActual.valorN0 = "";
+					dataActual.valorN1 = "";
+					dataActual.valorN2 = "";
+					dataActual.valorN3 = "";
+					dataActual.valorN4 = "";
+
+					debugger;
+					
+					if (dataActual.nivelSeleccion == 0) {
+						ACC.tramitesSeleccion.clearFieldsFromDataSelN0();
+						dataActual.valorN0 = $("#selectNivel0").val();
+					}
+
+					if (dataActual.nivelSeleccion == 1) {
+						ACC.tramitesSeleccion.clearFieldsFromDataSelN1();
+						dataActual.valorN0 = $("#selectNivel0").val();
+						dataActual.valorN1 = $("#selectNivel1").val();
+					}
+
+					if (dataActual.nivelSeleccion == 2) {
+						ACC.tramitesSeleccion.clearFieldsFromDataSelN2();
+						dataActual.valorN0 = $("#selectNivel0").val();
+						dataActual.valorN1 = $("#selectNivel1").val();
+						dataActual.valorN2 = $("#selectNivel2").val();
+					}
+
+					if (dataActual.nivelSeleccion == 3) {
+						dataActual.valorN0 = $("#selectNivel0").val();
+						dataActual.valorN1 = $("#selectNivel1").val();
+						dataActual.valorN2 = $("#selectNivel2").val();
+						dataActual.valorN3 = $("#selectNivel3").val();
+					}
+					
+					if (dataActual.nivelSeleccion == 4) {
+						dataActual.valorN0 = $("#selectNivel0").val();
+						dataActual.valorN1 = $("#selectNivel1").val();
+						dataActual.valorN2 = $("#selectNivel2").val();
+						dataActual.valorN3 = $("#selectNivel3").val();
+						dataActual.valorN4 = $("#selectNivel4").val();
+					}
+
+					$.ajax({
+						url : ACC.casoSeleccionURLRol,
+						data : dataActual,
+						type : "GET",
+						success : function(dataResponse) {
+							debugger;
 							ACC.spinner.close();
 							ACC.tramitesSeleccion.mostrarMensaje(dataResponse);
 							ACC.tramitesSeleccion.updateFromResponse(
@@ -85,6 +158,8 @@ ACC.tramitesSeleccion = {
 						".tramitesEnviar",
 						function(e) {
 							e.preventDefault();
+							
+							debugger;
 
 							var valorNivel = 0;
 							var valorActual = this.value;
@@ -108,7 +183,7 @@ ACC.tramitesSeleccion = {
 							validacion = ACC.tramitesSeleccion
 									.validarInfoAntesSubmit(ACC.tramitesSeleccion.dataCreacionCaso);
 
-//							 debugger;
+							 
 							if (validacion == true) {
 								var itemSeleccionado;
 								var idItemSeleccionado;
@@ -127,14 +202,14 @@ ACC.tramitesSeleccion = {
 											indiceItemSeleccionado = e.target.form[i].id
 													.substring(17, 18);
 	
-											// debugger;
+											//debugger;
 											let file = e.target.form[i].files[0];
 											let reader = new FileReader();
 											reader.readAsDataURL(file);
 	
 											reader.onload = function(evt) {
-												// console.log("onload");
-												// debugger;
+												console.log("onload");
+												debugger;
 												indiceItemSeleccionado = ACC.tramitesSeleccion
 														.obtenerIndiceArchivos(file.name);
 	
@@ -215,12 +290,171 @@ ACC.tramitesSeleccion = {
 
 						});
 	},
+	
+	bindTramitesEnviarRol : function() {
+		$(document)
+				.on(
+						"click",
+						".tramitesEnviarRol",
+						function(e) {
+							e.preventDefault();
+							
+							debugger;
+
+							var valorNivel = 0;
+							var valorActual = this.value;
+							var validacion = false;
+							ACC.tramitesSeleccion.dataCreacionCaso = {};
+
+							ACC.tramitesSeleccion.dataCreacionCaso.nivelSeleccion = valorNivel;
+							ACC.tramitesSeleccion.dataCreacionCaso.valorN0 = $(
+									"#selectNivel0").val();
+							ACC.tramitesSeleccion.dataCreacionCaso.valorN1 = $(
+									"#selectNivel1").val();
+							ACC.tramitesSeleccion.dataCreacionCaso.valorN2 = $(
+									"#selectNivel2").val();
+							ACC.tramitesSeleccion.dataCreacionCaso.valorN3 = $(
+									"#selectNivel3").val();
+							ACC.tramitesSeleccion.dataCreacionCaso.valorN4 = $(
+									"#selectNivel4").val();
+							ACC.tramitesSeleccion.dataCreacionCaso.mensaje = $(
+									"#mensaje").val();
+
+							validacion = ACC.tramitesSeleccion
+									.validarInfoAntesSubmit(ACC.tramitesSeleccion.dataCreacionCaso);
+
+							 
+							if (validacion == true) {
+								var itemSeleccionado;
+								var idItemSeleccionado;
+								var indiceArchivo = 0;
+								var campoEnData;
+								var valorCampo = "";
+
+								ACC.tramitesSeleccion.dataCreacionCaso.archivosLeidos = 0;
+								if(ACC.tramitesSeleccion.cantidadArchivos > 0){
+									for (var i = 0; i < e.target.form.length; i++) {
+										itemSeleccionado = e.target.form[i];
+										idItemSeleccionado = e.target.form[i].id
+												.substring(0, 17);
+	
+										if (idItemSeleccionado == "docNombreArchivo_") {
+											indiceItemSeleccionado = e.target.form[i].id
+													.substring(17, 18);
+	
+											debugger;
+											let file = e.target.form[i].files[0];
+											let reader = new FileReader();
+											reader.readAsDataURL(file);
+	
+											reader.onload = function(evt) {
+												console.log("onload");
+												debugger;
+												indiceItemSeleccionado = ACC.tramitesSeleccion
+														.obtenerIndiceArchivos(file.name);
+	
+												indiceArchivo = ACC.tramitesSeleccion.dataCreacionCaso.archivosLeidos;
+												ACC.tramitesSeleccion.dataCreacionCaso.archivosLeidos++;
+	
+												campoEnPantalla = "#docLeido_"
+														+ indiceItemSeleccionado;
+												$(campoEnPantalla).val("X");
+	
+												valorCampo = reader.result
+														.substring(28);
+												campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.conA"
+														+ indiceArchivo;
+												eval(campoEnData + "="
+														+ eval('"valorCampo"'));
+												// var mensaje = file.name +
+												// valorCampo;
+												// console.log(mensaje);
+	
+												campoEnPantalla = "#docDescArchivo_"
+														+ indiceItemSeleccionado;
+												valorCampo = $(campoEnPantalla)
+														.val();
+												campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.desA"
+														+ indiceArchivo;
+												eval(campoEnData + "="
+														+ eval('"valorCampo"'));
+	
+												campoEnPantalla = "#docDependencia_"
+														+ indiceItemSeleccionado;
+												valorCampo = $(campoEnPantalla)
+														.val();
+												campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.depe"
+														+ indiceArchivo;
+												eval(campoEnData + "="
+														+ eval('"valorCampo"'));
+	
+												campoEnPantalla = "#docSerieID_"
+														+ indiceItemSeleccionado;
+												valorCampo = $(campoEnPantalla)
+														.val();
+												campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.seri"
+														+ indiceArchivo;
+												eval(campoEnData + "="
+														+ eval('"valorCampo"'));
+	
+												campoEnPantalla = "#docSSerieID_"
+														+ indiceItemSeleccionado;
+												valorCampo = $(campoEnPantalla)
+														.val();
+												campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.sser"
+														+ indiceArchivo;
+												eval(campoEnData + "="
+														+ eval('"valorCampo"'));
+	
+												campoEnPantalla = "#docTipoDoc_"
+														+ indiceItemSeleccionado;
+												valorCampo = $(campoEnPantalla)
+														.val();
+												campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.tipd"
+														+ indiceArchivo;
+												eval(campoEnData + "="
+														+ eval('"valorCampo"'));
+	
+												indiceArchivo++;
+												if (indiceArchivo == ACC.tramitesSeleccion.cantidadArchivos) {
+													ACC.tramitesSeleccion.llamarWSCreacionCasoRol();
+												}
+											};
+	
+										}
+									}
+								}else{
+									ACC.tramitesSeleccion.llamarWSCreacionCasoRol();
+								}
+							}
+
+						});
+	},
 
 	
 	llamarWSCreacionCaso : function(){
 		$
 		.ajax({
 			url : ACC.casoCreacionURL,
+			data : ACC.tramitesSeleccion.dataCreacionCaso,
+			type : "POST",
+			success : function(
+					dataResponse) {
+				ACC.tramitesSeleccion
+						.resultadoCreacionCaso(
+								ACC.tramitesSeleccion.dataCreacionCaso,
+								dataResponse);
+			},
+			error : function() {
+			}
+		});
+		
+	},
+	
+	llamarWSCreacionCasoRol : function(){
+		$
+		.ajax({
+			url : ACC.casoCreacionURLRol,
 			data : ACC.tramitesSeleccion.dataCreacionCaso,
 			type : "POST",
 			success : function(
@@ -489,6 +723,73 @@ ACC.tramitesSeleccion = {
 
 		return validacion;
 	},
+	
+	validarInfoAntesSubmitRol : function(infoActual, infoResponse) {
+
+		// debugger;
+		var validacion = true;
+
+		if (infoActual.valorN0 != null) {
+			if (infoActual.valorN0 == "00") {
+				validacion = false;
+			} else {
+				if (infoActual.valorN1 != null) {
+					if (infoActual.valorN1 == "00") {
+						validacion = false;
+					} else {
+						if (infoActual.valorN2 != null) {
+							if (infoActual.valorN2 == "00") {
+								validacion = false;
+							} else {
+								if (infoActual.valorN3 != null) {
+									if (infoActual.valorN3 == "00") {
+										validacion = false;
+									}else{
+										if (infoActual.valorN4 != null) {
+											if (infoActual.valorN4 == "00") {
+												validacion = false;
+											}else{
+												if (infoActual.valorN5 != null) {
+													if (infoActual.valorN5 == "00") {
+														validacion = false;
+													}	
+												}		
+											}	
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		} else {
+			validacion = false;
+		}
+
+		// if(infoActual.mensaje != null){
+		// if(infoActual.mensaje == ""){
+		// validacion = false;
+		// }
+		// }else{
+		// validacion = false;
+		// }
+		var mensajeValidacion = "Por favor ingresar los valores obligatorios marcados con *";
+		if (validacion == true) {
+			validacion = ACC.tramitesSeleccion.validarArchivosAntesSubmit();
+			if(validacion == false){
+				mensajeValidacion = "No han sido adjuntados los documentos requeridos para este trámite";
+			}
+		}
+
+		if (validacion == false) {
+			alert(mensajeValidacion);
+		}
+
+		return validacion;
+	},
+	
+	
 
 	validarArchivosAntesSubmit : function() {
 
@@ -521,7 +822,7 @@ ACC.tramitesSeleccion = {
 
 	updateFromResponse : function(infoActual, infoResponse) {
 
-		// debugger;
+		debugger;
 		ACC.tramitesSeleccion.performActionFromResponse(infoResponse);
 		ACC.tramitesSeleccion
 				.updateSelectFromResponse(infoActual, infoResponse);
@@ -530,7 +831,7 @@ ACC.tramitesSeleccion = {
 	},
 
 	updateSelectFromResponse : function(infoActual, infoResponse) {
-
+		debugger;
 		if (infoActual.nivelSeleccion == 0) {
 			ACC.tramitesSeleccion.clearFieldsFromDataSelN0();
 			if (infoResponse.opciones.length > 0) {
@@ -616,7 +917,7 @@ ACC.tramitesSeleccion = {
 
 	fillDocsDataFromResponse : function(docTramites) {
 
-		// debugger;
+		debugger;
 		var doc = document.getElementById('documentos');
 		var mostrarTabDocs = false;
 		var subserie = "";
@@ -692,7 +993,7 @@ ACC.tramitesSeleccion = {
 
 	performActionFromResponse : function(infoResponse) {
 
-		// debugger;
+		debugger;
 		var urlAccion = $.ajaxPrefilter();
 		urlAccion = urlAccion + infoResponse.urlAccion;
 

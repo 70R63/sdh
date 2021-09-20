@@ -18,7 +18,6 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -49,7 +48,6 @@ import javax.annotation.Resource;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -57,6 +55,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -139,7 +140,7 @@ public class SobreVehiculosController extends AbstractPageController
 
 			try
 			{
-				List<ImpuestoVehiculos> impuestoVehiculos = sdhConsultaImpuesto_simplificado
+				final List<ImpuestoVehiculos> impuestoVehiculos = sdhConsultaImpuesto_simplificado
 						.consulta_impVehicular(consultaContribuyenteBPRequest);
 				sdhCustomerAccountService.updateImpuestoVehicular_simplificado(customerModel, impuestoVehiculos);
 				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
@@ -203,9 +204,9 @@ public class SobreVehiculosController extends AbstractPageController
 			vehiculosForm.setPlaca(vehiculoInfo.getPlaca());
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			String responseWS = sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest);
+			final String responseWS = sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest);
 			final DetalleVehiculosResponse detalleVehiculosResponse = mapper.readValue(responseWS, DetalleVehiculosResponse.class);
 
 			vehiculosForm.setDetalle(detalleVehiculosResponse.getDetalle());

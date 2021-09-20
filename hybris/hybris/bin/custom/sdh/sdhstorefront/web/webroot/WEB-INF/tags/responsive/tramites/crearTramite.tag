@@ -141,11 +141,13 @@
 
 <script>
 function tabdoc(){
+	debugger;
 	var doc=document.getElementById('documentos');
 	doc.style.display='block';
 }
 
 function tabdococul(){
+	debugger;
 	var doc=document.getElementById('documentos');
 	doc.style.display='none';
 }
