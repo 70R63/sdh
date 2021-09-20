@@ -24,7 +24,9 @@ import javax.annotation.Resource;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -208,7 +210,7 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 		{
 			wsRequest.setIndicador("01");
 		}
-		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		try
 		{
 			wsResponse = mapper.readValue(consultaContribuyenteBP_simplificado_string(wsRequest), SDHValidaMailRolResponse.class);
@@ -256,7 +258,7 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 
 		try{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			sdhConsultaContribuyenteBPResponse = mapper.readValue(
 					this.consultaContribuyenteBP(consultaContribuyenteBPRequest),
