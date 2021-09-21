@@ -51,7 +51,7 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 
 # CMS Footer Component
 UPDATE PSFooterComponent;$contentCV[unique=true];uid[unique=true];notice[lang=$lang]
-;;FooterComponent;"© 2015 hybris software"
+;;FooterComponent;"Secretaria Distrital de Hacienda"
 
 # Generic Banners (banners are not localizable so we must create a separate banner per language)
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
