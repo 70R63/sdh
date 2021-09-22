@@ -12,10 +12,11 @@
 	value="/contribuyentes/sobretasa-gasolina/declaracion-gasolina"
 	var="presentarDeclaracionUrl" htmlEscape="false" />
 
-<c:set var="flagHabilitarCalculo" value="true" />
-<c:if test="${contribuyente.numBP ne currentUser.numBP }">
-	<c:set var="flagHabilitarCalculo" value="false" />
+<c:set var="disabledInformacionDeclaracion" value=""/>
+<c:if test="${dataForm.controlCampos.informacionDeclaracion == true}">
+	<c:set var="disabledInformacionDeclaracion" value="true"/>
 </c:if>
+
 
 <div class="container">
 	<sf:form action="${declaracionURL}" method="POST"
@@ -67,8 +68,10 @@
 <!-- 						style="width: 25px"></img> <img onclick="deleinformadeclara()" -->
 <%-- 						src="${themeResourcePath}/images/deledelineacion.png" --%>
 <!-- 						style="width: 25px"></img> -->
+				<c:if test="${empty disabledInformacionDeclaracion}">
 					<button type="button" onclick="addinformadeclara()" class="btn btn-default btn-sm" style="font-size: 9px!important; border-color: green; background: green; padding: 5px; float: left">Agregar</button>
 						<button type="button" onclick="deleinformadeclara()" class="btn btn-default btn-sm" style="font-size: 9px!important; border-color: red; background: red; padding: 5px; float: right; margin-left: 1px">Eliminar</button>
+				</c:if>
 				</div>
 			</div>
 	</div>
@@ -89,7 +92,7 @@
 							path="dataForm.infoDeclara[${loop.index}].claseProd"
 							items="${dataForm.catalogosSo.claseProd}"
 							referenceData="${dataForm.catalogosSo.claseProd}" maxlength="10"
-							style="width: 235px" onchange="getProductClassOccurrance(this)" id="${claseProd_id}"/>
+							style="width: 235px" onchange="getProductClassOccurrance(this)" id="${claseProd_id}" disabled="${disabledInformacionDeclaracion}" readonly="${disabledInformacionDeclaracion}" />
 					</div>
 					<div class="col-md-1">
 					<label class="control-label format_label mostrarXS" for="">
@@ -98,7 +101,7 @@
 						<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
 							value="${info.galonesGra}"
 							class="new_alto form-control galones" maxlength="30"
-							size="20" onkeyup="numberFormattable(this)" onclick="numberFormattable(this)" id="number1" />
+							size="20" onkeyup="numberFormattable(this)" onclick="numberFormattable(this)" id="number1" readonly="${disabledInformacionDeclaracion}"/>
 					</div>
 					<div class="col-md-2">
 					<label class="control-label format_label mostrarXS"><spring:theme
@@ -107,7 +110,7 @@
 						<sf:input path="dataForm.infoDeclara[${loop.index}].precioRef"
 							value="${info.precioRef}"
 							class="new_alto form-control precio" maxlength="30" size="20"
-							readonly="true" type="" />
+							readonly="true" type=""/>
 					</div>
 					<div class="col-sm-1">
 					<label class="col-md-4 control-label format_label mostrarXS"><spring:theme
@@ -129,7 +132,7 @@
 									items="${dataForm.catalogosSo.alcoholCarbu}"
 									referenceData="${dataForm.catalogosSo.alcoholCarbu}"
 									class="new_alto form-control-gasolina alcohol"
-									style="width: auto !important;" id="${alcoholCarbu_id}"/>
+									style="width: auto !important;" id="${alcoholCarbu_id}" disabled="${disabledInformacionDeclaracion}" readonly="${disabledInformacionDeclaracion}"/>
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -150,6 +153,7 @@
 							size="20" readonly="true" />
 					</div>
 					<div class="col-md-1">
+				<c:if test="${empty disabledInformacionDeclaracion}">
 				<div class="form-group mostrarXS" style="margin-top: 5px !important">
 					<img onclick="addinformadeclara()"
 						src="${themeResourcePath}/images/adddelineacion.png"
@@ -157,6 +161,7 @@
 						src="${themeResourcePath}/images/deledelineacion.png"
 						style="width: 25px"></img>
 				</div>
+				</c:if>
 			</div>
 				</div>
 
@@ -164,7 +169,7 @@
 		</div>
 		<br>
 		<br>
-		<c:if test="${flagHabilitarCalculo eq true}">
+		<c:if test="${empty disabledInformacionDeclaracion }">
 			<div class="row">
 				<div class="col-md-12 col-md-offset-4">
 					<div class="form-group ">

@@ -6,6 +6,7 @@ package de.hybris.sdh.storefront.controllers.impuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRevisorDeclaranteResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasValoresDeclaraResponse;
+import de.hybris.sdh.storefront.forms.SobreTasaGasolinaControlCamposDec;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class SobreTasaGasolinaForm
 	private String skipReques;
 	private String periodicidadImpuesto;
 
-
+	private SobreTasaGasolinaControlCamposDec controlCampos;
 
 
 
@@ -625,6 +626,23 @@ public class SobreTasaGasolinaForm
 	public void setPeriodicidadImpuesto(final String periodicidadImpuesto)
 	{
 		this.periodicidadImpuesto = periodicidadImpuesto;
+	}
+
+	/**
+	 * @return the controlCampos
+	 */
+	public SobreTasaGasolinaControlCamposDec getControlCampos()
+	{
+		return controlCampos;
+	}
+
+	/**
+	 * @param controlCampos
+	 *           the controlCampos to set
+	 */
+	public void setControlCampos(final SobreTasaGasolinaControlCamposDec controlCampos)
+	{
+		this.controlCampos = controlCampos;
 	}
 
 	/*

@@ -88,7 +88,7 @@ public class AgentesAutorizadosInicialContribuyentePageController extends Abstra
 
 		//				final SDHValidaMailRolResponse representadoData = sdhCustomerFacade.getRepresentadoFromSAP(representado);
 		final SDHValidaMailRolResponse representadoData = sdhCustomerAccountService
-				.consultaContribuyenteBP_simplificado(representado, "01");
+				.consultaContribuyenteBP_simplificado(representado, "01,02");
 		//		final SDHValidaMailRolResponse representadoInfo =
 		//		final CustomerModel representadoData = sdhCustomerAccountService.mapearInfo(representadoInfo);
 
