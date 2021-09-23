@@ -3,7 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 
 /**
@@ -58,7 +58,7 @@ public class ContribAdicionales
 	 * @param tYPE
 	 *           the tYPE to set
 	 */
-	@JsonProperty("TYPE")
+	@JsonSetter("TYPE")
 	public void setTYPE(final String tYPE)
 	{
 		TYPE = tYPE;
@@ -76,7 +76,7 @@ public class ContribAdicionales
 	 * @param tITLE
 	 *           the tITLE to set
 	 */
-	@JsonProperty("TITLE")
+	@JsonSetter("TITLE")
 	public void setTITLE(final String tITLE)
 	{
 		TITLE = tITLE;
@@ -94,7 +94,7 @@ public class ContribAdicionales
 	 * @param sMTP_ADDR
 	 *           the sMTP_ADDR to set
 	 */
-	@JsonProperty("SMTP_ADDR")
+	@JsonSetter("SMTP_ADDR")
 	public void setSMTP_ADDR(final String sMTP_ADDR)
 	{
 		SMTP_ADDR = sMTP_ADDR;
@@ -112,7 +112,7 @@ public class ContribAdicionales
 	 * @param xSEXU
 	 *           the xSEXU to set
 	 */
-	@JsonProperty("XSEXU")
+	@JsonSetter("XSEXU")
 	public void setXSEXU(final int xSEXU)
 	{
 		XSEXU = xSEXU;
@@ -130,7 +130,7 @@ public class ContribAdicionales
 	 * @param nATIO
 	 *           the nATIO to set
 	 */
-	@JsonProperty("NATIO")
+	@JsonSetter("NATIO")
 	public void setNATIO(final String nATIO)
 	{
 		NATIO = nATIO;
@@ -148,7 +148,7 @@ public class ContribAdicionales
 	 * @param bIRTHDT
 	 *           the bIRTHDT to set
 	 */
-	@JsonProperty("BIRTHDT")
+	@JsonSetter("BIRTHDT")
 	public void setBIRTHDT(final String bIRTHDT)
 	{
 		BIRTHDT = bIRTHDT;
@@ -166,7 +166,7 @@ public class ContribAdicionales
 	 * @param zZNOMATRICUL
 	 *           the zZNOMATRICUL to set
 	 */
-	@JsonProperty("ZZNOMATRICUL")
+	@JsonSetter("ZZNOMATRICUL")
 	public void setZZNOMATRICUL(final String zZNOMATRICUL)
 	{
 		ZZNOMATRICUL = zZNOMATRICUL;
@@ -184,7 +184,7 @@ public class ContribAdicionales
 	 * @param zZAUTOUSOINF
 	 *           the zZAUTOUSOINF to set
 	 */
-	@JsonProperty("ZZAUTOUSOINF")
+	@JsonSetter("ZZAUTOUSOINF")
 	public void setZZAUTOUSOINF(final int zZAUTOUSOINF)
 	{
 		ZZAUTOUSOINF = zZAUTOUSOINF;
@@ -202,7 +202,7 @@ public class ContribAdicionales
 	 * @param zZFECHAAUTOU0001
 	 *           the zZFECHAAUTOU0001 to set
 	 */
-	@JsonProperty("ZZFECHAAUTOU0001")
+	@JsonSetter("ZZFECHAAUTOU0001")
 	public void setZZFECHAAUTOU0001(final String zZFECHAAUTOU0001)
 	{
 		ZZFECHAAUTOU0001 = zZFECHAAUTOU0001;
@@ -220,7 +220,7 @@ public class ContribAdicionales
 	 * @param zZAUTOUSOEMA
 	 *           the zZAUTOUSOEMA to set
 	 */
-	@JsonProperty("ZZAUTOUSOEMA")
+	@JsonSetter("ZZAUTOUSOEMA")
 	public void setZZAUTOUSOEMA(final int zZAUTOUSOEMA)
 	{
 		ZZAUTOUSOEMA = zZAUTOUSOEMA;
@@ -238,7 +238,7 @@ public class ContribAdicionales
 	 * @param zZFECHAAUTOU0002
 	 *           the zZFECHAAUTOU0002 to set
 	 */
-	@JsonProperty("ZZFECHAAUTOU0002")
+	@JsonSetter("ZZFECHAAUTOU0002")
 	public void setZZFECHAAUTOU0002(final String zZFECHAAUTOU0002)
 	{
 		ZZFECHAAUTOU0002 = zZFECHAAUTOU0002;
@@ -256,7 +256,7 @@ public class ContribAdicionales
 	 * @param zZAUTOUSOOFI0001
 	 *           the zZAUTOUSOOFI0001 to set
 	 */
-	@JsonProperty("ZZAUTOUSOOFI0001")
+	@JsonSetter("ZZAUTOUSOOFI0001")
 	public void setZZAUTOUSOOFI0001(final int zZAUTOUSOOFI0001)
 	{
 		ZZAUTOUSOOFI0001 = zZAUTOUSOOFI0001;
@@ -274,7 +274,7 @@ public class ContribAdicionales
 	 * @param zZFECHAAUTOU0003
 	 *           the zZFECHAAUTOU0003 to set
 	 */
-	@JsonProperty("ZZFECHAAUTOU0003")
+	@JsonSetter("ZZFECHAAUTOU0003")
 	public void setZZFECHAAUTOU0003(final String zZFECHAAUTOU0003)
 	{
 		ZZFECHAAUTOU0003 = zZFECHAAUTOU0003;
@@ -292,7 +292,7 @@ public class ContribAdicionales
 	 * @param zZAUTOBUZONE
 	 *           the zZAUTOBUZONE to set
 	 */
-	@JsonProperty("ZZAUTOBUZONE")
+	@JsonSetter("ZZAUTOBUZONE")
 	public void setZZAUTOBUZONE(final int zZAUTOBUZONE)
 	{
 		ZZAUTOBUZONE = zZAUTOBUZONE;
@@ -310,7 +310,7 @@ public class ContribAdicionales
 	 * @param zZFECHAAUTOB
 	 *           the zZFECHAAUTOB to set
 	 */
-	@JsonProperty("ZZFECHAAUTOB")
+	@JsonSetter("ZZFECHAAUTOB")
 	public void setZZFECHAAUTOB(final String zZFECHAAUTOB)
 	{
 		ZZFECHAAUTOB = zZFECHAAUTOB;
@@ -328,7 +328,7 @@ public class ContribAdicionales
 	 * @param cNDSC
 	 *           the cNDSC to set
 	 */
-	@JsonProperty("CNDSC")
+	@JsonSetter("CNDSC")
 	public void setCNDSC(final String cNDSC)
 	{
 		CNDSC = cNDSC;
@@ -346,7 +346,7 @@ public class ContribAdicionales
 	 * @param bIRTHPL
 	 *           the bIRTHPL to set
 	 */
-	@JsonProperty("BIRTHPL")
+	@JsonSetter("BIRTHPL")
 	public void setBIRTHPL(final String bIRTHPL)
 	{
 		BIRTHPL = bIRTHPL;
@@ -364,7 +364,7 @@ public class ContribAdicionales
 	 * @param nAME_ORG1
 	 *           the nAME_ORG1 to set
 	 */
-	@JsonProperty("NAME_ORG1")
+	@JsonSetter("NAME_ORG1")
 	public void setNAME_ORG1(final String nAME_ORG1)
 	{
 		NAME_ORG1 = nAME_ORG1;
@@ -382,7 +382,7 @@ public class ContribAdicionales
 	 * @param nAME_ORG2
 	 *           the nAME_ORG2 to set
 	 */
-	@JsonProperty("NAME_ORG2")
+	@JsonSetter("NAME_ORG2")
 	public void setNAME_ORG2(final String nAME_ORG2)
 	{
 		NAME_ORG2 = nAME_ORG2;
@@ -400,7 +400,7 @@ public class ContribAdicionales
 	 * @param nAME_ORG3
 	 *           the nAME_ORG3 to set
 	 */
-	@JsonProperty("NAME_ORG3")
+	@JsonSetter("NAME_ORG3")
 	public void setNAME_ORG3(final String nAME_ORG3)
 	{
 		NAME_ORG3 = nAME_ORG3;
@@ -418,7 +418,7 @@ public class ContribAdicionales
 	 * @param nAME_ORG4
 	 *           the nAME_ORG4 to set
 	 */
-	@JsonProperty("NAME_ORG4")
+	@JsonSetter("NAME_ORG4")
 	public void setNAME_ORG4(final String nAME_ORG4)
 	{
 		NAME_ORG4 = nAME_ORG4;
@@ -436,7 +436,7 @@ public class ContribAdicionales
 	 * @param lEGAL_ENTY
 	 *           the lEGAL_ENTY to set
 	 */
-	@JsonProperty("LEGAL_ENTY")
+	@JsonSetter("LEGAL_ENTY")
 	public void setLEGAL_ENTY(final String lEGAL_ENTY)
 	{
 		LEGAL_ENTY = lEGAL_ENTY;
@@ -454,7 +454,7 @@ public class ContribAdicionales
 	 * @param lIQUIDATIONDATE
 	 *           the lIQUIDATIONDATE to set
 	 */
-	@JsonProperty("FECHALIQUIDA")
+	@JsonSetter("FECHALIQUIDA")
 	public void setLIQUIDATIONDATE(final String lIQUIDATIONDATE)
 	{
 		LIQUIDATIONDATE = lIQUIDATIONDATE;
@@ -472,7 +472,7 @@ public class ContribAdicionales
 	 * @param lEGALORG
 	 *           the lEGALORG to set
 	 */
-	@JsonProperty("LEGAL_ORG")
+	@JsonSetter("LEGAL_ORG")
 	public void setLEGALORG(final String lEGALORG)
 	{
 		LEGALORG = lEGALORG;
@@ -490,7 +490,7 @@ public class ContribAdicionales
 	 * @param dIGVERIF
 	 *           the dIGVERIF to set
 	 */
-	@JsonProperty("DIGVERIF")
+	@JsonSetter("DIGVERIF")
 	public void setDIGVERIF(final String dIGVERIF)
 	{
 		DIGVERIF = dIGVERIF;

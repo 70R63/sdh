@@ -48,7 +48,7 @@
 						<label class="control-label required">
 							<spring:theme code="tramites.crear.inicial.tiptramite" />
 						</label> 
-						<select	class=" form-control !important" id="valorN0" name="valorN0">
+						<select	class=" form-control !important " id="selectNivel0" name="valorN0">
 							<option value="01">RIT</option>
 						</select>
 					</div>
@@ -62,7 +62,7 @@
 							<spring:theme code="tramites.crear.inicial.subtramite" />
 						</label> 
 						<select
-							class=" form-control !important" id="valorN1" name="valorN1">
+							class=" form-control !important " id="selectNivel1" name="valorN1">
 							<option value="01">Creación</option>
 						</select>
 					</div>
@@ -74,7 +74,7 @@
 						<label class="control-label required">
 							<spring:theme code="tramites.crear.inicial.categoria" />
 						</label> 
-						<select	class=" form-control !important" id="valorN2" name="valorN2">
+						<select	class=" form-control !important " id="selectNivel2" name="valorN2">
 							<option	value="01">Registro/Rol Tributario</option>
 						</select>
 					</div>
@@ -86,7 +86,7 @@
 						<label class="control-label required">
 							<spring:theme code="tramites.crear.inicial.subcategoria" />
 						</label> 
-						<select	class=" form-control !important " id="valorN3" name="valorN3">
+						<select	data-nivel="3" class=" form-control !important " id="selectNivel3" name="valorN3">
 							<option	value="00">Seleccionar</option>
 							<option value="01">Persona Natural</option>
 							<option value="02">Persona Jurídica</option>
@@ -100,12 +100,12 @@
 						<label class="control-label required">
 							<spring:theme code="tramites.crear.inicial.rol" />
 						</label> 
-						<select	class=" form-control !important " id="rol" >
+						<select	data-nivel="4" class=" form-control !important tramitestSNRol" id="selectNivel4" >
 							<option	value="00">Seleccionar</option>
-							<option value="01">Contribuyente</option>
+							<!--<option value="01">Contribuyente</option>-->
 							<option value="02">Agente Retenedor</option>
 							<option value="03">Reportate de la Información</option>
-							<option value="04">Terceros Autorizados</option>
+							<!--<option value="04">Terceros Autorizados</option>-->
 						</select>
 					</div>
 				</div>
@@ -144,7 +144,7 @@
 
 	<div class="row documentos">
 		<div class="col-md-6 text-center" style="margin-top: 15px">
-			<table>
+			<table id="documentos" >
 				<thead>
 					<tr>
 						<th>
@@ -167,7 +167,7 @@
 						</td>
 							
 						<td>
-							<input style="width:405px" class="inputtextnew" type="file" size="150" id="conA0" name="conA0"/>
+							<input style="width:405px" class="inputtextnew" type="file" size="150" id="docNombreArchivo_0" name="conA0"/>
 						</td>
 					</tr>
 				</tbody>
@@ -183,8 +183,8 @@
 	
 	<div class="row mt-3">
 		<div class="col-md-7 text-center">
-			<button style="margin-top: 5px;" id="" class="btn btn-primary btn-lg"
-				type="submit" onclick="changeMessage();">
+			<button style="margin-top: 5px;" id="btnEnviar" class="btn btn-primary btn-lg tramitesEnviarRol"
+				type="submit" name="btnEnviar" value="enviar" onclick="changeMessage();">
 				<spring:theme code="tramites.crear.inicial.enviar" />
 			</button>
 		</div>

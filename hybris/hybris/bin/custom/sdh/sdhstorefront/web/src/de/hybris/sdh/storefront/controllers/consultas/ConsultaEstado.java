@@ -293,20 +293,25 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 			SDHExteriorPublicityTaxData cutomerPublicidadRow = null;
 			final List<SDHExteriorPublicityTaxData> cutomerPublicidadList = new ArrayList<SDHExteriorPublicityTaxData>();
-			for (final ImpuestoPublicidadExterior publicidadRow : sdhConsultaContribuyenteBPResponse.getPublicidadExt())
+
+			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
+					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
 			{
-				if (publicidadRow.getNumObjeto() != null && !publicidadRow.getNumObjeto().isEmpty())
+				for (final ImpuestoPublicidadExterior publicidadRow : sdhConsultaContribuyenteBPResponse.getPublicidadExt())
 				{
-					cutomerPublicidadRow = new SDHExteriorPublicityTaxData();
-					cutomerPublicidadRow.setAnoGravable(publicidadRow.getAnoGravable());
-					cutomerPublicidadRow.setFenceType(publicidadRow.getTipoValla());
-					cutomerPublicidadRow.setResolutionNumber(publicidadRow.getNumResolu());
-					cutomerPublicidadRow.setObjectNumber(publicidadRow.getNumObjeto());
+					if (publicidadRow.getNumObjeto() != null && !publicidadRow.getNumObjeto().isEmpty())
+					{
+						cutomerPublicidadRow = new SDHExteriorPublicityTaxData();
+						cutomerPublicidadRow.setAnoGravable(publicidadRow.getAnoGravable());
+						cutomerPublicidadRow.setFenceType(publicidadRow.getTipoValla());
+						cutomerPublicidadRow.setResolutionNumber(publicidadRow.getNumResolu());
+						cutomerPublicidadRow.setObjectNumber(publicidadRow.getNumObjeto());
 
-					cutomerPublicidadList.add(cutomerPublicidadRow);
+						cutomerPublicidadList.add(cutomerPublicidadRow);
+					}
+
+
 				}
-
-
 			}
 			customerData.setExteriorPublicityTaxList(cutomerPublicidadList);
 

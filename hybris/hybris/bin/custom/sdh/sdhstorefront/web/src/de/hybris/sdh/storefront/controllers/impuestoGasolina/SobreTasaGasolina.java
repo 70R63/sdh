@@ -47,11 +47,13 @@ import de.hybris.sdh.core.services.SDHPseTransactionsLogService;
 import de.hybris.sdh.facades.SDHCalculaGasolina2Facade;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
+import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.storefront.controllers.pages.SDHAbstractPageController;
 import de.hybris.sdh.storefront.forms.EnviaFirmasForm;
 import de.hybris.sdh.storefront.forms.FirmantesForm;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
+import de.hybris.sdh.storefront.forms.SobreTasaGasolinaControlCamposDec;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
@@ -1127,6 +1129,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 			//				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 			//						"error.impuestoGasolina.sobretasa.error2", mensajesError);
 		}
+		dataForm.setControlCampos(establecerCamposImpuestoDec("sdh_02", contribuyenteData, currentUserData));
 		model.addAttribute("dataForm", dataForm);
 		model.addAttribute("detallePagoRequest", detallePagoRequest);
 
@@ -1161,6 +1164,67 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 
 		return valorRetorno;
+	}
+
+
+	private SobreTasaGasolinaControlCamposDec establecerCamposImpuestoDec(final String rol, final CustomerData contribuyenteData,
+			final CustomerData currentUserData)
+	{
+		final SobreTasaGasolinaControlCamposDec controlCampos = new SobreTasaGasolinaControlCamposDec();
+		final String strRepresentanteLegalPrincipal = "Repres. Legal Principal";
+		final String strContador = "Contador";
+		String funcionInterlocultorValida = null;
+
+		if (contribuyenteData.getDocumentType().equals("NIT") || currentUserData != null)
+		{
+			controlCampos.setBtnPresentarDec(true);
+			controlCampos.setBtnPagarDec(true);
+			controlCampos.setDatosGenerales(true);
+			controlCampos.setInformacionDeclaracion(true);
+		}
+
+		switch (contribuyenteData.getDocumentType())
+		{
+			case "NIT":
+				funcionInterlocultorValida = strRepresentanteLegalPrincipal;
+				break;
+			default:
+				funcionInterlocultorValida = strContador;
+				break;
+		}
+
+		switch (rol)
+		{
+			case "sdh_02":
+				if (contribuyenteData.getAgentList() != null && currentUserData != null)
+				{
+					controlCampos.setDatosGenerales(true);
+					controlCampos.setInformacionDeclaracion(true);
+
+					for (final SDHAgentData infoAgente : contribuyenteData.getAgentList())
+					{
+						if (infoAgente != null)
+						{
+							if (!StringUtils.isEmpty(infoAgente.getBp()) && !StringUtils.isEmpty(infoAgente.getInternalFunction())
+									&& infoAgente.getInternalFunction() != null && infoAgente.getBp() != null
+									&& infoAgente.getBp().equals(currentUserData.getNumBP())
+									&& infoAgente.getInternalFunction().equals(funcionInterlocultorValida))
+							{
+								controlCampos.setBtnPresentarDec(false);
+								controlCampos.setBtnPagarDec(false);
+								break;
+							}
+						}
+					}
+				}
+
+				break;
+
+			default:
+				break;
+		}
+
+		return controlCampos;
 	}
 
 

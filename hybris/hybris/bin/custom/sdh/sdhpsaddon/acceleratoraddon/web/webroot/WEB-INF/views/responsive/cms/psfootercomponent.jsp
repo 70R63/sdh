@@ -79,20 +79,20 @@
 			<div class="col-sm-4"></div>
 			<div class="copyright-text col-sm-4 center-block footer__copyright">${fn:escapeXml(footerComponent.notice)}</div>
 			<!-- Chat Toggle -->
-			<button value='<c:url value="/chat/chatWindow"/>' tabindex="0"
-				class="js-newWindow btn btn-lg mobile-chat" id="mobile-chat"
-				data-popup="scrollbars=yes">
-				<spring:theme code="chat.box.mobile.title" />
-			</button>
-			<div class="col-sm-6 chat-footer">
-				<button type="button"
-					class="btn btn-lg pop-over pop-over-toggle" onclick="openChatWindow();"
-					id="pop-over-toggle" data-placement="top" >
-					<div class="chat-glyphicon-close">
-						<spring:theme code="chatbox.title" />
-					</div>
-				</button>
-			</div>
+<%-- 			<button value='<c:url value="/chat/chatWindow"/>' tabindex="0" --%>
+<!-- 				class="js-newWindow btn btn-lg mobile-chat" id="mobile-chat" -->
+<!-- 				data-popup="scrollbars=yes"> -->
+<%-- 				<spring:theme code="chat.box.mobile.title" /> --%>
+<!-- 			</button> -->
+<!-- 			<div class="col-sm-6 chat-footer"> -->
+<!-- 				<button type="button" -->
+<!-- 					class="btn btn-lg pop-over pop-over-toggle" onclick="openChatWindow();" -->
+<!-- 					id="pop-over-toggle" data-placement="top" > -->
+<!-- 					<div class="chat-glyphicon-close"> -->
+<%-- 						<spring:theme code="chatbox.title" /> --%>
+<!-- 					</div> -->
+<!-- 				</button> -->
+<!-- 			</div> -->
 		</div>
 	</div>
 	<!-- Chat Module -->

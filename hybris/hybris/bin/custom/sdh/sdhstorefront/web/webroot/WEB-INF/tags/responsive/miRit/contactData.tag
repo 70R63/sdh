@@ -105,6 +105,7 @@
 		document.getElementById("address.assistant.output.spl2").value = "";
 
 		complementos = 0;
+		$("#addressAssistant").toggle();
 
 	}
 
@@ -275,7 +276,6 @@
 	}
 
 	function toggleAssistant() {
-		debugger;
 		$("#addressAssistant").toggle();
 // 		Se agrega cambio al estilo de los input para la direccion
 var toddir = document.getElementById('address.assistant.output');
@@ -316,7 +316,8 @@ toddir.style.width= '900px'
 			<div class="card-body">
 				<!--  First column of form -->
 				<div class="row">
-					<div class="col-md-4">
+<!-- 				cambio -->
+					<div class="col-md-3"> 
 						<div class="form-group ">
 							<c:set var="direccionOutput" value = "${miRitForm.direccionNotificacion.STREET}  ${miRitForm.direccionNotificacion.STR_SUPPL1 }  ${miRitForm.direccionNotificacion.STR_SUPPL2 } "/>
 							<label class="control-label required" for="direccionNotificacion">
@@ -384,7 +385,7 @@ toddir.style.width= '900px'
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-12 col-md-4  ">
+					<div class="col-12 col-md-3 ">
 						<div class="form-group ">
 							<button class="btn btn-secondary btn-lg btn-block" type="button"
 								id="updateNotificationAddressButton">
@@ -396,7 +397,8 @@ toddir.style.width= '900px'
 
 				<br> <br>
 				<div class="row">
-					<div class="col-md-4">
+<!-- 				cambio -->
+					<div class="col-md-3">
 						<div class="form-group ">
 							<c:set var="direccionOutput" value = "${miRitForm.direccionContacto.STREET } ${miRitForm.direccionContacto.STR_SUPPL1 } ${miRitForm.direccionContacto.STR_SUPPL2 }"/>
 							<label class="control-label required" for="direccionContacto">
@@ -465,7 +467,7 @@ toddir.style.width= '900px'
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-12 col-md-4  ">
+					<div class="col-12 col-md-3">
 						<div class="form-group ">
 							<button class="btn btn-secondary btn-lg btn-block" type="button"
 								id="updateContactAddressButton">
@@ -673,9 +675,9 @@ toddir.style.width= '900px'
 								<label class="control-label " for="u5060_input"> <spring:theme
 										code="mirit.addresshelper.numero" />
 								</label> <input id="u5060_input" name="lastName"
-									class="form-control form-control addressHelperField"
-									aria-required="true" type="text" value="" maxlength="10"
-									oninput="menuAutoSearch();" onkeyup="ajustar(this)" style="padding: 2px;">
+									class="newtaminput form-control form-control addressHelperField"
+									aria-required="true" type="text" value=""
+									oninput="menuAutoSearch();" style="padding: 2px; width: 50% !important; text-aling: center !important">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>
@@ -806,9 +808,9 @@ toddir.style.width= '900px'
 								<label class="control-label " for="u6064_input"> <spring:theme
 										code="mirit.addresshelper.numero" />
 								</label> <input id="u6064_input" name="lastName"
-									class="form-control form-control addressHelperField"
-									aria-required="true" type="text" value="" maxlength="10"
-									oninput="menuAutoSearch();" onkeyup="ajustar(this)" style="padding: 2px;">
+									class="newtaminput form-control form-control addressHelperField"
+									aria-required="true" type="text" value=""
+									oninput="menuAutoSearch();" style="padding: 2px; width: 50% !important; text-aling: center !important">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>
@@ -863,9 +865,9 @@ toddir.style.width= '900px'
 								<label class="control-label " for="u6065_input"> <spring:theme
 										code="mirit.addresshelper.numero" />
 								</label> <input id="u6065_input" name="lastName"
-									class="form-control form-control addressHelperField"
-									aria-required="true" type="text" value="" maxlength="10"
-									oninput="menuAutoSearch();" onkeyup="ajustar(this)" style="padding: 2px;">
+									class="newtaminput form-control form-control addressHelperField"
+									aria-required="true" type="text" value=""
+									oninput="menuAutoSearch();" style="padding: 2px; width: 50% !important; text-aling: center !important">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>
@@ -950,8 +952,8 @@ toddir.style.width= '900px'
 								<label class="control-label " for="u6066_input"> <spring:theme
 										code="mirit.addresshelper.complemento" />
 								</label> <input id="u6066_input" name="lastName"
-									class="form-control addressHelperField" aria-required="true"
-									type="text" value="" maxlength="40" oninput=""  onkeyup="ajustar(this)" style="padding: 2px;">
+									class="newtaminput form-control addressHelperField" aria-required="true"
+									type="text" value="" maxlength="40" oninput="" style="padding: 2px; width: 50% !important; text-align: center !important">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>

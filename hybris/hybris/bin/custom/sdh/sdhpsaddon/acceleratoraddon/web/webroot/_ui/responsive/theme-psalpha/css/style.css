@@ -25569,3 +25569,6 @@ input[type="search"] {
   text-indent: 100%;
   overflow: hidden;
 }
+.navigation--bottom .nav__links--products li a {
+  height: auto !important;
+}

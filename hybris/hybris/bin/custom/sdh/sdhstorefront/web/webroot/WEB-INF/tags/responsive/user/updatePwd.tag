@@ -9,7 +9,7 @@
         <div class="account-section">
             <div class="account-section-header no-border"><spring:theme code="text.account.profile.resetPassword"/></div>
             <div class="account-section-content row">
-                <form:form method="post" commandName="updatePwdForm">
+                <form:form method="post" modelAttribute="updatePwdForm">
                     <div class="col-md-6">
                         <div class="form-group">
                             <formElement:formPasswordBox idKey="password" labelKey="updatePwd.pwd" path="pwd"

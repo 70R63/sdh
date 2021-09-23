@@ -93,4 +93,10 @@ window.onload = function() {
 </script>
 
 </template:page>
-
+<style>
+.newtaminput{
+padding: 2px !important; 
+width: 50% !important; 
+text-align: center !important;
+}
+</style>

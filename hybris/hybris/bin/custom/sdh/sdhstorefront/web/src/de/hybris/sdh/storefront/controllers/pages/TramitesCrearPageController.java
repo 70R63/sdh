@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.MessageSource;
@@ -94,7 +95,7 @@ public class TramitesCrearPageController extends AbstractPageController
 
 	@RequestMapping(value = "/contibuyentes/tramites/crear", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String tramitescreaar(final Model model) throws CMSItemNotFoundException
+	public String tramitescreaar(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET TRAMITES crear --------------------------");
 		final Map<String,String> elementosResponse = new LinkedHashMap<String, String>();
@@ -104,6 +105,15 @@ public class TramitesCrearPageController extends AbstractPageController
 
 
 		llenarElementosTramites(elementos);
+
+		final String referrer = request.getServletPath();
+		if (!referrer.contains("seleccionNivelRol"))
+		{
+			elementos.removeIf(obj -> obj.getKey() == "0101010101");
+			elementos.removeIf(obj -> obj.getKey() == "0101010104");
+			elementos.removeIf(obj -> obj.getKey() == "0101010201");
+		}
+
 		busquedaSubKeyOpciones = obtenerKeySelNivel(new TramitesSeleccionInfo());
 
 		for (final TramiteOpcion elemento : elementos)
@@ -177,10 +187,13 @@ public class TramitesCrearPageController extends AbstractPageController
 
 
 
-	@RequestMapping(value = "/contribuyentes/tramites/seleccionNivel", method = RequestMethod.GET)
+	@RequestMapping(value =
+	{ "/contribuyentes/tramites/seleccionNivel",
+			"/register/contribuyentes/tramites/seleccionNivelRol" }, method = RequestMethod.GET)
 	@ResponseBody
 	public TramitesSeleccionInfoVista tramitesSeleccionNivelGET(@ModelAttribute("tramitesSeleccionInfo")
-	final TramitesSeleccionInfo tramitesSeleccionInfo, final Model model, final RedirectAttributes redirectModel)
+	final TramitesSeleccionInfo tramitesSeleccionInfo, final Model model, final RedirectAttributes redirectModel,
+			final HttpServletRequest request)
 			throws CMSItemNotFoundException
 	{
 
@@ -200,7 +213,17 @@ public class TramitesCrearPageController extends AbstractPageController
 		String notas = null;
 
 
+
 		llenarElementosTramites(elementos);
+
+		final String referrer = request.getServletPath();
+		if (!referrer.contains("seleccionNivelRol"))
+		{
+			elementos.removeIf(obj -> obj.getKey() == "0101010101");
+			elementos.removeIf(obj -> obj.getKey() == "0101010104");
+			elementos.removeIf(obj -> obj.getKey() == "0101010201");
+		}
+
 		busquedaSubKeyOpciones = obtenerKeySelNivel(tramitesSeleccionInfo);
 		busquedaSubKeyDocs = obtenerKeyCrearTramite(tramitesSeleccionInfo);
 
@@ -258,10 +281,12 @@ public class TramitesCrearPageController extends AbstractPageController
 	}
 
 
-	@RequestMapping(value = "/contribuyentes/tramites/creacionCaso", method = RequestMethod.POST)
+	@RequestMapping(value =
+	{ "/contribuyentes/tramites/creacionCaso", "/register/contribuyentes/tramites/creacionCaso" }, method = RequestMethod.POST)
 	@ResponseBody
 	public CreaCasosResponse creacionCasoGET(@ModelAttribute("tramitesCreacionCasoInfo")
-	final TramitesCreacionCasoInfo tramitesCreacionCasoInfo, final Model model, final RedirectAttributes redirectModel)
+	final TramitesCreacionCasoInfo tramitesCreacionCasoInfo, final Model model, final RedirectAttributes redirectModel,
+			final HttpServletRequest request)
 			throws CMSItemNotFoundException
 	{
 
@@ -293,6 +318,15 @@ public class TramitesCrearPageController extends AbstractPageController
 
 
 		llenarElementosTramites(elementos);
+
+		final String referrer = request.getServletPath();
+		if (!referrer.contains("seleccionNivelRol"))
+		{
+			elementos.removeIf(obj -> obj.getKey() == "0101010101");
+			elementos.removeIf(obj -> obj.getKey() == "0101010104");
+			elementos.removeIf(obj -> obj.getKey() == "0101010201");
+		}
+
 		tramitesSeleccionInfo.setNivelSeleccion(tramitesCreacionCasoInfo.getNivelSeleccion());
 		tramitesSeleccionInfo.setValorN0(tramitesCreacionCasoInfo.getValorN0());
 		tramitesSeleccionInfo.setValorN1(tramitesCreacionCasoInfo.getValorN1());
@@ -461,6 +495,12 @@ public class TramitesCrearPageController extends AbstractPageController
 				categoriza = elementoSeleccionado.getCategorizacion();
 				descripcion = elementoSeleccionado.getTramiteOpcion().getLabel();
 				bp = customerModel.getNumBP();
+
+				if (bp == null)
+				{
+					bp = getSessionService().getAttribute("numBP");
+				}
+
 				canal = "03";
 				mensaje = tramitesCreacionCasoInfo.getMensaje();
 				if (elementoSeleccionado.getRolAccion() != null)
@@ -674,14 +714,14 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "01010102__", "02", "Persona Jurídica");
 		//RIT-Creación-Registro / Rol Tributario - Persona Natural
 		agregarElementoTramites(elementos, "0101010100", "00", "Seleccionar");
-		//		agregarElementoTramites(elementos, "0101010101", "01", "Contribuyente");
+		//agregarElementoTramites(elementos, "0101010101", "01", "Contribuyente");
 		agregarElementoTramites_rol(elementos, "0101010102", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z065", "ZZAGENTE", "X");
 		agregarElementoTramites_rol(elementos, "0101010103", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z065",
 				"ZZREPORTANTE", "X");
-		//		agregarElementoTramites(elementos, "0101010104", "04", "Terceros Autorizados");
+		//agregarElementoTramites(elementos, "0101010104", "04", "Terceros Autorizados");
 		//RIT-Actualizacion-Registro / Rol Tributario - Persona Jurídica
 		agregarElementoTramites(elementos, "0101010200", "00", "Seleccionar");
-		//		agregarElementoTramites(elementos, "0101010201", "01", "Contribuyente");
+		//agregarElementoTramites(elementos, "0101010201", "01", "Contribuyente");
 		agregarElementoTramites_rol(elementos, "0101010202", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z066", "ZZAGENTE", "");
 		agregarElementoTramites_rol(elementos, "0101010203", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z066",
 				"ZZREPORTANTE", "");

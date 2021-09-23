@@ -3,7 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 /**
