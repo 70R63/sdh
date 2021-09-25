@@ -116,30 +116,30 @@ public class UIMenuForm
 			{
 				final String groupUid = group.getUid();
 
-				if (this.getbPredial() == null || this.getbPredial().equals(""))
-				{
-					this.setbPredial(groupUid.contains("predialUsrTaxGrp") ? "X" : "");
-				}
-
-				if (this.getbVehicular() == null || this.getbVehicular().equals(""))
-				{
-					this.setbVehicular(groupUid.contains("vehicularUsrTaxGrp") ? "X" : "");
-				}
-
-				if (this.getbIca() == null || this.getbIca().equals(""))
-				{
-					this.setbIca(groupUid.contains("ICAUsrTaxGrp") ? "X" : "");
-				}
+				//				if (this.getbPredial() == null || this.getbPredial().equals(""))
+				//				{
+				//					this.setbPredial(groupUid.contains("predialUsrTaxGrp") ? "X" : "");
+				//				}
+				//
+				//				if (this.getbVehicular() == null || this.getbVehicular().equals(""))
+				//				{
+				//					this.setbVehicular(groupUid.contains("vehicularUsrTaxGrp") ? "X" : "");
+				//				}
+				//
+				//				if (this.getbIca() == null || this.getbIca().equals(""))
+				//				{
+				//					this.setbIca(groupUid.contains("ICAUsrTaxGrp") ? "X" : "");
+				//				}
 
 				if (this.getbSobreGasolina() == null || this.getbSobreGasolina().equals(""))
 				{
 					this.setbSobreGasolina(groupUid.contains("gasolinaUsrTaxGrp") ? "X" : "");
 				}
 
-				if (this.getbDelineacionUrbana() == null || this.getbDelineacionUrbana().equals(""))
-				{
-					this.setbDelineacionUrbana(groupUid.contains("delineacionUsrTaxGrp") ? "X" : "");
-				}
+				//				if (this.getbDelineacionUrbana() == null || this.getbDelineacionUrbana().equals(""))
+				//				{
+				//					this.setbDelineacionUrbana(groupUid.contains("delineacionUsrTaxGrp") ? "X" : "");
+				//				}
 
 				if (this.getbPublicidadExt() == null || this.getbPublicidadExt().equals(""))
 				{

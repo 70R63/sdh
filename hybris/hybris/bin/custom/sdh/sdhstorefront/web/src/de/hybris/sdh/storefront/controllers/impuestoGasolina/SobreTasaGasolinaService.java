@@ -582,34 +582,34 @@ public class SobreTasaGasolinaService
 	{
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
-		if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
-		{
-			elementos.put("1", "Predial");
-		}
-		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
-		{
-			elementos.put("2", "Impuestos de Vehículos");
-		}
-		if (customerData.getIcaTax() != null && customerData.getIcaTax().getObjectNumber() != null)
-		{
-			elementos.put("3", "ICA");
-		}
+		//		if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
+		//		{
+		//			elementos.put("1", "Predial");
+		//		}
+		//		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
+		//		{
+		//			elementos.put("2", "Impuestos de Vehículos");
+		//		}
+		//		if (customerData.getIcaTax() != null && customerData.getIcaTax().getObjectNumber() != null)
+		//		{
+		//			elementos.put("3", "ICA");
+		//		}
 		if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
 		{
-			elementos.put("5", "Sobretasa Gasolina");
+			elementos.put("5", "Sobretasa a la gasolina motor");
 		}
-		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
-		{
-			elementos.put("6", "Delineacion Urbana");
-		}
+		//		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
+		//		{
+		//			elementos.put("6", "Delineacion Urbana");
+		//		}
 		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 		{
 			elementos.put("7", "Publicidad Exterior");
 		}
-		if (customerData.getReteIcaTax() != null)
-		{
-			elementos.put("4", "Reteica");
-		}
+		//		if (customerData.getReteIcaTax() != null)
+		//		{
+		//			elementos.put("4", "Reteica");
+		//		}
 
 
 		return elementos;
@@ -2541,41 +2541,41 @@ public class SobreTasaGasolinaService
 
 		elementos.put("00", "Seleccionar");
 
-		if (customerData.getVehicular() != null) //vehicular
-		{
-			if (customerData.getVehicular().size() > 0)
-			{
-				elementos.put("0002", "Vehículos");
-			}
-		}
-		if (customerData.getIca() != null) // ica
-		{
-			if (!customerData.getIca().getNumObjeto().isEmpty())
-			{
-				elementos.put("0003", "Industria y Comercio");
-			}
-		}
-		if (customerData.getReteIca() != null) // reteICA
-		{
-			if (!customerData.getReteIca().getNumObjeto().isEmpty())
-			{
-				elementos.put("0004", "Retención ICA");
-			}
-		}
+		//		if (customerData.getVehicular() != null) //vehicular
+		//		{
+		//			if (customerData.getVehicular().size() > 0)
+		//			{
+		//				elementos.put("0002", "Vehículos");
+		//			}
+		//		}
+		//		if (customerData.getIca() != null) // ica
+		//		{
+		//			if (!customerData.getIca().getNumObjeto().isEmpty())
+		//			{
+		//				elementos.put("0003", "Industria y Comercio");
+		//			}
+		//		}
+		//		if (customerData.getReteIca() != null) // reteICA
+		//		{
+		//			if (!customerData.getReteIca().getNumObjeto().isEmpty())
+		//			{
+		//				elementos.put("0004", "Retención ICA");
+		//			}
+		//		}
 		if (customerData.getGasolina() != null) //gasolina
 		{
 			if (customerData.getGasolina().size() > 0)
 			{
-				elementos.put("0005", "Sobretasa Motor");
+				elementos.put("0005", "Sobretasa a la gasolina motor");
 			}
 		}
-		if (customerData.getDelineacion() != null) //delineacion
-		{
-			if (customerData.getDelineacion().size() > 0)
-			{
-				elementos.put("0006", "Delineación Urbana");
-			}
-		}
+		//		if (customerData.getDelineacion() != null) //delineacion
+		//		{
+		//			if (customerData.getDelineacion().size() > 0)
+		//			{
+		//				elementos.put("0006", "Delineación Urbana");
+		//			}
+		//		}
 		if (customerData.getPublicidadExt() != null) //publicidad
 		{
 			if (customerData.getPublicidadExt().size() > 0)
@@ -2584,7 +2584,7 @@ public class SobreTasaGasolinaService
 			}
 		}
 
-		elementos.put("0001", "Predial");
+		//		elementos.put("0001", "Predial");
 
 		catalogosForm.setImpuesto(elementos);
 		return catalogosForm;
