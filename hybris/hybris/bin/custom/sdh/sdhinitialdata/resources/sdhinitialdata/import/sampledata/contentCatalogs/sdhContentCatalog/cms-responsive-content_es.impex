@@ -169,7 +169,7 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;PredialUnificadoLink;"Predial unificado";"Haga clic aquí para acceder a la opción de menú Predial unificado"
 ;;PublicidadExteriorLink;"Publicidad exterior";"Haga clic aquí para acceder a la opción de menú Publicidad exterior"
 ;;SobreVehiAutomotoresLink;"Impuestos de Vehículos";"Haga clic aquí para acceder a la opción de menú Sobre vehículos automotores"
-;;SobreTasaGasolinaLink;"Sobretasa a la gasolina";"Haga clic aquí para acceder a la opción de menú Sobretasa a la gasolina"
+;;SobreTasaGasolinaLink;"Sobretasa a la gasolina motor";"Haga clic aquí para acceder a la opción de menú Sobretasa a la gasolina"
 ;;NewSobreVehiNodeLink	;"Impuestos de Vehículos"  ;"Haga clic aquí para acceder a la opción de menú Sobre vehículos automotores"
 ;;NewPredialLink;"Predial";"Haga clic aquí para acceder a la opción de menú predial"
 #->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
