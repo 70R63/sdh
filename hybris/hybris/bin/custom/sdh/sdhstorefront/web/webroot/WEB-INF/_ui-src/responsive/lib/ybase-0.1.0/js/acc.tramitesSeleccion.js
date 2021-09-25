@@ -891,8 +891,9 @@ ACC.tramitesSeleccion = {
 		var mensaje = "";
 
 		if (infoResponse.respuesta.num_caso != null) {
-			mensaje = infoResponse.respuesta.descripcion + " "
-					+ infoResponse.respuesta.num_caso;
+			mensaje = infoResponse.respuesta.descripcion 
+			        //+ " "
+					//+ infoResponse.respuesta.num_caso;
 			var doc = document.getElementById('documentos');
 			doc.style.display = 'none';
 			$("#mensaje").val("");
