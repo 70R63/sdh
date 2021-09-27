@@ -24,7 +24,8 @@
 							<c:set var= "messageBuzon" value = "${error.id_msj}"></c:set>
 							
 							</c:if>
-							${ycommerce:sanitizeHTML(errorMessages) }
+<%-- 							${ycommerce:sanitizeHTML(errorMessages) } --%>
+							${errorMessages}
 							<br>
 						</div>
 					</c:if>
