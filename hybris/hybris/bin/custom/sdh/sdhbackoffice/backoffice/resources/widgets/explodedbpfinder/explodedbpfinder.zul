@@ -39,7 +39,7 @@
                     </row>
                     <row>
                         <cell>
-                            <label value="Fecha Expiración Del Documento:"/>
+                            <label value="Fecha Expedición Del Documento:"/>
                         </cell>
                         <cell>
                             <hbox align="center">
