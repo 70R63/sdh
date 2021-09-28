@@ -707,7 +707,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			}
 			if (!StringUtils.isEmpty(optionGas))
 			{
-				map.put("5", "Sobretasa Gasolina");
+				map.put("5", "Sobretasa a la gasolina motor");
 			}
 			if (!StringUtils.isEmpty(optionDeli))
 			{
