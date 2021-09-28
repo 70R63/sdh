@@ -597,6 +597,13 @@ public class SobreTasaGasolinaService
 		if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
 		{
 			elementos.put("5", "Sobretasa a la gasolina motor");
+<<<<<<< HEAD
+=======
+		}
+		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
+		{
+			elementos.put("6", "Delineacion Urbana");
+>>>>>>> 2005
 		}
 		//		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
 		//		{
@@ -2567,6 +2574,16 @@ public class SobreTasaGasolinaService
 			if (customerData.getGasolina().size() > 0)
 			{
 				elementos.put("0005", "Sobretasa a la gasolina motor");
+<<<<<<< HEAD
+=======
+			}
+		}
+		if (customerData.getDelineacion() != null) //delineacion
+		{
+			if (customerData.getDelineacion().size() > 0)
+			{
+				elementos.put("0006", "Delineación Urbana");
+>>>>>>> 2005
 			}
 		}
 		//		if (customerData.getDelineacion() != null) //delineacion
