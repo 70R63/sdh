@@ -176,14 +176,14 @@
 					</button>
 				</div>
 			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary btn-lg" id="action"
-						name="action" value="generar" style="margin-top: 3px">
-						<spring:theme code="obligacion.sujeto.descargar" />
-					</button>
-				</div>
-			</div>
+<!-- 			<div class="col-md-3"> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<button type="submit" class="btn btn-primary btn-lg" id="action" -->
+<!-- 						name="action" value="generar" style="margin-top: 3px"> -->
+<%-- 						<spring:theme code="obligacion.sujeto.descargar" /> --%>
+<!-- 					</button> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			<div class="col-md-3" style="display: none;" id="btnBuscar">
 				<div class="form-group ">
 					<button type="button" class="btn btn-primary btn-lg" id="action"
