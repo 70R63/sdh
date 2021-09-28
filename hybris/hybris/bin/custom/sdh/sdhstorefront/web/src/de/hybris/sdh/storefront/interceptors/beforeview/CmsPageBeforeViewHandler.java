@@ -194,7 +194,8 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 			final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
 			uiMenuForm.fillForm(customerData, customerModel);
-			uiMenuForm.setbNoFiltrarMenuContrib(determinarFiltroMenuContrib(customerData));
+			//			uiMenuForm.setbNoFiltrarMenuContrib(determinarFiltroMenuContrib(customerData));
+			uiMenuForm.setbNoFiltrarMenuContrib(true);
 			modelAndView.addObject("uiMenuForm", uiMenuForm);
 			if(sessionService.getAttribute("representado")!= null) {
 
