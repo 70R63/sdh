@@ -55,6 +55,8 @@ public class DeclaPublicidadController
 
 	private String habilitaPagarEnLinea;
 
+	private DeclaPublicidadControlCamposDec controlCampos;
+
 	/**
 	 * @return the tipoValla
 	 */
@@ -639,6 +641,23 @@ public class DeclaPublicidadController
 	public void setHabilitaPagarEnLinea(final String habilitaPagarEnLinea)
 	{
 		this.habilitaPagarEnLinea = habilitaPagarEnLinea;
+	}
+
+	/**
+	 * @return the controlCampos
+	 */
+	public DeclaPublicidadControlCamposDec getControlCampos()
+	{
+		return controlCampos;
+	}
+
+	/**
+	 * @param controlCampos
+	 *           the controlCampos to set
+	 */
+	public void setControlCampos(final DeclaPublicidadControlCamposDec controlCampos)
+	{
+		this.controlCampos = controlCampos;
 	}
 
 
