@@ -9,6 +9,13 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+
+<c:set var="disabledTotalPagar" value=""/>
+<c:if test="${declaPublicidadForm.controlCampos.totalAPagar == true}">
+	<c:set var="disabledTotalPagar" value="true"/>
+</c:if>
+
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-6">
@@ -69,6 +76,7 @@
 		</div>
 	</div>
 
+	<c:if test="${empty disabledTotalPagar }">
 	<div class="row">
 		<div class="col-md-2 col-md-offset-8">
 
@@ -78,4 +86,5 @@
 			</button>
 		</div>
 	</div>
+	</c:if>
 </div>
