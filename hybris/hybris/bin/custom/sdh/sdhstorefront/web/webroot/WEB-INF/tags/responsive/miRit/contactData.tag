@@ -979,10 +979,7 @@ toddir.style.width= '900px'
 				
 				
 				
-				<c:choose>
-				<c:when test="${ PJUR eq true || PNAT eq true}">
-				</c:when>
-				<c:otherwise>
+
 				<div class="row">
 					<div class="col-md-2">
 						<div class="form-group ">
@@ -1161,8 +1158,7 @@ toddir.style.width= '900px'
 						</div>
 					</div>
 				</div>
-				</c:otherwise>
-				</c:choose>
+
 			</div>
 		</div>
 	</div>
