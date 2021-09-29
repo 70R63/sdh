@@ -262,5 +262,9 @@
 			detplubliext.style.display = 'none';
 		}
 	}
+	
+	function goBack() {
+		window.history.back();
+	}
 </script>
 
