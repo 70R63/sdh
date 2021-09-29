@@ -170,8 +170,8 @@
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
-					<button type="submit" class="btn btn-secondary btn-lg" id="action"
-						name="action" value="generar" style="margin-top: 3px">
+					<button type="button" class="btn btn-secondary btn-lg" id="action"
+						name="action" value="generar" style="margin-top: 3px" onclick="goBack()">
 						<spring:theme code="obligacion.sujeto.regresar" />
 					</button>
 				</div>
