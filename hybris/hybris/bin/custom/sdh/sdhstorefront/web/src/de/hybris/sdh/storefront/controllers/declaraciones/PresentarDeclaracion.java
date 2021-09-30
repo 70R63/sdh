@@ -25,6 +25,7 @@ import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbanaWithRadicados;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
@@ -506,8 +507,15 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				final InfoDelineacionInput infoDelineacionInput = new InfoDelineacionInput();
 				String mensajeError = "";
 
-				model.addAttribute("delineacionWithRadicadosList", sdhValidaContribuyenteService
-						.getDelineacionListByBpAndYearWithRadicados(customerModel.getNumBP(), dataFormResponse.getAnoGravable()));
+				final List<ImpuestoDelineacionUrbanaWithRadicados> delineacionWithRadicadosList = sdhValidaContribuyenteService
+						.getDelineacionListByBpAndYearWithRadicados(customerModel.getNumBP(), dataFormResponse.getAnoGravable());
+				if (delineacionWithRadicadosList == null || delineacionWithRadicadosList.isEmpty())
+				{
+					GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+							"error.presentarDeclaracion.publicidadExt.listaVacia");
+					GlobalMessages.addErrorMessage(model, "error.presentarDeclaracion.publicidadExt.listaVacia");
+				}
+				model.addAttribute("delineacionWithRadicadosList", delineacionWithRadicadosList);
 
 				contribuyenteRequest.setNumBP(customerModel.getNumBP());
 				//detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService,
