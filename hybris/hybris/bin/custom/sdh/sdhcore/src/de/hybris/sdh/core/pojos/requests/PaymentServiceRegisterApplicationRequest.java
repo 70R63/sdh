@@ -24,4 +24,12 @@ public class PaymentServiceRegisterApplicationRequest {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "PaymentServiceRegisterApplicationRequest{" +
+                "applicationId=" + applicationId +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
