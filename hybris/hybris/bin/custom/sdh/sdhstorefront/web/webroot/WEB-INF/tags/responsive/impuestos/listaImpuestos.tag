@@ -316,6 +316,7 @@
 					</tr>
 
 					<c:forEach var="radicado" items="${item.radicados}" varStatus="loopStatus">
+					<c:if test="${not empty radicado.numRadicado}">
 						<tr id="${item.cdu}" >
 													<td class="col-sm-2">
 							<label hidden="true">${item.cdu}</label>
@@ -349,6 +350,7 @@
 								</form:form>
 							</td>
 						</tr>
+						</c:if>
 					</c:forEach>
 				</c:forEach>
 			</tbody>
