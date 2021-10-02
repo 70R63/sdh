@@ -10,11 +10,15 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
-import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
-import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
+import de.hybris.sdh.core.dao.impl.DefaultSDHTaxTypeDao;
+import de.hybris.sdh.core.model.SDHTaxTypeModel;
+import de.hybris.sdh.core.pojos.requests.*;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
+import de.hybris.sdh.core.pojos.responses.PaymentServiceRegisterResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.core.services.SDHTaxTypeService;
+import de.hybris.sdh.core.services.SdhPaymentService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 
@@ -22,6 +26,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +37,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 
 /**
@@ -63,6 +73,11 @@ public class PreparacionPagoPSE extends AbstractPageController
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
+	@Resource(name = "sdhPaymentService")
+	private SdhPaymentService sdhPaymentService;
+
+    @Resource(name = "sdhTaxTypeService")
+    private SDHTaxTypeService sdhTaxTypeService;
 
 	private static final String ERROR_CMS_PAGE = "notFound";
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
@@ -111,6 +126,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 	final InfoPreviaPSE infoPreviaPSE, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
+
 		System.out.println("---------------- En Preparacion Pago PSE POST --------------------------");
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		String[] mensajesError;
@@ -185,10 +201,46 @@ public class PreparacionPagoPSE extends AbstractPageController
 						mensajesError);
 			}
 		}
-		model.addAttribute("psePaymentForm", psePaymentForm);
+		//model.addAttribute("psePaymentForm", psePaymentForm);
 
+        SDHTaxTypeModel sdhTaxTypeModel = sdhTaxTypeService.findUniqueByTaxCode(psePaymentForm.getTipoDeImpuesto());
+        PaymentServiceRegisterResponse paymentServiceRegisterResponse = null;
 
-		return REDIRECT_TO_DECLARACIONES_PAGAR_PAGE;
+        PaymentServiceRegisterEntityRequest paymentServiceRegisterEntityRequest =
+                new PaymentServiceRegisterEntityRequest(1, "SECRETARIA DISTRITAL DE HACIENDA");
+
+        PaymentServiceRegisterApplicationRequest paymentServiceRegisterApplicationRequest =
+                new PaymentServiceRegisterApplicationRequest(5, "BOGDATA SAP");
+
+        PaymentServiceRegisterRequest paymentServiceRegisterRequest =
+                new PaymentServiceRegisterRequest(
+                        paymentServiceRegisterEntityRequest,
+                        paymentServiceRegisterApplicationRequest,
+                        psePaymentForm.getTipoDeImpuesto(),
+                        Objects.nonNull(sdhTaxTypeModel) ? sdhTaxTypeModel.getName() : StringUtils.EMPTY,
+                        psePaymentForm.getNumeroDeReferencia(),
+                        psePaymentForm.getObjPago(),
+                        psePaymentForm.getNumeroDeReferencia(),
+                        "AAA0123KLJH",
+                        psePaymentForm.getFechaLimiteDePago(),
+                        "http://sap.shd.gov.co/bogota",
+                        Integer.parseInt(psePaymentForm.getValorAPagar()));
+
+        try {
+            paymentServiceRegisterResponse = sdhPaymentService.register(paymentServiceRegisterRequest);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(paymentServiceRegisterRequest);
+		System.out.println(paymentServiceRegisterResponse);
+
+        return Objects.nonNull(paymentServiceRegisterResponse) ?
+                "redirect:" + paymentServiceRegisterResponse.getPaymentUrl() : "/";
 	}
 
 	@RequestMapping(value = "/setComplete5", method = RequestMethod.POST)

@@ -9,6 +9,7 @@ public class PaymentServiceRegisterRequest {
     private String ref1;
     private String ref2;
     private String ref3;
+    private String ref4;
     private String deadline;
     private String returnUrl;
     private Integer value;
@@ -16,7 +17,7 @@ public class PaymentServiceRegisterRequest {
     public PaymentServiceRegisterRequest(PaymentServiceRegisterEntityRequest entity,
                                          PaymentServiceRegisterApplicationRequest application,
                                          String concept, String description, String ref1,
-                                         String ref2, String ref3, String deadline,
+                                         String ref2, String ref3, String ref4, String deadline,
                                          String returnUrl, Integer value) {
         this.entity = entity;
         this.application = application;
@@ -25,6 +26,7 @@ public class PaymentServiceRegisterRequest {
         this.ref1 = ref1;
         this.ref2 = ref2;
         this.ref3 = ref3;
+        this.ref4 = ref4;
         this.deadline = deadline;
         this.returnUrl = returnUrl;
         this.value = value;
@@ -108,5 +110,26 @@ public class PaymentServiceRegisterRequest {
 
     public void setValue(Integer value) {
         this.value = value;
+    }
+
+    public String getRef4() { return ref4; }
+
+    public void setRef4(String ref4) { this.ref4 = ref4; }
+
+    @Override
+    public String toString() {
+        return "PaymentServiceRegisterRequest{" +
+                "entity=" + entity +
+                ", application=" + application +
+                ", concept='" + concept + '\'' +
+                ", description='" + description + '\'' +
+                ", ref1='" + ref1 + '\'' +
+                ", ref2='" + ref2 + '\'' +
+                ", ref3='" + ref3 + '\'' +
+                ", ref4='" + ref4 + '\'' +
+                ", deadline='" + deadline + '\'' +
+                ", returnUrl='" + returnUrl + '\'' +
+                ", value=" + value +
+                '}';
     }
 }

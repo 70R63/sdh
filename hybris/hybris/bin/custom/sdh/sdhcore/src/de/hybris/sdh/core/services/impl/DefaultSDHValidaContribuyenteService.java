@@ -279,7 +279,7 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 
 		final List<ImpuestoDelineacionUrbanaWithRadicados> returnList = new ArrayList<>();
 
-		if (Objects.nonNull(contribuyente))
+		if (Objects.nonNull(contribuyente) && contribuyente.getDelineacion() != null)
 		{
 			ImpuestoDelineacionUrbanaWithRadicados deli;
 			for (final ImpuestoDelineacionUrbana delineacion : contribuyente.getDelineacion())

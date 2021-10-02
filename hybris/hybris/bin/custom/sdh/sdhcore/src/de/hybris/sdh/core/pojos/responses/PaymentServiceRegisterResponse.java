@@ -37,4 +37,13 @@ public class PaymentServiceRegisterResponse {
     public void setPaymentUrl(String paymentUrl) {
         this.paymentUrl = paymentUrl;
     }
+
+    @Override
+    public String toString() {
+        return "PaymentServiceRegisterResponse{" +
+                "message='" + message + '\'' +
+                ", nus=" + nus +
+                ", paymentUrl='" + paymentUrl + '\'' +
+                '}';
+    }
 }
