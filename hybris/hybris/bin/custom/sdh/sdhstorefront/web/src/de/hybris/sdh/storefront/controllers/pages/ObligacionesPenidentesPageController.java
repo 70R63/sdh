@@ -9,6 +9,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
@@ -18,14 +19,17 @@ import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.ObligacionesRequest;
 import de.hybris.sdh.core.pojos.requests.ReteicaObligacionesRequest;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.ObligacionesDeliResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesICAResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesPredialResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesVehiculosResponse;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.ReteicaObligacionesResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
@@ -38,6 +42,10 @@ import de.hybris.sdh.core.services.SDHObligacionesVehiculosService;
 import de.hybris.sdh.core.services.SDHReteIcaService;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
+import de.hybris.sdh.facades.questions.data.SDHICATaxData;
+import de.hybris.sdh.facades.questions.data.SDHPredialTaxData;
+import de.hybris.sdh.facades.questions.data.SDHUrbanDelineationsTaxData;
+import de.hybris.sdh.facades.questions.data.SDHVehiculosTaxData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.ObligacionesForm;
@@ -153,7 +161,6 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		{
 			final String groupUid = group.getUid();
 
-
 			//			if (groupUid.contains("predialUsrTaxGrp"))
 			//			{
 			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
@@ -211,7 +218,6 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			//				icaTax.setObjectNumber(contImpuestos.getIca().getNumObjeto());
 			//				customerData.setIcaTax(icaTax);
 			//			}
-
 			if (groupUid.contains("predialUsrTaxGrp"))
 			{
 				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
@@ -279,7 +285,6 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 				}
 			}
 
-
 			if (groupUid.contains("gasolinaUsrTaxGrp"))
 			{
 				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "05");
@@ -301,7 +306,6 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 					customerData.setGasTaxList(gasTaxList);
 				}
 			}
-
 
 			//			if (groupUid.contains("delineacionUsrTaxGrp"))
 			//			{
@@ -367,7 +371,6 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 					customerData.setUrbanDelineationsTaxList(urbanDelineationsTaxList);
 				}
 			}
-
 
 			if (groupUid.contains("publicidadExtUsrTaxGrp"))
 			{

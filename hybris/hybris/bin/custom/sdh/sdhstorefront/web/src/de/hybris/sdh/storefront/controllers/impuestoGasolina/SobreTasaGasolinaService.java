@@ -597,12 +597,10 @@ public class SobreTasaGasolinaService
 		if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
 		{
 			elementos.put("5", "Sobretasa a la gasolina motor");
-
 		}
 		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
 		{
 			elementos.put("6", "Delineacion Urbana");
-
 		}
 		//		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
 		//		{
