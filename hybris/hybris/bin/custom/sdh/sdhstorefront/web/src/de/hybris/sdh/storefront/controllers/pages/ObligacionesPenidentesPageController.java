@@ -153,7 +153,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		{
 			final String groupUid = group.getUid();
 
-<<<<<<< HEAD
+
 			//			if (groupUid.contains("predialUsrTaxGrp"))
 			//			{
 			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
@@ -211,7 +211,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			//				icaTax.setObjectNumber(contImpuestos.getIca().getNumObjeto());
 			//				customerData.setIcaTax(icaTax);
 			//			}
-=======
+
 			if (groupUid.contains("predialUsrTaxGrp"))
 			{
 				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
@@ -278,7 +278,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 					customerData.setIcaTax(icaTax);
 				}
 			}
->>>>>>> 2005
+
 
 			if (groupUid.contains("gasolinaUsrTaxGrp"))
 			{
@@ -302,7 +302,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 				}
 			}
 
-<<<<<<< HEAD
+
 			//			if (groupUid.contains("delineacionUsrTaxGrp"))
 			//			{
 			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
@@ -333,7 +333,6 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			//
 			//				customerData.setUrbanDelineationsTaxList(urbanDelineationsTaxList);
 			//			}
-=======
 			if (groupUid.contains("delineacionUsrTaxGrp"))
 			{
 				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
@@ -368,7 +367,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 					customerData.setUrbanDelineationsTaxList(urbanDelineationsTaxList);
 				}
 			}
->>>>>>> 2005
+
 
 			if (groupUid.contains("publicidadExtUsrTaxGrp"))
 			{
