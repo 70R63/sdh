@@ -13,8 +13,8 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
 import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
@@ -398,7 +398,11 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse;
 		try
 		{
-			sdhConsultaContribuyenteBPResponse = mapper.readValue(sdhConsultaContribuyenteBPService.consultaContribuyenteBP(bp),
+			final ConsultaContribBPRequest validaContribRequest = new ConsultaContribBPRequest();
+			validaContribRequest.setNumBP(getSessionService().getAttribute("numBP"));
+			validaContribRequest.setIndicador("01,02");
+			sdhConsultaContribuyenteBPResponse = mapper.readValue(
+					sdhConsultaContribuyenteBPService.consultaContribuyenteBP_simplificado_string(validaContribRequest),
 					SDHValidaMailRolResponse.class);
 
 			valorBuzon = sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getZZAUTOBUZONE();
