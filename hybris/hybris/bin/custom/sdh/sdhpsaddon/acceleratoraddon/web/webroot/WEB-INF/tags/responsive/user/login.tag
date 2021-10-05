@@ -10,9 +10,9 @@
 
 <c:set var="hideDescription" value="checkout.login.loginAndCheckout" />
 
-<div class="headline">
+<div class="headline" style="text-align: center !important">
 
-		<span tabindex="0" class="new_title"><spring:theme code="login.title" /></span>
+		<span tabindex="0" class="new_title" style="font-size: 150% !important;align-items: center !important;text-align: center !important;"><spring:theme code="login.title" /></span>
 
 </div>
 
@@ -27,8 +27,10 @@
 			</span>
 		</c:if>
 
-		<formElement:formInputBox idKey="j_username" placeholder=" " labelKey="login.email" path="j_username" mandatory="true" inputCSS="tamnew form-control redtam tamnew"/>
-		<formElement:formPasswordBox idKey="j_password" labelKey="login.password" path="j_password" inputCSS="tamnew form-control redtam tamnew" mandatory="true"/>
+<%-- 		<formElement:formInputBox idKey="j_username"labelKey="" path="j_username" mandatory="true" inputCSS="tamnewtwo form-control redtam tamnew"/> --%>
+<%-- 		<formElement:formPasswordBox idKey="j_password"   labelKey="" inputCSS="tamnewtwo form-control redtam tamnew" mandatory="true"/> --%>
+<input type="text"  id=j_username placeholder="Ingresar usuario*"  path="j_username"  value="" class="tamnewtwo form-control"/>
+		<input type="text"  id="j_password" placeholder="Ingresar contraseña*"  path="j_password" value="" class="tamnewtwo form-control" style="margin-top: 5% !important"/>
 		<input type="hidden" id="registeredCheckout" name="registeredCheckout" value="${registeredCheckout}" />
 
 		<c:choose>
@@ -40,21 +42,21 @@
 			</c:otherwise>
 		</c:choose>
 
-		<div class="forgotten-password" style="margin-bottom: 1px !important">
+		<div class="forgotten-password" style="margin-bottom: 1px !important; text-align: center !important;">
 			<ycommerce:testId code="login_forgotPassword_link">
 				<a href="<c:url value='/login/pw/request/external'/>" class="pssword" data-cbox-title="<spring:theme code="forgottenPwd.title"/>"> <spring:theme code="login.link.forgottenPwd" />
 				</a>
 			</ycommerce:testId>
 		</div>
 		
-		<div class="forgotten-password" style="margin-bottom: 1px !important">
+		<div class="forgotten-password" style="margin-bottom: 1px !important; text-align: center !important;">
 			<ycommerce:testId code="login_forgotPassword_link">
 				<c:url value='/register' var="registerURL" />
 				<spring:theme code="login.link.getPassword" htmlEscape="false" arguments="${registerURL }" />
 			</ycommerce:testId>
 		</div>
 		<ycommerce:testId code="loginAndCheckoutButton">
-			<button type="submit" class="btn btn-primary redtam tam_button">
+			<button type="submit" class="btn btn-primary redtam tam_button" style="width: 100% !important; border-radius: 20px !important; background-color: #156ab5 !important; color: white !important;height: 48px !important; margin-top:10%;">
 				<spring:theme code="${actionNameKey}" />
 			</button>
 		</ycommerce:testId>
