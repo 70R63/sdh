@@ -705,7 +705,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "0102______", "02", "Actualización");
 		//RIT-Creación
 		agregarElementoTramites(elementos, "010100____", "00", "Seleccionar");
-		//		agregarElementoTramites(elementos, "010101__", "01", "Creación de RIT");
+		agregarElementoTramites(elementos, "010101__", "01", "Creación de RIT");
 		agregarElementoTramites(elementos, "010101____", "01", "Registro / Rol Tributario");
 		agregarElementoTramites(elementos, "010102____", "02", "Creación de Calidad Sujeción Pasiva");
 		//RIT-Creación-Registro / Rol Tributario
