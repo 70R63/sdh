@@ -10,9 +10,12 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
-import de.hybris.sdh.core.dao.impl.DefaultSDHTaxTypeDao;
 import de.hybris.sdh.core.model.SDHTaxTypeModel;
-import de.hybris.sdh.core.pojos.requests.*;
+import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
+import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
+import de.hybris.sdh.core.pojos.requests.PaymentServiceRegisterApplicationRequest;
+import de.hybris.sdh.core.pojos.requests.PaymentServiceRegisterEntityRequest;
+import de.hybris.sdh.core.pojos.requests.PaymentServiceRegisterRequest;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.PaymentServiceRegisterResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -21,6 +24,11 @@ import de.hybris.sdh.core.services.SDHTaxTypeService;
 import de.hybris.sdh.core.services.SdhPaymentService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
+
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -37,11 +45,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.util.Objects;
 
 
 /**
@@ -203,16 +206,16 @@ public class PreparacionPagoPSE extends AbstractPageController
 		}
 		//model.addAttribute("psePaymentForm", psePaymentForm);
 
-        SDHTaxTypeModel sdhTaxTypeModel = sdhTaxTypeService.findUniqueByTaxCode(psePaymentForm.getTipoDeImpuesto());
+        final SDHTaxTypeModel sdhTaxTypeModel = sdhTaxTypeService.findUniqueByTaxCode(psePaymentForm.getTipoDeImpuesto());
         PaymentServiceRegisterResponse paymentServiceRegisterResponse = null;
 
-        PaymentServiceRegisterEntityRequest paymentServiceRegisterEntityRequest =
+        final PaymentServiceRegisterEntityRequest paymentServiceRegisterEntityRequest =
                 new PaymentServiceRegisterEntityRequest(1, "SECRETARIA DISTRITAL DE HACIENDA");
 
-        PaymentServiceRegisterApplicationRequest paymentServiceRegisterApplicationRequest =
+        final PaymentServiceRegisterApplicationRequest paymentServiceRegisterApplicationRequest =
                 new PaymentServiceRegisterApplicationRequest(5, "BOGDATA SAP");
 
-        PaymentServiceRegisterRequest paymentServiceRegisterRequest =
+        final PaymentServiceRegisterRequest paymentServiceRegisterRequest =
                 new PaymentServiceRegisterRequest(
                         paymentServiceRegisterEntityRequest,
                         paymentServiceRegisterApplicationRequest,
@@ -222,17 +225,18 @@ public class PreparacionPagoPSE extends AbstractPageController
                         psePaymentForm.getObjPago(),
                         psePaymentForm.getNumeroDeReferencia(),
                         "AAA0123KLJH",
-                        psePaymentForm.getFechaLimiteDePago(),
-                        "http://sap.shd.gov.co/bogota",
+						psePaymentForm.getFechaLimiteDePago().substring(6) + "/" + psePaymentForm.getFechaLimiteDePago().substring(4, 6)
+								+ "/" + psePaymentForm.getFechaLimiteDePago().substring(0, 4),
+						"https://qasnuevaoficinavirtual.shd.gov.co/bogota/es/contribuyentes",
                         Integer.parseInt(psePaymentForm.getValorAPagar()));
 
         try {
             paymentServiceRegisterResponse = sdhPaymentService.register(paymentServiceRegisterRequest);
-        } catch (NoSuchAlgorithmException e) {
+        } catch (final NoSuchAlgorithmException e) {
             e.printStackTrace();
-        } catch (KeyStoreException e) {
+        } catch (final KeyStoreException e) {
             e.printStackTrace();
-        } catch (KeyManagementException e) {
+        } catch (final KeyManagementException e) {
             e.printStackTrace();
         }
 

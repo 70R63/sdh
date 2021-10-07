@@ -29,8 +29,8 @@
 
 <%-- 		<formElement:formInputBox idKey="j_username"labelKey="" path="j_username" mandatory="true" inputCSS="tamnewtwo form-control redtam tamnew"/> --%>
 <%-- 		<formElement:formPasswordBox idKey="j_password"   labelKey="" inputCSS="tamnewtwo form-control redtam tamnew" mandatory="true"/> --%>
-<input type="text"  id=j_username placeholder="Ingresar usuario*"  path="j_username"  value="" class="tamnewtwo form-control"/>
-		<input type="text"  id="j_password" placeholder="Ingresar contraseña*"  path="j_password" value="" class="tamnewtwo form-control" style="margin-top: 5% !important"/>
+<form:input type="text"  id="j_username" placeholder="Ingresar usuario*"  path="j_username"  value="" class="tamnewtwo form-control"/>
+		<form:input type="password"  id="j_password" placeholder="Ingresar contraseña*"  path="j_password" value="" class="tamnewtwo form-control" style="margin-top: 5% !important"/>
 		<input type="hidden" id="registeredCheckout" name="registeredCheckout" value="${registeredCheckout}" />
 
 		<c:choose>
