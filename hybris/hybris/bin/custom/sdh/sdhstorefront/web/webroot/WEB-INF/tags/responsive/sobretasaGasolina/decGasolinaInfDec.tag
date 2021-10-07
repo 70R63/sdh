@@ -124,7 +124,7 @@
 									items="${dataForm.catalogosSo.alcoholCarbu}"
 									referenceData="${dataForm.catalogosSo.alcoholCarbu}"
 									class="new_alto form-control-gasolina alcohol"
-									readonly="true" style="width: auto !important;" id="${alcoholCarbu_id}"/>
+									readonly="true" style="width: auto !important;" id="${alcoholCarbu_id}" disabled="${disabledInformacionDeclaracion}"/>
 							</c:when>
 							<c:otherwise>
 								<sf:select

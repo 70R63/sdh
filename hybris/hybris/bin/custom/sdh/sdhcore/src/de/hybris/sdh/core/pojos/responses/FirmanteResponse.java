@@ -1,48 +1,58 @@
 package de.hybris.sdh.core.pojos.responses;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-public class FirmanteResponse {
-
-    private String tipoIdent;
-    private String numIdent;
-    private String nombre;
-    private String tarjetaProd;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 
-    public String getTipoIdent() {
-        return tipoIdent;
-    }
+public class FirmanteResponse
+{
 
-    @JsonProperty("Tipo_ident")
-    public void setTipoIdent(final String tipoIdent) {
-        this.tipoIdent = tipoIdent;
-    }
+	private String tipoIdent;
+	private String numIdent;
+	private String nombre;
+	private String tarjetaProd;
 
-    public String getNumIdent() {
-        return numIdent;
-    }
 
-    @JsonProperty("Num_identif")
-    public void setNumIdent(final String numIdent) {
-        this.numIdent = numIdent;
-    }
+	public String getTipoIdent()
+	{
+		return tipoIdent;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	@JsonSetter("Tipo_ident")
+	public void setTipoIdent(final String tipoIdent)
+	{
+		this.tipoIdent = tipoIdent;
+	}
 
-    @JsonProperty("Nombre")
-    public void setNombre(final String nombre) {
-        this.nombre = nombre;
-    }
+	public String getNumIdent()
+	{
+		return numIdent;
+	}
 
-    public String getTarjetaProd() {
-        return tarjetaProd;
-    }
+	@JsonSetter("Num_identif")
+	public void setNumIdent(final String numIdent)
+	{
+		this.numIdent = numIdent;
+	}
 
-    @JsonProperty("Tarjeta_prof")
-    public void setTarjetaProd(final String tarjetaProd) {
-        this.tarjetaProd = tarjetaProd;
-    }
+	public String getNombre()
+	{
+		return nombre;
+	}
+
+	@JsonSetter("Nombre")
+	public void setNombre(final String nombre)
+	{
+		this.nombre = nombre;
+	}
+
+	public String getTarjetaProd()
+	{
+		return tarjetaProd;
+	}
+
+	@JsonSetter("Tarjeta_prof")
+	public void setTarjetaProd(final String tarjetaProd)
+	{
+		this.tarjetaProd = tarjetaProd;
+	}
 }
