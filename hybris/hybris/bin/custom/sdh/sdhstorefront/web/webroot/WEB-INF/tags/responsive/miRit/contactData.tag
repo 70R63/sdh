@@ -536,23 +536,23 @@ toddir.style.width= '900px'
 						<div class="col-md-2"></div>
 						<div class="col-md-2"></div>
 						<div class="col-md-2"></div>
-						<div class="col-12 col-md-2 text-center">
-							<div class="form-group ">
-								<button class="btn btn-secondary btn-lg addressHelperField"
-									type="button" onclick="cancelAddAddress();">
-									<spring:theme code="mirit.contactData.cancel" />
-								</button>
-							</div>
-						</div>
-						<div class="col-12 col-md-2 text-center">
-							<div class="form-group ">
-								<button class="btn btn-primary btn-lg addressHelperField"
-									type="button" onclick="setAddress();">
-									<spring:theme code="mirit.contactData.addAddress" />
-								</button>
-							</div>
-						</div>
-					</div>
+<!-- 						<div class="col-12 col-md-2 text-center"> -->
+<!-- 							<div class="form-group "> -->
+<!-- 								<button class="btn btn-secondary btn-lg addressHelperField" -->
+<!-- 									type="button" onclick="cancelAddAddress();"> -->
+<%-- 									<spring:theme code="mirit.contactData.cancel" /> --%>
+<!-- 								</button> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-12 col-md-2 text-center"> -->
+<!-- 							<div class="form-group "> -->
+<!-- 								<button class="btn btn-primary btn-lg addressHelperField" -->
+<!-- 									type="button" onclick="setAddress();"> -->
+<%-- 									<spring:theme code="mirit.contactData.addAddress" /> --%>
+<!-- 								</button> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 					<div class="row">
 						<div class="col-md-2">
 							<div class="form-group ">
@@ -971,6 +971,24 @@ toddir.style.width= '900px'
 									<spring:theme code="mirit.contactData.acept" />
 								</button>
 							</div>
+						</div>
+				
+					</div>
+							<div class="row">
+							<div class="col-12 col-md-3 text-center float-right" style="float: right !important; display: flex !important">
+							<div class="form-group ">
+								<button class="btn btn-secondary btn-lg addressHelperField"
+									type="button" onclick="cancelAddAddress();">
+									<spring:theme code="mirit.contactData.cancel" />
+								</button>
+							</div>
+							<div class="form-group ">
+								<button class="btn btn-primary btn-lg addressHelperField"
+									type="button" onclick="setAddress();">
+									<spring:theme code="mirit.contactData.addAddress" />
+								</button>
+							</div>
+						</div>
 						</div>
 
 					</div>
