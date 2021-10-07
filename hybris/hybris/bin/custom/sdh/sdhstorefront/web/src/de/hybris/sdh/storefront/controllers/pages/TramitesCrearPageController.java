@@ -522,6 +522,10 @@ public class TramitesCrearPageController extends AbstractPageController
 				atributos.add(atributo);
 				atributo = new CreaCasosAtribRequest("String 1", "CANAL", canal);
 				atributos.add(atributo);
+				if (mensaje != null)
+				{
+					mensaje = mensaje.replaceAll("\n", "\\\\n");
+				}
 				atributo = new CreaCasosAtribRequest("String 1", "COMENTARIO", mensaje);
 				atributos.add(atributo);
 				if (elementoSeleccionado.getRolAccion() != null)
