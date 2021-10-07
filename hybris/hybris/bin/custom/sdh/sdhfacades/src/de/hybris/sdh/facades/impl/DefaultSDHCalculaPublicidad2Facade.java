@@ -9,7 +9,10 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 public class DefaultSDHCalculaPublicidad2Facade implements SDHCalculaPublicidad2Facade {
 
@@ -28,7 +31,7 @@ public class DefaultSDHCalculaPublicidad2Facade implements SDHCalculaPublicidad2
             try {
             LOG.info(response);
                 final ObjectMapper mapper = new ObjectMapper();
-                mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+					 mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                 final CalcPublicidad2Response calcPublicidad2Response = mapper.readValue(response, CalcPublicidad2Response.class);
                 return calcPublicidad2Response;
 
