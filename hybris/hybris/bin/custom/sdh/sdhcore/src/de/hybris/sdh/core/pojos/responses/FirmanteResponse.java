@@ -55,4 +55,13 @@ public class FirmanteResponse
 	{
 		this.tarjetaProd = tarjetaProd;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "FirmanteResponse [tipoIdent=" + tipoIdent + ", numIdent=" + numIdent + ", nombre=" + nombre + ", tarjetaProd="
+				+ tarjetaProd + "]";
+	}
+
+
 }
