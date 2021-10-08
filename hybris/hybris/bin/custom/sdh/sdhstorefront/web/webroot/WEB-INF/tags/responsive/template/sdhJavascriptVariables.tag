@@ -188,38 +188,38 @@
 		  	<c:if test="${not empty reteICATemplateURL}">
 		  		ACC.reteICADownloadTemplate ="${reteICATemplateURL}";
 			</c:if>
+			debugger;
+			ACC.hideSubmenuDelineacionUrbana = true;
+			ACC.hideSubmenuICA = true;
+			ACC.hideSubmenuPredial = true;
+			ACC.hideSubmenuPublicidadExt = true;
+			ACC.hideSubmenuVehicular = true;
+			ACC.hideSubmenuGasolina = true;
 			
-			ACC.hideSubmenuDelineacionUrbana = false;
-			ACC.hideSubmenuICA = false;
-			ACC.hideSubmenuPredial = false;
-			ACC.hideSubmenuPublicidadExt = false;
-			ACC.hideSubmenuVehicular = false;
-			ACC.hideSubmenuGasolina = false;
 			
-			
-			<c:if test="${(hasCORol and fn:contains(currentURL, 'contribuyentes')) or (hasCORol and fn:contains(currentURL, 'pagoEnLinea'))}">
+			<c:if test="${(hasCORol and fn:contains(currentURL, 'contribuyentes')) or (hasCORol and fn:contains(currentURL, 'pagoEnLinea') or (hasAARol))}">
 				
-				<c:if test = "${uiMenuForm.bDelineacionUrbana != 'X'}">
-					ACC.hideSubmenuDelineacionUrbana = true;
+				<c:if test = "${uiMenuForm.bDelineacionUrbana == 'X'}">
+					ACC.hideSubmenuDelineacionUrbana = false;
 				</c:if>
 				
-				<c:if test = "${uiMenuForm.bIca != 'X'}">
-					ACC.hideSubmenuICA = true;
+				<c:if test = "${uiMenuForm.bIca == 'X'}">
+					ACC.hideSubmenuICA = false;
 				</c:if>
 				
-				<c:if test = "${uiMenuForm.bPredial != 'X'}">
-					ACC.hideSubmenuPredial = true;
+				<c:if test = "${uiMenuForm.bPredial == 'X'}">
+					ACC.hideSubmenuPredial = false;
 				</c:if>
 				
-				<c:if test = "${uiMenuForm.bPublicidadExt != 'X'}">
-					ACC.hideSubmenuPublicidadExt = true;
+				<c:if test = "${uiMenuForm.bPublicidadExt == 'X'}">
+					ACC.hideSubmenuPublicidadExt = false;
 				</c:if>
 				
-				<c:if test = "${uiMenuForm.bVehicular != 'X'}">
-					ACC.hideSubmenuVehicular = true;
+				<c:if test = "${uiMenuForm.bVehicular == 'X'}">
+					ACC.hideSubmenuVehicular = false;
 				</c:if>
-				<c:if test = "${uiMenuForm.bSobreGasolina != 'X'}">
-					ACC.hideSubmenuGasolina = true;
+				<c:if test = "${uiMenuForm.bSobreGasolina == 'X'}">
+					ACC.hideSubmenuGasolina = false;
 				</c:if>	
 			</c:if>
 			<c:if test="${hasAARol }">
