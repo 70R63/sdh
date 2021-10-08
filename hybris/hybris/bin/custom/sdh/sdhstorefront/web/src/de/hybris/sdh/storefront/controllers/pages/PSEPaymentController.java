@@ -70,7 +70,6 @@ import javax.annotation.Resource;
 
 import org.apache.axis.types.NonNegativeInteger;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -80,6 +79,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Decoder.BASE64Decoder;
 
@@ -523,7 +525,7 @@ public class PSEPaymentController extends AbstractPageController
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			consultaPagoRequest.setNumBP(customerData.getNumBP());
 			LOG.info("NumBP: " + customerData.getNumBP());
@@ -672,7 +674,7 @@ public class PSEPaymentController extends AbstractPageController
 
 
 		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		try
 		{
