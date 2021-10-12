@@ -589,7 +589,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		//	agregarElementoTramites(elementos, "04________", "04", "Analisis de la cuenta");
 		//agregarElementoTramites(elementos, "05________", "05", "Boletín de deudores Morosos"); //se modifica etiqueta, valor anterior = Boletín de deudores Morosos del Estado 14-01-2020 Maria Torres
 		agregarElementoTramites(elementos, "06________", "06", "Verificación de pagos", "ZT10", "A1ZTRT0001Z006",
-				"tramites.crear.categorizacion.notas.01");
+				"tramites.crear.categorizacion.notas.06");
 		//  agregarElementoTramites(elementos, "07________", "07", "Corrección de la información causada contablemente");
 		//	agregarElementoTramites(elementos, "08________", "08", "Declaración");
 		agregarElementoTramites(elementos, "09________", "09", "Agente Autorizado");
@@ -609,9 +609,8 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "01010102__", "02", "Persona Jurídica");
 		//RIT-Creación-Registro / Rol Tributario - Persona Natural
 		agregarElementoTramites(elementos, "0101010100", "00", "Seleccionar");
-		//		agregarElementoTramites(elementos, "0101010101", "01", "Contribuyente");
-		agregarElementoTramites_rol(elementos, "0101010101", "01", "Contribuyente", "ZT02", "A1ZTRT0004Z065", "ZZCONTRIBUYENTE",
-				"X");
+		agregarElementoTramites(elementos, "0101010101", "01", "Contribuyente", "ZT02", "A1ZTRT0004Z065",
+				"tramites.crear.categorizacion.notas.0101010101");
 		agregarElementoTramites_rol(elementos, "0101010102", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z065", "ZZAGENTE", "X");
 		agregarElementoTramites_rol(elementos, "0101010103", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z065",
 				"ZZREPORTANTE", "X");
