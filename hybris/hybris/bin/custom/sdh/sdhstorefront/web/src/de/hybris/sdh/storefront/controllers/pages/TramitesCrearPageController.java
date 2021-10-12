@@ -30,6 +30,8 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -284,7 +286,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		CreaCasosResponse creaCasosResponse = new CreaCasosResponse();
 		List<CreaCasosAtribRequest> atributos = null;
 		final List<CreaCasosArchiRequest> archivos = new ArrayList<CreaCasosArchiRequest>();
-		final List<CreaCasoArchVista> inputInfoArchivos = new ArrayList<CreaCasoArchVista>();
+		List<CreaCasoArchVista> inputInfoArchivos = null;
 		CreaCasoArchVista inputInfoArchivo_tmp = null;
 		CreaCasosArchiRequest archivoCarga = null;
 		CreaCasosArchiInfoRequest archivosInfo = null;
@@ -309,148 +311,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		tramitesSeleccionInfo.setValorN4(tramitesCreacionCasoInfo.getValorN4());
 
 
-
-		if (tramitesCreacionCasoInfo.getDesA0() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA0().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA0());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA0());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri0());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser0());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe0());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd0());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA1() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA1().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA1());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA1());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri1());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser1());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe1());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd1());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA2() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA2().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA2());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA2());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri2());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser2());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe2());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd2());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA3() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA3().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA3());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA3());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri3());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser3());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe3());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd3());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA4() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA4().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA4());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA4());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri4());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser4());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe4());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd4());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA5() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA5().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA5());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA5());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri5());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser5());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe5());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd5());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA6() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA6().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA6());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA6());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri6());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser6());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe6());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd6());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA7() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA7().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA7());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA7());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri7());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser7());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe7());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd7());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA8() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA8().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA8());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA8());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri8());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser8());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe8());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd8());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA9() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA9().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA9());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA9());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri9());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser9());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe9());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd9());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-
+		inputInfoArchivos = obtenerInfoArchivosInput(tramitesCreacionCasoInfo);
 		busquedaSubKey = obtenerKeyCrearTramite(tramitesSeleccionInfo);
 
 		for (final TramiteOpcion elemento : elementos)
@@ -555,6 +416,63 @@ public class TramitesCrearPageController extends AbstractPageController
 
 
 		return creaCasosResponse;
+	}
+
+
+	/**
+	 * @param tramitesCreacionCasoInfo
+	 * @return
+	 */
+	private List<CreaCasoArchVista> obtenerInfoArchivosInput(TramitesCreacionCasoInfo tramitesCreacionCasoInfo)
+	{
+
+		List<CreaCasoArchVista> inputInfoArchivos = new ArrayList<CreaCasoArchVista>();
+		Method method = null;
+		CreaCasoArchVista inputInfoArchivo_tmp = null;
+
+		try
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				method = tramitesCreacionCasoInfo.getClass().getMethod("getDesA" + Integer.toString(i));
+				String descA = (String) method.invoke(tramitesCreacionCasoInfo, null);
+
+				if (descA != null && !descA.equals(""))
+				{
+					inputInfoArchivo_tmp = new CreaCasoArchVista();
+					inputInfoArchivo_tmp.setDescArchivo(descA);
+					method = tramitesCreacionCasoInfo.getClass().getMethod("getConA" + Integer.toString(i));
+					inputInfoArchivo_tmp.setContenidoArchivo((String) method.invoke(tramitesCreacionCasoInfo, null));
+					method = tramitesCreacionCasoInfo.getClass().getMethod("getSeri" + Integer.toString(i));
+					inputInfoArchivo_tmp.setSerie_id((String) method.invoke(tramitesCreacionCasoInfo, null));
+					method = tramitesCreacionCasoInfo.getClass().getMethod("getSser" + Integer.toString(i));
+					inputInfoArchivo_tmp.setSserie_id((String) method.invoke(tramitesCreacionCasoInfo, null));
+					method = tramitesCreacionCasoInfo.getClass().getMethod("getDepe" + Integer.toString(i));
+					inputInfoArchivo_tmp.setDepend_id((String) method.invoke(tramitesCreacionCasoInfo, null));
+					method = tramitesCreacionCasoInfo.getClass().getMethod("getTipd" + Integer.toString(i));
+					inputInfoArchivo_tmp.setTipoDoc_id((String) method.invoke(tramitesCreacionCasoInfo, null));
+					inputInfoArchivos.add(inputInfoArchivo_tmp);
+				}
+			}
+		}
+		catch (NoSuchMethodException e)
+		{
+			// XXX: handle exception
+		}
+		catch (IllegalAccessException e)
+		{
+			// XXX: handle exception
+		}
+		catch (InvocationTargetException e)
+		{
+			// XXX: handle exception
+		}
+		catch (Exception e)
+		{
+			// XXX: handle exception
+		}
+
+		return inputInfoArchivos;
 	}
 
 
