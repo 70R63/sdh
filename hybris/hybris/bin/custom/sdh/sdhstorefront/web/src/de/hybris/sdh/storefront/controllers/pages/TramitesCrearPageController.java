@@ -30,6 +30,8 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -104,15 +106,8 @@ public class TramitesCrearPageController extends AbstractPageController
 		String busquedaSubKeyOpciones = "";
 
 
-		llenarElementosTramites(elementos);
-
-		final String referrer = request.getServletPath();
-		if (!referrer.contains("seleccionNivelRol"))
-		{
-			elementos.removeIf(obj -> obj.getKey() == "0101010101");
-			elementos.removeIf(obj -> obj.getKey() == "0101010104");
-			elementos.removeIf(obj -> obj.getKey() == "0101010201");
-		}
+		llenarElementosTramites(elementos, request);
+		//		filtrarRegistros(request, elementos);
 
 		busquedaSubKeyOpciones = obtenerKeySelNivel(new TramitesSeleccionInfo());
 
@@ -142,14 +137,11 @@ public class TramitesCrearPageController extends AbstractPageController
 	}
 
 
-
-
-
 	@RequestMapping(value = "/contibuyentes/tramites/crear", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String tramitescrearpost(@ModelAttribute("dataForm")
 	final TramitesSeleccionInfo dataForm, final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			final RedirectAttributes redirectAttributes, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("------------------Entro al POST de TRAMITES CREAR------------------------");
 
@@ -161,7 +153,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		final StringBuffer sb = new StringBuffer();
 
 
-		llenarElementosTramites(elementos);
+		llenarElementosTramites(elementos, request);
 
 		busquedaSubKey = obtenerKeyCrearTramite(dataForm);
 		for (final TramiteOpcion elemento : elementos)
@@ -214,15 +206,7 @@ public class TramitesCrearPageController extends AbstractPageController
 
 
 
-		llenarElementosTramites(elementos);
-
-		final String referrer = request.getServletPath();
-		if (!referrer.contains("seleccionNivelRol"))
-		{
-			elementos.removeIf(obj -> obj.getKey() == "0101010101");
-			elementos.removeIf(obj -> obj.getKey() == "0101010104");
-			elementos.removeIf(obj -> obj.getKey() == "0101010201");
-		}
+		llenarElementosTramites(elementos, request);
 
 		busquedaSubKeyOpciones = obtenerKeySelNivel(tramitesSeleccionInfo);
 		busquedaSubKeyDocs = obtenerKeyCrearTramite(tramitesSeleccionInfo);
@@ -302,7 +286,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		CreaCasosResponse creaCasosResponse = new CreaCasosResponse();
 		List<CreaCasosAtribRequest> atributos = null;
 		final List<CreaCasosArchiRequest> archivos = new ArrayList<CreaCasosArchiRequest>();
-		final List<CreaCasoArchVista> inputInfoArchivos = new ArrayList<CreaCasoArchVista>();
+		List<CreaCasoArchVista> inputInfoArchivos = null;
 		CreaCasoArchVista inputInfoArchivo_tmp = null;
 		CreaCasosArchiRequest archivoCarga = null;
 		CreaCasosArchiInfoRequest archivosInfo = null;
@@ -317,15 +301,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		String rolIndicador = "";
 
 
-		llenarElementosTramites(elementos);
-
-		final String referrer = request.getServletPath();
-		if (!referrer.contains("seleccionNivelRol"))
-		{
-			elementos.removeIf(obj -> obj.getKey() == "0101010101");
-			elementos.removeIf(obj -> obj.getKey() == "0101010104");
-			elementos.removeIf(obj -> obj.getKey() == "0101010201");
-		}
+		llenarElementosTramites(elementos, request);
 
 		tramitesSeleccionInfo.setNivelSeleccion(tramitesCreacionCasoInfo.getNivelSeleccion());
 		tramitesSeleccionInfo.setValorN0(tramitesCreacionCasoInfo.getValorN0());
@@ -334,147 +310,8 @@ public class TramitesCrearPageController extends AbstractPageController
 		tramitesSeleccionInfo.setValorN3(tramitesCreacionCasoInfo.getValorN3());
 		tramitesSeleccionInfo.setValorN4(tramitesCreacionCasoInfo.getValorN4());
 
-		if (tramitesCreacionCasoInfo.getDesA0() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA0().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA0());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA0());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri0());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser0());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe0());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd0());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA1() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA1().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA1());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA1());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri1());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser1());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe1());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd1());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA2() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA2().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA2());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA2());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri2());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser2());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe2());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd2());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA3() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA3().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA3());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA3());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri3());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser3());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe3());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd3());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA4() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA4().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA4());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA4());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri4());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser4());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe4());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd4());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA5() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA5().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA5());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA5());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri5());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser5());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe5());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd5());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA6() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA6().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA6());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA6());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri6());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser6());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe6());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd6());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA7() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA7().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA7());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA7());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri7());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser7());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe7());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd7());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA8() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA8().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA8());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA8());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri8());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser8());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe8());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd8());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
-		if (tramitesCreacionCasoInfo.getDesA9() != null)
-		{
-			if (!tramitesCreacionCasoInfo.getDesA9().equals(""))
-			{
-				inputInfoArchivo_tmp = new CreaCasoArchVista();
-				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA9());
-				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA9());
-				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri9());
-				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser9());
-				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe9());
-				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd9());
-				inputInfoArchivos.add(inputInfoArchivo_tmp);
-			}
-		}
 
+		inputInfoArchivos = obtenerInfoArchivosInput(tramitesCreacionCasoInfo);
 		busquedaSubKey = obtenerKeyCrearTramite(tramitesSeleccionInfo);
 
 		for (final TramiteOpcion elemento : elementos)
@@ -583,62 +420,82 @@ public class TramitesCrearPageController extends AbstractPageController
 
 
 	/**
+	 * @param tramitesCreacionCasoInfo
+	 * @return
+	 */
+	private List<CreaCasoArchVista> obtenerInfoArchivosInput(TramitesCreacionCasoInfo tramitesCreacionCasoInfo)
+	{
+
+		List<CreaCasoArchVista> inputInfoArchivos = new ArrayList<CreaCasoArchVista>();
+		Method method = null;
+		CreaCasoArchVista inputInfoArchivo_tmp = null;
+
+		try
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				method = tramitesCreacionCasoInfo.getClass().getMethod("getDesA" + Integer.toString(i));
+				String descA = (String) method.invoke(tramitesCreacionCasoInfo, null);
+
+				if (descA != null && !descA.equals(""))
+				{
+					inputInfoArchivo_tmp = new CreaCasoArchVista();
+					inputInfoArchivo_tmp.setDescArchivo(descA);
+					method = tramitesCreacionCasoInfo.getClass().getMethod("getConA" + Integer.toString(i));
+					inputInfoArchivo_tmp.setContenidoArchivo((String) method.invoke(tramitesCreacionCasoInfo, null));
+					method = tramitesCreacionCasoInfo.getClass().getMethod("getSeri" + Integer.toString(i));
+					inputInfoArchivo_tmp.setSerie_id((String) method.invoke(tramitesCreacionCasoInfo, null));
+					method = tramitesCreacionCasoInfo.getClass().getMethod("getSser" + Integer.toString(i));
+					inputInfoArchivo_tmp.setSserie_id((String) method.invoke(tramitesCreacionCasoInfo, null));
+					method = tramitesCreacionCasoInfo.getClass().getMethod("getDepe" + Integer.toString(i));
+					inputInfoArchivo_tmp.setDepend_id((String) method.invoke(tramitesCreacionCasoInfo, null));
+					method = tramitesCreacionCasoInfo.getClass().getMethod("getTipd" + Integer.toString(i));
+					inputInfoArchivo_tmp.setTipoDoc_id((String) method.invoke(tramitesCreacionCasoInfo, null));
+					inputInfoArchivos.add(inputInfoArchivo_tmp);
+				}
+			}
+		}
+		catch (NoSuchMethodException e)
+		{
+			// XXX: handle exception
+		}
+		catch (IllegalAccessException e)
+		{
+			// XXX: handle exception
+		}
+		catch (InvocationTargetException e)
+		{
+			// XXX: handle exception
+		}
+		catch (Exception e)
+		{
+			// XXX: handle exception
+		}
+
+		return inputInfoArchivos;
+	}
+
+
+	/**
 	 * @param tramitesSeleccionInfo
 	 * @return
 	 */
 	private String obtenerKeySelNivel(final TramitesSeleccionInfo infoSeleccion)
 	{
-		final StringBuffer sb = new StringBuffer();
-
-
-		if (infoSeleccion.getValorN0() != null && !infoSeleccion.getValorN0().isEmpty())
-		{
-			sb.append(infoSeleccion.getValorN0());
-			if (infoSeleccion.getValorN1() != null && !infoSeleccion.getValorN1().isEmpty())
-			{
-				sb.append(infoSeleccion.getValorN1());
-				if (infoSeleccion.getValorN2() != null && !infoSeleccion.getValorN2().isEmpty())
-				{
-					sb.append(infoSeleccion.getValorN2());
-					if (infoSeleccion.getValorN3() != null && !infoSeleccion.getValorN3().isEmpty())
-					{
-						sb.append(infoSeleccion.getValorN3());
-						if (infoSeleccion.getValorN4() != null && !infoSeleccion.getValorN4().isEmpty())
-						{
-							sb.append(infoSeleccion.getValorN4());
-						}
-						else
-						{
-							sb.append("\\d\\d");
-						}
-					}
-					else
-					{
-						sb.append("\\d\\d__");
-					}
-				}
-				else
-				{
-					sb.append("\\d\\d____");
-				}
-			}
-			else
-			{
-				sb.append("\\d\\d______");
-			}
-		}
-		else
-		{
-			sb.append("\\d\\d________");
-		}
-
-		return sb.toString();
+		return obtenerKeyGenerica(infoSeleccion, 'S');
 	}
 
 
 	private String obtenerKeyCrearTramite(final TramitesSeleccionInfo infoSeleccion)
 	{
+		return obtenerKeyGenerica(infoSeleccion, 'C');
+	}
+
+
+	private String obtenerKeyGenerica(final TramitesSeleccionInfo infoSeleccion, final char ambito)
+	{
 		final StringBuffer sb = new StringBuffer();
+		final String prefijo = determinarPrefijo(ambito);
 
 
 		if (infoSeleccion.getValorN0() != null && !infoSeleccion.getValorN0().isEmpty())
@@ -659,22 +516,29 @@ public class TramitesCrearPageController extends AbstractPageController
 						}
 						else
 						{
-							sb.append("__");
+							sb.append(prefijo);
 						}
 					}
 					else
 					{
-						sb.append("____");
+						sb.append(prefijo + "__");
 					}
 				}
 				else
 				{
-					sb.append("______");
+					sb.append(prefijo + "____");
 				}
 			}
 			else
 			{
-				sb.append("________");
+				sb.append(prefijo + "______");
+			}
+		}
+		else
+		{
+			if (ambito == 'S')
+			{
+				sb.append(prefijo + "________");
 			}
 		}
 
@@ -683,10 +547,37 @@ public class TramitesCrearPageController extends AbstractPageController
 
 
 	/**
+	 * @param ambito
+	 * @return
+	 */
+	private String determinarPrefijo(final char ambito)
+	{
+		String prefijo = null;
+
+		switch (ambito)
+		{
+			case 'S':
+				prefijo = "\\d\\d";
+				break;
+
+			case 'C':
+				prefijo = "__";
+				break;
+
+			default:
+				break;
+		}
+
+		return prefijo;
+	}
+
+
+	/**
 	 * @param elementos
+	 * @param request
 	 *
 	 */
-	private void llenarElementosTramites(final List<TramiteOpcion> elementos)
+	private void llenarElementosTramites(final List<TramiteOpcion> elementos, final HttpServletRequest request)
 	{
 
 
@@ -698,7 +589,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		//	agregarElementoTramites(elementos, "04________", "04", "Analisis de la cuenta");
 		//agregarElementoTramites(elementos, "05________", "05", "Boletín de deudores Morosos"); //se modifica etiqueta, valor anterior = Boletín de deudores Morosos del Estado 14-01-2020 Maria Torres
 		agregarElementoTramites(elementos, "06________", "06", "Verificación de pagos", "ZT10", "A1ZTRT0001Z006",
-				"tramites.crear.categorizacion.notas.01");
+				"tramites.crear.categorizacion.notas.06");
 		//  agregarElementoTramites(elementos, "07________", "07", "Corrección de la información causada contablemente");
 		//	agregarElementoTramites(elementos, "08________", "08", "Declaración");
 		agregarElementoTramites(elementos, "09________", "09", "Agente Autorizado");
@@ -718,7 +609,8 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "01010102__", "02", "Persona Jurídica");
 		//RIT-Creación-Registro / Rol Tributario - Persona Natural
 		agregarElementoTramites(elementos, "0101010100", "00", "Seleccionar");
-		//agregarElementoTramites(elementos, "0101010101", "01", "Contribuyente");
+		agregarElementoTramites(elementos, "0101010101", "01", "Contribuyente", "ZT02", "A1ZTRT0004Z065",
+				"tramites.crear.categorizacion.notas.0101010101");
 		agregarElementoTramites_rol(elementos, "0101010102", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z065", "ZZAGENTE", "X");
 		agregarElementoTramites_rol(elementos, "0101010103", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z065",
 				"ZZREPORTANTE", "X");
@@ -1118,7 +1010,29 @@ public class TramitesCrearPageController extends AbstractPageController
 
 
 
+		filtrarRegistros(elementos, request);
 	}
+
+
+	/**
+	 * @param request
+	 * @param elementos
+	 */
+	private void filtrarRegistros(final List<TramiteOpcion> elementos, final HttpServletRequest request)
+	{
+		if (request != null)
+		{
+			final String referrer = request.getServletPath();
+			if (!referrer.contains("seleccionNivelRol"))
+			{
+				//				elementos.removeIf(obj -> obj.getKey().equals("0101010101"));
+				elementos.removeIf(obj -> obj.getKey().equals("0101010104"));
+				elementos.removeIf(obj -> obj.getKey().equals("0101010201"));
+			}
+		}
+
+	}
+
 
 	/**
 	 * @param elementos
