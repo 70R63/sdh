@@ -18,7 +18,6 @@ import de.hybris.sdh.core.pojos.requests.PaymentServiceRegisterApplicationReques
 import de.hybris.sdh.core.pojos.requests.PaymentServiceRegisterEntityRequest;
 import de.hybris.sdh.core.pojos.requests.PaymentServiceRegisterRequest;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
-import de.hybris.sdh.core.pojos.responses.ItemListaDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.PaymentServiceRegisterResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -28,6 +27,7 @@ import de.hybris.sdh.core.services.SdhPaymentService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 
+import java.math.BigInteger;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -292,42 +292,51 @@ public class PreparacionPagoPSE extends AbstractPageController
 		//Obtiene la ref4 con los valores concatenados para imprimir un formulario con ws imprimePago
 		final StringBuffer sb = new StringBuffer();
 		String ref4 = null;
-		ItemListaDeclaraciones itemListaDeclaraciones_tmp = new ItemListaDeclaraciones();
-		for(final ItemListaDeclaraciones itemListaDeclaraciones : listaDeclaracionesResponse.getDeclaraciones()) {
-			if (itemListaDeclaraciones.getReferencia() != null
-					&& itemListaDeclaraciones.getReferencia().contains(psePaymentForm.getNumeroDeReferencia()))
-			{
-				sb.append(itemListaDeclaraciones.getNumBP() + ";");
-				sb.append(itemListaDeclaraciones.getCtaContrato() + ";");
-				sb.append(itemListaDeclaraciones.getNumObjeto() + ";");
-				sb.append(itemListaDeclaraciones.getFechaCompensa() + ";");
-				sb.append(itemListaDeclaraciones.getNumfactForm());
+		//		ItemListaDeclaraciones itemListaDeclaraciones_tmp = new ItemListaDeclaraciones();
+		//		for(final ItemListaDeclaraciones itemListaDeclaraciones : listaDeclaracionesResponse.getDeclaraciones()) {
+		//			if (itemListaDeclaraciones.getReferencia() != null
+		//					&& itemListaDeclaraciones.getReferencia().contains(psePaymentForm.getNumeroDeReferencia()))
+		//			{
+		//				sb.append(itemListaDeclaraciones.getNumBP() + ";");
+		//				sb.append(itemListaDeclaraciones.getCtaContrato() + ";");
+		//				sb.append(itemListaDeclaraciones.getNumObjeto() + ";");
+		//				sb.append(itemListaDeclaraciones.getFechaCompensa() + ";");
+		//				sb.append(itemListaDeclaraciones.getNumfactForm());
+		//
+		//				break;
+		//			}
+		//
+		//			if (itemListaDeclaraciones_tmp.getNumDocPago() == null)
+		//			{
+		//				itemListaDeclaraciones_tmp = itemListaDeclaraciones;
+		//			}
+		//			else if (itemListaDeclaraciones.getNumDocPago() != null
+		//					&& itemListaDeclaraciones.getNumDocPago().compareTo(itemListaDeclaraciones_tmp.getNumDocPago()) > 0)
+		//			{
+		//				itemListaDeclaraciones_tmp = itemListaDeclaraciones;
+		//			}
+		//
+		//		}
+		//
+		//		if (sb.length() <= 0)
+		//		{
+		//			if (itemListaDeclaraciones_tmp.getNumDocPago() != null)
+		//			{
+		//				sb.append(itemListaDeclaraciones_tmp.getNumBP() + ";");
+		//				sb.append(itemListaDeclaraciones_tmp.getCtaContrato() + ";");
+		//				sb.append(itemListaDeclaraciones_tmp.getNumObjeto() + ";");
+		//				sb.append(itemListaDeclaraciones_tmp.getFechaCompensa() + ";");
+		//				sb.append(itemListaDeclaraciones_tmp.getNumfactForm());
+		//			}
+		//		}
 
-				break;
-			}
 
-			if (itemListaDeclaraciones_tmp.getNumDocPago() == null)
-			{
-				itemListaDeclaraciones_tmp = itemListaDeclaraciones;
-			}
-			else if (itemListaDeclaraciones.getNumDocPago().compareTo(itemListaDeclaraciones_tmp.getNumDocPago()) > 0)
-			{
-				itemListaDeclaraciones_tmp = itemListaDeclaraciones;
-			}
-
-		}
-
-		if (sb.length() <= 0)
-		{
-			if (itemListaDeclaraciones_tmp.getNumDocPago() != null)
-			{
-				sb.append(itemListaDeclaraciones_tmp.getNumBP() + ";");
-				sb.append(itemListaDeclaraciones_tmp.getCtaContrato() + ";");
-				sb.append(itemListaDeclaraciones_tmp.getNumObjeto() + ";");
-				sb.append(itemListaDeclaraciones_tmp.getFechaCompensa() + ";");
-				sb.append(itemListaDeclaraciones_tmp.getNumfactForm());
-			}
-		}
+		sb.append(infoPreviaPSE.getNumBP() + ";");
+		sb.append(impuestoSAP + ";");
+		sb.append(infoPreviaPSE.getAnoGravable() + ";");
+		sb.append(infoPreviaPSE.getClavePeriodo() + ";");
+		sb.append(infoPreviaPSE.getNumObjeto() + ";");
+		sb.append(" ");
 
 		ref4 = sb.toString();
 
@@ -345,7 +354,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 						psePaymentForm.getFechaLimiteDePago().substring(6) + "/" + psePaymentForm.getFechaLimiteDePago().substring(4, 6)
 								+ "/" + psePaymentForm.getFechaLimiteDePago().substring(0, 4),
 						"https://qasnuevaoficinavirtual.shd.gov.co/bogota/es/contribuyentes",
-                        Integer.parseInt(psePaymentForm.getValorAPagar()));
+						new BigInteger(psePaymentForm.getValorAPagar()));
 
 		try
 		{
