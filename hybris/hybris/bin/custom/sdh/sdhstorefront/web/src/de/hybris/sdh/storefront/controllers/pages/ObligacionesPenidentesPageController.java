@@ -140,7 +140,13 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	final ObligacionesForm obligacionesForm, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 
-		final String referrer = request.getHeader("referer");
+		String referrer = request.getHeader("referer");
+
+		if (referrer == null)
+		{
+			referrer = request.getServletPath();
+		}
+
 		System.out.println("Se encuentra dentro del get de OBLIGACIONES PENDIENTES");
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
