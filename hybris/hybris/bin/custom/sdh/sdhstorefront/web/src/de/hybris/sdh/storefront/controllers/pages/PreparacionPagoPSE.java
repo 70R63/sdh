@@ -315,7 +315,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 					+ psePaymentForm.getFechaLimiteDePago().substring(0, 4);
 		}
 
-		final BigInteger valorAPagar = new BigInteger(psePaymentForm.getValorAPagar());
+		BigInteger valorAPagar = new BigInteger(psePaymentForm.getValorAPagar());
 
 
 		final PaymentServiceRegisterRequest paymentServiceRegisterRequest =
@@ -348,18 +348,20 @@ public class PreparacionPagoPSE extends AbstractPageController
 		{
 			e.printStackTrace();
 		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 
 		System.out.println(paymentServiceRegisterRequest);
 		System.out.println(paymentServiceRegisterResponse);
 
 
 		String errorSITII = null;
-
 		if (valorAPagar.intValue() <= 0)
 		{
-
-			errorSITII = "La deuda por pagar es 0";
-			redirectAttributes.addFlashAttribute("errorSITII", errorSITII);
+			errorSITII = getMessageSource().getMessage("prepararPago.error.0", null, getI18nService().getCurrentLocale());
+			redirectAttributes.addAttribute("errorSITII", errorSITII);
 			return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
 		}
 		else if (paymentServiceRegisterResponse.getNus() <= 0)

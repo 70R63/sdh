@@ -9,6 +9,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
@@ -65,6 +66,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -137,7 +139,9 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	{ "/contribuyentes/consultas/obligaciones", "/agenteRetenedor/consultas/obligaciones" }, method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String oblipendi(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("obligacionesForm")
-	final ObligacionesForm obligacionesForm, final HttpServletRequest request) throws CMSItemNotFoundException
+	final ObligacionesForm obligacionesForm, @RequestParam(name = "errorSITII", required = false, value = "") String errorSITII,
+			final HttpServletRequest request)
+			throws CMSItemNotFoundException
 	{
 
 		String referrer = request.getHeader("referer");
@@ -456,7 +460,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		model.addAttribute("obligacionesFormuno", obligacionesFormuno);
 		model.addAttribute("customerData", customerData);
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
-
+		model.addAttribute("errorSITII", errorSITII);
 
 
 
