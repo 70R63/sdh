@@ -8,6 +8,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.model.SDHTaxTypeModel;
@@ -292,44 +293,6 @@ public class PreparacionPagoPSE extends AbstractPageController
 		//Obtiene la ref4 con los valores concatenados para imprimir un formulario con ws imprimePago
 		final StringBuffer sb = new StringBuffer();
 		String ref4 = null;
-		//		ItemListaDeclaraciones itemListaDeclaraciones_tmp = new ItemListaDeclaraciones();
-		//		for(final ItemListaDeclaraciones itemListaDeclaraciones : listaDeclaracionesResponse.getDeclaraciones()) {
-		//			if (itemListaDeclaraciones.getReferencia() != null
-		//					&& itemListaDeclaraciones.getReferencia().contains(psePaymentForm.getNumeroDeReferencia()))
-		//			{
-		//				sb.append(itemListaDeclaraciones.getNumBP() + ";");
-		//				sb.append(itemListaDeclaraciones.getCtaContrato() + ";");
-		//				sb.append(itemListaDeclaraciones.getNumObjeto() + ";");
-		//				sb.append(itemListaDeclaraciones.getFechaCompensa() + ";");
-		//				sb.append(itemListaDeclaraciones.getNumfactForm());
-		//
-		//				break;
-		//			}
-		//
-		//			if (itemListaDeclaraciones_tmp.getNumDocPago() == null)
-		//			{
-		//				itemListaDeclaraciones_tmp = itemListaDeclaraciones;
-		//			}
-		//			else if (itemListaDeclaraciones.getNumDocPago() != null
-		//					&& itemListaDeclaraciones.getNumDocPago().compareTo(itemListaDeclaraciones_tmp.getNumDocPago()) > 0)
-		//			{
-		//				itemListaDeclaraciones_tmp = itemListaDeclaraciones;
-		//			}
-		//
-		//		}
-		//
-		//		if (sb.length() <= 0)
-		//		{
-		//			if (itemListaDeclaraciones_tmp.getNumDocPago() != null)
-		//			{
-		//				sb.append(itemListaDeclaraciones_tmp.getNumBP() + ";");
-		//				sb.append(itemListaDeclaraciones_tmp.getCtaContrato() + ";");
-		//				sb.append(itemListaDeclaraciones_tmp.getNumObjeto() + ";");
-		//				sb.append(itemListaDeclaraciones_tmp.getFechaCompensa() + ";");
-		//				sb.append(itemListaDeclaraciones_tmp.getNumfactForm());
-		//			}
-		//		}
-
 
 		sb.append(infoPreviaPSE.getNumBP() + ";");
 		sb.append(impuestoSAP + ";");
@@ -339,6 +302,20 @@ public class PreparacionPagoPSE extends AbstractPageController
 		sb.append(" ");
 
 		ref4 = sb.toString();
+
+		String fechaLimPago = null;
+		if (psePaymentForm.getFechaLimiteDePago().contains("/"))
+		{
+			fechaLimPago = psePaymentForm.getFechaLimiteDePago();
+		}
+		else
+		{
+			fechaLimPago = psePaymentForm.getFechaLimiteDePago().substring(6) + "/"
+					+ psePaymentForm.getFechaLimiteDePago().substring(4, 6) + "/"
+					+ psePaymentForm.getFechaLimiteDePago().substring(0, 4);
+		}
+
+		BigInteger valorAPagar = new BigInteger(psePaymentForm.getValorAPagar());
 
 
 		final PaymentServiceRegisterRequest paymentServiceRegisterRequest =
@@ -351,10 +328,9 @@ public class PreparacionPagoPSE extends AbstractPageController
                         psePaymentForm.getObjPago(),
                         psePaymentForm.getNumeroDeReferencia(),
                         ref4,
-						psePaymentForm.getFechaLimiteDePago().substring(6) + "/" + psePaymentForm.getFechaLimiteDePago().substring(4, 6)
-								+ "/" + psePaymentForm.getFechaLimiteDePago().substring(0, 4),
+						fechaLimPago,
 						"https://qasnuevaoficinavirtual.shd.gov.co/bogota/es/contribuyentes",
-						new BigInteger(psePaymentForm.getValorAPagar()));
+						valorAPagar);
 
 		try
 		{
@@ -372,12 +348,35 @@ public class PreparacionPagoPSE extends AbstractPageController
 		{
 			e.printStackTrace();
 		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 
 		System.out.println(paymentServiceRegisterRequest);
 		System.out.println(paymentServiceRegisterResponse);
 
-        return Objects.nonNull(paymentServiceRegisterResponse) ?
-                "redirect:" + paymentServiceRegisterResponse.getPaymentUrl() : "/";
+
+		String errorSITII = null;
+		if (valorAPagar.intValue() <= 0)
+		{
+			errorSITII = getMessageSource().getMessage("prepararPago.error.0", null, getI18nService().getCurrentLocale());
+			redirectAttributes.addAttribute("errorSITII", errorSITII);
+			return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
+		}
+		else if (paymentServiceRegisterResponse.getNus() <= 0)
+		{
+			errorSITII = paymentServiceRegisterResponse.getMessage();
+			redirectAttributes.addFlashAttribute("errorSITII", errorSITII);
+			return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
+		}
+		else
+		{
+			return Objects.nonNull(paymentServiceRegisterResponse) ? "redirect:" + paymentServiceRegisterResponse.getPaymentUrl()
+					: "/";
+		}
+
+
 	}
 
 	@RequestMapping(value = "/setComplete5", method = RequestMethod.POST)

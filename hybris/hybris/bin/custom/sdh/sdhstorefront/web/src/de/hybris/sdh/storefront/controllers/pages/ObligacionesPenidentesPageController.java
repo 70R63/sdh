@@ -66,6 +66,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -138,10 +139,18 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	{ "/contribuyentes/consultas/obligaciones", "/agenteRetenedor/consultas/obligaciones" }, method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String oblipendi(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("obligacionesForm")
-	final ObligacionesForm obligacionesForm, final HttpServletRequest request) throws CMSItemNotFoundException
+	final ObligacionesForm obligacionesForm, @RequestParam(name = "errorSITII", required = false, value = "") String errorSITII,
+			final HttpServletRequest request)
+			throws CMSItemNotFoundException
 	{
 
-		final String referrer = request.getHeader("referer");
+		String referrer = request.getHeader("referer");
+
+		if (referrer == null)
+		{
+			referrer = request.getServletPath();
+		}
+
 		System.out.println("Se encuentra dentro del get de OBLIGACIONES PENDIENTES");
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
@@ -538,7 +547,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		model.addAttribute("obligacionesFormuno", obligacionesFormuno);
 		model.addAttribute("customerData", customerData);
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
-
+		model.addAttribute("errorSITII", errorSITII);
 
 
 
