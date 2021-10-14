@@ -1,5 +1,8 @@
 package de.hybris.sdh.core.pojos.requests;
 
+import java.math.BigInteger;
+
+
 public class PaymentServiceRegisterRequest {
 
     private PaymentServiceRegisterEntityRequest entity;
@@ -12,13 +15,14 @@ public class PaymentServiceRegisterRequest {
     private String ref4;
     private String deadline;
     private String returnUrl;
-    private Integer value;
+	private BigInteger value;
 
-    public PaymentServiceRegisterRequest(PaymentServiceRegisterEntityRequest entity,
-                                         PaymentServiceRegisterApplicationRequest application,
-                                         String concept, String description, String ref1,
-                                         String ref2, String ref3, String ref4, String deadline,
-                                         String returnUrl, Integer value) {
+    public PaymentServiceRegisterRequest(final PaymentServiceRegisterEntityRequest entity,
+                                         final PaymentServiceRegisterApplicationRequest application,
+                                         final String concept, final String description, final String ref1,
+                                         final String ref2, final String ref3, final String ref4, final String deadline,
+			final String returnUrl, final BigInteger value)
+	{
         this.entity = entity;
         this.application = application;
         this.concept = concept;
@@ -36,7 +40,7 @@ public class PaymentServiceRegisterRequest {
         return entity;
     }
 
-    public void setEntity(PaymentServiceRegisterEntityRequest entity) {
+    public void setEntity(final PaymentServiceRegisterEntityRequest entity) {
         this.entity = entity;
     }
 
@@ -44,7 +48,7 @@ public class PaymentServiceRegisterRequest {
         return application;
     }
 
-    public void setApplication(PaymentServiceRegisterApplicationRequest application) {
+    public void setApplication(final PaymentServiceRegisterApplicationRequest application) {
         this.application = application;
     }
 
@@ -52,7 +56,7 @@ public class PaymentServiceRegisterRequest {
         return concept;
     }
 
-    public void setConcept(String concept) {
+    public void setConcept(final String concept) {
         this.concept = concept;
     }
 
@@ -60,7 +64,7 @@ public class PaymentServiceRegisterRequest {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -68,7 +72,7 @@ public class PaymentServiceRegisterRequest {
         return ref1;
     }
 
-    public void setRef1(String ref1) {
+    public void setRef1(final String ref1) {
         this.ref1 = ref1;
     }
 
@@ -76,7 +80,7 @@ public class PaymentServiceRegisterRequest {
         return ref2;
     }
 
-    public void setRef2(String ref2) {
+    public void setRef2(final String ref2) {
         this.ref2 = ref2;
     }
 
@@ -84,7 +88,7 @@ public class PaymentServiceRegisterRequest {
         return ref3;
     }
 
-    public void setRef3(String ref3) {
+    public void setRef3(final String ref3) {
         this.ref3 = ref3;
     }
 
@@ -92,7 +96,7 @@ public class PaymentServiceRegisterRequest {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(final String deadline) {
         this.deadline = deadline;
     }
 
@@ -100,21 +104,23 @@ public class PaymentServiceRegisterRequest {
         return returnUrl;
     }
 
-    public void setReturnUrl(String returnUrl) {
+    public void setReturnUrl(final String returnUrl) {
         this.returnUrl = returnUrl;
     }
 
-    public Integer getValue() {
+	public BigInteger getValue()
+	{
         return value;
     }
 
-    public void setValue(Integer value) {
+	public void setValue(final BigInteger value)
+	{
         this.value = value;
     }
 
     public String getRef4() { return ref4; }
 
-    public void setRef4(String ref4) { this.ref4 = ref4; }
+    public void setRef4(final String ref4) { this.ref4 = ref4; }
 
     @Override
     public String toString() {
