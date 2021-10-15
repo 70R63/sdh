@@ -1127,12 +1127,12 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		System.out.println(paymentServiceRegisterResponse);
 
 
-		String errorSITII = null;
 
+		String errorSITII = null;
 		if (valorAPagar.intValue() <= 0)
 		{
-			errorSITII = "La deuda por pagar es 0";
-			redirectAttributes.addFlashAttribute("errorSITII", errorSITII);
+			errorSITII = getMessageSource().getMessage("prepararPago.error.0", null, getI18nService().getCurrentLocale());
+			redirectAttributes.addAttribute("errorSITII", errorSITII);
 			return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
 		}
 		else if (paymentServiceRegisterResponse.getNus() <= 0)
