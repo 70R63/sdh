@@ -37,7 +37,7 @@ INSERT_UPDATE Usergroup;uid[unique=true];locName[lang=en];locName[lang=es]
 
 INSERT_UPDATE BackofficeRole;uid[unique=true]                    ;locName[lang=es]                      ;description                     ;authorities
                             ;sdhCustomerSupportChatRole	    ;Sdh Customer Support Chat Role ;Sdh Customer Support Chat Role  ;sdhCustomerSupportChat
-                            ;sdhAmsAdminEmployeeRole        ;Sdh ASM Adminisrator Role      ;Sdh ASM Adminisrator Role       ;
+                            ;sdhemployeegroup        ;Sdh ASM Adminisrator Role      ;Sdh ASM Adminisrator Role       ;
 
 #SDH Backoffice roles
 INSERT_UPDATE BackofficeRole	;UID[unique=true]		            ;authorities
@@ -46,14 +46,14 @@ INSERT_UPDATE BackofficeRole	;UID[unique=true]		            ;authorities
 
 INSERT_UPDATE Employee;UID[unique=true];name                                 ;password[default=$defaultPassword] ;description                     ;groups(uid)[mode=append]     ;backOfficeLoginDisabled
                       ;supportAgent    ;SDH Support Agent - [Name LastName]  ;                                   ;SDH Support Agent - Jorge Reyes ;sdhCustomerSupportChatRole   ;false
-                      ;sdhAsmAdmin     ;SDH ASM Admin                        ;                                   ;SDH ASM Adminisrator            ;sdhAmsAdminEmployeeRole      ;false
+                      ;sdhAsmAdmin     ;SDH ASM Admin                        ;                                   ;SDH ASM Adminisrator            ;sdhemployeegroup      ;false
 
 INSERT_UPDATE Employee;uid[unique=true];name;groups(uid);backOfficeLoginDisabled;passwordEncoding;encodedPassword[default=$defaultPassword]
-#;jorge.romero;jorge.romero;sdhemployeegroup;false;plain
+#;jorge.romero;jorge.romero;sdhAmsAdminEmployeeRole;false;plain
 
  $START_USERRIGHTS
  Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;changerights
- BackofficeRole;sdhemployeegroup;;;;;;;;
+ BackofficeRole;sdhAmsAdminEmployeeRole;;;;;;;;
  ;;;;Customer;+;+;-;-;-
  ;;;;UserGroup;+;+;-;-;-
  ;;;;SDHAddress;+;+;-;-;-
@@ -74,7 +74,7 @@ INSERT_UPDATE Employee;uid[unique=true];name;groups(uid);backOfficeLoginDisabled
 
 $START_USERRIGHTS;;;;;;;;;
 Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
-BackofficeRole;sdhAmsAdminEmployeeRole;;;;;;;
+BackofficeRole;sdhemployeegroup;;;;;;;
 ;;;;Customer;+;+;-;-;-
 ;;;;Customer.name;+;-;-;-;-
 ;;;;Customer.customerID;+;-;-;-;-
@@ -130,22 +130,22 @@ $END_USERRIGHTS;;;;;
 #--------------- SDH User restrictions ------
 $defaultPassword=12341234
 INSERT_UPDATE BackofficeRole;uid[unique=true]           ;locName[lang=es]               ;description                     ;authorities
-                            ;sdhAmsAdminEmployeeRole    ;Sdh ASM Adminisrator Role      ;Sdh ASM Adminisrator Role
+                            ;sdhemployeegroup    ;Sdh ASM Adminisrator Role      ;Sdh ASM Adminisrator Role
 
 
 INSERT_UPDATE Employee 	;UID[unique=true];name   		;password[default=$defaultPassword] ;description     		;groups(uid)[mode=append]     ;backOfficeLoginDisabled
-                          ;sdhAsmAdmin     ;SDH ASM Admin ;                                   ;SDH ASM Adminisrator   ;sdhAmsAdminEmployeeRole      ;false
-                          ;sdhAdmin     	 ;SDH Admin 	;                                   ;SDH Adminisrator   	;sdhemployeegroup      		  ;false
+                          ;sdhAsmAdmin     ;SDH ASM Admin ;                                   ;SDH ASM Adminisrator   ;sdhemployeegroup      ;false
+                          ;sdhAdmin     	 ;SDH Admin 	;                                   ;SDH Adminisrator   	;sdhAmsAdminEmployeeRole      		  ;false
 
 $START_USERRIGHTS;;;;;;;;;
 Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
-BackofficeRole;sdhAmsAdminEmployeeRole;;;;;;;
+BackofficeRole;sdhemployeegroup;;;;;;;
 ;;;;Customer;+;-;-;-;-
 $END_USERRIGHTS;;;;;
 
 $START_USERRIGHTS;;;;;;;;;
 Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
-BackofficeRole;sdhemployeegroup;;;;;;;
+BackofficeRole;sdhAmsAdminEmployeeRole;;;;;;;
 ;;;;Customer;+;-;-;-;-
 ;;;;SdhFAQs;+;-;-;-;-
 ;;;;SdhFAQsCategory;+;-;-;-;-
