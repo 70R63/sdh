@@ -191,7 +191,7 @@
 	<!-- End SDH FAQs -->
 
 	<!-- Begin SDH ASM User removing nodes-->
-	<context merge-by="principal" component="explorer-tree" principal="sdhAmsAdminEmployeeRole">
+	<context merge-by="principal" component="explorer-tree" principal="sdhemployeegroup">
 	<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
 		<explorer-tree:navigation-node id="hmc_treenode_catalog" merge-mode="remove">
 		</explorer-tree:navigation-node>
@@ -258,7 +258,7 @@
 	<!-- End SDH ASM User removing nodes-->
 
 
-	<context merge-by="principal" component="explorer-tree" principal="sdhemployeegroup">
+	<context merge-by="principal" component="explorer-tree" principal="sdhAmsAdminEmployeeRole">
 		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
 			<explorer-tree:navigation-node id="hmc_treenode_catalog" merge-mode="remove">
 			</explorer-tree:navigation-node>
