@@ -191,6 +191,8 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 	private SDHTaxTypeService sdhTaxTypeService;
 
 
+
+
 	@ModelAttribute("productClassMaximumOccurrencies")
 	public Map<String, Integer> getProductClassMaximumOccurrencies()
 	{
@@ -1042,7 +1044,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 		//Consulta de consulpagos
 		final ConsulPagosRequest listaDeclaracionesRequest = new ConsulPagosRequest();
-		ListaDeclaracionesResponse listaDeclaracionesResponse = null;
+		final ListaDeclaracionesResponse listaDeclaracionesResponse = null;
 
 		final Map<String, String> map_impuestos = new HashMap<>();
 		map_impuestos.put("5101", "0001");
@@ -1061,12 +1063,6 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		listaDeclaracionesRequest.setAnioGravable(dataForm.getAnoGravable());
 		listaDeclaracionesRequest.setPeriodo(dataForm.getPeriodo());
 		listaDeclaracionesRequest.setNumObjeto(detalleContribuyente.getGasolina().get(0).getNumObjeto());
-
-
-		System.out.println("Request para docs/consulPagos: " + listaDeclaracionesRequest);
-		listaDeclaracionesResponse = gasolinaService.consultaListaDeclaraciones_consulPagos(listaDeclaracionesRequest,
-				sdhDetalleGasolinaWS, LOG);
-		System.out.println("Response de docs/consulPagos: " + listaDeclaracionesResponse);
 
 
 		//Obtiene la ref4 con los valores concatenados para imprimir un formulario con ws imprimePago
@@ -1096,14 +1092,14 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 
 		final BigInteger valorAPagar = new BigInteger(psePaymentForm.getValorAPagar());
-
+		final String urlRetorno = configurationService.getConfiguration().getString("sdh.payment.service.retorno.url");
 		final PaymentServiceRegisterRequest paymentServiceRegisterRequest = new PaymentServiceRegisterRequest(
 				paymentServiceRegisterEntityRequest, paymentServiceRegisterApplicationRequest,
 				psePaymentForm.getTipoDeImpuesto().substring(2),
 				Objects.nonNull(sdhTaxTypeModel) ? sdhTaxTypeModel.getName() : StringUtils.EMPTY,
 				psePaymentForm.getNumeroDeReferencia(), psePaymentForm.getObjPago(), psePaymentForm.getNumeroDeReferencia(), ref4,
 				fechaLimPago,
-				"https://qasnuevaoficinavirtual.shd.gov.co/bogota/es/contribuyentes",
+				urlRetorno,
 				valorAPagar);
 
 		try

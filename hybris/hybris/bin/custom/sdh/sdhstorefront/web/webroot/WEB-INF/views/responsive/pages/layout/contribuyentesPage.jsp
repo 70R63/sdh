@@ -13,12 +13,27 @@
 
 <template:page pageTitle="${pageTitle}">
 <cont:contribuyentesLista/>
-	<script type="text/javascript">
+
+<script type="text/javascript">
 	debugger;
-window.onload = function() {
-	
-    $(".loader").fadeOut("slow");
-}
+
+	function onErrorSITII() {
+		debugger;
+		var errorSitII = '${errorSITII}';
+		if (errorSitII === null || errorSitII === '' || typeof errorSitII === 'undefined' ){
+		  
+		}else{
+			alert(errorSitII);
+		}
+	}	
+		
+	window.onload = function() {
+		
+	    $(".loader").fadeOut("slow");
+	    
+	    onErrorSITII();
+	    
+	}
 </script>
 
 </template:page>
