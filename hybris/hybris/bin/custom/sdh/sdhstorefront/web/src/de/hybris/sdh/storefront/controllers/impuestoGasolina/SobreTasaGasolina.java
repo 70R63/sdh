@@ -191,6 +191,8 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 	private SDHTaxTypeService sdhTaxTypeService;
 
 
+
+
 	@ModelAttribute("productClassMaximumOccurrencies")
 	public Map<String, Integer> getProductClassMaximumOccurrencies()
 	{
@@ -1090,14 +1092,14 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 
 		final BigInteger valorAPagar = new BigInteger(psePaymentForm.getValorAPagar());
-
+		final String urlRetorno = configurationService.getConfiguration().getString("sdh.payment.service.retorno.url");
 		final PaymentServiceRegisterRequest paymentServiceRegisterRequest = new PaymentServiceRegisterRequest(
 				paymentServiceRegisterEntityRequest, paymentServiceRegisterApplicationRequest,
 				psePaymentForm.getTipoDeImpuesto().substring(2),
 				Objects.nonNull(sdhTaxTypeModel) ? sdhTaxTypeModel.getName() : StringUtils.EMPTY,
 				psePaymentForm.getNumeroDeReferencia(), psePaymentForm.getObjPago(), psePaymentForm.getNumeroDeReferencia(), ref4,
 				fechaLimPago,
-				"https://qasnuevaoficinavirtual.shd.gov.co/bogota/es/contribuyentes",
+				urlRetorno,
 				valorAPagar);
 
 		try

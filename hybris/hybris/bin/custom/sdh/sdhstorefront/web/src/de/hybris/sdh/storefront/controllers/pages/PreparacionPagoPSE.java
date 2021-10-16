@@ -88,6 +88,7 @@ public class PreparacionPagoPSE extends AbstractPageController
     private SDHTaxTypeService sdhTaxTypeService;
 
 
+
 	private static final String ERROR_CMS_PAGE = "notFound";
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.declarapublicidad";
@@ -310,7 +311,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 		}
 
 		final BigInteger valorAPagar = new BigInteger(psePaymentForm.getValorAPagar());
-
+		final String urlRetorno = configurationService.getConfiguration().getString("sdh.payment.service.retorno.url");
 
 		final PaymentServiceRegisterRequest paymentServiceRegisterRequest =
                 new PaymentServiceRegisterRequest(
@@ -323,7 +324,7 @@ public class PreparacionPagoPSE extends AbstractPageController
                         psePaymentForm.getNumeroDeReferencia(),
                         ref4,
 						fechaLimPago,
-						"https://qasnuevaoficinavirtual.shd.gov.co/bogota/es/contribuyentes",
+						urlRetorno,
 						valorAPagar);
 
 		try
