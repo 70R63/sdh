@@ -38,12 +38,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -91,8 +94,13 @@ public class ContribuyentesPageController extends AbstractPageController
 
 	@RequestMapping(method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String showView(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String showView(final Model model, final RedirectAttributes redirectModel,
+			@RequestParam(required = false, defaultValue = "", value = "error")
+			final String errorSITIICancelar, @RequestParam(name = "errorSITII", required = false, value = "") String errorSITII)
+			throws CMSItemNotFoundException
 	{
+
+
 
 
 		final String pconfig = configurationService.getConfiguration().getString("sdh.pse.http.configuracion");
@@ -141,7 +149,7 @@ public class ContribuyentesPageController extends AbstractPageController
 			try
 			{
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 				String response = sdhConsulFirmasService.getDeclaraciones(consulFirmasRequest);
 				response = response.replaceAll("\"declaraciones\":\\s*\\{([\"])(.*)(\"\\})", "\"declaraciones\":[{\"$2$3]");
@@ -186,6 +194,13 @@ public class ContribuyentesPageController extends AbstractPageController
 		}
 
 		//		model.addAttribute("actualCustomer", customerData);
+
+		if (errorSITIICancelar.contains("1"))
+		{
+			errorSITII = getMessageSource().getMessage("contribuyentes.Cancelar", null, getI18nService().getCurrentLocale());
+			model.addAttribute("errorSITII", errorSITII);
+		}
+
 		model.addAttribute("contibForm", contibForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CONTRIBUYENTES_CMS_PAGE));

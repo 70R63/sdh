@@ -8,7 +8,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.model.SDHTaxTypeModel;
@@ -87,6 +86,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 
     @Resource(name = "sdhTaxTypeService")
     private SDHTaxTypeService sdhTaxTypeService;
+
 
 
 	private static final String ERROR_CMS_PAGE = "notFound";
@@ -266,7 +266,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 
 		//Consulta de consulpagos
 		final ConsulPagosRequest listaDeclaracionesRequest = new ConsulPagosRequest();
-		ListaDeclaracionesResponse listaDeclaracionesResponse = null;
+		final ListaDeclaracionesResponse listaDeclaracionesResponse = null;
 
 		final Map<String, String> map_impuestos = new HashMap<>();
 		map_impuestos.put("5101", "0001");
@@ -283,11 +283,6 @@ public class PreparacionPagoPSE extends AbstractPageController
 		listaDeclaracionesRequest.setBp(infoPreviaPSE.getNumBP());
 		listaDeclaracionesRequest.setImpuesto(impuestoSAP);
 		listaDeclaracionesRequest.setAnioGravable(infoPreviaPSE.getAnoGravable());
-
-		System.out.println("Request para docs/consulPagos: " + listaDeclaracionesRequest);
-		listaDeclaracionesResponse = gasolinaService.consultaListaDeclaraciones_consulPagos(listaDeclaracionesRequest,
-				sdhDetalleGasolinaWS, LOG);
-		System.out.println("Response de docs/consulPagos: " + listaDeclaracionesResponse);
 
 
 		//Obtiene la ref4 con los valores concatenados para imprimir un formulario con ws imprimePago
@@ -315,8 +310,8 @@ public class PreparacionPagoPSE extends AbstractPageController
 					+ psePaymentForm.getFechaLimiteDePago().substring(0, 4);
 		}
 
-		BigInteger valorAPagar = new BigInteger(psePaymentForm.getValorAPagar());
-
+		final BigInteger valorAPagar = new BigInteger(psePaymentForm.getValorAPagar());
+		final String urlRetorno = configurationService.getConfiguration().getString("sdh.payment.service.retorno.url");
 
 		final PaymentServiceRegisterRequest paymentServiceRegisterRequest =
                 new PaymentServiceRegisterRequest(
@@ -329,7 +324,7 @@ public class PreparacionPagoPSE extends AbstractPageController
                         psePaymentForm.getNumeroDeReferencia(),
                         ref4,
 						fechaLimPago,
-						"https://qasnuevaoficinavirtual.shd.gov.co/bogota/es/contribuyentes",
+						urlRetorno,
 						valorAPagar);
 
 		try
@@ -348,7 +343,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 		{
 			e.printStackTrace();
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			e.printStackTrace();
 		}
