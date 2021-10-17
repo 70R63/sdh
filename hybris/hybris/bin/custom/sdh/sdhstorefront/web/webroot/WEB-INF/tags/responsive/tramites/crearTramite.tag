@@ -8,7 +8,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
-
+<sf:form method="POST" modelAttribute="dataForm" id="forma" >
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container_new_page">
 	<div class="row mt-3">
@@ -92,7 +92,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="row documentos"  >
+	<div class="row documentos"  >
 		<div class="col-md-6 text-center"
 			style="margin-top: 15px">
 			<table class="table table-bordered" id="documentos" style="display:none">
@@ -136,22 +136,10 @@
 		</div>
 	</div>
 </div>
-
+</sf:form>
 
 
 <script>
-function tabdoc(){
-	debugger;
-	var doc=document.getElementById('documentos');
-	doc.style.display='block';
-}
-
-function tabdococul(){
-	debugger;
-	var doc=document.getElementById('documentos');
-	doc.style.display='none';
-}
-
 function btnCancelar(){
 	window.location.href = '<c:url value="/contibuyentes/tramites" />';
 }
@@ -160,8 +148,6 @@ function redireccionar(urlAccion){
 	debugger;
 	window.location = '<c:url value="/" />'+urlAccion;
 }
-
-
 </script>
 
 

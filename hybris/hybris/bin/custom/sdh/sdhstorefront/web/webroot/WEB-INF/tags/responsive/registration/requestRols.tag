@@ -1,122 +1,76 @@
 <%@ tag body-content="empty" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="formElement"
-	tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
+<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+
+
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<!-- <div class="container"> -->
-<!-- 	<div class="row"> -->
-<!-- 		<div class="col-md-12"> -->
-<!-- 			<div class="item_container_holder "> -->
-<!-- 				<div class="forgotten-password item_container "> -->
-<!-- 					<div class="description text-center"> -->
-<%-- 						<spring:theme code="register.request.rols" --%>
-<%-- 							text="Trámites Hacienda Bogotá" htmlEscape="false" /> --%>
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> 
-<!-- 	</div> -->
-<!-- </div> -->
-
-
-<div class="container">
+<div class="container_new_page">
 	<div class="row mt-3">
 		<div class="col-md-12 text-center">
 			<label class="control-label" style="text-transform: none"><spring:theme
 					code="tramites.crear.inicial.descrip" /></label>
 		</div>
 	</div>
-	
-	<c:url value="/register/postRol" var="formAction"/>
-	<form:form method="post" modelAttribute="tramitesCreacionCasoInfo" action="${formAction}">  
-	
-	<input type="hidden" id="depe0" name="depe0" value="212110">
-	<input type="hidden" id="desA0" name="desA0" value="DOCUMENTO DE IDENTIFICACIÓN">
-	<input type="hidden" id="seri0" name="seri0" value="60">
-	<input type="hidden" id="sser0" name="sser0" value="60.15">
-	<input type="hidden" id="tipd0" name="tipd0" value="SDH-6274">
-	
 	<div class="row">
 		<div class="col-md-6">
 			<div class="row mt-3">
 				<div class="col-md-12 text-center">
 					<div class="form-group">
-						<label class="control-label required">
-							<spring:theme code="tramites.crear.inicial.tiptramite" />
-						</label> 
-						<select	class=" form-control !important " id="selectNivel0" name="valorN0">
+						<label class="control-label required"><spring:theme
+								code="tramites.crear.inicial.tiptramite" /></label> 
+						<select data-nivel="0" class="  form-control !important tramitestSNRol" id="selectNivel0" >
 							<option value="01">RIT</option>
 						</select>
 					</div>
 				</div>
 			</div>
+			<div id="divSubtramite" class="row mt-3">
+				<div class="col-md-12 text-center">
+					<div class="form-group">
+						<label class="control-label required"><spring:theme
+								code="tramites.crear.inicial.subtramite" /></label> 
+						<select data-nivel="1" class=" form-control !important tramitestSNRol" id="selectNivel1">
+						<option value="01">Creación</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div id="divCategoria" class="row mt-3" >
+				<div class="col-md-12 text-center">
+					<div class="form-group">
+						<label class="control-label required"><spring:theme
+								code="tramites.crear.inicial.categoria" /></label> 
+						<select data-nivel="2" class=" form-control !important tramitestSNRol" id="selectNivel2">
+						<option value="01">Registro / rol tributario</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div id="divSubCategoria" class="row mt-3">
+				<div class="col-md-12 text-center">
+					<div class="form-group">
+						<label class="control-label required"><spring:theme
+								code="tramites.crear.inicial.subcategoria" /></label> 
+						<select data-nivel="3" class=" form-control !important tramitestSNRol" id="selectNivel3" >
+						</select>
+					</div>
+				</div>
+			</div>
 			
-			<div id="" class="row mt-3">
+			<div id="divRol" class="row mt-3" style="display: none;">
 				<div class="col-md-12 text-center">
 					<div class="form-group">
-						<label class="control-label required">
-							<spring:theme code="tramites.crear.inicial.subtramite" />
-						</label> 
-						<select
-							class=" form-control !important " id="selectNivel1" name="valorN1">
-							<option value="01">Creación</option>
+						<label class="control-label required"><spring:theme
+								code="tramites.crear.inicial.rol" /></label> 
+						<select data-nivel="4" class=" form-control !important tramitestSNRol" id="selectNivel4" >
 						</select>
-					</div>
-				</div>
-			</div>
-			<div id="" class="row mt-3">
-				<div class="col-md-12 text-center">
-					<div class="form-group">
-						<label class="control-label required">
-							<spring:theme code="tramites.crear.inicial.categoria" />
-						</label> 
-						<select	class=" form-control !important " id="selectNivel2" name="valorN2">
-							<option	value="01">Registro/Rol Tributario</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			<div id="divsubCategoriaI" class="row mt-3">
-				<div class="col-md-12 text-center">
-					<div class="form-group">
-						<label class="control-label required">
-							<spring:theme code="tramites.crear.inicial.subcategoria" />
-						</label> 
-						<select	data-nivel="3" class=" form-control !important " id="selectNivel3" name="valorN3">
-							<option	value="00">Seleccionar</option>
-							<option value="01">Persona Natural</option>
-							<option value="02">Persona Jurídica</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			<div id="divRol" class="row mt-3">
-				<div class="col-md-12 text-center">
-					<div class="form-group">
-						<label class="control-label required">
-							<spring:theme code="tramites.crear.inicial.rol" />
-						</label> 
-						<select	data-nivel="4" class=" form-control !important tramitestSNRol" id="selectNivel4" >
-							<option	value="00">Seleccionar</option>
-							<!--<option value="01">Contribuyente</option>-->
-							<option value="02">Agente Retenedor</option>
-							<option value="03">Reportate de la Información</option>
-							<!--<option value="04">Terceros Autorizados</option>-->
-						</select>
-					</div>
-				</div>
-			</div>
-			<div id="divCorreo" class="row mt-3">
-				<div class="col-md-12 text-center">
-					<div class="form-group">
-						<label class="control-label required">
-							<spring:theme code="tramites.crear.inicial.correo" />
-						</label>
-						<input	class="form-control" value="" type="email" id="email"/>
 					</div>
 				</div>
 			</div>
@@ -125,79 +79,81 @@
 			<div class="row mt-3">
 				<div class="col-md-12 ">
 					<div class="form-group">
-						<label class="control-label required" style="text-align: center !important;">
-							<spring:theme code="tramites.crear.inicial.mensaje" />
-						</label>
+						<label class="control-label"
+							style="text-align: center !important;"><spring:theme
+								code="tramites.crear.inicial.mensaje" /></label>
 						<textarea name="mensaje" id="mensaje" class="form-control"
-							style="min-height: 220px; max-height: 600px; min-width: 100%; max-width: 100%;"
-							maxlength="1000">
-						</textarea>
-						<small class="form-text text-muted"		style="text-align: right !important">
-							<spring:theme code="tramites.crear.inicial.nota" />
-						</small>
+							style="min-height: 220px; max-height: 600px; min-width: 100%; max-width: 100%;" maxlength="1000"></textarea>
+						<small class="form-text text-muted"
+							style="text-align: right !important"><spring:theme
+								code="tramites.crear.inicial.nota" /></small><br>
+								<small class="form-text text-muted"
+							style="text-align: right !important"><spring:theme
+								code="tramites.crear.inicial.nota2" /></small>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-	<div class="row documentos">
-		<div class="col-md-6 text-center" style="margin-top: 15px">
-			<table id="documentos" >
+	<form>
+	<div class="row documentos"  >
+		<div class="col-md-6 text-center"
+			style="margin-top: 15px">
+			<table class="table table-bordered" id="documentos" style="display:none">
 				<thead>
 					<tr>
-						<th>
-							<label class="contorl-label labeltabletd" >
-								<spring:theme code="tramites.crear.inicial.adjdoc" />
-							</label>
-						</th>
-						<th>
-							<label class="contorl-label labeltabletd required">
-								<spring:theme code="tramites.crear.inicial.adj" />
-							</label>
-						</th>
+						<th><label class="contorl-label labeltabletd"><spring:theme
+									code="tramites.crear.inicial.adjdoc" /></label></th>
+						<th><label class="contorl-label labeltabletd required"><spring:theme
+									code="tramites.crear.inicial.adj" /></label></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>
-							<input style="width:710px; font-size:9px !important" class="inputtextnew" disabled="disabled"	
-							type="text" size="30" value="DOCUMENTO DE IDENTIFICACIÓN" id="desA0" name="desA0"/>						
+							<input style="width:710px; font-size:9px !important" class="inputtextnew" disabled="disabled" 
+							type="text" size="30" id="docDescArchivo_0" value="DOCUMENTO DE IDENTIFICACIÓN">
 						</td>
-							
 						<td>
-							<input style="width:405px" class="inputtextnew" type="file" size="150" id="docNombreArchivo_0" name="conA0"/>
+							<input style="width:405px" class="inputtextnew" type="file" size="150" id="docNombreArchivo_0" name="conA0">							
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	
-	
-	
-	
-	
-	
-	
+
 	<div class="row mt-3">
-		<div class="col-md-7 text-center">
-			<button style="margin-top: 5px;" id="btnEnviar" class="btn btn-primary btn-lg tramitesEnviarRol"
-				type="submit" name="btnEnviar" value="enviar" onclick="changeMessage();">
+		<div class="col-md-7 text-right">
+			<button class="btn btn-primary btn-lg !important tramitesEnviarRol" type="submit" id="btnEnviar"
+				name="btnEnviar" value="enviar">
 				<spring:theme code="tramites.crear.inicial.enviar" />
 			</button>
 		</div>
 		<div class="col-md-1">
-			<button type="button" style="margin-top: 5px;"
-				class="btn btn-secondary btn-lg" id="action" name="action"
-				value="cancelar"
-				onclick="window.location.href ='<c:url value='/contribuyentes' />';">
+			<button style="margin-top: 3px;" id="btnCancelar"
+				class="btn btn-secondary btn-lg" type="button" 
+				onclick="btnCancelar()">
 				<spring:theme code="tramites.crear.inicial.cancelar" />
 			</button>
-
 		</div>
 	</div>
-	</form:form>
+	</form>
 </div>
+
+
+
+
+<script>
+function btnCancelar(){
+	window.location.href = '<c:url value="/" />';
+}
+
+function redireccionar(urlAccion){
+	debugger;
+	window.location = '<c:url value="/" />'+urlAccion;
+}
+
+</script>
+
 

@@ -13,9 +13,9 @@
 <div class="loader"></div>
 <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
-<sf:form action="${enviarURL}" method="POST" modelAttribute="dataForm" id="forma" onsubmit="return validarAntesSubmit();">
+
 	<tramite:crearTramite/>
-</sf:form>
+
 
 
 <div id="dialogMensajes" title="Tramites">
@@ -28,21 +28,4 @@ window.onload = function() {
     $(".loader").fadeOut("slow");
 }
 
-function validarAntesSubmit() {
-
-		
-		var valorNivel0 = document.getElementById('selectNivel0').value;
-		document.getElementById('pathValorN0').value = valorNivel0; 
-		var valorNivel1 = document.getElementById('selectNivel1').value;
-		document.getElementById('pathValorN1').value = valorNivel1; 
-		var valorNivel2 = document.getElementById('selectNivel2').value;
-		document.getElementById('pathValorN2').value = valorNivel2; 
-		var valorNivel3 = document.getElementById('selectNivel3').value;
-		document.getElementById('pathValorN3').value = valorNivel3; 
-
-		
-		document.form.submit();
-		return true;
-
-	}
 </script>

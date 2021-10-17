@@ -8,6 +8,21 @@
 
 <div class="container">
 <div class="row" >
+	<c:if test="${userFound eq false }">
+		<div class="col-md-6 col-md-offset-3">
+			<div id="dialogMensajes" title="Error" >
+				<div id="dialogMensajesContent">
+					<div class="has-error">
+						<div class="help-block">
+							<span id="lastName.errors"><spring:theme code="register.userNotFound" htmlEscape="false"/></span>
+						</div>
+					</div>
+					<span><spring:theme code="register.userNotFound.proceso" htmlEscape="false"/></span>
+				</div>
+			</div>
+		</div>
+	</c:if>	
+
 	<div class="col-md-6 col-md-offset-3">
 		<div class="item_container_holder ">
 			<div class="forgotten-password item_container ">
@@ -16,13 +31,6 @@
 				<c:url value="/register/searchUser" var="formAction"/>
 				<form:form method="post" modelAttribute="searchUserForm" action="${formAction}"> 
 					<div class="control-group">
-						<c:if test="${userFound eq false }">
-							<div class="has-error">
-								<div class="help-block">
-									<span id="lastName.errors"><spring:theme code="register.userNotFound" /></span>
-								</div>
-							</div>
-						</c:if>
 						<c:if test="${userRegistered eq true }">
 							<div class="has-error">
 								<div class="help-block">
