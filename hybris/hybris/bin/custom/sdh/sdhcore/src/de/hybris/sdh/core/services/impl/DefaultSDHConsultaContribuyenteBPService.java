@@ -251,19 +251,17 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 
 	@Override
 	public String getEntidadBancaria(final String bp) {
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		final ConsultaContribBPRequest consultaContribuyenteBPRequest = new ConsultaContribBPRequest();
 		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
 		consultaContribuyenteBPRequest.setNumBP(bp);
+		consultaContribuyenteBPRequest.setIndicador("01,02");
 		String entidad = "";
 
 		try{
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					this.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-
+			sdhConsultaContribuyenteBPResponse = consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
 		}catch (final Exception e){
 			LOG.error("error getting customer info from SAP: " + e.getMessage());
 		}

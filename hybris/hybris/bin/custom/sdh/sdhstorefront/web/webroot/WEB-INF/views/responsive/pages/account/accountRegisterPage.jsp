@@ -11,7 +11,11 @@
 <template:page pageTitle="${pageTitle}">
 	<c:choose>
 		<c:when test="${currentSection eq 'requestRols' }">
+			<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 			<registration:requestRols/>
+			<div id="dialogMensajes" title="Tramites">
+				<div id="dialogMensajesContent"></div>
+			</div>
 		</c:when>
 		<c:when test="${currentSection eq 'searchUserSection' }">
 			<registration:searchUserSection/>
@@ -37,6 +41,13 @@
 window.onload = function() {
 	
     $(".loader").fadeOut("slow");
+
+    if("${currentSection}" == "requestRols"){
+    	ACC.tramitesSeleccion.determinacionSelectRol();
+    }
+    if("${currentSection}" == "searchUserSection"){
+    	$("#dialogMensajes").dialog( "open" );
+    }
 }
 function changeMessage() {
 	debugger;
