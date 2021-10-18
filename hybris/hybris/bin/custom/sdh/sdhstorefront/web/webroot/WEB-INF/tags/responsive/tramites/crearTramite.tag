@@ -128,9 +128,9 @@
 			</sf:button>
 		</div>
 		<div class="col-md-1">
-			<button style="margin-top: 3px;" id=""
+			<button style="margin-top: 3px;" id="btnCancelar"
 				class="btn btn-secondary btn-lg" type="button" 
-				onclick="btnCancelar()">
+				onclick="cancelarAccion()">
 				<spring:theme code="tramites.crear.inicial.cancelar" />
 			</button>
 		</div>
@@ -140,7 +140,7 @@
 
 
 <script>
-function btnCancelar(){
+function cancelarAccion(){
 	window.location.href = '<c:url value="/contibuyentes/tramites" />';
 }
 
