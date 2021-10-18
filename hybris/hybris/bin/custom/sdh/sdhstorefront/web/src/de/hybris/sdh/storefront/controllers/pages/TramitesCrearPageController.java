@@ -522,6 +522,10 @@ public class TramitesCrearPageController extends AbstractPageController
 				atributos.add(atributo);
 				atributo = new CreaCasosAtribRequest("String 1", "CANAL", canal);
 				atributos.add(atributo);
+				if (mensaje != null)
+				{
+					mensaje = mensaje.replaceAll("\n", "\\\\n");
+				}
 				atributo = new CreaCasosAtribRequest("String 1", "COMENTARIO", mensaje);
 				atributos.add(atributo);
 				if (elementoSeleccionado.getRolAccion() != null)
@@ -714,7 +718,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "01010102__", "02", "Persona Jurídica");
 		//RIT-Creación-Registro / Rol Tributario - Persona Natural
 		agregarElementoTramites(elementos, "0101010100", "00", "Seleccionar");
-		//agregarElementoTramites(elementos, "0101010101", "01", "Contribuyente");
+		agregarElementoTramites(elementos, "0101010101", "01", "Contribuyente");
 		agregarElementoTramites_rol(elementos, "0101010102", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z065", "ZZAGENTE", "X");
 		agregarElementoTramites_rol(elementos, "0101010103", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z065",
 				"ZZREPORTANTE", "X");

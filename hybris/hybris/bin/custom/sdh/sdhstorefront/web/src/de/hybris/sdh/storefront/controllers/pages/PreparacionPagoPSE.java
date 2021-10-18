@@ -11,12 +11,15 @@ import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.model.SDHTaxTypeModel;
+import de.hybris.sdh.core.pojos.requests.ConsulPagosRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.PaymentServiceRegisterApplicationRequest;
 import de.hybris.sdh.core.pojos.requests.PaymentServiceRegisterEntityRequest;
 import de.hybris.sdh.core.pojos.requests.PaymentServiceRegisterRequest;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
+import de.hybris.sdh.core.pojos.responses.ItemListaDeclaraciones;
+import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.PaymentServiceRegisterResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
@@ -28,6 +31,8 @@ import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.annotation.Resource;
@@ -81,6 +86,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 
     @Resource(name = "sdhTaxTypeService")
     private SDHTaxTypeService sdhTaxTypeService;
+
 
 	private static final String ERROR_CMS_PAGE = "notFound";
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
@@ -205,42 +211,160 @@ public class PreparacionPagoPSE extends AbstractPageController
 			}
 		}
 		//model.addAttribute("psePaymentForm", psePaymentForm);
+		//return REDIRECT_TO_DECLARACIONES_PAGAR_PAGE;
 
-        final SDHTaxTypeModel sdhTaxTypeModel = sdhTaxTypeService.findUniqueByTaxCode(psePaymentForm.getTipoDeImpuesto());
+
+		//*->Consumo de servicio SITII para pago de impuestos
+		final SDHTaxTypeModel sdhTaxTypeModel = sdhTaxTypeService.findUniqueByTaxCode(psePaymentForm.getTipoDeImpuesto());
         PaymentServiceRegisterResponse paymentServiceRegisterResponse = null;
 
-        final PaymentServiceRegisterEntityRequest paymentServiceRegisterEntityRequest =
+		final PaymentServiceRegisterEntityRequest paymentServiceRegisterEntityRequest =
                 new PaymentServiceRegisterEntityRequest(1, "SECRETARIA DISTRITAL DE HACIENDA");
 
-        final PaymentServiceRegisterApplicationRequest paymentServiceRegisterApplicationRequest =
+		final PaymentServiceRegisterApplicationRequest paymentServiceRegisterApplicationRequest =
                 new PaymentServiceRegisterApplicationRequest(5, "BOGDATA SAP");
 
-        final PaymentServiceRegisterRequest paymentServiceRegisterRequest =
+		//Armado de objeto pago
+		String ref;
+		if (psePaymentForm.getTipoDeImpuesto().equals("5101"))
+		{
+			ref = psePaymentForm.getCHIP();
+		}
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5103"))
+		{
+			ref = psePaymentForm.getPlaca();
+		}
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5132"))
+		{
+			if (!psePaymentForm.getCUD().equals(""))
+			{
+				ref = psePaymentForm.getCUD();
+			}
+			else
+			{
+				ref = psePaymentForm.getCdu();
+			}
+		}
+		else
+		{
+			ref = psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
+		}
+
+
+		final int i_ceros = 14 - ref.length();
+
+		String s_ceros = new String();
+		for (int i = 1; i <= i_ceros; i++)
+		{
+			s_ceros = s_ceros + "0";
+		}
+
+		final String objPago = s_ceros + ref;
+
+		psePaymentForm.setObjPago(objPago);
+
+		//Consulta de consulpagos
+		final ConsulPagosRequest listaDeclaracionesRequest = new ConsulPagosRequest();
+		ListaDeclaracionesResponse listaDeclaracionesResponse = null;
+
+		final Map<String, String> map_impuestos = new HashMap<>();
+		map_impuestos.put("5101", "0001");
+		map_impuestos.put("5103", "0002");
+		map_impuestos.put("5102", "0003");
+		map_impuestos.put("5131", "0004");
+		map_impuestos.put("0108", "0005");
+		map_impuestos.put("5106", "0006");
+		map_impuestos.put("5132", "0006");
+		map_impuestos.put("5154", "0007");
+
+		final String impuestoSAP = map_impuestos.get(psePaymentForm.getTipoDeImpuesto());
+
+		listaDeclaracionesRequest.setBp(infoPreviaPSE.getNumBP());
+		listaDeclaracionesRequest.setImpuesto(impuestoSAP);
+		listaDeclaracionesRequest.setAnioGravable(infoPreviaPSE.getAnoGravable());
+
+		System.out.println("Request para docs/consulPagos: " + listaDeclaracionesRequest);
+		listaDeclaracionesResponse = gasolinaService.consultaListaDeclaraciones_consulPagos(listaDeclaracionesRequest,
+				sdhDetalleGasolinaWS, LOG);
+		System.out.println("Response de docs/consulPagos: " + listaDeclaracionesResponse);
+
+
+		//Obtiene la ref4 con los valores concatenados para imprimir un formulario con ws imprimePago
+		final StringBuffer sb = new StringBuffer();
+		String ref4 = null;
+		ItemListaDeclaraciones itemListaDeclaraciones_tmp = new ItemListaDeclaraciones();
+		for(final ItemListaDeclaraciones itemListaDeclaraciones : listaDeclaracionesResponse.getDeclaraciones()) {
+			if (itemListaDeclaraciones.getReferencia() != null
+					&& itemListaDeclaraciones.getReferencia().contains(psePaymentForm.getNumeroDeReferencia()))
+			{
+				sb.append(itemListaDeclaraciones.getNumBP() + ";");
+				sb.append(itemListaDeclaraciones.getCtaContrato() + ";");
+				sb.append(itemListaDeclaraciones.getNumObjeto() + ";");
+				sb.append(itemListaDeclaraciones.getFechaCompensa() + ";");
+				sb.append(itemListaDeclaraciones.getNumfactForm());
+
+				break;
+			}
+
+			if (itemListaDeclaraciones_tmp.getNumDocPago() == null)
+			{
+				itemListaDeclaraciones_tmp = itemListaDeclaraciones;
+			}
+			else if (itemListaDeclaraciones.getNumDocPago().compareTo(itemListaDeclaraciones_tmp.getNumDocPago()) > 0)
+			{
+				itemListaDeclaraciones_tmp = itemListaDeclaraciones;
+			}
+
+		}
+
+		if (sb.length() <= 0)
+		{
+			if (itemListaDeclaraciones_tmp.getNumDocPago() != null)
+			{
+				sb.append(itemListaDeclaraciones_tmp.getNumBP() + ";");
+				sb.append(itemListaDeclaraciones_tmp.getCtaContrato() + ";");
+				sb.append(itemListaDeclaraciones_tmp.getNumObjeto() + ";");
+				sb.append(itemListaDeclaraciones_tmp.getFechaCompensa() + ";");
+				sb.append(itemListaDeclaraciones_tmp.getNumfactForm());
+			}
+		}
+
+		ref4 = sb.toString();
+
+
+		final PaymentServiceRegisterRequest paymentServiceRegisterRequest =
                 new PaymentServiceRegisterRequest(
                         paymentServiceRegisterEntityRequest,
                         paymentServiceRegisterApplicationRequest,
-                        psePaymentForm.getTipoDeImpuesto(),
+						psePaymentForm.getTipoDeImpuesto().substring(2),
                         Objects.nonNull(sdhTaxTypeModel) ? sdhTaxTypeModel.getName() : StringUtils.EMPTY,
                         psePaymentForm.getNumeroDeReferencia(),
                         psePaymentForm.getObjPago(),
                         psePaymentForm.getNumeroDeReferencia(),
-                        "AAA0123KLJH",
+                        ref4,
 						psePaymentForm.getFechaLimiteDePago().substring(6) + "/" + psePaymentForm.getFechaLimiteDePago().substring(4, 6)
 								+ "/" + psePaymentForm.getFechaLimiteDePago().substring(0, 4),
 						"https://qasnuevaoficinavirtual.shd.gov.co/bogota/es/contribuyentes",
                         Integer.parseInt(psePaymentForm.getValorAPagar()));
 
-        try {
-            paymentServiceRegisterResponse = sdhPaymentService.register(paymentServiceRegisterRequest);
-        } catch (final NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (final KeyStoreException e) {
-            e.printStackTrace();
-        } catch (final KeyManagementException e) {
-            e.printStackTrace();
-        }
+		try
+		{
+			paymentServiceRegisterResponse = sdhPaymentService.register(paymentServiceRegisterRequest);
+		}
+		catch (final NoSuchAlgorithmException e)
+		{
+			e.printStackTrace();
+		}
+		catch (final KeyStoreException e)
+		{
+			e.printStackTrace();
+		}
+		catch (final KeyManagementException e)
+		{
+			e.printStackTrace();
+		}
 
-        System.out.println(paymentServiceRegisterRequest);
+		System.out.println(paymentServiceRegisterRequest);
 		System.out.println(paymentServiceRegisterResponse);
 
         return Objects.nonNull(paymentServiceRegisterResponse) ?
