@@ -35,9 +35,6 @@
 
 <script>
 window.onload = function() {
-
-	debugger;
-
 	var cosas = $(":input");
 	var tam = cosas.length;
 	if (false){ //FFD-codigo comentado por observaciones en pruebas realizadas el 04 de octubre 2019
@@ -63,7 +60,6 @@ window.onload = function() {
 
 <script>
 	function numberFormat(selectObject) {
-debugger;
 		var numero = selectObject.value;
 		var idinput = selectObject.id;
 		var nameinput = selectObject.name;
@@ -92,13 +88,20 @@ debugger;
 	}
 	
 	function numberFormattable(selectObject) {
-		debugger;
 				var numero = selectObject.value;
 				var idinput = selectObject.id;
 				var nameinput = selectObject.name;
 				selectObject.id = nameinput;
 				var idinput = selectObject.id;
 				var resultado = "";
+				var compareNumber= numero.replace(/\./g, '');
+		
+				if(nameinput.includes("galonesGra")){
+					if(compareNumber>15000000){
+						alert("No se pueden introducir más de 15 millones en este campo.");
+					}
+					
+				}
 				if (numero[0] == "-") {
 					nuevoNumero = numero.replace(/\./g, '').substring(1);
 				} else {
