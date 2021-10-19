@@ -11,9 +11,11 @@
 <c:set var="hideDescription" value="checkout.login.loginAndCheckout" />
 
 <div class="headline" style="text-align: center !important">
+		<span tabindex="0" class="new_title" style="font-size: 150% !important;align-items: center !important;text-align: center !important;"><spring:theme code="Oficina Virtual" /></span>
+</div>
 
+<div class="headline" style="text-align: center !important">
 		<span tabindex="0" class="new_title" style="font-size: 150% !important;align-items: center !important;text-align: center !important;"><spring:theme code="login.title" /></span>
-
 </div>
 
 <form:form action="${action}" method="post" modelAttribute="loginForm">
@@ -30,7 +32,7 @@
 <%-- 		<formElement:formInputBox idKey="j_username"labelKey="" path="j_username" mandatory="true" inputCSS="tamnewtwo form-control redtam tamnew"/> --%>
 <%-- 		<formElement:formPasswordBox idKey="j_password"   labelKey="" inputCSS="tamnewtwo form-control redtam tamnew" mandatory="true"/> --%>
 <form:input type="text"  id="j_username" placeholder="Ingresar usuario*"  path="j_username"  value="" class="tamnewtwo form-control"/>
-		<form:input type="password"  id="j_password" placeholder="Ingresar contraseña*"  path="j_password" value="" class="tamnewtwo form-control" style="margin-top: 5% !important"/>
+		<form:input type="password"  id="j_password" placeholder="Ingresar contraseña*"  path="j_password" value="" class="tamnewtwo form-control" style="margin-top: 5% !important; margin-bottom: 5% !important"/>
 		<input type="hidden" id="registeredCheckout" name="registeredCheckout" value="${registeredCheckout}" />
 
 		<c:choose>
