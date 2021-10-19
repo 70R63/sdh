@@ -199,6 +199,8 @@ public class ContribuyentesPageController extends AbstractPageController
 		{
 			errorSITII = getMessageSource().getMessage("contribuyentes.Cancelar", null, getI18nService().getCurrentLocale());
 			model.addAttribute("errorSITII", errorSITII);
+			final String urlRetorno = configurationService.getConfiguration().getString("sdh.payment.service.retorno.url");
+			LOG.error("Retorno de  SIT II  opcion CANCELAR: " + urlRetorno + "?error=1");
 		}
 
 		model.addAttribute("contibForm", contibForm);
