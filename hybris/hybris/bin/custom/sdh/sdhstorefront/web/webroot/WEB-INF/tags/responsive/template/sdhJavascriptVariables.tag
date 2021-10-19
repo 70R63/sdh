@@ -182,6 +182,8 @@
 			ACC.consultaEstadoCuentaURL= "<c:url value='/contribuyentes/mirit/consultaEstadoCuenta' />";
 
 		  	ACC.currentURL = "${currentURL}";
+		  	
+		  	ACC.inicialURL = "<c:url value='/' />";
 
 		  	
 			

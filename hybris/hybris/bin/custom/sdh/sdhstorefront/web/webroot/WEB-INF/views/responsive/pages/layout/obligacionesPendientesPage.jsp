@@ -24,6 +24,18 @@ function noActivo() {
 	alert("Debe generar un ROP o Cupón");
 }
 
+
+function onErrorSITII() {
+	debugger;
+	var errorSitII = '${errorSITII}';
+	if (errorSitII === null || errorSitII === '' || typeof errorSitII === 'undefined' ){
+	  
+	}else{
+		alert(errorSitII);
+	}
+}
+
+
 </script>
 
 <script>
@@ -96,6 +108,8 @@ function noActivo() {
 		}
 				
 		$(".loader").fadeOut("slow");
+		
+		onErrorSITII();
 	}
 	function goBack() {
 		window.history.back();
