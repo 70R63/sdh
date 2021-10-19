@@ -95,13 +95,13 @@
 							style="width: 235px" onchange="getProductClassOccurrance(this)" id="${claseProd_id}" disabled="${disabledInformacionDeclaracion}" readonly="${disabledInformacionDeclaracion}" />
 					</div>
 					<div class="col-md-1">
-					<label class="control-label format_label mostrarXS" for="">
+					<label  style="margin-left: -100% !important;" class="control-label format_label mostrarXS" for="">
 					<spring:theme code="impuestos.decGasolina.InformacionDec.galones" />
 				</label>
-						<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
+						<sf:input style="width: 180%; margin-left: -60%;" path="dataForm.infoDeclara[${loop.index}].galonesGra"
 							value="${info.galonesGra}"
-							class="new_alto form-control galones" maxlength="30"
-							size="20" onkeyup="numberFormattable(this)" onclick="numberFormattable(this)" id="number1" readonly="${disabledInformacionDeclaracion}"/>
+							class="new_alto form-control galones" maxlength="10"
+							size="10" onkeyup="numberFormattable(this)" onclick="numberFormattable(this)" id="number1" readonly="${disabledInformacionDeclaracion}"/>
 					</div>
 					<div class="col-md-2">
 					<label class="control-label format_label mostrarXS"><spring:theme
