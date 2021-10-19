@@ -353,7 +353,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 
 
 		String errorSITII = null;
-		if (valorAPagar.intValue() <= 0)
+		if (valorAPagar.compareTo(BigInteger.ZERO) == -1 || valorAPagar.compareTo(BigInteger.ZERO) == 0)
 		{
 			errorSITII = getMessageSource().getMessage("prepararPago.error.0", null, getI18nService().getCurrentLocale());
 			redirectAttributes.addAttribute("errorSITII", errorSITII);
