@@ -10,11 +10,12 @@
 
 <c:set var="hideDescription" value="checkout.login.loginAndCheckout" />
 
-<div class="headline" style="text-align: center !important; margin-left: -22% !important;">
-		<span tabindex="0" class="new_title" style="font-size: 150% !important;align-items: center !important;text-align: center !important;"><spring:theme code="Oficina Virtual" /></span>
+<div class="headline" style="text-align: center !important; margin-left: -22% !important; margin-bottom: 0px !important">
+		<span tabindex="0" class="new_title" style="font-size: 150% !important;align-items: center !important;text-align: center !important; padding-bottom: 1px !important;
+margin-left: 0px !important;"><spring:theme code="Oficina Virtual" /></span>
 </div>
 
-<div class="headline" style="text-align: center !important; margin-left: -22% !important;">
+<div class="headline" style="text-align: center !important; margin-left: -22% !important; padding-bottom: 1px !important;">
 		<span tabindex="0" class="new_title" style="font-size: 150% !important;align-items: center !important;text-align: center !important;"><spring:theme code="login.title" /></span>
 </div>
 
@@ -58,7 +59,7 @@
 			</ycommerce:testId>
 		</div>
 		<ycommerce:testId code="loginAndCheckoutButton">
-			<button type="submit" class="btn btn-primary redtam tam_button" style="width: 100% !important; border-radius: 20px !important; background-color: #156ab5 !important; color: white !important;height: 48px !important; margin-top:10%;">
+			<button type="submit" class="btn btn-primary redtam tam_button" style="width: 100% !important; border-radius: 20px !important; background-color: #156ab5 !important; color: white !important;height: 48px !important; margin-top:0px !important;">
 				<spring:theme code="${actionNameKey}" />
 			</button>
 		</ycommerce:testId>
