@@ -10,15 +10,16 @@
 
 <c:set var="hideDescription" value="checkout.login.loginAndCheckout" />
 
-<div class="headline" style="text-align: center !important">
-		<span tabindex="0" class="new_title" style="font-size: 150% !important;align-items: center !important;text-align: center !important;"><spring:theme code="Oficina Virtual" /></span>
+<div class="headline" style="text-align: center !important; margin-left: -22% !important; margin-bottom: 0px !important">
+		<span tabindex="0" class="new_title" style="font-size: 150% !important;align-items: center !important;text-align: center !important; padding-bottom: 1px !important;
+margin-left: 0px !important;"><spring:theme code="Oficina Virtual" /></span>
 </div>
 
-<div class="headline" style="text-align: center !important">
+<div class="headline" style="text-align: center !important; margin-left: -22% !important; padding-bottom: 1px !important;">
 		<span tabindex="0" class="new_title" style="font-size: 150% !important;align-items: center !important;text-align: center !important;"><spring:theme code="login.title" /></span>
 </div>
 
-<form:form action="${action}" method="post" modelAttribute="loginForm">
+<form:form action="${action}" method="post" modelAttribute="loginForm" style="margin-left: -10%;">
 	<fieldset>
 		<legend class="visuallyhidden">
 			<spring:theme code="login.form" />
@@ -44,7 +45,7 @@
 			</c:otherwise>
 		</c:choose>
 
-		<div class="forgotten-password" style="margin-bottom: 1px !important; text-align: center !important;">
+		<div class="forgotten-password" style="margin-bottom: 1px !important; text-align: center !important;margin-top: 3px !important">
 			<ycommerce:testId code="login_forgotPassword_link">
 				<a href="<c:url value='/login/pw/request/external'/>" class="pssword" data-cbox-title="<spring:theme code="forgottenPwd.title"/>"> <spring:theme code="login.link.forgottenPwd" />
 				</a>
@@ -58,7 +59,7 @@
 			</ycommerce:testId>
 		</div>
 		<ycommerce:testId code="loginAndCheckoutButton">
-			<button type="submit" class="btn btn-primary redtam tam_button" style="width: 100% !important; border-radius: 20px !important; background-color: #156ab5 !important; color: white !important;height: 48px !important; margin-top:10%;">
+			<button type="submit" class="btn btn-primary redtam tam_button" style="width: 100% !important; border-radius: 20px !important; background-color: #156ab5 !important; color: white !important;height: 48px !important; margin-top:0px !important;">
 				<spring:theme code="${actionNameKey}" />
 			</button>
 		</ycommerce:testId>
