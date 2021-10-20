@@ -32,7 +32,7 @@ public class AsignarsecomoAgenteController extends AbstractPageController
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "Asiganarse como Agente Autorizado";
+	private static final String TEXT_ACCOUNT_PROFILE = "Asignarse como Agente Autorizado";
 
 	// CMS Pages
 	private static final String ASIGNARSE_AGENTE_CMS_PAGE = "asignarseAgentePage";
