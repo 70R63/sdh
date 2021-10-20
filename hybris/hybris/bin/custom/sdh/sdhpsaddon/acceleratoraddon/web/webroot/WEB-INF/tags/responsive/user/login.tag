@@ -12,6 +12,7 @@
 
 <c:set var="hideDescription" value="checkout.login.loginAndCheckout" />
 
+
 <div class="headline" style="text-align: center !important; margin-left: -2% !important">
 	<span tabindex="0" class="new_title"
 		style="font-size: 150% !important; align-items: center !important; text-align: center !important;"><spring:theme
@@ -160,6 +161,7 @@
 					</ul>
 		</div>
 		</div>
+
 	</div>
 </div>
 
