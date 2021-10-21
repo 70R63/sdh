@@ -191,7 +191,7 @@
 	<!-- End SDH FAQs -->
 
 	<!-- Begin SDH ASM User removing nodes-->
-	<context merge-by="principal" component="explorer-tree" principal="sdhemployeegroup">
+	<context merge-by="principal" component="explorer-tree" principal="sdhAmsAdminEmployeeRole">
 	<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
 		<explorer-tree:navigation-node id="hmc_treenode_catalog" merge-mode="remove">
 		</explorer-tree:navigation-node>
@@ -258,7 +258,7 @@
 	<!-- End SDH ASM User removing nodes-->
 
 
-	<context merge-by="principal" component="explorer-tree" principal="sdhAmsAdminEmployeeRole">
+	<context merge-by="principal" component="explorer-tree" principal="sdhemployeegroup">
 		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
 			<explorer-tree:navigation-node id="hmc_treenode_catalog" merge-mode="remove">
 			</explorer-tree:navigation-node>
@@ -268,12 +268,12 @@
 
 			<explorer-tree:navigation-node id="hmc_treenode_medias" merge-mode="remove">
 			</explorer-tree:navigation-node>
-			
+
 			<explorer-tree:navigation-node id="hmc_treenode_user" merge-mode="replace">
-				<explorer-tree:type-node code="UserGroup" id="hmc_typenode_usergroup"/>
+				<explorer-tree:type-node code="Employee" id="hmc_typenode_employee"/>
 		        <explorer-tree:type-node code="Customer" id="hmc_typenode_customer"/>
 			</explorer-tree:navigation-node>
-			
+
 			<explorer-tree:navigation-node id="hmc_treenode_order" merge-mode="remove">
 
 			</explorer-tree:navigation-node>
@@ -301,22 +301,22 @@
 			<explorer-tree:navigation-node id="hmc.group.basecommerce.deeplink" merge-mode="remove">
 
 			</explorer-tree:navigation-node>
-			
+
 			<explorer-tree:navigation-node id="hmc.PSRelationship" merge-mode="remove">
 
 			</explorer-tree:navigation-node>
-			
+
 			<explorer-tree:navigation-node id="hmc.PSBillPayment" merge-mode="remove">
 
 			</explorer-tree:navigation-node>
-			
+
 			<explorer-tree:navigation-node id="hmc.PSAsset" merge-mode="remove">
 
 			</explorer-tree:navigation-node>
-			
+
 		</explorer-tree:explorer-tree>
 	</context>
-	
+
 	<context merge-by="type"  type="Customer" component="editor-area" module="sdhbackoffice">
         <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
             <editorArea:tab name="hmc.tab.sdh.properties">
