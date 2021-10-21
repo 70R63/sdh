@@ -36,12 +36,12 @@ INSERT_UPDATE Usergroup;uid[unique=true];locName[lang=en];locName[lang=es]
                        ;sdh_05;Reportante de Información;Reportente de Información
 
 INSERT_UPDATE BackofficeRole;uid[unique=true]                    ;locName[lang=es]                      ;description                     ;authorities
-                            ;sdhCustomerSupportChatRole	    ;Sdh Customer Support Chat Role ;Sdh Customer Support Chat Role  ;sdhCustomerSupportChat
+                            ;sdhCustomerSupportChatRole     ;Sdh Customer Support Chat Role ;Sdh Customer Support Chat Role  ;sdhCustomerSupportChat
                             ;sdhAmsAdminEmployeeRole        ;Sdh ASM Adminisrator Role      ;Sdh ASM Adminisrator Role       ;
 
 #SDH Backoffice roles
-INSERT_UPDATE BackofficeRole	;UID[unique=true]		            ;authorities
-                                ;backofficeadministratorrole	;backofficeworkflowadmin,	sdhBackOfficeAdmin
+INSERT_UPDATE BackofficeRole  ;UID[unique=true]               ;authorities
+                                ;backofficeadministratorrole  ;backofficeworkflowadmin, sdhBackOfficeAdmin
 
 
 INSERT_UPDATE Employee;UID[unique=true];name                                 ;password[default=$defaultPassword] ;description                     ;groups(uid)[mode=append]     ;backOfficeLoginDisabled
@@ -114,7 +114,7 @@ BackofficeRole;sdhAmsAdminEmployeeRole;;;;;;;
 ;;;;Customer.sessionCurrency;+;-;-;-;-
 ;;;;Customer.groups;+;-;-;-;-
 ;;;;Customer.description;+;-;-;-;-
-;;;;Customer.password;+;-;-;-;-
+;;;;Customer.password;+;+;-;-;-
 ;;;;Customer.passwordQuestion;+;-;-;-;-
 ;;;;Customer.lastLogin;+;-;-;-;-
 ;;;;Customer.loginDisabled;+;-;-;-;-
@@ -134,20 +134,21 @@ INSERT_UPDATE BackofficeRole;uid[unique=true]           ;locName[lang=es]       
                             ;sdhAmsAdminEmployeeRole    ;Sdh ASM Adminisrator Role      ;Sdh ASM Adminisrator Role
 
 
-INSERT_UPDATE Employee 	;UID[unique=true];name   		;password[default=$defaultPassword] ;description     		;groups(uid)[mode=append]     ;backOfficeLoginDisabled
+INSERT_UPDATE Employee  ;UID[unique=true];name      ;password[default=$defaultPassword] ;description        ;groups(uid)[mode=append]     ;backOfficeLoginDisabled
                           ;sdhAsmAdmin     ;SDH ASM Admin ;                                   ;SDH ASM Adminisrator   ;sdhAmsAdminEmployeeRole      ;false
-                          ;sdhAdmin     	 ;SDH Admin 	;                                   ;SDH Adminisrator   	;sdhemployeegroup      		  ;false
+                          ;sdhAdmin        ;SDH Admin   ;                                   ;SDH Adminisrator     ;sdhemployeegroup           ;false
 
 $START_USERRIGHTS;;;;;;;;;
 Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
 BackofficeRole;sdhAmsAdminEmployeeRole;;;;;;;
-;;;;Customer;+;-;-;-;-
+;;;;Customer;+;+;-;-;-
 $END_USERRIGHTS;;;;;
 
 $START_USERRIGHTS;;;;;;;;;
 Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
 BackofficeRole;sdhemployeegroup;;;;;;;
-;;;;Customer;+;-;-;-;-
-;;;;SdhFAQs;+;-;-;-;-
-;;;;SdhFAQsCategory;+;-;-;-;-
+;;;;Customer;+;+;+;+;+
+;;;;Employee;+;+;+;+;+
+;;;;SdhFAQs;+;+;+;+;+
+;;;;SdhFAQsCategory;+;+;+;+;+
 $END_USERRIGHTS;;;;;

@@ -270,7 +270,7 @@
 			</explorer-tree:navigation-node>
 
 			<explorer-tree:navigation-node id="hmc_treenode_user" merge-mode="replace">
-				<explorer-tree:type-node code="UserGroup" id="hmc_typenode_usergroup"/>
+				<explorer-tree:type-node code="Employee" id="hmc_typenode_employee"/>
 		        <explorer-tree:type-node code="Customer" id="hmc_typenode_customer"/>
 			</explorer-tree:navigation-node>
 
