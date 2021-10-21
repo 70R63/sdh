@@ -8,7 +8,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="container-fluid">
-<div class="footer-background"></div>
+
 	<div class="footer__top">
 		<div class="row">
 <!-- 			<div class="footer-left col-xs-12 col-sm-12 col-md-8 col-md-offset-2"> -->

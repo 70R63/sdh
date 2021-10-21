@@ -105,7 +105,7 @@
 			</aside>
 
 			<div class="row"></div>
-			<div class="row" style="margin-left: 1px !important;">
+			<div class="row" style="margin-left: 25px !important;">
 				<div class="col-md-12">
 					<div class="block-content">
 						<h2>Sede principal</h2>
@@ -140,23 +140,23 @@
 					<ul class="menu-social menu-footer">
 						<li><a class="font-link-1 font-sm-link-3"
 							href="https://www.facebook.com/HaciendaBogota" title="Facebook"
-							target="_blank"><i class="fa-facebook-f fab"></i>@HaciendaBogota</a></li>
+							target="_blank"><i class=" follow-Facebook icon"></i>@HaciendaBogota</a></li>
 						<li><a class="font-link-1 font-sm-link-3"
 							href="https://www.instagram.com/hacienda_bogota/"
-							title="Instagram" target="_blank"><i class="fa-instagram fab"></i>@Hacienda_Bogota</a></li>
+							title="Instagram" target="_blank"><i class="follow-Instagram icon"></i>@Hacienda_Bogota</a></li>
 						<li><a class="font-link-1 font-sm-link-3"
 							href="https://twitter.com/HaciendaBogota" title="Twitter"
-							target="_blank"><i class="fa-twitter fab"></i>@HaciendaBogota</a></li>
+							target="_blank"><i class="follow-Twitter icon"></i>@HaciendaBogota</a></li>
 					</ul>
 					<ul class="menu-terms menu-footer">
 						<li><a class="font-link-2 font-sm-link-4"
-							href="http://localhost:4200/noticia/secretaria-de-hacienda-presenta-el-calendario-tributario-2021-de-bogota">Términos
+							href=" https://www.shd.gov.co/shd/habeas-data">Términos
 								y condiciones</a></li>
-						<li><a class="font-link-2 font-sm-link-4" href="">Políticas</a></li>
+						<li><a class="font-link-2 font-sm-link-4" href="https://www.shd.gov.co/shd/habeas-data">Políticas</a></li>
 						<li><a class="font-link-2 font-sm-link-4" href="">Accesibilidad</a></li>
 						<li><a class="font-link-2 font-sm-link-4" href="">Mapa
 								del sitio</a></li>
-						<li><a class="font-link-2 font-sm-link-4" href="">Colaboradores
+						<li><a class="font-link-2 font-sm-link-4" href="https://www.shd.gov.co/shd/colaboradores-sdh">Colaboradores
 								Hacienda</a></li>
 					</ul>
 		</div>
