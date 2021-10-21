@@ -22,8 +22,7 @@
 
 			<a id="downloadHelper" target="_blank"></a>
 			<input type="hidden" id="numForm" value="${dataForm.numForm }">
-			<button type="button" class="btn btn-secondary btn-lg"
-				onclick="goBack()">
+			<button type="button" class="btn btn-secondary btn-lg" onclick="goBack()">
 				<spring:theme code="impuestos.decGasolina.Pago.Regresar" />
 			</button>
 			<button id="gasolinaGeneraDeclaracionButton"  type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton">
@@ -66,6 +65,10 @@
 
 
 <script>
+function goBack() {
+	debugger;
+	window.history.back();
+}
 
 function validaBotonPago(){
 	debugger;

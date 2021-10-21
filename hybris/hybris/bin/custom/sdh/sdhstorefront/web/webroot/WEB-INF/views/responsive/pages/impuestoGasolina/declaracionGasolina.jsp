@@ -55,11 +55,6 @@ window.onload = function() {
 
 </script>
 
-<script>
-	function goBack() {
-		window.history.back();
-	}
-</script>
 
 <script>
 	function numberFormat(selectObject) {

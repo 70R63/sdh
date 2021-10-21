@@ -24,6 +24,12 @@
 
 
 <script>
+function goBack() {
+	debugger;
+	window.history.back();
+}
+
+
 window.onload = function() {
 	debugger;
 	var cosas = $(":input");
