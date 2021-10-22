@@ -87,15 +87,15 @@
 							class="new_alto form-control " name="periodo" required='required'
 							onchange="onChangeMensual(this)">
 							<option value="00">Seleccionar</option>
-							<option value="01">1-Enero</option>
-							<option value="02">2-Febrero</option>
-							<option value="03">3-Marzo</option>
-							<option value="04">4-Abril</option>
-							<option value="05">5-Mayo</option>
-							<option value="06">6-Junio</option>
-							<option value="07">7-Julio</option>
-							<option value="08">8-Agosto</option>
-							<option value="09">9-Septiembre</option>
+<!-- 							<option value="01">1-Enero</option> -->
+<!-- 							<option value="02">2-Febrero</option> -->
+<!-- 							<option value="03">3-Marzo</option> -->
+<!-- 							<option value="04">4-Abril</option> -->
+<!-- 							<option value="05">5-Mayo</option> -->
+<!-- 							<option value="06">6-Junio</option> -->
+<!-- 							<option value="07">7-Julio</option> -->
+<!-- 							<option value="08">8-Agosto</option> -->
+<!-- 							<option value="09">9-Septiembre</option> -->
 							<option value="10">10-Octubre</option>
 							<option value="11">11-Noviembre</option>
 							<option value="12">12-Diciembre</option>
@@ -403,8 +403,7 @@
 
  	
 	function onChange(selectObject) {
-			debugger;
-		ACC.opcionDeclaraciones.preparaAnioGravable();
+		ACC.opcionDeclaraciones.preparaAnioGravable("certipagos");
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.opcionDeclaraciones.reiniciaCertipagos();
 // 		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
@@ -414,36 +413,33 @@
 
 	
 	function SelectedAnio(selectObject) {
-		debugger;
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos_porAnio();
 	}
 	
 	function onChangeMensual(selectObject) {
-		debugger;
 		var per = selectObject.value;
 		var anio = document.getElementById('aniograv').value;
 		var fecha = new Date();
 		var anioact = fecha.getFullYear();
 		var mesact = fecha.getMonth();
 
-		if (anio < anioact) {
+// 		if (anio < anioact) {
 
-		} else {
-			mesact = mesact + 1;
-			if (per < mesact) {
+// 		} else {
+// 			mesact = mesact + 1;
+// 			if (per < mesact) {
 
-			} else {
-				alert("Por favor, seleccione un mes anterior");
-			}
+// 			} else {
+// 				alert("Por favor, seleccione un mes anterior");
+// 			}
 
-		}
+// 		}
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
 		ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(ACC.opcionDeclaraciones.dataActual_backup,ACC.opcionDeclaraciones.dataResponse_backup,selectObject.value);
 
 	}
 	
 	function onChangeBimestral(selectObject) {
-		debugger;
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
 // 		ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(ACC.opcionDeclaraciones.dataActual_backup,ACC.opcionDeclaraciones.dataResponse_backup,selectObject.value);
 	}

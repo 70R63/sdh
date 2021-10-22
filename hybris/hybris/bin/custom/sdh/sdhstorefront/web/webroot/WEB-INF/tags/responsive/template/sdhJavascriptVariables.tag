@@ -190,7 +190,6 @@
 		  	<c:if test="${not empty reteICATemplateURL}">
 		  		ACC.reteICADownloadTemplate ="${reteICATemplateURL}";
 			</c:if>
-			debugger;
 			ACC.hideSubmenuDelineacionUrbana = true;
 			ACC.hideSubmenuICA = true;
 			ACC.hideSubmenuPredial = true;
@@ -261,6 +260,8 @@
 			ACC.gasolinaFirmar  = '<c:url value="/contribuyentes/gasolina/declaracion/firmar"  />';
 
 			ACC.declaracionFirmas = '<c:url value="/contribuyentes/declaracion/firmar"  />';
+			
+			ACC.consultas_certipagos_cant_anogravables = 1;
 
 	
 		/*]]>*/

@@ -336,9 +336,9 @@
 	});
 	
 	function onChange(selectObject) {
-		debugger;
-		ACC.opcionDeclaraciones.preparaAnioGravable();
+		ACC.opcionDeclaraciones.preparaAnioGravable("certideclaraciones");
 		ACC.opcionDeclaraciones.ocultarTablas();
+		ACC.opcionDeclaraciones.reiniciaCertipagos();
 		ACC.opcionDeclaraciones.prepararPeriodo();
 	}
 	
@@ -375,7 +375,6 @@
 	}
 		
 		function downloadPDF(pdf, newfilename) {
-			debugger;
 			if (pdf){
 				const linkSource = 'data:application/pdf;base64,' + pdf;
 			    const downloadLink = document.createElement("a");

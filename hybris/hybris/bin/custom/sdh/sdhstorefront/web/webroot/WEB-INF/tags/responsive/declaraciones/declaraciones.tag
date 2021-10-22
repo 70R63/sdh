@@ -354,8 +354,9 @@ window.onload = function() {
 
 	function onChange(selectObject) {
 		// 		debugger;
-		ACC.opcionDeclaraciones.preparaAnioGravable();
+		ACC.opcionDeclaraciones.preparaAnioGravable("declaraciones");
 		ACC.opcionDeclaraciones.ocultarTablas();
+		ACC.opcionDeclaraciones.reiniciaCertipagos();
 		ACC.opcionDeclaraciones.prepararPeriodo();
 	}
 	
