@@ -58,7 +58,7 @@ ACC.frimas = {
 
 		$(".justFirm").on("click",function(e){
 			ACC.spinner.show();
-			debugger;
+			
 			var numForm = $("#numForm").val();
 
 			if(numForm == "" )
@@ -116,7 +116,7 @@ ACC.frimas = {
 				type: "POST",
 				contentType: "application/json",
 				success: function (data) {
-					debugger;
+					
 					ACC.spinner.close();
 					$( "#dialogFirmas" ).dialog( "open" );
 					$("#firmasDialogContent").html("");
@@ -137,7 +137,7 @@ ACC.frimas = {
 
 				},
 				error: function () {
-					debugger;
+					
 					ACC.spinner.close();
 					$( "#dialogFirmas" ).dialog( "open" );
 					$("#firmasDialogContent").html("");

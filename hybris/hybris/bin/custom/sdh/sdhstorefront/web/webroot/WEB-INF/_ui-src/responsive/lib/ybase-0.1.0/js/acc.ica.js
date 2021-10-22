@@ -72,7 +72,7 @@ ACC.ica = {
 	 bindCalculoButton: function () {
 		 $(document).on("click", "#icaCalculoButton", function (e) {		
 				e.preventDefault();
-				debugger;
+				
 				ACC.spinner.show();
 
 				//Se comentan campos de la validación de valor retenido por petición de usuario 13/10/2020
@@ -516,7 +516,7 @@ ACC.ica = {
 	 bindPresentarDeclaracionButton: function () {
 		 $(document).on("click", "#icaPresentarDeclaracionButton", function (e) {
 	 	        e.preventDefault();
-debugger;
+
 			ACC.spinner.show();
 	 	       $("#icaPresentarDeclaracionButton").prop('disabled', true);
 	 	       var numForm  = $.trim($("#numForm").val());

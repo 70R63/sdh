@@ -5,7 +5,7 @@ ACC.contibList = {
 	bindDetalleVerCont : function() {
 		$(document).on("click",".detalleVerCont", function(e) {
 			e.preventDefault();
-							debugger;
+							
 //							var tabRel = document.getElementById('tabRelacion');
 //							tabRel.style.display = 'none';
 //							var relUno = $.trim($(this).attr("data-relacion1"));

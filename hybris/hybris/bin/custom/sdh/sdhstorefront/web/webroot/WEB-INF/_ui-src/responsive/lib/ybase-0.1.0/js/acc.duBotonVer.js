@@ -5,7 +5,7 @@ ACC.duBotonVer = {
 	
 	bindLabelVerButton : function() {
 		$(document).on("click", ".label1Ver", function(e) {
-			debugger;
+			
 			e.preventDefault();
 			ACC.spinner.show();
  	       var valorCDU = $.trim($(this).attr("data-cdu")); 	       
@@ -27,13 +27,13 @@ ACC.duBotonVer = {
 				data : data,
 				type : "GET",
 				success : function(dataResponse) {
-					debugger;
+					
 					ACC.spinner.close();
 				    document.getElementById("hiddenCdu").value = valorCDU;
 					ACC.duBotonVer.fillFieldsFromData(dataResponse);
 				},
 				error : function() {
-					debugger;
+					
 					ACC.spinner.close();
 				}
 			});
