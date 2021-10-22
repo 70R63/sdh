@@ -45,7 +45,7 @@ window.onload = function() {
 	$(".loader").fadeOut("slow");
 }
 	function downloadPDF(pdf) {
-// 		debugger;
+// 		
 		if (pdf) {
 			const linkSource = 'data:application/pdf;base64,' + pdf;
 			const downloadLink = document.createElement("a");
@@ -196,7 +196,7 @@ window.onload = function() {
 
 <script type="text/javascript">
 function mostrarTabla(claveImpuesto){
-	debugger;
+	
 	ACC.oblipend.llenarTablas_CertificacionDatos(claveImpuesto);
 	
 }

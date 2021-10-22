@@ -51,13 +51,13 @@
 	}
 
 	function presentarDeclaracion(CHIP, anioGravable) {
-		debugger;
+		
 		ACC.opcionDeclaraciones.predial_presentarDec(CHIP, anioGravable);
 
 	}
 
 	function pagarEnLinea(tipoImpuesto, anoGravable, periodo, numObjeto, chip) {
-		debugger;
+		
 		var numBP = "${infoContrib.numBP}";
 		var numDoc = "${infoContrib.numDoc}";
 		var tipoDoc = "${infoContrib.tipoDoc}";
@@ -70,7 +70,7 @@
 	}
 
 	function showDetailPredio(anioGravable, chip, matrInmobiliaria, objetoCon) {
-		debugger;
+		
 		document.getElementById("objetocontrato").value=objetoCon;
 		ACC.predial.detalle_tres(anioGravable, chip, matrInmobiliaria);
 	}

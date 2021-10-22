@@ -45,7 +45,7 @@
 		}	
 		 $(".loader").fadeOut("slow");
 		 
-		debugger;
+		
 		 
 		 var date = new Date();
 		 var currentday = date.getDate(); //obteniendo dia

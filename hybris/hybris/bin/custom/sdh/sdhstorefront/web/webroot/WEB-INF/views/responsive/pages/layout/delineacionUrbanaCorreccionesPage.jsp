@@ -964,7 +964,7 @@
 <script>
 
 window.onload = function() {
-	debugger;
+	
 	var cosas = $(":input");
 	var tam = cosas.length;
 	if (false){

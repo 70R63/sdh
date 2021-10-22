@@ -65,7 +65,7 @@ window.onload = function() {
 			 valexe.disabled = false;
 			 valexe.readonly= false;
 		}
-		debugger;
+		
 		
 		var tiplic = $.trim($("#tipoDeLicencia").val());
 		 var valor = document.getElementById('infObjetoDelineacion.infoDeclara.valorEjecutado');
@@ -85,7 +85,7 @@ window.onload = function() {
 
 }
 // 	function goBack() {
-// 		debugger;
+// 		
 // 		var declaracion = '${param.declaracion}';
 
 // 		if (declaracion) {

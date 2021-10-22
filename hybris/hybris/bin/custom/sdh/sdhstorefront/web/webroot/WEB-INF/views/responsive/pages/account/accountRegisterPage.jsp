@@ -50,7 +50,7 @@ window.onload = function() {
     }
 }
 function changeMessage() {
-	debugger;
+	
 	var rol = document.getElementById("rol").value;
 	var email = document.getElementById("email").value;
 	var mensaje = document.getElementById("mensaje").value;

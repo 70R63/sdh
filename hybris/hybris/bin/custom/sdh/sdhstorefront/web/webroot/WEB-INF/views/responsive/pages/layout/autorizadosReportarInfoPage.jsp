@@ -19,7 +19,7 @@
 	}
 	
 	function fncEnviarReporInfo(){
-		debugger;
+		
 		
 		document.getElementById("btnEnviarReporInfo").disabled = true;
 		return true;
@@ -28,7 +28,7 @@
 	
 	
 	window.onload = function() {
-		debugger;
+		
 		var cosas = $(":input");
 		var tam = cosas.length;
 		if (false){
