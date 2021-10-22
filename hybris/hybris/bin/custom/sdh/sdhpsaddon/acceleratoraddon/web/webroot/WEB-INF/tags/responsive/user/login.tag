@@ -15,13 +15,13 @@
 
 <div class="headline" style="text-align: center !important; margin-left: -2% !important">
 	<span tabindex="0" class="new_title"
-		style="font-size: 150% !important; align-items: center !important; text-align: center !important;"><spring:theme
+		style="font-size: 210% !important; align-items: center !important; text-align: center !important;"><spring:theme
 			code="Oficina Virtual" /></span>
 </div>
 <div class="newLoggin">
 	<div class="headline" style="text-align: center !important">
 		<span tabindex="0" class="new_title"
-			style="font-size: 150% !important; align-items: center !important; text-align: center !important;"><spring:theme
+			style="font-size: 190% !important; align-items: center !important; text-align: center !important;"><spring:theme
 				code="login.title" /></span>
 	</div>
 
@@ -85,6 +85,8 @@
 					<spring:theme code="${actionNameKey}" />
 				</button>
 			</ycommerce:testId>
+				<br><br><div style="text-align: center"><a href="https://www.shd.gov.co/shd/sites/default/files/files/impuestos/paso%20a%20paso%20registro%20general.jpeg" 
+		target="_blank">Instructivo registro Oficina Virtual</a></div>
 		</fieldset>
 
 	</form:form>
@@ -119,8 +121,8 @@
 						</p>
 
 						<p>
-							<a href="#">Defensoría de la ciudadanía</a><br> <a href="#">Contáctanos
-								en Bogotá te escucha</a><br> <a href="#">Denuncias por
+							<a href="https://bogota.gov.co/sdqs/">Defensoría de la ciudadanía</a><br> <a href="https://bogota.gov.co/sdqs/">Contáctanos
+								en Bogotá te escucha</a><br> <a href="https://bogota.gov.co/sdqs/denuncias-por-actos-de-corrupcion">Denuncias por
 								actos de corrupción</a>
 						</p>
 
