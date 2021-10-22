@@ -35,7 +35,7 @@
 	}
 	
 	function downloadPDF(pdf) {
-		debugger;
+		
 		if (pdf){
 			const linkSource = 'data:application/pdf;base64,' + pdf;
 		    const downloadLink = document.createElement("a");
@@ -48,7 +48,7 @@
 	}
 
 	function sdhOnChange(selectPaymentMethod){
-		debugger;
+		
 		
 	    var url = window.location.href;
 	    var n = url.indexOf("impuestos");
@@ -74,7 +74,7 @@
             url     : url + '?tax='+tax+'&paymentMethod='+paymentMethod,
             method  : 'GET',
             success : function(resultText){
-				debugger;
+				
                 $.each(resultText,function(i,v){
                     var option = document.createElement('option');
                     option.value = v.code;

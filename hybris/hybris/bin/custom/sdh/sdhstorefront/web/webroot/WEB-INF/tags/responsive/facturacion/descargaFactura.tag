@@ -175,7 +175,7 @@
 
 <script>
 	function showtable() {
-		debugger;
+		
 
 		var imp = document.getElementById('impuesto').value;
 		var tabpred = document.getElementById('table-predial');
@@ -196,7 +196,7 @@
 	}
 	function descargaFactura() {
 
-		debugger;
+		
 		var anoGravable = $("#aniograv").val();
 		var claveImpuesto = $("#impuesto").val();
 		var nombreObjeto = "";

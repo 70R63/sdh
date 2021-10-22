@@ -66,12 +66,12 @@
 
 <script>
 function goBack() {
-	debugger;
+	
 	window.history.back();
 }
 
 function validaBotonPago(){
-	debugger;
+	
 	var totPagar = document.getElementById('valorTotalPagar');
 	var negativePos = totPagar.value.search("-");
 	if(totPagar.value == '0' || totPagar.value == '0.00' || negativePos >= 0 ){

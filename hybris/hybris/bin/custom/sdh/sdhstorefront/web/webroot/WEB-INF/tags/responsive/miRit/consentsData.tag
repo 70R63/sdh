@@ -204,7 +204,7 @@
 
 <script type="text/javascript">
 	function showMessage() {
-		debugger;
+		
 		var chulo3 = document.getElementById("buzon").checked;
 		var message = document.getElementById("mensaggeBuzon");
 		if (chulo3 == true) {
@@ -214,7 +214,7 @@
 		}
 	}
 	function habilitaBuzon(){
-		debugger;
+		
 		var habcheck = document.getElementById("buzon2");
 		habcheck.style.cursor="auto";
 // 		habcheck.style.pointer-event="painted";

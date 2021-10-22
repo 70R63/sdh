@@ -24,7 +24,7 @@
 
 	
 	function downloadPDF(pdf) {
-		debugger;
+		
 		if (pdf){
 			const linkSource = 'data:application/pdf;base64,' + pdf;
 		    const downloadLink = document.createElement("a");
@@ -37,7 +37,7 @@
 	}
 
 	function sdhOnChange(selectPaymentMethod){
-		debugger;
+		
 		
 		
 		
@@ -70,7 +70,7 @@
             url     : url + '?tax='+tax+'&paymentMethod='+paymentMethod,
             method  : 'GET',
             success : function(resultText){
-				debugger;
+				
                 $.each(resultText,function(i,v){
                     var option = document.createElement('option');
                     option.value = v.code;
@@ -87,7 +87,7 @@
     }
 	
 	function formSubmition(buttonType){
-		debugger;
+		
 		//document.getElementById("hiddenOnlinePaymentProvider").value = buttonType;
 		var form = document.getElementById("psePaymentFormSubmition");
 		var paymentMethodSelect = document.getElementById("psePaymentForm.tipoDeTarjeta").value;
@@ -107,7 +107,7 @@
 	    $.ajax({
 	    	url: url2,
 	    	success: function(respuesta22) {
-	    		debugger;
+	    		
 	    			
 	    		
 	    		if(respuesta22 == "PENDING"){	    	    	
@@ -124,7 +124,7 @@
 	    		
 	    	},
 	    	error: function(jqXHR, exception) {
-	    		debugger;
+	    		
 	    		
 	    		if(paymentMethodSelect == "0" || bankSelect == "0"){
 	    		    alert("Seleccione banco o metodo de pago");

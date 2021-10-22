@@ -585,7 +585,7 @@ function verLista_click(event,flagVisualizacion){
 	}else{
 		$("#tabPaginacion5 tbody tr").each( function(indexRows){
 			$(this).children().find(".filtroCIIU").each( function(){
-				debugger;
+				
 				var elemento = $(this);
 				$(this).hide();
 			});
@@ -656,7 +656,7 @@ function filtrarLista(event,objeto){
 
 function agregarActEco() {
 
-	debugger;
+	
 	var numeradorUltimoId = $($("#tabPaginacion5 tbody tr")[0]).parent().children().last().attr("id").split("_")[1];
 	numeradorUltimoId++;
 	

@@ -110,7 +110,7 @@
 <script>
 	function presupuestoObraCHANGE(selectObject) {
 
-		debugger;
+		
 
 		var x = selectObject.value;
 		//Validacion presupuesto de obra = 02
@@ -136,7 +136,7 @@
 
 	function presupuestoObraLOAD() {
 
-		debugger;
+		
 
 		var totalRetencion = document.getElementById('totalRetencion');
 

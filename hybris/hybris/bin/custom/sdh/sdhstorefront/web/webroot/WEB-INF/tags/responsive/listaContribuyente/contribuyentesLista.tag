@@ -204,7 +204,7 @@
 
 <script>
 	function detalleVer() {
-		debugger;
+		
 		var tabRel = document.getElementById('tabRelacion');
 		tabRel.style.display = 'none';
 

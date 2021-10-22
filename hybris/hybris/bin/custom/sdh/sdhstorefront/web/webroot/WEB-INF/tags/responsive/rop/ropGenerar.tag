@@ -11,7 +11,7 @@
 <div class="row" >
     <script>
 		function downloadPDF(pdf) {
-			debugger;
+			
 			    const linkSource = 'data:application/pdf;base64,' + pdf;
 			    const downloadLink = document.createElement("a");
 			    const fileName = "ROP.pdf";

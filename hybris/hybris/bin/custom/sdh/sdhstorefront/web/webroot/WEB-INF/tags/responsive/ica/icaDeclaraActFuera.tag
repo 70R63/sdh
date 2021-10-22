@@ -10,7 +10,7 @@
 
 <script>
 	function bogota(selectObject) {
-		debugger;
+		
 		var muni = selectObject.value;
 		if (muni == '000000011001') {
 			alert("Seleccione un municipio diferente, ya que las actividades deben ser fuera de Bogot&aacute");
@@ -238,7 +238,7 @@
 	}
 
 	function addfile() {
-		debugger;
+		
 		var subir = document.getElementById('adjuntar');
 		subir.style.display = 'block';
 	}

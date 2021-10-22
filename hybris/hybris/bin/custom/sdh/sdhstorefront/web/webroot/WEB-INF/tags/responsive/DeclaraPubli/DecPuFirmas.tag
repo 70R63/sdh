@@ -264,7 +264,7 @@
 
 <script>
 	function habradio() {
-		debugger;
+		
 		var hobli = document.getElementById('selectobligado');
 		var firmdeclar = document.getElementById('btnfirmardeclarante');
 		var btnpredec = document

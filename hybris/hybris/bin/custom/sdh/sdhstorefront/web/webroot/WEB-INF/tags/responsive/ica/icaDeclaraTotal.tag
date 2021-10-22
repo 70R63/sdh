@@ -403,7 +403,7 @@
 
 <script>
 	function addtotaluno() {
-debugger;
+
 		var tam = $(".totaluno").length;
 		if ($(".totaluno").length < 20) {
 			$($(".totaluno")[0]).parent().append($($(".totaluno")[0]).clone());
@@ -530,7 +530,7 @@ debugger;
 	}
 	
 	function habilitarTablaING_onChange(){
-		debugger;
+		
 		llenarTablaING_CIIU();
 		habilitarTablaING_general();
 		

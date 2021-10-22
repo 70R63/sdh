@@ -399,7 +399,7 @@
 
 	function establecerCampoDia(valMes, idCampoDia, valDia, banderaHabilitado) {
 
-		// 		debugger;
+		// 		
 		var idElemento = 'diaValorRetenido_' + idCampoDia;
 		var sel = document.getElementById(idElemento);
 		if (banderaHabilitado == true) {

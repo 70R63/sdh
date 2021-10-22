@@ -760,7 +760,7 @@
 
 <script type="text/javascript">
 	function Selected(selectObject) {
-		debugger;
+		
 		var value = selectObject.value;
 		document.getElementById("Idimp").value = value;
 	}
@@ -883,7 +883,7 @@
 	
 	function showdetailrad(selectObject){
 		
-		debugger;
+		
 		var values = selectObject.value;
 		var value = selectObject;
 		var x = document.getElementById('Idimp').value;

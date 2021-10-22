@@ -298,7 +298,7 @@
 	}
 
 	function deleinformadeclara() {
-		debugger;
+		
 		var i = $(".informadeclara").length;
 		var val = i - 1;
 		if ($(".informadeclara").length <= 55

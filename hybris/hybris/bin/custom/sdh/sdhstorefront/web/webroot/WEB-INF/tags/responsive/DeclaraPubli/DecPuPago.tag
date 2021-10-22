@@ -75,7 +75,7 @@
 <script>
 
 function validaBotonPago(){
-	debugger;
+	
 	var totPagar = document.getElementById('totpag');
 	var negativePos = totPagar.value.search("-");
 	if(totPagar.value == '0' || totPagar.value == '0.00' || negativePos >= 0 ){
