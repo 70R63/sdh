@@ -850,7 +850,7 @@ public class SobreTasaGasolinaService
 		{
 			for (int i = 0; i < origen.size(); i++)
 			{
-				if ((origen.get(i).getTipoDoc() != null && origen.get(i).getTipoDoc().isEmpty() != true)
+				if ((origen.get(i) != null && origen.get(i).getTipoDoc() != null && origen.get(i).getTipoDoc().isEmpty() != true)
 						&& (origen.get(i).getNumDoc() != null && origen.get(i).getNumDoc().isEmpty() != true))
 				{
 
