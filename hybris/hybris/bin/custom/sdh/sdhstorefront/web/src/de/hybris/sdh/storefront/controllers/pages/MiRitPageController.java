@@ -29,7 +29,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CertifNombRequest;
-import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAddressRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAutorizacionesRitRequest;
@@ -82,7 +82,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -94,6 +93,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 /**
  * Controller for home page
@@ -170,21 +173,18 @@ public class MiRitPageController extends AbstractPageController
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		final ConsultaContribBPRequest consultaContribuyenteBPRequest = new ConsultaContribBPRequest();
 
 
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+		consultaContribuyenteBPRequest.setIndicador("01,02");
 
 		final String referrer = request.getHeader("referer");
 
 		try
 		{
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+					.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
 
 			final MiRitForm miRitForm = new MiRitForm();
 
@@ -490,7 +490,7 @@ public class MiRitPageController extends AbstractPageController
 			response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
 		}
 		catch (final Exception e)
@@ -698,7 +698,7 @@ public class MiRitPageController extends AbstractPageController
 		{
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			try
 			{
 				final List<ContribRedSocial> redesSociales = Arrays
@@ -737,7 +737,7 @@ public class MiRitPageController extends AbstractPageController
 			try
 			{
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				final ContribDireccion direccion = mapper.readValue(updateAddressRitForm.getAddress(),
 						ContribDireccion.class);
 
@@ -857,7 +857,7 @@ public class MiRitPageController extends AbstractPageController
 			try
 			{
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				final ContribDireccion direccionContacto = mapper.readValue(updateRitForm.getDireccionContacto(),
 						ContribDireccion.class);
 
@@ -876,7 +876,7 @@ public class MiRitPageController extends AbstractPageController
 			try
 			{
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				final ContribDireccion direccionNoficacion = mapper.readValue(updateRitForm.getDireccionNoficacion(),
 						ContribDireccion.class);
 
@@ -907,7 +907,7 @@ public class MiRitPageController extends AbstractPageController
 		{
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			try
 			{
 				final List<ContribRedSocial> redesSociales = Arrays
