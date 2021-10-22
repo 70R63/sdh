@@ -120,10 +120,11 @@
 	<%-- 			code="impuestos.sobreTasaGasolina.representantes.regresar" /> --%>
 	<%-- 	</sf:button> --%>
 
-	<button type="button" class="btn btn-secondary btn-lg"
-		onclick="goBack()">
-		<spring:theme
-			code="impuestos.sobreTasaGasolina.representantes.regresar" />
+	
+	<button type="button" class="btn btn-secondary btn-lg" id="action"
+		name="action" value="cancelar" style="margin-top: 3px"
+		onclick="window.location.href ='<c:url value='/contribuyentes' />';">
+		<spring:theme code="obligacion.inicial.cancelar" />
 	</button>
 
 	<div class="col-md-1"></div>

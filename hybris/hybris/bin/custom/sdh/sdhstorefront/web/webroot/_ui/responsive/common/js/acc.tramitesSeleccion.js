@@ -652,7 +652,7 @@ ACC.tramitesSeleccion = {
 				window.location.href =ACC.currentURL;
 			}
 		}else if(config.postCreacion == "R"){
-			btnCancelar();
+			cancelarAccion();
 		}
 
 	},

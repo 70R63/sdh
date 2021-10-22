@@ -60,10 +60,14 @@
 	<div class="row mb-2">
 		<div class="col-md-4 col-md-offset-5 centercol-md-8 text-right">
 
-			<button style="margin-top: 3px;" id="regresar"
-				class="btn btn-secondary btn-lg" onclick="goBack()" type="button">
-				<spring:theme code="publicidad.exterior.regresar" />
+			
+			<button type="button" class="btn btn-secondary btn-lg" id="action"
+				name="action" value="cancelar" style="margin-top: 3px"
+				onclick="window.location.href ='<c:url value='/contribuyentes' />';">
+				<spring:theme code="obligacion.inicial.cancelar" />
 			</button>
+			
+			
 			<button style="margin-top: 3px;" id="presentarDeclaracionButton"
 				class="btn btn-primary btn-lg" type="button">
 				<spring:theme code="publicidad.exterior.declarationpresent" />

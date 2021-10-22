@@ -584,7 +584,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		//Nivel 0
 		agregarElementoTramites(elementos, "00________", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "01________", "01", "RIT");
-		agregarElementoTramites(elementos, "02________", "02", "Novedades de registro");
+		//agregarElementoTramites(elementos, "02________", "02", "Novedades de registro");
 		//agregarElementoTramites(elementos, "03________", "03", "Facturación");
 		//	agregarElementoTramites(elementos, "04________", "04", "Analisis de la cuenta");
 		//agregarElementoTramites(elementos, "05________", "05", "Boletín de deudores Morosos"); //se modifica etiqueta, valor anterior = Boletín de deudores Morosos del Estado 14-01-2020 Maria Torres
@@ -592,7 +592,7 @@ public class TramitesCrearPageController extends AbstractPageController
 				"tramites.crear.categorizacion.notas.06");
 		//  agregarElementoTramites(elementos, "07________", "07", "Corrección de la información causada contablemente");
 		//	agregarElementoTramites(elementos, "08________", "08", "Declaración");
-		agregarElementoTramites(elementos, "09________", "09", "Agente Autorizado");
+		//agregarElementoTramites(elementos, "09________", "09", "Agente Autorizado");
 
 		//RIT
 		agregarElementoTramites(elementos, "0100______", "00", "Seleccionar");

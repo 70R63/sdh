@@ -178,22 +178,14 @@
 
 
 		<div class="row">
-			<div class="col-md-3">
-				<div class="form-group">
-					<button type="button" class="btn btn-secondary btn-lg" id="action"
-						name="action" value="generar" style="margin-top: 3px" onclick="goBack()">
-						<spring:theme code="obligacion.sujeto.regresar" />
-					</button>
-				</div>
-			</div>
-<!-- 			<div class="col-md-3"> -->
-<!-- 				<div class="form-group"> -->
-<!-- 					<button type="submit" class="btn btn-primary btn-lg" id="action" -->
-<!-- 						name="action" value="generar" style="margin-top: 3px"> -->
-<%-- 						<spring:theme code="obligacion.sujeto.descargar" /> --%>
-<!-- 					</button> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+		    <div class="col-md-3">
+				<button type="button" class="btn btn-secondary btn-lg" id="action"
+					name="action" value="cancelar" style="margin-top: 3px"
+					onclick="window.location.href ='<c:url value='/contribuyentes' />';">
+					<spring:theme code="obligacion.inicial.cancelar" />
+				</button>
+
+			</div>			
 			<div class="col-md-3" style="display: none;" id="btnBuscar">
 				<div class="form-group ">
 					<button type="button" class="btn btn-primary btn-lg" id="action"
@@ -203,15 +195,7 @@
 					</button>
 
 				</div>
-			</div>
-			<div class="col-md-3">
-				<button type="button" class="btn btn-secondary btn-lg" id="action"
-					name="action" value="cancelar" style="margin-top: 3px"
-					onclick="cancelfun(this)">
-					<spring:theme code="obligacion.inicial.cancelar" />
-				</button>
-
-			</div>
+			</div>			
 		</div>
 	</sf:form>
 </div>
