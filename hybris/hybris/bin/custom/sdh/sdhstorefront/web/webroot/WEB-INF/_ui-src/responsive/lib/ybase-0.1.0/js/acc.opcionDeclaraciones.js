@@ -640,7 +640,7 @@ ACC.opcionDeclaraciones = {
 		var desc_clavePeriodo = "";
 		var reteIca_consecutivo = "";
 		var indiceTabla = 0;
-		if(infoResponse.declaracionesCertiPagos.declaraciones != null){
+		if(infoResponse != null && infoResponse.declaracionesCertiPagos!= null && infoResponse.declaracionesCertiPagos.declaraciones != null){
 			if(infoResponse.declaracionesCertiPagos.declaraciones.length > 0){
 
 				if(infoActual.claveImpuesto == '0001'){
