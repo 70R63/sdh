@@ -22,7 +22,8 @@
 <html lang="${currentLanguage.isocode}">
 <head>
     <title>
-		${not empty pageTitle ? pageTitle : not empty cmsPage.title ? fn:escapeXml(cmsPage.title) : 'Accelerator Title'}
+<%-- 		${not empty pageTitle ? pageTitle : not empty cmsPage.title ? fn:escapeXml(cmsPage.title) : 'Accelerator Title'} --%>
+	Secretaría Distrital de Hacienda
 	</title>
 
     <%-- Meta Content --%>
@@ -31,22 +32,22 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-
     <%-- Additional meta tags --%>
     <htmlmeta:meta items="${metatags}" />
 
     <%-- Favourite Icon --%>
 	<spring:theme code="img.favIcon" text="/" var="favIconPath"/>
 	
-	<c:choose>
-		<%-- if empty webroot, skip originalContextPath, simply use favIconPath --%>
-		<c:when test="${fn:length(originalContextPath) eq 1}" >
-			<link rel="shortcut icon" type="image/x-icon" media="all" href="${favIconPath}" />
-		</c:when>
-		<c:otherwise>
-			<link rel="shortcut icon" type="image/x-icon" media="all" href="${originalContextPath}${favIconPath}" />
-		</c:otherwise>
-	</c:choose>
+<%-- 	<c:choose> --%>
+<%-- 		<%-- if empty webroot, skip originalContextPath, simply use favIconPath --%>
+<%-- 		<c:when test="${fn:length(originalContextPath) eq 1}" > --%>
+<%-- 			<link rel="shortcut icon" type="image/x-icon" media="all" href="${favIconPath}" /> --%>
+<%-- 		</c:when> --%>
+<%-- 		<c:otherwise> --%>
+<%-- 			<link rel="shortcut icon" type="image/x-icon" media="all" href="${originalContextPath}${favIconPath}" /> --%>
+<%-- 		</c:otherwise> --%>
+<%-- 	</c:choose> --%>
+	<link rel="shortcut icon" type="image/x-icon" media="all" href="${themeResourcePath}/images/escudo_Bogota.jpg" />
 
 	<%-- CSS Files Are Loaded First as they can be downloaded in parallel --%>
 	<addOnTemplate:styleSheets />
