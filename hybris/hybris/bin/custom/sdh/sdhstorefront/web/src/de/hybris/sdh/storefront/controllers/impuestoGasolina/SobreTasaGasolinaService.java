@@ -846,14 +846,17 @@ public class SobreTasaGasolinaService
 		final List<SobreTasaGasolinaTabla> destino = new ArrayList<SobreTasaGasolinaTabla>();
 		SobreTasaGasolinaTabla item;
 
-		for (int i = 0; i < origen.size(); i++)
+		if (origen != null)
 		{
-			if ((origen.get(i).getTipoDoc() != null && origen.get(i).getTipoDoc().isEmpty() != true)
-					&& (origen.get(i).getNumDoc() != null && origen.get(i).getNumDoc().isEmpty() != true))
+			for (int i = 0; i < origen.size(); i++)
 			{
+				if ((origen.get(i) != null && origen.get(i).getTipoDoc() != null && origen.get(i).getTipoDoc().isEmpty() != true)
+						&& (origen.get(i).getNumDoc() != null && origen.get(i).getNumDoc().isEmpty() != true))
+				{
 
-				item = new SobreTasaGasolinaTabla(origen.get(i).getTipoDoc(), origen.get(i).getNumDoc());
-				destino.add(item);
+					item = new SobreTasaGasolinaTabla(origen.get(i).getTipoDoc(), origen.get(i).getNumDoc());
+					destino.add(item);
+				}
 			}
 		}
 
