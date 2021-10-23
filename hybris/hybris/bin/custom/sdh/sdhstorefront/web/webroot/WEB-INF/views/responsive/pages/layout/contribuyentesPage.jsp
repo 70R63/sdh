@@ -12,6 +12,7 @@
 <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <template:page pageTitle="${pageTitle}">
+</template:page>
 <cont:contribuyentesLista/>
 
 <script type="text/javascript">
@@ -36,6 +37,6 @@
 	}
 </script>
 
-</template:page>
+
 
 
