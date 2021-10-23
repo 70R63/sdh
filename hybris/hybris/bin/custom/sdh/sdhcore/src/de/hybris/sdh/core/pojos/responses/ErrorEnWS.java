@@ -3,7 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 
 /**
@@ -58,7 +58,7 @@ public class ErrorEnWS
 		return id_msj;
 	}
 
-	@JsonProperty("id_msj")
+	@JsonSetter("id_msj")
 	public void setId_msj(final String id_msj) {
 		this.id_msj = id_msj;
 	}
@@ -67,7 +67,7 @@ public class ErrorEnWS
 		return txt_msj;
 	}
 
-	@JsonProperty("txt_msj")
+	@JsonSetter("txt_msj")
 	public void setTxt_msj(final String txt_msj) {
 		this.txt_msj = txt_msj;
 	}
@@ -90,7 +90,7 @@ public class ErrorEnWS
 	 * @param id
 	 *           the id to set
 	 */
-	@JsonProperty("ID")
+	@JsonSetter("ID")
 	public void setId(final String id)
 	{
 		this.id = id;
@@ -108,7 +108,7 @@ public class ErrorEnWS
 	 * @param mensaje
 	 *           the mensaje to set
 	 */
-	@JsonProperty("MENSAJE")
+	@JsonSetter("MENSAJE")
 	public void setMensaje(final String mensaje)
 	{
 		this.mensaje = mensaje;

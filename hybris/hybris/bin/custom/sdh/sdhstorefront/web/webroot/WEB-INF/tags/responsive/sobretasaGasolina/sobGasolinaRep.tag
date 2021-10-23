@@ -114,40 +114,31 @@
 </div>
 
 <div class="col-md-8 text-center">
-	<%-- 	<sf:button action="" type="submit" class="btn btn-primary btn-lg" --%>
-	<%-- 		id="action" name="action" value="regresar"> --%>
-	<%-- 		<spring:theme --%>
-	<%-- 			code="impuestos.sobreTasaGasolina.representantes.regresar" /> --%>
-	<%-- 	</sf:button> --%>
-
-	
-	<button type="button" class="btn btn-secondary btn-lg" id="action"
-		name="action" value="cancelar" style="margin-top: 3px"
+	<button type="button" class="btn btn-secondary btn-lg" id="actionCancelar"
+		name="actionCancelar" value="cancelar" style="margin-top: 3px"
 		onclick="window.location.href ='<c:url value='/contribuyentes' />';">
 		<spring:theme code="obligacion.inicial.cancelar" />
 	</button>
 
 	<div class="col-md-1"></div>
 	<div class="col-md-1"></div>
-	<%-- 	<sf:button action="${buscarUrl}" type="submit" --%>
-	<%-- 		class="btn btn-primary btn-lg" id="action" name="action" --%>
-	<%-- 		value="declarar"> --%>
-	<%-- 		<spring:theme --%>
-	<%-- 			code="impuestos.sobreTasaGasolina.menu.presentarDeclaracion" /> --%>
-	<%-- 	</sf:button> --%>
-
-	<sf:button action="" type="submit" class="btn btn-primary btn-lg"
-		id="action" name="action" value="regresar" style="display:none;">
-		<spring:theme
-			code="impuestos.sobreTasaGasolina.menu.presentarDeclaracion" />
-	</sf:button>
+	<c:choose>
+		<c:when test="${dataForm.controlCampos.pasarALiquidador}">
+			<sf:button action="" type="submit" class="btn btn-primary btn-lg"
+				id="action" name="action" value="presentar" style="display:none;">
+				<spring:theme
+					code="impuestos.sobreTasaGasolina.menu.presentarDeclaracion" />
+			</sf:button>
+			<c:set var="idBotonPresentarDeclaracion" value="presentarDeclaracionButton_0005"/>
+		</c:when>
+		<c:when test="${!dataForm.controlCampos.pasarALiquidador}">
+			<c:set var="idBotonPresentarDeclaracion" value="mostrarMensajePresDec"/>
+		</c:when>
+	</c:choose>
 	
-	<sf:button action="" type="button" class="btn btn-primary btn-lg" id="presentarDeclaracionButton_0005" name="action">
+	<sf:button action="" type="button" class="btn btn-primary btn-lg" id="${idBotonPresentarDeclaracion}" name="action" data-mensajeError="${dataForm.mensajeError}">
 		<spring:theme code="impuestos.sobreTasaGasolina.menu.presentarDeclaracion" />
 	</sf:button>
-
-	<%-- 	<button type="button" class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina/generar?numForm=${ dataForm.dataForm.numForm}' />';">Generar Declaración</button> --%>
-
 </div>
 <div class="row">
 		<div class="col-md-12"

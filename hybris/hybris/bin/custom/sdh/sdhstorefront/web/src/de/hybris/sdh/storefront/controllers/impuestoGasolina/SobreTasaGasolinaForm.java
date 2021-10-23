@@ -61,6 +61,7 @@ public class SobreTasaGasolinaForm
 	private String periodicidadImpuesto;
 
 	private SobreTasaGasolinaControlCamposDec controlCampos;
+	private String mensajeError;
 
 
 
@@ -643,6 +644,23 @@ public class SobreTasaGasolinaForm
 	public void setControlCampos(final SobreTasaGasolinaControlCamposDec controlCampos)
 	{
 		this.controlCampos = controlCampos;
+	}
+
+	/**
+	 * @return the mensajeError
+	 */
+	public String getMensajeError()
+	{
+		return mensajeError;
+	}
+
+	/**
+	 * @param mensajeError
+	 *           the mensajeError to set
+	 */
+	public void setMensajeError(final String mensajeError)
+	{
+		this.mensajeError = mensajeError;
 	}
 
 	/*

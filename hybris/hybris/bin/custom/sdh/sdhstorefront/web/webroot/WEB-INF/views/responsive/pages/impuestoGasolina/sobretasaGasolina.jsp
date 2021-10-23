@@ -10,6 +10,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 
+<div id="dialogGasolina" title="Gasolina"><div id="gasolinaDialogContent"></div></div>
 <div class="container">
 	<sf:form action="" method="POST" modelAttribute="dataForm" id="forma">
 		<sobreTasaGasolina:sobGasolinaMenu />

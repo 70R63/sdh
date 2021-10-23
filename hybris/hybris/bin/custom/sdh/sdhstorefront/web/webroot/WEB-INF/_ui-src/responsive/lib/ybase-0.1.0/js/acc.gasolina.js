@@ -1,6 +1,6 @@
 ACC.gasolina = {
 
-	 _autoload: ["bindGeneraDeclaracionButton","bindDialogGasolina","bindProductClass","bindPresentarDeclaracionButton"],
+	 _autoload: ["bindGeneraDeclaracionButton","bindDialogGasolina","bindProductClass","bindPresentarDeclaracionButton","bindMostrarMensajePresDec"],
 	 
 	 bindProductClass: function () {
 		 $(document).on("change", ".form-control-gasolina", function (e) {
@@ -136,6 +136,22 @@ ACC.gasolina = {
 				}
 	 	 });
 	 },
+
+	 bindMostrarMensajePresDec: function () {
+		 $(document).on("click", "#mostrarMensajePresDec", function (e) {
+	 	        e.preventDefault();
+
+	 	        var mensaje = $.trim($(this).attr("data-mensajeError"));
+				if(mensaje != null){
+					
+	            	$("#dialogGasolina" ).dialog("open");
+        			$("#gasolinaDialogContent").html(mensaje);
+				}
+
+				
+	 	 });
+	 },
+
 
     
 

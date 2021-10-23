@@ -9,6 +9,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -38,6 +39,7 @@ import de.hybris.sdh.core.pojos.responses.DetGasRevisorDeclaranteResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasValoresDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.EnviaFirmasResponse;
+import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.ImpGasolinaSimpliResponse;
@@ -434,7 +436,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
-		final DetGasResponse detalleGasolinaResponse;
+		DetGasResponse detalleGasolinaResponse = null;
 		ImpGasolinaSimpliResponse gasolinaSimpliResponse = new ImpGasolinaSimpliResponse();
 		List<ImpuestoGasolina> gasolina = new ArrayList<ImpuestoGasolina>();
 		final SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
@@ -448,7 +450,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		String periodo = "";
 		String returnURL = "/";
 		final boolean l_ocurrio_error = false;
-		String mensajeError = "";
+		String mensajeError = null;
 
 		numBP = customerModel.getNumBP();
 
@@ -478,8 +480,8 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		//	detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1();
 		if (gasolinaService.ocurrioErrorValcontGas(gasolinaSimpliResponse) != true)
 		{
-			tipoDoc = gasolinaService.obtenerTipoDoc(dataForm.getListaDocumentos());
-			numDoc = gasolinaService.obtenerNumDoc(dataForm.getListaDocumentos());
+			tipoDoc = customerModel.getDocumentType();
+			numDoc = customerModel.getDocumentNumber();
 			periodo = gasolinaService.obtenerPeriodoActual();
 			anioGravable = Integer.toString(gasolinaService.obtenerAnoGravableActual());
 
@@ -516,17 +518,42 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 			}
 			else
 			{
-				mensajesError = gasolinaService.prepararMensajesError(detalleGasolinaResponse.getErrores());
-				LOG.error("Error al leer detalle de gasolina: " + mensajesError);
-				GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error1");
+				mensajeError = "error.impuestoGasolina.sobretasa.error1";
 			}
 		}
 		else
 		{
-			mensajeError = detalleContribuyente.getTxtmsj();
-			LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
-			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+			mensajeError = "error.impuestoGasolina.sobretasa.error2";
 		}
+
+		if (dataForm != null)
+		{
+			dataForm.setControlCampos(new SobreTasaGasolinaControlCamposDec());
+			dataForm.getControlCampos().setPasarALiquidador(true);
+			dataForm.setMensajeError(null);
+
+			if (detalleGasolinaResponse != null && detalleGasolinaResponse.getErrores() != null)
+			{
+				for (ErrorEnWS etemp : detalleGasolinaResponse.getErrores())
+				{
+					if (etemp != null && etemp.getIdmsj() != null && etemp.getIdmsj().equals("200"))
+					{
+						dataForm.getControlCampos().setPasarALiquidador(false);
+						dataForm.setMensajeError(etemp.getTxtmsj());
+						mensajeError = null;
+					}
+				}
+			}
+		}
+
+		if (mensajeError != null)
+		{
+			GlobalMessages.addErrorMessage(model, mensajeError);
+		}
+
+
+
+
 		gasolinaService.ajustarMenus(detalleContribuyente, dataForm);
 		model.addAttribute("dataForm", dataForm);
 		storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
