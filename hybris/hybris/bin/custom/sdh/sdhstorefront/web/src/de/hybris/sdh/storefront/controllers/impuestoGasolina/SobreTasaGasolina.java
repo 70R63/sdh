@@ -450,7 +450,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		String periodo = "";
 		String returnURL = "/";
 		final boolean l_ocurrio_error = false;
-		String mensajeError = "";
+		String mensajeError = null;
 
 		numBP = customerModel.getNumBP();
 
@@ -518,16 +518,12 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 			}
 			else
 			{
-				mensajesError = gasolinaService.prepararMensajesError(detalleGasolinaResponse.getErrores());
-				LOG.error("Error al leer detalle de gasolina: " + mensajesError);
-				GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error1");
+				mensajeError = "error.impuestoGasolina.sobretasa.error1";
 			}
 		}
 		else
 		{
-			mensajeError = detalleContribuyente.getTxtmsj();
-			LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
-			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+			mensajeError = "error.impuestoGasolina.sobretasa.error2";
 		}
 
 		if (dataForm != null)
@@ -544,9 +540,15 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 					{
 						dataForm.getControlCampos().setPasarALiquidador(false);
 						dataForm.setMensajeError(etemp.getTxtmsj());
+						mensajeError = null;
 					}
 				}
 			}
+		}
+
+		if (mensajeError != null)
+		{
+			GlobalMessages.addErrorMessage(model, mensajeError);
 		}
 
 
