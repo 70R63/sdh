@@ -22,6 +22,7 @@ import de.hybris.sdh.core.pojos.responses.EdoCuentaResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHEdoCuentaService;
@@ -110,6 +111,9 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 	@Resource(name = "sdhCustomerAccountService")
 	SDHCustomerAccountService sdhCustomerAccountService;
+
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
 
 
 
@@ -246,7 +250,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 		}
 
 		//		Consumo de pedial
-		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
+		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
 		final PredialForm predialFormIni = new PredialForm();
 		final VehiculosInfObjetoForm vehiculosForm = new VehiculosInfObjetoForm();
 		final InfoDelineacion infoDelineacion = new InfoDelineacion();
@@ -259,12 +263,23 @@ public class ConsultaEstado extends AbstractSearchPageController
 		final ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-		try
-		{
-			sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-			predialFormIni.setPredial(sdhConsultaContribuyenteBPResponse.getPredial());
+		//		try
+		//		{
+			sdhConsultaContribuyenteBPResponse
+					.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
+			sdhConsultaContribuyenteBPResponse
+					.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
+			sdhConsultaContribuyenteBPResponse
+					.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
+			sdhConsultaContribuyenteBPResponse
+					.setPublicidadExt(sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));
+			sdhConsultaContribuyenteBPResponse
+					.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
+			//			sdhConsultaContribuyenteBPResponse.setReteIca(sdhConsultaImpuesto_simplificado.consulta_impRe(consultaContribuyenteBPRequest));
+			//			sdhConsultaContribuyenteBPResponse = mapper.readValue(
+			//					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+			//					SDHValidaMailRolResponse.class);
+			predialFormIni.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
 
 
 			//			if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
@@ -368,11 +383,11 @@ public class ConsultaEstado extends AbstractSearchPageController
 				ctaForm.setTablaReteica(sdhConsultaContribuyenteBPResponse.getReteIca());
 			}
 
-		}
-		catch (final IOException e)
-		{
-			e.printStackTrace();
-		}
+			//		}
+			//		catch (final IOException e)
+			//		{
+			//			e.printStackTrace();
+			//		}
 
 
 		if (referrer.contains("contribuyentes"))
