@@ -14,6 +14,7 @@ public class SobreTasaGasolinaControlCamposDec
 	private boolean informacionDeclaracion;
 	private boolean btnPresentarDec;
 	private boolean btnPagarDec;
+	private boolean pasarALiquidador;
 
 
 	/**
@@ -23,7 +24,7 @@ public class SobreTasaGasolinaControlCamposDec
 	{
 		return datosGenerales;
 	}
-	
+
 	/**
 	 * @param datosGenerales
 	 *           the datosGenerales to set
@@ -32,7 +33,7 @@ public class SobreTasaGasolinaControlCamposDec
 	{
 		this.datosGenerales = datosGenerales;
 	}
-	
+
 	/**
 	 * @return the informacionDeclaracion
 	 */
@@ -40,7 +41,7 @@ public class SobreTasaGasolinaControlCamposDec
 	{
 		return informacionDeclaracion;
 	}
-	
+
 	/**
 	 * @param informacionDeclaracion
 	 *           the informacionDeclaracion to set
@@ -56,7 +57,7 @@ public class SobreTasaGasolinaControlCamposDec
 	{
 		return btnPresentarDec;
 	}
-	
+
 	/**
 	 * @param btnPresentarDec
 	 *           the btnPresentarDec to set
@@ -72,7 +73,7 @@ public class SobreTasaGasolinaControlCamposDec
 	{
 		return btnPagarDec;
 	}
-	
+
 	/**
 	 * @param btnPagarDec
 	 *           the btnPagarDec to set
@@ -81,6 +82,24 @@ public class SobreTasaGasolinaControlCamposDec
 	{
 		this.btnPagarDec = btnPagarDec;
 	}
+
+	/**
+	 * @return the pasarALiquidador
+	 */
+	public boolean isPasarALiquidador()
+	{
+		return pasarALiquidador;
+	}
+
+	/**
+	 * @param pasarALiquidador
+	 *           the pasarALiquidador to set
+	 */
+	public void setPasarALiquidador(final boolean pasarALiquidador)
+	{
+		this.pasarALiquidador = pasarALiquidador;
+	}
+
 
 
 
