@@ -19,6 +19,7 @@ import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService;
 import de.hybris.platform.commerceservices.event.ForgottenPwdEvent;
 import de.hybris.platform.commerceservices.security.SecureToken;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserGroupModel;
@@ -1032,18 +1033,21 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = consultaContribuyenteBP_simplificado(
 					customerModel.getNumBP(), indicador);
-			if (indicador != null && indicador.contains(indicadorBasica))
+			if (sdhConsultaContribuyenteBPResponse != null)
 			{
-				grabarInfoContrib(customerModel, sdhConsultaContribuyenteBPResponse);
-				grabarImpuestos(customerModel, sdhConsultaContribuyenteBPResponse);
-			}
-			if (indicador != null && indicador.contains(indicadorRolesYAgentes))
-			{
-				grabarRoles(customerModel, sdhConsultaContribuyenteBPResponse);
-				grabarAgentes(customerModel, sdhConsultaContribuyenteBPResponse);
-			}
+				if (indicador != null && indicador.contains(indicadorBasica))
+				{
+					grabarInfoContrib(customerModel, sdhConsultaContribuyenteBPResponse);
+					grabarImpuestos(customerModel, sdhConsultaContribuyenteBPResponse);
+				}
+				if (indicador != null && indicador.contains(indicadorRolesYAgentes))
+				{
+					grabarRoles(customerModel, sdhConsultaContribuyenteBPResponse);
+					grabarAgentes(customerModel, sdhConsultaContribuyenteBPResponse);
+				}
 
-			modelService.save(customerModel);
+				modelService.save(customerModel);
+			}
 		}
 
 		//			response = response.replace("\"infoContrib\":[", "\"infoContrib\": ");
@@ -1125,42 +1129,48 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse)
 	{
 		//establecer informacion correspondiente a impuestos:
-		final List<SDHContribTaxModel> oldContribTaxModels = customerModel.getContribTaxList();
-
-		if (oldContribTaxModels != null && !oldContribTaxModels.isEmpty())
+		if (customerModel != null)
 		{
-			modelService.removeAll(oldContribTaxModels);
+			final List<SDHContribTaxModel> oldContribTaxModels = customerModel.getContribTaxList();
+
+			if (oldContribTaxModels != null && !oldContribTaxModels.isEmpty())
+			{
+				modelService.removeAll(oldContribTaxModels);
+			}
 		}
 
-		final List<ImpuestosResponse> impuestosContrib = sdhConsultaContribuyenteBPResponse.getImpuestos();
-		if (impuestosContrib != null && !impuestosContrib.isEmpty())
+		if (sdhConsultaContribuyenteBPResponse != null)
 		{
-
-			final List<SDHContribTaxModel> newContribTaxModels = new ArrayList<SDHContribTaxModel>();
-
-			for (final ImpuestosResponse eachImpuestosContrib : impuestosContrib)
+			final List<ImpuestosResponse> impuestosContrib = sdhConsultaContribuyenteBPResponse.getImpuestos();
+			if (impuestosContrib != null && !impuestosContrib.isEmpty())
 			{
-				if (StringUtils.isBlank(eachImpuestosContrib.getClaseObjeto()))
+
+				final List<SDHContribTaxModel> newContribTaxModels = new ArrayList<SDHContribTaxModel>();
+
+				for (final ImpuestosResponse eachImpuestosContrib : impuestosContrib)
 				{
-					continue;
+					if (StringUtils.isBlank(eachImpuestosContrib.getClaseObjeto()))
+					{
+						continue;
+					}
+
+					final SDHContribTaxModel eachNewContribTaxModel = new SDHContribTaxModel();
+					eachNewContribTaxModel.setClaseObjeto(eachImpuestosContrib.getClaseObjeto());
+					eachNewContribTaxModel.setCantObjetos(eachImpuestosContrib.getCantObjetos());
+					//					eachNewContribTaxModel.setLinea(eachContribTax.getDescripcion());
+
+					newContribTaxModels.add(eachNewContribTaxModel);
+
 				}
 
-				final SDHContribTaxModel eachNewContribTaxModel = new SDHContribTaxModel();
-				eachNewContribTaxModel.setClaseObjeto(eachImpuestosContrib.getClaseObjeto());
-				eachNewContribTaxModel.setCantObjetos(eachImpuestosContrib.getCantObjetos());
-				//					eachNewContribTaxModel.setLinea(eachContribTax.getDescripcion());
+				modelService.saveAll(newContribTaxModels);
 
-				newContribTaxModels.add(eachNewContribTaxModel);
-
+				customerModel.setContribTaxList(newContribTaxModels);
 			}
-
-			modelService.saveAll(newContribTaxModels);
-
-			customerModel.setContribTaxList(newContribTaxModels);
-		}
-		else
-		{
-			customerModel.setContribTaxList(null);
+			else
+			{
+				customerModel.setContribTaxList(null);
+			}
 		}
 
 	}
@@ -1180,32 +1190,35 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			modelService.removeAll(rols);
 		}
 
-		final List<NombreRolResponse> roles = sdhConsultaContribuyenteBPResponse.getRoles();
-
-		if (roles != null && !roles.isEmpty())
+		if (sdhConsultaContribuyenteBPResponse != null)
 		{
-			final List<SDHRolModel> newRolesModel = new ArrayList<SDHRolModel>();
+			final List<NombreRolResponse> roles = sdhConsultaContribuyenteBPResponse.getRoles();
 
-			for (final NombreRolResponse eachRolResponse : roles)
+			if (roles != null && !roles.isEmpty())
 			{
-				if (StringUtils.isBlank(eachRolResponse.getNombreRol()))
+				final List<SDHRolModel> newRolesModel = new ArrayList<SDHRolModel>();
+
+				for (final NombreRolResponse eachRolResponse : roles)
 				{
-					continue;
+					if (StringUtils.isBlank(eachRolResponse.getNombreRol()))
+					{
+						continue;
+					}
+
+					final SDHRolModel eachRolModel = new SDHRolModel();
+					eachRolModel.setRol(eachRolResponse.getNombreRol());
+					newRolesModel.add(eachRolModel);
+
 				}
 
-				final SDHRolModel eachRolModel = new SDHRolModel();
-				eachRolModel.setRol(eachRolResponse.getNombreRol());
-				newRolesModel.add(eachRolModel);
+				modelService.saveAll(newRolesModel);
 
+				customerModel.setRolList(newRolesModel);
 			}
-
-			modelService.saveAll(newRolesModel);
-
-			customerModel.setRolList(newRolesModel);
-		}
-		else
-		{
-			customerModel.setRolList(null);
+			else
+			{
+				customerModel.setRolList(null);
+			}
 		}
 
 	}
@@ -1274,128 +1287,130 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse)
 	{
 
-		final InfoContribResponse infoContribuyente = sdhConsultaContribuyenteBPResponse.getInfoContrib();
-		if (null != infoContribuyente)
+		if (sdhConsultaContribuyenteBPResponse != null)
 		{
-			customerModel.setFirstName(infoContribuyente.getPrimNom());
-			customerModel.setMiddleName(infoContribuyente.getSegNom());
-			customerModel.setLastName(infoContribuyente.getPrimApe());
-			customerModel.setSecondLastName(infoContribuyente.getSegApe());
-
-			customerModel.setDocumentNumber(infoContribuyente.getNumDoc());
-			customerModel.setDocumentType(infoContribuyente.getTipoDoc());
-			//TODO: save document expedition date
-
-			customerModel.setDocumentNumber(infoContribuyente.getNumDoc());
-
-
-			final ContribAdicionales adicionales = infoContribuyente.getAdicionales();
-			if (null != adicionales)
+			final InfoContribResponse infoContribuyente = sdhConsultaContribuyenteBPResponse.getInfoContrib();
+			if (null != infoContribuyente)
 			{
-				customerModel.setSdhType(adicionales.getTYPE());
-				customerModel.setSdhTitle(adicionales.getTITLE());
-				customerModel.setNameOrg1(adicionales.getNAME_ORG1());
-				customerModel.setNameOrg2(adicionales.getNAME_ORG2());
-				customerModel.setNameOrg3(adicionales.getNAME_ORG3());
-				customerModel.setNameOrg4(adicionales.getNAME_ORG4());
+				customerModel.setFirstName(infoContribuyente.getPrimNom());
+				customerModel.setMiddleName(infoContribuyente.getSegNom());
+				customerModel.setLastName(infoContribuyente.getPrimApe());
+				customerModel.setSecondLastName(infoContribuyente.getSegApe());
+
+				customerModel.setDocumentNumber(infoContribuyente.getNumDoc());
+				customerModel.setDocumentType(infoContribuyente.getTipoDoc());
+				//TODO: save document expedition date
+
+				customerModel.setDocumentNumber(infoContribuyente.getNumDoc());
 
 
-				customerModel.setDigVer(adicionales.getDIGVERIF());
-				customerModel.setLegalEntity(adicionales.getLEGAL_ENTY());
-				customerModel.setLegalOrg(adicionales.getLEGALORG());
-				customerModel.setUseEmailForNotifications((1 == adicionales.getZZAUTOBUZONE()) ? Boolean.TRUE : Boolean.FALSE);
-				customerModel
-						.setUseInformationForInstitutionalPurposes((1 == adicionales.getZZAUTOUSOINF()) ? Boolean.TRUE : Boolean.FALSE);
-				//TODO: fecha de autorizacion de uso de buzon
-
-			}
-
-			//clean old addresses
-			final List<SDHAddressModel> currentAddresses = customerModel.getAddressList();
-
-			if (currentAddresses != null && !currentAddresses.isEmpty())
-			{
-				modelService.removeAll(currentAddresses);
-			}
-
-			final List<ContribDireccion> direcciones = infoContribuyente.getDireccion();
-
-			if (direcciones != null && !direcciones.isEmpty())
-			{
-
-				final List<SDHAddressModel> newAddresses = new ArrayList<SDHAddressModel>();
-
-				for (final ContribDireccion eachAddress : direcciones)
+				final ContribAdicionales adicionales = infoContribuyente.getAdicionales();
+				if (null != adicionales)
 				{
+					customerModel.setSdhType(adicionales.getTYPE());
+					customerModel.setSdhTitle(adicionales.getTITLE());
+					customerModel.setNameOrg1(adicionales.getNAME_ORG1());
+					customerModel.setNameOrg2(adicionales.getNAME_ORG2());
+					customerModel.setNameOrg3(adicionales.getNAME_ORG3());
+					customerModel.setNameOrg4(adicionales.getNAME_ORG4());
 
-					if (StringUtils.isBlank(eachAddress.getADR_KIND()))
-					{
-						continue;
-					}
 
-					final SDHAddressModel eachAddressModel = new SDHAddressModel();
-					eachAddressModel.setAddKind(eachAddress.getADR_KIND());
-					eachAddressModel.setStreet(eachAddress.getSTREET());
-					eachAddressModel.setPostalCode(eachAddress.getPOST_CODE());
-					eachAddressModel.setCity(eachAddress.getCITY1());
-					eachAddressModel.setCountry(eachAddress.getCOUNTRY());
-					eachAddressModel.setRegion(eachAddress.getREGION());
-
-					newAddresses.add(eachAddressModel);
+					customerModel.setDigVer(adicionales.getDIGVERIF());
+					customerModel.setLegalEntity(adicionales.getLEGAL_ENTY());
+					customerModel.setLegalOrg(adicionales.getLEGALORG());
+					customerModel.setUseEmailForNotifications((1 == adicionales.getZZAUTOBUZONE()) ? Boolean.TRUE : Boolean.FALSE);
+					customerModel.setUseInformationForInstitutionalPurposes(
+							(1 == adicionales.getZZAUTOUSOINF()) ? Boolean.TRUE : Boolean.FALSE);
+					//TODO: fecha de autorizacion de uso de buzon
 
 				}
 
-				modelService.saveAll(newAddresses);
+				//clean old addresses
+				final List<SDHAddressModel> currentAddresses = customerModel.getAddressList();
 
-				customerModel.setAddressList(newAddresses);
-
-			}
-			else
-			{
-				customerModel.setAddressList(null);
-			}
-
-
-			//clean old social networks
-			final List<SDHSocialNetworkModel> socialNetworks = customerModel.getNetworkList();
-
-			if (socialNetworks != null && !socialNetworks.isEmpty())
-			{
-				modelService.removeAll(socialNetworks);
-			}
-
-			final List<ContribRedSocial> redsocial = infoContribuyente.getRedsocial();
-
-			if (redsocial != null && !redsocial.isEmpty())
-			{
-
-				final List<SDHSocialNetworkModel> newSocialNetwork = new ArrayList<SDHSocialNetworkModel>();
-
-				for (final ContribRedSocial eachSocialNetwork : redsocial)
+				if (currentAddresses != null && !currentAddresses.isEmpty())
 				{
-					if (StringUtils.isBlank(eachSocialNetwork.getRED_SOCIAL()))
-					{
-						continue;
-					}
-
-					final SDHSocialNetworkModel eachSocialNetworkModel = new SDHSocialNetworkModel();
-					eachSocialNetworkModel.setSocialNetwork(eachSocialNetwork.getRED_SOCIAL());
-					eachSocialNetworkModel.setUsername(eachSocialNetwork.getUSUARIORED());
-					newSocialNetwork.add(eachSocialNetworkModel);
-
+					modelService.removeAll(currentAddresses);
 				}
 
-				modelService.saveAll(newSocialNetwork);
+				final List<ContribDireccion> direcciones = infoContribuyente.getDireccion();
 
-				customerModel.setNetworkList(newSocialNetwork);
-			}
-			else
-			{
-				customerModel.setNetworkList(null);
-			}
+				if (direcciones != null && !direcciones.isEmpty())
+				{
 
+					final List<SDHAddressModel> newAddresses = new ArrayList<SDHAddressModel>();
+
+					for (final ContribDireccion eachAddress : direcciones)
+					{
+
+						if (StringUtils.isBlank(eachAddress.getADR_KIND()))
+						{
+							continue;
+						}
+
+						final SDHAddressModel eachAddressModel = new SDHAddressModel();
+						eachAddressModel.setAddKind(eachAddress.getADR_KIND());
+						eachAddressModel.setStreet(eachAddress.getSTREET());
+						eachAddressModel.setPostalCode(eachAddress.getPOST_CODE());
+						eachAddressModel.setCity(eachAddress.getCITY1());
+						eachAddressModel.setCountry(eachAddress.getCOUNTRY());
+						eachAddressModel.setRegion(eachAddress.getREGION());
+
+						newAddresses.add(eachAddressModel);
+
+					}
+
+					modelService.saveAll(newAddresses);
+
+					customerModel.setAddressList(newAddresses);
+
+				}
+				else
+				{
+					customerModel.setAddressList(null);
+				}
+
+
+				//clean old social networks
+				final List<SDHSocialNetworkModel> socialNetworks = customerModel.getNetworkList();
+
+				if (socialNetworks != null && !socialNetworks.isEmpty())
+				{
+					modelService.removeAll(socialNetworks);
+				}
+
+				final List<ContribRedSocial> redsocial = infoContribuyente.getRedsocial();
+
+				if (redsocial != null && !redsocial.isEmpty())
+				{
+
+					final List<SDHSocialNetworkModel> newSocialNetwork = new ArrayList<SDHSocialNetworkModel>();
+
+					for (final ContribRedSocial eachSocialNetwork : redsocial)
+					{
+						if (StringUtils.isBlank(eachSocialNetwork.getRED_SOCIAL()))
+						{
+							continue;
+						}
+
+						final SDHSocialNetworkModel eachSocialNetworkModel = new SDHSocialNetworkModel();
+						eachSocialNetworkModel.setSocialNetwork(eachSocialNetwork.getRED_SOCIAL());
+						eachSocialNetworkModel.setUsername(eachSocialNetwork.getUSUARIORED());
+						newSocialNetwork.add(eachSocialNetworkModel);
+
+					}
+
+					modelService.saveAll(newSocialNetwork);
+
+					customerModel.setNetworkList(newSocialNetwork);
+				}
+				else
+				{
+					customerModel.setNetworkList(null);
+				}
+
+			}
 		}
-
 	}
 
 
