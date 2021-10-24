@@ -126,10 +126,8 @@ public class SdhInfoObjectUseOptionController {
         detalleGasolinaRequest.setPeriodo(periodo);
 
         contribuyenteRequest.setNumBP(customerModel.getNumBP());
-        final SDHValidaMailRolResponse detalleContribuyente = gasolinaService.consultaContribuyente(
-                contribuyenteRequest,
-                sdhConsultaContribuyenteBPService,
-                LOG);
+		  final SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+		  detalleContribuyente.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(contribuyenteRequest));
         final List<SobreTasaGasolinaTabla> tablaDocs = gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina());
         if (tablaDocs != null){
             for (int i = 0; i < tablaDocs.size(); i++){
