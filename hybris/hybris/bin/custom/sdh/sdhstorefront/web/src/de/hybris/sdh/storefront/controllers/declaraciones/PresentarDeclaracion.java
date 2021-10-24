@@ -24,6 +24,7 @@ import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
+import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbanaWithRadicados;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
@@ -49,6 +50,7 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaSe
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaTabla;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacion;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacionInput;
+import de.hybris.sdh.storefront.forms.SobreTasaGasolinaControlCamposDec;
 import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
 import java.time.LocalDate;
@@ -156,6 +158,31 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
 		//dataForm.setAnoGravable("2019");
 		//dataForm.setPeriodo("1");
+		obtenerListaImpuestosCliente(customerModel, dataForm);
+
+
+		model.addAttribute("dataForm", dataForm);
+		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionVehicular(), dataForm.getOptionGas(),
+				dataForm.getOptionPubliExt(), dataForm.getOptionIca(), dataForm.getOptionDeli(), dataForm.getOptionPredial()));
+
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
+		model.addAttribute("customerData", customerData);
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+
+	/**
+	 * @param customerModel
+	 * @param dataForm
+	 */
+	private void obtenerListaImpuestosCliente(CustomerModel customerModel, SobreTasaGasolinaForm dataForm)
+	{
 
 		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
 
@@ -196,24 +223,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		}
 
-		model.addAttribute("dataForm", dataForm);
-		model.addAttribute("tpImpuesto",
-				this.getTpImpuesto(dataForm.getOptionVehicular(), dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
-						dataForm.getOptionIca(),
-						dataForm.getOptionDeli(), dataForm.getOptionPredial()));
-		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
-		model.addAttribute("customerData", customerData);
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-
-		return getViewForPage(model);
 	}
-
-
-
 
 
 	//-----------------------------------------------------------------------------------------------------------------
@@ -254,7 +265,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
 				final List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
-				SDHValidaMailRolResponse detalleContribuyente;
+				SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
 				String[] mensajesError;
 
 
@@ -264,20 +275,13 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 				contribuyenteRequest.setNumBP(numBP);
 
-				detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService,
-						LOG);
-				if (detalleContribuyente.getIdmsj() != 0)
-				{
-					LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
-					//					GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
-					mensajesError = gasolinaService.prepararMensajesError(
-							gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
-					GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-							"error.impuestoGasolina.sobretasa.error2", mensajesError);
-				}
-
+				detalleContribuyente.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(contribuyenteRequest));
 				anioGravable = dataFormResponse.getAnoGravable();
-				placa = detalleContribuyente.getVehicular().get(0).getPlaca();
+				if (detalleContribuyente != null && detalleContribuyente.getVehicular() != null
+						&& detalleContribuyente.getVehicular().get(0) != null)
+				{
+					placa = detalleContribuyente.getVehicular().get(0).getPlaca();
+				}
 
 				final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
 				detalleVehiculosRequest.setBpNum(numBP);
@@ -383,7 +387,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			if (dataFormResponse.getImpuesto().equals("5") && !dataFormResponse.getAnoGravable().equals("")
 					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
 			{
-				final CustomerModel customerModel;
+				CustomerModel customerModel = null;
 				final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 				final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 				String numBP = "";
@@ -392,12 +396,14 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				String anioGravable = "";
 				String periodo = "";
 				final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
-				final DetGasResponse detalleResponse;
+				DetGasResponse detalleResponse = null;
 				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
-				List<SobreTasaGasolinaTabla> tablaDocs;
+				List<SobreTasaGasolinaTabla> tablaDocs = null;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
-				SDHValidaMailRolResponse detalleContribuyente;
-				String[] mensajesError;
+				SDHValidaMailRolResponse detalleContribuyente = null;
+				SDHValidaMailRolResponse detalleContribuyente_temp = null;
+				String[] mensajesError = null;
+				String mensajeError = null;
 
 
 				customerModel = (CustomerModel) userService.getCurrentUser();
@@ -407,19 +413,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 				contribuyenteRequest.setNumBP(numBP);
 
-				detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService,
-						LOG);
-				if (detalleContribuyente.getIdmsj() != 0)
-				{
-					LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
-					//					GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
-					mensajesError = gasolinaService.prepararMensajesError(
-							gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
-					GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-							"error.impuestoGasolina.sobretasa.error2", mensajesError);
-				}
-
-
+				detalleContribuyente = new SDHValidaMailRolResponse();
+				detalleContribuyente.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(contribuyenteRequest));
 				tablaDocs = gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina());
 
 				if (tablaDocs != null)
@@ -443,6 +438,48 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				detalleGasolinaRequest.setPeriodo(periodo);
 
 				detalleResponse = gasolinaService.consultaDetGasolina(detalleGasolinaRequest, sdhDetalleGasolinaWS, LOG);
+				if (dataForm != null)
+				{
+					dataForm.setControlCampos(new SobreTasaGasolinaControlCamposDec());
+					dataForm.getControlCampos().setPasarALiquidador(true);
+					dataForm.setMensajeError(null);
+
+					if (detalleResponse != null && detalleResponse.getErrores() != null)
+					{
+						for (ErrorEnWS etemp : detalleResponse.getErrores())
+						{
+							if (etemp != null && etemp.getIdmsj() != null && etemp.getIdmsj().equals("200"))
+							{
+								dataForm.getControlCampos().setPasarALiquidador(false);
+								dataForm.setMensajeError(etemp.getTxtmsj());
+								mensajeError = etemp.getTxtmsj();
+							}
+						}
+					}
+				}
+
+				if (mensajeError != null)
+				{
+					GlobalMessages.addErrorMessage(model, mensajeError);
+
+					obtenerListaImpuestosCliente(customerModel, dataForm);
+					model.addAttribute("tpImpuesto",
+							this.getTpImpuesto(dataForm.getOptionVehicular(), dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
+									dataForm.getOptionIca(), dataForm.getOptionDeli(), dataForm.getOptionPredial()));
+					model.addAttribute("dataForm", dataForm);
+					model.addAttribute("icaPeriodo", this.getIcaPeriodo());
+					model.addAttribute("icaAnioGravable", this.getIcaAnoGravable());
+					model.addAttribute("isPeriodoAnual", isPeriodoAnual);
+					model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
+
+					storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
+					setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
+					model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+					model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+
+					return getViewForPage(model);
+				}
 				dataForm.setDataForm(detalleResponse);
 
 				dataForm.setNumBP(numBP);
@@ -450,7 +487,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				dataForm.setTipoDoc(tipoDoc);
 				dataForm.setAnoGravable(anioGravable);
 				dataForm.setPeriodo(periodo);
-				dataForm.setNAME_ORG1(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
+				if (customerModel != null)
+				{
+					dataForm.setNAME_ORG1(customerModel.getNameOrg1());
+				}
 				dataForm.setImpuesto(dataFormResponse.getImpuesto());
 
 				model.addAttribute("dataForm", dataForm);
@@ -564,14 +604,17 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		consultaContribuyenteBPRequest.setNumBP(customerData.getNumBP());
 
-		final ImpuestoICA icaWS = sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest);
-		final SDHICATaxData icaTax = new SDHICATaxData();
-		if (icaWS != null)
+		if (dataFormResponse.getImpuesto().equals("3"))
 		{
-			icaTax.setObjectNumber(icaWS.getNumObjeto());
-			if (customerData != null)
+			final ImpuestoICA icaWS = sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest);
+			final SDHICATaxData icaTax = new SDHICATaxData();
+			if (icaWS != null)
 			{
-				customerData.setIcaTax(icaTax);
+				icaTax.setObjectNumber(icaWS.getNumObjeto());
+				if (customerData != null)
+				{
+					customerData.setIcaTax(icaTax);
+				}
 			}
 		}
 
@@ -626,53 +669,11 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		dataForm.setPeriodicidadImpuesto(dataFormResponse.getPeriodicidadImpuesto());
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-
-		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
-
-
-		for (final PrincipalGroupModel group : groupList)
-		{
-			final String groupUid = group.getUid();
-
-			if (groupUid.contains("predialUsrTaxGrp"))
-			{
-				dataForm.setOptionPredial("1");
-			}
-
-			if (groupUid.contains("vehicularUsrTaxGrp"))
-			{
-				dataForm.setOptionVehicular("2");
-			}
-
-			if (groupUid.contains("ICAUsrTaxGrp"))
-			{
-				dataForm.setOptionIca("3");
-			}
-
-			if (groupUid.contains("gasolinaUsrTaxGrp"))
-			{
-				dataForm.setOptionGas("5");
-			}
-
-			if (groupUid.contains("delineacionUsrTaxGrp"))
-			{
-				dataForm.setOptionDeli("6");
-			}
-
-			if (groupUid.contains("publicidadExtUsrTaxGrp"))
-			{
-				dataForm.setOptionPubliExt("4");
-			}
-
-		}
-
-
+		obtenerListaImpuestosCliente(customerModel, dataForm);
 
 
 		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionVehicular(), dataForm.getOptionGas(),
 				dataForm.getOptionPubliExt(), dataForm.getOptionIca(), dataForm.getOptionDeli(), dataForm.getOptionPredial()));
-
-
 		model.addAttribute("dataForm", dataForm);
 		model.addAttribute("icaPeriodo", this.getIcaPeriodo());
 		model.addAttribute("icaAnioGravable", this.getIcaAnoGravable());
