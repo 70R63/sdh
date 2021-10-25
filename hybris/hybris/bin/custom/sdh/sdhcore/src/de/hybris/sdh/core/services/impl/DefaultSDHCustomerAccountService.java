@@ -19,7 +19,6 @@ import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService;
 import de.hybris.platform.commerceservices.event.ForgottenPwdEvent;
 import de.hybris.platform.commerceservices.security.SecureToken;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserGroupModel;
@@ -1239,41 +1238,43 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			modelService.removeAll(oldAgentModels);
 		}
 
-		final List<ContribAgente> agents = sdhConsultaContribuyenteBPResponse.getAgentes();
-
-		if (agents != null && !agents.isEmpty())
+		if (sdhConsultaContribuyenteBPResponse != null)
 		{
-
-			final List<SDHAgentModel> newAgentModels = new ArrayList<SDHAgentModel>();
-
-			for (final ContribAgente eachAgentResponse : agents)
+			final List<ContribAgente> agents = sdhConsultaContribuyenteBPResponse.getAgentes();
+			if (agents != null && !agents.isEmpty())
 			{
-				if (StringUtils.isBlank(eachAgentResponse.getNumDoc()))
+
+				final List<SDHAgentModel> newAgentModels = new ArrayList<SDHAgentModel>();
+
+				for (final ContribAgente eachAgentResponse : agents)
 				{
-					continue;
+					if (StringUtils.isBlank(eachAgentResponse.getNumDoc()))
+					{
+						continue;
+					}
+
+					final SDHAgentModel eachNewAgentModel = new SDHAgentModel();
+
+					eachNewAgentModel.setAgent(eachAgentResponse.getAgente());
+					eachNewAgentModel.setDocumentNumber(eachAgentResponse.getNumDoc());
+					eachNewAgentModel.setDocumentType(eachAgentResponse.getTipoDoc());
+					eachNewAgentModel.setCompleteName(eachAgentResponse.getNomCompleto());
+					eachNewAgentModel.setInternalFunction(eachAgentResponse.getFuncionInterl());
+					eachNewAgentModel.setBp(eachAgentResponse.getBp());
+					eachNewAgentModel.setMenu(eachAgentResponse.getMenu());
+
+					newAgentModels.add(eachNewAgentModel);
+
 				}
 
-				final SDHAgentModel eachNewAgentModel = new SDHAgentModel();
+				modelService.saveAll(newAgentModels);
 
-				eachNewAgentModel.setAgent(eachAgentResponse.getAgente());
-				eachNewAgentModel.setDocumentNumber(eachAgentResponse.getNumDoc());
-				eachNewAgentModel.setDocumentType(eachAgentResponse.getTipoDoc());
-				eachNewAgentModel.setCompleteName(eachAgentResponse.getNomCompleto());
-				eachNewAgentModel.setInternalFunction(eachAgentResponse.getFuncionInterl());
-				eachNewAgentModel.setBp(eachAgentResponse.getBp());
-				eachNewAgentModel.setMenu(eachAgentResponse.getMenu());
-
-				newAgentModels.add(eachNewAgentModel);
-
+				customerModel.setAgentList(newAgentModels);
 			}
-
-			modelService.saveAll(newAgentModels);
-
-			customerModel.setAgentList(newAgentModels);
-		}
-		else
-		{
-			customerModel.setAgentList(null);
+			else
+			{
+				customerModel.setAgentList(null);
+			}
 		}
 
 	}
