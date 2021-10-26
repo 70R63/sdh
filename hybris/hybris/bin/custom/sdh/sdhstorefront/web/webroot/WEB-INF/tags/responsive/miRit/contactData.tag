@@ -1001,9 +1001,9 @@ toddir.style.width= '900px'
 				<div class="row">
 					<div class="col-md-2">
 						<div class="form-group ">
-<!-- 							<label class="control-label" for="telefonoPricipal"> -->
-<%-- 								<spring:theme code="mirit.contactData.landPhone" /> --%>
-<!-- 							</label>  -->
+							<label class="control-label" for="telefonoPricipal">
+								<spring:theme code="Teléfono" />
+							</label> 
 						<select class="newalto form-control" id="phoneSelect" onchange="showExt()">
 							<option value="00">Seleccionar</option>
 							<option value="1">Movil</option>
