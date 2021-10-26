@@ -1,7 +1,6 @@
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class FirmanteResponsePredial2 {
 
@@ -16,7 +15,7 @@ public class FirmanteResponsePredial2 {
 		return tipoIdent;
 	}
 
-	@JsonProperty("tipoIdent")
+	@JsonSetter("tipoIdent")
 	public void setTipoIdent(final String tipoIdent)
 	{
 		this.tipoIdent = tipoIdent;
@@ -27,7 +26,7 @@ public class FirmanteResponsePredial2 {
 		return numIdent;
 	}
 
-	@JsonProperty("numIdentif")
+	@JsonSetter("numIdentif")
 	public void setNumIdent(final String numIdent)
 	{
 		this.numIdent = numIdent;
@@ -38,7 +37,7 @@ public class FirmanteResponsePredial2 {
 		return nombre;
 	}
 
-	@JsonProperty("nombre")
+	@JsonSetter("nombre")
 	public void setNombre(final String nombre)
 	{
 		this.nombre = nombre;
@@ -49,7 +48,7 @@ public class FirmanteResponsePredial2 {
 		return tarjetaProd;
 	}
 
-	@JsonProperty("tarjetaProf")
+	@JsonSetter("tarjetaProf")
 	public void setTarjetaProd(final String tarjetaProd)
 	{
 		this.tarjetaProd = tarjetaProd;
@@ -57,7 +56,7 @@ public class FirmanteResponsePredial2 {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

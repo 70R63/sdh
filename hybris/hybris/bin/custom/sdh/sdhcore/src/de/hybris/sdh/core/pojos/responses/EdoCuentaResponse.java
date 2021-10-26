@@ -5,7 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 
 /**
  * @author hybris
@@ -70,7 +71,7 @@ public class EdoCuentaResponse
 	 * @param newPredialSaldoCargo
 	 *           the newPredialSaldoCargo to set
 	 */
-	@JsonProperty("PredialSaldoCargo")
+	@JsonSetter("PredialSaldoCargo")
 	public void setNewPredialSaldoCargo(final String newPredialSaldoCargo)
 	{
 		this.newPredialSaldoCargo = newPredialSaldoCargo;
@@ -88,7 +89,7 @@ public class EdoCuentaResponse
 	 * @param newPredialSaldoFavor
 	 *           the newPredialSaldoFavor to set
 	 */
-	@JsonProperty("PredialSaldoFavor")
+	@JsonSetter("PredialSaldoFavor")
 	public void setNewPredialSaldoFavor(final String newPredialSaldoFavor)
 	{
 		this.newPredialSaldoFavor = newPredialSaldoFavor;
@@ -106,7 +107,7 @@ public class EdoCuentaResponse
 	 * @param newICASaldoCargo
 	 *           the newICASaldoCargo to set
 	 */
-	@JsonProperty("ICASaldoCargo")
+	@JsonSetter("ICASaldoCargo")
 	public void setNewICASaldoCargo(final String newICASaldoCargo)
 	{
 		this.newICASaldoCargo = newICASaldoCargo;
@@ -124,7 +125,7 @@ public class EdoCuentaResponse
 	 * @param newICASaldoFavor
 	 *           the newICASaldoFavor to set
 	 */
-	@JsonProperty("ICASaldoFavor")
+	@JsonSetter("ICASaldoFavor")
 	public void setNewICASaldoFavor(final String newICASaldoFavor)
 	{
 		this.newICASaldoFavor = newICASaldoFavor;
@@ -142,7 +143,7 @@ public class EdoCuentaResponse
 	 * @param newVehicularSaldoCargo
 	 *           the newVehicularSaldoCargo to set
 	 */
-	@JsonProperty("VehicularSaldoCargo")
+	@JsonSetter("VehicularSaldoCargo")
 	public void setNewVehicularSaldoCargo(final String newVehicularSaldoCargo)
 	{
 		this.newVehicularSaldoCargo = newVehicularSaldoCargo;
@@ -160,7 +161,7 @@ public class EdoCuentaResponse
 	 * @param newVehicularSaldoFavor
 	 *           the newVehicularSaldoFavor to set
 	 */
-	@JsonProperty("VehicularSaldoFavor")
+	@JsonSetter("VehicularSaldoFavor")
 	public void setNewVehicularSaldoFavor(final String newVehicularSaldoFavor)
 	{
 		this.newVehicularSaldoFavor = newVehicularSaldoFavor;
@@ -178,7 +179,7 @@ public class EdoCuentaResponse
 	 * @param newDelineacionSaldoCargo
 	 *           the newDelineacionSaldoCargo to set
 	 */
-	@JsonProperty("DelineacionSaldoCargo")
+	@JsonSetter("DelineacionSaldoCargo")
 	public void setNewDelineacionSaldoCargo(final String newDelineacionSaldoCargo)
 	{
 		this.newDelineacionSaldoCargo = newDelineacionSaldoCargo;
@@ -196,7 +197,7 @@ public class EdoCuentaResponse
 	 * @param newDelineacionSaldoFavor
 	 *           the newDelineacionSaldoFavor to set
 	 */
-	@JsonProperty("DelineacionSaldoFavor")
+	@JsonSetter("DelineacionSaldoFavor")
 	public void setNewDelineacionSaldoFavor(final String newDelineacionSaldoFavor)
 	{
 		this.newDelineacionSaldoFavor = newDelineacionSaldoFavor;
@@ -214,7 +215,7 @@ public class EdoCuentaResponse
 	 * @param newGasolinaSaldoCargo
 	 *           the newGasolinaSaldoCargo to set
 	 */
-	@JsonProperty("GasolinaSaldoCargo")
+	@JsonSetter("GasolinaSaldoCargo")
 	public void setNewGasolinaSaldoCargo(final String newGasolinaSaldoCargo)
 	{
 		this.newGasolinaSaldoCargo = newGasolinaSaldoCargo;
@@ -232,7 +233,7 @@ public class EdoCuentaResponse
 	 * @param newGasolinaSaldoFavor
 	 *           the newGasolinaSaldoFavor to set
 	 */
-	@JsonProperty("GasolinaSaldoFavor")
+	@JsonSetter("GasolinaSaldoFavor")
 	public void setNewGasolinaSaldoFavor(final String newGasolinaSaldoFavor)
 	{
 		this.newGasolinaSaldoFavor = newGasolinaSaldoFavor;
@@ -250,7 +251,7 @@ public class EdoCuentaResponse
 	 * @param newPublicidadSaldoCargo
 	 *           the newPublicidadSaldoCargo to set
 	 */
-	@JsonProperty("PublicidadSaldoCargo")
+	@JsonSetter("PublicidadSaldoCargo")
 	public void setNewPublicidadSaldoCargo(final String newPublicidadSaldoCargo)
 	{
 		this.newPublicidadSaldoCargo = newPublicidadSaldoCargo;
@@ -268,7 +269,7 @@ public class EdoCuentaResponse
 	 * @param newPublicidadSaldoFavor
 	 *           the newPublicidadSaldoFavor to set
 	 */
-	@JsonProperty("PublicidadSaldoFavor")
+	@JsonSetter("PublicidadSaldoFavor")
 	public void setNewPublicidadSaldoFavor(final String newPublicidadSaldoFavor)
 	{
 		this.newPublicidadSaldoFavor = newPublicidadSaldoFavor;
@@ -422,7 +423,7 @@ public class EdoCuentaResponse
 	 * @param newReteicaSaldoCargo
 	 *           the newReteicaSaldoCargo to set
 	 */
-	@JsonProperty("ReteicaSaldoCargo")
+	@JsonSetter("ReteicaSaldoCargo")
 	public void setNewReteicaSaldoCargo(final String newReteicaSaldoCargo)
 	{
 		this.newReteicaSaldoCargo = newReteicaSaldoCargo;
@@ -440,7 +441,7 @@ public class EdoCuentaResponse
 	 * @param newReteicaSaldoFavor
 	 *           the newReteicaSaldoFavor to set
 	 */
-	@JsonProperty("ReteicaSaldoFavor")
+	@JsonSetter("ReteicaSaldoFavor")
 	public void setNewReteicaSaldoFavor(final String newReteicaSaldoFavor)
 	{
 		this.newReteicaSaldoFavor = newReteicaSaldoFavor;

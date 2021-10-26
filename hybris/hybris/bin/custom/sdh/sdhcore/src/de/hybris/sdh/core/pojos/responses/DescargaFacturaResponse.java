@@ -5,7 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 
 
 /**
@@ -29,7 +30,7 @@ public class DescargaFacturaResponse
 	 * @param pdf
 	 *           the pdf to set
 	 */
-	@JsonProperty("PDF")
+	@JsonSetter("PDF")
 	public void setPdf(final String pdf)
 	{
 		this.pdf = pdf;

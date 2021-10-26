@@ -1,6 +1,6 @@
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class PredialResponse {
     private String CHIP;
@@ -14,8 +14,8 @@ public class PredialResponse {
         return CHIP;
     }
 
-    @JsonProperty("CHIP")
-    public void setCHIP(String CHIP) {
+	 @JsonSetter("CHIP")
+    public void setCHIP(final String CHIP) {
         this.CHIP = CHIP;
     }
 
@@ -23,7 +23,7 @@ public class PredialResponse {
         return matrInmobiliaria;
     }
 
-    public void setMatrInmobiliaria(String matrInmobiliaria) {
+    public void setMatrInmobiliaria(final String matrInmobiliaria) {
         this.matrInmobiliaria = matrInmobiliaria;
     }
 
@@ -31,7 +31,7 @@ public class PredialResponse {
         return direccionPredio;
     }
 
-    public void setDireccionPredio(String direccionPredio) {
+    public void setDireccionPredio(final String direccionPredio) {
         this.direccionPredio = direccionPredio;
     }
 
@@ -39,7 +39,7 @@ public class PredialResponse {
         return contratoArrenda;
     }
 
-    public void setContratoArrenda(String contratoArrenda) {
+    public void setContratoArrenda(final String contratoArrenda) {
         this.contratoArrenda = contratoArrenda;
     }
 
@@ -47,7 +47,7 @@ public class PredialResponse {
         return anioGravable;
     }
 
-    public void setAnioGravable(String anioGravable) {
+    public void setAnioGravable(final String anioGravable) {
         this.anioGravable = anioGravable;
     }
 
@@ -55,7 +55,7 @@ public class PredialResponse {
         return numObjeto;
     }
 
-    public void setNumObjeto(String numObjeto) {
+    public void setNumObjeto(final String numObjeto) {
         this.numObjeto = numObjeto;
     }
 

@@ -3,8 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author hybris
@@ -14,7 +13,7 @@ public class SendEmailResponse
 {
 	private String code;
 	private String messgae;
-	
+
 	/**
 	 * @return the code
 	 */
@@ -22,17 +21,17 @@ public class SendEmailResponse
 	{
 		return code;
 	}
-	
+
 	/**
 	 * @param code
 	 *           the code to set
 	 */
-	@JsonProperty("EP_CODE")
+	@JsonSetter("EP_CODE")
 	public void setCode(final String code)
 	{
 		this.code = code;
 	}
-	
+
 	/**
 	 * @return the messgae
 	 */
@@ -40,12 +39,12 @@ public class SendEmailResponse
 	{
 		return messgae;
 	}
-	
+
 	/**
 	 * @param messgae
 	 *           the messgae to set
 	 */
-	@JsonProperty("EP_MESSAGE")
+	@JsonSetter("EP_MESSAGE")
 	public void setMessgae(final String messgae)
 	{
 		this.messgae = messgae;

@@ -5,7 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 
 
 /**
@@ -51,7 +52,7 @@ public class CalculoReteIca2Response
 	 * @param infoDeclara
 	 *           the infoDeclara to set
 	 */
-	@JsonProperty("info_declara")
+	@JsonSetter("info_declara")
 	public void setInfoDeclara(final CalculoReteIca2InfoDeclara infoDeclara)
 	{
 		this.infoDeclara = infoDeclara;
@@ -69,7 +70,7 @@ public class CalculoReteIca2Response
 	 * @param icaFirmantes
 	 *           the icaFirmantes to set
 	 */
-	@JsonProperty("icaFirmantes")
+	@JsonSetter("icaFirmantes")
 	public void setIcaFirmantes(final List<FirmanteResponse> icaFirmantes)
 	{
 		this.icaFirmantes = icaFirmantes;

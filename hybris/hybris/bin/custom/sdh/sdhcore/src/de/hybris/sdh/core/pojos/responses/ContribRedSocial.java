@@ -3,8 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author hybris
@@ -27,7 +26,7 @@ public class ContribRedSocial
 	 * @param rED_SOCIAL
 	 *           the rED_SOCIAL to set
 	 */
-	@JsonProperty("RED_SOCIAL")
+	@JsonSetter("RED_SOCIAL")
 	public void setRED_SOCIAL(final String rED_SOCIAL)
 	{
 		RED_SOCIAL = rED_SOCIAL;
@@ -45,7 +44,7 @@ public class ContribRedSocial
 	 * @param uSUARIORED
 	 *           the uSUARIORED to set
 	 */
-	@JsonProperty("USUARIORED")
+	@JsonSetter("USUARIORED")
 	public void setUSUARIORED(final String uSUARIORED)
 	{
 		USUARIORED = uSUARIORED;

@@ -3,8 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author Federico Flores Dimas
@@ -99,7 +98,7 @@ public class DelineacionU2_usos
 	 * @param areaNeta
 	 *           the areaNeta to set
 	 */
-	@JsonProperty("area_neta")
+	@JsonSetter("area_neta")
 	public void setAreaNeta(final String areaNeta)
 	{
 		this.areaNeta = areaNeta;

@@ -3,8 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author Federico Flores Dimas
@@ -28,7 +27,7 @@ public class DelineacionU2_areaIntervenida
 	 * @param areaInter
 	 *           the areaInter to set
 	 */
-	@JsonProperty("Area_inter")
+	@JsonSetter("Area_inter")
 	public void setAreaInter(final String areaInter)
 	{
 		this.areaInter = areaInter;
@@ -46,7 +45,7 @@ public class DelineacionU2_areaIntervenida
 	 * @param aream2
 	 *           the aream2 to set
 	 */
-	@JsonProperty("Aream2")
+	@JsonSetter("Aream2")
 	public void setAream2(final String aream2)
 	{
 		this.aream2 = aream2;

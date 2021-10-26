@@ -5,7 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 
 
 /**
@@ -227,7 +228,7 @@ public class CalcVehiculosResponse
 	 * @param avaluoActual
 	 *           the avaluoActual to set
 	 */
-	@JsonProperty("avaluoActual")
+	@JsonSetter("avaluoActual")
 	public void setAvaluo(final String avaluo)
 	{
 		this.avaluo = avaluo;

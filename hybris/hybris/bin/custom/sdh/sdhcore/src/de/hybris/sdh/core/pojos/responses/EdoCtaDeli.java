@@ -5,7 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 
 
 /**
@@ -35,7 +36,7 @@ public class EdoCtaDeli
 	 * @param newCDU
 	 *           the newCDU to set
 	 */
-	@JsonProperty("CDU")
+	@JsonSetter("CDU")
 	public void setNewCDU(final String newCDU)
 	{
 		this.newCDU = newCDU;

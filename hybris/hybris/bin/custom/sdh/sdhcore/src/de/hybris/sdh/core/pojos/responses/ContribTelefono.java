@@ -3,8 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author hybris
@@ -41,7 +40,7 @@ public class ContribTelefono
 	 * @param tEL_TIPO
 	 *           the tEL_TIPO to set
 	 */
-	@JsonProperty("TEL_TIPO")
+	@JsonSetter("TEL_TIPO")
 	public void setTEL_TIPO(final String tEL_TIPO)
 	{
 		TEL_TIPO = tEL_TIPO;
@@ -59,7 +58,7 @@ public class ContribTelefono
 	 * @param tEL_NUMBER
 	 *           the tEL_NUMBER to set
 	 */
-	@JsonProperty("TEL_NUMBER")
+	@JsonSetter("TEL_NUMBER")
 	public void setTEL_NUMBER(final String tEL_NUMBER)
 	{
 		TEL_NUMBER = tEL_NUMBER;
@@ -77,7 +76,7 @@ public class ContribTelefono
 	 * @param tEL_EXTENS
 	 *           the tEL_EXTENS to set
 	 */
-	@JsonProperty("TEL_EXTENS")
+	@JsonSetter("TEL_EXTENS")
 	public void setTEL_EXTENS(final String tEL_EXTENS)
 	{
 		TEL_EXTENS = tEL_EXTENS;

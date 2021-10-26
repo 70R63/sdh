@@ -5,7 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 
 
 /**
@@ -38,7 +39,7 @@ public class PredialPresentarDecResponse
 	 * @param stringPDF
 	 *           the stringPDF to set
 	 */
-	@JsonProperty("PDF")
+	@JsonSetter("PDF")
 	public void setStringPDF(final String stringPDF)
 	{
 		this.stringPDF = stringPDF;
@@ -56,7 +57,7 @@ public class PredialPresentarDecResponse
 	 * @param referencia
 	 *           the referencia to set
 	 */
-	@JsonProperty("REFERENCIA")
+	@JsonSetter("REFERENCIA")
 	public void setReferencia(final String referencia)
 	{
 		this.referencia = referencia;
@@ -74,7 +75,7 @@ public class PredialPresentarDecResponse
 	 * @param fechavenc
 	 *           the fechavenc to set
 	 */
-	@JsonProperty("FECHAVENC")
+	@JsonSetter("FECHAVENC")
 	public void setFechavenc(final String fechavenc)
 	{
 		this.fechavenc = fechavenc;
@@ -92,7 +93,7 @@ public class PredialPresentarDecResponse
 	 * @param total
 	 *           the total to set
 	 */
-	@JsonProperty("TOTAL")
+	@JsonSetter("TOTAL")
 	public void setTotal(final String total)
 	{
 		this.total = total;
@@ -110,7 +111,7 @@ public class PredialPresentarDecResponse
 	 * @param bp
 	 *           the bp to set
 	 */
-	@JsonProperty("BP")
+	@JsonSetter("BP")
 	public void setBp(final String bp)
 	{
 		this.bp = bp;
@@ -128,7 +129,7 @@ public class PredialPresentarDecResponse
 	 * @param errores
 	 *           the errores to set
 	 */
-	@JsonProperty("MENSAJES")
+	@JsonSetter("MENSAJES")
 	public void setErrores(final List<ErrorEnWS> errores)
 	{
 		this.errores = errores;
@@ -153,7 +154,7 @@ public class PredialPresentarDecResponse
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
