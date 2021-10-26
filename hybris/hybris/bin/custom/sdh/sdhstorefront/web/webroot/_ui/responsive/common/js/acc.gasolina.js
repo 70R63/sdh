@@ -1,6 +1,6 @@
 ACC.gasolina = {
 
-	 _autoload: ["bindGeneraDeclaracionButton","bindDialogGasolina","bindProductClass","bindPresentarDeclaracionButton"],
+	 _autoload: ["bindGeneraDeclaracionButton","bindDialogGasolina","bindProductClass","bindPresentarDeclaracionButton","bindMostrarMensajePresDec"],
 	 
 	 bindProductClass: function () {
 		 $(document).on("change", ".form-control-gasolina", function (e) {
@@ -22,7 +22,7 @@ ACC.gasolina = {
 	 
 	 bindGeneraDeclaracionButton: function () {
 		 $(document).on("click", "#gasolinaGeneraDeclaracionButton", function (e) {
-			 debugger;
+			 
 	 	        e.preventDefault();
 				ACC.spinner.show();
 	 	       var numForm  = $.trim($("#numForm").val());
@@ -34,7 +34,7 @@ ACC.gasolina = {
 		            data: data,
 		            type: "GET",
 		            success: function (data) {
-						debugger;
+						
 						ACC.spinner.close();
 		            	$( "#dialogGasolina" ).dialog( "open" );
 		            	if(data.errores && ( data.errores[0].idmsj != 0 ))
@@ -64,7 +64,7 @@ ACC.gasolina = {
 	 	      		
 		            },
 		            error: function () {
-						debugger;
+						
 						
 						ACC.spinner.close();
 		            	$( "#dialogGasolina" ).dialog( "open" );
@@ -136,6 +136,22 @@ ACC.gasolina = {
 				}
 	 	 });
 	 },
+
+	 bindMostrarMensajePresDec: function () {
+		 $(document).on("click", "#mostrarMensajePresDec", function (e) {
+	 	        e.preventDefault();
+
+	 	        var mensaje = $.trim($(this).attr("data-mensajeError"));
+				if(mensaje != null){
+					
+	            	$("#dialogGasolina" ).dialog("open");
+        			$("#gasolinaDialogContent").html(mensaje);
+				}
+
+				
+	 	 });
+	 },
+
 
     
 
