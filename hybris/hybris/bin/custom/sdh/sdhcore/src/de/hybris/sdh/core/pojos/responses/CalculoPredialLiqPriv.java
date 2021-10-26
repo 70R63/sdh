@@ -3,8 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author hybris
@@ -40,7 +39,7 @@ public class CalculoPredialLiqPriv
 	 * @param aporteVoluntario
 	 *           the aporteVoluntario to set
 	 */
-	@JsonProperty("AporteVoluntario")
+	@JsonSetter("AporteVoluntario")
 	public void setAporteVoluntario(final String aporteVoluntario)
 	{
 		this.aporteVoluntario = aporteVoluntario;
@@ -58,7 +57,7 @@ public class CalculoPredialLiqPriv
 	 * @param proyecto
 	 *           the proyecto to set
 	 */
-	@JsonProperty("Proyecto")
+	@JsonSetter("Proyecto")
 	public void setProyecto(final String proyecto)
 	{
 		this.proyecto = proyecto;
@@ -76,7 +75,7 @@ public class CalculoPredialLiqPriv
 	 * @param valorImpuestoACargo
 	 *           the valorImpuestoACargo to set
 	 */
-	@JsonProperty("ValorImpuestoACargo")
+	@JsonSetter("ValorImpuestoACargo")
 	public void setValorImpuestoACargo(final String valorImpuestoACargo)
 	{
 		this.valorImpuestoACargo = valorImpuestoACargo;
@@ -94,7 +93,7 @@ public class CalculoPredialLiqPriv
 	 * @param descuentoPorIncrementoDiferencias
 	 *           the descuentoPorIncrementoDiferencias to set
 	 */
-	@JsonProperty("DescuentoPorIncrementoDiferencias")
+	@JsonSetter("DescuentoPorIncrementoDiferencias")
 	public void setDescuentoPorIncrementoDiferencias(final String descuentoPorIncrementoDiferencias)
 	{
 		this.descuentoPorIncrementoDiferencias = descuentoPorIncrementoDiferencias;
@@ -112,7 +111,7 @@ public class CalculoPredialLiqPriv
 	 * @param valorImpuestoAjustadoActual
 	 *           the valorImpuestoAjustadoActual to set
 	 */
-	@JsonProperty("ValorImpuestoAjustadoActual")
+	@JsonSetter("ValorImpuestoAjustadoActual")
 	public void setValorImpuestoAjustadoActual(final String valorImpuestoAjustadoActual)
 	{
 		this.valorImpuestoAjustadoActual = valorImpuestoAjustadoActual;
@@ -130,7 +129,7 @@ public class CalculoPredialLiqPriv
 	 * @param sancion
 	 *           the sancion to set
 	 */
-	@JsonProperty("Sancion")
+	@JsonSetter("Sancion")
 	public void setSancion(final String sancion)
 	{
 		this.sancion = sancion;
@@ -148,7 +147,7 @@ public class CalculoPredialLiqPriv
 	 * @param totalSaldoACargo
 	 *           the totalSaldoACargo to set
 	 */
-	@JsonProperty("TotalSaldoACargo")
+	@JsonSetter("TotalSaldoACargo")
 	public void setTotalSaldoACargo(final String totalSaldoACargo)
 	{
 		this.totalSaldoACargo = totalSaldoACargo;
@@ -166,7 +165,7 @@ public class CalculoPredialLiqPriv
 	 * @param valorAPagar
 	 *           the valorAPagar to set
 	 */
-	@JsonProperty("ValorAPagar")
+	@JsonSetter("ValorAPagar")
 	public void setValorAPagar(final String valorAPagar)
 	{
 		this.valorAPagar = valorAPagar;
@@ -184,7 +183,7 @@ public class CalculoPredialLiqPriv
 	 * @param descuentoPorProntoPago
 	 *           the descuentoPorProntoPago to set
 	 */
-	@JsonProperty("DescuentoPorProntoPago")
+	@JsonSetter("DescuentoPorProntoPago")
 	public void setDescuentoPorProntoPago(final String descuentoPorProntoPago)
 	{
 		this.descuentoPorProntoPago = descuentoPorProntoPago;
@@ -202,7 +201,7 @@ public class CalculoPredialLiqPriv
 	 * @param descuendoAdicional1
 	 *           the descuendoAdicional1 to set
 	 */
-	@JsonProperty("DescuendoAdicional1")
+	@JsonSetter("DescuendoAdicional1")
 	public void setDescuendoAdicional1(final String descuendoAdicional1)
 	{
 		this.descuendoAdicional1 = descuendoAdicional1;
@@ -220,7 +219,7 @@ public class CalculoPredialLiqPriv
 	 * @param intereses
 	 *           the intereses to set
 	 */
-	@JsonProperty("Intereses")
+	@JsonSetter("Intereses")
 	public void setIntereses(final String intereses)
 	{
 		this.intereses = intereses;
@@ -238,7 +237,7 @@ public class CalculoPredialLiqPriv
 	 * @param totalAPagar
 	 *           the totalAPagar to set
 	 */
-	@JsonProperty("TotalAPagar")
+	@JsonSetter("TotalAPagar")
 	public void setTotalAPagar(final String totalAPagar)
 	{
 		this.totalAPagar = totalAPagar;
@@ -256,7 +255,7 @@ public class CalculoPredialLiqPriv
 	 * @param valorAporteVoluntario
 	 *           the valorAporteVoluntario to set
 	 */
-	@JsonProperty("ValorAporteVoluntario")
+	@JsonSetter("ValorAporteVoluntario")
 	public void setValorAporteVoluntario(final String valorAporteVoluntario)
 	{
 		this.valorAporteVoluntario = valorAporteVoluntario;
@@ -274,7 +273,7 @@ public class CalculoPredialLiqPriv
 	 * @param totalConPagoVoluntario
 	 *           the totalConPagoVoluntario to set
 	 */
-	@JsonProperty("TotalConPagoVoluntario")
+	@JsonSetter("TotalConPagoVoluntario")
 	public void setTotalConPagoVoluntario(final String totalConPagoVoluntario)
 	{
 		this.totalConPagoVoluntario = totalConPagoVoluntario;
@@ -292,7 +291,7 @@ public class CalculoPredialLiqPriv
 	 * @param tarifa_liquidacion
 	 *           the tarifa_liquidacion to set
 	 */
-	@JsonProperty("TarifaLiquidacion")
+	@JsonSetter("TarifaLiquidacion")
 	public void setTarifaLiquidacion(final String tarifaLiquidacion)
 	{
 		this.tarifaLiquidacion = tarifaLiquidacion;

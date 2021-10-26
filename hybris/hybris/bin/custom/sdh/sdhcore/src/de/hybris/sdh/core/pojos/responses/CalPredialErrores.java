@@ -3,8 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author hybris
@@ -14,7 +13,7 @@ public class CalPredialErrores
 {
 	private String idError;
 	private String descError;
-	
+
 	/**
 	 * @return the idError
 	 */
@@ -22,18 +21,18 @@ public class CalPredialErrores
 	{
 		return idError;
 	}
-	
+
 	/**
 	 * @param idError
 	 *           the idError to set
 	 */
 
-	@JsonProperty("IdError")
+	@JsonSetter("IdError")
 	public void setIdError(final String idError)
 	{
 		this.idError = idError;
 	}
-	
+
 	/**
 	 * @return the descError
 	 */
@@ -41,13 +40,13 @@ public class CalPredialErrores
 	{
 		return descError;
 	}
-	
+
 	/**
 	 * @param descError
 	 *           the descError to set
 	 */
 
-	@JsonProperty("DescError")
+	@JsonSetter("DescError")
 	public void setDescError(final String descError)
 	{
 		this.descError = descError;

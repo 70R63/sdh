@@ -3,8 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author hybris
@@ -142,7 +141,7 @@ public class CalculoPredialRequest
 	 * @param datosLiquidacion
 	 *           the datosLiquidacion to set
 	 */
-	@JsonProperty("DatosLiquidacion")
+	@JsonSetter("DatosLiquidacion")
 	public void setDatosLiquidacion(final CalPredialDatLiq datosLiquidacion)
 	{
 		this.datosLiquidacion = datosLiquidacion;
@@ -164,7 +163,7 @@ public class CalculoPredialRequest
 	 * @param liquidacionPrivada
 	 *           the liquidacionPrivada to set
 	 */
-	@JsonProperty("LiquidacionPrivada")
+	@JsonSetter("LiquidacionPrivada")
 	public void setLiquidacionPrivada(final CalPredialLiqPriv liquidacionPrivada)
 	{
 		this.liquidacionPrivada = liquidacionPrivada;

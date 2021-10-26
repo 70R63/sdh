@@ -3,8 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author hybris
@@ -35,7 +34,7 @@ public class ContribDireccion
 	 * @param sTR_SUPPL1
 	 *           the sTR_SUPPL1 to set
 	 */
-	@JsonProperty("STR_SUPPL1")
+	@JsonSetter("STR_SUPPL1")
 	public void setSTR_SUPPL1(final String sTR_SUPPL1)
 	{
 		STR_SUPPL1 = sTR_SUPPL1;
@@ -53,7 +52,7 @@ public class ContribDireccion
 	 * @param sTR_SUPPL2
 	 *           the sTR_SUPPL2 to set
 	 */
-	@JsonProperty("STR_SUPPL2")
+	@JsonSetter("STR_SUPPL2")
 	public void setSTR_SUPPL2(final String sTR_SUPPL2)
 	{
 		STR_SUPPL2 = sTR_SUPPL2;
@@ -80,7 +79,7 @@ public class ContribDireccion
 	 * @param sTREET
 	 *           the sTREET to set
 	 */
-	@JsonProperty("STREET")
+	@JsonSetter("STREET")
 	public void setSTREET(final String sTREET)
 	{
 		STREET = sTREET;
@@ -99,7 +98,7 @@ public class ContribDireccion
 	 * @param cITY1
 	 *           the cITY1 to set
 	 */
-	@JsonProperty("CITY1")
+	@JsonSetter("CITY1")
 	public void setCITY1(final String cITY1)
 	{
 		CITY1 = cITY1;
@@ -117,7 +116,7 @@ public class ContribDireccion
 	 * @param cOUNTRY
 	 *           the cOUNTRY to set
 	 */
-	@JsonProperty("COUNTRY")
+	@JsonSetter("COUNTRY")
 	public void setCOUNTRY(final String cOUNTRY)
 	{
 		COUNTRY = cOUNTRY;
@@ -136,7 +135,7 @@ public class ContribDireccion
 	 * @param aDR_KIND
 	 *           the aDR_KIND to set
 	 */
-	@JsonProperty("ADR_KIND")
+	@JsonSetter("ADR_KIND")
 	public void setADR_KIND(final String aDR_KIND)
 	{
 		ADR_KIND = aDR_KIND;
@@ -154,7 +153,7 @@ public class ContribDireccion
 	 * @param hOUSE_NUM1
 	 *           the hOUSE_NUM1 to set
 	 */
-	@JsonProperty("HOUSE_NUM1")
+	@JsonSetter("HOUSE_NUM1")
 	public void setHOUSE_NUM1(final String hOUSE_NUM1)
 	{
 		HOUSE_NUM1 = hOUSE_NUM1;
@@ -172,7 +171,7 @@ public class ContribDireccion
 	 * @param pOST_CODE
 	 *           the pOST_CODE to set
 	 */
-	@JsonProperty("POST_CODE1")
+	@JsonSetter("POST_CODE1")
 	public void setPOST_CODE(final String pOST_CODE)
 	{
 		POST_CODE = pOST_CODE;
@@ -190,7 +189,7 @@ public class ContribDireccion
 	 * @param rEGION
 	 *           the rEGION to set
 	 */
-	@JsonProperty("REGION")
+	@JsonSetter("REGION")
 	public void setREGION(final String rEGION)
 	{
 		REGION = rEGION;

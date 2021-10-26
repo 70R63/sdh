@@ -5,7 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 
 
 /**
@@ -39,7 +40,7 @@ public class EdoCtaPredial
 	 * @param newCHIP
 	 *           the newCHIP to set
 	 */
-	@JsonProperty("CHIP")
+	@JsonSetter("CHIP")
 	public void setNewCHIP(final String newCHIP)
 	{
 		this.newCHIP = newCHIP;

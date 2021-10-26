@@ -1,13 +1,12 @@
 package de.hybris.sdh.core.pojos.requests;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class CalidadRequest {
 
     private String IdCalidad;
 
-    public CalidadRequest(String idCalidad) {
+    public CalidadRequest(final String idCalidad) {
         IdCalidad = idCalidad;
     }
 
@@ -16,8 +15,8 @@ public class CalidadRequest {
         return IdCalidad;
     }
 
-    @JsonProperty("IdCalidad")
-    public void setIdCalidad(String idCalidad) {
+	 @JsonSetter("IdCalidad")
+    public void setIdCalidad(final String idCalidad) {
         IdCalidad = idCalidad;
     }
 

@@ -3,8 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author Federico Flores Dimas
@@ -27,7 +26,7 @@ public class DelineacionU2_areaProyecto
 	 * @param areaProy
 	 *           the areaProy to set
 	 */
-	@JsonProperty("area_proy")
+	@JsonSetter("area_proy")
 	public void setAreaProy(final String areaProy)
 	{
 		this.areaProy = areaProy;

@@ -5,7 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 
 
 /**
@@ -49,7 +50,7 @@ public class DetalleVehiculos2Response
 	 * @param liquidacion
 	 *           the liquidacion to set
 	 */
-	@JsonProperty("Liquidacion")
+	@JsonSetter("Liquidacion")
 	public void setLiquidacion(final DetalleVehiculos2Response_liquidacion liquidacion)
 	{
 		this.liquidacion = liquidacion;
@@ -67,7 +68,7 @@ public class DetalleVehiculos2Response
 	 * @param firmantes
 	 *           the firmantes to set
 	 */
-	@JsonProperty("Firmantes")
+	@JsonSetter("Firmantes")
 	public void setFirmantes(final List<FirmanteResponse> firmantes)
 	{
 		this.firmantes = firmantes;

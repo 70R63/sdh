@@ -3,8 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author Federico Flores Dimas
@@ -176,7 +175,7 @@ public class PredialEstLiquidacionPrivada
 	 * @param valorAPagar
 	 *           the valorAPagar to set
 	 */
-	@JsonProperty("valorApagar")
+	@JsonSetter("valorApagar")
 	public void setValorAPagar(final String valorAPagar)
 	{
 		this.valorAPagar = valorAPagar;

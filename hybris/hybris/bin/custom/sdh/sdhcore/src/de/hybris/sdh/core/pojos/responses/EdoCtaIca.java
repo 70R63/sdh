@@ -5,7 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 
 
 /**
@@ -100,7 +101,7 @@ public class EdoCtaIca
 	 * @param newDetalleICA
 	 *           the newDetalleICA to set
 	 */
-	@JsonProperty("DetalleICA")
+	@JsonSetter("DetalleICA")
 	public void setNewDetalleICA(final List<EdoCtaIcaDetail> newDetalleICA)
 	{
 		this.newDetalleICA = newDetalleICA;

@@ -5,7 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 
 
 /**
@@ -14,12 +15,12 @@ import org.codehaus.jackson.annotate.JsonProperty;
  */
 public class SpacPDFResponse
 {
-	//	@JsonProperty("Proyecto")
+	//	@JsonSetter("Proyecto")
 
 
 	public String pdf;
 	public List<SpacErrores> errores;
-	
+
 	/**
 	 * @return the pdf
 	 */
@@ -27,12 +28,12 @@ public class SpacPDFResponse
 	{
 		return pdf;
 	}
-	
+
 	/**
 	 * @param pdf
 	 *           the pdf to set
 	 */
-	@JsonProperty("PDF")
+	@JsonSetter("PDF")
 	public void setPdf(final String pdf)
 	{
 		this.pdf = pdf;
@@ -44,7 +45,7 @@ public class SpacPDFResponse
 	{
 		return errores;
 	}
-	
+
 	/**
 	 * @param errores
 	 *           the errores to set

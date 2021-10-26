@@ -5,7 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 
 
 /**
@@ -116,7 +117,7 @@ public class CalcICA2Response
 	 * @param entFinanciera
 	 *           the entFinanciera to set
 	 */
-	@JsonProperty("Ent_financiera")
+	@JsonSetter("Ent_financiera")
 	public void setEntFinanciera(final String entFinanciera)
 	{
 		this.entFinanciera = entFinanciera;

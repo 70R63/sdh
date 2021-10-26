@@ -3,8 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author hybris
@@ -32,7 +31,7 @@ public class CalPredialLiqPriv
 	 * @param aporteVoluntario
 	 *           the aporteVoluntario to set
 	 */
-	@JsonProperty("AporteVoluntario")
+	@JsonSetter("AporteVoluntario")
 	public void setAporteVoluntario(final String aporteVoluntario)
 	{
 		this.aporteVoluntario = aporteVoluntario;
@@ -54,7 +53,7 @@ public class CalPredialLiqPriv
 	 * @param proyecto
 	 *           the proyecto to set
 	 */
-	@JsonProperty("Proyecto")
+	@JsonSetter("Proyecto")
 	public void setProyecto(final String proyecto)
 	{
 		this.proyecto = proyecto;
@@ -77,7 +76,7 @@ public class CalPredialLiqPriv
 	 * @param autoavaluo
 	 *           the autoavaluo to set
 	 */
-	@JsonProperty("Autoavaluo")
+	@JsonSetter("Autoavaluo")
 	public void setAutoavaluo(final String autoavaluo)
 	{
 		this.autoavaluo = autoavaluo;

@@ -5,7 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 
 
 /**
@@ -31,7 +32,7 @@ public class CalculoPredialDatosGenerales
 	 * @param numFrom
 	 *           the numFrom to set
 	 */
-	@JsonProperty("NumFrom")
+	@JsonSetter("NumFrom")
 	public void setNumFrom(final String numFrom)
 	{
 		this.numFrom = numFrom;
@@ -50,7 +51,7 @@ public class CalculoPredialDatosGenerales
 	 * @param liquidacionPrivada
 	 *           the liquidacionPrivada to set
 	 */
-	@JsonProperty("LiquidacionPrivada")
+	@JsonSetter("LiquidacionPrivada")
 	public void setLiquidacionPrivada(final CalculoPredialLiqPriv liquidacionPrivada)
 	{
 		this.liquidacionPrivada = liquidacionPrivada;
@@ -68,7 +69,7 @@ public class CalculoPredialDatosGenerales
 	 * @param errores
 	 *           the errores to set
 	 */
-	@JsonProperty("Errores")
+	@JsonSetter("Errores")
 	public void setErrores(final List<CalPredialErrores> errores)
 	{
 		Errores = errores;

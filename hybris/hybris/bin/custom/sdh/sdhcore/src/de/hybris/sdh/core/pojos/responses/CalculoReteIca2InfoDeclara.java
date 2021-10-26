@@ -3,8 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author hybris
@@ -35,7 +34,7 @@ public class CalculoReteIca2InfoDeclara
 	 * @param baseReten
 	 *           the baseReten to set
 	 */
-	@JsonProperty("Base_reten")
+	@JsonSetter("Base_reten")
 	public void setBaseReten(final String baseReten)
 	{
 		this.baseReten = baseReten;
@@ -53,7 +52,7 @@ public class CalculoReteIca2InfoDeclara
 	 * @param totalRetePer
 	 *           the totalRetePer to set
 	 */
-	@JsonProperty("total_rete_per")
+	@JsonSetter("total_rete_per")
 	public void setTotalRetePer(final String totalRetePer)
 	{
 		this.totalRetePer = totalRetePer;
@@ -71,7 +70,7 @@ public class CalculoReteIca2InfoDeclara
 	 * @param descDevol
 	 *           the descDevol to set
 	 */
-	@JsonProperty("desc_devol")
+	@JsonSetter("desc_devol")
 	public void setDescDevol(final String descDevol)
 	{
 		this.descDevol = descDevol;
@@ -89,7 +88,7 @@ public class CalculoReteIca2InfoDeclara
 	 * @param totalReteDecl
 	 *           the totalReteDecl to set
 	 */
-	@JsonProperty("total_rete_decl")
+	@JsonSetter("total_rete_decl")
 	public void setTotalReteDecl(final String totalReteDecl)
 	{
 		this.totalReteDecl = totalReteDecl;
@@ -107,7 +106,7 @@ public class CalculoReteIca2InfoDeclara
 	 * @param sancion
 	 *           the sancion to set
 	 */
-	@JsonProperty("sancion")
+	@JsonSetter("sancion")
 	public void setSancion(final String sancion)
 	{
 		this.sancion = sancion;
@@ -125,7 +124,7 @@ public class CalculoReteIca2InfoDeclara
 	 * @param totalSaldo
 	 *           the totalSaldo to set
 	 */
-	@JsonProperty("total_saldo")
+	@JsonSetter("total_saldo")
 	public void setTotalSaldo(final String totalSaldo)
 	{
 		this.totalSaldo = totalSaldo;
@@ -143,7 +142,7 @@ public class CalculoReteIca2InfoDeclara
 	 * @param valorPagar
 	 *           the valorPagar to set
 	 */
-	@JsonProperty("valor_pagar")
+	@JsonSetter("valor_pagar")
 	public void setValorPagar(final String valorPagar)
 	{
 		this.valorPagar = valorPagar;
@@ -161,7 +160,7 @@ public class CalculoReteIca2InfoDeclara
 	 * @param interesMora
 	 *           the interesMora to set
 	 */
-	@JsonProperty("interes_mora")
+	@JsonSetter("interes_mora")
 	public void setInteresMora(final String interesMora)
 	{
 		this.interesMora = interesMora;
@@ -179,7 +178,7 @@ public class CalculoReteIca2InfoDeclara
 	 * @param totalPagar
 	 *           the totalPagar to set
 	 */
-	@JsonProperty("total_pagar")
+	@JsonSetter("total_pagar")
 	public void setTotalPagar(final String totalPagar)
 	{
 		this.totalPagar = totalPagar;
@@ -187,7 +186,7 @@ public class CalculoReteIca2InfoDeclara
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
