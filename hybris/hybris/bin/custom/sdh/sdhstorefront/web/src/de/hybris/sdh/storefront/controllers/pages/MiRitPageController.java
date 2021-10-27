@@ -187,13 +187,15 @@ public class MiRitPageController extends AbstractPageController
 		//consultaContribuyenteBPRequest.setIndicador("01,02");
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-		final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
 
 
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+
+		final String referrer = request.getHeader("referer");
+
+		final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
 		consultaContribBPRequest.setNumBP(customerModel.getNumBP());
 		consultaContribBPRequest.setIndicador("01,02");
-
 
 		final String referrer = request.getHeader("referer");
 
@@ -258,8 +260,6 @@ public class MiRitPageController extends AbstractPageController
 					}
 				}
 			}
-
-
 
 			final MiRitForm miRitForm = new MiRitForm();
 
@@ -791,7 +791,6 @@ public class MiRitPageController extends AbstractPageController
 				udpateRitResponse.setRitUpdated(false);
 			}
 		}
-
 
 
 		return udpateRitResponse;
