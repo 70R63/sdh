@@ -197,8 +197,6 @@ public class MiRitPageController extends AbstractPageController
 		consultaContribBPRequest.setNumBP(customerModel.getNumBP());
 		consultaContribBPRequest.setIndicador("01,02");
 
-		final String referrer = request.getHeader("referer");
-
 		try
 		{
 
