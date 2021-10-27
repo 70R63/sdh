@@ -202,7 +202,7 @@ ACC.oblipend = {
 	}
 	else if(impuestoSelc=="5"){
 		tableGas[0].setAttribute("id","example");
-		   var selectRefinementsTitle = "Gasolina";
+		   var selectRefinementsTitle = "Sobretasa a la gasolina motor";
 	        ACC.colorbox.open(selectRefinementsTitle, {
 	            href: ".js-gasolina-facet",
 	            inline: true,
