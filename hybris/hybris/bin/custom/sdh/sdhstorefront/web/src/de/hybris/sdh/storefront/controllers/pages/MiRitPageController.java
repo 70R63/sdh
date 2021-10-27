@@ -29,6 +29,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CertifNombRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAddressRitRequest;
@@ -44,6 +45,7 @@ import de.hybris.sdh.core.pojos.responses.ContribDireccion;
 import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ContribTelefono;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestosResponse;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.pojos.responses.UpdateRitErrorResponse;
@@ -51,6 +53,7 @@ import de.hybris.sdh.core.pojos.responses.UpdateRitResponse;
 import de.hybris.sdh.core.pojos.responses.ValidEmailResponse;
 import de.hybris.sdh.core.pojos.responses.ValidPasswordResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.facades.SDHCalculaICA2Facade;
 import de.hybris.sdh.facades.SDHCertifNombFacade;
@@ -152,6 +155,9 @@ public class MiRitPageController extends AbstractPageController
 	@Resource(name = "sdhICAInfObjetoService")
 	SDHICAInfObjetoService sdhICAInfObjetoService;
 
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+
 	@ModelAttribute("socialNetworks")
 	public List<String> getSocialNetworks()
 	{
@@ -171,20 +177,73 @@ public class MiRitPageController extends AbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
 
 
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+		consultaContribBPRequest.setNumBP(customerModel.getNumBP());
+		consultaContribBPRequest.setIndicador("01,02");
 
 		final String referrer = request.getHeader("referer");
 
 		try
 		{
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			//			final ObjectMapper mapper = new ObjectMapper();
+			//			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			//
+			//			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+			//					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+			//					SDHValidaMailRolResponse.class);
 
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
+			SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+					.consultaContribuyenteBP_simplificado(consultaContribBPRequest);
+
+			if (sdhConsultaContribuyenteBPResponse != null && sdhConsultaContribuyenteBPResponse.getImpuestos() != null)
+			{
+				for (ImpuestosResponse impuestoRegistrado : sdhConsultaContribuyenteBPResponse.getImpuestos())
+				{
+					if (impuestoRegistrado != null)
+					{
+						switch (impuestoRegistrado.getClaseObjeto())
+						{
+							case "01":
+								sdhConsultaContribuyenteBPResponse
+										.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
+								break;
+							case "02":
+								sdhConsultaContribuyenteBPResponse.setVehicular(
+										sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
+								break;
+							case "03":
+								sdhConsultaContribuyenteBPResponse
+										.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
+								break;
+							case "04":
+
+								break;
+							case "05":
+								sdhConsultaContribuyenteBPResponse
+										.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
+								break;
+							case "06":
+								sdhConsultaContribuyenteBPResponse.setDelineacion(
+										sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
+								break;
+
+							case "07":
+								sdhConsultaContribuyenteBPResponse.setPublicidadExt(
+										sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));
+
+								break;
+
+
+							default:
+								break;
+						}
+					}
+				}
+			}
+
 
 			final MiRitForm miRitForm = new MiRitForm();
 
