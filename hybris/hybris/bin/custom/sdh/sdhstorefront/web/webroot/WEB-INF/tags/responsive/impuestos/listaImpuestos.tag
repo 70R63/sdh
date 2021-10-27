@@ -10,7 +10,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!-- <script src="jquery.min.js"></script> -->
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <c:url value="/contribuyentes/presentar-declaracion"
@@ -427,29 +426,8 @@
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
-<!-- se agrega control para tablas de delineaciï¿½n -->
+
 <script type="text/javascript">
 	function ShowSelected(selectObject) {
 		var value = selectObject.value;
@@ -501,7 +479,6 @@
 	}
 
 	function validateFormUso() {
-
 	    var anioGravable = document.getElementById("anoGravable").value;
 	    var impuesto = document.getElementById("impuesto");
 	    var periodo = "00";
@@ -553,10 +530,7 @@
     }
 
     function validarDelineacionform(hiddenCdu){
-        
-    	debugger;
     	var btnSelected = document.getElementById("auxbtn_"+hiddenCdu);
-
         var nowUrl = window.location.href;
         var targetUrl = "infoObject/getUseOption?cdu="+hiddenCdu+"&taxType=6";
         currentUrl = nowUrl.replace("contribuyentes/presentar-declaracion",targetUrl);
@@ -567,7 +541,7 @@
            	type : "GET",
         	success : function(dataResponse) {
                
-        		debugger;
+        		
         		
         		if ( dataResponse == "99"){
 	               	 alert("Solicite mediante un Trámite la actualización de los datos de la Licencia, una vez actualizado presente su Declaración");
@@ -586,7 +560,7 @@
       			}	
         	},
         	error : function() {
-				debugger;
+				
         	}
         });
 	    
@@ -596,14 +570,8 @@
     
     
     function validarPublicidadForm(numResolu, tipoVallaCode ){
-        //var btnSelected = document.getElementById("auxbtn_"+hiddenCdu);
-		
-        debugger;
-        
         var anioGravable = document.getElementById("anoGravable").value;
-        
         var urlDeclaracion = "publicidadexterior/declaracion?numResolu="+numResolu+"&anoGravable="+anioGravable+"&tipoValla="+tipoVallaCode;
-        
         var nowUrl = window.location.href;
         var targetUrl = "infoObject/getUseOption?anioGravable="+anioGravable+"&taxType=4"+"&numResolu="+numResolu+"&tipoVallaCode="+tipoVallaCode;
         currentUrl = nowUrl.replace("contribuyentes/presentar-declaracion",targetUrl);
@@ -613,7 +581,7 @@
            	type : "GET",
         	success : function(dataResponse) {
                
-        		debugger;
+        		
         		
        			if(dataResponse == "02"){
                     var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
@@ -635,6 +603,151 @@
         return false;
     }
     
+	window.onload = function() {
+		$('[data-toggle="tooltip"]').tooltip();
+		$(".loader").fadeOut("slow");
+		var tipoImpuesto = document.getElementById("impuesto").value;
+		var anio = document.getElementById("anoGravable").value;
+		var nota2 = document.getElementById("notaVehPre");
+		var notaotros = document.getElementById("notaOtros");
+		if (tipoImpuesto == '6') {
+			var nota = document.getElementById("notas_deli");
+			nota.style.display = 'block'
+		}
+	
+		if (anio != "") {
+			if (tipoImpuesto == '2' || tipoImpuesto == '1') { //vehicular predial
+				nota2.style.display = 'block';
+				notaotros.style.display = 'none';
+			} else {
+				nota2.style.display = 'none';
+				notaotros.style.display = 'block';
+			}
+		}
+		ACC.opcionDeclaraciones.preparaAnioGravable_presentarDec(tipoImpuesto);
+		document.getElementById("anoGravable").value = anio;
+	}
 
+	function onChange() {
+		var tipoImpuesto = document.getElementById("impuesto").value;
+		
+		if (tipoImpuesto == '2' || tipoImpuesto == '1' || tipoImpuesto == '6' ) { //vehicular, predial, delineacion urbana
+			ACC.opcionDeclaraciones.prepararImpuesto_presentarDec(tipoImpuesto);
+		} else { //otros impuestos
+			document.getElementById("anoGravable").value = "";
+			form = document.getElementById("forma");
+
+			input = document.createElement('input');
+			input.setAttribute('name', 'skipReques');
+			input.setAttribute('value', 'X');
+			input.setAttribute('type', 'hidden');
+			var skipRequesElemento = document.getElementById("skipReques");
+			if (skipRequesElemento == null) {
+				form.appendChild(input);
+			} else {
+				skipRequesElemento.value = "X";
+			}
+
+			form.submit();
+
+		}
+	}
+
+	function onChangeAnioGravable() {
+		var tipoImpuesto = document.getElementById("impuesto").value;
+		var nota = document.getElementById("notaVehPre");
+		var notaotros = document.getElementById("notaOtros");
+		
+		if(tipoImpuesto == null || tipoImpuesto == "" || tipoImpuesto == "0"){
+// 			return;
+		}
+
+		if (tipoImpuesto == "2" || tipoImpuesto == "1") { //vehicular predial
+			nota.style.display = 'block';
+			notaotros.style.display = 'none';
+		} else {
+			nota.style.display = 'none';
+			notaotros.style.display = 'block';
+		}
+		if (tipoImpuesto == "2" || tipoImpuesto == "1") { //vehicular, predial
+			ACC.opcionDeclaraciones.obtenerListaDeclaraciones_presentarDec(tipoImpuesto);
+		} else { //otros impuestos
+			if (tipoImpuesto == "4" || tipoImpuesto == "6" || tipoImpuesto == "3") {
+				form = document.getElementById("forma");
+				input = document.createElement('input');
+				input.setAttribute('name', 'skipReques');
+				input.setAttribute('value', '');
+				input.setAttribute('type', 'hidden');
+				var skipRequesElemento = document.getElementById("skipReques");
+				if (skipRequesElemento == null) {
+					form.appendChild(input);
+				} else {
+					skipRequesElemento.value = "";
+				}
+				form.submit();
+			}
+
+			ajustaPeriodo();
+		}
+
+//SE comenta funcionalidad por peticiÛn de usuario.
+//Maria Torres 11/05/2020
+// 	if (impuestoVal == "3") {
+// 			//Ingresamos un mensaje a mostrar
+// 			var mensaje = confirm("Si tienes m·s de 20 registros a declarar necesitas pasar a ayuda ICA ");
+// 			//Detectamos si el usuario acepto el mensaje
+// 			var currentUrl = window.location.href;
+// 			var targetUrl = "/contribuyentes/registroretenciones";
+// 			if (mensaje) {
+
+// 				if (currentUrl.indexOf('#') != "-1") {
+
+// 				} else {
+
+// 					currentUrl_tmp = currentUrl.replace(
+// 							"/contribuyentes/presentar-declaracion", targetUrl);
+// 				}
+
+// 				window.location.href = currentUrl_tmp;
+
+// 			}
+// 			//Detectamos si el usuario denegÛ el mensaje
+// 			else {
+
+// 			}
+// 		}
+	}
+
+	function ajustaPeriodo() {
+		
+		var dt = new Date();
+		var year = dt.getFullYear();
+
+		var sizePeriodo = document.getElementById("periodo").options.length;
+
+		if (sizePeriodo == 12
+				&& document.getElementById("anoGravable").value == year) {
+			var mon = dt.getMonth();
+			for (monPop = mon; monPop <= 11; monPop++) {
+				document.getElementById("periodo").options[monPop].disabled = true;
+			}
+		} else if (sizePeriodo == 7
+				&& document.getElementById("anoGravable").value == year) {
+			var mon = parseInt((dt.getMonth()) / 2) + 2;
+			mon = mon - 1;
+			for (monPop = mon; monPop < 7; monPop++) {
+				document.getElementById("periodo").options[monPop].disabled = true;
+			}
+		} else {
+			for (monPop = 0; monPop < document.getElementById("periodo").length; monPop++) {
+				document.getElementById("periodo").options[monPop].disabled = false;
+			}
+		}
+
+	}
+
+	function obtenerURLBase() {
+		return '<c:url value="/" />';
+	}
 </script>
 

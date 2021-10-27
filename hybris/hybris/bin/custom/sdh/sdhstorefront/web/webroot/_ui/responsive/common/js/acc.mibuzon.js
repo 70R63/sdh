@@ -24,7 +24,7 @@ ACC.mibuzon = {
 	
 	bindDescargar2 : function(objetode) {	
 			var newobjdes = objetode;
-			debugger;
+			
 			var newpdf = $.trim($(newobjdes).attr("data-pdfimprimir"));
 
 				

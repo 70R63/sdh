@@ -10,7 +10,7 @@ ACC.certipago = {
 		    	        e.preventDefault();
 		    	        
 		    	        
-		    	        debugger;
+		    	        
 		    	      
 		    	        var generarCertificacionData = {};
 		    	        
