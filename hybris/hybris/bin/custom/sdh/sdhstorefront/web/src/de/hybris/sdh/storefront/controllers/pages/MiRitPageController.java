@@ -30,9 +30,7 @@ import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CertifNombRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
-
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
-
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAddressRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAutorizacionesRitRequest;
@@ -182,11 +180,11 @@ public class MiRitPageController extends AbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
 
-		final ConsultaContribBPRequest consultaContribuyenteBPRequest = new ConsultaContribBPRequest();
+		//final ConsultaContribBPRequest consultaContribuyenteBPRequest = new ConsultaContribBPRequest();
 
 
-		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-		consultaContribuyenteBPRequest.setIndicador("01,02");
+		//consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+		//consultaContribuyenteBPRequest.setIndicador("01,02");
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
@@ -202,8 +200,8 @@ public class MiRitPageController extends AbstractPageController
 		try
 		{
 
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
-					.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
+			//final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+			//		.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
 
 			//			final ObjectMapper mapper = new ObjectMapper();
 			//			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -212,12 +210,12 @@ public class MiRitPageController extends AbstractPageController
 			//					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
 			//					SDHValidaMailRolResponse.class);
 
-			SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
 					.consultaContribuyenteBP_simplificado(consultaContribBPRequest);
 
 			if (sdhConsultaContribuyenteBPResponse != null && sdhConsultaContribuyenteBPResponse.getImpuestos() != null)
 			{
-				for (ImpuestosResponse impuestoRegistrado : sdhConsultaContribuyenteBPResponse.getImpuestos())
+				for (final ImpuestosResponse impuestoRegistrado : sdhConsultaContribuyenteBPResponse.getImpuestos())
 				{
 					if (impuestoRegistrado != null)
 					{
