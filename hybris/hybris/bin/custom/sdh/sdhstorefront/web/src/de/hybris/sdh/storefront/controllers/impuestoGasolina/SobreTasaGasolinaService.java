@@ -2791,15 +2791,13 @@ public class SobreTasaGasolinaService
 				{
 					for (final ItemListaDeclaraciones itemDeclaracion : listaDeclaracionesResponse.getDeclaraciones())
 					{
-						if(itemDeclaracion != null && itemDeclaracion.getNumObjeto() != null) {
-   						for (final ImpuestoPublicidadExterior publicidadExt_customer : infoVista.getCustomerData().getPublicidadExt())
-   						{
-   							if (publicidadExt_customer != null && publicidadExt_customer.getNumObjeto() != null && publicidadExt_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto())
-   									&& publicidadExt_customer.getAnoGravable()!= null && publicidadExt_customer.getAnoGravable().equals(infoVista.getAnoGravable()))
-   							{
-   								publicidadExt.add(publicidadExt_customer);
-   							}
-   						}
+						for (final ImpuestoPublicidadExterior publicidadExt_customer : infoVista.getCustomerData().getPublicidadExt())
+						{
+							if (publicidadExt_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto())
+									&& publicidadExt_customer.getAnoGravable().equals(infoVista.getAnoGravable()))
+							{
+								publicidadExt.add(publicidadExt_customer);
+							}
 						}
 					}
 
