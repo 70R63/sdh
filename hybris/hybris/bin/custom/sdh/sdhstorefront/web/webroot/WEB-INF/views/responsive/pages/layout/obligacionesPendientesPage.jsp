@@ -9,6 +9,10 @@
 
 <div class="loader"></div>
 <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
+<div id="dialogRop" title="Generar ROP">
+<div id="ropDialogContent"></div>
+</div>
+
 
 <obligaciones:obliPendientesMenu />
 <div id="idtodos" style="display: block;">
