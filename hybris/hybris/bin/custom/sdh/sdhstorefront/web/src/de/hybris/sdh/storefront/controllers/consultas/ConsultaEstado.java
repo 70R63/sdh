@@ -18,6 +18,7 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.EdoCuentaRequest;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.EdoCtaPublicidad;
 import de.hybris.sdh.core.pojos.responses.EdoCuentaResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -226,12 +227,22 @@ public class ConsultaEstado extends AbstractSearchPageController
 			}
 			if (edoCuentaResponse.getTablaPublicidad() != null && !edoCuentaResponse.getTablaPublicidad().isEmpty())
 			{
-				ctaForm
-						.setTablaPublicidad(
-								edoCuentaResponse.getTablaPublicidad().stream()
-										.filter(eachTax -> (StringUtils.isNotBlank(eachTax.getCabecera().getNoResolucion())
-												&& StringUtils.isNotBlank(eachTax.getCabecera().getTipoValla())))
-										.collect(Collectors.toList()));
+				ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad().stream().filter(eachTax -> 
+				(StringUtils.isNotBlank(eachTax.getCabecera().getNoResolucion())
+				&& (StringUtils.isNotBlank(eachTax.getCabecera().getTipoValla()) ||
+				StringUtils.isNotBlank(eachTax.getCabecera().getSaldocargo()) ||
+				StringUtils.isNotBlank(eachTax.getCabecera().getSaldofavor()))				
+				)).collect(Collectors.toList()));
+				for (EdoCtaPublicidad iterable_element : ctaForm.getTablaPublicidad())
+				{
+					iterable_element.setDetallePublicidad(iterable_element.getDetallePublicidad().stream().filter(eachItem -> (
+							StringUtils.isNotBlank(eachItem.getAnioGravable()) ||
+							StringUtils.isNotBlank(eachItem.getDestinoHacendario()) ||
+							StringUtils.isNotBlank(eachItem.getEstado()) ||
+							StringUtils.isNotBlank(eachItem.getSaldoCargo()) ||
+							StringUtils.isNotBlank(eachItem.getSaldoFavor())
+							)).collect(Collectors.toList()));	
+				}
 			}
 
 			final Date date = new Date();
