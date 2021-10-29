@@ -31,6 +31,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalPublicidadService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
@@ -105,6 +106,9 @@ public class PublicidadExteriorPageController extends AbstractPageController
 
 	@Resource(name = "sdhCustomerAccountService")
 	SDHCustomerAccountService sdhCustomerAccountService;
+	
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
 
 
 
@@ -124,8 +128,13 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		model.addAttribute("name", customerData.getCompleteName());
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		SDHValidaMailRolResponse detalleContribuyente;
-		detalleContribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "07");
+		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+		
+		ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		contribuyenteRequest.setNumBP(customerData.getNumBP());
+		
+		detalleContribuyente.setPublicidadExt(sdhConsultaImpuesto_simplificado.consulta_impPublicidad(contribuyenteRequest));
+//		detalleContribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "07");
 
 
 		//if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
@@ -224,7 +233,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final String numBP = customerData.getNumBP();
 
-		resetYearPublicidadInfo(numBP, publicidadInfo);
+		//resetYearPublicidadInfo(numBP, publicidadInfo);
 
 		detallePublicidadRequest.setNumBP(numBP);
 		detallePublicidadRequest.setNumResolu(publicidadInfo.getNumResolu());
