@@ -8,7 +8,7 @@
 
 <script type="text/javascript">
 function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip){
-	debugger;
+	
 	var numBP = "${customerData.numBP}";
 	var numDoc = "${customerData.documentNumber}";
 	var tipoDoc = "${customerData.documentType}";

@@ -10,6 +10,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<input type="hidden" value="${customerData.numBP}" id="contribuyente_numBP"/>
 <sf:form action="" method="POST" modelAttribute="obligacionesForm"
 	id="obligacionesForm">
 
@@ -811,23 +812,37 @@
 													<!--INI ROP -->
 													<c:choose>
 														<c:when test="${eachPubExtTax.facilidad == '00'}">
-															<td><a
-														href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTaxDet.obligacion}&objCont=${eachPubExtTaxDet.objetoContrato}&clvPer=${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1&tpImp=54" />">Generar
-															ROP</a></td>
+															<td><a 
+															id="consultaROP_A"  
+															data-obligacion="${eachPubExtTaxDet.obligacion}" 
+															data-totalPagar="${eachPubExtTaxDet.obligacion}" 
+															data-objCont="${eachPubExtTaxDet.objetoContrato}"
+															data-clvPer="${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1"
+															data-tpImp="54" 
+															href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTaxDet.obligacion}&objCont=${eachPubExtTaxDet.objetoContrato}&clvPer=${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1&tpImp=54" />">Generar ROP</a></td>
 														</c:when>
 														<c:when test="${eachPubExtTax.facilidad == '01'}">
-															<td><a
-														href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTax.montoFacilidad}&objCont=${eachPubExtTaxDet.objetoContrato}&clvPer=${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1&tpImp=54" />">Generar
-															ROP</a></td>
+															<td><a 
+															id="consultaROP_A"  
+															data-obligacion="${eachPubExtTaxDet.obligacion}" 
+															data-totalPagar="${eachPubExtTax.montoFacilidad}" 
+															data-objCont="${eachPubExtTaxDet.objetoContrato}"
+															data-clvPer="${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1"
+															data-tpImp="54" 
+															href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTax.montoFacilidad}&objCont=${eachPubExtTaxDet.objetoContrato}&clvPer=${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1&tpImp=54" />">Generar ROP</a></td>
 														</c:when>
 														<c:when test="${eachPubExtTax.facilidad == '02'}">
-															<td><label class="control-label labeltabletd"> <spring:theme
-															code="obligacion.inicial.sinROP" /></label></td>
+															<td><label class="control-label labeltabletd"> <spring:theme code="obligacion.inicial.sinROP" /></label></td>
 														</c:when>
 														<c:otherwise>
 															<td><a
-														href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTaxDet.obligacion}&objCont=${eachPubExtTaxDet.objetoContrato}&clvPer=${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1&tpImp=54" />">Generar
-															ROP</a></td>
+															id="consultaROP_A"  
+															data-obligacion="${eachPubExtTaxDet.obligacion}" 
+															data-totalPagar="${eachPubExtTaxDet.obligacion}" 
+															data-objCont="${eachPubExtTaxDet.objetoContrato}"
+															data-clvPer="${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1"
+															data-tpImp="54"
+															href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTaxDet.obligacion}&objCont=${eachPubExtTaxDet.objetoContrato}&clvPer=${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1&tpImp=54" />">Generar ROP</a></td>
 														</c:otherwise>
 													</c:choose>									
 													<!--FIN ROP -->

@@ -24,7 +24,7 @@
 			<div class="col-md-8">
 				<form:form action="">
 					<div class="table-responsive text-center">
-						<table class="table table-bordered" id="example">
+						<table class="table table-bordered" id="listaDeclaraciones">
 							<thead>
 								<tr>
 									<td><label class="control-label labeltabletd tableident"><spring:theme code="contribuyente.listadeclaraciones.declarcion" /></label></td>
@@ -153,7 +153,7 @@
 
 <script>
 	function detalleVer() {
-		debugger;
+		
 		var tabRel = document.getElementById('tabRelacion');
 		tabRel.style.display = 'none';
 

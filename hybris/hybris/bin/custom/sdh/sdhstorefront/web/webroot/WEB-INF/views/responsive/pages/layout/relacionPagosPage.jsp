@@ -37,7 +37,7 @@ window.onload = function() {
 }
 
 	function Selected(selectObject) {
-		debugger;
+		
 		var value = selectObject.value;
 		document.getElementById("Idimp").value = value;
 		
@@ -81,7 +81,7 @@ window.onload = function() {
 	}
 
 	function Selectedver(selectObject) {
-		debugger;
+		
 		var value = selectObject.value;
 		var x = document.getElementById('Idimp').value;
 		var tablepredial = document.getElementById('table-predial');
@@ -227,7 +227,7 @@ window.onload = function() {
 	}
 	
 	function cancelfun(selectObject) {
-		debugger;
+		
 		var value = selectObject.value;
 		var x = document.getElementById('Idimp').value;
 		var tablepredial = document.getElementById('table-predial');

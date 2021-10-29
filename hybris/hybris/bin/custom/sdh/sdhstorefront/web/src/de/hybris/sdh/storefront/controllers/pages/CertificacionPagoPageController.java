@@ -297,26 +297,26 @@ public class CertificacionPagoPageController extends AbstractPageController
 		{
 			final String groupUid = group.getUid();
 
-			if (groupUid.contains("predialUsrTaxGrp"))
-			{
-				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
-
-				customerData.setPredial(contImpuestos.getPredial());
-			}
-
-			if (groupUid.contains("vehicularUsrTaxGrp"))
-			{
-				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "02");
-
-				customerData.setVehicular(contImpuestos.getVehicular());
-			}
-
-			if (groupUid.contains("ICAUsrTaxGrp"))
-			{
-				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "03");
-
-				customerData.setIca(contImpuestos.getIca());
-			}
+			//			if (groupUid.contains("predialUsrTaxGrp"))
+			//			{
+			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
+			//
+			//				customerData.setPredial(contImpuestos.getPredial());
+			//			}
+			//
+			//			if (groupUid.contains("vehicularUsrTaxGrp"))
+			//			{
+			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "02");
+			//
+			//				customerData.setVehicular(contImpuestos.getVehicular());
+			//			}
+			//
+			//			if (groupUid.contains("ICAUsrTaxGrp"))
+			//			{
+			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "03");
+			//
+			//				customerData.setIca(contImpuestos.getIca());
+			//			}
 
 			if (groupUid.contains("gasolinaUsrTaxGrp"))
 			{
@@ -325,12 +325,12 @@ public class CertificacionPagoPageController extends AbstractPageController
 				customerData.setGasolina(contImpuestos.getGasolina());
 			}
 
-			if (groupUid.contains("delineacionUsrTaxGrp"))
-			{
-				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
-
-				customerData.setDelineacion(contImpuestos.getDelineacion());
-			}
+			//			if (groupUid.contains("delineacionUsrTaxGrp"))
+			//			{
+			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
+			//
+			//				customerData.setDelineacion(contImpuestos.getDelineacion());
+			//			}
 
 			if (groupUid.contains("publicidadExtUsrTaxGrp"))
 			{

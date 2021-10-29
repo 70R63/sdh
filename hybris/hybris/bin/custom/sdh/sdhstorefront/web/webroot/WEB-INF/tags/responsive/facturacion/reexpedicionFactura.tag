@@ -192,7 +192,7 @@
 
 <script>
 	function showtable() {
-		debugger;
+		
 
 		var imp = document.getElementById('impuesto').value;
 		var tabpred = document.getElementById('table-predial');

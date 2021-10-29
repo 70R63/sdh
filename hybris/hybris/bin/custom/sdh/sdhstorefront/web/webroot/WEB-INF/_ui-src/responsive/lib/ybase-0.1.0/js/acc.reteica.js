@@ -430,7 +430,7 @@ ACC.reteica = {
 	 
 	 
 	 formarNumIDEsperado: function(){
-		debugger;
+		
 		var customerNIT = $.trim( $("#customerNIT").val());
 		var numIDformado = null;
 		var longitudEsperada = 11;

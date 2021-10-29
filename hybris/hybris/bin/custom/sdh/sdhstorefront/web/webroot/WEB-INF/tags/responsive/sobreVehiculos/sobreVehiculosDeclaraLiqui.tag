@@ -417,7 +417,7 @@
 	
 <script>
 	function proyecthabi() {
-		debugger;
+		
 		var proyec = document.getElementById('proyecto');
 		document.getElementById("checkAportecal").value = "X";
 		proyec.disabled = false;

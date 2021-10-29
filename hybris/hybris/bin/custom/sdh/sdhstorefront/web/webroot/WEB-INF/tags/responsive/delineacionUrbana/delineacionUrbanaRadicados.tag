@@ -163,7 +163,7 @@
 
 	function formValidator(){
 		
-		debugger;
+		
 		
 		var hiddenCdu = document.getElementById("hiddenCdu").value;
 	
@@ -179,7 +179,7 @@
            	type : "GET",
         	success : function(dataResponse) {
         		
-        		debugger;
+        		
                 
                 if ( dataResponse == "99"){
                 	 alert("Solicite mediante un Trámite la actualización de los datos de la Licencia, una vez actualizado presente su Declaración");

@@ -661,7 +661,7 @@ toddir.style.width= '900px'
 									<option value="CL">Calle</option>
 									<option value="KR">Carrera</option>
 									<option value="DG">Diagonal</option>
-									<option value="TV">Trasnversal</option>
+									<option value="TV">Transversal</option>
 								</select>
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un

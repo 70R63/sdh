@@ -13,7 +13,7 @@
 <script>
 
 window.onload = function() {
-	debugger;
+	
 	//Se agrega funcionalidad para agentes Retenedores
 	var url = window.parent.location.href;
 	var contenido_url = url.includes('contribuyentes');
@@ -353,20 +353,18 @@ window.onload = function() {
 
 
 	function onChange(selectObject) {
-		// 		debugger;
-		ACC.opcionDeclaraciones.preparaAnioGravable();
+		ACC.opcionDeclaraciones.preparaAnioGravable("declaraciones");
 		ACC.opcionDeclaraciones.ocultarTablas();
+		ACC.opcionDeclaraciones.reiniciaCertipagos();
 		ACC.opcionDeclaraciones.prepararPeriodo();
 	}
 	
 	function SelectedAnio(selectObject) {
-// 		debugger;
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_porAnio();
 
 	}
 
 	function onChangeMensual(selectObject) {
-// 		debugger;
 		var per = selectObject.value;
 		var anio = document.getElementById('aniograv').value;
 		var fecha = new Date();
@@ -389,7 +387,6 @@ window.onload = function() {
 	}
 
 	function onChangeBimestral(selectObject) {
-// 		debugger;
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
 
 	}

@@ -145,7 +145,7 @@ function cancelarAccion(){
 }
 
 function redireccionar(urlAccion){
-	debugger;
+	
 	window.location = '<c:url value="/" />'+urlAccion;
 }
 </script>

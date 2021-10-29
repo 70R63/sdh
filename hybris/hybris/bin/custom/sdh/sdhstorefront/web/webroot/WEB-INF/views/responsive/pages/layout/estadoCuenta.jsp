@@ -57,7 +57,7 @@
 	}
 
 	function Selected(selectObject) {
-		debugger;
+		
 		var value = selectObject.value;
 		document.getElementById("impuesto").val() = value;
 	}

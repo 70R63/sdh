@@ -9,6 +9,10 @@
 
 <div class="loader"></div>
 <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
+<div id="dialogRop" title="Generar ROP">
+<div id="ropDialogContent"></div>
+</div>
+
 
 <obligaciones:obliPendientesMenu />
 <div id="idtodos" style="display: block;">
@@ -20,13 +24,13 @@
 <script>
 
 function noActivo() {
-	debugger;
+	
 	alert("Debe generar un ROP o Cupón");
 }
 
 
 function onErrorSITII() {
-	debugger;
+	
 	var errorSitII = '${errorSITII}';
 	if (errorSitII === null || errorSitII === '' || typeof errorSitII === 'undefined' ){
 	  
@@ -40,7 +44,7 @@ function onErrorSITII() {
 
 <script>
 	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar,cdu,placa,facilidad,montoFacilidad){
-		debugger;
+		
 		
 		var numBP = "${customerData.numBP}";
 		var numDoc = "${customerData.documentNumber}";
@@ -89,7 +93,7 @@ function onErrorSITII() {
 	
 	
 	window.onload = function() {
-		debugger;
+		
 		var cosas = $(":input");
 		var tam = cosas.length;
 		if (false) {
@@ -116,9 +120,9 @@ function onErrorSITII() {
 	}
 
 	function datatable() {
-		debugger;
+		
 		if ($.fn.dataTable.isDataTable('#example')) {
-			debugger;
+			
 			table = $('#example').DataTable();
 			table.destroy();
 			
@@ -180,7 +184,7 @@ function onErrorSITII() {
 						});
 
 		if ($.fn.dataTable.isDataTable('#example_ica')) {
-			debugger;
+			
 			table = $('#example_ica').DataTable();
 			table.destroy();
 		}

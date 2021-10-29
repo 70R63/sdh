@@ -7,7 +7,7 @@ ACC.faqs = {
 	bindSearchCategory: function() {
 		$(document).on("change", "#categoriaBuscar", function(e) {
 			e.preventDefault();
-			debugger;
+			
 			var currentUrl = window.location.href;
 			var categoryId = document.getElementById("categoriaBuscar").value;
 

@@ -52,7 +52,7 @@ ACC.oblipend = {
 					listaLimpuestos = listaLimpuestos_tag.split(",");
 				}
 
-				debugger;
+				
 				if(listaLimpuestos[0]=="X"){
 					$("#oblipend-predial").show();
 				}
@@ -85,7 +85,7 @@ ACC.oblipend = {
 	bindPopupPDF : function(){
  $(document).on("click", "#ImprimirPopUp", function(e) {
  e.preventDefault();
-debugger;
+
  ACC.publicidadexterior.bindDataTable_ID_refresh("#example");
 	var impuestoSelc = $(this).data("impuesto");
 	var tablePred = document.getElementsByClassName("table ImprimirPredial");
@@ -270,7 +270,7 @@ debugger;
 	},
 
 	bindTrmPdf : function(impuesto, reporte, reportPdfName) {
-		debugger;
+		
 	    var currentUrl = window.location.href;
 	    var infoTA = null;
 

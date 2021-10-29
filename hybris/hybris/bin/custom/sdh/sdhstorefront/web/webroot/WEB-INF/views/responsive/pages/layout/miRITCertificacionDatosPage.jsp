@@ -45,7 +45,7 @@ window.onload = function() {
 	$(".loader").fadeOut("slow");
 }
 	function downloadPDF(pdf) {
-// 		debugger;
+// 		
 		if (pdf) {
 			const linkSource = 'data:application/pdf;base64,' + pdf;
 			const downloadLink = document.createElement("a");
@@ -104,9 +104,9 @@ window.onload = function() {
 						<form:option value="1">
 							<spring:theme code="mirit.certificacion.opImpuesto" />
 						</form:option>
-						<form:option value="2">
-							<spring:theme code="mirit.certificacion.opSujeto" />
-						</form:option>
+<%-- 						<form:option value="2"> --%>
+<%-- 							<spring:theme code="mirit.certificacion.opSujeto" /> --%>
+<%-- 						</form:option> --%>
 					</form:select>
 				</div>
 			</div>
@@ -136,26 +136,26 @@ window.onload = function() {
 				<br>
 
 				<div class=" col-md-4">
-					<c:if test="${uiMenuForm.bPredial == 'X'}">
-						<input type="radio" name="tipoImp" id="tipoImp" value="01"
-							style="visibility: visible" onclick="mostrarTabla('1')">
-						<spring:theme code="mirit.certificacion.opPredial" />
-						<br>
-					</c:if>
+<%-- 					<c:if test="${uiMenuForm.bPredial == 'X'}"> --%>
+<!-- 						<input type="radio" name="tipoImp" id="tipoImp" value="01" -->
+<!-- 							style="visibility: visible" onclick="mostrarTabla('1')"> -->
+<%-- 						<spring:theme code="mirit.certificacion.opPredial" /> --%>
+<!-- 						<br> -->
+<%-- 					</c:if> --%>
 
-					<c:if test="${uiMenuForm.bVehicular == 'X'}">
-						<input type="radio" name="tipoImp" id="tipoImp" value="02"
-							style="visibility: visible" onclick="mostrarTabla('2')">
-						<spring:theme code="mirit.certificacion.opVehicular" />
-						<br>
-					</c:if>
+<%-- 					<c:if test="${uiMenuForm.bVehicular == 'X'}"> --%>
+<!-- 						<input type="radio" name="tipoImp" id="tipoImp" value="02" -->
+<!-- 							style="visibility: visible" onclick="mostrarTabla('2')"> -->
+<%-- 						<spring:theme code="mirit.certificacion.opVehicular" /> --%>
+<!-- 						<br> -->
+<%-- 					</c:if> --%>
 
-					<c:if test="${uiMenuForm.bIca == 'X'}">
-						<input type="radio" name="tipoImp" id="tipoImp" value="03"
-							style="visibility: visible" onclick="mostrarTabla('3')">
-						<spring:theme code="mirit.certificacion.opICA" />
-						<br>
-					</c:if>
+<%-- 					<c:if test="${uiMenuForm.bIca == 'X'}"> --%>
+<!-- 						<input type="radio" name="tipoImp" id="tipoImp" value="03" -->
+<!-- 							style="visibility: visible" onclick="mostrarTabla('3')"> -->
+<%-- 						<spring:theme code="mirit.certificacion.opICA" /> --%>
+<!-- 						<br> -->
+<%-- 					</c:if> --%>
 
 					<c:if test="${uiMenuForm.bPublicidadExt == 'X'}">
 						<input type="radio" name="tipoImp" id="tipoImp" value="07"
@@ -171,12 +171,12 @@ window.onload = function() {
 						<br>
 					</c:if>
 
-					<c:if test="${uiMenuForm.bDelineacionUrbana == 'X'}">
-						<input type="radio" name="tipoImp" id="tipoImp" value="06"
-							style="visibility: visible" onclick="mostrarTabla('6')">
-						<spring:theme code="mirit.certificacion.opDelineaciónUrbana" />
-						<br>
-					</c:if>
+<%-- 					<c:if test="${uiMenuForm.bDelineacionUrbana == 'X'}"> --%>
+<!-- 						<input type="radio" name="tipoImp" id="tipoImp" value="06" -->
+<!-- 							style="visibility: visible" onclick="mostrarTabla('6')"> -->
+<%-- 						<spring:theme code="mirit.certificacion.opDelineaciónUrbana" /> --%>
+<!-- 						<br> -->
+<%-- 					</c:if> --%>
 				</div>
 			</div>
 		</div>
@@ -196,7 +196,7 @@ window.onload = function() {
 
 <script type="text/javascript">
 function mostrarTabla(claveImpuesto){
-	debugger;
+	
 	ACC.oblipend.llenarTablas_CertificacionDatos(claveImpuesto);
 	
 }

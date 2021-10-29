@@ -14,7 +14,6 @@
 <script>
 window.onload = function() {
 	//Se agrega funcionalidad para agentes Retenedores
-	debugger;
 	var url = window.parent.location.href;
 	var contenido_url = url.includes('contribuyentes');
 	
@@ -30,7 +29,7 @@ window.onload = function() {
 		
  		document.getElementById("BanderaAgete").value= "X";
 		
-		ACC.opcionDeclaraciones.preparaAnioGravable();
+		ACC.opcionDeclaraciones.preparaAnioGravable("certideclaraciones");
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.opcionDeclaraciones.prepararPeriodo();
 		

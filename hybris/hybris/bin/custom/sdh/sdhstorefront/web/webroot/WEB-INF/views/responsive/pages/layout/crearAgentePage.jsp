@@ -41,7 +41,7 @@ function detalleBP(){
 //     "tipoId="+ $("#documentType").val() +
 //     "&numId="+ $("#documentNumber").val() +
 //     "&fechaExp=" + $("#issuedDate").val(),    
-    debugger;
+    
     $.ajax({
         url: urlConsulta,
         data:{},

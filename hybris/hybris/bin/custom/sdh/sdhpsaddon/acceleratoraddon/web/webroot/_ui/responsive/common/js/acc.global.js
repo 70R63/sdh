@@ -40,7 +40,7 @@ ACC.global = {
     	
     	if(ACC.hideSubmenuPredial == true)
     	{	
-    		$("a:contains('Predial unificado')").closest("li").remove();
+    		$("a:contains('Predial')").closest("li").remove();
     	}
     	
     	if(ACC.hideSubmenuPublicidadExt == true)
@@ -50,7 +50,7 @@ ACC.global = {
     	
     	if(ACC.hideSubmenuVehicular == true)
     	{	
-    		$("a:contains('Sobre vehículos automotores')").closest("li").remove();
+    		$("a:contains('Impuestos de Vehículos')").closest("li").remove();
     	}
     	
     	if(ACC.hideSubmenuGasolina == true)

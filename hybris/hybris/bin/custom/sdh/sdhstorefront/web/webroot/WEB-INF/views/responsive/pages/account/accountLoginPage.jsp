@@ -18,7 +18,7 @@
 		</div>
 	</div>
 		<script type="text/javascript">
-	debugger;
+	
 window.onload = function() {
 	
     $(".loader").fadeOut("slow");

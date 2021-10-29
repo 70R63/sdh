@@ -27,7 +27,7 @@
 <script type="text/javascript">
 
 window.onload = function() {
-	debugger;
+	
 	var cosas = $(":input");
 	var tam = cosas.length;
 	if (false){
@@ -112,7 +112,7 @@ Number.prototype.pad = function(size) {
 }
 
 function fechaExpedicion(doc){
-	debugger;
+	
 	var tip=doc;
 	var tipDoc =  tip.value;
 	

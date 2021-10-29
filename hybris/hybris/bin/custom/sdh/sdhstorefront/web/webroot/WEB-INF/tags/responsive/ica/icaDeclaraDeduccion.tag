@@ -793,7 +793,7 @@
 
 <script type="text/javascript">
 	function delededucciones(id) {
-		debugger;
+		
 		var elem = document.getElementsByTagName("img");
 		var ElementosClick = new Array();
 		var HaHechoClick;
@@ -827,7 +827,7 @@
 	}
 
 	function borrar(SelectObject) {
-		debugger;
+		
 		var dele = SelectObject;
 		//dele.remove()
 		var elem = document.getElementsByTagName("div");
@@ -845,7 +845,7 @@
 				var cual = elem[i];
 
 				if (cual == cual2) {
-					debugger;
+					
 					var eliminar = cual.parentNode;
 					while (eliminar.id != "deducciones") {
 						eliminar = eliminar.parentNode;

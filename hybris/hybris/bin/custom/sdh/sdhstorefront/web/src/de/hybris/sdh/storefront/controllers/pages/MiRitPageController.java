@@ -29,6 +29,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CertifNombRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAddressRitRequest;
@@ -44,6 +45,7 @@ import de.hybris.sdh.core.pojos.responses.ContribDireccion;
 import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ContribTelefono;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestosResponse;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.pojos.responses.UpdateRitErrorResponse;
@@ -51,6 +53,7 @@ import de.hybris.sdh.core.pojos.responses.UpdateRitResponse;
 import de.hybris.sdh.core.pojos.responses.ValidEmailResponse;
 import de.hybris.sdh.core.pojos.responses.ValidPasswordResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.facades.SDHCalculaICA2Facade;
 import de.hybris.sdh.facades.SDHCertifNombFacade;
@@ -82,7 +85,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -94,6 +96,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 /**
  * Controller for home page
@@ -152,6 +158,9 @@ public class MiRitPageController extends AbstractPageController
 	@Resource(name = "sdhICAInfObjetoService")
 	SDHICAInfObjetoService sdhICAInfObjetoService;
 
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+
 	@ModelAttribute("socialNetworks")
 	public List<String> getSocialNetworks()
 	{
@@ -170,6 +179,13 @@ public class MiRitPageController extends AbstractPageController
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
+
+		//final ConsultaContribBPRequest consultaContribuyenteBPRequest = new ConsultaContribBPRequest();
+
+
+		//consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+		//consultaContribuyenteBPRequest.setIndicador("01,02");
+
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 
 
@@ -177,14 +193,71 @@ public class MiRitPageController extends AbstractPageController
 
 		final String referrer = request.getHeader("referer");
 
+		final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
+		consultaContribBPRequest.setNumBP(customerModel.getNumBP());
+		consultaContribBPRequest.setIndicador("01,02");
+
 		try
 		{
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
+			//final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+			//		.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
+
+			//			final ObjectMapper mapper = new ObjectMapper();
+			//			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			//
+			//			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+			//					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+			//					SDHValidaMailRolResponse.class);
+
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+					.consultaContribuyenteBP_simplificado(consultaContribBPRequest);
+
+			if (sdhConsultaContribuyenteBPResponse != null && sdhConsultaContribuyenteBPResponse.getImpuestos() != null)
+			{
+				for (final ImpuestosResponse impuestoRegistrado : sdhConsultaContribuyenteBPResponse.getImpuestos())
+				{
+					if (impuestoRegistrado != null)
+					{
+						switch (impuestoRegistrado.getClaseObjeto())
+						{
+//							case "01":
+//								sdhConsultaContribuyenteBPResponse
+//										.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
+//								break;
+//							case "02":
+//								sdhConsultaContribuyenteBPResponse.setVehicular(
+//										sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
+//								break;
+//							case "03":
+//								sdhConsultaContribuyenteBPResponse
+//										.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
+//								break;
+//							case "04":
+//
+//								break;
+							case "05":
+								sdhConsultaContribuyenteBPResponse
+										.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
+								break;
+//							case "06":
+//								sdhConsultaContribuyenteBPResponse.setDelineacion(
+//										sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
+//								break;
+//
+							case "07":
+								sdhConsultaContribuyenteBPResponse.setPublicidadExt(
+										sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));
+
+								break;
+
+
+							default:
+								break;
+						}
+					}
+				}
+			}
 
 			final MiRitForm miRitForm = new MiRitForm();
 
@@ -490,7 +563,7 @@ public class MiRitPageController extends AbstractPageController
 			response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
 		}
 		catch (final Exception e)
@@ -698,7 +771,7 @@ public class MiRitPageController extends AbstractPageController
 		{
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			try
 			{
 				final List<ContribRedSocial> redesSociales = Arrays
@@ -716,7 +789,6 @@ public class MiRitPageController extends AbstractPageController
 				udpateRitResponse.setRitUpdated(false);
 			}
 		}
-
 
 
 		return udpateRitResponse;
@@ -737,7 +809,7 @@ public class MiRitPageController extends AbstractPageController
 			try
 			{
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				final ContribDireccion direccion = mapper.readValue(updateAddressRitForm.getAddress(),
 						ContribDireccion.class);
 
@@ -857,7 +929,7 @@ public class MiRitPageController extends AbstractPageController
 			try
 			{
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				final ContribDireccion direccionContacto = mapper.readValue(updateRitForm.getDireccionContacto(),
 						ContribDireccion.class);
 
@@ -876,7 +948,7 @@ public class MiRitPageController extends AbstractPageController
 			try
 			{
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				final ContribDireccion direccionNoficacion = mapper.readValue(updateRitForm.getDireccionNoficacion(),
 						ContribDireccion.class);
 
@@ -907,7 +979,7 @@ public class MiRitPageController extends AbstractPageController
 		{
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			try
 			{
 				final List<ContribRedSocial> redesSociales = Arrays

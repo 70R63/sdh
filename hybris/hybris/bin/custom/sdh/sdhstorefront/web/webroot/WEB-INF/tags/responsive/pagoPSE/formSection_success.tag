@@ -232,7 +232,7 @@
 	}
 
 	function downloadPDF(pdf) {
-		debugger;
+		
 		if (pdf){
 			const linkSource = 'data:application/pdf;base64,' + pdf;
 		    const downloadLink = document.createElement("a");

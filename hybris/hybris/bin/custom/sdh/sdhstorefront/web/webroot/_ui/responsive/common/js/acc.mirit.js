@@ -1252,7 +1252,7 @@ parent.attributes[4]=true;
         		var updateICAActEcoRitForm = {};
         		
         		updateICAActEcoRitForm.activEconomicas = ACC.mirit.obtenerInfo_ActEco();
-        		debugger;
+        		
         		
        				$.ajax({
 					url : ACC.actualizaICAActEcoURL,

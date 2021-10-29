@@ -77,9 +77,14 @@
 <div class="copyright footer__bottom">
 	<div class="container">
 		<div class="row">
+
+			<div class="col-sm-4"></div>
+<%-- 			<div class="copyright-text col-sm-4 center-block footer__copyright">${fn:escapeXml(footerComponent.notice)}</div> --%>
+
 <!-- 			<div class="col-sm-4"></div> -->
 <%-- 			<div class="copyright-text col-sm-4 center-block footer__copyright">${fn:escapeXml(footerComponent.notice)}} --%>
 <!-- 			</div> -->
+
 			<!-- Chat Toggle -->
 <%-- 			<button value='<c:url value="/chat/chatWindow"/>' tabindex="0" --%>
 <!-- 				class="js-newWindow btn btn-lg mobile-chat" id="mobile-chat" -->
@@ -156,7 +161,11 @@
 			  </div>
 		 </div>
 	</div>
+
+</div>
+
 	</div>
+
 
 	<script>
         function openChatWindow(){

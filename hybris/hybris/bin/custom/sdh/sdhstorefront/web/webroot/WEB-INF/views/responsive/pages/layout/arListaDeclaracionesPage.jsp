@@ -15,7 +15,7 @@
 <script type="text/javascript">
 	
 	window.onload = function() {
-		debugger;
+		
 		var cosas = $(":input");
 		var tam = cosas.length;
 		if (false){ //EMP-codigo comentado por observaciones en pruebas realizadas el 04 de octubre 2019

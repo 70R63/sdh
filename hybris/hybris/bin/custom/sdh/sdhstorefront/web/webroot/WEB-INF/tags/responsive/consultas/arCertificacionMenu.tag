@@ -15,7 +15,7 @@
 <script>
 window.onload = function() {
 	//Se agrega funcionalidad para agentes Retenedores
-	debugger;
+	
 	var url = window.parent.location.href;
 	var contenido_url = url.includes('contribuyentes');
 	
@@ -70,7 +70,7 @@ function vaperiodo(selectObject) {
 }
 	
 	function downloadPDF(pdf, newfilename) {
-		debugger;
+		
 		if (pdf){
 			const linkSource = 'data:application/pdf;base64,' + pdf;
 		    const downloadLink = document.createElement("a");
@@ -494,7 +494,7 @@ function vaperiodo(selectObject) {
 
  	
 	function onChange(selectObject) {
-			debugger;
+			
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.opcionDeclaraciones.reiniciaCertipagos();
 		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
@@ -502,20 +502,20 @@ function vaperiodo(selectObject) {
 
 	
 	function SelectedAnio(selectObject) {
-		debugger;
+		
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
 		ACC.opcionDeclaraciones.reiniciaPeriodosMB();
 		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
 	}
 	
 	function onChangeBimestral(selectObject) {
-		debugger;
+		
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
 		ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(ACC.opcionDeclaraciones.dataActual_backup,ACC.opcionDeclaraciones.dataResponse_backup,selectObject.value);
 	}
 	
 	function onChangeMensual(selectObject) {
-		debugger;
+		
 		var per = selectObject.value;
 		var anio = document.getElementById('aniograv').value;
 		var fecha = new Date();

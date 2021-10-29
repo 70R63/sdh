@@ -16,10 +16,10 @@
 <cont:contribuyentesLista/>
 
 <script type="text/javascript">
-	debugger;
+	
 
 	function onErrorSITII() {
-		debugger;
+		
 		var errorSitII = '${errorSITII}';
 		if (errorSitII === null || errorSitII === '' || typeof errorSitII === 'undefined' ){
 		  

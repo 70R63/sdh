@@ -106,7 +106,7 @@
 <script>
 
 	function validaBotonPago(){
-		debugger;
+		
 		var totPagar = document.getElementById('totpag');
 		var negativePos = totPagar.value.search("-");
 		if(totPagar.value == '0' || totPagar.value == '0.00' || negativePos >= 0 ){
@@ -121,7 +121,7 @@
 	}
 
 	function habradio() {
-		debugger;
+		
 		var hobli = document.getElementById('selectobligado');
 		var firmdeclar = document.getElementById('btnfirmardeclarante');
 		var btnpredec = document

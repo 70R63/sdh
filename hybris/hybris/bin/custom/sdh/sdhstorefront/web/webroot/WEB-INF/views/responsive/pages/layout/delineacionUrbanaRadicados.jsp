@@ -31,7 +31,7 @@
 <script>
 
 window.onload = function() {
-	debugger;
+	
 	var cosas = $(":input");
 	var tam = cosas.length;
 	if (false){
@@ -46,7 +46,7 @@ window.onload = function() {
     $(".loader").fadeOut("slow");
 }
 // 	function goBack() {
-// 		debugger;
+// 		
 // 		var declaracion = '${param.declaracion}';
 
 // 		if (declaracion) {
@@ -163,7 +163,7 @@ window.onload = function() {
 	
 	function goBack2() {
 
-		debugger;
+		
 		window.history.back();
 
 	}

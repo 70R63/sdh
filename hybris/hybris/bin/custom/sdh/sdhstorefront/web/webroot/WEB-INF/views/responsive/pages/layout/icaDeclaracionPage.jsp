@@ -60,7 +60,7 @@ window.onload = function() {
 	 ACC.ica.original_tablaValorRetenido = new Array();
 	 var item_valorRetenido = null;
 	 
-	 debugger;
+	 
 	<c:forEach items="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.valorRetenido }" var="eachValor" varStatus="loopStatusInfo" >
  		item_valorRetenido = new Object();
  		item_valorRetenido.keyComparacion = "${fn:trim(eachValor.anio)}"+"${fn:trim(eachValor.mes)}"+
