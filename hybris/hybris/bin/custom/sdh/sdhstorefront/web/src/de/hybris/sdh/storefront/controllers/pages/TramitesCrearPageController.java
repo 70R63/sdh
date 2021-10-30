@@ -362,6 +362,7 @@ public class TramitesCrearPageController extends AbstractPageController
 				if (mensaje != null)
 				{
 					mensaje = mensaje.replaceAll("\n", "\\\\n");
+					mensaje = mensaje + "\\\\";
 				}
 				atributo = new CreaCasosAtribRequest("String 1", "COMENTARIO", mensaje);
 				atributos.add(atributo);
