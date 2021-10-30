@@ -276,21 +276,30 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 		//		try
 		//		{
-			sdhConsultaContribuyenteBPResponse
-					.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
-			sdhConsultaContribuyenteBPResponse
-					.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
-			sdhConsultaContribuyenteBPResponse
-					.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
-			sdhConsultaContribuyenteBPResponse
-					.setPublicidadExt(sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));
-			sdhConsultaContribuyenteBPResponse
-					.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
+		if(ctaForm != null) {
+			if(ctaForm.getTablaVehicular()!= null && !ctaForm.getTablaVehicular().isEmpty()){
+				sdhConsultaContribuyenteBPResponse.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));				
+			}
+			if(ctaForm.getTablaDelineacion()!= null && !ctaForm.getTablaDelineacion().isEmpty()) {
+				sdhConsultaContribuyenteBPResponse.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));				
+			}
+			if(ctaForm.getTablaGasolina()!= null && !ctaForm.getTablaGasolina().isEmpty()) {
+				sdhConsultaContribuyenteBPResponse.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
+			}
+			if(ctaForm.getTablaPublicidad() != null && !ctaForm.getTablaPublicidad().isEmpty()) {
+				sdhConsultaContribuyenteBPResponse.setPublicidadExt(sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));
+			}
+			if(ctaForm.getTablaICA() != null && !ctaForm.getTablaICA().isEmpty()) {
+				sdhConsultaContribuyenteBPResponse.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));				
+			}
+			if(ctaForm.getPredial() != null && !ctaForm.getPredial().isEmpty()) {
+				predialFormIni.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));				
+			}
+		}
 			//			sdhConsultaContribuyenteBPResponse.setReteIca(sdhConsultaImpuesto_simplificado.consulta_impRe(consultaContribuyenteBPRequest));
 			//			sdhConsultaContribuyenteBPResponse = mapper.readValue(
 			//					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
 			//					SDHValidaMailRolResponse.class);
-			predialFormIni.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
 
 
 			//			if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
