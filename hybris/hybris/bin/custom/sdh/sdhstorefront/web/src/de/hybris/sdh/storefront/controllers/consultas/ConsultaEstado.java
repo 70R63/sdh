@@ -18,6 +18,7 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.EdoCuentaRequest;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.EdoCtaPublicidad;
 import de.hybris.sdh.core.pojos.responses.EdoCuentaResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -226,12 +227,22 @@ public class ConsultaEstado extends AbstractSearchPageController
 			}
 			if (edoCuentaResponse.getTablaPublicidad() != null && !edoCuentaResponse.getTablaPublicidad().isEmpty())
 			{
-				ctaForm
-						.setTablaPublicidad(
-								edoCuentaResponse.getTablaPublicidad().stream()
-										.filter(eachTax -> (StringUtils.isNotBlank(eachTax.getCabecera().getNoResolucion())
-												&& StringUtils.isNotBlank(eachTax.getCabecera().getTipoValla())))
-										.collect(Collectors.toList()));
+				ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad().stream().filter(eachTax -> 
+				(StringUtils.isNotBlank(eachTax.getCabecera().getNoResolucion())
+				&& (StringUtils.isNotBlank(eachTax.getCabecera().getTipoValla()) ||
+				StringUtils.isNotBlank(eachTax.getCabecera().getSaldocargo()) ||
+				StringUtils.isNotBlank(eachTax.getCabecera().getSaldofavor()))				
+				)).collect(Collectors.toList()));
+				for (EdoCtaPublicidad iterable_element : ctaForm.getTablaPublicidad())
+				{
+					iterable_element.setDetallePublicidad(iterable_element.getDetallePublicidad().stream().filter(eachItem -> (
+							StringUtils.isNotBlank(eachItem.getAnioGravable()) ||
+							StringUtils.isNotBlank(eachItem.getDestinoHacendario()) ||
+							StringUtils.isNotBlank(eachItem.getEstado()) ||
+							StringUtils.isNotBlank(eachItem.getSaldoCargo()) ||
+							StringUtils.isNotBlank(eachItem.getSaldoFavor())
+							)).collect(Collectors.toList()));	
+				}
 			}
 
 			final Date date = new Date();
@@ -265,21 +276,30 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 		//		try
 		//		{
-			sdhConsultaContribuyenteBPResponse
-					.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
-			sdhConsultaContribuyenteBPResponse
-					.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
-			sdhConsultaContribuyenteBPResponse
-					.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
-			sdhConsultaContribuyenteBPResponse
-					.setPublicidadExt(sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));
-			sdhConsultaContribuyenteBPResponse
-					.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
+		if(ctaForm != null) {
+			if(ctaForm.getTablaVehicular()!= null && !ctaForm.getTablaVehicular().isEmpty()){
+				sdhConsultaContribuyenteBPResponse.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));				
+			}
+			if(ctaForm.getTablaDelineacion()!= null && !ctaForm.getTablaDelineacion().isEmpty()) {
+				sdhConsultaContribuyenteBPResponse.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));				
+			}
+			if(ctaForm.getTablaGasolina()!= null && !ctaForm.getTablaGasolina().isEmpty()) {
+				sdhConsultaContribuyenteBPResponse.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
+			}
+			if(ctaForm.getTablaPublicidad() != null && !ctaForm.getTablaPublicidad().isEmpty()) {
+				sdhConsultaContribuyenteBPResponse.setPublicidadExt(sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));
+			}
+			if(ctaForm.getTablaICA() != null && !ctaForm.getTablaICA().isEmpty()) {
+				sdhConsultaContribuyenteBPResponse.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));				
+			}
+			if(ctaForm.getPredial() != null && !ctaForm.getPredial().isEmpty()) {
+				predialFormIni.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));				
+			}
+		}
 			//			sdhConsultaContribuyenteBPResponse.setReteIca(sdhConsultaImpuesto_simplificado.consulta_impRe(consultaContribuyenteBPRequest));
 			//			sdhConsultaContribuyenteBPResponse = mapper.readValue(
 			//					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
 			//					SDHValidaMailRolResponse.class);
-			predialFormIni.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
 
 
 			//			if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
