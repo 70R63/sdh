@@ -1,5 +1,6 @@
 ACC.publicidadexterior = {
-
+	
+	dataPublicidad : {},
 	 _autoload: ["bindLabelVerButton","bindGeneraDeclaracionButton", "bindCalculoButton","bindSearchButton","bindPresentarDeclaracionButton","bindDialogPublicidadExterior","bindDataTable","bindDataTablesPagination","bindDataTablesPagination_class","bindDataTable_Class"],
 	 
 	
@@ -146,7 +147,12 @@ ACC.publicidadexterior = {
 	 bindPresentarDeclaracionButton: function () {
 		 $(document).on("click", "#presentarDeclaracionButton", function (e) {
 	 	        e.preventDefault();
-	 	        
+	 	      
+				if(ACC.publicidadexterior.dataPublicidad.idmsj == 200 ){
+	            	$( "#dialogPublicidadExterior" ).dialog( "open" );
+	            	$("#publicidadExteriorDialogContent").html(ACC.publicidadexterior.dataPublicidad.txtmsj);
+					return;
+				}
 	 	      var anoGravable  = $.trim($("#anio").val());
 	 	      var numResolu =  $("#selectedNumRes").val();
 	 	      var tipoValla = $("#selectedTipoValla").val();
@@ -369,15 +375,26 @@ ACC.publicidadexterior = {
         		$("#pantallaLedOrientacionVisual").val(data.orientacion);
         		$("#pantallaLedAreaTotal").val(data.areaElemento);
     		}
+			$.each(data.errores, function (index,value){
+				if(value.idmsj == 200){
+					ACC.publicidadexterior.dataPublicidad.idmsj = value.idmsj;
+					ACC.publicidadexterior.dataPublicidad.txtmsj = value.txtmsj;
+					break;					
+				}
+			});
+			
+			
 	    },
 
 	    bindLabelVerButton: function () {
-	    	 $(document).on("click", ".labelVer", function (e) {
-		 	        e.preventDefault();
-					ACC.spinner.show();
-		 	        var anoGravable  = $.trim($(this).attr("data-anogravable"));
-		 	        var tipoValla = $.trim($(this).attr("data-tipoValla"));
-		 	       var numResolu = $.trim($(this).attr("data-numRes"));
+			$(document).on("click", ".labelVer", function (e) {
+				e.preventDefault();
+				ACC.spinner.show();
+				ACC.publicidadexterior.dataPublicidad.idmsj = 0;
+				ACC.publicidadexterior.dataPublicidad.txtmsj = "";
+				var anoGravable  = $.trim($(this).attr("data-anogravable"));
+				var tipoValla = $.trim($(this).attr("data-tipoValla"));
+				var numResolu = $.trim($(this).attr("data-numRes"));
 
 //		 	        if(anoGravable == "0")
 //		 	        {
@@ -391,32 +408,31 @@ ACC.publicidadexterior = {
 //		 	        	return;
 //		 	        }
 
-		 	        $("#selectedTipoValla").val(tipoValla);
-		 	       $("#selectedNumRes").val(numResolu);
-		 	      $("#anio").val(anoGravable)
-		 	       var data={};
+				$("#selectedTipoValla").val(tipoValla);
+				$("#selectedNumRes").val(numResolu);
+				$("#anio").val(anoGravable);
+				var data={};
 
-			       data.numResolu = numResolu;
-			       data.anoGravable = anoGravable;
-			       data.tipoValla = tipoValla;
+				data.numResolu = numResolu;
+				data.anoGravable = anoGravable;
+				data.tipoValla = tipoValla;
 
-			        $.ajax({
-			            url: ACC.publicidadExteriorDetalleURL,
-			            data: data,
-			            type: "GET",
-			            success: function (data) {
-							ACC.spinner.close();
-			            	ACC.publicidadexterior.fillFieldsFromData(data);
-			            	//Modificacion Jair Roa
-			            	document.getElementById("opcionUsoHidden").value = data.opcionUso;
+				$.ajax({
+					url: ACC.publicidadExteriorDetalleURL,
+					data: data,
+					type: "GET",
+					success: function (data) {
+						ACC.spinner.close();
+						ACC.publicidadexterior.fillFieldsFromData(data);
+						//Modificacion Jair Roa
+						document.getElementById("opcionUsoHidden").value = data.opcionUso;
 			         },
-			            error: function () {
-							ACC.spinner.close();
-			            }
-			        });
-		 	        
-		 	        
-		 	  });
+					error: function () {
+						ACC.spinner.close();
+					}
+				});
+			});
+			
 	    	
 	    },
     

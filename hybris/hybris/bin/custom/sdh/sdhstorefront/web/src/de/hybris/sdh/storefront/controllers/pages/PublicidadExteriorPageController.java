@@ -247,8 +247,9 @@ public class PublicidadExteriorPageController extends AbstractPageController
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
-					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
+			String wsResponse = sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest);
+			wsResponse = wsResponse.replace("\"},\"\"", "\"}");
+			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(wsResponse , DetallePublicidadResponse.class);
 
 			//final PublicidadForm publicidadForm = new PublicidadForm();
 
@@ -256,116 +257,120 @@ public class PublicidadExteriorPageController extends AbstractPageController
 
 			//Datos Basicos
 
-			final String fechResolu = detallePublicidadResponse.getFechResolu();
-			publicidadForm.setOpcionUso(detallePublicidadResponse.getInfoDeclara().getOpcionUso());
-			LOG.info("setOpcionUso -> " + detallePublicidadResponse.getInfoDeclara().getOpcionUso());
-
-
-			if (StringUtils.isNotBlank(fechResolu) && !"00000000".equals(fechResolu))
-			{
-				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-
-				final LocalDate localDate = LocalDate.parse(fechResolu, formatter);
-
-				final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-				publicidadForm.setFechResolu(localDate.format(formatter2));
-			}
-
-
-			final String fechNotif = detallePublicidadResponse.getFechNotif();
-			if (StringUtils.isNotBlank(fechNotif) && !"00000000".equals(fechNotif))
-			{
-				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-
-				final LocalDate localDate = LocalDate.parse(fechNotif, formatter);
-
-				final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-				publicidadForm.setFechNotif(localDate.format(formatter2));
-			}
-
-			final String vigenDesde = detallePublicidadResponse.getVigenDesde();
-			if (StringUtils.isNotBlank(vigenDesde) && !"00000000".equals(vigenDesde))
-			{
-				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-
-				final LocalDate localDate = LocalDate.parse(vigenDesde, formatter);
-
-				final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-				publicidadForm.setVigenDesde(localDate.format(formatter2));
-			}
-			publicidadForm.setVigenHasta(detallePublicidadResponse.getVigenHasta());
-			final String vigenHasta = detallePublicidadResponse.getVigenDesde();
-			if (StringUtils.isNotBlank(vigenHasta) && !"00000000".equals(vigenHasta))
-			{
-				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-
-				final LocalDate localDate = LocalDate.parse(vigenHasta, formatter);
-
-				final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-				publicidadForm.setVigenHasta(localDate.format(formatter2));
-			}
-
-
-
-
-			if (detallePublicidadResponse.getDetalle() != null && !detallePublicidadResponse.getDetalle().isEmpty())
-			{
-
-				for (final DetallePubli eachDetalle : detallePublicidadResponse.getDetalle())
-				{
-
-					if ("02".equalsIgnoreCase(tipovalla) || "VALLA VEHICULOS".equalsIgnoreCase(tipovalla)
-							|| "VALLA VEHíCULOS".equalsIgnoreCase(tipovalla))
-					{
-
-						this.fillVallaVehiculos(publicidadForm, eachDetalle, detallePublicidadResponse);
-
-					}
-					else if ("03".equalsIgnoreCase(tipovalla) || "Valla Tubular de Obra".equalsIgnoreCase(tipovalla))
-					{
-
-						this.fillVallaTubularObra(publicidadForm, eachDetalle, detallePublicidadResponse);
-
-
-					}
-					else if ("04".equalsIgnoreCase(tipovalla) || "Valla de Obra Convencional".equalsIgnoreCase(tipovalla))
-					{
-
-						this.fillVallaObraConvencional(publicidadForm, eachDetalle, detallePublicidadResponse);
-
-					}
-					else if ("01".equalsIgnoreCase(tipovalla) || "Valla Tubular Comercial".equalsIgnoreCase(tipovalla))
-					{
-
-
-						this.fillVallaTubularComercial(publicidadForm, eachDetalle, detallePublicidadResponse);
-
-					}
-					else if ("05".equalsIgnoreCase(tipovalla) || "Pantalla LED".equalsIgnoreCase(tipovalla))
-					{
-						this.fillVallaLED(publicidadForm, eachDetalle, detallePublicidadResponse);
-
-
-					}
-					else
-					{
-						System.out.println("------------Algo salio mal con el mapeo------------------");
-					}
-
-					if (publicidadForm.getTipoServicio() == null || "-".equals(publicidadForm.getTipoServicio()))
-					{
-						publicidadForm.setTipoServicio(getMessageSource().getMessage(
-								"publicidad.exterior.vehicles.tipoServicio." + eachDetalle.getTipoServicio(), null,
-								getI18nService().getCurrentLocale()));
-					}
-
-					break;
-				}
-
+			if(detallePublicidadResponse != null) {
+				publicidadForm.setErrores(detallePublicidadResponse.getErrores());
+   			final String fechResolu = detallePublicidadResponse.getFechResolu();
+   			publicidadForm.setOpcionUso(detallePublicidadResponse.getInfoDeclara().getOpcionUso());
+   			LOG.info("setOpcionUso -> " + detallePublicidadResponse.getInfoDeclara().getOpcionUso());
+   
+   
+   			if (StringUtils.isNotBlank(fechResolu) && !"00000000".equals(fechResolu))
+   			{
+   				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+   
+   				final LocalDate localDate = LocalDate.parse(fechResolu, formatter);
+   
+   				final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+   
+   				publicidadForm.setFechResolu(localDate.format(formatter2));
+   			}
+   
+   
+   			final String fechNotif = detallePublicidadResponse.getFechNotif();
+   			if (StringUtils.isNotBlank(fechNotif) && !"00000000".equals(fechNotif))
+   			{
+   				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+   
+   				final LocalDate localDate = LocalDate.parse(fechNotif, formatter);
+   
+   				final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+   
+   				publicidadForm.setFechNotif(localDate.format(formatter2));
+   			}
+   
+   			final String vigenDesde = detallePublicidadResponse.getVigenDesde();
+   			if (StringUtils.isNotBlank(vigenDesde) && !"00000000".equals(vigenDesde))
+   			{
+   				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+   
+   				final LocalDate localDate = LocalDate.parse(vigenDesde, formatter);
+   
+   				final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+   
+   				publicidadForm.setVigenDesde(localDate.format(formatter2));
+   			}
+   			publicidadForm.setVigenHasta(detallePublicidadResponse.getVigenHasta());
+   			final String vigenHasta = detallePublicidadResponse.getVigenDesde();
+   			if (StringUtils.isNotBlank(vigenHasta) && !"00000000".equals(vigenHasta))
+   			{
+   				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+   
+   				final LocalDate localDate = LocalDate.parse(vigenHasta, formatter);
+   
+   				final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+   
+   				publicidadForm.setVigenHasta(localDate.format(formatter2));
+   			}
+   
+   
+   
+   
+   			if (detallePublicidadResponse.getDetalle() != null && !detallePublicidadResponse.getDetalle().isEmpty())
+   			{
+   
+   				for (final DetallePubli eachDetalle : detallePublicidadResponse.getDetalle())
+   				{
+   
+   					if ("02".equalsIgnoreCase(tipovalla) || "VALLA VEHICULOS".equalsIgnoreCase(tipovalla)
+   							|| "VALLA VEHíCULOS".equalsIgnoreCase(tipovalla))
+   					{
+   
+   						this.fillVallaVehiculos(publicidadForm, eachDetalle, detallePublicidadResponse);
+   
+   					}
+   					else if ("03".equalsIgnoreCase(tipovalla) || "Valla Tubular de Obra".equalsIgnoreCase(tipovalla))
+   					{
+   
+   						this.fillVallaTubularObra(publicidadForm, eachDetalle, detallePublicidadResponse);
+   
+   
+   					}
+   					else if ("04".equalsIgnoreCase(tipovalla) || "Valla de Obra Convencional".equalsIgnoreCase(tipovalla))
+   					{
+   
+   						this.fillVallaObraConvencional(publicidadForm, eachDetalle, detallePublicidadResponse);
+   
+   					}
+   					else if ("01".equalsIgnoreCase(tipovalla) || "Valla Tubular Comercial".equalsIgnoreCase(tipovalla))
+   					{
+   
+   
+   						this.fillVallaTubularComercial(publicidadForm, eachDetalle, detallePublicidadResponse);
+   
+   					}
+   					else if ("05".equalsIgnoreCase(tipovalla) || "Pantalla LED".equalsIgnoreCase(tipovalla))
+   					{
+   						this.fillVallaLED(publicidadForm, eachDetalle, detallePublicidadResponse);
+   
+   
+   					}
+   					else
+   					{
+   						System.out.println("------------Algo salio mal con el mapeo------------------");
+   					}
+   
+   					if (publicidadForm.getTipoServicio() == null || "-".equals(publicidadForm.getTipoServicio()))
+   					{
+   						publicidadForm.setTipoServicio(getMessageSource().getMessage(
+   								"publicidad.exterior.vehicles.tipoServicio." + eachDetalle.getTipoServicio(), null,
+   								getI18nService().getCurrentLocale()));
+   					}
+   
+   					break;
+   				}
+   
+   			}
+			
 			}
 
 			model.addAttribute("publicidadForm", publicidadForm);

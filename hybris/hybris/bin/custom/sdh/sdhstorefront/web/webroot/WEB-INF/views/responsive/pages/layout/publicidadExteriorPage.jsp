@@ -23,7 +23,7 @@
 
 
 <template:page>
-
+	<div id="dialogPublicidadExterior" title="Publicidad Exterior" ><div id="publicidadExteriorDialogContent"></div></div>
 <%-- <sf:form action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion" method="POST" modelAttribute="publicidadForm" id="forma"> --%>
 <sf:form action="" method="POST" modelAttribute="publicidadForm" id="forma">
 
@@ -40,7 +40,7 @@
         <input type="hidden" id="opcionUsoHidden" name="opcionUsoHidden" value="">
 	</sf:form>
 	
-	<div id="dialogPublicidadExterior" title="Publicidad Exterior" ><div id="publicidadExteriorDialogContent"></div></div>
+
 
 	
 	

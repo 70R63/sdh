@@ -4,6 +4,7 @@
 package de.hybris.sdh.storefront.forms;
 
 import de.hybris.sdh.core.pojos.responses.DetallePubli;
+import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.InfoDeclaraPubli;
 
@@ -66,9 +67,26 @@ public class PublicidadForm
 	private String tipoVia;
 	private String tipoValla;
 	private String tipoVallaCode;
+	private List<ErrorEnWS> errores;
 
 
 
+
+	/**
+	 * @return the errores
+	 */
+	public List<ErrorEnWS> getErrores()
+	{
+		return errores;
+	}
+
+	/**
+	 * @param errores the errores to set
+	 */
+	public void setErrores(List<ErrorEnWS> errores)
+	{
+		this.errores = errores;
+	}
 
 	/**
 	 * @return the tipoVallaCode
