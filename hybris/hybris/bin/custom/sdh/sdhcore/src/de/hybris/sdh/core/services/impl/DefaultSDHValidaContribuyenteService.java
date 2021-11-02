@@ -7,6 +7,7 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultarBPRequest;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.requests.SdhValidaContribuyenteRequest;
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
@@ -132,6 +133,8 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 		final HttpEntity<SdhValidaContribuyenteRequest> requestData = new HttpEntity<>(request);
 		return restTemplate.postForObject(urlService, requestData, SDHValidaMailRolResponse.class);
 	}
+
+
 
 	/*
 	 * (non-Javadoc)
@@ -324,6 +327,69 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 			}
 		}
 		return returnList;
+	}
+
+	@Override
+	public String consultarBP(final ConsultarBPRequest request)
+	{
+
+		final String urlString = configurationService.getConfiguration().getString("sdh.consultarBP.url");
+		final String user = configurationService.getConfiguration().getString("sdh.consultarBP.user");
+		final String password = configurationService.getConfiguration().getString("sdh.consultarBP.password");
+
+		if (StringUtils.isAnyBlank(urlString, user, password))
+		{
+			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+		}
+
+		try
+		{
+			final URL url = new URL(urlString);
+
+			final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+
+			final String authString = user + ":" + password;
+			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
+			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setUseCaches(false);
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			LOG.info("connection to: " + conn.toString());
+
+			final String requestJson = request.toString();
+			LOG.info("request: " + requestJson);
+
+			final OutputStream os = conn.getOutputStream();
+			os.write(requestJson.getBytes());
+			os.flush();
+			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
+			{
+				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+
+			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+			final StringBuilder builder = new StringBuilder();
+
+			String inputLine;
+			while ((inputLine = br.readLine()) != null)
+			{
+				builder.append(inputLine);
+			}
+
+
+			final String result = builder.toString();
+			LOG.info("response: " + result);
+
+			return result;
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+		}
+		return null;
 	}
 
 

@@ -379,17 +379,17 @@ ACC.publicidadexterior = {
 		 	        var tipoValla = $.trim($(this).attr("data-tipoValla"));
 		 	       var numResolu = $.trim($(this).attr("data-numRes"));
 
-		 	        if(anoGravable == "0")
-		 	        {
-		 	        	alert("Por favor, selecciona el año a consultar");
-		 	        	return;
-		 	        }
-
-		 	        if(tipoValla == "" || numResolu == "")
-		 	        {
-		 	        	alert("Por favor, selecciona el impuesto a consultar");
-		 	        	return;
-		 	        }
+//		 	        if(anoGravable == "0")
+//		 	        {
+//		 	        	alert("Por favor, selecciona el año a consultar");
+//		 	        	return;
+//		 	        }
+//
+//		 	        if(tipoValla == "" || numResolu == "")
+//		 	        {
+//		 	        	alert("Por favor, selecciona el impuesto a consultar");
+//		 	        	return;
+//		 	        }
 
 		 	        $("#selectedTipoValla").val(tipoValla);
 		 	       $("#selectedNumRes").val(numResolu);

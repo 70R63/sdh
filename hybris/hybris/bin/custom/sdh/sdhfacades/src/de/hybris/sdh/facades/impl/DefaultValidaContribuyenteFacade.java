@@ -4,8 +4,8 @@
 package de.hybris.sdh.facades.impl;
 
 import de.hybris.platform.servicelayer.session.SessionService;
-import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.pojos.requests.ConsultarBPRequest;
+import de.hybris.sdh.core.pojos.responses.ConsultarBPResponse;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 import de.hybris.sdh.facades.SDHValidaContribuyenteFacade;
@@ -19,7 +19,10 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 
 /**
@@ -47,15 +50,15 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 	 * ValidaContribuyenteRequest)
 	 */
 	@Override
-	public boolean existeContribuyente(final ValidaContribuyenteRequest request)
+	public boolean existeContribuyente(final ConsultarBPRequest request)
 	{
 
 
 		if ("CC".equalsIgnoreCase(request.getTipoid()))
 		{
-			final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-			final String date = request.getExpeditionDate();
+			final String date = request.getFechExp();
 
 			final LocalDate customerExpDate;
 
@@ -63,7 +66,7 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 			{
 				customerExpDate = LocalDate.parse(date, formatter);
 
-				request.setExpeditionDate(formatter.format(customerExpDate));
+				request.setFechExp(formatter.format(customerExpDate));
 			}
 			catch (final DateTimeParseException e1)
 			{
@@ -75,7 +78,10 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 
 		}
 
-		final String response = sdhValidaContribuyenteService.validaContribuyente(request);
+
+
+
+		final String response = sdhValidaContribuyenteService.consultarBP(request);
 
 		if (StringUtils.isBlank(response))
 		{
@@ -85,24 +91,20 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			final SDHValidaMailRolResponse sdhValidaMailRolResponse = mapper.readValue(response, SDHValidaMailRolResponse.class);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			final ConsultarBPResponse consultarBPResponse = mapper.readValue(response, ConsultarBPResponse.class);
 
-			if (sdhValidaMailRolResponse != null && sdhValidaMailRolResponse.getIdmsj() == 0
-					&& sdhValidaMailRolResponse.getInfoContrib() != null
-					&& sdhValidaMailRolResponse.getInfoContrib().getNumBP() != null)
+			if (consultarBPResponse != null && consultarBPResponse.getNumBP() != null)
 			{
-				sessionService.setAttribute("numBP", sdhValidaMailRolResponse.getInfoContrib().getNumBP());
+				sessionService.setAttribute("numBP", consultarBPResponse.getNumBP());
 
 				sessionService.setAttribute("documentNumber", request.getNumid());
 
 				sessionService.setAttribute("documentType", request.getTipoid());
 
-				if (sdhValidaMailRolResponse.getInfoContrib().getAdicionales() != null
-						&& sdhValidaMailRolResponse.getInfoContrib().getAdicionales().getSMTP_ADDR() != null)
+				if (consultarBPResponse.getSmtp_addr() != null)
 				{
-					sessionService.setAttribute("SMTP_ADDR",
-							sdhValidaMailRolResponse.getInfoContrib().getAdicionales().getSMTP_ADDR());
+					sessionService.setAttribute("SMTP_ADDR", consultarBPResponse.getSmtp_addr());
 				}
 
 				return true;

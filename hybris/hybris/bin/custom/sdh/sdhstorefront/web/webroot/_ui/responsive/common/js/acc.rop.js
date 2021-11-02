@@ -1,6 +1,6 @@
 ACC.rop = {
 
-	 _autoload: ["bindGeneraROPButton", "bindROPDialog"],
+	 _autoload: ["bindGeneraROPButton", "bindROPDialog", "consultaROP"],
 
 	bindGeneraROPButton: function () {
 		$(document).on("click", "#generaROPButton", function (e) {
@@ -60,6 +60,7 @@ ACC.rop = {
 		
 		var flagGenerarROP = false;
 		var flagConfReimpresion = false;
+		var flagRedirigirROP = true;
 		var strMensaje = "";
 		var dataResponse = {};
 		
@@ -72,6 +73,10 @@ ACC.rop = {
 				}
 				if(value.idmsj!=null && value.idmsj.trim() == "10"){
 					flagGenerarROP = true;
+					strMensaje = value.txtmsj.trim();
+				}
+				if(value.idmsj!=null && value.idmsj.trim() == "05"){
+					flagRedirigirROP = false;
 					strMensaje = value.txtmsj.trim();
 				}
 			});
@@ -91,8 +96,14 @@ ACC.rop = {
 			flagGenerarROP = confirm("¿Desea generar un nuevo ROP?");
 		}
 		
+		if(!flagRedirigirROP){
+			$( "#dialogRop" ).dialog( "open" );
+			$("#ropDialogContent").html(strMensaje);
+		}
+		
 		
 		dataResponse.flagGenerarROP = flagGenerarROP;
+		dataResponse.flagRedirigirROP = flagRedirigirROP;
 		return dataResponse
 	},
 	
@@ -144,6 +155,53 @@ ACC.rop = {
 			}
 		});
 
+	},
+	
+	
+	consultaROP: function(){
+		$(document).on("click", "#consultaROP_A", function (e) {
+			e.preventDefault();	
+			ACC.spinner.show();	
+			var importeusuario = "";
+			var tipoImp = $.trim($(this).attr("data-tpImp"));
+			var numObjeto = $.trim($(this).attr("data-objCont"));
+			var numBP = $("#contribuyente_numBP").val();
+			var clavePeriodo = $.trim($(this).attr("data-clvPer"));
+			var urlRedirigir = $(this).attr("href");
+
+			var data = {};
+			data.importeusuario = importeusuario;
+			data.tipoImp = tipoImp;
+			data.numObjeto = numObjeto;
+			data.numBP = numBP;
+			data.clavePeriodo = clavePeriodo;
+			data.consulta = 'X';
+                        
+			var acciones = {};
+			$.ajax({
+				url: ACC.generaROPURL,
+				data: data,
+				type: "POST",
+				success: function (dataResponse) {
+					ACC.spinner.close();
+					acciones = ACC.rop.accionConsulta(dataResponse);
+					
+					if(acciones.flagRedirigirROP){
+						window.location.href = urlRedirigir;
+					}
+				},
+				error: function () {
+					ACC.spinner.close();
+					
+					$( "#dialogRop" ).dialog( "open" );
+					$("#ropDialogContent").html("Hubo un error al consultar rop, por favor intentalo más tarde");
+				}
+			});
+			
+			
+			});
+					
+		return false;
 	},
 	
 
