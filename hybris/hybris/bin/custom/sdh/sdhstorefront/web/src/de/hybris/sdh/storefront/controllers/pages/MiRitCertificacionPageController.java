@@ -12,6 +12,7 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
@@ -26,6 +27,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHEdoCuentaService;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
@@ -38,12 +40,12 @@ import de.hybris.sdh.storefront.forms.PredialForm;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
 import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -104,6 +106,9 @@ public class MiRitCertificacionPageController extends AbstractPageController
 
 	@Resource(name = "sdhEdoCuentaService")
 	SDHEdoCuentaService sdhEdoCuentaService;
+
+	@Resource(name = "sdhCustomerAccountService")
+	SDHCustomerAccountService sdhCustomerAccountService;
 
 
 	@RequestMapping(value =
@@ -547,121 +552,161 @@ public class MiRitCertificacionPageController extends AbstractPageController
 
 //				Consumo de pedial
 		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
+		SDHValidaMailRolResponse contImpuestos = null;
+		sdhConsultaContribuyenteBPResponse = sdhCustomerAccountService.getBPDataFromCustomer(customerModel);
+
+
+		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
+
+		for (final PrincipalGroupModel group : groupList)
+		{
+			final String groupUid = group.getUid();
+
+			if (groupUid.contains("predialUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
+				sdhConsultaContribuyenteBPResponse.setPredial(contImpuestos.getPredial());
+			}
+
+			if (groupUid.contains("vehicularUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "02");
+				sdhConsultaContribuyenteBPResponse.setVehicular(contImpuestos.getVehicular());
+			}
+
+			if (groupUid.contains("ICAUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "03");
+				sdhConsultaContribuyenteBPResponse.setIca(contImpuestos.getIca());
+			}
+
+			if (groupUid.contains("gasolinaUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "05");
+				sdhConsultaContribuyenteBPResponse.setGasolina(contImpuestos.getGasolina());
+			}
+
+			if (groupUid.contains("delineacionUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
+				sdhConsultaContribuyenteBPResponse.setDelineacion(contImpuestos.getDelineacion());
+			}
+
+			if (groupUid.contains("publicidadExtUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "07");
+				sdhConsultaContribuyenteBPResponse.setPublicidadExt(contImpuestos.getPublicidadExt());
+			}
+
+		}
+
+
+
 		final PredialForm predialFormIni = new PredialForm();
 		final VehiculosInfObjetoForm vehiculosForm = new VehiculosInfObjetoForm();
 		final InfoDelineacion infoDelineacion = new InfoDelineacion();
 		final MiRitForm miRitForm = new MiRitForm();
 		final PublicidadForm publicidadForm = new PublicidadForm();
 
-		//				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		consultaContribuyenteBPRequest.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
 
 		final ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-		try
+		//sdhConsultaContribuyenteBPResponse = mapper.readValue(
+		//		sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+		//		SDHValidaMailRolResponse.class);
+		predialFormIni.setPredial(sdhConsultaContribuyenteBPResponse.getPredial());
+
+
+		if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
+				&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getVehicular()))
 		{
-			sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-			predialFormIni.setPredial(sdhConsultaContribuyenteBPResponse.getPredial());
+			vehiculosForm.setImpvehicular(sdhConsultaContribuyenteBPResponse.getVehicular().stream()
+					.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
+		}
+
+		if (sdhConsultaContribuyenteBPResponse.getDelineacion() != null
+				&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getDelineacion()))
+		{
+			miRitForm.setDelineacion(sdhConsultaContribuyenteBPResponse.getDelineacion().stream()
+					.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
+		}
+
+		if (sdhConsultaContribuyenteBPResponse.getGasolina() != null && !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
+		{
+			miRitForm.setGasolina(sdhConsultaContribuyenteBPResponse.getGasolina().stream()
+					.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumDoc())).collect(Collectors.toList()));
+		}
 
 
-			if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
-					&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getVehicular()))
+		SDHExteriorPublicityTaxData cutomerPublicidadRow = null;
+		final List<SDHExteriorPublicityTaxData> cutomerPublicidadList = new ArrayList<SDHExteriorPublicityTaxData>();
+		for (final ImpuestoPublicidadExterior publicidadRow : sdhConsultaContribuyenteBPResponse.getPublicidadExt())
+		{
+			if (publicidadRow.getNumObjeto() != null && !publicidadRow.getNumObjeto().isEmpty())
 			{
-				vehiculosForm.setImpvehicular(sdhConsultaContribuyenteBPResponse.getVehicular().stream()
-						.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
+				cutomerPublicidadRow = new SDHExteriorPublicityTaxData();
+				cutomerPublicidadRow.setAnoGravable(publicidadRow.getAnoGravable());
+				cutomerPublicidadRow.setFenceType(publicidadRow.getTipoValla());
+				cutomerPublicidadRow.setResolutionNumber(publicidadRow.getNumResolu());
+				cutomerPublicidadRow.setObjectNumber(publicidadRow.getNumObjeto());
+
+				cutomerPublicidadList.add(cutomerPublicidadRow);
 			}
 
-			if (sdhConsultaContribuyenteBPResponse.getDelineacion() != null
-					&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getDelineacion()))
-			{
-				miRitForm.setDelineacion(sdhConsultaContribuyenteBPResponse.getDelineacion().stream()
-						.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
-			}
-
-			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
-					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
-			{
-				miRitForm.setGasolina(sdhConsultaContribuyenteBPResponse.getGasolina().stream()
-						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumDoc())).collect(Collectors.toList()));
-			}
-
-
-			SDHExteriorPublicityTaxData cutomerPublicidadRow = null;
-			final List<SDHExteriorPublicityTaxData> cutomerPublicidadList = new ArrayList<SDHExteriorPublicityTaxData>();
-			for (final ImpuestoPublicidadExterior publicidadRow : sdhConsultaContribuyenteBPResponse.getPublicidadExt())
-			{
-				if (publicidadRow.getNumObjeto() != null && !publicidadRow.getNumObjeto().isEmpty())
-				{
-					cutomerPublicidadRow = new SDHExteriorPublicityTaxData();
-					cutomerPublicidadRow.setAnoGravable(publicidadRow.getAnoGravable());
-					cutomerPublicidadRow.setFenceType(publicidadRow.getTipoValla());
-					cutomerPublicidadRow.setResolutionNumber(publicidadRow.getNumResolu());
-					cutomerPublicidadRow.setObjectNumber(publicidadRow.getNumObjeto());
-
-					cutomerPublicidadList.add(cutomerPublicidadRow);
-				}
-
-
-			}
-			customerData.setExteriorPublicityTaxList(cutomerPublicidadList);
-
-
-
-			if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
-			{
-				final List<SDHExteriorPublicityTaxData> exteriorPublicityList = customerData.getExteriorPublicityTaxList();
-
-				final List<ImpuestoPublicidadExterior> listImpuestoPublicdadExterior = new ArrayList<ImpuestoPublicidadExterior>();
-
-				for (final SDHExteriorPublicityTaxData eachPublicityTax : exteriorPublicityList)
-				{
-					final ImpuestoPublicidadExterior eachImpuestoPE = new ImpuestoPublicidadExterior();
-
-					eachImpuestoPE.setNumObjeto(eachPublicityTax.getObjectNumber());
-					eachImpuestoPE.setNumResolu(eachPublicityTax.getResolutionNumber());
-					eachImpuestoPE.setTipoValla(eachPublicityTax.getFenceType());
-					eachImpuestoPE.setAnoGravable(eachPublicityTax.getAnoGravable());
-					if ("VALLA VEHICULOS".equalsIgnoreCase(eachPublicityTax.getFenceType())
-							|| "VALLA VEHíCULOS".equalsIgnoreCase(eachPublicityTax.getFenceType()))
-					{
-						eachImpuestoPE.setTipoVallaCode("02");
-					}
-					else if ("Valla Tubular de Obra".equalsIgnoreCase(eachPublicityTax.getFenceType()))
-					{
-						eachImpuestoPE.setTipoVallaCode("03");
-					}
-					else if ("Valla de Obra Convencional".equalsIgnoreCase(eachPublicityTax.getFenceType()))
-					{
-						eachImpuestoPE.setTipoVallaCode("04");
-					}
-					else if ("Valla Tubular Comercial".equalsIgnoreCase(eachPublicityTax.getFenceType()))
-					{
-						eachImpuestoPE.setTipoVallaCode("01");
-					}
-					else if ("Pantalla LED".equalsIgnoreCase(eachPublicityTax.getFenceType()))
-					{
-						eachImpuestoPE.setTipoVallaCode("05");
-					}
-					listImpuestoPublicdadExterior.add(eachImpuestoPE);
-				}
-
-				publicidadForm.setPublicidadExt(listImpuestoPublicdadExterior);
-
-			}
-
-			if (sdhConsultaContribuyenteBPResponse.getIca() != null
-					&& StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getIca().getNumObjeto()))
-			{
-				miRitForm.setImpuestoICA(sdhConsultaContribuyenteBPResponse.getIca());
-			}
 
 		}
-		catch (final IOException e)
+		customerData.setExteriorPublicityTaxList(cutomerPublicidadList);
+
+
+
+		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 		{
-			e.printStackTrace();
+			final List<SDHExteriorPublicityTaxData> exteriorPublicityList = customerData.getExteriorPublicityTaxList();
+
+			final List<ImpuestoPublicidadExterior> listImpuestoPublicdadExterior = new ArrayList<ImpuestoPublicidadExterior>();
+
+			for (final SDHExteriorPublicityTaxData eachPublicityTax : exteriorPublicityList)
+			{
+				final ImpuestoPublicidadExterior eachImpuestoPE = new ImpuestoPublicidadExterior();
+
+				eachImpuestoPE.setNumObjeto(eachPublicityTax.getObjectNumber());
+				eachImpuestoPE.setNumResolu(eachPublicityTax.getResolutionNumber());
+				eachImpuestoPE.setTipoValla(eachPublicityTax.getFenceType());
+				eachImpuestoPE.setAnoGravable(eachPublicityTax.getAnoGravable());
+				if ("VALLA VEHICULOS".equalsIgnoreCase(eachPublicityTax.getFenceType())
+						|| "VALLA VEHíCULOS".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+				{
+					eachImpuestoPE.setTipoVallaCode("02");
+				}
+				else if ("Valla Tubular de Obra".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+				{
+					eachImpuestoPE.setTipoVallaCode("03");
+				}
+				else if ("Valla de Obra Convencional".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+				{
+					eachImpuestoPE.setTipoVallaCode("04");
+				}
+				else if ("Valla Tubular Comercial".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+				{
+					eachImpuestoPE.setTipoVallaCode("01");
+				}
+				else if ("Pantalla LED".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+				{
+					eachImpuestoPE.setTipoVallaCode("05");
+				}
+				listImpuestoPublicdadExterior.add(eachImpuestoPE);
+			}
+
+			publicidadForm.setPublicidadExt(listImpuestoPublicdadExterior);
+
+		}
+
+		if (sdhConsultaContribuyenteBPResponse.getIca() != null
+				&& StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getIca().getNumObjeto()))
+		{
+			miRitForm.setImpuestoICA(sdhConsultaContribuyenteBPResponse.getIca());
 		}
 
 
