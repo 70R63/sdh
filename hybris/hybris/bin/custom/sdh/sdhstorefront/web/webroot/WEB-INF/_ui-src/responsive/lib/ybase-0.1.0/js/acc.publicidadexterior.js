@@ -379,7 +379,6 @@ ACC.publicidadexterior = {
 				if(value.idmsj == 200){
 					ACC.publicidadexterior.dataPublicidad.idmsj = value.idmsj;
 					ACC.publicidadexterior.dataPublicidad.txtmsj = value.txtmsj;
-					break;					
 				}
 			});
 			

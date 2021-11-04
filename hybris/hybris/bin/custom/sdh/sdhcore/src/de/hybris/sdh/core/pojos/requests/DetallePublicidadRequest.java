@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
+import org.apache.commons.lang3.StringUtils;
+
+
 /**
  * @author hybris
  *
@@ -103,10 +106,11 @@ public class DetallePublicidadRequest
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{");
-		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
-		stringBuilder.append("\"numResolu\":\"" + this.getNumResolu() + "\",");
-		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\",");
-		stringBuilder.append("\"tipoValla\":\"" + this.getTipoValla() + "\"");
+		stringBuilder.append("\"numBP\":\"" + ((StringUtils.isBlank(this.getNumBP())) ? "" : this.getNumBP()) + "\",");
+		stringBuilder.append("\"numResolu\":\"" + ((StringUtils.isBlank(this.getNumResolu())) ? "" : this.getNumResolu()) + "\",");
+		stringBuilder
+				.append("\"anoGravable\":\"" + ((StringUtils.isBlank(this.getAnoGravable())) ? "" : this.getAnoGravable()) + "\",");
+		stringBuilder.append("\"tipoValla\":\"" + ((StringUtils.isBlank(this.getTipoValla())) ? "" : this.getTipoValla()) + "\"");
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();
