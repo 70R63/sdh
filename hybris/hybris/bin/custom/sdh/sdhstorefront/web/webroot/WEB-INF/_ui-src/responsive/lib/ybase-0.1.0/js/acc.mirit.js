@@ -384,31 +384,22 @@ parent.attributes[4]=true;
 		var flagHuboCambios = false;
 		
 		
-		if($("#telefono_movil_original").val() != $("#telefono_movil").val()){
+		if($("#telefono_01_original").val() != $("#telefono_01").val() 
+			|| $("#telefono_01_ext_original").val() != $("#telefono_01_ext").val()){
 			var telefono = {};
 			telefono.TEL_TIPO = "01";
-			telefono.TEL_NUMBER = $("#telefono_movil").val();
-			telefono.TEL_EXTENS = "";
+			telefono.TEL_NUMBER = $("#telefono_01").val();
+			telefono.TEL_EXTENS = $("#telefono_01_ext").val();
 			
 			telefonos.push(telefono);
 			flagHuboCambios = true;
 		}
-		if($("#telefono_oficina_original").val() != $("#telefono_oficina").val() 
-			|| $("#telefono_oficina_ext_original").val() != $("#telefono_oficina_ext").val()){
-			var telefono = {};
-			telefono.TEL_TIPO = "02";
-			telefono.TEL_NUMBER = $("#telefono_oficina").val();
-			telefono.TEL_EXTENS = $("#telefono_oficina_ext").val();
-			
-			telefonos.push(telefono);
-			flagHuboCambios = true;
-		}
-		if($("#telefono_fijo_original").val() != $("#telefono_fijo").val()){
+		if($("#telefono_03_original").val() != $("#telefono_03").val()){
 			var telefono = {};
 			telefono.TEL_TIPO = "03";
-			telefono.TEL_NUMBER = $("#telefono_fijo").val();
+			telefono.TEL_NUMBER = $("#telefono_03").val();
 			telefono.TEL_EXTENS = "";
-						
+			
 			telefonos.push(telefono);
 			flagHuboCambios = true;
 		}
@@ -425,10 +416,10 @@ parent.attributes[4]=true;
 	
 	actualizarCambiosTelefonos : function (){
 		
-		$("#telefono_movil_original").val($("#telefono_movil").val());
-		$("#telefono_oficina_original").val($("#telefono_oficina").val());
-		$("#telefono_oficina_ext_original").val($("#telefono_oficina_ext").val());
-		$("#telefono_fijo_original").val($("#telefono_fijo").val());
+		$("#telefono_01_original").val($("#telefono_01").val());
+		$("#telefono_01_ext_original").val($("#telefono_01_ext").val());
+		$("#telefono_03_original").val($("#telefono_03").val());
+
 		
 	},
 
