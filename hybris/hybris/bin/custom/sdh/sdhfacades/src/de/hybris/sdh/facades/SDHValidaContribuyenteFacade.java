@@ -3,7 +3,7 @@
  */
 package de.hybris.sdh.facades;
 
-import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultarBPRequest;
 
 
 /**
@@ -12,5 +12,5 @@ import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
  */
 public interface SDHValidaContribuyenteFacade
 {
-	boolean existeContribuyente(ValidaContribuyenteRequest request);
+	boolean existeContribuyente(ConsultarBPRequest request);
 }

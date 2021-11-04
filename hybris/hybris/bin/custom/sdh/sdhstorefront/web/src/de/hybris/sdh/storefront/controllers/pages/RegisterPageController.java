@@ -16,7 +16,7 @@ import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
-import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultarBPRequest;
 import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
 import de.hybris.sdh.core.pojos.responses.QuestionForRegistrationResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -155,11 +155,12 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 	@RequestMapping(value = "/searchUser", method = RequestMethod.POST)
 	public String searchUser(final Model model, final SearchUserForm searchUserForm) throws CMSItemNotFoundException
 	{
-		final ValidaContribuyenteRequest request = new ValidaContribuyenteRequest();
+		final ConsultarBPRequest request = new ConsultarBPRequest();
+
 
 		request.setNumid(searchUserForm.getDocumentNumber());
 		request.setTipoid(searchUserForm.getDocumentType());
-		request.setExpeditionDate(searchUserForm.getExpeditionDate());
+		request.setFechExp(searchUserForm.getExpeditionDate());
 
 
 		if (StringUtils.isNotBlank(request.getNumid()) && StringUtils.isNotBlank(request.getTipoid()))

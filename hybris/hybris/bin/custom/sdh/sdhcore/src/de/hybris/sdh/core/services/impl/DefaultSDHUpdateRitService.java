@@ -11,6 +11,7 @@ import de.hybris.sdh.core.pojos.requests.UpdateNameRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRedesSocialesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateTelefonoRitRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateTelefonosRitRequest;
 import de.hybris.sdh.core.services.SDHUpdateRitService;
 
 import java.io.BufferedReader;
@@ -404,6 +405,74 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 		return null;
 	}
 
+
+	@Override
+	public String updateTelefonosRit(final UpdateTelefonosRitRequest request)
+	{
+		final String urlString = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_URL);
+		final String user = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_USER);
+		final String password = configurationService.getConfiguration().getString(MODCONTRIBUYENTE_PASSWORD);
+
+
+		try
+		{
+			if (StringUtils.isAnyBlank(urlString, user, password))
+			{
+				throw new RuntimeException("Error while validating updating telefono contribuyente: Empty credentials");
+			}
+
+			final URL url = new URL(urlString);
+
+			final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+
+			final String authString = user + ":" + password;
+			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
+			conn.setRequestProperty(AUTORIZATION_STATEMENT, BASIC_STATEMENT + authStringEnc);
+			conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
+			conn.setUseCaches(false);
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			LOG.info(CONNECT_TO_STATEMENT + conn.toString());
+
+			final String requestJson = request.toString();
+			LOG.info(REQUESTS_STATEMENT + requestJson);
+
+			final OutputStream os = conn.getOutputStream();
+			os.write(requestJson.getBytes());
+			os.flush();
+			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
+			{
+				throw new RuntimeException(FAIL_HTTP + conn.getResponseCode());
+			}
+
+			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+			final StringBuilder builder = new StringBuilder();
+
+			String inputLine;
+			while ((inputLine = br.readLine()) != null)
+			{
+				builder.append(inputLine);
+			}
+
+
+			final String result = builder.toString();
+			LOG.info(RESPONSE_STATEMENT + result);
+
+			return result;
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("There was an error updating contribuyente's phones: " + e.getMessage());
+		}
+
+
+
+		return null;
+	}
+
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -551,7 +620,7 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.hybris.sdh.core.services.SDHUpdateRitService#updateICAActEcoRit(de.hybris.sdh.core.pojos.requests.
 	 * UpdateICAActEcoRitRequest)
 	 */

@@ -40,6 +40,7 @@ import de.hybris.sdh.core.pojos.requests.UpdateNameRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRedesSocialesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateTelefonoRitRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateTelefonosRitRequest;
 import de.hybris.sdh.core.pojos.responses.CertifNombResponse;
 import de.hybris.sdh.core.pojos.responses.ContribDireccion;
 import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
@@ -68,6 +69,7 @@ import de.hybris.sdh.storefront.forms.UpdatePasswordRitForm;
 import de.hybris.sdh.storefront.forms.UpdateRedesSocialesRitForm;
 import de.hybris.sdh.storefront.forms.UpdateRitForm;
 import de.hybris.sdh.storefront.forms.UpdateTelefonoRitForm;
+import de.hybris.sdh.storefront.forms.UpdateTelefonosRitForm;
 import de.hybris.sdh.storefront.forms.ValidEmailForm;
 import de.hybris.sdh.storefront.forms.ValidPasswordForm;
 
@@ -81,6 +83,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -316,6 +319,33 @@ public class MiRitPageController extends AbstractPageController
 
 				miRitForm.setFchExp(localDate.format(formatter2));
 			}
+			List<ContribTelefono> telefonos_temp = new ArrayList<ContribTelefono>();
+			for (int i = 0; i < 3; i++)
+			{
+				telefonos_temp.add(new ContribTelefono());
+			}
+			
+			if(sdhConsultaContribuyenteBPResponse!= null && sdhConsultaContribuyenteBPResponse.getInfoContrib()!= null && 
+					sdhConsultaContribuyenteBPResponse.getInfoContrib().getTelefono() != null) {
+				int index = -1;
+				ContribTelefono telefono_element_tmp = null;
+				for (ContribTelefono telefono_element : sdhConsultaContribuyenteBPResponse.getInfoContrib().getTelefono()) {
+					if(telefono_element != null && telefono_element.getTEL_TIPO() != null) {
+						try{
+							index = Integer.parseInt(telefono_element.getTEL_TIPO()) - 1;
+							if(index >= 0) {
+								telefonos_temp.get(index).setTEL_TIPO(telefono_element.getTEL_TIPO()); 
+								telefonos_temp.get(index).setTEL_NUMBER(telefono_element.getTEL_NUMBER()); 
+								telefonos_temp.get(index).setTEL_EXTENS(telefono_element.getTEL_EXTENS()); 
+							}
+						}catch (NumberFormatException e) {
+							// XXX: handle exception
+						}
+					}
+					
+				}
+			}
+			miRitForm.setTelefono(telefonos_temp);
 
 
 			miRitForm.setNumDoc(sdhConsultaContribuyenteBPResponse.getInfoContrib().getNumDoc());
@@ -856,6 +886,27 @@ public class MiRitPageController extends AbstractPageController
 		UpdateRitResponse udpateRitResponse = new UpdateRitResponse();
 
 		udpateRitResponse = sdhUpdateRitFacade.updateTelefonoRit(request);
+
+
+
+		return udpateRitResponse;
+	}
+	
+	
+	@RequestMapping(value = "/updateTelefonos", method = RequestMethod.POST)
+	@ResponseBody
+	public UpdateRitResponse updateTelefonos(Model model, @RequestBody final UpdateTelefonosRitForm updateTelefonosRitForm, final HttpServletResponse httpResponse, final HttpServletRequest httpRequest)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		boolean considerarExtension = false;
+
+		final UpdateTelefonosRitRequest request = new UpdateTelefonosRitRequest();
+		request.setNumBP(customerModel.getNumBP());
+		request.setTelefonos(updateTelefonosRitForm.getTelefonos());
+
+		UpdateRitResponse udpateRitResponse = new UpdateRitResponse();
+
+		udpateRitResponse = sdhUpdateRitFacade.updateTelefonosRit(request);
 
 
 

@@ -456,6 +456,7 @@ parent.attributes[4]=true;
 		    	        
 		    	        if(currentPassword == "")
 	    	        	{
+							ACC.spinner.close();
 		    	        	$( "#dialog" ).dialog( "open" );
 	    	            	$("#ritDialogContent").html("");
 	    	            	$("#ritDialogContent").html("Por favor introduce la contraseña actual");
@@ -464,6 +465,7 @@ parent.attributes[4]=true;
 		    	        
 		    	        if(newPassword == "")
 	    	        	{
+							ACC.spinner.close();
 		    	        	$( "#dialog" ).dialog( "open" );
 	    	            	$("#ritDialogContent").html("");
 	    	            	$("#ritDialogContent").html("Por favor introduce la nueva contraseña");
@@ -473,6 +475,7 @@ parent.attributes[4]=true;
 		    	        
 		    	        if(confirmNewPassword == "")
 	    	        	{
+							ACC.spinner.close();
 		    	        	$( "#dialog" ).dialog( "open" );
 	    	            	$("#ritDialogContent").html("");
 	    	            	$("#ritDialogContent").html("Por favor confirma la nueva contraseña");
@@ -481,6 +484,7 @@ parent.attributes[4]=true;
 		    	        
 		    	        if(/[a-z]/.test(newPassword) == false || /[A-Z]/.test(newPassword) == false || /[0-9]/.test(newPassword) == false || (newPassword.length <8 || newPassword.length>16))
 	    	        	{
+							ACC.spinner.close();
 		    	        	$( "#dialog" ).dialog( "open" );
 	    	            	$("#ritDialogContent").html("");
 	    	            	$("#ritDialogContent").html("La contraseña debe tener una letra mayúscula, una minúscula, un número y una longitud entre 8 y 16 caracteres.");
@@ -489,6 +493,7 @@ parent.attributes[4]=true;
 		    	        
 		    	        if(currentPassword == newPassword)
 	    	        	{
+							ACC.spinner.close();
 		    	        	$( "#dialog" ).dialog( "open" );
 	    	            	$("#ritDialogContent").html("");
 	    	            	$("#ritDialogContent").html("La contraseña actual y la nueva contraseña son idénticas.");
@@ -497,6 +502,7 @@ parent.attributes[4]=true;
 	    	        
 		    	        if(confirmNewPassword != newPassword)
 	    	        	{
+							ACC.spinner.close();
 		    	        	$( "#dialog" ).dialog( "open" );
 	    	            	$("#ritDialogContent").html("");
 	    	            	$("#ritDialogContent").html("La nueva contraseña y la confirmación de contraseña son diferentes.");
