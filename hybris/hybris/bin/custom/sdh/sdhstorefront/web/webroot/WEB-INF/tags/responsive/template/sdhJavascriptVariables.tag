@@ -32,6 +32,7 @@
 			ACC.updateAutorizacionesRitURL ="<c:url value='/contribuyentes/mirit/updateAutorizaciones' />";
 			ACC.updateRedesSocialesRitURL ="<c:url value='/contribuyentes/mirit/updateRedesSociales' />";
 			ACC.updateTelefonoRitURL ="<c:url value='/contribuyentes/mirit/updateTelefono' />";
+			ACC.updateTelefonosRitURL ="<c:url value='/contribuyentes/mirit/updateTelefonos' />";
 			ACC.updateAddressRitURL ="<c:url value='/contribuyentes/mirit/updateAddress' />";
 			ACC.updateNombreRitURL ="<c:url value='/contribuyentes/mirit/updateNombre' />";
 			

@@ -1,6 +1,6 @@
 ACC.mirit = {
 
-		 _autoload: ["bindUpdateNombreButton","bindUpdateNotificationAddressButton","bindUpdateContactAddressButton","bindUpdateTelefonoButton","bindUpdateRedesSocialesButton","bindUpdateAutorizacionesButton","bindUpdatePasswordButton", "bindUpdateEmailButton", "bindCertifNombButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton", "bindTermnsandConditions","bindTermnsandConditionsRegister", "bindActEco" ],
+		 _autoload: ["bindUpdateNombreButton","bindUpdateNotificationAddressButton","bindUpdateContactAddressButton","bindUpdateTelefonoButton","bindUpdateTelefonosButton","bindUpdateRedesSocialesButton","bindUpdateAutorizacionesButton","bindUpdatePasswordButton", "bindUpdateEmailButton", "bindCertifNombButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton", "bindTermnsandConditions","bindTermnsandConditionsRegister", "bindActEco" ],
 		 
 
 	
@@ -296,7 +296,6 @@ parent.attributes[4]=true;
 		 bindUpdateTelefonoButton: function () {
 		        $(document).on("click", "#updateTelefonoButton", function (e) {
 		    	        e.preventDefault();
-
 		    	        ACC.spinner.show();
 	    	        
 		    	        var updateTelefonoRitData ={};
@@ -333,6 +332,106 @@ parent.attributes[4]=true;
 			   	        });
 		        });
 		   },
+
+	bindUpdateTelefonosButton: function () {
+		$(document).on("click", "#updateTelefonosButton", function (e) {
+			e.preventDefault();
+			
+			var updateTelefonoRitData = ACC.mirit.registrosCambiosTelefonos();
+			if(updateTelefonoRitData != null){
+				ACC.spinner.show();
+				
+				$.ajax({
+					url: ACC.updateTelefonosRitURL,
+					data: JSON.stringify(updateTelefonoRitData),
+					type: "POST",
+					contentType: "application/json",
+					success: function (data) {
+						ACC.spinner.close();
+						$( "#dialog" ).dialog( "open" );
+						$("#ritDialogContent").html("");
+						if(data.ritUpdated==true)
+						{
+							$("#ritDialogContent").html("Tu teléfono ha sido actualizado.");
+						}else
+						{
+							$("#ritDialogContent").html("Tu teléfono no ha sido actualizado.");
+						}
+						ACC.mirit.actualizarCambiosTelefonos();
+					},
+					error: function () {
+						ACC.spinner.close();
+						$( "#dialog" ).dialog( "open" );
+						$("#ritDialogContent").html("");
+						$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
+					}
+				});
+			}else{
+				$( "#dialog" ).dialog( "open" );
+				$("#ritDialogContent").html("No se detectaron cambios en telefonos para actualizar");
+			}
+			
+			
+		});
+	},
+	
+	
+	
+	registrosCambiosTelefonos : function(){
+		
+		var updateTelefonoRitData ={};
+		var telefonos = [];
+		var flagHuboCambios = false;
+		
+		
+		if($("#telefono_movil_original").val() != $("#telefono_movil").val()){
+			var telefono = {};
+			telefono.TEL_TIPO = "01";
+			telefono.TEL_NUMBER = $("#telefono_movil").val();
+			telefono.TEL_EXTENS = "";
+			
+			telefonos.push(telefono);
+			flagHuboCambios = true;
+		}
+		if($("#telefono_oficina_original").val() != $("#telefono_oficina").val() 
+			|| $("#telefono_oficina_ext_original").val() != $("#telefono_oficina_ext").val()){
+			var telefono = {};
+			telefono.TEL_TIPO = "02";
+			telefono.TEL_NUMBER = $("#telefono_oficina").val();
+			telefono.TEL_EXTENS = $("#telefono_oficina_ext").val();
+			
+			telefonos.push(telefono);
+			flagHuboCambios = true;
+		}
+		if($("#telefono_fijo_original").val() != $("#telefono_fijo").val()){
+			var telefono = {};
+			telefono.TEL_TIPO = "03";
+			telefono.TEL_NUMBER = $("#telefono_fijo").val();
+			telefono.TEL_EXTENS = "";
+						
+			telefonos.push(telefono);
+			flagHuboCambios = true;
+		}
+		
+		if(flagHuboCambios == false){
+			updateTelefonoRitData = null;
+		}else{
+			updateTelefonoRitData.telefonos = telefonos;
+		}
+		
+		return updateTelefonoRitData;
+	},
+	
+	
+	actualizarCambiosTelefonos : function (){
+		
+		$("#telefono_movil_original").val($("#telefono_movil").val());
+		$("#telefono_oficina_original").val($("#telefono_oficina").val());
+		$("#telefono_oficina_ext_original").val($("#telefono_oficina_ext").val());
+		$("#telefono_fijo_original").val($("#telefono_fijo").val());
+		
+	},
+
 		 
 		 bindUpdateRedesSocialesButton: function () {
 		        $(document).on("click", "#updateRedesSocialesButton", function (e) {

@@ -11,6 +11,7 @@ import de.hybris.sdh.core.pojos.requests.UpdateNameRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRedesSocialesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateTelefonoRitRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateTelefonosRitRequest;
 
 /**
  * @author hybris
@@ -27,6 +28,8 @@ public interface SDHUpdateRitService
 	String updateRedesSocialesRit(UpdateRedesSocialesRitRequest request);
 
 	String updateTelefonoRit(UpdateTelefonoRitRequest request);
+
+	String updateTelefonosRit(UpdateTelefonosRitRequest request);
 
 	String updateAddressRit(UpdateAddressRitRequest request);
 
