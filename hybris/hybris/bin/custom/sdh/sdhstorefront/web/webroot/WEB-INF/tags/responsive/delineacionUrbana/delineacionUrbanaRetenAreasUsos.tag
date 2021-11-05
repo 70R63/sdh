@@ -300,7 +300,8 @@
 						<sf:input class="newalto form-control"
 							readonly="${disabledInformacionAreaUso}" aria-required="true"
 							maxlength="240"
-							path="infObjetoDelineacion.areaProyecto[${loop.index}].aream2" />
+							path="infObjetoDelineacion.areaProyecto[${loop.index}].aream2" 
+							onkeyup="numberFormat(this)" onclick="numberFormat(this)"/>
 					</div>
 				</div>
 
