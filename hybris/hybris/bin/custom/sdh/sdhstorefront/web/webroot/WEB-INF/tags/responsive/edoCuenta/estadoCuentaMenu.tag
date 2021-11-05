@@ -19,13 +19,13 @@
 <c:set var="claveImpuesto_7" value="false"/>
 
 <c:if test="${not empty ctaForm.predial}">
-<c:set var="claveImpuesto_1" value="false"/>
+<c:set var="claveImpuesto_1" value="true"/>
 </c:if>
 <c:if test="${not empty ctaForm.tablaVehicular}">
-<c:set var="claveImpuesto_2" value="false"/>
+<c:set var="claveImpuesto_2" value="true"/>
 </c:if>
 <c:if test="${not empty ctaForm.tablaICA}">
-<c:set var="claveImpuesto_3" value="false"/>
+<c:set var="claveImpuesto_3" value="true"/>
 </c:if>
 <c:if test="${not empty ctaForm.tablaPublicidad}">
 <c:set var="claveImpuesto_4" value="true"/>
@@ -34,10 +34,10 @@
 <c:set var="claveImpuesto_5" value="true"/>
 </c:if>
 <c:if test="${not empty ctaForm.tablaDelineacion}">
-<c:set var="claveImpuesto_6" value="false"/>
+<c:set var="claveImpuesto_6" value="true"/>
 </c:if>
 <c:if test="${not empty ctaForm.obligNoTributaria}">
-<c:set var="claveImpuesto_7" value="false"/>
+<c:set var="claveImpuesto_7" value="true"/>
 </c:if>
 
 
