@@ -12,6 +12,7 @@ import de.hybris.sdh.core.pojos.requests.UpdateNameRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRedesSocialesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateTelefonoRitRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateTelefonosRitRequest;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.pojos.responses.UpdateRitErrorResponse;
 import de.hybris.sdh.core.pojos.responses.UpdateRitResponse;
@@ -212,6 +213,41 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 				final ObjectMapper mapper = new ObjectMapper();
 				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				response = mapper.readValue(strinResponse, UpdateRitResponse.class);
+				response.setRitUpdated(true);
+
+				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+				consultaContribuyenteBPRequest.setNumBP(request.getNumBP());
+
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+						.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
+				sdhCustomerAccountService.updateTelefonoRit(sdhConsultaContribuyenteBPResponse);
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("there was an error while parsing update rit reponse: " + e.getMessage());
+			}
+		}
+
+		return response;
+	}
+
+
+	@Override
+	public UpdateRitResponse updateTelefonosRit(final UpdateTelefonosRitRequest request)
+	{
+		UpdateRitResponse response = new UpdateRitResponse();
+		response.setRitUpdated(false);
+		final String stringResponse = sdhUpdateRitService.updateTelefonosRit(request);
+
+		if (StringUtils.isNotBlank(stringResponse))
+		{
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				response = mapper.readValue(stringResponse, UpdateRitResponse.class);
 				response.setRitUpdated(true);
 
 				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();

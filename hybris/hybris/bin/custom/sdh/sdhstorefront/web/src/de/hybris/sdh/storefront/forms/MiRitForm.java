@@ -6,6 +6,7 @@ package de.hybris.sdh.storefront.forms;
 import de.hybris.sdh.core.pojos.responses.ContribAgente;
 import de.hybris.sdh.core.pojos.responses.ContribDireccion;
 import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
+import de.hybris.sdh.core.pojos.responses.ContribTelefono;
 import de.hybris.sdh.core.pojos.responses.DetalleActivEconomicas;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
@@ -80,6 +81,7 @@ public class MiRitForm
 	private List<ImpuestoVehiculos> vehicular;
 	private List<PredialResponse> predial;
 	private List<DetalleActivEconomicas> activEconomicas;
+	private List<ContribTelefono> telefono;
 
 
 	//*->INI dev-eduardo ajuste de menu impuestos
@@ -1026,6 +1028,22 @@ public class MiRitForm
 	public void setRepresentantes(final List<ContribAgente> representantes)
 	{
 		this.representantes = representantes;
+	}
+
+	/**
+	 * @return the telefono
+	 */
+	public List<ContribTelefono> getTelefono()
+	{
+		return telefono;
+	}
+
+	/**
+	 * @param telefono the telefono to set
+	 */
+	public void setTelefono(List<ContribTelefono> telefono)
+	{
+		this.telefono = telefono;
 	}
 
 

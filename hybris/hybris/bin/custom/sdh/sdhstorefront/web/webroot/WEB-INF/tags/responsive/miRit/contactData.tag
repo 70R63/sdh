@@ -999,49 +999,38 @@ toddir.style.width= '900px'
 				
 
 				<div class="row">
-					<div class="col-md-2">
-						<div class="form-group ">
-							<label class="control-label" for="telefonoPricipal">
-								<spring:theme code="Teléfono" />
-							</label> 
-						<select class="newalto form-control" id="phoneSelect" onchange="showExt()">
-							<option value="00">Seleccionar</option>
-							<option value="1">Movil</option>
-							<option value="2">Oficina</option>
-							<option value="3">Fijo</option>
-						</select>
-							<input id="telefonoPricipal" name="telefonoPricipal"
-								class="newalto form-control" type="text" value="${miRitForm.telefonoPricipal }"
-								maxlength="240" onkeyup="ajustar(this)">
-							<div class="help-block">
-								<span id="telefonoPricipal.errors" class="hidden">Seleccione
-									un tipo de documento</span>
-							</div>
+					<div class="col-md-6">
+						<div class="col-md-4" id="divTel01" style="display: block">
+							<label class="control-label" for="telefono_01"><spring:theme code="mirit.contactData.telefono.fijooficina"/></label>
+							<input id="telefono_01_original" class="newalto form-control" type="hidden" value="${miRitForm.telefono[0].TEL_NUMBER}" maxlength="240" disabled="disabled">
+							<input id="telefono_01" class="newalto form-control" type="text" value="${miRitForm.telefono[0].TEL_NUMBER}" maxlength="240" onkeyup="ajustar(this)">
+							<label class="control-label" for="telefono_01_ext"><spring:theme code="mirit.contactData.extension" /></label> 
+							<input id="telefono_01_ext_original" class="newalto form-control" aria-required="true" type="hidden" value="${miRitForm.telefono[0].TEL_EXTENS}" maxlength="240" disabled="disabled">
+							<input id="telefono_01_ext" class="newalto form-control" aria-required="true" type="text" value="${miRitForm.telefono[0].TEL_EXTENS}" maxlength="240" onkeyup="ajustar(this)">
 						</div>
-					</div>
-					<div class="col-md-2" id="phoneExtension" style="display: none">
-						<div class="form-group ">
-							<label class="control-label required" for="extensionTelefono">
-								<spring:theme code="mirit.contactData.extension" />
-							</label> <input id="extensionTelefono" name="extensionTelefono"
-								class="newalto form-control" aria-required="true"
-								type="text" value="${miRitForm.extensionTelefono }"
-								maxlength="240" onkeyup="ajustar(this)">
-						
+						<div class="col-md-4" id="divTel03" style="display: block">
+							<label class="control-label" for="telefono_03"> <spring:theme code="mirit.contactData.telefono.movil" /></label>
+							<input id="telefono_03_original" name="telefono_03_original" class="newalto form-control" type="hidden" value="${miRitForm.telefono[2].TEL_NUMBER}" maxlength="240" disabled="disabled">
+							<input id="telefono_03" name="telefono_03" class="newalto form-control" type="text" value="${miRitForm.telefono[2].TEL_NUMBER}" maxlength="240" onkeyup="ajustar(this)">
 						</div>
 					</div>
 				</div>
+				<br>
 
 				<div class="row">
 					<div class="col-12 col-md-4  ">
 						<div class="form-group ">
 							<button class="btn btn-secondary btn-block btn-lg " type="button"
-								id="updateTelefonoButton">
-								<spring:theme code="mirit.contactData.updateTelefono" />
+								id="updateTelefonosButton">
+								<spring:theme code="mirit.contactData.updateTelefonos" />
 							</button>
 						</div>
 					</div>
 				</div>
+				
+				
+				
+				
 
 				<br> <br>
 				<div id="socialNetRows">

@@ -23,6 +23,7 @@ public class DetallePublicidadResponse
 	private String direccion;
 	private String placa;
 	private List<DetallePubli> detalle;
+	private List<ErrorEnWS> errores;
 
 
 	/**
@@ -212,6 +213,23 @@ public class DetallePublicidadResponse
 	public void setDetalle(final List<DetallePubli> detalle)
 	{
 		this.detalle = detalle;
+	}
+
+	/**
+	 * @return the errores
+	 */
+	public List<ErrorEnWS> getErrores()
+	{
+		return errores;
+	}
+
+	/**
+	 * @param errores
+	 *           the errores to set
+	 */
+	public void setErrores(final List<ErrorEnWS> errores)
+	{
+		this.errores = errores;
 	}
 
 }
