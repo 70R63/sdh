@@ -33,14 +33,14 @@
 													code="edocuenta.inicial.predio.chip" /> </label></th>
 										<th><label class="control-label labeltabletd"><spring:theme
 													code="edocuenta.inicial.predio.matricula" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+										<!-- <th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.predio.aniograv" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.predio.desthacen" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.predio.estado" /> </label></th>
 										<th><label class="control-label labeltabletd tableangrav"><spring:theme
-													code="edocuenta.inicial.predio.participa" /> </label></th>
+													code="edocuenta.inicial.predio.participa" /> </label></th> -->
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.predio.saldocargo" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -57,12 +57,12 @@
 												<tr>
 													<td><c:out value="${eachPredial.newCHIP}" /></td>
 													<td><c:out value="${eachPredial.matrInmobiliaria}" /></td>
-													<td><c:out value="${eachPredialDetail.anioGravable}" /></td>
+													<!--<td><c:out value="${eachPredialDetail.anioGravable}" /></td>
 													<td><c:out
 															value="${eachPredialDetail.destinohacendario}" /></td>
 													<td><c:out value="${eachPredialDetail.estado}" /></td>
 													<td><c:out
-															value="${eachPredialDetail.porcParticipacion}" /></td>
+															value="${eachPredialDetail.porcParticipacion}" /></td>-->
 													<td><c:out value="${eachPredialDetail.saldoCargo}" /></td>
 													<td><c:out value="${eachPredialDetail.saldoFavor}" /></td>
 												</tr>
@@ -127,10 +127,10 @@
 									<tr>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.vehiculo.placa" /> </label></th>
-										<th><label class="control-label labeltabletd tableangrav"><spring:theme
+										<!-- <th><label class="control-label labeltabletd tableangrav"><spring:theme
 													code="edocuenta.inicial.vehiculo.aniograv" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.vehiculo.estado" /> </label></th>
+													code="edocuenta.inicial.vehiculo.estado" /> </label></th> -->
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.vehiculo.saldocargo" /> </label></th>
 										<th><label class="control-label labeltabletd tableangrav"><spring:theme
@@ -147,8 +147,8 @@
 												test="${not empty eachVehicularDetail.anioGravable && not empty eachVehicularDetail.estado}">
 												<tr>
 													<td><c:out value="${eachVehicular.placa}" /></td>
-													<td><c:out value="${eachVehicularDetail.anioGravable}" /></td>
-													<td><c:out value="${eachVehicularDetail.estado}" /></td>
+													<!-- <td><c:out value="${eachVehicularDetail.anioGravable}" /></td>
+													<td><c:out value="${eachVehicularDetail.estado}" /></td> -->
 													<td><c:out value="${eachVehicularDetail.saldoCargo}" /></td>
 													<td><c:out value="${eachVehicularDetail.saldoFavor}" /></td>
 												</tr>
@@ -209,12 +209,16 @@
 							<table class="table tableedocuenta" id="tabPaginacion2">
 								<thead>
 									<tr>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+									    <th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.tipiden" /> </label></th>
+                                        <th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.numiden" /> </label></th>													
+										<!-- <th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.ica.aniograv" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.ica.periodo" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.ica.estado" /> </label></th>
+													code="edocuenta.inicial.ica.estado" /> </label></th> -->
 										<th><label class="control-label labeltabletd"><spring:theme
 													code="edocuenta.inicial.ica.saldocargo" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -228,9 +232,11 @@
 										<c:forEach varStatus="loop" items="${eachICA.newDetalleICA}"
 											var="eachICADetail">
 											<tr>
-												<td><c:out value="${eachICADetail.anioGravable}" /></td>
+												<td><c:out value="${ctaForm.tipoDoc}" /></td>
+												<td><c:out value="${ctaForm.numDoc}" /></td>
+												<!-- <td><c:out value="${eachICADetail.anioGravable}" /></td>
 												<td><c:out value="${eachICADetail.periodo}" /></td>
-												<td><c:out value="${eachICADetail.estado}" /></td>
+												<td><c:out value="${eachICADetail.estado}" /></td> -->
 												<td><c:out value="${eachICADetail.saldoCargo}" /></td>
 												<td><c:out value="${eachICADetail.saldoFavor}" /></td>
 											</tr>
@@ -295,11 +301,13 @@
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.deliurbana.cdu" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="edocuenta.inicial.deliurbana.licenconst" /> </label></th>			
+										<!--<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.deliurbana.radicado" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.deliurbana.aniograv" /> </label></th>
 										<th><label class="control-label labeltabletd tableangrav"><spring:theme
-													code="edocuenta.inicial.deliurbana.estado" /> </label></th>
+													code="edocuenta.inicial.deliurbana.estado" /> </label></th>-->
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.deliurbana.saldocargo" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -313,9 +321,10 @@
 											items="${eachDeli.detalleDelineacion}" var="eachDeliDetail">
 											<tr>
 												<td><c:out value="${eachDeli.newCDU}" /></td>
-												<td><c:out value="${eachDeliDetail.radicado}" /></td>
+												<td><c:out value="${eachDeli.licenciaConstruccion}" /></td>
+												<!-- <td><c:out value="${eachDeliDetail.radicado}" /></td>
 												<td><c:out value="${eachDeliDetail.anioGravable}" /></td>
-												<td><c:out value="${eachDeliDetail.estado}" /></td>
+												<td><c:out value="${eachDeliDetail.estado}" /></td> -->
 												<td><c:out value="${eachDeliDetail.saldoCargo}" /></td>
 												<td><c:out value="${eachDeliDetail.saldoFavor}" /></td>
 											</tr>
@@ -379,11 +388,15 @@
 								<thead>
 									<tr>
 										<th><label class="control-label labeltabletd"><spring:theme
-													code="edocuenta.inicial.gasolina.anigrav" /> </label></th>
+													code="edocuenta.inicial.tipiden" /> </label></th>
+                                        <th><label class="control-label labeltabletd"><spring:theme
+													code="edocuenta.inicial.numiden" /> </label></th>
+										<!-- <th><label class="control-label labeltabletd"><spring:theme
+													code="edocuenta.inicial.gasolina.anigrav" /> </label></th>																
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.gasolina.periodo" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.gasolina.estado" /> </label></th>
+													code="edocuenta.inicial.gasolina.estado" /> </label></th> -->
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.gasolina.saldocargo" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -397,9 +410,11 @@
 										<c:forEach varStatus="loop" items="${eachGas.detalleGasolina}"
 											var="eachGasDetail">
 											<tr>
-												<td><c:out value="${eachGasDetail.anioGravable}" /></td>
+												<td><c:out value="${ctaForm.tipoDoc}" /></td>
+												<td><c:out value="${ctaForm.numDoc}" /></td>
+												<!--  <td><c:out value="${eachGasDetail.anioGravable}" /></td>
 												<td><c:out value="${eachGasDetail.periodo}" /></td>
-												<td><c:out value="${eachGasDetail.estado}" /></td>
+												<td><c:out value="${eachGasDetail.estado}" /></td>-->
 												<td><c:out value="${eachGasDetail.saldoCargo}" /></td>
 												<td><c:out value="${eachGasDetail.saldoFavor}" /></td>
 											</tr>
@@ -465,12 +480,12 @@
 									<tr>
 										<th><label class="control-label labeltabletd"><spring:theme
 													code="edocuenta.inicial.publicidad.numresol" /> </label></th>
-										<th><label class="control-label labeltabletd"><spring:theme
+										<!-- <th><label class="control-label labeltabletd"><spring:theme
 													code="edocuenta.inicial.publicidad.anigrav" /> </label></th>
 										<th><label class="control-label labeltabletd tableangrav"><spring:theme
 													code="edocuenta.inicial.publicidad.tipvalla" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.publicidad.estado" /> </label></th>
+													code="edocuenta.inicial.publicidad.estado" /> </label></th> -->
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.publicidad.saldocargo" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -484,9 +499,9 @@
 											items="${eachPubli.detallePublicidad}" var="eachPubliDetail">
 											<tr>
 												<td><c:out value="${eachPubli.cabecera.noResolucion}" /></td>
-												<td><c:out value="${eachPubliDetail.anioGravable}" /></td>
+												<!-- <td><c:out value="${eachPubliDetail.anioGravable}" /></td>
 												<td><c:out value="${eachPubli.cabecera.tipoValla}" /></td>
-												<td><c:out value="${eachPubliDetail.estado}" /></td>
+												<td><c:out value="${eachPubliDetail.estado}" /></td> -->
 												<td><c:out value="${eachPubliDetail.saldoCargo}" /></td>
 												<td><c:out value="${eachPubliDetail.saldoFavor}" /></td>
 											</tr>
