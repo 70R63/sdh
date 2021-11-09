@@ -82,6 +82,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Decoder.BASE64Decoder;
 
+import java.util.stream.Collectors;
+
 /**
  * @author Maria Luisa/Federico Flores Dimas
  *
@@ -707,6 +709,20 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 
 		determinarInfoDelineacion(infoDelineacion, customerModel);
 
+		if(infoDelineacion != null && infoDelineacion.getInfObjetoDelineacion() != null) {
+			if( infoDelineacion.getInfObjetoDelineacion().getUsos() != null) {
+			infoDelineacion.getInfObjetoDelineacion().setUsos(
+					infoDelineacion.getInfObjetoDelineacion().getUsos().stream().filter(c -> !"00".equals(c.getUso())).collect(Collectors.toList()));
+			}
+			if( infoDelineacion.getInfObjetoDelineacion().getAreaIntervenida() != null) {
+			infoDelineacion.getInfObjetoDelineacion().setAreaIntervenida(
+					infoDelineacion.getInfObjetoDelineacion().getAreaIntervenida().stream().filter(c -> !"00".equals(c.getAreaInter())).collect(Collectors.toList()));
+			}
+			if( infoDelineacion.getInfObjetoDelineacion().getAreaProyecto() != null) {
+			infoDelineacion.getInfObjetoDelineacion().setAreaProyecto(
+					infoDelineacion.getInfObjetoDelineacion().getAreaProyecto().stream().filter(c -> !"00".equals(c.getAreaProy())).collect(Collectors.toList()));
+			}
+		}
 
 		infoDelineacionRequest.setNumBP(infoDelineacion.getValCont().getInfoContrib().getNumBP());
 		infoDelineacionRequest.setCdu(infoDelineacion.getInput().getSelectedCDU());
