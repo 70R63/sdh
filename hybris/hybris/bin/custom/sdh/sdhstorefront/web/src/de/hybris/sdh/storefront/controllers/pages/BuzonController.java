@@ -129,9 +129,8 @@ public class BuzonController extends AbstractPageController
 
 		try
 			{
-				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-						SDHValidaMailRolResponse.class);
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = 
+						sdhConsultaContribuyenteBPService.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
 
 			final BuzonTributarioMsgResponse buzonTributarioMsgResponse = mapper
 					.readValue(sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioMsgResponse.class);
