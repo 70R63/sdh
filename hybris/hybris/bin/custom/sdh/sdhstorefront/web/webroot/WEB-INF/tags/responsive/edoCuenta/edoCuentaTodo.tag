@@ -50,24 +50,33 @@
 								<tbody>
 									<c:forEach varStatus="loop" items="${ctaForm.predial}"
 										var="eachPredial">
-										<c:forEach varStatus="loop"
+										<c:if test="${not empty eachPredial.newCHIP || not empty eachPredial.matrInmobiliaria}">
+											<tr>
+												<td><c:out value="${eachPredial.newCHIP}" /></td>
+												<td><c:out value="${eachPredial.matrInmobiliaria}" /></td>
+												<td><c:out value="${eachPredial.saldocargo}" /></td>
+												<td><c:out value="${eachPredial.saldofavor}" /></td>
+											</tr>	
+										</c:if>	
+										
+										<!--<c:forEach varStatus="loop"
 											items="${eachPredial.detallePredial}" var="eachPredialDetail">
 											<c:if
 												test="${not empty eachPredial.newCHIP || not empty eachPredial.matrInmobiliaria}">
 												<tr>
 													<td><c:out value="${eachPredial.newCHIP}" /></td>
 													<td><c:out value="${eachPredial.matrInmobiliaria}" /></td>
-													<!--<td><c:out value="${eachPredialDetail.anioGravable}" /></td>
+													<td><c:out value="${eachPredialDetail.anioGravable}" /></td>
 													<td><c:out
 															value="${eachPredialDetail.destinohacendario}" /></td>
 													<td><c:out value="${eachPredialDetail.estado}" /></td>
 													<td><c:out
-															value="${eachPredialDetail.porcParticipacion}" /></td>-->
+															value="${eachPredialDetail.porcParticipacion}" /></td>
 													<td><c:out value="${eachPredialDetail.saldoCargo}" /></td>
 													<td><c:out value="${eachPredialDetail.saldoFavor}" /></td>
 												</tr>
 											</c:if>
-										</c:forEach>
+										</c:forEach>-->
 									</c:forEach>
 								</tbody>
 							</table>
@@ -140,20 +149,30 @@
 								<tbody>
 									<c:forEach varStatus="loop" items="${ctaForm.tablaVehicular}"
 										var="eachVehicular">
-										<c:forEach varStatus="loop"
+										
+										<c:if test="${not empty eachVehicularDetail.anioGravable && not empty eachVehicularDetail.estado}">
+											<tr>
+												<td><c:out value="${eachVehicular.placa}" /></td>
+												<td><c:out value="${eachVehicular.saldocargo}" /></td>
+												<td><c:out value="${eachVehicular.saldofavor}" /></td>
+										    </tr>
+										</c:if>
+										
+										<!--<c:forEach varStatus="loop"
 											items="${eachVehicular.detalleVehicular}"
 											var="eachVehicularDetail">
 											<c:if
 												test="${not empty eachVehicularDetail.anioGravable && not empty eachVehicularDetail.estado}">
 												<tr>
 													<td><c:out value="${eachVehicular.placa}" /></td>
-													<!-- <td><c:out value="${eachVehicularDetail.anioGravable}" /></td>
-													<td><c:out value="${eachVehicularDetail.estado}" /></td> -->
+													<td><c:out value="${eachVehicularDetail.anioGravable}" /></td>
+													<td><c:out value="${eachVehicularDetail.estado}" /></td> 
 													<td><c:out value="${eachVehicularDetail.saldoCargo}" /></td>
 													<td><c:out value="${eachVehicularDetail.saldoFavor}" /></td>
 												</tr>
 											</c:if>
-										</c:forEach>
+										</c:forEach>-->
+										
 									</c:forEach>
 
 								</tbody>
@@ -229,18 +248,29 @@
 								<tbody>
 									<c:forEach varStatus="loop" items="${ctaForm.tablaICA}"
 										var="eachICA">
-										<c:forEach varStatus="loop" items="${eachICA.newDetalleICA}"
+										
+										<tr>
+											<td><c:out value="${ctaForm.tipoDoc}" /></td>
+											<td><c:out value="${ctaForm.numDoc}" /></td>
+											<td><c:out value="${eachICA.saldocargo}" /></td>
+											<td><c:out value="${eachICA.saldofavor}" /></td>
+										</tr>	
+										
+										
+										<!--<c:forEach varStatus="loop" items="${eachICA.newDetalleICA}"
 											var="eachICADetail">
 											<tr>
 												<td><c:out value="${ctaForm.tipoDoc}" /></td>
 												<td><c:out value="${ctaForm.numDoc}" /></td>
-												<!-- <td><c:out value="${eachICADetail.anioGravable}" /></td>
+												<td><c:out value="${eachICADetail.anioGravable}" /></td>
 												<td><c:out value="${eachICADetail.periodo}" /></td>
-												<td><c:out value="${eachICADetail.estado}" /></td> -->
+												<td><c:out value="${eachICADetail.estado}" /></td> 
 												<td><c:out value="${eachICADetail.saldoCargo}" /></td>
 												<td><c:out value="${eachICADetail.saldoFavor}" /></td>
 											</tr>
-										</c:forEach>
+										</c:forEach>-->
+										
+										
 									</c:forEach>
 
 								</tbody>
@@ -317,18 +347,29 @@
 								<tbody>
 									<c:forEach varStatus="loop" items="${ctaForm.tablaDelineacion}"
 										var="eachDeli">
-										<c:forEach varStatus="loop"
+										
+										<tr>
+											<td><c:out value="${eachDeli.newCDU}" /></td>
+											<td><c:out value="${eachDeli.licenciaConstruccion}" /></td>
+											<td><c:out value="${eachDeli.saldocargo}" /></td>
+											<td><c:out value="${eachDeli.saldofavor}" /></td>
+										</tr>	
+										
+										
+										<!--<c:forEach varStatus="loop"
 											items="${eachDeli.detalleDelineacion}" var="eachDeliDetail">
 											<tr>
 												<td><c:out value="${eachDeli.newCDU}" /></td>
 												<td><c:out value="${eachDeli.licenciaConstruccion}" /></td>
-												<!-- <td><c:out value="${eachDeliDetail.radicado}" /></td>
+												<td><c:out value="${eachDeliDetail.radicado}" /></td>
 												<td><c:out value="${eachDeliDetail.anioGravable}" /></td>
-												<td><c:out value="${eachDeliDetail.estado}" /></td> -->
+												<td><c:out value="${eachDeliDetail.estado}" /></td> 
 												<td><c:out value="${eachDeliDetail.saldoCargo}" /></td>
 												<td><c:out value="${eachDeliDetail.saldoFavor}" /></td>
 											</tr>
-										</c:forEach>
+										</c:forEach>-->
+										
+										
 									</c:forEach>
 
 								</tbody>
@@ -407,18 +448,29 @@
 								<tbody>
 									<c:forEach varStatus="loop" items="${ctaForm.tablaGasolina}"
 										var="eachGas">
-										<c:forEach varStatus="loop" items="${eachGas.detalleGasolina}"
+										
+										<tr>
+											<td><c:out value="${ctaForm.tipoDoc}" /></td>
+										    <td><c:out value="${ctaForm.numDoc}" /></td>
+											<td><c:out value="${eachGas.saldocargo}" /></td>
+											<td><c:out value="${eachGas.saldofavor}" /></td>		
+										</tr>	
+												
+										
+										<!--<c:forEach varStatus="loop" items="${eachGas.detalleGasolina}"
 											var="eachGasDetail">
 											<tr>
 												<td><c:out value="${ctaForm.tipoDoc}" /></td>
 												<td><c:out value="${ctaForm.numDoc}" /></td>
-												<!--  <td><c:out value="${eachGasDetail.anioGravable}" /></td>
+												<td><c:out value="${eachGasDetail.anioGravable}" /></td>
 												<td><c:out value="${eachGasDetail.periodo}" /></td>
-												<td><c:out value="${eachGasDetail.estado}" /></td>-->
+												<td><c:out value="${eachGasDetail.estado}" /></td>
 												<td><c:out value="${eachGasDetail.saldoCargo}" /></td>
 												<td><c:out value="${eachGasDetail.saldoFavor}" /></td>
 											</tr>
-										</c:forEach>
+										</c:forEach>-->
+										
+										
 									</c:forEach>
 
 								</tbody>
@@ -495,17 +547,27 @@
 								<tbody>
 									<c:forEach varStatus="loop" items="${ctaForm.tablaPublicidad}"
 										var="eachPubli">
-										<c:forEach varStatus="loop"
+										
+										<tr>
+											<td><c:out value="${eachPubli.cabecera.noResolucion}" /></td>
+											<td><c:out value="${eachPubli.cabecera.saldocargo}" /></td>
+											<td><c:out value="${eachPubli.cabecera.saldofavor}" /></td>
+										</tr>	
+										
+										
+										<!--<c:forEach varStatus="loop"
 											items="${eachPubli.detallePublicidad}" var="eachPubliDetail">
 											<tr>
 												<td><c:out value="${eachPubli.cabecera.noResolucion}" /></td>
-												<!-- <td><c:out value="${eachPubliDetail.anioGravable}" /></td>
+												<td><c:out value="${eachPubliDetail.anioGravable}" /></td>
 												<td><c:out value="${eachPubli.cabecera.tipoValla}" /></td>
-												<td><c:out value="${eachPubliDetail.estado}" /></td> -->
+												<td><c:out value="${eachPubliDetail.estado}" /></td> 
 												<td><c:out value="${eachPubliDetail.saldoCargo}" /></td>
 												<td><c:out value="${eachPubliDetail.saldoFavor}" /></td>
 											</tr>
-										</c:forEach>
+										</c:forEach>-->
+										
+										
 									</c:forEach>
 
 								</tbody>
