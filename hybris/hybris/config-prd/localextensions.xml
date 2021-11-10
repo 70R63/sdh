@@ -101,6 +101,7 @@ Parameters:
 		<extension dir='${HYBRIS_BIN_DIR}/custom/sdh/sdhbackoffice'/>
 		<extension dir='${HYBRIS_BIN_DIR}/ext-backoffice/cmsbackoffice'/>
 		<extension name='maintenanceweb'/>
+		<extension name='oauth2' />
 	</extensions>
 
 </hybrisconfig>

@@ -164,7 +164,11 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		final ObligacionesForm obligacionesFormuno = new ObligacionesForm();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 
-		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
+		Set<PrincipalGroupModel> groupList = customerModel.getGroups();
+		
+		//solo para PRD inicio:
+		groupList = groupList.stream().filter(c -> (c.getUid().contains("gasolinaUsrTaxGrp") || c.getUid().contains("publicidadExtUsrTaxGrp"))).collect(Collectors.toSet());
+		//solo para PRD fin
 
 		for (final PrincipalGroupModel group : groupList)
 		{
