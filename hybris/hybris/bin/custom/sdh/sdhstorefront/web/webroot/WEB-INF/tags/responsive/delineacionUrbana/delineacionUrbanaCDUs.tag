@@ -135,8 +135,10 @@
 										</td>
 									<td class="inputtextnew">${delineacion.curaduria}
 										</td>
-									<td data-cdu="${delineacion.cdu}">${delineacion.cdu}
-												</td>
+										<td><label style="color: #0358d8 !important"
+										data-cdu="${delineacion.cdu}"
+										class="text-capitalize !important label1Ver "><spring:theme
+												code="publicidad.exterior.ver" /></label></td>
 
 								</tr>
 
