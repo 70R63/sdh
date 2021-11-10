@@ -128,6 +128,8 @@
 
 			ACC.presentarDecListaDeclaracionesURL= "<c:url value='/contribuyentes/presentar-declaracion/listaDeclaraciones' />";	
 
+			ACC.presentarDecValidacionPublicidadURL= "<c:url value='/contribuyentes/presentar-declaracion/validacionPublicidad' />";	
+
 			ACC.certiPagosListaURL= "<c:url value='/contribuyentes/consultas/certipagos/listaPagos' />";	
 
 			ACC.tipoPeriodoDeclaracionURL= "<c:url value='/contribuyentes/consultas/declaraciones/tipoPeriodoDec' />";	
