@@ -21,3 +21,7 @@
 <div id="dialogMensajes" title="Predial">
 	<div id="dialogMensajesContent"></div>
 </div>
+
+<div id="dialogDeclaracion" title="Declaracion">
+	<div id="declaracionDialogContent"></div>
+</div>
