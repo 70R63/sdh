@@ -40,7 +40,6 @@ import de.hybris.sdh.storefront.forms.PredialForm;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
 import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -202,6 +201,10 @@ public class ConsultaEstado extends AbstractSearchPageController
 						edoCuentaResponse.getTablaICA().stream().filter(
 								eachTax -> (StringUtils.isNotBlank(eachTax.getNumDoc()) || StringUtils.isNotBlank(eachTax.getTipoDoc())))
 								.collect(Collectors.toList()));
+				ctaForm.setTablaICA(edoCuentaResponse.getTablaICA().stream()
+						.filter(
+								eachTax -> (StringUtils.isNotBlank(eachTax.getNumDoc()) || StringUtils.isNotBlank(eachTax.getTipoDoc())))
+						.collect(Collectors.toList()));
 			}
 
 			//cambios para reteica
@@ -228,13 +231,13 @@ public class ConsultaEstado extends AbstractSearchPageController
 			}
 			if (edoCuentaResponse.getTablaPublicidad() != null && !edoCuentaResponse.getTablaPublicidad().isEmpty())
 			{
-				ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad().stream().filter(eachTax -> 
+				ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad().stream().filter(eachTax ->
 				(StringUtils.isNotBlank(eachTax.getCabecera().getNoResolucion())
 				&& (StringUtils.isNotBlank(eachTax.getCabecera().getTipoValla()) ||
 				StringUtils.isNotBlank(eachTax.getCabecera().getSaldocargo()) ||
-				StringUtils.isNotBlank(eachTax.getCabecera().getSaldofavor()))				
+				StringUtils.isNotBlank(eachTax.getCabecera().getSaldofavor()))
 				)).collect(Collectors.toList()));
-				for (EdoCtaPublicidad iterable_element : ctaForm.getTablaPublicidad())
+				for (final EdoCtaPublicidad iterable_element : ctaForm.getTablaPublicidad())
 				{
 					iterable_element.setDetallePublicidad(iterable_element.getDetallePublicidad().stream().filter(eachItem -> (
 							StringUtils.isNotBlank(eachItem.getAnioGravable()) ||
@@ -242,7 +245,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 							StringUtils.isNotBlank(eachItem.getEstado()) ||
 							StringUtils.isNotBlank(eachItem.getSaldoCargo()) ||
 							StringUtils.isNotBlank(eachItem.getSaldoFavor())
-							)).collect(Collectors.toList()));	
+							)).collect(Collectors.toList()));
 				}
 			}
 
@@ -262,7 +265,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 		}
 
 		//		Consumo de pedial
-		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
+		final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
 		final PredialForm predialFormIni = new PredialForm();
 		final VehiculosInfObjetoForm vehiculosForm = new VehiculosInfObjetoForm();
 		final InfoDelineacion infoDelineacion = new InfoDelineacion();
@@ -279,10 +282,10 @@ public class ConsultaEstado extends AbstractSearchPageController
 		//		{
 		if(ctaForm != null) {
 			if(ctaForm.getTablaVehicular()!= null && !ctaForm.getTablaVehicular().isEmpty()){
-				sdhConsultaContribuyenteBPResponse.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));				
+				sdhConsultaContribuyenteBPResponse.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
 			}
 			if(ctaForm.getTablaDelineacion()!= null && !ctaForm.getTablaDelineacion().isEmpty()) {
-				sdhConsultaContribuyenteBPResponse.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));				
+				sdhConsultaContribuyenteBPResponse.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
 			}
 			if(ctaForm.getTablaGasolina()!= null && !ctaForm.getTablaGasolina().isEmpty()) {
 				sdhConsultaContribuyenteBPResponse.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
@@ -291,10 +294,10 @@ public class ConsultaEstado extends AbstractSearchPageController
 				sdhConsultaContribuyenteBPResponse.setPublicidadExt(sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));
 			}
 			if(ctaForm.getTablaICA() != null && !ctaForm.getTablaICA().isEmpty()) {
-				sdhConsultaContribuyenteBPResponse.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));				
+				sdhConsultaContribuyenteBPResponse.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
 			}
 			if(ctaForm.getPredial() != null && !ctaForm.getPredial().isEmpty()) {
-				predialFormIni.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));				
+				predialFormIni.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
 			}
 		}
 //			sdhConsultaContribuyenteBPResponse.setReteIca(sdhConsultaImpuesto_simplificado.consulta_impRe(consultaContribuyenteBPRequest));
@@ -343,12 +346,9 @@ public class ConsultaEstado extends AbstractSearchPageController
 						cutomerPublicidadList.add(cutomerPublicidadRow);
 					}
 
-
 				}
 			}
 			customerData.setExteriorPublicityTaxList(cutomerPublicidadList);
-
-
 
 			if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 			{
@@ -437,10 +437,6 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 		return getViewForPage(model);
 	}
-
-
-
-
 
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value =
@@ -546,7 +542,5 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 		return null;
 	}
-
-
 
 }
