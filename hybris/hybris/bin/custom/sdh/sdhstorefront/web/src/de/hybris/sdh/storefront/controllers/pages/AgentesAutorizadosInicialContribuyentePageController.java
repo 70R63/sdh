@@ -96,6 +96,7 @@ public class AgentesAutorizadosInicialContribuyentePageController extends Abstra
 		sessionService.getCurrentSession().setAttribute("representadoData", representadoData);
 
 		model.addAttribute("representado", representadoData);
+		model.addAttribute("representadoData", representadoData);
 
 
 		final ConsulFirmasRequest request = new ConsulFirmasRequest();

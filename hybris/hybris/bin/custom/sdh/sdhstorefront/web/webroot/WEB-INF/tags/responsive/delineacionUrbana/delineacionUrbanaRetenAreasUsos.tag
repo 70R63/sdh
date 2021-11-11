@@ -24,11 +24,6 @@
 
 
 	<div class="row">
-		<!-- 			<div class="col-md-3"> -->
-		<%-- 				<label class="control-label" for=""> <spring:theme --%>
-		<%-- 						code="delineacion.urbana.dec.areasusos.uso" /> --%>
-		<!-- 				</label> -->
-		<!-- 			</div> -->
 		<div class="col-md-3 mostrarMD">
 			<label class="control-label format_label" for=""
 				style="text-transform: none !important"> <spring:theme
@@ -43,53 +38,35 @@
 	</div>
 
 	<!-- LINEA DE USO -->
-	<c:forEach items="${dataForm.infObjetoDelineacion.usos}" var="info"
-		varStatus="loop">
-		<div class="row">
+	<div class="row" id="divUsos">
+		<c:forEach items="${dataForm.infObjetoDelineacion.usos}" var="info" varStatus="loop">
 			<div class="row areasusos">
-				<!-- 					<div class="col-md-3"> -->
-				<!-- 						<div class="form-group "> -->
-				<%-- 							<sf:select --%>
-				<%-- 								path="infObjetoDelineacion.usos[${loop.index}].usoCatalogo" --%>
-				<%-- 								items="${dataForm.catalogos.uso}" --%>
-				<%-- 								referenceData="${dataForm.catalogos.uso}" class="form-control"></sf:select> --%>
-				<!-- 						</div> -->
-
-				<!-- 					</div> -->
-
 				<div class="col-md-3">
 					<div class="form-group">
-						<label class="control-label format_label mostrarXS" for=""
-				style="text-transform: none !important"> <spring:theme
-					code="delineacion.urbana.dec.areasusos.uso" />
-			</label>
+						<label class="control-label format_label mostrarXS" for="" style="text-transform: none !important"> <spring:theme code="delineacion.urbana.dec.areasusos.uso" /></label>
 						<c:if test='${dataForm.input.tipoFlujo == "D"}'>
 							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
 								items="${dataForm.catalogos.codUso}"
 								referenceData="${dataForm.catalogos.codUso}"
-								class="new_alto form-control"
+								class="new_alto form-control usoSelect"
 								disabled="${disabledInformacionAreaUso}"></sf:select>
 						</c:if>
 						<c:if test='${dataForm.input.tipoFlujo == "R"}'>
 							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
 								items="${dataForm.catalogos.codUso}"
 								referenceData="${dataForm.catalogos.codUso}"
-								class="new_alto form-control"
+								class="new_alto form-control usoSelect"
 								disabled="${disabledInformacionAreaUso}"></sf:select>
 						</c:if>
 
 					</div>
 				</div>
 
-
 				<div class="col-md-2">
 					<div class="form-group ">
-					<label class="control-label format_label mostrarXS" for=""
-				style="text-transform: none !important"> <spring:theme
-					code="delineacion.urbana.dec.areasusos.netuso" /></label>
-
+						<label class="control-label format_label mostrarXS" for="" style="text-transform: none !important"> <spring:theme code="delineacion.urbana.dec.areasusos.netuso" /></label>
 						<c:if test='${dataForm.input.tipoFlujo == "D"}'>
-							<sf:input class="newalto form-control"
+							<sf:input class="newalto form-control usoInput"
 								readonly="${disabledInformacionAreaUso}" aria-required="true"
 								maxlength="240"
 								path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
@@ -97,7 +74,7 @@
 								disabled="false" />
 						</c:if>
 						<c:if test='${dataForm.input.tipoFlujo == "R"}'>
-							<sf:input class="newalto form-control"
+							<sf:input class="newalto form-control usoInput"
 								readonly="${disabledInformacionAreaUso}" aria-required="true"
 								maxlength="240"
 								path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
@@ -111,29 +88,23 @@
 					<c:if test='${dataForm.input.tipoFlujo == "D"}'>
 						<div class="col-md-1">
 							<div class="form-group ">
-								<img onclick="addinfoareuso()"
-									src="${themeResourcePath}/images/adddelineacion.png"
-									style="width: 25px"></img> <img onclick="deleinfoareuso()"
-									src="${themeResourcePath}/images/deledelineacion.png"
-									style="width: 25px"></img>
+								<img onclick="addinfoareusotable2(this,'areasusos')" src="${themeResourcePath}/images/adddelineacion.png" style="width: 25px"></img> 
+								<img onclick="deleinfoareusotable2(this,'areasusos')" src="${themeResourcePath}/images/deledelineacion.png" style="width: 25px"></img>
 							</div>
 						</div>
 					</c:if>
 					<c:if test='${dataForm.input.tipoFlujo == "R"}'>
 						<div class="col-md-1">
 							<div class="form-group ">
-								<img onclick="addinfoareuso()"
-									src="${themeResourcePath}/images/adddelineacion.png"
-									style="width: 25px"></img> <img onclick="deleinfoareuso()"
-									src="${themeResourcePath}/images/deledelineacion.png"
-									style="width: 25px"></img>
+								<img onclick="addinfoareusotable2(this,'areasusos')" src="${themeResourcePath}/images/adddelineacion.png" style="width: 25px"></img> 
+								<img onclick="deleinfoareusotable2(this,'areasusos')" src="${themeResourcePath}/images/deledelineacion.png" style="width: 25px"></img>
 							</div>
 						</div>
 					</c:if>
 				</c:if>
 			</div>
-		</div>
-	</c:forEach>
+		</c:forEach>
+	</div>
 
 
 	<!-- LINEA DE TOTAL - USO -->
@@ -141,17 +112,13 @@
 		<div class="row total">
 			<div class="col-md-3">
 				<div class="form-group ">
-					<input id="inputareainter" class="new_alto form-control"
-						maxlength="30" value="Total" disabled="disabled"
-						readonly="readonly"></input>
+					<input id="inputareainter" class="new_alto form-control" maxlength="30" value="Total" disabled="disabled"readonly="readonly"></input>
 				</div>
 			</div>
 
 			<div class="col-md-2 offset-md-3">
 				<div class="form-group ">
-					<sf:input id="inputareainter" class="newalto form-control"
-						maxlength="30" path="infObjetoDelineacion.infoDeclara.totalUsos"
-						disabled="true"></sf:input>
+					<sf:input id="inputareainter" class="newalto form-control" maxlength="30" path="infObjetoDelineacion.infoDeclara.totalUsos" disabled="true"></sf:input>
 				</div>
 			</div>
 		</div>
@@ -164,47 +131,33 @@
 	<div class="row">
 		<div class="row mostrarMD">
 			<div class="col-md-3">
-				<label class="control-label format_label" for=""
-					style="text-transform: none !important"> <spring:theme
-						code="delineacion.urbana.dec.areasusos.areainve" />
-				</label>
+				<label class="control-label format_label" for="" style="text-transform: none !important"> <spring:theme code="delineacion.urbana.dec.areasusos.areainve" /></label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label format_label" for=""
-					style="text-transform: none !important"> <spring:theme
-						code="delineacion.urbana.dec.areasusos.m2area" />
-				</label>
+				<label class="control-label format_label" for="" style="text-transform: none !important"> <spring:theme code="delineacion.urbana.dec.areasusos.m2area" /> </label>
 			</div>
 		</div>
 	</div>
 
-	<c:forEach items="${dataForm.infObjetoDelineacion.areaIntervenida}"
-		var="varAreaIntervenida" varStatus="loop">
-	
-		<div class="row">
-			<div class="row areausosdos">
+	<div class="row" id="divIntervenida">
+		<c:forEach items="${dataForm.infObjetoDelineacion.areaIntervenida}" var="varAreaIntervenida" varStatus="loop">
+			<div class="areausosdos row">
 				<div class="col-md-3">
 					<div class="form-group ">
-					<label class="control-label format_label mostrarXS" for=""
-					style="text-transform: none !important"> <spring:theme
-						code="delineacion.urbana.dec.areasusos.areainve" />
-				</label>
-						<sf:select id="select"
-							path="infObjetoDelineacion.areaIntervenida[${loop.index}].areaInter"
-							items="${dataForm.catalogos.areaInter}"
-							referenceData="${dataForm.catalogos.areaInter}"
-							class="new_alto form-control"
-							disabled="${disabledInformacionAreaUso}"></sf:select>
+					<label class="control-label format_label mostrarXS" for="" style="text-transform: none !important"> <spring:theme code="delineacion.urbana.dec.areasusos.areainve" /></label>
+					<sf:select id="select"
+						path="infObjetoDelineacion.areaIntervenida[${loop.index}].areaInter"
+						items="${dataForm.catalogos.areaInter}"
+						referenceData="${dataForm.catalogos.areaInter}"
+						class="new_alto form-control intervenidaSelect"
+						disabled="${disabledInformacionAreaUso}"></sf:select>
 					</div>
 				</div>
 
 				<div class="col-md-2">
 					<div class="form-group ">
-					<label class="control-label format_label mostrarXS" for=""
-					style="text-transform: none !important"> <spring:theme
-						code="delineacion.urbana.dec.areasusos.m2area" />
-				</label>
-						<sf:input class="newalto form-control"
+						<label class="control-label format_label mostrarXS" for="" style="text-transform: none !important"> <spring:theme code="delineacion.urbana.dec.areasusos.m2area" /></label>
+						<sf:input class="newalto form-control intervenidaInput"
 							readonly="${disabledInformacionAreaUso}" aria-required="true"
 							maxlength="240"
 							path="infObjetoDelineacion.areaIntervenida[${loop.index}].aream2"
@@ -214,17 +167,14 @@
 				<c:if test="${dataForm.controlCampos.informacionAreaUso != true}">
 					<div class="col-md-1">
 						<div class="form-group ">
-							<img onclick="addinfoareuso3()"
-								src="${themeResourcePath}/images/adddelineacion.png"
-								style="width: 25px"></img> <img onclick="deleinfoareusotable3()"
-								src="${themeResourcePath}/images/deledelineacion.png"
-								style="width: 25px"></img>
+							<img onclick="addinfoareusotable2(this,'areausosdos')" src="${themeResourcePath}/images/adddelineacion.png" style="width: 25px"></img> 
+							<img onclick="deleinfoareusotable2(this,'areausosdos')" src="${themeResourcePath}/images/deledelineacion.png" style="width: 25px"></img>
 						</div>
 					</div>
 				</c:if>
 			</div>
-		</div>
-	</c:forEach>
+		</c:forEach>
+	</div>
 
 
 	<div class="row">
@@ -251,73 +201,51 @@
 	<!-- 	comienza tabla tres -->
 
 	<div class="row mostrarMD">
-
 		<div class="col-md-3">
-
-			<label class="control-label format_label" for=""
-				style="text-transform: none !important"> <spring:theme
-					code="delineacion.urbana.dec.areasusos.areaproyin" />
-			</label>
+			<label class="control-label format_label" for="" style="text-transform: none !important"> <spring:theme code="delineacion.urbana.dec.areasusos.areaproyin" /></label>
 		</div>
 		<div class="col-md-2">
-
-			<label class="control-label format_label" for=""
-				style="text-transform: none !important"> <spring:theme
-					code="delineacion.urbana.dec.areasusos.aream2" />
-			</label>
-
+			<label class="control-label format_label" for="" style="text-transform: none !important"> <spring:theme code="delineacion.urbana.dec.areasusos.aream2" /></label>
 		</div>
 	</div>
 
 
-	<c:forEach items="${dataForm.infObjetoDelineacion.areaProyecto}"
-		var="varAreaIntervenida" varStatus="loop">
-
-		<div class="row">
-			<div class=" arearquitec row" id="arearquitec">
+	<div class="row" id="divArearquitec">
+		<c:forEach items="${dataForm.infObjetoDelineacion.areaProyecto}" var="varAreaIntervenida" varStatus="loop">
+			<div class=" arearquitec row" id="arearquitec" style="display: block;">
 				<div class="col-md-3">
 					<div class="form-group ">
-					<label class="control-label format_label mostrarXS" for=""
-				style="text-transform: none !important"> <spring:theme
-					code="delineacion.urbana.dec.areasusos.areaproyin" />
-			</label>
+						<label class="control-label format_label mostrarXS" for="" style="text-transform: none !important"> <spring:theme code="delineacion.urbana.dec.areasusos.areaproyin" /></label>
 						<sf:select
 							path="infObjetoDelineacion.areaProyecto[${loop.index}].areaProy"
 							items="${dataForm.catalogos.areaProy}"
 							referenceData="${dataForm.catalogos.areaProy}"
-							class="new_alto form-control"
+							class="new_alto form-control areaProySelect"
 							disabled="${disabledInformacionAreaUso}"></sf:select>
 					</div>
-
 				</div>
 
 				<div class="col-md-2">
 					<div class="form-group ">
-					<label class="control-label format_label mostrarXS" for=""
-				style="text-transform: none !important"> <spring:theme
-					code="delineacion.urbana.dec.areasusos.aream2" />
-			</label>
-						<sf:input class="newalto form-control"
+						<label class="control-label format_label mostrarXS" for="" style="text-transform: none !important"> <spring:theme code="delineacion.urbana.dec.areasusos.aream2" /></label>
+						<sf:input class="newalto form-control areaProyInput"
 							readonly="${disabledInformacionAreaUso}" aria-required="true"
 							maxlength="240"
-							path="infObjetoDelineacion.areaProyecto[${loop.index}].aream2" />
+							path="infObjetoDelineacion.areaProyecto[${loop.index}].aream2" 
+							onkeyup="numberFormat(this)" onclick="numberFormat(this)"/>
 					</div>
 				</div>
-
 				<c:if test="${dataForm.controlCampos.informacionAreaUso != true}">
 					<div class="col-md-1">
 						<div class="form-group ">
-							<img onclick="addinfoareusotable2()"
-								src="${themeResourcePath}/images/adddelineacion.png"
-								style="width: 25px"></img> <img onclick="deleinfoareusotable2()"
-								src="${themeResourcePath}/images/deledelineacion.png"
-								style="width: 25px"></img>
+							<img onclick="addinfoareusotable2(this,'arearquitec')" src="${themeResourcePath}/images/adddelineacion.png" style="width: 25px"></img>
+							<img onclick="deleinfoareusotable2(this,'arearquitec')" src="${themeResourcePath}/images/deledelineacion.png" style="width: 25px"></img>
 						</div>
 					</div>
 				</c:if>
 			</div>
-		</div>
-	</c:forEach>
+		</c:forEach>
+	</div>
 
 	<div class="row">
 		<div class="row totalnew">
@@ -332,7 +260,7 @@
 				<div class="form-group ">
 					<input class="newalto form-control" maxlength="30"
 						value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreap}"
-						disabled="true"></input>
+						disabled="disabled"></input>
 				</div>
 			</div>
 		</div>
@@ -341,156 +269,43 @@
 </div>
 
 <script>
-	function addinfoareuso() {
-		if ($(".areasusos").length < 10000) {
 
-			var tam = $(".areasusos").length;
-			var i = tam - 1;
-			$($(".areasusos")[i]).parent()
-					.append($($(".areasusos")[i]).clone()) //.find('select').val("00"));
+	function addinfoareusotable2(elemento,seccion) {
+		ACC.delineacionurbana.agregarRegistro(elemento,ACC.delineacionurbana.obtenerInfoElemento(seccion));
 
-			for (var j = 0; j <= tam; j++) {
-				var arr = $(".areasusos");
-				if (j == tam) {
+	}
+	
+	function deleinfoareusotable2(elemento,seccion) {
+		ACC.delineacionurbana.borrarRegistro(elemento,ACC.delineacionurbana.obtenerInfoElemento(seccion));
 
-					$($(".areasusos")[j]).find('select').val("00");
-					var area = $($(".areasusos")[j]).find('select');
-					var nom = "infObjetoDelineacion.usos[" + tam + "].uso";
-					var nomid = "infObjetoDelineacion.usos" + tam + ".uso";
-					area.attr("name", nom);
-					area.attr("id", nomid);
+	}
+	
+	
+	function numberFormat(selectObject) {
 
-					$($(".areasusos")[j]).find('input').val("");
-					var areainp = $($(".areasusos")[j]).find('input');
-					var nom2 = "infObjetoDelineacion.usos[" + tam
-							+ "].areaNeta";
-					var nomid2 = "infObjetoDelineacion.usos" + tam
-							+ ".areaNeta";
-					areainp.attr("name", nom2);
-					areainp.attr("id", nomid2);
-
-				}
-			}
+		var numero = selectObject.value;
+		var idinput = selectObject.id;
+		var resultado = "";
+		if (numero[0] == "-") {
+			nuevoNumero = numero.replace(/\./g, '').substring(1);
 		} else {
-			alert("No puede agregar más registros");
+			nuevoNumero = numero.toString().replace(/\./g, '');
 		}
+		if (numero.toString().indexOf(",") >= 0)
+			nuevoNumero = nuevoNumero.substring(0, nuevoNumero.indexOf(","));
 
-	}
-	function deleinfoareuso() {
-		var i = $(".areasusos").length;
-		var val = i - 1;
-		if ($(".areasusos").length <= 10000 && $(".areasusos").length > 1) {
+		for (var j, i = nuevoNumero.length - 1, j = 0; i >= 0; i--, j++)
+			resultado = nuevoNumero.charAt(i)
+					+ ((j > 0) && (j % 3 == 0) ? "." : "") + resultado;
+		if (numero.toString().indexOf(",") >= 0)
+			resultado += numero.substring(numero.indexOf(","));
 
-			$($(".areasusos")[val]).closest($($(".areasusos")[val]).remove());
-
-		} else if ($(".areasusos").length <= 1) {
-			alert("No puede eliminar todos los registros");
-		}
-	}
-
-	function addinfoareusotable2() {
-
-		var tam = $(".arearquitec").length;
-		var i = tam - 1;
-		if ($(".arearquitec").length < 10000) {
-			$($(".arearquitec")[i]).parent().append(
-					$($(".arearquitec")[i]).clone());
-
-			for (var j = 0; j <= tam; j++) {
-				var arr = $(".arearquitec");
-				if (j == tam) {
-
-					$($(".arearquitec")[j]).find('select').val("00");
-					var area = $($(".arearquitec")[j]).find('select');
-					var nom = "infObjetoDelineacion.areaProyecto[" + tam
-							+ "].areaProy";
-					var nomid = "infObjetoDelineacion.areaProyecto" + tam
-							+ ".areaProy";
-					area.attr("name", nom);
-					area.attr("id", nomid);
-
-					$($(".arearquitec")[j]).find('input').val("");
-					var areainp = $($(".arearquitec")[j]).find('input');
-					var nom2 = "infObjetoDelineacion.areaProyecto[" + tam
-							+ "].aream2";
-					var nomid2 = "infObjetoDelineacion.areaProyecto" + tam
-							+ ".aream2";
-					areainp.attr("name", nom2);
-					areainp.attr("id", nomid2);
-
-				}
-			}
-
+		if (numero[0] == "-") {
+			document.getElementById(idinput).value = "-" + resultado;
+			return "-" + resultado;
 		} else {
-			alert("No puede agregar más registros");
+			document.getElementById(idinput).value = resultado;
+			return resultado;
 		}
-
-	}
-
-	function deleinfoareusotable2() {
-
-		var i = $(".arearquitec").length;
-		var val = i - 1;
-		if ($(".arearquitec").length <= 10000 && $(".arearquitec").length > 1) {
-
-			$($(".arearquitec")[val]).closest(
-					$($(".arearquitec")[val]).remove());
-
-		} else if ($(".arearquitec").length <= 1) {
-			alert("No puede eliminar todos los registros");
-		}
-
-	}
-
-	function addinfoareuso3() {
-
-		var tam = $(".areausosdos").length;
-		var i = tam - 1;
-		if ($(".areausosdos").length < 10000) {
-			$($(".areausosdos")[i]).parent().append(
-					$($(".areausosdos")[i]).clone());
-
-			for (var j = 0; j <= tam; j++) {
-				var arr = $(".areausosdos");
-				if (j == tam) {
-
-					$($(".areausosdos")[j]).find('select').val("00");
-					var areau = $($(".areasusosdos")[j]).find('select');
-					var nom = "infObjetoDelineacion.areaIntervenida[" + tam
-							+ "].areaInter";
-					var nomid = "infObjetoDelineacion.areaIntervenida" + tam
-							+ ".areaInter";
-					$($(".areausosdos")[j]).find('select').attr("name", nom);
-					$($(".areausosdos")[j]).find('select').attr("id", nomid);
-
-					$($(".areausosdos")[j]).find('input').val("");
-					var areainpu = $($(".areasusosdos")[j]).find('input');
-					var nom2 = "infObjetoDelineacion.areaIntervenida[" + tam
-							+ "].aream2";
-					var nomid2 = "infObjetoDelineacion.areaIntervenida" + tam
-							+ ".aream2";
-					$($(".areausosdos")[j]).find('input').attr("name", nom2);
-					$($(".areausosdos")[j]).find('input').attr("id", nomid2);
-
-				}
-			}
-		} else {
-			alert("No puede agregar más registros");
-		}
-
-	}
-
-	function deleinfoareusotable3() {
-		var i = $(".areausosdos").length;
-		var val = i - 1;
-		if ($(".areausosdos").length <= 10000 && $(".areausosdos").length > 1) {
-
-			$($(".areausosdos")[val]).closest(
-					$($(".areausosdos")[val]).remove());
-
-		} else if ($(".areausosdos").length <= 1) {
-			alert("No puede eliminar todos los registros");
-		}
-
 	}
 </script>

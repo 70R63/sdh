@@ -210,11 +210,14 @@
 
 	<c:if test="${not empty publicidadExtList}">
 		<table id="myTable" class="tabPaginacion">
+			<thead>
 			<tr>
 				<th>NUMERO DE RESOLUCION</th>
 				<th>TIPO DE VALLA</th>
 				<th>ACTION</th>
 			</tr>
+			</thead>
+			<tbody>
 			<c:forEach var="item" items="${publicidadExtList}">
 				<tr>
 					<td><c:out value="${item.numResolu}" /></td>
@@ -224,6 +227,7 @@
 							class="float-left submit-button">Generar</button></td>
 				</tr>
 			</c:forEach>
+			</tbody>
 		</table>
 	</c:if>
 
@@ -570,37 +574,8 @@
     
     
     function validarPublicidadForm(numResolu, tipoVallaCode ){
-        var anioGravable = document.getElementById("anoGravable").value;
-        var urlDeclaracion = "publicidadexterior/declaracion?numResolu="+numResolu+"&anoGravable="+anioGravable+"&tipoValla="+tipoVallaCode;
-        var nowUrl = window.location.href;
-        var targetUrl = "infoObject/getUseOption?anioGravable="+anioGravable+"&taxType=4"+"&numResolu="+numResolu+"&tipoVallaCode="+tipoVallaCode;
-        currentUrl = nowUrl.replace("contribuyentes/presentar-declaracion",targetUrl);
-
-	    $.ajax({
-            url : currentUrl,
-           	type : "GET",
-        	success : function(dataResponse) {
-               
-        		
-        		
-       			if(dataResponse == "02"){
-                    var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
-                    if (r == true) {
-                    	window.location.href = urlDeclaracion;
-                    } else {
-                        return false;
-                    }
-                }else{
-                	window.location.href = urlDeclaracion;
-                 }
-      				
-        	},
-        	error : function() {
-        	}
-        });
-	    
-
-        return false;
+    	var anioGravable = document.getElementById("anoGravable").value;
+    	return  ACC.opcionDeclaraciones.validarPublicidadForm(anioGravable,numResolu,tipoVallaCode);
     }
     
 	window.onload = function() {
@@ -663,28 +638,40 @@
 		}
 
 		if (tipoImpuesto == "2" || tipoImpuesto == "1") { //vehicular predial
-			nota.style.display = 'block';
-			notaotros.style.display = 'none';
+			if(nota != null){
+				nota.style.display = 'block';
+			}
+			if(notaotros){
+				notaotros.style.display = 'none';
+			}
 		} else {
-			nota.style.display = 'none';
-			notaotros.style.display = 'block';
+			if(nota != null){
+				nota.style.display = 'none';
+			}
+			if(notaotros){
+				notaotros.style.display = 'block';
+			}
 		}
 		if (tipoImpuesto == "2" || tipoImpuesto == "1") { //vehicular, predial
 			ACC.opcionDeclaraciones.obtenerListaDeclaraciones_presentarDec(tipoImpuesto);
 		} else { //otros impuestos
 			if (tipoImpuesto == "4" || tipoImpuesto == "6" || tipoImpuesto == "3") {
 				form = document.getElementById("forma");
-				input = document.createElement('input');
-				input.setAttribute('name', 'skipReques');
-				input.setAttribute('value', '');
-				input.setAttribute('type', 'hidden');
-				var skipRequesElemento = document.getElementById("skipReques");
-				if (skipRequesElemento == null) {
-					form.appendChild(input);
-				} else {
-					skipRequesElemento.value = "";
+				if(form != null){
+					input = document.createElement('input');
+					if(input != null){
+						input.setAttribute('name', 'skipReques');
+						input.setAttribute('value', '');
+						input.setAttribute('type', 'hidden');
+					}
+					var skipRequesElemento = document.getElementById("skipReques");
+					if (skipRequesElemento == null) {
+						form.appendChild(input);
+					} else {
+						skipRequesElemento.value = "";
+					}
+					form.submit();
 				}
-				form.submit();
 			}
 
 			ajustaPeriodo();

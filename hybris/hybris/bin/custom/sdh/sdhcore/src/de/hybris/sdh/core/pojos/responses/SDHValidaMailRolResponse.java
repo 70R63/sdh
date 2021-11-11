@@ -6,7 +6,8 @@ package de.hybris.sdh.core.pojos.responses;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.codehaus.jackson.annotate.JsonSetter;
+
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 
 /**
