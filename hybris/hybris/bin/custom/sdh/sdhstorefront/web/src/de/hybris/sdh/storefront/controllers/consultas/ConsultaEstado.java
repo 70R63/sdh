@@ -18,9 +18,11 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.EdoCuentaRequest;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.EdoCtaPredial;
 import de.hybris.sdh.core.pojos.responses.EdoCtaPublicidad;
 import de.hybris.sdh.core.pojos.responses.EdoCuentaResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
@@ -45,11 +47,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -115,11 +119,6 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 	@Resource(name = "sdhConsultaImpuesto_simplificado")
 	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
-
-
-
-
-
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value =
 	{ "/contribuyentes/estado-de-cuenta", "/agenteRetenedor/estado-de-cuenta" }, method = RequestMethod.GET)
@@ -133,7 +132,6 @@ public class ConsultaEstado extends AbstractSearchPageController
 			referrer = request.getServletPath();
 		}
 
-
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
@@ -143,7 +141,6 @@ public class ConsultaEstado extends AbstractSearchPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final EdoCuentaRequest edoCuentaRequest = new EdoCuentaRequest();
-
 
 		ctaForm.setCompleName(customerData.getCompleteName());
 		ctaForm.setTipoDoc(customerData.getDocumentType());
@@ -285,7 +282,8 @@ public class ConsultaEstado extends AbstractSearchPageController
 				sdhConsultaContribuyenteBPResponse.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
 			}
 			if(ctaForm.getTablaDelineacion()!= null && !ctaForm.getTablaDelineacion().isEmpty()) {
-				sdhConsultaContribuyenteBPResponse.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
+				sdhConsultaContribuyenteBPResponse
+						.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
 			}
 			if(ctaForm.getTablaGasolina()!= null && !ctaForm.getTablaGasolina().isEmpty()) {
 				sdhConsultaContribuyenteBPResponse.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
@@ -298,6 +296,38 @@ public class ConsultaEstado extends AbstractSearchPageController
 			}
 			if(ctaForm.getPredial() != null && !ctaForm.getPredial().isEmpty()) {
 				predialFormIni.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
+
+				final ArrayList<PredialResponse> currentPredial = new ArrayList<PredialResponse>();
+
+				for (final EdoCtaPredial edoCtaPredial : ctaForm.getPredial())
+				{
+
+					final Optional<PredialResponse> result = predialFormIni.getPredial().stream()
+							.filter(item -> item.getCHIP() != null && item.getCHIP().equals(edoCtaPredial.getNewCHIP())
+									&& item.getMatrInmobiliaria() != null
+									&& item.getMatrInmobiliaria().equals(edoCtaPredial.getMatrInmobiliaria()))
+							.findFirst();
+
+					if (result.isPresent())
+					{
+						final PredialResponse predialResponseItem = new PredialResponse();
+
+						predialResponseItem.setAnioGravable(result.get().getAnioGravable());
+						predialResponseItem.setCHIP(result.get().getCHIP());
+						predialResponseItem.setContratoArrenda(result.get().getContratoArrenda());
+						predialResponseItem.setDireccionPredio(result.get().getDireccionPredio());
+						predialResponseItem.setMatrInmobiliaria(result.get().getMatrInmobiliaria());
+						predialResponseItem.setNumObjeto(result.get().getNumObjeto());
+
+
+						currentPredial.add(predialResponseItem);
+					}
+
+				}
+
+				predialFormIni.setPredial(currentPredial);
+
+
 			}
 		}
 //			sdhConsultaContribuyenteBPResponse.setReteIca(sdhConsultaImpuesto_simplificado.consulta_impRe(consultaContribuyenteBPRequest));
@@ -319,6 +349,26 @@ public class ConsultaEstado extends AbstractSearchPageController
 				miRitForm.setDelineacion(sdhConsultaContribuyenteBPResponse.getDelineacion().stream()
 						.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
 			}
+
+		//sdhConsultaContribuyenteBPResponse.setReteIca(sdhConsultaImpuesto_simplificado.consulta_impRe(consultaContribuyenteBPRequest));
+		//sdhConsultaContribuyenteBPResponse = mapper.readValue(
+		//		sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+		//		SDHValidaMailRolResponse.class);
+
+
+		if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
+				&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getVehicular()))
+		{
+			vehiculosForm.setImpvehicular(sdhConsultaContribuyenteBPResponse.getVehicular().stream()
+					.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
+		}
+
+		if (sdhConsultaContribuyenteBPResponse.getDelineacion() != null
+				&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getDelineacion()))
+		{
+			miRitForm.setDelineacion(sdhConsultaContribuyenteBPResponse.getDelineacion().stream()
+					.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
+		}
 
 			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
 					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
@@ -468,7 +518,6 @@ public class ConsultaEstado extends AbstractSearchPageController
 				List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 				SDHValidaMailRolResponse detalleContribuyente;
-
 
 				customerModel = (CustomerModel) userService.getCurrentUser();
 
