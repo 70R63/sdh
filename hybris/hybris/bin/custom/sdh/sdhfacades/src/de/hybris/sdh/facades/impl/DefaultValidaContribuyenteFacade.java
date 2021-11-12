@@ -56,22 +56,19 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 
 		if ("CC".equalsIgnoreCase(request.getTipoid()))
 		{
-			final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+			final DateTimeFormatter formatterOriginal = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			final DateTimeFormatter formatterConvertido = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-			final String date = request.getFechExp();
-
-			final LocalDate customerExpDate;
+			final String fechaOriginal = request.getFechExp();
 
 			try
 			{
-				customerExpDate = LocalDate.parse(date, formatter);
-
-				request.setFechExp(formatter.format(customerExpDate));
+				final String customerExpDate = LocalDate.parse(fechaOriginal, formatterOriginal).format(formatterConvertido);
+				request.setFechExp(customerExpDate);
 			}
 			catch (final DateTimeParseException e1)
 			{
-				LOG.error("Error parsing expedition date: " + date);
-
+				LOG.error("Error parsing expedition date: " + fechaOriginal);
 				return false;
 			}
 
