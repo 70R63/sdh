@@ -56,12 +56,10 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 
 		if ("CC".equalsIgnoreCase(request.getTipoid()))
 		{
-<<<<<<< HEAD
-			final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-=======
+
 			final DateTimeFormatter formatterOriginal = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			final DateTimeFormatter formatterConvertido = DateTimeFormatter.ofPattern("yyyyMMdd");
->>>>>>> Cr_fede_representado
+
 
 			final String fechaOriginal = request.getFechExp();
 
