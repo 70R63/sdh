@@ -9,21 +9,15 @@ import de.hybris.sdh.core.pojos.responses.ConsultarBPResponse;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 import de.hybris.sdh.facades.SDHValidaContribuyenteFacade;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import javax.annotation.Resource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-
 
 /**
  * @author hybris
@@ -31,7 +25,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteFacade
 {
-
 	private static final Logger LOG = Logger.getLogger(DefaultValidaContribuyenteFacade.class);
 
 	@Resource(name = "sdhValidaContribuyenteService")
@@ -49,11 +42,10 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 	 * @see de.hybris.sdh.facades.SDHValidaContribuyenteFacade#existeContribuyente(de.hybris.sdh.core.pojos.requests.
 	 * ValidaContribuyenteRequest)
 	 */
+
 	@Override
 	public boolean existeContribuyente(final ConsultarBPRequest request)
 	{
-
-
 		if ("CC".equalsIgnoreCase(request.getTipoid()))
 		{
 			final DateTimeFormatter formatterOriginal = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -72,11 +64,7 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 				return false;
 			}
 
-
 		}
-
-
-
 
 		final String response = sdhValidaContribuyenteService.consultarBP(request);
 
@@ -114,7 +102,5 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 		}
 		return false;
 	}
-
-
 
 }

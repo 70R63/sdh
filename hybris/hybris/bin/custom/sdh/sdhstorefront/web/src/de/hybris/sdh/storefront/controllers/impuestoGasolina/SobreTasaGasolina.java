@@ -9,7 +9,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -534,7 +533,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 			if (detalleGasolinaResponse != null && detalleGasolinaResponse.getErrores() != null)
 			{
-				for (ErrorEnWS etemp : detalleGasolinaResponse.getErrores())
+				for (final ErrorEnWS etemp : detalleGasolinaResponse.getErrores())
 				{
 					if (etemp != null && etemp.getIdmsj() != null && etemp.getIdmsj().equals("200"))
 					{
@@ -958,7 +957,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		numBP = detallePagoRequest.getNumBP();
 		contribuyenteRequest.setNumBP(numBP);
 
-		System.out.println("Request de validaCont: " + contribuyenteRequest);
+		System.out.println("Request de validaCont_simplificado: " + contribuyenteRequest);
 		//detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
 		detalleContribuyente = gasolinaService.consultaContribuyenteGas(customerModel);
 
@@ -967,7 +966,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 			detalleContribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "05");
 		}
 
-		System.out.println("Response de validaCont: " + detalleContribuyente);
+		System.out.println("Response de validaCont_simplificado: " + detalleContribuyente);
 		if (gasolinaService.ocurrioErrorValcontGas(gasolinaSimpliResponse) != true)
 		{
 			clavePeriodo = gasolinaService.prepararPeriodoMensualPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
@@ -1018,165 +1017,166 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 
 
+		final String sitII_activado = configurationService.getConfiguration().getString("sdh.payment.service.activado");
 
-		System.out.println("---------------- Pago Gasolina SIT_II --------------------------");
-		//*->Consumo de servicio SITII para pago de impuestos
-		final SDHTaxTypeModel sdhTaxTypeModel = sdhTaxTypeService.findUniqueByTaxCode(psePaymentForm.getTipoDeImpuesto());
-		PaymentServiceRegisterResponse paymentServiceRegisterResponse = null;
-
-		final PaymentServiceRegisterEntityRequest paymentServiceRegisterEntityRequest = new PaymentServiceRegisterEntityRequest(1,
-				"SECRETARIA DISTRITAL DE HACIENDA");
-
-		final PaymentServiceRegisterApplicationRequest paymentServiceRegisterApplicationRequest = new PaymentServiceRegisterApplicationRequest(
-				5, "BOGDATA SAP");
-
-		//Armado de objeto pago
-		String ref;
-		if (psePaymentForm.getTipoDeImpuesto().equals("5101"))
+		if (sitII_activado.contains("true"))
 		{
-			ref = psePaymentForm.getCHIP();
-		}
-		else if (psePaymentForm.getTipoDeImpuesto().equals("5103"))
-		{
-			ref = psePaymentForm.getPlaca();
-		}
-		else if (psePaymentForm.getTipoDeImpuesto().equals("5132"))
-		{
-			if (!psePaymentForm.getCUD().equals(""))
+
+			System.out.println("---------------- Pago Gasolina SIT_II --------------------------");
+			//*->Consumo de servicio SITII para pago de impuestos
+			final SDHTaxTypeModel sdhTaxTypeModel = sdhTaxTypeService.findUniqueByTaxCode(psePaymentForm.getTipoDeImpuesto());
+			PaymentServiceRegisterResponse paymentServiceRegisterResponse = null;
+
+			final PaymentServiceRegisterEntityRequest paymentServiceRegisterEntityRequest = new PaymentServiceRegisterEntityRequest(
+					1, "SECRETARIA DISTRITAL DE HACIENDA");
+
+			final PaymentServiceRegisterApplicationRequest paymentServiceRegisterApplicationRequest = new PaymentServiceRegisterApplicationRequest(
+					5, "BOGDATA SAP");
+
+			//Armado de objeto pago
+			String ref;
+			if (psePaymentForm.getTipoDeImpuesto().equals("5101"))
 			{
-				ref = psePaymentForm.getCUD();
+				ref = psePaymentForm.getCHIP();
+			}
+			else if (psePaymentForm.getTipoDeImpuesto().equals("5103"))
+			{
+				ref = psePaymentForm.getPlaca();
+			}
+			else if (psePaymentForm.getTipoDeImpuesto().equals("5132"))
+			{
+				if (!psePaymentForm.getCUD().equals(""))
+				{
+					ref = psePaymentForm.getCUD();
+				}
+				else
+				{
+					ref = psePaymentForm.getCdu();
+				}
 			}
 			else
 			{
-				ref = psePaymentForm.getCdu();
+				ref = psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
+			}
+
+
+			final int i_ceros = 14 - ref.length();
+
+			String s_ceros = new String();
+			for (int i = 1; i <= i_ceros; i++)
+			{
+				s_ceros = s_ceros + "0";
+			}
+
+			final String objPago = s_ceros + ref;
+
+			psePaymentForm.setObjPago(objPago);
+
+			//Consulta de consulpagos
+			final ConsulPagosRequest listaDeclaracionesRequest = new ConsulPagosRequest();
+			final ListaDeclaracionesResponse listaDeclaracionesResponse = null;
+
+			final Map<String, String> map_impuestos = new HashMap<>();
+			map_impuestos.put("5101", "0001");
+			map_impuestos.put("5103", "0002");
+			map_impuestos.put("5102", "0003");
+			map_impuestos.put("5131", "0004");
+			map_impuestos.put("0108", "0005");
+			map_impuestos.put("5106", "0006");
+			map_impuestos.put("5132", "0006");
+			map_impuestos.put("5154", "0007");
+
+			final String impuestoSAP = map_impuestos.get(psePaymentForm.getTipoDeImpuesto());
+
+			listaDeclaracionesRequest.setBp(numBP);
+			listaDeclaracionesRequest.setImpuesto(impuestoSAP);
+			listaDeclaracionesRequest.setAnioGravable(dataForm.getAnoGravable());
+			listaDeclaracionesRequest.setPeriodo(dataForm.getPeriodo());
+			listaDeclaracionesRequest.setNumObjeto(detalleContribuyente.getGasolina().get(0).getNumObjeto());
+
+
+			//Obtiene la ref4 con los valores concatenados para imprimir un formulario con ws imprimePago
+			final StringBuffer sb = new StringBuffer();
+			String ref4 = null;
+
+			sb.append(numBP + ";");
+			sb.append(impuestoSAP + ";");
+			sb.append(dataForm.getAnoGravable() + ";");
+			sb.append(dataForm.getPeriodo() + ";");
+			sb.append(detalleContribuyente.getGasolina().get(0).getNumObjeto() + ";");
+			sb.append(" ");
+
+			ref4 = sb.toString();
+
+			String fechaLimPago = null;
+			if (psePaymentForm.getFechaLimiteDePago().contains("/"))
+			{
+				fechaLimPago = psePaymentForm.getFechaLimiteDePago();
+			}
+			else
+			{
+				fechaLimPago = psePaymentForm.getFechaLimiteDePago().substring(6) + "/"
+						+ psePaymentForm.getFechaLimiteDePago().substring(4, 6) + "/"
+						+ psePaymentForm.getFechaLimiteDePago().substring(0, 4);
+			}
+
+
+			final BigInteger valorAPagar = new BigInteger(psePaymentForm.getValorAPagar());
+			final String urlRetorno = configurationService.getConfiguration().getString("sdh.payment.service.retorno.url");
+			final PaymentServiceRegisterRequest paymentServiceRegisterRequest = new PaymentServiceRegisterRequest(
+					paymentServiceRegisterEntityRequest, paymentServiceRegisterApplicationRequest,
+					psePaymentForm.getTipoDeImpuesto().substring(2),
+					Objects.nonNull(sdhTaxTypeModel) ? sdhTaxTypeModel.getName() : StringUtils.EMPTY,
+					psePaymentForm.getNumeroDeReferencia(), psePaymentForm.getObjPago(), psePaymentForm.getNumeroDeReferencia(), ref4,
+					fechaLimPago, urlRetorno, valorAPagar);
+
+			try
+			{
+				paymentServiceRegisterResponse = sdhPaymentService.register(paymentServiceRegisterRequest);
+			}
+			catch (final NoSuchAlgorithmException e)
+			{
+				e.printStackTrace();
+			}
+			catch (final KeyStoreException e)
+			{
+				e.printStackTrace();
+			}
+			catch (final KeyManagementException e)
+			{
+				e.printStackTrace();
+			}
+
+			System.out.println(paymentServiceRegisterRequest);
+			System.out.println(paymentServiceRegisterResponse);
+
+
+
+			String errorSITII = null;
+			if (valorAPagar.compareTo(BigInteger.ZERO) == -1 || valorAPagar.compareTo(BigInteger.ZERO) == 0)
+			{
+				errorSITII = getMessageSource().getMessage("prepararPago.error.0", null, getI18nService().getCurrentLocale());
+				redirectAttributes.addAttribute("errorSITII", errorSITII);
+				return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
+			}
+			else if (paymentServiceRegisterResponse.getNus() <= 0)
+			{
+				errorSITII = paymentServiceRegisterResponse.getMessage();
+				redirectAttributes.addFlashAttribute("errorSITII", errorSITII);
+				return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
+			}
+			else
+			{
+				return Objects.nonNull(paymentServiceRegisterResponse) ? "redirect:" + paymentServiceRegisterResponse.getPaymentUrl()
+						: "/";
 			}
 		}
 		else
 		{
-			ref = psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
+			return REDIRECT_TO_DECLARACIONES_PAGAR_PAGE;
 		}
 
 
-		final int i_ceros = 14 - ref.length();
-
-		String s_ceros = new String();
-		for (int i = 1; i <= i_ceros; i++)
-		{
-			s_ceros = s_ceros + "0";
-		}
-
-		final String objPago = s_ceros + ref;
-
-		psePaymentForm.setObjPago(objPago);
-
-		//Consulta de consulpagos
-		final ConsulPagosRequest listaDeclaracionesRequest = new ConsulPagosRequest();
-		final ListaDeclaracionesResponse listaDeclaracionesResponse = null;
-
-		final Map<String, String> map_impuestos = new HashMap<>();
-		map_impuestos.put("5101", "0001");
-		map_impuestos.put("5103", "0002");
-		map_impuestos.put("5102", "0003");
-		map_impuestos.put("5131", "0004");
-		map_impuestos.put("0108", "0005");
-		map_impuestos.put("5106", "0006");
-		map_impuestos.put("5132", "0006");
-		map_impuestos.put("5154", "0007");
-
-		final String impuestoSAP = map_impuestos.get(psePaymentForm.getTipoDeImpuesto());
-
-		listaDeclaracionesRequest.setBp(numBP);
-		listaDeclaracionesRequest.setImpuesto(impuestoSAP);
-		listaDeclaracionesRequest.setAnioGravable(dataForm.getAnoGravable());
-		listaDeclaracionesRequest.setPeriodo(dataForm.getPeriodo());
-		listaDeclaracionesRequest.setNumObjeto(detalleContribuyente.getGasolina().get(0).getNumObjeto());
-
-
-		//Obtiene la ref4 con los valores concatenados para imprimir un formulario con ws imprimePago
-		final StringBuffer sb = new StringBuffer();
-		String ref4 = null;
-
-		sb.append(numBP + ";");
-		sb.append(impuestoSAP + ";");
-		sb.append(dataForm.getAnoGravable() + ";");
-		sb.append(dataForm.getPeriodo() + ";");
-		sb.append(detalleContribuyente.getGasolina().get(0).getNumObjeto() + ";");
-		sb.append(" ");
-
-		ref4 = sb.toString();
-
-		String fechaLimPago = null;
-		if (psePaymentForm.getFechaLimiteDePago().contains("/"))
-		{
-			fechaLimPago = psePaymentForm.getFechaLimiteDePago();
-		}
-		else
-		{
-			fechaLimPago = psePaymentForm.getFechaLimiteDePago().substring(6) + "/"
-					+ psePaymentForm.getFechaLimiteDePago().substring(4, 6) + "/"
-					+ psePaymentForm.getFechaLimiteDePago().substring(0, 4);
-		}
-
-
-		final BigInteger valorAPagar = new BigInteger(psePaymentForm.getValorAPagar());
-		final String urlRetorno = configurationService.getConfiguration().getString("sdh.payment.service.retorno.url");
-		final PaymentServiceRegisterRequest paymentServiceRegisterRequest = new PaymentServiceRegisterRequest(
-				paymentServiceRegisterEntityRequest, paymentServiceRegisterApplicationRequest,
-				psePaymentForm.getTipoDeImpuesto().substring(2),
-				Objects.nonNull(sdhTaxTypeModel) ? sdhTaxTypeModel.getName() : StringUtils.EMPTY,
-				psePaymentForm.getNumeroDeReferencia(), psePaymentForm.getObjPago(), psePaymentForm.getNumeroDeReferencia(), ref4,
-				fechaLimPago,
-				urlRetorno,
-				valorAPagar);
-
-		try
-		{
-			paymentServiceRegisterResponse = sdhPaymentService.register(paymentServiceRegisterRequest);
-		}
-		catch (final NoSuchAlgorithmException e)
-		{
-			e.printStackTrace();
-		}
-		catch (final KeyStoreException e)
-		{
-			e.printStackTrace();
-		}
-		catch (final KeyManagementException e)
-		{
-			e.printStackTrace();
-		}
-
-		System.out.println(paymentServiceRegisterRequest);
-		System.out.println(paymentServiceRegisterResponse);
-
-
-
-		String errorSITII = null;
-		if (valorAPagar.compareTo(BigInteger.ZERO) == -1 || valorAPagar.compareTo(BigInteger.ZERO) == 0)
-		{
-			errorSITII = getMessageSource().getMessage("prepararPago.error.0", null, getI18nService().getCurrentLocale());
-			redirectAttributes.addAttribute("errorSITII", errorSITII);
-			return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
-		}
-		else if (paymentServiceRegisterResponse.getNus() <= 0)
-		{
-			errorSITII = paymentServiceRegisterResponse.getMessage();
-			redirectAttributes.addFlashAttribute("errorSITII", errorSITII);
-			return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
-		}
-		else
-		{
-			return Objects.nonNull(paymentServiceRegisterResponse) ? "redirect:" + paymentServiceRegisterResponse.getPaymentUrl()
-					: "/";
-		}
-
-
-
-
-
-
-
-		//return REDIRECT_TO_DECLARACIONES_PAGAR_PAGE;
 	}
 
 

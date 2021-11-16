@@ -18,9 +18,11 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.EdoCuentaRequest;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.EdoCtaPredial;
 import de.hybris.sdh.core.pojos.responses.EdoCtaPublicidad;
 import de.hybris.sdh.core.pojos.responses.EdoCuentaResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
@@ -40,17 +42,18 @@ import de.hybris.sdh.storefront.forms.PredialForm;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
 import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -188,38 +191,42 @@ public class ConsultaEstado extends AbstractSearchPageController
 			ctaForm.setPublicidadSaldoCargo(edoCuentaResponse.getNewPublicidadSaldoCargo());
 			ctaForm.setPublicidadSaldoFavor(edoCuentaResponse.getNewPublicidadSaldoFavor());
 
-			//			if (edoCuentaResponse.getPredial() != null && !edoCuentaResponse.getPredial().isEmpty())
-			//			{
-			//				ctaForm.setPredial(
-			//						edoCuentaResponse.getPredial().stream().filter(eachTax -> (StringUtils.isNotBlank(eachTax.getNewCHIP())
-			//								|| StringUtils.isNotBlank(eachTax.getMatrInmobiliaria()))).collect(Collectors.toList()));
-			//			}
-			//
-			//			if (edoCuentaResponse.getTablaICA() != null && !edoCuentaResponse.getTablaICA().isEmpty())
-			//			{
-			//				ctaForm.setTablaICA(
-			//						edoCuentaResponse.getTablaICA().stream().filter(
-			//								eachTax -> (StringUtils.isNotBlank(eachTax.getNumDoc()) || StringUtils.isNotBlank(eachTax.getTipoDoc())))
-			//								.collect(Collectors.toList()));
-			//			}
-			//
-			//			//cambios para reteica
-			//			ctaForm.setReteica(edoCuentaResponse.getReteica());
-			//			ctaForm.setReteicaSaldoFavor(edoCuentaResponse.getNewReteicaSaldoFavor());
-			//			ctaForm.setReteicaSaldoCargo(edoCuentaResponse.getNewReteicaSaldoCargo());
-			//			//termina reteica
-			//
-			//			if (edoCuentaResponse.getTablaVehicular() != null && !edoCuentaResponse.getTablaVehicular().isEmpty())
-			//			{
-			//				ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular().stream()
-			//						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getPlaca())).collect(Collectors.toList()));
-			//			}
-			//			//ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular());
-			//			if (edoCuentaResponse.getTablaDelineacion() != null && !edoCuentaResponse.getTablaDelineacion().isEmpty())
-			//			{
-			//				ctaForm.setTablaDelineacion(edoCuentaResponse.getTablaDelineacion().stream()
-			//						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCDU())).collect(Collectors.toList()));
-			//			}
+			if (edoCuentaResponse.getPredial() != null && !edoCuentaResponse.getPredial().isEmpty())
+			{
+				ctaForm.setPredial(
+						edoCuentaResponse.getPredial().stream().filter(eachTax -> (StringUtils.isNotBlank(eachTax.getNewCHIP())
+								|| StringUtils.isNotBlank(eachTax.getMatrInmobiliaria()))).collect(Collectors.toList()));
+			}
+
+			if (edoCuentaResponse.getTablaICA() != null && !edoCuentaResponse.getTablaICA().isEmpty())
+			{
+				ctaForm.setTablaICA(edoCuentaResponse.getTablaICA().stream()
+						.filter(
+								eachTax -> (StringUtils.isNotBlank(eachTax.getNumDoc()) || StringUtils.isNotBlank(eachTax.getTipoDoc())))
+						.collect(Collectors.toList()));
+			}
+
+			//cambios para reteica
+			ctaForm.setReteica(edoCuentaResponse.getReteica());
+			ctaForm.setReteicaSaldoFavor(edoCuentaResponse.getNewReteicaSaldoFavor());
+			ctaForm.setReteicaSaldoCargo(edoCuentaResponse.getNewReteicaSaldoCargo());
+			//termina reteica
+
+			if (edoCuentaResponse.getTablaVehicular() != null && !edoCuentaResponse.getTablaVehicular().isEmpty())
+			{
+				ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular().stream()
+						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getPlaca())).collect(Collectors.toList()));
+			}
+			//ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular());
+			if (edoCuentaResponse.getTablaDelineacion() != null && !edoCuentaResponse.getTablaDelineacion().isEmpty())
+			{
+				ctaForm.setTablaDelineacion(edoCuentaResponse.getTablaDelineacion().stream()
+						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCDU())).collect(Collectors.toList()));
+			}
+
+
+
+
 			if (edoCuentaResponse.getTablaGasolina() != null && !edoCuentaResponse.getTablaGasolina().isEmpty())
 			{
 				ctaForm.setTablaGasolina(edoCuentaResponse.getTablaGasolina().stream()
@@ -227,13 +234,13 @@ public class ConsultaEstado extends AbstractSearchPageController
 			}
 			if (edoCuentaResponse.getTablaPublicidad() != null && !edoCuentaResponse.getTablaPublicidad().isEmpty())
 			{
-				ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad().stream().filter(eachTax -> 
+				ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad().stream().filter(eachTax ->
 				(StringUtils.isNotBlank(eachTax.getCabecera().getNoResolucion())
 				&& (StringUtils.isNotBlank(eachTax.getCabecera().getTipoValla()) ||
 				StringUtils.isNotBlank(eachTax.getCabecera().getSaldocargo()) ||
-				StringUtils.isNotBlank(eachTax.getCabecera().getSaldofavor()))				
+				StringUtils.isNotBlank(eachTax.getCabecera().getSaldofavor()))
 				)).collect(Collectors.toList()));
-				for (EdoCtaPublicidad iterable_element : ctaForm.getTablaPublicidad())
+				for (final EdoCtaPublicidad iterable_element : ctaForm.getTablaPublicidad())
 				{
 					iterable_element.setDetallePublicidad(iterable_element.getDetallePublicidad().stream().filter(eachItem -> (
 							StringUtils.isNotBlank(eachItem.getAnioGravable()) ||
@@ -241,7 +248,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 							StringUtils.isNotBlank(eachItem.getEstado()) ||
 							StringUtils.isNotBlank(eachItem.getSaldoCargo()) ||
 							StringUtils.isNotBlank(eachItem.getSaldoFavor())
-							)).collect(Collectors.toList()));	
+							)).collect(Collectors.toList()));
 				}
 			}
 
@@ -261,7 +268,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 		}
 
 		//		Consumo de pedial
-		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
+		final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
 		final PredialForm predialFormIni = new PredialForm();
 		final VehiculosInfObjetoForm vehiculosForm = new VehiculosInfObjetoForm();
 		final InfoDelineacion infoDelineacion = new InfoDelineacion();
@@ -278,10 +285,11 @@ public class ConsultaEstado extends AbstractSearchPageController
 		//		{
 		if(ctaForm != null) {
 			if(ctaForm.getTablaVehicular()!= null && !ctaForm.getTablaVehicular().isEmpty()){
-				sdhConsultaContribuyenteBPResponse.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));				
+				sdhConsultaContribuyenteBPResponse.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
 			}
 			if(ctaForm.getTablaDelineacion()!= null && !ctaForm.getTablaDelineacion().isEmpty()) {
-				sdhConsultaContribuyenteBPResponse.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));				
+				sdhConsultaContribuyenteBPResponse
+						.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
 			}
 			if(ctaForm.getTablaGasolina()!= null && !ctaForm.getTablaGasolina().isEmpty()) {
 				sdhConsultaContribuyenteBPResponse.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
@@ -290,31 +298,63 @@ public class ConsultaEstado extends AbstractSearchPageController
 				sdhConsultaContribuyenteBPResponse.setPublicidadExt(sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));
 			}
 			if(ctaForm.getTablaICA() != null && !ctaForm.getTablaICA().isEmpty()) {
-				sdhConsultaContribuyenteBPResponse.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));				
+				sdhConsultaContribuyenteBPResponse.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
 			}
 			if(ctaForm.getPredial() != null && !ctaForm.getPredial().isEmpty()) {
-				predialFormIni.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));				
+				predialFormIni.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
+
+				final ArrayList<PredialResponse> currentPredial = new ArrayList<PredialResponse>();
+
+				for (final EdoCtaPredial edoCtaPredial : ctaForm.getPredial())
+				{
+
+					final Optional<PredialResponse> result = predialFormIni.getPredial().stream()
+							.filter(item -> item.getCHIP() != null && item.getCHIP().equals(edoCtaPredial.getNewCHIP())
+									&& item.getMatrInmobiliaria() != null
+									&& item.getMatrInmobiliaria().equals(edoCtaPredial.getMatrInmobiliaria()))
+							.findFirst();
+
+					if (result.isPresent())
+					{
+						final PredialResponse predialResponseItem = new PredialResponse();
+
+						predialResponseItem.setAnioGravable(result.get().getAnioGravable());
+						predialResponseItem.setCHIP(result.get().getCHIP());
+						predialResponseItem.setContratoArrenda(result.get().getContratoArrenda());
+						predialResponseItem.setDireccionPredio(result.get().getDireccionPredio());
+						predialResponseItem.setMatrInmobiliaria(result.get().getMatrInmobiliaria());
+						predialResponseItem.setNumObjeto(result.get().getNumObjeto());
+
+
+						currentPredial.add(predialResponseItem);
+					}
+
+				}
+
+				predialFormIni.setPredial(currentPredial);
+
+
 			}
 		}
-			//			sdhConsultaContribuyenteBPResponse.setReteIca(sdhConsultaImpuesto_simplificado.consulta_impRe(consultaContribuyenteBPRequest));
-			//			sdhConsultaContribuyenteBPResponse = mapper.readValue(
-			//					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-			//					SDHValidaMailRolResponse.class);
+		//sdhConsultaContribuyenteBPResponse.setReteIca(sdhConsultaImpuesto_simplificado.consulta_impRe(consultaContribuyenteBPRequest));
+		//sdhConsultaContribuyenteBPResponse = mapper.readValue(
+		//		sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+		//		SDHValidaMailRolResponse.class);
 
 
-			//			if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
-			//					&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getVehicular()))
-			//			{
-			//				vehiculosForm.setImpvehicular(sdhConsultaContribuyenteBPResponse.getVehicular().stream()
-			//						.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
-			//			}
-			//
-			//			if (sdhConsultaContribuyenteBPResponse.getDelineacion() != null
-			//					&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getDelineacion()))
-			//			{
-			//				miRitForm.setDelineacion(sdhConsultaContribuyenteBPResponse.getDelineacion().stream()
-			//						.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
-			//			}
+		if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
+				&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getVehicular()))
+		{
+			vehiculosForm.setImpvehicular(sdhConsultaContribuyenteBPResponse.getVehicular().stream()
+					.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
+		}
+
+		if (sdhConsultaContribuyenteBPResponse.getDelineacion() != null
+				&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getDelineacion()))
+		{
+			miRitForm.setDelineacion(sdhConsultaContribuyenteBPResponse.getDelineacion().stream()
+					.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
+		}
 
 			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
 					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
