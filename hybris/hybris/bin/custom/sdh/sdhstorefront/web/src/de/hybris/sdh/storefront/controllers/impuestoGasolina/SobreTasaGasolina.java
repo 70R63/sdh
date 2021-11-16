@@ -957,7 +957,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		numBP = detallePagoRequest.getNumBP();
 		contribuyenteRequest.setNumBP(numBP);
 
-		System.out.println("Request de validaCont: " + contribuyenteRequest);
+		System.out.println("Request de validaCont_simplificado: " + contribuyenteRequest);
 		//detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
 		detalleContribuyente = gasolinaService.consultaContribuyenteGas(customerModel);
 
@@ -966,7 +966,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 			detalleContribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "05");
 		}
 
-		System.out.println("Response de validaCont: " + detalleContribuyente);
+		System.out.println("Response de validaCont_simplificado: " + detalleContribuyente);
 		if (gasolinaService.ocurrioErrorValcontGas(gasolinaSimpliResponse) != true)
 		{
 			clavePeriodo = gasolinaService.prepararPeriodoMensualPago(dataForm.getAnoGravable(), dataForm.getPeriodo());

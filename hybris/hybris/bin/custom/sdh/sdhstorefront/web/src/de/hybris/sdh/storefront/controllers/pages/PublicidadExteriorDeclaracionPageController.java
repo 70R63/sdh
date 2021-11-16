@@ -293,13 +293,13 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 
 		contribuyenteRequest.setNumBP(numBP);
 
-		System.out.println("Request de validaCont: " + contribuyenteRequest);
+		System.out.println("Request de validaCont_simplificado: " + contribuyenteRequest);
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		//detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
 		detalleContribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "07");
 
-		System.out.println("Response de validaCont: " + detalleContribuyente);
+		System.out.println("Response de validaCont_simplificado: " + detalleContribuyente);
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
 			infoPreviaPSE.setAnoGravable(anoParaPSE);
@@ -679,9 +679,12 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 
 		contribuyenteRequest.setNumBP(numBP);
 
-		System.out.println("Request de validaCont: " + contribuyenteRequest);
-		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
-		System.out.println("Response de validaCont: " + detalleContribuyente);
+		System.out.println("Request de validaCont_simplificado: " + contribuyenteRequest);
+		//detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		detalleContribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "07");
+
+		System.out.println("Response de validaCont_simplificado: " + detalleContribuyente);
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
 			infoPreviaPSE.setAnoGravable(anoParaPSE);
