@@ -66,8 +66,14 @@ ACC.facturacion = {
 	},
 	
 	
-	descargaFactura : function (anoGravable,numObjeto,tipoOperacion){
+	descargaFactura : function (anoGravable,numObjeto,tipoOperacion,descargaFactura1){
+		debugger;
 		ACC.spinner.show();
+		var objnew = descargaFactura1;
+			debugger;
+			var anoGravable = $.trim($(objnew).attr("data-anioGrav"));
+			var numObjeto = $.trim($(objnew).attr("data-numObjeto"));
+			
 		if(ACC.facturacion.validarAntesSubmit(anoGravable,numObjeto)){
 			var dataActual = {};	
 		

@@ -20,9 +20,9 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DescargaFacturaRequest;
 import de.hybris.sdh.core.pojos.responses.DescargaFacturaResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.DescargaFacturaForm;
@@ -32,6 +32,7 @@ import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -39,7 +40,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,7 +48,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import Decoder.BASE64Decoder;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -96,7 +97,8 @@ public class DescargaFacturaPageController extends AbstractPageController
 	@Resource(name = "customerFacade")
 	CustomerFacade customerFacade;
 
-
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
 
 	@RequestMapping(value = "/contribuyentes/descargafactura", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -114,16 +116,23 @@ public class DescargaFacturaPageController extends AbstractPageController
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
+			//			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+			//					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+			//					SDHValidaMailRolResponse.class);
 
-			facturacionForm.setPredial(sdhConsultaContribuyenteBPResponse.getPredial());
-			facturacionForm.setVehicular(sdhConsultaContribuyenteBPResponse.getVehicular());
+			//			final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
+			//			consultaContribBPRequest.setNumBP(customerModel.getNumBP());
+			//
+			//			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+			//					.consultaContribuyenteBP_simplificado(consultaContribBPRequest);
+
+			facturacionForm.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
+			facturacionForm.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
 
 			model.addAttribute("facturacionForm", facturacionForm);
+			model.addAttribute("descargaFacturaForm", new DescargaFacturaForm());
 		}
 		catch (final Exception e)
 		{
@@ -138,7 +147,6 @@ public class DescargaFacturaPageController extends AbstractPageController
 
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-
 		return getViewForPage(model);
 	}
 
@@ -196,24 +204,20 @@ public class DescargaFacturaPageController extends AbstractPageController
 			}
 			else
 			{
-
-
 				if (descargaFacturaResponse != null && descargaFacturaResponse.getPdf() != null
 						&& !descargaFacturaResponse.getPdf().isEmpty())
 				{
 					final String encodedBytes = descargaFacturaResponse.getPdf();
 
-					final BASE64Decoder decoder = new BASE64Decoder();
-					byte[] decodedBytes;
+					//		final BASE64Decoder decoder = new BASE64Decoder();
+					byte[] decodedBytes = new byte[0];
 					final FileOutputStream fop;
-					decodedBytes = new BASE64Decoder().decodeBuffer(encodedBytes);
-
-
+					//	decodedBytes = new BASE64Decoder().decodeBuffer(encodedBytes);
+					decodedBytes = Base64.getDecoder().decode(decodedBytes);
 
 					final String fileName = dataForm.getNumObjeto() + "-" + dataForm.getNumBP() + ".pdf";
 
 					final InputStream is = new ByteArrayInputStream(decodedBytes);
-
 
 					final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
 					mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
