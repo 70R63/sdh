@@ -54,9 +54,6 @@
     <extension name='configurablebundleservices' />
     <extension name='configurablebundlebackoffice' />
     <extension name='customersupportbackoffice' />
-    <extension name='datahubadapter' />
-    <extension name='datahubbackoffice' />
-    <extension name='datahubclient' />
     <extension name='previewwebservices' />
     <extension name='pcmbackoffice' />
     <extension name='backofficesolrsearch' />
