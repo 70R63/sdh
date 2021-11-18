@@ -4,6 +4,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 public class SdhCustomerUpdate {
     private String bp;
+    private String uid;
     private String newEmail;
 
     public String getBp() {
@@ -23,4 +24,9 @@ public class SdhCustomerUpdate {
     public void setNewEmail(String newEmail) {
         this.newEmail = newEmail;
     }
+
+    public String getUid() { return uid; }
+
+    @JsonProperty("uid")
+    public void setUid(String uid) { this.uid = uid; }
 }
