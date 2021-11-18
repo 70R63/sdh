@@ -1,0 +1,41 @@
+$contentCatalog=sdhContentCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Stage])[default=$contentCatalog:Stage]
+
+$productCatalog=sdhProductCatalog
+$productCatalogName=Public Sector Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Stage'])[unique=true,default=$productCatalog:Stage]
+$picture=media(code, $contentCV) ;
+$siteResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$jarResourceCms=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/cockpits/cmscockpit
+$medias=medias(code, $contentCV);
+$lang=es
+$mediaContainer=media(qualifier, $contentCV)[lang=$lang];
+$addonExtensionName=sdhpsaddon
+$siteUid=sdh
+
+# CMS Site Settings - set default preview category and product
+UPDATE CMSSite; uid[unique=true]; defaultPreviewCategory(code, $productCV); defaultPreviewProduct(code, $productCV)
+              ; $siteUid   ; report-an-issue         ; report-graffiti
+
+
+# Site Logo Component
+INSERT_UPDATE PSSimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; urlLink
+; ; SiteLogoComponent ; Site Logo Component ; SiteLogoComponent ; "/"
+
+
+UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; category(code, $productCV); product(code,$productCV);target(code)[default = 'sameWindow'];;
+; ;FacturacionLink; FACTURACION LINK    ; "/contribuyentes/descargafactura" ;;;;;
+
+UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&nodeRef;children(uid,$contentCV);links(&linkRef);
+;FacturacionNavigationServiceRequestsNavNodeMenu;;Facturacion Service Requests Menu;FacturacionNavigationServiceRequestsNavNodeMenu;
+
+REMOVE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; category(code, $productCV); product(code,$productCV);target(code)[default = 'sameWindow'];;
+; ; DescargaFacturaLink          ; DESCARGA FACTURA                    ; "/contribuyentes/descargafactura" ;;;;;
+
+REMOVE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&nodeRef;links(&linkRef);
+;DescargaFacturaNavNode ;;Descarga Factura Link;DescargaFacturaNavNode
+;ReexpedicionFacturaNavNode ;;Reexpedicion Factura Link;ReexpedicionFacturaNavNode
+
+REMOVE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];title[lang=$lang]
+;;DescargaFacturaLink;"Descarga de factura";"Haga clic aquí para acceder a la opción de menú Descarga de factura"
+;;ReexpedicionFacturaLink;"Reexpedición de factura";"Haga clic aquí para acceder a la opción de menú Reexpedición de factura"

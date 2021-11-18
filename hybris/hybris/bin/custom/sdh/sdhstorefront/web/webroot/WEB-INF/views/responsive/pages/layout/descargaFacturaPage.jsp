@@ -7,7 +7,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="desfac"
 	tagdir="/WEB-INF/tags/responsive/facturacion"%>
-<div class="loader"></div>
+<!-- <div class="loader"></div> -->
 <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <c:choose>
@@ -19,6 +19,7 @@
 	</c:otherwise>
 </c:choose>
 
+
 <a id="downloadHelper" target="_blank"></a>
 <div id="dialogMensajes" title="Descarga Factura">
 	<div id="dialogMensajesContent"></div>
@@ -28,12 +29,11 @@
 window.onload = function() {
 	
 	ACC.facturacion.establecerCat_aniograv();
-    $(".loader").fadeOut("slow");
+ //   $(".loader").fadeOut("slow");
 }
 	function goBack() {
 		window.history.back();
 	}
-
 
 </script>
 
