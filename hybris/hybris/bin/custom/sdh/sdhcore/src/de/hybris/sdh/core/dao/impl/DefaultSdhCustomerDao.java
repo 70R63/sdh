@@ -23,4 +23,12 @@ public class DefaultSdhCustomerDao extends DefaultGenericDao<CustomerModel> impl
         LOG.info("FindCustomerByBp Parameter: " + parameters);
         return super.find(parameters).stream().findFirst();
     }
+
+    @Override
+    public Optional<CustomerModel> findByUid(String uid) {
+        parameters = new HashMap<String, Object>();
+        parameters.put(CustomerModel.UID, uid);
+        LOG.info("FindCustomerByUid Parameter: " + parameters);
+        return super.find(parameters).stream().findFirst();
+    }
 }
