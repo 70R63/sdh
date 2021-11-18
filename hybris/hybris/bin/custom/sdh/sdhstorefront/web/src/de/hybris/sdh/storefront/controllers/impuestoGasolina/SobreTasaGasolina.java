@@ -1056,19 +1056,21 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 			}
 			else
 			{
-				ref = psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
+				//ref = psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
+				ref = psePaymentForm.getNoIdentificacion();
 			}
 
 
-			final int i_ceros = 14 - ref.length();
+			//final int i_ceros = 14 - ref.length();
 
-			String s_ceros = new String();
-			for (int i = 1; i <= i_ceros; i++)
-			{
-				s_ceros = s_ceros + "0";
-			}
+			//String s_ceros = new String();
+			//for (int i = 1; i <= i_ceros; i++)
+			//{
+			//	s_ceros = s_ceros + "0";
+			//}
 
-			final String objPago = s_ceros + ref;
+			//final String objPago = s_ceros + ref;
+			final String objPago = ref;
 
 			psePaymentForm.setObjPago(objPago);
 
@@ -1127,7 +1129,9 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 					paymentServiceRegisterEntityRequest, paymentServiceRegisterApplicationRequest,
 					psePaymentForm.getTipoDeImpuesto().substring(2),
 					Objects.nonNull(sdhTaxTypeModel) ? sdhTaxTypeModel.getName() : StringUtils.EMPTY,
-					psePaymentForm.getNumeroDeReferencia(), psePaymentForm.getObjPago(), psePaymentForm.getNumeroDeReferencia(), ref4,
+					psePaymentForm.getNumeroDeReferencia().replaceFirst("^0+(?!$)", ""),
+					psePaymentForm.getNumeroDeReferencia().replaceFirst("^0+(?!$)", ""),
+					psePaymentForm.getObjPago().replaceFirst("^0+(?!$)", ""), ref4,
 					fechaLimPago, urlRetorno, valorAPagar);
 
 			try
