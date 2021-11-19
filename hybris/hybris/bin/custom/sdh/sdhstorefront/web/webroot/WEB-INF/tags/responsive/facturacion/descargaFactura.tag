@@ -67,7 +67,9 @@
 			</button>
 		</div>
 	</div>
+	</div>
 	<br>
+	<div class="row">
 	<div id="table-predial" style="display: none;" class="table-responsive">
 		<div class="row">
 			<div class="col-md-12">
@@ -75,32 +77,32 @@
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center" hidden="hidden"><label
-								class="control-label " for="">Año Gravable</label></th>
-							<th style="text-align: center"><label class="control-label "
+								class="control-label labeltabletd " for="">Año Gravable</label></th>
+							<th style="text-align: center"><label class="control-label labeltabletd"
 								for=""><spring:theme
 										code="descarga.factura.predial.chip" /></label></th>
-							<th style="text-align: center"><label class="control-label"
+							<th style="text-align: center"><label class="control-label labeltabletd"
 								for=""> <spring:theme
 										code="descarga.factura.predial.matinm" /></label></th>
-							<th style="text-align: center"><label class="control-label"
+							<th style="text-align: center"><label class="control-label labeltabletd"
 								for=""> <spring:theme
 										code="descarga.factura.predial.dirpred" /></label></th>
 							<!-- 							<th style="text-align: center"><label class="control-label" -->
 							<%-- 								for=""> <spring:theme --%>
 							<%-- 										code="descarga.factura.predial.selec" /></label></th> --%>
-							<th style="text-align: center"><label class="control-label"
+							<th style="text-align: center"><label class="control-label labeltabletd"
 								for=""> <spring:theme code="Pago voluntario" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme code="Total a pagar" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme code="Total con pago voluntario" /></label></th>
-							<th style="text-align: center"><label class="control-label"
+<!-- 							<th style="text-align: center"><label class="control-label" -->
+<%-- 								for=""> <spring:theme code="Total a pagar" /></label></th> --%>
+<!-- 							<th style="text-align: center"><label class="control-label" -->
+<%-- 								for=""> <spring:theme code="Total con pago voluntario" /></label></th> --%>
+							<th style="text-align: center"><label class="control-label labeltabletd "
 								for=""> <spring:theme code="Reexpedicion de factura" /></label></th>
-							<th style="text-align: center"><label class="control-label"
+							<th style="text-align: center"><label class="control-label labeltabletd "
 								for=""> <spring:theme code="Descargar factura" /></label></th>
-							<th style="text-align: center"><label class="control-label"
+							<th style="text-align: center"><label class="control-label labeltabletd "
 								for=""> <spring:theme code="Pagar con aporte" /></label></th>
-							<th style="text-align: center"><label class="control-label"
+							<th style="text-align: center"><label class="control-label labeltabletd "
 								for=""> <spring:theme code="Pagar sin aporte" /></label></th>
 						</tr>
 					</thead>
@@ -120,8 +122,8 @@
 										<!-- 								<td><input class="inputtextnew" -->
 										<!-- 									style="visibility: visible !important; width: 15px" -->
 										<%-- 									type="radio" id="" name="objetoPredial" value="${eachPredial.numObjeto}"></td> --%>
-										<td></td>
-										<td></td>
+<!-- 										<td></td> -->
+<!-- 										<td></td> -->
 										<td></td>
 										<td><label class="control-label"
 											style="text-transform: capitalize !important"
@@ -135,8 +137,8 @@
 											data-nombreObjeto="objetoPredial"
 											data-anioGrav="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}"
 											onclick="descargaFactura(this)"> <span class="">Descargar factura</span></label></td>
-										<td></td>
-										<td></td>
+									<td><a onclick="validaBotonPago()"></a></td>
+									<td><a onclick="validaBotonPago()"></a></td>
 
 									</tr>
 								</c:if>
@@ -165,28 +167,28 @@
 						<tr>
 							<th style="text-align: center" hidden="hidden"><label
 								class="control-label " for="">año gravable</label></th>
-							<th style="text-align: center"><label class="control-label "
+							<th style="text-align: center"><label class="control-label labeltabletd "
 								for=""><spring:theme
 										code="descarga.factura.vehiculo.placa" /></label></th>
-							<th style="text-align: center"><label class="control-label"
+							<th style="text-align: center"><label class="control-label labeltabletd "
 								for=""> <spring:theme
 										code="descarga.factura.vehiculo.marca" /></label></th>
 							<!-- 							<th style="text-align: center"><label class="control-label" -->
 							<%-- 								for=""> <spring:theme --%>
 							<%-- 										code="descarga.factura.vehiculo.selec" /></label></th> --%>
-							<th style="text-align: center"><label class="control-label"
+							<th style="text-align: center"><label class="control-labe labeltabletd l"
 								for=""> <spring:theme code="Pago voluntario" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme code="Total a pagar" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme code="Total con pago voluntario" /></label></th>
-							<th style="text-align: center"><label class="control-label"
+<!-- 							<th style="text-align: center"><label class="control-label" -->
+<%-- 								for=""> <spring:theme code="Total a pagar" /></label></th> --%>
+<!-- 							<th style="text-align: center"><label class="control-label" -->
+<%-- 								for=""> <spring:theme code="Total con pago voluntario" /></label></th> --%>
+							<th style="text-align: center"><label class="control-label labeltabletd"
 								for=""> <spring:theme code="Reexpedicion de factura" /></label></th>
-							<th style="text-align: center"><label class="control-label"
+							<th style="text-align: center"><label class="control-label labeltabletd "
 								for=""> <spring:theme code="Descargar factura" /></label></th>
-							<th style="text-align: center"><label class="control-label"
+							<th style="text-align: center"><label class="control-label labeltabletd "
 								for=""> <spring:theme code="Pagar con aporte" /></label></th>
-							<th style="text-align: center"><label class="control-label"
+							<th style="text-align: center"><label class="control-label labeltabletd "
 								for=""> <spring:theme code="Pagar sin aporte" /></label></th>
 						</tr>
 					</thead>
@@ -207,8 +209,8 @@
 <!-- 											type="radio" id="" name="objetoVehicular" -->
 <%-- 											value="${eachVehiculo.numObjeto}"></td> --%>
 <!-- 														<td></td> -->
-										<td></td>
-										<td></td>
+<!-- 										<td></td> -->
+<!-- 										<td></td> -->
 										<td><label class="control-label"
 											style="text-transform: capitalize !important"
 											id="downloadFac" data-claveImpuesto="0002"
@@ -222,8 +224,8 @@
 											data-anioGrav="${eachVehiculo.anioGravable}" data-numObjeto="${eachVehiculo.numObjeto}"
 											onclick="descargaFactura(this)"> <span class="">Descargar factura</span></label></td>
 										<td></td>
-										<td></td>
-										<td></td>
+										<td><a onclick="validaBotonPago()"></a></td>
+										<td><a onclick="validaBotonPago()"></a></td>
 
 									</tr>
 								</c:if>
@@ -277,7 +279,6 @@
 
 	}
 	function descargaFactura(descargaFactura1) {
-debugger;
 var objeto = this;
 		
 		var anoGravable = $("#aniograv").val();
@@ -300,7 +301,6 @@ var objeto = this;
 	
 		
 	function reexpedicion(reexpedicionFactura){
-		debugger;
 		$("#anoGravable").val($("#aniograv").val());
 		var claveImpuesto = $("#impuesto").val();
 		var nombreObjeto = "";
@@ -322,5 +322,20 @@ var objeto = this;
 		}
 		
 	}
+	
+	function validaBotonPago(){
+		var totPagar = document.getElementById('totalPagar');
+		var negativePos = totPagar.value.search("-");
+		if(totPagar.value == '0' || totPagar.value == '0.00' || negativePos >= 0 ){
+			alert('El total a pagar debe ser mayor a 0');
+		var btnPagar = document.getElementById("action");
+		btnPagar.disabled = true;
+		}else{
+			var form1 = document.getElementById('infoPreviaPSE');
+			form1.submit();		
+		}
+		
+	}
+	
 </script>
 
