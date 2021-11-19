@@ -82,8 +82,12 @@
 							</table>
 						</div>
 						
+
+			   		    
+
 <!-- 						INI -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario
 						<div class="col-md-offset-6">
+
 							<table class="table tableedocuenta">
 								<tbody>
 									<tr>
@@ -95,6 +99,11 @@
 									</tr>
 								</tbody>
 							</table>
+
+						
+						
+						
+
 						</div>
 						
 			FIN -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario -->
