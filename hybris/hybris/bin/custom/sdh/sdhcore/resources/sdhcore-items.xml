@@ -1005,6 +1005,24 @@
 				</attributes>
 			</itemtype>
 		</typegroup>
+		
+			<typegroup name="sdhCatalogs">
+			<itemtype generate="true" code="SdhReferenceStatus" extends="GenericItem" autocreate="true" >
+				<deployment table="SdhReferenceStatus" typecode="20020" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="code">
+						<description>SDH Reference Status Code</description>
+						<modifiers unique="true"/>
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="description">
+						<description>SDH Reference Status Description</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
 
     </itemtypes>
 </items>
