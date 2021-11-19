@@ -82,7 +82,12 @@
 							</table>
 						</div>
 						
-			   		    <div class="col-md-offset-6">
+
+			   		    
+
+<!-- 						INI -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario
+						<div class="col-md-offset-6">
+
 							<table class="table tableedocuenta">
 								<tbody>
 									<tr>
@@ -94,9 +99,16 @@
 									</tr>
 								</tbody>
 							</table>
-						</div> 
+
 						
 						
+						
+
+						</div>
+						
+			FIN -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario -->
+			
+			
 						<!-- 					<div class="col-md-3 col-md-offset-8"> -->
 						<!-- 						<button type="button" class="btn btn-primary btn-lg" id="action" -->
 						<!-- 							name="action" value="Imprimir" style="margin-top: 3px" -->
@@ -181,6 +193,8 @@
 								</tbody>
 							</table>
 						</div>
+						
+						<!-- 						INI -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario
 						<div class="col-md-offset-5">
 							<table class="table tableedocuenta">
 								<tbody>
@@ -196,6 +210,8 @@
 								</tbody>
 							</table>
 						</div>
+						
+		FIN -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario -->
 
 						<!-- 						<button type="button" class="btn btn-primary btn-lg" id="action" -->
 						<!-- 							name="action" value="Imprimir" style="margin-top: 3px" -->
@@ -279,6 +295,8 @@
 								</tbody>
 							</table>
 						</div>
+						
+<!-- 						INI -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario
 						<div class="col-md-offset-6">
 							<table class="table tableedocuenta">
 								<tbody>
@@ -294,6 +312,9 @@
 								</tbody>
 							</table>
 						</div>
+						
+						
+		FIN -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario -->
 						<!-- 						<div class="col-md-3 col-md-offset-8"> -->
 						<!-- 							<button type="button" class="btn btn-primary btn-lg" id="action" -->
 						<!-- 								name="action" value="Imprimir" style="margin-top: 3px" -->
@@ -378,6 +399,9 @@
 								</tbody>
 							</table>
 						</div>
+						
+						
+<!-- 						INI -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario
 						<div class="col-md-offset-5">
 							<table class="table tableedocuenta">
 								<tbody>
@@ -393,6 +417,9 @@
 								</tbody>
 							</table>
 						</div>
+						
+		FIN -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario -->
+		
 						<!-- 						<div class="col-md-3 col-md-offset-8"> -->
 						<!-- 							<button type="button" class="btn btn-primary btn-lg" id="action" -->
 						<!-- 								name="action" value="Imprimir" style="margin-top: 3px" -->
@@ -480,6 +507,8 @@
 							</table>
 
 						</div>
+						
+						<!-- 						INI -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario
 						<div class="col-md-offset-3">
 							<table class="table tableedocuenta">
 								<tbody>
@@ -495,6 +524,9 @@
 								</tbody>
 							</table>
 						</div>
+						
+						
+		FIN -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario -->
 						<!-- 						<div class="col-md-3 col-md-offset-8"> -->
 						<!-- 							<button type="button" class="btn btn-primary btn-lg" id="action" -->
 						<!-- 								name="action" value="Imprimir" style="margin-top: 3px" -->
@@ -576,6 +608,8 @@
 								</tbody>
 							</table>
 						</div>
+						
+						<!-- 						INI -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario
 						<div class="col-md-offset-6">
 							<table class="table tableedocuenta">
 								<tbody>
@@ -591,6 +625,8 @@
 								</tbody>
 							</table>
 						</div>
+						
+								FIN -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario -->
 						<!-- 						<div class="col-md-3 col-md-offset-8"> -->
 						<!-- 							<button type="button" class="btn btn-primary btn-lg" id="action" -->
 						<!-- 								name="action" value="Imprimir" style="margin-top: 3px" -->
@@ -658,6 +694,7 @@
 								</tbody>
 							</table>
 						</div>
+						<!-- 						INI -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario
 						<div class="col-md-offset-6">
 							<table class="table tableedocuenta">
 								<tbody>
@@ -673,6 +710,7 @@
 								</tbody>
 							</table>
 						</div>
+								FIN -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario -->
 					</div>
 				</div>
 			</div>
@@ -725,6 +763,7 @@
 								</tbody>
 							</table>
 						</div>
+						<!-- 						INI -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario
 						<div class="col-md-offset-6">
 							<table class="table tableedocuenta">
 								<tbody>
@@ -740,6 +779,7 @@
 								</tbody>
 							</table>
 						</div>
+								FIN -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario -->
 						<div class="col-md-3 col-md-offset-8">
 							<button type="button" class="btn btn-primary btn-lg"
 								id="ImprimirPopUp" name="ImprimirPopUp" value="ImprimirPopUp"
