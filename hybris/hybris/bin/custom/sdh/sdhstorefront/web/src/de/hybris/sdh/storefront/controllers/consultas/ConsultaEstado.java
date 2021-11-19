@@ -64,6 +64,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.apache.commons.collections.CollectionUtils;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -118,11 +119,6 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 	@Resource(name = "sdhConsultaImpuesto_simplificado")
 	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
-
-
-
-
-
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value =
 	{ "/contribuyentes/estado-de-cuenta", "/agenteRetenedor/estado-de-cuenta" }, method = RequestMethod.GET)
@@ -136,7 +132,6 @@ public class ConsultaEstado extends AbstractSearchPageController
 			referrer = request.getServletPath();
 		}
 
-
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
@@ -146,7 +141,6 @@ public class ConsultaEstado extends AbstractSearchPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final EdoCuentaRequest edoCuentaRequest = new EdoCuentaRequest();
-
 
 		ctaForm.setCompleName(customerData.getCompleteName());
 		ctaForm.setTipoDoc(customerData.getDocumentType());
@@ -200,6 +194,10 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 			if (edoCuentaResponse.getTablaICA() != null && !edoCuentaResponse.getTablaICA().isEmpty())
 			{
+				ctaForm.setTablaICA(
+						edoCuentaResponse.getTablaICA().stream().filter(
+								eachTax -> (StringUtils.isNotBlank(eachTax.getNumDoc()) || StringUtils.isNotBlank(eachTax.getTipoDoc())))
+								.collect(Collectors.toList()));
 				ctaForm.setTablaICA(edoCuentaResponse.getTablaICA().stream()
 						.filter(
 								eachTax -> (StringUtils.isNotBlank(eachTax.getNumDoc()) || StringUtils.isNotBlank(eachTax.getTipoDoc())))
@@ -223,10 +221,6 @@ public class ConsultaEstado extends AbstractSearchPageController
 				ctaForm.setTablaDelineacion(edoCuentaResponse.getTablaDelineacion().stream()
 						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCDU())).collect(Collectors.toList()));
 			}
-
-
-
-
 			if (edoCuentaResponse.getTablaGasolina() != null && !edoCuentaResponse.getTablaGasolina().isEmpty())
 			{
 				ctaForm.setTablaGasolina(edoCuentaResponse.getTablaGasolina().stream()
@@ -336,6 +330,26 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 			}
 		}
+//			sdhConsultaContribuyenteBPResponse.setReteIca(sdhConsultaImpuesto_simplificado.consulta_impRe(consultaContribuyenteBPRequest));
+//			sdhConsultaContribuyenteBPResponse = mapper.readValue(
+//					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+//					SDHValidaMailRolResponse.class);
+
+
+			if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
+					&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getVehicular()))
+			{
+				vehiculosForm.setImpvehicular(sdhConsultaContribuyenteBPResponse.getVehicular().stream()
+						.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getDelineacion() != null
+					&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getDelineacion()))
+			{
+				miRitForm.setDelineacion(sdhConsultaContribuyenteBPResponse.getDelineacion().stream()
+						.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
+			}
+
 		//sdhConsultaContribuyenteBPResponse.setReteIca(sdhConsultaImpuesto_simplificado.consulta_impRe(consultaContribuyenteBPRequest));
 		//sdhConsultaContribuyenteBPResponse = mapper.readValue(
 		//		sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
@@ -382,12 +396,9 @@ public class ConsultaEstado extends AbstractSearchPageController
 						cutomerPublicidadList.add(cutomerPublicidadRow);
 					}
 
-
 				}
 			}
 			customerData.setExteriorPublicityTaxList(cutomerPublicidadList);
-
-
 
 			if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 			{
@@ -477,10 +488,6 @@ public class ConsultaEstado extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
-
-
-
-
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value =
 	{ "/contribuyentes/estado-de-cuenta", "/agenteRetenedor/estado-de-cuenta" }, method = RequestMethod.POST)
@@ -511,7 +518,6 @@ public class ConsultaEstado extends AbstractSearchPageController
 				List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 				SDHValidaMailRolResponse detalleContribuyente;
-
 
 				customerModel = (CustomerModel) userService.getCurrentUser();
 
@@ -585,7 +591,5 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 		return null;
 	}
-
-
 
 }

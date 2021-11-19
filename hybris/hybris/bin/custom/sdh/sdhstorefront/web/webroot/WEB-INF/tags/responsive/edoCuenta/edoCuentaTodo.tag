@@ -108,7 +108,7 @@
 						
 			FIN -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario -->
 			
-			
+
 						<!-- 					<div class="col-md-3 col-md-offset-8"> -->
 						<!-- 						<button type="button" class="btn btn-primary btn-lg" id="action" -->
 						<!-- 							name="action" value="Imprimir" style="margin-top: 3px" -->

@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="headline">
 			<h2 align="center">
-				<span><spring:theme code="descarga.factura.inicial.titulo" /></span>
+				<span><spring:theme code="Facturación" /></span>
 			</h2>
 		</div>
 	</div>

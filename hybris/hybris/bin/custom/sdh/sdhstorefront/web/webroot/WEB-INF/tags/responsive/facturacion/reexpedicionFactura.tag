@@ -16,7 +16,7 @@
 		<div class="headline">
 			<h2 align="center">
 				<span><spring:theme
-						code="reexpedicion.factura.inicial.titulo" /></span>
+						code="Facturación" /></span>
 			</h2>
 		</div>
 	</div>
@@ -25,8 +25,7 @@
 	<div class="row">
 		<div class="col-md-4 col-xs-12 mb-20 no-marginright">
 			<span class="paso--uno pasos color-sr1">1</span>
-			<h2 class="titulo-caja--ser-rel color-sr1 ">REEXPEDICIÓN DE
-				FACTURA</h2>
+			<h2 class="titulo-caja--ser-rel color-sr1 ">Impuesto</h2>
 			<p class="pasoClase1 metrophobic">Selecciona el impuesto que
 				deseas consultar.</p>
 			<div class="caja--ser-rel color-sr1">

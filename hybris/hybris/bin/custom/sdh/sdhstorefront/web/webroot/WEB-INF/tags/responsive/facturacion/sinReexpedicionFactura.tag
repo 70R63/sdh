@@ -16,7 +16,7 @@
 		<div class="headline">
 			<h2 align="center">
 				<span><spring:theme
-						code="reexpedicion.factura.inicial.titulo" /></span>
+						code="Facturación" /></span>
 			</h2>
 		</div>
 	</div>

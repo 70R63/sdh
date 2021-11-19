@@ -46,6 +46,7 @@ window.onload = function() {
     	ACC.tramitesSeleccion.determinacionSelectRol();
     }
     if("${currentSection}" == "searchUserSection"){
+    	$("#dialogMensajes").dialog( "option", "width", 600 );
     	$("#dialogMensajes").dialog( "open" );
     }
 }
