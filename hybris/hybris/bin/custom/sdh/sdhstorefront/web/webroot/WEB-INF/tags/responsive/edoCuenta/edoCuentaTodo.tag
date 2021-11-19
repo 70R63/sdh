@@ -81,7 +81,8 @@
 								</tbody>
 							</table>
 						</div>
-						<div class="col-md-offset-6">
+						
+			   		    <div class="col-md-offset-6">
 							<table class="table tableedocuenta">
 								<tbody>
 									<tr>
@@ -93,7 +94,9 @@
 									</tr>
 								</tbody>
 							</table>
-						</div>
+						</div> 
+						
+						
 						<!-- 					<div class="col-md-3 col-md-offset-8"> -->
 						<!-- 						<button type="button" class="btn btn-primary btn-lg" id="action" -->
 						<!-- 							name="action" value="Imprimir" style="margin-top: 3px" -->
