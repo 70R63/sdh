@@ -104,6 +104,8 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 	private static final String MI_RIT = "Mi RIT";
 	private static final String CRUMBS_LINK = "#";
 	private static final String ROOT = "/";
+	private static final String PROFILE_CONCE = "/concesionarios";
+	private static final String BREADCRUMB_CONCESIONARIO = "breadcrumb.concesionarios";
 
 	private I18NService i18nService;
 
@@ -875,6 +877,16 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		}
 		//*->FIN REPORTANTE SANCIONES-----------------------------------------------------
 
+
+		//*->INI REPORTANTE CONCESIONARIOS-----------------------------------------------------
+		if (resourceKey.equals(BREADCRUMB_CONCESIONARIO))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb(ROLE, ROOT));
+			subTreeMap.put(2, new CustomBreadcrumb(PROFILE_CONCE, PROFILE_CONCE));
+			treeMap.put(BREADCRUMB_REPORTANTE_SANCIONES, subTreeMap);
+		}
+		//*->FIN REPORTANTE CONCESIONARIOS-----------------------------------------------------
 
 
 

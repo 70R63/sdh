@@ -741,7 +741,7 @@
 	<bean id="defaultSdhDocumentTypeDao" class="de.hybris.sdh.core.dao.impl.DefaultSdhDocumentTypeDao">
 		<constructor-arg value="SdhDocumentType"/>
 	</bean>
-
+	
 	<alias alias="sdhCustomerDao" name="defaultSdhCustomerDao"/>
 	<bean id="defaultSdhCustomerDao" class="de.hybris.sdh.core.dao.impl.DefaultSdhCustomerDao">
 		<constructor-arg value="Customer"/>
@@ -788,4 +788,9 @@
 
 	<alias alias="sdhPaymentService" name="defaultSdhPaymentService"/>
 	<bean name="defaultSdhPaymentService" class="de.hybris.sdh.core.services.impl.DefaultSdhPaymentService"/>
+	
+	<alias alias="sdhReferenceStatusDao" name="defaultSdhReferenceStatusDao"/>
+	<bean id="defaultSdhReferenceStatusDao" class="de.hybris.sdh.core.dao.impl.DefaultSdhReferenceStatusDao">
+		<constructor-arg value="SdhReferenceStatus"/>
+	</bean>
 </beans>
