@@ -9,8 +9,10 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.model.SDHTaxTypeModel;
+import de.hybris.sdh.core.model.SITIITransactionsLogModel;
 import de.hybris.sdh.core.pojos.requests.ConsulPagosRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
@@ -86,6 +88,9 @@ public class PreparacionPagoPSE extends AbstractPageController
 
     @Resource(name = "sdhTaxTypeService")
     private SDHTaxTypeService sdhTaxTypeService;
+
+	@Resource(name = "modelService")
+	private ModelService modelService;
 
 
 
@@ -334,6 +339,16 @@ public class PreparacionPagoPSE extends AbstractPageController
 			try
 			{
 				paymentServiceRegisterResponse = sdhPaymentService.register(paymentServiceRegisterRequest);
+
+				final SITIITransactionsLogModel sitIITransactionsLogModel = new SITIITransactionsLogModel();
+				sitIITransactionsLogModel.setTransactionDate(java.time.LocalDate.now().toString());
+				sitIITransactionsLogModel.setTransactionTime(java.time.LocalTime.now().toString());
+				sitIITransactionsLogModel.setTransactionReference(psePaymentForm.getNumeroDeReferencia());
+				sitIITransactionsLogModel.setTransactionNUS(paymentServiceRegisterResponse.getNus().toString());
+				sitIITransactionsLogModel.setTransactionAmount(valorAPagar.toString());
+
+
+				modelService.saveAll(sitIITransactionsLogModel);
 			}
 			catch (final NoSuchAlgorithmException e)
 			{
