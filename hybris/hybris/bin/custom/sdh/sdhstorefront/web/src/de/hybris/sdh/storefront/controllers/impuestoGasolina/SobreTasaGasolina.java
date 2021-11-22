@@ -18,6 +18,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.model.SDHTaxTypeModel;
+import de.hybris.sdh.core.model.SITIITransactionsLogModel;
 import de.hybris.sdh.core.pojos.requests.CalcGasolina2Request;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.ConsulPagosRequest;
@@ -1137,6 +1138,17 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 			try
 			{
 				paymentServiceRegisterResponse = sdhPaymentService.register(paymentServiceRegisterRequest);
+
+				final SITIITransactionsLogModel sitIITransactionsLogModel = new SITIITransactionsLogModel();
+				sitIITransactionsLogModel.setTransactionDate(java.time.LocalDate.now().toString());
+				sitIITransactionsLogModel.setTransactionTime(java.time.LocalTime.now().toString());
+				sitIITransactionsLogModel.setTransactionReference(psePaymentForm.getNumeroDeReferencia());
+				sitIITransactionsLogModel.setTransactionNUS(paymentServiceRegisterResponse.getNus().toString());
+				sitIITransactionsLogModel.setTransactionAmount(valorAPagar.toString());
+
+
+				modelService.saveAll(sitIITransactionsLogModel);
+
 			}
 			catch (final NoSuchAlgorithmException e)
 			{
