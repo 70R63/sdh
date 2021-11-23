@@ -18,15 +18,6 @@
 						</div>
 					</div>
 					<span><spring:theme code="register.userNotFound.proceso" htmlEscape="false"/></span><br>
-					<span><spring:theme code="register.userNotFound.proceso1" htmlEscape="false"/></span><br>
-					<span><spring:theme code="register.userNotFound.proceso2" htmlEscape="false"/></span><br>
-					<span><spring:theme code="register.userNotFound.proceso3.0" htmlEscape="false"/></span><br>
-					<span><spring:theme code="register.userNotFound.proceso3.1" htmlEscape="false"/></span><br>
-					<span><spring:theme code="register.userNotFound.proceso3.2" htmlEscape="false"/></span><br>
-					<span><spring:theme code="register.userNotFound.proceso3.3" htmlEscape="false"/></span><br>
-					<span><spring:theme code="register.userNotFound.proceso3.4" htmlEscape="false"/></span><br>
-					<span><spring:theme code="register.userNotFound.proceso3.5" htmlEscape="false"/></span><br>
-					<span><spring:theme code="register.userNotFound.proceso3.6" htmlEscape="false"/></span><br>
 				</div>
 			</div>
 		</div>
