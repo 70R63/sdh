@@ -130,7 +130,7 @@
 											id="downloadFac" data-claveImpuesto="0001"
 											data-nombreObjeto="objetoPredial"
 											data-anioGrav="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}"
-											onclick="reexpedicion(this)"> <span class="">Reexpedir factura</span></label></td>
+											onclick="reexpedicion(this)"> <span class="">Reexpedir</span></label></td>
 										<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0001" data-nombreObjeto="objetoPredial"
 											data-anioGrav="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}"></img></td>
 									<td><a onclick="validaBotonPago()"></a></td>
@@ -212,7 +212,7 @@
 											id="downloadFac" data-claveImpuesto="0002"
 											data-nombreObjeto="objetoVehicular"
 											data-anioGrav="${eachVehiculo.anioGravable}" data-numObjeto="${eachVehiculo.numObjeto}"
-											onclick="reexpedicion(this)"> <span class="">Reexpedir Factura</span></label></td>
+											onclick="reexpedicion(this)"> <span class="">Reexpedir</span></label></td>
 										<td><img id="downloadFac" src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0002"
 											data-nombreObjeto="objetoVehicular"
 											data-anioGrav="${eachVehiculo.anioGravable}" data-numObjeto="${eachVehiculo.numObjeto}"></img></td>
