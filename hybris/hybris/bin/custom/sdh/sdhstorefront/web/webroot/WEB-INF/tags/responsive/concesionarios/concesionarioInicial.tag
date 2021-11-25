@@ -10,7 +10,8 @@
 	tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
+<spring:url value="/concesionarios" var="conURL"
+	htmlEscape="false" />
 <div class="container_new_page">
 	<div class="row">
 		<div class="headline">
@@ -20,7 +21,7 @@
 		</div>
 	</div>
 
-
+<form  action="${conURL}" method="POST" target="dataForm">
 	<div class="row">
 		<div class="col-md-4 col-xs-12 mb-20 no-marginright">
 			<span class="paso--uno pasos color-sr1">1</span>
@@ -31,9 +32,7 @@
 				deseas consultar.</p>
 			<div class="caja--ser-rel color-sr1">
 				<label class="control-label"><spring:theme
-						code="concesionario.inicial.fecInicio" /></label> <input type="date"  class="newalto form-control">
-				<label class="control-label"><spring:theme
-						code="concesionario.inicial.fecFin" /></label> <input type="date"  class="newalto form-control">
+						code="concesionario.inicial.fecInicio" /></label> <form:input type="date"  class="newalto form-control" name="fecInio" id="fecInio" path="fecInio" value="${concesionarios.fecInio}"/>
 			</div>
 		</div>
 
@@ -47,28 +46,39 @@
 				referencias.</p>
 			<div class="caja--ser-rel color-sr2">
 				<label><spring:theme
-						code="concesionario.inicial.estatusReferencia" /></label> <select
-					id="aniograv" class="new_alto form-control " name="aniograv">
+						code="concesionario.inicial.estatusReferencia" /></label> <form:select
+					id="referenceStatus" class="new_alto form-control " name="referenceStatus" path="referenceStatus">
 					<option value="">Seleccionar</option>
-					<c:forEach varStatus="loop" items="${referenceStatus}"
-										var="eachStatus">
-					<option value="${eachStatus.code}">${eachStatus.name}</option>
-					</c:forEach>
-				</select>
+						<c:forEach varStatus="loop" items="${referenceStatus}"
+							var="eachStatus">
+							<c:choose>
+								<c:when
+									test="${eachStatus.code == concesionarios.referenceStatus}">
+									<form:option value="${eachStatus.code}" id="${eachStatus.code}"
+										selected="selected">${eachStatus.name}</form:option>
+										 <c:set var = "statusDescription" scope = "session" value = "${eachStatus.name}"/>
+								</c:when>
+								<c:otherwise>
+									<form:option value="${eachStatus.code}" id="${eachStatus.code}">${eachStatus.name}</form:option>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</form:select>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-3 col-md-offset-3">
 			<button style="margin-top: 3px;" id="facBuscar"
-				class="btn btn-primary btn-lg facBuscar" type="button">
+				class="btn btn-primary btn-lg facBuscar" type="submit">
 				<spring:theme code="reexpedicion.factura.inicial.buscar" />
 			</button>
 		</div>
 	</div>
+	</form>
 	<br>
 
-	<div id="table-vehiculos" style="display: block;">
+	<div id="table-concesionarios" style="display: block;">
 		<div class="row" class="table-responsive">
 			<div class="col-md-9 col-md-offset-2">
 				<table class="table" id="tabPaginacion1">
@@ -82,9 +92,6 @@
 										code="concesionario.inicial.placa" /></label></th>
 							<th style="text-align: center"><label
 								class="control-label labeltabletd " for=""> <spring:theme
-										code="concesionario.inicial.modelo" /></label></th>
-							<th style="text-align: center"><label
-								class="control-label labeltabletd " for=""> <spring:theme
 										code="concesionario.inicial.vigencia" /></label></th>
 							<th style="text-align: center"><label
 								class="control-label labeltabletd " for=""> <spring:theme
@@ -94,26 +101,27 @@
 										code="concesionario.inicial.estatusdeReferencia" /></label></th>
 							<th style="text-align: center"><label
 								class="control-label labeltabletd " for=""> <spring:theme
-										code="concesionario.inicial.seleccionar" /></label></th>
+										code="concesionario.inicial.valRef" /></label></th>
 							<th style="text-align: center"><label
 								class="control-label labeltabletd " for=""> <spring:theme
 										code="concesionario.inicial.impresion" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
+					  <c:forEach items="${concesionarios.concesionarios}" var="conce">
 						<tr>
-							<td><c:out value="" /></td>
-							<td><c:out value="" /></td>
-							<td><c:out value="" /></td>
-							<td><c:out value="" /></td>
-							<td><c:out value="" /></td>
-							<td><c:out value="" /></td>
-							<td><label class="labelVerDetalle text-capitalize !important" id="labelPagar" style="color: #0358d8 !important">
-													Pagar</label></td>
+							<td><c:out value="${conce.xblnr}" /></td>
+							<td><c:out value="${conce.psobtxt}" /></td>
+							<td><c:out value="${conce.persl}" /></td>
+							<td><c:out value="${conce.faedn}" /></td>
+							<td><c:out value="${statusDescription}" /></td>
+							<td><label class="labelVerDetalle text-capitalize !important" id="labelPagar" style="color: #0358d8 !important" data-monto="${conce.betrw}">
+													${conce.betrw}</label></td>
 							<td><label class="labelVerDetalle text-capitalize !important" id="labelPagar" style="color: #0358d8 !important">
 													Descargar</label></td>
 
 						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

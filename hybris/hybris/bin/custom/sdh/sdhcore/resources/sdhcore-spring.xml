@@ -793,4 +793,7 @@
 	<bean id="defaultSdhReferenceStatusDao" class="de.hybris.sdh.core.dao.impl.DefaultSdhReferenceStatusDao">
 		<constructor-arg value="SdhReferenceStatus"/>
 	</bean>
+	
+		<alias alias="sdhConcesionariosService" name="defaultSDHConcesionariosImpService"/>
+	<bean id="defaultSDHConcesionariosImpService" class="de.hybris.sdh.core.services.impl.DefaultSDHConcesionariosImpService"/>
 </beans>
