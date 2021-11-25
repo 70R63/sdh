@@ -117,8 +117,7 @@
 							<td><c:out value="${statusDescription}" /></td>
 							<td><label class="labelVerDetalle text-capitalize !important" id="labelPagar" style="color: #0358d8 !important" data-monto="${conce.betrw}">
 													${conce.betrw}</label></td>
-							<td><label class="labelVerDetalle text-capitalize !important" id="labelPagar" style="color: #0358d8 !important">
-													Descargar</label></td>
+							<td><img src="${themeResourcePath}/images/download_icon.png"></td>
 
 						</tr>
 						</c:forEach>
