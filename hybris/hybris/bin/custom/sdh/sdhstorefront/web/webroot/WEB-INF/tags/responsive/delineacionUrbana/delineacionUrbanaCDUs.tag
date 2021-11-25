@@ -60,8 +60,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${dataForm.valCont.delineacion}"
-							var="delineacion">
+						<c:forEach items="${dataForm.valCont.delineacion}" var="delineacion">
 							<c:if test="${delineacion.cdu != ''}">
 								<tr>
 									<td><input id="CDU" name=""
@@ -107,6 +106,7 @@
 										value="${delineacion.curaduria}" maxlength="240"
 										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
 									<td><label style="color: #0358d8 !important"
+
 										data-cdu="${delineacion.cdu}"
 										class="text-capitalize !important label1Ver "><spring:theme
 												code="publicidad.exterior.ver" /></label></td>

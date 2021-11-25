@@ -224,30 +224,30 @@ public class MiRitPageController extends AbstractPageController
 					{
 						switch (impuestoRegistrado.getClaseObjeto())
 						{
-//							case "01":
-//								sdhConsultaContribuyenteBPResponse
-//										.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
-//								break;
-//							case "02":
-//								sdhConsultaContribuyenteBPResponse.setVehicular(
-//										sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
-//								break;
-//							case "03":
-//								sdhConsultaContribuyenteBPResponse
-//										.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
-//								break;
-//							case "04":
-//
-//								break;
+							case "01":
+								sdhConsultaContribuyenteBPResponse
+										.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
+								break;
+							case "02":
+								sdhConsultaContribuyenteBPResponse.setVehicular(
+										sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
+								break;
+							case "03":
+								sdhConsultaContribuyenteBPResponse
+										.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
+								break;
+							case "04":
+
+								break;
 							case "05":
 								sdhConsultaContribuyenteBPResponse
 										.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
 								break;
-//							case "06":
-//								sdhConsultaContribuyenteBPResponse.setDelineacion(
-//										sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
-//								break;
-//
+							case "06":
+								sdhConsultaContribuyenteBPResponse.setDelineacion(
+										sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
+								break;
+
 							case "07":
 								sdhConsultaContribuyenteBPResponse.setPublicidadExt(
 										sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));

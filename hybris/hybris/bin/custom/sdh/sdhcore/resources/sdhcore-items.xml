@@ -1004,6 +1004,37 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+			
+			<itemtype generate="true" code="SITIITransactionsLog" extends="GenericItem" autocreate="true" >
+				<deployment table="SITIITransactionsLog" typecode="20016" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="transactionDate">
+						<description>Transaction Date</description>
+						<modifiers unique="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="transactionTime">
+						<description>Transaction time</description>
+						<modifiers unique="true" />
+						<persistence type="property" ></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="transactionReference">
+						<description>Transaction Reference</description>
+						<modifiers unique="true" />
+						<persistence type="property" ></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="transactionNUS">
+						<description>Transaction NUS</description>
+						<modifiers optional="true" />
+						<persistence type="property" ></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="transactionAmount">
+						<description>Transaction Amount</description>
+						<modifiers optional="true" />
+						<persistence type="property" ></persistence>
+					</attribute>
+				</attributes>
+			</itemtype>
 		</typegroup>
 		
 			<typegroup name="sdhCatalogs">

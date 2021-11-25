@@ -48,6 +48,8 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 	{
 		if ("CC".equalsIgnoreCase(request.getTipoid()))
 		{
+
+
 			final DateTimeFormatter formatterOriginal = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			final DateTimeFormatter formatterConvertido = DateTimeFormatter.ofPattern("yyyyMMdd");
 

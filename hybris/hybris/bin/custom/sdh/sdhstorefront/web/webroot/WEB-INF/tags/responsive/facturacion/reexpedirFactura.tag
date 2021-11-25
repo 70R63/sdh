@@ -15,7 +15,7 @@
 		<div class="col-md-6">
 			<div class="form-group">
 				<button id="certificacionRIT" class="btn btn-primary btn-lg" type="button" onclick="descargaFactura()">
-					<spring:theme code="facturacion.reexpedirFactura.inicial.reexpedirFactura" />
+					<spring:theme code="Facturación" />
 				</button>
 			</div>
 		</div>

@@ -46,6 +46,7 @@ import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalculoPredialService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePredialService;
@@ -176,6 +177,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@Resource(name = "sdhCustomerAccountService")
 	SDHCustomerAccountService sdhCustomerAccountService;
+	
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
 
 	private static final Logger LOG = Logger.getLogger(PredialUnificadoController.class);
 
@@ -552,9 +556,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		}
 		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
-		contribuyenteData.setPredial(
-				contribuyenteData.getPredial().stream().filter(d -> predialFormuno.getCHIP().equals(d.getCHIP()))
-						.collect(Collectors.toList()));
+		leerInfoPredial(contribuyenteData,predialFormuno.getNumBP(), predialFormuno.getCHIP());
 		predialFormuno.setContribuyenteData(contribuyenteData);
 		predialFormuno.setControlCampos(
 				establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
@@ -759,8 +761,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		}
 		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
-		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
-				.filter(d -> predialFormdos.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		leerInfoPredial(contribuyenteData,predialFormdos.getNumBP(), predialFormdos.getCHIP());
 		predialFormdos.setContribuyenteData(contribuyenteData);
 		predialFormdos
 				.setControlCampos(
@@ -958,8 +959,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		}
 		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
-		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
-				.filter(d -> predialFormtres.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		leerInfoPredial(contribuyenteData,predialInfoInitres.getNumBP(), predialInfoInitres.getCHIP());
 		predialFormtres.setContribuyenteData(contribuyenteData);
 		predialFormtres.setControlCampos(
 				establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
@@ -1150,8 +1150,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		}
 		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
-		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
-				.filter(d -> predialFormcua.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		leerInfoPredial(contribuyenteData,predialFormcua.getNumBP(), predialFormcua.getCHIP());
 		predialFormcua.setContribuyenteData(contribuyenteData);
 		predialFormcua
 				.setControlCampos(establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
@@ -1344,8 +1343,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		}
 		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
-		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
-				.filter(d -> predialFormcinco.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		leerInfoPredial(contribuyenteData,predialFormcinco.getNumBP(), predialFormcinco.getCHIP());
 		predialFormcinco.setContribuyenteData(contribuyenteData);
 		predialFormcinco
 				.setControlCampos(establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
@@ -1542,8 +1540,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		}
 		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
-		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
-				.filter(d -> predialFormseis.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		leerInfoPredial(contribuyenteData,predialFormseis.getNumBP(), predialFormseis.getCHIP());
 		predialFormseis.setContribuyenteData(contribuyenteData);
 		predialFormseis
 				.setControlCampos(establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
@@ -1733,8 +1730,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		}
 		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
-		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
-				.filter(d -> predialFormsiete.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		leerInfoPredial(contribuyenteData,predialFormsiete.getNumBP(), predialFormsiete.getCHIP());
 		predialFormsiete.setContribuyenteData(contribuyenteData);
 		predialFormsiete
 				.setControlCampos(establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
@@ -1923,8 +1919,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		}
 		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
-		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
-				.filter(d -> predialFormocho.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		leerInfoPredial(contribuyenteData,predialFormocho.getNumBP(), predialFormocho.getCHIP());
 		predialFormocho.setContribuyenteData(contribuyenteData);
 		predialFormocho
 				.setControlCampos(establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
@@ -2162,6 +2157,27 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
+	}
+
+
+	/**
+	 * @param contribuyenteData
+	 * @param numBP 
+	 * @param chip 
+	 */
+	private void leerInfoPredial(SDHValidaMailRolResponse contribuyenteData, String numBP, String chip)
+	{
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		contribuyenteRequest.setNumBP(numBP);
+		if(contribuyenteData != null) {
+   		contribuyenteData.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(contribuyenteRequest));
+   		if(contribuyenteData.getPredial() != null) {
+   		contribuyenteData.setPredial(
+   				contribuyenteData.getPredial().stream().filter(d -> chip.equals(d.getCHIP()))
+   						.collect(Collectors.toList()));
+   		}
+		}
+		
 	}
 
 

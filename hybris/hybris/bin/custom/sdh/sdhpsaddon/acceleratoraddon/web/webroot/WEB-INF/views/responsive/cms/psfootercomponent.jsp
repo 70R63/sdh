@@ -8,31 +8,30 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="container-fluid">
-
 	<div class="footer__top">
 		<div class="row">
-<!-- 			<div class="footer-left col-xs-12 col-sm-12 col-md-8 col-md-offset-2"> -->
-<!-- 				<div> -->
-<%-- 					<c:forEach items="${footerComponent.navigationNodes}" var="node"> --%>
-<%-- 						<c:if test="${node.visible}"> --%>
-<%-- 							<c:forEach items="${node.links}" step="${component.wrapAfter}" --%>
-<%-- 								varStatus="i"> --%>
-<!-- 								<div class="footer__nav--container links col-xs-12 col-sm-3"> -->
-<%-- 									<c:if test="${component.wrapAfter > i.index}"> --%>
-<%-- 										<div class="title">${node.title}</div> --%>
-<%-- 									</c:if> --%>
-<!-- 									<ul class="footer__nav--links"> -->
-<%-- 										<c:forEach items="${node.links}" var="childlink" --%>
-<%-- 											begin="${i.index}" end="${i.index + component.wrapAfter - 1}"> --%>
-<%-- 											<cms:component component="${childlink}" --%>
-<%-- 												evaluateRestriction="true" element="li" /> --%>
-<%-- 										</c:forEach> --%>
-<!-- 									</ul> -->
-<!-- 								</div> -->
-<%-- 							</c:forEach> --%>
-<%-- 						</c:if> --%>
-<%-- 					</c:forEach> --%>
-<!-- 					<div class="links col-xs-12 col-sm-6 col-md-12 col-lg-12"> -->
+			<div class="footer-left col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+				<div>
+					<c:forEach items="${footerComponent.navigationNodes}" var="node">
+						<c:if test="${node.visible}">
+							<c:forEach items="${node.links}" step="${component.wrapAfter}"
+								varStatus="i">
+								<div class="footer__nav--container links col-xs-12 col-sm-3">
+									<c:if test="${component.wrapAfter > i.index}">
+										<div class="title">${node.title}</div>
+									</c:if>
+									<ul class="footer__nav--links">
+										<c:forEach items="${node.links}" var="childlink"
+											begin="${i.index}" end="${i.index + component.wrapAfter - 1}">
+											<cms:component component="${childlink}"
+												evaluateRestriction="true" element="li" />
+										</c:forEach>
+									</ul>
+								</div>
+							</c:forEach>
+						</c:if>
+					</c:forEach>
+					<div class="links col-xs-12 col-sm-6 col-md-12 col-lg-12">
 <!-- 						<div class="col-xs-12 col-sm-12"> -->
 <!-- 							<div class="clearfix social-links"> -->
 <%-- 								<c:if test="${footerComponent.socialNavigationNode.visible}"> --%>
@@ -55,21 +54,21 @@
 <%-- 								</c:if> --%>
 <!-- 							</div> -->
 <!-- 						</div> -->
-<!-- 						<div class="footer__right col-xs-12 col-sm-12 col-md-12 col-lg-8"> -->
-<!-- 							<div class="lang-currency-section"> -->
-<!-- 								<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 footer__dropdown"> -->
-<%-- 									<footer:languageSelector languages="${languages}" --%>
-<%-- 										currentLanguage="${currentLanguage}" /> --%>
-<!-- 								</div> -->
-<!-- 								<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 footer__dropdown"> -->
-<%-- 									<footer:currencySelector currencies="${currencies}" --%>
-<%-- 										currentCurrency="${currentCurrency}" /> --%>
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+						<div class="footer__right col-xs-12 col-sm-12 col-md-12 col-lg-8">
+							<div class="lang-currency-section">
+								<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 footer__dropdown">
+									<footer:languageSelector languages="${languages}"
+										currentLanguage="${currentLanguage}" />
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 footer__dropdown">
+									<footer:currencySelector currencies="${currencies}"
+										currentCurrency="${currentCurrency}" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -77,42 +76,25 @@
 <div class="copyright footer__bottom">
 	<div class="container">
 		<div class="row">
-
 			<div class="col-sm-4"></div>
 <%-- 			<div class="copyright-text col-sm-4 center-block footer__copyright">${fn:escapeXml(footerComponent.notice)}</div> --%>
-
-<!-- 			<div class="col-sm-4"></div> -->
-<%-- 			<div class="copyright-text col-sm-4 center-block footer__copyright">${fn:escapeXml(footerComponent.notice)}} --%>
-<!-- 			</div> -->
-
 			<!-- Chat Toggle -->
-<%-- 			<button value='<c:url value="/chat/chatWindow"/>' tabindex="0" --%>
-<!-- 				class="js-newWindow btn btn-lg mobile-chat" id="mobile-chat" -->
-<!-- 				data-popup="scrollbars=yes"> -->
-<%-- 				<spring:theme code="chat.box.mobile.title" /> --%>
-<!-- 			</button> -->
-<!-- 			<div class="col-sm-6 chat-footer"> -->
-<!-- 				<button type="button" -->
-<!-- 					class="btn btn-lg pop-over pop-over-toggle" onclick="openChatWindow();" -->
-<!-- 					id="pop-over-toggle" data-placement="top" > -->
-<!-- 					<div class="chat-glyphicon-close"> -->
-<%-- 						<spring:theme code="chatbox.title" /> --%>
-<!-- 					</div> -->
-<!-- 				</button> -->
-<!-- 			</div> -->
-<div class="col-md-1">
-<a>
-<img title="Bogota" alt="Bogota" class="footerimg" src="/bogota/_ui/addons/sdhpsaddon/responsive/theme-psalpha/images/Bogota_footer_1.svg" width="200" height="196">
-</a>
-</div>
-<div class="col-md-1">
-<a>
-<img title="Bogota" alt="Bogota" class="footerimg_gov" src="/bogota/_ui/addons/sdhpsaddon/responsive/theme-psalpha/images/Bogota_footer_2.svg" width="135" height="27">
-</a>
-</div>
+			<button value='<c:url value="/chat/chatWindow"/>' tabindex="0"
+				class="js-newWindow btn btn-lg mobile-chat" id="mobile-chat"
+				data-popup="scrollbars=yes">
+				<spring:theme code="chat.box.mobile.title" />
+			</button>
+			<div class="col-sm-6 chat-footer">
+				<button type="button"
+					class="btn btn-lg pop-over pop-over-toggle" onclick="openChatWindow();"
+					id="pop-over-toggle" data-placement="top" >
+					<div class="chat-glyphicon-close">
+						<spring:theme code="chatbox.title" />
+					</div>
+				</button>
+			</div>
 		</div>
 	</div>
-	
 	<!-- Chat Module -->
 	 <div class="container chat-container popover-content" id="popover-content">
 		 <div class="chat-module active col-xs-12 col-sm-12 col-md-12 col-lg-12 no-space">
@@ -161,11 +143,6 @@
 			  </div>
 		 </div>
 	</div>
-
-</div>
-
-	</div>
-
 
 	<script>
         function openChatWindow(){

@@ -34,8 +34,7 @@
 <c:set var="lblBotonFirmarYAgregar" value="Firmar y Agregar" />
 <c:set var="flagMostrarSoloFirmar" value="true" />
 <c:set var="mostrarBotonesFirmas" value="true" />
-<c:if
-	test="${contribuyente.documentType eq 'NIT' and contribuyente.numBP eq currentUser.numBP }">
+<c:if test="${contribuyente.documentType eq 'NIT' and contribuyente.numBP eq currentUser.numBP }">
 	<c:set var="lblDeclarante" value="" />
 	<c:set var="lblBotonFirmarYAgregar" value="Agregar firmantes" />
 	<c:set var="flagMostrarSoloFirmar" value="false" />

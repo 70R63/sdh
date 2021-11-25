@@ -24,7 +24,7 @@
 			<div class="col-md-8">
 				<form:form action="">
 					<div class="table-responsive text-center">
-						<table class="table table-bordered" id="listaDeclaraciones">
+						<table class="table table-bordered" id="example">
 							<thead>
 								<tr>
 									<td><label class="control-label labeltabletd tableident"><spring:theme code="contribuyente.listadeclaraciones.declarcion" /></label></td>
@@ -73,20 +73,12 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach items="${contibForm.declaraciones}" var="eachDeclaracion">
-											<c:choose>
-												<c:when test="${eachDeclaracion.estadoFirma eq '01'}">
-													<c:set var="desc_status" value='Pendiente por firmar'></c:set>
-												</c:when>
-												<c:when test="${eachDeclaracion.estadoFirma eq '02'}">
-													<c:set var="desc_status" value='Pendiente por presentar'></c:set>
-												</c:when>
-											</c:choose>
 											<tr>
 												<td><input class="inputtextnew tableident" disabled="disabled" type="text" size="30" value="${eachDeclaracion.idDeclaracion}" /></td>
 												<td><input class="inputtextnew " disabled="disabled" type="text" size="30" value="<spring:theme code="autorizado.impuestos.${eachDeclaracion.impuesto}" />" /></td>
 												<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="30" value="${eachDeclaracion.anioGravable}" /></td>
 												<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="30" value='<spring:theme code="autorizado.periodo.mes.${eachDeclaracion.periodo}" />' /></td>
-												<td><input class="inputtextnew" disabled="disabled" type="text" size="30" value="${desc_status}" /></td>
+												<td><input class="inputtextnew" disabled="disabled" type="text" size="30" value='<spring:theme code="contribuyente.listadeclaraciones.status.${eachDeclaracion.estadoFirma}"/>' /></td>
 												<td><label class="labelVerDetalle text-capitalize !important" id="labelVerDetalle" style="color: #0358d8 !important"
 													data-relacion1="${eachDeclaracion.relacion}"
 													data-tipo1="${eachDeclaracion.tipo_id1}"
