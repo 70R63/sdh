@@ -104,7 +104,7 @@ function validaBotonPago(){
 }
 
 function goBack4() {
-  window.history.back();
+	window.location.href = ACC.contribList;
 }
 
 

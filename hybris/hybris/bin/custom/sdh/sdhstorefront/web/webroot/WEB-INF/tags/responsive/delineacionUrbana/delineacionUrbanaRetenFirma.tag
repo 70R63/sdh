@@ -39,7 +39,7 @@
 				
 				<div class=" col-md-3">
 					<button type="button" class="btn btn-secondary btn-lg"
-						id="regresarButton" name="" value="regresar" onclick="goBack2()">
+						id="regresarButton" name="" value="regresar" onclick="goBack4()">
 						<spring:theme code="delineacion.urbana.dec.firm.regresar" />
 					</button>
 				</div>
@@ -101,6 +101,9 @@
 
 
 <script>
+function goBack4() {
+	window.location.href = ACC.contribList;
+}
 
 function validaBotonPago(){
 	
