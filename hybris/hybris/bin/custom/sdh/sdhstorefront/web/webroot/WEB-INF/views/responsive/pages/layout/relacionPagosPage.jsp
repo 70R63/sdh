@@ -13,16 +13,16 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 	<relacionpagos:relacionPagosMenu />
-		<c:choose>
-			<c:when test="${not empty Retenedor}">
-				<relacionpagos:relacionPagosRETEICA/>
-			</c:when>
-			<c:otherwise>
-	<div id="idtodos" style="display: none;">
-	<relacionpagos:relacionPagosTodo />
-	</div>
-	<relacionpagos:relacionPagosImpuesto/>
-	</c:otherwise>
+	<c:choose>
+		<c:when test="${not empty Retenedor}">
+			<relacionpagos:relacionPagosRETEICA/>
+		</c:when>
+		<c:otherwise>
+			<div id="idtodos" style="display: none;">
+				<relacionpagos:relacionPagosTodo />
+			</div>
+			<relacionpagos:relacionPagosImpuesto/>
+		</c:otherwise>
 	</c:choose>
 
 	
@@ -36,8 +36,14 @@ window.onload = function() {
 	
 }
 
+function goBack() {
+	window.history.back();
+
+}
+
 	function Selected(selectObject) {
 		
+		debugger;
 		var value = selectObject.value;
 		document.getElementById("Idimp").value = value;
 		
@@ -178,12 +184,12 @@ window.onload = function() {
 			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'none';
 			tabledeli.style.display = 'none';
-			tablegas.style.display = 'none';
+			tablegas.style.display = 'block';
 			todo.style.display = 'none';
 			detpred.style.display = 'none';
 			detica.style.display = 'none';
 			detvehi.style.display = 'none';
-			detgas.style.display = 'block';
+			detgas.style.display = 'none';
 			detdeli.style.display = 'none';
 			detplubliext.style.display = 'none';
 			detradic.style.display = 'none';

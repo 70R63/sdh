@@ -94,7 +94,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<button type="button" class="btn btn-secondary btn-lg" id="action"
-						name="action" value="regresar" style="margin-top: 3px">
+						name="action" value="regresar" style="margin-top: 3px" onclick="goBack()">
 						<spring:theme code="relacion.inicial.regresar" />
 					</button>
 				</div>

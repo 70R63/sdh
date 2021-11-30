@@ -104,6 +104,7 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 	private static final String MI_RIT = "Mi RIT";
 	private static final String CRUMBS_LINK = "#";
 	private static final String ROOT = "/";
+	
 
 	private I18NService i18nService;
 
