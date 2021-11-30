@@ -1149,6 +1149,12 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 				modelService.saveAll(sitIITransactionsLogModel);
 
+				LOG.error("SITIITransactionsLog:[ TransactionDate: " + sitIITransactionsLogModel.getTransactionDate()
+						+ " TransactionTime: " + sitIITransactionsLogModel.getTransactionTime() + " TransactionReference: "
+						+ sitIITransactionsLogModel.getTransactionReference() + " TransactionNUS: "
+						+ sitIITransactionsLogModel.getTransactionNUS() + " TransactionAmount: "
+						+ sitIITransactionsLogModel.getTransactionAmount());
+
 			}
 			catch (final NoSuchAlgorithmException e)
 			{
