@@ -638,7 +638,7 @@ ACC.predial = {
             	if(result.errores)
             	{
             		$.each(result.errores, function( index, value ) {
-            			if(value.idError != "0" && value.idError != "00" && value.idError != "")
+            			if(value.IdError != "0" && value.IdError != "00" && value.IdError != "")
             			actualErrors.push(value);
             		});
             	}
@@ -647,7 +647,7 @@ ACC.predial = {
             		$( "#dialogICA" ).dialog( "open" );
             		$("#icaDialogContent").html("");
             		$.each(result.errores, function( index, value ) {
-            			$("#icaDialogContent").html($("#icaDialogContent").html()+value.descError+"<br>");
+            			$("#icaDialogContent").html($("#icaDialogContent").html()+value.DescError+"<br>");
             		});
             		
             		  		
