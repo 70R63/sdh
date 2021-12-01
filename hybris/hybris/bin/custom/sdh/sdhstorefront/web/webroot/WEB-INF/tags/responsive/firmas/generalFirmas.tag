@@ -69,15 +69,13 @@
 					<c:if test="${modo_debug eq 'true'}">
 						<div>seccion1inicio</div>
 					</c:if>
-					<c:if
-						test="${contribuyente.documentNumber eq currentUser.documentNumber}">
+					<c:if test="${contribuyente.documentNumber eq currentUser.documentNumber}">
 						<c:set var="mostrarBotonesFirmas" value="false" />
 					</c:if>
 					<div class="row mt-3">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="control-label"><spring:theme
-										code="firmas.natural.nota2" /></label>
+								<label class="control-label"><spring:theme code="firmas.natural.nota2" /></label>
 							</div>
 						</div>
 					</div>
