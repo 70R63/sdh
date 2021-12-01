@@ -163,7 +163,7 @@ ACC.frimas = {
 
 			var firmantes =[];
 
-			$.each($(".representante .row"),function (index,value) {
+			$.each($(".representante .registro"),function (index,value) {
 
 				var tipoIdent= $.trim($(value).find(".FirmTipoId").val());
 
