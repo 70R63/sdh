@@ -42,7 +42,7 @@
 						<td style="width: 416px !important;"><input type="text"
 							class="form-control" id="exampleFormControlFile1" disabled></td>
 						<td style="text-align: center !important; color: #0358d8 !important"><label style="text-align: center !important; color: #0358d8 !important"
-							class="control-label" for=""> <spring:theme
+							class="control-label" for=""  onclick="showDetail()"> <spring:theme
 									code="representantes.info.sanciones.vehiculos.ver" /></label></td>
 					</tr>
 				</tbody>

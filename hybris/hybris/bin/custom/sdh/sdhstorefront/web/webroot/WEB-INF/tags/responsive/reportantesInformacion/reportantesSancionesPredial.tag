@@ -46,7 +46,7 @@
 						<td
 							style="text-align: center !important; color: #0358d8 !important"><label
 							class="control-label" for=""
-							style="text-align: center !important; color: #0358d8 !important">
+							style="text-align: center !important; color: #0358d8 !important"  onclick="showDetail()">
 								<spring:theme code="representantes.info.sanciones.predial.ver" />
 						</label></td>
 					</tr>

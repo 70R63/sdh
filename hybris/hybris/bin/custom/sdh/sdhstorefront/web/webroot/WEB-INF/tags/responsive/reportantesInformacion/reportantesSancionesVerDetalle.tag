@@ -16,37 +16,32 @@
 		style="background-color: #56ace3 !important; border-top: 1px solid #56ace3 !important;" />
 
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-6">
 			<table class="table border">
 				<thead style="cellspacing: 10 !important">
 					<tr>
+						<th style="text-align: center"></th>
 						<th style="text-align: center"><label class="control-label"
 							for=""> <spring:theme
-									code="representantes.info.sanciones.ica.objeto" /></label></th>
-						<th style="text-align: center"><label class="control-label"
-							for=""> <spring:theme
-									code="representantes.info.sanciones.ica.valor" /></label></th>
+									code="Objeto de la sanción" /></label></th>
 						<th style="text-align: center"><label class="control-label "
 							for=""><spring:theme
-									code="representantes.info.sanciones.ica.visualizar" /></label></th>
+									code="Sanción persuasiva" /></label></th>
 					</tr>
 				</thead>
 				<tbody>
 
 					<tr>
 
-						<td style="text-align: center !important"><span><spring:theme
-									code="representantes.info.historico.ica.resolucion" /></span>
-							<p>
-								<spring:theme code="representantes.info.historico.ica.articulo1" /></td>
-						<td style="width: 416px !important;"><input type="text"
-							class="form-control" id="exampleFormControlFile1" disabled></td>
-						<td
-							style="text-align: center !important; color: #0358d8 !important"><label
-							class="control-label" for=""
-							style="text-align: center !important; color: #0358d8 !important" onclick="showDetail()">
-								<spring:theme code="representantes.info.sanciones.ica.ver" />
+						<td style="text-align: center !important"><label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="" />
 						</label></td>
+						<td></td>
+						<td
+							style="text-align: center !important; color: #0358d8 !important"></td>
 					</tr>
 				</tbody>
 			</table>

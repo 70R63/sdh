@@ -6,8 +6,8 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-	<!-- Agregar el valor del acto que venga del form para determinar si se muestran los campos de acto o no -->
-<c:set var="idacto" value=""/>
+<!-- Agregar el valor del acto que venga del form para determinar si se muestran los campos de acto o no -->
+<c:set var="idacto" value="" />
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container_new_page">
 	<div class="row">
@@ -76,23 +76,61 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.generales.anigrav" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormbases.anioGravable}"
-						maxlength="240"></input>
+						name="" class="newalto form-control" disabled type="text"
+						value="${predialFormbases.anioGravable}" maxlength="240"></input>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.generales.opuso" /></label> <input id=""
-						name="" class="alto form-control" disabled type="text" value="${predialFormbases.opcionuso}"
-						maxlength="240"></input>
+						name="" class="alto form-control" disabled type="text"
+						value="${predialFormbases.opcionuso}" maxlength="240"></input>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme code="chip" /></label>
+					<input id="" name="" class="newalto form-control" disabled
+						type="text" value="" maxlength="240"></input>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.generales.matricula" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormbases.matrInmobiliaria}"
+						name="" class="newalto form-control" disabled type="text"
+						value="${predialFormbases.matrInmobiliaria}" maxlength="240"></input>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="Uso de suelo" /></label> <select id="" name=""
+						class="newalto form-control"><option>Seleccionar</option></select>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="Base Gravable calc." /></label> <input id="" name=""
+						class="newalto form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="Confirmar BG final" /></label> <input id="" name=""
+						class="newalto form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme code="Tarifa" /></label>
+					<input id="" name="" class="newalto form-control" disabled
+						type="text" value="${predialFormbases.matrInmobiliaria}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -102,59 +140,55 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.generales.direccion" /></label> <input id=""
-						name="" class="alto form-control" disabled type="text" value="${predialFormbases.direccionPredio}"
-						maxlength="240"></input>
+						name="" class="alto form-control" disabled type="text"
+						value="${predialFormbases.direccionPredio}" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
 		<c:if test="${idacto != ''}">
-		<div class="row">
-		<div class="col-md-2">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predial.declaracion.vehiculo.idacto" /></label> <input id=""
-						name="" class="newalto form-control"
-						value=""
-						aria-required="false" type="text" maxlength="30"
-						disabled="disabled">
+			<div class="row">
+				<div class="col-md-2">
+					<div class="form-group">
+						<label class="control-label"><spring:theme
+								code="predial.declaracion.vehiculo.idacto" /></label> <input id=""
+							name="" class="newalto form-control" value=""
+							aria-required="false" type="text" maxlength="30"
+							disabled="disabled">
 
+					</div>
 				</div>
-			</div>
-					<div class="col-md-2">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="sobre.vehiculo.declaracion.vehiculo.fechanotiacto" /></label> <input id=""
-						name="" class="newalto form-control"
-						value=""
-						aria-required="false" type="text" maxlength="30"
-						disabled="disabled">
+				<div class="col-md-2">
+					<div class="form-group">
+						<label class="control-label"><spring:theme
+								code="sobre.vehiculo.declaracion.vehiculo.fechanotiacto" /></label> <input
+							id="" name="" class="newalto form-control" value=""
+							aria-required="false" type="text" maxlength="30"
+							disabled="disabled">
 
+					</div>
 				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predial.declaracion.vehiculo.descriacto" /></label> <input id=""
-						name="" class="newalto form-control"
-						value=""
-						aria-required="false" type="text" maxlength="30"
-						disabled="disabled">
+				<div class="col-md-2">
+					<div class="form-group">
+						<label class="control-label"><spring:theme
+								code="predial.declaracion.vehiculo.descriacto" /></label> <input id=""
+							name="" class="newalto form-control" value=""
+							aria-required="false" type="text" maxlength="30"
+							disabled="disabled">
 
+					</div>
 				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predial.declaracion.vehiculo.numeroexpediente" /></label> <input id=""
-						name="" class="newalto form-control"
-						value=""
-						aria-required="false" type="text" maxlength="30"
-						disabled="disabled">
+				<div class="col-md-2">
+					<div class="form-group">
+						<label class="control-label"><spring:theme
+								code="predial.declaracion.vehiculo.numeroexpediente" /></label> <input
+							id="" name="" class="newalto form-control" value=""
+							aria-required="false" type="text" maxlength="30"
+							disabled="disabled">
 
+					</div>
 				</div>
+
 			</div>
-		
-		</div>
 		</c:if>
 
 	</form:form>

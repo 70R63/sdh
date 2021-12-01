@@ -31,7 +31,7 @@
 							</c:forEach>
 						</c:if>
 					</c:forEach>
-					<div class="links col-xs-12 col-sm-6 col-md-12 col-lg-12">
+<!-- 					<div class="links col-xs-12 col-sm-6 col-md-12 col-lg-12"> -->
 <!-- 						<div class="col-xs-12 col-sm-12"> -->
 <!-- 							<div class="clearfix social-links"> -->
 <%-- 								<c:if test="${footerComponent.socialNavigationNode.visible}"> --%>
@@ -54,19 +54,19 @@
 <%-- 								</c:if> --%>
 <!-- 							</div> -->
 <!-- 						</div> -->
-						<div class="footer__right col-xs-12 col-sm-12 col-md-12 col-lg-8">
-							<div class="lang-currency-section">
-								<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 footer__dropdown">
-									<footer:languageSelector languages="${languages}"
-										currentLanguage="${currentLanguage}" />
-								</div>
-								<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 footer__dropdown">
-									<footer:currencySelector currencies="${currencies}"
-										currentCurrency="${currentCurrency}" />
-								</div>
-							</div>
-						</div>
-					</div>
+<!-- 						<div class="footer__right col-xs-12 col-sm-12 col-md-12 col-lg-8"> -->
+<!-- 							<div class="lang-currency-section"> -->
+<!-- 								<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 footer__dropdown"> -->
+<%-- 									<footer:languageSelector languages="${languages}" --%>
+<%-- 										currentLanguage="${currentLanguage}" /> --%>
+<!-- 								</div> -->
+<!-- 								<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 footer__dropdown"> -->
+<%-- 									<footer:currencySelector currencies="${currencies}" --%>
+<%-- 										currentCurrency="${currentCurrency}" /> --%>
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 				</div>
 			</div>
 		</div>
@@ -75,6 +75,11 @@
 
 <div class="copyright footer__bottom">
 	<div class="container">
+	<div class="row">
+	<div class="col-md-2">
+	<img src="/bogota/_ui/responsive/common/images/Colombia_footer_1.svg" width="80" height="90"></img>
+	</div>
+	</div>
 		<div class="row">
 			<div class="col-sm-4"></div>
 <%-- 			<div class="copyright-text col-sm-4 center-block footer__copyright">${fn:escapeXml(footerComponent.notice)}</div> --%>
