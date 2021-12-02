@@ -80,6 +80,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
 		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
 
+		LOG.info(urlService);
 		LOG.info(wsRequest);
 		final String wsResponse = restTemplate.postForObject(urlService, request, String.class);
 		LOG.info(wsResponse);
@@ -246,6 +247,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
 		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
 
+		LOG.info(urlService);
 		LOG.info(wsRequest);
 		final String wsResponse = restTemplate.postForObject(urlService, request, String.class);
 		LOG.info(wsResponse);
@@ -297,6 +299,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
 		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
 
+		LOG.info(urlService);
 		LOG.info(wsRequest);
 		final String wsResponse = restTemplate.postForObject(urlService, request, String.class);
 		LOG.info(wsResponse);
@@ -347,6 +350,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
 		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
 
+		LOG.info(urlService);
 		LOG.info(wsRequest);
 		final String wsResponse = restTemplate.postForObject(urlService, request, String.class);
 		LOG.info(wsResponse);
@@ -396,6 +400,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
 		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
 
+		LOG.info(urlService);
 		LOG.info(wsRequest);
 		String wsResponse = restTemplate.postForObject(urlService, request, String.class);
 		wsResponse = wsResponse.replaceAll("numOjbeto", "numObjeto");

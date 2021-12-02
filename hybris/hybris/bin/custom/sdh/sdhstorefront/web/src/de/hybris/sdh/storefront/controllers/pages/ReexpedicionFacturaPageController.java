@@ -24,6 +24,7 @@ import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.DescargaFacturaForm;
 import de.hybris.sdh.storefront.forms.Descuento1PCCatalogos;
@@ -100,6 +101,9 @@ public class ReexpedicionFacturaPageController extends AbstractPageController
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
+	
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
 
 
 	@RequestMapping(value = "/contribuyentes/reexpedicionfactura", method = RequestMethod.GET)
@@ -116,26 +120,11 @@ public class ReexpedicionFacturaPageController extends AbstractPageController
 
 
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-		try {
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		facturacionForm.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
+		facturacionForm.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
 
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-
-			facturacionForm.setPredial(sdhConsultaContribuyenteBPResponse.getPredial());
-			facturacionForm.setVehicular(sdhConsultaContribuyenteBPResponse.getVehicular());
-
-			model.addAttribute("facturacionForm", facturacionForm);
-			model.addAttribute("descargaFacturaForm", new DescargaFacturaForm());
-		}
-		catch (final Exception e)
-		{
-			// XXX Auto-generated catch block
-			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
-			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
-		}
+		model.addAttribute("facturacionForm", facturacionForm);
+		model.addAttribute("descargaFacturaForm", new DescargaFacturaForm());
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(REEXPEDICION_FACTURA_CMS_PAGE));

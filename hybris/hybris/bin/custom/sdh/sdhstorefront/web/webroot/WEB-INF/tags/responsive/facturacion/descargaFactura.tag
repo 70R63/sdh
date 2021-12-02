@@ -67,12 +67,9 @@
 			</button>
 		</div>
 	</div>
-<!-- 	</div> -->
 	<br>
-<!-- 	<div class="row"> -->
-	<div id="table-predial" style="display: none;" class="">
-		<div class="row">
-			<div class="col-md-7">
+	<div id="table-predial" style="display: none;">
+			<div class="col-md-11">
 				<table class="table" id="tabPaginacion0" style="widht: 100% !important">
 					<thead style="cellspacing: 10 !important">
 						<tr>
@@ -143,7 +140,6 @@
 					</tbody>
 				</table>
 			</div>
-		</div>
 <!-- 		<div class="row"> -->
 <!-- 			<div class="col-md-3 col-md-offset-5"> -->
 <!-- 				<button style="margin-top: 3px;" id="" -->
@@ -156,8 +152,7 @@
 	</div>
 
 	<div id="table-vehiculos" style="display: none;">
-<!-- 		<div class="row"> -->
-			<div class="col-md-7">
+			<div class="col-md-10">
 				<table class="table table-responsive" id="tabPaginacion1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
