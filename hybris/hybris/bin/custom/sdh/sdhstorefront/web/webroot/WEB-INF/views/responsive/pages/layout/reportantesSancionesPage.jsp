@@ -25,6 +25,15 @@
 	<div id="idVehicular" style="display: none;">
 		<reportantes:reportantesSancionesVehiculos />
 	</div>
+	<div id="idVerDetalle" style="display: none;">
+		<reportantes:reportantesSancionesVerDetalle />
+	</div>
+	<div id="idLiquidador" style="display: none;">
+		<reportantes:reportantesSancionesLiquidacion />
+	</div>
+	<div id="idTotalPagar" style="display: none;">
+		<reportantes:reportantesSancionesTotalPagar />
+	</div>
 </div>
 
 <script type="text/javascript">
@@ -45,36 +54,41 @@ window.onload = function() {
 		var idOpain = document.getElementById('idOpain');
 		var idIca = document.getElementById('idIca');
 		var idVehicular = document.getElementById('idVehicular');
+		var idDetalle = document.getElementById('idVerDetalle');
 
 		if (x == '1') {
 			idPredial.style.display = 'block';
 			idOpain.style.display = 'none';
 			idIca.style.display = 'none';
 			idVehicular.style.display = 'none';
+			idVehicular.style.display = 'none';
 
 		} else if (x == '2') {
 			idPredial.style.display = 'none';
 			idOpain.style.display = 'block';
 			idIca.style.display = 'none';
-			idVehicular.style.display = 'none';
+			idDetalle.style.display = 'none';
 
 		} else if (x == '3') {
 			idPredial.style.display = 'none';
 			idOpain.style.display = 'none';
 			idIca.style.display = 'block';
 			idVehicular.style.display = 'none';
+			idDetalle.style.display = 'none';
 
 		} else if (x == '4') {
 			idPredial.style.display = 'none';
 			idOpain.style.display = 'none';
 			idIca.style.display = 'none';
 			idVehicular.style.display = 'block';
+			idDetalle.style.display = 'none';
 
 		} else {
 			idPredial.style.display = 'none';
 			idOpain.style.display = 'none';
 			idIca.style.display = 'none';
 			idVehicular.style.display = 'none';
+			idDetalle.style.display = 'none';
 		}
 
 	}
@@ -111,5 +125,24 @@ window.onload = function() {
 							}
 						});
 	}
+	
+	function showDetail() {
+		
+		var idDetalle = document.getElementById('idVerDetalle');
+		idDetalle.style.display = 'block';
+
+	}
+	
+	function goBack() {
+		window.history.back();
+	}
+	
+	function showTotal() {
+		
+		var idtotal = document.getElementById('idTotalPagar');
+		idtotal.style.display = 'block';
+
+	}
+
 </script>
 
