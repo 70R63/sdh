@@ -51,7 +51,7 @@
 			<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
 			<div class="caja--ser-rel color-sr2">
 				<select id="aniograv" class="new_alto form-control " name="aniograv">
-						<option value="2020">2020</option>
+						<option value="2021">2021</option>
 				</select>
 
 			</div>
@@ -69,38 +69,26 @@
 	</div>
 	<br>
 	<div id="table-predial" style="display: none;">
-			<div class="col-md-11">
-				<table class="table" id="tabPaginacion0" style="widht: 100% !important">
-					<thead style="cellspacing: 10 !important">
+			<div class="col-md-12">
+				<table id="tabPaginacion0">
+					<thead>
 						<tr>
-							<th style="text-align: center" hidden="hidden"><label
-								class="control-label labeltabletd " for="">Año Gravable</label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd"
-								for=""><spring:theme
-										code="descarga.factura.predial.chip" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd"
-								for=""> <spring:theme
-										code="descarga.factura.predial.matinm" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd"
-								for=""> <spring:theme
-										code="descarga.factura.predial.dirpred" /></label></th>
+<!-- 							<th style="text-align: center" hidden="hidden"><label class="control-label labeltabletd " for="">Año Gravable</label></th> -->
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""><spring:theme code="descarga.factura.predial.chip" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="descarga.factura.predial.matinm" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="descarga.factura.predial.dirpred" /></label></th>
 							<!-- 							<th style="text-align: center"><label class="control-label" -->
 							<%-- 								for=""> <spring:theme --%>
 							<%-- 										code="descarga.factura.predial.selec" /></label></th> --%>
-							<th style="text-align: center"><label class="control-label labeltabletd"
-								for=""> <spring:theme code="Pago voluntario" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Pago voluntario" /></label></th>
 <!-- 							<th style="text-align: center"><label class="control-label" -->
 <%-- 								for=""> <spring:theme code="Total a pagar" /></label></th> --%>
 <!-- 							<th style="text-align: center"><label class="control-label" -->
 <%-- 								for=""> <spring:theme code="Total con pago voluntario" /></label></th> --%>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme code="Reexpedicion de factura" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme code="Descargar factura" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme code="Pagar con aporte" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme code="Pagar sin aporte" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Reexpedicion de factura" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Descargar factura" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar con aporte" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar sin aporte" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -111,8 +99,7 @@
 								<c:if
 									test="${not empty eachPredial.anioGravable || not empty eachPredial.direccionPredio}">
 									<tr>
-										<td hidden="hidden"><c:out
-												value="${eachPredial.anioGravable}" /></td>
+<%-- 										<td hidden="hidden"><c:out value="${eachPredial.anioGravable}" /></td> --%>
 										<td><c:out value="${eachPredial.CHIP}" /></td>
 										<td><c:out value="${eachPredial.matrInmobiliaria}" /></td>
 										<td><c:out value="${eachPredial.direccionPredio}" /></td>
@@ -128,8 +115,7 @@
 											data-nombreObjeto="objetoPredial"
 											data-anioGrav="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}"
 											onclick="reexpedicion(this)"> <span class="">Reexpedir</span></label></td>
-										<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0001" data-nombreObjeto="objetoPredial"
-											data-anioGrav="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}"></img></td>
+										<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0001" data-nombreObjeto="objetoPredial" data-anioGrav="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}"></img></td>
 									<td><a onclick="validaBotonPago()"></a></td>
 									<td><a onclick="validaBotonPago()"></a></td>
 
@@ -152,35 +138,25 @@
 	</div>
 
 	<div id="table-vehiculos" style="display: none;">
-			<div class="col-md-10">
-				<table class="table table-responsive" id="tabPaginacion1">
-					<thead style="cellspacing: 10 !important">
+			<div class="col-md-12">
+				<table id="tabPaginacion1">
+					<thead>
 						<tr>
-							<th style="text-align: center" hidden="hidden"><label
-								class="control-label " for="">año gravable</label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""><spring:theme
-										code="descarga.factura.vehiculo.placa" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme
-										code="descarga.factura.vehiculo.marca" /></label></th>
+<!-- 							<th style="text-align: center" hidden="hidden"><label class="control-label " for="">año gravable</label></th> -->
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""><spring:theme code="descarga.factura.vehiculo.placa" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="descarga.factura.vehiculo.marca" /></label></th>
 							<!-- 							<th style="text-align: center"><label class="control-label" -->
 							<%-- 								for=""> <spring:theme --%>
 							<%-- 										code="descarga.factura.vehiculo.selec" /></label></th> --%>
-							<th style="text-align: center"><label class="control-labe labeltabletd l"
-								for=""> <spring:theme code="Pago voluntario" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-labe labeltabletd l" for=""> <spring:theme code="Pago voluntario" /></label></th>
 <!-- 							<th style="text-align: center"><label class="control-label" -->
 <%-- 								for=""> <spring:theme code="Total a pagar" /></label></th> --%>
 <!-- 							<th style="text-align: center"><label class="control-label" -->
 <%-- 								for=""> <spring:theme code="Total con pago voluntario" /></label></th> --%>
-							<th style="text-align: center"><label class="control-label labeltabletd"
-								for=""> <spring:theme code="Reexpedicion de factura" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme code="Descargar factura" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme code="Pagar con aporte" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme code="Pagar sin aporte" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Reexpedicion de factura" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Descargar factura" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar con aporte" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar sin aporte" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -190,8 +166,7 @@
 								<c:if
 									test="${not empty eachVehiculo.placa || not empty eachVehiculo.marca}">
 									<tr>
-										<td hidden="hidden"><c:out
-												value="${eachVehiculo.anioGravable}" /></td>
+<%-- 										<td hidden="hidden"><c:out value="${eachVehiculo.anioGravable}" /></td> --%>
 										<td><c:out value="${eachVehiculo.placa}" /></td>
 										<td><label class="labelVerDetVeh "><spring:theme
 													code="vehiculos.detalle.marca.${eachVehiculo.marca}" /></label></td>

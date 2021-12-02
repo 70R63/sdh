@@ -15,19 +15,20 @@ ACC.facturacion = {
 			tabpred.style.display = 'none';
 			tabveh.style.display = 'none';
 
-			
-			switch(imp){
-			case "0001":
-//				ACC.facturacion.filtrarRegistros_aniograv("tabPaginacion0","0",aniogravFiltro);
-				tabpred.style.display = 'block';
-				break;
-			case "0002":
-//				ACC.facturacion.filtrarRegistros_aniograv("tabPaginacion1","0",aniogravFiltro);
-				tabveh.style.display = 'block';
-				break;
-				
-			default:
-				break;
+			if(aniogravFiltro != ""){
+				switch(imp){
+				case "0001":
+	//				ACC.facturacion.filtrarRegistros_aniograv("tabPaginacion0","0",aniogravFiltro);
+					tabpred.style.display = 'block';
+					break;
+				case "0002":
+	//				ACC.facturacion.filtrarRegistros_aniograv("tabPaginacion1","0",aniogravFiltro);
+					tabveh.style.display = 'block';
+					break;
+					
+				default:
+					break;
+				}
 			}
 			
 		}
@@ -69,7 +70,7 @@ ACC.facturacion = {
 	descargaFactura : function (anoGravable,numObjeto,tipoOperacion,descargaFactura1){
 		debugger;
 		ACC.spinner.show();
-		if(descargaFactura1 != undefinçed && descargaFactura1 != null){
+		if(descargaFactura1 != undefined && descargaFactura1 != null){
 			var objnew = descargaFactura1;
 			
 			anoGravable = $.trim($(objnew).attr("data-anioGrav"));

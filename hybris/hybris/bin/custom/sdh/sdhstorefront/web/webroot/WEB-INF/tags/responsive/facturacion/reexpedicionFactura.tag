@@ -53,13 +53,8 @@
 			<div class="caja--ser-rel color-sr2">
 				<select id="aniograv" class="new_alto form-control " name="aniograv">
 					<option value="">Seleccionar</option>
-					<option value="2020">2020</option>
-<!-- 					<option value="2019">2019</option> -->
-<!-- 					<option value="2018">2018</option> -->
-<!-- 					<option value="2017">2017</option> -->
-<!-- 					<option value="2016">2016</option> -->
+					<option value="2021">2021</option>
 				</select>
-
 			</div>
 		</div>
 	</div>
@@ -74,23 +69,15 @@
 	</div>
 	<br>
 	<div id="table-predial" style="display: none;">
-		<div class="col-md-10">
-			<table class="table" id="tabPaginacion0">
+		<div class="col-md-12">
+			<table id="tabPaginacion0">
 				<thead style="cellspacing: 10 !important">
 					<tr>
-					<th style="text-align: center" hidden="hidden"><label class="control-label " for="">Año Gravable</label></th>
-						<th style="text-align: center"><label class="control-label "
-							for=""><spring:theme
-									code="reexpedicion.factura.predial.chip" /></label></th>
-						<th style="text-align: center"><label class="control-label"
-							for=""> <spring:theme
-									code="reexpedicion.factura.predial.matinm" /></label></th>
-						<th style="text-align: center"><label class="control-label"
-							for=""> <spring:theme
-									code="reexpedicion.factura.predial.dirpred" /></label></th>
-						<th style="text-align: center"><label class="control-label"
-							for=""> <spring:theme
-									code="reexpedicion.factura.predial.selec" /></label></th>
+<!-- 					<th style="text-align: center" hidden="hidden"><label class="control-label " for="">Año Gravable</label></th> -->
+						<th class="col-md-1" class="col-md-1" style="text-align: center"><label class="control-label " for=""><spring:theme code="reexpedicion.factura.predial.chip" /></label></th>
+						<th class="col-md-1" style="text-align: center"><label class="control-label" for=""> <spring:theme code="reexpedicion.factura.predial.matinm" /></label></th>
+						<th class="col-md-1" style="text-align: center"><label class="control-label" for=""> <spring:theme code="reexpedicion.factura.predial.dirpred" /></label></th>
+						<th class="col-md-1" style="text-align: center"><label class="control-label" for=""> <spring:theme code="reexpedicion.factura.predial.selec" /></label></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -99,13 +86,11 @@
 						<c:if test="${not empty eachPredial.matrInmobiliaria || not empty eachPredial.CHIP }">
 						<c:if test="${not empty eachPredial.anioGravable || not empty eachPredial.direccionPredio}">
 					<tr>
-							<td hidden="hidden"><c:out value="${eachPredial.anioGravable}" /></td>
+<%-- 							<td hidden="hidden"><c:out value="${eachPredial.anioGravable}" /></td> --%>
 							<td><c:out value="${eachPredial.CHIP}" /></td>
 							<td><c:out value="${eachPredial.matrInmobiliaria}" /></td>
 							<td><c:out value="${eachPredial.direccionPredio}" /></td>
-							<td><input class="inputtextnew"
-								style="visibility: visible !important; width: 15px"
-								type="radio" id="" name="objetoPredial" value="${eachPredial.numObjeto}"></td>
+							<td><input class="inputtextnew" style="visibility: visible !important; width: 15px" type="radio" id="" name="objetoPredial" value="${eachPredial.numObjeto}"></td>
 
 						</tr>
 						</c:if>
@@ -129,16 +114,10 @@
 			<table class="table" id="tabPaginacion1">
 				<thead style="cellspacing: 10 !important">
 					<tr>
-					<th style="text-align: center" hidden="hidden"><label class="control-label " for="">año gravable</label></th>
-						<th style="text-align: center"><label class="control-label "
-							for=""><spring:theme
-									code="descarga.factura.vehiculo.placa" /></label></th>
-						<th style="text-align: center"><label class="control-label"
-							for=""> <spring:theme
-									code="descarga.factura.vehiculo.marca" /></label></th>
-						<th style="text-align: center"><label class="control-label"
-							for=""> <spring:theme
-									code="reexpedicion.factura.vehiculo.selec" /></label></th>
+<!-- 					<th style="text-align: center" hidden="hidden"><label class="control-label " for="">año gravable</label></th> -->
+						<th class="col-md-1" style="text-align: center"><label class="control-label " for=""><spring:theme code="descarga.factura.vehiculo.placa" /></label></th>
+						<th class="col-md-1" style="text-align: center"><label class="control-label" for=""> <spring:theme code="descarga.factura.vehiculo.marca" /></label></th>
+						<th class="col-md-1" style="text-align: center"><label class="control-label" for=""> <spring:theme code="reexpedicion.factura.vehiculo.selec" /></label></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -147,13 +126,10 @@
 						<c:if test="${not empty eachVehiculo.anioGravable}">
 						<c:if test="${not empty eachVehiculo.placa || not empty eachVehiculo.marca}">
 						<tr>
-							<td hidden="hidden"><c:out value="${eachVehiculo.anioGravable}" /></td>
+<%-- 							<td hidden="hidden"><c:out value="${eachVehiculo.anioGravable}" /></td> --%>
 							<td><c:out value="${eachVehiculo.placa}" /></td>
-							<td><label class="labelVerDetVeh "><spring:theme
-										code="vehiculos.detalle.marca.${eachVehiculo.marca}" /></label></td>
-							<td><input class="inputtextnew"
-								style="visibility: visible !important; width: 15px"
-								type="radio" id="" name="objetoVehicular" value="${eachVehiculo.numObjeto}"></td>
+							<td><label class="labelVerDetVeh "><spring:theme code="vehiculos.detalle.marca.${eachVehiculo.marca}" /></label></td>
+							<td><input class="inputtextnew" style="visibility: visible !important; width: 15px" type="radio" id="" name="objetoVehicular" value="${eachVehiculo.numObjeto}"></td>
 
 						</tr>
 						</c:if>
