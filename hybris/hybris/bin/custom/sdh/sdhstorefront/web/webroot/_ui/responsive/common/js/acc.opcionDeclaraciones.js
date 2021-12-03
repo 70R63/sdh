@@ -1898,7 +1898,69 @@ ACC.opcionDeclaraciones = {
 		var urlDetalleActo = "/contribuyentes/detalleActo";
 				var urlPrefijo = obtenerURLBase();
 		 window.location.href =  urlPrefijo + urlDetalleActo;
+	},
+	
+	
+	validarPublicidadForm: function (anioGravable,numResolu,tipoVallaCode){
+		ACC.spinner.show();
+		var urlDeclaracion = "publicidadexterior/declaracion?numResolu="+numResolu+"&anoGravable="+anioGravable+"&tipoValla="+tipoVallaCode;
+
+		var dataRequest = {};
+		dataRequest.anoGravable = anioGravable;
+		dataRequest.numResolu = numResolu;
+		dataRequest.tipoValla = tipoVallaCode;
+		
+	    $.ajax({
+			url : ACC.presentarDecValidacionPublicidadURL,
+			type : "GET",
+			data: dataRequest,
+			success : function(dataResponse) {
+				ACC.spinner.close();
+				if(dataResponse != null){
+					if(!ACC.opcionDeclaraciones.manejarError200_publicidad(dataResponse)){
+						if(dataResponse.opcionUso != null && dataResponse.opcionUso.trim().startsWith("02")){
+							var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+			    			if (r == true) {
+			 					window.location.href = urlDeclaracion;
+			    			}else{
+								return false;
+			    			}
+						}else{
+							window.location.href = urlDeclaracion;
+			 			}
+					}else{
+						return false;
+					}
+				}else{
+            		$("#dialogDeclaracion").dialog( "open" );
+	    			$("#declaracionDialogContent").html("Error al consultar infoObjeto");
+				}
+			},
+				error : function() {
+					ACC.spinner.close();
+            		$("#dialogDeclaracion").dialog( "open" );
+	    			$("#declaracionDialogContent").html("Error al consultar infoObjeto");
+			}
+		});
+	},
+	
+	
+	manejarError200_publicidad: function(dataResponse){
+		var flagError = false;
+
+		if(dataResponse.errores != null){
+			$.each(dataResponse.errores, function (index,value){
+				if(value.idmsj == "200" && !flagError){
+	            	$( "#dialogDeclaracion" ).dialog( "open" );
+	    			$("#declaracionDialogContent").html(value.txtmsj);
+					flagError = true;
+				}
+			});
 		}
+		
+		
+		return flagError;
+	}
 	
 	
 };

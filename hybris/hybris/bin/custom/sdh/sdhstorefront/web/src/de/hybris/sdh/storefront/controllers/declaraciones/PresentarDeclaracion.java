@@ -71,7 +71,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-//import org.codehaus.jackson.map.ObjectMapper;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -193,7 +193,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	 * @param customerModel
 	 * @param dataForm
 	 */
-	private void obtenerListaImpuestosCliente(CustomerModel customerModel, SobreTasaGasolinaForm dataForm)
+	private void obtenerListaImpuestosCliente(final CustomerModel customerModel, final SobreTasaGasolinaForm dataForm)
 	{
 
 		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
@@ -213,20 +213,22 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				dataForm.setOptionVehicular("2");
 			}
 
-			if (groupUid.contains("ICAUsrTaxGrp"))
-			{
-				dataForm.setOptionIca("3");
-			}
+			//
+			//			if (groupUid.contains("ICAUsrTaxGrp"))
+			//			{
+			//				dataForm.setOptionIca("3");
+			//			}
+
 
 			if (groupUid.contains("gasolinaUsrTaxGrp"))
 			{
 				dataForm.setOptionGas("5");
 			}
 
-			if (groupUid.contains("delineacionUsrTaxGrp"))
-			{
-				dataForm.setOptionDeli("6");
-			}
+			//			if (groupUid.contains("delineacionUsrTaxGrp"))
+			//			{
+			//				dataForm.setOptionDeli("6");
+			//			}
 
 			if (groupUid.contains("publicidadExtUsrTaxGrp"))
 			{
@@ -277,8 +279,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
 				final List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
-				SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
-				String[] mensajesError;
+				final SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+				final String[] mensajesError;
 
 
 				customerModel = (CustomerModel) userService.getCurrentUser();
@@ -413,8 +415,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				List<SobreTasaGasolinaTabla> tablaDocs = null;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 				SDHValidaMailRolResponse detalleContribuyente = null;
-				SDHValidaMailRolResponse detalleContribuyente_temp = null;
-				String[] mensajesError = null;
+				final SDHValidaMailRolResponse detalleContribuyente_temp = null;
+				final String[] mensajesError = null;
 				String mensajeError = null;
 
 
@@ -458,7 +460,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 					if (detalleResponse != null && detalleResponse.getErrores() != null)
 					{
-						for (ErrorEnWS etemp : detalleResponse.getErrores())
+						for (final ErrorEnWS etemp : detalleResponse.getErrores())
 						{
 							if (etemp != null && etemp.getIdmsj() != null && etemp.getIdmsj().equals("200"))
 							{
