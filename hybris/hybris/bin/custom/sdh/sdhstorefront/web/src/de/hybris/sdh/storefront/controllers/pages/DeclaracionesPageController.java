@@ -139,20 +139,20 @@ public class DeclaracionesPageController extends AbstractPageController
 		{
 			final String groupUid = group.getUid();
 
-			//			if (groupUid.contains("predialUsrTaxGrp"))
-			//			{
-			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
-			//
-			//				customerData.setPredial(contImpuestos.getPredial());
-			//			}
-			//
-			//			if (groupUid.contains("vehicularUsrTaxGrp"))
-			//			{
-			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "02");
-			//
-			//				customerData.setVehicular(contImpuestos.getVehicular());
-			//			}
-			//
+			if (groupUid.contains("predialUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
+
+				customerData.setPredial(contImpuestos.getPredial());
+			}
+
+			if (groupUid.contains("vehicularUsrTaxGrp"))
+			{
+				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "02");
+
+				customerData.setVehicular(contImpuestos.getVehicular());
+			}
+
 			//			if (groupUid.contains("ICAUsrTaxGrp"))
 			//			{
 			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "03");

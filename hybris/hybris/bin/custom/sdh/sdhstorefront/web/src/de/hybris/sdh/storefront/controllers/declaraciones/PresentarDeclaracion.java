@@ -66,7 +66,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -78,6 +77,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -181,7 +183,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	 * @param customerModel
 	 * @param dataForm
 	 */
-	private void obtenerListaImpuestosCliente(CustomerModel customerModel, SobreTasaGasolinaForm dataForm)
+	private void obtenerListaImpuestosCliente(final CustomerModel customerModel, final SobreTasaGasolinaForm dataForm)
 	{
 
 		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
@@ -191,15 +193,15 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		{
 			final String groupUid = group.getUid();
 
-			//			if (groupUid.contains("predialUsrTaxGrp"))
-			//			{
-			//				dataForm.setOptionPredial("1");
-			//			}
-			//
-			//			if (groupUid.contains("vehicularUsrTaxGrp"))
-			//			{
-			//				dataForm.setOptionVehicular("2");
-			//			}
+			if (groupUid.contains("predialUsrTaxGrp"))
+			{
+				dataForm.setOptionPredial("1");
+			}
+
+			if (groupUid.contains("vehicularUsrTaxGrp"))
+			{
+				dataForm.setOptionVehicular("2");
+			}
 			//
 			//			if (groupUid.contains("ICAUsrTaxGrp"))
 			//			{
@@ -265,8 +267,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
 				final List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
-				SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
-				String[] mensajesError;
+				final SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+				final String[] mensajesError;
 
 
 				customerModel = (CustomerModel) userService.getCurrentUser();
@@ -293,7 +295,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				{
 
 					final ObjectMapper mapper = new ObjectMapper();
-					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+					mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 					final DetalleVehiculosResponse detalleVehiculosResponse = mapper.readValue(
 							sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
@@ -401,8 +403,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				List<SobreTasaGasolinaTabla> tablaDocs = null;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 				SDHValidaMailRolResponse detalleContribuyente = null;
-				SDHValidaMailRolResponse detalleContribuyente_temp = null;
-				String[] mensajesError = null;
+				final SDHValidaMailRolResponse detalleContribuyente_temp = null;
+				final String[] mensajesError = null;
 				String mensajeError = null;
 
 
@@ -446,7 +448,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 					if (detalleResponse != null && detalleResponse.getErrores() != null)
 					{
-						for (ErrorEnWS etemp : detalleResponse.getErrores())
+						for (final ErrorEnWS etemp : detalleResponse.getErrores())
 						{
 							if (etemp != null && etemp.getIdmsj() != null && etemp.getIdmsj().equals("200"))
 							{
@@ -636,7 +638,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			try
 			{
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 				String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
