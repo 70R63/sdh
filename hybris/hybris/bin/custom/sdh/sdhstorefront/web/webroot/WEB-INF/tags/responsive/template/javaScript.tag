@@ -142,6 +142,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.firmas.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.aaEntidadBancariaMenu.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/captcha.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.relacionPagos.js"></script>
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">
 		    <script type="text/javascript" src="${commonResourcePath}/js/cms/${actionJsFile}"></script>

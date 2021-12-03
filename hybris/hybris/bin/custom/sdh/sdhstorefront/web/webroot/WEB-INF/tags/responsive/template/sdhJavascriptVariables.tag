@@ -183,6 +183,9 @@
 			
 			ACC.actualizaICAActEcoURL= "<c:url value='/contribuyentes/mirit/updateICAActEco' />";
 			ACC.consultaEstadoCuentaURL= "<c:url value='/contribuyentes/mirit/consultaEstadoCuenta' />";
+			
+			
+			ACC.relacionPagosServicioURL = "<c:url value='/contribuyentes/consultas/relacionpagos/servicio' />";
 
 		  	ACC.currentURL = "${currentURL}";
 		  	
