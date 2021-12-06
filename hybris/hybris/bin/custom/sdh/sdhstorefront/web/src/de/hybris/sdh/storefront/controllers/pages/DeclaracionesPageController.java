@@ -153,12 +153,14 @@ public class DeclaracionesPageController extends AbstractPageController
 				customerData.setVehicular(contImpuestos.getVehicular());
 			}
 
-			if (groupUid.contains("ICAUsrTaxGrp"))
-			{
-				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "03");
 
-				customerData.setIca(contImpuestos.getIca());
-			}
+			//			if (groupUid.contains("ICAUsrTaxGrp"))
+			//			{
+			//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "03");
+			//
+			//				customerData.setIca(contImpuestos.getIca());
+			//			}
+
 
 			if (groupUid.contains("gasolinaUsrTaxGrp"))
 			{
@@ -167,12 +169,12 @@ public class DeclaracionesPageController extends AbstractPageController
 				customerData.setGasolina(contImpuestos.getGasolina());
 			}
 
-			if (groupUid.contains("delineacionUsrTaxGrp"))
-			{
-				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
-
-				customerData.setDelineacion(contImpuestos.getDelineacion());
-			}
+//			if (groupUid.contains("delineacionUsrTaxGrp"))
+//			{
+//				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
+//
+//				customerData.setDelineacion(contImpuestos.getDelineacion());
+//			}
 
 			if (groupUid.contains("publicidadExtUsrTaxGrp"))
 			{
@@ -180,6 +182,7 @@ public class DeclaracionesPageController extends AbstractPageController
 
 				customerData.setPublicidadExt(contImpuestos.getPublicidadExt());
 			}
+
 
 		}
 
