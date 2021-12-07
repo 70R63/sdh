@@ -36,6 +36,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.JuridicosVehiculos;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConfigCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
@@ -152,6 +153,9 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	
 	@Resource(name = "sdhDetallePublicidadService")
 	SDHDetallePublicidadService sdhDetallePublicidadService;
+	
+	@Resource(name = "sdhConfigCatalogos")
+	SDHConfigCatalogos sdhConfigCatalogos;
 
 
 
@@ -167,7 +171,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
-		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
+		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos(sdhConfigCatalogos));
 		//dataForm.setAnoGravable("2019");
 		//dataForm.setPeriodo("1");
 		obtenerListaImpuestosCliente(customerModel, dataForm);
@@ -274,7 +278,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				String placa = "";
 				final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 				final DetGasResponse detalleResponse;
-				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
+				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos(sdhConfigCatalogos);
 				final List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 				SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
@@ -409,7 +413,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				String periodo = "";
 				final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 				DetGasResponse detalleResponse = null;
-				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
+				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos(sdhConfigCatalogos);
 				List<SobreTasaGasolinaTabla> tablaDocs = null;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 				SDHValidaMailRolResponse detalleContribuyente = null;
@@ -674,7 +678,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			}
 		}
 
-		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
+		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos(sdhConfigCatalogos));
 		dataForm.setImpuesto(dataFormResponse.getImpuesto());
 		dataForm.setAnoGravable(dataFormResponse.getAnoGravable());
 		dataForm.setPeriodo(dataFormResponse.getPeriodo());

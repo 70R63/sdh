@@ -129,6 +129,20 @@ ACC.facturacion = {
 			}
 		}
 	 },
+
+
+	refreshTablas : function(){
+		var tabpred = document.getElementById('table-predial');
+		var tabveh = document.getElementById('table-vehiculos');
+		
+		if(tabpred != null){
+			tabpred.style.display = 'none';
+		}
+		if(tabveh != null){
+			tabveh.style.display = 'none';
+		}
+
+	},
 	 
 	 
 	 validarAntesSubmit : function (anoGravable,numObjeto){

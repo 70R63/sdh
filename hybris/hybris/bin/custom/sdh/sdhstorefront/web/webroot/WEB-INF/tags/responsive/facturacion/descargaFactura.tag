@@ -4,7 +4,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="formElement"
 	tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
@@ -25,10 +24,9 @@
 		<div class="col-md-4 col-xs-12 mb-20 no-marginright">
 			<span class="paso--uno pasos color-sr1">1</span>
 			<h2 class="titulo-caja--ser-rel color-sr1 ">DESCARGA DE FACTURA</h2>
-			<p class="pasoClase1 metrophobic">Selecciona el impuesto que
-				deseas consultar.</p>
+			<p class="pasoClase1 metrophobic">Selecciona el impuesto que deseas consultar.</p>
 			<div class="caja--ser-rel color-sr1">
-				<select class="new_alto form-control !important" id="impuesto">
+				<select class="new_alto form-control !important" id="impuesto" onchange="refreshTablas();">
 					<option value="00">Seleccionar</option>
 					<c:if test="${ not empty facturacionForm.predial}">
 						<option value="0001">Predial Unificado</option>
@@ -50,19 +48,15 @@
 			</h2>
 			<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
 			<div class="caja--ser-rel color-sr2">
-				<select id="aniograv" class="new_alto form-control " name="aniograv">
-						<option value="2021">2021</option>
-				</select>
-
+				<sf:form modelAttribute="descargaFacturaForm" >
+					<sf:select path="anoGravable" items="${listaAnioGravable}" id="aniograv" class="new_alto form-control " name="aniograv"/>
+				</sf:form>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-3 col-md-offset-3">
-			<button style="margin-top: 3px;" id=""
-				class="btn btn-primary btn-lg facBuscar" type="button"
-				id="facBuscar">
-				<!-- 				 onclick="showtable()"> -->
+			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg facBuscar" type="button" id="facBuscar">
 				<spring:theme code="descarga.factura.inicial.buscar" />
 			</button>
 		</div>
@@ -221,24 +215,8 @@
 </div>
 
 <script>
-	function showtable() {
-		
-
-		var imp = document.getElementById('impuesto').value;
-		var tabpred = document.getElementById('table-predial');
-		var tabveh = document.getElementById('table-vehiculos');
-
-		if (imp == '0001') {
-			tabpred.style.display = 'block';
-			tabveh.style.display = 'none';
-
-		} else if (imp == '0002') {
-			tabpred.style.display = 'none';
-			tabveh.style.display = 'block';
-		} else {
-			tabpred.style.display = 'none';
-			tabveh.style.display = 'none';
-		}
+	function refreshTablas() {
+		ACC.facturacion.refreshTablas();
 
 	}
 	function descargaFactura(descargaFactura1) {

@@ -24,8 +24,7 @@
 
 <script type="text/javascript">
 window.onload = function() {
-	debugger;
-	ACC.facturacion.establecerCat_aniograv();
+// 	ACC.facturacion.establecerCat_aniograv();
     $(".loader").fadeOut("slow");
 }
 

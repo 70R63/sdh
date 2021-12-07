@@ -798,4 +798,8 @@
 	
 		<alias alias="sdhConcesionariosService" name="defaultSDHConcesionariosImpService"/>
 	<bean id="defaultSDHConcesionariosImpService" class="de.hybris.sdh.core.services.impl.DefaultSDHConcesionariosImpService"/>
+	
+	<alias alias="sdhConfigCatalogos" name="defaultSDHConfigCatalogos"/>
+	<bean name="defaultSDHConfigCatalogos" class="de.hybris.sdh.core.services.impl.DefaultSDHConfigCatalogos" />
+	
 </beans>

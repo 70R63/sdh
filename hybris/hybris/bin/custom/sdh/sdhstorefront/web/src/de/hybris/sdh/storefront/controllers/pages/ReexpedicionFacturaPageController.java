@@ -23,6 +23,7 @@ import de.hybris.sdh.core.pojos.responses.ContribTelefono;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
+import de.hybris.sdh.core.services.SDHConfigCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
@@ -104,6 +105,11 @@ public class ReexpedicionFacturaPageController extends AbstractPageController
 	
 	@Resource(name = "sdhConsultaImpuesto_simplificado")
 	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+	
+
+	@Resource(name = "sdhConfigCatalogos")
+	SDHConfigCatalogos sdhConfigCatalogos;
+
 
 
 	@RequestMapping(value = "/contribuyentes/reexpedicionfactura", method = RequestMethod.GET)
@@ -125,6 +131,7 @@ public class ReexpedicionFacturaPageController extends AbstractPageController
 
 		model.addAttribute("facturacionForm", facturacionForm);
 		model.addAttribute("descargaFacturaForm", new DescargaFacturaForm());
+		model.addAttribute("listaAnioGravable", sdhConfigCatalogos.obtenerListaAnioGravable_facturacion());
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(REEXPEDICION_FACTURA_CMS_PAGE));

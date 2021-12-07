@@ -25,6 +25,7 @@ import de.hybris.sdh.core.pojos.responses.EdoCuentaResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConfigCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
@@ -121,6 +122,11 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 	@Resource(name = "sdhConsultaImpuesto_simplificado")
 	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+	
+	@Resource(name = "sdhConfigCatalogos")
+	SDHConfigCatalogos sdhConfigCatalogos;
+
+	
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value =
 	{ "/contribuyentes/estado-de-cuenta", "/agenteRetenedor/estado-de-cuenta" }, method = RequestMethod.GET)
@@ -136,7 +142,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
-		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
+		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos(sdhConfigCatalogos));
 		model.addAttribute("dataForm", dataForm);
 
 		final EdoCuentaForm ctaForm = new EdoCuentaForm();
@@ -519,7 +525,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 				String periodo = "";
 				final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 				final DetGasResponse detalleResponse;
-				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
+				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos(sdhConfigCatalogos);
 				List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 				SDHValidaMailRolResponse detalleContribuyente;

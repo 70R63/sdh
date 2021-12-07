@@ -74,6 +74,7 @@ import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.ReteICA;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.pojos.responses.TramiteCatalogos;
+import de.hybris.sdh.core.services.SDHConfigCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacion;
@@ -129,15 +130,14 @@ public class SobreTasaGasolinaService
 
 	}
 
-	public SobreTasaGasolinaCatalogos prepararCatalogos()
+	public SobreTasaGasolinaCatalogos prepararCatalogos(SDHConfigCatalogos sdhConfigCatalogos)
 	{
 
 		final SobreTasaGasolinaCatalogos catalogosForm = new SobreTasaGasolinaCatalogos();
 
 		//Sobretasa a gasolina
 		catalogosForm.setOpcionesCantidadMostrar(obtenerListaOpcionesCantidadMostrar());
-		catalogosForm.setAnioGravable(obtenerListaAnioGravable(obtenerAnoGravableActual(),
-				Integer.parseInt(configurationService.getConfiguration().getString(confCantidadAnioGravableBusqueda))));
+		catalogosForm.setAnioGravable(sdhConfigCatalogos.obtenerListaAnioGravable_sobretasagasolina());
 		catalogosForm.setPeriodo(obtenerListaPeriodo());
 		catalogosForm.setCalidadResponsable(obtenerListaCalidadResponsable());
 		catalogosForm.setCodigoPostal(obtenerListaCodigoPostal());
