@@ -76,9 +76,16 @@
 <div class="copyright footer__bottom">
 	<div class="container">
 	<div class="row">
-	<div class="col-md-2">
-	<img src="/bogota/_ui/responsive/common/images/Colombia_footer_1.svg" width="80" height="90"></img>
-	</div>
+	<div class="col-md-1">
+<a>
+<img title="Bogota" alt="Bogota" class="footerimg" src="/bogota/_ui/addons/sdhpsaddon/responsive/theme-psalpha/images/Bogota_footer_1.svg" width="200" height="196">
+</a>
+</div>
+<div class="col-md-1">
+<a>
+<img title="Bogota" alt="Bogota" class="footerimg_gov" src="/bogota/_ui/addons/sdhpsaddon/responsive/theme-psalpha/images/Bogota_footer_2.svg" width="135" height="27">
+</a>
+</div>
 	</div>
 		<div class="row">
 			<div class="col-sm-4"></div>
