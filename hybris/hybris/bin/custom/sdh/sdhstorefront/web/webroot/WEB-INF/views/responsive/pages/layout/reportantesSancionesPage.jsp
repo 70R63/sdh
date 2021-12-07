@@ -55,19 +55,22 @@ window.onload = function() {
 		var idIca = document.getElementById('idIca');
 		var idVehicular = document.getElementById('idVehicular');
 		var idDetalle = document.getElementById('idVerDetalle');
+		var idLiq = document.getElementById('idLiquidador');
 
 		if (x == '1') {
 			idPredial.style.display = 'block';
 			idOpain.style.display = 'none';
 			idIca.style.display = 'none';
 			idVehicular.style.display = 'none';
-			idVehicular.style.display = 'none';
+			idDetalle.style.display = 'none';
+			idLiq.style.display = 'none';
 
 		} else if (x == '2') {
 			idPredial.style.display = 'none';
 			idOpain.style.display = 'block';
 			idIca.style.display = 'none';
 			idDetalle.style.display = 'none';
+			idLiq.style.display = 'none';
 
 		} else if (x == '3') {
 			idPredial.style.display = 'none';
@@ -75,6 +78,7 @@ window.onload = function() {
 			idIca.style.display = 'block';
 			idVehicular.style.display = 'none';
 			idDetalle.style.display = 'none';
+			idLiq.style.display = 'none';
 
 		} else if (x == '4') {
 			idPredial.style.display = 'none';
@@ -82,6 +86,7 @@ window.onload = function() {
 			idIca.style.display = 'none';
 			idVehicular.style.display = 'block';
 			idDetalle.style.display = 'none';
+			idLiq.style.display = 'none';
 
 		} else {
 			idPredial.style.display = 'none';
@@ -89,6 +94,7 @@ window.onload = function() {
 			idIca.style.display = 'none';
 			idVehicular.style.display = 'none';
 			idDetalle.style.display = 'none';
+			idLiq.style.display = 'none';
 		}
 
 	}
@@ -142,6 +148,11 @@ window.onload = function() {
 		var idtotal = document.getElementById('idTotalPagar');
 		idtotal.style.display = 'block';
 
+	}
+	
+	function showLiquidador(){
+		var idLiq = document.getElementById('idLiquidador');
+		idLiq.style.display = 'block';
 	}
 
 </script>
