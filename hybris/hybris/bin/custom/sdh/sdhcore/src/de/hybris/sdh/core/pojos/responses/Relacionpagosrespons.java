@@ -18,6 +18,27 @@ public class Relacionpagosrespons
 	private RelacionPagosDelineacion delineacionUrbana;
 	private RelacionPagosPublicidad publicidadexterior;
 	private RelacionPagosVehicular vehicular;
+	private String strpdf;
+
+
+
+	/**
+	 * @return the strpdf
+	 */
+	public String getStrpdf()
+	{
+		return strpdf;
+	}
+
+	/**
+	 * @param strpdf
+	 *           the strpdf to set
+	 */
+	@JsonSetter("STRPDF")
+	public void setStrpdf(final String strpdf)
+	{
+		this.strpdf = strpdf;
+	}
 
 	/**
 	 * @return the predialUnificado
