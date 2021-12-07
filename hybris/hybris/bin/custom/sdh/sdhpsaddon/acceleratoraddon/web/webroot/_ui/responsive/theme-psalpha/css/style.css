@@ -25776,3 +25776,11 @@ a:hover {
   font-family: 'Montserrat-medium';
   text-decoration: none;
 }
+div.dataTables_paginateo .paginate_button {
+  margin-right: 25px !important;
+}
+a.paginate_button {
+  margin-right: 10px !important;
+  padding: 2px;
+  border-style: outset !important;
+}
