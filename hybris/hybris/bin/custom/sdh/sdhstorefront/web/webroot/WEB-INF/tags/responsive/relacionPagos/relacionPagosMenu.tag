@@ -84,12 +84,12 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group">
-					<button type="submit" class="btn btn-primary btn-lg" id="action"
-						name="action" value="generar" style="margin-top: 3px">
+					<button type="button" class="btn btn-primary btn-lg" id="action" name="action" value="generar" style="margin-top: 3px" onclick="descargaRelacionPDF()">  
 						<spring:theme code="relacion.inicial.descargar" />
 					</button>
 				</div>
 			</div>
+			
 			<div class="col-md-2">
 				<div class="form-check">
 
