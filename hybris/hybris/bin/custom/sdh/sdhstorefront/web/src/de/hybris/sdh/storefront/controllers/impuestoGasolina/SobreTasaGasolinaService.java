@@ -460,6 +460,9 @@ public class SobreTasaGasolinaService
 			case "03_04":
 				elementos.add(new SelectAtomValue("0002", "Vehículos"));
 				break;
+				
+			case "03_05":
+				break;
 
 			default:
 				break;
