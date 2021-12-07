@@ -585,15 +585,14 @@ public class TramitesCrearPageController extends AbstractPageController
 		//Nivel 0
 		agregarElementoTramites(elementos, "00________", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "01________", "01", "RIT");
-		agregarElementoTramites(elementos, "02________", "02", "Novedades de registro");
-		agregarElementoTramites(elementos, "03________", "03", "Facturación");
-		agregarElementoTramites(elementos, "04________", "04", "Analisis de la cuenta");
-		agregarElementoTramites(elementos, "05________", "05", "Boletín de deudores Morosos"); //se modifica etiqueta, valor anterior = Boletín de deudores Morosos del Estado 14-01-2020 Maria Torres
-		agregarElementoTramites(elementos, "06________", "06", "Verificación de pagos", "ZT10", "A1ZTRT0001Z006",
-				"tramites.crear.categorizacion.notas.06");
-		agregarElementoTramites(elementos, "07________", "07", "Corrección de la información causada contablemente");
-		agregarElementoTramites(elementos, "08________", "08", "Declaración");
-		agregarElementoTramites(elementos, "09________", "09", "Agente Autorizado");
+//		agregarElementoTramites(elementos, "02________", "02", "Novedades de registro");
+//		agregarElementoTramites(elementos, "03________", "03", "Facturación");
+//		agregarElementoTramites(elementos, "04________", "04", "Analisis de la cuenta");
+//		agregarElementoTramites(elementos, "05________", "05", "Boletín de deudores Morosos"); //se modifica etiqueta, valor anterior = Boletín de deudores Morosos del Estado 14-01-2020 Maria Torres
+		agregarElementoTramites(elementos, "06________", "06", "Verificación de pagos", "ZT10", "A1ZTRT0001Z006","tramites.crear.categorizacion.notas.06");
+//		agregarElementoTramites(elementos, "07________", "07", "Corrección de la información causada contablemente");
+//		agregarElementoTramites(elementos, "08________", "08", "Declaración");
+//		agregarElementoTramites(elementos, "09________", "09", "Agente Autorizado");
 
 		//RIT
 		agregarElementoTramites(elementos, "0100______", "00", "Seleccionar");
@@ -601,66 +600,64 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "0102______", "02", "Actualización");
 		//RIT-Creación
 		agregarElementoTramites(elementos, "010100____", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "010101__", "01", "Creación de RIT");
-		agregarElementoTramites(elementos, "010101____", "01", "Registro / Rol Tributario");
-		agregarElementoTramites(elementos, "010102____", "02", "Creación de Calidad Sujeción Pasiva");
-		//RIT-Creación-Registro / Rol Tributario
+		agregarElementoTramites(elementos, "010101____", "01", "Creación de RIT");
+		agregarElementoTramites(elementos, "010102____", "02", "Registro / Rol Tributario");
+		agregarElementoTramites(elementos, "010103____", "03", "Creación de Calidad Sujeción Pasiva");
+		//RIT-Creación-Creación de RIT
 		agregarElementoTramites(elementos, "01010100__", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "01010101__", "01", "Persona Natural");
 		agregarElementoTramites(elementos, "01010102__", "02", "Persona Jurídica");
-		//RIT-Creación-Registro / Rol Tributario - Persona Natural
-		agregarElementoTramites(elementos, "0101010100", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "0101010101", "01", "Contribuyente", "ZT02", "A1ZTRT0004Z065",
-				"tramites.crear.categorizacion.notas.0101010101");
-		agregarElementoTramites_rol(elementos, "0101010102", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z065", "ZZAGENTE", "X");
-		agregarElementoTramites_rol(elementos, "0101010103", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z065",
-				"ZZREPORTANTE", "X");
-		agregarElementoTramites(elementos, "0101010104", "04", "Terceros Autorizados");
-		//RIT-Actualizacion-Registro / Rol Tributario - Persona Jurídica
-		agregarElementoTramites(elementos, "0101010200", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "0101010201", "01", "Contribuyente");
-		agregarElementoTramites_rol(elementos, "0101010202", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z066", "ZZAGENTE", "");
-		agregarElementoTramites_rol(elementos, "0101010203", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z066",
-				"ZZREPORTANTE", "");
-		agregarElementoTramites(elementos, "0101010204", "04", "Terceros Autorizados");
-		//RIT-Creación-Creación de Calidad Sujeción Pasiva
+		//RIT-Creación-Registro / Rol Tributario
 		agregarElementoTramites(elementos, "01010200__", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "01010201__", "01", "Predial unificado/ Propietario", "ZT04", "A1ZTRT0004Z067");
-		agregarElementoTramites(elementos, "01010202__", "02", "Predial unificado/ Usufructuario", "ZT04", "A1ZTRT0004Z068");
-		agregarElementoTramites(elementos, "01010203__", "03", "Predial unificado/ Beneficio/Fideicomitente", "ZT04",
-				"A1ZTRT0004Z069");
-		agregarElementoTramites(elementos, "01010204__", "04", "Predial unificado/ Arrendatario", "ZT04", "A1ZTRT0004Z070");
-		agregarElementoTramites(elementos, "01010205__", "05", "Predial unificado/ Poseedor", "ZT04", "A1ZTRT0004Z071");
-		agregarElementoTramites(elementos, "01010206__", "06", "Vehículos automotores / Propietario", "ZT04", "A1ZTRT0004Z072");
-		agregarElementoTramites(elementos, "01010207__", "07", "Vehículos automotores / Poseedor", "ZT04", "A1ZTRT0004Z073");
-		agregarElementoTramites(elementos, "01010208__", "08", "Vehículos / Beneficio/Fideicomitente", "ZT04", "A1ZTRT0004Z101");
-		agregarElementoTramites(elementos, "01010209__", "09", "Industria y comercio ICA", "ZT04", "A1ZTRT0004Z074");
-		agregarElementoTramites(elementos, "01010210__", "10", "Delineación urbana", "ZT04", "A1ZTRT0004Z075");
-		agregarElementoTramites(elementos, "01010211__", "11", "Sobretasa a la gasolina", "ZT04", "A1ZTRT0004Z076");
-		agregarElementoTramites(elementos, "01010212__", "12", "Publicidad exterior visual", "ZT04", "A1ZTRT0004Z077");
+		agregarElementoTramites(elementos, "01010201__", "01", "Persona Natural");
+		agregarElementoTramites(elementos, "01010202__", "02", "Persona Jurídica");
+		//RIT-Creación-Registro / Rol Tributario-Persona Natural
+		agregarElementoTramites(elementos, "0101020100", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "0101020101", "01", "Contribuyente", "ZT02", "A1ZTRT0004Z065","tramites.crear.categorizacion.notas.0101010101");
+		agregarElementoTramites_rol(elementos, "0101020102", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z065", "ZZAGENTE", "X");
+		agregarElementoTramites_rol(elementos, "0101020103", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z065","ZZREPORTANTE", "X");
+		agregarElementoTramites(elementos, "0101020104", "04", "Terceros Autorizados");
+		//RIT-Creación-Registro / Rol Tributario-Persona Jurídica
+		agregarElementoTramites(elementos, "0101020200", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "0101020201", "01", "Contribuyente");
+		agregarElementoTramites_rol(elementos, "0101020202", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z066", "ZZAGENTE", "");
+		agregarElementoTramites_rol(elementos, "0101020203", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z066","ZZREPORTANTE", "");
+		agregarElementoTramites(elementos, "0101020204", "04", "Terceros Autorizados");
+		//RIT-Creación-Creación de Calidad Sujeción Pasiva
+		agregarElementoTramites(elementos, "01010300__", "00", "Seleccionar");
+//		agregarElementoTramites(elementos, "01010301__", "01", "Predial unificado/ Propietario", "ZT04", "A1ZTRT0004Z067");
+//		agregarElementoTramites(elementos, "01010302__", "02", "Predial unificado/ Usufructuario", "ZT04", "A1ZTRT0004Z068");
+//		agregarElementoTramites(elementos, "01010303__", "03", "Predial unificado/ Beneficio/Fideicomitente", "ZT04","A1ZTRT0004Z069");
+//		agregarElementoTramites(elementos, "01010304__", "04", "Predial unificado/ Arrendatario", "ZT04", "A1ZTRT0004Z070");
+//		agregarElementoTramites(elementos, "01010305__", "05", "Predial unificado/ Poseedor", "ZT04", "A1ZTRT0004Z071");
+//		agregarElementoTramites(elementos, "01010306__", "06", "Vehículos automotores / Propietario", "ZT04", "A1ZTRT0004Z072");
+//		agregarElementoTramites(elementos, "01010307__", "07", "Vehículos automotores / Poseedor", "ZT04", "A1ZTRT0004Z073");
+//		agregarElementoTramites(elementos, "01010308__", "08", "Vehículos / Beneficio/Fideicomitente", "ZT04", "A1ZTRT0004Z101");
+//		agregarElementoTramites(elementos, "01010309__", "09", "Industria y comercio ICA", "ZT04", "A1ZTRT0004Z074");
+//		agregarElementoTramites(elementos, "01010310__", "10", "Delineación urbana", "ZT04", "A1ZTRT0004Z075");
+		agregarElementoTramites(elementos, "01010311__", "11", "Sobretasa a la gasolina", "ZT04", "A1ZTRT0004Z076");
+		agregarElementoTramites(elementos, "01010312__", "12", "Publicidad exterior visual", "ZT04", "A1ZTRT0004Z077");
 		//RIT-Actualización
-		agregarElementoTramites(elementos, "010200____", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "010201____", "01", "Actualización de RIT", "ZT02", "A1ZTRT0003Z004");
-		agregarElementoTramites(elementos, "010204____", "04", "Actualización Identificación Sujeto", "ZT02", "A1ZTRT0003Z061");
-		agregarElementoTramites(elementos, "010202____", "02", "Actualización de Rol tributario");
+//		agregarElementoTramites(elementos, "010200____", "00", "Seleccionar");
+//		agregarElementoTramites(elementos, "010201____", "01", "Actualización de RIT", "ZT02", "A1ZTRT0003Z004");
+//		agregarElementoTramites(elementos, "010202____", "02", "Actualización de Rol tributario");
 		agregarElementoTramites(elementos, "010203____", "03", "Actualización Calidad Sujeción Pasiva");
 		//RIT-Actualización-Actualización de Rol tributario
-		agregarElementoTramites(elementos, "01020200__", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "01020201__", "01", "Persona Natural", "ZT02", "A1ZTRT0004Z078");
-		agregarElementoTramites(elementos, "01020202__", "02", "Persona Jurídica", "ZT02", "A1ZTRT0004Z079");
+//		agregarElementoTramites(elementos, "01020200__", "00", "Seleccionar");
+//		agregarElementoTramites(elementos, "01020201__", "01", "Persona Natural", "ZT02", "A1ZTRT0004Z078");
+//		agregarElementoTramites(elementos, "01020202__", "02", "Persona Jurídica", "ZT02", "A1ZTRT0004Z079");
 		//RIT-Actualización-Actualización Calidad Sujeción Pasiva
 		agregarElementoTramites(elementos, "01020300__", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "01020301__", "01", "Predial unificado/ Propietario", "ZT05", "A1ZTRT0004Z080");
-		agregarElementoTramites(elementos, "01020302__", "02", "Predial unificado/ Usufructuario", "ZT05", "A1ZTRT0004Z081");
-		agregarElementoTramites(elementos, "01020303__", "03", "Predial unificado/ Beneficio/Fideicomitente", "ZT05",
-				"A1ZTRT0004Z082");
-		agregarElementoTramites(elementos, "01020304__", "04", "Predial unificado/ Arrendatario", "ZT05", "A1ZTRT0004Z083");
-		agregarElementoTramites(elementos, "01020305__", "05", "Predial unificado/ Poseedor", "ZT05", "A1ZTRT0004Z084");
-		agregarElementoTramites(elementos, "01020306__", "06", "Vehículos automotores / Propietario", "ZT05", "A1ZTRT0004Z085");
-		agregarElementoTramites(elementos, "01020307__", "07", "Vehículos automotores / Poseedor", "ZT05", "A1ZTRT0004Z086");
-		agregarElementoTramites(elementos, "01020308__", "08", "Vehículos / Beneficio/Fideicomitente", "ZT05", "A1ZTRT0004Z103");
-		agregarElementoTramites(elementos, "01020309__", "09", "Industria y comercio ICA", "ZT05", "A1ZTRT0004Z087");
-		agregarElementoTramites(elementos, "01020310__", "10", "Delineación urbana", "ZT05", "A1ZTRT0004Z088");
+//		agregarElementoTramites(elementos, "01020301__", "01", "Predial unificado/ Propietario", "ZT05", "A1ZTRT0004Z080");
+//		agregarElementoTramites(elementos, "01020302__", "02", "Predial unificado/ Usufructuario", "ZT05", "A1ZTRT0004Z081");
+//		agregarElementoTramites(elementos, "01020303__", "03", "Predial unificado/ Beneficio/Fideicomitente", "ZT05","A1ZTRT0004Z082");
+//		agregarElementoTramites(elementos, "01020304__", "04", "Predial unificado/ Arrendatario", "ZT05", "A1ZTRT0004Z083");
+//		agregarElementoTramites(elementos, "01020305__", "05", "Predial unificado/ Poseedor", "ZT05", "A1ZTRT0004Z084");
+//		agregarElementoTramites(elementos, "01020306__", "06", "Vehículos automotores / Propietario", "ZT05", "A1ZTRT0004Z085");
+//		agregarElementoTramites(elementos, "01020307__", "07", "Vehículos automotores / Poseedor", "ZT05", "A1ZTRT0004Z086");
+//		agregarElementoTramites(elementos, "01020308__", "08", "Vehículos / Beneficio/Fideicomitente", "ZT05", "A1ZTRT0004Z103");
+//		agregarElementoTramites(elementos, "01020309__", "09", "Industria y comercio ICA", "ZT05", "A1ZTRT0004Z087");
+//		agregarElementoTramites(elementos, "01020310__", "10", "Delineación urbana", "ZT05", "A1ZTRT0004Z088");
 		agregarElementoTramites(elementos, "01020311__", "11", "Sobretasa a la gasolina", "ZT05", "A1ZTRT0004Z089");
 		agregarElementoTramites(elementos, "01020312__", "12", "Publicidad exterior visual", "ZT05", "A1ZTRT0004Z090");
 
@@ -919,15 +916,17 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "0504______", "04", "NO Obligado", "ZT09", "A1ZTRT0002Z016");
 
 		//Verificacion de pagos
+		agregarElementoTramites(elementos, "0600______", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "0601______", "01", "Deuda Cancelada", "ZT10", "A1ZTRT0002Z013");
 
 		//Corrección de la información causada contablemente
 		agregarElementoTramites(elementos, "0700______", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "0701______", "01", "Predial", "ZT11", "A1ZTRT0002Z017");
-		agregarElementoTramites(elementos, "0702______", "02", "Vehículos", "ZT11", "A1ZTRT0002Z018");
-		agregarElementoTramites(elementos, "0703______", "03", "Delineación Urbana", "ZT11", "A1ZTRT0002Z029");
+//		agregarElementoTramites(elementos, "0701______", "01", "Predial", "ZT11", "A1ZTRT0002Z017");
+//		agregarElementoTramites(elementos, "0702______", "02", "Vehículos", "ZT11", "A1ZTRT0002Z018");
+//		agregarElementoTramites(elementos, "0703______", "03", "Delineación Urbana", "ZT11", "A1ZTRT0002Z029");
 		agregarElementoTramites(elementos, "0704______", "04", "Publicidad", "ZT11", "A1ZTRT0002Z030");
-		agregarElementoTramites(elementos, "0705______", "05", "ICA", "ZT11", "A1ZTRT0002Z031");
-		agregarElementoTramites(elementos, "0706______", "06", "Rete Ica", "ZT11", "A1ZTRT0002Z032");
+//		agregarElementoTramites(elementos, "0705______", "05", "ICA", "ZT11", "A1ZTRT0002Z031");
+//		agregarElementoTramites(elementos, "0706______", "06", "Rete Ica", "ZT11", "A1ZTRT0002Z032");
 		agregarElementoTramites(elementos, "0707______", "07", "Sobre tasa", "ZT11", "A1ZTRT0002Z033");
 
 		//Corrección de la información causada contablemente-Predial
@@ -978,14 +977,14 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "070607____", "07", "Errores Aritméticos", "ZT11", "A1ZTRT0003Z093");
 
 		//Corrección de la información causada contablemente-Sobre tasa
-		agregarElementoTramites(elementos, "070700____", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "070701____", "01", "Tipo Identificación", "ZT11", "A1ZTRT0003Z094");
-		agregarElementoTramites(elementos, "070702____", "02", "No. Identificación", "ZT11", "A1ZTRT0003Z095");
-		agregarElementoTramites(elementos, "070703____", "03", "Año Gravable", "ZT11", "A1ZTRT0003Z096");
-		agregarElementoTramites(elementos, "070704____", "04", "Periodo Gravable", "ZT11", "A1ZTRT0003Z097");
-		agregarElementoTramites(elementos, "070705____", "05", "Objeto", "ZT11", "A1ZTRT0003Z098");
-		agregarElementoTramites(elementos, "070706____", "06", "Errores de Magnitud", "ZT11", "A1ZTRT0003Z099");
-		agregarElementoTramites(elementos, "070707____", "07", "Errores Aritméticos", "ZT11", "A1ZTRT0003Z100");
+//		agregarElementoTramites(elementos, "070700____", "00", "Seleccionar");
+//		agregarElementoTramites(elementos, "070701____", "01", "Tipo Identificación", "ZT11", "A1ZTRT0003Z094");
+//		agregarElementoTramites(elementos, "070702____", "02", "No. Identificación", "ZT11", "A1ZTRT0003Z095");
+//		agregarElementoTramites(elementos, "070703____", "03", "Año Gravable", "ZT11", "A1ZTRT0003Z096");
+//		agregarElementoTramites(elementos, "070704____", "04", "Periodo Gravable", "ZT11", "A1ZTRT0003Z097");
+//		agregarElementoTramites(elementos, "070705____", "05", "Objeto", "ZT11", "A1ZTRT0003Z098");
+//		agregarElementoTramites(elementos, "070706____", "06", "Errores de Magnitud", "ZT11", "A1ZTRT0003Z099");
+//		agregarElementoTramites(elementos, "070707____", "07", "Errores Aritméticos", "ZT11", "A1ZTRT0003Z100");
 
 		//Declaración
 		agregarElementoTramites(elementos, "0800______", "00", "Seleccionar");
