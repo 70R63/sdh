@@ -12,6 +12,14 @@
 <sf:form>
 	<div class="container">
 	    
+	    <div id="impuest" style="display: none;">
+			<input id="Idimp" value="">
+		</div>
+		
+		<div id="relpagPDF" style="display: none;">
+	        <input id="strPDF"  value="" />
+	    </div>    
+	    
 		<div id="impuest" style="display: none;">
 			<input id="Idimp" value="">
 		</div>
@@ -817,6 +825,8 @@
 		debugger;
 		var obKey = selectObject.dataset.objkey;
 		var impuesto = selectObject.dataset.impuesto;
+		
+		ACC.gestionBancaria.bindReteIcaRecargar();
 		
 		ACC.relacionPagos.relacionPagosServicio(obKey,impuesto);
 		
