@@ -26,10 +26,14 @@ ACC.relacionPagos = {
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.PredialUnificado.fbnum +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.PredialUnificado.bldat +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.PredialUnificado.total_pgo +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.PredialUnificado.aporte +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.PredialUnificado.aporte +'" type="text" /></td>'+									
 								    "</tr>"
 							);
 						}
+						if(data.Relacionpagosrespons.STRPDF != null){
+							$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
+						}
+							
 					}
 					
 					
@@ -49,6 +53,9 @@ ACC.relacionPagos = {
 								    "</tr>"
 							);
 						}
+						if(data.Relacionpagosrespons.STRPDF != null){
+							$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
+						}
 					}
 					
 					if(impuesto == "3"){
@@ -66,6 +73,9 @@ ACC.relacionPagos = {
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.impuestoICA.aporte +'" type="text" /></td>'+
 								    "</tr>"
 							);
+						}
+						if(data.Relacionpagosrespons.STRPDF != null){
+							$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
 						}
 					}
 					
@@ -87,6 +97,9 @@ ACC.relacionPagos = {
 								    "</tr>"
 							);
 						}
+						if(data.Relacionpagosrespons.STRPDF != null){
+							$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
+						}
 					}
 					
 					if(impuesto == "5"){
@@ -105,6 +118,9 @@ ACC.relacionPagos = {
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.SobretasaGasolina.aporte +'" type="text" /></td>'+
 								    "</tr>"
 							);
+						}
+						if(data.Relacionpagosrespons.STRPDF != null){
+							$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
 						}
 					}
 					
@@ -125,6 +141,9 @@ ACC.relacionPagos = {
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.DelineacionUrbana.aporte +'" type="text" /></td>'+
 								    "</tr>"
 							);
+						}
+						if(data.Relacionpagosrespons.STRPDF != null){
+							$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
 						}
 					}
 					

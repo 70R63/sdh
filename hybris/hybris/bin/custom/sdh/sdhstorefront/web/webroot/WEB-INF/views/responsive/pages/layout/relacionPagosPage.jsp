@@ -36,6 +36,39 @@ window.onload = function() {
 	
 }
 
+
+function descargaRelacionPDF() {
+	debugger;
+	
+	var x = document.getElementById('Idimp').value;
+	var fileName = "RelacionPagos.pdf" ;
+	
+	if (x == '1') {
+		fileName = "RelacionPagosPredial.pdf" ;
+	} else if (x == '2') {
+		fileName = "RelacionPagosVehiculos.pdf" ;
+	} else if (x == '3') {
+		fileName = "RelacionPagosICA.pdf" ;
+	} else if (x == '4') {
+		fileName = "RelacionPagosPublicidad.pdf" ;
+	} else if (x == '5') {
+		fileName = "RelacionPagosGasolina.pdf" ;
+	} else if (x == '6') {
+		fileName = "RelacionPagosDelineacion.pdf" ;
+	}
+	
+	
+	var pdf = document.getElementById('strPDF').value;
+	if (pdf){
+		const linkSource = 'data:application/pdf;base64,' + pdf;
+	    const downloadLink = document.createElement("a");	    	
+	    downloadLink.href = linkSource;
+	    downloadLink.download = fileName;
+	    downloadLink.click();
+	}    
+}
+
+
 function goBack() {
 	window.location.href ='<c:url value='/contribuyentes' />';
 
@@ -46,6 +79,7 @@ function goBack() {
 		debugger;
 		var value = selectObject.value;
 		document.getElementById("Idimp").value = value;
+		 
 		 
 	}
 
@@ -109,13 +143,13 @@ function goBack() {
 		} else if (x == '3') {
 			tablepredial.style.display = 'none';
 			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
+			tableica.style.display = 'block';
 			tablepublicidad.style.display = 'none';
 			tabledeli.style.display = 'none';
 			tablegas.style.display = 'none';
 			todo.style.display = 'none';
 			detpred.style.display = 'none';
-			detica.style.display = 'block';
+			detica.style.display = 'none';
 			detvehi.style.display = 'none';
 			detdeli.style.display = 'none';
 			detgas.style.display = 'none';

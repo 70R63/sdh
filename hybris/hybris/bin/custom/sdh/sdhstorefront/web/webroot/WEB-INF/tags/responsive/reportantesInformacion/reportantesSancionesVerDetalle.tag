@@ -41,7 +41,11 @@
 						</label></td>
 						<td></td>
 						<td
-							style="text-align: center !important; color: #0358d8 !important"></td>
+							style="text-align: center !important; color: #0358d8 !important"><label
+							class="control-label" for=""
+							style="text-align: center !important; color: #0358d8 !important" onclick="showLiquidador()">
+								<spring:theme code="Liquidador" />
+						</label></td>
 					</tr>
 				</tbody>
 			</table>

@@ -66,14 +66,37 @@
 		<div class="col-md-3">
 			<div class="form-group">
 				<label class="control-label required"><spring:theme
-						code="representantes.info.inicial.impreportar" /></label> <select
-					required="required" required id="impuesto" class="newalto form-control "
-					name="impuesto" onchange="ShowSelected(this)">
+						code="representantes.info.inicial.resolucion" /></label> <select
+					aria-required="true" id="aniograva" class="newalto form-control "
+					name="aniograva" onchange=" " required='required'>
 					<option value="">Seleccionar</option>
-					<option value="1">Predial</option>
-					<option value="2">Predial - OPAIN</option>
-					<option value="3">ICA</option>
-					<option value="4">Vehículos</option>
+					<option value="">Estampillas</option>
+					<option value="">Predial</option>
+					<option value="">Predial-Opain</option>
+					<option value="">ICA</option>
+					<option value="">Vehículos</option>
+
+				</select>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="form-group">
+				<label class="control-label required"><spring:theme
+						code="representantes.info.inicial.anigrav" /></label> <select
+					aria-required="true" id="aniograva" class="newalto form-control "
+					name="aniograva" onchange=" " required='required'>
+					<option value="">Seleccionar</option>
+
+				</select>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="form-group">
+				<label class="control-label"><spring:theme
+						code="representantes.info.inicial.articulo" /></label> <select
+					id="impuesto" class="newalto form-control " name="impuesto"
+					onchange="">
+					<option value="">Seleccionar</option>
 				</select>
 			</div>
 		</div>
@@ -84,28 +107,13 @@
 			</div>
 
 		</div>
-
-		<div class="col-md-3">
-			<div class="form-group">
-				<label class="control-label required"><spring:theme
-						code="representantes.info.inicial.anigrav" /></label> <select
-					aria-required="true" id="aniograva" class="newalto form-control "
-					name="aniograva" onchange=" " required='required'>
-					<option value="">Seleccionar</option>
-					<option value="2019">2019</option>
-					<option value="2018">2018</option>
-					<option value="2017">2017</option>
-					<option value="2016">2016</option>
-				</select>
-			</div>
-		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-3  col-md-offset-1 text-right">
 			<div class="form-group">
-				<button class="btn btn-primary btn-block" id=""
-					name="" value="cancelar">
+				<button class="btn btn-primary btn-block" id="" name=""
+					value="cancelar">
 					<spring:theme code="representantes.info.inicial.cacelar" />
 				</button>
 			</div>
@@ -126,56 +134,88 @@
 	<div class="row">
 		<div class="form-group">
 			<label class="control-label"><spring:theme
-					code="representantes.info.inicial.descarga" /></label>
+					code="representantes.info.inicial.antes" /></label>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<table class="table">
+				<thead style="cellspacing: 10 !important">
+					<tr>
+						<!-- 				<th colspan="2" style="text-align: center"><label -->
+						<%-- 					class="control-label " for=""><spring:theme --%>
+						<%-- 							code="representantes.info.inicial.predial" /></label></th> --%>
+						<!-- 				<th colspan="2" style="text-align: center"><label -->
+						<%-- 					class="control-label" for=""> <spring:theme --%>
+						<%-- 							code="representantes.info.inicial.opain" /></label></th> --%>
+						<!-- 				<th colspan="2" style="text-align: center"><label -->
+						<%-- 					class="control-label" for=""> <spring:theme --%>
+						<%-- 							code="representantes.info.inicial.vehicular" /></label></th> --%>
+						<th colspan="2" style="text-align: center"><label
+							class="control-label" for=""> <spring:theme
+									code="representantes.info.inicial.ica" /></label></th>
+					</tr>
+				</thead>
+				<tbody>
 
-	<table class="table">
-		<thead style="cellspacing: 10 !important">
-			<tr>
-				<th colspan="2" style="text-align: center"><label
-					class="control-label " for=""><spring:theme
-							code="representantes.info.inicial.predial" /></label></th>
-				<th colspan="2" style="text-align: center"><label
-					class="control-label" for=""> <spring:theme
-							code="representantes.info.inicial.opain" /></label></th>
-				<th colspan="2" style="text-align: center"><label
-					class="control-label" for=""> <spring:theme
-							code="representantes.info.inicial.vehicular" /></label></th>
-				<th colspan="2" style="text-align: center"><label
-					class="control-label" for=""> <spring:theme
-							code="representantes.info.inicial.ica" /></label></th>
-			</tr>
-		</thead>
-		<tbody>
-
-			<tr>
-				<td style="text-align: center !important"><img
-					src="${themeResourcePath}/images/resolucion_reportantes.png"
-					style="width: 50"></img></td>
-				<td style="text-align: center !important"><img
-					src="${themeResourcePath}/images/anexotecnico_reportantes.png"
-					style="width: 50"></img></td>
-				<td style="text-align: center !important"><img
-					src="${themeResourcePath}/images/resolucion_reportantes.png"
-					style="width: 50"></img></td>
-				<td style="text-align: center !important"><img
-					src="${themeResourcePath}/images/anexotecnico_reportantes.png"
-					style="width: 50"></img></td>
-				<td style="text-align: center !important"><img
-					src="${themeResourcePath}/images/resolucion_reportantes.png"
-					style="width: 50"></img></td>
-				<td style="text-align: center !important"><img
-					src="${themeResourcePath}/images/anexotecnico_reportantes.png"
-					style="width: 50"></img></td>
-				<td style="text-align: center !important"><img
-					src="${themeResourcePath}/images/resolucion_reportantes.png"
-					style="width: 50"></img></td>
-				<td style="text-align: center !important"><img
-					src="${themeResourcePath}/images/anexotecnico_reportantes.png"
-					style="width: 50"></img></td>
-			</tr>
-		</tbody>
-	</table>
+					<tr>
+						<!-- 				<td style="text-align: center !important"><img -->
+						<%-- 					src="${themeResourcePath}/images/resolucion_reportantes.png" --%>
+						<!-- 					style="width: 50"></img></td> -->
+						<!-- 				<td style="text-align: center !important"><img -->
+						<%-- 					src="${themeResourcePath}/images/anexotecnico_reportantes.png" --%>
+						<!-- 					style="width: 50"></img></td> -->
+						<!-- 				<td style="text-align: center !important"><img -->
+						<%-- 					src="${themeResourcePath}/images/resolucion_reportantes.png" --%>
+						<!-- 					style="width: 50"></img></td> -->
+						<!-- 				<td style="text-align: center !important"><img -->
+						<%-- 					src="${themeResourcePath}/images/anexotecnico_reportantes.png" --%>
+						<!-- 					style="width: 50"></img></td> -->
+						<!-- 				<td style="text-align: center !important"><img -->
+						<%-- 					src="${themeResourcePath}/images/resolucion_reportantes.png" --%>
+						<!-- 					style="width: 50"></img></td> -->
+						<!-- 				<td style="text-align: center !important"><img -->
+						<%-- 					src="${themeResourcePath}/images/anexotecnico_reportantes.png" --%>
+						<!-- 					style="width: 50"></img></td> -->
+						<td style="text-align: center !important"><img
+							src="${themeResourcePath}/images/resolucion_reportantes.png"
+							style="width: 50"></img></td>
+						<td style="text-align: center !important"><img
+							src="${themeResourcePath}/images/anexotecnico_reportantes.png"
+							style="width: 50"></img></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="control-label required"><spring:theme
+						code="representantes.info.inicial.seleccionar" /></label><input
+					type="file" class="form-control" id="exampleFormControlFile1">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2 col-md-offset-3">
+			<button type="submit" class="btn btn-primary btn-lg" id="" name=""
+				value="regresar">
+				<spring:theme code="representantes.info.vehiculos.regresar" />
+			</button>
+		</div>
+		<div class="col-md-2">
+			<button type="submit" class="btn btn-primary btn-lg" id="" name=""
+				value="cancelar">
+				<spring:theme code="representantes.info.vehiculos.cancelar" />
+			</button>
+		</div>
+		<div class="col-md-2">
+			<button type="submit" class="btn btn-primary btn-lg" id="" name=""
+				value="enviar">
+				<spring:theme code="representantes.info.vehiculos.enviar" />
+			</button>
+		</div>
+	</div>
 </div>
 
