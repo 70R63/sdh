@@ -24,9 +24,11 @@ import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.cms2.model.pages.ContentPageModel;
 import de.hybris.platform.sdhpsaddon.controllers.ControllerConstants;
 import de.hybris.platform.sdhpsaddon.forms.SDHLoginForm;
+import de.hybris.sdh.core.exceptions.NoNetworkConnection;
 import de.hybris.sdh.core.exceptions.NotARobotException;
 import de.hybris.sdh.core.exceptions.NotAValidEmailException;
 import de.hybris.sdh.core.exceptions.UserNotExistsException;
+import de.hybris.sdh.core.exceptions.UsuarioBloqueadoIntentos;
 
 import java.util.Collections;
 
@@ -165,13 +167,40 @@ public class LoginPageController extends AbstractLoginPageController
 			}
 			else if (authenticationException != null && authenticationException instanceof DisabledException)
 			{
-				model.addAttribute("loginError", Boolean.valueOf(loginError));
-				GlobalMessages.addErrorMessage(model, "login.user.disabled.exception");
+				try
+				{
+					DisabledException disabledException = (DisabledException) authenticationException;
+					if ("Bad credentials".equals(disabledException.getMessage()))
+					{
+						model.addAttribute("loginError", Boolean.valueOf(loginError));
+						GlobalMessages.addErrorMessage(model, "login.error.account.not.found.title");
+					}
+					else
+					{
+						model.addAttribute("loginError", Boolean.valueOf(loginError));
+						GlobalMessages.addErrorMessage(model, "login.user.disabled.exception");
+					}
+				}
+				catch (Exception e)
+				{
+					model.addAttribute("loginError", Boolean.valueOf(loginError));
+					GlobalMessages.addErrorMessage(model, "login.user.disabled.exception");
+				}
 			}
 			else if (authenticationException != null && authenticationException instanceof UserNotExistsException)
 			{
 				model.addAttribute("loginError", Boolean.valueOf(loginError));
 				GlobalMessages.addErrorMessage(model, "login.user.not.exists");
+			}
+			else if (authenticationException != null && authenticationException instanceof NoNetworkConnection)
+			{
+				model.addAttribute("loginError", Boolean.valueOf(loginError));
+				GlobalMessages.addErrorMessage(model, "login.nonetwokconnection");
+			}
+			else if (authenticationException != null && authenticationException instanceof UsuarioBloqueadoIntentos)
+			{
+				model.addAttribute("loginError", Boolean.valueOf(loginError));
+				GlobalMessages.addErrorMessage(model, "login.user.bloqueadoIntentos");
 			}
 			else
 			{

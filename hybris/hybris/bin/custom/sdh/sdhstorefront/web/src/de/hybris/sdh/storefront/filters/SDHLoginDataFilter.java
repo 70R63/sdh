@@ -17,8 +17,10 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
+import de.hybris.sdh.core.exceptions.NoNetworkConnection;
 import de.hybris.sdh.core.exceptions.NotARobotException;
 import de.hybris.sdh.core.exceptions.NotAValidEmailException;
+import de.hybris.sdh.core.exceptions.UsuarioBloqueadoIntentos;
 import de.hybris.sdh.storefront.checkout.steps.validation.impl.SDHRegistrationValidator;
 import de.hybris.sdh.storefront.security.LoginAuthenticationFailureHandler;
 
@@ -141,8 +143,9 @@ public class SDHLoginDataFilter extends AbstractAuthenticationProcessingFilter
 	 */
 	@Override
 	public Authentication attemptAuthentication(final HttpServletRequest request, final HttpServletResponse response)
-			throws AuthenticationException, IOException, ServletException
+			throws AuthenticationException, IOException, NoNetworkConnection, UsuarioBloqueadoIntentos, ServletException
 	{
+		boolean usuarioBloqueadoIntentos = false;
 		final boolean captchaEnabledForCurrentStore = isCaptchaEnabledForCurrentStore();
 		if (captchaEnabledForCurrentStore)
 		{
@@ -196,14 +199,29 @@ public class SDHLoginDataFilter extends AbstractAuthenticationProcessingFilter
 						userModel.setLoginDisabled(false);
 						userModel.setBlockedSince(null);
 						modelService.save(userModel);
+					}else {
+						usuarioBloqueadoIntentos = true;
 					}
 
 				}
 
-			}catch(final UnknownIdentifierException ex)
+			}
+			catch(final UnknownIdentifierException ex)
 			{
 				LOG.warn("User: " + username + " not found");
 			}
+			
+			if(usuarioBloqueadoIntentos) {
+				throw new UsuarioBloqueadoIntentos("Cuenta bloqueada porque se hicieron los tres intentos, debe esperar 15 min para que se active.");
+			}
+
+
+			boolean validacionRed = false; //falta implementar como determinar esto
+			if (validacionRed)
+			{
+				throw new NoNetworkConnection("Ocurrio un error al conectarse al sistema destino");
+			}
+
 		}
 
 
@@ -263,7 +281,19 @@ public class SDHLoginDataFilter extends AbstractAuthenticationProcessingFilter
 
 			return;
 		}
+		catch (final NoNetworkConnection failed)
+		{
+			unsuccessfulAuthentication(request, response, failed);
 
+			return;
+		}
+		catch (final UsuarioBloqueadoIntentos failed)
+		{
+			unsuccessfulAuthentication(request, response, failed);
+
+			return;
+		}
+		
 
 		chain.doFilter(request, response);
 	}
