@@ -16,7 +16,11 @@ public class PredialCatalogos
 	Map<String, String> caracterizacionPredio;
 	Map<String, String> propiedadHorizontal;
 	Map<String, String> destinoHacendario;
-	
+	Map<String, String> caracteri61;
+	Map<String, String> caracteri62;
+	Map<String, String> caracteri65;
+	Map<String, String> caracteri67;
+
 	/**
 	 * @return the caracterizacionPredio
 	 */
@@ -24,7 +28,7 @@ public class PredialCatalogos
 	{
 		return caracterizacionPredio;
 	}
-	
+
 	/**
 	 * @param caracterizacionPredio
 	 *           the caracterizacionPredio to set
@@ -33,7 +37,7 @@ public class PredialCatalogos
 	{
 		this.caracterizacionPredio = caracterizacionPredio;
 	}
-	
+
 	/**
 	 * @return the propiedadHorizontal
 	 */
@@ -41,7 +45,7 @@ public class PredialCatalogos
 	{
 		return propiedadHorizontal;
 	}
-	
+
 	/**
 	 * @param propiedadHorizontal
 	 *           the propiedadHorizontal to set
@@ -50,7 +54,7 @@ public class PredialCatalogos
 	{
 		this.propiedadHorizontal = propiedadHorizontal;
 	}
-	
+
 	/**
 	 * @return the destinoHacendario
 	 */
@@ -58,7 +62,7 @@ public class PredialCatalogos
 	{
 		return destinoHacendario;
 	}
-	
+
 	/**
 	 * @param destinoHacendario
 	 *           the destinoHacendario to set
@@ -68,5 +72,71 @@ public class PredialCatalogos
 		this.destinoHacendario = destinoHacendario;
 	}
 
+	/**
+	 * @return the caracteri61
+	 */
+	public Map<String, String> getCaracteri61()
+	{
+		return caracteri61;
+	}
 
+	/**
+	 * @param caracteri61
+	 *           the caracteri61 to set
+	 */
+	public void setCaracteri61(final Map<String, String> caracteri61)
+	{
+		this.caracteri61 = caracteri61;
+	}
+
+	/**
+	 * @return the caracteri62
+	 */
+	public Map<String, String> getCaracteri62()
+	{
+		return caracteri62;
+	}
+
+	/**
+	 * @param caracteri62
+	 *           the caracteri62 to set
+	 */
+	public void setCaracteri62(final Map<String, String> caracteri62)
+	{
+		this.caracteri62 = caracteri62;
+	}
+
+	/**
+	 * @return the caracteri65
+	 */
+	public Map<String, String> getCaracteri65()
+	{
+		return caracteri65;
+	}
+
+	/**
+	 * @param caracteri65
+	 *           the caracteri65 to set
+	 */
+	public void setCaracteri65(final Map<String, String> caracteri65)
+	{
+		this.caracteri65 = caracteri65;
+	}
+
+	/**
+	 * @return the caracteri67
+	 */
+	public Map<String, String> getCaracteri67()
+	{
+		return caracteri67;
+	}
+
+	/**
+	 * @param caracteri67
+	 *           the caracteri67 to set
+	 */
+	public void setCaracteri67(final Map<String, String> caracteri67)
+	{
+		this.caracteri67 = caracteri67;
+	}
 }
