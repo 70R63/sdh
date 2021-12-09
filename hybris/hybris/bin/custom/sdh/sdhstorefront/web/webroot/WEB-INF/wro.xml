@@ -102,6 +102,7 @@
 		<js>/_ui/responsive/common/js/acc.aaEntidadBancariaMenu.js</js>
 		<js>/_ui/responsive/common/js/captcha.js</js>
 		<js>/_ui/responsive/common/js/acc.relacionPagos.js</js>
+		<js>/_ui/responsive/common/js/acc.concesionarios.js</js>
     </group>
     
     

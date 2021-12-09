@@ -171,6 +171,8 @@
 
 			ACC.declaracionPredialURL="<c:url value='/contribuyentes/predialunificado/URL/declara' />";
 			
+			ACC.listaConcesionariosURL="<c:url value='/contribuyentes/predialunificado/URL/declara' />";
+			
 			ACC.descargaFacturaURL="<c:url value='/contribuyentes/descargafactura/descargarFactura' />";
 
 			ACC.spacURL="<c:url value='/contribuyentes/spac' />";

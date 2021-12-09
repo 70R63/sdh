@@ -189,6 +189,7 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 				      if (start>-1){
 				      	modelAndView.addObject("hasTARol_05" , true);
 				      	modelAndView.addObject("valueTARol" , eachRolData.getRol().substring(start,eachRolData.getRol().length()));
+							sessionService.getCurrentSession().setAttribute("concesionarios_ernam",eachRolData.getRol().substring(start,eachRolData.getRol().length()));
 				      }
 					}
 				} else if ("04".equals(eachRolData.getRol())) {

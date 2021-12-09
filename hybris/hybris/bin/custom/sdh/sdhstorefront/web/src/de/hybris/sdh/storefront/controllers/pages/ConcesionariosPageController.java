@@ -11,6 +11,7 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.dao.SdhReferenceStatusDao;
@@ -35,6 +36,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -86,6 +88,9 @@ public class ConcesionariosPageController extends AbstractPageController
 
 	@Resource(name = "sdhConcesionariosService")
 	SDHConcesionariosService sdhConcesionariosService;
+	
+	@Resource(name = "sessionService")
+	SessionService sessionService;
 
 
 	@ModelAttribute("referenceStatus")
@@ -171,6 +176,67 @@ public class ConcesionariosPageController extends AbstractPageController
 
 
 		return getViewForPage(model);
+	}
+	
+	
+	@RequestMapping(value = "/concesionarios/listado", method = RequestMethod.GET)
+	@RequireHardLogIn
+	@ResponseBody
+	public List<ConcesionariosForm> obtenerListado(@ModelAttribute("dataForm")
+	final ConcesionariosForm concesionarios, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes)
+			throws CMSItemNotFoundException
+	{
+		LOG.info("En listado de concesionarios");
+		List<ConcesionariosForm> listado = null;
+		
+		String ernam = sessionService.getCurrentSession().getAttribute("concesionarios_ernam");
+
+		final ConcesionariosRequest concesionariosRequest = new ConcesionariosRequest();
+		concesionariosRequest.setaUGUST("");
+		concesionariosRequest.setbUDAT(concesionarios.getFecInio());
+		concesionariosRequest.seteRNAM(ernam);
+		final List<Concesionarios> concesionariosForForm = new ArrayList<Concesionarios>();
+
+		LOG.info("Request: " + concesionariosRequest);
+		try
+		{
+
+			final ConcesionariosResponse concesionariosResponse = sdhConcesionariosService.concesionario(concesionariosRequest);
+			LOG.info("Response: " + concesionariosResponse);
+
+			if (concesionariosResponse != null)
+			{
+				for (final Concesionarios conce : concesionariosResponse.getConcesionarios())
+				{
+					final Concesionarios conceForm = new Concesionarios();
+					conceForm.setBetrw(conce.getBetrw()); // importe a pagar
+					conceForm.setPsobtxt(conce.getPsobtxt()); //placa
+					conceForm.setXblnr(conce.getXblnr()); // Referencia
+					conceForm.setPersl(obtainVigencia(conce.getPersl())); //Vigencia
+					conceForm.setFaedn(obtainVencimiento(conce.getFaedn()));
+					concesionariosForForm.add(conceForm);
+				}
+				concesionarios.setConcesionarios(concesionariosForForm);
+			}
+		}
+		catch (final Exception s)
+		{
+			LOG.error("error on concesionarios service: " + s.getMessage());
+		}
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(CONCESIONARIOS_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CONCESIONARIOS_CMS_PAGE));
+
+		model.addAttribute("fecInio", concesionarios.getFecInio());
+		model.addAttribute("dataForm", concesionarios);
+		model.addAttribute("concesionarios", concesionarios);
+
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMB_CONCESIONARIOS));
+
+
+		return listado;
 	}
 
 	public String obtainVigencia(final String vigencia)

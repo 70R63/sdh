@@ -23,6 +23,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 /**
  * @author Maria Torres
@@ -115,7 +118,28 @@ public class DefaultSDHConcesionariosImpService implements SDHConcesionariosServ
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
 
 		final HttpEntity<ConcesionariosRequest> request = new HttpEntity<>(concesionariosRequest);
-		return restTemplate.postForObject(urlService, request, ConcesionariosResponse.class);
+
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		String response = null;
+		ConcesionariosResponse wsResponse = null;
+
+		LOG.info("Request: " + request);
+		try
+		{
+			response = restTemplate.postForObject(urlService, request, String.class);
+			LOG.info("Response: " + response);
+			if (response != null)
+			{
+				wsResponse = mapper.readValue(response, ConcesionariosResponse.class);
+			}
+		}
+		catch (final Exception e)
+		{
+			LOG.info("Error al llamar al WS: " + urlService);
+		}
+
+		return wsResponse;
 	}
 
 

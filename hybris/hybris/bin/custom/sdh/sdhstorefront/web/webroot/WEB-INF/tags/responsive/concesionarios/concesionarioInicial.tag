@@ -32,7 +32,8 @@
 				deseas consultar.</p>
 			<div class="caja--ser-rel color-sr1">
 				<label class="control-label"><spring:theme
-						code="concesionario.inicial.fecInicio" /></label> <form:input type="date"  class="newalto form-control" name="fecInio" id="fecInio" path="fecInio" value="${concesionarios.fecInio}"/>
+						code="concesionario.inicial.fecInicio" /></label> 
+						<form:input type="date"  class="newalto form-control" name="fecInio" id="fecInio" path="fecInio" value="${concesionarios.fecInio}"/>
 			</div>
 		</div>
 
@@ -70,7 +71,7 @@
 	<div class="row">
 		<div class="col-md-3 col-md-offset-3">
 			<button style="margin-top: 3px;" id="facBuscar"
-				class="btn btn-primary btn-lg facBuscar" type="submit">
+				class="btn btn-primary btn-lg facBuscar" type="submit" onclick="buscar();">
 				<spring:theme code="reexpedicion.factura.inicial.buscar" />
 			</button>
 		</div>
@@ -81,7 +82,7 @@
 	<div id="table-concesionarios" style="display: block;">
 		<div class="row" class="table-responsive">
 			<div class="col-md-9 col-md-offset-2">
-				<table class="table" id="tabPaginacion1">
+				<table class="table tabPaginacion" id="concesionarios1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label
@@ -129,4 +130,13 @@
 </div>
 
 
+<script type="text/javascript">
 
+function buscar(){
+	ACC.concesionarios.buscar();
+	
+}
+
+</script>
+
+</script>
