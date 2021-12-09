@@ -638,7 +638,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "01010311__", "11", "Sobretasa a la gasolina", "ZT04", "A1ZTRT0004Z076");
 		agregarElementoTramites(elementos, "01010312__", "12", "Publicidad exterior visual", "ZT04", "A1ZTRT0004Z077");
 		//RIT-Actualización
-//		agregarElementoTramites(elementos, "010200____", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "010200____", "00", "Seleccionar");
 //		agregarElementoTramites(elementos, "010201____", "01", "Actualización de RIT", "ZT02", "A1ZTRT0003Z004");
 //		agregarElementoTramites(elementos, "010202____", "02", "Actualización de Rol tributario");
 		agregarElementoTramites(elementos, "010203____", "03", "Actualización Calidad Sujeción Pasiva");
