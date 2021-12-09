@@ -10,6 +10,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -93,9 +94,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import Decoder.BASE64Decoder;
-
 
 /**
  * @author Maria Luisa
@@ -3044,7 +3043,42 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		catalogos.setDestinoHacendario(elementos);
 
+		//Caracteristicas predio Residencial Y URBANIZABLE NO URBANIZADO
+		elementos = new LinkedHashMap<String, String>();
+		elementos.put("", "Seleccionar");
+		elementos.put("E1", "ESTRATO 1");
+		elementos.put("E2", "ESTRATO 2");
+		elementos.put("E3", "ESTRATO 3");
+		elementos.put("E4", "ESTRATO 4");
+		elementos.put("E5", "ESTRATO 5");
+		elementos.put("E6", "ESTRATO 6");
 
+		catalogos.setCaracteri61(elementos);
+
+		//Caracteristicas predio Comercial
+		elementos = new LinkedHashMap<String, String>();
+		elementos.put("", "Seleccionar");
+		elementos.put("C1", "PUNTUAL");
+		elementos.put("C2", "ZONAL");
+		elementos.put("C3", "URBANO");
+		elementos.put("C4", "METROPOLITANO");
+		elementos.put("C5", "FINANCIERO");
+
+		catalogos.setCaracteri62(elementos);
+
+		//Caracteristicas predio Deposito y Parqueadero
+		elementos = new LinkedHashMap<String, String>();
+		elementos.put("", "Seleccionar");
+		elementos.put("D1", "ESTRATO 1, 2 Y 3");
+		elementos.put("E1", "ESTRATO 1");
+		elementos.put("E2", "ESTRATO 2");
+		elementos.put("E3", "ESTRATO 3");
+		elementos.put("E4", "ESTRATO 4");
+		elementos.put("E5", "ESTRATO 5");
+		elementos.put("E6", "ESTRATO 6");
+		elementos.put("D2", "COMERCIAL Y OTROS");
+
+		catalogos.setCaracteri65(elementos);
 		return catalogos;
 	}
 

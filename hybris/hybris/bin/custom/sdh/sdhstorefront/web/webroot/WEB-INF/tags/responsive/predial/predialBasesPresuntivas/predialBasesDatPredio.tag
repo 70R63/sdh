@@ -27,11 +27,29 @@
 		</div>
 
 		<div class="row">
+			<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="Uso de suelo" /></label> 
+						<select class="newalto form-control" id="usoSuelo" onchange="showDestino(this)">
+						<option value="">Seleccionar</option>
+							<option value="0">Urbano</option>
+							<option value="1">Rural</option>
+						</select>
+			</div>
+			</div>
+				<div class="col-md-2" id="destHacendario" style="display: none">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="predial.basespresun.datliquidacion.destino" /></label> 
+						<form:select class="newalto form-control" id="DestinoHacendario" path="estrLiquidacionPredial.destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}" onclick="accionCat_destinoHacendario()" disabled="${disabledDatosPredio}" onchange="showHacendario(this)"></form:select>
+			</div>
+			</div>
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datospredio.areterreno" /></label> <input id="areaterreno"
-						name="areaterreno" class="newalto form-control areaterreno" disabled type="text" value="${predialFormbases.datosFisicos.areaTerrenoCatastro}"
+						name="areaterreno" class="newalto form-control areaterreno" disabled type="text" value=""
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -39,18 +57,18 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datospredio.areaconstru" /></label> <input id="areaconstruccion"
-						name="areaconstruccion" class="newalto form-control areaconstruccion" disabled type="text" value="${predialFormbases.datosFisicos.areaConstruida}"
+						name="areaconstruccion" class="newalto form-control areaconstruccion" disabled type="text" value=""
 						maxlength="240"></input>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6">
+				<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predial.basespresun.datliquidacion.destino" /></label> 
-						<form:select class="newalto form-control" id="DestinoHacendario" path="estrLiquidacionPredial.destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}" onclick="accionCat_destinoHacendario()" disabled="${disabledDatosPredio}"></form:select>
-				</div>
+							code="Actividad Ecónomica" /></label> 
+						<select class="newalto form-control" id="activEconomica" ></select>
+			</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
@@ -60,15 +78,44 @@
 							
 				</div>
 			</div>
+					<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="Base gravable calc." /></label> <input id="baseGrav"
+						name="baseGrav" class="newalto form-control areaterreno" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+					<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="Tarifa" /></label> <input id="tarifa"
+						name="baseGrav" class="newalto form-control areaterreno" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datospredio.caracpredio" /></label> 
-						<form:select class="newalto form-control" id="caracterizacionPredio" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracterizacionPredio}" disabled="${disabledDatosPredio}"></form:select>
+						<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri61}" disabled="${disabledDatosPredio}"></form:select>
+						<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio62" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri62}" disabled="${disabledDatosPredio}"></form:select>
+						<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio65" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri65}" disabled="${disabledDatosPredio}"></form:select>
+						<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio67" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri67}" disabled="${disabledDatosPredio}"></form:select>
 				</div>
 			</div>
+					<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="Confirmar BG final" /></label> <input id="confirmBG"
+						name="baseGrav" class="newalto form-control areaterreno" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+			</div>
+			<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
 				<c:if test="${predialFormbases.controlCampos.datosPredio != true}">
@@ -110,7 +157,60 @@ function accionCat_destinoHacendario(){
 			}
 		}		
 	}
+	}
+	
 
-}
+	function showDestino(object) {
+		var opt = object;
+		var dest = document.getElementById("destHacendario");
+		var x = document.getElementById('usoSuelo').value;
+
+		if (x == '0') {
+			dest.style.display = 'block';
+		} else if (x == '1') {
+			dest.style.display = 'none';
+		}
+	}
+
+	function showHacendario(object) {
+		var opt = object;
+		var x = document.getElementById('destHacendario').value;
+		var car61 = document.getElementById("caracterizacionPredio");
+		var car62 = document.getElementById("caracterizacionPredio62");
+		var car67 = document.getElementById("caracterizacionPredio67");
+		var car65 = document.getElementById("caracterizacionPredio65");
+
+		if (x == '61') {
+			car61.style.display = 'block';
+			car62.style.display = 'none';
+			car67.style.display = 'none';
+			car65.style.display = 'none';
+		} else if (x == '62') {
+			car61.style.display = 'none';
+			car62.style.display = 'block';
+			car67.style.display = 'none';
+			car65.style.display = 'none';
+		}else if (x == '67') {
+			car61.style.display = 'none';
+			car62.style.display = 'none';
+			car67.style.display = 'block';
+			car65.style.display = 'none';
+		}else if (x == '64') {
+			car61.style.display = 'none';
+			car62.style.display = 'none';
+			car67.style.display = 'none';
+			car65.style.display = 'none';
+		}else if (x == '65') {
+			car61.style.display = 'none';
+			car62.style.display = 'none';
+			car67.style.display = 'none';
+			car65.style.display = 'block';
+		}else if (x == '66') {
+			car61.style.display = 'none';
+			car62.style.display = 'none';
+			car67.style.display = 'none';
+			car65.style.display = 'none';
+		}
+	}
 </script>
 
