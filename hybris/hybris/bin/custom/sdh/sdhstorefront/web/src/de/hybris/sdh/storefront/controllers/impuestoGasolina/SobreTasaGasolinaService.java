@@ -2551,27 +2551,34 @@ public class SobreTasaGasolinaService
 
 		elementos.put("00", "Seleccionar");
 
-		//		if (customerData.getVehicular() != null) //vehicular
-		//		{
-		//			if (customerData.getVehicular().size() > 0)
-		//			{
-		//				elementos.put("0002", "Vehículos");
-		//			}
-		//		}
-		//		if (customerData.getIca() != null) // ica
-		//		{
-		//			if (!customerData.getIca().getNumObjeto().isEmpty())
-		//			{
-		//				elementos.put("0003", "Industria y Comercio");
-		//			}
-		//		}
-		//		if (customerData.getReteIca() != null) // reteICA
-		//		{
-		//			if (!customerData.getReteIca().getNumObjeto().isEmpty())
-		//			{
-		//				elementos.put("0004", "Retención ICA");
-		//			}
-		//		}
+		if (customerData.getPredial() != null) //predial
+		{
+			if (customerData.getPredial().size() > 0)
+			{
+				elementos.put("0001", "Predial");
+			}
+		}
+		if (customerData.getVehicular() != null) //vehicular
+		{
+			if (customerData.getVehicular().size() > 0)
+			{
+				elementos.put("0002", "Vehículos");
+			}
+		}
+		if (customerData.getIca() != null) // ica
+		{
+			if (!customerData.getIca().getNumObjeto().isEmpty())
+			{
+				elementos.put("0003", "Industria y Comercio");
+			}
+		}
+		if (customerData.getReteIca() != null) // reteICA
+		{
+			if (!customerData.getReteIca().getNumObjeto().isEmpty())
+			{
+				elementos.put("0004", "Retención ICA");
+			}
+		}
 		if (customerData.getGasolina() != null) //gasolina
 		{
 			if (customerData.getGasolina().size() > 0)
@@ -2588,13 +2595,13 @@ public class SobreTasaGasolinaService
 
 			}
 		}
-		//		if (customerData.getDelineacion() != null) //delineacion
-		//		{
-		//			if (customerData.getDelineacion().size() > 0)
-		//			{
-		//				elementos.put("0006", "Delineación Urbana");
-		//			}
-		//		}
+		if (customerData.getDelineacion() != null) //delineacion
+		{
+			if (customerData.getDelineacion().size() > 0)
+			{
+				elementos.put("0006", "Delineación Urbana");
+			}
+		}
 		if (customerData.getPublicidadExt() != null) //publicidad
 		{
 			if (customerData.getPublicidadExt().size() > 0)
@@ -2603,7 +2610,6 @@ public class SobreTasaGasolinaService
 			}
 		}
 
-		//		elementos.put("0001", "Predial");
 
 		catalogosForm.setImpuesto(elementos);
 		return catalogosForm;
