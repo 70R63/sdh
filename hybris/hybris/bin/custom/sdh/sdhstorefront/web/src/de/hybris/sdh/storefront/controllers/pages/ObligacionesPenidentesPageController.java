@@ -274,21 +274,25 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 
 					for (final ImpuestoDelineacionUrbana delineacionItem : contImpuestos.getDelineacion())
 					{
+						urbanDelineationsTaxItem.setCdu(delineacionItem.getCdu());
+						urbanDelineationsTaxItem.setExpDate(delineacionItem.getFechaExp());
+						urbanDelineationsTaxItem.setLicenConst(delineacionItem.getLicenConst());
+						urbanDelineationsTaxItem.setObjectNumber(delineacionItem.getNumObjeto());
 
-						delineacionItem.setCdu(delineacionItem.getCdu());
-						delineacionItem.setCuraduria(delineacionItem.getCuraduria());
-						delineacionItem.setFechaEjecutoria(delineacionItem.getFechaEjecutoria());
-						delineacionItem.setFechaExp(delineacionItem.getFechaExp());
-						delineacionItem.setFechaIniObra(delineacionItem.getFechaIniObra());
-						delineacionItem.setFechaReval(delineacionItem.getFechaReval());
-						delineacionItem.setFechFinObra(delineacionItem.getFechFinObra());
-						delineacionItem.setLicenConst(delineacionItem.getLicenConst());
-						delineacionItem.setNroResolucReva(delineacionItem.getNroResolucReva());
-						delineacionItem.setNumObjeto(delineacionItem.getNumObjeto());
-						delineacionItem.setRadicados(delineacionItem.getRadicados());
-						delineacionItem.setTipoMarca(delineacionItem.getTipoMarca());
-						delineacionItem.setTotalPresup(delineacionItem.getTotalPresup());
-						delineacionItem.setValorEjecut(delineacionItem.getValorEjecut());
+//						delineacionItem.setCdu(delineacionItem.getCdu());
+//						delineacionItem.setCuraduria(delineacionItem.getCuraduria());
+//						delineacionItem.setFechaEjecutoria(delineacionItem.getFechaEjecutoria());
+//						delineacionItem.setFechaExp(delineacionItem.getFechaExp());
+//						delineacionItem.setFechaIniObra(delineacionItem.getFechaIniObra());
+//						delineacionItem.setFechaReval(delineacionItem.getFechaReval());
+//						delineacionItem.setFechFinObra(delineacionItem.getFechFinObra());
+//						delineacionItem.setLicenConst(delineacionItem.getLicenConst());
+//						delineacionItem.setNroResolucReva(delineacionItem.getNroResolucReva());
+//						delineacionItem.setNumObjeto(delineacionItem.getNumObjeto());
+//						delineacionItem.setRadicados(delineacionItem.getRadicados());
+//						delineacionItem.setTipoMarca(delineacionItem.getTipoMarca());
+//						delineacionItem.setTotalPresup(delineacionItem.getTotalPresup());
+//						delineacionItem.setValorEjecut(delineacionItem.getValorEjecut());
 
 						urbanDelineationsTaxList.add(urbanDelineationsTaxItem);
 					}

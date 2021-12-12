@@ -659,40 +659,34 @@ ACC.predial = {
         			$("#numForm").val(result.numFrom);
         			if(result!=null){
 	        			$("#numForm").val(result.numFrom);
-	        			var liq = result.liquidacionPrivada;
-
-						if(liq != null){
-		    				$("#ValorImpuestoACargo").val(liq.valorImpuestoACargo);							
-						}
 						if(result.liquidacionPrivada != null){
-							$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.aporteVoluntario);
-							$("#DescuentoPorIncrementoDiferencias").val(result.liquidacionPrivada.descuentoPorIncrementoDiferencias);
-							$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.valorImpuestoAjustadoActual);
-							$("#Sancion").val(result.liquidacionPrivada.sancion);
-							$("#TotalSaldoACargo").val(result.liquidacionPrivada.totalSaldoACargo);
-							$("#ValorAPagar").val(result.liquidacionPrivada.valorAPagar);
-							$("#DescuentoPorProntoPago").val(result.liquidacionPrivada.descuentoPorProntoPago);
-							$("#DescuendoAdicional1").val(result.liquidacionPrivada.descuendoAdicional1);
-							$("#Intereses").val(result.liquidacionPrivada.intereses);
-							$("#TotalAPagar").val(result.liquidacionPrivada.totalAPagar);
-							$("#ValorAporteVoluntario").val(result.liquidacionPrivada.valorAporteVoluntario);
-							$("#TotalConPagoVoluntario").val(result.liquidacionPrivada.totalConPagoVoluntario);							
-							if(result.liquidacionPrivada.tarifaLiquidacion != null){
-								$("#Tarifa_liquidacion").val(result.liquidacionPrivada.tarifaLiquidacion.trim());
+		    				$("#ValorImpuestoACargo").val(result.liquidacionPrivada.ValorImpuestoACargo);	
+							$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.AporteVoluntario);
+							$("#DescuentoPorIncrementoDiferencias").val(result.liquidacionPrivada.DescuentoPorIncrementoDiferencias);
+							$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.ValorImpuestoAjustadoActual);
+							$("#Sancion").val(result.liquidacionPrivada.Sancion);
+							$("#TotalSaldoACargo").val(result.liquidacionPrivada.TotalSaldoACargo);
+							$("#ValorAPagar").val(result.liquidacionPrivada.ValorAPagar);
+							$("#DescuentoPorProntoPago").val(result.liquidacionPrivada.DescuentoPorProntoPago);
+							$("#DescuendoAdicional1").val(result.liquidacionPrivada.DescuendoAdicional1);
+							$("#Intereses").val(result.liquidacionPrivada.Intereses);
+							$("#TotalAPagar").val(result.liquidacionPrivada.TotalAPagar);
+							$("#ValorAporteVoluntario").val(result.liquidacionPrivada.ValorAporteVoluntario);
+							$("#TotalConPagoVoluntario").val(result.liquidacionPrivada.TotalConPagoVoluntario);							
+							if(result.liquidacionPrivada.TarifaLiquidacion != null){
+								$("#Tarifa_liquidacion").val(result.liquidacionPrivada.TarifaLiquidacion.trim());
 							}
+							if(result.liquidacionPrivada.Proyecto == "1"){
+								$("#proyectoLiq").val('01');
+							}else if(result.liquidacionPrivada.Proyecto == "2"){
+								$("#proyectoLiq").val('02');
+			        		}else{
+			        			$("#proyectoLiq").val('00');
+			        		}
 						}
 					}
-				
-				
-					if(liq.proyecto == "1"){
-						$("#proyectoLiq").val('01');
-					}else if(liq.proyecto == "2"){
-						$("#proyectoLiq").val('02');
-	        		}else{
-	        			$("#proyectoLiq").val('00');
-	        		}
-        		
         		}
+
 			},
 			error : function() {		
 				ACC.spinner.close();

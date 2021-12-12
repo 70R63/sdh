@@ -1,6 +1,6 @@
 ACC.concesionarios = {
 
-	_autoload : [],
+//	_autoload : [],
 
 	
 	buscar : function() {
@@ -43,7 +43,7 @@ ACC.concesionarios = {
 	
 	vaciarTablasInfo : function (){
 		$("#concesionarios1").find("tr:gt(0)").remove();
-	}
+	},
 	
 	
 	
