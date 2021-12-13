@@ -60,5 +60,6 @@
     <extension name='previewwebservices' />
     <extension name='pcmbackoffice' />
     <extension name='backofficesolrsearch' />
+    <extension name='oauth2' />
   </extensions>
 </hybrisconfig>

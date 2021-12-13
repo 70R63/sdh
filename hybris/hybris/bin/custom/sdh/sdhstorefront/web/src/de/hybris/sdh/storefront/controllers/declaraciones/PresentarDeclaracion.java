@@ -18,11 +18,14 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
+import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.DetallePubli;
+import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
@@ -38,6 +41,7 @@ import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
@@ -50,6 +54,7 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaSe
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaTabla;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacion;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacionInput;
+import de.hybris.sdh.storefront.forms.PublicidadForm;
 import de.hybris.sdh.storefront.forms.SobreTasaGasolinaControlCamposDec;
 import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
@@ -143,6 +148,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 	@Resource(name = "sdhCustomerAccountService")
 	private SDHCustomerAccountService sdhCustomerAccountService;
+	
+	@Resource(name = "sdhDetallePublicidadService")
+	SDHDetallePublicidadService sdhDetallePublicidadService;
+
 
 
 	//-----------------------------------------------------------------------------------------------------------------
@@ -917,6 +926,50 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		}
 
 		return listaInfoImpuesto;
+	}
+	
+	
+	@RequestMapping(value = "/contribuyentes/presentar-declaracion/validacionPublicidad", method = RequestMethod.GET)
+	@ResponseBody
+	public PublicidadForm publicidadExternaDetail(@ModelAttribute("publicidadInfo")
+	final PublicidadForm publicidadInfo, final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+
+		final PublicidadForm publicidadForm = new PublicidadForm();
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
+		String opcionUso = null;
+		final String numBP = customerData.getNumBP();
+
+
+		detallePublicidadRequest.setNumBP(numBP);
+		detallePublicidadRequest.setNumResolu(publicidadInfo.getNumResolu());
+		detallePublicidadRequest.setAnoGravable(publicidadInfo.getAnoGravable());
+		detallePublicidadRequest.setTipoValla(publicidadInfo.getTipoValla());
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			String wsResponse = sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest);
+			wsResponse = wsResponse.replace("\"},\"\"", "\"}");
+			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(wsResponse , DetallePublicidadResponse.class);
+
+			if(detallePublicidadResponse != null) {
+				publicidadForm.setErrores(detallePublicidadResponse.getErrores());
+				if(detallePublicidadResponse.getInfoDeclara() != null) {
+					publicidadForm.setOpcionUso(detallePublicidadResponse.getInfoDeclara().getOpcionUso());
+				}
+			}
+		
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error getting details for publicidad object : " + e.getMessage());
+			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+		}
+
+		return publicidadForm;
 	}
 
 

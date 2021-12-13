@@ -67,5 +67,6 @@
     <extension name='relationshipfacades' />
 <!--     <extension name='relationshipatddtests' /> -->
     <extension name='auditreportservices' />
+    <extension name='oauth2' />
   </extensions>
 </hybrisconfig>
