@@ -211,28 +211,22 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			{
 				dataForm.setOptionPredial("1");
 			}
-
 			if (groupUid.contains("vehicularUsrTaxGrp"))
 			{
 				dataForm.setOptionVehicular("2");
 			}
-
-			//
-			//			if (groupUid.contains("ICAUsrTaxGrp"))
-			//			{
-			//				dataForm.setOptionIca("3");
-			//			}
-
-
+			if (groupUid.contains("ICAUsrTaxGrp"))
+			{
+				dataForm.setOptionIca("3");
+			}
 			if (groupUid.contains("gasolinaUsrTaxGrp"))
 			{
 				dataForm.setOptionGas("5");
 			}
-
-			//			if (groupUid.contains("delineacionUsrTaxGrp"))
-			//			{
-			//				dataForm.setOptionDeli("6");
-			//			}
+			if (groupUid.contains("delineacionUsrTaxGrp"))
+			{
+				dataForm.setOptionDeli("6");
+			}
 
 			if (groupUid.contains("publicidadExtUsrTaxGrp"))
 			{

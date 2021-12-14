@@ -585,18 +585,18 @@ public class SobreTasaGasolinaService
 	{
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
-		//		if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
-		//		{
-		//			elementos.put("1", "Predial");
-		//		}
-		//		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
-		//		{
-		//			elementos.put("2", "Impuestos de Vehículos");
-		//		}
-		//		if (customerData.getIcaTax() != null && customerData.getIcaTax().getObjectNumber() != null)
-		//		{
-		//			elementos.put("3", "ICA");
-		//		}
+		if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
+		{
+			elementos.put("1", "Predial");
+		}
+		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
+		{
+			elementos.put("2", "Impuestos de Vehículos");
+		}
+		if (customerData.getIcaTax() != null && customerData.getIcaTax().getObjectNumber() != null)
+		{
+			elementos.put("3", "ICA");
+		}
 		if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
 		{
 			elementos.put("5", "Sobretasa a la gasolina motor");
@@ -605,18 +605,18 @@ public class SobreTasaGasolinaService
 		{
 			elementos.put("6", "Delineacion Urbana");
 		}
-		//		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
-		//		{
-		//			elementos.put("6", "Delineacion Urbana");
-		//		}
+		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
+		{
+			elementos.put("6", "Delineacion Urbana");
+		}
 		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 		{
 			elementos.put("7", "Publicidad Exterior");
 		}
-		//		if (customerData.getReteIcaTax() != null)
-		//		{
-		//			elementos.put("4", "Reteica");
-		//		}
+		if (customerData.getReteIcaTax() != null)
+		{
+			elementos.put("4", "Reteica");
+		}
 
 
 		return elementos;
