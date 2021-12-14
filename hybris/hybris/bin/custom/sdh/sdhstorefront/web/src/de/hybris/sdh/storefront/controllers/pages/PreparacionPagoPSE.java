@@ -249,7 +249,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 			}
 			else if (psePaymentForm.getTipoDeImpuesto().equals("5132"))
 			{
-				if (!psePaymentForm.getCUD().equals(""))
+				if (psePaymentForm.getCUD() != null && !psePaymentForm.getCUD().equals(""))
 				{
 					ref = psePaymentForm.getCUD();
 				}
@@ -349,13 +349,13 @@ public class PreparacionPagoPSE extends AbstractPageController
 
 
 				modelService.saveAll(sitIITransactionsLogModel);
-				
+
 				LOG.error("SITIITransactionsLog:[ TransactionDate: " + sitIITransactionsLogModel.getTransactionDate()
 						+ " TransactionTime: " + sitIITransactionsLogModel.getTransactionTime() + " TransactionReference: "
 						+ sitIITransactionsLogModel.getTransactionReference() + " TransactionNUS: "
 						+ sitIITransactionsLogModel.getTransactionNUS() + " TransactionAmount: "
 						+ sitIITransactionsLogModel.getTransactionAmount());
-				
+
 			}
 			catch (final NoSuchAlgorithmException e)
 			{

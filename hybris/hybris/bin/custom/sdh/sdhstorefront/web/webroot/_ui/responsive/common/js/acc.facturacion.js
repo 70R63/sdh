@@ -15,19 +15,20 @@ ACC.facturacion = {
 			tabpred.style.display = 'none';
 			tabveh.style.display = 'none';
 
-			
-			switch(imp){
-			case "0001":
-				ACC.facturacion.filtrarRegistros_aniograv("tabPaginacion0","0",aniogravFiltro);
-				tabpred.style.display = 'block';
-				break;
-			case "0002":
-				ACC.facturacion.filtrarRegistros_aniograv("tabPaginacion1","0",aniogravFiltro);
-				tabveh.style.display = 'block';
-				break;
-				
-			default:
-				break;
+			if(aniogravFiltro != ""){
+				switch(imp){
+				case "0001":
+	//				ACC.facturacion.filtrarRegistros_aniograv("tabPaginacion0","0",aniogravFiltro);
+					tabpred.style.display = 'block';
+					break;
+				case "0002":
+	//				ACC.facturacion.filtrarRegistros_aniograv("tabPaginacion1","0",aniogravFiltro);
+					tabveh.style.display = 'block';
+					break;
+					
+				default:
+					break;
+				}
 			}
 			
 		}
@@ -69,10 +70,12 @@ ACC.facturacion = {
 	descargaFactura : function (anoGravable,numObjeto,tipoOperacion,descargaFactura1){
 		debugger;
 		ACC.spinner.show();
-		var objnew = descargaFactura1;
-			debugger;
-			var anoGravable = $.trim($(objnew).attr("data-anioGrav"));
-			var numObjeto = $.trim($(objnew).attr("data-numObjeto"));
+		if(descargaFactura1 != undefined && descargaFactura1 != null){
+			var objnew = descargaFactura1;
+			
+			anoGravable = $.trim($(objnew).attr("data-anioGrav"));
+			numObjeto = $.trim($(objnew).attr("data-numObjeto"));
+		}
 			
 		if(ACC.facturacion.validarAntesSubmit(anoGravable,numObjeto)){
 			var dataActual = {};	
@@ -126,6 +129,20 @@ ACC.facturacion = {
 			}
 		}
 	 },
+
+
+	refreshTablas : function(){
+		var tabpred = document.getElementById('table-predial');
+		var tabveh = document.getElementById('table-vehiculos');
+		
+		if(tabpred != null){
+			tabpred.style.display = 'none';
+		}
+		if(tabveh != null){
+			tabveh.style.display = 'none';
+		}
+
+	},
 	 
 	 
 	 validarAntesSubmit : function (anoGravable,numObjeto){
