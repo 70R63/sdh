@@ -9,7 +9,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
@@ -23,7 +22,9 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
+import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraDeli;
 import de.hybris.sdh.core.pojos.responses.ObligacionesDeliResponse;
+import de.hybris.sdh.core.pojos.responses.ObligacionesDetallePublicidad;
 import de.hybris.sdh.core.pojos.responses.ObligacionesGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesICAResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesPredialResponse;
@@ -139,7 +140,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	{ "/contribuyentes/consultas/obligaciones", "/agenteRetenedor/consultas/obligaciones" }, method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String oblipendi(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("obligacionesForm")
-	final ObligacionesForm obligacionesForm, @RequestParam(name = "errorSITII", required = false, value = "") String errorSITII,
+	final ObligacionesForm obligacionesForm, @RequestParam(name = "errorSITII", required = false, value = "") final String errorSITII,
 			final HttpServletRequest request)
 			throws CMSItemNotFoundException
 	{
@@ -164,8 +165,8 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		final ObligacionesForm obligacionesFormuno = new ObligacionesForm();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 
-		Set<PrincipalGroupModel> groupList = customerModel.getGroups();
-		
+		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
+
 		//solo para PRD inicio:
 //		groupList = groupList.stream().filter(c -> (c.getUid().contains("gasolinaUsrTaxGrp") || c.getUid().contains("publicidadExtUsrTaxGrp"))).collect(Collectors.toSet());
 		//solo para PRD fin
@@ -378,6 +379,16 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 								ObligacionesDeliResponse.class);
 						obligacionesFormuno.setHeaderdeli(obligacionesDeliResponse.getHeader().stream()
 								.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
+
+						if(obligacionesFormuno.getHeaderdeli() != null) {
+							for(final ObligacionesCabeceraDeli obligacionesCabeceraDeli : obligacionesFormuno.getHeaderdeli() ) {
+								for(final ObligacionesDetallePublicidad obligacionesDetallePublicidad: obligacionesCabeceraDeli.getDetails()) {
+									if (StringUtils.isBlank(obligacionesDetallePublicidad.getNumReferencia()) ) {
+										obligacionesCabeceraDeli.getDetails().remove(obligacionesDetallePublicidad);
+									}
+								}
+							}
+						}
 					}
 				}
 
