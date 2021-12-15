@@ -123,6 +123,7 @@ public class DefaultSDHConcesionariosImpService implements SDHConcesionariosServ
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		String response = null;
 		ConcesionariosResponse wsResponse = null;
+		LOG.info("connection to: " + urlService);
 
 		LOG.info("Request: " + request);
 		try

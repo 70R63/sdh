@@ -4,24 +4,25 @@ ACC.concesionarios = {
 
 	
 	buscar : function() {
-		ACC.spinner.show();
+
 		ACC.concesionarios.ocultarTablas();
 		ACC.publicidadexterior.bindDataTable_Class_refresh();
 		ACC.concesionarios.vaciarTablasInfo();
-		if(ACC.concesionarios.validarAntesSubmit()){
-			var fecha = $("#fecInio").val;
-			var status = $("#referenceStatus").val;
-			var dataActual = {};
+		var fecha = $("#fecInio").val();
+		var status = $("#referenceStatus").val();
+		var dataActual = {};
 
-			dataActual.fecInio = fecha;
-			dataActual.referenceStatus = status;
+		dataActual.fecInio = fecha;
+		dataActual.referenceStatus = status;
+		if(ACC.concesionarios.validarAntesSubmit(dataActual)){
+			ACC.spinner.show();
 			$.ajax({
 				url : ACC.listaConcesionariosURL,
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
 					ACC.spinner.close();
-					ACC.opcionDeclaraciones.updateFromResponseSeleccion(dataActual,dataResponse);
+					ACC.concesionarios.updateFromResponseSeleccion(dataActual,dataResponse);
 					ACC.publicidadexterior.bindDataTable_Class();
 				},
 				error : function() {
@@ -35,11 +36,53 @@ ACC.concesionarios = {
 	},
 	
 	
+	updateFromResponseSeleccion : function(infoActual,infoResponse) {
+		ACC.concesionarios.vaciarTablasInfo();
+
+		if (infoResponse != null){
+			var status = ACC.concesionarios.obtenerDescripcionStatus($("#referenceStatus").val());
+			
+			$.each(infoResponse, function (index,value){
+				var fechaVencimiento= "";
+				if(value.FAEDN != null){
+					fechaVencimiento = value.FAEDN;
+					fechaVencimiento = fechaVencimiento.substring(6,8) + "/" + fechaVencimiento.substring(4,6) + "/" + fechaVencimiento.substring(0,4);
+				}
+
+				var fechaVigencia = "";
+				if(value.PERSL != null){
+					fechaVigencia = "Año " + value.PERSL.substring(0,2);
+				}
+				
+				$('#concesionarios1').append("<tr>"+
+						'<td>' + value.XBLNR + '</td>'+
+						'<td>' + value.PSOBTXT + '</td>'+
+						'<td>' + fechaVigencia + '</td>'+
+						'<td>' + fechaVencimiento + '</td>'+
+						'<td>' + status + '</td>'+
+						'<td>' + value.BETRW + '</td>'+
+						'<td><img src="'+ACC.config.themeResourcePath+'/images/download_icon.png"></td>' +
+						"</tr>");
+			});
+		}
+		ACC.concesionarios.mostrarTablas();
+
+
+	},
+	
+	
 	ocultarTablas : function (){
 		var div_concesionarios = document.getElementById('table-concesionarios');
 		ACC.opcionDeclaraciones.establecerEstiloDisplay(div_concesionarios,'none');
 		
 	},
+	
+	
+	mostrarTablas : function (){
+		var div_concesionarios = document.getElementById('table-concesionarios');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(div_concesionarios,'block');
+	},
+	
 	
 	vaciarTablasInfo : function (){
 		$("#concesionarios1").find("tr:gt(0)").remove();
@@ -47,13 +90,47 @@ ACC.concesionarios = {
 	
 	
 	
-	validarAntesSubmit : function(){
-		return true;
+	validarAntesSubmit : function(dataActual){
+		var validacionOK = false;
 		
+		if(dataActual.fecInio != ""){
+			validacionOK = true;
+		}else{
+			alert("Por favor ingresar fecha");
+		}
+
+		
+		return validacionOK;
+	},
+	
+	obtenerDescripcionStatus : function(status){
+		var descripcion = "";
+		
+		switch(status){
+			case "01":
+				descripcion = "Por pagar";
+				break;
+			
+			case "02":
+				descripcion = "Pagadas";
+				break;
+			
+			case "03":
+				descripcion = "Canceladas";
+				break;
+			
+			case "04":
+				descripcion = "Todas";
+				break;
+			
+			default:
+				descripcion = "";
+				break;
+		}
+		
+		
+		return descripcion;
 	}
-	
-	
-	
 	
 	
 	

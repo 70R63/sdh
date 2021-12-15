@@ -64,7 +64,7 @@
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="<c:url value='/setRole?role=sdh_03&subrole=05' />">
 				<div class=" card-section col-xs-12 col-sm-2 col-md-2 col-lg-1 center">
-					<img title="Concesionarios" alt="Concesionarios" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/Concesionarios.png" width="91">
+					<img title="Concesionarios" alt="Concesionarios" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/TerceroAutorizado.png" width="91">
 				</div>
 				<div class="card-section  col-xs-12 col-sm-10 col-md-10 ">
 					<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="thirdAutorized.title_05" /></span></h2></div>

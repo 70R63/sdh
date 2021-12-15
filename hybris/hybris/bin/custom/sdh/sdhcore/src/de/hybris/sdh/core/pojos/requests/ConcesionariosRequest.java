@@ -70,7 +70,26 @@ public class ConcesionariosRequest
 	@Override
 	public String toString()
 	{
-		return "ConcesionariosRequest [eRNAM=" + eRNAM + ", bUDAT=" + bUDAT + ", aUGUST=" + aUGUST + "]";
+		final StringBuilder stringBuilder = new StringBuilder();
+
+		stringBuilder.append("{");
+		stringBuilder.append(obtenerValorJson("\"ERNAM\":\"", this.geteRNAM(), "\","));
+		stringBuilder.append(obtenerValorJson("\"BUDAT\":\"", this.getbUDAT(), "\","));
+		stringBuilder.append(obtenerValorJson("\"AUGST\":\"", this.getaUGUST(), "\""));
+		stringBuilder.append("}");
+
+
+		return stringBuilder.toString();
+	}
+
+	private String obtenerValorJson(final String cadena1, final String valor, final String cadena2)
+	{
+		String valorVariable = "";
+
+		valorVariable = (valor != null) ? cadena1 + valor + cadena2 : cadena1 + cadena2;
+
+
+		return valorVariable;
 	}
 
 }
