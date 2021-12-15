@@ -1,5 +1,7 @@
 ACC.relacionPagos = {
 		
+		_autoload : ["relacionPagosServicio"],
+		
 		relacionPagosServicio : function(obKey,impuesto){
 			debugger;
 			ACC.spinner.show();

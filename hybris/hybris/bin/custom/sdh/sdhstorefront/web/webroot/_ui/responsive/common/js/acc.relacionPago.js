@@ -1,8 +1,8 @@
-ACC.relacionPagos = {
+ACC.relacionPago = {
 		
-		_autoload : ["relacionPagosServicio"],
+		_autoload : ["relacionPagoServicio"],
 		
-		relacionPagosServicio : function(obKey,impuesto){
+		relacionPagoServicio : function(obKey,impuesto){
 			debugger;
 			ACC.spinner.show();
 			
