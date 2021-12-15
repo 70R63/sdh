@@ -129,6 +129,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.predial.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.vehiculos.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.gestionBancaria.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.relacionPago.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.mibuzon.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.facturacion.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.spac.js"></script>
@@ -142,8 +143,12 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.firmas.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.aaEntidadBancariaMenu.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/captcha.js"></script>
+<<<<<<< HEAD
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.relacionPagos.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.concesionarios.js"></script>
+=======
+		
+>>>>>>> 2005-dev-eduardo
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">
 		    <script type="text/javascript" src="${commonResourcePath}/js/cms/${actionJsFile}"></script>

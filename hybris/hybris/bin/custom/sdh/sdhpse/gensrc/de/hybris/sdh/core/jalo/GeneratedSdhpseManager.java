@@ -1,7 +1,11 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
+<<<<<<< HEAD
  * --- Generated at 14 dic 2021 15:50:23                        ---
+=======
+ * --- Generated at 15 dic 2021 11:03:57                        ---
+>>>>>>> 2005-dev-eduardo
  * ----------------------------------------------------------------
  *  
  * Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.

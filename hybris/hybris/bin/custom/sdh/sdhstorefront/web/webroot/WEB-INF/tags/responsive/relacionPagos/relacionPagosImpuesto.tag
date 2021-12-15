@@ -828,7 +828,7 @@
 		
 		ACC.gestionBancaria.bindReteIcaRecargar();
 		
-		ACC.relacionPagos.relacionPagosServicio(obKey,impuesto);
+		ACC.relacionPago.relacionPagoServicio(obKey,impuesto);
 		
 		var values = selectObject.value;
 		var value = selectObject;

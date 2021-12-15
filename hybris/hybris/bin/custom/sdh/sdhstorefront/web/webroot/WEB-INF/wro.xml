@@ -87,6 +87,7 @@
 		<js>/_ui/responsive/common/js/acc.predial.js</js>
 		<js>/_ui/responsive/common/js/acc.vehiculos.js</js>
 		<js>/_ui/responsive/common/js/acc.gestionBancaria.js</js>
+		<js>/_ui/responsive/common/js/acc.relacionPago.js</js>
 		<js>/_ui/responsive/common/js/acc.mibuzon.js</js>
 		<js>/_ui/responsive/common/js/acc.facturacion.js</js>
 		<js>/_ui/responsive/common/js/acc.spac.js</js>
@@ -101,8 +102,12 @@
 		<js>/_ui/responsive/common/js/acc.firmas.js</js>
 		<js>/_ui/responsive/common/js/acc.aaEntidadBancariaMenu.js</js>
 		<js>/_ui/responsive/common/js/captcha.js</js>
+<<<<<<< HEAD
 		<js>/_ui/responsive/common/js/acc.relacionPagos.js</js>
 		<js>/_ui/responsive/common/js/acc.concesionarios.js</js>
+=======
+		
+>>>>>>> 2005-dev-eduardo
     </group>
     
     
