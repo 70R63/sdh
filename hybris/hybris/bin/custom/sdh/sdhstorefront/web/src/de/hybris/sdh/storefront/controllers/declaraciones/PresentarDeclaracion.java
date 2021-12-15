@@ -24,7 +24,6 @@ import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
-import de.hybris.sdh.core.pojos.responses.DetallePubli;
 import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
@@ -72,10 +71,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-<<<<<<< HEAD
-
-=======
->>>>>>> 2005-dev-eduardo
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -942,7 +937,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		final PublicidadForm publicidadForm = new PublicidadForm();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
-		String opcionUso = null;
+		final String opcionUso = null;
 		final String numBP = customerData.getNumBP();
 
 
