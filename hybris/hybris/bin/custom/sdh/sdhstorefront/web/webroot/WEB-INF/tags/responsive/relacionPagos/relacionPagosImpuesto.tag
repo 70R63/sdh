@@ -826,7 +826,7 @@
 		var obKey = selectObject.dataset.objkey;
 		var impuesto = selectObject.dataset.impuesto;
 		
-		ACC.gestionBancaria.bindReteIcaRecargar();
+		
 		
 		ACC.relacionPago.relacionPagoServicio(obKey,impuesto);
 		
