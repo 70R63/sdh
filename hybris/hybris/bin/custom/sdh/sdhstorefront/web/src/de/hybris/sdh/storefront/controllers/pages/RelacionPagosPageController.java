@@ -16,6 +16,7 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.RelacionPagosRequest;
 import de.hybris.sdh.core.pojos.responses.ImpuestosResponse;
 import de.hybris.sdh.core.pojos.responses.RelacionPagosResponse;
+import de.hybris.sdh.core.pojos.responses.Relacionpagosrespons;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
@@ -254,7 +255,14 @@ public class RelacionPagosPageController extends AbstractPageController
 
 			final String resp = sdhRelacionPagosService.getRelacionPagos(relacionPagosRequest);
 
-			relacionPagosResponse = mapper.readValue(resp, RelacionPagosResponse.class);
+			if (resp != null ) {
+				relacionPagosResponse = mapper.readValue(resp, RelacionPagosResponse.class);
+			}
+			else {
+				relacionPagosResponse.setRelacionpagosrespons(new Relacionpagosrespons());
+			}
+
+
 
 
 		}
