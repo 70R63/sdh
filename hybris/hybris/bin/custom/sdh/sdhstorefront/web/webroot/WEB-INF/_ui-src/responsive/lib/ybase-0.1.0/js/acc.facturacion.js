@@ -1,6 +1,6 @@
 ACC.facturacion = {
 
-	_autoload : ["bindBuscar"],
+	_autoload : ["bindBuscar","bindPagarFacturaBtn"],
 
 	
 	bindBuscar : function(){
@@ -68,7 +68,6 @@ ACC.facturacion = {
 	
 	
 	descargaFactura : function (anoGravable,numObjeto,tipoOperacion,descargaFactura1){
-		debugger;
 		ACC.spinner.show();
 		if(descargaFactura1 != undefined && descargaFactura1 != null){
 			var objnew = descargaFactura1;
@@ -171,5 +170,163 @@ ACC.facturacion = {
 		
 
 	},
+	
+	
+	bindPagarFacturaBtn : function(){
+		$(document).on("click", "#pagarFacturaBtn", function(e) {
+			e.preventDefault();
+			
+			var impuesto = $(this).data("impuesto");
+			var numObjeto = $(this).data("numObjeto");
+			var anoGravable = $("#aniograv");
+			
+			if(ACC.facturacion.validarAntesSubmitWSPagar(impuesto,anoGravable,numObjeto)){
+				ACC.spinner.show();
+				var dataActual = {};	
+			
+				
+				dataActual.impuesto = anoGravable;
+				dataActual.numObjeto = numObjeto;
+				dataActual.impuesto = impuesto;
+				
+//PENDIENTE: implementar llamada a WS y quitar este IF - INICIO
+				var dataResponse = null;
+				ACC.facturacion.manejarRespuestaWSPagar(dataActual,dataResponse);
+				if(true){
+					ACC.spinner.close();
+					return;				
+				}
+//PENDIENTE: implementar llamada a WS y quitar este IF - FIN
+
+				$.ajax({
+					url : ACC.obtenerListaPagarFacturaURL,
+					data : dataActual,
+					type : "GET",
+					success : function(dataResponse) {
+						ACC.spinner.close();
+						ACC.facturacion.manejarRespuestaWSPagar(dataActual,dataResponse);
+					},
+					error : function() {
+						ACC.spinner.close();
+						alert("Error procesar la solicitud de proceso de pago");	
+					}
+				});
+			}
+			
+			
+		});
+		
+		
+	},
+	
+	
+	manejarRespuestaWSPagar : function(dataActual,dataResponse){
+	 	ACC.publicidadexterior.bindDataTable_ID_refresh("#example");
+		ACC.facturacion.manejarRespuestaWSPagar_registrosTabla(dataActual,dataResponse);
+		
+		var tableImpuesto = document.getElementsByClassName("table pagarImpuesto");
+		tableImpuesto[0].setAttribute("id","example");
+		ACC.publicidadexterior.bindDataTable_id("#example");
+		
+		switch (dataActual.impuesto){
+			case "0001":
+				ACC.facturacion.visualizacionPopUpPagar (tableImpuesto[0],"Predial","0001");
+			break;
+			case "0002":
+				ACC.facturacion.visualizacionPopUpPagar (tableImpuesto[0],"Vehicular","0001");
+			break;
+		}
+
+		
+	},
+	
+	
+	
+	manejarRespuestaWSPagar_registrosTabla : function(dataActual,dataResponse){
+		
+		var claveCSSTabla = null;
+		
+//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
+			var value = {};
+			var concepto = "Concepto";
+//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
+		
+		switch (dataActual.impuesto){
+			case "0001":
+				claveCSSTabla = ".pagarImpuesto";
+//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
+			value.numReferencia = "01";
+			value.monto = "01";
+//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
+
+				break;
+			
+			case "0002":
+				claveCSSTabla = ".pagarImpuesto";
+				
+//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
+			value.numReferencia = "02";
+			value.monto = "02";
+//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
+			break;
+		}
+		
+		
+		if( claveCSSTabla != null){
+			$(claveCSSTabla+" tbody tr").remove();
+			
+			$(claveCSSTabla+" tbody").append(
+			'<tr>'+
+			'<td>'+ concepto + '</td>' +
+			'<td>'+ value.numReferencia + '</td>' +
+			'<td>'+ value.monto + '</td>' +
+			'<td><button id="btnAccionPagarFactura" data-concepto="' + concepto + '" data-numreferencia="' + value.numReferencia + '" data-monto="' + value.monto + '" type="button" onclick="ACC.facturacion.llamarPago(this)">Pagar</button></td>'+
+			'</tr>');			
+		}
+
+		
+	},
+	
+	
+	llamarPago : function(boton){
+		var concepto = $(boton).data("concepto");
+		var numReferencia = $(boton).data("numreferencia");
+		var monto = $(boton).data("monto");
+		
+		alert("aca se realiza el llamado para pagar concepto: " + concepto + " numReferencia: " + numReferencia + " monto: " + monto);	
+	},
+	
+	
+	
+	validarAntesSubmitWSPagar : function(impuesto,anoGravable,numObjeto){
+		var validacion = true;
+		
+		return validacion;
+	},
+	
+	
+	visualizacionPopUpPagar : function(tabla, tituloTabla, impuesto){
+
+        ACC.colorbox.open(tituloTabla, {
+            href: ".js-"+ impuesto +"-facet",
+            inline: true,
+            width: "90%",
+            onComplete: function () {
+                $(document).on("click", ".js-"+ impuesto +"-facet .js-facet-name-" + impuesto, function (e) {
+                    e.preventDefault();
+                    $(".js-"+ impuesto +"-facet  .js-facet-" + impuesto).removeClass("active");
+                    $(this).parents(".js-facet-" + impuesto).addClass("active");
+                    $.colorbox.resize()
+                })
+            },
+            onClosed: function () {
+                $(document).off("click", ".js-"+ impuesto +"-facet .js-facet-name-" + impuesto );
+            }
+        });
+		
+		
+	}
+	
+	
 	
 };

@@ -74,15 +74,15 @@
 							<!-- 							<th style="text-align: center"><label class="control-label" -->
 							<%-- 								for=""> <spring:theme --%>
 							<%-- 										code="descarga.factura.predial.selec" /></label></th> --%>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Pago voluntario" /></label></th>
+<%-- 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Pago voluntario" /></label></th> --%>
 <!-- 							<th style="text-align: center"><label class="control-label" -->
 <%-- 								for=""> <spring:theme code="Total a pagar" /></label></th> --%>
 <!-- 							<th style="text-align: center"><label class="control-label" -->
 <%-- 								for=""> <spring:theme code="Total con pago voluntario" /></label></th> --%>
 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Reexpedicion de factura" /></label></th>
 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Descargar factura" /></label></th>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar con aporte" /></label></th>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar sin aporte" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar" /></label></th>
+<%-- 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar sin aporte" /></label></th> --%>
 						</tr>
 					</thead>
 					<tbody>
@@ -102,7 +102,7 @@
 										<%-- 									type="radio" id="" name="objetoPredial" value="${eachPredial.numObjeto}"></td> --%>
 <!-- 										<td></td> -->
 <!-- 										<td></td> -->
-										<td></td>
+<!-- 										<td></td> -->
 										<td><label class="control-label"
 											style="text-transform: capitalize !important"
 											id="downloadFac" data-claveImpuesto="0001"
@@ -110,8 +110,8 @@
 											data-anioGrav="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}"
 											onclick="reexpedicion(this)"> <span class="">Reexpedir</span></label></td>
 										<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0001" data-nombreObjeto="objetoPredial" data-anioGrav="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}"></img></td>
-									<td><a onclick="validaBotonPago()"></a></td>
-									<td><a onclick="validaBotonPago()"></a></td>
+									<td><button id="pagarFacturaBtn" type="button" data-impuesto="0001" data-numObjeto="${eachPredial.numObjeto}" >Pagar</button></td>
+<!-- 									<td><a onclick="validaBotonPago()"></a></td> -->
 
 									</tr>
 								</c:if>
@@ -149,8 +149,8 @@
 <%-- 								for=""> <spring:theme code="Total con pago voluntario" /></label></th> --%>
 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Reexpedicion de factura" /></label></th>
 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Descargar factura" /></label></th>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar con aporte" /></label></th>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar sin aporte" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar" /></label></th>
+<%-- 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar sin aporte" /></label></th> --%>
 						</tr>
 					</thead>
 					<tbody>
@@ -181,8 +181,8 @@
 											data-nombreObjeto="objetoVehicular"
 											data-anioGrav="${eachVehiculo.anioGravable}" data-numObjeto="${eachVehiculo.numObjeto}"></img></td>
 										<td></td>
-										<td><a onclick="validaBotonPago()"></a></td>
-										<td><a onclick="validaBotonPago()"></a></td>
+										<td><button id="pagarFacturaBtn" type="button" data-impuesto="0002" data-numObjeto="${eachVehiculo.numObjeto}" >Pagar</button></td>
+<!-- 										<td><a onclick="validaBotonPago()"></a></td> -->
 
 									</tr>
 								</c:if>

@@ -13,6 +13,7 @@
 <c:choose>
 	<c:when test="${ not empty facturacionForm.vehicular || not empty facturacionForm.predial}">
 		<desfac:descargaFactura/>
+		<desfac:descargaFacturaPagar/>
 	</c:when>
 	<c:otherwise>
 		<desfac:sinDescargaFactura/>
