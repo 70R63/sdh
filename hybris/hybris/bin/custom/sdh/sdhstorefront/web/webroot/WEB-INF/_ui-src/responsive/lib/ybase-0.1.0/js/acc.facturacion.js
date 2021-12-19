@@ -277,11 +277,19 @@ ACC.facturacion = {
 			
 			$(claveCSSTabla+" tbody").append(
 			'<tr>'+
-			'<td>'+ concepto + '</td>' +
+			'<td>'+ "Pago con aporte voluntario" + '</td>' +
 			'<td>'+ value.numReferencia + '</td>' +
 			'<td>'+ value.monto + '</td>' +
-			'<td><button id="btnAccionPagarFactura" data-concepto="' + concepto + '" data-numreferencia="' + value.numReferencia + '" data-monto="' + value.monto + '" type="button" onclick="ACC.facturacion.llamarPago(this)">Pagar</button></td>'+
-			'</tr>');			
+			'<td><button id="btnAccionPagarFactura" data-concepto="' + "CON" + '" data-numreferencia="' + value.numReferencia + '" data-monto="' + value.monto + '" type="button" onclick="ACC.facturacion.llamarPago(this)">Pagar</button></td>'+
+			'</tr>');
+			
+			$(claveCSSTabla+" tbody").append(
+			'<tr>'+
+			'<td>'+ "Pago sin aporte voluntario" + '</td>' +
+			'<td>'+ value.numReferencia + '</td>' +
+			'<td>'+ value.monto + '</td>' +
+			'<td><button id="btnAccionPagarFactura" data-concepto="' + "SIN" + '" data-numreferencia="' + value.numReferencia + '" data-monto="' + value.monto + '" type="button" onclick="ACC.facturacion.llamarPago(this)">Pagar</button></td>'+
+			'</tr>');
 		}
 
 		
