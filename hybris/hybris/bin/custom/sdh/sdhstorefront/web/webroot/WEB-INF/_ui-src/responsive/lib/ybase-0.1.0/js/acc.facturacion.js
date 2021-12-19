@@ -72,7 +72,7 @@ ACC.facturacion = {
 		if(descargaFactura1 != undefined && descargaFactura1 != null){
 			var objnew = descargaFactura1;
 			
-			anoGravable = $.trim($(objnew).attr("data-anioGrav"));
+//			anoGravable = $.trim($(objnew).attr("data-anioGrav"));
 			numObjeto = $.trim($(objnew).attr("data-numObjeto"));
 		}
 			
