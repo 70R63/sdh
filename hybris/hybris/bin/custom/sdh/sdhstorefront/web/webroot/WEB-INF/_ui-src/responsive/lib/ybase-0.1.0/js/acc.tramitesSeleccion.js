@@ -1,35 +1,34 @@
 ACC.tramitesSeleccion = {
 
-	dataCreacionCaso : {},
-	cantidadArchivos : {},
+	dataCreacionCaso: {},
+	cantidadArchivos: {},
 
-	_autoload : [ "bindTramitesSelect", "bindTramitesSelectRol", "bindTramitesEnviar","bindTramitesEnviarRol", "bindConsCasoEnviar", "bindSelectCaso" ],
+	_autoload: ["bindTramitesSelect", "bindTramitesSelectRol", "bindTramitesEnviar", "bindTramitesEnviarRol", "bindConsCasoEnviar", "bindSelectCaso"],
 
-	bindTramitesSelect : function() {
-		$(document).on("change",".tramitestSN",function(e) {
+	bindTramitesSelect: function() {
+		$(document).on("change", ".tramitestSN", function(e) {
 			var valorNivel = $.trim($(this).attr("data-nivel"));
 			var valorActual = this.value;
 			ACC.tramitesSeleccion.determinacionSelect(valorNivel, valorActual, ACC.casoSeleccionURL);
 		});
 	},
 
-	
-	bindTramitesSelectRol : function() {
-		$(document).on("change",".tramitestSNRol",function(e) {
+
+	bindTramitesSelectRol: function() {
+		$(document).on("change", ".tramitestSNRol", function(e) {
 			var valorNivel = $.trim($(this).attr("data-nivel"));
 			var valorActual = this.value;
 			ACC.tramitesSeleccion.determinacionSelect(valorNivel, valorActual, ACC.casoSeleccionURLRol);
 		});
 	},
 
-	
-	determinacionSelectRol : function(){
+
+	determinacionSelectRol: function() {
 		ACC.tramitesSeleccion.determinacionSelect("2", "01", ACC.casoSeleccionURLRol);
 	},
-	
-	
-	determinacionSelect : function(valorNivel,valorActual,urlAccion){
-	
+
+
+	determinacionSelect: function(valorNivel, valorActual, urlAccion) {
 		ACC.spinner.show();
 		var dataActual = {};
 		dataActual.nivelSeleccion = valorNivel;
@@ -51,6 +50,7 @@ ACC.tramitesSeleccion = {
 			ACC.tramitesSeleccion.clearFieldsFromDataSelN1();
 			dataActual.valorN0 = $("#selectNivel0").val();
 			dataActual.valorN1 = $("#selectNivel1").val();
+			ACC.tramitesSeleccion.messageAgeteCrearBaja();
 		}
 
 		if (dataActual.nivelSeleccion == 2) {
@@ -66,7 +66,7 @@ ACC.tramitesSeleccion = {
 			dataActual.valorN2 = $("#selectNivel2").val();
 			dataActual.valorN3 = $("#selectNivel3").val();
 		}
-		
+
 		if (dataActual.nivelSeleccion == 4) {
 			dataActual.valorN0 = $("#selectNivel0").val();
 			dataActual.valorN1 = $("#selectNivel1").val();
@@ -74,30 +74,41 @@ ACC.tramitesSeleccion = {
 			dataActual.valorN3 = $("#selectNivel3").val();
 			dataActual.valorN4 = $("#selectNivel4").val();
 		}
-		
-		
-		if(urlAccion != null){
+
+
+		if (urlAccion != null) {
 			$.ajax({
-				url : urlAccion,
-				data : dataActual,
-				type : "GET",
-				success : function(dataResponse) {
+				url: urlAccion,
+				data: dataActual,
+				type: "GET",
+				success: function(dataResponse) {
 					ACC.spinner.close();
 					ACC.tramitesSeleccion.mostrarMensaje(dataResponse);
 					ACC.tramitesSeleccion.updateFromResponse(dataActual, dataResponse);
 				},
-				error : function() {
+				error: function() {
 					ACC.spinner.close();
 				}
 			});
 		}
-		
-	},
-	
-	
 
-	bindTramitesEnviar : function() {
-		$(document).on("click",".tramitesEnviar",function(e) {
+	},
+
+	messageAgeteCrearBaja: function() {
+		valorN0 = $("#selectNivel0").val();
+		valorN1 = $("#selectNivel1").val();
+		mensaje = $('#mensaje');
+
+		mensaje.val('');
+		if (valorN0 == 09 && valorN1 == 03) {
+			mensaje.val('Contribuyente:  \n Tipo Doc: CE   \n No. Doc: 396427 \n \n Agente: \n Tipo Doc: CE \n No. Doc.: 798515');
+		} else if (valorN0 == 09 && valorN1 == 04) {
+			mensaje.val('Contribuyente:  \n Tipo Doc: CE   \n No. Doc: 396427 \n \n Agente: \n Tipo Doc: CE \n No. Doc.: 798515');
+		}
+	},
+
+	bindTramitesEnviar: function() {
+		$(document).on("click", ".tramitesEnviar", function(e) {
 			e.preventDefault();
 			var config = {};
 			config.urlAccion = ACC.casoCreacionURL;
@@ -107,8 +118,8 @@ ACC.tramitesSeleccion = {
 	},
 
 
-	bindTramitesEnviarRol : function() {
-		$(document).on("click",".tramitesEnviarRol",function(e) {
+	bindTramitesEnviarRol: function() {
+		$(document).on("click", ".tramitesEnviarRol", function(e) {
 			e.preventDefault();
 			var config = {};
 			config.urlAccion = ACC.casoCreacionURLRol;
@@ -116,9 +127,9 @@ ACC.tramitesSeleccion = {
 			ACC.tramitesSeleccion.tramitesEnviar(e, config);
 		});
 	},
-	
-	
-	tramitesEnviar : function(e,config){
+
+
+	tramitesEnviar: function(e, config) {
 		ACC.spinner.show();
 		var valorNivel = 0;
 		var valorActual = this.value;
@@ -134,7 +145,7 @@ ACC.tramitesSeleccion = {
 		ACC.tramitesSeleccion.dataCreacionCaso.mensaje = $("#mensaje").val();
 
 		validacion = ACC.tramitesSeleccion.validarInfoAntesSubmit(ACC.tramitesSeleccion.dataCreacionCaso);
-		 
+
 		if (validacion == true) {
 			var itemSeleccionado;
 			var idItemSeleccionado;
@@ -143,7 +154,7 @@ ACC.tramitesSeleccion = {
 			var valorCampo = "";
 
 			ACC.tramitesSeleccion.dataCreacionCaso.archivosLeidos = 0;
-			if(ACC.tramitesSeleccion.cantidadArchivos > 0){
+			if (ACC.tramitesSeleccion.cantidadArchivos > 0) {
 				for (var i = 0; i < e.target.form.length; i++) {
 					itemSeleccionado = e.target.form[i];
 					idItemSeleccionado = e.target.form[i].id.substring(0, 17);
@@ -161,7 +172,7 @@ ACC.tramitesSeleccion = {
 							indiceArchivo = ACC.tramitesSeleccion.dataCreacionCaso.archivosLeidos;
 							ACC.tramitesSeleccion.dataCreacionCaso.archivosLeidos++;
 
-							campoEnPantalla = "#docLeido_"+ indiceItemSeleccionado;
+							campoEnPantalla = "#docLeido_" + indiceItemSeleccionado;
 							$(campoEnPantalla).val("X");
 
 							valorCampo = reader.result.substring(28);
@@ -171,29 +182,29 @@ ACC.tramitesSeleccion = {
 							// valorCampo;
 							// console.log(mensaje);
 
-							campoEnPantalla = "#docDescArchivo_"+ indiceItemSeleccionado;
+							campoEnPantalla = "#docDescArchivo_" + indiceItemSeleccionado;
 							valorCampo = $(campoEnPantalla).val();
-							campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.desA"+ indiceArchivo;
+							campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.desA" + indiceArchivo;
 							eval(campoEnData + "=" + eval('"valorCampo"'));
 
-							campoEnPantalla = "#docDependencia_"+ indiceItemSeleccionado;
+							campoEnPantalla = "#docDependencia_" + indiceItemSeleccionado;
 							valorCampo = $(campoEnPantalla).val();
-							campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.depe"+ indiceArchivo;
+							campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.depe" + indiceArchivo;
 							eval(campoEnData + "=" + eval('"valorCampo"'));
 
-							campoEnPantalla = "#docSerieID_"+ indiceItemSeleccionado;
+							campoEnPantalla = "#docSerieID_" + indiceItemSeleccionado;
 							valorCampo = $(campoEnPantalla).val();
-							campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.seri"+ indiceArchivo;
+							campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.seri" + indiceArchivo;
 							eval(campoEnData + "=" + eval('"valorCampo"'));
 
-							campoEnPantalla = "#docSSerieID_"+ indiceItemSeleccionado;
+							campoEnPantalla = "#docSSerieID_" + indiceItemSeleccionado;
 							valorCampo = $(campoEnPantalla).val();
-							campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.sser"+ indiceArchivo;
+							campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.sser" + indiceArchivo;
 							eval(campoEnData + "=" + eval('"valorCampo"'));
 
-							campoEnPantalla = "#docTipoDoc_"+ indiceItemSeleccionado;
+							campoEnPantalla = "#docTipoDoc_" + indiceItemSeleccionado;
 							valorCampo = $(campoEnPantalla).val();
-							campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.tipd"+ indiceArchivo;
+							campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.tipd" + indiceArchivo;
 							eval(campoEnData + "=" + eval('"valorCampo"'));
 
 							indiceArchivo++;
@@ -204,35 +215,35 @@ ACC.tramitesSeleccion = {
 
 					}
 				}
-			}else{
+			} else {
 				ACC.tramitesSeleccion.llamarWSCreacionCaso(config);
 			}
 		}
-		
+
 		ACC.spinner.close();
 	},
 
-	
-	llamarWSCreacionCaso : function(config){
-		
+
+	llamarWSCreacionCaso: function(config) {
+
 		ACC.spinner.show();
 		$.ajax({
-			url : config.urlAccion,
-			data : ACC.tramitesSeleccion.dataCreacionCaso,
-			type : "POST",
-			success : function(dataResponse) {
+			url: config.urlAccion,
+			data: ACC.tramitesSeleccion.dataCreacionCaso,
+			type: "POST",
+			success: function(dataResponse) {
 				ACC.spinner.close();
-				ACC.tramitesSeleccion.resultadoCreacionCaso(ACC.tramitesSeleccion.dataCreacionCaso,dataResponse,config);
+				ACC.tramitesSeleccion.resultadoCreacionCaso(ACC.tramitesSeleccion.dataCreacionCaso, dataResponse, config);
 			},
-			error : function() {
+			error: function() {
 				ACC.spinner.close();
 			}
 		});
-		
+
 	},
 
 
-	obtenerIndiceArchivos : function(nombreArchivo) {
+	obtenerIndiceArchivos: function(nombreArchivo) {
 		var indiceArchivo = -1;
 		var campoEnPantalla = "";
 		var nombreArchivoPantalla = "";
@@ -250,8 +261,8 @@ ACC.tramitesSeleccion = {
 		return indiceArchivo;
 	},
 
-	bindConsCasoEnviar : function() {
-		$(document).on("click",".consCasoEnviar",function(e) {
+	bindConsCasoEnviar: function() {
+		$(document).on("click", ".consCasoEnviar", function(e) {
 			e.preventDefault();
 			ACC.spinner.show();
 			ACC.tramitesSeleccion.clearSeleccionCaso();
@@ -263,14 +274,14 @@ ACC.tramitesSeleccion = {
 			dataActual.radicado = $("#radicado").val();
 
 			$.ajax({
-				url : ACC.casoConsultaURL,
-				data : dataActual,
-				type : "GET",
-				success : function(dataResponse) {
+				url: ACC.casoConsultaURL,
+				data: dataActual,
+				type: "GET",
+				success: function(dataResponse) {
 					ACC.spinner.close();
 					ACC.tramitesSeleccion.resultadoConsultaCaso(dataActual, dataResponse);
 				},
-				error : function() {
+				error: function() {
 					ACC.spinner.close();
 				}
 			});
@@ -278,7 +289,7 @@ ACC.tramitesSeleccion = {
 		});
 	},
 
-	resultadoConsultaCaso : function(infoSeleccion, infoResponse) {
+	resultadoConsultaCaso: function(infoSeleccion, infoResponse) {
 
 		ACC.tramitesSeleccion.clearSeleccionCaso();
 		var mostrarTabDocs = false;
@@ -287,57 +298,57 @@ ACC.tramitesSeleccion = {
 		$("#tableInfo").find("tr:gt(0)").remove();
 		if (infoResponse.infoCasos.length > 0) {
 			$
-					.each(
-							infoResponse.infoCasos,
-							function(index, value) {
-								infoDocsData = "";
-								if (value.archivos != null) {
-									for (var i = 0; i < 1; i++) {
-										infoDocsData = infoDocsData
-												+ ' data-descArchivo_'
-												+ i
-												+ ' = "'
-												+ value.archivos.zzwcc_desc_tipodoc
-												+ '"';
-									}
-								}
-								$('#tableInfo')
-										.append(
-												"<tr>"
-														+ '<td><label class="control-label labeltabletd tableident selectCaso" data-num_caso=" '
-														+ value.num_caso
-														+ '" data-num_radicado=" '
-														+ value.num_radicado
-														+ '" data-tramite=" '
-														+ value.tramite
-														+ '" data-estatus=" '
-														+ value.estatus
-														+ '" data-cat01=" '
-														+ value.cat01
-														+ '" data-cat02=" '
-														+ value.cat02
-														+ '" data-cat03=" '
-														+ value.cat03
-														+ '" data-cat04=" '
-														+ value.cat04
-														+ '" data-mensaje=" '
-														+ value.mensaje
-														+ '"'
-														+ infoDocsData
-														+ '>'
-														+ value.num_caso
-														+ '</label>'
-														+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-														+ value.num_radicado
-														+ '" /></td>'
-														+ '<td><input style="width: 195px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="100" value="'
-														+ value.tramite
-														+ '" /></td>'
-														+ '<td><input style="width: 135px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-														+ value.estatus
-														+ '" /></td>' + "</tr>");
-								mostrarTabDocs = true;
-							});
+				.each(
+					infoResponse.infoCasos,
+					function(index, value) {
+						infoDocsData = "";
+						if (value.archivos != null) {
+							for (var i = 0; i < 1; i++) {
+								infoDocsData = infoDocsData
+									+ ' data-descArchivo_'
+									+ i
+									+ ' = "'
+									+ value.archivos.zzwcc_desc_tipodoc
+									+ '"';
+							}
+						}
+						$('#tableInfo')
+							.append(
+								"<tr>"
+								+ '<td><label class="control-label labeltabletd tableident selectCaso" data-num_caso=" '
+								+ value.num_caso
+								+ '" data-num_radicado=" '
+								+ value.num_radicado
+								+ '" data-tramite=" '
+								+ value.tramite
+								+ '" data-estatus=" '
+								+ value.estatus
+								+ '" data-cat01=" '
+								+ value.cat01
+								+ '" data-cat02=" '
+								+ value.cat02
+								+ '" data-cat03=" '
+								+ value.cat03
+								+ '" data-cat04=" '
+								+ value.cat04
+								+ '" data-mensaje=" '
+								+ value.mensaje
+								+ '"'
+								+ infoDocsData
+								+ '>'
+								+ value.num_caso
+								+ '</label>'
+								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+								+ value.num_radicado
+								+ '" /></td>'
+								+ '<td><input style="width: 195px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="100" value="'
+								+ value.tramite
+								+ '" /></td>'
+								+ '<td><input style="width: 135px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+								+ value.estatus
+								+ '" /></td>' + "</tr>");
+						mostrarTabDocs = true;
+					});
 			for (var i = 0; i < infoResponse.infoCasos; i++) {
 				campoEnPantalla = "#docNombreArchivo_" + i;
 				nombreArchivoPantalla = $(campoEnPantalla).val();
@@ -358,8 +369,8 @@ ACC.tramitesSeleccion = {
 
 	},
 
-	bindSelectCaso : function() {
-		$(document).on("click",".selectCaso",function(e) {
+	bindSelectCaso: function() {
+		$(document).on("click", ".selectCaso", function(e) {
 
 			var valorCampo;
 			var infoDocsData = "";
@@ -367,7 +378,7 @@ ACC.tramitesSeleccion = {
 			valorCampo = $.trim($(this).attr("data-num_caso"));
 			$("#det_num_caso").val(valorCampo);
 			valorCampo = $.trim($(this).attr(
-					"data-num_radicado"));
+				"data-num_radicado"));
 			$("#det_num_radicado").val(valorCampo);
 			// valorCampo =
 			// $.trim($(this).attr("data-tramite"));
@@ -392,8 +403,8 @@ ACC.tramitesSeleccion = {
 				valorCampo = $.trim($(this).attr(nombreCampo));
 				if (valorCampo != "") {
 					infoDocsData = infoDocsData
-							+ '<div class="col-md-1"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="60" /> <label>'
-							+ valorCampo + '</label></div>';
+						+ '<div class="col-md-1"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="60" /> <label>'
+						+ valorCampo + '</label></div>';
 				}
 			}
 			$("#docsAdjuntos").find("div:gt(0)").remove();
@@ -406,7 +417,7 @@ ACC.tramitesSeleccion = {
 		});
 	},
 
-	clearSeleccionCaso : function() {
+	clearSeleccionCaso: function() {
 
 		var doc = document.getElementById('tableInfo');
 		doc.style.display = 'none';
@@ -416,7 +427,7 @@ ACC.tramitesSeleccion = {
 
 	},
 
-	validarInfoAntesSubmit : function(infoActual, infoResponse) {
+	validarInfoAntesSubmit: function(infoActual, infoResponse) {
 
 		var validacion = true;
 
@@ -435,7 +446,7 @@ ACC.tramitesSeleccion = {
 								if (infoActual.valorN3 != null) {
 									if (infoActual.valorN3 == "00") {
 										validacion = false;
-									}else{
+									} else {
 										if (infoActual.valorN4 != null) {
 											if (infoActual.valorN4 == "00") {
 												validacion = false;
@@ -462,7 +473,7 @@ ACC.tramitesSeleccion = {
 		var mensajeValidacion = "Por favor ingresar los valores obligatorios marcados con *";
 		if (validacion == true) {
 			validacion = ACC.tramitesSeleccion.validarArchivosAntesSubmit();
-			if(validacion == false){
+			if (validacion == false) {
 				mensajeValidacion = "No han sido adjuntados los documentos requeridos para este trámite";
 			}
 		}
@@ -473,8 +484,8 @@ ACC.tramitesSeleccion = {
 
 		return validacion;
 	},
-	
-	validarInfoAntesSubmitRol : function(infoActual, infoResponse) {
+
+	validarInfoAntesSubmitRol: function(infoActual, infoResponse) {
 
 		var validacion = true;
 
@@ -493,17 +504,17 @@ ACC.tramitesSeleccion = {
 								if (infoActual.valorN3 != null) {
 									if (infoActual.valorN3 == "00") {
 										validacion = false;
-									}else{
+									} else {
 										if (infoActual.valorN4 != null) {
 											if (infoActual.valorN4 == "00") {
 												validacion = false;
-											}else{
+											} else {
 												if (infoActual.valorN5 != null) {
 													if (infoActual.valorN5 == "00") {
 														validacion = false;
-													}	
-												}		
-											}	
+													}
+												}
+											}
 										}
 									}
 								}
@@ -526,7 +537,7 @@ ACC.tramitesSeleccion = {
 		var mensajeValidacion = "Por favor ingresar los valores obligatorios marcados con *";
 		if (validacion == true) {
 			validacion = ACC.tramitesSeleccion.validarArchivosAntesSubmit();
-			if(validacion == false){
+			if (validacion == false) {
 				mensajeValidacion = "No han sido adjuntados los documentos requeridos para este trámite";
 			}
 		}
@@ -537,10 +548,10 @@ ACC.tramitesSeleccion = {
 
 		return validacion;
 	},
-	
-	
 
-	validarArchivosAntesSubmit : function() {
+
+
+	validarArchivosAntesSubmit: function() {
 
 		var validacion = true;
 		var campoDesArchivo = "";
@@ -568,7 +579,7 @@ ACC.tramitesSeleccion = {
 		return validacion;
 	},
 
-	updateFromResponse : function(infoActual, infoResponse) {
+	updateFromResponse: function(infoActual, infoResponse) {
 
 		ACC.tramitesSeleccion.performActionFromResponse(infoResponse);
 		ACC.tramitesSeleccion.updateSelectFromResponse(infoActual, infoResponse);
@@ -576,12 +587,12 @@ ACC.tramitesSeleccion = {
 
 	},
 
-	updateSelectFromResponse : function(infoActual, infoResponse) {
+	updateSelectFromResponse: function(infoActual, infoResponse) {
 		if (infoActual.nivelSeleccion == 0) {
 			ACC.tramitesSeleccion.clearFieldsFromDataSelN0();
 			if (infoResponse.opciones.length > 0) {
 				$.each(infoResponse.opciones, function(index, value) {
-					$('#selectNivel1').append("<option value=" + value.key + ">" + value.label+ "</option>");
+					$('#selectNivel1').append("<option value=" + value.key + ">" + value.label + "</option>");
 				})
 				$("#divSubtramite").show();
 			}
@@ -592,7 +603,7 @@ ACC.tramitesSeleccion = {
 
 			if (infoResponse.opciones.length > 0) {
 				$.each(infoResponse.opciones, function(index, value) {
-					$('#selectNivel2').append("<option value=" + value.key + ">" + value.label+ "</option>");
+					$('#selectNivel2').append("<option value=" + value.key + ">" + value.label + "</option>");
 				})
 				$("#divCategoria").show();
 			}
@@ -603,18 +614,18 @@ ACC.tramitesSeleccion = {
 
 			if (infoResponse.opciones.length > 0) {
 				$.each(infoResponse.opciones, function(index, value) {
-					$('#selectNivel3').append("<option value=" + value.key + ">" + value.label+ "</option>");
+					$('#selectNivel3').append("<option value=" + value.key + ">" + value.label + "</option>");
 				})
 				$("#divSubCategoria").show();
 			}
 		}
-		
+
 		if (infoActual.nivelSeleccion == 3) {
 			ACC.tramitesSeleccion.clearFieldsFromDataSelN3();
 
 			if (infoResponse.opciones.length > 0) {
 				$.each(infoResponse.opciones, function(index, value) {
-					$('#selectNivel4').append("<option value=" + value.key + ">" + value.label+ "</option>");
+					$('#selectNivel4').append("<option value=" + value.key + ">" + value.label + "</option>");
 				})
 				$("#divRol").show();
 			}
@@ -622,42 +633,42 @@ ACC.tramitesSeleccion = {
 
 	},
 
-	resultadoCreacionCaso : function(infoActual, infoResponse, config) {
+	resultadoCreacionCaso: function(infoActual, infoResponse, config) {
 
 		var mensaje = "";
 
 		if (infoResponse.respuesta.num_caso != null) {
-			mensaje = infoResponse.respuesta.descripcion 
-			        //+ " "
-					//+ infoResponse.respuesta.num_caso;
-			if(config.postCreacion == "T"){
+			mensaje = infoResponse.respuesta.descripcion
+			//+ " "
+			//+ infoResponse.respuesta.num_caso;
+			if (config.postCreacion == "T") {
 				var doc = document.getElementById('documentos');
 				doc.style.display = 'none';
 				$("#mensaje").val("");
 				ACC.tramitesSeleccion.clearFieldsFromDataSelN0();
 				$("#selectNivel0").val("00");
-			}	
+			}
 		} else {
 			mensaje = infoResponse.respuesta.descripcion;
 		}
 		var mensaje2 = confirm(mensaje);
 
-		if(config.postCreacion == "T"){
+		if (config.postCreacion == "T") {
 			// Detectamos si el usuario acepto el mensaje
 			if (mensaje2) {
 				window.location.href = ACC.tramiteExitosoURL;
 			}
 			// Detectamos si el usuario denegó el mensaje
 			else {
-				window.location.href =ACC.currentURL;
+				window.location.href = ACC.currentURL;
 			}
-		}else if(config.postCreacion == "R"){
+		} else if (config.postCreacion == "R") {
 			cancelarAccion();
 		}
 
 	},
 
-	fillDocsDataFromResponse : function(docTramites) {
+	fillDocsDataFromResponse: function(docTramites) {
 
 		var doc = document.getElementById('documentos');
 		var mostrarTabDocs = false;
@@ -671,7 +682,7 @@ ACC.tramitesSeleccion = {
 			// ACC.tramitesSeleccion.cantidadArchivos =
 			// docTramites.docTramitesResponse.documentos.length;
 			$("#documentos").find("tr:gt(0)").remove();
-			$.each(docTramites.docTramitesResponse.documentos,function(index, value) {
+			$.each(docTramites.docTramitesResponse.documentos, function(index, value) {
 				if (value.tipoDocumen_t != '') {
 					subserie = "";
 					if (value.subserie != null) {
@@ -679,14 +690,14 @@ ACC.tramitesSeleccion = {
 					}
 					archivosValidos++;
 
-					$('#documentos').append("<tr>"+ 
-					'<td><input style="width:710px; font-size:9px !important" class="inputtextnew" disabled="disabled" type="text" size="30" id="docDescArchivo_'+ index+ '" value="'+ value.tipoDocumen_t+ '"/></td>"'+ 
-					'<td><input style="width:405px" class="inputtextnew" type="file" size="150" id="docNombreArchivo_'+ index+ '" />'+ '<input type="hidden" id="docDependencia_'+ index+ '" value="'+ value.dependencia+ '" />'+ '<input type="hidden" id="docSerieID_'+ index+ '" value="'+ value.serie+ '" />'+ '<input type="hidden" id="docSSerieID_'+ index+ '" value="'+ subserie+ '" />'+ '<input type="hidden" id="docTipoDoc_'+ index+ '" value="'+ value.tipoDocumen+ '" />'+ '<input type="hidden" id="docLeido_'+ index+ '" value="" />'+ "</td>" + 
-					"</tr>");
+					$('#documentos').append("<tr>" +
+						'<td><input style="width:710px; font-size:9px !important" class="inputtextnew" disabled="disabled" type="text" size="30" id="docDescArchivo_' + index + '" value="' + value.tipoDocumen_t + '"/></td>"' +
+						'<td><input style="width:405px" class="inputtextnew" type="file" size="150" id="docNombreArchivo_' + index + '" />' + '<input type="hidden" id="docDependencia_' + index + '" value="' + value.dependencia + '" />' + '<input type="hidden" id="docSerieID_' + index + '" value="' + value.serie + '" />' + '<input type="hidden" id="docSSerieID_' + index + '" value="' + subserie + '" />' + '<input type="hidden" id="docTipoDoc_' + index + '" value="' + value.tipoDocumen + '" />' + '<input type="hidden" id="docLeido_' + index + '" value="" />' + "</td>" +
+						"</tr>");
 					mostrarTabDocs = true;
 				}
 			});
-							
+
 			ACC.spinner.close();
 		}
 		ACC.tramitesSeleccion.cantidadArchivos = archivosValidos;
@@ -699,7 +710,7 @@ ACC.tramitesSeleccion = {
 
 	},
 
-	performActionFromResponse : function(infoResponse) {
+	performActionFromResponse: function(infoResponse) {
 
 		var urlAccion = $.ajaxPrefilter();
 		urlAccion = urlAccion + infoResponse.urlAccion;
@@ -710,7 +721,7 @@ ACC.tramitesSeleccion = {
 
 	},
 
-	clearFieldsFromDataSelN0 : function() {
+	clearFieldsFromDataSelN0: function() {
 
 		$("#divRol").hide();
 		$("#divSubCategoria").hide();
@@ -727,7 +738,7 @@ ACC.tramitesSeleccion = {
 
 	},
 
-	clearFieldsFromDataSelN1 : function() {
+	clearFieldsFromDataSelN1: function() {
 
 		$("#divRol").hide();
 		$("#divSubCategoria").hide();
@@ -741,8 +752,8 @@ ACC.tramitesSeleccion = {
 
 	},
 
-	clearFieldsFromDataSelN2 : function() {
-		
+	clearFieldsFromDataSelN2: function() {
+
 		$("#divRol").hide();
 		$("#divSubCategoria").hide();
 		$("#selectNivel3").find("option:gt(0)").remove();
@@ -751,20 +762,20 @@ ACC.tramitesSeleccion = {
 		$("#selectNivel4").find("option:eq(0)").remove();
 
 	},
-	
-	clearFieldsFromDataSelN3 : function() {
-		
+
+	clearFieldsFromDataSelN3: function() {
+
 		$("#divRol").hide();
 		$("#selectNivel4").find("option:gt(0)").remove();
 		$("#selectNivel4").find("option:eq(0)").remove();
 
 	},
-	
-	
-	mostrarMensaje : function(infoResponse){
-		
-		if(infoResponse!= null && infoResponse.notas!= null && infoResponse.notas.trim() !=""){
-	    	$("#dialogMensajes" ).dialog( "open" );
+
+
+	mostrarMensaje: function(infoResponse) {
+
+		if (infoResponse != null && infoResponse.notas != null && infoResponse.notas.trim() != "") {
+			$("#dialogMensajes").dialog("open");
 			$("#dialogMensajesContent").html("");
 			$("#dialogMensajesContent").html(infoResponse.notas);
 		}
