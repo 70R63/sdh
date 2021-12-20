@@ -35,6 +35,8 @@ import de.hybris.sdh.storefront.forms.MiRitForm;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -109,7 +111,16 @@ public class ReexpedicionFacturaPageController extends AbstractPageController
 
 	@Resource(name = "sdhConfigCatalogos")
 	SDHConfigCatalogos sdhConfigCatalogos;
+	
+	
+	@ModelAttribute("socialNetworks")
+	public List<String> getSocialNetworks()
+	{
+		final List<String> socialNetworks = Arrays.asList("FACEBOOK", "INSTAGRAM", "LINKEDIN", "SKYPE", "TWITTER", "WHATSAPP",
+				"YOUTUBE");
 
+		return socialNetworks;
+	}
 
 
 	@RequestMapping(value = "/contribuyentes/reexpedicionfactura", method = RequestMethod.GET)
