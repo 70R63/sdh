@@ -107,10 +107,10 @@
 											style="text-transform: capitalize !important"
 											id="downloadFac" data-claveImpuesto="0001"
 											data-nombreObjeto="objetoPredial"
-											data-anioGrav="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}"
+											data-anioGrav="${eachPredial.anioGravable}" data-numobjeto="${eachPredial.numObjeto}"
 											onclick="reexpedicion(this)"> <span class="">Reexpedir</span></label></td>
-										<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0001" data-nombreObjeto="objetoPredial" data-anioGrav="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}"></img></td>
-									<td><button id="pagarFacturaBtn" type="button" data-impuesto="0001" data-numObjeto="${eachPredial.numObjeto}" >Pagar</button></td>
+										<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0001" data-nombreObjeto="objetoPredial" data-anioGrav="${eachPredial.anioGravable}" data-numobjeto="${eachPredial.numObjeto}"></img></td>
+									<td><button id="pagarFacturaBtn" type="button" data-impuesto="0001" data-numobjeto="${eachPredial.numObjeto}" >Pagar</button></td>
 <!-- 									<td><a onclick="validaBotonPago()"></a></td> -->
 
 									</tr>
@@ -175,13 +175,13 @@
 											style="text-transform: capitalize !important"
 											id="downloadFac" data-claveImpuesto="0002"
 											data-nombreObjeto="objetoVehicular"
-											data-anioGrav="${eachVehiculo.anioGravable}" data-numObjeto="${eachVehiculo.numObjeto}"
+											data-anioGrav="${eachVehiculo.anioGravable}" data-numobjeto="${eachVehiculo.numObjeto}"
 											onclick="reexpedicion(this)"> <span class="">Reexpedir</span></label></td>
 										<td><img id="downloadFac" src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0002"
 											data-nombreObjeto="objetoVehicular"
-											data-anioGrav="${eachVehiculo.anioGravable}" data-numObjeto="${eachVehiculo.numObjeto}"></img></td>
+											data-anioGrav="${eachVehiculo.anioGravable}" data-numobjeto="${eachVehiculo.numObjeto}"></img></td>
 										<td></td>
-										<td><button id="pagarFacturaBtn" type="button" data-impuesto="0002" data-numObjeto="${eachVehiculo.numObjeto}" >Pagar</button></td>
+										<td><button id="pagarFacturaBtn" type="button" data-impuesto="0002" data-numobjeto="${eachVehiculo.numObjeto}" >Pagar</button></td>
 <!-- 										<td><a onclick="validaBotonPago()"></a></td> -->
 
 									</tr>
@@ -220,22 +220,9 @@
 
 	}
 	function descargaFactura(descargaFactura1) {
-var objeto = this;
-		
 		var anoGravable = $("#aniograv").val();
 		var claveImpuesto = $("#impuesto").val();
-		var nombreObjeto = "";
-		
-		switch (claveImpuesto){
-		case "0001":
-			nombreObjeto = "objetoPredial";
-			break;
-		case "0002":
-			nombreObjeto = "objetoVehicular";
-			break;
-		}
-		var numObjeto = $("input[name='"+nombreObjeto+"']:checked"). val();
-	
+		var numObjeto = $.trim($(descargaFactura1).attr("data-numobjeto"));
 		
 		ACC.facturacion.descargaFactura(anoGravable,numObjeto,1,descargaFactura1);
 	}
@@ -244,19 +231,9 @@ var objeto = this;
 	function reexpedicion(reexpedicionFactura){
 		$("#anoGravable").val($("#aniograv").val());
 		var claveImpuesto = $("#impuesto").val();
-		var nombreObjeto = "";
-		
-		switch (claveImpuesto){
-		case "0001":
-			nombreObjeto = "objetoPredial";
-			break;
-		case "0002":
-			nombreObjeto = "objetoVehicular";
-			break;
-		}
-// 		var numObjeto = $("input[name='"+nombreObjeto+"']:checked"). val();
-// 		$("#numObjeto").val(numObjeto);
-		var numObjeto = $.trim($(reexpedicionFactura).attr("data-numObjeto"));
+		var numObjeto = $.trim($(reexpedicionFactura).attr("data-numobjeto"));
+		$("#numObjeto").val(numObjeto);
+
 		var form = document.getElementById('reexpedicionFacturaAct');
 		if(form!=null && numObjeto!= null && numObjeto!=""){
 			form.submit();
