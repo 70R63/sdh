@@ -8,6 +8,35 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="formElement"
 	tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
+	
+	
+	
+<spring:url value="/impuestos/preparaPagoPSE" var="pagarURL"
+	htmlEscape="false" />
+
+<div class="container">
+	<div class="row">
+		<sf:form action="${pagarURL}" method="POST" modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
+			<div class="col-md-2">
+				<sf:hidden path="tipoImpuesto" id="pagarEnLinea_tipoImpuesto"/>
+				<sf:hidden path="numBP" id="pagarEnLinea_numBP"/>
+				<sf:hidden path="numDoc" id="pagarEnLinea_numDoc"/>
+				<sf:hidden path="tipoDoc" id="pagarEnLinea_tipoDoc"/>
+				<sf:hidden path="anoGravable" id="pagarEnLinea_anoGravable"/>
+				<sf:hidden path="periodo" id="pagarEnLinea_periodo"/>
+				<sf:hidden path="clavePeriodo" id="pagarEnLinea_clavePeriodo"/>
+				<sf:hidden path="dv" id="pagarEnLinea_dv"/>
+				<sf:hidden path="numObjeto" id="pagarEnLinea_numObjeto"/>
+				<sf:hidden path="chip" id="pagarEnLinea_chip"/>
+				<sf:hidden path="fechaVenc" id="pagarEnLinea_fechaVenc"/>
+				<sf:hidden path="numRef" id="pagarEnLinea_numRef"/>
+				<sf:hidden path="totalPagar" id="pagarEnLinea_totalPagar"/>
+				<sf:hidden path="cdu" id="pagarEnLinea_cdu"/>
+				<sf:hidden path="placa" id="pagarEnLinea_placa"/>
+			</div>
+		</sf:form>
+	</div>
+</div>	
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <spring:url value="/concesionarios" var="conURL"
@@ -82,7 +111,8 @@
 							<th style="text-align: center" class="col-md-1"><label class="control-label labeltabletd " for=""> <spring:theme code="concesionario.inicial.vencimiento" /></label></th>
 							<th style="text-align: center" class="col-md-1"><label class="control-label labeltabletd " for=""> <spring:theme code="concesionario.inicial.estatusdeReferencia" /></label></th>
 							<th style="text-align: center" class="col-md-1"><label class="control-label labeltabletd " for=""> <spring:theme code="concesionario.inicial.valRef" /></label></th>
-							<th style="text-align: center" class="col-md-1"><label class="control-label labeltabletd " for=""> <spring:theme code="concesionario.inicial.impresion" /></label></th>
+							<!--<th style="text-align: center" class="col-md-1"><label class="control-label labeltabletd " for=""> <spring:theme code="concesionario.inicial.impresion" /></label></th> -->
+							<th style="text-align: center" class="col-md-1"><label class="control-label labeltabletd " for=""> <spring:theme code="concesionario.inicial.pagar" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -95,10 +125,63 @@
 </div>
 
 
+
+
+
+
 <script type="text/javascript">
 
 function buscar(){
 	ACC.concesionarios.buscar();
+	
+}
+
+
+function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar,cdu,placa,facilidad,montoFacilidad){
+	
+	debugger;
+	
+	var numBP = "${customerData.numBP}";
+	var numDoc = "${customerData.documentNumber}";
+	var tipoDoc = "${customerData.documentType}";
+	if (periodo === null || periodo === '' || typeof periodo === 'undefined' ){
+		var clavePeriodo = anoGravable.substr(2,2).concat("A1");
+	}	  
+	else{
+		var clavePeriodo = anoGravable.substr(2,2).concat(periodo);
+	} 
+	var dv = "${customerData.digVer}";
+	
+	
+	$("#pagarEnLinea_tipoImpuesto").val(tipoImpuesto);
+	$("#pagarEnLinea_numBP").val(numBP);
+	$("#pagarEnLinea_numDoc").val(numDoc);
+	$("#pagarEnLinea_tipoDoc").val(tipoDoc);		
+	$("#pagarEnLinea_anoGravable").val(anoGravable);
+	$("#pagarEnLinea_periodo").val(periodo);
+	$("#pagarEnLinea_clavePeriodo").val(clavePeriodo);
+	$("#pagarEnLinea_dv").val(dv);
+	$("#pagarEnLinea_numObjeto").val(numObjeto);
+	$("#pagarEnLinea_chip").val(chip);
+	$("#pagarEnLinea_cdu").val(cdu);
+	$("#pagarEnLinea_placa").val(placa);
+	
+	
+	if(fechaVenc === '' || fechaVenc.search("/") >= 0 || periodo.search("/") >= 0){
+		$("#pagarEnLinea_fechaVenc").val(fechaVenc);
+	}else{
+		var fechaVencimineto = fechaVenc.substring(6,8).concat("/",fechaVenc.substring(4,6),"/",fechaVenc.substring(0,4));
+		$("#pagarEnLinea_fechaVenc").val(fechaVencimineto);
+	}
+	
+	$("#pagarEnLinea_numRef").val(numRef);
+    $("#pagarEnLinea_totalPagar").val(totalPagar);
+	
+	
+	var form = document.getElementById("infoPreviaPSE");
+	if(form!=null){
+		form.submit();
+	}
 	
 }
 

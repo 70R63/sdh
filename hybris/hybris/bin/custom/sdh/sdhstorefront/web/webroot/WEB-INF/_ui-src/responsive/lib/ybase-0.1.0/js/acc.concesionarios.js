@@ -61,7 +61,21 @@ ACC.concesionarios = {
 						'<td>' + fechaVencimiento + '</td>'+
 						'<td>' + status + '</td>'+
 						'<td>' + value.BETRW + '</td>'+
-						'<td><img src="'+ACC.config.themeResourcePath+'/images/download_icon.png"></td>' +
+						'<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important; text-align: center " id="Detalle" '+ 
+						'onclick="pagarEnLinea(' + '\'5103\'' + ',\'' 
+						                         + value.PERSL.substring(0,2) + '\','
+												 + '\'\'' + ',\'' 
+												 + value.PSOBTXT + '\',' 
+												 + '\'\'' + ',\'' 
+												 + fechaVencimiento + '\',\'' 
+												 + value.XBLNR + '\',\'' 
+												 + value.BETRW + '\',' 
+												 + '\'\'' + ',\'' 
+												 + value.PSOBTXT + '\',' 
+												 + '\'\'' + ',' 
+												 + '\'\'' 
+						+')" ' + 
+						'>Pagar</label></td>'+	
 						"</tr>");
 			});
 		}

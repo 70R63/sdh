@@ -16,6 +16,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.dao.SdhReferenceStatusDao;
 import de.hybris.sdh.core.pojos.requests.ConcesionariosRequest;
+import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.responses.Concesionarios;
 import de.hybris.sdh.core.pojos.responses.ConcesionariosResponse;
 import de.hybris.sdh.core.services.SDHConcesionariosService;
@@ -23,11 +24,9 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.ConcesionariosForm;
 
 import java.text.ParseException;
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -92,7 +91,7 @@ public class ConcesionariosPageController extends AbstractPageController
 
 	@Resource(name = "sdhConcesionariosService")
 	SDHConcesionariosService sdhConcesionariosService;
-	
+
 	@Resource(name = "sessionService")
 	SessionService sessionService;
 
@@ -117,6 +116,7 @@ public class ConcesionariosPageController extends AbstractPageController
 
 		model.addAttribute("fecInio", "DD/MM/YYYY");
 		model.addAttribute("concesionarios", new ConcesionariosForm());
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMB_CONCESIONARIOS));
 
@@ -124,7 +124,7 @@ public class ConcesionariosPageController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
-	
+
 	@RequestMapping(value = "/concesionarios/listado", method = RequestMethod.GET)
 	@RequireHardLogIn
 	@ResponseBody
@@ -135,8 +135,8 @@ public class ConcesionariosPageController extends AbstractPageController
 	{
 		LOG.info("En listado de concesionarios");
 		List<Concesionarios> listado = null;
-		
-		String ernam = sessionService.getCurrentSession().getAttribute("concesionarios_ernam");
+
+		final String ernam = sessionService.getCurrentSession().getAttribute("concesionarios_ernam");
 //		ernam = "JORTIZ";
 
 		final ConcesionariosRequest concesionariosRequest = new ConcesionariosRequest();
@@ -144,12 +144,12 @@ public class ConcesionariosPageController extends AbstractPageController
 		if(concesionarios != null) {
 			concesionariosRequest.setaUGUST(concesionarios.getReferenceStatus());
 			if(concesionarios.getFecInio() != null ) {
-   	      DateTimeFormatter formatterD = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-   	      DateTimeFormatter formatterO = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+   	      final DateTimeFormatter formatterD = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+   	      final DateTimeFormatter formatterO = DateTimeFormatter.ofPattern("yyyy-MM-dd");
    	      try {
    	      concesionariosRequest.setbUDAT(LocalDate.parse(concesionarios.getFecInio(), formatterO).format(formatterD));
    	      }
-   	      catch (DateTimeParseException e) {
+   	      catch (final DateTimeParseException e) {
 					// XXX: handle exception
 				}
 			}
