@@ -14,12 +14,12 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  */
 public class Relacionpagosrespons
 {
-	private List<RelacionPagosPredial> predialUnificado;
-	private List<RelacionPagosGasolina> sobretasaGasolina;
-	private List<RelacionPagosICA> impuestoICA;
+	private RelacionPagosPredial predialUnificado;
+	private RelacionPagosGasolina sobretasaGasolina;
+	private RelacionPagosICA impuestoICA;
 	private List<RelacionPagosDelineacion> delineacionUrbana;
-	private List<RelacionPagosPublicidad> publicidadexterior;
-	private List<RelacionPagosVehicular> vehicular;
+	private RelacionPagosPublicidad publicidadexterior;
+	private RelacionPagosVehicular vehicular;
 	private String strpdf;
 
 
@@ -45,7 +45,7 @@ public class Relacionpagosrespons
 	/**
 	 * @return the predialUnificado
 	 */
-	public List<RelacionPagosPredial> getPredialUnificado()
+	public RelacionPagosPredial getPredialUnificado()
 	{
 		return predialUnificado;
 	}
@@ -55,7 +55,7 @@ public class Relacionpagosrespons
 	 *           the predialUnificado to set
 	 */
 	@JsonSetter("PredialUnificado")
-	public void setPredialUnificado(final List<RelacionPagosPredial> predialUnificado)
+	public void setPredialUnificado(final RelacionPagosPredial predialUnificado)
 	{
 		this.predialUnificado = predialUnificado;
 	}
@@ -63,7 +63,7 @@ public class Relacionpagosrespons
 	/**
 	 * @return the sobretasaGasolina
 	 */
-	public List<RelacionPagosGasolina> getSobretasaGasolina()
+	public RelacionPagosGasolina getSobretasaGasolina()
 	{
 		return sobretasaGasolina;
 	}
@@ -73,7 +73,7 @@ public class Relacionpagosrespons
 	 *           the sobretasaGasolina to set
 	 */
 	@JsonSetter("SobretasaGasolina")
-	public void setSobretasaGasolina(final List<RelacionPagosGasolina> sobretasaGasolina)
+	public void setSobretasaGasolina(final RelacionPagosGasolina sobretasaGasolina)
 	{
 		this.sobretasaGasolina = sobretasaGasolina;
 	}
@@ -81,7 +81,7 @@ public class Relacionpagosrespons
 	/**
 	 * @return the impuestoICA
 	 */
-	public List<RelacionPagosICA> getImpuestoICA()
+	public RelacionPagosICA getImpuestoICA()
 	{
 		return impuestoICA;
 	}
@@ -90,7 +90,7 @@ public class Relacionpagosrespons
 	 * @param impuestoICA
 	 *           the impuestoICA to set
 	 */
-	public void setImpuestoICA(final List<RelacionPagosICA> impuestoICA)
+	public void setImpuestoICA(final RelacionPagosICA impuestoICA)
 	{
 		this.impuestoICA = impuestoICA;
 	}
@@ -116,7 +116,7 @@ public class Relacionpagosrespons
 	/**
 	 * @return the publicidadexterior
 	 */
-	public List<RelacionPagosPublicidad> getPublicidadexterior()
+	public RelacionPagosPublicidad getPublicidadexterior()
 	{
 		return publicidadexterior;
 	}
@@ -126,7 +126,7 @@ public class Relacionpagosrespons
 	 *           the publicidadexterior to set
 	 */
 	@JsonSetter("Publicidadexterior")
-	public void setPublicidadexterior(final List<RelacionPagosPublicidad> publicidadexterior)
+	public void setPublicidadexterior(final RelacionPagosPublicidad publicidadexterior)
 	{
 		this.publicidadexterior = publicidadexterior;
 	}
@@ -134,7 +134,7 @@ public class Relacionpagosrespons
 	/**
 	 * @return the vehicular
 	 */
-	public List<RelacionPagosVehicular> getVehicular()
+	public RelacionPagosVehicular getVehicular()
 	{
 		return vehicular;
 	}
@@ -144,7 +144,7 @@ public class Relacionpagosrespons
 	 *           the vehicular to set
 	 */
 	@JsonSetter("Vehicular")
-	public void setVehicular(final List<RelacionPagosVehicular> vehicular)
+	public void setVehicular(final RelacionPagosVehicular vehicular)
 	{
 		this.vehicular = vehicular;
 	}
