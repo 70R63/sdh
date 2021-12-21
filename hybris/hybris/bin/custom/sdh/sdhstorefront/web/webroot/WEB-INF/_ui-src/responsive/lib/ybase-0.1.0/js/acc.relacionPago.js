@@ -3,7 +3,7 @@ ACC.relacionPago = {
 		
 		
 		relacionPagoServicio : function(obKey,impuesto){
-			debugger;
+			
 			ACC.spinner.show();
 			
 			var data = {};
@@ -14,7 +14,8 @@ ACC.relacionPago = {
 	            data: data,
 	            type: "POST",
 	            success: function (data) {
-					debugger;
+					
+					var flagRegistrosAgregados = false;
 					
 					if(impuesto == "1"){
 						$("#relPagosPredial").find("tr:gt(0)").remove();
@@ -247,37 +248,31 @@ ACC.relacionPago = {
 						$("#relPagosDelineacion").find("tr:gt(0)").remove();
 						if(data.Relacionpagosrespons.DelineacionUrbana != null){
 							
-							if(data.Relacionpagosrespons.DelineacionUrbana.nslctud != null){								
-								$('#relPagosDelineacion').append(
-									"<tr>"+ 
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.DelineacionUrbana.nslctud +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.DelineacionUrbana.numberid +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.DelineacionUrbana.doctyp +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.DelineacionUrbana.xblnr +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.DelineacionUrbana.fbnum +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.DelineacionUrbana.bldat +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.DelineacionUrbana.total_pgo +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.DelineacionUrbana.aporte +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.DelineacionUrbana.aporte +'" type="text" /></td>'+
-								    "</tr>"
-								);
-								
-								if(data.Relacionpagosrespons.STRPDF != null){
-									$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
+							$.each(data.Relacionpagosrespons.DelineacionUrbana, function (index,value){
+								if(true){
+									$('#relPagosDelineacion').append(
+										"<tr>"+ 
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.nslctud +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.numberid +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
+									    "</tr>"
+									);
+								flagRegistrosAgregados = true;
 								}
-								
+							});
+						}
+						if(flagRegistrosAgregados){								
+							if(data.Relacionpagosrespons.STRPDF != null){
+								$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
 								$("#descargaRelacionPDF").show();
 							}
-							else{
-								$('#relPagosDelineacion').append(
-									"<tr>"+ 
-									'<td colspan="9" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
-									"</tr>"
-								);
-								$("#descargaRelacionPDF").hide();
-							}	
-						}
-						else{
+						}else{
 							$('#relPagosDelineacion').append(
 								"<tr>"+ 
 								'<td colspan="9" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
@@ -294,7 +289,7 @@ ACC.relacionPago = {
  	      		    
 	            },
 	            error: function () {
-					debugger;
+					
 	            	ACC.spinner.close();
 	            	
 	            }

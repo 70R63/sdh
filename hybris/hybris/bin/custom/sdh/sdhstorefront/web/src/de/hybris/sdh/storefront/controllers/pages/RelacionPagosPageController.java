@@ -51,7 +51,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class RelacionPagosPageController extends AbstractPageController
 {
 
-	private static final Logger LOG = Logger.getLogger(MiRitPageController.class);
+	private static final Logger LOG = Logger.getLogger(RelacionPagosPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.relapagos";

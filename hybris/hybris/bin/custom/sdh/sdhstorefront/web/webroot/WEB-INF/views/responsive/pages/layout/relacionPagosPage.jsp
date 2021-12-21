@@ -102,129 +102,46 @@ function goBack() {
 		var detgas = document.getElementById('detalle-gasolina');
 		var detplubliext = document.getElementById('detalle-publiext');
 		var detradic = document.getElementById('detalle-retenciones');
+		
+		
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(tablepredial,'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(tablevehiculos,'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(tableica,'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(tablepublicidad,'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(tabledeli,'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(tablegas,'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(todo,'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(detpred,'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(detica,'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(detvehi,'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(detdeli,'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(detgas,'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(detplubliext,'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(detradic,'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(tabrad,'none');
 
-
-		if (x == '1') {
-
-			tablepredial.style.display = 'block';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-			tabledeli.style.display = 'none';
-			tablegas.style.display = 'none';
-			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'none';
-			detradic.style.display = 'none';
-			tabrad.style.display='none';
-
-		} else if (x == '2') {
-
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'block';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-			tabledeli.style.display = 'none';
-			tablegas.style.display = 'none';
-			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'none';
-			detradic.style.display = 'none';
-			tabrad.style.display='none';
-
-		} else if (x == '3') {
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'block';
-			tablepublicidad.style.display = 'none';
-			tabledeli.style.display = 'none';
-			tablegas.style.display = 'none';
-			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'none';
-			detradic.style.display = 'none';
-			tabrad.style.display='none';
-
-		} else if (x == '4') {
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'block';
-			tabledeli.style.display = 'none';
-			tablegas.style.display = 'none';
-			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'none';
-			detradic.style.display = 'none';
-			tabrad.style.display='none';
-
-		} else if (x == '5') {
-
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-			tabledeli.style.display = 'none';
-			tablegas.style.display = 'block';
-			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detgas.style.display = 'none';
-			detdeli.style.display = 'none';
-			detplubliext.style.display = 'none';
-			detradic.style.display = 'none';
-			tabrad.style.display='none';
-
-		} else if (x == '6') {
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-			tabledeli.style.display = 'block';
-			tablegas.style.display = 'none';
-			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'none';
-			detradic.style.display = 'none';
-			tabrad.style.display='none';
-		} else {
-
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-			tablegas.style.display = 'none';
-			tabledeli.style.display = 'none';
-			tabrad.style.display='none';
-			todo.style.display = 'block';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'none';
-			detradic.style.display = 'none';
+		switch(x){
+		case '1':
+			ACC.opcionDeclaraciones.establecerEstiloDisplay(tablepredial,'block');
+			break;
+		case '2':
+			ACC.opcionDeclaraciones.establecerEstiloDisplay(tablevehiculos,'block');
+			break;
+		case '3':
+			ACC.opcionDeclaraciones.establecerEstiloDisplay(tableica,'block');
+			break;
+		case '4':
+			ACC.opcionDeclaraciones.establecerEstiloDisplay(tablepublicidad,'block');
+			break;
+		case '5':
+			ACC.opcionDeclaraciones.establecerEstiloDisplay(tablegas,'block');
+			break;
+		case '6':
+			ACC.opcionDeclaraciones.establecerEstiloDisplay(tabledeli,'block');
+			break;
+		default:
+			ACC.opcionDeclaraciones.establecerEstiloDisplay(todo,'block');
+			break;
 		}
 
 	}

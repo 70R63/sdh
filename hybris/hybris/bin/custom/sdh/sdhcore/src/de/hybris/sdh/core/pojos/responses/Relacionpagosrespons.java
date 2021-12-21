@@ -3,6 +3,8 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 
@@ -12,12 +14,12 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  */
 public class Relacionpagosrespons
 {
-	private RelacionPagosPredial predialUnificado;
-	private RelacionPagosGasolina sobretasaGasolina;
-	private RelacionPagosICA impuestoICA;
-	private RelacionPagosDelineacion delineacionUrbana;
-	private RelacionPagosPublicidad publicidadexterior;
-	private RelacionPagosVehicular vehicular;
+	private List<RelacionPagosPredial> predialUnificado;
+	private List<RelacionPagosGasolina> sobretasaGasolina;
+	private List<RelacionPagosICA> impuestoICA;
+	private List<RelacionPagosDelineacion> delineacionUrbana;
+	private List<RelacionPagosPublicidad> publicidadexterior;
+	private List<RelacionPagosVehicular> vehicular;
 	private String strpdf;
 
 
@@ -43,7 +45,7 @@ public class Relacionpagosrespons
 	/**
 	 * @return the predialUnificado
 	 */
-	public RelacionPagosPredial getPredialUnificado()
+	public List<RelacionPagosPredial> getPredialUnificado()
 	{
 		return predialUnificado;
 	}
@@ -53,7 +55,7 @@ public class Relacionpagosrespons
 	 *           the predialUnificado to set
 	 */
 	@JsonSetter("PredialUnificado")
-	public void setPredialUnificado(final RelacionPagosPredial predialUnificado)
+	public void setPredialUnificado(final List<RelacionPagosPredial> predialUnificado)
 	{
 		this.predialUnificado = predialUnificado;
 	}
@@ -61,7 +63,7 @@ public class Relacionpagosrespons
 	/**
 	 * @return the sobretasaGasolina
 	 */
-	public RelacionPagosGasolina getSobretasaGasolina()
+	public List<RelacionPagosGasolina> getSobretasaGasolina()
 	{
 		return sobretasaGasolina;
 	}
@@ -71,7 +73,7 @@ public class Relacionpagosrespons
 	 *           the sobretasaGasolina to set
 	 */
 	@JsonSetter("SobretasaGasolina")
-	public void setSobretasaGasolina(final RelacionPagosGasolina sobretasaGasolina)
+	public void setSobretasaGasolina(final List<RelacionPagosGasolina> sobretasaGasolina)
 	{
 		this.sobretasaGasolina = sobretasaGasolina;
 	}
@@ -79,7 +81,7 @@ public class Relacionpagosrespons
 	/**
 	 * @return the impuestoICA
 	 */
-	public RelacionPagosICA getImpuestoICA()
+	public List<RelacionPagosICA> getImpuestoICA()
 	{
 		return impuestoICA;
 	}
@@ -88,7 +90,7 @@ public class Relacionpagosrespons
 	 * @param impuestoICA
 	 *           the impuestoICA to set
 	 */
-	public void setImpuestoICA(final RelacionPagosICA impuestoICA)
+	public void setImpuestoICA(final List<RelacionPagosICA> impuestoICA)
 	{
 		this.impuestoICA = impuestoICA;
 	}
@@ -96,7 +98,7 @@ public class Relacionpagosrespons
 	/**
 	 * @return the delineacionUrbana
 	 */
-	public RelacionPagosDelineacion getDelineacionUrbana()
+	public List<RelacionPagosDelineacion> getDelineacionUrbana()
 	{
 		return delineacionUrbana;
 	}
@@ -106,7 +108,7 @@ public class Relacionpagosrespons
 	 *           the delineacionUrbana to set
 	 */
 	@JsonSetter("DelineacionUrbana")
-	public void setDelineacionUrbana(final RelacionPagosDelineacion delineacionUrbana)
+	public void setDelineacionUrbana(final List<RelacionPagosDelineacion> delineacionUrbana)
 	{
 		this.delineacionUrbana = delineacionUrbana;
 	}
@@ -114,7 +116,7 @@ public class Relacionpagosrespons
 	/**
 	 * @return the publicidadexterior
 	 */
-	public RelacionPagosPublicidad getPublicidadexterior()
+	public List<RelacionPagosPublicidad> getPublicidadexterior()
 	{
 		return publicidadexterior;
 	}
@@ -124,7 +126,7 @@ public class Relacionpagosrespons
 	 *           the publicidadexterior to set
 	 */
 	@JsonSetter("Publicidadexterior")
-	public void setPublicidadexterior(final RelacionPagosPublicidad publicidadexterior)
+	public void setPublicidadexterior(final List<RelacionPagosPublicidad> publicidadexterior)
 	{
 		this.publicidadexterior = publicidadexterior;
 	}
@@ -132,7 +134,7 @@ public class Relacionpagosrespons
 	/**
 	 * @return the vehicular
 	 */
-	public RelacionPagosVehicular getVehicular()
+	public List<RelacionPagosVehicular> getVehicular()
 	{
 		return vehicular;
 	}
@@ -142,7 +144,7 @@ public class Relacionpagosrespons
 	 *           the vehicular to set
 	 */
 	@JsonSetter("Vehicular")
-	public void setVehicular(final RelacionPagosVehicular vehicular)
+	public void setVehicular(final List<RelacionPagosVehicular> vehicular)
 	{
 		this.vehicular = vehicular;
 	}
