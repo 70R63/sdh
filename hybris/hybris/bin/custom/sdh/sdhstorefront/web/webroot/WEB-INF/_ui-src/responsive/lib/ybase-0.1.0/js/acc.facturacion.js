@@ -174,20 +174,30 @@ ACC.facturacion = {
 	
 	bindPagarFacturaBtn : function(){
 		$(document).on("click", "#pagarFacturaBtn", function(e) {
+			debugger;
 			e.preventDefault();
 			
 			var impuesto = $(this).data("impuesto");
-			var numObjeto = $(this).data("numObjeto");
-			var anoGravable = $("#aniograv");
+			var numbp = $(this).data("numbp");
+			var periodo = $(this).data("periodo");
+			var anioGravable = $(this).data("anioGravable");
+			var numobjeto = $(this).data("numobjeto");
+			var placa = $(this).data("placa");     
+			var chip = $(this).data("chip");     
+			
 			
 			if(ACC.facturacion.validarAntesSubmitWSPagar(impuesto,anoGravable,numObjeto)){
 				ACC.spinner.show();
 				var dataActual = {};	
 			
 				
-				dataActual.impuesto = anoGravable;
-				dataActual.numObjeto = numObjeto;
 				dataActual.impuesto = impuesto;
+				dataActual.numbp = numbp;
+				dataActual.periodo = periodo;
+				dataActual.anioGravable = anioGravable;
+				dataActual.numobjeto = numobjeto;
+				dataActual.placa = placa;
+				dataActual.chip = chip;
 				
 //PENDIENTE: implementar llamada a WS y quitar este IF - INICIO
 				var dataResponse = null;
@@ -334,6 +344,7 @@ ACC.facturacion = {
 		
 		
 	}
+	
 	
 	
 	
