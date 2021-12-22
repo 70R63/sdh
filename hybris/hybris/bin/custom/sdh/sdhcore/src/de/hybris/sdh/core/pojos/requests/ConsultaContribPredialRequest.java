@@ -3,18 +3,24 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
+
 /**
  * @author hybris
  *
  */
-public class ConsultaContribBPRequest
+public class ConsultaContribPredialRequest
 {
 	private String numBP;
-	private String indicador;
+	private String anioGravable;
+
 
 	/**
 	 * @return the numBP
 	 */
+	@JsonGetter("numBP")
 	public String getNumBP()
 	{
 		return numBP;
@@ -24,26 +30,29 @@ public class ConsultaContribBPRequest
 	 * @param numBP
 	 *           the numBP to set
 	 */
+	@JsonSetter("numBP")
 	public void setNumBP(final String numBP)
 	{
 		this.numBP = numBP;
 	}
 
 	/**
-	 * @return the indicador
+	 * @return the anioGravable
 	 */
-	public String getIndicador()
+	@JsonGetter("Anio")
+	public String getAnioGravable()
 	{
-		return indicador;
+		return anioGravable;
 	}
 
 	/**
-	 * @param indicador
-	 *           the indicador to set
+	 * @param anioGravable
+	 *           the anioGravable to set
 	 */
-	public void setIndicador(final String indicador)
+	@JsonSetter("Anio")
+	public void setAnioGravable(final String anioGravable)
 	{
-		this.indicador = indicador;
+		this.anioGravable = anioGravable;
 	}
 
 	/*
@@ -58,10 +67,8 @@ public class ConsultaContribBPRequest
 
 		stringBuilder.append("{");
 		stringBuilder.append(obtenerValorJson("\"numBP\":\"", this.getNumBP(), "\","));
-		stringBuilder.append(obtenerValorJson("\"indicador\":\"", this.getIndicador(), "\""));
+		stringBuilder.append(obtenerValorJson("\"Anio\":\"", this.getAnioGravable(), "\""));
 		stringBuilder.append("}");
-
-
 
 		return stringBuilder.toString();
 	}
@@ -75,4 +82,6 @@ public class ConsultaContribBPRequest
 
 		return valorVariable;
 	}
+
+
 }

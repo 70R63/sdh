@@ -937,25 +937,35 @@ ACC.opcionDeclaraciones = {
 				var strClaveImpuesto = "'5101'";
 
 				$.each(infoResponse.predial, function (index,value){
-					nombrePresentarDec = "btnPresentarDec_"+value.chip;
-					nombrePagarEnLinea = "btnPagarEnLinea_"+value.chip;
-					nombreTotalPagar = "totalPagar_"+value.chip;
-					var strChip = "'"+value.chip+"'";
+					nombrePresentarDec = "btnPresentarDec_"+value.CHIP;
+					nombrePagarEnLinea = "btnPagarEnLinea_"+value.CHIP;
+					nombreTotalPagar = "totalPagar_"+value.CHIP;
+					var strChip = "'"+value.CHIP+"'";
 					var strAnioGravable = "'"+value.anioGravable+"'";
 					var strPeriodo = "''";
 					var strNumObjeto = "'"+value.numObjeto+"'";
 
-							var idActo = 12345;
-							var fechActo = 12/03/2020;
-							var desActo = "Ejemplo de acto";
-							var expActo = "12345ABC";
+					var idActo = 12345;
+					var fechActo = 12/03/2020;
+					var desActo = "Ejemplo de acto";
+					var expActo = "12345ABC";
+					
+					var direccionPredioOut = "";
+					if(value.direccionPredio != null){
+						direccionPredioOut = value.direccionPredio;
+					}
+					
+					var contratoArrendaOut = "";
+					if(value.contratoArrenda != null){
+						contratoArrendaOut = value.contratoArrenda;
+					}
 
 
 					$('#table-predial1').append("<tr>"+
-							'<td>' + value.chip + '</td>'+
+							'<td>' + value.CHIP + '</td>'+
 							'<td>' + value.matrInmobiliaria + '</td>'+
-							'<td>' + value.direccionPredio + '</td>'+
-							'<td>' + value.contratoArrenda + '</td>'+
+							'<td>' + direccionPredioOut + '</td>'+
+							'<td>' + contratoArrendaOut + '</td>'+
 					//		'<td><div data-toggle="tooltip" title="tooltip">'+'<a href="#" onclick="ACC.opcionDeclaraciones.detalleActo();">?</a>'+'</div></td>'+
 //				'<td>'+'<div data-toggle="tooltip" title="ID Acto: '+idActo+'&#10 Fecha de Notificación: '+fechActo+'&#10 Descripción: '+desActo+'&#10 Expediente: '+expActo+'">'+'<a href="#" onclick="">?</a>'+'</div></td>'+
 				// ACC.opcionDeclaraciones.detalleActo(); agregara para funcionamiento de id acto ?
@@ -969,7 +979,7 @@ ACC.opcionDeclaraciones = {
 //							'onclick="pagarEnLinea('+strClaveImpuesto+','+strAnioGravable+','+strPeriodo+','+strNumObjeto+','+strChip+')">'+
 //							'Pagar en linea</button>' + '</td>'+
 
-							'<td><a href="#" onclick="ACC.opcionDeclaraciones.validarDeclaracionPredial(\''+value.chip+'\',\''+value.matrInmobiliaria+'\');">Generar Declaracion</a> </td>'+
+							'<td><a href="#" onclick="ACC.opcionDeclaraciones.validarDeclaracionPredial(\''+value.CHIP+'\',\''+value.matrInmobiliaria+'\');">Generar Declaracion</a> </td>'+
 							"</tr>");
 				});
 

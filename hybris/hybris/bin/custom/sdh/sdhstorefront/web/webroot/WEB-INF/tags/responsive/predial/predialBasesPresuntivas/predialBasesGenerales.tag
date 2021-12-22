@@ -111,37 +111,37 @@
 						value="${predialFormbases.matrInmobiliaria}" maxlength="240"></input>
 				</div>
 			</div>
-			<div class="col-md-2">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="Uso de suelo" /></label> <select id="" name=""
-						class="newalto form-control"><option>Seleccionar</option></select>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="Base Gravable calc." /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
-						maxlength="240"></input>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="Confirmar BG final" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
-						maxlength="240"></input>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="form-group">
-					<label class="control-label"><spring:theme code="Tarifa" /></label>
-					<input id="" name="" class="newalto form-control" disabled
-						type="text" value="${predialFormbases.matrInmobiliaria}"
-						maxlength="240"></input>
-				</div>
-			</div>
+<!-- 			<div class="col-md-2"> -->
+<!-- 				<div class="form-group"> -->
+<%-- 					<label class="control-label"><spring:theme --%>
+<%-- 							code="Uso de suelo" /></label> <select id="" name="" --%>
+<!-- 						class="newalto form-control"><option>Seleccionar</option></select> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-2"> -->
+<!-- 				<div class="form-group"> -->
+<%-- 					<label class="control-label"><spring:theme --%>
+<%-- 							code="Base Gravable calc." /></label> <input id="" name="" --%>
+<!-- 						class="newalto form-control" disabled type="text" value="" -->
+<!-- 						maxlength="240"></input> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-2"> -->
+<!-- 				<div class="form-group"> -->
+<%-- 					<label class="control-label"><spring:theme --%>
+<%-- 							code="Confirmar BG final" /></label> <input id="" name="" --%>
+<!-- 						class="newalto form-control" disabled type="text" value="" -->
+<!-- 						maxlength="240"></input> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-2"> -->
+<!-- 				<div class="form-group"> -->
+<%-- 					<label class="control-label"><spring:theme code="Tarifa" /></label> --%>
+<!-- 					<input id="" name="" class="newalto form-control" disabled -->
+<%-- 						type="text" value="${predialFormbases.matrInmobiliaria}" --%>
+<!-- 						maxlength="240"></input> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</div>
 		<div class="row">
 			<div class="col-md-4">

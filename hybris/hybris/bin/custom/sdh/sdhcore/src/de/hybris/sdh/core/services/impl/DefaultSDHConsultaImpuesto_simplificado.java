@@ -2,6 +2,7 @@ package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.util.Config;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribPredialRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
@@ -352,6 +353,54 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		final RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
 		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
+
+		LOG.info(urlService);
+		LOG.info(wsRequest);
+		final String wsResponse = restTemplate.postForObject(urlService, request, String.class);
+		LOG.info(wsResponse);
+
+
+		return wsResponse;
+	}
+
+
+	//Predial
+	@Override
+	public List<PredialResponse> consulta_impPredial2(final ConsultaContribPredialRequest request)
+	{
+		SDHValidaMailRolResponse wsResponse = null;
+		List<PredialResponse> impuestosPredial = null;
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try
+		{
+			wsResponse = mapper.readValue(consulta_impPredial2_string(request), SDHValidaMailRolResponse.class);
+			if (wsResponse != null)
+			{
+				impuestosPredial = wsResponse.getPredial();
+			}
+		}
+		catch (final Exception e)
+		{
+			LOG.info("Error al convertir response de consulta impuesto Predial");
+		}
+
+
+		return impuestosPredial;
+	}
+
+
+
+	@Override
+	public String consulta_impPredial2_string(final ConsultaContribPredialRequest wsRequest)
+	{
+		final String usuario = configurationService.getConfiguration().getString("sdh.ingreso.impPredial.user");
+		final String password = configurationService.getConfiguration().getString("sdh.ingreso.impPredial.password");
+		final String urlService = configurationService.getConfiguration().getString("sdh.ingreso.impPredial.url");
+
+		final RestTemplate restTemplate = new RestTemplate();
+		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
+		final HttpEntity<ConsultaContribPredialRequest> request = new HttpEntity<>(wsRequest);
 
 		LOG.info(urlService);
 		LOG.info(wsRequest);

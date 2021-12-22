@@ -4,6 +4,7 @@
 package de.hybris.sdh.core.services;
 
 
+import de.hybris.sdh.core.pojos.requests.ConsultaContribPredialRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
@@ -34,6 +35,11 @@ public interface SDHConsultaImpuesto_simplificado
 	List<PredialResponse> consulta_impPredial(ConsultaContribuyenteBPRequest request);
 
 	String consulta_impPredial_string(ConsultaContribuyenteBPRequest request);
+
+	List<PredialResponse> consulta_impPredial2(ConsultaContribPredialRequest request);
+
+	String consulta_impPredial2_string(ConsultaContribPredialRequest request);
+
 
 
 	//Vehicular

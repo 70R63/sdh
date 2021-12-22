@@ -16,6 +16,7 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribPredialRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
@@ -895,9 +896,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			numBP = customerModel.getNumBP();
 			if (numBP != null)
 			{
-				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+				final ConsultaContribPredialRequest consultaContribuyenteBPRequest = new ConsultaContribPredialRequest();
 				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-				impuestoWS = sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest);
+				consultaContribuyenteBPRequest.setAnioGravable(infoVista.getAnoGravable());
+				impuestoWS = sdhConsultaImpuesto_simplificado.consulta_impPredial2(consultaContribuyenteBPRequest);
 				//				sdhCustomerAccountService.updateImpuestoP(customerModel, impuestoWS);
 				listaInfoImpuesto = new ArrayList<PredialResponse>();
 			}
@@ -909,7 +911,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			for (final PredialResponse impuesto_element : impuestoWS)
 			{
 				if (impuesto_element != null && impuesto_element.getAnioGravable() != null
-						&& impuesto_element.getAnioGravable().equals(infoVista.getAnoGravable()))
+//						&& impuesto_element.getAnioGravable().equals(infoVista.getAnoGravable())
+						)
 				{
 					infoImpuesto = new PredialResponse();
 					infoImpuesto.setAnioGravable(impuesto_element.getAnioGravable());
