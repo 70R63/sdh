@@ -6,7 +6,6 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
@@ -18,8 +17,10 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DescargaFacturaRequest;
+import de.hybris.sdh.core.pojos.requests.FacturacionPagosRequest;
 import de.hybris.sdh.core.pojos.responses.DescargaFacturaResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
+import de.hybris.sdh.core.pojos.responses.FacturacionPagosResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConfigCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -30,10 +31,8 @@ import de.hybris.sdh.storefront.forms.DescargaFacturaForm;
 import de.hybris.sdh.storefront.forms.FacturacionForm;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -48,9 +47,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Decoder.BASE64Decoder;
 
@@ -105,8 +101,8 @@ public class DescargaFacturaPageController extends AbstractPageController
 
 	@Resource(name = "sdhConfigCatalogos")
 	SDHConfigCatalogos sdhConfigCatalogos;
-	
-	
+
+
 	@RequestMapping(value = "/contribuyentes/descargafactura", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String descargafact(final Model model) throws CMSItemNotFoundException
@@ -120,7 +116,7 @@ public class DescargaFacturaPageController extends AbstractPageController
 
 
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-
+		facturacionForm.setNumbp(customerModel.getNumBP());
 			facturacionForm.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
 			facturacionForm.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
 
@@ -128,7 +124,7 @@ public class DescargaFacturaPageController extends AbstractPageController
 			model.addAttribute("descargaFacturaForm", new DescargaFacturaForm());
 			model.addAttribute("listaAnioGravable", sdhConfigCatalogos.obtenerListaAnioGravable_facturacion());
 
-			
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DESCARGA_FACTURA_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DESCARGA_FACTURA_CMS_PAGE));
 
@@ -226,6 +222,59 @@ public class DescargaFacturaPageController extends AbstractPageController
 			errores.add(error);
 
 			dataForm.setErrores(errores);
+
+		}
+		return dataForm;
+
+	}
+
+
+	@RequestMapping(value = "/contribuyentes/descargafactura/facturacionPagos", method = RequestMethod.GET)
+	@ResponseBody
+	public FacturacionForm facturacionPagos(final FacturacionForm dataForm, final HttpServletResponse response,
+			final HttpServletRequest request) throws CMSItemNotFoundException
+	{
+
+		System.out.println("---------------- Hola entro al GET Facturacion Pagos --------------------------");
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		FacturacionPagosResponse facturacionPagosResponse = null;
+		final FacturacionPagosRequest facturacionPagosRequest = new FacturacionPagosRequest();
+		final String numBP = customerFacade.getCurrentCustomer().getNumBP();
+		final byte[] decodedBytes;
+      String clavePeriodo;
+
+		facturacionPagosRequest.setNumbp(numBP);
+
+		if(dataForm.getPeriodo() == null || dataForm.getPeriodo().isEmpty() ) {
+			clavePeriodo = dataForm.getAnioGravable() + "A1";
+			facturacionPagosRequest.setClavePeriodo(clavePeriodo);
+		}else {
+			clavePeriodo = dataForm.getAnioGravable() + dataForm.getPeriodo();
+			facturacionPagosRequest.setClavePeriodo(clavePeriodo);
+		}
+
+		facturacionPagosRequest.setNumObjeto(dataForm.getNumObjeto());
+
+
+		try
+		{
+			System.out.println("Request de trm/facturacionPagos: " + facturacionPagosRequest);
+			facturacionPagosResponse = gasolinaService.facturacionPagos(facturacionPagosRequest, sdhDetalleGasolinaWS, LOG);
+			System.out.println("Response de trm/facturacionResponse: " + facturacionPagosResponse);
+
+			if (facturacionPagosResponse.getResponsePredial() != null)
+			{
+				dataForm.setResponsePredial(facturacionPagosResponse.getResponsePredial());
+			}
+
+			if (facturacionPagosResponse.getResponseVehicular() != null)
+			{
+				dataForm.setResponseVehicular(facturacionPagosResponse.getResponseVehicular());
+			}
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error al obtener fecturacionPagos : " + e.getMessage());
 
 		}
 		return dataForm;

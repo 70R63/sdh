@@ -25,6 +25,7 @@ import de.hybris.sdh.core.pojos.requests.DetallePredial2Request;
 import de.hybris.sdh.core.pojos.requests.DetallePredialBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculos2Request;
 import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
+import de.hybris.sdh.core.pojos.requests.FacturacionPagosRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacion2Request;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.ListaDeclaracionesRequest;
@@ -52,6 +53,7 @@ import de.hybris.sdh.core.pojos.responses.DetallePredialBPResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculos2Response;
 import de.hybris.sdh.core.pojos.responses.DocTramitesResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
+import de.hybris.sdh.core.pojos.responses.FacturacionPagosResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ImpGasolinaSimpliResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
@@ -130,7 +132,7 @@ public class SobreTasaGasolinaService
 
 	}
 
-	public SobreTasaGasolinaCatalogos prepararCatalogos(SDHConfigCatalogos sdhConfigCatalogos)
+	public SobreTasaGasolinaCatalogos prepararCatalogos(final SDHConfigCatalogos sdhConfigCatalogos)
 	{
 
 		final SobreTasaGasolinaCatalogos catalogosForm = new SobreTasaGasolinaCatalogos();
@@ -460,7 +462,7 @@ public class SobreTasaGasolinaService
 			case "03_04":
 				elementos.add(new SelectAtomValue("0002", "Vehículos"));
 				break;
-				
+
 			case "03_05":
 				break;
 
@@ -2536,6 +2538,21 @@ public class SobreTasaGasolinaService
 
 
 		return (DescargaFacturaResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet, LOG,
+				nombreClase);
+	}
+
+	public FacturacionPagosResponse facturacionPagos(final FacturacionPagosRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		final String confUrl = "sdh.facturacionPagos.url";
+		final String confUser = "sdh.facturacionPagos.user";
+		final String confPass = "sdh.facturacionPagos.password";
+		final String wsNombre = "trm/facturacionPagos";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.FacturacionPagosResponse";
+
+
+		return (FacturacionPagosResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet, LOG,
 				nombreClase);
 	}
 

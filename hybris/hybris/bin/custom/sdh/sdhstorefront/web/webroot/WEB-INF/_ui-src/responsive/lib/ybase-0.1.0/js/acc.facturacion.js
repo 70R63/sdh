@@ -179,12 +179,8 @@ ACC.facturacion = {
 			
 			var impuesto = $(this).data("impuesto");
 			var numbp = $(this).data("numbp");
-			var periodo = $(this).data("periodo");
-			var anioGravable = $(this).data("anioGravable");
-			var numobjeto = $(this).data("numobjeto");
-			var placa = $(this).data("placa");     
-			var chip = $(this).data("chip");     
-			
+			var numObjeto = $(this).data("numobjeto");
+			var anioGravable = $(this).data("aniogravable");
 			
 			if(ACC.facturacion.validarAntesSubmitWSPagar(impuesto,anoGravable,numObjeto)){
 				ACC.spinner.show();
@@ -193,23 +189,20 @@ ACC.facturacion = {
 				
 				dataActual.impuesto = impuesto;
 				dataActual.numbp = numbp;
-				dataActual.periodo = periodo;
+				dataActual.numObjeto = numObjeto;
 				dataActual.anioGravable = anioGravable;
-				dataActual.numobjeto = numobjeto;
-				dataActual.placa = placa;
-				dataActual.chip = chip;
 				
 //PENDIENTE: implementar llamada a WS y quitar este IF - INICIO
-				var dataResponse = null;
-				ACC.facturacion.manejarRespuestaWSPagar(dataActual,dataResponse);
-				if(true){
-					ACC.spinner.close();
-					return;				
-				}
+				//var dataResponse = null;
+				//ACC.facturacion.manejarRespuestaWSPagar(dataActual,dataResponse);
+				//if(true){
+				//	ACC.spinner.close();
+				//	return;				
+				//}
 //PENDIENTE: implementar llamada a WS y quitar este IF - FIN
 
 				$.ajax({
-					url : ACC.obtenerListaPagarFacturaURL,
+					url : ACC.facturacionPagosURL,
 					data : dataActual,
 					type : "GET",
 					success : function(dataResponse) {
@@ -231,7 +224,8 @@ ACC.facturacion = {
 	
 	
 	manejarRespuestaWSPagar : function(dataActual,dataResponse){
-	 	ACC.publicidadexterior.bindDataTable_ID_refresh("#example");
+	 	debugger;
+		ACC.publicidadexterior.bindDataTable_ID_refresh("#example");
 		ACC.facturacion.manejarRespuestaWSPagar_registrosTabla(dataActual,dataResponse);
 		
 		var tableImpuesto = document.getElementsByClassName("table pagarImpuesto");
@@ -265,8 +259,10 @@ ACC.facturacion = {
 			case "0001":
 				claveCSSTabla = ".pagarImpuesto";
 //datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
-			value.numReferencia = "01";
-			value.monto = "01";
+			value.numReferencia = dataResponse.responsePredial.numReferencia;
+			value.montoSinAporte = dataResponse.responsePredial.totalPagar;
+			value.montoConAporte = dataResponse.responsePredial.totalConVoluntario;
+			        
 //datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
 
 				break;
@@ -275,8 +271,9 @@ ACC.facturacion = {
 				claveCSSTabla = ".pagarImpuesto";
 				
 //datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
-			value.numReferencia = "02";
-			value.monto = "02";
+			value.numReferencia = dataResponse.responseVehicular.numReferencia;
+			value.montoSinAporte = dataResponse.responseVehicular.totalPagar;
+			value.montoConAporte = dataResponse.responseVehicular.totalConVoluntario;
 //datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
 			break;
 		}
@@ -289,7 +286,7 @@ ACC.facturacion = {
 			'<tr>'+
 			'<td>'+ "Pago con aporte voluntario" + '</td>' +
 			'<td>'+ value.numReferencia + '</td>' +
-			'<td>'+ value.monto + '</td>' +
+			'<td>'+ value.montoConAporte + '</td>' +
 			'<td><button id="btnAccionPagarFactura" data-concepto="' + "CON" + '" data-numreferencia="' + value.numReferencia + '" data-monto="' + value.monto + '" type="button" onclick="ACC.facturacion.llamarPago(this)">Pagar</button></td>'+
 			'</tr>');
 			
@@ -297,8 +294,8 @@ ACC.facturacion = {
 			'<tr>'+
 			'<td>'+ "Pago sin aporte voluntario" + '</td>' +
 			'<td>'+ value.numReferencia + '</td>' +
-			'<td>'+ value.monto + '</td>' +
-			'<td><button id="btnAccionPagarFactura" data-concepto="' + "SIN" + '" data-numreferencia="' + value.numReferencia + '" data-monto="' + value.monto + '" type="button" onclick="ACC.facturacion.llamarPago(this)">Pagar</button></td>'+
+			'<td>'+ value.montoSinAporte + '</td>' +
+			'<td><button id="btnAccionPagarFactura" data-chip="' + "SIN" + '" data-numreferencia="' + value.numReferencia + '" data-monto="' + value.monto + '" type="button" onclick="ACC.facturacion.llamarPago(this)">Pagar</button></td>'+
 			'</tr>');
 		}
 
@@ -344,6 +341,7 @@ ACC.facturacion = {
 		
 		
 	}
+	
 	
 	
 	

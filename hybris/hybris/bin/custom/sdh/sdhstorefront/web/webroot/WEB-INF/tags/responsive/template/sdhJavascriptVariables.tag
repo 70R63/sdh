@@ -174,6 +174,7 @@
 			ACC.listaConcesionariosURL="<c:url value='/concesionarios/listado' />";
 			
 			ACC.descargaFacturaURL="<c:url value='/contribuyentes/descargafactura/descargarFactura' />";
+			ACC.facturacionPagosURL="<c:url value='/contribuyentes/descargafactura/facturacionPagos' />";
 
 			ACC.spacURL="<c:url value='/contribuyentes/spac' />";
 

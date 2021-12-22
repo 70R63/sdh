@@ -110,7 +110,7 @@
 											data-anioGrav="${eachPredial.anioGravable}" data-numobjeto="${eachPredial.numObjeto}"
 											onclick="reexpedicion(this)"> <span class="">Reexpedir</span></label></td>
 										<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0001" data-nombreObjeto="objetoPredial" data-anioGrav="${eachPredial.anioGravable}" data-numobjeto="${eachPredial.numObjeto}"></img></td>
-									<td><button id="pagarFacturaBtn" type="button" data-impuesto="0001" data-numobjeto="${eachPredial.numObjeto}" >Pagar</button></td>
+									<td><button id="pagarFacturaBtn" type="button" data-impuesto="0001" data-numbp="${facturacionForm.numbp}" data-anioGravable="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}" >Pagar</button></td>
 <!-- 									<td><a onclick="validaBotonPago()"></a></td> -->
 
 									</tr>
@@ -181,7 +181,7 @@
 											data-nombreObjeto="objetoVehicular"
 											data-anioGrav="${eachVehiculo.anioGravable}" data-numobjeto="${eachVehiculo.numObjeto}"></img></td>
 										<td></td>
-										<td><button id="pagarFacturaBtn" type="button" data-impuesto="0002" data-numobjeto="${eachVehiculo.numObjeto}" >Pagar</button></td>
+										<td><button id="pagarFacturaBtn" type="button" data-impuesto="0002" data-numbp="${facturacionForm.numbp}" data-anioGravable="${eachVehiculo.anioGravable}" data-numObjeto="${eachVehiculo.numObjeto}" >Pagar</button></td>
 <!-- 										<td><a onclick="validaBotonPago()"></a></td> -->
 
 									</tr>
