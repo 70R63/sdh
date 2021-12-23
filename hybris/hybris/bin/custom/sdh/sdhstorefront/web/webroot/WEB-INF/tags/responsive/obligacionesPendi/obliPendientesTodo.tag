@@ -1161,7 +1161,7 @@
 									<c:forEach items="${obligacionesFormuno.headerdeli}"
 										var="eachDeli">
 										<c:forEach items="${eachDeli.details}" var="eachDeliDet">
-											<c:if test="${not empty eachDeliDet.numReferencia || true}">
+											<c:if test="${not empty eachDeliDet.estadoObligacion || not empty eachDeliDet.obligacion}">
 												<tr>
 													<td><c:out value="${eachDeli.anioGravable}" /></td>
 													<td><c:out value="${eachDeli.cdu}" /></td>
