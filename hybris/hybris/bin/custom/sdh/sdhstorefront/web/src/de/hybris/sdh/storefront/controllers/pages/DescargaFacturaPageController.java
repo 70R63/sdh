@@ -18,6 +18,7 @@ import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DescargaFacturaRequest;
 import de.hybris.sdh.core.pojos.requests.FacturacionPagosRequest;
+import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.responses.DescargaFacturaResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.FacturacionPagosResponse;
@@ -122,6 +123,7 @@ public class DescargaFacturaPageController extends AbstractPageController
 
 			model.addAttribute("facturacionForm", facturacionForm);
 			model.addAttribute("descargaFacturaForm", new DescargaFacturaForm());
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 			model.addAttribute("listaAnioGravable", sdhConfigCatalogos.obtenerListaAnioGravable_facturacion());
 
 
