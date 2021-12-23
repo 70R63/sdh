@@ -36,9 +36,9 @@ window.onload = function() {
 	
 }
 
-
-function descargaRelacionPDF() {
-	debugger;
+         
+function descargaRelacionPagosPDF() {
+	
 	
 	var x = document.getElementById('Idimp').value;
 	var fileName = "RelacionPagos.pdf" ;

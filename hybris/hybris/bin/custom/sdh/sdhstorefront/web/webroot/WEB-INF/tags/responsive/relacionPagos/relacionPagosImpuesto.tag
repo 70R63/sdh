@@ -17,7 +17,7 @@
 		</div>
 		
 		<div id="relpagPDF" style="display: none;">
-	        <input id="strPDF"  value="" />
+	        <input id="strPDF" value="" />
 	    </div>    
 	    
 		<div id="impuest" style="display: none;">

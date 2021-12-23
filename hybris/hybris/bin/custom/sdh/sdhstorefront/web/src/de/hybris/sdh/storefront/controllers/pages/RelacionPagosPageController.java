@@ -253,7 +253,9 @@ public class RelacionPagosPageController extends AbstractPageController
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			final String resp = sdhRelacionPagosService.getRelacionPagos(relacionPagosRequest);
+			String resp = sdhRelacionPagosService.getRelacionPagos(relacionPagosRequest);
+
+			resp = resp.replaceAll("(\"STRPDF\":\\[)(.*)(\"\\]\\}\\})(.*)", "\"STRPDF\":$2\"\\}\\}$4");
 
 			if (resp != null ) {
 				relacionPagosResponse = mapper.readValue(resp, RelacionPagosResponse.class);

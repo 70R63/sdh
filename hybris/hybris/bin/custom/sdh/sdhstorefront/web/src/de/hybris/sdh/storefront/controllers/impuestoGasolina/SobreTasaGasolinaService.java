@@ -1145,6 +1145,7 @@ public class SobreTasaGasolinaService
 				wsresponse = wsresponse.replace("\"stringPDF\":", "\"pdf\":");
 			}
 
+
 			responseInfo = mapper.readValue(wsresponse, Class.forName(nombreClase));
 		}
 		catch (final Exception e)

@@ -20,45 +20,37 @@ ACC.relacionPago = {
 					if(impuesto == "1"){
 						$("#relPagosPredial").find("tr:gt(0)").remove();
 						if(data.Relacionpagosrespons.PredialUnificado != null){
-							
-							if(data.Relacionpagosrespons.PredialUnificado.chip != null){								
-								$('#relPagosPredial').append(
+							$.each(data.Relacionpagosrespons.PredialUnificado, function (index,value){
+								if(true){
+									$('#relPagosPredial').append(
 										"<tr>"+ 
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.PredialUnificado.chip +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.PredialUnificado.anio +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.PredialUnificado.doctyp +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.PredialUnificado.xblnr +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.PredialUnificado.fbnum +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.PredialUnificado.bldat +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.PredialUnificado.total_pgo +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.PredialUnificado.aporte +'" type="text" /></td>'+									
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.chip +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.anio +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+									
 										"</tr>"
-								);
-								
-								if(data.Relacionpagosrespons.STRPDF != null){
-									$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
+									);
+									flagRegistrosAgregados = true;
 								}
-								
+							});
+						}
+						if(flagRegistrosAgregados){								
+							if(data.Relacionpagosrespons.STRPDF != null){
+								$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
 								$("#descargaRelacionPDF").show();
 							}
-							else{
-								$('#relPagosPredial').append(
-									"<tr>"+ 
-									'<td colspan="8" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
-									"</tr>"
-								);
-								$("#descargaRelacionPDF").hide();
-							}	
-						}
-						else{
+						}else{
 							$('#relPagosPredial').append(
 								"<tr>"+ 
-								'<td colspan="8" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
+								'<td colspan="9" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
 								"</tr>"
 							);
 							$("#descargaRelacionPDF").hide();
-						}	
-						
+						}
 							
 					}
 					
@@ -68,43 +60,37 @@ ACC.relacionPago = {
 						$("#relPagosVehicular").find("tr:gt(0)").remove();
 						if(data.Relacionpagosrespons.Vehicular != null){
 							
-							if(data.Relacionpagosrespons.Vehicular.placa != null){								
-								$('#relPagosVehicular').append(
+							$.each(data.Relacionpagosrespons.Vehicular, function (index,value){
+								if(true){
+									$('#relPagosVehicular').append(
 										"<tr>"+ 
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Vehicular.placa +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Vehicular.anio +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Vehicular.doctyp +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Vehicular.xblnr +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Vehicular.fbnum +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Vehicular.bldat +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Vehicular.total_pgo +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Vehicular.aporte +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.placa +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.anio +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
 										"</tr>"
-								);
-								
-								if(data.Relacionpagosrespons.STRPDF != null){
-									$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
+									);
+									flagRegistrosAgregados = true;
 								}
-								
+							});
+						}
+						if(flagRegistrosAgregados){								
+							if(data.Relacionpagosrespons.STRPDF != null){
+								$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
 								$("#descargaRelacionPDF").show();
 							}
-							else{
-								$('#relPagosVehicular').append(
-									"<tr>"+ 
-									'<td colspan="8" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
-									"</tr>"
-								);
-								$("#descargaRelacionPDF").hide();
-							}	
-						}
-						else{
+						}else{
 							$('#relPagosVehicular').append(
 								"<tr>"+ 
-								'<td colspan="8" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
+								'<td colspan="9" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
 								"</tr>"
 							);
 							$("#descargaRelacionPDF").hide();
-						}	
+						}
 							
 					}
 					
@@ -112,82 +98,70 @@ ACC.relacionPago = {
 					if(impuesto == "3"){
 						$("#relPagosICA").find("tr:gt(0)").remove();
 						if(data.Relacionpagosrespons.impuestoICA != null){
-							
-							if(data.Relacionpagosrespons.impuestoICA.anio != null){								
-								$('#relPagosICA').append(
+							$.each(data.Relacionpagosrespons.impuestoICA, function (index,value){
+								if(true){
+									$('#relPagosICA').append(
 										"<tr>"+ 
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.impuestoICA.anio +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.impuestoICA.persl +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.impuestoICA.doctyp +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.impuestoICA.xblnr +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.impuestoICA.fbnum +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.impuestoICA.bldat +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.impuestoICA.total_pgo +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.impuestoICA.aporte +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.anio +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.persl +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
 										"</tr>"
-								);
-								
-								if(data.Relacionpagosrespons.STRPDF != null){
-									$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
+									);
+									flagRegistrosAgregados = true;
 								}
-								
+							});
+						}
+						if(flagRegistrosAgregados){								
+							if(data.Relacionpagosrespons.STRPDF != null){
+								$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
 								$("#descargaRelacionPDF").show();
 							}
-							else{
-								$('#relPagosICA').append(
-									"<tr>"+ 
-									'<td colspan="8" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
-									"</tr>"
-								);
-								$("#descargaRelacionPDF").hide();
-							}	
-						}						
-						else{
+						}else{
 							$('#relPagosICA').append(
 								"<tr>"+ 
-								'<td colspan="8" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
+								'<td colspan="9" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
 								"</tr>"
 							);
 							$("#descargaRelacionPDF").hide();
-						}	
+						}
+						
+							
 					}
 					
 					
 					if(impuesto == "8"){
 						$("#relPagosPublicidad").find("tr:gt(0)").remove();
 						if(data.Relacionpagosrespons.Publicidadexterior != null){
-							
-							if(data.Relacionpagosrespons.Publicidadexterior.nslctud != null){								
-								$('#relPagosPublicidad').append(
+							$.each(data.Relacionpagosrespons.impuestoICA, function (index,value){
+								if(true){
+									$('#relPagosPublicidad').append(
 										"<tr>"+ 
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Publicidadexterior.nslctud +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Publicidadexterior.numberid +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Publicidadexterior.doctyp +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Publicidadexterior.xblnr +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Publicidadexterior.fbnum +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Publicidadexterior.bldat +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Publicidadexterior.total_pgo +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Publicidadexterior.aporte +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.Publicidadexterior.aporte +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.nslctud +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.numberid +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
 								    "</tr>"
-								);
-								
-								if(data.Relacionpagosrespons.STRPDF != null){
-									$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
+									);
+									flagRegistrosAgregados = true;
 								}
-								
+							});
+						}
+						if(flagRegistrosAgregados){								
+							if(data.Relacionpagosrespons.STRPDF != null){
+								$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
 								$("#descargaRelacionPDF").show();
 							}
-							else{
-								$('#relPagosPublicidad').append(
-									"<tr>"+ 
-									'<td colspan="9" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
-									"</tr>"
-								);
-								$("#descargaRelacionPDF").hide();
-							}	
-						}
-						else{
+						}else{
 							$('#relPagosPublicidad').append(
 								"<tr>"+ 
 								'<td colspan="9" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
@@ -195,44 +169,39 @@ ACC.relacionPago = {
 							);
 							$("#descargaRelacionPDF").hide();
 						}
+						
+							
 							
 					}
 					
 					if(impuesto == "5"){
 						$("#relPagosGasolina").find("tr:gt(0)").remove();
 						if(data.Relacionpagosrespons.SobretasaGasolina != null){
-							
-							if(data.Relacionpagosrespons.SobretasaGasolina.nslctud != null){								
-								$('#relPagosGasolina').append(
+							$.each(data.Relacionpagosrespons.impuestoICA, function (index,value){
+								if(true){
+									$('#relPagosGasolina').append(
 									"<tr>"+ 
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.SobretasaGasolina.nslctud +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.SobretasaGasolina.numberid +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.SobretasaGasolina.doctyp +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.SobretasaGasolina.xblnr +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.SobretasaGasolina.fbnum +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.SobretasaGasolina.bldat +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.SobretasaGasolina.total_pgo +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.SobretasaGasolina.aporte +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ data.Relacionpagosrespons.SobretasaGasolina.aporte +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.nslctud +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.numberid +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
 								    "</tr>"
 								);
-								
-								if(data.Relacionpagosrespons.STRPDF != null){
-									$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
+									flagRegistrosAgregados = true;
 								}
-								
+							});
+						}
+						if(flagRegistrosAgregados){								
+							if(data.Relacionpagosrespons.STRPDF != null){
+								$("#strPDF").val( data.Relacionpagosrespons.STRPDF );
 								$("#descargaRelacionPDF").show();
 							}
-							else{
-								$('#relPagosGasolina').append(
-									"<tr>"+ 
-									'<td colspan="9" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
-									"</tr>"
-								);
-								$("#descargaRelacionPDF").hide();
-							}	
-						}
-						else{
+						}else{
 							$('#relPagosGasolina').append(
 								"<tr>"+ 
 								'<td colspan="9" class="dataTables_empty" valign="top">No se encontraron registros</td>' + 
@@ -240,6 +209,9 @@ ACC.relacionPago = {
 							);
 							$("#descargaRelacionPDF").hide();
 						}
+							
+							
+							
 							
 					}
 					
