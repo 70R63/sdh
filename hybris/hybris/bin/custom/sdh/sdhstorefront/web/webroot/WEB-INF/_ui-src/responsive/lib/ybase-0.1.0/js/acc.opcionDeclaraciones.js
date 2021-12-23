@@ -544,7 +544,7 @@ ACC.opcionDeclaraciones = {
 				if(infoResponse.predial.length > 0){
 					$.each(infoResponse.predial, function (index,value){
 						$('#table-predial1').append("<tr>"+
-								'<td>' + value.chip + '</td>'+
+								'<td>' + value.CHIP + '</td>'+
 								'<td>' + value.matrInmobiliaria + '</td>'+
 								'<td>' + value.direccionPredio + '</td>'+
 								'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
@@ -651,7 +651,7 @@ ACC.opcionDeclaraciones = {
 								if( value1.numObjeto.replace(/^0+/, '').trim() == value2.numObjeto.replace(/^0+/, '').trim() ){
 									desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
 									$('#table-predial1').append("<tr>"+
-											'<td>' + value2.chip + '</td>'+
+											'<td>' + value2.CHIP + '</td>'+
 											'<td>' + value2.matrInmobiliaria + '</td>'+
 											'<td>' + value2.direccionPredio + '</td>'+
 											'<td><input id="registroNum_'+ indiceTabla +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-numfactForm="' + value1.numfactForm + '" data-importe="' + value1.importe.replace(/,/g, '') + '"' +">" + "</td>"+
@@ -1355,6 +1355,7 @@ ACC.opcionDeclaraciones = {
 	obtener_desc_clavePeriodo : function (clavePeriodo){
 		var descripcion = "";
 		var des_periodo = "";
+		var des_anio = "";
 
 		tipo_periodo = ACC.opcionDeclaraciones.obtener_tipoPeriodo(clavePeriodo);
 		if(tipo_periodo == "B"){
@@ -1365,7 +1366,10 @@ ACC.opcionDeclaraciones = {
     	    		des_periodo = eachItem.itemValue;
     		});
 		}
-		des_anio = clavePeriodo.substring(0,2);
+		if(clavePeriodo != null){
+			des_anio = clavePeriodo.substring(0,2);			
+		}
+
 		if(des_periodo == ""){
 			descripcion = "20" + des_anio;
 		} else{
@@ -1390,14 +1394,24 @@ ACC.opcionDeclaraciones = {
 
 
 	obtener_tipoPeriodo : function(clavePeriodo) {
+		var clavePosfijo = "";
+		
+		if(clavePeriodo != null){
+			clavePosfijo = clavePeriodo.substring(2,3);
+		}
 
-		return clavePeriodo.substring(2,3);
+		return clavePosfijo;
 	},
 
 
 	obtener_valorPeriodo : function(clavePeriodo) {
+		var clavePosfijo = "";
+		
+		if(clavePeriodo != null){
+			clavePosfijo = clavePeriodo.substring(2,4);
+		}
 
-		return clavePeriodo.substring(2,4);
+		return clavePosfijo;
 	},
 
 
