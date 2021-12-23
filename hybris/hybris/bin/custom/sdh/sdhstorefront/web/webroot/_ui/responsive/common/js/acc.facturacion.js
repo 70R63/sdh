@@ -1,6 +1,6 @@
 ACC.facturacion = {
 
-	_autoload : ["bindBuscar"],
+	_autoload : ["bindBuscar","bindPagarFacturaBtn"],
 
 	
 	bindBuscar : function(){
@@ -68,12 +68,11 @@ ACC.facturacion = {
 	
 	
 	descargaFactura : function (anoGravable,numObjeto,tipoOperacion,descargaFactura1){
-		debugger;
 		ACC.spinner.show();
 		if(descargaFactura1 != undefined && descargaFactura1 != null){
 			var objnew = descargaFactura1;
 			
-			anoGravable = $.trim($(objnew).attr("data-anioGrav"));
+//			anoGravable = $.trim($(objnew).attr("data-anioGrav"));
 			numObjeto = $.trim($(objnew).attr("data-numObjeto"));
 		}
 			
@@ -171,5 +170,252 @@ ACC.facturacion = {
 		
 
 	},
+	
+	
+	bindPagarFacturaBtn : function(){
+		$(document).on("click", "#pagarFacturaBtn", function(e) {
+			debugger;
+			e.preventDefault();
+			
+			var impuesto = $(this).data("impuesto");
+			var numbp = $(this).data("numbp");
+			var numObjeto = $(this).data("numobjeto");
+			var anioGravable = $(this).data("aniogravable");
+			
+			if(ACC.facturacion.validarAntesSubmitWSPagar(impuesto,anoGravable,numObjeto)){
+				ACC.spinner.show();
+				var dataActual = {};	
+			
+				
+				dataActual.impuesto = impuesto;
+				dataActual.numbp = numbp;
+				dataActual.numObjeto = numObjeto;
+				dataActual.anioGravable = anioGravable;
+				
+//PENDIENTE: implementar llamada a WS y quitar este IF - INICIO
+				//var dataResponse = null;
+				//ACC.facturacion.manejarRespuestaWSPagar(dataActual,dataResponse);
+				//if(true){
+				//	ACC.spinner.close();
+				//	return;				
+				//}
+//PENDIENTE: implementar llamada a WS y quitar este IF - FIN
+
+				$.ajax({
+					url : ACC.facturacionPagosURL,
+					data : dataActual,
+					type : "GET",
+					success : function(dataResponse) {
+						ACC.spinner.close();
+						ACC.facturacion.manejarRespuestaWSPagar(dataActual,dataResponse);
+					},
+					error : function() {
+						ACC.spinner.close();
+						alert("Error procesar la solicitud de proceso de pago");	
+					}
+				});
+			}
+			
+			
+		});
+		
+		
+	},
+	
+	
+	manejarRespuestaWSPagar : function(dataActual,dataResponse){
+	 	debugger;
+		ACC.publicidadexterior.bindDataTable_ID_refresh("#example");
+		ACC.facturacion.manejarRespuestaWSPagar_registrosTabla(dataActual,dataResponse);
+		
+		var tableImpuesto = document.getElementsByClassName("table pagarImpuesto");
+		tableImpuesto[0].setAttribute("id","example");
+		ACC.publicidadexterior.bindDataTable_id("#example");
+		
+		switch (dataActual.impuesto){
+			case "0001":
+				ACC.facturacion.visualizacionPopUpPagar (tableImpuesto[0],"Predial","0001");
+			break;
+			case "0002":
+				ACC.facturacion.visualizacionPopUpPagar (tableImpuesto[0],"Vehicular","0001");
+			break;
+		}
+
+		
+	},
+	
+	
+	
+	manejarRespuestaWSPagar_registrosTabla : function(dataActual,dataResponse){
+		debugger;
+		var claveCSSTabla = null;
+		
+//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
+			var value = {};
+			var concepto = "Concepto";
+//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
+		
+		switch (dataActual.impuesto){
+			case "0001":
+				claveCSSTabla = ".pagarImpuesto";
+//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
+			value.impuesto = "\'5101\'";    
+			if(dataResponse.responsePredial.anoGravable = "01"){
+				value.anoGravable = "2021";    
+			}	
+			else{
+				value.anoGravable = dataResponse.responsePredial.anoGravable;
+			}	
+			value.periodo = "\'\'";
+			value.numObjeto = dataResponse.responsePredial.chip;
+			value.chip = dataResponse.responsePredial.chip;
+			if(dataResponse.responsePredial.fechaVencimiento = "01"){
+				value.fechaVenc = "22/12/2021";    
+			}	
+			else{
+				value.fechaVenc = dataResponse.responsePredial.fechaVencimiento;
+			}
+			value.numRef = dataResponse.responsePredial.numReferencia;
+			value.montoSinAporte = dataResponse.responsePredial.totalPagar;
+			value.montoConAporte = dataResponse.responsePredial.totalConVoluntario;
+			value.cdu = "\'\'";
+			value.placa = "\'\'";
+			value.facilidad = "\'\'";
+			value.montoFacilidad = "\'\'";
+//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
+
+				break;
+			
+			case "0002":
+				claveCSSTabla = ".pagarImpuesto";
+				
+//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
+            value.impuesto = "\'5103\'";        
+			if(dataResponse.responseVehicular.anoGravable = "02"){
+				value.anoGravable = "2021";    
+			}	
+			else{
+				value.anoGravable = dataResponse.responseVehicular.anoGravable;
+			}
+			value.periodo = "\'\'";
+			value.numObjeto = dataResponse.responseVehicular.placa;
+			value.chip = "\'\'";
+			if(dataResponse.responseVehicular.fechaVencimiento = "02"){
+				value.fechaVenc = "22/12/2021";    
+			}	
+			else{
+				value.fechaVenc = dataResponse.responseVehicular.fechaVencimiento;
+			}	
+			value.numRef = dataResponse.responseVehicular.numReferencia;
+			value.montoSinAporte = dataResponse.responseVehicular.totalPagar;
+			value.montoConAporte = dataResponse.responseVehicular.totalConVoluntario;
+			value.cdu = "\'\'";
+			value.placa = dataResponse.responseVehicular.placa;
+			value.facilidad = "\'\'";
+			value.montoFacilidad = "\'\'";
+//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
+			break;
+		}
+		
+		
+		if( claveCSSTabla != null){
+			$(claveCSSTabla+" tbody tr").remove();
+			
+			$(claveCSSTabla+" tbody").append(
+			'<tr>'+
+			'<td>'+ "Pago con aporte voluntario" + '</td>' +
+			'<td>'+ value.numRef + '</td>' +
+			'<td>'+ value.montoConAporte + '</td>' +
+			'<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important; text-align: center " id="Detalle" '+ 
+			'onclick="pagarEnLinea(' + value.impuesto + ',\'' 
+									 + value.anoGravable + '\','
+									 + value.periodo + ',\'' 
+									 + value.numObjeto + '\',' 
+									 + value.chip + ',\'' 
+									 + value.fechaVenc + '\',\'' 
+									 + value.numRef  + '\',\'' 
+									 + value.montoConAporte + '\',' 
+									 + value.cdu + ',\'' 
+									 + value.placa + '\',' 
+									 + value.facilidad + ',' 
+									 + value.montoFacilidad  
+						+')" ' +			
+			'>Pagar</label></td>'+
+			'</tr>');
+			
+			
+			
+			$(claveCSSTabla+" tbody").append(
+			'<tr>'+
+			'<td>'+ "Pago sin aporte voluntario" + '</td>' +
+			'<td>'+ value.numRef + '</td>' +
+			'<td>'+ value.montoSinAporte + '</td>' +
+			'<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important; text-align: center " id="Detalle" '+
+			'onclick="pagarEnLinea(' + value.impuesto + ',\'' 
+									 + value.anoGravable + '\','
+									 + value.periodo + ',\'' 
+									 + value.numObjeto + '\',' 
+									 + value.chip + ',\'' 
+									 + value.fechaVenc + '\',\'' 
+									 + value.numRef  + '\',\'' 
+									 + value.montoConAporte + '\',' 
+									 + value.cdu + ',\'' 
+									 + value.placa + '\',' 
+									 + value.facilidad + ',' 
+									 + value.montoFacilidad  
+						+')" ' +
+			'>Pagar</label></td>'+
+			'</tr>');
+		}
+
+		
+	},
+	
+	
+	llamarPago : function(boton){
+		var concepto = $(boton).data("concepto");
+		var numReferencia = $(boton).data("numreferencia");
+		var monto = $(boton).data("monto");
+		
+		alert("aca se realiza el llamado para pagar concepto: " + concepto + " numReferencia: " + numReferencia + " monto: " + monto);	
+	},
+	
+	
+	
+	validarAntesSubmitWSPagar : function(impuesto,anoGravable,numObjeto){
+		var validacion = true;
+		
+		return validacion;
+	},
+	
+	
+	visualizacionPopUpPagar : function(tabla, tituloTabla, impuesto){
+
+        ACC.colorbox.open(tituloTabla, {
+            href: ".js-"+ impuesto +"-facet",
+            inline: true,
+            width: "90%",
+            onComplete: function () {
+                $(document).on("click", ".js-"+ impuesto +"-facet .js-facet-name-" + impuesto, function (e) {
+                    e.preventDefault();
+                    $(".js-"+ impuesto +"-facet  .js-facet-" + impuesto).removeClass("active");
+                    $(this).parents(".js-facet-" + impuesto).addClass("active");
+                    $.colorbox.resize()
+                })
+            },
+            onClosed: function () {
+                $(document).off("click", ".js-"+ impuesto +"-facet .js-facet-name-" + impuesto );
+            }
+        });
+		
+		
+	}
+	
+
+
+
+
+	
+	
 	
 };

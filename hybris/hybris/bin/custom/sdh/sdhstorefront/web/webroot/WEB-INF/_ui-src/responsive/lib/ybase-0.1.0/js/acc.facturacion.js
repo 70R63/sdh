@@ -174,32 +174,35 @@ ACC.facturacion = {
 	
 	bindPagarFacturaBtn : function(){
 		$(document).on("click", "#pagarFacturaBtn", function(e) {
+			debugger;
 			e.preventDefault();
 			
 			var impuesto = $(this).data("impuesto");
-			var numObjeto = $(this).data("numObjeto");
-			var anoGravable = $("#aniograv");
+			var numbp = $(this).data("numbp");
+			var numObjeto = $(this).data("numobjeto");
+			var anioGravable = $(this).data("aniogravable");
 			
 			if(ACC.facturacion.validarAntesSubmitWSPagar(impuesto,anoGravable,numObjeto)){
 				ACC.spinner.show();
 				var dataActual = {};	
 			
 				
-				dataActual.impuesto = anoGravable;
-				dataActual.numObjeto = numObjeto;
 				dataActual.impuesto = impuesto;
+				dataActual.numbp = numbp;
+				dataActual.numObjeto = numObjeto;
+				dataActual.anioGravable = anioGravable;
 				
 //PENDIENTE: implementar llamada a WS y quitar este IF - INICIO
-				var dataResponse = null;
-				ACC.facturacion.manejarRespuestaWSPagar(dataActual,dataResponse);
-				if(true){
-					ACC.spinner.close();
-					return;				
-				}
+				//var dataResponse = null;
+				//ACC.facturacion.manejarRespuestaWSPagar(dataActual,dataResponse);
+				//if(true){
+				//	ACC.spinner.close();
+				//	return;				
+				//}
 //PENDIENTE: implementar llamada a WS y quitar este IF - FIN
 
 				$.ajax({
-					url : ACC.obtenerListaPagarFacturaURL,
+					url : ACC.facturacionPagosURL,
 					data : dataActual,
 					type : "GET",
 					success : function(dataResponse) {
@@ -221,7 +224,8 @@ ACC.facturacion = {
 	
 	
 	manejarRespuestaWSPagar : function(dataActual,dataResponse){
-	 	ACC.publicidadexterior.bindDataTable_ID_refresh("#example");
+	 	debugger;
+		ACC.publicidadexterior.bindDataTable_ID_refresh("#example");
 		ACC.facturacion.manejarRespuestaWSPagar_registrosTabla(dataActual,dataResponse);
 		
 		var tableImpuesto = document.getElementsByClassName("table pagarImpuesto");
@@ -243,7 +247,7 @@ ACC.facturacion = {
 	
 	
 	manejarRespuestaWSPagar_registrosTabla : function(dataActual,dataResponse){
-		
+		debugger;
 		var claveCSSTabla = null;
 		
 //datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
@@ -255,8 +259,29 @@ ACC.facturacion = {
 			case "0001":
 				claveCSSTabla = ".pagarImpuesto";
 //datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
-			value.numReferencia = "01";
-			value.monto = "01";
+			value.impuesto = "\'5101\'";    
+			if(dataResponse.responsePredial.anoGravable = "01"){
+				value.anoGravable = "2021";    
+			}	
+			else{
+				value.anoGravable = dataResponse.responsePredial.anoGravable;
+			}	
+			value.periodo = "\'\'";
+			value.numObjeto = dataResponse.responsePredial.chip;
+			value.chip = dataResponse.responsePredial.chip;
+			if(dataResponse.responsePredial.fechaVencimiento = "01"){
+				value.fechaVenc = "22/12/2021";    
+			}	
+			else{
+				value.fechaVenc = dataResponse.responsePredial.fechaVencimiento;
+			}
+			value.numRef = dataResponse.responsePredial.numReferencia;
+			value.montoSinAporte = dataResponse.responsePredial.totalPagar;
+			value.montoConAporte = dataResponse.responsePredial.totalConVoluntario;
+			value.cdu = "\'\'";
+			value.placa = "\'\'";
+			value.facilidad = "\'\'";
+			value.montoFacilidad = "\'\'";
 //datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
 
 				break;
@@ -265,8 +290,29 @@ ACC.facturacion = {
 				claveCSSTabla = ".pagarImpuesto";
 				
 //datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
-			value.numReferencia = "02";
-			value.monto = "02";
+            value.impuesto = "\'5103\'";        
+			if(dataResponse.responseVehicular.anoGravable = "02"){
+				value.anoGravable = "2021";    
+			}	
+			else{
+				value.anoGravable = dataResponse.responseVehicular.anoGravable;
+			}
+			value.periodo = "\'\'";
+			value.numObjeto = dataResponse.responseVehicular.placa;
+			value.chip = "\'\'";
+			if(dataResponse.responseVehicular.fechaVencimiento = "02"){
+				value.fechaVenc = "22/12/2021";    
+			}	
+			else{
+				value.fechaVenc = dataResponse.responseVehicular.fechaVencimiento;
+			}	
+			value.numRef = dataResponse.responseVehicular.numReferencia;
+			value.montoSinAporte = dataResponse.responseVehicular.totalPagar;
+			value.montoConAporte = dataResponse.responseVehicular.totalConVoluntario;
+			value.cdu = "\'\'";
+			value.placa = dataResponse.responseVehicular.placa;
+			value.facilidad = "\'\'";
+			value.montoFacilidad = "\'\'";
 //datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
 			break;
 		}
@@ -278,17 +324,47 @@ ACC.facturacion = {
 			$(claveCSSTabla+" tbody").append(
 			'<tr>'+
 			'<td>'+ "Pago con aporte voluntario" + '</td>' +
-			'<td>'+ value.numReferencia + '</td>' +
-			'<td>'+ value.monto + '</td>' +
-			'<td><button id="btnAccionPagarFactura" data-concepto="' + "CON" + '" data-numreferencia="' + value.numReferencia + '" data-monto="' + value.monto + '" type="button" onclick="ACC.facturacion.llamarPago(this)">Pagar</button></td>'+
+			'<td>'+ value.numRef + '</td>' +
+			'<td>'+ value.montoConAporte + '</td>' +
+			'<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important; text-align: center " id="Detalle" '+ 
+			'onclick="pagarEnLinea(' + value.impuesto + ',\'' 
+									 + value.anoGravable + '\','
+									 + value.periodo + ',\'' 
+									 + value.numObjeto + '\',' 
+									 + value.chip + ',\'' 
+									 + value.fechaVenc + '\',\'' 
+									 + value.numRef  + '\',\'' 
+									 + value.montoConAporte + '\',' 
+									 + value.cdu + ',\'' 
+									 + value.placa + '\',' 
+									 + value.facilidad + ',' 
+									 + value.montoFacilidad  
+						+')" ' +			
+			'>Pagar</label></td>'+
 			'</tr>');
+			
+			
 			
 			$(claveCSSTabla+" tbody").append(
 			'<tr>'+
 			'<td>'+ "Pago sin aporte voluntario" + '</td>' +
-			'<td>'+ value.numReferencia + '</td>' +
-			'<td>'+ value.monto + '</td>' +
-			'<td><button id="btnAccionPagarFactura" data-concepto="' + "SIN" + '" data-numreferencia="' + value.numReferencia + '" data-monto="' + value.monto + '" type="button" onclick="ACC.facturacion.llamarPago(this)">Pagar</button></td>'+
+			'<td>'+ value.numRef + '</td>' +
+			'<td>'+ value.montoSinAporte + '</td>' +
+			'<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important; text-align: center " id="Detalle" '+
+			'onclick="pagarEnLinea(' + value.impuesto + ',\'' 
+									 + value.anoGravable + '\','
+									 + value.periodo + ',\'' 
+									 + value.numObjeto + '\',' 
+									 + value.chip + ',\'' 
+									 + value.fechaVenc + '\',\'' 
+									 + value.numRef  + '\',\'' 
+									 + value.montoConAporte + '\',' 
+									 + value.cdu + ',\'' 
+									 + value.placa + '\',' 
+									 + value.facilidad + ',' 
+									 + value.montoFacilidad  
+						+')" ' +
+			'>Pagar</label></td>'+
 			'</tr>');
 		}
 
@@ -334,7 +410,6 @@ ACC.facturacion = {
 		
 		
 	}
-	
 	
 	
 };

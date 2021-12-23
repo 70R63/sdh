@@ -5,9 +5,10 @@ package de.hybris.sdh.storefront.forms;
 
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
+import de.hybris.sdh.core.pojos.responses.ResponsePredial;
+import de.hybris.sdh.core.pojos.responses.ResponseVehicular;
 
 import java.util.List;
-
 
 /**
  * @author Maria Luisa
@@ -15,7 +16,10 @@ import java.util.List;
  */
 public class FacturacionForm
 {
-
+	private String numbp;
+	private String anioGravable;
+	private String numObjeto;
+	private String periodo;
 	private String placa;
 	private String marca;
 	private String chip;
@@ -23,6 +27,114 @@ public class FacturacionForm
 	private String direccion;
 	private List<ImpuestoVehiculos> vehicular;
 	private List<PredialResponse> predial;
+	private ResponseVehicular responseVehicular;
+	private ResponsePredial responsePredial;
+
+
+
+
+	/**
+	 * @return the responseVehicular
+	 */
+	public ResponseVehicular getResponseVehicular()
+	{
+		return responseVehicular;
+	}
+
+	/**
+	 * @param responseVehicular
+	 *           the responseVehicular to set
+	 */
+	public void setResponseVehicular(final ResponseVehicular responseVehicular)
+	{
+		this.responseVehicular = responseVehicular;
+	}
+
+	/**
+	 * @return the responsePredial
+	 */
+	public ResponsePredial getResponsePredial()
+	{
+		return responsePredial;
+	}
+
+	/**
+	 * @param responsePredial
+	 *           the responsePredial to set
+	 */
+	public void setResponsePredial(final ResponsePredial responsePredial)
+	{
+		this.responsePredial = responsePredial;
+	}
+
+	/**
+	 * @return the anioGravable
+	 */
+	public String getAnioGravable()
+	{
+		return anioGravable;
+	}
+
+	/**
+	 * @param anioGravable
+	 *           the anioGravable to set
+	 */
+	public void setAnioGravable(final String anioGravable)
+	{
+		this.anioGravable = anioGravable;
+	}
+
+	/**
+	 * @return the numObjeto
+	 */
+	public String getNumObjeto()
+	{
+		return numObjeto;
+	}
+
+	/**
+	 * @param numObjeto
+	 *           the numObjeto to set
+	 */
+	public void setNumObjeto(final String numObjeto)
+	{
+		this.numObjeto = numObjeto;
+	}
+
+
+	/**
+	 * @return the numbp
+	 */
+	public String getNumbp()
+	{
+		return numbp;
+	}
+
+	/**
+	 * @param numbp
+	 *           the numbp to set
+	 */
+	public void setNumbp(final String numbp)
+	{
+		this.numbp = numbp;
+	}
+
+	/**
+	 * @return the periodo
+	 */
+	public String getPeriodo()
+	{
+		return periodo;
+	}
+
+	/**
+	 * @param periodo
+	 *           the periodo to set
+	 */
+	public void setPeriodo(final String periodo)
+	{
+		this.periodo = periodo;
+	}
 
 	/**
 	 * @return the placa

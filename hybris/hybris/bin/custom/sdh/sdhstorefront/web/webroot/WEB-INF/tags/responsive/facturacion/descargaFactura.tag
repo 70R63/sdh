@@ -4,9 +4,40 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="formElement"
 	tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
+
+
+
+
+<spring:url value="/impuestos/preparaPagoPSE" var="pagarURL"
+	htmlEscape="false" />
+
+<div class="container">
+	<div class="row">
+		<sf:form action="${pagarURL}" method="POST" modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
+			<div class="col-md-2">
+				<sf:hidden path="tipoImpuesto" id="pagarEnLinea_tipoImpuesto"/>
+				<sf:hidden path="numBP" id="pagarEnLinea_numBP"/>
+				<sf:hidden path="numDoc" id="pagarEnLinea_numDoc"/>
+				<sf:hidden path="tipoDoc" id="pagarEnLinea_tipoDoc"/>
+				<sf:hidden path="anoGravable" id="pagarEnLinea_anoGravable"/>
+				<sf:hidden path="periodo" id="pagarEnLinea_periodo"/>
+				<sf:hidden path="clavePeriodo" id="pagarEnLinea_clavePeriodo"/>
+				<sf:hidden path="dv" id="pagarEnLinea_dv"/>
+				<sf:hidden path="numObjeto" id="pagarEnLinea_numObjeto"/>
+				<sf:hidden path="chip" id="pagarEnLinea_chip"/>
+				<sf:hidden path="fechaVenc" id="pagarEnLinea_fechaVenc"/>
+				<sf:hidden path="numRef" id="pagarEnLinea_numRef"/>
+				<sf:hidden path="totalPagar" id="pagarEnLinea_totalPagar"/>
+				<sf:hidden path="cdu" id="pagarEnLinea_cdu"/>
+				<sf:hidden path="placa" id="pagarEnLinea_placa"/>
+			</div>
+		</sf:form>
+	</div>
+</div>	
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -110,7 +141,7 @@
 											data-anioGrav="${eachPredial.anioGravable}" data-numobjeto="${eachPredial.numObjeto}"
 											onclick="reexpedicion(this)"> <span class="">Reexpedir</span></label></td>
 										<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0001" data-nombreObjeto="objetoPredial" data-anioGrav="${eachPredial.anioGravable}" data-numobjeto="${eachPredial.numObjeto}"></img></td>
-									<td><button id="pagarFacturaBtn" type="button" data-impuesto="0001" data-numobjeto="${eachPredial.numObjeto}" >Pagar</button></td>
+									<td><button id="pagarFacturaBtn" type="button" data-impuesto="0001" data-numbp="${facturacionForm.numbp}" data-anioGravable="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}" >Pagar</button></td>
 <!-- 									<td><a onclick="validaBotonPago()"></a></td> -->
 
 									</tr>
@@ -181,7 +212,7 @@
 											data-nombreObjeto="objetoVehicular"
 											data-anioGrav="${eachVehiculo.anioGravable}" data-numobjeto="${eachVehiculo.numObjeto}"></img></td>
 										<td></td>
-										<td><button id="pagarFacturaBtn" type="button" data-impuesto="0002" data-numobjeto="${eachVehiculo.numObjeto}" >Pagar</button></td>
+										<td><button id="pagarFacturaBtn" type="button" data-impuesto="0002" data-numbp="${facturacionForm.numbp}" data-anioGravable="${eachVehiculo.anioGravable}" data-numObjeto="${eachVehiculo.numObjeto}" >Pagar</button></td>
 <!-- 										<td><a onclick="validaBotonPago()"></a></td> -->
 
 									</tr>
@@ -254,6 +285,56 @@
 		}
 		
 	}
+	
+	
+	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar,cdu,placa,facilidad,montoFacilidad){
+		
+		debugger;
+		
+		var numBP = "${customerData.numBP}";
+		var numDoc = "${customerData.documentNumber}";
+		var tipoDoc = "${customerData.documentType}";
+		if (periodo === null || periodo === '' || typeof periodo === 'undefined' ){
+			var clavePeriodo = anoGravable.substr(2,2).concat("A1");
+		}	  
+		else{
+			var clavePeriodo = anoGravable.substr(2,2).concat(periodo);
+		} 
+		var dv = "${customerData.digVer}";
+		
+		
+		$("#pagarEnLinea_tipoImpuesto").val(tipoImpuesto);
+		$("#pagarEnLinea_numBP").val(numBP);
+		$("#pagarEnLinea_numDoc").val(numDoc);
+		$("#pagarEnLinea_tipoDoc").val(tipoDoc);		
+		$("#pagarEnLinea_anoGravable").val(anoGravable);
+		$("#pagarEnLinea_periodo").val(periodo);
+		$("#pagarEnLinea_clavePeriodo").val(clavePeriodo);
+		$("#pagarEnLinea_dv").val(dv);
+		$("#pagarEnLinea_numObjeto").val(numObjeto);
+		$("#pagarEnLinea_chip").val(chip);
+		$("#pagarEnLinea_cdu").val(cdu);
+		$("#pagarEnLinea_placa").val(placa);
+		
+		
+		if(fechaVenc === '' || fechaVenc.search("/") >= 0 || periodo.search("/") >= 0){
+			$("#pagarEnLinea_fechaVenc").val(fechaVenc);
+		}else{
+			var fechaVencimineto = fechaVenc.substring(6,8).concat("/",fechaVenc.substring(4,6),"/",fechaVenc.substring(0,4));
+			$("#pagarEnLinea_fechaVenc").val(fechaVencimineto);
+		}
+		
+		$("#pagarEnLinea_numRef").val(numRef);
+	    $("#pagarEnLinea_totalPagar").val(totalPagar);
+		
+		
+		var form = document.getElementById("infoPreviaPSE");
+		if(form!=null){
+			form.submit();
+		}
+		
+	}
+	
 	
 </script>
 
