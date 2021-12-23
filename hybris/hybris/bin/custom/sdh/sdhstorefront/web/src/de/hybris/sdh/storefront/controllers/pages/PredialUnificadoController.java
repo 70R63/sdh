@@ -403,8 +403,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialuno(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
-			final PredialForm predialInfo, final RedirectAttributes redirectAttributes, final HttpServletRequest request)
+			@RequestParam(required = false, value = "numBP") String numBP,
+			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			final RedirectAttributes redirectAttributes, final HttpServletRequest request)
 			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado uno GET--------------------------");
@@ -441,6 +443,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialInfoIniUno.setNumDoc(customerData.getDocumentNumber());
 				predialInfoIniUno.setCompleName(customerData.getCompleteName());
 				predialInfoIniUno.setNumBP(customerData.getNumBP());
+				predialInfoIniUno.setObjetocontrato(objetoContrato);
 			}
 			else
 			{
@@ -608,8 +611,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialdos(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
-			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			@RequestParam(required = false, value = "numBP") String numBP, 
+			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado DOS --------------------------");
 
@@ -648,6 +653,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialInfoInidos.setNumDoc(customerData.getDocumentNumber());
 				predialInfoInidos.setCompleName(customerData.getCompleteName());
 				predialInfoInidos.setNumBP(customerData.getNumBP());
+				predialInfoInidos.setObjetocontrato(objetoContrato);
 			}
 			else
 			{
@@ -817,8 +823,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialtres(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
-			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			@RequestParam(required = false, value = "numBP") String numBP, 
+			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado TRES --------------------------");
 
@@ -855,6 +863,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialInfoInitres.setNumDoc(customerData.getDocumentNumber());
 				predialInfoInitres.setCompleName(customerData.getCompleteName());
 				predialInfoInitres.setNumBP(customerData.getNumBP());
+				predialInfoInitres.setObjetocontrato(objetoContrato);
 			}
 			else
 			{
@@ -1007,8 +1016,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialcuatro(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
-			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			@RequestParam(required = false, value = "numBP") String numBP, 
+			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado CUATRO --------------------------");
 
@@ -1045,6 +1056,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialInfoInicuatro.setNumDoc(customerData.getDocumentNumber());
 				predialInfoInicuatro.setCompleName(customerData.getCompleteName());
 				predialInfoInicuatro.setNumBP(customerData.getNumBP());
+				predialInfoInicuatro.setObjetocontrato(objetoContrato);
 			}
 			else
 			{
@@ -1201,8 +1213,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialcinco(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
-			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			@RequestParam(required = false, value = "numBP") String numBP, 
+			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado CINCO --------------------------");
 
@@ -1240,6 +1254,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialInfoInicinco.setNumDoc(customerData.getDocumentNumber());
 				predialInfoInicinco.setCompleName(customerData.getCompleteName());
 				predialInfoInicinco.setNumBP(customerData.getNumBP());
+				predialInfoInicinco.setObjetocontrato(objetoContrato);
 			}
 			else
 			{
@@ -1392,8 +1407,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialseis(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
-			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			@RequestParam(required = false, value = "numBP") String numBP, 
+			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado SEIS --------------------------");
 
@@ -1431,6 +1448,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialInfoIniseis.setNumDoc(customerData.getDocumentNumber());
 				predialInfoIniseis.setCompleName(customerData.getCompleteName());
 				predialInfoIniseis.setNumBP(customerData.getNumBP());
+				predialInfoIniseis.setObjetocontrato(objetoContrato);
 			}
 			else
 			{
@@ -1587,8 +1605,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialsiete(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
-			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			@RequestParam(required = false, value = "numBP") String numBP, 
+			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado Siete --------------------------");
 
@@ -1626,6 +1646,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialInfoInisiete.setNumDoc(customerData.getDocumentNumber());
 				predialInfoInisiete.setCompleName(customerData.getCompleteName());
 				predialInfoInisiete.setNumBP(customerData.getNumBP());
+				predialInfoInisiete.setObjetocontrato(objetoContrato);
 			}
 			else
 			{
@@ -1779,8 +1800,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialocho(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
-			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			@RequestParam(required = false, value = "numBP") String numBP, 
+			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado OCHO --------------------------");
 
@@ -1818,6 +1841,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialInfoIniocho.setNumDoc(customerData.getDocumentNumber());
 				predialInfoIniocho.setCompleName(customerData.getCompleteName());
 				predialInfoIniocho.setNumBP(customerData.getNumBP());
+				predialInfoIniocho.setObjetocontrato(objetoContrato);
 			}
 			else
 			{
@@ -1967,8 +1991,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialbases(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
-			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			@RequestParam(required = false, value = "numBP") String numBP, 
+			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado BASES PRESUNTIVAS --------------------------");
 
@@ -2003,6 +2029,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialInfoInibases.setNumDoc(customerData.getDocumentNumber());
 			predialInfoInibases.setCompleName(customerData.getCompleteName());
 			predialInfoInibases.setNumBP(customerData.getNumBP());
+			predialInfoInibases.setObjetocontrato(objetoContrato);
 		}
 		else
 		{
