@@ -26,6 +26,7 @@
 		<c:set var="lblCampo" value="terceros.sim.buscar.lblCampo_subrol03_02" />
 	</c:when>
 	<c:when test="${tercerosAutForm.subrol == '03_03'}">
+		<c:set var="lblCampo" value="terceros.sim.buscar.lblCampo_subrol03_03" />
 	</c:when>
 	<c:when test="${tercerosAutForm.subrol == '03_04'}">
 		<c:set var="flagMostrarObjeto" value="block" />
