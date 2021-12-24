@@ -33,6 +33,7 @@
 				<sf:hidden path="totalPagar" id="pagarEnLinea_totalPagar"/>
 				<sf:hidden path="cdu" id="pagarEnLinea_cdu"/>
 				<sf:hidden path="placa" id="pagarEnLinea_placa"/>
+				<sf:hidden path="concesionario" id="pagarEnLinea_concesionario"/>
 			</div>
 		</sf:form>
 	</div>
@@ -91,7 +92,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3 col-md-offset-3">
-			<button style="margin-top: 3px;" id="concesionarioBuscar" class="btn btn-primary btn-lg concesionarioBuscar" type="button" onclick="buscar();">
+			<button style="margin-top: 3px;" id="concesionarioBuscar" class="btn btn-primary btn-lg concesionarioBuscar" type="button" onclick="buscarConcesionarios();">
 				<spring:theme code="reexpedicion.factura.inicial.buscar" />
 			</button>
 		</div>
@@ -112,7 +113,7 @@
 							<th style="text-align: center" class="col-md-1"><label class="control-label labeltabletd " for=""> <spring:theme code="concesionario.inicial.estatusdeReferencia" /></label></th>
 							<th style="text-align: center" class="col-md-1"><label class="control-label labeltabletd " for=""> <spring:theme code="concesionario.inicial.valRef" /></label></th>
 							<!--<th style="text-align: center" class="col-md-1"><label class="control-label labeltabletd " for=""> <spring:theme code="concesionario.inicial.impresion" /></label></th> -->
-							<th style="text-align: center" class="col-md-1"><label class="control-label labeltabletd " for=""> <spring:theme code="concesionario.inicial.pagar" /></label></th>
+							<th id="colConcesionarioPagar" style="text-align: center" class="col-md-1"><label class="control-label labeltabletd " for=""> <spring:theme code="concesionario.inicial.pagar" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -131,7 +132,8 @@
 
 <script type="text/javascript">
 
-function buscar(){
+function buscarConcesionarios(){
+	debugger;
 	ACC.concesionarios.buscar();
 	
 }
@@ -165,6 +167,7 @@ function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,
 	$("#pagarEnLinea_chip").val(chip);
 	$("#pagarEnLinea_cdu").val(cdu);
 	$("#pagarEnLinea_placa").val(placa);
+	$("#pagarEnLinea_concesionario").val("X");
 	
 	
 	if(fechaVenc === '' || fechaVenc.search("/") >= 0 || periodo.search("/") >= 0){

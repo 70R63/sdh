@@ -8,12 +8,14 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.model.SDHTaxTypeModel;
 import de.hybris.sdh.core.model.SITIITransactionsLogModel;
 import de.hybris.sdh.core.pojos.requests.ConsulPagosRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.PaymentServiceRegisterApplicationRequest;
@@ -303,12 +305,26 @@ public class PreparacionPagoPSE extends AbstractPageController
 			final StringBuffer sb = new StringBuffer();
 			String ref4 = null;
 
-			sb.append(infoPreviaPSE.getNumBP() + ";");
-			sb.append(impuestoSAP + ";");
-			sb.append(infoPreviaPSE.getAnoGravable() + ";");
-			sb.append(infoPreviaPSE.getClavePeriodo() + ";");
-			sb.append(infoPreviaPSE.getNumObjeto() + ";");
-			sb.append(" ");
+			if (infoPreviaPSE.getConcesionario() != null || infoPreviaPSE.getConcesionario().isEmpty())
+			{
+				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+				final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
+
+				sb.append(customerModel.getNumBP() + ";");
+				sb.append(impuestoSAP + ";");
+				sb.append(infoPreviaPSE.getAnoGravable() + ";");
+				sb.append(infoPreviaPSE.getClavePeriodo() + ";");
+				sb.append(infoPreviaPSE.getNumObjeto() + ";");
+			}
+			else
+			{
+				sb.append(infoPreviaPSE.getNumBP() + ";");
+				sb.append(impuestoSAP + ";");
+				sb.append(infoPreviaPSE.getAnoGravable() + ";");
+				sb.append(infoPreviaPSE.getClavePeriodo() + ";");
+				sb.append(infoPreviaPSE.getNumObjeto() + ";");
+				sb.append(" ");
+			}
 
 			ref4 = sb.toString();
 

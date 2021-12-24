@@ -27,10 +27,29 @@ public class InfoPreviaPSE
 	private String totalPagar;
 	private String cdu;
 	private String placa;
+	private String concesionario;
 
 
 
 
+
+
+	/**
+	 * @return the concesionario
+	 */
+	public String getConcesionario()
+	{
+		return concesionario;
+	}
+
+	/**
+	 * @param concesionario
+	 *           the concesionario to set
+	 */
+	public void setConcesionario(final String concesionario)
+	{
+		this.concesionario = concesionario;
+	}
 
 	/**
 	 * @return the cdu

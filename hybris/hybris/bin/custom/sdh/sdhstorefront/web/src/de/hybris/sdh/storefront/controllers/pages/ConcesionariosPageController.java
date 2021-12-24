@@ -142,7 +142,15 @@ public class ConcesionariosPageController extends AbstractPageController
 		final ConcesionariosRequest concesionariosRequest = new ConcesionariosRequest();
 		concesionariosRequest.seteRNAM(ernam);
 		if(concesionarios != null) {
-			concesionariosRequest.setaUGUST(concesionarios.getReferenceStatus());
+			if (concesionarios.getReferenceStatus().contains("01"))
+			{
+				concesionariosRequest.setaUGUST("");
+			}
+			else if (concesionarios.getReferenceStatus().contains("02"))
+			{
+				concesionariosRequest.setaUGUST("9");
+			}
+
 			if(concesionarios.getFecInio() != null ) {
    	      final DateTimeFormatter formatterD = DateTimeFormatter.ofPattern("dd/MM/yyyy");
    	      final DateTimeFormatter formatterO = DateTimeFormatter.ofPattern("yyyy-MM-dd");

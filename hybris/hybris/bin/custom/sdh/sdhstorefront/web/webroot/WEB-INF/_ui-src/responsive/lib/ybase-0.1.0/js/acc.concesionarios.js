@@ -38,7 +38,7 @@ ACC.concesionarios = {
 	
 	updateFromResponseSeleccion : function(infoActual,infoResponse) {
 		ACC.concesionarios.vaciarTablasInfo();
-
+		debugger;
 		if (infoResponse != null){
 			var status = ACC.concesionarios.obtenerDescripcionStatus($("#referenceStatus").val());
 			
@@ -51,7 +51,7 @@ ACC.concesionarios = {
 
 				var fechaVigencia = "";
 				if(value.PERSL != null){
-					fechaVigencia = "Año " + value.PERSL.substring(0,2);
+					fechaVigencia = "20" + value.PERSL.substring(0,2);
 				}
 				
 				$('#concesionarios1').append("<tr>"+
@@ -61,7 +61,7 @@ ACC.concesionarios = {
 						'<td>' + fechaVencimiento + '</td>'+
 						'<td>' + status + '</td>'+
 						'<td>' + value.BETRW + '</td>'+
-						'<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important; text-align: center " id="Detalle" '+ 
+						'<td id="botonPagarConcesionario" ><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important; text-align: center " id="Detalle" '+ 
 						'onclick="pagarEnLinea(' + '\'5103\'' + ',\'' 
 						                         + value.PERSL.substring(0,2) + '\','
 												 + '\'\'' + ',\'' 
@@ -77,6 +77,14 @@ ACC.concesionarios = {
 						+')" ' + 
 						'>Pagar</label></td>'+	
 						"</tr>");
+				
+				if(status == "Por pagar"){
+					$('#colConcesionarioPagar').show();
+					$('#botonPagarConcesionario').show();
+				}else{
+				  $('#colConcesionarioPagar').hide();
+				  $('#botonPagarConcesionario').hide();
+				}
 			});
 		}
 		ACC.concesionarios.mostrarTablas();
