@@ -175,7 +175,9 @@ ACC.reportesTerceroAutorizado = {
 			
 			ACC.reportesTerceroAutorizado.displayTablas('block',flagMostrarTabla);
 		}
-		ACC.reportesTerceroAutorizado.mostrarBtnGenImprimir(opcionConsulta,flagMostrarTabla,infoResponse,claveImpuestoBTN);
+		if(ACC.reportesTerceroAutorizado.habilitarBtnGenImprimir(infoResponse)){
+			ACC.reportesTerceroAutorizado.mostrarBtnGenImprimir(opcionConsulta,flagMostrarTabla,infoResponse,claveImpuestoBTN);			
+		}
 
 	},
 	
@@ -461,6 +463,19 @@ ACC.reportesTerceroAutorizado = {
 		flags.obligacionesPublicidad = true;
 		
 		return flags;
+	},
+	
+	
+	habilitarBtnGenImprimir : function(infoResponse){
+		var flagErrores = false;
+		
+		
+		if (infoResponse != null && infoResponse.errores != null && infoResponse.errores[0] != null && infoResponse.errores[0].id_msj != null && infoResponse.errores[0].id_msj != "02"){
+			flagErrores = true;
+		}
+		
+		return flagErrores;
+		
 	}
 	
 	
