@@ -544,7 +544,7 @@ ACC.opcionDeclaraciones = {
 				if(infoResponse.predial.length > 0){
 					$.each(infoResponse.predial, function (index,value){
 						$('#table-predial1').append("<tr>"+
-								'<td>' + value.chip + '</td>'+
+								'<td>' + value.CHIP + '</td>'+
 								'<td>' + value.matrInmobiliaria + '</td>'+
 								'<td>' + value.direccionPredio + '</td>'+
 								'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
@@ -651,7 +651,7 @@ ACC.opcionDeclaraciones = {
 								if( value1.numObjeto.replace(/^0+/, '').trim() == value2.numObjeto.replace(/^0+/, '').trim() ){
 									desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
 									$('#table-predial1').append("<tr>"+
-											'<td>' + value2.chip + '</td>'+
+											'<td>' + value2.CHIP + '</td>'+
 											'<td>' + value2.matrInmobiliaria + '</td>'+
 											'<td>' + value2.direccionPredio + '</td>'+
 											'<td><input id="registroNum_'+ indiceTabla +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-numfactForm="' + value1.numfactForm + '" data-importe="' + value1.importe.replace(/,/g, '') + '"' +">" + "</td>"+
@@ -937,25 +937,35 @@ ACC.opcionDeclaraciones = {
 				var strClaveImpuesto = "'5101'";
 
 				$.each(infoResponse.predial, function (index,value){
-					nombrePresentarDec = "btnPresentarDec_"+value.chip;
-					nombrePagarEnLinea = "btnPagarEnLinea_"+value.chip;
-					nombreTotalPagar = "totalPagar_"+value.chip;
-					var strChip = "'"+value.chip+"'";
+					nombrePresentarDec = "btnPresentarDec_"+value.CHIP;
+					nombrePagarEnLinea = "btnPagarEnLinea_"+value.CHIP;
+					nombreTotalPagar = "totalPagar_"+value.CHIP;
+					var strChip = "'"+value.CHIP+"'";
 					var strAnioGravable = "'"+value.anioGravable+"'";
 					var strPeriodo = "''";
 					var strNumObjeto = "'"+value.numObjeto+"'";
 
-							var idActo = 12345;
-							var fechActo = 12/03/2020;
-							var desActo = "Ejemplo de acto";
-							var expActo = "12345ABC";
+					var idActo = 12345;
+					var fechActo = 12/03/2020;
+					var desActo = "Ejemplo de acto";
+					var expActo = "12345ABC";
+					
+					var direccionPredioOut = "";
+					if(value.direccionPredio != null){
+						direccionPredioOut = value.direccionPredio;
+					}
+					
+					var contratoArrendaOut = "";
+					if(value.contratoArrenda != null){
+						contratoArrendaOut = value.contratoArrenda;
+					}
 
 
 					$('#table-predial1').append("<tr>"+
-							'<td>' + value.chip + '</td>'+
+							'<td>' + value.CHIP + '</td>'+
 							'<td>' + value.matrInmobiliaria + '</td>'+
-							'<td>' + value.direccionPredio + '</td>'+
-							'<td>' + value.contratoArrenda + '</td>'+
+							'<td>' + direccionPredioOut + '</td>'+
+							'<td>' + contratoArrendaOut + '</td>'+
 					//		'<td><div data-toggle="tooltip" title="tooltip">'+'<a href="#" onclick="ACC.opcionDeclaraciones.detalleActo();">?</a>'+'</div></td>'+
 //				'<td>'+'<div data-toggle="tooltip" title="ID Acto: '+idActo+'&#10 Fecha de Notificación: '+fechActo+'&#10 Descripción: '+desActo+'&#10 Expediente: '+expActo+'">'+'<a href="#" onclick="">?</a>'+'</div></td>'+
 				// ACC.opcionDeclaraciones.detalleActo(); agregara para funcionamiento de id acto ?
@@ -969,7 +979,7 @@ ACC.opcionDeclaraciones = {
 //							'onclick="pagarEnLinea('+strClaveImpuesto+','+strAnioGravable+','+strPeriodo+','+strNumObjeto+','+strChip+')">'+
 //							'Pagar en linea</button>' + '</td>'+
 
-							'<td><a href="#" onclick="ACC.opcionDeclaraciones.validarDeclaracionPredial(\''+value.chip+'\',\''+value.matrInmobiliaria+'\');">Generar Declaracion</a> </td>'+
+							'<td><a href="#" onclick="ACC.opcionDeclaraciones.validarDeclaracionPredial(\''+value.CHIP+'\',\''+value.matrInmobiliaria+'\');">Generar Declaracion</a> </td>'+
 							"</tr>");
 				});
 
@@ -1345,6 +1355,7 @@ ACC.opcionDeclaraciones = {
 	obtener_desc_clavePeriodo : function (clavePeriodo){
 		var descripcion = "";
 		var des_periodo = "";
+		var des_anio = "";
 
 		tipo_periodo = ACC.opcionDeclaraciones.obtener_tipoPeriodo(clavePeriodo);
 		if(tipo_periodo == "B"){
@@ -1355,7 +1366,10 @@ ACC.opcionDeclaraciones = {
     	    		des_periodo = eachItem.itemValue;
     		});
 		}
-		des_anio = clavePeriodo.substring(0,2);
+		if(clavePeriodo != null){
+			des_anio = clavePeriodo.substring(0,2);			
+		}
+
 		if(des_periodo == ""){
 			descripcion = "20" + des_anio;
 		} else{
@@ -1380,14 +1394,24 @@ ACC.opcionDeclaraciones = {
 
 
 	obtener_tipoPeriodo : function(clavePeriodo) {
+		var clavePosfijo = "";
+		
+		if(clavePeriodo != null){
+			clavePosfijo = clavePeriodo.substring(2,3);
+		}
 
-		return clavePeriodo.substring(2,3);
+		return clavePosfijo;
 	},
 
 
 	obtener_valorPeriodo : function(clavePeriodo) {
+		var clavePosfijo = "";
+		
+		if(clavePeriodo != null){
+			clavePosfijo = clavePeriodo.substring(2,4);
+		}
 
-		return clavePeriodo.substring(2,4);
+		return clavePosfijo;
 	},
 
 

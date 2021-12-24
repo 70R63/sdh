@@ -14,7 +14,7 @@ ACC.relacionPago = {
 	            data: data,
 	            type: "POST",
 	            success: function (data) {
-					
+					debugger;
 					var flagRegistrosAgregados = false;
 					
 					if(impuesto == "1"){
@@ -134,10 +134,10 @@ ACC.relacionPago = {
 					}
 					
 					
-					if(impuesto == "8"){
+					if(impuesto == "4"){
 						$("#relPagosPublicidad").find("tr:gt(0)").remove();
 						if(data.Relacionpagosrespons.Publicidadexterior != null){
-							$.each(data.Relacionpagosrespons.impuestoICA, function (index,value){
+							$.each(data.Relacionpagosrespons.Publicidadexterior, function (index,value){
 								if(true){
 									$('#relPagosPublicidad').append(
 										"<tr>"+ 
@@ -177,7 +177,7 @@ ACC.relacionPago = {
 					if(impuesto == "5"){
 						$("#relPagosGasolina").find("tr:gt(0)").remove();
 						if(data.Relacionpagosrespons.SobretasaGasolina != null){
-							$.each(data.Relacionpagosrespons.impuestoICA, function (index,value){
+							$.each(data.Relacionpagosrespons.SobretasaGasolina, function (index,value){
 								if(true){
 									$('#relPagosGasolina').append(
 									"<tr>"+ 
