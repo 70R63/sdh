@@ -18,7 +18,7 @@
 	<c:set var="disabledAporte" value='' />
 </c:when>
 <c:when test="${predialFormcinco.checkAporte_flag == 2}">
-	<c:set var="disabledAporte" value='disabled="disabled"' />
+<%-- 	<c:set var="disabledAporte" value='disabled="disabled"' /> --%>
 </c:when>
 </c:choose>
 <c:set var="disabledLiquidacionPrivada" value="" />
