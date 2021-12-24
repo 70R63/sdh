@@ -7,7 +7,7 @@
 
 <c:forEach items="${firmantes}" var="eachFirmante">
 	<c:if test="${!empty eachFirmante.tipoIdent}">
-		<div class="row mt-3">
+		<div class="row mt-3 registro">
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"> <spring:theme

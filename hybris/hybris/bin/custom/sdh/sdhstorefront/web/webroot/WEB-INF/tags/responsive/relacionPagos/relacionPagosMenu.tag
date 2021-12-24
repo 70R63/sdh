@@ -79,34 +79,17 @@
 
 		</div>
 
-		<div class="row" id="idinputImpuesto" style="display: none;">
-			<div class="col-md-6"></div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label text-right" id="labelSearch"></label><input
-						class="newalto form-control" value=""
-						type="text" />
-				</div>
-			</div>
-		</div>
+		
 
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group">
-					<button type="button" class="btn btn-secondary btn-lg" id="action"
-						name="action" value="regresar" style="margin-top: 3px" onclick="goBack()">
-						<spring:theme code="relacion.inicial.regresar" />
-					</button>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary btn-lg" id="action"
-						name="action" value="generar" style="margin-top: 3px">
+					<button type="button" class="btn btn-primary btn-lg" id="descargaRelacionPDF" name="action" value="generar" style="margin-top: 3px" onclick="descargaRelacionPDF()">  
 						<spring:theme code="relacion.inicial.descargar" />
 					</button>
 				</div>
 			</div>
+			
 			<div class="col-md-2">
 				<div class="form-check">
 

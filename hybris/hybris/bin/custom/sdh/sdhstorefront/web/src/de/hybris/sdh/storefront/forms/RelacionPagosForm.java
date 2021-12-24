@@ -28,6 +28,8 @@ public class RelacionPagosForm
 	private List<ImpuestoPublicidadExterior> publicidadExt;
 
 
+	private String obKey;
+
 
 
 
@@ -184,6 +186,31 @@ public class RelacionPagosForm
 	public void setPublicidadExt(final List<ImpuestoPublicidadExterior> publicidadExt)
 	{
 		this.publicidadExt = publicidadExt;
+	}
+
+
+
+
+
+	/**
+	 * @return the obKey
+	 */
+	public String getObKey()
+	{
+		return obKey;
+	}
+
+
+
+
+
+	/**
+	 * @param obKey
+	 *           the obKey to set
+	 */
+	public void setObKey(final String obKey)
+	{
+		this.obKey = obKey;
 	}
 
 

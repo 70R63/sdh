@@ -11,6 +11,7 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.dao.SdhReferenceStatusDao;
@@ -22,6 +23,10 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.ConcesionariosForm;
 
 import java.text.ParseException;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +40,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -86,6 +92,9 @@ public class ConcesionariosPageController extends AbstractPageController
 
 	@Resource(name = "sdhConcesionariosService")
 	SDHConcesionariosService sdhConcesionariosService;
+	
+	@Resource(name = "sessionService")
+	SessionService sessionService;
 
 
 	@ModelAttribute("referenceStatus")
@@ -115,62 +124,47 @@ public class ConcesionariosPageController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
-
-
-
-	@RequestMapping(value = "/concesionarios", method = RequestMethod.POST)
+	
+	@RequestMapping(value = "/concesionarios/listado", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String delineacionUrbanaPOST(@ModelAttribute("dataForm")
+	@ResponseBody
+	public List<Concesionarios> obtenerListado(@ModelAttribute("dataForm")
 	final ConcesionariosForm concesionarios, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
-		LOG.info("Estoy dentro de POST de concesionarios");
+		LOG.info("En listado de concesionarios");
+		List<Concesionarios> listado = null;
+		
+		String ernam = sessionService.getCurrentSession().getAttribute("concesionarios_ernam");
+//		ernam = "JORTIZ";
 
 		final ConcesionariosRequest concesionariosRequest = new ConcesionariosRequest();
-		concesionariosRequest.setaUGUST("");
-		concesionariosRequest.setbUDAT("17/11/2021");
-		concesionariosRequest.seteRNAM("GMERLIN");
-		final List<Concesionarios> concesionariosForForm = new ArrayList<Concesionarios>();
-
-		try
-		{
-
-			final ConcesionariosResponse concesionariosResponse = sdhConcesionariosService.concesionario(concesionariosRequest);
-			LOG.info("RESPONSE: " + concesionariosResponse);
-
-			if (concesionariosResponse != null)
-			{
-				for (final Concesionarios conce : concesionariosResponse.getConcesionarios())
-				{
-					final Concesionarios conceForm = new Concesionarios();
-					conceForm.setBetrw(conce.getBetrw()); // importe a pagar
-					conceForm.setPsobtxt(conce.getPsobtxt()); //placa
-					conceForm.setXblnr(conce.getXblnr()); // Referencia
-					conceForm.setPersl(obtainVigencia(conce.getPersl())); //Vigencia
-					conceForm.setFaedn(obtainVencimiento(conce.getFaedn()));
-					concesionariosForForm.add(conceForm);
+		concesionariosRequest.seteRNAM(ernam);
+		if(concesionarios != null) {
+			concesionariosRequest.setaUGUST(concesionarios.getReferenceStatus());
+			if(concesionarios.getFecInio() != null ) {
+   	      DateTimeFormatter formatterD = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+   	      DateTimeFormatter formatterO = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+   	      try {
+   	      concesionariosRequest.setbUDAT(LocalDate.parse(concesionarios.getFecInio(), formatterO).format(formatterD));
+   	      }
+   	      catch (DateTimeParseException e) {
+					// XXX: handle exception
 				}
-				concesionarios.setConcesionarios(concesionariosForForm);
 			}
 		}
-		catch (final Exception s)
+
+
+		final ConcesionariosResponse concesionariosResponse = sdhConcesionariosService.concesionario(concesionariosRequest);
+
+		if (concesionariosResponse != null)
 		{
-			LOG.error("error on concesionarios service: " + s.getMessage());
+			listado = concesionariosResponse.getConcesionarios();
 		}
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(CONCESIONARIOS_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CONCESIONARIOS_CMS_PAGE));
 
-		model.addAttribute("fecInio", concesionarios.getFecInio());
-		model.addAttribute("dataForm", concesionarios);
-		model.addAttribute("concesionarios", concesionarios);
-
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMB_CONCESIONARIOS));
-
-
-		return getViewForPage(model);
+		return listado;
 	}
 
 	public String obtainVigencia(final String vigencia)

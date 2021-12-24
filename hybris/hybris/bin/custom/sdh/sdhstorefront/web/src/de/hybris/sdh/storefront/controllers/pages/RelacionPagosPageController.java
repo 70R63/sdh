@@ -13,16 +13,21 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.RelacionPagosRequest;
 import de.hybris.sdh.core.pojos.responses.ImpuestosResponse;
+import de.hybris.sdh.core.pojos.responses.RelacionPagosResponse;
+import de.hybris.sdh.core.pojos.responses.Relacionpagosrespons;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
+import de.hybris.sdh.core.services.SDHRelacionPagosService;
 import de.hybris.sdh.storefront.forms.RelacionPagosForm;
 
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -31,6 +36,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -64,6 +73,10 @@ public class RelacionPagosPageController extends AbstractPageController
 
 	@Resource(name = "sdhConsultaImpuesto_simplificado")
 	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+
+	@Resource(name = "sdhRelacionPagosService")
+	SDHRelacionPagosService sdhRelacionPagosService;
+
 
 
 	@RequestMapping(value =
@@ -223,6 +236,44 @@ public class RelacionPagosPageController extends AbstractPageController
 
 		return getViewForPage(model);
 	}
+
+
+	@RequestMapping(value = "/contribuyentes/consultas/relacionpagos/servicio", method = RequestMethod.POST)
+	@ResponseBody
+	public RelacionPagosResponse generar(final RelacionPagosForm dataForm, final HttpServletResponse response,
+			final HttpServletRequest request) throws CMSItemNotFoundException
+	{
+		RelacionPagosResponse relacionPagosResponse = new RelacionPagosResponse();
+		final RelacionPagosRequest relacionPagosRequest = new RelacionPagosRequest();
+
+		relacionPagosRequest.setObKey(dataForm.getObKey());
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			final String resp = sdhRelacionPagosService.getRelacionPagos(relacionPagosRequest);
+
+			if (resp != null ) {
+				relacionPagosResponse = mapper.readValue(resp, RelacionPagosResponse.class);
+			}
+			else {
+				relacionPagosResponse.setRelacionpagosrespons(new Relacionpagosrespons());
+			}
+
+
+
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error getting customer info from SAP for relacion pagos page: " + e.getMessage());
+		}
+
+		return relacionPagosResponse;
+	}
+
 
 
 

@@ -26,6 +26,7 @@ import de.hybris.sdh.core.pojos.responses.EdoCuentaResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
+import de.hybris.sdh.core.services.SDHConfigCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHEdoCuentaService;
@@ -109,6 +110,9 @@ public class MiRitCertificacionPageController extends AbstractPageController
 
 	@Resource(name = "sdhCustomerAccountService")
 	SDHCustomerAccountService sdhCustomerAccountService;
+	
+	@Resource(name = "sdhConfigCatalogos")
+	SDHConfigCatalogos sdhConfigCatalogos;
 
 
 	@RequestMapping(value =
@@ -468,7 +472,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
-		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
+		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos(sdhConfigCatalogos));
 
 		final EdoCuentaForm ctaForm = new EdoCuentaForm();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();

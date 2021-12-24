@@ -47,6 +47,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.PaymentServiceRegisterResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConfigCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
@@ -87,6 +88,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -192,7 +194,8 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 	@Resource(name = "sdhTaxTypeService")
 	private SDHTaxTypeService sdhTaxTypeService;
 
-
+	@Resource(name = "sdhConfigCatalogos")
+	SDHConfigCatalogos sdhConfigCatalogos;
 
 
 	@ModelAttribute("productClassMaximumOccurrencies")
@@ -506,7 +509,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 				{
 					dataForm.setListaDocumentos(gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()));
 					//	dataForm.setNAME_ORG1(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
-					dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
+					dataForm.setCatalogosSo(gasolinaService.prepararCatalogos(sdhConfigCatalogos));
 					dataForm.setAnoGravable(Integer.toString(gasolinaService.obtenerAnoGravableActual()));
 					dataForm.setPeriodo(gasolinaService.obtenerPeriodoActual());
 					dataForm.setNumBP(numBP);
@@ -599,7 +602,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		super.addFirmantes_impuesto(model, null, customerData);
 		List<ImpuestoGasolina> gasolina = new ArrayList<ImpuestoGasolina>();
 
-		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
+		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos(sdhConfigCatalogos);
 
 		String[] mensajesError;
 		String numBP = "";
@@ -878,7 +881,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 					}
 				}
 			}
-			dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
+			dataForm.setCatalogosSo(gasolinaService.prepararCatalogos(sdhConfigCatalogos));
 			model.addAttribute("dataForm", dataForm);
 		}
 		else
@@ -1249,7 +1252,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 			super.addFirmantes_impuesto(model, calcGasolina2Response.getFirmantes(), currentUserData);
 		}
 
-		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
+		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos(sdhConfigCatalogos);
 
 		final String[] mensajesError;
 		String numBP = "";

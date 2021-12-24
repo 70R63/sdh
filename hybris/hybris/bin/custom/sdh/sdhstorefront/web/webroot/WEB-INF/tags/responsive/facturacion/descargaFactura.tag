@@ -4,7 +4,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="formElement"
 	tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
@@ -25,10 +24,9 @@
 		<div class="col-md-4 col-xs-12 mb-20 no-marginright">
 			<span class="paso--uno pasos color-sr1">1</span>
 			<h2 class="titulo-caja--ser-rel color-sr1 ">DESCARGA DE FACTURA</h2>
-			<p class="pasoClase1 metrophobic">Selecciona el impuesto que
-				deseas consultar.</p>
+			<p class="pasoClase1 metrophobic">Selecciona el impuesto que deseas consultar.</p>
 			<div class="caja--ser-rel color-sr1">
-				<select class="new_alto form-control !important" id="impuesto">
+				<select class="new_alto form-control !important" id="impuesto" onchange="refreshTablas();">
 					<option value="00">Seleccionar</option>
 					<c:if test="${ not empty facturacionForm.predial}">
 						<option value="0001">Predial Unificado</option>
@@ -50,60 +48,41 @@
 			</h2>
 			<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
 			<div class="caja--ser-rel color-sr2">
-				<select id="aniograv" class="new_alto form-control " name="aniograv">
-						<option value="2020">2020</option>
-				</select>
-
+				<sf:form modelAttribute="descargaFacturaForm" >
+					<sf:select path="anoGravable" items="${listaAnioGravable}" id="aniograv" class="new_alto form-control " name="aniograv"/>
+				</sf:form>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-3 col-md-offset-3">
-			<button style="margin-top: 3px;" id=""
-				class="btn btn-primary btn-lg facBuscar" type="button"
-				id="facBuscar">
-				<!-- 				 onclick="showtable()"> -->
+			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg facBuscar" type="button" id="facBuscar">
 				<spring:theme code="descarga.factura.inicial.buscar" />
 			</button>
 		</div>
 	</div>
-<!-- 	</div> -->
 	<br>
-<!-- 	<div class="row"> -->
-	<div id="table-predial" style="display: none;" class="">
-		<div class="row">
-			<div class="col-md-7">
-				<table class="table" id="tabPaginacion0" style="widht: 100% !important">
-					<thead style="cellspacing: 10 !important">
+	<div id="table-predial" style="display: none;">
+			<div class="col-md-12">
+				<table id="tabPaginacion0">
+					<thead>
 						<tr>
-							<th style="text-align: center" hidden="hidden"><label
-								class="control-label labeltabletd " for="">Año Gravable</label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd"
-								for=""><spring:theme
-										code="descarga.factura.predial.chip" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd"
-								for=""> <spring:theme
-										code="descarga.factura.predial.matinm" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd"
-								for=""> <spring:theme
-										code="descarga.factura.predial.dirpred" /></label></th>
+<!-- 							<th style="text-align: center" hidden="hidden"><label class="control-label labeltabletd " for="">Año Gravable</label></th> -->
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""><spring:theme code="descarga.factura.predial.chip" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="descarga.factura.predial.matinm" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="descarga.factura.predial.dirpred" /></label></th>
 							<!-- 							<th style="text-align: center"><label class="control-label" -->
 							<%-- 								for=""> <spring:theme --%>
 							<%-- 										code="descarga.factura.predial.selec" /></label></th> --%>
-							<th style="text-align: center"><label class="control-label labeltabletd"
-								for=""> <spring:theme code="Pago voluntario" /></label></th>
+<%-- 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Pago voluntario" /></label></th> --%>
 <!-- 							<th style="text-align: center"><label class="control-label" -->
 <%-- 								for=""> <spring:theme code="Total a pagar" /></label></th> --%>
 <!-- 							<th style="text-align: center"><label class="control-label" -->
 <%-- 								for=""> <spring:theme code="Total con pago voluntario" /></label></th> --%>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme code="Reexpedicion de factura" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme code="Descargar factura" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme code="Pagar con aporte" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme code="Pagar sin aporte" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Reexpedicion de factura" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Descargar factura" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar" /></label></th>
+<%-- 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar sin aporte" /></label></th> --%>
 						</tr>
 					</thead>
 					<tbody>
@@ -114,8 +93,7 @@
 								<c:if
 									test="${not empty eachPredial.anioGravable || not empty eachPredial.direccionPredio}">
 									<tr>
-										<td hidden="hidden"><c:out
-												value="${eachPredial.anioGravable}" /></td>
+<%-- 										<td hidden="hidden"><c:out value="${eachPredial.anioGravable}" /></td> --%>
 										<td><c:out value="${eachPredial.CHIP}" /></td>
 										<td><c:out value="${eachPredial.matrInmobiliaria}" /></td>
 										<td><c:out value="${eachPredial.direccionPredio}" /></td>
@@ -124,17 +102,16 @@
 										<%-- 									type="radio" id="" name="objetoPredial" value="${eachPredial.numObjeto}"></td> --%>
 <!-- 										<td></td> -->
 <!-- 										<td></td> -->
-										<td></td>
+<!-- 										<td></td> -->
 										<td><label class="control-label"
 											style="text-transform: capitalize !important"
 											id="downloadFac" data-claveImpuesto="0001"
 											data-nombreObjeto="objetoPredial"
 											data-anioGrav="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}"
 											onclick="reexpedicion(this)"> <span class="">Reexpedir</span></label></td>
-										<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0001" data-nombreObjeto="objetoPredial"
-											data-anioGrav="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}"></img></td>
-									<td><a onclick="validaBotonPago()"></a></td>
-									<td><a onclick="validaBotonPago()"></a></td>
+										<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0001" data-nombreObjeto="objetoPredial" data-anioGrav="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}"></img></td>
+									<td><button id="pagarFacturaBtn" type="button" data-impuesto="0001" data-numObjeto="${eachPredial.numObjeto}" >Pagar</button></td>
+<!-- 									<td><a onclick="validaBotonPago()"></a></td> -->
 
 									</tr>
 								</c:if>
@@ -143,7 +120,6 @@
 					</tbody>
 				</table>
 			</div>
-		</div>
 <!-- 		<div class="row"> -->
 <!-- 			<div class="col-md-3 col-md-offset-5"> -->
 <!-- 				<button style="margin-top: 3px;" id="" -->
@@ -156,36 +132,25 @@
 	</div>
 
 	<div id="table-vehiculos" style="display: none;">
-<!-- 		<div class="row"> -->
-			<div class="col-md-7">
-				<table class="table table-responsive" id="tabPaginacion1">
-					<thead style="cellspacing: 10 !important">
+			<div class="col-md-12">
+				<table id="tabPaginacion1">
+					<thead>
 						<tr>
-							<th style="text-align: center" hidden="hidden"><label
-								class="control-label " for="">año gravable</label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""><spring:theme
-										code="descarga.factura.vehiculo.placa" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme
-										code="descarga.factura.vehiculo.marca" /></label></th>
+<!-- 							<th style="text-align: center" hidden="hidden"><label class="control-label " for="">año gravable</label></th> -->
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""><spring:theme code="descarga.factura.vehiculo.placa" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="descarga.factura.vehiculo.marca" /></label></th>
 							<!-- 							<th style="text-align: center"><label class="control-label" -->
 							<%-- 								for=""> <spring:theme --%>
 							<%-- 										code="descarga.factura.vehiculo.selec" /></label></th> --%>
-							<th style="text-align: center"><label class="control-labe labeltabletd l"
-								for=""> <spring:theme code="Pago voluntario" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-labe labeltabletd l" for=""> <spring:theme code="Pago voluntario" /></label></th>
 <!-- 							<th style="text-align: center"><label class="control-label" -->
 <%-- 								for=""> <spring:theme code="Total a pagar" /></label></th> --%>
 <!-- 							<th style="text-align: center"><label class="control-label" -->
 <%-- 								for=""> <spring:theme code="Total con pago voluntario" /></label></th> --%>
-							<th style="text-align: center"><label class="control-label labeltabletd"
-								for=""> <spring:theme code="Reexpedicion de factura" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme code="Descargar factura" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme code="Pagar con aporte" /></label></th>
-							<th style="text-align: center"><label class="control-label labeltabletd "
-								for=""> <spring:theme code="Pagar sin aporte" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Reexpedicion de factura" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Descargar factura" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar" /></label></th>
+<%-- 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar sin aporte" /></label></th> --%>
 						</tr>
 					</thead>
 					<tbody>
@@ -195,8 +160,7 @@
 								<c:if
 									test="${not empty eachVehiculo.placa || not empty eachVehiculo.marca}">
 									<tr>
-										<td hidden="hidden"><c:out
-												value="${eachVehiculo.anioGravable}" /></td>
+<%-- 										<td hidden="hidden"><c:out value="${eachVehiculo.anioGravable}" /></td> --%>
 										<td><c:out value="${eachVehiculo.placa}" /></td>
 										<td><label class="labelVerDetVeh "><spring:theme
 													code="vehiculos.detalle.marca.${eachVehiculo.marca}" /></label></td>
@@ -217,8 +181,8 @@
 											data-nombreObjeto="objetoVehicular"
 											data-anioGrav="${eachVehiculo.anioGravable}" data-numObjeto="${eachVehiculo.numObjeto}"></img></td>
 										<td></td>
-										<td><a onclick="validaBotonPago()"></a></td>
-										<td><a onclick="validaBotonPago()"></a></td>
+										<td><button id="pagarFacturaBtn" type="button" data-impuesto="0002" data-numObjeto="${eachVehiculo.numObjeto}" >Pagar</button></td>
+<!-- 										<td><a onclick="validaBotonPago()"></a></td> -->
 
 									</tr>
 								</c:if>
@@ -251,24 +215,8 @@
 </div>
 
 <script>
-	function showtable() {
-		
-
-		var imp = document.getElementById('impuesto').value;
-		var tabpred = document.getElementById('table-predial');
-		var tabveh = document.getElementById('table-vehiculos');
-
-		if (imp == '0001') {
-			tabpred.style.display = 'block';
-			tabveh.style.display = 'none';
-
-		} else if (imp == '0002') {
-			tabpred.style.display = 'none';
-			tabveh.style.display = 'block';
-		} else {
-			tabpred.style.display = 'none';
-			tabveh.style.display = 'none';
-		}
+	function refreshTablas() {
+		ACC.facturacion.refreshTablas();
 
 	}
 	function descargaFactura(descargaFactura1) {

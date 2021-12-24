@@ -24,7 +24,6 @@ import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
-import de.hybris.sdh.core.pojos.responses.DetallePubli;
 import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
@@ -36,6 +35,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.JuridicosVehiculos;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConfigCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
@@ -71,7 +71,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-//import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -152,6 +151,9 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	
 	@Resource(name = "sdhDetallePublicidadService")
 	SDHDetallePublicidadService sdhDetallePublicidadService;
+	
+	@Resource(name = "sdhConfigCatalogos")
+	SDHConfigCatalogos sdhConfigCatalogos;
 
 
 
@@ -167,7 +169,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
-		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
+		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos(sdhConfigCatalogos));
 		//dataForm.setAnoGravable("2019");
 		//dataForm.setPeriodo("1");
 		obtenerListaImpuestosCliente(customerModel, dataForm);
@@ -193,7 +195,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	 * @param customerModel
 	 * @param dataForm
 	 */
-	private void obtenerListaImpuestosCliente(CustomerModel customerModel, SobreTasaGasolinaForm dataForm)
+	private void obtenerListaImpuestosCliente(final CustomerModel customerModel, final SobreTasaGasolinaForm dataForm)
 	{
 
 		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
@@ -207,22 +209,18 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			{
 				dataForm.setOptionPredial("1");
 			}
-
 			if (groupUid.contains("vehicularUsrTaxGrp"))
 			{
 				dataForm.setOptionVehicular("2");
 			}
-
 			if (groupUid.contains("ICAUsrTaxGrp"))
 			{
 				dataForm.setOptionIca("3");
 			}
-
 			if (groupUid.contains("gasolinaUsrTaxGrp"))
 			{
 				dataForm.setOptionGas("5");
 			}
-
 			if (groupUid.contains("delineacionUsrTaxGrp"))
 			{
 				dataForm.setOptionDeli("6");
@@ -274,11 +272,11 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				String placa = "";
 				final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 				final DetGasResponse detalleResponse;
-				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
+				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos(sdhConfigCatalogos);
 				final List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
-				SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
-				String[] mensajesError;
+				final SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+				final String[] mensajesError;
 
 
 				customerModel = (CustomerModel) userService.getCurrentUser();
@@ -409,12 +407,12 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				String periodo = "";
 				final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 				DetGasResponse detalleResponse = null;
-				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
+				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos(sdhConfigCatalogos);
 				List<SobreTasaGasolinaTabla> tablaDocs = null;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 				SDHValidaMailRolResponse detalleContribuyente = null;
-				SDHValidaMailRolResponse detalleContribuyente_temp = null;
-				String[] mensajesError = null;
+				final SDHValidaMailRolResponse detalleContribuyente_temp = null;
+				final String[] mensajesError = null;
 				String mensajeError = null;
 
 
@@ -458,7 +456,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 					if (detalleResponse != null && detalleResponse.getErrores() != null)
 					{
-						for (ErrorEnWS etemp : detalleResponse.getErrores())
+						for (final ErrorEnWS etemp : detalleResponse.getErrores())
 						{
 							if (etemp != null && etemp.getIdmsj() != null && etemp.getIdmsj().equals("200"))
 							{
@@ -674,7 +672,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			}
 		}
 
-		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
+		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos(sdhConfigCatalogos));
 		dataForm.setImpuesto(dataFormResponse.getImpuesto());
 		dataForm.setAnoGravable(dataFormResponse.getAnoGravable());
 		dataForm.setPeriodo(dataFormResponse.getPeriodo());
@@ -939,7 +937,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		final PublicidadForm publicidadForm = new PublicidadForm();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
-		String opcionUso = null;
+		final String opcionUso = null;
 		final String numBP = customerData.getNumBP();
 
 

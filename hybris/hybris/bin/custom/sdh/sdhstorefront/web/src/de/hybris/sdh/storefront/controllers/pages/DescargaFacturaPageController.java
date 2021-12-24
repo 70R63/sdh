@@ -21,6 +21,7 @@ import de.hybris.sdh.core.pojos.requests.DescargaFacturaRequest;
 import de.hybris.sdh.core.pojos.responses.DescargaFacturaResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
+import de.hybris.sdh.core.services.SDHConfigCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
@@ -50,6 +51,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import Decoder.BASE64Decoder;
 
 
 /**
@@ -100,6 +103,10 @@ public class DescargaFacturaPageController extends AbstractPageController
 	@Resource(name = "sdhConsultaImpuesto_simplificado")
 	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
 
+	@Resource(name = "sdhConfigCatalogos")
+	SDHConfigCatalogos sdhConfigCatalogos;
+	
+	
 	@RequestMapping(value = "/contribuyentes/descargafactura", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String descargafact(final Model model) throws CMSItemNotFoundException
@@ -113,35 +120,15 @@ public class DescargaFacturaPageController extends AbstractPageController
 
 
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-		try
-		{
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-			//			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-			//					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-			//					SDHValidaMailRolResponse.class);
-
-			//			final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
-			//			consultaContribBPRequest.setNumBP(customerModel.getNumBP());
-			//
-			//			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
-			//					.consultaContribuyenteBP_simplificado(consultaContribBPRequest);
 
 			facturacionForm.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
 			facturacionForm.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
 
 			model.addAttribute("facturacionForm", facturacionForm);
 			model.addAttribute("descargaFacturaForm", new DescargaFacturaForm());
-		}
-		catch (final Exception e)
-		{
-			// XXX Auto-generated catch block
-			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
-			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
-		}
+			model.addAttribute("listaAnioGravable", sdhConfigCatalogos.obtenerListaAnioGravable_facturacion());
 
-
+			
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DESCARGA_FACTURA_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DESCARGA_FACTURA_CMS_PAGE));
 
@@ -170,6 +157,7 @@ public class DescargaFacturaPageController extends AbstractPageController
 		DescargaFacturaResponse descargaFacturaResponse = null;
 		final DescargaFacturaRequest descargaFacturaRequest = new DescargaFacturaRequest();
 		final String numBP = customerFacade.getCurrentCustomer().getNumBP();
+		byte[] decodedBytes;
 
 
 		dataForm.setErrores(null);
@@ -207,15 +195,8 @@ public class DescargaFacturaPageController extends AbstractPageController
 				if (descargaFacturaResponse != null && descargaFacturaResponse.getPdf() != null
 						&& !descargaFacturaResponse.getPdf().isEmpty())
 				{
-					final String encodedBytes = descargaFacturaResponse.getPdf();
-
-					//		final BASE64Decoder decoder = new BASE64Decoder();
-					byte[] decodedBytes = new byte[0];
-					final FileOutputStream fop;
-					//	decodedBytes = new BASE64Decoder().decodeBuffer(encodedBytes);
-					decodedBytes = Base64.getDecoder().decode(decodedBytes);
-
-					final String fileName = dataForm.getNumObjeto() + "-" + dataForm.getNumBP() + ".pdf";
+					decodedBytes = new BASE64Decoder().decodeBuffer(descargaFacturaResponse.getPdf());
+					final String fileName = dataForm.getNumObjeto() + "-" + numBP + ".pdf";
 
 					final InputStream is = new ByteArrayInputStream(decodedBytes);
 

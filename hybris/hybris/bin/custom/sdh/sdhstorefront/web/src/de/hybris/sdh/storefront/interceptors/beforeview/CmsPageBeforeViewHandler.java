@@ -181,7 +181,18 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 				}
 				else if (eachRolData.getRol() != null && eachRolData.getRol().startsWith("03") && eachRolData.getRol().length() >= 3)
 				{
-					modelAndView.addObject("hasTARol_" + eachRolData.getRol().substring(3), true);
+					if(!eachRolData.getRol().startsWith("03_05")){
+						modelAndView.addObject("hasTARol_" + eachRolData.getRol().substring(3), true);
+					}
+					else{
+				      int start= eachRolData.getRol().indexOf(",");
+				      if (start>-1){
+				      	start++;
+				      	modelAndView.addObject("hasTARol_05" , true);
+				      	modelAndView.addObject("valueTARol" , eachRolData.getRol().substring(start,eachRolData.getRol().length()));
+							sessionService.getCurrentSession().setAttribute("concesionarios_ernam",eachRolData.getRol().substring(start,eachRolData.getRol().length()));
+				      }
+					}
 				} else if ("04".equals(eachRolData.getRol())) {
 					modelAndView.addObject("hasARRol", true);
 				} else if ("05".equals(eachRolData.getRol())) {

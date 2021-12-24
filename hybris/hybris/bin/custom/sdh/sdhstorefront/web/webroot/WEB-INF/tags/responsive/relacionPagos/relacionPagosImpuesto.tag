@@ -11,9 +11,19 @@
 
 <sf:form>
 	<div class="container">
+	    
+	    <div id="impuest" style="display: none;">
+			<input id="Idimp" value="">
+		</div>
+		
+		<div id="relpagPDF" style="display: none;">
+	        <input id="strPDF"  value="" />
+	    </div>    
+	    
 		<div id="impuest" style="display: none;">
 			<input id="Idimp" value="">
 		</div>
+		
 		<br>
 
 		<div id="table-predial" style="display: none;" class="table-responsive">
@@ -48,7 +58,7 @@
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.CHIP}"></c:out></td>
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.matrInmobiliaria}"/></td>
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.direccionPredio}"/></td>
-									<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: none; color: #0358d8 !important" id="" onclick="showdetail(this)">Detalle</label></td>
+									<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: none; color: #0358d8 !important" id="" data-objkey="${eachItem.numObjeto}" data-impuesto="1" onclick="showdetail(this)">Detalle</label></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -93,7 +103,7 @@
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.modelo}"></c:out></td>
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme code="vehiculos.detalle.marca.${eachItem.marca}"/></td>
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme code="vehiculos.detalle.linea.${eachItem.linea}"/></td>									
-								    <td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="" onclick="showdetail(this)">Detalle</label></td>	
+								    <td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="" data-objkey="${eachItem.numObjeto}" data-impuesto="2" onclick="showdetail(this)">Detalle</label></td>	
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -101,6 +111,50 @@
 				</div>
 			</div>
 		</div>
+		
+		
+		
+		<div id="table-ica" style="display: none;">
+			<div class="row">
+				<div class="headline">
+					<h2>
+						<span><spring:theme	code="relacion.inicial.ica.titulo" /></span>
+					</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<table class="col-md-12 table" id="tabPaginacion5">
+						<thead style="cellspacing: 10 !important">
+							<tr>
+								<th><label class="control-label labeltabletd" for=""><spring:theme
+											code="relacion.inicial.gasolina.tipdoc" /></label></th>
+								<th><label class="control-label labeltabletd" for="">
+										<spring:theme code="relacion.inicial.gasolina.numdoc" />
+								</label></th>
+								<th><label class="control-label labeltabletd" for="">
+										<spring:theme code="relacion.inicial.gasolina.numObjeto" />
+								</label></th>
+								<th><label class="control-label labeltabletd" for="">
+										<spring:theme code="relacion.inicial.publicidad.visualizar" />
+								</label></th>
+							</tr>
+						</thead>
+						<tbody>
+						    <c:forEach items="${relacionPagosForm.gasolina }" var="eachItem">
+								<tr>
+									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.tipoDoc}"></c:out></td>
+									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.numDoc}"/></td>
+									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.numObjeto}"/></td>
+									<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="" data-objkey="${eachItem.numObjeto}" data-impuesto="3" onclick="showdetail(this)">Detalle</label></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
 
 
 		<div id="table-publicidad" style="display: none;">
@@ -132,7 +186,7 @@
 								<tr>
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.numResolu}"></c:out></td>
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.tipoValla}"/></td>
-									<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="" onclick="showdetail(this)">Detalle</label></td>
+									<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="" data-objkey="${eachItem.numObjeto}" data-impuesto="4" onclick="showdetail(this)">Detalle</label></td>
 								</tr>
 							</c:forEach>
 
@@ -178,7 +232,7 @@
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.tipoDoc}"></c:out></td>
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.numDoc}"/></td>
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.numObjeto}"/></td>
-									<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="" onclick="showdetail(this)">Detalle</label></td>
+									<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="" data-objkey="${eachItem.numObjeto}" data-impuesto="5" onclick="showdetail(this)">Detalle</label></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -188,46 +242,7 @@
 		</div>
 		
 		
-		<div id="table-ica" style="display: none;">
-			<div class="row">
-				<div class="headline">
-					<h2>
-						<span><spring:theme	code="relacion.inicial.ica.titulo" /></span>
-					</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<table class="col-md-12 table" id="tabPaginacion5">
-						<thead style="cellspacing: 10 !important">
-							<tr>
-								<th><label class="control-label labeltabletd" for=""><spring:theme
-											code="relacion.inicial.gasolina.tipdoc" /></label></th>
-								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="relacion.inicial.gasolina.numdoc" />
-								</label></th>
-								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="relacion.inicial.gasolina.numObjeto" />
-								</label></th>
-								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="relacion.inicial.publicidad.visualizar" />
-								</label></th>
-							</tr>
-						</thead>
-						<tbody>
-						    <c:forEach items="${relacionPagosForm.gasolina }" var="eachItem">
-								<tr>
-									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.tipoDoc}"></c:out></td>
-									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.numDoc}"/></td>
-									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.numObjeto}"/></td>
-									<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="" onclick="showdetail(this)">Detalle</label></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
+
 		
 		
 		
@@ -257,7 +272,7 @@
 								<tr>
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.cdu}"></c:out></td>
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.licenConst}"></c:out></td>									
-									<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="" onclick="showdetail(this)">Detalle</label></td>
+									<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="" data-objkey="${eachItem.numObjeto}" data-impuesto="6" onclick="showdetail(this)">Detalle</label></td>
 								</tr>
 							</c:forEach>
  						</tbody>
@@ -382,7 +397,7 @@
 			<div class="row">
 				<div class="col-md-8 text-center">
 					<div class="table-responsive">
-						<table class="table table-bordered" id="">
+						<table class="table table-bordered" id="relPagosPredial">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -442,7 +457,7 @@
 			<div class="row">
 				<div class="col-md-8 text-center">
 					<div class="table-responsive">
-						<table class="table table-bordered" id="">
+						<table class="table table-bordered" id="relPagosICA">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd tableangrav"><spring:theme
@@ -496,7 +511,7 @@
 			<div class="row">
 				<div class="col-md-8 text-center">
 					<div class="table-responsive">
-						<table class="table table-bordered" id="">
+						<table class="table table-bordered" id="relPagosVehicular">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -549,7 +564,7 @@
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<div class="table-responsive">
-						<table class="table table-bordered" id="">
+						<table class="table table-bordered" id="relPagosDelineacion">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -695,7 +710,7 @@
 			<div class="row">
 				<div class="col-md-8 text-center">
 					<div class="table-responsive">
-						<table class="table table-bordered" id="">
+						<table class="table table-bordered" id="relPagosGasolina">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd tableangrav"><spring:theme
@@ -744,7 +759,7 @@
 			<div class="row">
 				<div class="col-md-8 text-center">
 					<div class="table-responsive">
-						<table class="table table-bordered" id="">
+						<table class="table table-bordered" id="relPagosPublicidad">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd"><spring:theme
@@ -806,6 +821,15 @@
 	}
 
 	function showdetail(selectObject) {
+		
+		debugger;
+		var obKey = selectObject.dataset.objkey;
+		var impuesto = selectObject.dataset.impuesto;
+		
+		
+		
+		ACC.relacionPago.relacionPagoServicio(obKey,impuesto);
+		
 		var values = selectObject.value;
 		var value = selectObject;
 		var x = document.getElementById('Idimp').value;

@@ -36,8 +36,41 @@ window.onload = function() {
 	
 }
 
+
+function descargaRelacionPDF() {
+	debugger;
+	
+	var x = document.getElementById('Idimp').value;
+	var fileName = "RelacionPagos.pdf" ;
+	
+	if (x == '1') {
+		fileName = "RelacionPagosPredial.pdf" ;
+	} else if (x == '2') {
+		fileName = "RelacionPagosVehiculos.pdf" ;
+	} else if (x == '3') {
+		fileName = "RelacionPagosICA.pdf" ;
+	} else if (x == '4') {
+		fileName = "RelacionPagosPublicidad.pdf" ;
+	} else if (x == '5') {
+		fileName = "RelacionPagosGasolina.pdf" ;
+	} else if (x == '6') {
+		fileName = "RelacionPagosDelineacion.pdf" ;
+	}
+	
+	
+	var pdf = document.getElementById('strPDF').value;
+	if (pdf){
+		const linkSource = 'data:application/pdf;base64,' + pdf;
+	    const downloadLink = document.createElement("a");	    	
+	    downloadLink.href = linkSource;
+	    downloadLink.download = fileName;
+	    downloadLink.click();
+	}    
+}
+
+
 function goBack() {
-	window.history.back();
+	window.location.href ='<c:url value='/contribuyentes' />';
 
 }
 
@@ -46,44 +79,8 @@ function goBack() {
 		debugger;
 		var value = selectObject.value;
 		document.getElementById("Idimp").value = value;
-		
-		var inputSearch =  document.getElementById('idinputImpuesto')
-		
-
-		 switch (value) {
-		   case "0": // foo es 0, por lo tanto se cumple la condición y se ejecutara el siguiente bloque
-				inputSearch.style.display = 'none';
-		     break;
-		     // NOTA: el "break" olvidado debería estar aquí
-		   case "1": // No hay sentencia "break" en el 'case 0:', por lo tanto este caso también será ejecutado
-			   inputSearch.style.display = 'block';
-				 document.getElementById('labelSearch').innerHTML
-		         = 'CHIP/Matricula Inmobiliaria';
-		     break; // Al encontrar un "break", no será ejecutado el 'case 2:'
-		   case "2":
-			   inputSearch.style.display = 'block';
-				 document.getElementById('labelSearch').innerHTML
-		         = 'Placa';
-		     break;
-		   case "3":
-			   inputSearch.style.display = 'none';
-			     break;
-		   case "4":
-			   inputSearch.style.display = 'block';
-				 document.getElementById('labelSearch').innerHTML
-		         = 'Numero de resolucion';
-			     break;
-		   case "5":
-			   inputSearch.style.display = 'none';
-			     break;
-		   case "6":
-			   inputSearch.style.display = 'block';
-				 document.getElementById('labelSearch').innerHTML
-		         = 'CDU';
-			     break;
-		   default:
-		     console.log('default');
-		 }
+		 
+		 
 	}
 
 	function Selectedver(selectObject) {
@@ -146,13 +143,13 @@ function goBack() {
 		} else if (x == '3') {
 			tablepredial.style.display = 'none';
 			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
+			tableica.style.display = 'block';
 			tablepublicidad.style.display = 'none';
 			tabledeli.style.display = 'none';
 			tablegas.style.display = 'none';
 			todo.style.display = 'none';
 			detpred.style.display = 'none';
-			detica.style.display = 'block';
+			detica.style.display = 'none';
 			detvehi.style.display = 'none';
 			detdeli.style.display = 'none';
 			detgas.style.display = 'none';
@@ -233,6 +230,8 @@ function goBack() {
 	}
 	
 	function cancelfun(selectObject) {
+		
+		goBack();
 		
 		var value = selectObject.value;
 		var x = document.getElementById('Idimp').value;

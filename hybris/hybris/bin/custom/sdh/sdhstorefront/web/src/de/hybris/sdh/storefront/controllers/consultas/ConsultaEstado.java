@@ -13,6 +13,7 @@ import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.util.Config;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
@@ -24,6 +25,7 @@ import de.hybris.sdh.core.pojos.responses.EdoCuentaResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConfigCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
@@ -47,6 +49,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -119,6 +122,11 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 	@Resource(name = "sdhConsultaImpuesto_simplificado")
 	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+	
+	@Resource(name = "sdhConfigCatalogos")
+	SDHConfigCatalogos sdhConfigCatalogos;
+
+	
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value =
 	{ "/contribuyentes/estado-de-cuenta", "/agenteRetenedor/estado-de-cuenta" }, method = RequestMethod.GET)
@@ -134,7 +142,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
-		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
+		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos(sdhConfigCatalogos));
 		model.addAttribute("dataForm", dataForm);
 
 		final EdoCuentaForm ctaForm = new EdoCuentaForm();
@@ -184,15 +192,18 @@ public class ConsultaEstado extends AbstractSearchPageController
 			ctaForm.setGasolinaSaldoFavor(edoCuentaResponse.getNewGasolinaSaldoFavor());
 			ctaForm.setPublicidadSaldoCargo(edoCuentaResponse.getNewPublicidadSaldoCargo());
 			ctaForm.setPublicidadSaldoFavor(edoCuentaResponse.getNewPublicidadSaldoFavor());
+			
+			
+			Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos();
 
-			if (edoCuentaResponse.getPredial() != null && !edoCuentaResponse.getPredial().isEmpty())
+			if ("X".equals(impuestosActivos.get(sdhConsultaImpuesto_simplificado.predial)) && edoCuentaResponse.getPredial() != null && !edoCuentaResponse.getPredial().isEmpty())
 			{
 				ctaForm.setPredial(
 						edoCuentaResponse.getPredial().stream().filter(eachTax -> (StringUtils.isNotBlank(eachTax.getNewCHIP())
 								|| StringUtils.isNotBlank(eachTax.getMatrInmobiliaria()))).collect(Collectors.toList()));
 			}
 
-			if (edoCuentaResponse.getTablaICA() != null && !edoCuentaResponse.getTablaICA().isEmpty())
+			if ("X".equals(impuestosActivos.get(sdhConsultaImpuesto_simplificado.ica)) && edoCuentaResponse.getTablaICA() != null && !edoCuentaResponse.getTablaICA().isEmpty())
 			{
 				ctaForm.setTablaICA(
 						edoCuentaResponse.getTablaICA().stream().filter(
@@ -210,23 +221,23 @@ public class ConsultaEstado extends AbstractSearchPageController
 			ctaForm.setReteicaSaldoCargo(edoCuentaResponse.getNewReteicaSaldoCargo());
 			//termina reteica
 
-			if (edoCuentaResponse.getTablaVehicular() != null && !edoCuentaResponse.getTablaVehicular().isEmpty())
+			if ("X".equals(impuestosActivos.get(sdhConsultaImpuesto_simplificado.vehiculos)) && edoCuentaResponse.getTablaVehicular() != null && !edoCuentaResponse.getTablaVehicular().isEmpty())
 			{
 				ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular().stream()
 						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getPlaca())).collect(Collectors.toList()));
 			}
 			//ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular());
-			if (edoCuentaResponse.getTablaDelineacion() != null && !edoCuentaResponse.getTablaDelineacion().isEmpty())
+			if ("X".equals(impuestosActivos.get(sdhConsultaImpuesto_simplificado.delineacion)) && edoCuentaResponse.getTablaDelineacion() != null && !edoCuentaResponse.getTablaDelineacion().isEmpty())
 			{
 				ctaForm.setTablaDelineacion(edoCuentaResponse.getTablaDelineacion().stream()
 						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCDU())).collect(Collectors.toList()));
 			}
-			if (edoCuentaResponse.getTablaGasolina() != null && !edoCuentaResponse.getTablaGasolina().isEmpty())
+			if ("X".equals(impuestosActivos.get(sdhConsultaImpuesto_simplificado.gasolina)) && edoCuentaResponse.getTablaGasolina() != null && !edoCuentaResponse.getTablaGasolina().isEmpty())
 			{
 				ctaForm.setTablaGasolina(edoCuentaResponse.getTablaGasolina().stream()
 						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getTipoDocumento())).collect(Collectors.toList()));
 			}
-			if (edoCuentaResponse.getTablaPublicidad() != null && !edoCuentaResponse.getTablaPublicidad().isEmpty())
+			if ("X".equals(impuestosActivos.get(sdhConsultaImpuesto_simplificado.publicidad)) && edoCuentaResponse.getTablaPublicidad() != null && !edoCuentaResponse.getTablaPublicidad().isEmpty())
 			{
 				ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad().stream().filter(eachTax ->
 				(StringUtils.isNotBlank(eachTax.getCabecera().getNoResolucion())
@@ -514,7 +525,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 				String periodo = "";
 				final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 				final DetGasResponse detalleResponse;
-				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
+				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos(sdhConfigCatalogos);
 				List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 				SDHValidaMailRolResponse detalleContribuyente;

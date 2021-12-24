@@ -705,6 +705,8 @@
 	<bean name="sdhSpacService" class="de.hybris.sdh.core.services.impl.DefaultSDHSpacService"/>
 	
 	<bean name="sdhSpacPDFService" class="de.hybris.sdh.core.services.impl.DefaultSDHSpacPDFService"/>
+	
+	<bean name="sdhRelacionPagosService" class="de.hybris.sdh.core.services.impl.DefaultSDHRelacionPagosService" />
 
 	<alias alias="sdhTaxTypeDao" name="defaultSDHTaxTypeDao"/>
 	<bean id="defaultSDHTaxTypeDao" class="de.hybris.sdh.core.dao.impl.DefaultSDHTaxTypeDao">
@@ -796,4 +798,8 @@
 	
 		<alias alias="sdhConcesionariosService" name="defaultSDHConcesionariosImpService"/>
 	<bean id="defaultSDHConcesionariosImpService" class="de.hybris.sdh.core.services.impl.DefaultSDHConcesionariosImpService"/>
+	
+	<alias alias="sdhConfigCatalogos" name="defaultSDHConfigCatalogos"/>
+	<bean name="defaultSDHConfigCatalogos" class="de.hybris.sdh.core.services.impl.DefaultSDHConfigCatalogos" />
+	
 </beans>

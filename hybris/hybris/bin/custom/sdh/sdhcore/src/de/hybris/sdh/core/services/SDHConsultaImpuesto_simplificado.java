@@ -14,6 +14,7 @@ import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author hybris
@@ -21,6 +22,13 @@ import java.util.List;
  */
 public interface SDHConsultaImpuesto_simplificado
 {
+	public static final String predial = "0001";
+	public static final String vehiculos = "0002";
+	public static final String ica = "0003";
+	public static final String reteica = "0004";
+	public static final String gasolina = "0005";
+	public static final String delineacion = "0006";
+	public static final String publicidad = "0007";
 
 	//Predial
 	List<PredialResponse> consulta_impPredial(ConsultaContribuyenteBPRequest request);
@@ -58,7 +66,7 @@ public interface SDHConsultaImpuesto_simplificado
 
 	String consulta_impPublicidad_string(ConsultaContribuyenteBPRequest request);
 
-
+	Map<String, String> obtenerListaImpuestosActivos();
 
 
 

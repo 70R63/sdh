@@ -108,10 +108,7 @@
 						
 			FIN -- MTorres, se comentan lineas de total esperando ajuste por  parte de usuario -->
 			
-<<<<<<< HEAD
-=======
 			
->>>>>>> CI_Concesionarios
 						<!-- 					<div class="col-md-3 col-md-offset-8"> -->
 						<!-- 						<button type="button" class="btn btn-primary btn-lg" id="action" -->
 						<!-- 							name="action" value="Imprimir" style="margin-top: 3px" -->
@@ -168,7 +165,7 @@
 									<c:forEach varStatus="loop" items="${ctaForm.tablaVehicular}"
 										var="eachVehicular">
 										
-										<c:if test="${not empty eachVehicularDetail.anioGravable && not empty eachVehicularDetail.estado}">
+										<c:if test="${not empty eachVehicular.placa}">
 											<tr>
 												<td><c:out value="${eachVehicular.placa}" /></td>
 												<td><c:out value="${eachVehicular.saldocargo}" /></td>

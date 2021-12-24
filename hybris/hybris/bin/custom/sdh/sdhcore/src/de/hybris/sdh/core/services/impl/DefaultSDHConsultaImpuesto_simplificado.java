@@ -1,6 +1,7 @@
 package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.util.Config;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
@@ -16,7 +17,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -80,6 +83,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
 		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
 
+		LOG.info(urlService);
 		LOG.info(wsRequest);
 		final String wsResponse = restTemplate.postForObject(urlService, request, String.class);
 		LOG.info(wsResponse);
@@ -246,6 +250,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
 		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
 
+		LOG.info(urlService);
 		LOG.info(wsRequest);
 		final String wsResponse = restTemplate.postForObject(urlService, request, String.class);
 		LOG.info(wsResponse);
@@ -297,6 +302,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
 		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
 
+		LOG.info(urlService);
 		LOG.info(wsRequest);
 		final String wsResponse = restTemplate.postForObject(urlService, request, String.class);
 		LOG.info(wsResponse);
@@ -347,6 +353,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
 		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
 
+		LOG.info(urlService);
 		LOG.info(wsRequest);
 		final String wsResponse = restTemplate.postForObject(urlService, request, String.class);
 		LOG.info(wsResponse);
@@ -396,6 +403,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
 		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
 
+		LOG.info(urlService);
 		LOG.info(wsRequest);
 		String wsResponse = restTemplate.postForObject(urlService, request, String.class);
 		wsResponse = wsResponse.replaceAll("numOjbeto", "numObjeto");
@@ -403,6 +411,26 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 
 
 		return wsResponse;
+	}
+
+
+
+	@Override
+	public Map<String, String> obtenerListaImpuestosActivos()
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		elementos.put(SDHConsultaImpuesto_simplificado.predial, Config.getParameter("impuestosActivos.estadocuenta.predial"));
+		elementos.put(SDHConsultaImpuesto_simplificado.vehiculos, Config.getParameter("impuestosActivos.estadocuenta.vehiculos"));
+		elementos.put(SDHConsultaImpuesto_simplificado.ica, Config.getParameter("impuestosActivos.estadocuenta.ica"));
+		elementos.put(SDHConsultaImpuesto_simplificado.reteica, Config.getParameter("impuestosActivos.estadocuenta.reteica"));
+		elementos.put(SDHConsultaImpuesto_simplificado.gasolina, Config.getParameter("impuestosActivos.estadocuenta.gasolina"));
+		elementos.put(SDHConsultaImpuesto_simplificado.delineacion,
+				Config.getParameter("impuestosActivos.estadocuenta.delineacion"));
+		elementos.put(SDHConsultaImpuesto_simplificado.publicidad, Config.getParameter("impuestosActivos.estadocuenta.publicidad"));
+
+
+		return elementos;
 	}
 
 }

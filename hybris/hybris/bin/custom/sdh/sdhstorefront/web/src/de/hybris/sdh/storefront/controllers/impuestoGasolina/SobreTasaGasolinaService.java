@@ -74,6 +74,7 @@ import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.ReteICA;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.pojos.responses.TramiteCatalogos;
+import de.hybris.sdh.core.services.SDHConfigCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacion;
@@ -129,15 +130,14 @@ public class SobreTasaGasolinaService
 
 	}
 
-	public SobreTasaGasolinaCatalogos prepararCatalogos()
+	public SobreTasaGasolinaCatalogos prepararCatalogos(SDHConfigCatalogos sdhConfigCatalogos)
 	{
 
 		final SobreTasaGasolinaCatalogos catalogosForm = new SobreTasaGasolinaCatalogos();
 
 		//Sobretasa a gasolina
 		catalogosForm.setOpcionesCantidadMostrar(obtenerListaOpcionesCantidadMostrar());
-		catalogosForm.setAnioGravable(obtenerListaAnioGravable(obtenerAnoGravableActual(),
-				Integer.parseInt(configurationService.getConfiguration().getString(confCantidadAnioGravableBusqueda))));
+		catalogosForm.setAnioGravable(sdhConfigCatalogos.obtenerListaAnioGravable_sobretasagasolina());
 		catalogosForm.setPeriodo(obtenerListaPeriodo());
 		catalogosForm.setCalidadResponsable(obtenerListaCalidadResponsable());
 		catalogosForm.setCodigoPostal(obtenerListaCodigoPostal());
@@ -460,6 +460,9 @@ public class SobreTasaGasolinaService
 			case "03_04":
 				elementos.add(new SelectAtomValue("0002", "Vehículos"));
 				break;
+				
+			case "03_05":
+				break;
 
 			default:
 				break;
@@ -582,18 +585,18 @@ public class SobreTasaGasolinaService
 	{
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
-		//		if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
-		//		{
-		//			elementos.put("1", "Predial");
-		//		}
-		//		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
-		//		{
-		//			elementos.put("2", "Impuestos de Vehículos");
-		//		}
-		//		if (customerData.getIcaTax() != null && customerData.getIcaTax().getObjectNumber() != null)
-		//		{
-		//			elementos.put("3", "ICA");
-		//		}
+		if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
+		{
+			elementos.put("1", "Predial");
+		}
+		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
+		{
+			elementos.put("2", "Impuestos de Vehículos");
+		}
+		if (customerData.getIcaTax() != null && customerData.getIcaTax().getObjectNumber() != null)
+		{
+			elementos.put("3", "ICA");
+		}
 		if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
 		{
 			elementos.put("5", "Sobretasa a la gasolina motor");
@@ -602,18 +605,18 @@ public class SobreTasaGasolinaService
 		{
 			elementos.put("6", "Delineacion Urbana");
 		}
-		//		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
-		//		{
-		//			elementos.put("6", "Delineacion Urbana");
-		//		}
+		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
+		{
+			elementos.put("6", "Delineacion Urbana");
+		}
 		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 		{
 			elementos.put("7", "Publicidad Exterior");
 		}
-		//		if (customerData.getReteIcaTax() != null)
-		//		{
-		//			elementos.put("4", "Reteica");
-		//		}
+		if (customerData.getReteIcaTax() != null)
+		{
+			elementos.put("4", "Reteica");
+		}
 
 
 		return elementos;
@@ -2548,27 +2551,34 @@ public class SobreTasaGasolinaService
 
 		elementos.put("00", "Seleccionar");
 
-		//		if (customerData.getVehicular() != null) //vehicular
-		//		{
-		//			if (customerData.getVehicular().size() > 0)
-		//			{
-		//				elementos.put("0002", "Vehículos");
-		//			}
-		//		}
-		//		if (customerData.getIca() != null) // ica
-		//		{
-		//			if (!customerData.getIca().getNumObjeto().isEmpty())
-		//			{
-		//				elementos.put("0003", "Industria y Comercio");
-		//			}
-		//		}
-		//		if (customerData.getReteIca() != null) // reteICA
-		//		{
-		//			if (!customerData.getReteIca().getNumObjeto().isEmpty())
-		//			{
-		//				elementos.put("0004", "Retención ICA");
-		//			}
-		//		}
+		if (customerData.getPredial() != null) //predial
+		{
+			if (customerData.getPredial().size() > 0)
+			{
+				elementos.put("0001", "Predial");
+			}
+		}
+		if (customerData.getVehicular() != null) //vehicular
+		{
+			if (customerData.getVehicular().size() > 0)
+			{
+				elementos.put("0002", "Vehículos");
+			}
+		}
+		if (customerData.getIca() != null) // ica
+		{
+			if (!customerData.getIca().getNumObjeto().isEmpty())
+			{
+				elementos.put("0003", "Industria y Comercio");
+			}
+		}
+		if (customerData.getReteIca() != null) // reteICA
+		{
+			if (!customerData.getReteIca().getNumObjeto().isEmpty())
+			{
+				elementos.put("0004", "Retención ICA");
+			}
+		}
 		if (customerData.getGasolina() != null) //gasolina
 		{
 			if (customerData.getGasolina().size() > 0)
@@ -2585,13 +2595,13 @@ public class SobreTasaGasolinaService
 
 			}
 		}
-		//		if (customerData.getDelineacion() != null) //delineacion
-		//		{
-		//			if (customerData.getDelineacion().size() > 0)
-		//			{
-		//				elementos.put("0006", "Delineación Urbana");
-		//			}
-		//		}
+		if (customerData.getDelineacion() != null) //delineacion
+		{
+			if (customerData.getDelineacion().size() > 0)
+			{
+				elementos.put("0006", "Delineación Urbana");
+			}
+		}
 		if (customerData.getPublicidadExt() != null) //publicidad
 		{
 			if (customerData.getPublicidadExt().size() > 0)
@@ -2600,7 +2610,6 @@ public class SobreTasaGasolinaService
 			}
 		}
 
-		//		elementos.put("0001", "Predial");
 
 		catalogosForm.setImpuesto(elementos);
 		return catalogosForm;

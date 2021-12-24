@@ -79,7 +79,9 @@ public class HomePageController extends AbstractPageController
 
 	@RequestMapping(method = RequestMethod.GET, value = "/setRole")
 	@RequireHardLogIn
-	public String setRole(@RequestParam(value = "role", required = true) final String role, final Model model,
+	public String setRole(@RequestParam(value = "role", required = true) final String role,
+			@RequestParam(value = "subrole", required = false) final String subrole,
+			final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		sdhCustomerAccountService.cleanSessionAutorities();
@@ -104,7 +106,14 @@ public class HomePageController extends AbstractPageController
 		}
 		else if ("sdh_03".equals(role))
 		{
-			return REDIRECT_PREFIX + "/terceros";
+			if (!"05".equals(subrole))
+			{
+				return REDIRECT_PREFIX + "/terceros";
+			}
+			else
+			{
+				return REDIRECT_PREFIX + "/concesionarios";
+			}
 		}
 		else if ("sdh_04".equals(role))
 		{

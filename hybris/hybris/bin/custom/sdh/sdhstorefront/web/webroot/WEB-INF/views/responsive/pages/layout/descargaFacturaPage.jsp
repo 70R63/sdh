@@ -13,6 +13,7 @@
 <c:choose>
 	<c:when test="${ not empty facturacionForm.vehicular || not empty facturacionForm.predial}">
 		<desfac:descargaFactura/>
+		<desfac:descargaFacturaPagar/>
 	</c:when>
 	<c:otherwise>
 		<desfac:sinDescargaFactura/>
@@ -28,7 +29,7 @@
 		<script type="text/javascript">
 window.onload = function() {
 	
-	ACC.facturacion.establecerCat_aniograv();
+// 	ACC.facturacion.establecerCat_aniograv();
  //   $(".loader").fadeOut("slow");
 }
 	function goBack() {
