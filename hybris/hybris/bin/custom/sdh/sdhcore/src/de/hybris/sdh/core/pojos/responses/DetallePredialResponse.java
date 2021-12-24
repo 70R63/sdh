@@ -20,6 +20,7 @@ public class DetallePredialResponse
 	private String direccionPredio;
 	private String checkAporte;
 	private String indicadorDesc1;
+	private String aporte_activo;
 
 	private PredialDatosJuridicos datosJuridicos;
 	private PredialDatosEconomicos datosEconomicos;
@@ -288,6 +289,23 @@ public class DetallePredialResponse
 	public void setIndicadorDesc1(final String indicadorDesc1)
 	{
 		this.indicadorDesc1 = indicadorDesc1;
+	}
+
+	/**
+	 * @return the aporte_activo
+	 */
+	public String getAporte_activo()
+	{
+		return aporte_activo;
+	}
+
+	/**
+	 * @param aporte_activo
+	 *           the aporte_activo to set
+	 */
+	public void setAporte_activo(final String aporte_activo)
+	{
+		this.aporte_activo = aporte_activo;
 	}
 
 

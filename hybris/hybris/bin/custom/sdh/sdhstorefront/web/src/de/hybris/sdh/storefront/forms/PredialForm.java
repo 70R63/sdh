@@ -112,6 +112,8 @@ public class PredialForm
 	//campos para precalculo
 	private String areaConstruida;
 	private String areaTerrenoCatastro;
+	
+	private String aporte_activo;
 
 
 	/**
@@ -1234,6 +1236,22 @@ public class PredialForm
 	public void setIndicadorDesc1(final String indicadorDesc1)
 	{
 		this.indicadorDesc1 = indicadorDesc1;
+	}
+
+	/**
+	 * @return the aporte_activo
+	 */
+	public String getAporte_activo()
+	{
+		return aporte_activo;
+	}
+
+	/**
+	 * @param aporte_activo the aporte_activo to set
+	 */
+	public void setAporte_activo(String aporte_activo)
+	{
+		this.aporte_activo = aporte_activo;
 	}
 
 

@@ -45,6 +45,7 @@
 
 
 		<div class="row">
+		<c:if test="${predialFormcua.aporte_activo == 'X'}">
 			<div class="col-md-5 col-xs-9">
 				<label class="control-label "
 					style="font-weight: 400; text-transform: none !important;"><spring:theme
@@ -57,6 +58,7 @@
 					type="radio" name="optradio" id="optionNo" value="2"
 					${disabledAporte}>No
 			</div>
+			</c:if>
 			<div class="col-md-5">
 				<label class="control-label "
 					style="font-weight: 400; text-transform: none !important;"><spring:theme
@@ -67,6 +69,7 @@
 					id="predialNoAceptaFactura" value="true" ${disabledSiAceptaFactura}> </label>
 			</div>
 		</div>
+		<c:if test="${predialFormcua.aporte_activo == 'X'}">
 		<div class="row">
 			<div class="col-md-4" id="proyecto">
 				<div class="form-group">
@@ -80,6 +83,7 @@
 				</div>
 			</div>
 		</div>
+		</c:if>
 
 		<div class="row">
 			<div class="col-md-3">

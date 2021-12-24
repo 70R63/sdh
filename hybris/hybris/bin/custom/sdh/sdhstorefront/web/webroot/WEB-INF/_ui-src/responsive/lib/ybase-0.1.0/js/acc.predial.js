@@ -1,7 +1,7 @@
 ACC.predial = {
 	flagMsjInfoObjeto : {},
 
-	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindMostrarAporteVolintario", "bindNoAceptaFactura", "bindDialogoMensajes"],
+	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindNoAceptaFactura", "bindDialogoMensajes"],
 
 	bindoptionNo : function() {
 		$(document).on("click", ".optradio", function() {
