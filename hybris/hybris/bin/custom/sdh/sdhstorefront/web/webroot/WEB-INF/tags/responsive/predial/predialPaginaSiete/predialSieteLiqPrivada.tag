@@ -10,9 +10,11 @@
 <c:set var="idacto" value=""/>
 <input type="hidden" value="${predialForm.mostrarAporteVoluntario}" id="mostrarAporteVoluntario"/>
 
+<c:set var="disabledSiAceptaFactura" value="" />
 <c:set var="disabledLiquidacionPrivada" value=""/>
 <c:if test="${predialFormsiete.controlCampos.liquidacionPrivada == true}">
 	<c:set var="disabledLiquidacionPrivada" value='disabled="disabled"'/>
+	<c:set var="disabledSiAceptaFactura" value='disabled="disabled"' />
 </c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <form:form>
@@ -35,7 +37,7 @@
 						code="predialuno.liquidacionpriv.aceptaFactura" />
 				<input	class="predialNoAceptaFactura"
 					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
-					type="checkbox" name="optionSiAceptaFactura" id="predialNoAceptaFactura" value="true" >
+					type="checkbox" name="optionSiAceptaFactura" id="predialNoAceptaFactura" value="true" ${disabledSiAceptaFactura}>
 				</label>			
 			</div>
 			

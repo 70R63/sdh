@@ -557,7 +557,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 
 		}
-		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP(),"01,02");
 		leerInfoPredial(contribuyenteData,predialFormuno.getNumBP(), predialFormuno.getCHIP());
 		predialFormuno.setContribuyenteData(contribuyenteData);
 		predialFormuno.setControlCampos(
@@ -765,7 +765,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 
 		}
-		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP(),"01,02");
 		leerInfoPredial(contribuyenteData,predialFormdos.getNumBP(), predialFormdos.getCHIP());
 		predialFormdos.setContribuyenteData(contribuyenteData);
 		predialFormdos
@@ -966,7 +966,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 
 		}
-		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP(),"01,02");
 		leerInfoPredial(contribuyenteData,predialInfoInitres.getNumBP(), predialInfoInitres.getCHIP());
 		predialFormtres.setContribuyenteData(contribuyenteData);
 		predialFormtres.setControlCampos(
@@ -1160,7 +1160,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 
 		}
-		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP(),"01,02");
 		leerInfoPredial(contribuyenteData,predialFormcua.getNumBP(), predialFormcua.getCHIP());
 		predialFormcua.setContribuyenteData(contribuyenteData);
 		predialFormcua
@@ -1356,7 +1356,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 
 		}
-		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP(),"01,02");
 		leerInfoPredial(contribuyenteData,predialFormcinco.getNumBP(), predialFormcinco.getCHIP());
 		predialFormcinco.setContribuyenteData(contribuyenteData);
 		predialFormcinco
@@ -1556,7 +1556,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 
 		}
-		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP(),"01,02");
 		leerInfoPredial(contribuyenteData,predialFormseis.getNumBP(), predialFormseis.getCHIP());
 		predialFormseis.setContribuyenteData(contribuyenteData);
 		predialFormseis
@@ -1749,7 +1749,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 
 		}
-		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP(),"01,02");
 		leerInfoPredial(contribuyenteData,predialFormsiete.getNumBP(), predialFormsiete.getCHIP());
 		predialFormsiete.setContribuyenteData(contribuyenteData);
 		predialFormsiete
@@ -1941,7 +1941,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 
 		}
-		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP(),"01,02");
 		leerInfoPredial(contribuyenteData,predialFormocho.getNumBP(), predialFormocho.getCHIP());
 		predialFormocho.setContribuyenteData(contribuyenteData);
 		predialFormocho
@@ -2129,7 +2129,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 		}
 
-		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP(),"01,02");
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		SDHValidaMailRolResponse contImpuestos = null;

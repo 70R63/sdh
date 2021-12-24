@@ -7,6 +7,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
+<c:set var="baseGravableDisabled" value=""/>
+<c:if test="${predialFormseis.controlCampos.liquidacion == true}" >
+	<c:set var="baseGravableDisabled" value="disabled"/>
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <form:form>
 	<div class="container">
@@ -86,7 +90,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialseis.datliquidacion.basegrav" /></label> <input id="basegrav"
-						name="basegrav" class="newalto form-control"  type="text" value="${predialFormseis.estrLiquidacionPredial.baseGravable}"
+						name="basegrav" class="newalto form-control" ${baseGravableDisabled} type="text" value="${predialFormseis.estrLiquidacionPredial.baseGravable}"
 						maxlength="240"></input>
 				</div>
 			</div>

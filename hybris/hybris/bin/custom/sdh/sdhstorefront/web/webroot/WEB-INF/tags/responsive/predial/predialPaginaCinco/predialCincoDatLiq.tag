@@ -7,6 +7,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
+<c:set var="baseGravableDisabled" value=""/>
+<c:if test="${predialFormcinco.controlCampos.liquidacion == true}" >
+	<c:set var="baseGravableDisabled" value="disabled"/>
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <form:form>
 	<div class="container">

@@ -79,24 +79,24 @@
 						<table class="table table-bordered" id="example">
 							<thead>
 								<tr>
-									<td><label class="control-label labeltabletd tableident"><spring:theme code="autorizado.listadeclaraciones.declarcion" /></label></td>
-									<td><label class="control-label labeltabletd "><spring:theme code="autorizado.listadeclaraciones.impuesto" /></label></td>
-									<td><label class="control-label labeltabletd tablenumiden"><spring:theme code="autorizado.listadeclaraciones.angrav" /></label></td>
-									<td><label class="control-label labeltabletd tablenumiden"><spring:theme code="autorizado.listadeclaraciones.periodo" /></label></td>
-									<td><label class="control-label labeltabletd "><spring:theme code="autorizado.listadeclaraciones.estatus" /></label></td>
-									<td><label class="control-label labeltabletd tablenumiden"><spring:theme code="autorizado.listadeclaraciones.seleccionar" /></label></td>
-									<td style="display: none;"/>
-									<td style="display: none;"/>
-									<td style="display: none;"/>
-									<td style="display: none;"/>
-									<td style="display: none;"/>
-									<td style="display: none;"/>
-									<td style="display: none;"/>
-									<td style="display: none;"/>
-									<td style="display: none;"/>
-									<td style="display: none;"/>
-									<td style="display: none;"/>
-									<td style="display: none;"/>
+									<th><label class="control-label labeltabletd tableident"><spring:theme code="autorizado.listadeclaraciones.declarcion" /></label></th>
+									<th><label class="control-label labeltabletd "><spring:theme code="autorizado.listadeclaraciones.impuesto" /></label></th>
+									<th><label class="control-label labeltabletd tablenumiden"><spring:theme code="autorizado.listadeclaraciones.angrav" /></label></th>
+									<th><label class="control-label labeltabletd tablenumiden"><spring:theme code="autorizado.listadeclaraciones.periodo" /></label></th>
+									<th><label class="control-label labeltabletd "><spring:theme code="autorizado.listadeclaraciones.estatus" /></label></th>
+									<th><label class="control-label labeltabletd tablenumiden"><spring:theme code="autorizado.listadeclaraciones.seleccionar" /></label></th>
+									<th style="display: none;"/>
+									<th style="display: none;"/>
+									<th style="display: none;"/>
+									<th style="display: none;"/>
+									<th style="display: none;"/>
+									<th style="display: none;"/>
+									<th style="display: none;"/>
+									<th style="display: none;"/>
+									<th style="display: none;"/>
+									<th style="display: none;"/>
+									<th style="display: none;"/>
+									<th style="display: none;"/>
 								</tr>
 							</thead>
 							<tbody>
@@ -166,9 +166,20 @@
 														</c:otherwise>
 
 													</c:choose>
+													<td style="display: none;"/>
+													<td style="display: none;"/>
+													<td style="display: none;"/>
+													<td style="display: none;"/>
+													<td style="display: none;"/>
+													<td style="display: none;"/>
+													<td style="display: none;"/>
+													<td style="display: none;"/>
+													<td style="display: none;"/>
+													<td style="display: none;"/>
+													<td style="display: none;"/>
+													<td style="display: none;"/>
 
-
-												<tr>
+												</tr>
 												</c:forEach>
 										</c:otherwise>
 									</c:choose>

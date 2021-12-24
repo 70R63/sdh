@@ -12,6 +12,7 @@
 	id="mostrarAporteVoluntario" />
 
 <c:set var="disabledAporte" value="" />
+<c:set var="disabledSiAceptaFactura" value="" />
 <c:choose>
 <c:when test="${predialFormcinco.checkAporte_flag == 1}">
 	<c:set var="disabledAporte" value='' />
@@ -25,6 +26,7 @@
 	test="${predialFormcinco.controlCampos.liquidacionPrivada == true}">
 	<c:set var="disabledLiquidacionPrivada" value='disabled="disabled"' />
 	<c:set var="disabledAporte" value='disabled="disabled"' />
+	<c:set var="disabledSiAceptaFactura" value='disabled="disabled"' />
 </c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <form:form>
@@ -62,7 +64,7 @@
 					class="predialNoAceptaFactura"
 					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
 					type="checkbox" name="optionSiAceptaFactura"
-					id="predialNoAceptaFactura" value="true"> </label>
+					id="predialNoAceptaFactura" value="true" ${disabledSiAceptaFactura}> </label>
 			</div>
 		</div>
 		<div class="row">
