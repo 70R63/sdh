@@ -911,25 +911,49 @@ ACC.predial = {
 	 
 	 
 	 leerMensajesInfoObjeto2 : function(result){
-			var mensaje = "";
-			ACC.predial.flagMsjInfoObjeto = false;
-			
-			$.each(result.tblErrores, function (index,value){
-				switch (value.idMensaje) {
-					case "07":
-					case "08":
-						mensaje = value.descripcionMensajes;
-						$("#dialogMensajesContent").html("");
-			    		$("#dialogMensajesContent").html(mensaje.trim()+"<br>");
-			    		ACC.predial.flagMsjInfoObjeto = true;
-						break;
+		var mensaje = "";
+		ACC.predial.flagMsjInfoObjeto = false;
 		
-					default:
-						break;
-				}
-			});
+		$.each(result.tblErrores, function (index,value){
+			switch (value.idMensaje) {
+				case "07":
+				case "08":
+					mensaje = value.descripcionMensajes;
+					$("#dialogMensajesContent").html("");
+		    		$("#dialogMensajesContent").html(mensaje.trim()+"<br>");
+		    		ACC.predial.flagMsjInfoObjeto = true;
+					break;
+	
+				default:
+					break;
+			}
+		});
 
-			 return mensaje;
-		 }
+		 return mensaje;
+	 },
+
+
+	validateFormPredialAntesLiquidador : function(){
+		var validacion = false;
+
+		if(!ACC.predial.mostrarMensajeInfoObjeto()){
+			var myform = $("#myForm");
+			var opcUso = $("#opcUsoPredialUni").val();
+			if(opcUso != null){
+				opcUso = opcUso.substring(0, 2);
+				if(opcUso == "02"){
+					var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+					if (r == true) {
+						validacion = true;
+					}
+				}else{
+					validacion = true;
+				}
+			}
+		}
+
+		
+		return validacion;
+	} 
 	 
 };
