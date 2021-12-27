@@ -18,6 +18,8 @@ public class DetalleVehiculosResponse
 	private List<DetalleLiquidacionVehiculos> liquidacion;
 	private DetalleInfoDeclaraVehiculos info_declara;
 	private String checkAporte;
+	private String fechaNotif;
+
 	/**
 	 * @return the detalle
 	 */
@@ -25,7 +27,7 @@ public class DetalleVehiculosResponse
 	{
 		return detalle;
 	}
-	
+
 	/**
 	 * @param detalle
 	 *           the detalle to set
@@ -34,7 +36,7 @@ public class DetalleVehiculosResponse
 	{
 		this.detalle = detalle;
 	}
-	
+
 	/**
 	 * @return the datosJuridicos
 	 */
@@ -76,7 +78,7 @@ public class DetalleVehiculosResponse
 	{
 		return liquidacion;
 	}
-	
+
 	/**
 	 * @param liquidacion
 	 *           the liquidacion to set
@@ -92,7 +94,7 @@ public class DetalleVehiculosResponse
 	{
 		return info_declara;
 	}
-	
+
 	/**
 	 * @param info_declara
 	 *           the info_declara to set
@@ -117,6 +119,23 @@ public class DetalleVehiculosResponse
 	public void setCheckAporte(final String checkAporte)
 	{
 		this.checkAporte = checkAporte;
+	}
+
+	/**
+	 * @return the fechaNotif
+	 */
+	public String getFechaNotif()
+	{
+		return fechaNotif;
+	}
+
+	/**
+	 * @param fechaNotif
+	 *           the fechaNotif to set
+	 */
+	public void setFechaNotif(final String fechaNotif)
+	{
+		this.fechaNotif = fechaNotif;
 	}
 
 
