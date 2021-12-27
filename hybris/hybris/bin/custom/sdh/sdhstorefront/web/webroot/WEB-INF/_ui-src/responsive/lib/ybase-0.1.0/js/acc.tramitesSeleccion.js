@@ -50,7 +50,6 @@ ACC.tramitesSeleccion = {
 			ACC.tramitesSeleccion.clearFieldsFromDataSelN1();
 			dataActual.valorN0 = $("#selectNivel0").val();
 			dataActual.valorN1 = $("#selectNivel1").val();
-			ACC.tramitesSeleccion.messageAgeteCrearBaja();
 		}
 
 		if (dataActual.nivelSeleccion == 2) {
@@ -92,19 +91,6 @@ ACC.tramitesSeleccion = {
 			});
 		}
 
-	},
-
-	messageAgeteCrearBaja: function() {
-		valorN0 = $("#selectNivel0").val();
-		valorN1 = $("#selectNivel1").val();
-		mensaje = $('#mensaje');
-
-		mensaje.val('');
-		if (valorN0 == 09 && valorN1 == 03) {
-			mensaje.val('Contribuyente:  \n Tipo Doc: CE   \n No. Doc: 396427 \n \n Agente: \n Tipo Doc: CE \n No. Doc.: 798515');
-		} else if (valorN0 == 09 && valorN1 == 04) {
-			mensaje.val('Contribuyente:  \n Tipo Doc: CE   \n No. Doc: 396427 \n \n Agente: \n Tipo Doc: CE \n No. Doc.: 798515');
-		}
 	},
 
 	bindTramitesEnviar: function() {

@@ -35,7 +35,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.subtramite" /></label> 
-						<select data-nivel="1" class=" form-control !important tramitestSN" id="selectNivel1">
+						<select data-nivel="1" class=" form-control !important tramitestSN" id="selectNivel1" onchange="changeNiv1()">
 						</select>
 					</div>
 				</div>
@@ -147,6 +147,18 @@ function cancelarAccion(){
 function redireccionar(urlAccion){
 	
 	window.location = '<c:url value="/" />'+urlAccion;
+}
+
+function changeNiv1(){
+	valorN0 = $("#selectNivel0").val();
+	valorN1 = $("#selectNivel1").val();
+	mensaje = 	$('#mensaje');
+	if(valorN0 == 09 && valorN1 == 03){
+		$('#mensaje').append("<p>" + "contribuyente: " + "</p>" + "<p>" + "Tipo Doc: CE" + "</p>" + "<p>" + "No. Doc: 396427" + "</p>" + "<br> <br>" + "<p>" + "Agente: " + "</p>" + "<p>" + "Tipo Doc: CE" + "</p>"+"<p>" + "No. Doc.: 798515 " + "</p>");
+	mensaje.val('Contribuyente:  \n Tipo Doc: CE   \n No. Doc: 396427 \n \n Agente: \n Tipo Doc: CE \n No. Doc.: 798515');
+	}else if(valorN0 == 09 && valorN1 == 04){
+		
+	}
 }
 </script>
 
