@@ -310,7 +310,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 				final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
 
-				sb.append(customerModel.getNumBP() + ";");
+				sb.append(infoPreviaPSE.getNumBP() + ";");
 				sb.append(impuestoSAP + ";");
 				sb.append(infoPreviaPSE.getAnoGravable() + ";");
 				sb.append(infoPreviaPSE.getClavePeriodo() + ";");

@@ -139,11 +139,11 @@ function buscarConcesionarios(){
 }
 
 
-function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar,cdu,placa,facilidad,montoFacilidad){
+function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar,cdu,placa,facilidad,montoFacilidad,partner){
 	
 	debugger;
 	
-	var numBP = "${customerData.numBP}";
+	var numBP = partner;
 	var numDoc = "${customerData.documentNumber}";
 	var tipoDoc = "${customerData.documentType}";
 	if (periodo === null || periodo === '' || typeof periodo === 'undefined' ){

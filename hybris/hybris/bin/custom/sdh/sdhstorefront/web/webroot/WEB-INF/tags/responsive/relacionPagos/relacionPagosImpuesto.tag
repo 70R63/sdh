@@ -127,13 +127,8 @@
 					<table class="col-md-12 table" id="tabPaginacion5">
 						<thead style="cellspacing: 10 !important">
 							<tr>
-								<th><label class="control-label labeltabletd" for=""><spring:theme
-											code="relacion.inicial.gasolina.tipdoc" /></label></th>
 								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="relacion.inicial.gasolina.numdoc" />
-								</label></th>
-								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="relacion.inicial.gasolina.numObjeto" />
+										<spring:theme code="relacion.inicial.ica.numObjeto" />
 								</label></th>
 								<th><label class="control-label labeltabletd" for="">
 										<spring:theme code="relacion.inicial.publicidad.visualizar" />
@@ -141,14 +136,10 @@
 							</tr>
 						</thead>
 						<tbody>
-						    <c:forEach items="${relacionPagosForm.gasolina }" var="eachItem">
-								<tr>
-									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.tipoDoc}"></c:out></td>
-									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.numDoc}"/></td>
-									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.numObjeto}"/></td>
-									<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="" data-objkey="${eachItem.numObjeto}" data-impuesto="3" onclick="showdetail(this)">Detalle</label></td>
-								</tr>
-							</c:forEach>
+					    	<tr>
+								<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${relacionPagosForm.impuestoICA.numObjeto}"></c:out></td>									
+								<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="" data-objkey="${relacionPagosForm.impuestoICA.numObjeto}" data-impuesto="3" onclick="showdetail(this)">Detalle</label></td>
+							</tr>							
 						</tbody>
 					</table>
 				</div>

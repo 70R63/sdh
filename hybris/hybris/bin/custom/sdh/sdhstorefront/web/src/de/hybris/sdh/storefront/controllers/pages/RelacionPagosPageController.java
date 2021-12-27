@@ -256,6 +256,7 @@ public class RelacionPagosPageController extends AbstractPageController
 			String resp = sdhRelacionPagosService.getRelacionPagos(relacionPagosRequest);
 
 			resp = resp.replaceAll("(\"STRPDF\":\\[)(.*)(\"\\]\\}\\})(.*)", "\"STRPDF\":$2\"\\}\\}$4");
+			resp = resp.replaceAll("(.*)(,\"\"\\],)(.*)", "$1\\],$3");
 
 			if (resp != null ) {
 				relacionPagosResponse = mapper.readValue(resp, RelacionPagosResponse.class);

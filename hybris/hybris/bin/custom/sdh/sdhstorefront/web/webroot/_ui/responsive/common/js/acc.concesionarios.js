@@ -43,6 +43,7 @@ ACC.concesionarios = {
 			var status = ACC.concesionarios.obtenerDescripcionStatus($("#referenceStatus").val());
 			
 			$.each(infoResponse, function (index,value){
+				debugger;
 				var fechaVencimiento= "";
 				if(value.FAEDN != null){
 					fechaVencimiento = value.FAEDN;
@@ -73,19 +74,20 @@ ACC.concesionarios = {
 												 + '\'\'' + ',\'' 
 												 + value.PSOBTXT + '\',' 
 												 + '\'\'' + ',' 
-												 + '\'\'' 
+												 + '\'\'' + ',\'' 
+												 + value.PARTNER +  '\'' 												 
 						+')" ' + 
 						'>Pagar</label></td>'+	
 						"</tr>");
 				
-				if(status == "Por pagar"){
-					$('#colConcesionarioPagar').show();
-					$('#botonPagarConcesionario').show();
-				}else{
-				  $('#colConcesionarioPagar').hide();
-				  $('#botonPagarConcesionario').hide();
-				}
+				
 			});
+			
+			if(status == "Por pagar"){
+				$('td:nth-child(7), th:nth-child(2)').show();				
+			}else{
+				$('td:nth-child(7), th:nth-child(2)').hide();
+			}
 		}
 		ACC.concesionarios.mostrarTablas();
 

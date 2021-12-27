@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 
@@ -152,7 +153,8 @@ public class SDHValidaMailRolResponse {
 	/**
 	 * @param ica the ica to set
 	 */
-	@JsonSetter("ICA")
+	@JsonAlias(
+	{ "ICA", "ica" })
 	public void setIca(final ImpuestoICA ica) {
 		this.ica = ica;
 	}

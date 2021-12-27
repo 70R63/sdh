@@ -141,18 +141,18 @@ ACC.relacionPago = {
 								if(true){
 									$('#relPagosPublicidad').append(
 										"<tr>"+ 
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.nslctud +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.numberid +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.dirInst +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.orient +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.nslctud +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
 								    "</tr>"
 									);
-									flagRegistrosAgregados = true;
+									flagRegistrosAgregados = true;									
 								}
 							});
 						}
