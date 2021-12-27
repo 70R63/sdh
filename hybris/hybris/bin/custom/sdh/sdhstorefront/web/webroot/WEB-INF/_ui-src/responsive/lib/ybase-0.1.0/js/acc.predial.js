@@ -23,16 +23,18 @@ ACC.predial = {
 			var valPredialNoAceptaFactura = this.checked;
 			
 			if (valPredialNoAceptaFactura) {
-				$('#basegrav').prop('disabled', false);						
+				if($("#basegrav").attr("valoriginal") == undefined){
+					$("#basegrav").attr("valoriginal",$("#basegrav").val());
+				}
+				$(document).on("change", "#basegrav", ACC.predial.validacionMonto_basegrav );
+				$('#basegrav').prop('disabled', false);
 			} else {
-				$('#basegrav').prop('disabled', true);				
+				$(document).off("change", "#basegrav", ACC.predial.validacionMonto_basegrav );
+				$('#basegrav').prop('disabled', true);
+				ACC.predial.verificarAnteSubmit_basegrav();
 			}
 		});
 		
-		$(document).on("change", ".basegrav", function() {
-			var nuevoValor = this.value;
-			$('#BaseGravable').prop('value', nuevoValor);
-		});
 	},
 	
 	
@@ -537,6 +539,7 @@ ACC.predial = {
 
 	calculoPredial : function() {
 		ACC.spinner.show();
+		ACC.predial.verificarAnteSubmit_basegrav();
 		var dataForm = {};
 		dataForm.numBP = $("#NumBP").val();
 		dataForm.chipcalculo = $("#CHIP").val();
@@ -697,6 +700,7 @@ ACC.predial = {
 	
 	calculoPredialSinAporte : function(){
 		ACC.spinner.show();
+		ACC.predial.verificarAnteSubmit_basegrav();
 		var dataForm = {};
 		dataForm.numBP = $("#NumBP").val();
 		dataForm.chipcalculo = $("#CHIP").val();
@@ -954,6 +958,52 @@ ACC.predial = {
 
 		
 		return validacion;
-	} 
+	},
+	
+	
+	validacionMonto_basegrav : function(){
+		var validacion = false;
+		
+		validacion = ACC.predial.validacionMontoAD_basegrav();
+		if(validacion){
+			$('#BaseGravable').prop('value', $("#basegrav").val());
+		}else{
+			alert("El importe no puede ser menor al importe inicial");
+			$("#basegrav").focus();
+		}
+		
+		return validacion;
+	},
+	
+
+	verificarAnteSubmit_basegrav : function(){
+		if(!ACC.predial.validacionMonto_basegrav()){
+			if($("#basegrav").attr("valoriginal") != undefined){
+				$("#basegrav").val($("#basegrav").attr("valoriginal"));
+				$('#BaseGravable').prop('value', $("#basegrav").val());
+			}
+
+		}
+	},
+	
+	
+	validacionMontoAD_basegrav : function(){
+		var validacion = false;
+		
+		var valOriginal = $("#basegrav").attr("valoriginal");
+		valOriginal = valOriginal.replace(/\./g, '');
+		var valOriginal_f = parseFloat(valOriginal);
+		
+		var valNuevo = $("#basegrav").val();
+		valNuevo = valNuevo.replace(/\./g, '');
+		var valNuevo_f = parseFloat(valNuevo);
+		
+		if(valOriginal_f <= valNuevo_f){
+			validacion = true;
+		}
+		
+		return validacion;
+	}
+	
 	 
 };
