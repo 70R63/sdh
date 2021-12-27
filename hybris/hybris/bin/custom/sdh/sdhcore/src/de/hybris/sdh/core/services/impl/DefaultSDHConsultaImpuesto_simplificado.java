@@ -70,8 +70,8 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 	}
 
 
-
-	public String consulta_impVehicular_string(final ConsultaContribuyenteBPRequest wsRequest)
+	@Override
+	public String consulta_impVehicular_string(final Object wsRequest)
 	{
 		final String usuario = configurationService.getConfiguration()
 				.getString("sdh.validacontribuyente_simplificado_impVehicular.user");
@@ -79,18 +79,52 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 				.getString("sdh.validacontribuyente_simplificado_impVehicular.password");
 		final String urlService = configurationService.getConfiguration()
 				.getString("sdh.validacontribuyente_simplificado_impVehicular.url");
+		String wsResponse = null;
 
 		final RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
-		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
 
 		LOG.info(urlService);
-		LOG.info(wsRequest);
-		final String wsResponse = restTemplate.postForObject(urlService, request, String.class);
+		if (wsRequest instanceof ConsultaContribuyenteBPRequest)
+		{
+			final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>((ConsultaContribuyenteBPRequest) wsRequest);
+			LOG.info(wsRequest);
+			wsResponse = restTemplate.postForObject(urlService, request, String.class);
+		}
+		else if (wsRequest instanceof ConsultaContribPredialRequest)
+		{
+			final HttpEntity<ConsultaContribPredialRequest> request = new HttpEntity<>((ConsultaContribPredialRequest) wsRequest);
+			LOG.info(wsRequest);
+			wsResponse = restTemplate.postForObject(urlService, request, String.class);
+		}
 		LOG.info(wsResponse);
 
 
 		return wsResponse;
+	}
+
+	@Override
+	public List<ImpuestoVehiculos> consulta_impVehicular2(final ConsultaContribPredialRequest wsRequest)
+	{
+		SDHValidaMailRolResponse wsResponse = null;
+		List<ImpuestoVehiculos> impuestosVehiculos = null;
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try
+		{
+			wsResponse = mapper.readValue(consulta_impVehicular_string(wsRequest), SDHValidaMailRolResponse.class);
+			if (wsResponse != null)
+			{
+				impuestosVehiculos = wsResponse.getVehicular();
+			}
+		}
+		catch (final Exception e)
+		{
+			LOG.info("Error al convertir response de consulta impuesto Vehicular");
+		}
+
+
+		return impuestosVehiculos;
 	}
 
 
@@ -237,7 +271,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 	}
 
 
-
+	@Override
 	public String consulta_impDelineacion_string(final ConsultaContribuyenteBPRequest wsRequest)
 	{
 		final String usuario = configurationService.getConfiguration()
@@ -343,20 +377,29 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 
 
 
-	@Override
-	public String consulta_impPredial_string(final ConsultaContribuyenteBPRequest wsRequest)
+	public String consulta_impPredial_string(final Object wsRequest)
 	{
 		final String usuario = configurationService.getConfiguration().getString("sdh.ingreso.impPredial.user");
 		final String password = configurationService.getConfiguration().getString("sdh.ingreso.impPredial.password");
 		final String urlService = configurationService.getConfiguration().getString("sdh.ingreso.impPredial.url");
+		String wsResponse = null;
 
 		final RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
-		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
 
 		LOG.info(urlService);
-		LOG.info(wsRequest);
-		final String wsResponse = restTemplate.postForObject(urlService, request, String.class);
+		if (wsRequest instanceof ConsultaContribuyenteBPRequest)
+		{
+			final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>((ConsultaContribuyenteBPRequest) wsRequest);
+			LOG.info(wsRequest);
+			wsResponse = restTemplate.postForObject(urlService, request, String.class);
+		}
+		else if (wsRequest instanceof ConsultaContribPredialRequest)
+		{
+			final HttpEntity<ConsultaContribPredialRequest> request = new HttpEntity<>((ConsultaContribPredialRequest) wsRequest);
+			LOG.info(wsRequest);
+			wsResponse = restTemplate.postForObject(urlService, request, String.class);
+		}
 		LOG.info(wsResponse);
 
 
@@ -374,7 +417,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		try
 		{
-			wsResponse = mapper.readValue(consulta_impPredial2_string(request), SDHValidaMailRolResponse.class);
+			wsResponse = mapper.readValue(consulta_impPredial_string(request), SDHValidaMailRolResponse.class);
 			if (wsResponse != null)
 			{
 				impuestosPredial = wsResponse.getPredial();
@@ -388,29 +431,6 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 
 		return impuestosPredial;
 	}
-
-
-
-	@Override
-	public String consulta_impPredial2_string(final ConsultaContribPredialRequest wsRequest)
-	{
-		final String usuario = configurationService.getConfiguration().getString("sdh.ingreso.impPredial.user");
-		final String password = configurationService.getConfiguration().getString("sdh.ingreso.impPredial.password");
-		final String urlService = configurationService.getConfiguration().getString("sdh.ingreso.impPredial.url");
-
-		final RestTemplate restTemplate = new RestTemplate();
-		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
-		final HttpEntity<ConsultaContribPredialRequest> request = new HttpEntity<>(wsRequest);
-
-		LOG.info(urlService);
-		LOG.info(wsRequest);
-		final String wsResponse = restTemplate.postForObject(urlService, request, String.class);
-		LOG.info(wsResponse);
-
-
-		return wsResponse;
-	}
-
 
 
 	@Override
