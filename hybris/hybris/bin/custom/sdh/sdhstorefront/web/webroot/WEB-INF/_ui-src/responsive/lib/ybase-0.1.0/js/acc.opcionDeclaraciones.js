@@ -413,7 +413,11 @@ ACC.opcionDeclaraciones = {
 	},
 	
 	obtenerListaDeclaraciones_porAnio : function() {
+		
 		ACC.spinner.show();
+		
+		ACC.opcionDeclaraciones.vaciarTablasInfo();
+		
 		if(ACC.opcionDeclaraciones.validarAntesSubmitPeriodo()){
 	        var claveImpuesto = $("#seleccion").val();  	       
 	        var anoGravable = $("#aniograv").val();  	       
@@ -428,6 +432,7 @@ ACC.opcionDeclaraciones = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
+					debugger;
 					ACC.spinner.close();
 					ACC.opcionDeclaraciones.updateFromResponsePeriodo_porAnio(dataActual,dataResponse);
 					ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
@@ -1490,6 +1495,7 @@ ACC.opcionDeclaraciones = {
 		$("#table-ica1").find("tr:gt(0)").remove();
 		$("#table-reteica1").find("tr:gt(0)").remove();
 		$("#table-delineacion1").find("tr:gt(0)").remove();
+		$("#table-predial1").find("tr:gt(0)").remove();
 
 	},
 
