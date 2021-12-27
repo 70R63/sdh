@@ -95,6 +95,7 @@ ACC.concesionarios = {
 	},
 	
 	
+	
 	ocultarTablas : function (){
 		var div_concesionarios = document.getElementById('table-concesionarios');
 		ACC.opcionDeclaraciones.establecerEstiloDisplay(div_concesionarios,'none');

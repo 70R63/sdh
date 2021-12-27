@@ -305,7 +305,16 @@ public class PreparacionPagoPSE extends AbstractPageController
 			final StringBuffer sb = new StringBuffer();
 			String ref4 = null;
 
-			if (infoPreviaPSE.getConcesionario() != null || infoPreviaPSE.getConcesionario().isEmpty())
+			if (infoPreviaPSE.getConcesionario() == null)
+			{
+				sb.append(infoPreviaPSE.getNumBP() + ";");
+				sb.append(impuestoSAP + ";");
+				sb.append(infoPreviaPSE.getAnoGravable() + ";");
+				sb.append(infoPreviaPSE.getClavePeriodo() + ";");
+				sb.append(infoPreviaPSE.getNumObjeto() + ";");
+				sb.append(" ");
+			}
+			else
 			{
 				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 				final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
@@ -315,15 +324,8 @@ public class PreparacionPagoPSE extends AbstractPageController
 				sb.append(infoPreviaPSE.getAnoGravable() + ";");
 				sb.append(infoPreviaPSE.getClavePeriodo() + ";");
 				sb.append(infoPreviaPSE.getNumObjeto() + ";");
-			}
-			else
-			{
-				sb.append(infoPreviaPSE.getNumBP() + ";");
-				sb.append(impuestoSAP + ";");
-				sb.append(infoPreviaPSE.getAnoGravable() + ";");
-				sb.append(infoPreviaPSE.getClavePeriodo() + ";");
-				sb.append(infoPreviaPSE.getNumObjeto() + ";");
-				sb.append(" ");
+
+
 			}
 
 			ref4 = sb.toString();
