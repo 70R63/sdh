@@ -72,7 +72,7 @@
 
 				<button class="btn btn-primary btn-lg generarDeclracinPredial"
 				    type="submit" id="btnGenerarDeclaracion" name=""
-				    onClick="return validateForm();"
+				    onClick="return validateFormPredial()"
 					value="" id="generarDeclracinPredial">
 					<spring:theme code="predial.inicial.marcas.generar" />
 				</button>
@@ -85,28 +85,9 @@
 
 
 <script type="text/javascript">
-    function validateForm() {
-    	
-		
-    	if(ACC.predial.mostrarMensajeInfoObjeto()){
-    		return false;
-    	}
-        var myform = document.getElementById("myForm");
-        var opcUso = document.getElementById("opcUsoPredialUni").value;
-        opcUso = opcUso.substring(0, 2);
-
-        if(opcUso == "02"){
-            var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
-            if (r == true) {
-                  myform.submit();
-             } else {
-                return false;
-             }
-         }else{
-            myform.submit();
-         }
-        return false;
-    }
+    function validateFormPredial() {
+		return ACC.predial.validateFormPredialAntesLiquidador();
+	}
     
 	function descargaFactura() {
 

@@ -59,7 +59,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialdos.datliquidacion.basegrav" /></label> <input id="basegrav"
-						name="basegrav" class="newalto form-control" disabled type="text" value="${predialFormdos.estrLiquidacionPredial.baseGravable}"
+						name="basegrav" class="newalto form-control valFormatoImporte" disabled type="text" value="${predialFormdos.estrLiquidacionPredial.baseGravable}"
 						maxlength="240"></input>
 				</div>
 			</div>
