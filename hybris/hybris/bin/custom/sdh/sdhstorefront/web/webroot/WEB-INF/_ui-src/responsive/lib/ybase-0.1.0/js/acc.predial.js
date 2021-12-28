@@ -991,6 +991,9 @@ ACC.predial = {
 		var validacion = false;
 		
 		var valOriginal = $("#basegrav").attr("valoriginal");
+		if(valOriginal == undefined){
+			valOriginal = $("#basegrav").val();
+		}
 		valOriginal = valOriginal.replace(/\./g, '');
 		var valOriginal_f = parseFloat(valOriginal);
 		
