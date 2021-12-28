@@ -10,7 +10,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -94,6 +93,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import Decoder.BASE64Decoder;
 
 /**
@@ -176,7 +176,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@Resource(name = "sdhCustomerAccountService")
 	SDHCustomerAccountService sdhCustomerAccountService;
-	
+
 	@Resource(name = "sdhConsultaImpuesto_simplificado")
 	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
 
@@ -404,8 +404,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
 			@RequestParam(required = false, value = "numBP") String numBP,
-			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
-			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			@RequestParam(required = false, value = "objetoContrato") final String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo,
 			final RedirectAttributes redirectAttributes, final HttpServletRequest request)
 			throws CMSItemNotFoundException
 	{
@@ -523,24 +523,27 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				}
 
 
-				for (final PredialMarcas eachMarca : predialFormuno.getMarcas())
+				if (predialFormuno.getMarcas() != null)
 				{
-					if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
+					for (final PredialMarcas eachMarca : predialFormuno.getMarcas())
 					{
-						String exMarca = "";
-						exMarca = eachMarca.getTipoMarca();
-						if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+						if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 						{
-							predialFormuno.setDecExclusion(eachMarca.getPorcMarca());
-						}
-						if (exMarca == "2" || exMarca.equals("2"))
-						{
-							predialFormuno.setDecExencion(eachMarca.getPorcMarca());
-						}
+							String exMarca = "";
+							exMarca = eachMarca.getTipoMarca();
+							if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+							{
+								predialFormuno.setDecExclusion(eachMarca.getPorcMarca());
+							}
+							if (exMarca == "2" || exMarca.equals("2"))
+							{
+								predialFormuno.setDecExencion(eachMarca.getPorcMarca());
+							}
 
+						}
 					}
+
 				}
-				
 
 			}
 			else
@@ -613,9 +616,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialdos(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, 
-			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
-			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			@RequestParam(required = false, value = "numBP") String numBP,
+			@RequestParam(required = false, value = "objetoContrato") final String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado DOS --------------------------");
@@ -734,23 +737,26 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialFormdos.setDesCalidad("-");
 			}
 
-			for (final PredialMarcas eachMarca : predialFormdos.getMarcas())
-			{
-				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
+				if (predialFormdos.getMarcas() != null)
 				{
-					String exMarca = "";
-					exMarca = eachMarca.getTipoMarca();
-					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+					for (final PredialMarcas eachMarca : predialFormdos.getMarcas())
 					{
-						predialFormdos.setDecExclusion(eachMarca.getPorcMarca());
-					}
-					if (exMarca == "2" || exMarca.equals("2"))
-					{
-						predialFormdos.setDecExencion(eachMarca.getPorcMarca());
-					}
+						if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
+						{
+							String exMarca = "";
+							exMarca = eachMarca.getTipoMarca();
+							if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+							{
+								predialFormdos.setDecExclusion(eachMarca.getPorcMarca());
+							}
+							if (exMarca == "2" || exMarca.equals("2"))
+							{
+								predialFormdos.setDecExencion(eachMarca.getPorcMarca());
+							}
 
+						}
+					}
 				}
-			}
 			}
 			else
 			{
@@ -826,9 +832,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialtres(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, 
-			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
-			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			@RequestParam(required = false, value = "numBP") String numBP,
+			@RequestParam(required = false, value = "objetoContrato") final String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado TRES --------------------------");
@@ -945,21 +951,24 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialFormtres.setDesCalidad("-");
 			}
 
-			for (final PredialMarcas eachMarca : predialFormtres.getMarcas())
+			if (predialFormtres.getMarcas() != null)
 			{
-				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
+				for (final PredialMarcas eachMarca : predialFormtres.getMarcas())
 				{
-					String exMarca = "";
-					exMarca = eachMarca.getTipoMarca();
-					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+					if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 					{
-						predialFormtres.setDecExclusion(eachMarca.getPorcMarca());
-					}
-					if (exMarca == "2" || exMarca.equals("2"))
-					{
-						predialFormtres.setDecExencion(eachMarca.getPorcMarca());
-					}
+						String exMarca = "";
+						exMarca = eachMarca.getTipoMarca();
+						if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+						{
+							predialFormtres.setDecExclusion(eachMarca.getPorcMarca());
+						}
+						if (exMarca == "2" || exMarca.equals("2"))
+						{
+							predialFormtres.setDecExencion(eachMarca.getPorcMarca());
+						}
 
+					}
 				}
 			}
 
@@ -1020,9 +1029,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialcuatro(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, 
-			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
-			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			@RequestParam(required = false, value = "numBP") String numBP,
+			@RequestParam(required = false, value = "objetoContrato") final String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado CUATRO --------------------------");
@@ -1140,21 +1149,24 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialFormcua.setDesCalidad("-");
 			}
 
-			for (final PredialMarcas eachMarca : predialFormcua.getMarcas())
+			if (predialFormcua.getMarcas() != null)
 			{
-				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
+				for (final PredialMarcas eachMarca : predialFormcua.getMarcas())
 				{
-					String exMarca = "";
-					exMarca = eachMarca.getTipoMarca();
-					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+					if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 					{
-						predialFormcua.setDecExclusion(eachMarca.getPorcMarca());
-					}
-					if (exMarca == "2" || exMarca.equals("2"))
-					{
-						predialFormcua.setDecExencion(eachMarca.getPorcMarca());
-					}
+						String exMarca = "";
+						exMarca = eachMarca.getTipoMarca();
+						if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+						{
+							predialFormcua.setDecExclusion(eachMarca.getPorcMarca());
+						}
+						if (exMarca == "2" || exMarca.equals("2"))
+						{
+							predialFormcua.setDecExencion(eachMarca.getPorcMarca());
+						}
 
+					}
 				}
 			}
 		}
@@ -1217,9 +1229,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialcinco(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, 
-			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
-			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			@RequestParam(required = false, value = "numBP") String numBP,
+			@RequestParam(required = false, value = "objetoContrato") final String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado CINCO --------------------------");
@@ -1337,21 +1349,24 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialFormcinco.setDesCalidad("-");
 			}
 
-			for (final PredialMarcas eachMarca : predialFormcinco.getMarcas())
+			if (predialFormcinco.getMarcas() != null)
 			{
-				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
+				for (final PredialMarcas eachMarca : predialFormcinco.getMarcas())
 				{
-					String exMarca = "";
-					exMarca = eachMarca.getTipoMarca();
-					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+					if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 					{
-						predialFormcinco.setDecExclusion(eachMarca.getPorcMarca());
-					}
-					if (exMarca == "2" || exMarca.equals("2"))
-					{
-						predialFormcinco.setDecExencion(eachMarca.getPorcMarca());
-					}
+						String exMarca = "";
+						exMarca = eachMarca.getTipoMarca();
+						if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+						{
+							predialFormcinco.setDecExclusion(eachMarca.getPorcMarca());
+						}
+						if (exMarca == "2" || exMarca.equals("2"))
+						{
+							predialFormcinco.setDecExencion(eachMarca.getPorcMarca());
+						}
 
+					}
 				}
 			}
 		}
@@ -1412,9 +1427,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialseis(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, 
-			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
-			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			@RequestParam(required = false, value = "numBP") String numBP,
+			@RequestParam(required = false, value = "objetoContrato") final String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado SEIS --------------------------");
@@ -1532,22 +1547,25 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					predialFormseis.setDesCalidad("-");
 				}
 
-				for (final PredialMarcas eachMarca : predialFormseis.getMarcas())
+				if (predialFormseis.getMarcas() != null)
 				{
-					if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
+					for (final PredialMarcas eachMarca : predialFormseis.getMarcas())
 					{
-
-						final String exMarca = eachMarca.getTipoMarca();
-						if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+						if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 						{
-							predialFormseis.setDecExclusion(eachMarca.getPorcMarca());
-						}
-						if (exMarca == "2" || exMarca.equals("2"))
-						{
-							predialFormseis.setDecExencion(eachMarca.getPorcMarca());
-						}
+
+							final String exMarca = eachMarca.getTipoMarca();
+							if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+							{
+								predialFormseis.setDecExclusion(eachMarca.getPorcMarca());
+							}
+							if (exMarca == "2" || exMarca.equals("2"))
+							{
+								predialFormseis.setDecExencion(eachMarca.getPorcMarca());
+							}
 
 
+						}
 					}
 				}
 			}
@@ -1611,9 +1629,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialsiete(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, 
-			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
-			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			@RequestParam(required = false, value = "numBP") String numBP,
+			@RequestParam(required = false, value = "objetoContrato") final String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado Siete --------------------------");
@@ -1732,21 +1750,25 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialFormsiete.setDesCalidad("-");
 			}
 
-			for (final PredialMarcas eachMarca : predialFormsiete.getMarcas())
-			{
-				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
-				{
-					String exMarca = "";
-					exMarca = eachMarca.getTipoMarca();
-					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
-					{
-						predialFormsiete.setDecExclusion(eachMarca.getPorcMarca());
-					}
-					if (exMarca == "2" || exMarca.equals("2"))
-					{
-						predialFormsiete.setDecExencion(eachMarca.getPorcMarca());
-					}
 
+			if (predialFormsiete.getMarcas() != null)
+			{
+				for (final PredialMarcas eachMarca : predialFormsiete.getMarcas())
+				{
+					if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
+					{
+						String exMarca = "";
+						exMarca = eachMarca.getTipoMarca();
+						if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+						{
+							predialFormsiete.setDecExclusion(eachMarca.getPorcMarca());
+						}
+						if (exMarca == "2" || exMarca.equals("2"))
+						{
+							predialFormsiete.setDecExencion(eachMarca.getPorcMarca());
+						}
+
+					}
 				}
 			}
 		}
@@ -1807,9 +1829,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialocho(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, 
-			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
-			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			@RequestParam(required = false, value = "numBP") String numBP,
+			@RequestParam(required = false, value = "objetoContrato") final String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado OCHO --------------------------");
@@ -1890,7 +1912,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormocho.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 			predialFormocho
 					.setMostrarAporteVoluntario(isBefore3erViernesJunio(new Integer(detallePredialRequest.getAnioGravable())));
-			
+
 			predialFormocho.setAporte_activo(detallePredialResponse.getAporte_activo());
 
 			final String idDestino = predialFormocho.getEstrLiquidacionPredial().getDestinoHacendario();
@@ -1927,19 +1949,22 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialFormocho.setDesCalidad("-");
 			}
 
-			for (final PredialMarcas eachMarca : predialFormocho.getMarcas())
+			if (predialFormocho.getMarcas() != null)
 			{
-				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
+				for (final PredialMarcas eachMarca : predialFormocho.getMarcas())
 				{
-					String exMarca = "";
-					exMarca = eachMarca.getTipoMarca();
-					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+					if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 					{
-						predialFormocho.setDecExclusion(eachMarca.getPorcMarca());
-					}
-					if (exMarca == "2" || exMarca.equals("2"))
-					{
-						predialFormocho.setDecExencion(eachMarca.getPorcMarca());
+						String exMarca = "";
+						exMarca = eachMarca.getTipoMarca();
+						if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+						{
+							predialFormocho.setDecExclusion(eachMarca.getPorcMarca());
+						}
+						if (exMarca == "2" || exMarca.equals("2"))
+						{
+							predialFormocho.setDecExencion(eachMarca.getPorcMarca());
+						}
 					}
 				}
 			}
@@ -2000,9 +2025,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	public String predialbases(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
 			@RequestParam(required = false, value = "chip") String chip,
 			@RequestParam(required = false, value = "matricula") String matricula,
-			@RequestParam(required = false, value = "numBP") String numBP, 
-			@RequestParam(required = false, value = "objetoContrato") String objetoContrato,
-			@ModelAttribute("dataForm") final PredialForm predialInfo, 
+			@RequestParam(required = false, value = "numBP") String numBP,
+			@RequestParam(required = false, value = "objetoContrato") final String objetoContrato,
+			@ModelAttribute("dataForm") final PredialForm predialInfo,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado BASES PRESUNTIVAS --------------------------");
@@ -2115,21 +2140,24 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialFormbases.setDesCalidad("-");
 			}
 
-			for (final PredialMarcas eachMarca : predialFormbases.getMarcas())
+			if (predialFormbases.getMarcas() != null)
 			{
-				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
+				for (final PredialMarcas eachMarca : predialFormbases.getMarcas())
 				{
-					String exMarca = "";
-					exMarca = eachMarca.getTipoMarca();
-					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+					if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 					{
-						predialFormbases.setDecExclusion(eachMarca.getPorcMarca());
-					}
-					if (exMarca == "2" || exMarca.equals("2"))
-					{
-						predialFormbases.setDecExencion(eachMarca.getPorcMarca());
-					}
+						String exMarca = "";
+						exMarca = eachMarca.getTipoMarca();
+						if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+						{
+							predialFormbases.setDecExclusion(eachMarca.getPorcMarca());
+						}
+						if (exMarca == "2" || exMarca.equals("2"))
+						{
+							predialFormbases.setDecExencion(eachMarca.getPorcMarca());
+						}
 
+					}
 				}
 			}
 		}
@@ -2197,10 +2225,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	/**
 	 * @param contribuyenteData
-	 * @param numBP 
-	 * @param chip 
+	 * @param numBP
+	 * @param chip
 	 */
-	private void leerInfoPredial(SDHValidaMailRolResponse contribuyenteData, String numBP, String chip)
+	private void leerInfoPredial(final SDHValidaMailRolResponse contribuyenteData, final String numBP, final String chip)
 	{
 		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 		contribuyenteRequest.setNumBP(numBP);
@@ -2212,7 +2240,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
    						.collect(Collectors.toList()));
    		}
 		}
-		
+
 	}
 
 
