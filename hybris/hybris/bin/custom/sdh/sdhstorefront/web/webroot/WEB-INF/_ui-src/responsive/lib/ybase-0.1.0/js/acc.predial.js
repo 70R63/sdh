@@ -111,7 +111,7 @@ ACC.predial = {
 	},
 
 	detalle_tres : function(anioGravable, chip, matrInmobiliaria) {
-		
+		debugger;
 		ACC.spinner.show();
 		var show = document.getElementById('InicialDetalle');
 		show.style.display = 'block';
@@ -142,9 +142,14 @@ ACC.predial = {
 					data : data,
 					type : "GET",
 					success : function(result) {	
-						
+						debugger;
 						ACC.spinner.close();
 						ACC.predial.leerMensajesInfoObjeto2(result);
+						
+						if(ACC.predial.flagMsjInfoObjeto){
+							return result;
+						}	
+							
 						$(".chip").val(result.chip);
 						$("#opcUsoPredialUni").val(result.opcionuso);
 						if(result.indicadorDesc1 != null && result.indicadorDesc1 == "X"){
@@ -917,24 +922,33 @@ ACC.predial = {
 	 leerMensajesInfoObjeto2 : function(result){
 		var mensaje = "";
 		ACC.predial.flagMsjInfoObjeto = false;
+		$( "#btnGenerarDeclaracion" ).prop( "disabled", false );
 		
 		$.each(result.tblErrores, function (index,value){
+			debugger;
 			switch (value.idMensaje) {
-				case "07":
+				case "":
+				    break;
+				case "00":
+				    break;
 				case "08":
 					mensaje = value.descripcionMensajes;
 					$("#dialogMensajesContent").html("");
 		    		$("#dialogMensajesContent").html(mensaje.trim()+"<br>");
 		    		ACC.predial.flagMsjInfoObjeto = true;
-					break;
-	
+					break;				
 				default:
-					break;
+				   ACC.spinner.close();
+				   alert(value.descripcionMensajes);	
+				   ACC.predial.flagMsjInfoObjeto = true;
+				   $( "#btnGenerarDeclaracion" ).prop( "disabled", true );
+				   break;
 			}
 		});
 
 		 return mensaje;
 	 },
+
 
 
 	validateFormPredialAntesLiquidador : function(){

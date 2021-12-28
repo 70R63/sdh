@@ -70,7 +70,7 @@
 	}
 
 	function showDetailPredio(anioGravable, chip, matrInmobiliaria, objetoCon) {
-		
+		debugger;
 		document.getElementById("objetocontrato").value=objetoCon;
 		ACC.predial.detalle_tres(anioGravable, chip, matrInmobiliaria);
 	}
