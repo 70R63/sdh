@@ -34,18 +34,17 @@ public interface SDHConsultaImpuesto_simplificado
 	//Predial
 	List<PredialResponse> consulta_impPredial(ConsultaContribuyenteBPRequest request);
 
-	String consulta_impPredial_string(ConsultaContribuyenteBPRequest request);
+	String consulta_impPredial_string(Object request);
 
 	List<PredialResponse> consulta_impPredial2(ConsultaContribPredialRequest request);
-
-	String consulta_impPredial2_string(ConsultaContribPredialRequest request);
-
 
 
 	//Vehicular
 	List<ImpuestoVehiculos> consulta_impVehicular(ConsultaContribuyenteBPRequest request);
 
-	String consulta_impVehicular_string(ConsultaContribuyenteBPRequest request);
+	String consulta_impVehicular_string(Object request);
+
+	List<ImpuestoVehiculos> consulta_impVehicular2(ConsultaContribPredialRequest request);
 
 
 	//ICA

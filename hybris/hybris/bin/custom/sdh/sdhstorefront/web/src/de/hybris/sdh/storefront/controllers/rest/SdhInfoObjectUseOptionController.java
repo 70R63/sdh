@@ -185,7 +185,7 @@ public class SdhInfoObjectUseOptionController {
         detalleVehiculosRequest.setPlaca(placa);
         detalleVehiculosRequest.setAnioGravable(anioGravable);
 
-
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
             detalleVehiculosResponse = mapper.readValue(
                     sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
