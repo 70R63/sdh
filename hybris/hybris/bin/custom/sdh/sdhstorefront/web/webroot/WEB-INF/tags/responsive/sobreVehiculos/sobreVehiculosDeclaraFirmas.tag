@@ -14,7 +14,7 @@
 
 <c:set var="flagPresentarDeclaracion" value="false" />
 <c:set var="flagPagarEnLinea" value="false" />
-<c:if test="${vehiculosFormDeclaracion.controlCampos.btnPresentarDec == false}">
+<c:if test="${vehiculosFormDeclaracion.controlCampos.btnPresentarDec == true}">
 	<c:set var="flagPresentarDeclaracion" value="true" />
 </c:if>
 <c:if test="${vehiculosFormDeclaracion.controlCampos.btnPagarDec == false}">

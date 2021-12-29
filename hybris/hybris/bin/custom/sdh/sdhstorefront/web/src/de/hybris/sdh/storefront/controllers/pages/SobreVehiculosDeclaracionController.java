@@ -18,7 +18,6 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -71,7 +70,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -80,6 +78,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Decoder.BASE64Decoder;
 
@@ -174,8 +175,8 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 
 
-	private String sobreVehiculosDeclaracionGET(Model model, String anioGravable, String placa, String numForma, String numBPP,
-			RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	private String sobreVehiculosDeclaracionGET(final Model model, final String anioGravable, final String placa, final String numForma, final String numBPP,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		model.addAttribute("customerData", customerData);
@@ -198,7 +199,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 			vehiculosFormDeclaracion.setNumForm(numForma);
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final DetalleVehiculosResponse detalleVehiculosResponse = mapper
 					.readValue(sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
@@ -349,7 +350,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		//		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 		//		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
 		final String mensajeError = "";
-		String[] mensajesError;
+		final String[] mensajesError;
 
 
 		//		contribuyenteRequest.setNumBP(numBP);
@@ -409,7 +410,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 			final ObjectMapper mapper = new ObjectMapper();
 			DetalleVehiculosResponse detalleVehiculosResponse = null;
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			try
 			{
@@ -509,7 +510,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 			String wsresponse = sdhCalcVehiculosService.calcVehiculos(calcVehiculosRequest);
@@ -582,7 +583,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
 					GeneraDeclaracionResponse.class);
@@ -926,14 +927,14 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		return controlCampos;
 	}
 
-	public String prepararNumObjetoVehicular(CustomerModel customerModel, final String placa)
+	public String prepararNumObjetoVehicular(final CustomerModel customerModel, final String placa)
 	{
 		String numObjeto = "";
-		List<SDHVehiculosTaxModel> detalleImpuesto = customerModel.getVehiculosTaxList();
+		final List<SDHVehiculosTaxModel> detalleImpuesto = customerModel.getVehiculosTaxList();
 
 		if (detalleImpuesto != null)
 		{
-			for (SDHVehiculosTaxModel sdhVehiculosTaxModel : detalleImpuesto)
+			for (final SDHVehiculosTaxModel sdhVehiculosTaxModel : detalleImpuesto)
 			{
 				if (sdhVehiculosTaxModel != null && sdhVehiculosTaxModel.getPlaca() != null
 						&& sdhVehiculosTaxModel.getPlaca().equals(placa))
@@ -948,7 +949,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		return numObjeto;
 	}
 
-	public String prepararDV(CustomerModel customerModel)
+	public String prepararDV(final CustomerModel customerModel)
 	{
 		String dv = "";
 

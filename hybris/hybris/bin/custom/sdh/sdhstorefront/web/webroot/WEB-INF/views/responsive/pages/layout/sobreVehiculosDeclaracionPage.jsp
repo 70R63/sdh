@@ -30,7 +30,7 @@
 	}
 	
 	window.onload = function() {
-	
+		
 		var cosas = $(":input");
 		var tam = cosas.length;
 		if (false){
@@ -122,7 +122,10 @@
 			 "${vehiculosFormDeclaracion.modelo}", //5 - carroceria
 			 "${vehiculosFormDeclaracion.avaluo}" //6 - avaluo
 			 ];
-		ACC.vehiculos.obtenerCatalogosInicialVehiculos(cat_valores_actuales);
+		
+		
+		ACC.vehiculos.obtenerCatalogosInicialVehiculos(cat_valores_actuales,"${vehiculosFormDeclaracion.homologado}");
+		
 	}
 	
 	function actualizarCampo(campo_catalogo){

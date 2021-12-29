@@ -97,8 +97,10 @@ ACC.vehiculos = {
 	},
 	
 	bindPresentarDeclaracionVehiculoButton: function () {
+		 
 		 $(document).on("click", "#bindPresentarDeclaracionVehiculoButton", function (e) {
-	 	        e.preventDefault();
+	 	        
+				e.preventDefault();
 	 	        if(ACC.vehiculos.flagMsjInfoObjeto){
 	 	        	ACC.vehiculos.mostrarMensajesInfoObjeto2();
 	 	        	return;
@@ -620,7 +622,8 @@ ACC.vehiculos = {
 	},
 	
 	
-	obtenerCatalogosInicialVehiculos : function(cat_valores_actuales) {
+	obtenerCatalogosInicialVehiculos : function(cat_valores_actuales, homologado) {
+		
 		var elementoCat = null;
 		elementoCat = document.getElementById("linea");
 		elementoCat.disabled = "disabled";
@@ -629,15 +632,32 @@ ACC.vehiculos = {
 		
 		dataActual = null;
 		dataActual = ACC.vehiculos.determinarInfoInicialParaCatalogo("linea",cat_valores_actuales);
-		ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"linea",cat_valores_actuales);
+		ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"linea",cat_valores_actuales, homologado);
 		dataActual = ACC.vehiculos.determinarInfoInicialParaCatalogo("cilindraje",cat_valores_actuales);
-		ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"cilindraje",cat_valores_actuales);
+		ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"cilindraje",cat_valores_actuales, homologado);
 		
 		
 	},
 	
 	
-	obtenerCatalogosVehiculos : function(dataActual, campo_catalogo, cat_valores_actuales) {
+	actualizaHomologado : function(homologado) {
+	
+		if(homologado == "X"){			
+			$( "#linea" ).prop( "disabled", false );
+			$( "#cilindraje" ).prop( "disabled", false );
+			$( "#avaluoAct" ).prop( "disabled", false );
+		}else{
+			$( "#linea" ).prop( "disabled", true );
+			$( "#cilindraje" ).prop( "disabled", true );
+			$( "#avaluoAct" ).prop( "disabled", true );
+		}	
+		
+		
+		
+	},
+	
+	
+	obtenerCatalogosVehiculos : function(dataActual, campo_catalogo, cat_valores_actuales, homologado) {
 		ACC.spinner.show();
 
 		$.ajax({
@@ -647,7 +667,7 @@ ACC.vehiculos = {
 			success : function(dataResponse) {
 				
 				ACC.spinner.close();
-				ACC.vehiculos.updateFromResponse_catalogos(campo_catalogo,cat_valores_actuales,dataActual,dataResponse);					
+				ACC.vehiculos.updateFromResponse_catalogos(campo_catalogo,cat_valores_actuales,dataActual,dataResponse, homologado);					
 			},
 			error : function() {
 				ACC.spinner.close();
@@ -659,8 +679,8 @@ ACC.vehiculos = {
 	},
 	
 	
-	updateFromResponse_catalogos : function(campo_catalogo, cat_valores_actuales, infoActual, infoResponse){
-		
+	updateFromResponse_catalogos : function(campo_catalogo, cat_valores_actuales, infoActual, infoResponse, homologado){
+	
 		if(campo_catalogo == 'linea'){
 			$("#linea").find("option:gt(0)").remove();
 			$("#linea").find("option:eq(0)").remove();
@@ -712,7 +732,7 @@ ACC.vehiculos = {
 			}
 		}
 		
-		
+		ACC.vehiculos.actualizaHomologado(homologado);
 	},
 	
 	
@@ -846,5 +866,6 @@ ACC.vehiculos = {
 		
 		return cadenaNueva;
 	}
+
 
 };
