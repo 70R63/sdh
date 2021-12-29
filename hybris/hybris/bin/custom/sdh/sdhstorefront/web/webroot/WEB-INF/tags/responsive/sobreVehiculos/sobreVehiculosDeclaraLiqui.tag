@@ -11,22 +11,19 @@
 
 <c:set var="disabledLiquidacion" value="" />
 <c:set var="disabledAporte" value="" />
-<c:set var="disabledLinea" value='disabled="disabled"' />
-<c:set var="disabledCilindraje" value='disabled="disabled"' />
-<c:set var="disabledAvaluo" value='disabled="disabled"' />
 <c:set var="disabledAll" value='disabled="disabled"' />
+
 <!-- Agregar el valor del acto que venga del form para determinar si se muestran los campos de acto o no -->
 <c:set var="idacto" value="123" />
 <c:choose>
 	<c:when test="${idacto != ''}">
-	<c:set var="disabledLiquidacion" value='disabled="disabled"' />
-<c:set var="disabledAporte" value='disabled="disabled"' />
-<c:set var="disabledLinea" value='disabled="disabled"' />
-<c:set var="disabledCilindraje" value='disabled="disabled"' />
-<c:set var="disabledAvaluo" value='disabled="disabled"' />
+	   <c:set var="disabledLiquidacion" value='disabled="disabled"' />
+       <c:set var="disabledAporte" value='disabled="disabled"' />
+       <c:set var="disabledLinea" value='disabled="disabled"' />
+       <c:set var="disabledCilindraje" value='disabled="disabled"' />
+       <c:set var="disabledAvaluo" value='disabled="disabled"' />
 	</c:when>
 	<c:otherwise>
-	
 	</c:otherwise>
 </c:choose>
 
@@ -39,27 +36,29 @@
 	</c:when>
 </c:choose>
 
-<c:choose>
-	<c:when test="${vehiculosFormDeclaracion.homologado == 'X'}">
-		<c:set var="disabledLinea" value='' />
-		<c:set var="disabledCilindraje" value='' />
-		<c:set var="disabledAvaluo" value='' />
-	</c:when>
-	<c:when test="${vehiculosFormDeclaracion.homologado == ''}">
-		<c:set var="disabledLinea" value='disabled="disabled"' />
-		<c:set var="disabledCilindraje" value='disabled="disabled"' />
-		<c:set var="disabledAvaluo" value='disabled="disabled"' />
-	</c:when>
-</c:choose>
 
-<c:if
-	test="${vehiculosFormDeclaracion.controlCampos.liquidacion == true}">
+
+<c:if test="${vehiculosFormDeclaracion.controlCampos.liquidacion == true}">
 	<c:set var="disabledLiquidacion" value='disabled="disabled"' />
 	<c:set var="disabledAporte" value='disabled="disabled"' />
 	<c:set var="disabledLinea" value='disabled="disabled"' />
 	<c:set var="disabledCilindraje" value='disabled="disabled"' />
 	<c:set var="disabledAvaluo" value='disabled="disabled"' />
 </c:if>
+
+<c:choose>
+	<c:when test="${vehiculosFormDeclaracion.homologado == 'X'}">
+		<c:set var="disabledLinea" value='' />
+		<c:set var="disabledCilindraje" value='' />
+		<c:set var="disabledAvaluo" value='' />
+	</c:when>
+	<c:when test="${vehiculosFormDeclaracion.homologado != 'X'}">
+		<c:set var="disabledLinea" value='true' />
+		<c:set var="disabledCilindraje" value='disabled="disabled"' />
+		<c:set var="disabledAvaluo" value='disabled="disabled"' />
+	</c:when>
+</c:choose>
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="container">
@@ -97,13 +96,17 @@
 				<c:set var="flagDisabled_capacidadTon" value='' />
 			</c:when>
 		</c:choose>
+		
+		
+		
+		
 		<div class="row mt-3">
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="sobre.vehiculo.declaracion.vehiculo.info.linea" /></label> <select disabled="disabled"
-						id="linea" class="alto_select form-control" aria-required="true"
-						onchange='actualizarCampo("cilindraje")'></select>
+							code="sobre.vehiculo.declaracion.vehiculo.info.linea" /></label> <select 
+						id="linea"   class="alto_select form-control" aria-required="true"
+						onchange='actualizarCampo("cilindraje")' ></select>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -123,8 +126,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.cilindra" /></label> <select
 						id="cilindraje" class="alto_select form-control"
-						aria-required="true" onchange='actualizarCampo("avaluo")'
-						${disabledCilindraje}></select>
+						aria-required="true" onchange='actualizarCampo("avaluo")' ${disabledCilindraje} ></select>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -146,8 +148,7 @@
 						id="avaluoAct" name=""
 						class="newalto form-control avaluoAct valFormatoImporte"
 						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.avaluo}" maxlength="30"
-						${disabledAvaluo}>
+						value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" ${disabledAvaluo} onchange='validaMontoAvaluo("${vehiculosFormDeclaracion.avaluo}")' >
 				</div>
 			</div>
 		</div>
@@ -377,45 +378,13 @@
 		<br>
 	</form:form>
 </div>
-<div class="container" id="selectBoxActo">
-	<c:if test="${idacto != ''}">
-		<div class="row mt-3">
-			<div class="col-md-4">
-				<div class="form-check">
-					<label class="form-check-label"
-						style="text-transform: none !important; font-weight: normal !important"><spring:theme
-							code="sobre.vehiculo.declaracion.vehiculo.liq.acogerseacto" /> </label>
-					<label class="form-check-label"
-						style="text-transform: capitalize !important; font-weight: normal !important">
-						<input type="radio" name="acogerse" id="acogerseSi"
-						class="form-check-input mr-2"
-						style="visibility: visible !important; min-height: 4px !important;"
-						value="si" onclick=""> Si
-					</label> <label class="form-check-label"
-						style="text-transform: capitalize !important; font-weight: normal !important">
-						<input type="radio" name="acogerse" id="acogerseNo"
-						class="form-check-input mr-2"
-						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
-						value="no" onclick="punto()"> No
-					</label>
-				</div>
-			</div>
-		</div>
-	</c:if>
-	<div class="row">
-			<div class="col-md-12">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="sobre.vehiculo.mensaje.spac" /></label>
-				</div>
-			</div>
-		</div>
 
-	
-</div>
 
 	
 <script>
+	
+	
+	
 	function proyecthabi() {
 		
 		var proyec = document.getElementById('proyecto');
@@ -443,6 +412,18 @@
 			avaluo.disabled = true;
 		} else {
 			avaluo.disabled = false;
+		}
+
+	}
+	
+	function validaMontoAvaluo(montoOriginalAvaluo) {
+		debugger;
+		var nuevoAvaluo = $('#avaluoAct').val();
+		
+		
+		if (nuevoAvaluo > montoOriginalAvaluo) {
+			alert("El nuevo monto de avaluo no debe ser mayor a " + montoOriginalAvaluo);
+			$('#avaluoAct').val(montoOriginalAvaluo);
 		}
 
 	}
