@@ -19,8 +19,7 @@
 			<div class="col-md-12">
 				<div class="headline">
 					<h2>
-						<span class="col-md-10 "><spring:theme
-								code="predial.basespresun.datospredio.titulo" /></span>
+						<span class="col-md-10 "><spring:theme code="predial.basespresun.datospredio.titulo" /></span>
 					</h2>
 				</div>
 			</div>
@@ -29,101 +28,101 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="Uso de suelo" /></label> 
-						<select class="newalto form-control" id="usoSuelo" onchange="showDestino(this)">
+					<label class="control-label"><spring:theme code="Uso de suelo" /></label> 
+					<select class="newalto form-control" id="usoSuelo" onchange="showDestino(this)">
 						<option value="">Seleccionar</option>
-							<option value="0">Urbano</option>
-							<option value="1">Rural</option>
-						</select>
+						<option value="0">Urbano</option>
+						<option value="1">Rural</option>
+					</select>
+				</div>
 			</div>
-			</div>
-				<div class="col-md-2" id="destHacendario" style="display: none">
+			<div class="col-md-2" id="destHacendario" style="display: none">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predial.basespresun.datliquidacion.destino" /></label> 
-						<form:select class="newalto form-control" id="DestinoHacendario" path="estrLiquidacionPredial.destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}" onclick="accionCat_destinoHacendario()" disabled="${disabledDatosPredio}" onchange="showHacendario(this)"></form:select>
-			</div>
-			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predial.basespresun.datospredio.areterreno" /></label> <input id="areaterreno"
-						name="areaterreno" class="newalto form-control areaterreno" disabled type="text" value=""
-						maxlength="240"></input>
+					<label class="control-label"><spring:theme code="predial.basespresun.datliquidacion.destino" /></label> 
+					<form:select class="newalto form-control" id="DestinoHacendario" path="estrLiquidacionPredial.destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}" onclick="accionCat_destinoHacendario()" disabled="${disabledDatosPredio}" onchange="showHacendario(this)"></form:select>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predial.basespresun.datospredio.areaconstru" /></label> <input id="areaconstruccion"
-						name="areaconstruccion" class="newalto form-control areaconstruccion" disabled type="text" value=""
-						maxlength="240"></input>
+					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.areterreno" /></label> 
+					<input id="areaterreno" name="areaterreno" class="newalto form-control areaterreno" type="text" value="" maxlength="240"></input>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.areaconstru" /></label> 
+					<input id="areaconstruccion" name="areaconstruccion" class="newalto form-control areaconstruccion" type="text" value="" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-				<div class="col-md-2">
+			<div class="col-md-2">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="Actividad Ecónomica" /></label> 
-						<select class="newalto form-control" id="activEconomica" ></select>
-			</div>
+					<label class="control-label"><spring:theme code="Actividad Ecónomica" /></label> 
+						<select class="newalto form-control" id="activEconomica" >
+							<option value="">Seleccionar</option>
+							<option value="0">Urbano</option>
+							<option value="C1">PUNTUAL</option>
+							<option value="C2">ZONAL</option>
+							<option value="C3">URBANO</option>
+							<option value="C4">METROPOLITANO</option>
+							<option value="C5">FINANCIERO</option>
+							<option value="D1">ESTRATO 1, 2 Y 3</option>
+							<option value="D2">COMERCIAL Y OTROS</option>
+							<option value="E1">ESTRATO 1</option>
+							<option value="E2">ESTRATO 2</option>
+							<option value="E3">ESTRATO 3</option>
+							<option value="E4">ESTRATO 4</option>
+							<option value="E5">ESTRATO 5</option>
+							<option value="E6">ESTRATO 6</option>
+							<option value="NA">NO APLICA</option>
+						</select>
+				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predial.basespresun.datospredio.prophorizon" /></label> 
-							<form:select class="newalto form-control prophorizontal" id="propiedadHorizontal" path="estrDatosGenerales.propiedadHorizontal" items="${predialFormbases.catalogos.propiedadHorizontal}" disabled="${disabledDatosPredio}"></form:select>
-							
+					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.prophorizon" /></label> 
+					<form:select class="newalto form-control prophorizontal" id="propiedadHorizontal" path="estrDatosGenerales.propiedadHorizontal" items="${predialFormbases.catalogos.propiedadHorizontal}" disabled="${disabledDatosPredio}"></form:select>
 				</div>
 			</div>
-					<div class="col-md-3">
+			<div class="col-md-3">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="Base gravable calc." /></label> <input id="baseGrav"
-						name="baseGrav" class="newalto form-control areaterreno" disabled type="text" value=""
-						maxlength="240"></input>
+					<label class="control-label"><spring:theme code="Base gravable calc." /></label> 
+					<input id="baseGrav" name="baseGrav" class="newalto form-control" disabled type="text" value="" maxlength="240"></input>
 				</div>
 			</div>
-					<div class="col-md-3">
+			<div class="col-md-3">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="Tarifa" /></label> <input id="tarifa"
-						name="baseGrav" class="newalto form-control areaterreno" disabled type="text" value=""
-						maxlength="240"></input>
+					<label class="control-label"><spring:theme code="Tarifa" /></label> 
+					<input id="tarifa" name="tarifa" class="newalto form-control" disabled type="text" value="" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predial.basespresun.datospredio.caracpredio" /></label> 
+					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.caracpredio" /></label> 
 						<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri61}" disabled="${disabledDatosPredio}"></form:select>
 						<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio62" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri62}" disabled="${disabledDatosPredio}"></form:select>
 						<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio65" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri65}" disabled="${disabledDatosPredio}"></form:select>
 						<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio67" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri67}" disabled="${disabledDatosPredio}"></form:select>
 				</div>
 			</div>
-					<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="Confirmar BG final" /></label> <input id="confirmBG"
-						name="baseGrav" class="newalto form-control areaterreno" disabled type="text" value=""
-						maxlength="240"></input>
-				</div>
-			</div>
-			</div>
-			<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
-				<c:if test="${predialFormbases.controlCampos.datosPredio != true}">
-				<button id="buttonPrecalculo"
-					class="btn btn-primary btn-lg buttonPrecalculo" type="button" onclick="accionPreCalculo()">
-					<spring:theme code="predial.basespresun.datospredio.precalculo" />
-				</button>
-				</c:if>
+					<label class="control-label"><spring:theme code="Confirmar BG final" /></label> 
+					<input id="confirmBG" name="baseGrav" class="newalto form-control areaterreno" disabled type="text" value="" maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<c:if test="${predialFormbases.controlCampos.datosPredio != true}">
+						<button id="buttonPrecalculo" class="btn btn-primary btn-lg buttonPrecalculo" type="button" onclick="accionPreCalculo()">
+							<spring:theme code="predial.basespresun.datospredio.precalculo" />
+						</button>
+					</c:if>
 				</div>
 			</div>
 		</div>
@@ -171,6 +170,30 @@ function accionCat_destinoHacendario(){
 			dest.style.display = 'none';
 		}
 	}
+	
+	
+	function actualizarConf(objeto){
+		
+		switch(objeto.name){
+		case "usoSuelo":
+			cascadaDesde_usoSuelo(objeto);
+			break;
+		}
+		
+	}
+
+	
+	function cascadaDesde_usoSuelo(objeto){
+		
+		switch($(objeto).val()){
+		case "1":
+			var objeto1 = document.getElementById("");
+			habilitarObjeto(baseGrav);
+			break;		
+		}
+		
+	}
+	
 
 	function showHacendario(object) {
 		var opt = object;

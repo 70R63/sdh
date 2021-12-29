@@ -5,10 +5,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 
 <c:set var="flagPresentarDeclaracion" value="false" />
 <c:set var="flagPagarEnLinea" value="false" />
+<c:set var="flagSPAC" value="false" />
 <c:if test="${predialFormdos.controlCampos.btnPresentarDec == false}">
 	<c:set var="flagPresentarDeclaracion" value="true" />
 </c:if>
@@ -20,12 +22,15 @@
 	<c:set var="flagPagarEnLinea" value="true" />
 	<input type="hidden" value="X" id="contribuyenteNoNIT"/>
 </c:if>
+<c:if test="${fn:substring(predialFormdos.opcionuso,0,2) == '01' && predialFormdos.indicadorspac == 'X'}">
+	<c:set var="flagSPAC" value="true" />
+</c:if>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-
 <spring:url value="/impuestos/preparaPagoPSE" var="pagarURL"
 	htmlEscape="false" />
+
 
 <div class="container">
 <!-- Campos para calculo -->
@@ -89,10 +94,12 @@
 					</sf:button>
 				</c:if>
 				
-				<button class="btn btn-primary btn-lg btnspac" type="submit"
-					id="btnspac" name="pagar" value="pagar" data-numForm="${predialFormdos.numFrom}" data-anio="${predialFormdos.anioGravable}" data-obj="${predialFormdos.anioGravable}">
-					<spring:theme code="predialuno.firma.spac" />
-				</button>
+				<c:if test="${flagSPAC eq true}">
+					<button class="btn btn-primary btn-lg btnspac" type="submit"
+						id="btnspac" name="pagar" value="pagar" data-numForm="${predialFormdos.numFrom}" data-anio="${predialFormdos.anioGravable}" data-obj="${predialFormdos.anioGravable}">
+						<spring:theme code="predialuno.firma.spac" />
+					</button>
+				</c:if>
 
 
 			</div>
