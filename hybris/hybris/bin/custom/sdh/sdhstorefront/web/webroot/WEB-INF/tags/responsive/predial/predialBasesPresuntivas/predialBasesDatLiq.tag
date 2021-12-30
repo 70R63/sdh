@@ -51,8 +51,8 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datliquidacion.basegrav" /></label> <input
-						id="BaseGravable" name="basegrav" class="newalto form-control valFormatoImporte" type="text" value="${predialFormbases.estrLiquidacionPredial.baseGravable}"
-						maxlength="240" ${disabledLiquidacion}></input>
+						id="basegrav" name="basegrav" class="newalto form-control valFormatoImporte" type="text" value="${predialFormbases.estrLiquidacionPredial.baseGravable}"
+						maxlength="240" ${disabledLiquidacion} onchange="basegrav_val(this)"></input>
 				</div>
 			</div>
 
@@ -71,3 +71,12 @@
 </form:form>
 
 
+
+<script type="text/javascript">
+
+function basegrav_val(objeto){
+	
+	$('#BaseGravable').val($('#basegrav').val(););
+	
+}
+</script>

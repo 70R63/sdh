@@ -6,6 +6,8 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+
+ <input type="hidden" value="" id="BaseGravable"/>
 <!-- Agregar el valor del acto que venga del form para determinar si se muestran los campos de acto o no -->
 <c:set var="idacto" value="" />
 <spring:htmlEscape defaultHtmlEscape="true" />

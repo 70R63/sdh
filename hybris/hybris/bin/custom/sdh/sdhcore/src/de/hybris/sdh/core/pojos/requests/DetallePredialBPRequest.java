@@ -17,6 +17,7 @@ public class DetallePredialBPRequest
 	private String caracterizacionPredio;
 	private String propiedadHorizontal;
 	private String destinoHacendario;
+	private String actividadEconomica;
 
 	/**
 	 * @return the numBP
@@ -154,6 +155,23 @@ public class DetallePredialBPRequest
 		this.destinoHacendario = destinoHacendario;
 	}
 
+	/**
+	 * @return the actividadEconomica
+	 */
+	public String getActividadEconomica()
+	{
+		return actividadEconomica;
+	}
+
+	/**
+	 * @param actividadEconomica
+	 *           the actividadEconomica to set
+	 */
+	public void setActividadEconomica(final String actividadEconomica)
+	{
+		this.actividadEconomica = actividadEconomica;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -172,7 +190,8 @@ public class DetallePredialBPRequest
 		stringBuilder.append(obtenerValorJson("\"areaTerrenoCatastro\":\"", this.getAreaTerrenoCatastro(), "\","));
 		stringBuilder.append(obtenerValorJson("\"caracterizacionPredio\":\"", this.getCaracterizacionPredio(), "\","));
 		stringBuilder.append(obtenerValorJson("\"propiedadHorizontal\":\"", this.getPropiedadHorizontal(), "\","));
-		stringBuilder.append(obtenerValorJson("\"destinoHacendario\":\"", this.getDestinoHacendario(), "\""));
+		stringBuilder.append(obtenerValorJson("\"destinoHacendario\":\"", this.getDestinoHacendario(), "\","));
+		stringBuilder.append(obtenerValorJson("\"actividadEconomica\":\"", this.getActividadEconomica(), "\""));
 		stringBuilder.append("}");
 
 		return stringBuilder.toString();

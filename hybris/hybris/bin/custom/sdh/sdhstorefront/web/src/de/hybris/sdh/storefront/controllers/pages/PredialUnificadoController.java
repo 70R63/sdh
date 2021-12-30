@@ -19,6 +19,7 @@ import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CalculoPredialRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.DetalleBasesPresuntivasRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredial2Request;
 import de.hybris.sdh.core.pojos.requests.DetallePredialBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredialRequest;
@@ -27,6 +28,7 @@ import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.responses.CalPredialErrores;
 import de.hybris.sdh.core.pojos.responses.CalculoPredialResponse;
 import de.hybris.sdh.core.pojos.responses.ContribAgente;
+import de.hybris.sdh.core.pojos.responses.DetalleBasesPresuntivasResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePredial2Response;
 import de.hybris.sdh.core.pojos.responses.DetallePredial2Response_marcas;
 import de.hybris.sdh.core.pojos.responses.DetallePredialBPResponse;
@@ -2224,6 +2226,35 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		return getViewForPage(model);
 	}
+	
+	
+//	@RequestMapping(value = "/contribuyentes/predialunificado/basespresuntivas/precalculo", method = RequestMethod.GET)
+//	@RequireHardLogIn
+//	public DetalleBasesPresuntivasResponse predialbases_precalculo(final Model model, 
+//			@ModelAttribute("dataForm") final PredialForm predialInfo,
+//			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+//	{
+//		System.out.println("---------------- En predial Bases Presuntivas - precalculo --------------------------");
+//		DetalleBasesPresuntivasResponse response = null;
+//		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();	
+//		
+//		
+//		DetalleBasesPresuntivasRequest wsRequest = new DetalleBasesPresuntivasRequest();
+//		wsRequest.setNumBP(customerModel.getNumBP());
+//		wsRequest.setChip(predialInfo.getCHIP());
+//		wsRequest.setAnioGravable(predialInfo.getAnioGravable());
+//		wsRequest.setAreaConstruida(predialInfo.getAreaConstruida());
+//		wsRequest.setAreaTerrenoCatastro(predialInfo.getAreaTerrenoCatastro());
+//		wsRequest.setCaracterizacionPredio(predialInfo.getCaracterizacionPredio());
+//		wsRequest.setPropiedadHorizontal(predialInfo.getPropiedadHorizontal());
+//		wsRequest.setDestinoHacendario(predialInfo.getDestinoHacendario());
+//		wsRequest.setActividadEconomica(predialInfo.getActividadEconomica());
+//		
+//		response = sdhDetallePredialService.detalleBasesPresuntivas(wsRequest);
+//		
+//		
+//		return response;
+//	}
 
 
 	/**
@@ -3053,9 +3084,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		DetallePredialBPResponse detallePredialBPResponse = null;
 		final DetallePredialBPRequest detallePredialBPRequest = new DetallePredialBPRequest();
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();	
 
 
-		detallePredialBPRequest.setNumBP(predialInfo.getNumBP());
+		detallePredialBPRequest.setNumBP(customerModel.getNumBP());
 		detallePredialBPRequest.setChip(predialInfo.getCHIP());
 		detallePredialBPRequest.setAnioGravable(predialInfo.getAnioGravable());
 		detallePredialBPRequest.setAreaConstruida(predialInfo.getAreaConstruida());
@@ -3063,6 +3095,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		detallePredialBPRequest.setCaracterizacionPredio(predialInfo.getCaracterizacionPredio());
 		detallePredialBPRequest.setPropiedadHorizontal(predialInfo.getPropiedadHorizontal());
 		detallePredialBPRequest.setDestinoHacendario(predialInfo.getDestinoHacendario());
+		detallePredialBPRequest.setActividadEconomica(predialInfo.getActividadEconomica());
 
 		System.out.println("Request para basespresuntivas: " + detallePredialBPRequest);
 		detallePredialBPResponse = gasolinaService.consultaPredialBP(detallePredialBPRequest, sdhDetalleGasolinaWS, LOG);

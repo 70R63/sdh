@@ -36,7 +36,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-md-2" id="destHacendario" style="display: none">
+			<div class="col-md-2" id="destHacendario" style="display: block">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="predial.basespresun.datliquidacion.destino" /></label> 
 					<form:select class="newalto form-control" id="DestinoHacendario" path="estrLiquidacionPredial.destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}" onclick="accionCat_destinoHacendario()" disabled="${disabledDatosPredio}" onchange="showHacendario(this)"></form:select>
@@ -58,25 +58,16 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group">
-					<label class="control-label"><spring:theme code="Actividad Ecónomica" /></label> 
-						<select class="newalto form-control" id="activEconomica" >
-							<option value="">Seleccionar</option>
-							<option value="0">Urbano</option>
-							<option value="C1">PUNTUAL</option>
-							<option value="C2">ZONAL</option>
-							<option value="C3">URBANO</option>
-							<option value="C4">METROPOLITANO</option>
-							<option value="C5">FINANCIERO</option>
-							<option value="D1">ESTRATO 1, 2 Y 3</option>
-							<option value="D2">COMERCIAL Y OTROS</option>
-							<option value="E1">ESTRATO 1</option>
-							<option value="E2">ESTRATO 2</option>
-							<option value="E3">ESTRATO 3</option>
-							<option value="E4">ESTRATO 4</option>
-							<option value="E5">ESTRATO 5</option>
-							<option value="E6">ESTRATO 6</option>
-							<option value="NA">NO APLICA</option>
-						</select>
+					<label class="control-label"><spring:theme code="Actividad Ecónomica" /></label>
+					<select class="newalto form-control" id="activEconomica" >
+						<option value="">Seleccionar</option>
+						<option value="1">Residencial</option>
+						<option value="2">Urbanizable no urbanizado</option>
+						<option value="3">Comercial</option>
+						<option value="10">Industrial</option>
+						<option value="12">Dotacional</option>
+						<option value="48">Depósitos y parqueaderos</option>
+					</select>
 				</div>
 			</div>
 			<div class="col-md-2">
@@ -101,11 +92,11 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.caracpredio" /></label> 
-						<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri61}" disabled="${disabledDatosPredio}"></form:select>
-						<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio62" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri62}" disabled="${disabledDatosPredio}"></form:select>
-						<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio65" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri65}" disabled="${disabledDatosPredio}"></form:select>
-						<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio67" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri67}" disabled="${disabledDatosPredio}"></form:select>
+					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.caracpredio" /></label>
+					<form:select style="display: block" class="newalto form-control" id="caracterizacionPredio" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri61}" disabled="${disabledDatosPredio}"></form:select>
+					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio62" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri62}" disabled="${disabledDatosPredio}"></form:select>
+					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio65" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri65}" disabled="${disabledDatosPredio}"></form:select>
+					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio67" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri67}" disabled="${disabledDatosPredio}"></form:select>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -141,13 +132,14 @@ function accionPreCalculo(){
 	var caracterizacionPredio = $('#caracterizacionPredio').val();
 	var propiedadHorizontal = $('#propiedadHorizontal').val();
 	var destinoHacendario = $('#DestinoHacendario').val();
+	var actividadEconomica = $('#activEconomica').val();
 	
-	ACC.predial.ejecutarPreCalculoPB(numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario);
+	ACC.predial.ejecutarPreCalculoPB(numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario,actividadEconomica);
 	
 }
 
 function accionCat_destinoHacendario(){
-
+	debugger;
 	$("#caracterizacionPredio").find("option:gt(0)").remove();	
 	if($("#DestinoHacendario").val() != null){
 		for(var i=0;i<cat_predial_caracterizacionPredio.length;i++){
@@ -161,14 +153,18 @@ function accionCat_destinoHacendario(){
 
 	function showDestino(object) {
 		var opt = object;
+		var baseGrav = document.getElementById("baseGrav");
 		var dest = document.getElementById("destHacendario");
 		var x = document.getElementById('usoSuelo').value;
 
 		if (x == '0') {
 			dest.style.display = 'block';
+			$("#baseGrav").prop("disabled",true);
 		} else if (x == '1') {
 			dest.style.display = 'none';
+			$("#baseGrav").prop("disabled",false);
 		}
+
 	}
 	
 	

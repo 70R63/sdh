@@ -88,9 +88,11 @@ ACC.predial = {
 					var destino = document.getElementById('DestinoHacendario');
 					var tam = destino.length;
 					for(i=0; i<tam; i++){
-						var valoption = destino.options[i].value;
-					if(valoption == 65){destino.options[i].remove();}
-					if(valoption == 67){destinooption = "ok";}
+						if(destino.options[i] != null){
+							var valoption = destino.options[i].value;
+							if(valoption == 65){destino.options[i].remove();}
+							if(valoption == 67){destinooption = "ok";}
+						}
 					}
 					if(destinooption == "no"){
 						 const option = document.createElement('option');
@@ -111,7 +113,6 @@ ACC.predial = {
 	},
 
 	detalle_tres : function(anioGravable, chip, matrInmobiliaria) {
-		debugger;
 		ACC.spinner.show();
 		var show = document.getElementById('InicialDetalle');
 		show.style.display = 'block';
@@ -142,7 +143,6 @@ ACC.predial = {
 					data : data,
 					type : "GET",
 					success : function(result) {	
-						debugger;
 						ACC.spinner.close();
 						ACC.predial.leerMensajesInfoObjeto2(result);
 						
@@ -801,14 +801,14 @@ ACC.predial = {
 	 },
 	 
 	 
-	 ejecutarPreCalculoPB : function (numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario){
+	 ejecutarPreCalculoPB : function (numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario,actividadEconomica){
 		ACC.spinner.show();
 		ACC.predial.visualizacionBasesDetalle(false);
 		if(ACC.predial.validarAntesSubmit_precalculoBP()){
 			var dataActual = {};	
 		
 			
-			dataActual.numBP = numBP;
+//			dataActual.numBP = numBP;
 			dataActual.CHIP = chip;
 			dataActual.anioGravable = anioGravable;
 			dataActual.areaConstruida = areaConstruida;
@@ -816,6 +816,7 @@ ACC.predial = {
 			dataActual.caracterizacionPredio = caracterizacionPredio;
 			dataActual.propiedadHorizontal = propiedadHorizontal;
 			dataActual.destinoHacendario = destinoHacendario;
+			dataActual.actividadEconomica = actividadEconomica;
 			
 			
 			$.ajax({
@@ -840,7 +841,10 @@ ACC.predial = {
 					alert("Error procesar la solicitud de basespresuntivas");	
 				}
 			});
+		}else{
+			ACC.spinner.close();
 		}
+		
 	 },
 	 
 	 visualizacionBasesDetalle : function (flagVisible){
@@ -925,7 +929,6 @@ ACC.predial = {
 		$( "#btnGenerarDeclaracion" ).prop( "disabled", false );
 		
 		$.each(result.tblErrores, function (index,value){
-			debugger;
 			switch (value.idMensaje) {
 				case "":
 				    break;
@@ -1003,21 +1006,30 @@ ACC.predial = {
 	
 	validacionMontoAD_basegrav : function(){
 		var validacion = false;
+		var valOriginal_f = Number.NaN;
+		var valNuevo_f = Number.NaN;
 		
 		var valOriginal = $("#basegrav").attr("valoriginal");
 		if(valOriginal == undefined){
 			valOriginal = $("#basegrav").val();
 		}
-		valOriginal = valOriginal.replace(/\./g, '');
-		var valOriginal_f = parseFloat(valOriginal);
+		if(valOriginal != undefined){
+			valOriginal = valOriginal.replace(/\./g, '');
+			valOriginal_f = parseFloat(valOriginal);
+		}
 		
 		var valNuevo = $("#basegrav").val();
-		valNuevo = valNuevo.replace(/\./g, '');
-		var valNuevo_f = parseFloat(valNuevo);
-		
-		if(valOriginal_f <= valNuevo_f){
-			validacion = true;
+		if(valOriginal != undefined){
+			valNuevo = valNuevo.replace(/\./g, '');
+			valNuevo_f = parseFloat(valNuevo);
 		}
+		
+		if(valOriginal_f != Number.NaN && valNuevo_f != Number.NaN){
+			if(valOriginal_f <= valNuevo_f){
+				validacion = true;
+			}			
+		}
+
 		
 		return validacion;
 	}
