@@ -8,6 +8,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
@@ -15,7 +16,13 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.RelacionPagosRequest;
 import de.hybris.sdh.core.pojos.responses.ImpuestosResponse;
+import de.hybris.sdh.core.pojos.responses.RelacionPagosDelineacion;
+import de.hybris.sdh.core.pojos.responses.RelacionPagosGasolina;
+import de.hybris.sdh.core.pojos.responses.RelacionPagosICA;
+import de.hybris.sdh.core.pojos.responses.RelacionPagosPredial;
+import de.hybris.sdh.core.pojos.responses.RelacionPagosPublicidad;
 import de.hybris.sdh.core.pojos.responses.RelacionPagosResponse;
+import de.hybris.sdh.core.pojos.responses.RelacionPagosVehicular;
 import de.hybris.sdh.core.pojos.responses.Relacionpagosrespons;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -88,9 +95,7 @@ public class RelacionPagosPageController extends AbstractPageController
 		final StringBuffer requestURL = request.getRequestURL();
 		final String url2 = String.valueOf(requestURL);
 
-
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-
 
 		final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
 		consultaContribBPRequest.setNumBP(customerModel.getNumBP());
@@ -98,8 +103,6 @@ public class RelacionPagosPageController extends AbstractPageController
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-
-
 		try
 		{
 
@@ -199,23 +202,13 @@ public class RelacionPagosPageController extends AbstractPageController
 				relacionPagosForm.setPredial(sdhConsultaContribuyenteBPResponse.getPredial().stream()
 						.filter(d -> StringUtils.isNotBlank(d.getCHIP())).collect(Collectors.toList()));
 			}
-
-
 			model.addAttribute("relacionPagosForm", relacionPagosForm);
-
-
-
 		}
 		catch (final Exception e)
 		{
 			LOG.error("Error getting customer info from SAP for RelacionPagosPage: " + e.getMessage());
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 		}
-
-
-
-
-
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(RELACION_PAGOS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(RELACION_PAGOS_CMS_PAGE));
@@ -230,10 +223,6 @@ public class RelacionPagosPageController extends AbstractPageController
 			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE_RETE));
 			model.addAttribute("Retenedor", "Retenedor");
 		}
-
-
-
-
 		return getViewForPage(model);
 	}
 
@@ -260,14 +249,11 @@ public class RelacionPagosPageController extends AbstractPageController
 
 			if (resp != null ) {
 				relacionPagosResponse = mapper.readValue(resp, RelacionPagosResponse.class);
+				obtainDate(relacionPagosResponse);
 			}
 			else {
 				relacionPagosResponse.setRelacionpagosrespons(new Relacionpagosrespons());
 			}
-
-
-
-
 		}
 		catch (final Exception e)
 		{
@@ -277,9 +263,77 @@ public class RelacionPagosPageController extends AbstractPageController
 		return relacionPagosResponse;
 	}
 
+	public void obtainDate(final RelacionPagosResponse relacionPago)
+	{
+		String fecha = "";
+		int i = 0;
+		if (relacionPago.getRelacionpagosrespons().getPredialUnificado() != null)
+		{
+			for (final RelacionPagosPredial relPredial : relacionPago.getRelacionpagosrespons().getPredialUnificado())
+			{
+				fecha = relPredial.getBldat();
+				relacionPago.getRelacionpagosrespons().getPredialUnificado().get(i).setBldat(converterDate(fecha));
+				i++;
+			}
+		}
 
+		if (relacionPago.getRelacionpagosrespons().getSobretasaGasolina() != null)
+		{
+			for (final RelacionPagosGasolina relGas : relacionPago.getRelacionpagosrespons().getSobretasaGasolina())
+			{
+				fecha = relGas.getBldat();
+				relacionPago.getRelacionpagosrespons().getSobretasaGasolina().get(i).setBldat(converterDate(fecha));
+				i++;
+			}
+		}
 
+		if (relacionPago.getRelacionpagosrespons().getImpuestoICA() != null)
+		{
+			for (final RelacionPagosICA relIca : relacionPago.getRelacionpagosrespons().getImpuestoICA())
+			{
+				fecha = relIca.getBldat();
+				relacionPago.getRelacionpagosrespons().getImpuestoICA().get(i).setBldat(converterDate(fecha));
+				i++;
+			}
+		}
 
+		if (relacionPago.getRelacionpagosrespons().getDelineacionUrbana() != null)
+		{
+			for (final RelacionPagosDelineacion relDeli : relacionPago.getRelacionpagosrespons().getDelineacionUrbana())
+			{
+				fecha = relDeli.getBldat();
+				relacionPago.getRelacionpagosrespons().getDelineacionUrbana().get(i).setBldat(converterDate(fecha));
+				i++;
+			}
+		}
+		if (relacionPago.getRelacionpagosrespons().getPublicidadexterior() != null)
+		{
+			for (final RelacionPagosPublicidad relPubli : relacionPago.getRelacionpagosrespons().getPublicidadexterior())
+			{
+				fecha = relPubli.getBldat();
+				relacionPago.getRelacionpagosrespons().getPublicidadexterior().get(i).setBldat(converterDate(fecha));
+				i++;
+			}
+		}
+		if (relacionPago.getRelacionpagosrespons().getVehicular() != null)
+		{
+			for (final RelacionPagosVehicular relVehicu : relacionPago.getRelacionpagosrespons().getVehicular())
+			{
+				fecha = relVehicu.getBldat();
+				relacionPago.getRelacionpagosrespons().getVehicular().get(i).setBldat(converterDate(fecha));
+				i++;
+			}
+		}
+	}
 
-
+	public String converterDate(final String fecha)
+	{
+			final String inputDate = fecha;
+			final String dia = inputDate.substring(6);
+			final String mes = inputDate.substring(4, 6);
+			final String anio = inputDate.substring(0, 4);
+			final String date = dia + "/" + mes + "/" + anio;
+			LOG.info("La fecha tomo el siguiente formato: " + date);
+			return date;
+	}
 }

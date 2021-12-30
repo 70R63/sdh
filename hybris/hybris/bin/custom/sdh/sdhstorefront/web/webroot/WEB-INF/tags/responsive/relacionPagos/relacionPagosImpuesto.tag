@@ -26,7 +26,7 @@
 		
 		<br>
 
-		<div id="table-predial" style="display: none;" class="table-responsive">
+		<div id="table-predial" style="display: none;">
 			<div class="row">
 				<div class="headline">
 					<h2>
@@ -36,7 +36,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<table class="table" id="tabPaginacion4" class="newtd">
+					<table class="table" id="tabPaginacion4" class="table-responsive newtd">
 						<thead style="cellspacing: 10 !important">
 							<tr>
 								<th><label class="control-label labeltabletd"><spring:theme
@@ -268,6 +268,7 @@
 							</c:forEach>
  						</tbody>
  					</table> 
+ 					<div><br></div>
  					<small class="form-text text-muted" style="text-align: right !important">
  					<spring:theme code="relacion.inicial.delineacion.retencion.nota1" /></small> 
 				</div>
@@ -380,13 +381,13 @@
 <!-- 			</div> -->
 <!-- 		</div> -->
 		
-		
+		<br><br><br>
 
 		<!-- 			tablas de detalle -->
 
-		<div id="detalle-predial" style="display: none;" class="table-responsive">
+		<div id="detalle-predial" style="display: none;">
 			<div class="row">
-				<div class="col-md-8 text-center">
+				<div class="col-md-12 text-center">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="relPagosPredial">
 							<thead>
@@ -757,8 +758,8 @@
 												code="relacion.inicial.publicidad.numresol" /> </label></th>
 									<th><label class="control-label labeltabletd"><spring:theme
 												code="relacion.inicial.publicidad.dirins" /> </label></th>
-									<th><label class="control-label labeltabletd tableangrav"><spring:theme
-												code="relacion.inicial.publicidad.orientacion" /> </label></th>
+<%-- 									<th><label class="control-label labeltabletd tableangrav"><spring:theme --%>
+<%-- 												code="relacion.inicial.publicidad.orientacion" /> </label></th> --%>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="relacion.inicial.publicidad.regrisol" /> </label></th>
 									<th><label class="control-label labeltabletd"><spring:theme
@@ -780,8 +781,8 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew" disabled="disabled"
 										value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
+<!-- 									<td><input class="inputtextnew tabledoobli" -->
+<!-- 										disabled="disabled" value="" type="text" /></td> -->
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tableangrav"
