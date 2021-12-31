@@ -339,7 +339,8 @@
 						</c:if>
 					</c:when>
 					<c:when
-						test="${fn:trim(infoDeclara.proyectoAporte) eq '01' or fn:trim(infoDeclara.proyectoAporte) eq '1'}">
+						test="${fn:trim(infoDeclara.proyectoAporte) eq '01' or fn:trim(infoDeclara.proyectoAporte) eq '1' or
+						fn:trim(infoDeclara.proyectoAporte) eq '03' or fn:trim(infoDeclara.proyectoAporte) eq '3'}">
 
 						<c:set var="fortalecimientoOptionSelected" value="selected" />
 						<c:set var="tarifa2Disable" value="" />
@@ -383,6 +384,7 @@
 							de la seguridad ciudadana</option>
 						<option value="02" ${financimientoOptionSelected }>Financiación
 							de la educación superior</option>
+							<option value="03">Bogotá Solidaria en Casa </option>
 					</select>
 				</div>
 			</div>
@@ -486,7 +488,7 @@
 		var tari1 = document.getElementById('tarifaAporte1');
 		var tari2 = document.getElementById('tarifaAporte2');
 		var emptyTarifa = document.getElementById('emptyTarifa');
-		if (x == '01') {
+		if (x == '01' || x == '03') {
 			tari1.style.display = 'none';
 			tari2.style.display = 'block';
 			emptyTarifa.style.display = 'none';
