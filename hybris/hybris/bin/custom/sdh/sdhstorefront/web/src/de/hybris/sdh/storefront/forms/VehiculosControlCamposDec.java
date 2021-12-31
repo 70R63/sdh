@@ -13,7 +13,27 @@ public class VehiculosControlCamposDec
 	private boolean liquidacion;
 	private boolean btnPresentarDec;
 	private boolean btnPagarDec;
+	private boolean btnPagarSPAC;
 
+
+
+
+	/**
+	 * @return the btnPagarSPAC
+	 */
+	public boolean isBtnPagarSPAC()
+	{
+		return btnPagarSPAC;
+	}
+
+	/**
+	 * @param btnPagarSPAC
+	 *           the btnPagarSPAC to set
+	 */
+	public void setBtnPagarSPAC(final boolean btnPagarSPAC)
+	{
+		this.btnPagarSPAC = btnPagarSPAC;
+	}
 
 	/**
 	 * @return the liquidacion
