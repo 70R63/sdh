@@ -59,12 +59,24 @@ ACC.reportesTerceroAutorizado = {
 	
 	mostrarErrores : function (infoResponse) {
 		var flagErrores = false;
+		var mensajeError = "";
+		var mostrarBoton = false;
 		
-		
-		if (infoResponse.errores != null && infoResponse.errores[0] != null && infoResponse.errores[0].id_msj != null && infoResponse.errores[0].id_msj != ""){
-			alert(infoResponse.errores[0].txt_msj);
-			flagErrores = true;
+		if(infoResponse.errores != null){
+			$.each(infoResponse.errores, function (index,value){
+				if (!flagErrores && value != null && value.id_msj != null){
+					if(value.txt_msj != ""){
+						mensajeError = value.txt_msj;
+						flagErrores = true;
+					}
+				}
+			});
+			
+			if(flagErrores){
+				alert(mensajeError);
+			}
 		}
+					
 		
 		return flagErrores;
 	},
@@ -467,15 +479,16 @@ ACC.reportesTerceroAutorizado = {
 	
 	
 	habilitarBtnGenImprimir : function(infoResponse){
-		var flagErrores = false;
+		var flagValidacion = false;
 		
 		
-		if (infoResponse != null && infoResponse.errores != null && infoResponse.errores[0] != null && infoResponse.errores[0].id_msj != null && infoResponse.errores[0].id_msj != "02"){
-			flagErrores = true;
+		if (infoResponse != null && infoResponse.errores != null && infoResponse.errores[0] != null && infoResponse.errores[0].id_msj != null && infoResponse.errores[0].id_msj != ""){
+			if(infoResponse.errores[0].txt_msj == "El tipo y número de documento consultado no cuenta con obligaciones pendientes"){
+				flagValidacion = true;
+			}
 		}
 		
-		return flagErrores;
-		
+		return flagValidacion;
 	}
 	
 	

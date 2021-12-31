@@ -67,8 +67,8 @@ ACC.relacionPago = {
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.placa +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.anio +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tableRelacion" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tableRelacion" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
@@ -142,11 +142,10 @@ ACC.relacionPago = {
 									$('#relPagosPublicidad').append(
 										"<tr>"+ 
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.numberid +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.dirInst +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.orient +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.linstal +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.nslctud +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tableRelacion" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tableRelacion"" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
@@ -181,15 +180,15 @@ ACC.relacionPago = {
 								if(true){
 									$('#relPagosGasolina').append(
 									"<tr>"+ 
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.nslctud +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.numberid +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.anio +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tableRelacion" disabled="disabled" value="'+ value.periodo +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tableRelacion" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tableRelacion" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
+//									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
+//									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
 								    "</tr>"
 								);
 									flagRegistrosAgregados = true;
@@ -225,14 +224,14 @@ ACC.relacionPago = {
 									$('#relPagosDelineacion').append(
 										"<tr>"+ 
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.cdu +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.numberid +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.cdu +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tableRelacion" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
+										'<td><input class="inputtextnew" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
 									    "</tr>"
 									);
 								flagRegistrosAgregados = true;
