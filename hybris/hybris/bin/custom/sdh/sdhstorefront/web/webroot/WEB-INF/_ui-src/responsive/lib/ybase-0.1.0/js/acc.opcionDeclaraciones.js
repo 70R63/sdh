@@ -1878,16 +1878,33 @@ ACC.opcionDeclaraciones = {
 			case "certipagos":
 				cantidadAnoGravable = ACC.consultas_certipagos_cant_anogravables;
 				break;
+			case "presentar-declaracion":
+		        switch (claveImpuesto) {
+					case "5":		//gasolina
+					case "4":		//publicidad exterior
+						cantidadAnoGravable = 2;
+						break;
+					case "6":		//delineacion
+						cantidadAnoGravable = 7;
+						break;
+					default:
+						cantidadAnoGravable = 5;
+						break;
+				}
+				break;
 			default:
 		        switch (claveImpuesto) {
-				case "6":
+				case "5":		//gasolina
+				case "7":		//publicidad exterior
+					cantidadAnoGravable = 2;
+					break;
+				case "6":		//delineacion
 					cantidadAnoGravable = 7;
 					break;
 				default:
 					cantidadAnoGravable = 5;
 					break;
 				}
-				break;
 		}	
 
         
