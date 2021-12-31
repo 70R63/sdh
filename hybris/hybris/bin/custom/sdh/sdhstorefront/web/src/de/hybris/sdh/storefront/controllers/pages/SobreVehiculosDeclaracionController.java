@@ -900,6 +900,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 				controlCampos.setLiquidacion(true);
 				controlCampos.setBtnPresentarDec(true);
 				controlCampos.setBtnPagarDec(true);
+				controlCampos.setBtnPagarSPAC(false);
 
 				if (contribuyenteData.getAgentList() != null)
 				{

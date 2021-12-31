@@ -17,6 +17,11 @@
 <c:if test="${vehiculosFormDeclaracion.controlCampos.btnPresentarDec == true}">
 	<c:set var="flagPresentarDeclaracion" value="true" />
 </c:if>
+
+<c:if test="${vehiculosFormDeclaracion.controlCampos.btnPagarSPAC == true}">
+	<c:set var="flagSPAC" value="true" />
+</c:if>
+
 <c:if test="${vehiculosFormDeclaracion.controlCampos.btnPagarDec == false}">
 	<c:set var="flagPagarEnLinea" value="true" />
 </c:if>
@@ -75,13 +80,16 @@
 				</div>
 			</sf:form>
 			<div class="col-md-1 col-xs-12">
-				<button class="btn btn-primary btn-lg btnspac" type="button" id="btnspac"
-					data-numForm="${vehiculosFormDeclaracion.numForm}" 
-					data-anio="${vehiculosFormDeclaracion.anioGravable}" 
-					data-obj="${vehiculosFormDeclaracion.objetoCont}" 
-					data-reimpresion="">
-					<spring:theme code="predialuno.firma.spac" />
-				</button>
+				
+				<c:if test="${flagSPAC eq true}">
+					<button class="btn btn-primary btn-lg btnspac" type="button" id="btnspac"
+						data-numForm="${vehiculosFormDeclaracion.numForm}" 
+						data-anio="${vehiculosFormDeclaracion.anioGravable}" 
+						data-obj="${vehiculosFormDeclaracion.objetoCont}" 
+						data-reimpresion="">
+						<spring:theme code="predialuno.firma.spac" />
+					</button>
+				</c:if>	
 			</div>	
 
 		</div>
