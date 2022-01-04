@@ -643,13 +643,13 @@ ACC.vehiculos = {
 	actualizaHomologado : function(homologado) {
 	
 		if(homologado == "X"){			
-			$( "#linea" ).prop( "disabled", false );
-			$( "#cilindraje" ).prop( "disabled", false );
-			$( "#avaluoAct" ).prop( "disabled", false );
-		}else{
 			$( "#linea" ).prop( "disabled", true );
 			$( "#cilindraje" ).prop( "disabled", true );
 			$( "#avaluoAct" ).prop( "disabled", true );
+		}else{
+			$( "#linea" ).prop( "disabled", false );
+			$( "#cilindraje" ).prop( "disabled", false );
+			$( "#avaluoAct" ).prop( "disabled", false );
 		}	
 		
 		

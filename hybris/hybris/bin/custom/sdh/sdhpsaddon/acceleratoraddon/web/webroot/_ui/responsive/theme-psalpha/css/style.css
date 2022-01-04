@@ -25784,3 +25784,6 @@ a.paginate_button {
   padding: 2px;
   border-style: outset !important;
 }
+.tableRelacion {
+  width: 95% !important;
+}

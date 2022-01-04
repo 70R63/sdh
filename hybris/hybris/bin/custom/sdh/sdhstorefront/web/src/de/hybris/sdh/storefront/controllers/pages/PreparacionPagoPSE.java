@@ -151,6 +151,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 		final DetallePagoRequest detallePagoRequest = new DetallePagoRequest();
 		final DetallePagoResponse detallePagoResponse;
 		final PSEPaymentForm psePaymentForm = new PSEPaymentForm();
+		String errorSITII = null;
 
 
 
@@ -356,24 +357,64 @@ public class PreparacionPagoPSE extends AbstractPageController
 
 			try
 			{
+				System.out.println(paymentServiceRegisterRequest);
 				paymentServiceRegisterResponse = sdhPaymentService.register(paymentServiceRegisterRequest);
-
-				final SITIITransactionsLogModel sitIITransactionsLogModel = new SITIITransactionsLogModel();
-				sitIITransactionsLogModel.setTransactionDate(java.time.LocalDate.now().toString());
-				sitIITransactionsLogModel.setTransactionTime(java.time.LocalTime.now().toString());
-				sitIITransactionsLogModel.setTransactionReference(psePaymentForm.getNumeroDeReferencia());
-				sitIITransactionsLogModel.setTransactionNUS(paymentServiceRegisterResponse.getNus().toString());
-				sitIITransactionsLogModel.setTransactionAmount(valorAPagar.toString());
+				System.out.println(paymentServiceRegisterResponse);
 
 
-				modelService.saveAll(sitIITransactionsLogModel);
+				if (paymentServiceRegisterResponse != null)
+				{
+					if (paymentServiceRegisterResponse.getNus() != null)
+					{
+						if (valorAPagar.compareTo(BigInteger.ZERO) == -1 || valorAPagar.compareTo(BigInteger.ZERO) == 0)
+						{
+							errorSITII = getMessageSource().getMessage("prepararPago.error.0", null,
+									getI18nService().getCurrentLocale());
+							redirectAttributes.addAttribute("errorSITII", errorSITII);
+							return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
+						}
+						else if (paymentServiceRegisterResponse.getNus() <= 0)
+						{
+							errorSITII = paymentServiceRegisterResponse.getMessage();
+							redirectAttributes.addAttribute("errorSITII", errorSITII);
+							//redirectAttributes.addFlashAttribute("errorSITII", errorSITII);
+							return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
+						}
+						else
+						{
+							final SITIITransactionsLogModel sitIITransactionsLogModel = new SITIITransactionsLogModel();
+							sitIITransactionsLogModel.setTransactionDate(java.time.LocalDate.now().toString());
+							sitIITransactionsLogModel.setTransactionTime(java.time.LocalTime.now().toString());
+							sitIITransactionsLogModel.setTransactionReference(psePaymentForm.getNumeroDeReferencia());
+							sitIITransactionsLogModel.setTransactionNUS(paymentServiceRegisterResponse.getNus().toString());
+							sitIITransactionsLogModel.setTransactionAmount(valorAPagar.toString());
 
-				LOG.error("SITIITransactionsLog:[ TransactionDate: " + sitIITransactionsLogModel.getTransactionDate()
-						+ " TransactionTime: " + sitIITransactionsLogModel.getTransactionTime() + " TransactionReference: "
-						+ sitIITransactionsLogModel.getTransactionReference() + " TransactionNUS: "
-						+ sitIITransactionsLogModel.getTransactionNUS() + " TransactionAmount: "
-						+ sitIITransactionsLogModel.getTransactionAmount());
 
+
+							modelService.saveAll(sitIITransactionsLogModel);
+
+							LOG.error("SITIITransactionsLog:[ TransactionDate: " + sitIITransactionsLogModel.getTransactionDate()
+									+ " TransactionTime: " + sitIITransactionsLogModel.getTransactionTime() + " TransactionReference: "
+									+ sitIITransactionsLogModel.getTransactionReference() + " TransactionNUS: "
+									+ sitIITransactionsLogModel.getTransactionNUS() + " TransactionAmount: "
+									+ sitIITransactionsLogModel.getTransactionAmount());
+
+
+
+							return Objects.nonNull(paymentServiceRegisterResponse)
+									? "redirect:" + paymentServiceRegisterResponse.getPaymentUrl()
+									: "/";
+						}
+					}
+
+				}
+				else
+				{
+					errorSITII = getMessageSource().getMessage("prepararPago.error.SIT2null", null,
+							getI18nService().getCurrentLocale());
+					redirectAttributes.addAttribute("errorSITII", errorSITII);
+					return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
+				}
 			}
 			catch (final NoSuchAlgorithmException e)
 			{
@@ -392,28 +433,8 @@ public class PreparacionPagoPSE extends AbstractPageController
 				e.printStackTrace();
 			}
 
-			System.out.println(paymentServiceRegisterRequest);
-			System.out.println(paymentServiceRegisterResponse);
+			return "/";
 
-
-			String errorSITII = null;
-			if (valorAPagar.compareTo(BigInteger.ZERO) == -1 || valorAPagar.compareTo(BigInteger.ZERO) == 0)
-			{
-				errorSITII = getMessageSource().getMessage("prepararPago.error.0", null, getI18nService().getCurrentLocale());
-				redirectAttributes.addAttribute("errorSITII", errorSITII);
-				return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
-			}
-			else if (paymentServiceRegisterResponse.getNus() <= 0)
-			{
-				errorSITII = paymentServiceRegisterResponse.getMessage();
-				redirectAttributes.addFlashAttribute("errorSITII", errorSITII);
-				return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
-			}
-			else
-			{
-				return Objects.nonNull(paymentServiceRegisterResponse) ? "redirect:" + paymentServiceRegisterResponse.getPaymentUrl()
-						: "/";
-			}
 		}
 		else
 		{
