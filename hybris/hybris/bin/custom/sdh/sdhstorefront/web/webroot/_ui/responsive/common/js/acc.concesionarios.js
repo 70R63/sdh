@@ -84,9 +84,9 @@ ACC.concesionarios = {
 			});
 			
 			if(status == "Por pagar"){
-				$('td:nth-child(7), th:nth-child(2)').show();				
+				$('td:nth-child(7), th:nth-child(7)').show();				
 			}else{
-				$('td:nth-child(7), th:nth-child(2)').hide();
+				$('td:nth-child(7), th:nth-child(7)').hide();
 			}
 		}
 		ACC.concesionarios.mostrarTablas();

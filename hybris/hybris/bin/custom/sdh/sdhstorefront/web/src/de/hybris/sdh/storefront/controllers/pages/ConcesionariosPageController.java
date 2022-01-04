@@ -42,6 +42,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 
 /**
@@ -133,6 +135,8 @@ public class ConcesionariosPageController extends AbstractPageController
 			final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
+		ConcesionariosResponse concesionariosResponse = null;
+
 		LOG.info("En listado de concesionarios");
 		List<Concesionarios> listado = null;
 
@@ -163,8 +167,17 @@ public class ConcesionariosPageController extends AbstractPageController
 			}
 		}
 
-
-		final ConcesionariosResponse concesionariosResponse = sdhConcesionariosService.concesionario(concesionariosRequest);
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			final String responseWS = sdhConcesionariosService.concesionarios(concesionariosRequest);
+			concesionariosResponse = mapper.readValue(responseWS, ConcesionariosResponse.class);
+			//sdhConcesionariosService.concesionario(concesionariosRequest);
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error getting customer info from SAP for relacion pagos page: " + e.getMessage());
+		}
 
 		if (concesionariosResponse != null)
 		{
