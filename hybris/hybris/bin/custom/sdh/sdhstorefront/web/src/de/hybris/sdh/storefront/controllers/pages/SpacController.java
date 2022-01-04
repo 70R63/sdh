@@ -27,7 +27,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -113,7 +115,7 @@ public class SpacController extends AbstractPageController
 
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 			final String response = sdhSpacService.spacRequest(spacrequest);
@@ -167,7 +169,7 @@ public class SpacController extends AbstractPageController
 
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 			final String response = sdhSpacPDFService.spacPDFRequest(spacpdfrequest);

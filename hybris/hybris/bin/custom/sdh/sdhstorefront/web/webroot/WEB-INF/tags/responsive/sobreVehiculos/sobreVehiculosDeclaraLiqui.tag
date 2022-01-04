@@ -206,6 +206,7 @@
 						<option value="00">SELECCIONAR</option>
 						<option value="01" ${option01Selected}>FORTALECIMIENTO DE
 							LA SEGURIDAD CIUDADANA</option>
+							<option value="03">BOGOTÁ SOLIDARIA EN CASA</option>
 					</select>
 				</div>
 			</div>

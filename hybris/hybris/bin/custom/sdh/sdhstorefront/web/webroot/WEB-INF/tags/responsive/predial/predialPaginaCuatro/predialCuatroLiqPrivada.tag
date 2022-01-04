@@ -79,7 +79,8 @@
 						${disabledAporte}><option value="00">Seleccionar</option>
 						<option value="01">FORTALECIMIENTO DE LA SEGURIDAD
 							CIUDADANA</option>
-						<option value="02">FINANCIACIÓN DE LA EDUCACIÓN SUPERIOR</option></select>
+						<option value="02">FINANCIACIÓN DE LA EDUCACIÓN SUPERIOR</option>
+						<option value="03">BOGOTÁ SOLIDARIA EN CASA</option></select>
 				</div>
 			</div>
 		</div>
