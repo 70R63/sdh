@@ -353,7 +353,7 @@ window.onload = function() {
 
 
 	function onChange(selectObject) {
-		ACC.opcionDeclaraciones.preparaAnioGravable("declaraciones");
+		ACC.opcionDeclaraciones.preparaAnioGravable("consultas");
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.opcionDeclaraciones.reiniciaCertipagos();
 		ACC.opcionDeclaraciones.prepararPeriodo();

@@ -10,6 +10,31 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 
+<c:set var="claveImpuesto_1" value="false"/>
+<c:set var="claveImpuesto_2" value="false"/>
+<c:set var="claveImpuesto_3" value="false"/>
+<c:set var="claveImpuesto_4" value="false"/>
+<c:set var="claveImpuesto_5" value="false"/>
+<c:set var="claveImpuesto_6" value="false"/>
+
+<c:if test="${not empty relacionPagosForm.predial}">
+<c:set var="claveImpuesto_1" value="true"/>
+</c:if>
+<c:if test="${not empty relacionPagosForm.vehicular}">
+<c:set var="claveImpuesto_2" value="true"/>
+</c:if>
+<c:if test="${not empty relacionPagosForm.impuestoICA}">
+<c:set var="claveImpuesto_3" value="true"/>
+</c:if>
+<c:if test="${not empty relacionPagosForm.publicidadExt}">
+<c:set var="claveImpuesto_4" value="true"/>
+</c:if>
+<c:if test="${not empty relacionPagosForm.gasolina}">
+<c:set var="claveImpuesto_5" value="true"/>
+</c:if>
+<c:if test="${not empty relacionPagosForm.delineacion}">
+<c:set var="claveImpuesto_6" value="true"/>
+</c:if>
 <div class="container_new_page">
 	<div class="row">
 		<div class="col-md-12">
@@ -65,12 +90,12 @@
 						class="new_alto form-control " name="impuesto"
 						onchange="Selected(this)">
 						<option value="0">Seleccionar</option>
-						<option value="1">Predial Unificado</option>
-						<option value="2">Vehículos</option>
-						<option value="3">ICA</option>
-						<option value="4">Publicidad Exterior</option>
-						<option value="5">Sobretasa Gasolina</option>
-						<option value="6">Delineación Urbana</option>
+						<c:if test="${claveImpuesto_1}"><option value="1"><spring:theme code="relacion.inicial.impuestos.0001"/></option></c:if>
+						<c:if test="${claveImpuesto_2}"><option value="2"><spring:theme code="relacion.inicial.impuestos.0002"/></option></c:if>
+						<c:if test="${claveImpuesto_3}"><option value="3"><spring:theme code="relacion.inicial.impuestos.0003"/></option></c:if>
+						<c:if test="${claveImpuesto_4}"><option value="4"><spring:theme code="relacion.inicial.impuestos.0004"/></option></c:if>
+						<c:if test="${claveImpuesto_5}"><option value="5"><spring:theme code="relacion.inicial.impuestos.0005"/></option></c:if>
+						<c:if test="${claveImpuesto_6}"><option value="6"><spring:theme code="relacion.inicial.impuestos.0006"/></option></c:if>
 					</select>
 				</div>
 			</div>

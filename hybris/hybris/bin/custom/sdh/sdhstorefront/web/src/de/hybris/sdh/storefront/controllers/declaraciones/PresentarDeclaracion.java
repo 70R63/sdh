@@ -198,40 +198,48 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	 */
 	private void obtenerListaImpuestosCliente(final CustomerModel customerModel, final SobreTasaGasolinaForm dataForm)
 	{
-
+		Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.ambito_presentarDeclaracion);
 		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
 
 
 		for (final PrincipalGroupModel group : groupList)
 		{
-			final String groupUid = group.getUid();
+			String groupUid = null;
+			
+			if(group != null && group.getUid() != null) {
+				groupUid = group.getUid();
 
-			if (groupUid.contains("predialUsrTaxGrp"))
-			{
-				dataForm.setOptionPredial("1");
+   			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.predial) && groupUid.contains("predialUsrTaxGrp"))
+   			{
+   				dataForm.setOptionPredial("1");
+   				continue;
+   			}
+   			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.vehiculos) && groupUid.contains("vehicularUsrTaxGrp"))
+   			{
+   				dataForm.setOptionVehicular("2");
+   				continue;
+   			}
+   			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.ica) && groupUid.contains("ICAUsrTaxGrp"))
+   			{
+   				dataForm.setOptionIca("3");
+   				continue;
+   			}
+   			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.gasolina) && groupUid.contains("gasolinaUsrTaxGrp"))
+   			{
+   				dataForm.setOptionGas("5");
+   				continue;
+   			}
+   			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.delineacion) && groupUid.contains("delineacionUsrTaxGrp"))
+   			{
+   				dataForm.setOptionDeli("6");
+   				continue;
+   			}
+   			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.publicidad) && groupUid.contains("publicidadExtUsrTaxGrp"))
+   			{
+   				dataForm.setOptionPubliExt("4");
+   				continue;
+   			}
 			}
-			if (groupUid.contains("vehicularUsrTaxGrp"))
-			{
-				dataForm.setOptionVehicular("2");
-			}
-			if (groupUid.contains("ICAUsrTaxGrp"))
-			{
-				dataForm.setOptionIca("3");
-			}
-			if (groupUid.contains("gasolinaUsrTaxGrp"))
-			{
-				dataForm.setOptionGas("5");
-			}
-			if (groupUid.contains("delineacionUsrTaxGrp"))
-			{
-				dataForm.setOptionDeli("6");
-			}
-
-			if (groupUid.contains("publicidadExtUsrTaxGrp"))
-			{
-				dataForm.setOptionPubliExt("4");
-			}
-
 		}
 
 

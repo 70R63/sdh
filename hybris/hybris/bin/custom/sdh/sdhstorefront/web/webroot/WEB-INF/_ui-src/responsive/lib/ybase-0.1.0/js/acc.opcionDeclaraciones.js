@@ -1909,19 +1909,51 @@ ACC.opcionDeclaraciones = {
 		var cantidadAnoGravable = 0;
 
         switch (ambito) {
-			case "certipagos":
-				cantidadAnoGravable = ACC.consultas_certipagos_cant_anogravables;
+			case "consultas":
+		        switch (claveImpuesto) {
+					case "1":		//predial
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_Consultas_predial;
+						break;
+					case "2":		//vehiculos
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_Consultas_vehiculos;
+						break;
+					case "3":		//ica
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_Consultas_ica;
+						break;
+					case "5":		//gasolina
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_Consultas_gasolina;
+						break;
+					case "6":		//delineacion
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_Consultas_delineacion;
+						break;
+					case "7":		//publicidad
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_Consultas_publicidad;
+						break;
+					default:
+						cantidadAnoGravable = 0;
+						break;
+					}
+				break;
+			case "presentar-declaracion":
+		        switch (claveImpuesto) {
+					default:
+						cantidadAnoGravable = 5;
+						break;
+				}
 				break;
 			default:
 		        switch (claveImpuesto) {
-				case "6":
+				case "5":		//gasolina
+				case "7":		//publicidad exterior
+					cantidadAnoGravable = 2;
+					break;
+				case "6":		//delineacion
 					cantidadAnoGravable = 7;
 					break;
 				default:
 					cantidadAnoGravable = 5;
 					break;
 				}
-				break;
 		}	
 
         

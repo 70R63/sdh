@@ -9,13 +9,17 @@ import de.hybris.sdh.core.pojos.responses.ConsultarBPResponse;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 import de.hybris.sdh.facades.SDHValidaContribuyenteFacade;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -103,6 +107,58 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 			LOG.error("Error trying to parse JSON :" + response + " to String. Ex.Message" + e.getMessage());
 		}
 		return false;
+	}
+
+	@Override
+	public ConsultarBPResponse existeContribuyente_object(final ConsultarBPRequest request)
+	{
+		ConsultarBPResponse consultarBPResponse = null;
+
+		if ("CC".equalsIgnoreCase(request.getTipoid()))
+		{
+
+
+			final DateTimeFormatter formatterOriginal = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			final DateTimeFormatter formatterConvertido = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+			final String fechaOriginal = request.getFechExp();
+
+			try
+			{
+				final String customerExpDate = LocalDate.parse(fechaOriginal, formatterOriginal).format(formatterConvertido);
+				request.setFechExp(customerExpDate);
+			}
+			catch (final DateTimeParseException e1)
+			{
+				LOG.error("Error parsing expedition date: " + fechaOriginal);
+				return consultarBPResponse;
+			}
+
+		}
+
+		final String response = sdhValidaContribuyenteService.consultarBP(request);
+
+		if (!StringUtils.isBlank(response))
+		{
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				consultarBPResponse = mapper.readValue(response, ConsultarBPResponse.class);
+
+				if (consultarBPResponse != null && consultarBPResponse.getNumBP() != null)
+				{
+					return consultarBPResponse;
+				}
+			}
+			catch (final IOException e)
+			{
+				// XXX Auto-generated catch block
+				LOG.error("Error trying to parse JSON :" + response + " to String. Ex.Message" + e.getMessage());
+			}
+		}
+
+		return consultarBPResponse;
 	}
 
 }

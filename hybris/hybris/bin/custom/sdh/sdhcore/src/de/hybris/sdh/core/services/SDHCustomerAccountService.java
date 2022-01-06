@@ -62,7 +62,7 @@ public interface SDHCustomerAccountService
 	//mapea usando getBPDataFromCustomer y despues lee de SAP los impuestos
 	SDHValidaMailRolResponse getBPAndTaxDataFromCustomer(final CustomerModel customerModel, String taxCode);
 
-	//mapea usando getBPDataFromCustomer y despues lee de SAP los impuestos 
+	//mapea usando getBPDataFromCustomer y despues lee de SAP los impuestos
 	SDHValidaMailRolResponse getBPAndTaxDataFromCustomer(final String numBP, String taxCode);
 
 	//leer customer desde SAP con validaContrib
@@ -81,5 +81,8 @@ public interface SDHCustomerAccountService
 	CustomerModel mapearInfo(SDHValidaMailRolResponse sdhValidaMailRolResponse);
 
 	void updateImpuestoGasolina_simplificado(CustomerModel customerModel, ImpGasolinaSimpliResponse gasolinaSimpliResponse);
+
+	//de los impuestos activos le su informacion de ingreso/contrib
+	SDHValidaMailRolResponse leerImpuestosActivosContribuyente(String ambito);
 
 }

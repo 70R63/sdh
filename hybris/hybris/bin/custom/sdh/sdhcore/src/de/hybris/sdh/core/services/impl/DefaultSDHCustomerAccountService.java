@@ -85,6 +85,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.xml.rpc.holders.StringHolder;
@@ -136,6 +137,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	@Resource(name = "sdhConsultaImpuesto_simplificado")
 	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+
+	@Resource(name = "sdhCustomerAccountService")
+	SDHCustomerAccountService sdhCustomerAccountService;
 
 	/*
 	 * (non-Javadoc)
@@ -2462,6 +2466,79 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		}
 
 		return sdhValidaMailRolResponse;
+	}
+
+
+	@Override
+	public SDHValidaMailRolResponse leerImpuestosActivosContribuyente(final String ambito)
+	{
+		SDHValidaMailRolResponse customerData = null;
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+
+		customerData = sdhCustomerAccountService.getBPDataFromCustomer(customerModel);
+
+		final Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(ambito);
+		Set<PrincipalGroupModel> groupList = customerModel.getGroups();
+
+		groupList = groupList.stream().filter(c -> (
+		c.getUid().contains("predialUsrTaxGrp") || c.getUid().contains("vehicularUsrTaxGrp") || c.getUid().contains("ICAUsrTaxGrp")
+				||
+				c.getUid().contains("gasolinaUsrTaxGrp") ||
+				c.getUid().contains("delineacionUsrTaxGrp") || c.getUid().contains("publicidadExtUsrTaxGrp")))
+				.collect(Collectors.toSet());
+
+		for (final PrincipalGroupModel group : groupList)
+		{
+			String groupUid = null;
+
+			if (group != null && group.getUid() != null)
+			{
+				groupUid = group.getUid();
+
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.predial)
+						&& groupUid.contains("predialUsrTaxGrp"))
+				{
+					customerData.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
+					continue;
+				}
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.vehiculos)
+						&& groupUid.contains("vehicularUsrTaxGrp"))
+				{
+					customerData.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
+					continue;
+				}
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.ica)
+						&& groupUid.contains("ICAUsrTaxGrp"))
+				{
+					customerData.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
+					continue;
+				}
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.gasolina)
+						&& groupUid.contains("gasolinaUsrTaxGrp"))
+				{
+					customerData.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
+					continue;
+				}
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.delineacion)
+						&& groupUid.contains("delineacionUsrTaxGrp"))
+				{
+					customerData
+							.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
+					continue;
+				}
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.publicidad)
+						&& groupUid.contains("publicidadExtUsrTaxGrp"))
+				{
+					customerData
+							.setPublicidadExt(sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));
+					continue;
+				}
+			}
+		}
+
+		return customerData;
 	}
 
 }

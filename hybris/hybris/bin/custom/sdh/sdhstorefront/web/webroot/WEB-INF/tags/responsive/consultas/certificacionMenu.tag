@@ -403,7 +403,7 @@
 
  	
 	function onChange(selectObject) {
-		ACC.opcionDeclaraciones.preparaAnioGravable("certipagos");
+		ACC.opcionDeclaraciones.preparaAnioGravable("consultas");
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.opcionDeclaraciones.reiniciaCertipagos();
 // 		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
