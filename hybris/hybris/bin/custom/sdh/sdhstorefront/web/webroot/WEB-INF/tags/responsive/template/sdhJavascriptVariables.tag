@@ -7,8 +7,15 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<c:set value="1" var="configCatalogos_cantidadAnios_Consultas_predial" />
+<c:set value="1" var="configCatalogos_cantidadAnios_Consultas_vehiculos" />
+<c:set value="1" var="configCatalogos_cantidadAnios_Consultas_ica" />
+<c:set value="2" var="configCatalogos_cantidadAnios_Consultas_gasolina" />
+<c:set value="1" var="configCatalogos_cantidadAnios_Consultas_delineacion" />
+<c:set value="2" var="configCatalogos_cantidadAnios_Consultas_publicidad" />
 <%-- JS configuration --%>
 	<script type="text/javascript">
+
 		/*<![CDATA[*/
 			<c:if test="${not empty representado}">
 				ACC.aamenus = "${aamenus}";
@@ -270,8 +277,13 @@
 
 			ACC.declaracionFirmas = '<c:url value="/contribuyentes/declaracion/firmar"  />';
 			
-			ACC.consultas_certipagos_cant_anogravables = 1;
-
+			
+			ACC.configCatalogos_cantidadAnios_Consultas_predial="${configCatalogos_cantidadAnios_Consultas_predial}";
+			ACC.configCatalogos_cantidadAnios_Consultas_vehiculos="${configCatalogos_cantidadAnios_Consultas_vehiculos}";
+			ACC.configCatalogos_cantidadAnios_Consultas_ica="${configCatalogos_cantidadAnios_Consultas_ica}";
+			ACC.configCatalogos_cantidadAnios_Consultas_gasolina="${configCatalogos_cantidadAnios_Consultas_gasolina}";
+			ACC.configCatalogos_cantidadAnios_Consultas_delineacion="${configCatalogos_cantidadAnios_Consultas_delineacion}";
+			ACC.configCatalogos_cantidadAnios_Consultas_publicidad="${configCatalogos_cantidadAnios_Consultas_publicidad}";	
 	
 		/*]]>*/
 	</script>

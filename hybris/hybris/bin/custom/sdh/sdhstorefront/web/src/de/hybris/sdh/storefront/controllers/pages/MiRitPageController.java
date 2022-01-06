@@ -79,6 +79,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -203,18 +204,9 @@ public class MiRitPageController extends AbstractPageController
 		try
 		{
 
-			//final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
-			//		.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
-
-			//			final ObjectMapper mapper = new ObjectMapper();
-			//			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			//
-			//			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-			//					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-			//					SDHValidaMailRolResponse.class);
-
 			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
 					.consultaContribuyenteBP_simplificado(consultaContribBPRequest);
+			Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.ambito_mirit);
 
 			if (sdhConsultaContribuyenteBPResponse != null && sdhConsultaContribuyenteBPResponse.getImpuestos() != null)
 			{
@@ -225,33 +217,43 @@ public class MiRitPageController extends AbstractPageController
 						switch (impuestoRegistrado.getClaseObjeto())
 						{
 							case "01":
-								sdhConsultaContribuyenteBPResponse
+								if(sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.predial)) {
+									sdhConsultaContribuyenteBPResponse
 										.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
+								}
 								break;
 							case "02":
-								sdhConsultaContribuyenteBPResponse.setVehicular(
+								if(sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.vehiculos)) {
+									sdhConsultaContribuyenteBPResponse.setVehicular(
 										sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
+								}
 								break;
 							case "03":
-								sdhConsultaContribuyenteBPResponse
+								if(sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.ica)) {
+									sdhConsultaContribuyenteBPResponse
 										.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
+								}
 								break;
 							case "04":
 
 								break;
 							case "05":
-								sdhConsultaContribuyenteBPResponse
+								if(sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.gasolina)) {
+									sdhConsultaContribuyenteBPResponse
 										.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
+								}
 								break;
 							case "06":
-								sdhConsultaContribuyenteBPResponse.setDelineacion(
+								if(sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.delineacion)) {
+									sdhConsultaContribuyenteBPResponse.setDelineacion(
 										sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
+								}
 								break;
-
 							case "07":
-								sdhConsultaContribuyenteBPResponse.setPublicidadExt(
+								if(sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.publicidad)) {
+									sdhConsultaContribuyenteBPResponse.setPublicidadExt(
 										sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));
-
+								}
 								break;
 
 

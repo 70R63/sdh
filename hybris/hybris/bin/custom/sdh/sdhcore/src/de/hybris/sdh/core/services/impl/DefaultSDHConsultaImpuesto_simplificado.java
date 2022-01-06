@@ -485,21 +485,37 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 
 
 	@Override
-	public Map<String, String> obtenerListaImpuestosActivos()
+	public Map<String, String> obtenerListaImpuestosActivos(final String ambito)
 	{
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
-		elementos.put(SDHConsultaImpuesto_simplificado.predial, Config.getParameter("impuestosActivos.estadocuenta.predial"));
-		elementos.put(SDHConsultaImpuesto_simplificado.vehiculos, Config.getParameter("impuestosActivos.estadocuenta.vehiculos"));
-		elementos.put(SDHConsultaImpuesto_simplificado.ica, Config.getParameter("impuestosActivos.estadocuenta.ica"));
-		elementos.put(SDHConsultaImpuesto_simplificado.reteica, Config.getParameter("impuestosActivos.estadocuenta.reteica"));
-		elementos.put(SDHConsultaImpuesto_simplificado.gasolina, Config.getParameter("impuestosActivos.estadocuenta.gasolina"));
+		elementos.put(SDHConsultaImpuesto_simplificado.predial, Config.getParameter("impuestosActivos." + ambito + ".predial"));
+		elementos.put(SDHConsultaImpuesto_simplificado.vehiculos, Config.getParameter("impuestosActivos." + ambito + ".vehiculos"));
+		elementos.put(SDHConsultaImpuesto_simplificado.ica, Config.getParameter("impuestosActivos." + ambito + ".ica"));
+		elementos.put(SDHConsultaImpuesto_simplificado.reteica, Config.getParameter("impuestosActivos." + ambito + ".reteica"));
+		elementos.put(SDHConsultaImpuesto_simplificado.gasolina, Config.getParameter("impuestosActivos." + ambito + ".gasolina"));
 		elementos.put(SDHConsultaImpuesto_simplificado.delineacion,
-				Config.getParameter("impuestosActivos.estadocuenta.delineacion"));
-		elementos.put(SDHConsultaImpuesto_simplificado.publicidad, Config.getParameter("impuestosActivos.estadocuenta.publicidad"));
+				Config.getParameter("impuestosActivos." + ambito + ".delineacion"));
+		elementos.put(SDHConsultaImpuesto_simplificado.publicidad,
+				Config.getParameter("impuestosActivos." + ambito + ".publicidad"));
 
 
 		return elementos;
+	}
+
+
+	@Override
+	public boolean esImpuestoActivo(final Map<String, String> impuestosActivos, final String claveImpuesto)
+	{
+		boolean validacionOK = false;
+
+		if (impuestosActivos != null && "X".equals(impuestosActivos.get(claveImpuesto)))
+		{
+			validacionOK = true;
+		}
+
+
+		return validacionOK;
 	}
 
 }

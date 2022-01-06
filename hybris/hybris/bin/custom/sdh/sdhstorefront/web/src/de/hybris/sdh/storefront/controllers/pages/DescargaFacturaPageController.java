@@ -35,6 +35,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -112,19 +113,24 @@ public class DescargaFacturaPageController extends AbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+
+		
+		Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.ambito_facturacion);
 
 		final FacturacionForm facturacionForm = new FacturacionForm();
-
-
-		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
 		facturacionForm.setNumbp(customerModel.getNumBP());
+		if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.predial)){
 			facturacionForm.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
+		}
+		if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.vehiculos)){
 			facturacionForm.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
+		}
 
-			model.addAttribute("facturacionForm", facturacionForm);
-			model.addAttribute("descargaFacturaForm", new DescargaFacturaForm());
+		model.addAttribute("facturacionForm", facturacionForm);
+		model.addAttribute("descargaFacturaForm", new DescargaFacturaForm());
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
-			model.addAttribute("listaAnioGravable", sdhConfigCatalogos.obtenerListaAnioGravable_facturacion());
+		model.addAttribute("listaAnioGravable", sdhConfigCatalogos.obtenerListaAnioGravable_facturacion());
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DESCARGA_FACTURA_CMS_PAGE));

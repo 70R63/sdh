@@ -27,6 +27,7 @@ import de.hybris.sdh.core.pojos.responses.Relacionpagosrespons;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHRelacionPagosService;
 import de.hybris.sdh.storefront.forms.RelacionPagosForm;
 
@@ -83,6 +84,9 @@ public class RelacionPagosPageController extends AbstractPageController
 
 	@Resource(name = "sdhRelacionPagosService")
 	SDHRelacionPagosService sdhRelacionPagosService;
+	
+	@Resource(name = "sdhCustomerAccountService")
+	SDHCustomerAccountService sdhCustomerAccountService;
 
 
 
@@ -95,69 +99,10 @@ public class RelacionPagosPageController extends AbstractPageController
 		final StringBuffer requestURL = request.getRequestURL();
 		final String url2 = String.valueOf(requestURL);
 
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-
-		final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
-		consultaContribBPRequest.setNumBP(customerModel.getNumBP());
-		consultaContribBPRequest.setIndicador("01,02");
-
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
 		try
 		{
 
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
-					.consultaContribuyenteBP_simplificado(consultaContribBPRequest);
-
-			if (sdhConsultaContribuyenteBPResponse != null && sdhConsultaContribuyenteBPResponse.getImpuestos() != null)
-			{
-				for (final ImpuestosResponse impuestoRegistrado : sdhConsultaContribuyenteBPResponse.getImpuestos())
-				{
-					if (impuestoRegistrado != null)
-					{
-						switch (impuestoRegistrado.getClaseObjeto())
-						{
-							case "01":
-								sdhConsultaContribuyenteBPResponse
-										.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
-								break;
-
-							case "02":
-								sdhConsultaContribuyenteBPResponse.setVehicular(
-										sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
-								break;
-
-							case "03":
-								sdhConsultaContribuyenteBPResponse
-										.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
-								break;
-
-							case "04":
-								break;
-
-							case "05":
-								sdhConsultaContribuyenteBPResponse
-										.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
-								break;
-
-							case "06":
-								sdhConsultaContribuyenteBPResponse.setDelineacion(
-										sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
-								break;
-
-							case "07":
-								sdhConsultaContribuyenteBPResponse.setPublicidadExt(
-										sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));
-
-								break;
-
-
-							default:
-								break;
-						}
-					}
-				}
-			}
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhCustomerAccountService.leerImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.ambito_consultas);
 
 			final RelacionPagosForm relacionPagosForm = new RelacionPagosForm();
 
