@@ -16,8 +16,28 @@ public class ObligacionesDetallePublicidad
 	private String numReferencia;
 	private String objetoContrato;
 	private String fechaVencimiento;
+	private String codImpuesto;
 
 
+
+
+
+	/**
+	 * @return the codImpuesto
+	 */
+	public String getCodImpuesto()
+	{
+		return codImpuesto;
+	}
+
+	/**
+	 * @param codImpuesto
+	 *           the codImpuesto to set
+	 */
+	public void setCodImpuesto(final String codImpuesto)
+	{
+		this.codImpuesto = codImpuesto;
+	}
 
 	/**
 	 * @return the fechaVencimiento
