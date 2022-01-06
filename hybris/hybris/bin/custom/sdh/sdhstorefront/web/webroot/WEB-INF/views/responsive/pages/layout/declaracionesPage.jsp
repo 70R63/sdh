@@ -32,7 +32,7 @@ window.onload = function() {
 		
  		document.getElementById("BanderaAgete").value= "X";
 		
- 		ACC.opcionDeclaraciones.preparaAnioGravable("declaraciones");
+ 		ACC.opcionDeclaraciones.preparaAnioGravable("consultas");
  		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.opcionDeclaraciones.prepararPeriodo();
 		

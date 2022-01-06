@@ -10,11 +10,13 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
 import de.hybris.sdh.storefront.controllers.pages.MiRitCertificacionPageController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -34,7 +36,8 @@ public class UIMenuForm
 
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
-
+	
+	
 	//log
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
@@ -90,11 +93,17 @@ public class UIMenuForm
 		}
 	}
 
-	public void fillForm(final CustomerData customerData, final CustomerModel customerModel)
+	public void fillForm(final CustomerData customerData, final CustomerModel customerModel, SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado)
 	{
 		try
 		{
 
+			this.setbPredial("");
+			this.setbVehicular("");
+			this.setbIca("");
+			this.setbSobreGasolina("");
+			this.setbDelineacionUrbana("");
+			this.setbPublicidadExt("");
 			if (customerData.getRolList() != null && !customerData.getRolList().isEmpty())
 			{
 				final List<NombreRolResponse> roles = new ArrayList<NombreRolResponse>();
@@ -110,104 +119,54 @@ public class UIMenuForm
 			}
 
 			final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
-
+			Map<String,String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.ambito_impuestos);
+			
 
 			for (final PrincipalGroupModel group : groupList)
 			{
-				final String groupUid = group.getUid();
+				String groupUid = null;
 
-				if (this.getbPredial() == null || this.getbPredial().equals(""))
-				{
-					this.setbPredial(groupUid.contains("predialUsrTaxGrp") ? "X" : "");
-				}
-
-				if (this.getbVehicular() == null || this.getbVehicular().equals(""))
-				{
-					this.setbVehicular(groupUid.contains("vehicularUsrTaxGrp") ? "X" : "");
-				}
-
-				if (this.getbIca() == null || this.getbIca().equals(""))
-				{
-					this.setbIca(groupUid.contains("ICAUsrTaxGrp") ? "X" : "");
-				}
-
-				if (this.getbSobreGasolina() == null || this.getbSobreGasolina().equals(""))
-				{
-					this.setbSobreGasolina(groupUid.contains("gasolinaUsrTaxGrp") ? "X" : "");
-				}
-
-				if (this.getbDelineacionUrbana() == null || this.getbDelineacionUrbana().equals(""))
-				{
-					this.setbDelineacionUrbana(groupUid.contains("delineacionUsrTaxGrp") ? "X" : "");
-				}
-
-				if (this.getbPublicidadExt() == null || this.getbPublicidadExt().equals(""))
-				{
-					this.setbPublicidadExt(groupUid.contains("publicidadExtUsrTaxGrp") ? "X" : "");
+				if(group != null && group.getUid()!= null) {
+					groupUid = group.getUid();
+   				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.predial) && groupUid.contains("predialUsrTaxGrp"))
+   				{
+   					this.setbPredial("X");
+   					continue;
+   				}
+   				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.vehiculos) && groupUid.contains("vehicularUsrTaxGrp"))
+   				{
+   					this.setbVehicular("X");
+   					continue;
+   				}
+   				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.ica) && groupUid.contains("ICAUsrTaxGrp"))
+   				{
+   					this.setbIca("X");
+   					continue;
+   				}
+   				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.gasolina) && groupUid.contains("gasolinaUsrTaxGrp"))
+   				{
+   					this.setbSobreGasolina("X");
+   					continue;
+   				}
+   				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.delineacion) && groupUid.contains("delineacionUsrTaxGrp"))
+   				{
+   					this.setbDelineacionUrbana("X");
+   					continue;
+   				}
+   				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.publicidad) && groupUid.contains("publicidadExtUsrTaxGrp"))
+   				{
+   					this.setbPublicidadExt("X");
+   					continue;
+   				}
 				}
 			}
 
-			//private String bPredial;
-			//private String bVehicular;
-			//private String bIca;
-			//			if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
-			//			{
-			//				this.setbVehicular("X");
-			//			}
-			//			else
-			//			{
-			//				this.setbVehicular("");
-			//			}
-			//
-			//			if (customerData.getPredialTaxList() != null && !customerData.getPredialTaxList().isEmpty())
-			//			{
-			//				this.setbPredial("X");
-			//			}
-			//			else
-			//			{
-			//				this.setbPredial("");
-			//			}
-			//
-			//			if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
-			//			{
-			//				this.setbSobreGasolina("X");
-			//			}
-			//			else
-			//			{
-			//				this.setbSobreGasolina("");
-			//			}
-			//
-			//			if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
-			//			{
-			//				this.setbPublicidadExt("X");
-			//			}
-			//			else
-			//			{
-			//				this.setbPublicidadExt("");
-			//			}
-			//
-			//			if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
-			//			{
-			//				this.setbDelineacionUrbana("X");
-			//			}
-			//			else
-			//			{
-			//				this.setbDelineacionUrbana("");
-			//			}
-			//
-			//			if (customerData.getIcaTax() != null )
-			//			{
-			//				this.setbIca("X");
-			//			}
-			//			else
-			//			{
-			//				this.setbIca("");
-			//			}
+			
 
 		}
 		catch (final Exception e)
 		{
-			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+			LOG.error("error in taxes determination: " + e.getMessage());
 		}
 	}
 

@@ -13,15 +13,15 @@ import java.util.Map;
 public interface SDHConfigCatalogos
 {
 
-	public static final String facturacion_anioBase = "configCatalogos.facturacion_anioBase";
-	public static final String facturacion_cantidadAnios = "configCatalogos.facturacion_cantidadAnios";
-	public static final String facturacion_cantidadAniosCorrimiento = "configCatalogos.facturacion_cantidadAniosCorrimiento";
-	public static final String facturacion_valSeleccionar = "configCatalogos.facturacion_valSeleccionar";
+	public static final String facturacion_anioBase = "configCatalogos.anioBase.facturacion";
+	public static final String facturacion_cantidadAnios = "configCatalogos.cantidadAnios.facturacion";
+	public static final String facturacion_cantidadAniosCorrimiento = "configCatalogos.cantidadAniosCorrimiento.facturacion";
+	public static final String facturacion_valSeleccionar = "configCatalogos.valSeleccionar.facturacion";
 
-	public static final String sobretasagasolina_anioBase = "configCatalogos.sobretasagasolina_anioBase";
-	public static final String sobretasagasolina_cantidadAnios = "configCatalogos.sobretasagasolina_cantidadAnios";
-	public static final String sobretasagasolina_cantidadAniosCorrimiento = "configCatalogos.sobretasagasolina_cantidadAniosCorrimiento";
-	public static final String sobretasagasolina_valSeleccionar = "configCatalogos.sobretasagasolina_valSeleccionar";
+	public static final String sobretasagasolina_anioBase = "configCatalogos.anioBase.sobretasagasolina";
+	public static final String sobretasagasolina_cantidadAnios = "configCatalogos.cantidadAnios.sobretasagasolina";
+	public static final String sobretasagasolina_cantidadAniosCorrimiento = "configCatalogos.cantidadAniosCorrimiento.sobretasagasolina";
+	public static final String sobretasagasolina_valSeleccionar = "configCatalogos.valSeleccionar.sobretasagasolina";
 
 
 	Map<String, String> obtenerListaAnioGravable_generica(final int anioBase, final int cantidadAnios, String valSeleccionar);

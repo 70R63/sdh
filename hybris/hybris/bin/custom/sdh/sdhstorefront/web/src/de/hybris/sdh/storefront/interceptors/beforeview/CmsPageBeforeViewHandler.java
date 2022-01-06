@@ -47,6 +47,7 @@ import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.sdh.core.model.SdhAccesoMenuContrib1Model;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
@@ -125,6 +126,10 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 
 	@Resource(name = "userService")
 	private UserService userService;
+	
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+
 
 	@Override
 	public void beforeView(final HttpServletRequest request, final HttpServletResponse response, final ModelAndView modelAndView)
@@ -204,7 +209,7 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 
 			final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
-			uiMenuForm.fillForm(customerData, customerModel);
+			uiMenuForm.fillForm(customerData, customerModel,sdhConsultaImpuesto_simplificado);
 			//			uiMenuForm.setbNoFiltrarMenuContrib(determinarFiltroMenuContrib(customerData));
 			uiMenuForm.setbNoFiltrarMenuContrib(true);
 			modelAndView.addObject("uiMenuForm", uiMenuForm);

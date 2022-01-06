@@ -32,6 +32,7 @@ import de.hybris.sdh.core.pojos.responses.OpcionCertiDecImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
@@ -50,6 +51,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -143,6 +145,10 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 
 	@Resource(name = "sdhCustomerAccountService")
 	SDHCustomerAccountService sdhCustomerAccountService;
+	
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+
 
 
 	@ModelAttribute("anoGravableGasolina")
@@ -204,73 +210,16 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 
 
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final OpcionDeclaracionesVista infoVista = new OpcionDeclaracionesVista();
 		final String urlIni;
 		SDHValidaMailRolResponse customerData = null;
-		SDHValidaMailRolResponse contImpuestos = null;
 
 		request.getHeaders(CMS_PAGE_MODEL);
 		request.getAttribute(getSiteName());
 		final String resolvedUrl = response.encodeURL(request.getContextPath() + resolvedUrlPath);
 		final String urlIDD = request.getServletPath();
 
-
-
-		customerData = sdhCustomerFacade.getRepresentadoFromSAP(customerModel.getNumBP());
-
-
-		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
-
-		for (final PrincipalGroupModel group : groupList)
-		{
-			final String groupUid = group.getUid();
-
-			if (groupUid.contains("predialUsrTaxGrp"))
-			{
-				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
-
-				customerData.setPredial(contImpuestos.getPredial());
-			}
-
-			if (groupUid.contains("vehicularUsrTaxGrp"))
-			{
-				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "02");
-
-				customerData.setVehicular(contImpuestos.getVehicular());
-			}
-
-			if (groupUid.contains("ICAUsrTaxGrp"))
-			{
-				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "03");
-
-				customerData.setIca(contImpuestos.getIca());
-			}
-
-			if (groupUid.contains("gasolinaUsrTaxGrp"))
-			{
-				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "05");
-
-				customerData.setGasolina(contImpuestos.getGasolina());
-			}
-
-			if (groupUid.contains("delineacionUsrTaxGrp"))
-			{
-				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "06");
-
-				customerData.setDelineacion(contImpuestos.getDelineacion());
-			}
-
-			if (groupUid.contains("publicidadExtUsrTaxGrp"))
-			{
-				contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "07");
-
-				customerData.setPublicidadExt(contImpuestos.getPublicidadExt());
-			}
-
-		}
-
-
+		customerData = sdhCustomerAccountService.leerImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.ambito_consultas);
 		infoVista.setCatalogos(gasolinaService.prepararCatalogosOpcionDeclaraciones(customerData));
 		infoVista.setCustomerData(customerData);
 

@@ -31,6 +31,12 @@ public interface SDHConsultaImpuesto_simplificado
 	public static final String delineacion = "0006";
 	public static final String publicidad = "0007";
 
+	public static final String ambito_consultas = "consultas";
+	public static final String ambito_impuestos = "impuestos";
+	public static final String ambito_facturacion = "facturacion";
+	public static final String ambito_presentarDeclaracion = "presentarDeclaracion";
+	public static final String ambito_mirit = "mirit";
+
 	//Predial
 	List<PredialResponse> consulta_impPredial(ConsultaContribuyenteBPRequest request);
 
@@ -71,9 +77,11 @@ public interface SDHConsultaImpuesto_simplificado
 
 	String consulta_impPublicidad_string(ConsultaContribuyenteBPRequest request);
 
-	Map<String, String> obtenerListaImpuestosActivos();
 
+	//Manejo de impuestos activos
+	Map<String, String> obtenerListaImpuestosActivos(String ambito);
 
+	boolean esImpuestoActivo(Map<String, String> impuestosActivos, String claveImpuesto);
 
 
 
