@@ -1243,25 +1243,25 @@
 																	<td><label class="control-label"
 																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 																	id="Detalle"
-																	onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>
+																	onclick="pagarEnLinea('${eachDeliDet.codImpuesto}','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>
 																</c:when>
 																<c:when test="${eachDeli.facilidad == '01'}">
 																	<td><label class="control-label"
 																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 																	id="Detalle"
-																	onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeli.montoFacilidad}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>
+																	onclick="pagarEnLinea('${eachDeliDet.codImpuesto}','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeli.montoFacilidad}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>
 																</c:when>
 																<c:when test="${eachDeli.facilidad == '02'}">
 																	<td><label class="control-label"
 																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 																	id="Detalle"
-																	onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeli.montoFacilidad}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>
+																	onclick="pagarEnLinea('${eachDeliDet.codImpuesto}','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeli.montoFacilidad}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>
 																</c:when>
 																<c:otherwise>
 																	<td><label class="control-label"
 																	style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 																	id="Detalle"
-																	onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>
+																	onclick="pagarEnLinea('${eachDeliDet.codImpuesto}','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}','${eachDeli.cdu}','','${eachDeli.facilidad}','${eachDeli.montoFacilidad}' )">Pagar</label></td>
 																</c:otherwise>
 															</c:choose>															
 														</c:otherwise>

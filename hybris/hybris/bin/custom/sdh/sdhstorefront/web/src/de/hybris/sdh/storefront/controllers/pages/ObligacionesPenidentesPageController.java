@@ -380,15 +380,27 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 						obligacionesFormuno.setHeaderdeli(obligacionesDeliResponse.getHeader().stream()
 								.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
 
-//						if(obligacionesFormuno.getHeaderdeli() != null) {
-//							for(final ObligacionesCabeceraDeli obligacionesCabeceraDeli : obligacionesFormuno.getHeaderdeli() ) {
-//								for(final ObligacionesDetallePublicidad obligacionesDetallePublicidad: obligacionesCabeceraDeli.getDetails()) {
-//									if (StringUtils.isBlank(obligacionesDetallePublicidad.getNumReferencia()) ) {
-//										obligacionesCabeceraDeli.getDetails().remove(obligacionesDetallePublicidad);
-//									}
-//								}
-//							}
-//						}
+
+
+						if (obligacionesFormuno.getHeaderdeli() != null)
+						{
+							for (final ObligacionesCabeceraDeli obligacionesCabeceraDeli : obligacionesFormuno.getHeaderdeli())
+							{
+								for (final ObligacionesDetallePublicidad obligacionesDetallePublicidad : obligacionesCabeceraDeli
+										.getDetails())
+								{
+									if (obligacionesDetallePublicidad.getNumReferencia() != null)
+									{
+										String referencia = obligacionesDetallePublicidad.getNumReferencia().replaceFirst("^0+(?!$)", "");
+										if (!referencia.isEmpty())
+										{
+											referencia = "51" + referencia.substring(2, 4);
+											obligacionesDetallePublicidad.setCodImpuesto(referencia);
+										}
+									}
+								}
+							}
+						}
 					}
 				}
 
