@@ -34,6 +34,7 @@ public class VehiculosInfObjetoForm
 	private String bpNum;
 	private String placa;
 	private String anioGravable;
+	private String anioGravableActual;
 
 	private SDHValidaMailRolResponse vehiculos;
 
@@ -239,6 +240,22 @@ public class VehiculosInfObjetoForm
 	{
 		this.anioGravable = anioGravable;
 	}
+	/**
+	 * @return the anioGravableActual
+	 */
+	public String getAnioGravableActual()
+	{
+		return anioGravableActual;
+	}
+
+	/**
+	 * @param anioGravableActual the anioGravableActual to set
+	 */
+	public void setAnioGravableActual(String anioGravableActual)
+	{
+		this.anioGravableActual = anioGravableActual;
+	}
+
 	/**
 	 * @return the vehiculos
 	 */

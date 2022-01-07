@@ -137,6 +137,7 @@ public class SobreVehiculosController extends AbstractPageController
 			vehiculosForm.setTipiden(customerModel.getDocumentType());
 			vehiculosForm.setNumide(customerModel.getDocumentNumber());
 			vehiculosForm.setName(customerModel.getFirstName() + " " + customerModel.getLastName());
+			vehiculosForm.setAnioGravableActual(Integer.toString(LocalDate.now().getYear()));
 
 			try
 			{
