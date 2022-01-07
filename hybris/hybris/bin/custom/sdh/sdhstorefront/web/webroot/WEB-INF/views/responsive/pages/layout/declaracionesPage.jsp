@@ -8,8 +8,9 @@
 	tagdir="/WEB-INF/tags/responsive/declaraciones"%>
 
 <div class="loader"></div>
-<!-- <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div> -->
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
+<template:sdhJavascriptVariables4/>
 <declara:declaraciones/>
 
 
