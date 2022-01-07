@@ -72,7 +72,7 @@
 			<option value="2016">2016</option>
 		</select>
 	</div> --%>
-	<input type="hidden" id="an" value="2020"/>
+	<input type="hidden" id="an" value="${vehiculosForm.anioGravableActual}"/>
 
 
 
