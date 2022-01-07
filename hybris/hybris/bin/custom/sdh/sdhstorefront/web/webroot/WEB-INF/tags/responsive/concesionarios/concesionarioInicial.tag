@@ -133,15 +133,12 @@
 <script type="text/javascript">
 
 function buscarConcesionarios(){
-	debugger;
 	ACC.concesionarios.buscar();
 	
 }
 
 
 function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar,cdu,placa,facilidad,montoFacilidad,partner){
-	
-	debugger;
 	
 	var numBP = partner;
 	var numDoc = "${customerData.documentNumber}";

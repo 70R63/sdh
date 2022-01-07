@@ -139,7 +139,6 @@ function accionPreCalculo(){
 }
 
 function accionCat_destinoHacendario(){
-	debugger;
 	$("#caracterizacionPredio").find("option:gt(0)").remove();	
 	if($("#DestinoHacendario").val() != null){
 		for(var i=0;i<cat_predial_caracterizacionPredio.length;i++){

@@ -418,7 +418,6 @@
 	}
 	
 	function validaMontoAvaluo(montoOriginalAvaluo) {
-		debugger;
 		var nuevoAvaluo = $('#avaluoAct').val();
 		
 		

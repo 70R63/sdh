@@ -432,7 +432,6 @@ ACC.opcionDeclaraciones = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
-					debugger;
 					ACC.spinner.close();
 					ACC.opcionDeclaraciones.updateFromResponsePeriodo_porAnio(dataActual,dataResponse);
 					ACC.opcionDeclaraciones.obtenerListaDeclaraciones();

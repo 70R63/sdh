@@ -76,7 +76,6 @@ function goBack() {
 
 	function Selected(selectObject) {
 		
-		debugger;
 		var value = selectObject.value;
 		document.getElementById("Idimp").value = value;
 		 

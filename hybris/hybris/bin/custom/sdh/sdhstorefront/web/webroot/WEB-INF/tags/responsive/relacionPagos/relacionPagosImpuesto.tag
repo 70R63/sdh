@@ -814,7 +814,6 @@
 
 	function showdetail(selectObject) {
 		
-		debugger;
 		var obKey = selectObject.dataset.objkey;
 		var impuesto = selectObject.dataset.impuesto;
 		
