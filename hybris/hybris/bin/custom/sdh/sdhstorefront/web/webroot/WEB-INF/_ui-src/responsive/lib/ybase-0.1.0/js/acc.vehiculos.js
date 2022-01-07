@@ -260,28 +260,29 @@ ACC.vehiculos = {
 						ACC.spinner.close();
 		            	if(data.errores != null)
 	            		{
-		            		
-							if (data.errores[0].txtmsj != null && data.errores[0].txtmsj != ""){
-								alert(data.errores[0].txtmsj);
+							var mensajesError = "";
+							$.each(data.errores, function( index, value ) {
+	            				if(value.txtmsj != null && value.txtmsj != ""){
+									mensajesError = mensajesError + value.txtmsj + "\n";
+								}
+    	            		});
+    	            		if(mensajesError.length>0){
+								alert(mensajesError);
 								
-								// $( "#dialogVehiculos" ).dialog( "open" );
-								// $("#vehiculosDialogContent").html("");
-								// $.each(data.errores, function( index, value )
-								// {
-								// $("#vehiculosDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
-								// });
 								
-								$("#avaluoAct").val("");
-								$("#valimpcar").val("");
-								$("#valsemafo").val("");
-								$("#despronpag").val("");
-								$("#taract").val("");
-								$("#totpag").val("");
-								$("#sancion").val("");
-								$("#valpagar").val("");
-								$("#intereses").val("");
-								$("#totpagvol").val("");
-								$("#numForm").val("");
+//								Estos se comentaron por reporte de incidencias inicio
+//								$("#avaluoAct").val("");
+//								$("#valimpcar").val("");
+//								$("#valsemafo").val("");
+//								$("#despronpag").val("");
+//								$("#taract").val("");
+//								$("#totpag").val("");
+//								$("#sancion").val("");
+//								$("#valpagar").val("");
+//								$("#intereses").val("");
+//								$("#totpagvol").val("");
+//								$("#numForm").val("");
+//								Estos se comentaron por reporte de incidencias fin
 							
 								
 		            			// $('#generaDeclaracionButton').prop("disabled",
