@@ -51,7 +51,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ARListaDeclaracionesPageController extends AbstractPageController
 {
 
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(ARListaDeclaracionesPageController.class);
 
 	private static final String AR_LISTA_CMS_PAGE = "arListaDeclaracionesPage";
 

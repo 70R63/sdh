@@ -41,7 +41,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 //@RequestMapping("")
 public class TercerosMenuPageController extends AbstractPageController
 {
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(TercerosMenuPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "AgentesTerceros Autorizados";

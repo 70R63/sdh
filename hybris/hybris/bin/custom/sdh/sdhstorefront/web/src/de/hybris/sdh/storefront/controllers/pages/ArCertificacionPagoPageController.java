@@ -82,7 +82,7 @@ import Decoder.BASE64Decoder;
 /* @RequestMapping("/agenteRetenedor/certipagos") */
 public class ArCertificacionPagoPageController extends AbstractPageController
 {
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(ArCertificacionPagoPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.arCertipagos";

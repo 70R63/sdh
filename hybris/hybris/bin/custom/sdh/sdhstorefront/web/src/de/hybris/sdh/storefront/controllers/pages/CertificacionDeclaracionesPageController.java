@@ -91,7 +91,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 	private static final String TEXT_CERTIFICA_DECLARACION_CONTRIB = "text.account.profile.certiDeclara";
 	private static final String VACIO = "";
 
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(CertificacionDeclaracionesPageController.class);
 
 	// CMS Pages
 	private static final String CERTIFICACION_DECLARACIONES_CMS_PAGE = "certiDeclaracionesPage";

@@ -43,7 +43,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 //@RequestMapping("")
 public class RetenedoresRegistroPageController extends RetenedoresAbstractPageController
 {
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(RetenedoresRegistroPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "Registro de Retenciones";

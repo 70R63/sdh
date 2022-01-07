@@ -57,7 +57,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ContribuyentesPageController extends AbstractPageController
 {
 
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(ContribuyentesPageController.class);
 
 	private static final String CONTRIBUYENTES_CMS_PAGE = "ContribuyentesPage";
 

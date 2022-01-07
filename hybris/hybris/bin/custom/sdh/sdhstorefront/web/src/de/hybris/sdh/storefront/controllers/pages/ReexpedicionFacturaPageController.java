@@ -66,7 +66,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 //@RequestMapping("")
 public class ReexpedicionFacturaPageController extends AbstractPageController
 {
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(ReexpedicionFacturaPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.reexpedicionFac";

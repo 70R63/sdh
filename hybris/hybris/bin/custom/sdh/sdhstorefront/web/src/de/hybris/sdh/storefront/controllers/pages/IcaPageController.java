@@ -108,7 +108,7 @@ import Decoder.BASE64Decoder;
 
 public class IcaPageController extends SDHAbstractPageController
 {
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(IcaPageController.class);
 
 
 	private static final String VACIO = "";
