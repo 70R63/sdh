@@ -174,7 +174,6 @@ ACC.facturacion = {
 	
 	bindPagarFacturaBtn : function(){
 		$(document).on("click", "#pagarFacturaBtn", function(e) {
-			debugger;
 			e.preventDefault();
 			
 			var impuesto = $(this).data("impuesto");
@@ -224,7 +223,6 @@ ACC.facturacion = {
 	
 	
 	manejarRespuestaWSPagar : function(dataActual,dataResponse){
-	 	debugger;
 		ACC.publicidadexterior.bindDataTable_ID_refresh("#example");
 		ACC.facturacion.manejarRespuestaWSPagar_registrosTabla(dataActual,dataResponse);
 		
@@ -247,7 +245,6 @@ ACC.facturacion = {
 	
 	
 	manejarRespuestaWSPagar_registrosTabla : function(dataActual,dataResponse){
-		debugger;
 		var claveCSSTabla = null;
 		
 //datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
@@ -255,68 +252,72 @@ ACC.facturacion = {
 			var concepto = "Concepto";
 //datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
 		
-		switch (dataActual.impuesto){
-			case "0001":
-				claveCSSTabla = ".pagarImpuesto";
-//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
-			value.impuesto = "\'5101\'";    
-			if(dataResponse.responsePredial.anoGravable = "01"){
-				value.anoGravable = "2021";    
-			}	
-			else{
-				value.anoGravable = dataResponse.responsePredial.anoGravable;
-			}	
-			value.periodo = "\'\'";
-			value.numObjeto = dataResponse.responsePredial.chip;
-			value.chip = dataResponse.responsePredial.chip;
-			if(dataResponse.responsePredial.fechaVencimiento = "01"){
-				value.fechaVenc = "22/12/2021";    
-			}	
-			else{
-				value.fechaVenc = dataResponse.responsePredial.fechaVencimiento;
-			}
-			value.numRef = dataResponse.responsePredial.numReferencia;
-			value.montoSinAporte = dataResponse.responsePredial.totalPagar;
-			value.montoConAporte = dataResponse.responsePredial.totalConVoluntario;
-			value.cdu = "\'\'";
-			value.placa = "\'\'";
-			value.facilidad = "\'\'";
-			value.montoFacilidad = "\'\'";
-//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
-
-				break;
-			
-			case "0002":
-				claveCSSTabla = ".pagarImpuesto";
+		if(dataResponse != null){
+			switch (dataActual.impuesto){
+				case "0001":
+					if(dataResponse.responsePredial != null){
+						claveCSSTabla = ".pagarImpuesto";
+		//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
+						value.impuesto = "\'5101\'";    
+						if(dataResponse.responsePredial.anoGravable == "01"){
+							value.anoGravable = "2021";    
+						}	
+						else{
+							value.anoGravable = dataResponse.responsePredial.anoGravable;
+						}	
+						value.periodo = "\'\'";
+						value.numObjeto = dataResponse.responsePredial.chip;
+						value.chip = dataResponse.responsePredial.chip;
+						if(dataResponse.responsePredial.fechaVencimiento == "01"){
+							value.fechaVenc = "22/12/2021";    
+						}	
+						else{
+							value.fechaVenc = dataResponse.responsePredial.fechaVencimiento;
+						}
+						value.numRef = dataResponse.responsePredial.numReferencia;
+						value.montoSinAporte = dataResponse.responsePredial.totalPagar;
+						value.montoConAporte = dataResponse.responsePredial.totalConVoluntario;
+						value.cdu = "\'\'";
+						value.placa = "\'\'";
+						value.facilidad = "\'\'";
+						value.montoFacilidad = "\'\'";
+		//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
+					}
+					break;
 				
-//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
-            value.impuesto = "\'5103\'";        
-			if(dataResponse.responseVehicular.anoGravable = "02"){
-				value.anoGravable = "2021";    
-			}	
-			else{
-				value.anoGravable = dataResponse.responseVehicular.anoGravable;
+				case "0002":
+					if(dataResponse.responseVehicular != null){
+						claveCSSTabla = ".pagarImpuesto";
+					
+			//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
+			            value.impuesto = "\'5103\'";        
+						if(dataResponse.responseVehicular.anoGravable == "02"){
+							value.anoGravable = "2021";    
+						}	
+						else{
+							value.anoGravable = dataResponse.responseVehicular.anoGravable;
+						}
+						value.periodo = "\'\'";
+						value.numObjeto = dataResponse.responseVehicular.placa;
+						value.chip = "\'\'";
+						if(dataResponse.responseVehicular.fechaVencimiento == "02"){
+							value.fechaVenc = "22/12/2021";    
+						}	
+						else{
+							value.fechaVenc = dataResponse.responseVehicular.fechaVencimiento;
+						}	
+						value.numRef = dataResponse.responseVehicular.numReferencia;
+						value.montoSinAporte = dataResponse.responseVehicular.totalPagar;
+						value.montoConAporte = dataResponse.responseVehicular.totalConVoluntario;
+						value.cdu = "\'\'";
+						value.placa = dataResponse.responseVehicular.placa;
+						value.facilidad = "\'\'";
+						value.montoFacilidad = "\'\'";
+			//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
+					}
+					break;
 			}
-			value.periodo = "\'\'";
-			value.numObjeto = dataResponse.responseVehicular.placa;
-			value.chip = "\'\'";
-			if(dataResponse.responseVehicular.fechaVencimiento = "02"){
-				value.fechaVenc = "22/12/2021";    
-			}	
-			else{
-				value.fechaVenc = dataResponse.responseVehicular.fechaVencimiento;
-			}	
-			value.numRef = dataResponse.responseVehicular.numReferencia;
-			value.montoSinAporte = dataResponse.responseVehicular.totalPagar;
-			value.montoConAporte = dataResponse.responseVehicular.totalConVoluntario;
-			value.cdu = "\'\'";
-			value.placa = dataResponse.responseVehicular.placa;
-			value.facilidad = "\'\'";
-			value.montoFacilidad = "\'\'";
-//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
-			break;
 		}
-		
 		
 		if( claveCSSTabla != null){
 			$(claveCSSTabla+" tbody tr").remove();
