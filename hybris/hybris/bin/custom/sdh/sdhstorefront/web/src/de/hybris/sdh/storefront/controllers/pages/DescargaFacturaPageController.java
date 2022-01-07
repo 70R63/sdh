@@ -61,7 +61,7 @@ import Decoder.BASE64Decoder;
 //@RequestMapping("")
 public class DescargaFacturaPageController extends AbstractPageController
 {
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(DescargaFacturaPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.descargaFac";
@@ -249,18 +249,22 @@ public class DescargaFacturaPageController extends AbstractPageController
 		final FacturacionPagosRequest facturacionPagosRequest = new FacturacionPagosRequest();
 		final String numBP = customerFacade.getCurrentCustomer().getNumBP();
 		final byte[] decodedBytes;
-      String clavePeriodo;
+      String clavePeriodo = null;
+      String anioGravable = dataForm.getAnioGravable();
+      
+      if(anioGravable != null && anioGravable.length() == 4){
+      	anioGravable = anioGravable.substring(2);
+      }else {
+      	anioGravable = "";
+      }
 
 		facturacionPagosRequest.setNumbp(numBP);
-
 		if(dataForm.getPeriodo() == null || dataForm.getPeriodo().isEmpty() ) {
-			clavePeriodo = dataForm.getAnioGravable() + "A1";
-			facturacionPagosRequest.setClavePeriodo(clavePeriodo);
+			clavePeriodo = anioGravable + "A1";
 		}else {
-			clavePeriodo = dataForm.getAnioGravable() + dataForm.getPeriodo();
-			facturacionPagosRequest.setClavePeriodo(clavePeriodo);
+			clavePeriodo = anioGravable + dataForm.getPeriodo();
 		}
-
+		facturacionPagosRequest.setClavePeriodo(clavePeriodo);
 		facturacionPagosRequest.setNumObjeto(dataForm.getNumObjeto());
 
 

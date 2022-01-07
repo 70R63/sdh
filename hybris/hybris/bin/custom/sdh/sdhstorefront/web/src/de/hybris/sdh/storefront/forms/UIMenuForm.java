@@ -39,7 +39,7 @@ public class UIMenuForm
 	
 	
 	//log
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(UIMenuForm.class);
 
 	private String bPredial;
 	private String bVehicular;

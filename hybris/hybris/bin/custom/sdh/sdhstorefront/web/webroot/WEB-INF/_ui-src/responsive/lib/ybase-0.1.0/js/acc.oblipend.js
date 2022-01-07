@@ -84,7 +84,6 @@ ACC.oblipend = {
 	
 	bindPopupPDF : function(){
  $(document).on("click", "#ImprimirPopUp", function(e) {
-	 debugger;
  e.preventDefault();
 
  ACC.publicidadexterior.bindDataTable_ID_refresh("#example");

@@ -42,7 +42,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ReportantesPageController extends AbstractPageController
 {
 	//log
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(ReportantesPageController.class);
 
 	//breadcrumb
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";

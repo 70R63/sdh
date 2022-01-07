@@ -63,7 +63,7 @@ import Decoder.BASE64Decoder;
 @Controller
 public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPageController
 {
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(RetenedoresDeclaracionPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String RETEICA_DECLARACION_PROFILE = "Retenedores Declaracion";

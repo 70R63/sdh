@@ -35,7 +35,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 { "/contribuyentes/mibuzontributario/inicial", "/agenteRetenedor/mibuzon_tributario" })
 public class MiBuzonController extends AbstractPageController
 {
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(MiBuzonController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.buzon";

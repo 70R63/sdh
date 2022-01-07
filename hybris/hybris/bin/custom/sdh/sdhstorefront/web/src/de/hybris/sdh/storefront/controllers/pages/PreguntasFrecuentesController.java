@@ -43,7 +43,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class PreguntasFrecuentesController extends AbstractPageController
 {
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(PreguntasFrecuentesController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.preguntasfre";

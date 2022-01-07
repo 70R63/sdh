@@ -38,12 +38,10 @@ ACC.concesionarios = {
 	
 	updateFromResponseSeleccion : function(infoActual,infoResponse) {
 		ACC.concesionarios.vaciarTablasInfo();
-		debugger;
 		if (infoResponse != null){
 			var status = ACC.concesionarios.obtenerDescripcionStatus($("#referenceStatus").val());
 			
 			$.each(infoResponse, function (index,value){
-				debugger;
 				var fechaVencimiento= "";
 				if(value.FAEDN != null){
 					fechaVencimiento = value.FAEDN;

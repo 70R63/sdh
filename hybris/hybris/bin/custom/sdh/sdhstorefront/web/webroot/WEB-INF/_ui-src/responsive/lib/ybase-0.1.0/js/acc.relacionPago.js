@@ -14,7 +14,6 @@ ACC.relacionPago = {
 	            data: data,
 	            type: "POST",
 	            success: function (data) {
-					debugger;
 					var flagRegistrosAgregados = false;
 					
 					if(impuesto == "1"){

@@ -258,18 +258,14 @@ ACC.vehiculos = {
 					type : "POST",
 					success : function(data) {
 						ACC.spinner.close();
-		            	if(data.errores != null)
-	            		{
-							var mensajesError = "";
-							$.each(data.errores, function( index, value ) {
-	            				if(value.txtmsj != null && value.txtmsj != ""){
-									mensajesError = mensajesError + value.txtmsj + "\n";
-								}
-    	            		});
-    	            		if(mensajesError.length>0){
-								alert(mensajesError);
-								
-								
+						var mensajesError = "";
+						$.each(data.errores, function( index, value ) {
+            				if(value.txtmsj != null && value.txtmsj != ""){
+								mensajesError = mensajesError + value.txtmsj + "\n";
+							}
+	            		});
+						if(mensajesError.length>0){
+							alert(mensajesError);
 //								Estos se comentaron por reporte de incidencias inicio
 //								$("#avaluoAct").val("");
 //								$("#valimpcar").val("");
@@ -283,47 +279,22 @@ ACC.vehiculos = {
 //								$("#totpagvol").val("");
 //								$("#numForm").val("");
 //								Estos se comentaron por reporte de incidencias fin
-							
-								
 		            			// $('#generaDeclaracionButton').prop("disabled",
 								// true);
-							}else{
-								$("#avaluoAct").val(data.avaluo);
-								$("#valimpcar").val(data.impuestoCargo);
-								$("#valsemafo").val(data.valorSemafor);
-								$("#despronpag").val(data.descuentoProntop);
-								$("#taract").val(data.tarifaActual);
-								$("#totpag").val(data.totalPagar);
-								$("#sancion").val(data.sancion);
-								$("#valpagar").val(data.valorPagar);
-								$("#intereses").val(data.intereses);
-								$("#totpagvol").val(data.totalPagoVol);
-								$("#numForm").val(data.numForm);
-								ACC.vehiculos.habilitarBotonPresentarDeclaracion();
-							}
-		            		
-	            		}else
-	            		{	            			
-							$("#avaluoAct").val(data.avaluo);
-	            			$("#valimpcar").val(data.impuestoCargo);
-	            			$("#valsemafo").val(data.valorSemafor);
-	            			$("#despronpag").val(data.descuentoProntop);
-	            			$("#taract").val(data.tarifaActual);
-	            			$("#totpag").val(data.totalPagar);
-	            			$("#sancion").val(data.sancion);
-	            			$("#valpagar").val(data.valorPagar);
-	            			$("#intereses").val(data.intereses);
-	            			$("#totpagvol").val(data.totalPagoVol);
-	            			$("#numForm").val(data.numForm);
-	            			ACC.vehiculos.habilitarBotonPresentarDeclaracion();
-	            			
-	            			
-// $('#generaDeclaracionButton').prop("disabled", false);
-	            			
-	            		}
-	 	      		
-		            
-
+						}else{
+							$("#avaluoAct").val(data.avaluoActual);
+							$("#valimpcar").val(data.impuestoCargo);
+							$("#valsemafo").val(data.valorSemafor);
+							$("#despronpag").val(data.descuentoProntop);
+							$("#taract").val(data.tarifaActual);
+							$("#totpag").val(data.totalPagar);
+							$("#sancion").val(data.sancion);
+							$("#valpagar").val(data.valorPagar);
+							$("#intereses").val(data.intereses);
+							$("#totpagvol").val(data.totalPagoVol);
+							$("#numForm").val(data.numForm);
+							ACC.vehiculos.habilitarBotonPresentarDeclaracion();
+						}
 		},error: function () {
 			ACC.spinner.close();
         	$( "#dialogVehiculos" ).dialog( "open" );
