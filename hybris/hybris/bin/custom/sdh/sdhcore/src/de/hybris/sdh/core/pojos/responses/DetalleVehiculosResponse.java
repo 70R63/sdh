@@ -19,6 +19,7 @@ public class DetalleVehiculosResponse
 	private DetalleInfoDeclaraVehiculos info_declara;
 	private String checkAporte;
 	private String fechaNotif;
+	private String aporte_activo;
 
 	/**
 	 * @return the detalle
@@ -136,6 +137,23 @@ public class DetalleVehiculosResponse
 	public void setFechaNotif(final String fechaNotif)
 	{
 		this.fechaNotif = fechaNotif;
+	}
+
+	/**
+	 * @return the aporte_activo
+	 */
+	public String getAporte_activo()
+	{
+		return aporte_activo;
+	}
+
+	/**
+	 * @param aporte_activo
+	 *           the aporte_activo to set
+	 */
+	public void setAporte_activo(final String aporte_activo)
+	{
+		this.aporte_activo = aporte_activo;
 	}
 
 

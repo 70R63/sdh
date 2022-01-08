@@ -128,6 +128,9 @@ public class VehiculosInfObjetoForm
 
 	private VehiculosControlCamposDec controlCampos;
 	private List<ErrorEnWS> erroresWS;
+	private String aporte_activo;
+	
+	
 	/**
 	 * @return the numBP
 	 */
@@ -1478,6 +1481,22 @@ public class VehiculosInfObjetoForm
 	public void setErroresWS(final List<ErrorEnWS> erroresWS)
 	{
 		this.erroresWS = erroresWS;
+	}
+
+	/**
+	 * @return the aporte_activo
+	 */
+	public String getAporte_activo()
+	{
+		return aporte_activo;
+	}
+
+	/**
+	 * @param aporte_activo the aporte_activo to set
+	 */
+	public void setAporte_activo(String aporte_activo)
+	{
+		this.aporte_activo = aporte_activo;
 	}
 
 

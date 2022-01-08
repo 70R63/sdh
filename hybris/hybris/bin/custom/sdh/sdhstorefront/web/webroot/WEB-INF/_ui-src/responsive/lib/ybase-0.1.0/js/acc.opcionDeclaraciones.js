@@ -407,6 +407,8 @@ ACC.opcionDeclaraciones = {
 					alert("Error procesar la solicitud obtener tipo de periodo");	
 				}
 			});
+		}else{
+			ACC.spinner.close();
 		}
 		
 		
@@ -560,9 +562,20 @@ ACC.opcionDeclaraciones = {
 			if(infoActual.claveImpuesto == '0002'){
 				if(infoResponse.vehicular.length > 0){
 					$.each(infoResponse.vehicular, function (index,value){
+						var marcaDescripcion = "";
+						marca_vehi.forEach(function (eachMAR) {
+							if(marcaDescripcion != ""){
+								return;
+							}
+					    	if(eachMAR.id_marca == value.marca){
+				    			marcaDescripcion = eachMAR.item_marca;
+				    		}
+						});
+						
+						
 						$('#table-vehicular1').append("<tr>"+
 								'<td>' + value.placa + '</td>'+
-								'<td>' + value.marca + '</td>'+
+								'<td>' + marcaDescripcion + '</td>'+
 								'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
 								"</tr>");
 					});
