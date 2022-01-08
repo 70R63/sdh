@@ -292,6 +292,8 @@ ACC.vehiculos = {
 							$("#valpagar").val(data.valorPagar);
 							$("#intereses").val(data.intereses);
 							$("#totpagvol").val(data.totalPagoVol);
+							$("#descuentoconbustible").val(data.descuentoconbustible);
+							$("#descuentoadicional").val(data.descuentoadicional);
 							$("#numForm").val(data.numForm);
 							ACC.vehiculos.habilitarBotonPresentarDeclaracion();
 						}
@@ -310,6 +312,8 @@ ACC.vehiculos = {
 			$("#valpagar").val("");
 			$("#intereses").val("");
 			$("#totpagvol").val("");
+			$("#descuentoconbustible").val("");
+			$("#descuentoadicional").val("");
 			$("#numForm").val("");
 // $("#calculoButton").prop('disabled', false);
         }

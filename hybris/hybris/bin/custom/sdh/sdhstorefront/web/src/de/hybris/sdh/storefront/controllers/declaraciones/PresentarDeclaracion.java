@@ -833,7 +833,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
 				consultaContribuyenteBPRequest.setAnioGravable(infoVista.getAnoGravable());
 				impuestoVehiculos = sdhConsultaImpuesto_simplificado.consulta_impVehicular2(consultaContribuyenteBPRequest);
-				sdhCustomerAccountService.updateImpuestoVehicular_simplificado(customerModel, impuestoVehiculos);
+//				sdhCustomerAccountService.updateImpuestoVehicular_simplificado(customerModel, impuestoVehiculos);
 				//				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
 				//				sdhConsultaContribuyenteBPResponse.setVehicular(impuestoVehiculos);
 				listaInfoVehiculos = new ArrayList<ImpuestoVehiculos>();

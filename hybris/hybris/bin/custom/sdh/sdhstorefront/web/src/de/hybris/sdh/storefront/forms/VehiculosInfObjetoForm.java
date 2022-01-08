@@ -129,6 +129,8 @@ public class VehiculosInfObjetoForm
 	private VehiculosControlCamposDec controlCampos;
 	private List<ErrorEnWS> erroresWS;
 	private String aporte_activo;
+	private String descuentoadicional;
+	private String descuentoconbustible;
 	
 	
 	/**
@@ -1499,10 +1501,37 @@ public class VehiculosInfObjetoForm
 		this.aporte_activo = aporte_activo;
 	}
 
+	/**
+	 * @return the descuentoadicional
+	 */
+	public String getDescuentoadicional()
+	{
+		return descuentoadicional;
+	}
 
+	/**
+	 * @param descuentoadicional the descuentoadicional to set
+	 */
+	public void setDescuentoadicional(String descuentoadicional)
+	{
+		this.descuentoadicional = descuentoadicional;
+	}
 
+	/**
+	 * @return the descuentoconbustible
+	 */
+	public String getDescuentoconbustible()
+	{
+		return descuentoconbustible;
+	}
 
-
+	/**
+	 * @param descuentoconbustible the descuentoconbustible to set
+	 */
+	public void setDescuentoconbustible(String descuentoconbustible)
+	{
+		this.descuentoconbustible = descuentoconbustible;
+	}
 
 
 }
