@@ -237,7 +237,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 				try
 				{
 					impuestoVehiculos = sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest);
-					sdhCustomerAccountService.updateImpuestoVehicular_simplificado(customerModel, impuestoVehiculos);
+//					sdhCustomerAccountService.updateImpuestoVehicular_simplificado(customerModel, impuestoVehiculos);
 					sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
 					sdhConsultaContribuyenteBPResponse.setVehicular(impuestoVehiculos);
 
@@ -531,6 +531,8 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 			vehiculosFormDeclaracion.setTotalPagar(calcVehiculosResponse.getTotalPagar());
 			vehiculosFormDeclaracion.setValorPagar(calcVehiculosResponse.getValorPagar());
 			vehiculosFormDeclaracion.setTotalPagoVol(calcVehiculosResponse.getTotalPagoVol());
+			vehiculosFormDeclaracion.setDescuentoadicional(calcVehiculosResponse.getDescuentoadicional());
+			vehiculosFormDeclaracion.setDescuentoconbustible(calcVehiculosResponse.getDescuentoconbustible());
 
 
 		}
@@ -540,7 +542,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 		catch (final Exception e)
 		{
-			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+			LOG.error("error getting vehicle details page: " + e.getMessage());
 
 			final ErrorPubli error = new ErrorPubli();
 

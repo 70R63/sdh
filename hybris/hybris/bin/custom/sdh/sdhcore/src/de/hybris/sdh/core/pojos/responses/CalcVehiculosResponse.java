@@ -26,6 +26,8 @@ public class CalcVehiculosResponse
 	private String valorPagar;
 	private String totalPagoVol;
 	private String avaluo;
+	private String descuentoadicional;
+	private String descuentoconbustible;
 
 	private List<ErrorPubli> errores;
 
@@ -232,6 +234,40 @@ public class CalcVehiculosResponse
 	public void setAvaluo(final String avaluo)
 	{
 		this.avaluo = avaluo;
+	}
+
+	/**
+	 * @return the descuentoadicional
+	 */
+	public String getDescuentoadicional()
+	{
+		return descuentoadicional;
+	}
+
+	/**
+	 * @param descuentoadicional
+	 *           the descuentoadicional to set
+	 */
+	public void setDescuentoadicional(final String descuentoadicional)
+	{
+		this.descuentoadicional = descuentoadicional;
+	}
+
+	/**
+	 * @return the descuentoconbustible
+	 */
+	public String getDescuentoconbustible()
+	{
+		return descuentoconbustible;
+	}
+
+	/**
+	 * @param descuentoconbustible
+	 *           the descuentoconbustible to set
+	 */
+	public void setDescuentoconbustible(final String descuentoconbustible)
+	{
+		this.descuentoconbustible = descuentoconbustible;
 	}
 
 

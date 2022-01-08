@@ -27,6 +27,10 @@
 	<c:set var="disabledLiquidacionPrivada" value='disabled="disabled"' />
 	<c:set var="disabledAporte" value='disabled="disabled"' />
 </c:if>
+<c:set var="flagProyecto_01" value=false />
+<c:if test="${predialFormbases.anioGravable != '2022'}">
+<c:set var="flagProyecto_01" value=true />
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <form:form>
 	<div class="container">
@@ -74,8 +78,7 @@
 							code="predialuno.liquidacionpriv.proyecto" /></label> <select
 						id="proyectoLiq" name="" class="alto_select alto form-control"
 						${disabledAporte}><option value="00">Seleccionar</option>
-						<option value="01">FORTALECIMIENTO DE LA SEGURIDAD
-							CIUDADANA</option>
+						<c:if test="${flagProyecto_01}"><option value="01">FORTALECIMIENTO DE LA SEGURIDAD CIUDADANA</option></c:if>
 						<option value="02">FINANCIACIÓN DE LA EDUCACIÓN SUPERIOR</option>
 						<option value="03">BOGOTÁ SOLIDARIA EN CASA</option>
 						</select>

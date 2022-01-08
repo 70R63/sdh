@@ -136,14 +136,18 @@ public class SobreVehiculosController extends AbstractPageController
 			vehiculosForm.setNumBP(customerModel.getNumBP());
 			vehiculosForm.setTipiden(customerModel.getDocumentType());
 			vehiculosForm.setNumide(customerModel.getDocumentNumber());
-			vehiculosForm.setName(customerModel.getFirstName() + " " + customerModel.getLastName());
+			if("NIT".compareToIgnoreCase(customerModel.getDocumentType()) == 0) {
+				vehiculosForm.setName(customerModel.getNameOrg1() + " " + customerModel.getNameOrg2());
+			}else {
+				vehiculosForm.setName(customerModel.getFirstName() + " " + customerModel.getLastName());				
+			}
 			vehiculosForm.setAnioGravableActual(Integer.toString(LocalDate.now().getYear()));
 
 			try
 			{
 				final List<ImpuestoVehiculos> impuestoVehiculos = sdhConsultaImpuesto_simplificado
 						.consulta_impVehicular(consultaContribuyenteBPRequest);
-				sdhCustomerAccountService.updateImpuestoVehicular_simplificado(customerModel, impuestoVehiculos);
+//				sdhCustomerAccountService.updateImpuestoVehicular_simplificado(customerModel, impuestoVehiculos);
 				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
 				sdhConsultaContribuyenteBPResponse.setVehicular(impuestoVehiculos);
 
@@ -157,9 +161,7 @@ public class SobreVehiculosController extends AbstractPageController
 			}
 			catch (final Exception e)
 			{
-				// XXX Auto-generated catch block
-				//				LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
-				//				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+				LOG.error("error getting customer info from SAP for vehiculos page: " + e.getMessage());
 			}
 
 		}

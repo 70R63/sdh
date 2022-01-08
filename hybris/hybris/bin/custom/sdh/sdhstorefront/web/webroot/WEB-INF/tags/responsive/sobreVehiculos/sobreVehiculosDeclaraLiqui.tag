@@ -279,6 +279,32 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.liq.descuentoconbustible" /></label> <input
+						id="descuentoconbustible" name="descuentoconbustible" class="newalto form-control"
+						aria-required="true" type="text"
+						value="${vehiculosFormDeclaracion.descuentoconbustible}" maxlength="30"
+						disabled="disabled">
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.liq.descuentoadicional" /></label> <input
+						id="descuentoadicional" name="descuentoadicional" class="newalto form-control"
+						aria-required="true" type="text"
+						value="${vehiculosFormDeclaracion.descuentoadicional}" maxlength="30"
+						disabled="disabled">
+				</div>
+			</div>
+		</div>
 
 		<div class="row">
 			<div class="col-md-3">

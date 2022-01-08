@@ -29,8 +29,8 @@
 			</table>
 		</div>
 	</div>
-	<div class="row mt-3">
-		<div class="col-md-12 col-md-offset-4 d-flex align-items-center">
+	<div class="row mt-4">
+		<div class="col-md-12 col-md-offset-1 d-flex align-items-center">
 			<div class="table-responsive text-center">
 				<table class="table table-bordered" style="width:auto !important">
 					<thead>
