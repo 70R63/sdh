@@ -229,6 +229,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 				{
 					vehiculosFormDeclaracion.setObjetoCont(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getObjetoCont());
 				}
+				vehiculosFormDeclaracion.setAporte_activo(detalleVehiculosResponse.getAporte_activo());
 
 				List<ImpuestoVehiculos> impuestoVehiculos = null;
 				SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;

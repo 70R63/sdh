@@ -161,6 +161,7 @@
 			</div>
 		</div>
 
+		<c:if test="${vehiculosFormDeclaracion.aporte_activo == 'X'}">
 		<div class="row mt-3">
 			<div class="col-md-3">
 				<div class="form-check">
@@ -204,13 +205,14 @@
 						id="proyecto" name="proyecto" class="alto_select form-control"
 						aria-required="true" ${projectDisable}>
 						<option value="00">SELECCIONAR</option>
-						<option value="01" ${option01Selected}>FORTALECIMIENTO DE
-							LA SEGURIDAD CIUDADANA</option>
-							<option value="03">BOGOTÁ SOLIDARIA EN CASA</option>
+						<option value="01" ${option01Selected}>FORTALECIMIENTO DE LA SEGURIDAD CIUDADANA</option>
+						<option value="02">FINANCIACIÓN DE LA EDUCACIÓN SUPERIOR</option>
+						<option value="03">BOGOTÁ SOLIDARIA EN CASA</option>
 					</select>
 				</div>
 			</div>
 		</div>
+		</c:if>
 
 		<div class="row">
 			<div class="col-md-3">
