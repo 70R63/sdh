@@ -258,31 +258,20 @@ ACC.facturacion = {
 		switch (dataActual.impuesto){
 			case "0001":
 				claveCSSTabla = ".pagarImpuesto";
-//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
-			value.impuesto = "\'5101\'";    
-			if(dataResponse.responsePredial.anoGravable = "01"){
-				value.anoGravable = "2021";    
-			}	
-			else{
-				value.anoGravable = dataResponse.responsePredial.anoGravable;
-			}	
-			value.periodo = "\'\'";
-			value.numObjeto = dataResponse.responsePredial.chip;
-			value.chip = dataResponse.responsePredial.chip;
-			if(dataResponse.responsePredial.fechaVencimiento = "01"){
-				value.fechaVenc = "22/12/2021";    
-			}	
-			else{
+
+				value.impuesto = "\'5101\'";    
+				value.anoGravable = dataResponse.anioGravable;				
+				value.periodo = "\'\'";
+				value.numObjeto = dataResponse.responsePredial.objetoContrato;
+				value.chip = dataResponse.responsePredial.CHIP;
 				value.fechaVenc = dataResponse.responsePredial.fechaVencimiento;
-			}
-			value.numRef = dataResponse.responsePredial.numReferencia;
-			value.montoSinAporte = dataResponse.responsePredial.totalPagar;
-			value.montoConAporte = dataResponse.responsePredial.totalConVoluntario;
-			value.cdu = "\'\'";
-			value.placa = "\'\'";
-			value.facilidad = "\'\'";
-			value.montoFacilidad = "\'\'";
-//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
+				value.numRef = dataResponse.responsePredial.numReferencia;
+				value.montoSinAporte = dataResponse.responsePredial.totalPagar;
+				value.montoConAporte = dataResponse.responsePredial.totalConVoluntario;
+				value.cdu = "\'\'";
+				value.placa = "";
+				value.facilidad = "\'\'";
+				value.montoFacilidad = "\'\'";
 
 				break;
 			
@@ -299,7 +288,7 @@ ACC.facturacion = {
 			}
 			value.periodo = "\'\'";
 			value.numObjeto = dataResponse.responseVehicular.placa;
-			value.chip = "\'\'";
+			value.chip = "";
 			if(dataResponse.responseVehicular.fechaVencimiento = "02"){
 				value.fechaVenc = "22/12/2021";    
 			}	
@@ -330,8 +319,8 @@ ACC.facturacion = {
 			'onclick="pagarEnLinea(' + value.impuesto + ',\'' 
 									 + value.anoGravable + '\','
 									 + value.periodo + ',\'' 
-									 + value.numObjeto + '\',' 
-									 + value.chip + ',\'' 
+									 + value.numObjeto + '\',\'' 
+									 + value.chip + '\',\'' 
 									 + value.fechaVenc + '\',\'' 
 									 + value.numRef  + '\',\'' 
 									 + value.montoConAporte + '\',' 
@@ -354,11 +343,11 @@ ACC.facturacion = {
 			'onclick="pagarEnLinea(' + value.impuesto + ',\'' 
 									 + value.anoGravable + '\','
 									 + value.periodo + ',\'' 
-									 + value.numObjeto + '\',' 
-									 + value.chip + ',\'' 
+									 + value.numObjeto + '\',\'' 
+									 + value.chip + '\',\'' 
 									 + value.fechaVenc + '\',\'' 
 									 + value.numRef  + '\',\'' 
-									 + value.montoConAporte + '\',' 
+									 + value.montoSinAporte + '\',' 
 									 + value.cdu + ',\'' 
 									 + value.placa + '\',' 
 									 + value.facilidad + ',' 

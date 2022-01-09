@@ -55,8 +55,20 @@ public class FacturacionPagosResponse
 	@Override
 	public String toString()
 	{
-		return "FacturacionPagosResponse [responseVehicular=" + responseVehicular.toString() + ", responsePredial="
-				+ responsePredial.toString() + "]";
+		if (responseVehicular == null)
+		{
+			return "FacturacionPagosResponse [responseVehicular=null" + ", responsePredial=" + responsePredial.toString() + "]";
+		}
+		else if (responsePredial == null)
+		{
+			return "FacturacionPagosResponse [responseVehicular=" + responseVehicular.toString() + ", responsePredial=null]";
+		}
+		else
+		{
+			return "FacturacionPagosResponse [responseVehicular=" + responseVehicular.toString() + ", responsePredial="
+					+ responsePredial.toString() + "]";
+		}
+
 	}
 
 

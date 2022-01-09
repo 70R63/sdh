@@ -29,7 +29,7 @@ public class FacturacionPagosRequest
 	 * @param numbp
 	 *           the numbp to set
 	 */
-	@JsonSetter("NumBP")
+	@JsonSetter("numBP")
 	public void setNumbp(final String numbp)
 	{
 		this.numbp = numbp;
@@ -77,7 +77,7 @@ public class FacturacionPagosRequest
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{");
-		stringBuilder.append("\"NumBP\":\"" + this.getNumbp() + "\",");
+		stringBuilder.append("\"numBP\":\"" + this.getNumbp() + "\",");
 		stringBuilder.append("\"clavePeriodo\":\"" + this.getClavePeriodo() + "\",");
 		stringBuilder.append("\"numObjeto\":\"" + this.getNumObjeto() + "\"");
 		stringBuilder.append("}");

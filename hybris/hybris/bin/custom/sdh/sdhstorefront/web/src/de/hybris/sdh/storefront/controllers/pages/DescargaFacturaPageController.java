@@ -115,8 +115,8 @@ public class DescargaFacturaPageController extends AbstractPageController
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
 
-		
-		Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.ambito_facturacion);
+
+		final Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.ambito_facturacion);
 
 		final FacturacionForm facturacionForm = new FacturacionForm();
 		facturacionForm.setNumbp(customerModel.getNumBP());
@@ -249,12 +249,20 @@ public class DescargaFacturaPageController extends AbstractPageController
 		final FacturacionPagosRequest facturacionPagosRequest = new FacturacionPagosRequest();
 		final String numBP = customerFacade.getCurrentCustomer().getNumBP();
 		final byte[] decodedBytes;
-      String clavePeriodo;
+		String clavePeriodo = null;
 
 		facturacionPagosRequest.setNumbp(numBP);
 
 		if(dataForm.getPeriodo() == null || dataForm.getPeriodo().isEmpty() ) {
-			clavePeriodo = dataForm.getAnioGravable() + "A1";
+			if (dataForm.getAnioGravable().length() == 4)
+			{
+				clavePeriodo = dataForm.getAnioGravable().substring(2) + "A1";
+			}
+			else if (dataForm.getAnioGravable().length() == 2)
+			{
+				clavePeriodo = dataForm.getAnioGravable() + "A1";
+			}
+
 			facturacionPagosRequest.setClavePeriodo(clavePeriodo);
 		}else {
 			clavePeriodo = dataForm.getAnioGravable() + dataForm.getPeriodo();
