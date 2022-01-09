@@ -24,12 +24,22 @@
 	<div id="vehiculosDialogContent"></div>
 </div>
 <div id="dialogPublicidadExterior" title="Impuesto de Sobre Vehiculos Automotores" ><div id="publicidadExteriorDialogContent"></div></div>
+
+<template:sdhJavascriptVariables_linea_vehi/>
+<template:sdhJavascriptVariables_linea_vehi2/>
+<template:sdhJavascriptVariables_linea_vehi3/>
+<template:sdhJavascriptVariables_linea_vehi4/>
+<template:sdhJavascriptVariables_linea_vehi5/>
+<template:sdhJavascriptVariables_linea_vehi6/>
+<template:sdhJavascriptVariables_linea_vehi7/>
+<template:sdhJavascriptVariables4/>
 <script>
 	function goBack() {
 		window.history.back();
 	}
 	
 	window.onload = function() {
+		ACC.vehiculos.cargarDescripciones_val();
 		
 		var cosas = $(":input");
 		var tam = cosas.length;
@@ -122,7 +132,6 @@
 			 "${vehiculosFormDeclaracion.modelo}", //5 - carroceria
 			 "${vehiculosFormDeclaracion.avaluo}" //6 - avaluo
 			 ];
-		
 		
 		ACC.vehiculos.obtenerCatalogosInicialVehiculos(cat_valores_actuales,"${vehiculosFormDeclaracion.homologado}");
 		

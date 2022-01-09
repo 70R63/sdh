@@ -48,7 +48,14 @@
 
 
 
-
+<template:sdhJavascriptVariables_linea_vehi/>
+<template:sdhJavascriptVariables_linea_vehi2/>
+<template:sdhJavascriptVariables_linea_vehi3/>
+<template:sdhJavascriptVariables_linea_vehi4/>
+<template:sdhJavascriptVariables_linea_vehi5/>
+<template:sdhJavascriptVariables_linea_vehi6/>
+<template:sdhJavascriptVariables_linea_vehi7/>
+<template:sdhJavascriptVariables4/>
 <script>
 
 window.onload = function() {
@@ -68,6 +75,9 @@ window.onload = function() {
 	var contenido_url = url.includes('contribuyentes');
 }
 	window.onload = function() {
+		
+		ACC.vehiculos.cargarDescripciones();
+		
 		var inputcol = document.getElementsByTagName("input");
 		for (i = 0; i < inputcol.length; i++) {
 			var texto = inputcol[i].value;

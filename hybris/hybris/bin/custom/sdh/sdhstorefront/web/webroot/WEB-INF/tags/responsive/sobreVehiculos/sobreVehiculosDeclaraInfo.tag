@@ -37,22 +37,22 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.clase" /></label> <input
-						name="numresol" class="newalto form-control"
+						name="numresol" class="newalto form-control td_clase"
 						aria-required="true" type="text"
-						value='<spring:theme code="vehiculos.detalle.clase.${vehiculosFormDeclaracion.clase}"/>'
+						value="${vehiculosFormDeclaracion.clase}"
 						maxlength="30" disabled="disabled">
-						<input id="clase" type="hidden" value="${vehiculosFormDeclaracion.clase}"/>
+						<input id="clase td_clase" type="hidden" value="${vehiculosFormDeclaracion.clase}"/>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.carroceria" /></label> <input
-						name="numresol" class="newalto form-control"
+						name="numresol" class="newalto form-control td_carroceria"
 						aria-required="true" type="text"
-						value='<spring:theme code="vehiculos.detalle.carroceria.${vehiculosFormDeclaracion.carroceria}"/>'
+						value="${vehiculosFormDeclaracion.carroceria}"
 						maxlength="30" disabled="disabled">
-						<input id="carroceria" type="hidden" value="${vehiculosFormDeclaracion.carroceria}"/>
+						<input class="td_carroceria" id="carroceria" type="hidden" value="${vehiculosFormDeclaracion.carroceria}"/>
 				</div>
 			</div>
 		</div>
@@ -62,11 +62,11 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.marca" /></label> <input
-						id="marca_descripcion" name="numresol" class="newalto form-control"
+						id="marca_descripcion" name="numresol" class="newalto form-control td_marca"
 						aria-required="true" type="text"
-						value='<spring:theme code="vehiculos.detalle.marca.${vehiculosFormDeclaracion.marca}"/>'
+						value="${vehiculosFormDeclaracion.marca}"
 						maxlength="30" disabled="disabled">
-						<input type="hidden" id="marca" value="${vehiculosFormDeclaracion.marca}"/>
+						<input class="td_marca" id="marca" type="hidden" value="${vehiculosFormDeclaracion.marca}"/>
 				</div>
 			</div>
 		
@@ -98,9 +98,9 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.blindado" /></label> <input
-						id="numresol" name="numresol" class="newalto form-control"
+						id="blindado" name="blindado" class="newalto form-control td_blindado"
 						aria-required="true" type="text"
-						value='<spring:theme code="vehiculos.detalle.blindado.${vehiculosFormDeclaracion.blindado}"/>'
+						value="${vehiculosFormDeclaracion.blindado}"
 						maxlength="30" disabled="disabled">
 				</div>
 			</div>

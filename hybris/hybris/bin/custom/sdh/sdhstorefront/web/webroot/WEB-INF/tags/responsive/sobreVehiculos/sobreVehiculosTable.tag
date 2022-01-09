@@ -78,7 +78,7 @@
 
 	<div class="row">
 		<div class="col-md-10 table-responsive">
-			<table class="table" id="example" class="newtd">
+			<table class="table" id="tabla_vehi" class="newtd">
 				<thead>
 					<tr>
 						<th><label class="control-label labeltabletd"><spring:theme
@@ -108,13 +108,13 @@
 					<c:forEach items="${vehiculosForm.impvehicular }" var="eachVehiculo">
 						<tr>
 							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachVehiculo.placa}"></c:out></td>
-							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme code="vehiculos.detalle.marca.${eachVehiculo.marca}"/></td>
-							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme code="vehiculos.detalle.linea.${eachVehiculo.linea}"/></td>
+							<td class="td_marca" style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;">${eachVehiculo.marca}</td>
+							<td class="td_linea" style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;">${eachVehiculo.marca}_${eachVehiculo.linea}</td>
 							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachVehiculo.modelo}"></c:out></td>
-							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme code="vehiculos.detalle.clase.${eachVehiculo.clase}"/></td>
-							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme code="vehiculos.detalle.carroceria.${eachVehiculo.carroceria}"/></td>
+							<td class="td_clase" style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;">${eachVehiculo.clase}</td>
+							<td class="td_carroceria" style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;">${eachVehiculo.carroceria}</td>
 							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachVehiculo.numPuertas}"></c:out></td>
-							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme code="vehiculos.detalle.blindado.${eachVehiculo.blindado}"/></td>
+							<td class="td_blindado" style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;">${eachVehiculo.blindado}</td>
 							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachVehiculo.cilindraje}"></c:out></td>
 							<td><label style="color: #0358d8 !important"
 								data-placa="${eachVehiculo.placa}"
