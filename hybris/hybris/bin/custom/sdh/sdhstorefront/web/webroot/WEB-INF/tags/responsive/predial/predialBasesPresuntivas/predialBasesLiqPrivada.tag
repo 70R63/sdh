@@ -27,11 +27,11 @@
 	<c:set var="disabledLiquidacionPrivada" value='disabled="disabled"' />
 	<c:set var="disabledAporte" value='disabled="disabled"' />
 </c:if>
-<c:set var="flagProyecto_01" value=false />
-<c:set var="flagProyecto_02" value=false />
+<c:set var="flagProyecto_01" value="false" />
+<c:set var="flagProyecto_02" value="false" />
 <c:if test="${predialFormbases.anioGravable != '2022'}">
-<c:set var="flagProyecto_01" value=true />
-<c:set var="flagProyecto_02" value=true />
+<c:set var="flagProyecto_01" value="true" />
+<c:set var="flagProyecto_02" value="true" />
 </c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <form:form>
