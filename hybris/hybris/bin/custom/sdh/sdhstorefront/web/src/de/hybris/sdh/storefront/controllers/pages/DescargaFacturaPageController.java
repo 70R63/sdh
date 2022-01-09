@@ -61,7 +61,7 @@ import Decoder.BASE64Decoder;
 //@RequestMapping("")
 public class DescargaFacturaPageController extends AbstractPageController
 {
-	private static final Logger LOG = Logger.getLogger(DescargaFacturaPageController.class);
+	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.descargaFac";
@@ -115,8 +115,8 @@ public class DescargaFacturaPageController extends AbstractPageController
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
 
-		
-		Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.ambito_facturacion);
+
+		final Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.ambito_facturacion);
 
 		final FacturacionForm facturacionForm = new FacturacionForm();
 		facturacionForm.setNumbp(customerModel.getNumBP());
@@ -249,22 +249,26 @@ public class DescargaFacturaPageController extends AbstractPageController
 		final FacturacionPagosRequest facturacionPagosRequest = new FacturacionPagosRequest();
 		final String numBP = customerFacade.getCurrentCustomer().getNumBP();
 		final byte[] decodedBytes;
-      String clavePeriodo = null;
-      String anioGravable = dataForm.getAnioGravable();
-      
-      if(anioGravable != null && anioGravable.length() == 4){
-      	anioGravable = anioGravable.substring(2);
-      }else {
-      	anioGravable = "";
-      }
+		String clavePeriodo = null;
 
 		facturacionPagosRequest.setNumbp(numBP);
+
 		if(dataForm.getPeriodo() == null || dataForm.getPeriodo().isEmpty() ) {
-			clavePeriodo = anioGravable + "A1";
+			if (dataForm.getAnioGravable().length() == 4)
+			{
+				clavePeriodo = dataForm.getAnioGravable().substring(2) + "A1";
+			}
+			else if (dataForm.getAnioGravable().length() == 2)
+			{
+				clavePeriodo = dataForm.getAnioGravable() + "A1";
+			}
+
+			facturacionPagosRequest.setClavePeriodo(clavePeriodo);
 		}else {
-			clavePeriodo = anioGravable + dataForm.getPeriodo();
+			clavePeriodo = dataForm.getAnioGravable() + dataForm.getPeriodo();
+			facturacionPagosRequest.setClavePeriodo(clavePeriodo);
 		}
-		facturacionPagosRequest.setClavePeriodo(clavePeriodo);
+
 		facturacionPagosRequest.setNumObjeto(dataForm.getNumObjeto());
 
 
@@ -294,3 +298,4 @@ public class DescargaFacturaPageController extends AbstractPageController
 	}
 
 }
+
