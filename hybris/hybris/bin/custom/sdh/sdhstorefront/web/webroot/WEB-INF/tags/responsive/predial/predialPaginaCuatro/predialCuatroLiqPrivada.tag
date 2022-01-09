@@ -29,8 +29,10 @@
 	<c:set var="disabledSiAceptaFactura" value='disabled="disabled"' />
 </c:if>
 <c:set var="flagProyecto_01" value=false />
+<c:set var="flagProyecto_02" value=false />
 <c:if test="${predialFormcua.anioGravable != '2022'}">
 <c:set var="flagProyecto_01" value=true />
+<c:set var="flagProyecto_02" value=true />
 </c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <form:form>
@@ -82,7 +84,7 @@
 						id="proyectoLiq" name="" class="alto_select alto form-control"
 						${disabledAporte}><option value="00">Seleccionar</option>
 						<c:if test="${flagProyecto_01}"><option value="01">FORTALECIMIENTO DE LA SEGURIDAD CIUDADANA</option></c:if>
-						<option value="02">FINANCIACIÓN DE LA EDUCACIÓN SUPERIOR</option>
+						<c:if test="${flagProyecto_02}"><option value="02">FINANCIACIÓN DE LA EDUCACIÓN SUPERIOR</option></c:if>
 						<option value="03">BOGOTÁ SOLIDARIA EN CASA</option></select>
 				</div>
 			</div>
