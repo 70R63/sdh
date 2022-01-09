@@ -14,8 +14,8 @@
 <div class="loader"></div>
 <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
-<template:sdhJavascriptVariables2/>
-<template:sdhJavascriptVariables3/>
+<%-- <template:sdhJavascriptVariables2/> --%>
+<%-- <template:sdhJavascriptVariables3/> --%>
 <template:sdhJavascriptVariables4/>
 <impuestos:listaImpuestos />
 <div id="dialogMensajes" title="Predial">
