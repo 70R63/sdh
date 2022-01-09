@@ -12,11 +12,11 @@
 <c:set var="disabledLiquidacion" value="" />
 <c:set var="disabledAporte" value="" />
 <c:set var="disabledAll" value='disabled="disabled"' />
-<c:set var="flagProyecto_01" value=false />
-<c:set var="flagProyecto_02" value=false />
+<c:set var="flagProyecto_01" value="false" />
+<c:set var="flagProyecto_02" value="false" />
 <c:if test="${vehiculosFormDeclaracion.anioGravable != '2022'}">
-<c:set var="flagProyecto_01" value=true />
-<c:set var="flagProyecto_02" value=true />
+<c:set var="flagProyecto_01" value="true" />
+<c:set var="flagProyecto_02" value="true" />
 </c:if>
 
 <!-- Agregar el valor del acto que venga del form para determinar si se muestran los campos de acto o no -->
