@@ -483,7 +483,8 @@ ACC.reportesTerceroAutorizado = {
 		
 		
 		if (infoResponse != null && infoResponse.errores != null && infoResponse.errores[0] != null && infoResponse.errores[0].id_msj != null && infoResponse.errores[0].id_msj != ""){
-			if(infoResponse.errores[0].txt_msj == "El tipo y número de documento consultado no cuenta con obligaciones pendientes"){
+			if(infoResponse.errores[0].txt_msj == "El tipo y número de documento consultado no cuenta con obligaciones pendientes" || 
+			infoResponse.errores[0].txt_msj == "La Placa no cuenta con obligaciones pendientes"){
 				flagValidacion = true;
 			}
 		}
