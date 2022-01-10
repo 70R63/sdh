@@ -24,6 +24,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraDeli;
+import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraVehiculos;
 import de.hybris.sdh.core.pojos.responses.ObligacionesDeliResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesDetallePublicidad;
 import de.hybris.sdh.core.pojos.responses.ObligacionesGasolinaResponse;
@@ -54,6 +55,7 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaSe
 import de.hybris.sdh.storefront.forms.ObligacionesForm;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -436,6 +438,23 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 								ObligacionesVehiculosResponse.class);
 						obligacionesFormuno.setHeaderVehiculos(obligacionesVehiResponse.getHeader().stream()
 								.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
+						for (ObligacionesCabeceraVehiculos eachVehicle_obligacion : obligacionesFormuno.getHeaderVehiculos())
+						{
+							if(eachVehicle_obligacion != null) {
+								if(eachVehicle_obligacion.getMarca() == null || StringUtils.isEmpty(eachVehicle_obligacion.getMarca())) {
+									for (SDHVehiculosTaxData eachVehicle_usuario : customerData.getVehiculosTaxList())
+									{
+										eachVehicle_obligacion.setMarca(eachVehicle_usuario.getMarca());
+									}
+								}
+								if(eachVehicle_obligacion.getLinea() == null || StringUtils.isEmpty(eachVehicle_obligacion.getLinea())) {
+									for (SDHVehiculosTaxData eachVehicle_usuario : customerData.getVehiculosTaxList())
+									{
+										eachVehicle_obligacion.setLinea(eachVehicle_usuario.getLinea());
+									}
+								}
+							}
+						}
 					}
 				}
 

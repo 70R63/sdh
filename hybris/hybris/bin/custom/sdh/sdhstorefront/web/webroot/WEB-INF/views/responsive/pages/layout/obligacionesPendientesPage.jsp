@@ -20,7 +20,14 @@
 </div>
 <obligaciones:obliPendientesPagar />
 
-
+<template:sdhJavascriptVariables_linea_vehi/>
+<template:sdhJavascriptVariables_linea_vehi2/>
+<template:sdhJavascriptVariables_linea_vehi3/>
+<template:sdhJavascriptVariables_linea_vehi4/>
+<template:sdhJavascriptVariables_linea_vehi5/>
+<template:sdhJavascriptVariables_linea_vehi6/>
+<template:sdhJavascriptVariables_linea_vehi7/>
+<template:sdhJavascriptVariables4/>
 <script>
 
 function noActivo() {
@@ -93,6 +100,7 @@ function onErrorSITII() {
 	
 	
 	window.onload = function() {
+		ACC.vehiculos.cargarDescripciones();
 		
 		var cosas = $(":input");
 		var tam = cosas.length;

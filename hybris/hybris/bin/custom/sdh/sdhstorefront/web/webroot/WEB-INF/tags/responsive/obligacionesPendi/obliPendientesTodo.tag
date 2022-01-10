@@ -274,7 +274,7 @@
 			<c:if test="${not empty obligacionesFormuno.headerVehiculos}">
 				<div class="row">
 					<div class="col-md-12">
-						<table class="tablesearch table" id="tabPaginacion1">
+						<table class="tablesearch table" id="tabla_vehi">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd" for=""><spring:theme
@@ -331,10 +331,8 @@
 												<td><c:out value="${eachObVehi.anioGravable}" /></td>
 												<td><c:out value="${eachObVehi.placa}" /></td>
 												<td><c:out value="${eachObVehi.modelo}" /></td>
-												<td><spring:theme
-														code="vehiculos.detalle.marca.${eachObVehi.marca}" /></td>
-												<td><spring:theme
-														code="vehiculos.detalle.linea.${eachObVehi.linea}" /></td>
+												<td class="td_marca">${eachObVehi.marca}</td>
+												<td class="td_linea">${eachObVehi.marca}_${eachObVehi.linea}</td>
 												<td><c:out value="${eachObVehiDet.estadoObligacion}" /></td>
 												<td><c:out value="${eachObVehiDet.obligacion}" /></td>
 												<td><c:out value="${eachObVehiDet.numFormulario}" /></td>
