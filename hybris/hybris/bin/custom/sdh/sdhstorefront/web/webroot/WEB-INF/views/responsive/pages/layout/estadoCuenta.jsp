@@ -22,8 +22,13 @@
 	<%-- 	<consultas:estadoCuentaImpuesto /> --%>
 
 </sf:form>
+
+
+<template:sdhJavascriptVariables4/>
 <script type="text/javascript">
 	window.onload = function() {
+		ACC.vehiculos.cargarDescripciones();
+		
 		var url = window.parent.location.href;
 		var contenido_url = url.includes('agenteRetenedor');
 		

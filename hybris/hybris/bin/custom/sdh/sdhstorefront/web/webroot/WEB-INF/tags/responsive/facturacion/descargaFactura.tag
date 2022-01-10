@@ -164,7 +164,7 @@
 
 	<div id="table-vehiculos" style="display: none;">
 			<div class="col-md-12">
-				<table id="tabPaginacion1">
+				<table id="tabla_vehi">
 					<thead>
 						<tr>
 <!-- 							<th style="text-align: center" hidden="hidden"><label class="control-label " for="">año gravable</label></th> -->
@@ -193,8 +193,7 @@
 									<tr>
 <%-- 										<td hidden="hidden"><c:out value="${eachVehiculo.anioGravable}" /></td> --%>
 										<td><c:out value="${eachVehiculo.placa}" /></td>
-										<td><label class="labelVerDetVeh "><spring:theme
-													code="vehiculos.detalle.marca.${eachVehiculo.marca}" /></label></td>
+										<td class="td_marca">${eachVehiculo.marca}</td>
 <!-- 										<td><input class="inputtextnew" -->
 <!-- 											style="visibility: visible !important; width: 15px" -->
 <!-- 											type="radio" id="" name="objetoVehicular" -->

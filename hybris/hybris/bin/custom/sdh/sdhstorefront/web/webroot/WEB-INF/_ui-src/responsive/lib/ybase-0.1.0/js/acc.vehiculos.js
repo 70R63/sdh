@@ -841,6 +841,46 @@ ACC.vehiculos = {
 		cadenaNueva = cadenaTempInicio + cadenaOriginal.substring(indiceUltima, cadenaOriginal.length);
 		
 		return cadenaNueva;
+	},
+	
+	
+	cargarDescripciones : function(){
+		$('.td_blindado').each( function( index,value ) {
+			$(value).html(ACC.opcionDeclaraciones.obtenerDesc_blindado($(value).html()));
+		});
+		$('.td_carroceria').each( function( index,value ) {
+			$(value).html(ACC.opcionDeclaraciones.obtenerDesc_carroceria($(value).html()));
+		});
+		$('.td_clase').each( function( index,value ) {
+			$(value).html(ACC.opcionDeclaraciones.obtenerDesc_clase($(value).html()));
+		});
+		$('.td_linea').each( function( index,value ) {
+			$(value).html(ACC.opcionDeclaraciones.obtenerDesc_linea($(value).html()));
+		});
+		$('.td_marca').each( function( index,value ) {
+			$(value).html(ACC.opcionDeclaraciones.obtenerDesc_marca($(value).html()));
+		});
+		ACC.publicidadexterior.bindDataTable_id("#tabla_vehi");
+		
+	},
+	
+	cargarDescripciones_val : function(){
+		$('.td_blindado').each( function( index,value ) {
+			$(value).val(ACC.opcionDeclaraciones.obtenerDesc_blindado($(value).val()));
+		});
+		$('.td_carroceria').each( function( index,value ) {
+			$(value).val(ACC.opcionDeclaraciones.obtenerDesc_carroceria($(value).val()));
+		});
+		$('.td_clase').each( function( index,value ) {
+			$(value).val(ACC.opcionDeclaraciones.obtenerDesc_clase($(value).val()));
+		});
+		$('.td_linea').each( function( index,value ) {
+			$(value).val(ACC.opcionDeclaraciones.obtenerDesc_linea($(value).val()));
+		});
+		$('.td_marca').each( function( index,value ) {
+			$(value).val(ACC.opcionDeclaraciones.obtenerDesc_marca($(value).val()));
+		});
+		
 	}
 
 

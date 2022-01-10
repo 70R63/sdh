@@ -21,9 +21,10 @@
 </c:choose>
 
 
-
+<template:sdhJavascriptVariables4/>
 <script type="text/javascript">
 window.onload = function() {
+	ACC.vehiculos.cargarDescripciones();
 // 	ACC.facturacion.establecerCat_aniograv();
     $(".loader").fadeOut("slow");
 }

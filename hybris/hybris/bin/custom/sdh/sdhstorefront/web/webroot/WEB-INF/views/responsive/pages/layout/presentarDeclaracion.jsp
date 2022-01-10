@@ -14,8 +14,13 @@
 <div class="loader"></div>
 <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
-<%-- <template:sdhJavascriptVariables2/> --%>
-<%-- <template:sdhJavascriptVariables3/> --%>
+<template:sdhJavascriptVariables_linea_vehi/>
+<template:sdhJavascriptVariables_linea_vehi2/>
+<template:sdhJavascriptVariables_linea_vehi3/>
+<template:sdhJavascriptVariables_linea_vehi4/>
+<template:sdhJavascriptVariables_linea_vehi5/>
+<template:sdhJavascriptVariables_linea_vehi6/>
+<template:sdhJavascriptVariables_linea_vehi7/>
 <template:sdhJavascriptVariables4/>
 <impuestos:listaImpuestos />
 <div id="dialogMensajes" title="Predial">

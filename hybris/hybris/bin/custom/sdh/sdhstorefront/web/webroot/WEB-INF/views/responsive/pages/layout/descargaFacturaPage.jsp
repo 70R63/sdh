@@ -26,11 +26,13 @@
 	<div id="dialogMensajesContent"></div>
 </div>
 
+<template:sdhJavascriptVariables4/>
 		<script type="text/javascript">
 window.onload = function() {
+	ACC.vehiculos.cargarDescripciones();
 	
 // 	ACC.facturacion.establecerCat_aniograv();
- //   $(".loader").fadeOut("slow");
+   $(".loader").fadeOut("slow");
 }
 	function goBack() {
 		window.history.back();
