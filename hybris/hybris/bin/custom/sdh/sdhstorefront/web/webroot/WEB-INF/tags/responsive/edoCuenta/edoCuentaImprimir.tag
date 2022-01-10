@@ -168,9 +168,7 @@
 								<td
 									style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out
 										value="${eachVehiculo.placa}"></c:out></td>
-								<td
-									style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme
-										code="vehiculos.detalle.marca.${eachVehiculo.marca}" /></td>
+								<td class="td_marca" style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;">${eachVehiculo.marca}</td>
 								<c:choose>
 									<c:when test="${flagCertiRit == true }">
 										<td><label onclick="generarCertiRit('${eachVehiculo.numObjeto}')"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></label></td>										

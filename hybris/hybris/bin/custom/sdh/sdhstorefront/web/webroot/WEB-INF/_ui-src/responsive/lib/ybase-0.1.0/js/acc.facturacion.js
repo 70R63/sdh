@@ -22,7 +22,7 @@ ACC.facturacion = {
 					tabpred.style.display = 'block';
 					break;
 				case "0002":
-	//				ACC.facturacion.filtrarRegistros_aniograv("tabPaginacion1","0",aniogravFiltro);
+	//				ACC.facturacion.filtrarRegistros_aniograv("tabla_vehi","0",aniogravFiltro);
 					tabveh.style.display = 'block';
 					break;
 					

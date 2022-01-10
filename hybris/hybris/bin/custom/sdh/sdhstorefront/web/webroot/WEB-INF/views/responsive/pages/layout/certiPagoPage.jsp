@@ -9,7 +9,7 @@
 
 
 <div class="loader"></div>
-<!-- <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div> -->
+<div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 	<certificacion:certificacionMenu />
 
 <script type="text/javascript">

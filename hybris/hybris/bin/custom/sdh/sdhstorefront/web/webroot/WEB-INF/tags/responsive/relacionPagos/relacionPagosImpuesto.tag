@@ -78,7 +78,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<table class="table" id="tabPaginacion3" class="newtd">
+					<table class="table" id="tabla_vehi" class="newtd">
 						<thead>
 							<tr>
 								<th><label class="control-label labeltabletd" for=""><spring:theme
@@ -101,8 +101,8 @@
 								<tr>
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.placa}"></c:out></td>
 									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachItem.modelo}"></c:out></td>
-									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme code="vehiculos.detalle.marca.${eachItem.marca}"/></td>
-									<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme code="vehiculos.detalle.linea.${eachItem.linea}"/></td>									
+									<td class="td_marca" style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;">${eachItem.marca}</td>
+									<td class="td_linea" style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;">${eachItem.marca}_${eachItem.linea}</td>									
 								    <td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="" data-objkey="${eachItem.numObjeto}" data-impuesto="2" onclick="showdetail(this)">Detalle</label></td>	
 								</tr>
 							</c:forEach>
