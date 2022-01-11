@@ -77,7 +77,7 @@ public class FacturacionPagosRequest
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{");
-		stringBuilder.append("\"NumBP\":\"" + this.getNumbp() + "\",");
+		stringBuilder.append("\"numBP\":\"" + this.getNumbp() + "\",");
 		stringBuilder.append("\"clavePeriodo\":\"" + this.getClavePeriodo() + "\",");
 		stringBuilder.append("\"numObjeto\":\"" + this.getNumObjeto() + "\"");
 		stringBuilder.append("}");

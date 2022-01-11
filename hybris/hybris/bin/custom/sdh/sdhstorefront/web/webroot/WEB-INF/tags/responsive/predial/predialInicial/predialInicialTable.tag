@@ -31,7 +31,7 @@
 				<tbody>
 					<tr class="avisobody">
 
-						<td><spring:theme code="predial.inicial.table.descripcion" /></td>
+						<td><spring:theme code="predial.inicial.table.descripcion" htmlEscape="false"/></td>
 					</tr>
 				</tbody>
 			</table>
