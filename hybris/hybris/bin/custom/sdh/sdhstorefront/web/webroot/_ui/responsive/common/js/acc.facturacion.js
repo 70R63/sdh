@@ -288,7 +288,7 @@ ACC.facturacion = {
 			}
 			value.periodo = "\'\'";
 			value.numObjeto = dataResponse.responseVehicular.placa;
-			value.chip = "\'\'";
+			value.chip = "";
 			if(dataResponse.responseVehicular.fechaVencimiento = "02"){
 				value.fechaVenc = "22/12/2021";    
 			}	

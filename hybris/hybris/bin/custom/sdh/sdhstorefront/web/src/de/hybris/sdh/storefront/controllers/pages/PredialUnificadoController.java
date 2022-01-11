@@ -2224,19 +2224,19 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		return getViewForPage(model);
 	}
-	
-	
+
+
 //	@RequestMapping(value = "/contribuyentes/predialunificado/basespresuntivas/precalculo", method = RequestMethod.GET)
 //	@RequireHardLogIn
-//	public DetalleBasesPresuntivasResponse predialbases_precalculo(final Model model, 
+//	public DetalleBasesPresuntivasResponse predialbases_precalculo(final Model model,
 //			@ModelAttribute("dataForm") final PredialForm predialInfo,
 //			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 //	{
 //		System.out.println("---------------- En predial Bases Presuntivas - precalculo --------------------------");
 //		DetalleBasesPresuntivasResponse response = null;
-//		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();	
-//		
-//		
+//		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+//
+//
 //		DetalleBasesPresuntivasRequest wsRequest = new DetalleBasesPresuntivasRequest();
 //		wsRequest.setNumBP(customerModel.getNumBP());
 //		wsRequest.setChip(predialInfo.getCHIP());
@@ -2247,10 +2247,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 //		wsRequest.setPropiedadHorizontal(predialInfo.getPropiedadHorizontal());
 //		wsRequest.setDestinoHacendario(predialInfo.getDestinoHacendario());
 //		wsRequest.setActividadEconomica(predialInfo.getActividadEconomica());
-//		
+//
 //		response = sdhDetallePredialService.detalleBasesPresuntivas(wsRequest);
-//		
-//		
+//
+//
 //		return response;
 //	}
 
@@ -2375,6 +2375,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		//	calculoPredialRequest.setLiquidacionPrivada(dataForm.getCalcLiquidacionPrivada());
 		//calculoPredialRequest.setLiquidacionPrivada(dataForm.getLiquidacionPrivada());
 		calculoPredialRequest.setLiquidacionPrivada(dataForm.getNewLiquidacionRequ());
+		calculoPredialRequest.setDatosBasesPresuntas(dataForm.getNewBasesPresuntasRequ());
 
 
 		try
@@ -3082,7 +3083,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		DetallePredialBPResponse detallePredialBPResponse = null;
 		final DetallePredialBPRequest detallePredialBPRequest = new DetallePredialBPRequest();
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();	
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
 
 		detallePredialBPRequest.setNumBP(customerModel.getNumBP());
