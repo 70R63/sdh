@@ -268,6 +268,7 @@
 
 <script type="text/javascript">
 	function calculoPred() {
+		debugger;
 		ACC.predial.calculoPredial();
 	}
 	function punto(){

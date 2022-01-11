@@ -3,6 +3,7 @@
  */
 package de.hybris.sdh.storefront.forms;
 
+import de.hybris.sdh.core.pojos.requests.CalBasesPresuntas;
 import de.hybris.sdh.core.pojos.requests.CalPredialDatLiq;
 import de.hybris.sdh.core.pojos.requests.CalPredialLiqPriv;
 import de.hybris.sdh.core.pojos.responses.CalPredialErrores;
@@ -73,6 +74,7 @@ public class PredialForm
 	private CalPredialDatLiq newDatosLiquidacion;
 	private CalPredialLiqPriv calcLiquidacionPrivada;
 	private CalPredialLiqPriv newLiquidacionRequ;
+	private CalBasesPresuntas newBasesPresuntasRequ;
 
 	//campos para request de calculo
 
@@ -113,9 +115,28 @@ public class PredialForm
 	private String areaConstruida;
 	private String areaTerrenoCatastro;
 	private String actividadEconomica;
-	
+
 	private String aporte_activo;
 
+
+
+
+	/**
+	 * @return the newBasesPresuntasRequ
+	 */
+	public CalBasesPresuntas getNewBasesPresuntasRequ()
+	{
+		return newBasesPresuntasRequ;
+	}
+
+	/**
+	 * @param newBasesPresuntasRequ
+	 *           the newBasesPresuntasRequ to set
+	 */
+	public void setNewBasesPresuntasRequ(final CalBasesPresuntas newBasesPresuntasRequ)
+	{
+		this.newBasesPresuntasRequ = newBasesPresuntasRequ;
+	}
 
 	/**
 	 * @return the objetocontrato
@@ -1250,7 +1271,7 @@ public class PredialForm
 	/**
 	 * @param actividadEconomica the actividadEconomica to set
 	 */
-	public void setActividadEconomica(String actividadEconomica)
+	public void setActividadEconomica(final String actividadEconomica)
 	{
 		this.actividadEconomica = actividadEconomica;
 	}
@@ -1266,7 +1287,7 @@ public class PredialForm
 	/**
 	 * @param aporte_activo the aporte_activo to set
 	 */
-	public void setAporte_activo(String aporte_activo)
+	public void setAporte_activo(final String aporte_activo)
 	{
 		this.aporte_activo = aporte_activo;
 	}

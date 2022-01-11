@@ -629,7 +629,20 @@ ACC.predial = {
 		
 		dataForm.newLiquidacionRequ = newLiquidacionRequ;
 		
+		var newBasesPresuntasRequ = {};
 		
+		newBasesPresuntasRequ.UsoSuelo = $('#usoSuelo').val();
+		newBasesPresuntasRequ.DestinoHacendario = $('#DestinoHacendario').val();
+		newBasesPresuntasRequ.ActividadEconomica = $('#activEconomica').val();
+		newBasesPresuntasRequ.PredioHorizontal = $('#propiedadHorizontal').val();
+		newBasesPresuntasRequ.BaseGravableCalc = $('#basegrav').val();
+		newBasesPresuntasRequ.Caracteristica = $('#caracterizacionPredio').val();
+		newBasesPresuntasRequ.AreaConstruida = $('#areaconstruccion').val();
+		newBasesPresuntasRequ.AreaTerreno = $('#areaterreno').val();
+		newBasesPresuntasRequ.ConfirmaBGFinal = $('#confirmBG').val();
+		
+		
+		dataForm.newBasesPresuntasRequ = newBasesPresuntasRequ;
 		
 		
 		$.ajax({

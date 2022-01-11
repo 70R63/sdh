@@ -17,7 +17,31 @@ public class CalculoPredialRequest
 	private String AnioGravable;
 	private String OpcionUso;
 	public CalPredialDatLiq datosLiquidacion;
+	public CalBasesPresuntas datosBasesPresuntas;
 	public CalPredialLiqPriv liquidacionPrivada;
+
+
+
+
+
+	/**
+	 * @return the datosBasesPresuntas
+	 */
+	public CalBasesPresuntas getDatosBasesPresuntas()
+	{
+		return datosBasesPresuntas;
+	}
+
+
+
+	/**
+	 * @param datosBasesPresuntas
+	 *           the datosBasesPresuntas to set
+	 */
+	public void setDatosBasesPresuntas(final CalBasesPresuntas datosBasesPresuntas)
+	{
+		this.datosBasesPresuntas = datosBasesPresuntas;
+	}
 
 
 
@@ -189,6 +213,7 @@ public class CalculoPredialRequest
 		stringBuilder.append("\"AnioGravable\":\"" + (this.getAnioGravable() != null ? this.getAnioGravable() : "") + "\",");
 		stringBuilder.append("\"OpcionUso\":\"" + (this.getOpcionUso() != null ? this.getOpcionUso() : "") + "\",");
 		stringBuilder.append("\"DatosLiquidacion\":" + this.getDatosLiquidacion() + ",");
+		stringBuilder.append("\"BasesPresuntas\":" + this.getDatosBasesPresuntas() + ",");
 		stringBuilder.append("\"LiquidacionPrivada\":" + this.getLiquidacionPrivada());
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
