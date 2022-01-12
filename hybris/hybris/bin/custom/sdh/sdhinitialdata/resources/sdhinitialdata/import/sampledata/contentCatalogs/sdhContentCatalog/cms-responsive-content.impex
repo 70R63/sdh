@@ -3110,8 +3110,6 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 INSERT_UPDATE SdhReferenceStatus; code[unique=true] ;description
                              ;01		;Por pagar
                              ;02		;Pagadas
-                             ;03		;Canceladas
-							 ;04		;Todas
 
 INSERT_UPDATE Usergroup;uid[unique=true];locName[lang=en];locName[lang=es]
                        ;sdh_06;Concesionarios                       
