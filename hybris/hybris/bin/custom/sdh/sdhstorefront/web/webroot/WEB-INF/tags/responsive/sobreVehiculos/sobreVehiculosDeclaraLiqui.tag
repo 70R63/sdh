@@ -65,6 +65,12 @@
 	</c:when>
 </c:choose>
 
+<c:set var="projectDisable" value="disabled" />
+<c:if test="${vehiculosFormDeclaracion.aporte_activo == 'X'}">
+	<c:set var="disabledAporte" value="" />
+	<c:set var="projectDisable" value="" />
+</c:if>
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="container">
@@ -193,7 +199,6 @@
 			</div>
 
 			<c:set var="option01Selected" value="" />
-			<c:set var="projectDisable" value="disabled" />
 			<%-- 			<c:choose> --%>
 			<%-- 				<c:when test="${vehiculosFormDeclaracion.checkAporte.equalsIgnoreCase('X')}"> --%>
 			<%-- 					<c:set var="projectDisable" value="" /> --%>
