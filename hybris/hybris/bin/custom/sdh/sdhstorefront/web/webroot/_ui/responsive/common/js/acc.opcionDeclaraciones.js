@@ -407,6 +407,8 @@ ACC.opcionDeclaraciones = {
 					alert("Error procesar la solicitud obtener tipo de periodo");	
 				}
 			});
+		}else{
+			ACC.spinner.close();
 		}
 		
 		
@@ -432,7 +434,6 @@ ACC.opcionDeclaraciones = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
-					debugger;
 					ACC.spinner.close();
 					ACC.opcionDeclaraciones.updateFromResponsePeriodo_porAnio(dataActual,dataResponse);
 					ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
@@ -561,9 +562,20 @@ ACC.opcionDeclaraciones = {
 			if(infoActual.claveImpuesto == '0002'){
 				if(infoResponse.vehicular.length > 0){
 					$.each(infoResponse.vehicular, function (index,value){
+						var marcaDescripcion = "";
+						marca_vehi.forEach(function (eachMAR) {
+							if(marcaDescripcion != ""){
+								return;
+							}
+					    	if(eachMAR.id_marca == value.marca){
+				    			marcaDescripcion = eachMAR.item_marca;
+				    		}
+						});
+						
+						
 						$('#table-vehicular1').append("<tr>"+
 								'<td>' + value.placa + '</td>'+
-								'<td>' + value.marca + '</td>'+
+								'<td>' + marcaDescripcion + '</td>'+
 								'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
 								"</tr>");
 					});
@@ -857,54 +869,12 @@ ACC.opcionDeclaraciones = {
 //							var url = urlPrefijo + urlDeclaracion + '?anioGravable=' + anioGravable + '&placa=' + value.placa + '&numBPP=' + infoResponse.numBP + '&numForma=' + value.numForm ;
 							var url = urlPrefijo + urlDeclaracion + '?anioGravable=' + anioGravable + '&placa=' + value.placa + '&numBPP=' + infoResponse.numBP;
 
-							blindado_vehi.forEach(function (eachBLI) {
-						    		if(eachBLI.id_blindado== value.blindado)
-						    		{
-						    			var nuevo_blindado = eachBLI.item_blindado;
-						    			value.blindado = nuevo_blindado;
-						    		}
-						    	});
-							 marca_vehi.forEach(function (eachMAR) {
-						    		if(eachMAR.id_marca == value.marca)
-						    		{
-						    			var nuevo_marca = eachMAR.item_marca;
-						    			value.marca = nuevo_marca;
-						    		}
-						    	});
-							 carroceria_vehi.forEach(function (eachCAR) {
-						    		if(eachCAR.id_carroceria == value.carroceria)
-						    		{
-						    			var nuevo_carroceria = eachCAR.item_carriceria;
-						    			value.carroceria = nuevo_carroceria;
-						    		}
-						    	});
-							 clase_vehi.forEach(function (eachCLA) {
-						    		if(eachCLA.id_clase == value.clase)
-						    		{
-						    			var nuevo_clase = eachCLA.item_clase;
-						    			value.clase = nuevo_clase;
-						    		}
-						    	});
-							 var linea_inicial = value.linea;
+							value.blindado = ACC.opcionDeclaraciones.obtenerDesc_blindado(value.blindado);
+							value.carroceria = ACC.opcionDeclaraciones.obtenerDesc_carroceria(value.carroceria);
+							value.clase = ACC.opcionDeclaraciones.obtenerDesc_clase(value.clase);
+							value.linea = ACC.opcionDeclaraciones.obtenerDesc_linea(value.marca+"_"+value.linea);
+							value.marca = ACC.opcionDeclaraciones.obtenerDesc_marca(value.marca);
 
-							 linea_vehi.forEach(function (eachLIN) {
-						    		if(eachLIN.id_linea == value.linea)
-						    		{
-						    			var nuevo_linea = eachLIN.item_linea;
-						    			value.linea = nuevo_linea;
-						    		}
-						    	});
-
-							 if(linea_inicial == value.linea)
-								 {
-								 linea_vehi2.forEach(function (eachLIN) {
-							    		if(eachLIN.id_linea == value.linea)
-							    		{
-							    			var nuevo_linea = eachLIN.item_linea;
-							    			value.linea = nuevo_linea;
-							    		}
-							    	});
-								 }
 							
 							var idActo = 12345;
 							var fechActo = 12/03/2020;
@@ -1047,6 +1017,135 @@ ACC.opcionDeclaraciones = {
 
 	},
 	
+	
+	obtenerDesc_blindado : function(id_item){
+		var descripcion = "";
+		blindado_vehi.some(function (eachCat) {
+			if(eachCat.i == id_item){
+				descripcion = eachCat.d;
+				return true;
+			}
+		});
+		
+		return descripcion;
+	},
+	
+	
+	obtenerDesc_carroceria : function(id_item){
+		var descripcion = "";
+		carroceria_vehi.some(function (eachCat) {
+			if(eachCat.i == id_item){
+				descripcion = eachCat.d;
+				return true;
+			}
+		});
+		
+		return descripcion;
+	},
+	
+	
+	obtenerDesc_clase : function(id_item){
+		var descripcion = "";
+		clase_vehi.some(function (eachCat) {
+			if(eachCat.i == id_item){
+				descripcion = eachCat.d;
+				return true;
+			}
+		});
+		
+		return descripcion;
+	},
+	
+	
+	obtenerDesc_marca : function(id_item){
+		var descripcion = "";
+		marca_vehi.some(function (eachCat) {
+			if(eachCat.i == id_item){
+				descripcion = eachCat.d;
+				return true;
+			}
+		});
+		
+		return descripcion;
+	},
+	
+	
+	obtenerDesc_linea : function(id_item){
+		var descripcion = "";
+		var flagEncontrado = false;
+		
+		linea_vehi.some(function (eachCat) {
+			if(eachCat.i == id_item){
+				descripcion = eachCat.d;
+				flagEncontrado = true;
+				return true;
+			}
+		});
+		
+		
+		if(!flagEncontrado){
+			linea_vehi2.some(function (eachCat) {
+				if(eachCat.i == id_item){
+					descripcion = eachCat.d;
+					flagEncontrado = true;
+					return true;
+				}
+			});
+		}
+		
+		if(!flagEncontrado){
+			linea_vehi3.some(function (eachCat) {
+				if(eachCat.i == id_item){
+					descripcion = eachCat.d;
+					flagEncontrado = true;
+					return true;
+				}
+			});
+		}
+		
+		if(!flagEncontrado){
+			linea_vehi4.some(function (eachCat) {
+				if(eachCat.i == id_item){
+					descripcion = eachCat.d;
+					flagEncontrado = true;
+					return true;
+				}
+			});
+		}
+		
+		if(!flagEncontrado){
+			linea_vehi5.some(function (eachCat) {
+				if(eachCat.i == id_item){
+					descripcion = eachCat.d;
+					flagEncontrado = true;
+					return true;
+				}
+			});
+		}
+		
+		if(!flagEncontrado){
+			linea_vehi6.some(function (eachCat) {
+				if(eachCat.i == id_item){
+					descripcion = eachCat.d;
+					flagEncontrado = true;
+					return true;
+				}
+			});
+		}
+
+		if(!flagEncontrado){
+			linea_vehi7.some(function (eachCat) {
+				if(eachCat.i == id_item){
+					descripcion = eachCat.d;
+					flagEncontrado = true;
+					return true;
+				}
+			});
+		}		
+		
+		return descripcion;
+	},
+
 	
 
 	validarDeclaracionPredial : function(chip,matricula, numObjeto){

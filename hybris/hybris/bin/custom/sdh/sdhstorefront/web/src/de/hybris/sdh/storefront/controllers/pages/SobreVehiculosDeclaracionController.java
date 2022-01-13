@@ -367,8 +367,8 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
 		infoPreviaPSE.setNumBP(numBP);
 		infoPreviaPSE.setClavePeriodo(gasolinaService.prepararPeriodoAnualPago(anoParaPSE));
-		//			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoVehicular(detalleContribuyente, placa));
-		infoPreviaPSE.setNumObjeto(prepararNumObjetoVehicular(customerModel, placa));
+		infoPreviaPSE.setNumObjeto(vehiculosFormDeclaracion.getObjetoCont());
+		//infoPreviaPSE.setNumObjeto(prepararNumObjetoVehicular(customerModel, placa));
 		//			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
 		infoPreviaPSE.setDv(prepararDV(customerModel));
 		infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getVEHICULAR());
