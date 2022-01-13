@@ -18,7 +18,7 @@ ACC.spac = {
 
 							divtable.style.visibility = 'hidden';
 
-							if (confirm("El SPAC es el sistema de pago de los Impuestos Predial y Vehículos Automotores por cuotas de la presente vigencia. Si te acoges al pago de predial por cuotas no tendrás la opción del 10% de descuento por pronto pago ni del 1% adicional.")) {
+							if (confirm("El SPAC es el sistema de pago del Impuesto Predial por cuotas de la presente vigencia. Si te acoges al pago de predial por cuotas no tendrás la opción del 10% de descuento por pronto pago.")) {
 								var anio = $.trim($(this).attr("data-anio"));
 								var numform = $.trim($(this).attr(
 										"data-numForm"));

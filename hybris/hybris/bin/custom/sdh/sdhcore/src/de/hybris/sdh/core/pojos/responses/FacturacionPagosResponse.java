@@ -55,7 +55,9 @@ public class FacturacionPagosResponse
 	@Override
 	public String toString()
 	{
+
 		return "FacturacionPagosResponse [responseVehicular=" + responseVehicular + ", responsePredial=" + responsePredial + "]";
+
 	}
 
 

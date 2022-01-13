@@ -29,7 +29,7 @@ public class FacturacionPagosRequest
 	 * @param numbp
 	 *           the numbp to set
 	 */
-	@JsonSetter("NumBP")
+	@JsonSetter("numBP")
 	public void setNumbp(final String numbp)
 	{
 		this.numbp = numbp;
