@@ -19,19 +19,21 @@
 <c:set var="flagProyecto_02" value="true" />
 </c:if>
 
+<c:if test="${false}">
 <!-- Agregar el valor del acto que venga del form para determinar si se muestran los campos de acto o no -->
-<c:set var="idacto" value="123" />
-<c:choose>
-	<c:when test="${idacto != ''}">
-	   <c:set var="disabledLiquidacion" value='disabled="disabled"' />
-       <c:set var="disabledAporte" value='disabled="disabled"' />
-       <c:set var="disabledLinea" value='disabled="disabled"' />
-       <c:set var="disabledCilindraje" value='disabled="disabled"' />
-       <c:set var="disabledAvaluo" value='disabled="disabled"' />
-	</c:when>
-	<c:otherwise>
-	</c:otherwise>
-</c:choose>
+	<c:set var="idacto" value="123" />
+	<c:choose>
+		<c:when test="${idacto != ''}">
+		   <c:set var="disabledLiquidacion" value='disabled="disabled"' />
+	       <c:set var="disabledAporte" value='disabled="disabled"' />
+	       <c:set var="disabledLinea" value='disabled="disabled"' />
+	       <c:set var="disabledCilindraje" value='disabled="disabled"' />
+	       <c:set var="disabledAvaluo" value='disabled="disabled"' />
+		</c:when>
+		<c:otherwise>
+		</c:otherwise>
+	</c:choose>
+</c:if>
 
 <c:choose>
 	<c:when test="${vehiculosFormDeclaracion.checkAporte_flag == 1}">
@@ -42,33 +44,40 @@
 	</c:when>
 </c:choose>
 
-
-
-<c:if test="${vehiculosFormDeclaracion.controlCampos.liquidacion == true}">
-	<c:set var="disabledLiquidacion" value='disabled="disabled"' />
-	<c:set var="disabledAporte" value='disabled="disabled"' />
-	<c:set var="disabledLinea" value='disabled="disabled"' />
-	<c:set var="disabledCilindraje" value='disabled="disabled"' />
-	<c:set var="disabledAvaluo" value='disabled="disabled"' />
-</c:if>
-
 <c:choose>
 	<c:when test="${vehiculosFormDeclaracion.homologado == 'X'}">
+		<c:if test="${fn:substring(vehiculosFormDeclaracion.opcionUso,0,2) == '01'}">
+			<c:set var="disabledLinea" value='true' />
+			<c:set var="disabledCilindraje" value='disabled="disabled"' />
+			<c:set var="disabledAvaluo" value='disabled="disabled"' />
+		</c:if>
+		<c:if test="${fn:substring(vehiculosFormDeclaracion.opcionUso,0,2) == '02'}">
+			<c:set var="disabledLinea" value='' />
+			<c:set var="disabledCilindraje" value='' />
+			<c:set var="disabledAvaluo" value='' />
+		</c:if>
+	</c:when>
+	<c:when test="${vehiculosFormDeclaracion.homologado != 'X'}">
 		<c:set var="disabledLinea" value='' />
 		<c:set var="disabledCilindraje" value='' />
 		<c:set var="disabledAvaluo" value='' />
 	</c:when>
-	<c:when test="${vehiculosFormDeclaracion.homologado != 'X'}">
-		<c:set var="disabledLinea" value='true' />
-		<c:set var="disabledCilindraje" value='disabled="disabled"' />
-		<c:set var="disabledAvaluo" value='disabled="disabled"' />
-	</c:when>
 </c:choose>
 
-<c:set var="projectDisable" value="disabled" />
+<c:set var="disabledAporte" value='disabled="disabled"' />
+<c:set var="projectDisable" value='disabled="disabled"' />
 <c:if test="${vehiculosFormDeclaracion.aporte_activo == 'X'}">
 	<c:set var="disabledAporte" value="" />
 	<c:set var="projectDisable" value="" />
+</c:if>
+
+<c:if test="${vehiculosFormDeclaracion.controlCampos.liquidacion == true}">
+	<c:set var="disabledLiquidacion" value='disabled="disabled"' />
+	<c:set var="disabledAporte" value='disabled="disabled"' />
+	<c:set var="projectDisable" value='disabled="disabled"' />
+	<c:set var="disabledLinea" value='disabled="disabled"' />
+	<c:set var="disabledCilindraje" value='disabled="disabled"' />
+	<c:set var="disabledAvaluo" value='disabled="disabled"' />
 </c:if>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
