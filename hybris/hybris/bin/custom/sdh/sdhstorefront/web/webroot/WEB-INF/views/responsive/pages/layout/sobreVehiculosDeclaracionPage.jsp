@@ -133,7 +133,12 @@
 			 "${vehiculosFormDeclaracion.avaluo}" //6 - avaluo
 			 ];
 		
-		ACC.vehiculos.obtenerCatalogosInicialVehiculos(cat_valores_actuales,"${vehiculosFormDeclaracion.homologado}");
+		 var opcionUso = "${vehiculosFormDeclaracion.opcionUso}";
+		 var homologado = "${vehiculosFormDeclaracion.homologado}";
+		 if(opcionUso != null && opcionUso.length >= 2){
+			 opcionUso = opcionUso.substring(0,2);
+		 }
+		ACC.vehiculos.obtenerCatalogosInicialVehiculos(cat_valores_actuales,homologado,opcionUso);
 		
 	}
 	
