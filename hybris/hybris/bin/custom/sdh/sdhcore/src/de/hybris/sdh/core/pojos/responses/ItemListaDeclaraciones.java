@@ -27,7 +27,7 @@ public class ItemListaDeclaraciones
 	private String moneda; //Para consulPagos
 	private String numfactForm; //Para consulPagos
 	private String numDocPago; //Para consulPagos
-
+	private String direccionPredio;
 
 
 
@@ -319,20 +319,33 @@ public class ItemListaDeclaraciones
 		this.numDocPago = numDocPago;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#toString()
+	/**
+	 * @return the direccionPredio
 	 */
+	public String getDireccionPredio()
+	{
+		return direccionPredio;
+	}
+
+	/**
+	 * @param direccionPredio
+	 *           the direccionPredio to set
+	 */
+	public void setDireccionPredio(final String direccionPredio)
+	{
+		this.direccionPredio = direccionPredio;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "ItemListaDeclaraciones [numBP=" + numBP + ", ctaContrato=" + ctaContrato + ", numObjeto=" + numObjeto
-				+ ", clavePeriodo=" + clavePeriodo + ", referencia=" + referencia + ", numForm=" + numForm + ", taxpayer=" + taxpayer
-				+ ", numRadicado=" + numRadicado + ", noRadicado=" + noRadicado + ", creacion=" + creacion + ", modificacion="
-				+ modificacion + ", fechaCompensa="
-				+ fechaCompensa + ", importe=" + importe + ", moneda=" + moneda + ", numfactForm=" + numfactForm + ", numDocPago="
-				+ numDocPago + "]";
+				+ ", clavePeriodo=" + clavePeriodo + ", desc_clavePeriodo=" + desc_clavePeriodo + ", referencia=" + referencia
+				+ ", numForm=" + numForm + ", taxpayer=" + taxpayer + ", numRadicado=" + numRadicado + ", noRadicado=" + noRadicado
+				+ ", creacion=" + creacion + ", modificacion=" + modificacion + ", fechaCompensa=" + fechaCompensa + ", importe="
+				+ importe + ", moneda=" + moneda + ", numfactForm=" + numfactForm + ", numDocPago=" + numDocPago
+				+ ", direccionPredio=" + direccionPredio + "]";
 	}
+
 
 }
