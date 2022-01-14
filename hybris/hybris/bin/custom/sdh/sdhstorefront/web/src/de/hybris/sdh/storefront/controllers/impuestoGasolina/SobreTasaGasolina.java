@@ -1199,18 +1199,38 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 			catch (final NoSuchAlgorithmException e)
 			{
 				e.printStackTrace();
+
+				errorSITII = getMessageSource().getMessage("prepararPago.error.SIT2conexion", null,
+						getI18nService().getCurrentLocale());
+				redirectAttributes.addAttribute("errorSITII", errorSITII);
+				return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
 			}
 			catch (final KeyStoreException e)
 			{
 				e.printStackTrace();
+
+				errorSITII = getMessageSource().getMessage("prepararPago.error.SIT2conexion", null,
+						getI18nService().getCurrentLocale());
+				redirectAttributes.addAttribute("errorSITII", errorSITII);
+				return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
 			}
 			catch (final KeyManagementException e)
 			{
 				e.printStackTrace();
+
+				errorSITII = getMessageSource().getMessage("prepararPago.error.SIT2conexion", null,
+						getI18nService().getCurrentLocale());
+				redirectAttributes.addAttribute("errorSITII", errorSITII);
+				return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
 			}
 			catch (final Exception e)
 			{
 				e.printStackTrace();
+
+				errorSITII = getMessageSource().getMessage("prepararPago.error.SIT2conexion", null,
+						getI18nService().getCurrentLocale());
+				redirectAttributes.addAttribute("errorSITII", errorSITII);
+				return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
 			}
 
 			return "/";
