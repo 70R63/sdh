@@ -219,7 +219,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		final String resolvedUrl = response.encodeURL(request.getContextPath() + resolvedUrlPath);
 		final String urlIDD = request.getServletPath();
 
-		customerData = sdhCustomerAccountService.leerImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.ambito_consultas);
+		customerData = sdhCustomerAccountService.leerImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTAS);
 		infoVista.setCatalogos(gasolinaService.prepararCatalogosOpcionDeclaraciones(customerData));
 		infoVista.setCustomerData(customerData);
 

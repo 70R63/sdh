@@ -2,85 +2,677 @@ ACC.oblipend = {
 
 	_autoload : [  "bindDetalle", "bindDetalledos", "bindPopupPDF"],
 
-	bindBuscarObliPend : function(listaLimpuestos_tag) {	
-//		$(document).on("click", "#buscarObliPend", function(e) {
-//			e.preventDefault();
 
-			$(".oblipend-table").hide();
-			$(".oblipend-tabledetalle").hide();
-			$(".oblipend-tabledetalledos").hide();
-			$("#oblipend-predial").hide();
-			$("#oblipend-vehiculos").hide();
-			$("#oblipend-ica").hide();
-			$("#oblipend-publiext").hide();
-			$("#oblipend-gasolina").hide();
-			$("#oblipend-delurbana").hide();
-			$("#oblipend-reteica").hide();
-			var divtable = document.getElementById("tableSpac");
 
-			divtable.style.visibility = 'hidden';
-
-			var impuesto = $("#impuesto").val();
-
-			if (impuesto == "1") {
-
-				$("#oblipend-predial").show();
-
-			} else if (impuesto == "2") {
-
-				$("#oblipend-vehiculos").show();
-
-			} else if (impuesto == "3") {
-
-				$("#oblipend-ica").show();
-
-			} else if (impuesto == "7") {
-
-				$("#oblipend-publiext").show();
-
-			} else if (impuesto == "5") {
-
-				$("#oblipend-gasolina").show();
-
-			} else if (impuesto == "6") {
-
-				$("#oblipend-delurbana").show();
-
-			}else if (impuesto == "99") {
-				var listaLimpuestos = ["","","","","","",""];
-				if(listaLimpuestos_tag != null){
-					listaLimpuestos = listaLimpuestos_tag.split(",");
-				}
-
-				
-				if(listaLimpuestos[0]=="X"){
-					$("#oblipend-predial").show();
-				}
-				if(listaLimpuestos[1]=="X"){
-					$("#oblipend-vehiculos").show();
-				}
-				if(listaLimpuestos[2]=="X"){
-					$("#oblipend-ica").show();
-				}
-				//3=Reteica no se considera
-				if(listaLimpuestos[4]=="X"){
-					$("#oblipend-gasolina").show();
-				}
-				if(listaLimpuestos[5]=="X"){
-					$("#oblipend-delurbana").show();
-				}
-				if(listaLimpuestos[6]=="X"){
-					$("#oblipend-publiext").show();
-				}
-
-			}else if (impuesto == "4" || impuesto == "00") {
-				$("#oblipend-reteica").show();
-
+	updateFromResponseImpuesto : function(infoResponse){
+		
+		debugger;
+		if(infoResponse.claveImpuesto!= null){
+			switch (infoResponse.claveImpuesto){
+				case "0001":
+					ACC.oblipend.updateFromResponseImpuesto_predial(infoResponse);
+					break;
+				case "0002":
+					ACC.oblipend.updateFromResponseImpuesto_vehiculos(infoResponse);
+					break;
+				case "0003":
+					ACC.oblipend.updateFromResponseImpuesto_vehiculos(infoResponse);
+					break;
+				case "0004":
+					break;
+				case "0005":
+					ACC.oblipend.updateFromResponseImpuesto_gasolina(infoResponse);
+					break;
+				case "0006":
+					ACC.oblipend.updateFromResponseImpuesto_delurbana(infoResponse);
+					break;
+				case "0007":
+					ACC.oblipend.updateFromResponseImpuesto_publiext(infoResponse);
+					break;
 			}
+		}
 
-//		});
+		
+	},
+	
+	
+	updateFromResponseImpuesto_publiext : function(infoResponse){
+		var id_tabla = "#table-publicidad1";
+		var tablaInfo = infoResponse.header;
+		
+		$(id_tabla).find("tr:gt(0)").remove();
+		ACC.publicidadexterior.bindDataTable_ID_refresh(id_tabla);
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("div_titulo_publiext"),'block');
+		if(tablaInfo != null){
+			if(tablaInfo.length == 0){
+				ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("noCuentaPendientes_publiext"),'block');
+			}else{
+				var tpImp = "54";
+				var claveImpuestoExt = "5154";
+				$.each(tablaInfo, function (indexH,valueH){
+					$.each(valueH.details, function (indexD,valueD){
+						var tr_value = "";
+						
+						if(true || (valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != "")){
+							var td_totalPagar = "";
+							var td_rop = "";
+							var td_pagoVigente = "";
+							var clavePeriodo = "";
+							var desPeriodoMensual = ACC.oblipend.obtenerPeriodoMensual(valueH.periodo);
+							
+							if(valueH.anioGravable != null && valueH.anioGravable.lenght >= 4){
+								clavePeriodo = valueH.anioGravable.substring(2,4)+"A1";
+							}
+							
+							switch (valueH.facilidad){
+								case "00":
+									td_totalPagar = valueD.obligacion;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,"","",valueH.facilidad,valueH.montoFacilidad));
+									break;
+								case "01":
+									td_totalPagar = valueH.montoFacilidad;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueH.montoFacilidad,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,"","",valueH.facilidad,valueH.montoFacilidad));
+									break;
+								case "02":
+									td_totalPagar = valueH.montoFacilidad;
+									td_rop = "Sin ROP";
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,"","",valueH.facilidad,valueH.montoFacilidad));
+									break;
+								default:
+									td_totalPagar = valueD.obligacion;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,"","",valueH.facilidad,valueH.montoFacilidad));
+									break;	
+							}
+							
+							tr_value = 
+								"<tr>" +
+								"<td>" + valueH.anioGravable +"</td>"+
+								"<td>" + valueH.cdu +"</td>"+
+								"<td>" + valueH.chip +"</td>"+
+								"<td>" + valueH.direccion +"</td>"+
+								"<td>" + valueD.estadoObligacion +"</td>"+
+								"<td>" + valueD.obligacion +"</td>"+
+								"<td>" + valueD.numFormulario +"</td>"+
+								"<td>" + valueD.numReferencia +"</td>"+
+								"<td>" + td_totalPagar +"</td>"+
+								"<td>" + valueD.objetoContrato +"</td>"+
+								"<td>" + td_rop +"</td>"+
+								"<td>" + td_pagoVigente +"</td>"+
+								"</tr>";
+							$(id_tabla).append(tr_value);
+						}
+					});
+				});
+				ACC.publicidadexterior.bindDataTable_id(id_tabla);
+				ACC.oblipend.mostrarTablaDelImpuesto(infoResponse.claveImpuesto);
+			}
+			
+		}
+					
+		
+	},
+	
+	
+	updateFromResponseImpuesto_delurbana : function(infoResponse){
+		var id_tabla = "#table-delurbana";
+		var tablaInfo = infoResponse.headerdeli;
+		
+		$(id_tabla).find("tr:gt(0)").remove();
+		ACC.publicidadexterior.bindDataTable_ID_refresh(id_tabla);
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("div_titulo_delurbana"),'block');
+		if(tablaInfo != null){
+			if(tablaInfo.length == 0){
+				ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("noCuentaPendientes_delurbana"),'block');
+			}else{
+				var tpImp = "006";
+				$.each(tablaInfo, function (indexH,valueH){
+					$.each(valueH.details, function (indexD,valueD){
+						var tr_value = "";
+						
+						if(true || (valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != "")){
+							var td_totalPagar = "";
+							var td_rop = "";
+							var td_pagoVigente = "";
+							var clavePeriodo = "";
+							var desPeriodoMensual = ACC.oblipend.obtenerPeriodoMensual(valueH.periodo);
+							var claveImpuestoExt = valueD.codImpuesto;
+							
+							if(valueH.anioGravable != null && valueH.anioGravable.lenght >= 4){
+								clavePeriodo = valueH.anioGravable.substring(2,4)+"A1";
+							}
+							
+							switch (valueH.facilidad){
+								case "00":
+									td_totalPagar = valueD.obligacion;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.chip,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,valueH.cdu,"",valueH.facilidad,valueH.montoFacilidad));
+									break;
+								case "01":
+									td_totalPagar = valueH.montoFacilidad;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueH.montoFacilidad,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.chip,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,valueH.cdu,"",valueH.facilidad,valueH.montoFacilidad));
+									break;
+								case "02":
+									td_totalPagar = valueH.montoFacilidad;
+									td_rop = "Sin ROP";
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.chip,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,valueH.cdu,"",valueH.facilidad,valueH.montoFacilidad));
+									break;
+								default:
+									td_totalPagar = valueD.obligacion;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.chip,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,valueH.cdu,"",valueH.facilidad,valueH.montoFacilidad));
+									break;	
+							}
+							
+							tr_value = 
+								"<tr>" +
+								"<td>" + valueH.anioGravable +"</td>"+
+								"<td>" + valueH.cdu +"</td>"+
+								"<td>" + valueH.chip +"</td>"+
+								"<td>" + valueH.direccion +"</td>"+
+								"<td>" + valueD.estadoObligacion +"</td>"+
+								"<td>" + valueD.obligacion +"</td>"+
+								"<td>" + valueD.numFormulario +"</td>"+
+								"<td>" + valueD.numReferencia +"</td>"+
+								"<td>" + td_totalPagar +"</td>"+
+								"<td>" + valueD.objetoContrato +"</td>"+
+								"<td>" + td_rop +"</td>"+
+								"<td>" + td_pagoVigente +"</td>"+
+								"</tr>";
+							$(id_tabla).append(tr_value);
+						}
+					});
+				});
+				ACC.publicidadexterior.bindDataTable_id(id_tabla);
+				ACC.oblipend.mostrarTablaDelImpuesto(infoResponse.claveImpuesto);
+			}
+			
+		}
+					
+		
+	},
+	
+	
+	updateFromResponseImpuesto_gasolina : function(infoResponse){
+		var id_tabla = "#tabla-gasolina";
+		var tablaInfo = infoResponse.headergas;
+		
+		$(id_tabla).find("tr:gt(0)").remove();
+		ACC.publicidadexterior.bindDataTable_ID_refresh(id_tabla);
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("div_titulo_gasolina"),'block');
+		if(tablaInfo != null){
+			if(tablaInfo.length == 0){
+				ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("noCuentaPendientes_gasolina"),'block');
+			}else{
+				var tpImp = "08";
+				var claveImpuestoExt = "0108";
+				$.each(tablaInfo, function (indexH,valueH){
+					$.each(valueH.details, function (indexD,valueD){
+						var tr_value = "";
+						
+						if(true || (valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != "")){
+							var td_totalPagar = "";
+							var td_rop = "";
+							var td_pagoVigente = "";
+							var clavePeriodo = "";
+							var desPeriodoMensual = ACC.oblipend.obtenerPeriodoMensual(valueH.periodo);
+							
+							if(valueH.anioGravable != null && valueH.anioGravable.lenght >= 4){
+								clavePeriodo = valueH.anioGravable.substring(2,4)+"A1";
+							}
+							
+							switch (valueH.facilidad){
+								case "00":
+									td_totalPagar = valueD.obligacion;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,valueH.periodo,valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,"","",valueH.facilidad,valueH.montoFacilidad));
+									break;
+								case "01":
+									td_totalPagar = valueH.montoFacilidad;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueH.montoFacilidad,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,valueH.periodo,valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,"","",valueH.facilidad,valueH.montoFacilidad));
+									break;
+								case "02":
+									td_totalPagar = valueH.montoFacilidad;
+									td_rop = "Sin ROP";
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,valueH.periodo,valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,"","",valueH.facilidad,valueH.montoFacilidad));
+									break;
+								default:
+									td_totalPagar = valueD.obligacion;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,valueH.periodo,valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,"","",valueH.facilidad,valueH.montoFacilidad));
+									break;	
+							}
+							
+							tr_value = 
+								"<tr>" +
+								"<td>" + valueH.anioGravable +"</td>"+
+								"<td>" + desPeriodoMensual +"</td>"+
+								"<td>" + valueD.estadoObligacion +"</td>"+
+								"<td>" + valueD.obligacion +"</td>"+
+								"<td>" + valueD.numFormulario +"</td>"+
+								"<td>" + valueD.numReferencia +"</td>"+
+								"<td>" + td_totalPagar +"</td>"+
+								"<td>" + valueD.objetoContrato +"</td>"+
+								"<td>" + td_rop +"</td>"+
+								"<td>" + td_pagoVigente +"</td>"+
+								"</tr>";
+							$(id_tabla).append(tr_value);
+						}
+					});
+				});
+				ACC.publicidadexterior.bindDataTable_id(id_tabla);
+				ACC.oblipend.mostrarTablaDelImpuesto(infoResponse.claveImpuesto);
+			}
+			
+		}
+					
+		
+	},
+	
+	
+	updateFromResponseImpuesto_vehiculos : function(infoResponse){
+		var id_tabla = "#tabla_vehi";
+		var tablaInfo = infoResponse.headerVehiculos;
+		
+		ACC.publicidadexterior.bindDataTable_ID_refresh(id_tabla);
+		$(id_tabla).find("tr:gt(0)").remove();
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("div_titulo_vehiculos"),'block');
+		if(tablaInfo != null){
+			if(tablaInfo.length == 0){
+				ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("noCuentaPendientes_vehiculos"),'block');
+			}else{
+				var tpImp = "03";
+				var claveImpuestoExt = "5103";
+				$.each(tablaInfo, function (indexH,valueH){
+					$.each(valueH.details, function (indexD,valueD){
+						var tr_value = "";
+						
+						if(true || (valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != "")){
+							var td_totalPagar = "";
+							var td_rop = "";
+							var td_pagoVigente = "";
+							var td_spac = "";
+							var clavePeriodo = "";
+							
+							if(valueH.anioGravable != null && valueH.anioGravable.lenght >= 4){
+								clavePeriodo = valueH.anioGravable.substring(2,4)+"A1";
+							}
+							
+							switch (valueH.facilidad){
+								case "00":
+									td_totalPagar = valueD.obligacion;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,"",valueH.placa,valueH.facilidad,valueH.montoFacilidad));
+									td_spac = "Sin Cupones";
+									break;
+								case "01":
+									td_totalPagar = valueH.montoFacilidad;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueH.montoFacilidad,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,"",valueH.placa,valueH.facilidad,valueH.montoFacilidad));
+									td_spac = "Sin Cupones";
+									break;
+								case "02":
+									td_totalPagar = valueH.montoFacilidad;
+									td_rop = "Sin ROP";
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,"",valueH.placa,valueH.facilidad,valueH.montoFacilidad));
+									td_spac = ACC.oblipend.predial_generarTD_spac(valueD.numFormulario,valueH.anioGravable,valueD.objetoContrato,"X");
+									break;
+								default:
+									td_totalPagar = valueD.obligacion;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,"",valueH.placa,valueH.facilidad,valueH.montoFacilidad));
+									td_spac = "Sin Cupones";
+									break;	
+							}
+							
+							tr_value = 
+								"<tr>" +
+								"<td>" + valueH.anioGravable +"</td>"+
+								"<td>" + valueH.placa +"</td>"+
+								"<td>" + valueH.modelo +"</td>"+
+								"<td class=\"td_marca\">" + valueH.marca +"</td>"+
+								"<td class=\"td_linea\">" + valueH.marca + "_" + valueH.linea +"</td>"+
+								"<td>" + valueD.estadoObligacion +"</td>"+
+								"<td>" + valueD.obligacion +"</td>"+
+								"<td>" + valueD.numFormulario +"</td>"+
+								"<td>" + valueD.numReferencia +"</td>"+
+								"<td>" + td_totalPagar +"</td>"+
+								"<td>" + valueD.objetoContrato +"</td>"+
+								"<td>" + td_rop +"</td>"+
+								"<td>" + td_pagoVigente +"</td>"+
+								"<td>" + td_spac +"</td>"+
+								"</tr>";
+							$(id_tabla).append(tr_value);
+						}
+					});
+				});
+				ACC.vehiculos.cargarDescripciones();
+				ACC.oblipend.mostrarTablaDelImpuesto(infoResponse.claveImpuesto);
+			}
+			
+		}
+					
+		
+	},
+	
+	
+	updateFromResponseImpuesto_predial : function(infoResponse){
+		var id_tabla = "table-predial1";
+		var tablaInfo = infoResponse.headerPredial;
+		
+		ACC.publicidadexterior.bindDataTable_ID_refresh(id_tabla);
+		$(id_tabla).find("tr:gt(0)").remove();
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("div_titulo_predial"),'block');
+		if(tablaInfo != null){
+			if(tablaInfo.length == 0){
+				ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("noCuentaPendientes_predial"),'block');
+			}else{
+				var tpImp = "01";
+				var claveImpuestoExt = "5101";
+				$.each(tablaInfo, function (indexH,valueH){
+					$.each(valueH.details, function (indexD,valueD){
+						var tr_value = "";
+						
+						if(valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != ""){
+							var td_totalPagar = "";
+							var td_rop = "";
+							var td_pagoVigente = "";
+							var td_spac = "";
+							var clavePeriodo = "";
+							
+							if(valueH.anioGravable != null && valueH.anioGravable.lenght >= 4){
+								clavePeriodo = valueH.anioGravable.substring(2,4)+"A1";
+							}
+							
+							switch (valueH.facilidad){
+								case "00":
+									td_totalPagar = valueD.obligacion;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,"","",valueH.facilidad,valueH.montoFacilidad));
+									td_spac = "Sin Cupones";
+									break;
+								case "01":
+									td_totalPagar = valueH.montoFacilidad;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueH.montoFacilidad,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,"","",valueH.facilidad,valueH.montoFacilidad));
+									td_spac = "Sin Cupones";
+									break;
+								case "02":
+									td_totalPagar = valueH.montoFacilidad;
+									td_rop = "Sin ROP";
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,"","",valueH.facilidad,valueH.montoFacilidad));
+									td_spac = ACC.oblipend.predial_generarTD_spac(valueD.numFormulario,valueH.anioGravable,valueD.objetoContrato,"X");
+									break;
+								default:
+									td_totalPagar = valueD.obligacion;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,"","",valueH.facilidad,valueH.montoFacilidad));
+									td_spac = "Sin Cupones";
+									break;	
+							}
+							
+							tr_value = 
+								"<tr>" +
+								"<td>" + valueH.anioGravable +"</td>"+
+								"<td>" + valueH.objetoContrato +"</td>"+
+								"<td>" + valueD.estadoObligacion +"</td>"+
+								"<td>" + valueD.obligacion +"</td>"+
+								"<td>" + valueD.numFormulario +"</td>"+
+								"<td>" + valueD.numReferencia +"</td>"+
+								"<td>" + td_totalPagar +"</td>"+
+								"<td>" + valueD.objetoContrato +"</td>"+
+								"<td>" + td_rop +"</td>"+
+								"<td>" + td_pagoVigente +"</td>"+
+								"<td>" + td_spac +"</td>"+
+								"</tr>";
+							$(id_tabla).append(tr_value);
+						}
+					});
+				});
+				ACC.publicidadexterior.bindDataTable_id(id_tabla);
+				ACC.oblipend.mostrarTablaDelImpuesto(infoResponse.claveImpuesto);
+			}
+			
+		}
+					
+		
+	},
+	
+	
+	obtenerPeriodoMensual : function(clave){
+		var periodoMensual = ["","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+		var descripcion ="";
+		
+		if(clave != null && clave.trim() != ""){
+			descripcion = periodoMensual[parseInt(clave)];
+		}
+		
+		return descripcion;
+	},
+	
+	
+	predial_generarTD_totalPagar : function(obligacion,totalPagar,objetoContrato,clavePeriodo,tpImp){
+		
+		return '<a href="' + ACC.inicialURL +'contribuyentes/rop?obligacion=' + obligacion + '&totalPagar=' + totalPagar + '&objCont=' + objetoContrato + '&clvPer=' + clavePeriodo + 'A1&tpImp="' + tpImp + ' >Generar ROP</a>'; 
+	},
+	
+	predial_generarTD_spac : function(numFormulario,anioGravable,objetoContrato,reimpresion){
+		
+		return '<label class="control-label btnGenerarSPACObli" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="btnGenerarSPACObli" data-numForm="' + numFormulario + '" data-anio="' + anioGravable + '" data-obj="' + objetoContrato + '" data-reimpresion="' + reimpresion + '">Cupones</label>'; 
+	},
+	
+	
+	predial_generarTD_pagoVigente_aux : function(refActiva,claveImpuestoExt,anioGravable,periodo,objetoContratoD,objetoContratoH,fechaVencimiento,numReferencia,pago,cdu,placa,facilidad,montoFacilidad){
+		var td_value = "";
+
+		switch (refActiva){
+			case "02":
+				break;
+			default:
+				td_value = '<label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="Detalle" onclick="pagarEnLinea(\'' + claveImpuestoExt + '\',\'' + anioGravable +'\',\'' + periodo + '\',\'' + objetoContratoD + '\',\'' + objetoContratoH + '\',\'' + fechaVencimiento + '\',\'' + numReferencia + '\',\'' + pago + '\',\'' + cdu + '\',\'' + placa + '\',\'' + facilidad + '\',\'' + montoFacilidad + '\')">Pagar</label>';
+				break;
+		}		
+		
+		return td_value;
+	},
+	
+	
+	predial_generarTD_pagoVigente : function(refActiva,td_value_refActiva_n02){
+		var td_value = "";
+
+		switch (refActiva){
+			case "02":
+				td_value = '<label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important" id="Detalle" onclick="noActivo()">Pagar</label>';
+				break;
+			default:
+				td_value = td_value_refActiva_n02;
+				break;
+		}		
+		
+		return td_value;
+	},
+
+
+	buscarObliPend : function() {
+		
+		ACC.spinner.show();
+		debugger;
+		ACC.oblipend.ocultarTablasDeImpuestos();
+		
+		var impuesto = $("#impuesto").val();
+		var dataActual = {};
+		
+		if(impuesto != ""){
+			switch (impuesto){
+				case "0001":
+				case "0002":
+				case "0003":
+				case "0004":
+				case "0005":
+				case "0006":
+				case "0007":
+					dataActual.claveImpuesto = impuesto;
+					$.ajax({
+						url : ACC.obligacionesPendImpuesto_contURL,
+						data : dataActual,
+						type : "GET",
+						success : function(dataResponse) {
+							ACC.spinner.close();
+							ACC.oblipend.updateFromResponseImpuesto_todos(dataResponse);
+						},
+						error : function() {
+							ACC.spinner.close();
+							alert("Error procesar la solicitud");	
+						}
+					});
+					break;
+				case "99":
+					$("#impuesto option").each(function(i){
+						switch ($(this).val()){
+							case "0001":
+							case "0002":
+							case "0003":
+							case "0004":
+							case "0005":
+							case "0006":
+							case "0007":
+								dataActual.claveImpuesto = $(this).val();
+								$.ajax({
+									url : ACC.obligacionesPendImpuesto_contURL,
+									data : dataActual,
+									type : "GET",
+									success : function(dataResponse) {
+										ACC.spinner.close();
+										ACC.oblipend.updateFromResponseImpuesto_todos(dataResponse);
+									},
+									error : function() {
+										ACC.spinner.close();
+										alert("Error procesar la solicitud");	
+									}
+								});
+								break;
+							default:
+								break;
+						}
+					});
+					break;
+			}
+		}
 
 	},
+	
+	
+	updateFromResponseImpuesto_todos : function(infoResponse){
+		if(infoResponse!= null){
+			switch (infoResponse.claveImpuesto){
+				case "0001":
+				case "0002":
+				case "0003":
+				case "0004":
+				case "0005":
+				case "0006":
+				case "0007":
+					ACC.oblipend.updateFromResponseImpuesto(infoResponse);
+					break;
+				default:
+					break;
+			}
+		}
+	},
+	
+	
+	ocultarTablasDeImpuestos : function (){
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("div_titulo_predial"),'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("tableSpac"),'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("noCuentaPendientes_predial"),'none');
+		
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("div_titulo_vehiculos"),'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("tableSpacVehicular"),'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("noCuentaPendientes_vehiculos"),'none');
+		
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("div_titulo_gasolina"),'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("noCuentaPendientes_gasolina"),'none');
+
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("div_titulo_delurbana"),'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("noCuentaPendientes_delurbana"),'none');
+
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("div_titulo_publiext"),'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("noCuentaPendientes_publiext"),'none');
+
+		
+		$(".oblipend-table").hide();
+		$(".oblipend-tabledetalle").hide();
+		$(".oblipend-tabledetalledos").hide();
+		$("#oblipend-predial").hide();
+		$("#oblipend-vehiculos").hide();
+		$("#oblipend-ica").hide();
+		$("#oblipend-publiext").hide();
+		$("#oblipend-gasolina").hide();
+		$("#oblipend-delurbana").hide();
+		$("#oblipend-reteica").hide();
+		
+	},
+	
+	
+	mostrarTablaDelImpuesto : function (impuesto){
+			
+		switch (impuesto){
+			case "0001":
+				$("#oblipend-predial").show();
+				break;
+			case "0002":
+				$("#oblipend-vehiculos").show();
+				break;
+			case "0003":
+				$("#oblipend-ica").show();
+				break;
+			case "0004":
+				$("#oblipend-reteica").show();
+			case "0005":
+				$("#oblipend-gasolina").show();
+				break;
+			case "0006":
+				$("#oblipend-delurbana").show();
+				break;
+			case "0007":
+				$("#oblipend-publiext").show();
+				break;
+//			case "99":
+//				$("#impuesto option").each(function(i){
+//					switch ($(this).val()){
+//						case "0001":
+//							$("#oblipend-predial").show();
+//							break;
+//						case "0002":
+//							$("#oblipend-vehiculos").show();
+//							break;
+//						case "0003":
+//							$("#oblipend-ica").show();
+//							break;
+//						case "0004":
+//							$("#oblipend-reteica").show();
+//							break;
+//						case "0005":
+//							$("#oblipend-gasolina").show();
+//							break;
+//						case "0006":
+//							$("#oblipend-delurbana").show();
+//							break;
+//						case "0007":
+//							$("#oblipend-publiext").show();
+//							break;
+//					}
+//				});
+				break;
+			default:
+				break;
+		}
+	},
+	
 	
 	bindPopupPDF : function(){
  $(document).on("click", "#ImprimirPopUp", function(e) {
@@ -270,7 +862,8 @@ ACC.oblipend = {
 	},
 
 	bindTrmPdf : function(impuesto, reporte, reportPdfName) {
-		
+debugger;
+		ACC.spinner.show();		
 	    var currentUrl = window.location.href;
 	    var infoTA = null;
 
@@ -292,12 +885,14 @@ ACC.oblipend = {
 		    url     : strUrlWS,
 		    method  : 'GET',
 		    success : function(pdfResponse){
-		    	if(!ACC.oblipend.hayErrores_getPdfString(pdfResponse)){
-		            ACC.oblipend.bindDownloadPdf(pdfResponse.pdf, reportPdfName);
-		    	}
+				ACC.spinner.close();
+				if(!ACC.oblipend.hayErrores_getPdfString(pdfResponse)){
+					ACC.oblipend.bindDownloadPdf(pdfResponse.pdf, reportPdfName);
+				}
 		    },
 		    error : function(jqXHR, exception){
-		        console.log('Ocurrio un error al intentar obtener el archivo PDF');
+				ACC.spinner.close();
+				alert('Ocurrio un error al intentar obtener el archivo PDF');
 		    }
 		});
 	},
@@ -815,6 +1410,83 @@ ACC.oblipend = {
 			$(claveCSSTabla+" tbody").append(rowContent);
 		});
 		
+	},
+	
+	
+		bindBuscarObliPend : function(listaLimpuestos_tag) {	
+//		$(document).on("click", "#buscarObliPend", function(e) {
+//			e.preventDefault();
+
+			$(".oblipend-table").hide();
+			$(".oblipend-tabledetalle").hide();
+			$(".oblipend-tabledetalledos").hide();
+			$("#oblipend-predial").hide();
+			$("#oblipend-vehiculos").hide();
+			$("#oblipend-ica").hide();
+			$("#oblipend-publiext").hide();
+			$("#oblipend-gasolina").hide();
+			$("#oblipend-delurbana").hide();
+			$("#oblipend-reteica").hide();
+			var divtable = document.getElementById("tableSpac");
+
+			divtable.style.visibility = 'hidden';
+
+			var impuesto = $("#impuesto").val();
+
+			if (impuesto == "0001") {
+
+				$("#oblipend-predial").show();
+
+			} else if (impuesto == "0002") {
+
+				$("#oblipend-vehiculos").show();
+
+			} else if (impuesto == "0003") {
+
+				$("#oblipend-ica").show();
+
+			} else if (impuesto == "0007") {
+
+				$("#oblipend-publiext").show();
+
+			} else if (impuesto == "0005") {
+
+				$("#oblipend-gasolina").show();
+
+			} else if (impuesto == "0006") {
+
+				$("#oblipend-delurbana").show();
+
+			}else if (impuesto == "99") {
+				$("#impuesto option").each(function(i){
+					switch ($(this).val()){
+						case "0001":
+							$("#oblipend-predial").show();
+							break;
+						case "0002":
+							$("#oblipend-vehiculos").show();
+							break;
+						case "0003":
+							$("#oblipend-ica").show();
+							break;
+						case "0004":
+							$("#oblipend-gasolina").show();
+							break;
+						case "0005":
+							$("#oblipend-delurbana").show();
+							break;
+						case "0006":
+							$("#oblipend-publiext").show();
+							break;
+					}
+				});
+			}else if (impuesto == "4" || impuesto == "00") {
+				$("#oblipend-reteica").show();
+
+			}
+
+//		});
+
 	}
 	
 	

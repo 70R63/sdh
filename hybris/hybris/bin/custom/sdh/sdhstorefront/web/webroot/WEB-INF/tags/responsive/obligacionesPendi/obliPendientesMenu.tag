@@ -58,13 +58,10 @@
 					<label class="control-label"><spring:theme
 							code="obligacion.inicial.selcimpuesto" /></label> 
 					<sf:select class="new_alto form-control" id="impuesto" name="impuesto"
-						path="claveImpuesto" items="${listaImpuestosCat}" referenceData="${listaImpuestosCat}"/>
+						path="claveImpuesto" items="${listaImpuestosUsuario}" referenceData="${listaImpuestosUsuario}"/>
 				</div>
 			</div>
 		</div>
-
-
-
 		<div class="row">
 			<div class="col-md-5"></div>
 			<div class="col-md-2">
@@ -79,7 +76,7 @@
 				<div class="form-group ">
 					<button type="button" class="btn btn-primary btn-lg"
 						id="buscarObliPend" name="action" value="buscar"
-						style="margin-top: 3px" onclick="ACC.oblipend.bindBuscarObliPend('${listaImpuestosCatStr}')">
+						style="margin-top: 3px" onclick="buscarObligacionPendiente();">
 						<spring:theme code="obligacion.inicial.buscar" />
 					</button>
 				</div>
@@ -90,3 +87,10 @@
 <br>
 
 
+<script>
+
+function buscarObligacionPendiente(){
+	ACC.oblipend.buscarObliPend();
+	
+}
+</script>

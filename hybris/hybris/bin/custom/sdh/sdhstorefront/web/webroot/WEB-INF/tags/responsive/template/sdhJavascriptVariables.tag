@@ -193,6 +193,10 @@
 			
 			ACC.actualizaICAActEcoURL= "<c:url value='/contribuyentes/mirit/updateICAActEco' />";
 			ACC.consultaEstadoCuentaURL= "<c:url value='/contribuyentes/mirit/consultaEstadoCuenta' />";
+
+			ACC.obligacionesPendImpuesto_contURL= "<c:url value='/contribuyentes/consultas/obligaciones/impuesto' />";
+
+			ACC.obligacionesPendImpuesto_arURL= "<c:url value='/agenteRetenedor/consultas/obligaciones/impuesto' />";
 			
 			
 			ACC.relacionPagosServicioURL = "<c:url value='/contribuyentes/consultas/relacionpagos/servicio' />";
