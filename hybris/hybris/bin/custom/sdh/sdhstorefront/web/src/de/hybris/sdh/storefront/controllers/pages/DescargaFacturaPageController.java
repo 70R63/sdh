@@ -9,6 +9,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -115,6 +116,8 @@ public class DescargaFacturaPageController extends AbstractPageController
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
 
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+
 		final Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.ambito_facturacion);
 
 		final FacturacionForm facturacionForm = new FacturacionForm();
@@ -126,6 +129,7 @@ public class DescargaFacturaPageController extends AbstractPageController
 			facturacionForm.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
 		}
 
+		model.addAttribute("customerData", customerData);
 		model.addAttribute("facturacionForm", facturacionForm);
 		model.addAttribute("descargaFacturaForm", new DescargaFacturaForm());
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());

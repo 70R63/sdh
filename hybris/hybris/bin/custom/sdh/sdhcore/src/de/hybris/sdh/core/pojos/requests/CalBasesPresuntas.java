@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
+
+
 /**
  * @author Praxis
  *
@@ -31,6 +34,7 @@ public class CalBasesPresuntas
 	 * @param usoSuelo
 	 *           the usoSuelo to set
 	 */
+	@JsonSetter("UsoSuelo")
 	public void setUsoSuelo(final String usoSuelo)
 	{
 		this.usoSuelo = usoSuelo;
@@ -48,6 +52,7 @@ public class CalBasesPresuntas
 	 * @param destinoHacendario
 	 *           the destinoHacendario to set
 	 */
+	@JsonSetter("DestinoHacendario")
 	public void setDestinoHacendario(final String destinoHacendario)
 	{
 		this.destinoHacendario = destinoHacendario;
@@ -65,6 +70,7 @@ public class CalBasesPresuntas
 	 * @param actividadEconomica
 	 *           the actividadEconomica to set
 	 */
+	@JsonSetter("ActividadEconomica")
 	public void setActividadEconomica(final String actividadEconomica)
 	{
 		this.actividadEconomica = actividadEconomica;
@@ -82,6 +88,7 @@ public class CalBasesPresuntas
 	 * @param predioHorizontal
 	 *           the predioHorizontal to set
 	 */
+	@JsonSetter("PredioHorizontal")
 	public void setPredioHorizontal(final String predioHorizontal)
 	{
 		this.predioHorizontal = predioHorizontal;
@@ -99,6 +106,7 @@ public class CalBasesPresuntas
 	 * @param baseGravableCalc
 	 *           the baseGravableCalc to set
 	 */
+	@JsonSetter("BaseGravableCalc")
 	public void setBaseGravableCalc(final String baseGravableCalc)
 	{
 		this.baseGravableCalc = baseGravableCalc;
@@ -116,6 +124,7 @@ public class CalBasesPresuntas
 	 * @param caracteristica
 	 *           the caracteristica to set
 	 */
+	@JsonSetter("Caracteristica")
 	public void setCaracteristica(final String caracteristica)
 	{
 		this.caracteristica = caracteristica;
@@ -133,6 +142,7 @@ public class CalBasesPresuntas
 	 * @param areaConstruida
 	 *           the areaConstruida to set
 	 */
+	@JsonSetter("AreaConstruida")
 	public void setAreaConstruida(final String areaConstruida)
 	{
 		this.areaConstruida = areaConstruida;
@@ -150,6 +160,7 @@ public class CalBasesPresuntas
 	 * @param areaTerreno
 	 *           the areaTerreno to set
 	 */
+	@JsonSetter("AreaTerreno")
 	public void setAreaTerreno(final String areaTerreno)
 	{
 		this.areaTerreno = areaTerreno;
@@ -167,6 +178,7 @@ public class CalBasesPresuntas
 	 * @param confirmaBGFinal
 	 *           the confirmaBGFinal to set
 	 */
+	@JsonSetter("ConfirmaBGFinal")
 	public void setConfirmaBGFinal(final String confirmaBGFinal)
 	{
 		this.confirmaBGFinal = confirmaBGFinal;
