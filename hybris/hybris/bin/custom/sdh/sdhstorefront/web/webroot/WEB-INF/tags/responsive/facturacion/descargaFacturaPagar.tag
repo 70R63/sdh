@@ -25,18 +25,18 @@
 				<table class="table pagarImpuesto">
 					<thead>
 						<tr>
-							<th><label class="control-label labeltabletd tableident"><spring:theme code="Concepto" /></label></th>
-							<th><label class="control-label labeltabletd tablenumiden"><spring:theme code="Número de referencia" /></label></th>
+							<th><label class="control-label labeltabletd "><spring:theme code="Concepto" /></label></th>
+							<th><label class="control-label labeltabletd "><spring:theme code="Número de referencia" /></label></th>
 							<th><label class="control-label labeltabletd "><spring:theme code="Monto" /></label></th>
 							<th><label class="control-label labeltabletd "><spring:theme code="Pagar" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><label class="control-label labeltabletd tableident"><spring:theme code="Concepto" /></label></td>
-							<td><label class="control-label labeltabletd tablenumiden"><spring:theme code="Número de referencia" /></label></td>
-							<td><label class="control-label labeltabletd "><spring:theme code="Monto" /></label></td>
-							<td><label class="control-label labeltabletd "><spring:theme code="Pagar" /></label></td>
+							<td><label class="control-label labeltabletd "><spring:theme code="Información no disponible" /></label></td>
+							<td><label class="control-label labeltabletd "><spring:theme code="Información no disponible" /></label></td>
+							<td><label class="control-label labeltabletd "><spring:theme code="Información no disponible" /></label></td>
+							<td><label class="control-label labeltabletd "><spring:theme code="Información no disponible" /></label></td>
 						</tr>
 					</tbody>
 				</table>

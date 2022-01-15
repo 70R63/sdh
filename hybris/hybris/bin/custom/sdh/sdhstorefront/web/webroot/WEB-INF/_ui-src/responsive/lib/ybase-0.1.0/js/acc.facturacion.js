@@ -18,7 +18,7 @@ ACC.facturacion = {
 			if(aniogravFiltro != ""){
 				switch(imp){
 				case "0001":
-	//				ACC.facturacion.filtrarRegistros_aniograv("tabPaginacion0","0",aniogravFiltro);
+	//				ACC.facturacion.filtrarRegistros_aniograv("tabla_vehi","0",aniogravFiltro);
 					tabpred.style.display = 'block';
 					break;
 				case "0002":
@@ -184,22 +184,11 @@ ACC.facturacion = {
 			if(ACC.facturacion.validarAntesSubmitWSPagar(impuesto,anoGravable,numObjeto)){
 				ACC.spinner.show();
 				var dataActual = {};	
-			
 				
 				dataActual.impuesto = impuesto;
 				dataActual.numbp = numbp;
 				dataActual.numObjeto = numObjeto;
 				dataActual.anioGravable = anioGravable;
-				
-//PENDIENTE: implementar llamada a WS y quitar este IF - INICIO
-				//var dataResponse = null;
-				//ACC.facturacion.manejarRespuestaWSPagar(dataActual,dataResponse);
-				//if(true){
-				//	ACC.spinner.close();
-				//	return;				
-				//}
-//PENDIENTE: implementar llamada a WS y quitar este IF - FIN
-
 				$.ajax({
 					url : ACC.facturacionPagosURL,
 					data : dataActual,
@@ -243,116 +232,91 @@ ACC.facturacion = {
 	},
 	
 	
-	
 	manejarRespuestaWSPagar_registrosTabla : function(dataActual,dataResponse){
-		var claveCSSTabla = null;
+		var claveCSSTabla = ".pagarImpuesto";
 		
-//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
-			var value = {};
-			var concepto = "Concepto";
-//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
-		
-		switch (dataActual.impuesto){
-			case "0001":
-				claveCSSTabla = ".pagarImpuesto";
-
-				value.impuesto = "\'5101\'";    
-				value.anoGravable = dataResponse.anioGravable;				
-				value.periodo = "\'\'";
-				value.numObjeto = dataResponse.responsePredial.objetoContrato;
-				value.chip = dataResponse.responsePredial.CHIP;
-				value.fechaVenc = dataResponse.responsePredial.fechaVencimiento;
-				value.numRef = dataResponse.responsePredial.numReferencia;
-				value.montoSinAporte = dataResponse.responsePredial.totalPagar;
-				value.montoConAporte = dataResponse.responsePredial.totalConVoluntario;
-				value.cdu = "\'\'";
-				value.placa = "";
-				value.facilidad = "\'\'";
-				value.montoFacilidad = "\'\'";
-
-				break;
-			
-			case "0002":
-				claveCSSTabla = ".pagarImpuesto";
+		var valueS = {};
+		var valueC = {};
+		var value = {};
+		if(dataResponse != null){
+			switch (dataActual.impuesto){
+				case "0001":
+					if(dataResponse.responsePredial != null){
+						value.impuesto = "5101";
+						value.periodo = "";
+						value.cdu = "";
+						value.placa = "";
+						value.facilidad = "";
+						value.montoFacilidad = "";
+						value.anoGravable = dataResponse.responsePredial.anoGravable;
+						value.chip = dataResponse.responsePredial.CHIP;
+						value.numObjeto = dataResponse.responsePredial.CHIP;
+						value.fechaVenc = dataResponse.responsePredial.fechaVencimiento;
+						value.numRef = dataResponse.responsePredial.numReferencia;
+						valueS = Object.assign({}, value);
+						valueC = Object.assign({}, value);
+						valueS.montoAporte = dataResponse.responsePredial.totalPagar;
+						valueC.montoAporte = dataResponse.responsePredial.totalConVoluntario;
+					}
+					break;
 				
-//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - INICIO
-            value.impuesto = "\'5103\'";        
-			if(dataResponse.responseVehicular.anoGravable = "02"){
-				value.anoGravable = "2021";    
-			}	
-			else{
-				value.anoGravable = dataResponse.responseVehicular.anoGravable;
+				case "0002":
+					if(dataResponse.responseVehicular != null){
+						value.impuesto = "5103";
+						value.periodo = "";
+						value.chip = "";
+						value.cdu = "";
+						value.facilidad = "";
+						value.montoFacilidad = "";
+						value.anoGravable = dataResponse.responseVehicular.anoGravable;
+						value.placa = dataResponse.responseVehicular.placa;
+						value.numObjeto = dataResponse.responseVehicular.placa;
+						value.fechaVenc = dataResponse.responseVehicular.fechaVencimiento;
+						value.numRef = dataResponse.responseVehicular.numReferencia;
+						valueS = Object.assign({}, value);
+						valueC = Object.assign({}, value);
+						valueS.montoAporte = dataResponse.responseVehicular.totalPagar;
+						valueC.montoAporte = dataResponse.responseVehicular.totalConVoluntario;
+					}
+					break;
+				default:
+					break;
 			}
-			value.periodo = "\'\'";
-			value.numObjeto = dataResponse.responseVehicular.placa;
-			value.chip = "";
-			if(dataResponse.responseVehicular.fechaVencimiento = "02"){
-				value.fechaVenc = "22/12/2021";    
-			}	
-			else{
-				value.fechaVenc = dataResponse.responseVehicular.fechaVencimiento;
-			}	
-			value.numRef = dataResponse.responseVehicular.numReferencia;
-			value.montoSinAporte = dataResponse.responseVehicular.totalPagar;
-			value.montoConAporte = dataResponse.responseVehicular.totalConVoluntario;
-			value.cdu = "\'\'";
-			value.placa = dataResponse.responseVehicular.placa;
-			value.facilidad = "\'\'";
-			value.montoFacilidad = "\'\'";
-//datos dummy de prueba, se cambiaran por el resultado de la llamada al WS - FIN
-			break;
 		}
 		
 		
 		if( claveCSSTabla != null){
 			$(claveCSSTabla+" tbody tr").remove();
-			
-			$(claveCSSTabla+" tbody").append(
-			'<tr>'+
-			'<td>'+ "Pago sin aporte voluntario" + '</td>' +
-			'<td>'+ value.numRef + '</td>' +
-			'<td>'+ value.montoSinAporte + '</td>' +
-			'<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important; text-align: center " id="Detalle" '+
-			'onclick="pagarEnLinea(' + value.impuesto + ',\'' 
-									 + value.anoGravable + '\','
-									 + value.periodo + ',\'' 
-									 + value.numObjeto + '\',\'' 
-									 + value.chip + '\',\'' 
-									 + value.fechaVenc + '\',\'' 
-									 + value.numRef  + '\',\'' 
-									 + value.montoSinAporte + '\',' 
-									 + value.cdu + ',\'' 
-									 + value.placa + '\',' 
-									 + value.facilidad + ',' 
-									 + value.montoFacilidad  
-						+')" ' +
-			'>Pagar</label></td>'+
-			'</tr>');
-			
-			$(claveCSSTabla+" tbody").append(
-			'<tr>'+
-			'<td>'+ "Pago con aporte voluntario" + '</td>' +
-			'<td>'+ value.numRef + '</td>' +
-			'<td>'+ value.montoConAporte + '</td>' +
-			'<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important; text-align: center " id="Detalle" '+ 
-			'onclick="pagarEnLinea(' + value.impuesto + ',\'' 
-									 + value.anoGravable + '\','
-									 + value.periodo + ',\'' 
-									 + value.numObjeto + '\',\'' 
-									 + value.chip + '\',\'' 
-									 + value.fechaVenc + '\',\'' 
-									 + value.numRef  + '\',\'' 
-									 + value.montoConAporte + '\',' 
-									 + value.cdu + ',\'' 
-									 + value.placa + '\',' 
-									 + value.facilidad + ',' 
-									 + value.montoFacilidad  
-						+')" ' +			
-			'>Pagar</label></td>'+
-			'</tr>');
+			$(claveCSSTabla+" tbody").append(ACC.facturacion.generarRegistroTablaPagar("Pago sin aporte voluntario",valueS));
+			$(claveCSSTabla+" tbody").append(ACC.facturacion.generarRegistroTablaPagar("Pago con aporte voluntario",valueC));
 		}
 
 		
+	},
+	
+	
+	generarRegistroTablaPagar : function(tituloTD,value){
+		return '<tr>'+
+			'<td>'+ tituloTD  + '</td>' +
+			'<td>'+ value.numRef + '</td>' +
+			'<td>'+ value.montoAporte + '</td>' +
+			'<td><label class="control-label" style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important; text-align: center " id="Detalle" '+ 
+			'onclick="pagarEnLinea('
+				+ '\'' + value.impuesto + '\','
+				+ '\'' + value.anoGravable + '\','
+				+ '\'' + value.periodo + '\','
+				+ '\'' + value.numObjeto + '\','
+				+ '\'' + value.chip + '\','
+				+ '\'' + value.fechaVenc + '\','
+				+ '\'' + value.numRef + '\','
+				+ '\'' + value.montoAporte + '\','
+				+ '\'' + value.cdu + '\','
+				+ '\'' + value.placa + '\','
+				+ '\'' + value.facilidad + '\','
+				+ '\'' + value.montoFacilidad + '\''
+				+')" ' +			
+			'>Pagar</label></td>'+
+			'</tr>'
 	},
 	
 	
