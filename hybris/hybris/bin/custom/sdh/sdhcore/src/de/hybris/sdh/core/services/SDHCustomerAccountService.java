@@ -12,6 +12,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -82,7 +83,11 @@ public interface SDHCustomerAccountService
 
 	void updateImpuestoGasolina_simplificado(CustomerModel customerModel, ImpGasolinaSimpliResponse gasolinaSimpliResponse);
 
-	//de los impuestos activos le su informacion de ingreso/contrib
+	//determina los impuestos activos en el sistema y lee informacion de ingreso/contrib para cada uno de ellos para el usuario activo
 	SDHValidaMailRolResponse leerImpuestosActivosContribuyente(String ambito);
+
+	//determina los impuestos activos en el sistema y que el usuario activo (clave de impuesto en interfaz SDHConsultaImpuesto_simplificado y su descripcion)
+	Map<String, String> determinaImpuestosActivosContribuyente(String ambito);
+
 
 }

@@ -102,7 +102,7 @@ public class RelacionPagosPageController extends AbstractPageController
 		try
 		{
 
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhCustomerAccountService.leerImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.ambito_consultas);
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhCustomerAccountService.leerImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTAS);
 
 			final RelacionPagosForm relacionPagosForm = new RelacionPagosForm();
 
