@@ -489,14 +489,14 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 	{
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
-		elementos.put(SDHConsultaImpuesto_simplificado.predial, Config.getParameter("impuestosActivos." + ambito + ".predial"));
-		elementos.put(SDHConsultaImpuesto_simplificado.vehiculos, Config.getParameter("impuestosActivos." + ambito + ".vehiculos"));
-		elementos.put(SDHConsultaImpuesto_simplificado.ica, Config.getParameter("impuestosActivos." + ambito + ".ica"));
-		elementos.put(SDHConsultaImpuesto_simplificado.reteica, Config.getParameter("impuestosActivos." + ambito + ".reteica"));
-		elementos.put(SDHConsultaImpuesto_simplificado.gasolina, Config.getParameter("impuestosActivos." + ambito + ".gasolina"));
-		elementos.put(SDHConsultaImpuesto_simplificado.delineacion,
+		elementos.put(SDHConsultaImpuesto_simplificado.PREDIAL, Config.getParameter("impuestosActivos." + ambito + ".predial"));
+		elementos.put(SDHConsultaImpuesto_simplificado.VEHICULOS, Config.getParameter("impuestosActivos." + ambito + ".vehiculos"));
+		elementos.put(SDHConsultaImpuesto_simplificado.ICA, Config.getParameter("impuestosActivos." + ambito + ".ica"));
+		elementos.put(SDHConsultaImpuesto_simplificado.RETEICA, Config.getParameter("impuestosActivos." + ambito + ".reteica"));
+		elementos.put(SDHConsultaImpuesto_simplificado.GASOLINA, Config.getParameter("impuestosActivos." + ambito + ".gasolina"));
+		elementos.put(SDHConsultaImpuesto_simplificado.DELINEACION,
 				Config.getParameter("impuestosActivos." + ambito + ".delineacion"));
-		elementos.put(SDHConsultaImpuesto_simplificado.publicidad,
+		elementos.put(SDHConsultaImpuesto_simplificado.PUBLICIDAD,
 				Config.getParameter("impuestosActivos." + ambito + ".publicidad"));
 
 

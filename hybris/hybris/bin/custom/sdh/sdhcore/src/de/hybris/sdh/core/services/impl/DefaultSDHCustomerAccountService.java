@@ -81,6 +81,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -2497,38 +2498,38 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			{
 				groupUid = group.getUid();
 
-				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.predial)
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PREDIAL)
 						&& groupUid.contains("predialUsrTaxGrp"))
 				{
 					customerData.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
 					continue;
 				}
-				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.vehiculos)
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.VEHICULOS)
 						&& groupUid.contains("vehicularUsrTaxGrp"))
 				{
 					customerData.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
 					continue;
 				}
-				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.ica)
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.ICA)
 						&& groupUid.contains("ICAUsrTaxGrp"))
 				{
 					customerData.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
 					continue;
 				}
-				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.gasolina)
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.GASOLINA)
 						&& groupUid.contains("gasolinaUsrTaxGrp"))
 				{
 					customerData.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
 					continue;
 				}
-				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.delineacion)
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.DELINEACION)
 						&& groupUid.contains("delineacionUsrTaxGrp"))
 				{
 					customerData
 							.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
 					continue;
 				}
-				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.publicidad)
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PUBLICIDAD)
 						&& groupUid.contains("publicidadExtUsrTaxGrp"))
 				{
 					customerData
@@ -2539,6 +2540,81 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		}
 
 		return customerData;
+	}
+
+
+	@Override
+	public Map<String, String> determinaImpuestosActivosContribuyente(final String ambito)
+	{
+		Map<String, String> impuestosActivosUsuario = null;
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(ambito);
+		Set<PrincipalGroupModel> groupList = customerModel.getGroups();
+
+		if (groupList != null)
+		{
+			groupList = groupList.stream()
+					.filter(c -> (c.getUid().contains("predialUsrTaxGrp") || c.getUid().contains("vehicularUsrTaxGrp")
+							|| c.getUid().contains("ICAUsrTaxGrp") || c.getUid().contains("gasolinaUsrTaxGrp")
+							|| c.getUid().contains("delineacionUsrTaxGrp") || c.getUid().contains("publicidadExtUsrTaxGrp")))
+					.collect(Collectors.toSet());
+			if (!groupList.isEmpty())
+			{
+				impuestosActivosUsuario = new LinkedHashMap<String, String>();
+				impuestosActivosUsuario.put("00", "Seleccionar");
+			}
+		}
+
+
+		for (final PrincipalGroupModel group : groupList)
+		{
+			String groupUid = null;
+
+			if (group != null && group.getUid() != null)
+			{
+				groupUid = group.getUid();
+
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PREDIAL)
+						&& groupUid.contains("predialUsrTaxGrp"))
+				{
+					impuestosActivosUsuario.put(sdhConsultaImpuesto_simplificado.PREDIAL, "Predial");
+					continue;
+				}
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.VEHICULOS)
+						&& groupUid.contains("vehicularUsrTaxGrp"))
+				{
+					impuestosActivosUsuario.put(sdhConsultaImpuesto_simplificado.VEHICULOS, "Impuestos de Vehículos");
+					continue;
+				}
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.ICA)
+						&& groupUid.contains("ICAUsrTaxGrp"))
+				{
+					impuestosActivosUsuario.put(sdhConsultaImpuesto_simplificado.ICA, "ICA");
+					continue;
+				}
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.GASOLINA)
+						&& groupUid.contains("gasolinaUsrTaxGrp"))
+				{
+					impuestosActivosUsuario.put(sdhConsultaImpuesto_simplificado.GASOLINA, "Sobretasa a la gasolina motor");
+					continue;
+				}
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.DELINEACION)
+						&& groupUid.contains("delineacionUsrTaxGrp"))
+				{
+					impuestosActivosUsuario.put(sdhConsultaImpuesto_simplificado.DELINEACION, "Delineación Urbana");
+					continue;
+				}
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PUBLICIDAD)
+						&& groupUid.contains("publicidadExtUsrTaxGrp"))
+				{
+					impuestosActivosUsuario.put(sdhConsultaImpuesto_simplificado.PUBLICIDAD, "Publicidad exterior");
+					continue;
+				}
+			}
+		}
+
+
+		return impuestosActivosUsuario;
 	}
 
 }

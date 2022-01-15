@@ -296,7 +296,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 		final OpcionDeclaracionesVista infoVista = new OpcionDeclaracionesVista();
 		SDHValidaMailRolResponse customerData = null;
 
-		customerData = sdhCustomerAccountService.leerImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.ambito_consultas);
+		customerData = sdhCustomerAccountService.leerImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTAS);
 
 		infoVista.setCatalogos(gasolinaService.prepararCatalogosOpcionDeclaraciones(customerData));
 		infoVista.setCustomerData(customerData);

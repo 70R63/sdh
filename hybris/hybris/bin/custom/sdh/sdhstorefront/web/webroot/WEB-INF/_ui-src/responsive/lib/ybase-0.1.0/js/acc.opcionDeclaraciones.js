@@ -670,7 +670,7 @@ ACC.opcionDeclaraciones = {
 									$('#table-predial1').append("<tr>"+
 											'<td>' + value2.CHIP + '</td>'+
 											'<td>' + value2.matrInmobiliaria + '</td>'+
-											'<td>' + value2.direccionPredio + '</td>'+
+											'<td>' + value1.direccionPredio + '</td>'+
 											'<td><input id="registroNum_'+ indiceTabla +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-numfactForm="' + value1.numfactForm + '" data-importe="' + value1.importe.replace(/,/g, '') + '"' +">" + "</td>"+
 											"</tr>");
 										indiceTabla++;

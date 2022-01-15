@@ -134,7 +134,7 @@ public class DeclaracionesPageController extends AbstractPageController
 		SDHValidaMailRolResponse customerData = null;
 		final String referrer = request.getHeader("referer");
 
-		customerData = sdhCustomerAccountService.leerImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.ambito_consultas);
+		customerData = sdhCustomerAccountService.leerImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTAS);
 
 		infoVista.setCatalogos(gasolinaService.prepararCatalogosOpcionDeclaraciones(customerData));
 		infoVista.setCustomerData(customerData);

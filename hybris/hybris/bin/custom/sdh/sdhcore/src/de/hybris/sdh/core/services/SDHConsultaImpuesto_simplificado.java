@@ -23,19 +23,19 @@ import java.util.Map;
  */
 public interface SDHConsultaImpuesto_simplificado
 {
-	public static final String predial = "0001";
-	public static final String vehiculos = "0002";
-	public static final String ica = "0003";
-	public static final String reteica = "0004";
-	public static final String gasolina = "0005";
-	public static final String delineacion = "0006";
-	public static final String publicidad = "0007";
+	public static final String PREDIAL = "0001";
+	public static final String VEHICULOS = "0002";
+	public static final String ICA = "0003";
+	public static final String RETEICA = "0004";
+	public static final String GASOLINA = "0005";
+	public static final String DELINEACION = "0006";
+	public static final String PUBLICIDAD = "0007";
 
-	public static final String ambito_consultas = "consultas";
-	public static final String ambito_impuestos = "impuestos";
-	public static final String ambito_facturacion = "facturacion";
-	public static final String ambito_presentarDeclaracion = "presentarDeclaracion";
-	public static final String ambito_mirit = "mirit";
+	public static final String AMBITO_CONSULTAS = "consultas";
+	public static final String AMBITO_IMPUESTOS = "impuestos";
+	public static final String AMBITO_FACTURACION = "facturacion";
+	public static final String AMBITO_PRESENTARDECLARACION = "presentarDeclaracion";
+	public static final String AMBITO_MIRIT = "mirit";
 
 	//Predial
 	List<PredialResponse> consulta_impPredial(ConsultaContribuyenteBPRequest request);

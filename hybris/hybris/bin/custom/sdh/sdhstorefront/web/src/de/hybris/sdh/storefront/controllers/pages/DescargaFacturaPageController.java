@@ -118,14 +118,14 @@ public class DescargaFacturaPageController extends AbstractPageController
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
-		final Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.ambito_facturacion);
+		final Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.AMBITO_FACTURACION);
 
 		final FacturacionForm facturacionForm = new FacturacionForm();
 		facturacionForm.setNumbp(customerModel.getNumBP());
-		if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.predial)){
+		if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PREDIAL)){
 			facturacionForm.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
 		}
-		if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.vehiculos)){
+		if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.VEHICULOS)){
 			facturacionForm.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
 		}
 
@@ -134,7 +134,6 @@ public class DescargaFacturaPageController extends AbstractPageController
 		model.addAttribute("descargaFacturaForm", new DescargaFacturaForm());
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute("listaAnioGravable", sdhConfigCatalogos.obtenerListaAnioGravable_facturacion());
-
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DESCARGA_FACTURA_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DESCARGA_FACTURA_CMS_PAGE));
@@ -165,7 +164,6 @@ public class DescargaFacturaPageController extends AbstractPageController
 		final DescargaFacturaRequest descargaFacturaRequest = new DescargaFacturaRequest();
 		final String numBP = customerFacade.getCurrentCustomer().getNumBP();
 		byte[] decodedBytes;
-
 
 		dataForm.setErrores(null);
 		dataForm.setUrlDownload(null);
