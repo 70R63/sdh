@@ -679,6 +679,10 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		//		inicio de remapeo
 		vehiculosFormDeclaracion.setNumBP(representado);
 		vehiculosFormDeclaracion.setNumForm(numForm);
+		if(vehicular2response != null){
+			vehiculosFormDeclaracion.setDescuentoadicional(vehicular2response.getDescuentoadicional());
+			vehiculosFormDeclaracion.setDescuentoconbustible(vehicular2response.getDescuentoconbustible());
+		}
 		if (vehicular2response != null && vehicular2response.getInfo_vehiculo() != null)
 		{
 			vehiculosFormDeclaracion.setAnioGravable(vehicular2response.getInfo_vehiculo().getAnio_Gravable());

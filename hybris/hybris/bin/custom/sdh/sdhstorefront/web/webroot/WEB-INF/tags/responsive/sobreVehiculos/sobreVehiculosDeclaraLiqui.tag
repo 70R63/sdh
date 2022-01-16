@@ -78,6 +78,7 @@
 	<c:set var="disabledLinea" value='disabled="disabled"' />
 	<c:set var="disabledCilindraje" value='disabled="disabled"' />
 	<c:set var="disabledAvaluo" value='disabled="disabled"' />
+	<input type="hidden" id="disabledLiquidacion_flag" value="X"/>
 </c:if>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
