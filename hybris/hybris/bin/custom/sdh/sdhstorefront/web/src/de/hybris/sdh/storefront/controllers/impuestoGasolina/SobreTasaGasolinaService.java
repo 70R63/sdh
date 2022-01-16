@@ -1150,8 +1150,7 @@ public class SobreTasaGasolinaService
 		}
 		catch (final Exception e)
 		{
-			LOG.error("Error al llamar WebService: " + wsNombre + "Detalle:" + e.getMessage());
-			e.printStackTrace();
+			LOG.error("---EXCEPTION: Error al llamar WebService: " + wsNombre + "Detalle:" + e.getMessage());
 		}
 
 		return responseInfo;

@@ -62,7 +62,7 @@ import Decoder.BASE64Decoder;
 //@RequestMapping("")
 public class DescargaFacturaPageController extends AbstractPageController
 {
-	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+	private static final Logger LOG = Logger.getLogger(DescargaFacturaPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.descargaFac";
@@ -116,7 +116,6 @@ public class DescargaFacturaPageController extends AbstractPageController
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
 
-
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
 		final Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.AMBITO_FACTURACION);
@@ -135,7 +134,6 @@ public class DescargaFacturaPageController extends AbstractPageController
 		model.addAttribute("descargaFacturaForm", new DescargaFacturaForm());
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute("listaAnioGravable", sdhConfigCatalogos.obtenerListaAnioGravable_facturacion());
-
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DESCARGA_FACTURA_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DESCARGA_FACTURA_CMS_PAGE));
@@ -166,7 +164,6 @@ public class DescargaFacturaPageController extends AbstractPageController
 		final DescargaFacturaRequest descargaFacturaRequest = new DescargaFacturaRequest();
 		final String numBP = customerFacade.getCurrentCustomer().getNumBP();
 		byte[] decodedBytes;
-
 
 		dataForm.setErrores(null);
 		dataForm.setUrlDownload(null);
