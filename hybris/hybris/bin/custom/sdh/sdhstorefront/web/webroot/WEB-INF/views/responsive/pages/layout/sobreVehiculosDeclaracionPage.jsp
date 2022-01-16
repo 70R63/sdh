@@ -118,33 +118,46 @@
 			 "${vehiculosFormDeclaracion.avaluo}" //6 - avaluo
 			 ];
 		
-		 var opcionUso = "${vehiculosFormDeclaracion.opcionUso}";
-		 var homologado = "${vehiculosFormDeclaracion.homologado}";
-		 if(opcionUso != null && opcionUso.length >= 2){
-			 opcionUso = opcionUso.substring(0,2);
-		 }
-		 debugger;
-		 var bloquearCampos = false;
-		 if($("#disabledLiquidacion_flag").val() == "X"){
-			 bloquearCampos = true;
-		 }
-		ACC.vehiculos.obtenerCatalogosInicialVehiculos(cat_valores_actuales,homologado,opcionUso,bloquearCampos);
+		var datosAdicionales = obtenerOpcionesAdicionales();
+		ACC.vehiculos.obtenerCatalogosInicialVehiculos(cat_valores_actuales,datosAdicionales.homologado,datosAdicionales.opcionUso,datosAdicionales.bloquearCampos);
 		
 	}
 	
 	function actualizarCampo(campo_catalogo){
+		debugger;
+		var dataActual = null;
 		if(campo_catalogo == "cilindraje"){
 			$("#cilindraje").val("");
 			var elementoCat = document.getElementById("cilindraje");
 			elementoCat.disabled = "disabled";
 			$("#avaluoAct").val("");
-			var dataActual = ACC.vehiculos.determinarInfoParaCatalogo("cilindraje");
-			ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"cilindraje",null);
+			dataActual = ACC.vehiculos.determinarInfoParaCatalogo("cilindraje");
 		}else if(campo_catalogo == "avaluo"){
 			$("#avaluoAct").val("");
-			var dataActual = ACC.vehiculos.determinarInfoParaCatalogo("avaluo");
-			ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"avaluo",null);
+			dataActual = ACC.vehiculos.determinarInfoParaCatalogo("avaluo");
 		}
+		
+		if(dataActual != null){
+			var datosAdicionales = obtenerOpcionesAdicionales();
+			ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,campo_catalogo,null,datosAdicionales.homologado,datosAdicionales.opcionUso,datosAdicionales.bloquearCampos);	
+		}
+		
+	}
+	
+	function obtenerOpcionesAdicionales(){
+		var data = {};
+		
+		var opcionUso = "${vehiculosFormDeclaracion.opcionUso}";
+		data.homologado = "${vehiculosFormDeclaracion.homologado}";
+		if(opcionUso != null && opcionUso.length >= 2){
+			data.opcionUso = opcionUso.substring(0,2);
+		}
+		data.bloquearCampos = false;
+		if($("#disabledLiquidacion_flag").val() == "X"){
+			data.bloquearCampos = true;
+		}
+		
+		return data;
 	}
 		
 	function pagarlinea() {

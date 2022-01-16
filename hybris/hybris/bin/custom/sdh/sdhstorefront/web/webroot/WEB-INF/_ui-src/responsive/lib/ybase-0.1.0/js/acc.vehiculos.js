@@ -715,17 +715,19 @@ ACC.vehiculos = {
 			elementoCat.disabled = "";
 		}else if(campo_catalogo == 'avaluo'){
 			if(infoResponse.catalogo.avaluoactual  == null || infoResponse.catalogo.avaluoactual == ""){
-				var error = infoResponse.catalogo.errores;
-				var tam = error.length;
-				var showerror = $("#AvaluoMensaje");
-				showerror.style.display = 'block';
-				for(var i = 0; i<=tam; i++){
-				$("#mensajeAvaluo").val(error.txt_msj);
+				if(infoResponse.catalogo.errores != undefined){
+					var error = infoResponse.catalogo.errores;
+					var tam = error.length;
+					var showerror = $("#AvaluoMensaje");
+					showerror.style.display = 'block';
+					for(var i = 0; i<=tam; i++){
+						$("#mensajeAvaluo").val(error.txt_msj);
+					}
 				}
 			}else{
 				var showerror = $("#AvaluoMensaje");
 				showerror.style.display = 'none';
-			$("#avaluoAct").val(infoResponse.catalogo.avaluoactual);
+				$("#avaluoAct").val(infoResponse.catalogo.avaluoactual);
 			}
 		}
 		
