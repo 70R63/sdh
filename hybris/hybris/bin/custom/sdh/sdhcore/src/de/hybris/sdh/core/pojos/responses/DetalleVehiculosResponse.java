@@ -20,6 +20,8 @@ public class DetalleVehiculosResponse
 	private String checkAporte;
 	private String fechaNotif;
 	private String aporte_activo;
+	private String descuentoadicional;
+	private String descuentoconbustible;
 
 	/**
 	 * @return the detalle
@@ -154,6 +156,40 @@ public class DetalleVehiculosResponse
 	public void setAporte_activo(final String aporte_activo)
 	{
 		this.aporte_activo = aporte_activo;
+	}
+
+	/**
+	 * @return the descuentoadicional
+	 */
+	public String getDescuentoadicional()
+	{
+		return descuentoadicional;
+	}
+
+	/**
+	 * @param descuentoadicional
+	 *           the descuentoadicional to set
+	 */
+	public void setDescuentoadicional(final String descuentoadicional)
+	{
+		this.descuentoadicional = descuentoadicional;
+	}
+
+	/**
+	 * @return the descuentoconbustible
+	 */
+	public String getDescuentoconbustible()
+	{
+		return descuentoconbustible;
+	}
+
+	/**
+	 * @param descuentoconbustible
+	 *           the descuentoconbustible to set
+	 */
+	public void setDescuentoconbustible(final String descuentoconbustible)
+	{
+		this.descuentoconbustible = descuentoconbustible;
 	}
 
 

@@ -19,6 +19,8 @@ public class DetalleVehiculos2Response
 	private DetalleVehiculos2Response_info info_vehiculo;
 	private DetalleVehiculos2Response_liquidacion liquidacion;
 	private List<FirmanteResponse> firmantes;
+	private String descuentoadicional;
+	private String descuentoconbustible;
 
 
 	/**
@@ -74,17 +76,47 @@ public class DetalleVehiculos2Response
 		this.firmantes = firmantes;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#toString()
+	/**
+	 * @return the descuentoadicional
 	 */
+	public String getDescuentoadicional()
+	{
+		return descuentoadicional;
+	}
+
+	/**
+	 * @param descuentoadicional
+	 *           the descuentoadicional to set
+	 */
+	public void setDescuentoadicional(final String descuentoadicional)
+	{
+		this.descuentoadicional = descuentoadicional;
+	}
+
+	/**
+	 * @return the descuentoconbustible
+	 */
+	public String getDescuentoconbustible()
+	{
+		return descuentoconbustible;
+	}
+
+	/**
+	 * @param descuentoconbustible
+	 *           the descuentoconbustible to set
+	 */
+	public void setDescuentoconbustible(final String descuentoconbustible)
+	{
+		this.descuentoconbustible = descuentoconbustible;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "DetalleVehiculos2Response [info_vehiculo=" + info_vehiculo + ", liquidacion=" + liquidacion + ", firmantes="
-				+ firmantes + "]";
+				+ firmantes + ", descuentoadicional=" + descuentoadicional + ", descuentoconbustible=" + descuentoconbustible + "]";
 	}
+
 
 
 

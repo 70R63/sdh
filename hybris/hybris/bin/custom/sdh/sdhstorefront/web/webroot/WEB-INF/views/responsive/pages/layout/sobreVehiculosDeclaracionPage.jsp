@@ -57,70 +57,55 @@
 		 
 		
 		 
-		 var date = new Date();
-		 var currentday = date.getDate(); //obteniendo dia
-		 var currentmes = date.getMonth()+1; //obteniendo mes
-		  var currentano = date.getFullYear(); //obteniendo año
-		  var currentwday = date.getDay(); //obtiene el dia de la semana
-		  
-		 var primerDia = new Date(date.getFullYear(), date.getMonth(), 1);
-		 var yearday = primerDia.getDay();
-		 var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+		var date = new Date();
+		var currentday = date.getDate(); //obteniendo dia
+		var currentmes = date.getMonth()+1; //obteniendo mes
+		var currentano = date.getFullYear(); //obteniendo año
+		var currentwday = date.getDay(); //obtiene el dia de la semana
 		 
-		 var proyecto = document.getElementById('proyecto');
-		 var aportesi = document.getElementById('aporteSi');
-		 var aporteno = document.getElementById('aporteNo');
-		 var aniograv = document.getElementById('aniograv').value;
+		var primerDia = new Date(date.getFullYear(), date.getMonth(), 1);
+		var yearday = primerDia.getDay();
+		var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 		 
-		 if(aniograv != currentano){
-			 proyecto.disabled = true;
-			  aportesi.disabled = true;
-			  aporteno.disabled = true;
-			 
+		var proyecto = document.getElementById('proyecto');
+		var aportesi = document.getElementById('aporteSi');
+		var aporteno = document.getElementById('aporteNo');
+		var aniograv = document.getElementById('aniograv').value;
+		var desabilitarProyectoAportes = false;
+		var currentano_str = (currentano).toString();
+		 
+		 if(aniograv != currentano_str){
+			 desabilitarProyectoAportes = true;
 		 }else{
-		 
-		    if(currentmes == "6"){
-		  
-			  if(currentday == "27" && yearday=="0" ){
-				  proyecto.disabled = true;
-				  aportesi.disabled = true;
-				  aporteno.disabled = true;
-				  
+		    if(currentmes == 6){
+			  if(currentday == 27 && yearday==0 ){
+				 desabilitarProyectoAportes = true;
 			  }	  
-			  
-			  if(currentday == "26" && yearday=="1"){
-				  proyecto.disabled = true;
-				  aportesi.disabled = true;
-				  aporteno.disabled = true;
+			  if(currentday == 26 && yearday==1){
+				 desabilitarProyectoAportes = true;
 			  }
-		
-			  if(currentday == "25" && yearday=="2"){
-				  proyecto.disabled = true;
-				  aportesi.disabled = true;
-				  aporteno.disabled = true;
+			  if(currentday == 25 && yearday==2){
+				 desabilitarProyectoAportes = true;
 			  }
-			  
-			  if(currentday == "24" && yearday=="3"){
-				  proyecto.disabled = true;
-				  aportesi.disabled = true;
-				  aporteno.disabled = true;
+			  if(currentday == 24 && yearday==3){
+				 desabilitarProyectoAportes = true;
 			  }
-			  if(currentday == "23" && yearday=="4"){
-				  proyecto.disabled = true;
-				  aportesi.disabled = true;
-				  aporteno.disabled = true;
+			  if(currentday == 23 && yearday==4){
+				 desabilitarProyectoAportes = true;
 			  }
-			  if(currentday == "22" && yearday=="5"){
-				  proyecto.disabled = true;
-				  aportesi.disabled = true;
-				  aporteno.disabled = true;
+			  if(currentday == 22 && yearday==5){
+				 desabilitarProyectoAportes = true;
 			  }
-			  if(currentday == "28" && yearday=="6"){
-				  proyecto.disabled = true;
-				  aportesi.disabled = true;
-				  aporteno.disabled = true;
+			  if(currentday == 28 && yearday==6){
+				 desabilitarProyectoAportes = true;
 			  }
 		    }
+		 }
+		 
+		 if(desabilitarProyectoAportes){
+			$("#proyecto").prop("disabled", true );
+			$("#aportesi").prop("disabled", true );
+			$("#aporteNo").prop("disabled", true );
 		 }
 		 
 		 var cat_valores_actuales = [
@@ -138,7 +123,12 @@
 		 if(opcionUso != null && opcionUso.length >= 2){
 			 opcionUso = opcionUso.substring(0,2);
 		 }
-		ACC.vehiculos.obtenerCatalogosInicialVehiculos(cat_valores_actuales,homologado,opcionUso);
+		 debugger;
+		 var bloquearCampos = false;
+		 if($("#disabledLiquidacion_flag").val() == "X"){
+			 bloquearCampos = true;
+		 }
+		ACC.vehiculos.obtenerCatalogosInicialVehiculos(cat_valores_actuales,homologado,opcionUso,bloquearCampos);
 		
 	}
 	
