@@ -11,6 +11,7 @@
 <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 	<declaraciones:certificacionDeclaraciones/>
 
+<template:sdhJavascriptVariables4/>
 <script>
 window.onload = function() {
 	//Se agrega funcionalidad para agentes Retenedores

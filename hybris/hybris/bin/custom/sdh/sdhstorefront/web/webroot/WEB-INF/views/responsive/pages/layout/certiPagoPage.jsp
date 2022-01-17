@@ -12,6 +12,7 @@
 <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 	<certificacion:certificacionMenu />
 
+<template:sdhJavascriptVariables4/>
 <script type="text/javascript">
 window.onload = function() {
 	
