@@ -124,7 +124,6 @@
 	}
 	
 	function actualizarCampo(campo_catalogo){
-		debugger;
 		var dataActual = null;
 		if(campo_catalogo == "cilindraje"){
 			$("#cilindraje").val("");
