@@ -37,11 +37,11 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.clase" /></label> <input
-						name="numresol" class="newalto form-control td_clase"
+						class="newalto form-control td_clase"
 						aria-required="true" type="text"
 						value="${vehiculosFormDeclaracion.clase}"
 						maxlength="30" disabled="disabled">
-						<input id="clase td_clase" type="hidden" value="${vehiculosFormDeclaracion.clase}"/>
+						<input id="clase" type="hidden" value="${vehiculosFormDeclaracion.clase}"/>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -52,7 +52,7 @@
 						aria-required="true" type="text"
 						value="${vehiculosFormDeclaracion.carroceria}"
 						maxlength="30" disabled="disabled">
-						<input class="td_carroceria" id="carroceria" type="hidden" value="${vehiculosFormDeclaracion.carroceria}"/>
+						<input id="carroceria" type="hidden" value="${vehiculosFormDeclaracion.carroceria}"/>
 				</div>
 			</div>
 		</div>
@@ -62,11 +62,11 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.marca" /></label> <input
-						id="marca_descripcion" name="numresol" class="newalto form-control td_marca"
+						id="marca_descripcion" name="marca_descripcion" class="newalto form-control td_marca"
 						aria-required="true" type="text"
 						value="${vehiculosFormDeclaracion.marca}"
 						maxlength="30" disabled="disabled">
-						<input class="td_marca" id="marca" type="hidden" value="${vehiculosFormDeclaracion.marca}"/>
+						<input id="marca" type="hidden" value="${vehiculosFormDeclaracion.marca}"/>
 				</div>
 			</div>
 		
