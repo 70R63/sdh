@@ -322,6 +322,8 @@ ACC.opcionDeclaraciones = {
 					alert("Error procesar la solicitud");	
 				}
 			});
+		}else{
+			ACC.spinner.close();
 		}
 		
 		
@@ -358,6 +360,8 @@ ACC.opcionDeclaraciones = {
 					alert("Error procesar la solicitud");	
 				}
 			});
+		}else{
+			ACC.spinner.close();
 		}
 		
 		
