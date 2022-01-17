@@ -21,6 +21,7 @@
 <c:if test="${vehiculosFormDeclaracion.controlCampos.btnPagarSPAC == true}">
 	<c:set var="flagSPAC" value="true" />
 </c:if>
+<c:set var="flagSPAC" value="false" />
 
 <c:if test="${vehiculosFormDeclaracion.controlCampos.btnPagarDec == false}">
 	<c:set var="flagPagarEnLinea" value="true" />
