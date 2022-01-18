@@ -25,7 +25,7 @@
 						<td><spring:theme code="predialcinco.generales.descripcion1" /><a
 							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
 								información</a><br> <spring:theme
-								code="predialcinco.generales.descripcion2" /></td>
+								code="predialuno.generales.descripcion2" /></td>
 					</tr>
 				</tbody>
 			</table>
