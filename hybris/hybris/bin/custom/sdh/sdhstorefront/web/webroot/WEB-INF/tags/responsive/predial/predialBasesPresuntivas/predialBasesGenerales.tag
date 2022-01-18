@@ -28,7 +28,7 @@
 								code="predial.basespresun.generales.descripcion1" /><a
 							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
 								información</a><br> <spring:theme
-								code="predial.basespresun.generales.descripcion2" /></td>
+								code="predialuno.generales.descripcion2" /></td>
 					</tr>
 				</tbody>
 			</table>
