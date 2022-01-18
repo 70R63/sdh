@@ -66,9 +66,15 @@
 
 <c:set var="disabledAporte" value='disabled="disabled"' />
 <c:set var="projectDisable" value='disabled="disabled"' />
+<c:set var="mostrarSeccionAporte" value="false" />
 <c:if test="${vehiculosFormDeclaracion.aporte_activo == 'X'}">
 	<c:set var="disabledAporte" value="" />
 	<c:set var="projectDisable" value="" />
+	<c:set var="mostrarSeccionAporte" value="true" />
+</c:if>
+
+<c:if test="${fn:substring(vehiculosFormDeclaracion.opcionUso,0,2) == '02'}">
+	<c:set var="mostrarSeccionAporte" value="false" />
 </c:if>
 
 <c:if test="${vehiculosFormDeclaracion.controlCampos.liquidacion == true}">
@@ -183,7 +189,7 @@
 			</div>
 		</div>
 
-		<c:if test="${vehiculosFormDeclaracion.aporte_activo == 'X'}">
+		<c:if test="${mostrarSeccionAporte == true}">
 		<div class="row mt-3">
 			<div class="col-md-3">
 				<div class="form-check">
