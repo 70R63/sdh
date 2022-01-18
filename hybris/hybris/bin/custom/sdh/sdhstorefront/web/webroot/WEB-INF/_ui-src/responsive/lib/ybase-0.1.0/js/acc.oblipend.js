@@ -53,7 +53,7 @@ ACC.oblipend = {
 					$.each(valueH.details, function (indexD,valueD){
 						var tr_value = "";
 						
-						if(true || (valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != "")){
+						if(valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != ""){
 							var td_totalPagar = "";
 							var td_rop = "";
 							var td_pagoVigente = "";
@@ -132,7 +132,7 @@ ACC.oblipend = {
 					$.each(valueH.details, function (indexD,valueD){
 						var tr_value = "";
 						
-						if(true || (valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != "")){
+						if(valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != ""){
 							var td_totalPagar = "";
 							var td_rop = "";
 							var td_pagoVigente = "";
@@ -213,7 +213,7 @@ ACC.oblipend = {
 					$.each(valueH.details, function (indexD,valueD){
 						var tr_value = "";
 						
-						if(true || (valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != "")){
+						if(valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != ""){
 							var td_totalPagar = "";
 							var td_rop = "";
 							var td_pagoVigente = "";
@@ -291,7 +291,7 @@ ACC.oblipend = {
 					$.each(valueH.details, function (indexD,valueD){
 						var tr_value = "";
 						
-						if(true || (valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != "")){
+						if(valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != ""){
 							var td_totalPagar = "";
 							var td_rop = "";
 							var td_pagoVigente = "";

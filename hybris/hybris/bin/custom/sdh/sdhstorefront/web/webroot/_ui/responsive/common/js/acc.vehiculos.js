@@ -598,19 +598,19 @@ ACC.vehiculos = {
 	},
 	
 	
-	obtenerCatalogosInicialVehiculos : function(cat_valores_actuales, homologado,opcionUso) {
+	obtenerCatalogosInicialVehiculos : function(cat_valores_actuales, homologado,opcionUso,bloquearCampos_flag) {
 		
 		var elementoCat = null;
 		elementoCat = document.getElementById("linea");
-		elementoCat.disabled = "disabled";
+		$("#linea").prop("disabled", true );
 		elementoCat = document.getElementById("cilindraje");
-		elementoCat.disabled = "disabled";
+		$("#cilindraje").prop("disabled", true );
 		
 		dataActual = null;
 		dataActual = ACC.vehiculos.determinarInfoInicialParaCatalogo("linea",cat_valores_actuales);
-		ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"linea",cat_valores_actuales, homologado,opcionUso);
+		ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"linea",cat_valores_actuales, homologado,opcionUso,bloquearCampos_flag);
 		dataActual = ACC.vehiculos.determinarInfoInicialParaCatalogo("cilindraje",cat_valores_actuales);
-		ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"cilindraje",cat_valores_actuales, homologado,opcionUso);
+		ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"cilindraje",cat_valores_actuales, homologado,opcionUso,bloquearCampos_flag);
 		
 		
 	},
@@ -637,14 +637,24 @@ ACC.vehiculos = {
 			$( "#linea" ).prop( "disabled", false );
 			$( "#cilindraje" ).prop( "disabled", false );
 			$( "#avaluoAct" ).prop( "disabled", false );
-		}	
-		
+		}
 		
 		
 	},
 	
 	
-	obtenerCatalogosVehiculos : function(dataActual, campo_catalogo, cat_valores_actuales, homologado,opcionUso) {
+	bloquearCampos : function(flag) {
+	
+		if(flag){
+			$( "#linea" ).prop( "disabled", true );
+			$( "#cilindraje" ).prop( "disabled", true );
+			$( "#avaluoAct" ).prop( "disabled", true );
+		}
+		
+	},
+	
+	
+	obtenerCatalogosVehiculos : function(dataActual, campo_catalogo, cat_valores_actuales, homologado,opcionUso,bloquearCampos_flag) {
 		ACC.spinner.show();
 
 		$.ajax({
@@ -654,7 +664,7 @@ ACC.vehiculos = {
 			success : function(dataResponse) {
 				
 				ACC.spinner.close();
-				ACC.vehiculos.updateFromResponse_catalogos(campo_catalogo,cat_valores_actuales,dataActual,dataResponse, homologado,opcionUso);					
+				ACC.vehiculos.updateFromResponse_catalogos(campo_catalogo,cat_valores_actuales,dataActual,dataResponse, homologado,opcionUso,bloquearCampos_flag);					
 			},
 			error : function() {
 				ACC.spinner.close();
@@ -666,7 +676,7 @@ ACC.vehiculos = {
 	},
 	
 	
-	updateFromResponse_catalogos : function(campo_catalogo, cat_valores_actuales, infoActual, infoResponse, homologado,opcionUso){
+	updateFromResponse_catalogos : function(campo_catalogo, cat_valores_actuales, infoActual, infoResponse, homologado,opcionUso,bloquearCampos_flag){
 	
 		if(campo_catalogo == 'linea'){
 			$("#linea").find("option:gt(0)").remove();
@@ -705,21 +715,29 @@ ACC.vehiculos = {
 			elementoCat.disabled = "";
 		}else if(campo_catalogo == 'avaluo'){
 			if(infoResponse.catalogo.avaluoactual  == null || infoResponse.catalogo.avaluoactual == ""){
-				var error = infoResponse.catalogo.errores;
-				var tam = error.length;
-				var showerror = $("#AvaluoMensaje");
-				showerror.style.display = 'block';
-				for(var i = 0; i<=tam; i++){
-				$("#mensajeAvaluo").val(error.txt_msj);
+				if(infoResponse.catalogo.errores != undefined){
+					var error = infoResponse.catalogo.errores;
+					var tam = error.length;
+					var showerror = $("#AvaluoMensaje");
+					showerror.style.display = 'block';
+					for(var i = 0; i<=tam; i++){
+						$("#mensajeAvaluo").val(error.txt_msj);
+					}
 				}
 			}else{
 				var showerror = $("#AvaluoMensaje");
 				showerror.style.display = 'none';
-			$("#avaluoAct").val(infoResponse.catalogo.avaluoactual);
+				$("#avaluoAct").val(infoResponse.catalogo.avaluoactual);
 			}
 		}
 		
-		ACC.vehiculos.actualizaHomologado(homologado,opcionUso);
+		if(bloquearCampos_flag){
+			ACC.vehiculos.bloquearCampos(bloquearCampos_flag);
+		}else{
+			ACC.vehiculos.actualizaHomologado(homologado,opcionUso);			
+		}
+
+
 	},
 	
 	
