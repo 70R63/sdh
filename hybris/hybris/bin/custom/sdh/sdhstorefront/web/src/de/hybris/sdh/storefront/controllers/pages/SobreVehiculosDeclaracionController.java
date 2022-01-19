@@ -655,9 +655,9 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		final VehiculosInfObjetoForm vehiculosFormDeclaracion = new VehiculosInfObjetoForm();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 
-		//		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CustomerData currentUserData = this.getCustomerFacade().getCurrentCustomer();
-		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSession();
 
 		model.addAttribute("contribuyenteData", contribuyenteData);
 		model.addAttribute("currentUserData", currentUserData);
@@ -760,17 +760,12 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		final String numBP = representado;
 			final String anoParaPSE = vehicular2response.getInfo_vehiculo().getAnio_Gravable();
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
-		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
 		final String mensajeError = "";
 		String[] mensajesError;
+		
 
-
-		contribuyenteRequest.setNumBP(numBP);
-
-		System.out.println("Request de validaCont: " + contribuyenteRequest);
-		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
-		System.out.println("Response de validaCont: " + detalleContribuyente);
+		detalleContribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "02");
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
 			infoPreviaPSE.setAnoGravable(anoParaPSE);

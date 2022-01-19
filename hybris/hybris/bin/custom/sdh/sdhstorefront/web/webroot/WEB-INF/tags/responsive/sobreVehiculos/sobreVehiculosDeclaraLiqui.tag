@@ -77,6 +77,7 @@
 	<c:set var="mostrarSeccionAporte" value="false" />
 </c:if>
 
+<c:set var="flagCalcular" value='true' />
 <c:if test="${vehiculosFormDeclaracion.controlCampos.liquidacion == true}">
 	<c:set var="disabledLiquidacion" value='disabled="disabled"' />
 	<c:set var="disabledAporte" value='disabled="disabled"' />
@@ -84,6 +85,7 @@
 	<c:set var="disabledLinea" value='disabled="disabled"' />
 	<c:set var="disabledCilindraje" value='disabled="disabled"' />
 	<c:set var="disabledAvaluo" value='disabled="disabled"' />
+	<c:set var="flagCalcular" value='false' />
 	<input type="hidden" id="disabledLiquidacion_flag" value="X"/>
 </c:if>
 
@@ -421,16 +423,18 @@
 
 
 
-		<div class="row">
-			<div class="col-md-3">
-				<button id="calcularVehButton"
-					class="btn btn-primary calcularVehButton" type="button"
-					style="margin-top: 28px !important">
-					<spring:theme
-						code="sobre.vehiculo.declaracion.vehiculo.liq.calcular" />
-				</button>
+		<c:if test="${flagCalcular == true}">
+			<div class="row">
+				<div class="col-md-3">
+					<button id="calcularVehButton"
+						class="btn btn-primary calcularVehButton" type="button"
+						style="margin-top: 28px !important">
+						<spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.liq.calcular" />
+					</button>
+				</div>
 			</div>
-		</div>
+		</c:if>
 		<br>
 	</form:form>
 </div>
