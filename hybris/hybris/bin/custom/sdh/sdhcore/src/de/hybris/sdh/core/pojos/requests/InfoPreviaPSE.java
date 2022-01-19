@@ -28,7 +28,8 @@ public class InfoPreviaPSE
 	private String cdu;
 	private String placa;
 	private String concesionario;
-	private String montoVoluntario;
+	private String pagoVoluntario;
+
 
 
 
@@ -36,20 +37,20 @@ public class InfoPreviaPSE
 
 
 	/**
-	 * @return the montoVoluntario
+	 * @return the pagoVoluntario
 	 */
-	public String getMontoVoluntario()
+	public String getPagoVoluntario()
 	{
-		return montoVoluntario;
+		return pagoVoluntario;
 	}
 
 	/**
-	 * @param montoVoluntario
-	 *           the montoVoluntario to set
+	 * @param pagoVoluntario
+	 *           the pagoVoluntario to set
 	 */
-	public void setMontoVoluntario(final String montoVoluntario)
+	public void setPagoVoluntario(final String pagoVoluntario)
 	{
-		this.montoVoluntario = montoVoluntario;
+		this.pagoVoluntario = pagoVoluntario;
 	}
 
 	/**
@@ -377,8 +378,10 @@ public class InfoPreviaPSE
 				+ ", anoGravable=" + anoGravable + ", periodo=" + periodo + ", clavePeriodo=" + clavePeriodo + ", dv=" + dv
 				+ ", numObjeto=" + numObjeto + ", CDU=" + CDU + ", radicado=" + radicado + ", anticipo=" + anticipo + ", chip=" + chip
 				+ ", fechaVenc=" + fechaVenc + ", numRef=" + numRef + ", totalPagar=" + totalPagar + ", cdu=" + cdu + ", placa="
-				+ placa + ", concesionario=" + concesionario + ", montoVoluntario=" + montoVoluntario + "]";
+				+ placa + ", concesionario=" + concesionario + ", pagoVoluntario=" + pagoVoluntario + "]";
 	}
+
+
 
 
 
