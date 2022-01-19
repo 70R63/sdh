@@ -2669,6 +2669,7 @@ public class SobreTasaGasolinaService
 							{
 								if (predial_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto()))
 								{
+									predial_customer.setDireccionPredio(itemDeclaracion.getDireccionPredio());
 									predial.add(predial_customer);
 								}
 							}
