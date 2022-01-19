@@ -322,6 +322,8 @@ ACC.opcionDeclaraciones = {
 					alert("Error procesar la solicitud");	
 				}
 			});
+		}else{
+			ACC.spinner.close();
 		}
 		
 		
@@ -358,6 +360,8 @@ ACC.opcionDeclaraciones = {
 					alert("Error procesar la solicitud");	
 				}
 			});
+		}else{
+			ACC.spinner.close();
 		}
 		
 		
@@ -562,16 +566,7 @@ ACC.opcionDeclaraciones = {
 			if(infoActual.claveImpuesto == '0002'){
 				if(infoResponse.vehicular.length > 0){
 					$.each(infoResponse.vehicular, function (index,value){
-						var marcaDescripcion = "";
-						marca_vehi.forEach(function (eachMAR) {
-							if(marcaDescripcion != ""){
-								return;
-							}
-					    	if(eachMAR.id_marca == value.marca){
-				    			marcaDescripcion = eachMAR.item_marca;
-				    		}
-						});
-						
+						var marcaDescripcion = ACC.opcionDeclaraciones.obtenerDesc_marca(value.marca);
 						
 						$('#table-vehicular1').append("<tr>"+
 								'<td>' + value.placa + '</td>'+

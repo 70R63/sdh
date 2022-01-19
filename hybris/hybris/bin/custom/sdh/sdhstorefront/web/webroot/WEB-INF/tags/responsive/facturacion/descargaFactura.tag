@@ -34,6 +34,7 @@
 				<sf:hidden path="totalPagar" id="pagarEnLinea_totalPagar"/>
 				<sf:hidden path="cdu" id="pagarEnLinea_cdu"/>
 				<sf:hidden path="placa" id="pagarEnLinea_placa"/>
+				<sf:hidden path="pagoVoluntario" id="pagarEnLinea_pagoVoluntario"/>				
 			</div>
 		</sf:form>
 	</div>
@@ -286,7 +287,7 @@
 	}
 	
 	
-	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar,cdu,placa,facilidad,montoFacilidad){
+	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar,cdu,placa,facilidad,montoFacilidad,pagoVoluntario){
 		
 		var numBP = "${customerData.numBP}";
 		var numDoc = "${customerData.documentNumber}";
@@ -323,8 +324,8 @@
 		
 		$("#pagarEnLinea_numRef").val(numRef);
 	    $("#pagarEnLinea_totalPagar").val(totalPagar);
-		
-		
+	    $("#pagarEnLinea_pagoVoluntario").val(pagoVoluntario);
+	    
 		var form = document.getElementById("infoPreviaPSE");
 		if(form!=null){
 			form.submit();
