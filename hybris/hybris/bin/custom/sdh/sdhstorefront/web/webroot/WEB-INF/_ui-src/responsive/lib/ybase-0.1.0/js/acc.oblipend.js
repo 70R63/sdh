@@ -6,7 +6,6 @@ ACC.oblipend = {
 
 	updateFromResponseImpuesto : function(infoResponse){
 		
-		debugger;
 		if(infoResponse.claveImpuesto!= null){
 			switch (infoResponse.claveImpuesto){
 				case "0001":
@@ -53,7 +52,7 @@ ACC.oblipend = {
 					$.each(valueH.details, function (indexD,valueD){
 						var tr_value = "";
 						
-						if(true || (valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != "")){
+						if(valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != ""){
 							var td_totalPagar = "";
 							var td_rop = "";
 							var td_pagoVigente = "";
@@ -132,7 +131,7 @@ ACC.oblipend = {
 					$.each(valueH.details, function (indexD,valueD){
 						var tr_value = "";
 						
-						if(true || (valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != "")){
+						if(valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != ""){
 							var td_totalPagar = "";
 							var td_rop = "";
 							var td_pagoVigente = "";
@@ -213,7 +212,7 @@ ACC.oblipend = {
 					$.each(valueH.details, function (indexD,valueD){
 						var tr_value = "";
 						
-						if(true || (valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != "")){
+						if(valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != ""){
 							var td_totalPagar = "";
 							var td_rop = "";
 							var td_pagoVigente = "";
@@ -291,7 +290,7 @@ ACC.oblipend = {
 					$.each(valueH.details, function (indexD,valueD){
 						var tr_value = "";
 						
-						if(true || (valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != "")){
+						if(valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != ""){
 							var td_totalPagar = "";
 							var td_rop = "";
 							var td_pagoVigente = "";
@@ -361,8 +360,8 @@ ACC.oblipend = {
 	
 	
 	updateFromResponseImpuesto_predial : function(infoResponse){
-		var id_tabla = "table-predial1";
-		var tablaInfo = infoResponse.headerPredial;
+		var id_tabla = "#table-predial1";
+		var tablaInfo = infoResponse.headerPred;
 		
 		ACC.publicidadexterior.bindDataTable_ID_refresh(id_tabla);
 		$(id_tabla).find("tr:gt(0)").remove();
@@ -499,13 +498,9 @@ ACC.oblipend = {
 
 	buscarObliPend : function() {
 		
-		ACC.spinner.show();
-		debugger;
 		ACC.oblipend.ocultarTablasDeImpuestos();
 		
 		var impuesto = $("#impuesto").val();
-		var dataActual = {};
-		
 		if(impuesto != ""){
 			switch (impuesto){
 				case "0001":
@@ -515,20 +510,7 @@ ACC.oblipend = {
 				case "0005":
 				case "0006":
 				case "0007":
-					dataActual.claveImpuesto = impuesto;
-					$.ajax({
-						url : ACC.obligacionesPendImpuesto_contURL,
-						data : dataActual,
-						type : "GET",
-						success : function(dataResponse) {
-							ACC.spinner.close();
-							ACC.oblipend.updateFromResponseImpuesto_todos(dataResponse);
-						},
-						error : function() {
-							ACC.spinner.close();
-							alert("Error procesar la solicitud");	
-						}
-					});
+					ACC.oblipend.buscarObliPend_impuesto(impuesto);
 					break;
 				case "99":
 					$("#impuesto option").each(function(i){
@@ -540,20 +522,7 @@ ACC.oblipend = {
 							case "0005":
 							case "0006":
 							case "0007":
-								dataActual.claveImpuesto = $(this).val();
-								$.ajax({
-									url : ACC.obligacionesPendImpuesto_contURL,
-									data : dataActual,
-									type : "GET",
-									success : function(dataResponse) {
-										ACC.spinner.close();
-										ACC.oblipend.updateFromResponseImpuesto_todos(dataResponse);
-									},
-									error : function() {
-										ACC.spinner.close();
-										alert("Error procesar la solicitud");	
-									}
-								});
+								ACC.oblipend.buscarObliPend_impuesto($(this).val());
 								break;
 							default:
 								break;
@@ -563,6 +532,28 @@ ACC.oblipend = {
 			}
 		}
 
+	},
+	
+	
+	buscarObliPend_impuesto : function(impuesto){
+		ACC.spinner.show();
+		var dataActual = {};
+		
+		dataActual.claveImpuesto = impuesto;
+		$.ajax({
+			url : ACC.obligacionesPendImpuesto_contURL,
+			data : dataActual,
+			type : "GET",
+			success : function(dataResponse) {
+				ACC.spinner.close();
+				ACC.oblipend.updateFromResponseImpuesto_todos(dataResponse);
+			},
+			error : function() {
+				ACC.spinner.close();
+				alert("Error al procesar la solicitud");	
+			}
+		});
+		
 	},
 	
 	
@@ -640,33 +631,6 @@ ACC.oblipend = {
 				break;
 			case "0007":
 				$("#oblipend-publiext").show();
-				break;
-//			case "99":
-//				$("#impuesto option").each(function(i){
-//					switch ($(this).val()){
-//						case "0001":
-//							$("#oblipend-predial").show();
-//							break;
-//						case "0002":
-//							$("#oblipend-vehiculos").show();
-//							break;
-//						case "0003":
-//							$("#oblipend-ica").show();
-//							break;
-//						case "0004":
-//							$("#oblipend-reteica").show();
-//							break;
-//						case "0005":
-//							$("#oblipend-gasolina").show();
-//							break;
-//						case "0006":
-//							$("#oblipend-delurbana").show();
-//							break;
-//						case "0007":
-//							$("#oblipend-publiext").show();
-//							break;
-//					}
-//				});
 				break;
 			default:
 				break;
@@ -862,7 +826,6 @@ ACC.oblipend = {
 	},
 
 	bindTrmPdf : function(impuesto, reporte, reportPdfName) {
-debugger;
 		ACC.spinner.show();		
 	    var currentUrl = window.location.href;
 	    var infoTA = null;
