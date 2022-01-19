@@ -313,6 +313,10 @@ public class PreparacionPagoPSE extends AbstractPageController
 				sb.append(infoPreviaPSE.getAnoGravable() + ";");
 				sb.append(infoPreviaPSE.getClavePeriodo() + ";");
 				sb.append(infoPreviaPSE.getNumObjeto() + ";");
+				if (infoPreviaPSE.getPagoVoluntario() != null)
+				{
+					sb.append(infoPreviaPSE.getPagoVoluntario() + ";");
+				}
 				sb.append(" ");
 			}
 			else

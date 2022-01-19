@@ -28,11 +28,30 @@ public class InfoPreviaPSE
 	private String cdu;
 	private String placa;
 	private String concesionario;
+	private String pagoVoluntario;
 
 
 
 
 
+
+
+	/**
+	 * @return the pagoVoluntario
+	 */
+	public String getPagoVoluntario()
+	{
+		return pagoVoluntario;
+	}
+
+	/**
+	 * @param pagoVoluntario
+	 *           the pagoVoluntario to set
+	 */
+	public void setPagoVoluntario(final String pagoVoluntario)
+	{
+		this.pagoVoluntario = pagoVoluntario;
+	}
 
 	/**
 	 * @return the concesionario
@@ -352,18 +371,19 @@ public class InfoPreviaPSE
 		this.chip = chip;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
 		return "InfoPreviaPSE [tipoImpuesto=" + tipoImpuesto + ", numBP=" + numBP + ", numDoc=" + numDoc + ", tipoDoc=" + tipoDoc
 				+ ", anoGravable=" + anoGravable + ", periodo=" + periodo + ", clavePeriodo=" + clavePeriodo + ", dv=" + dv
 				+ ", numObjeto=" + numObjeto + ", CDU=" + CDU + ", radicado=" + radicado + ", anticipo=" + anticipo + ", chip=" + chip
-				+ "]";
+				+ ", fechaVenc=" + fechaVenc + ", numRef=" + numRef + ", totalPagar=" + totalPagar + ", cdu=" + cdu + ", placa="
+				+ placa + ", concesionario=" + concesionario + ", pagoVoluntario=" + pagoVoluntario + "]";
 	}
+
+
+
+
+
 
 }

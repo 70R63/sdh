@@ -256,7 +256,9 @@ ACC.facturacion = {
 						valueS = Object.assign({}, value);
 						valueC = Object.assign({}, value);
 						valueS.montoAporte = dataResponse.responsePredial.totalPagar;
+						valueS.pagoVoluntario = "0.00";
 						valueC.montoAporte = dataResponse.responsePredial.totalConVoluntario;
+						valueC.pagoVoluntario = dataResponse.responsePredial.pagoVoluntario;
 					}
 					break;
 				
@@ -276,7 +278,9 @@ ACC.facturacion = {
 						valueS = Object.assign({}, value);
 						valueC = Object.assign({}, value);
 						valueS.montoAporte = dataResponse.responseVehicular.totalPagar;
+						valueS.pagoVoluntario = "0.00";
 						valueC.montoAporte = dataResponse.responseVehicular.totalConVoluntario;
+						valueC.pagoVoluntario = dataResponse.responseVehicular.pagoVoluntario;
 					}
 					break;
 				default:
@@ -313,7 +317,8 @@ ACC.facturacion = {
 				+ '\'' + value.cdu + '\','
 				+ '\'' + value.placa + '\','
 				+ '\'' + value.facilidad + '\','
-				+ '\'' + value.montoFacilidad + '\''
+				+ '\'' + value.montoFacilidad + '\','
+				+ '\'' + value.pagoVoluntario + '\''	
 				+')" ' +			
 			'>Pagar</label></td>'+
 			'</tr>'
