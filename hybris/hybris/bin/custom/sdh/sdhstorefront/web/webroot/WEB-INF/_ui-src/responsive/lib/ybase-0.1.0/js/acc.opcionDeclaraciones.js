@@ -682,9 +682,11 @@ ACC.opcionDeclaraciones = {
 							$.each(infoResponse.customerData.vehicular, function (index,value2){
 								if(value1.numObjeto == value2.numObjeto){
 									desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
+									var desc_marca = ACC.opcionDeclaraciones.obtenerDesc_marca(value2.marca);
+									
 									$('#table-vehicular1').append("<tr>"+
 											'<td>' + value2.placa + '</td>'+
-											'<td>' + value2.marca + '</td>'+
+											'<td>' + desc_marca + '</td>'+
 											'<td>' + desc_clavePeriodo + '</td>'+
 											'<td>' + value1.referencia + '</td>'+
 											'<td>' + value1.importe + '</td>'+
