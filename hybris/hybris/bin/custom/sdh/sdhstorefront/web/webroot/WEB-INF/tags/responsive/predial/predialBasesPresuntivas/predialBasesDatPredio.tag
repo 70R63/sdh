@@ -7,9 +7,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
-<c:set var="disabledDatosPredio" value="false" />
+<c:set var="disabledDatosPredio_boolean" value="false" />
+<c:set var="disabledDatosPredio_text" value="" />
 <c:if test="${predialFormbases.controlCampos.datosPredio == true}">
-	<c:set var="disabledDatosPredio" value='true' />
+	<c:set var="disabledDatosPredio_boolean" value='true' />
+	<c:set var="disabledDatosPredio_text" value="disabled" />
 </c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
@@ -29,7 +31,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="Uso de suelo" /></label> 
-					<select class="newalto form-control" id="usoSuelo" onchange="showDestino(this)">
+					<select class="newalto form-control" id="usoSuelo" onchange="showDestino(this)" ${disabledDatosPredio_text}>
 						<option value="">Seleccionar</option>
 						<option value="0">Urbano</option>
 						<option value="1">Rural</option>
@@ -39,19 +41,19 @@
 			<div class="col-md-2" id="destHacendario" style="display: block">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="predial.basespresun.datliquidacion.destino" /></label> 
-					<form:select class="newalto form-control" id="DestinoHacendario" path="estrLiquidacionPredial.destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}" onclick="accionCat_destinoHacendario()" disabled="${disabledDatosPredio}" onchange="showHacendario(this)"></form:select>
+					<form:select class="newalto form-control" id="DestinoHacendario" path="estrLiquidacionPredial.destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}" onclick="accionCat_destinoHacendario()" disabled="${disabledDatosPredio_boolean}" onchange="showHacendario(this)"></form:select>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.areterreno" /></label> 
-					<input id="areaterreno" name="areaterreno" class="newalto form-control areaterreno" type="text" value="" maxlength="240"></input>
+					<input id="areaterreno" name="areaterreno" class="newalto form-control areaterreno" type="text" value="" maxlength="240" ${disabledDatosPredio_text}/>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.areaconstru" /></label> 
-					<input id="areaconstruccion" name="areaconstruccion" class="newalto form-control areaconstruccion" type="text" value="" maxlength="240"></input>
+					<input id="areaconstruccion" name="areaconstruccion" class="newalto form-control areaconstruccion" type="text" value="" maxlength="240" ${disabledDatosPredio_text}/>
 				</div>
 			</div>
 		</div>
@@ -59,7 +61,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="Actividad Ecónomica" /></label>
-					<select class="newalto form-control" id="activEconomica" >
+					<select class="newalto form-control" id="activEconomica" ${disabledDatosPredio_text}>
 						<option value="">Seleccionar</option>
 						<option value="1">Residencial</option>
 						<option value="2">Urbanizable no urbanizado</option>
@@ -73,7 +75,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.prophorizon" /></label> 
-					<form:select class="newalto form-control prophorizontal" id="propiedadHorizontal" path="estrDatosGenerales.propiedadHorizontal" items="${predialFormbases.catalogos.propiedadHorizontal}" disabled="${disabledDatosPredio}"></form:select>
+					<form:select class="newalto form-control prophorizontal" id="propiedadHorizontal" path="estrDatosGenerales.propiedadHorizontal" items="${predialFormbases.catalogos.propiedadHorizontal}" disabled="${disabledDatosPredio_boolean}"></form:select>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -93,10 +95,10 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.caracpredio" /></label>
-					<form:select style="display: block" class="newalto form-control" id="caracterizacionPredio" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri61}" disabled="${disabledDatosPredio}"></form:select>
-					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio62" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri62}" disabled="${disabledDatosPredio}"></form:select>
-					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio65" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri65}" disabled="${disabledDatosPredio}"></form:select>
-					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio67" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri67}" disabled="${disabledDatosPredio}"></form:select>
+					<form:select style="display: block" class="newalto form-control" id="caracterizacionPredio" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri61}" disabled="${disabledDatosPredio_boolean}"></form:select>
+					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio62" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri62}" disabled="${disabledDatosPredio_boolean}"></form:select>
+					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio65" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri65}" disabled="${disabledDatosPredio_boolean}"></form:select>
+					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio67" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri67}" disabled="${disabledDatosPredio_boolean}"></form:select>
 				</div>
 			</div>
 			<div class="col-md-3">
