@@ -2170,12 +2170,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		}
 
 		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP(),"01,02");
-
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		SDHValidaMailRolResponse contImpuestos = null;
-
-		contImpuestos = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "01");
-		contribuyenteData.setPredial(contImpuestos.getPredial());
+		ConsultaContribuyenteBPRequest consultaContribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		consultaContribuyenteRequest.setNumBP(customerData.getNumBP());
+		contribuyenteData.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteRequest));
 
 		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
 				.filter(d -> predialFormbases.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
