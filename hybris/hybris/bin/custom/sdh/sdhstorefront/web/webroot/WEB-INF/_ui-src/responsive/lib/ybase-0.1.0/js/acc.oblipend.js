@@ -297,8 +297,8 @@ ACC.oblipend = {
 							var td_spac = "";
 							var clavePeriodo = "";
 							
-							if(valueH.anioGravable != null && valueH.anioGravable.lenght >= 4){
-								clavePeriodo = valueH.anioGravable.substring(2,4)+"A1";
+							if(valueH.anioGravable != null ){
+								clavePeriodo = valueH.anioGravable.substring(2,4);
 							}
 							
 							switch (valueH.facilidad){
@@ -383,8 +383,8 @@ ACC.oblipend = {
 							var td_spac = "";
 							var clavePeriodo = "";
 							
-							if(valueH.anioGravable != null && valueH.anioGravable.lenght >= 4){
-								clavePeriodo = valueH.anioGravable.substring(2,4)+"A1";
+							if(valueH.anioGravable != null ){
+								clavePeriodo = valueH.anioGravable.substring(2,4);
 							}
 							
 							switch (valueH.facilidad){
