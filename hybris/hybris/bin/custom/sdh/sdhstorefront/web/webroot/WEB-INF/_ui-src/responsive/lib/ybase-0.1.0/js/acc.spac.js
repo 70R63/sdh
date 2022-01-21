@@ -100,6 +100,7 @@ ACC.spac = {
 		var currentUrl = window.location.href;
 		
 		$(objetosPantalla.tableSpacPagoTbody).empty();
+		$(objetosPantalla.tableSpacPagoTbody).find("tr:gt(0)").remove();
 		var divtable = document.getElementById(objetosPantalla.tableSpac);
 		if(divtable!=null){
 			divtable.style.display = 'none';
