@@ -41,8 +41,10 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.util.Assert;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -212,7 +214,7 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 			final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
 
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			consultaContribBPRequest.setNumBP(numBP);
 			consultaContribBPRequest.setIndicador(indicador);
 
@@ -241,7 +243,7 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				consultaContribuyenteBPRequest.setNumBP(numBP);
 
 				sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
