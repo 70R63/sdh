@@ -93,13 +93,14 @@ ACC.spac = {
 	
 	
 	generarSPACObli : function(objeto,claveImpuesto){
-		
+		debugger;
 		ACC.spinner.show();
 		objetosPantalla = ACC.spac.determinarObjetos(claveImpuesto);
 
 		var currentUrl = window.location.href;
 		
 		$(objetosPantalla.tableSpacPagoTbody).empty();
+		$(objetosPantalla.tableSpacPagoTbody).find("tr:gt(0)").remove();
 		var divtable = document.getElementById(objetosPantalla.tableSpac);
 		if(divtable!=null){
 			divtable.style.display = 'none';
@@ -121,6 +122,7 @@ ACC.spac = {
 			type : "GET",
 			success : function(spacform) {
 				ACC.spinner.close();
+				debugger;
 				var cuotas = spacform.cuotas_Spac;
 				if(cuotas != null){
 					for (var i = 0; i < cuotas.length; i++) {
