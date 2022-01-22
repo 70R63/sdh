@@ -456,7 +456,7 @@ ACC.oblipend = {
 	
 	predial_generarTD_totalPagar : function(obligacion,totalPagar,objetoContrato,clavePeriodo,tpImp){
 		
-		return '<a href="' + ACC.inicialURL +'contribuyentes/rop?obligacion=' + obligacion + '&totalPagar=' + totalPagar + '&objCont=' + objetoContrato + '&clvPer=' + clavePeriodo + 'A1&tpImp="' + tpImp + ' >Generar ROP</a>'; 
+		return '<a href="' + ACC.inicialURL +'contribuyentes/rop?obligacion=' + obligacion + '&totalPagar=' + totalPagar + '&objCont=' + objetoContrato + '&clvPer=' + clavePeriodo + 'A1&tpImp=' + tpImp + '" >Generar ROP</a>'; 
 	},
 	
 	predial_generarTD_spac : function(numFormulario,anioGravable,objetoContrato,reimpresion){

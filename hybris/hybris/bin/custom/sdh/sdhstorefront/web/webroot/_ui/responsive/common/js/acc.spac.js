@@ -93,7 +93,7 @@ ACC.spac = {
 	
 	
 	generarSPACObli : function(objeto,claveImpuesto){
-		debugger;
+		
 		ACC.spinner.show();
 		objetosPantalla = ACC.spac.determinarObjetos(claveImpuesto);
 
@@ -122,7 +122,6 @@ ACC.spac = {
 			type : "GET",
 			success : function(spacform) {
 				ACC.spinner.close();
-				debugger;
 				var cuotas = spacform.cuotas_Spac;
 				if(cuotas != null){
 					for (var i = 0; i < cuotas.length; i++) {
