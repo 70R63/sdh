@@ -2030,6 +2030,22 @@ ACC.opcionDeclaraciones = {
 						break;
 					}
 				break;
+			case ACC.configCatalogos_ambito_certiDeclaracion:
+			case ACC.configCatalogos_ambito_reimpresionDeclaracion:
+		        switch (claveImpuesto) {
+					case "1":		//predial
+					case "2":		//vehiculos
+					case "3":		//ica
+					case "5":		//gasolina
+					case "6":		//delineacion
+					case "7":		//publicidad
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_CertiDeclaracion;
+						break;
+					default:
+						cantidadAnoGravable = 0;
+						break;
+					}
+				break;
 			case "presentar-declaracion":
 		        switch (claveImpuesto) {
 					default:

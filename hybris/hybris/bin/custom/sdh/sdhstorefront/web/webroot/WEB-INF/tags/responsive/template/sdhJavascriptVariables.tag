@@ -13,6 +13,7 @@
 <c:set value="2" var="configCatalogos_cantidadAnios_Consultas_gasolina" />
 <c:set value="1" var="configCatalogos_cantidadAnios_Consultas_delineacion" />
 <c:set value="2" var="configCatalogos_cantidadAnios_Consultas_publicidad" />
+<c:set value="5" var="configCatalogos_cantidadAnios_CertiDeclaracion" />
 <%-- JS configuration --%>
 	<script type="text/javascript">
 
@@ -288,6 +289,9 @@
 			ACC.configCatalogos_cantidadAnios_Consultas_gasolina="${configCatalogos_cantidadAnios_Consultas_gasolina}";
 			ACC.configCatalogos_cantidadAnios_Consultas_delineacion="${configCatalogos_cantidadAnios_Consultas_delineacion}";
 			ACC.configCatalogos_cantidadAnios_Consultas_publicidad="${configCatalogos_cantidadAnios_Consultas_publicidad}";	
+			ACC.configCatalogos_cantidadAnios_CertiDeclaracion="${configCatalogos_cantidadAnios_CertiDeclaracion}";
+			ACC.configCatalogos_ambito_certiDeclaracion="certiDeclaracion";
+			ACC.configCatalogos_ambito_reimpresionDeclaracion="reimpresionDeclaracion";
 	
 		/*]]>*/
 	</script>
