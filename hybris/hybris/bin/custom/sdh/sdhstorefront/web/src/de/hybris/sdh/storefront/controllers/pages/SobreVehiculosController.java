@@ -137,9 +137,9 @@ public class SobreVehiculosController extends AbstractPageController
 			vehiculosForm.setTipiden(customerModel.getDocumentType());
 			vehiculosForm.setNumide(customerModel.getDocumentNumber());
 			if("NIT".compareToIgnoreCase(customerModel.getDocumentType()) == 0) {
-				vehiculosForm.setName(customerModel.getNameOrg1() + " " + customerModel.getNameOrg2());
+				vehiculosForm.setName((customerModel.getNameOrg1()==null?"":customerModel.getNameOrg1()) + " " + (customerModel.getNameOrg2()==null?"":customerModel.getNameOrg2()));
 			}else {
-				vehiculosForm.setName(customerModel.getFirstName() + " " + customerModel.getLastName());				
+				vehiculosForm.setName((customerModel.getFirstName()==null?"":customerModel.getFirstName()) + " " + (customerModel.getLastName()==null?"":customerModel.getLastName()));				
 			}
 			vehiculosForm.setAnioGravableActual(Integer.toString(LocalDate.now().getYear()));
 
