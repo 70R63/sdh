@@ -2174,7 +2174,6 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		consultaContribuyenteRequest.setNumBP(customerData.getNumBP());
 		contribuyenteData.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteRequest));
 
-
 		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
 				.filter(d -> predialFormbases.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormbases.setContribuyenteData(contribuyenteData);

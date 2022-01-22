@@ -49,24 +49,36 @@
 		</div>
 		
 		
-<%-- 			<c:choose> --%>
-<%--     <c:when test="${ropFormRequest.tipoImp == '01' || ropFormRequest.tipoImp == '02'}"> --%>
-     <div class="row">
-			<div class="col-md-2">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="rop.generar.parcial" /></label>
-					<form:input class="form-control new_alto" type="text" size="30"
-						value="" path="importeusuario" onkeyup="numberFormat(this)"
-						onclick="numberFormat(this)" id="importeusuario" />
+
+	
+	<c:choose>
+	   	<c:when test="${ropFormRequest.tipoImp == '03'}"> 
+	     <div class="row" style="display: none;">
+				<div class="col-md-2">
+					<div class="form-group">
+						<label class="control-label"><spring:theme
+								code="rop.generar.parcial" /></label>
+						<form:input class="form-control new_alto" type="text" size="30"
+							value="" path="importeusuario" onkeyup="numberFormat(this)"
+							onclick="numberFormat(this)" id="importeusuario" />
+					</div>
 				</div>
 			</div>
-		</div>
-<%--     </c:when>     --%>
-<%--     <c:otherwise> --%>
-
-<%--     </c:otherwise> --%>
-<%-- </c:choose> --%>
+	  </c:when>
+      <c:otherwise>
+      <div class="row" style="display: block;">
+				<div class="col-md-2">
+					<div class="form-group">
+						<label class="control-label"><spring:theme
+								code="rop.generar.parcial" /></label>
+						<form:input class="form-control new_alto" type="text" size="30"
+							value="" path="importeusuario" onkeyup="numberFormat(this)"
+							onclick="numberFormat(this)" id="importeusuario" />
+					</div>
+				</div>
+			</div>
+      </c:otherwise>
+	</c:choose>	
 		
 		
 		<div class="row">
