@@ -51,8 +51,6 @@ window.onload = function() {
 		}
 	}
 	$(".loader").fadeOut("slow");
-	accionCat_destinoHacendario();
-	$('#caracterizacionPredio').val("${predialFormbases.estrDatosGenerales.caracterizacionPredio}");
 
 }
 </script>

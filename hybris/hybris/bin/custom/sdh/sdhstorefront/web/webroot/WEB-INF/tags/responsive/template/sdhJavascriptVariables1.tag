@@ -117,7 +117,17 @@
 				{'itemId':'46612','habilitado':'X'},
 				{'itemId':'46632','habilitado':'X'}
 				];
-			var cat_predial_caracterizacionPredio = [
+			
+			var cat_predial_destinoHacendario = [
+				{'usoSuelo':'0','itemId':'61','itemValue':'RESIDENCIAL'},
+				{'usoSuelo':'0','itemId':'62','itemValue':'COMERCIAL'},
+				{'usoSuelo':'0','itemId':'64','itemValue':'DOTACIONAL'},
+				{'usoSuelo':'0','itemId':'66','itemValue':'INDUSTRIAL'},
+				{'usoSuelo':'0','itemId':'65','itemValue':'DEPOSITO Y PARQUEDERO'},
+				{'usoSuelo':'0','itemId':'67','itemValue':'URBANIZABLE NO URBANIZADO Y URBANIZADO NO EDIFICADO'}
+				];
+			
+			var cat_predial_actividadEconomica = [
 				{'destinoHacendario':'61','itemId':'E1','itemValue':'ESTRATO 1'},
 				{'destinoHacendario':'61','itemId':'E2','itemValue':'ESTRATO 2'},
 				{'destinoHacendario':'61','itemId':'E3','itemValue':'ESTRATO 3'},
@@ -131,6 +141,9 @@
 				{'destinoHacendario':'62','itemId':'C5','itemValue':'FINANCIERO'},
 				{'destinoHacendario':'64','itemId':'NA','itemValue':'NO APLICA'},
 				{'destinoHacendario':'65','itemId':'D1','itemValue':'ESTRATOS 1,2 Y 3'},
+				{'destinoHacendario':'65','itemId':'E1','itemValue':'ESTRATO 1'},
+				{'destinoHacendario':'65','itemId':'E2','itemValue':'ESTRATO 2'},
+				{'destinoHacendario':'65','itemId':'E3','itemValue':'ESTRATO 3'},
 				{'destinoHacendario':'65','itemId':'E4','itemValue':'ESTRATO 4'},
 				{'destinoHacendario':'65','itemId':'E5','itemValue':'ESTRATO 5'},
 				{'destinoHacendario':'65','itemId':'E6','itemValue':'ESTRATO 6'},
@@ -144,6 +157,54 @@
 				{'destinoHacendario':'67','itemId':'E6','itemValue':'ESTRATO 6'}
 				];
 			
+			var cat_predial_propiedadHorizontal = [
+				{'destinoHacendario':'61','actividadEconomica':'E1','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'61','actividadEconomica':'E1','itemId':'2','itemValue':'NO'},
+				{'destinoHacendario':'61','actividadEconomica':'E2','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'61','actividadEconomica':'E2','itemId':'2','itemValue':'NO'},
+				{'destinoHacendario':'61','actividadEconomica':'E3','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'61','actividadEconomica':'E3','itemId':'2','itemValue':'NO'},
+				{'destinoHacendario':'61','actividadEconomica':'E4','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'61','actividadEconomica':'E4','itemId':'2','itemValue':'NO'},
+				{'destinoHacendario':'61','actividadEconomica':'E5','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'61','actividadEconomica':'E5','itemId':'2','itemValue':'NO'},
+				{'destinoHacendario':'61','actividadEconomica':'E6','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'61','actividadEconomica':'E6','itemId':'2','itemValue':'NO'},
+
+				{'destinoHacendario':'62','actividadEconomica':'C1','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'62','actividadEconomica':'C1','itemId':'2','itemValue':'NO'},
+				{'destinoHacendario':'62','actividadEconomica':'C2','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'62','actividadEconomica':'C2','itemId':'2','itemValue':'NO'},
+				{'destinoHacendario':'62','actividadEconomica':'C3','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'62','actividadEconomica':'C3','itemId':'2','itemValue':'NO'},
+				{'destinoHacendario':'62','actividadEconomica':'C4','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'62','actividadEconomica':'C4','itemId':'2','itemValue':'NO'},
+				{'destinoHacendario':'62','actividadEconomica':'C5','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'62','actividadEconomica':'C5','itemId':'2','itemValue':'NO'},
+
+				{'destinoHacendario':'64','actividadEconomica':'NA','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'64','actividadEconomica':'NA','itemId':'2','itemValue':'NO'},
+
+				{'destinoHacendario':'65','actividadEconomica':'D1','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'65','actividadEconomica':'E1','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'65','actividadEconomica':'E2','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'65','actividadEconomica':'E3','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'65','actividadEconomica':'E4','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'65','actividadEconomica':'E5','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'65','actividadEconomica':'E6','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'65','actividadEconomica':'D2','itemId':'1','itemValue':'SI'},
+
+				{'destinoHacendario':'66','actividadEconomica':'NA','itemId':'1','itemValue':'SI'},
+				{'destinoHacendario':'66','actividadEconomica':'NA','itemId':'2','itemValue':'NO'},
+				
+				{'destinoHacendario':'67','actividadEconomica':'E1','itemId':'2','itemValue':'NO'},
+				{'destinoHacendario':'67','actividadEconomica':'E2','itemId':'2','itemValue':'NO'},
+				{'destinoHacendario':'67','actividadEconomica':'E3','itemId':'2','itemValue':'NO'},
+				{'destinoHacendario':'67','actividadEconomica':'E4','itemId':'2','itemValue':'NO'},
+				{'destinoHacendario':'67','actividadEconomica':'E5','itemId':'2','itemValue':'NO'},
+				{'destinoHacendario':'67','actividadEconomica':'E6','itemId':'2','itemValue':'NO'}
+				
+				];
 
 			var countries=[{'isocode':'AD','name':'Andorra'},
 				{'isocode':'AE','name':'E.A.U.'},
