@@ -846,6 +846,7 @@ ACC.predial = {
 						}
 						
 						$("#BaseGravable").val(dataResponse.baseGravable);
+						$("#basegrav").val(dataResponse.baseGravable);
 						ACC.predial.visualizacionBasesDetalle(true);
 					}
 				},

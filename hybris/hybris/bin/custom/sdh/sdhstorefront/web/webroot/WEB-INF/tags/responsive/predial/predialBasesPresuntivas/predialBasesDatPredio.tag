@@ -91,15 +91,15 @@
 			</div>
 		</div>
 		<div class="row">
-<!-- 			<div class="col-md-4"> -->
-<!-- 				<div class="form-group"> -->
-<%-- 					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.caracpredio" /></label> --%>
-<%-- 					<form:select style="display: block" class="newalto form-control" id="caracterizacionPredio" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri61}" disabled="${disabledDatosPredio_boolean}"></form:select> --%>
-<%-- 					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio62" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri62}" disabled="${disabledDatosPredio_boolean}"></form:select> --%>
-<%-- 					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio65" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri65}" disabled="${disabledDatosPredio_boolean}"></form:select> --%>
-<%-- 					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio67" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri67}" disabled="${disabledDatosPredio_boolean}"></form:select> --%>
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<div class="col-md-4">
+				<div class="form-group">
+					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.caracpredio" /></label>
+					<form:select style="display: block" class="newalto form-control" id="caracterizacionPredio" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri61}" disabled="${disabledDatosPredio_boolean}"></form:select>
+					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio62" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri62}" disabled="${disabledDatosPredio_boolean}"></form:select>
+					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio65" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri65}" disabled="${disabledDatosPredio_boolean}"></form:select>
+					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio67" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri67}" disabled="${disabledDatosPredio_boolean}"></form:select>
+				</div>
+			</div>
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="Confirmar BG final" /></label> 
@@ -138,6 +138,7 @@
 				$("#propiedadHorizontal").find("option:gt(0)").remove();
 				actualizarCatalogosInferior(objetoActualizado);
 				actualizarObjetosHabilitados(objetoActualizado);
+				accionCat_destinoHacendario()
 				break;
 			case "activEconomica":
 				$("#propiedadHorizontal").find("option:gt(0)").remove();
@@ -314,6 +315,17 @@
 		
 		ACC.predial.ejecutarPreCalculoPB(numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario,actividadEconomica);
 		
+	}
+	
+	function accionCat_destinoHacendario(){
+		$("#caracterizacionPredio").find("option:gt(0)").remove();	
+		if($("#DestinoHacendario").val() != null){
+			for(var i=0;i<cat_predial_caracterizacionPredio.length;i++){
+				if(cat_predial_caracterizacionPredio[i].destinoHacendario == $("#DestinoHacendario").val()){
+					$('#caracterizacionPredio').append('<option value="'+ cat_predial_caracterizacionPredio[i].itemId +'">'+ cat_predial_caracterizacionPredio[i].itemValue + "</option>");
+				}
+			}		
+		}
 	}
 </script>
 
