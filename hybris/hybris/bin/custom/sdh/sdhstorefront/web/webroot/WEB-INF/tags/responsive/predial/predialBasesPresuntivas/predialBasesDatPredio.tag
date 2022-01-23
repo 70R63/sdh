@@ -138,7 +138,7 @@
 				$("#propiedadHorizontal").find("option:gt(0)").remove();
 				actualizarCatalogosInferior(objetoActualizado);
 				actualizarObjetosHabilitados(objetoActualizado);
-				accionCat_destinoHacendario()
+				accionCat_destinoHacendario();
 				break;
 			case "activEconomica":
 				$("#propiedadHorizontal").find("option:gt(0)").remove();
