@@ -902,7 +902,6 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 			case "sdh_02":
 				controlCampos = new VehiculosControlCamposDec();
 				controlCampos.setLiquidacion(true);
-				controlCampos.setBtnPresentarDec(true);
 				controlCampos.setBtnPagarDec(true);
 				controlCampos.setBtnPagarSPAC(false);
 
@@ -916,7 +915,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 									&& infoAgente.getBp().equals(currentUserData.getNumBP())
 									&& infoAgente.getInternalFunction().equals(strRepresentanteLegalPrincipal))
 							{
-								controlCampos.setBtnPresentarDec(false);
+								controlCampos.setBtnPresentarDec(true);
 								controlCampos.setBtnPagarDec(false);
 							}
 						}

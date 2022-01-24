@@ -77,6 +77,17 @@
 	<c:set var="mostrarSeccionAporte" value="false" />
 </c:if>
 
+<c:set var="flagDisabled_capacidadPas" value='disabled="disabled"' />
+<c:set var="flagDisabled_capacidadTon" value='disabled="disabled"' />
+<c:choose>
+	<c:when test="${vehiculosFormDeclaracion.tipoVeh == 6}">
+		<c:set var="flagDisabled_capacidadPas" value='' />
+	</c:when>
+	<c:when test="${vehiculosFormDeclaracion.tipoVeh == 7}">
+		<c:set var="flagDisabled_capacidadTon" value='' />
+	</c:when>
+</c:choose>
+		
 <c:set var="flagCalcular" value='true' />
 <c:if test="${vehiculosFormDeclaracion.controlCampos.liquidacion == true}">
 	<c:set var="disabledLiquidacion" value='disabled="disabled"' />
@@ -87,6 +98,8 @@
 	<c:set var="disabledAvaluo" value='disabled="disabled"' />
 	<c:set var="flagCalcular" value='false' />
 	<input type="hidden" id="disabledLiquidacion_flag" value="X"/>
+	<c:set var="flagDisabled_capacidadPas" value='disabled="disabled"' />
+	<c:set var="flagDisabled_capacidadTon" value='disabled="disabled"' />
 </c:if>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -116,16 +129,7 @@
 	<%--  		</c:otherwise>  --%>
 	<%--  	</c:choose>  --%>
 	<form:form action="">
-		<c:set var="flagDisabled_capacidadPas" value='disabled="disabled"' />
-		<c:set var="flagDisabled_capacidadTon" value='disabled="disabled"' />
-		<c:choose>
-			<c:when test="${vehiculosFormDeclaracion.tipoVeh == 6}">
-				<c:set var="flagDisabled_capacidadPas" value='' />
-			</c:when>
-			<c:when test="${vehiculosFormDeclaracion.tipoVeh == 7}">
-				<c:set var="flagDisabled_capacidadTon" value='' />
-			</c:when>
-		</c:choose>
+
 		
 		
 		
