@@ -763,7 +763,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
 		final String mensajeError = "";
 		String[] mensajesError;
-		
+
 
 		detalleContribuyente = sdhCustomerAccountService.getBPAndTaxDataFromCustomer(customerModel, "02");
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
@@ -773,8 +773,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 			infoPreviaPSE.setNumDoc(contribuyenteData.getDocumentNumber());
 			infoPreviaPSE.setNumBP(numBP);
 			infoPreviaPSE.setClavePeriodo(gasolinaService.prepararPeriodoAnualPago(anoParaPSE));
-				infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoVehicular(detalleContribuyente,
-						vehicular2response.getInfo_vehiculo().getPlaca()));
+			infoPreviaPSE.setNumObjeto(vehicular2response.getInfo_vehiculo().getObjeto_cont());
 			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
 			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getVEHICULAR());
 			infoPreviaPSE.setPlaca(vehicular2response.getInfo_vehiculo().getPlaca());
