@@ -24,13 +24,13 @@
 						<span class="col-md-10 "><spring:theme code="predial.basespresun.datospredio.titulo" /></span>
 					</h2>
 				</div>
-			</div>
+			</div>		
 		</div>
 
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-6">
 				<div class="form-group">
-					<label class="control-label"><spring:theme code="Uso de suelo" /></label> 
+					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.usoSuelo" /></label> 
 					<select class="newalto form-control" id="usoSuelo" onchange="actualizarCatalogos(this)" ${disabledDatosPredio_text}>
 						<option value="">Seleccionar</option>
 						<option value="0">Urbano</option>
@@ -38,72 +38,77 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-md-2" id="destHacendario" style="display: block">
+			<div class="col-md-6">
 				<div class="form-group">
-					<label class="control-label"><spring:theme code="predial.basespresun.datliquidacion.destino" /></label> 
-<%-- 					<form:select class="newalto form-control" id="DestinoHacendario" path="estrLiquidacionPredial.destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}" onclick="accionCat_destinoHacendario()" disabled="${disabledDatosPredio_boolean}" onchange="showHacendario(this)"></form:select> --%>
-					<select class="newalto form-control" id="DestinoHacendario" onchange="actualizarCatalogos(this)" ${disabledDatosPredio_text}>
-						<option value="">Seleccionar</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.areterreno" /></label> 
-					<input id="areaterreno" name="areaterreno" class="newalto form-control areaterreno" type="text" value="" maxlength="240" disabled/>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.areaconstru" /></label> 
-					<input id="areaconstruccion" name="areaconstruccion" class="newalto form-control areaconstruccion" type="text" value="" maxlength="240" disabled />
+					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.caracpredio" /></label>
+					<form:select style="display: block" class="newalto form-control" id="caracterizacionPredio" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri61}" disabled="true" ></form:select>
+					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio62" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri62}" disabled="true"></form:select>
+					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio65" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri65}" disabled="true"></form:select>
+					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio67" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri67}" disabled="true"></form:select>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-6">
 				<div class="form-group">
-					<label class="control-label"><spring:theme code="Actividad Ecónomica" /></label>
-					<select class="newalto form-control" id="activEconomica" onchange="actualizarCatalogos(this)" ${disabledDatosPredio_text}>
+					<label class="control-label"><spring:theme code="predial.basespresun.datliquidacion.destino" /></label> 
+					<select class="newalto form-control" id="DestinoHacendario" onchange="actualizarCatalogos(this)" disabled>
 						<option value="">Seleccionar</option>
 					</select>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.areaconstru" /></label> 
+					<input id="areaconstruccion" name="areaconstruccion" class="newalto form-control areaconstruccion valFormatoImporte" type="text" value="" maxlength="240" disabled />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.actividadEconomica" /></label>
+					<select class="newalto form-control" id="activEconomica" onchange="actualizarCatalogos(this)" disabled>
+						<option value="">Seleccionar</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.areterreno" /></label> 
+					<input id="areaterreno" name="areaterreno" class="newalto form-control areaterreno valFormatoImporte" type="text" value="" maxlength="240" disabled/>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.prophorizon" /></label> 
-					<select class="newalto form-control" id="propiedadHorizontal" onchange="actualizarCatalogos(this)" ${disabledDatosPredio_text}>
+					<select class="newalto form-control" id="propiedadHorizontal" onchange="actualizarCatalogos(this)" disabled>
 						<option value="">Seleccionar</option>
 					</select>
 				</div>
 			</div>
-			<div class="col-md-3">
+		</div>
+		<div class="row">
+			<div class="col-md-6">
 				<div class="form-group">
-					<label class="control-label"><spring:theme code="Base gravable calc." /></label> 
+					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.baseGravableCalc" /></label> 
 					<input id="baseGrav" name="baseGrav" class="newalto form-control" disabled type="text" value="" maxlength="240"></input>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
-					<label class="control-label"><spring:theme code="Tarifa" /></label> 
-					<input id="tarifa" name="tarifa" class="newalto form-control" disabled type="text" value="" maxlength="240"></input>
+					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.confirmarBGF" /></label> 
+					<input id="confirmBG" name="baseGrav" class="newalto form-control areaterreno" disabled type="text" value="" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="form-group">
-					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.caracpredio" /></label>
-					<form:select style="display: block" class="newalto form-control" id="caracterizacionPredio" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri61}" disabled="${disabledDatosPredio_boolean}"></form:select>
-					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio62" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri62}" disabled="${disabledDatosPredio_boolean}"></form:select>
-					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio65" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri65}" disabled="${disabledDatosPredio_boolean}"></form:select>
-					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio67" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri67}" disabled="${disabledDatosPredio_boolean}"></form:select>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label"><spring:theme code="Confirmar BG final" /></label> 
-					<input id="confirmBG" name="baseGrav" class="newalto form-control areaterreno" disabled type="text" value="" maxlength="240"></input>
+					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.tarifa" /></label> 
+					<input id="tarifa" name="tarifa" class="newalto form-control" disabled type="text" value="" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -127,25 +132,33 @@
 		
 		switch(catActualizado){
 			case "usoSuelo":
-				$("#destHacendario").find("option:gt(0)").remove();
+				$("#DestinoHacendario").find("option:gt(0)").remove();
 				$("#activEconomica").find("option:gt(0)").remove();
 				$("#propiedadHorizontal").find("option:gt(0)").remove();
+				$("#areaconstruccion").val("");
+				$("#areaterreno").val("");
 				actualizarCatalogosInferior(objetoActualizado);
 				actualizarObjetosHabilitados(objetoActualizado);
 				break;
 			case "DestinoHacendario":
 				$("#activEconomica").find("option:gt(0)").remove();
 				$("#propiedadHorizontal").find("option:gt(0)").remove();
+				$("#areaconstruccion").val("");
+				$("#areaterreno").val("");
 				actualizarCatalogosInferior(objetoActualizado);
 				actualizarObjetosHabilitados(objetoActualizado);
 				accionCat_destinoHacendario();
 				break;
 			case "activEconomica":
 				$("#propiedadHorizontal").find("option:gt(0)").remove();
+				$("#areaconstruccion").val("");
+				$("#areaterreno").val("");
 				actualizarCatalogosInferior(objetoActualizado);
 				actualizarObjetosHabilitados(objetoActualizado);
 				break;
 			case "propiedadHorizontal":
+				$("#areaconstruccion").val("");
+				$("#areaterreno").val("");
 				actualizarObjetosHabilitados(objetoActualizado);
 				break;
 			default:
@@ -158,6 +171,7 @@
 	
 	function actualizarCatalogosInferior(objetoActualizado){
 		var catActualizado = $(objetoActualizado).attr('id');
+		
 		
 		switch(catActualizado){
 			case "usoSuelo":
@@ -179,23 +193,58 @@
 	function actualizarObjetosHabilitados(objetoActualizado){
 		var catActualizado = $(objetoActualizado).attr('id');
 		var valActualizado = $(objetoActualizado).val();
+		
+		$("#DestinoHacendario").prop("disabled",true);
+		$("#activEconomica").prop("disabled",true);
+		$("#propiedadHorizontal	").prop("disabled",true);
+		$("#caracterizacionPredio").prop("disabled",true);
+		$("#caracterizacionPredio62").prop("disabled",true);
+		$("#caracterizacionPredio65").prop("disabled",true);
+		$("#caracterizacionPredio67").prop("disabled",true);
+		$("#areaconstruccion").prop("disabled",true);
+		$("#areaterreno").prop("disabled",true);
+		$("#baseGrav").prop("disabled",true);
+		
 	
 		switch(catActualizado){
 			case "usoSuelo":
 				switch(valActualizado){
 				case "0":
-					$("#baseGrav").prop("disabled",true);
+					$("#DestinoHacendario").prop("disabled",false);
 					break;
 				case "1":
 					$("#baseGrav").prop("disabled",false);
 					break;
 				default:
-					$("#areaconstruccion").prop("disabled",true);
-					$("#areaterreno").prop("disabled",true);
 					break;
 				}
 				break;
+			case "DestinoHacendario":
+				$("#DestinoHacendario").prop("disabled",false);
+				$("#activEconomica").prop("disabled",false);
+				break;
+			case "activEconomica":
+				$("#DestinoHacendario").prop("disabled",false);
+				$("#activEconomica").prop("disabled",false);
+				$("#propiedadHorizontal").prop("disabled",false);
+				break;
 			case "propiedadHorizontal":
+				$("#DestinoHacendario").prop("disabled",false);
+				$("#activEconomica").prop("disabled",false);
+				$("#propiedadHorizontal").prop("disabled",false);
+				
+				switch(valActualizado){
+				case "1":
+				case "2":
+					$("#caracterizacionPredio").prop("disabled",false);
+					$("#caracterizacionPredio62").prop("disabled",false);
+					$("#caracterizacionPredio65").prop("disabled",false);
+					$("#caracterizacionPredio67").prop("disabled",false);
+					break;
+				default:
+					break;
+				}
+				
 				var destinoHacendario = $("#DestinoHacendario").val();
 				switch(destinoHacendario){
 					case "61":
@@ -209,8 +258,6 @@
 							$("#areaterreno").prop("disabled",false);
 							break;
 						default:
-							$("#areaconstruccion").prop("disabled",true);
-							$("#areaterreno").prop("disabled",true);
 							break;
 						}
 						break;
@@ -220,8 +267,6 @@
 							$("#areaconstruccion").prop("disabled",false);
 							break;
 						default:
-							$("#areaconstruccion").prop("disabled",true);
-							$("#areaterreno").prop("disabled",true);
 							break;
 						}
 						break;
@@ -232,21 +277,14 @@
 							$("#areaterreno").prop("disabled",false);
 							break;
 						default:
-							$("#areaconstruccion").prop("disabled",true);
-							$("#areaterreno").prop("disabled",true);
 							break;
 						}
 						break;
-	
 					default:
-						$("#areaconstruccion").prop("disabled",true);
-						$("#areaterreno").prop("disabled",true);
 						break;
 				}
 				break;
 			default:
-				$("#areaconstruccion").prop("disabled",true);
-				$("#areaterreno").prop("disabled",true);
 				break;
 		
 		}
