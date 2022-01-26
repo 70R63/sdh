@@ -33,25 +33,25 @@
 					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.usoSuelo" /></label> 
 					<select class="newalto form-control" id="usoSuelo" onchange="actualizarCatalogos(this)" ${disabledDatosPredio_text}>
 						<option value="">Seleccionar</option>
-						<option value="0">Urbano</option>
-						<option value="1">Rural</option>
+						<option value="0">URBANO</option>
+						<option value="1">RURAL</option>
+						<option value="2">ZONA DE EXPANSIÓN O SUBURBANO</option>
 					</select>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.caracpredio" /></label>
-					<form:select style="display: block" class="newalto form-control" id="caracterizacionPredio" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri61}" disabled="true" ></form:select>
-					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio62" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri62}" disabled="true"></form:select>
-					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio65" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri65}" disabled="true"></form:select>
-					<form:select style="display: none" class="newalto form-control" id="caracterizacionPredio67" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracteri67}" disabled="true"></form:select>
+					<select class="newalto form-control" id="caracterizacionPredio" onchange="actualizarCatalogos(this)" disabled>
+						<option value="">Seleccionar</option>
+					</select>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
-					<label class="control-label"><spring:theme code="predial.basespresun.datliquidacion.destino" /></label> 
+					<label class="control-label"><spring:theme code="predial.basespresun.datliquidacion.destino" /></label>
 					<select class="newalto form-control" id="DestinoHacendario" onchange="actualizarCatalogos(this)" disabled>
 						<option value="">Seleccionar</option>
 					</select>
@@ -60,7 +60,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.areaconstru" /></label> 
-					<input id="areaconstruccion" name="areaconstruccion" class="newalto form-control areaconstruccion valFormatoImporte" type="text" value="" maxlength="240" disabled />
+					<input id="areaconstruccion" name="areaconstruccion" class="newalto form-control areaconstruccion" type="text" value="" maxlength="240" disabled />
 				</div>
 			</div>
 		</div>
@@ -76,7 +76,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.areterreno" /></label> 
-					<input id="areaterreno" name="areaterreno" class="newalto form-control areaterreno valFormatoImporte" type="text" value="" maxlength="240" disabled/>
+					<input id="areaterreno" name="areaterreno" class="newalto form-control areaterreno" type="text" value="" maxlength="240" disabled/>
 				</div>
 			</div>
 		</div>
@@ -94,7 +94,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="predial.basespresun.datospredio.baseGravableCalc" /></label> 
-					<input id="baseGrav" name="baseGrav" class="newalto form-control" disabled type="text" value="" maxlength="240"></input>
+					<input id="baseGrav" name="baseGrav" class="newalto form-control valFormatoImporte" disabled type="text" value="" maxlength="240" onchange="validarValorBaseGrav(this)"></input>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -124,6 +124,11 @@
 			</div>
 		</div>
 	</form:form>
+
+	<c:if test="${not empty predialFormbases.marcas}">
+		<input type="hidden" id="ztipo_marca" value="${predialFormbases.marcas[0].tipoMarca}"/>
+		<input type="hidden" id="zmarca" value="${predialFormbases.marcas[0].marca}"/>
+	</c:if>
 </div>
 
 <script type="text/javascript">
@@ -135,28 +140,38 @@
 				$("#DestinoHacendario").find("option:gt(0)").remove();
 				$("#activEconomica").find("option:gt(0)").remove();
 				$("#propiedadHorizontal").find("option:gt(0)").remove();
+				$("#caracterizacionPredio").find("option:gt(0)").remove();
 				$("#areaconstruccion").val("");
 				$("#areaterreno").val("");
+				$("#baseGrav").val("");
 				actualizarCatalogosInferior(objetoActualizado);
 				actualizarObjetosHabilitados(objetoActualizado);
 				break;
 			case "DestinoHacendario":
 				$("#activEconomica").find("option:gt(0)").remove();
 				$("#propiedadHorizontal").find("option:gt(0)").remove();
+				$("#caracterizacionPredio").find("option:gt(0)").remove();
 				$("#areaconstruccion").val("");
 				$("#areaterreno").val("");
 				actualizarCatalogosInferior(objetoActualizado);
 				actualizarObjetosHabilitados(objetoActualizado);
-				accionCat_destinoHacendario();
 				break;
 			case "activEconomica":
 				$("#propiedadHorizontal").find("option:gt(0)").remove();
+				$("#caracterizacionPredio").find("option:gt(0)").remove();
 				$("#areaconstruccion").val("");
 				$("#areaterreno").val("");
 				actualizarCatalogosInferior(objetoActualizado);
 				actualizarObjetosHabilitados(objetoActualizado);
 				break;
 			case "propiedadHorizontal":
+				$("#caracterizacionPredio").find("option:gt(0)").remove();
+				$("#areaconstruccion").val("");
+				$("#areaterreno").val("");
+				actualizarCatalogosInferior(objetoActualizado);
+				actualizarObjetosHabilitados(objetoActualizado);
+				break;
+			case "caracterizacionPredio":
 				$("#areaconstruccion").val("");
 				$("#areaterreno").val("");
 				actualizarObjetosHabilitados(objetoActualizado);
@@ -171,17 +186,34 @@
 	
 	function actualizarCatalogosInferior(objetoActualizado){
 		var catActualizado = $(objetoActualizado).attr('id');
-		
+		var valActualizado = $(objetoActualizado).val();
 		
 		switch(catActualizado){
 			case "usoSuelo":
 				actualizarCatalogoDestinoHacendario($(objetoActualizado).val());
 				break;
 			case "DestinoHacendario":
-				actualizarCatalogoActividadEconomica($(objetoActualizado).val());
+				var flagActualizarInferior = false;
+				switch(valActualizado){
+					case "70":
+					case "72":
+						flagActualizarInferior = validarMarca(valActualizado);
+						break;
+					default:
+						flagActualizarInferior = true;
+						break;
+				}
+				if(flagActualizarInferior){
+					actualizarCatalogoActividadEconomica($(objetoActualizado).val());					
+				}else{
+					alert("Sr. Contribuyente, este predio no ha sido reportado por la entidad competente como No Urbanizable. Por lo tanto, no se puede liquidar con ese destino hacendario.");			
+				}
 				break;
 			case "activEconomica":
-				actualizarCatalogoPropiedadHorizontal($("#DestinoHacendario").val(),$(objetoActualizado).val());
+				actualizarCatalogoPropiedadHorizontal($(objetoActualizado).val());
+				break;
+			case "propiedadHorizontal":
+				actualizarCatalogoCaracterizacionPredio($("#activEconomica").val());
 				break;
 			default:
 				
@@ -198,30 +230,39 @@
 		$("#activEconomica").prop("disabled",true);
 		$("#propiedadHorizontal	").prop("disabled",true);
 		$("#caracterizacionPredio").prop("disabled",true);
-		$("#caracterizacionPredio62").prop("disabled",true);
-		$("#caracterizacionPredio65").prop("disabled",true);
-		$("#caracterizacionPredio67").prop("disabled",true);
 		$("#areaconstruccion").prop("disabled",true);
 		$("#areaterreno").prop("disabled",true);
 		$("#baseGrav").prop("disabled",true);
+		$("#confirmBG").prop("disabled",true);
 		
 	
 		switch(catActualizado){
 			case "usoSuelo":
 				switch(valActualizado){
 				case "0":
-					$("#DestinoHacendario").prop("disabled",false);
-					break;
 				case "1":
-					$("#baseGrav").prop("disabled",false);
+				case "2":
+					$("#DestinoHacendario").prop("disabled",false);
 					break;
 				default:
 					break;
 				}
 				break;
 			case "DestinoHacendario":
-				$("#DestinoHacendario").prop("disabled",false);
-				$("#activEconomica").prop("disabled",false);
+				var usoSuelo = $("#usoSuelo").val();
+				switch(usoSuelo){
+					case "0":
+						$("#DestinoHacendario").prop("disabled",false);
+						$("#activEconomica").prop("disabled",false);					
+						break;
+					case "1":
+					case "2":
+						$("#DestinoHacendario").prop("disabled",false);
+						$("#baseGrav").prop("disabled",false);
+						break;
+					default:
+						break;
+				}
 				break;
 			case "activEconomica":
 				$("#DestinoHacendario").prop("disabled",false);
@@ -232,52 +273,78 @@
 				$("#DestinoHacendario").prop("disabled",false);
 				$("#activEconomica").prop("disabled",false);
 				$("#propiedadHorizontal").prop("disabled",false);
+				$("#caracterizacionPredio").prop("disabled",false);
+				break;
+			case "caracterizacionPredio":
+				$("#DestinoHacendario").prop("disabled",false);
+				$("#activEconomica").prop("disabled",false);
+				$("#propiedadHorizontal").prop("disabled",false);
+				$("#caracterizacionPredio").prop("disabled",false);
 				
-				switch(valActualizado){
-				case "1":
-				case "2":
-					$("#caracterizacionPredio").prop("disabled",false);
-					$("#caracterizacionPredio62").prop("disabled",false);
-					$("#caracterizacionPredio65").prop("disabled",false);
-					$("#caracterizacionPredio67").prop("disabled",false);
-					break;
-				default:
-					break;
-				}
-				
-				var destinoHacendario = $("#DestinoHacendario").val();
-				switch(destinoHacendario){
-					case "61":
-					case "62":
-					case "64":
-					case "66":
-						switch(valActualizado){
-						case "1":
-						case "2":
-							$("#areaconstruccion").prop("disabled",false);
-							$("#areaterreno").prop("disabled",false);
-							break;
-						default:
-							break;
+				var activEconomica = $("#activEconomica").val();
+				var propiedadHorizontal = $("#propiedadHorizontal").val();
+				switch(activEconomica){
+					case "1":
+						switch(propiedadHorizontal){
+							case "N":
+								$("#areaconstruccion").prop("disabled",false);
+								$("#areaterreno").prop("disabled",false);
+								break;
+							case "P":
+								$("#areaterreno").prop("disabled",false);
+								break;
 						}
 						break;
-					case "65":
-						switch(valActualizado){
-						case "1":
-							$("#areaconstruccion").prop("disabled",false);
-							break;
-						default:
-							break;
+					case "3":
+						switch(propiedadHorizontal){
+							case "N":
+								$("#areaconstruccion").prop("disabled",false);
+								$("#areaterreno").prop("disabled",false);
+								break;
+							case "P":
+								$("#areaterreno").prop("disabled",false);
+								break;
 						}
 						break;
-					case "67":
-						switch(valActualizado){
-						case "2":
-							$("#areaconstruccion").prop("disabled",false);
-							$("#areaterreno").prop("disabled",false);
-							break;
-						default:
-							break;
+						
+					case "10":
+						switch(propiedadHorizontal){
+							case "N":
+								$("#areaconstruccion").prop("disabled",false);
+								$("#areaterreno").prop("disabled",false);
+								break;
+							case "P":
+								$("#areaterreno").prop("disabled",false);
+								break;
+						}
+						break;
+						
+					case "48":
+						switch(propiedadHorizontal){
+							case "P":
+								$("#areaterreno").prop("disabled",false);
+								break;
+						}
+						break;
+						
+					case "12":
+						switch(propiedadHorizontal){
+							case "N":
+								$("#areaconstruccion").prop("disabled",false);
+								$("#areaterreno").prop("disabled",false);
+								break;
+							case "P":
+								$("#areaterreno").prop("disabled",false);
+								break;
+						}
+						break;
+						
+					case "2":
+						switch(propiedadHorizontal){
+							case "N":
+								$("#areaconstruccion").prop("disabled",false);
+								$("#areaterreno").prop("disabled",false);
+								break;
 						}
 						break;
 					default:
@@ -286,24 +353,30 @@
 				break;
 			default:
 				break;
-		
 		}
+		
 	}
 	
-	function actualizarCatalogoPropiedadHorizontal(idDestinoHacendario, idActividadEconomica){
-		var idObjetoActualizar = "#propiedadHorizontal";
+	function validarMarca(valActualizado){
+		var flagValidacion = false;
 		
-		switch(idActividadEconomica){
-			case "":
-				break;
-			default:
-				for(var i=0;i<cat_predial_propiedadHorizontal.length;i++){
-					if(cat_predial_propiedadHorizontal[i].destinoHacendario == idDestinoHacendario && cat_predial_propiedadHorizontal[i].actividadEconomica == idActividadEconomica){
-						$(idObjetoActualizar).append('<option value="'+ cat_predial_propiedadHorizontal[i].itemId +'">'+ cat_predial_propiedadHorizontal[i].itemValue + "</option>");
-					}
+		switch(valActualizado){
+			case "70":
+				if($("#ztipo_marca").val()=="5" && $("#zmarca").val()=="6"){
+					flagValidacion = true;
 				}
 				break;
+			case "72":
+				if($("#ztipo_marca").val()=="5" && $("#zmarca").val()=="3"){
+					flagValidacion = true;
+				}
+				break;
+			default:
+				flagValidacion = true;
+				break;
 		}
+		
+		return flagValidacion;
 	}
 	
 	function actualizarCatalogoDestinoHacendario(idSeleccionado){
@@ -338,6 +411,43 @@
 		}
 	}
 	
+	function actualizarCatalogoPropiedadHorizontal(idActividadEconomica){
+		var idObjetoActualizar = "#propiedadHorizontal";
+		
+		switch(idActividadEconomica){
+			case "":
+				break;
+			default:
+				for(var i=0;i<cat_predial_propiedadHorizontal.length;i++){
+					if(cat_predial_propiedadHorizontal[i].actividadEconomica == idActividadEconomica){
+						$(idObjetoActualizar).append('<option value="'+ cat_predial_propiedadHorizontal[i].itemId +'">'+ cat_predial_propiedadHorizontal[i].itemValue + "</option>");
+					}
+				}
+				break;
+		}
+	}
+	
+	function actualizarCatalogoCaracterizacionPredio(idActividadEconomica){
+		var idObjetoActualizar = "#caracterizacionPredio";
+		
+		switch(idActividadEconomica){
+			case "":
+				break;
+			default:
+				for(var i=0;i<cat_predial_caracterizacionPredio.length;i++){
+					if(cat_predial_caracterizacionPredio[i].actividadEconomica == idActividadEconomica){
+						$(idObjetoActualizar).append('<option value="'+ cat_predial_caracterizacionPredio[i].itemId +'">'+ cat_predial_caracterizacionPredio[i].itemValue + "</option>");
+					}
+				}
+				break;
+		}
+	}
+	
+	function validarValorBaseGrav(objetoActualizado){
+		if(parseInt($(objetoActualizado).val())<0){
+			alert("El valor en base gravable calc. debe ser mayor a 0");
+		}
+	}
 	
 	function accionPreCalculo(){
 		
@@ -353,17 +463,6 @@
 		
 		ACC.predial.ejecutarPreCalculoPB(numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario,actividadEconomica);
 		
-	}
-	
-	function accionCat_destinoHacendario(){
-		$("#caracterizacionPredio").find("option:gt(0)").remove();	
-		if($("#DestinoHacendario").val() != null){
-			for(var i=0;i<cat_predial_caracterizacionPredio.length;i++){
-				if(cat_predial_caracterizacionPredio[i].destinoHacendario == $("#DestinoHacendario").val()){
-					$('#caracterizacionPredio').append('<option value="'+ cat_predial_caracterizacionPredio[i].itemId +'">'+ cat_predial_caracterizacionPredio[i].itemValue + "</option>");
-				}
-			}		
-		}
 	}
 </script>
 
