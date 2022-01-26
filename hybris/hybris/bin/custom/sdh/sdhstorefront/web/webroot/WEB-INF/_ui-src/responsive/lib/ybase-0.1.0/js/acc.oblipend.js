@@ -116,7 +116,7 @@ ACC.oblipend = {
 	
 	
 	updateFromResponseImpuesto_delurbana : function(infoResponse){
-		var id_tabla = "#table-delurbana";
+		var id_tabla = "#table_delurbana";
 		var tablaInfo = infoResponse.headerdeli;
 		
 		$(id_tabla).find("tr:gt(0)").remove();
