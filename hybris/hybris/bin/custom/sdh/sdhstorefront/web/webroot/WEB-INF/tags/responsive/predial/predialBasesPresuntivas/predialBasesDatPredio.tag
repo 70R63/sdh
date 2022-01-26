@@ -240,19 +240,29 @@
 			case "usoSuelo":
 				switch(valActualizado){
 				case "0":
-					$("#DestinoHacendario").prop("disabled",false);
-					break;
 				case "1":
 				case "2":
-					$("#baseGrav").prop("disabled",false);
+					$("#DestinoHacendario").prop("disabled",false);
 					break;
 				default:
 					break;
 				}
 				break;
 			case "DestinoHacendario":
-				$("#DestinoHacendario").prop("disabled",false);
-				$("#activEconomica").prop("disabled",false);
+				var usoSuelo = $("#usoSuelo").val();
+				switch(usoSuelo){
+					case "0":
+						$("#DestinoHacendario").prop("disabled",false);
+						$("#activEconomica").prop("disabled",false);					
+						break;
+					case "1":
+					case "2":
+						$("#DestinoHacendario").prop("disabled",false);
+						$("#baseGrav").prop("disabled",false);
+						break;
+					default:
+						break;
+				}
 				break;
 			case "activEconomica":
 				$("#DestinoHacendario").prop("disabled",false);
