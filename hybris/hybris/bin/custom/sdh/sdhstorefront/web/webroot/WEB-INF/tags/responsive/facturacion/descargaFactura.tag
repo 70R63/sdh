@@ -174,7 +174,7 @@
 							<!-- 							<th style="text-align: center"><label class="control-label" -->
 							<%-- 								for=""> <spring:theme --%>
 							<%-- 										code="descarga.factura.vehiculo.selec" /></label></th> --%>
-							<th class="col-md-1" style="text-align: center"><label class="control-labe labeltabletd l" for=""> <spring:theme code="Pago voluntario" /></label></th>
+<!--							<th class="col-md-1" style="text-align: center"><label class="control-labe labeltabletd l" for=""> <spring:theme code="Pago voluntario" /></label></th>-->
 <!-- 							<th style="text-align: center"><label class="control-label" -->
 <%-- 								for=""> <spring:theme code="Total a pagar" /></label></th> --%>
 <!-- 							<th style="text-align: center"><label class="control-label" -->
