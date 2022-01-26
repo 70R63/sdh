@@ -816,6 +816,7 @@ ACC.predial = {
 	 
 	 ejecutarPreCalculoPB : function (numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario,actividadEconomica){
 		ACC.spinner.show();
+		$("#confirmBG").prop("disabled",true);
 		ACC.predial.visualizacionBasesDetalle(false);
 		if(ACC.predial.validarAntesSubmit_precalculoBP()){
 			var dataActual = {};	
@@ -845,8 +846,8 @@ ACC.predial = {
 		            		$("#dialogMensajesContent").html(dataResponse.errores.txtMsj+"<br>");
 						}
 						
-						$("#BaseGravable").val(dataResponse.baseGravable);
-						$("#basegrav").val(dataResponse.baseGravable);
+						$("#baseGrav").val(dataResponse.baseGravable);
+						$("#confirmBG").prop("disabled",false);
 						ACC.predial.visualizacionBasesDetalle(true);
 					}
 				},
