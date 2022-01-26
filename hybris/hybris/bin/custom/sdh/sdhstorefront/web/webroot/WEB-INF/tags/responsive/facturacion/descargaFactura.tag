@@ -211,7 +211,7 @@
 										<td><img id="downloadFac" src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0002"
 											data-nombreObjeto="objetoVehicular"
 											data-anioGrav="${eachVehiculo.anioGravable}" data-numobjeto="${eachVehiculo.numObjeto}"></img></td>
-										<td></td>
+<!--										<td></td>-->
 										<td><button id="pagarFacturaBtn" type="button" data-impuesto="0002" data-numbp="${facturacionForm.numbp}" data-anioGravable="${eachVehiculo.anioGravable}" data-numObjeto="${eachVehiculo.numObjeto}" >Pagar</button></td>
 <!-- 										<td><a onclick="validaBotonPago()"></a></td> -->
 
