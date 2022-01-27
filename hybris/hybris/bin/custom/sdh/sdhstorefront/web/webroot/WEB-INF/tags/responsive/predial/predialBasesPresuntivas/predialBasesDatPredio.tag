@@ -230,8 +230,8 @@
 		$("#activEconomica").prop("disabled",true);
 		$("#propiedadHorizontal	").prop("disabled",true);
 		$("#caracterizacionPredio").prop("disabled",true);
-		$("#areaconstruccion").prop("disabled",true);
 		$("#areaterreno").prop("disabled",true);
+		$("#areaconstruccion").prop("disabled",true);
 		$("#baseGrav").prop("disabled",true);
 		$("#confirmBG").prop("disabled",true);
 		
@@ -287,22 +287,22 @@
 					case "1":
 						switch(propiedadHorizontal){
 							case "N":
-								$("#areaconstruccion").prop("disabled",false);
 								$("#areaterreno").prop("disabled",false);
+								$("#areaconstruccion").prop("disabled",false);
 								break;
 							case "P":
-								$("#areaterreno").prop("disabled",false);
+								$("#areaconstruccion").prop("disabled",false);
 								break;
 						}
 						break;
 					case "3":
 						switch(propiedadHorizontal){
 							case "N":
-								$("#areaconstruccion").prop("disabled",false);
 								$("#areaterreno").prop("disabled",false);
+								$("#areaconstruccion").prop("disabled",false);
 								break;
 							case "P":
-								$("#areaterreno").prop("disabled",false);
+								$("#areaconstruccion").prop("disabled",false);
 								break;
 						}
 						break;
@@ -310,11 +310,11 @@
 					case "10":
 						switch(propiedadHorizontal){
 							case "N":
-								$("#areaconstruccion").prop("disabled",false);
 								$("#areaterreno").prop("disabled",false);
+								$("#areaconstruccion").prop("disabled",false);
 								break;
 							case "P":
-								$("#areaterreno").prop("disabled",false);
+								$("#areaconstruccion").prop("disabled",false);
 								break;
 						}
 						break;
@@ -322,7 +322,7 @@
 					case "48":
 						switch(propiedadHorizontal){
 							case "P":
-								$("#areaterreno").prop("disabled",false);
+								$("#areaconstruccion").prop("disabled",false);
 								break;
 						}
 						break;
@@ -330,11 +330,11 @@
 					case "12":
 						switch(propiedadHorizontal){
 							case "N":
-								$("#areaconstruccion").prop("disabled",false);
 								$("#areaterreno").prop("disabled",false);
+								$("#areaconstruccion").prop("disabled",false);
 								break;
 							case "P":
-								$("#areaterreno").prop("disabled",false);
+								$("#areaconstruccion").prop("disabled",false);
 								break;
 						}
 						break;
@@ -342,7 +342,6 @@
 					case "2":
 						switch(propiedadHorizontal){
 							case "N":
-								$("#areaconstruccion").prop("disabled",false);
 								$("#areaterreno").prop("disabled",false);
 								break;
 						}

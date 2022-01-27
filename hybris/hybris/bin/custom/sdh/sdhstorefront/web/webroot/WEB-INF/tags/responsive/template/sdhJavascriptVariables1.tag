@@ -119,13 +119,13 @@
 				];
 			
 			var cat_predial_destinoHacendario = [
-				{'usoSuelo':'0','itemId':'61','itemValue':'RESIDENCIAL'},
-				{'usoSuelo':'0','itemId':'62','itemValue':'COMERCIAL'},
+				{'usoSuelo':'0','itemId':'61','itemValue':'RESIDENCIALES URBANOS Y RURALES'},
+				{'usoSuelo':'0','itemId':'62','itemValue':'COMERCIALES URBANOS Y RURALES'},
 				{'usoSuelo':'0','itemId':'63','itemValue':'FINANCIERO'},
 				{'usoSuelo':'0','itemId':'64','itemValue':'INDUSTRIALES URBANOS Y RURALES'},
 				{'usoSuelo':'0','itemId':'65','itemValue':'DEPOSITO Y PARQUEDERO'},
 				{'usoSuelo':'0','itemId':'66','itemValue':'DOTACIONAL'},
-				{'usoSuelo':'0','itemId':'67','itemValue':'URBANIZABLE NO URBANIZADO Y URBANIZADO NO EDIFICADO'},
+				{'usoSuelo':'0','itemId':'67','itemValue':'LOTE/URBANIZABLES NO URBANIZADOS/URBANIZADOS NO EDIFICADOS'},
 				{'usoSuelo':'0','itemId':'70','itemValue':'NO URBANIZABLE'},
 				{'usoSuelo':'0','itemId':'72','itemValue':'SISTEMA DE AREAS PROTEGIDA'},
 				{'usoSuelo':'1','itemId':'61','itemValue':'RESIDENCIALES URBANOS Y RURALES'},
