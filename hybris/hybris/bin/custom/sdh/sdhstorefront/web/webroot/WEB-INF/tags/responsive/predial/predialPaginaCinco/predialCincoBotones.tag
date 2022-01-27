@@ -65,6 +65,15 @@
 		<sf:form action="${pagarURL}" method="POST" 
 			modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
 			<div class="col-md-12 centercol-md-8 text-center">
+			
+				            
+                <button type="button" class="btn btn-secondary btn-lg" id="action"
+                    name="action" value="cancelar" style="margin-top: 3px"
+                    onclick="window.location.href ='<c:url value='/contribuyentes' />';">
+                    <spring:theme code="predialuno.firma.cancelar" />
+                </button>
+                
+			
 				<c:if test="${flagPresentarDeclaracion eq true}">
 					<button style="margin-top: 3px;" id="predialGeneraDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
 						type="button" disabled="disabled">
