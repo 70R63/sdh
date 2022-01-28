@@ -89,9 +89,8 @@ ACC.oblipend = {
 							tr_value = 
 								"<tr>" +
 								"<td>" + valueH.anioGravable +"</td>"+
-								"<td>" + valueH.cdu +"</td>"+
-								"<td>" + valueH.chip +"</td>"+
-								"<td>" + valueH.direccion +"</td>"+
+								"<td>" + valueH.numResolucion +"</td>"+
+								"<td>" + valueH.orientacionValla +"</td>"+
 								"<td>" + valueD.estadoObligacion +"</td>"+
 								"<td>" + valueD.obligacion +"</td>"+
 								"<td>" + valueD.numFormulario +"</td>"+
