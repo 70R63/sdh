@@ -171,12 +171,12 @@ window.onload = function() {
 						<br>
 					</c:if>
 
-<%-- 					<c:if test="${uiMenuForm.bDelineacionUrbana == 'X'}"> --%>
-<!-- 						<input type="radio" name="tipoImp" id="tipoImp" value="06" -->
-<!-- 							style="visibility: visible" onclick="mostrarTabla('6')"> -->
-<%-- 						<spring:theme code="mirit.certificacion.opDelineaciónUrbana" /> --%>
-<!-- 						<br> -->
-<%-- 					</c:if> --%>
+					<c:if test="${uiMenuForm.bDelineacionUrbana == 'X'}">
+						<input type="radio" name="tipoImp" id="tipoImp" value="06"
+							style="visibility: visible" onclick="mostrarTabla('6')">
+						<spring:theme code="mirit.certificacion.opDelineaciónUrbana" />
+						<br>
+					</c:if>
 				</div>
 			</div>
 		</div>
