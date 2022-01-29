@@ -1890,6 +1890,10 @@ ACC.opcionDeclaraciones = {
 	
 	preparaAnioGravable : function(ambito){
 		var claveImpuesto = document.getElementById('seleccion').value;
+		if (claveImpuesto = null || claveImpuesto == "" ){
+            claveImpuesto = document.getElementById('selCerDecImpAR').value;
+        }    
+		
 		var d = new Date();
 		var anoGravableBase = d.getFullYear();
 		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto.substring(3,4),ambito);
@@ -2036,6 +2040,7 @@ ACC.opcionDeclaraciones = {
 					case "1":		//predial
 					case "2":		//vehiculos
 					case "3":		//ica
+					case "4":		//ReteIca
 					case "5":		//gasolina
 					case "6":		//delineacion
 					case "7":		//publicidad

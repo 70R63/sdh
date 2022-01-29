@@ -64,9 +64,9 @@
 					DECLARACIÓN</h2>
 				<p class="pasoClase1 metrophobic">El Impuesto a consultar es:</p>
 				<div class="caja--ser-rel color-sr1">
-					<input id="0004" name="" class="newalto form-control" disabled
-						type="text" value="Retención ICA" maxlength="240"
-						style="display: inline-block !important;"></input>
+					<select class="new_alto form-control seleccion" id="selCerDecImpAR" disabled>
+                      <option value="0004">Retenci?n ICA </option>                      
+                    </select>
 				</div>
 			</div>
 
