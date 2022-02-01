@@ -38,7 +38,6 @@ function noActivo() {
 
 function onErrorSITII() {
 	
-	debugger;
 	var errorSitII = '${errorSITII}';
 	if (errorSitII === null || errorSitII === '' || typeof errorSitII === 'undefined' ){
 	  
