@@ -484,8 +484,8 @@
 		var nuevoAvaluo = $('#avaluoAct').val();
 		
 		
-		if (nuevoAvaluo > montoOriginalAvaluo) {
-			alert("El nuevo monto de avaluo no debe ser mayor a " + montoOriginalAvaluo);
+		if (nuevoAvaluo < montoOriginalAvaluo) {
+			alert("El nuevo monto de avaluo debe ser mayor o igual a " + montoOriginalAvaluo);
 			$('#avaluoAct').val(montoOriginalAvaluo);
 		}
 
