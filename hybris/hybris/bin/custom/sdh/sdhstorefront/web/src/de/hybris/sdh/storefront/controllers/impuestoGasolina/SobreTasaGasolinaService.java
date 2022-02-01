@@ -2074,11 +2074,12 @@ public class SobreTasaGasolinaService
 			final List<ImpuestoDelineacionUrbana> dealineaciones = infoDelineacion.getValCont().getDelineacion();
 			final String cduSeleccionado = infoDelineacion.getInput().getSelectedCDU();
 
-			for (int i = 0; i < dealineaciones.size(); i++)
+			for (ImpuestoDelineacionUrbana impuestoDelineacionUrbana : dealineaciones)
 			{
-				if (dealineaciones.get(i).getCdu().equals(cduSeleccionado))
+				if (impuestoDelineacionUrbana != null && impuestoDelineacionUrbana.getCdu()!= null && impuestoDelineacionUrbana.getCdu().equals(cduSeleccionado))
 				{
-					numObjeto = dealineaciones.get(i).getNumObjeto();
+					numObjeto = impuestoDelineacionUrbana.getNumObjeto();
+					break;
 				}
 			}
 		}
