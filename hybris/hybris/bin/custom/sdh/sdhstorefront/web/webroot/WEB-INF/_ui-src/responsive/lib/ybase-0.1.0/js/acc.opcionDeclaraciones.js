@@ -1890,7 +1890,7 @@ ACC.opcionDeclaraciones = {
 	
 	preparaAnioGravable : function(ambito){
 		var claveImpuesto = document.getElementById('seleccion').value;
-		if (claveImpuesto = null || claveImpuesto == "" ){
+		if (claveImpuesto == null || claveImpuesto == "" ){
             claveImpuesto = document.getElementById('selCerDecImpAR').value;
         }    
 		
