@@ -1717,7 +1717,7 @@ ACC.opcionDeclaraciones = {
 		var ocultarPeriodo2 = false;
         var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto,"presentar-declaracion");
+		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto,ACC.configCatalogos_ambito_presentarDeclaracion);
 		
         
         var btnAction = document.getElementById('action');
@@ -1842,7 +1842,7 @@ ACC.opcionDeclaraciones = {
 
 		var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto,"presentar-declaracion");
+		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto,ACC.configCatalogos_ambito_presentarDeclaracion);
 		
 		$("#anoGravable").find("option:gt(0)").remove();
 		if(claveImpuesto == '1' || claveImpuesto == '2'){ // predial vehicular 
@@ -2009,7 +2009,7 @@ ACC.opcionDeclaraciones = {
 		var cantidadAnoGravable = 0;
 
         switch (ambito) {
-			case "consultas":
+			case ACC.configCatalogos_ambito_consultas:
 		        switch (claveImpuesto) {
 					case "1":		//predial
 						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_Consultas_predial;
@@ -2051,10 +2051,13 @@ ACC.opcionDeclaraciones = {
 						break;
 					}
 				break;
-			case "presentar-declaracion":
+			case ACC.configCatalogos_ambito_presentarDeclaracion:
 		        switch (claveImpuesto) {
+					case "6":		//delineacion
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_PresentarDeclaracion_delineacion;
+						break;
 					default:
-						cantidadAnoGravable = 5;
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_PresentarDeclaracion;
 						break;
 				}
 				break;
