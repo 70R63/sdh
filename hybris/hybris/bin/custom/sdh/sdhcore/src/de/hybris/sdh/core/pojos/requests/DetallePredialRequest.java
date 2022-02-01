@@ -13,6 +13,7 @@ public class DetallePredialRequest
 	private String CHIP;
 	private String matrInmobiliaria;
 	private String anioGravable;
+	private String marca;
 
 	/**
 	 * @return the numBP
@@ -82,6 +83,23 @@ public class DetallePredialRequest
 		this.anioGravable = anioGravable;
 	}
 
+	/**
+	 * @return the marca
+	 */
+	public String getMarca()
+	{
+		return marca;
+	}
+
+	/**
+	 * @param marca
+	 *           the marca to set
+	 */
+	public void setMarca(final String marca)
+	{
+		this.marca = marca;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -96,7 +114,8 @@ public class DetallePredialRequest
 		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
 		stringBuilder.append("\"CHIP\":\"" + this.getCHIP() + "\",");
 		stringBuilder.append("\"matrInmobiliaria\":\"" + this.getMatrInmobiliaria() + "\",");
-		stringBuilder.append("\"anioGravable\":\"" + this.getAnioGravable() + "\"");
+		stringBuilder.append("\"anioGravable\":\"" + this.getAnioGravable() + "\",");
+		stringBuilder.append("\"marca\":\"" + this.getMarca() + "\",");
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();

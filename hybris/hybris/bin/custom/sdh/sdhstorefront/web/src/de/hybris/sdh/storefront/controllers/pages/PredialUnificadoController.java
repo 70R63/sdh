@@ -235,6 +235,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	{
 		System.out.println("---------------- Hola entro predial unificadoINICIO POST --------------------------");
 
+		String marca = "1";
 		final PredialForm predialForm = new PredialForm();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
@@ -248,6 +249,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		detallePredialRequest.setAnioGravable(predialInfo.getAnioGravable());
 		detallePredialRequest.setCHIP(predialInfo.getCHIP());
 		detallePredialRequest.setMatrInmobiliaria(predialInfo.getMatrInmobiliaria());
+		detallePredialRequest.setMarca(marca);
 
 
 		//		detallePredialRequest.setNumBP("1000010203");
@@ -458,6 +460,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setAnioGravable(predialInfoIniUno.getAnioGravable());
 			detallePredialRequest.setCHIP(predialInfoIniUno.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialInfoIniUno.getMatrInmobiliaria());
+			detallePredialRequest.setMarca("2");
 
 			final DetallePredialResponse detallePredialResponse = determinaResponse(infoReemplazo, predialInfo,
 					detallePredialRequest);
@@ -673,6 +676,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setAnioGravable(predialInfoInidos.getAnioGravable());
 			detallePredialRequest.setCHIP(predialInfoInidos.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialInfoInidos.getMatrInmobiliaria());
+			detallePredialRequest.setMarca("2");
 
 			final DetallePredialResponse detallePredialResponse = determinaResponse(infoReemplazo, predialInfo,
 					detallePredialRequest);
@@ -887,6 +891,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setAnioGravable(predialInfoInitres.getAnioGravable());
 			detallePredialRequest.setCHIP(predialInfoInitres.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialInfoInitres.getMatrInmobiliaria());
+			detallePredialRequest.setMarca("2");
 
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -1084,6 +1089,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setAnioGravable(predialInfoInicuatro.getAnioGravable());
 			detallePredialRequest.setCHIP(predialInfoInicuatro.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialInfoInicuatro.getMatrInmobiliaria());
+			detallePredialRequest.setMarca("2");
 
 
 			final ObjectMapper mapper = new ObjectMapper();
@@ -1285,6 +1291,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setAnioGravable(predialInfoInicinco.getAnioGravable());
 			detallePredialRequest.setCHIP(predialInfoInicinco.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialInfoInicinco.getMatrInmobiliaria());
+			detallePredialRequest.setMarca("2");
 
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -1483,6 +1490,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setAnioGravable(predialInfoIniseis.getAnioGravable());
 			detallePredialRequest.setCHIP(predialInfoIniseis.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialInfoIniseis.getMatrInmobiliaria());
+			detallePredialRequest.setMarca("2");
 
 			final DetallePredialResponse detallePredialResponse = determinaResponse(infoReemplazo, predialInfo,
 					detallePredialRequest);
@@ -1685,6 +1693,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setAnioGravable(predialFormsiete.getAnioGravable());
 			detallePredialRequest.setCHIP(predialFormsiete.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialFormsiete.getMatrInmobiliaria());
+			detallePredialRequest.setMarca("2");
 
 
 			final ObjectMapper mapper = new ObjectMapper();
@@ -1885,6 +1894,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setAnioGravable(predialInfoIniocho.getAnioGravable());
 			detallePredialRequest.setCHIP(predialInfoIniocho.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialInfoIniocho.getMatrInmobiliaria());
+			detallePredialRequest.setMarca("2");
 
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -2078,6 +2088,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		detallePredialRequest.setAnioGravable(predialInfoInibases.getAnioGravable());
 		detallePredialRequest.setCHIP(predialInfoInibases.getCHIP());
 		detallePredialRequest.setMatrInmobiliaria(predialInfoInibases.getMatrInmobiliaria());
+		detallePredialRequest.setMarca("2");
 
 		final DetallePredialResponse detallePredialResponse = determinaResponse(infoReemplazo, predialInfo, detallePredialRequest);
 
