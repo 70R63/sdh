@@ -847,6 +847,7 @@ ACC.predial = {
 						}
 						
 						$("#baseGrav").val(dataResponse.baseGravable);
+						$(document).on("change", "#confirmBG", ACC.predial.validacionMonto_confirmBG );
 						$("#confirmBG").prop("disabled",false);
 						ACC.predial.visualizacionBasesDetalle(true);
 					}
@@ -1007,6 +1008,19 @@ ACC.predial = {
 		return validacion;
 	},
 	
+	
+	validacionMonto_confirmBG : function(){
+		var validacion = false;
+		
+		validacion = ACC.predial.validacionMontoAD_confirmBG();
+		if(validacion == false){
+			alert("El importe no puede ser menor al importe calculado");
+			$("#confirmBG").focus();
+		}
+		
+		return validacion;
+	},
+	
 
 	verificarAnteSubmit_basegrav : function(){
 		if(!ACC.predial.validacionMonto_basegrav()){
@@ -1020,21 +1034,41 @@ ACC.predial = {
 	
 	
 	validacionMontoAD_basegrav : function(){
-		var validacion = false;
-		var valOriginal_f = Number.NaN;
-		var valNuevo_f = Number.NaN;
-		
+
 		var valOriginal = $("#basegrav").attr("valoriginal");
 		if(valOriginal == undefined){
 			valOriginal = $("#basegrav").val();
 		}
+		var valNuevo = $("#basegrav").val();
+		var validacion = ACC.predial.validacionMontoAD_generica(valOriginal,valNuevo);
+
+		
+		return validacion;
+	},
+	
+	
+	validacionMontoAD_confirmBG : function(){
+		
+		var valOriginal = $("#baseGrav").val();
+		var valNuevo = $("#confirmBG").val();
+		var validacion = ACC.predial.validacionMontoAD_generica(valOriginal,valNuevo);
+
+		
+		return validacion;
+	},
+	
+	
+	validacionMontoAD_generica : function(valOriginal, valNuevo){
+		var validacion = false;
+		var valOriginal_f = Number.NaN;
+		var valNuevo_f = Number.NaN;
+		
 		if(valOriginal != undefined){
 			valOriginal = valOriginal.replace(/\./g, '');
 			valOriginal_f = parseFloat(valOriginal);
 		}
 		
-		var valNuevo = $("#basegrav").val();
-		if(valOriginal != undefined){
+		if(valNuevo != undefined){
 			valNuevo = valNuevo.replace(/\./g, '');
 			valNuevo_f = parseFloat(valNuevo);
 		}

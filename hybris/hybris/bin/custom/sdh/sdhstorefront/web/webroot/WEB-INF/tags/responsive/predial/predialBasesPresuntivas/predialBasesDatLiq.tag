@@ -76,7 +76,7 @@
 
 function basegrav_val(objeto){
 	
-	$('#BaseGravable').val($('#basegrav').val(););
+	$('#BaseGravable').val($('#basegrav').val());
 	
 }
 </script>

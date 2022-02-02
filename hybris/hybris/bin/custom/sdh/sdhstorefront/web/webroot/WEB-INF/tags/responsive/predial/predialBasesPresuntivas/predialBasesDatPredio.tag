@@ -146,6 +146,7 @@
 				$("#baseGrav").val("");
 				actualizarCatalogosInferior(objetoActualizado);
 				actualizarObjetosHabilitados(objetoActualizado);
+				mostrarMensajes(objetoActualizado);
 				break;
 			case "DestinoHacendario":
 				$("#activEconomica").find("option:gt(0)").remove();
@@ -216,10 +217,9 @@
 				actualizarCatalogoCaracterizacionPredio($("#activEconomica").val());
 				break;
 			default:
-				
 				break;
-		
 		}
+		
 	}
 	
 	function actualizarObjetosHabilitados(objetoActualizado){
@@ -461,6 +461,34 @@
 		var actividadEconomica = $('#activEconomica').val();
 		
 		ACC.predial.ejecutarPreCalculoPB(numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario,actividadEconomica);
+		
+	}
+	
+	function mostrarMensajes(objetoActualizado){
+		var catActualizado = $(objetoActualizado).attr('id');
+		var valActualizado = $(objetoActualizado).val();
+		var mensaje = "";
+		
+		switch(catActualizado){
+			case "usoSuelo":
+				switch(valActualizado){
+				case "1":
+					mensaje = "Se\u00F1or contribuyente para los predios rurales a los cuales no se les haya fijado aval\u00FAo catastral a primero de enero de 20XX, la base gravable del impuesto predial unificado ser· el valor que mediante autoaval\u00FAo establezca el contribuyente";
+					break;
+				case "2":
+					mensaje = "Se\u00F1or contribuyente para los predios rurales a los cuales no se les haya fijado aval\u00FAo catastral a primero de enero la base gravable del impuesto predial unificado ser· el valor que mediante autoaval\u00FAo establezca el contribuyente.";
+					break;
+				default:
+					break;
+				}
+				break;
+			default:
+				break;
+		}
+		
+		if(mensaje != ""){
+			alert(mensaje);
+		}
 		
 	}
 </script>
