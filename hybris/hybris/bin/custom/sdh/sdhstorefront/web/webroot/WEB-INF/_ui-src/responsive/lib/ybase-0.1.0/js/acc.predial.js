@@ -544,6 +544,16 @@ ACC.predial = {
 
 	calculoPredial : function() {
 		ACC.spinner.show();
+		$("#basegrav").prop("disabled",true);
+		if($("#usoSuelo").val() == "0"){ 
+			if($("#confirmBG").val() == "" ){
+				$("#basegrav").val($("#baseGrav").val());
+			}else{
+				$("#basegrav").val($("#confirmBG").val());
+			}
+		}else if($("#usoSuelo").val() == "1" || $("#usoSuelo").val() == "2"){
+				$("#basegrav").val($("#baseGrav").val());
+		}
 		ACC.predial.verificarAnteSubmit_basegrav();
 		var dataForm = {};
 		dataForm.numBP = $("#NumBP").val();
@@ -818,8 +828,18 @@ ACC.predial = {
 		ACC.spinner.show();
 		$("#confirmBG").prop("disabled",true);
 		ACC.predial.visualizacionBasesDetalle(false);
-		if(ACC.predial.validarAntesSubmit_precalculoBP()){
-			var dataActual = {};	
+		if(ACC.predial.validarAntesSubmit_precalculoBP(destinoHacendario,caracterizacionPredio)){
+			var usoSuelo = $("#usoSuelo").val();
+			if(usoSuelo == "1" || usoSuelo == "2"){
+				ACC.predial.visualizacionBasesDetalle(true);
+				$("#confirmBG").prop("disabled",true);
+				$("#basegrav").prop("disabled",true);
+				$("#basegrav").val($("#baseGrav").val());
+				ACC.spinner.close();
+				return;
+			}
+			
+			var dataActual = {};
 		
 			
 //			dataActual.numBP = numBP;
@@ -837,8 +857,9 @@ ACC.predial = {
 				url : ACC.precalculoPredialBPURL,
 				data : dataActual,
 				type : "GET",
-				success : function(dataResponse) {			
-				ACC.spinner.close();
+				success : function(dataResponse) {
+					var usoSuelo = $("#usoSuelo").val();
+					ACC.spinner.close();
 					if(dataResponse != null){
 						if(dataResponse.errores.txtMsj.trim() != ""){
 			            	$("#dialogMensajes" ).dialog( "open" );
@@ -847,9 +868,11 @@ ACC.predial = {
 						}
 						
 						$("#baseGrav").val(dataResponse.baseGravable);
+						$("#basegrav").val(dataResponse.baseGravable);
 						$(document).on("change", "#confirmBG", ACC.predial.validacionMonto_confirmBG );
-						$("#confirmBG").prop("disabled",false);
 						ACC.predial.visualizacionBasesDetalle(true);
+						$("#confirmBG").prop("disabled",false);
+						$("#basegrav").prop("disabled",true);
 					}
 				},
 				error : function() {
@@ -876,15 +899,33 @@ ACC.predial = {
 	 },
 		 
 		 
-	 validarAntesSubmit_precalculoBP : function (){
-		 var flagValidacion = false;
+	 validarAntesSubmit_precalculoBP : function (destinoHacendario,caracterizacionPredio){
+		var flagValidacion = false;
+		var mensaje = "";
+		var usoSuelo = $("#usoSuelo").val();
 		 
-		 if($("#caracterizacionPredio").val()!= null && $("#caracterizacionPredio").val()!= null &&
-				 $("#caracterizacionPredio").val()!= "" && $("#caracterizacionPredio").val()!= ""){
-			 flagValidacion = true;
-		 }else{
-			 alert("Los campos Destino Hacendario y Caracterización del predio son obligatorios");
-		 }
+		switch(usoSuelo){
+			case "0":
+				if(destinoHacendario != null && destinoHacendario != "" && caracterizacionPredio != null && caracterizacionPredio != ""){
+			 		flagValidacion = true;
+		 		}else{
+					mensaje = "Los campos Destino Hacendario y Caracterización del predio son obligatorios";
+				}
+				break;
+			case "1":
+			case "2":
+				if(destinoHacendario != null && destinoHacendario != ""){
+			 		flagValidacion = true;
+		 		}else{
+			 		mensaje ="El campo Destino Hacendario es obligatorio";
+				}
+				break;
+			default:
+				break;
+		}
+		if(mensaje != ""){
+			alert(mensaje);
+		}
 		 
 		 
 		 return flagValidacion;
