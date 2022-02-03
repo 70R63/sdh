@@ -1922,15 +1922,14 @@ public class SobreTasaGasolinaService
 		}
 		else
 		{
-			for (int i = 0; i < list.size(); i++)
+			for (ImpuestoDelineacionUrbana impuestoDelineacionUrbana : list)
 			{
-				if (list.get(i).getCdu().equals(infoDelineacionInput.getSelectedCDU()))
-				{
-					if ((!list.get(i).getFechaExp().equals("")) && (list.get(i).getFechaExp().length() > 6))
-					{
-						anoGravable = list.get(i).getFechaExp().substring(6);
-					}
-
+				if(impuestoDelineacionUrbana != null 
+						&& impuestoDelineacionUrbana.getCdu() != null 
+						&& impuestoDelineacionUrbana.getCdu().equals(infoDelineacionInput.getSelectedCDU())
+						&& (!impuestoDelineacionUrbana.getFechaExp().equals("") && impuestoDelineacionUrbana.getFechaExp().length() > 6)) {
+					anoGravable = impuestoDelineacionUrbana.getFechaExp().substring(6);
+					break;
 				}
 			}
 		}
