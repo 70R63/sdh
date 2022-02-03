@@ -1717,7 +1717,7 @@ ACC.opcionDeclaraciones = {
 		var ocultarPeriodo2 = false;
         var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto,"presentar-declaracion");
+		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto,ACC.configCatalogos_ambito_presentarDeclaracion);
 		
         
         var btnAction = document.getElementById('action');
@@ -1842,7 +1842,7 @@ ACC.opcionDeclaraciones = {
 
 		var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto,"presentar-declaracion");
+		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto,ACC.configCatalogos_ambito_presentarDeclaracion);
 		
 		$("#anoGravable").find("option:gt(0)").remove();
 		if(claveImpuesto == '1' || claveImpuesto == '2'){ // predial vehicular 
@@ -1890,6 +1890,10 @@ ACC.opcionDeclaraciones = {
 	
 	preparaAnioGravable : function(ambito){
 		var claveImpuesto = document.getElementById('seleccion').value;
+		if (claveImpuesto == null || claveImpuesto == "" ){
+            claveImpuesto = document.getElementById('selCerDecImpAR').value;
+        }    
+		
 		var d = new Date();
 		var anoGravableBase = d.getFullYear();
 		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto.substring(3,4),ambito);
@@ -2005,7 +2009,7 @@ ACC.opcionDeclaraciones = {
 		var cantidadAnoGravable = 0;
 
         switch (ambito) {
-			case "consultas":
+			case ACC.configCatalogos_ambito_consultas:
 		        switch (claveImpuesto) {
 					case "1":		//predial
 						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_Consultas_predial;
@@ -2030,10 +2034,30 @@ ACC.opcionDeclaraciones = {
 						break;
 					}
 				break;
-			case "presentar-declaracion":
+			case ACC.configCatalogos_ambito_certiDeclaracion:
+			case ACC.configCatalogos_ambito_reimpresionDeclaracion:
 		        switch (claveImpuesto) {
+					case "1":		//predial
+					case "2":		//vehiculos
+					case "3":		//ica
+					case "4":		//ReteIca
+					case "5":		//gasolina
+					case "6":		//delineacion
+					case "7":		//publicidad
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_CertiDeclaracion;
+						break;
 					default:
-						cantidadAnoGravable = 5;
+						cantidadAnoGravable = 0;
+						break;
+					}
+				break;
+			case ACC.configCatalogos_ambito_presentarDeclaracion:
+		        switch (claveImpuesto) {
+					case "6":		//delineacion
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_PresentarDeclaracion_delineacion;
+						break;
+					default:
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_PresentarDeclaracion;
 						break;
 				}
 				break;

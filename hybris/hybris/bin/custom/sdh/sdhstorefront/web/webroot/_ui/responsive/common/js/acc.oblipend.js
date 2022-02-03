@@ -89,9 +89,8 @@ ACC.oblipend = {
 							tr_value = 
 								"<tr>" +
 								"<td>" + valueH.anioGravable +"</td>"+
-								"<td>" + valueH.cdu +"</td>"+
-								"<td>" + valueH.chip +"</td>"+
-								"<td>" + valueH.direccion +"</td>"+
+								"<td>" + valueH.numResolucion +"</td>"+
+								"<td>" + valueH.orientacionValla +"</td>"+
 								"<td>" + valueD.estadoObligacion +"</td>"+
 								"<td>" + valueD.obligacion +"</td>"+
 								"<td>" + valueD.numFormulario +"</td>"+
@@ -116,7 +115,7 @@ ACC.oblipend = {
 	
 	
 	updateFromResponseImpuesto_delurbana : function(infoResponse){
-		var id_tabla = "#table-delurbana";
+		var id_tabla = "#table_delurbana";
 		var tablaInfo = infoResponse.headerdeli;
 		
 		$(id_tabla).find("tr:gt(0)").remove();

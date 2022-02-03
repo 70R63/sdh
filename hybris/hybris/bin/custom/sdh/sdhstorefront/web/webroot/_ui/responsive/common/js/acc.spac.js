@@ -77,9 +77,9 @@ ACC.spac = {
 	},
 
 	bindBtnSpacObli : function() {
-		$(document).on("click",".btnGenerarSPACObli",function(e) {
+		$(document).on("click",".btnGenerarSPACObli",function(e) {			
 			e.preventDefault();
-			ACC.spac.generarSPACObli(this,"0001");
+			ACC.spac.generarSPACObli(this,"0001");			
 		});
 	},
 	
@@ -100,7 +100,7 @@ ACC.spac = {
 		var currentUrl = window.location.href;
 		
 		$(objetosPantalla.tableSpacPagoTbody).empty();
-		$(objetosPantalla.tableSpacPagoTbody).find("tr:gt(0)").remove();
+		
 		var divtable = document.getElementById(objetosPantalla.tableSpac);
 		if(divtable!=null){
 			divtable.style.display = 'none';
@@ -115,13 +115,14 @@ ACC.spac = {
 		document.getElementById(objetosPantalla.anioGravPDF).value=anio;
 		document.getElementById(objetosPantalla.objcontPDF).value=numobj;
 		document.getElementById(objetosPantalla.numFormPDF).value=numform;
-
+		
+		$('#btnGenerarSPACObli').hide();
 		$.ajax({
 			url : ACC.spacURL + '?anio=' + anio + '&numform='+ numform + '&numobj=' + numobj + '&reimpresion=' + reimpresion,
 			// data : data,
 			type : "GET",
 			success : function(spacform) {
-				ACC.spinner.close();
+				$(objetosPantalla.tableSpacPagoTbody).find("tr:gt(0)").remove();
 				var cuotas = spacform.cuotas_Spac;
 				if(cuotas != null){
 					for (var i = 0; i < cuotas.length; i++) {
@@ -137,6 +138,8 @@ ACC.spac = {
  						}
 					}
 				}
+				$('#btnGenerarSPACObli').show();
+				ACC.spinner.close();
 		},
 			error : function(){ACC.spinner.close();}
 		});		

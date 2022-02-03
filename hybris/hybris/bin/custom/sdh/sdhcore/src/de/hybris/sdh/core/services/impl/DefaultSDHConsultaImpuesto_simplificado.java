@@ -11,6 +11,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.pojos.responses.ReteICA;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 
 import java.io.BufferedReader;
@@ -483,11 +484,66 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 	}
 
 
+    @Override
+    public ReteICA consulta_impReteICA(final ConsultaContribuyenteBPRequest request)
+    {
+        SDHValidaMailRolResponse wsResponse = null;
+        ReteICA impuestoReteICA = null;
+        final ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        try
+        {
+            wsResponse = mapper.readValue(consulta_impReteICA_string(request), SDHValidaMailRolResponse.class);
+            if (wsResponse != null)
+            {
+                impuestoReteICA = wsResponse.getReteIca();
+            }
+
+        }
+        catch (final Exception e)
+        {
+            LOG.info("Error al convertir response de consulta impuesto ICA");
+        }
+
+
+        return impuestoReteICA;
+
+    }
+
+    @Override
+    public String consulta_impReteICA_string(final ConsultaContribuyenteBPRequest wsRequest)
+    {
+        final String usuario = configurationService.getConfiguration()
+                .getString("sdh.validacontribuyente_simplificado_impReteICA.user");
+        final String password = configurationService.getConfiguration()
+                .getString("sdh.validacontribuyente_simplificado_impReteICA.password");
+        final String urlService = configurationService.getConfiguration()
+                .getString("sdh.validacontribuyente_simplificado_impReteICA.url");
+
+        final RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
+        final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(wsRequest);
+
+        LOG.info(urlService);
+        LOG.info(wsRequest);
+        String wsResponse = restTemplate.postForObject(urlService, request, String.class);
+        wsResponse = wsResponse.replaceAll("numOjbeto", "numObjeto");
+        LOG.info(wsResponse);
+
+
+        return wsResponse;
+    }
+
+
+
 
 	@Override
 	public Map<String, String> obtenerListaImpuestosActivos(final String ambito)
 	{
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+		final String impReteIca = "impuestosActivos." + ambito + ".reteica";
+        final String reteIcaActivo = Config.getParameter(impReteIca);
+
 
 		elementos.put(SDHConsultaImpuesto_simplificado.PREDIAL, Config.getParameter("impuestosActivos." + ambito + ".predial"));
 		elementos.put(SDHConsultaImpuesto_simplificado.VEHICULOS, Config.getParameter("impuestosActivos." + ambito + ".vehiculos"));

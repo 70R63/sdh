@@ -42,7 +42,7 @@
 						<c:forEach items="${predial.predial}" var="current">
 							<c:choose>
 								<c:when
-									test="${current.CHIP != '' && current.matrInmobiliaria != ''}">
+									test="${current.CHIP != '' || current.matrInmobiliaria != ''}">
 									<tr>
 										<td><c:out value="${current.CHIP}" /></td>
 										<td><c:out value="${current.matrInmobiliaria}" /></td>
@@ -69,7 +69,7 @@
 									</tr>
 								</c:when>
 								<c:when
-									test="${current.CHIP != '' && current.matrInmobiliaria == ''}">
+									test="${current.CHIP != '' || current.matrInmobiliaria == ''}">
 									<tr>
 										<td><c:out value="${current.CHIP}" /></td>
 										<td><c:out value="${current.matrInmobiliaria}" /></td>
@@ -96,7 +96,7 @@
 									</tr>
 								</c:when>
 								<c:when
-									test="${current.CHIP == '' && current.matrInmobiliaria != ''}">
+									test="${current.CHIP == '' || current.matrInmobiliaria != ''}">
 									<tr>
 										<td><c:out value="${current.CHIP}" /></td>
 										<td><c:out value="${current.matrInmobiliaria}" /></td>

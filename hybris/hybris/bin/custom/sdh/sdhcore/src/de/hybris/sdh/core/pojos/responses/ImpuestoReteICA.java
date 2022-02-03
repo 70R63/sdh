@@ -11,6 +11,29 @@ public class ImpuestoReteICA
 {
 	private String numObjeto;
 	private String numID;
+    private String consecutivo;
+
+
+
+
+
+    /**
+     * @return the consecutivo
+     */
+    public String getConsecutivo()
+    {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo
+     *           the consecutivo to set
+     */
+    public void setConsecutivo(final String consecutivo)
+    {
+        this.consecutivo = consecutivo;
+    }
+
 
 	/**
 	 * @return the numObjeto

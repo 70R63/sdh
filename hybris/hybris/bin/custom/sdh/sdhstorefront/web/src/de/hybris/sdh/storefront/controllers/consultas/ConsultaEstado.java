@@ -196,7 +196,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 			
 			
 			Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTAS);
-
+	  
 			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PREDIAL) && edoCuentaResponse.getPredial() != null && !edoCuentaResponse.getPredial().isEmpty())
 			{
 				ctaForm.setPredial(
@@ -314,8 +314,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 				{
 
 					final Optional<PredialResponse> result = predialFormIni.getPredial().stream()
-							.filter(item -> item.getCHIP() != null && item.getCHIP().equals(edoCtaPredial.getNewCHIP())
-									&& item.getMatrInmobiliaria() != null
+							.filter(item -> item.getMatrInmobiliaria() != null
 									&& item.getMatrInmobiliaria().equals(edoCtaPredial.getMatrInmobiliaria()))
 							.findFirst();
 
