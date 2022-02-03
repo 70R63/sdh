@@ -497,10 +497,10 @@
 			case "usoSuelo":
 				switch(valActualizado){
 				case "1":
-					mensaje = "Se\u00F1or contribuyente para los predios rurales a los cuales no se les haya fijado aval\u00FAo catastral a primero de enero de 20XX, la base gravable del impuesto predial unificado ser· el valor que mediante autoaval\u00FAo establezca el contribuyente";
+					mensaje = "Se\u00F1or contribuyente para los predios rurales a los cuales no se les haya fijado aval\u00FAo catastral a primero de enero de 20XX, la base gravable del impuesto predial unificado ser\u00e1 el valor que mediante autoaval\u00FAo establezca el contribuyente";
 					break;
 				case "2":
-					mensaje = "Se\u00F1or contribuyente para los predios rurales a los cuales no se les haya fijado aval\u00FAo catastral a primero de enero la base gravable del impuesto predial unificado ser· el valor que mediante autoaval\u00FAo establezca el contribuyente.";
+					mensaje = "Se\u00F1or contribuyente para los predios rurales a los cuales no se les haya fijado aval\u00FAo catastral a primero de enero la base gravable del impuesto predial unificado ser\u00e1 el valor que mediante autoaval\u00FAo establezca el contribuyente.";
 					break;
 				default:
 					break;
