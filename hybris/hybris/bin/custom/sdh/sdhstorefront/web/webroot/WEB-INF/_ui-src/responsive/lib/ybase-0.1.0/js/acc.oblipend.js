@@ -680,7 +680,7 @@ ACC.oblipend = {
 	}else if(impuestoSelc=="2"){
 	
 		tableVeh[0].setAttribute("id","example");
-		   var selectRefinementsTitle = "Vehicular";
+		   var selectRefinementsTitle = "Impuestos de Vehículos";
 	        ACC.colorbox.open(selectRefinementsTitle, {
 	            href: ".js-vehicular-facet",
 	            inline: true,
