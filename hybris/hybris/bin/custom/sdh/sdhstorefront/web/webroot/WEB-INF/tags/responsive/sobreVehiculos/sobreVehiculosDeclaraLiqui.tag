@@ -482,13 +482,13 @@
 	
 	function validaMontoAvaluo(montoOriginalAvaluo) {
 		var nuevoAvaluo = $('#avaluoAct').val();
-		
-		
+		montoOriginalAvaluo = montoOriginalAvaluo.replace('.',"");
+		montoOriginalAvaluo = parseInt(montoOriginalAvaluo);
+		nuevoAvaluo = parseInt(nuevoAvaluo);
 		if (nuevoAvaluo < montoOriginalAvaluo) {
 			alert("El nuevo monto de avaluo debe ser mayor o igual a " + montoOriginalAvaluo);
 			$('#avaluoAct').val(montoOriginalAvaluo);
 		}
-
 	}
 </script>
 
