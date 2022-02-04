@@ -229,17 +229,17 @@ public class CalculoImpDelineacionRequest
 				stringBuilder.append(this.preparaInfoDeclara("\"infoDeclara\":"));
 
 			}
-			if (this.getUsos() != null)
+			if (this.getUsos() != null && this.getUsos().size() > 0)
 			{
 				stringBuilder.append(",");
 				stringBuilder.append(this.preparaUsos("\"usos\":"));
 			}
-			if (this.getAreaIntervenida() != null)
+			if (this.getAreaIntervenida() != null && this.getAreaIntervenida().size() > 0)
 			{
 				stringBuilder.append(",");
 				stringBuilder.append(this.preparaAreaIntervenida("\"areaIntervenida\":"));
 			}
-			if (this.getAreaProyecto() != null)
+			if (this.getAreaProyecto() != null && this.getAreaProyecto().size() > 0)
 			{
 				stringBuilder.append(",");
 				stringBuilder.append(this.preparaAreaProyecto("\"areaProyecto\":"));
@@ -310,7 +310,7 @@ public class CalculoImpDelineacionRequest
 		String valorRetorno = "";
 
 
-		if (this.getUsos() != null)
+		if (this.getUsos() != null && this.getUsos().size() > 0)
 		{
 			stringBuilder.append("[");
 			for (int i = 0; i < this.getUsos().size() - 1; i++)
@@ -352,7 +352,7 @@ public class CalculoImpDelineacionRequest
 		String valorRetorno = "";
 
 
-		if (this.getAreaIntervenida() != null)
+		if (this.getAreaIntervenida() != null && this.getAreaIntervenida().size() > 0)
 		{
 			stringBuilder.append("[");
 			for (int i = 0; i < this.getAreaIntervenida().size() - 1; i++)
@@ -389,7 +389,7 @@ public class CalculoImpDelineacionRequest
 		String valorRetorno = "";
 
 
-		if (this.getAreaProyecto() != null)
+		if (this.getAreaProyecto() != null && this.getAreaProyecto().size() > 0)
 		{
 			stringBuilder.append("[");
 			for (int i = 0; i <= this.getAreaProyecto().size() - 1; i++)
