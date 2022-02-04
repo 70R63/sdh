@@ -659,7 +659,7 @@ public class TramitesCrearPageController extends AbstractPageController
 //		agregarElementoTramites(elementos, "01020607__", "07", "Vehículos automotores / Poseedor", "ZT05", "A1ZTRT0004Z086");
 //		agregarElementoTramites(elementos, "01020608__", "08", "Vehículos / Beneficio/Fideicomitente", "ZT05", "A1ZTRT0004Z103");
 //		agregarElementoTramites(elementos, "01020609__", "09", "Industria y comercio ICA", "ZT05", "A1ZTRT0004Z087");
-//		agregarElementoTramites(elementos, "01020610__", "10", "Delineación urbana", "ZT05", "A1ZTRT0004Z088");
+		agregarElementoTramites(elementos, "01020610__", "10", "Delineación urbana", "ZT05", "A1ZTRT0004Z088");
 		agregarElementoTramites(elementos, "01020611__", "11", "Sobretasa a la gasolina", "ZT05", "A1ZTRT0004Z089");
 		agregarElementoTramites(elementos, "01020612__", "12", "Publicidad exterior visual", "ZT05", "A1ZTRT0004Z090");
 
