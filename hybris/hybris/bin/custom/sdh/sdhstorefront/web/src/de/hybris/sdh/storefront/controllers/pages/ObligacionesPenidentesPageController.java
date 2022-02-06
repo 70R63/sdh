@@ -24,6 +24,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraDeli;
+import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraPredial;
 import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraVehiculos;
 import de.hybris.sdh.core.pojos.responses.ObligacionesDeliResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesDetallePublicidad;
@@ -583,6 +584,13 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		final ObligacionesForm obligacionesFormuno = new ObligacionesForm();
 		final ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		
+      int totalReg = Integer.parseInt(configurationService.getConfiguration().getString("config.obligacionesPendientes.totalReg"));
+      int totalReg_tmp = totalReg;
+      int rango = Integer.parseInt(configurationService.getConfiguration().getString("config.obligacionesPendientes.rango"));
+      int finRango = rango;
+      String rangoActual = "";
+		
 
 		String referrer = request.getHeader("referer");
 
@@ -600,16 +608,43 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			switch (obligacionesForm.getClaveImpuesto())
 			{
 				case "0001":
-					wsResponse = sdhObligacionesPredialService.obligacionesRequest(obligacionesRequest);
+					List<ObligacionesCabeceraPredial> wsTemp_predial = new ArrayList<ObligacionesCabeceraPredial>();
 					ObligacionesPredialResponse obligacionesPredResponse = null;
-					try {
-						obligacionesPredResponse = mapper.readValue(wsResponse,ObligacionesPredialResponse.class);
-					}catch(final Exception e) {
+					totalReg_tmp = totalReg;
+					finRango = rango;
+					rangoActual = "";
+               
+					for (int inicioRango = 1; inicioRango < totalReg; inicioRango+=(rango))
+					{
+						rangoActual = Integer.toString(inicioRango)+"-"+Integer.toString(finRango);
+					   
+						obligacionesRequest.setRango(rangoActual);
+					   wsResponse = sdhObligacionesPredialService.obligacionesRequest(obligacionesRequest);
+					   if(wsResponse != null) {
+						   try {
+						   	obligacionesPredResponse = mapper.readValue(wsResponse,ObligacionesPredialResponse.class);
+						   }catch(final Exception e) {
+						   }
+	                  if(obligacionesPredResponse!=null && obligacionesPredResponse.getHeader()!=null) {
+	                  	wsTemp_predial.addAll(obligacionesPredResponse.getHeader());
+	                  }
+					   }
+                  
+                  if(obligacionesPredResponse != null && obligacionesPredResponse.getHeader() != null && obligacionesPredResponse.getHeader().size() > 0){
+                  	if(obligacionesPredResponse.getHeader().get(0) != null && obligacionesPredResponse.getHeader().get(0).getTotalReg() != null) {
+                  		try {
+                     		totalReg = Integer.parseInt(obligacionesPredResponse.getHeader().get(0).getTotalReg().trim());
+                  		}catch(Exception e) {
+                  		}
+                  	}
+                  }else {
+                  	totalReg = 0;
+                  }
+                  
+			         finRango+=(rango);
 					}
-					if(obligacionesPredResponse!=null && obligacionesPredResponse.getHeader()!=null) {
-						obligacionesFormuno.setHeaderPred(obligacionesPredResponse.getHeader().stream()
-							.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
-					}
+					obligacionesFormuno.setHeaderPred(wsTemp_predial);
+					
 					break;
 
 				case "0002":
