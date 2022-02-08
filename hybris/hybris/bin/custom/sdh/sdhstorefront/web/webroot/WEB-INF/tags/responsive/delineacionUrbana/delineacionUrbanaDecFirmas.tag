@@ -14,15 +14,15 @@
 
 <c:set var="flagPresentarDeclaracion" value="false" />
 <c:set var="flagPagarEnLinea" value="false" />
-<c:if test="${dataForm.controlCampos.btnPresentarDec == false}">
+<c:if test="${dataForm.controlCampos.btnPresentarDec == true}">
 	<c:set var="flagPresentarDeclaracion" value="true" />
 </c:if>
-<c:if test="${dataForm.controlCampos.btnPagarDec == false}">
+<c:if test="${dataForm.controlCampos.btnPagarDec == true}">
 	<c:set var="flagPagarEnLinea" value="true" />
 </c:if>
 <c:if test="${contribuyente.documentType ne 'NIT' and contribuyente.numBP eq currentUser.numBP }">
-	<c:set var="flagPresentarDeclaracion" value="true" />
-	<c:set var="flagPagarEnLinea" value="true" />
+<%-- 	<c:set var="flagPresentarDeclaracion" value="true" /> --%>
+<%-- 	<c:set var="flagPagarEnLinea" value="true" /> --%>
 	<input type="hidden" value="X" id="contribuyenteNoNIT"/>
 </c:if>
 <br>
@@ -50,7 +50,7 @@
 			<div class="col-md-3">
 				<a id="downloadHelper" target="_blank"></a>
 				<c:if test="${flagPresentarDeclaracion eq true}">
-				<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton" onclick="pagarlinea()" disabled="disabled">
+				<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton" onclick="pagarlinea()">
 					<!--<c:out value='${empty dataForm.infObjetoDelineacion.numForm ? "disabled":""}'/>
 					class="btn btn-primary btn-lg" onclick="pagarlinea()">  Se comenta linea para habilitar botón 19/12/2019 Maria Torres-->
 					<spring:theme code="delineacion.urbana.dec.firm.predec" />
@@ -74,7 +74,7 @@
 			<div class="col-md-3">
 				<c:if test="${flagPagarEnLinea eq true}">
 				<sf:button class="btn btn-primary btn-lg pagarbtn" type="button"
-					id="action" name="pagar" value="pagar" disabled="true" onclick="validaBotonPago()">
+					id="action" name="pagar" value="pagar" onclick="validaBotonPago()">
 					<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 				</sf:button>
 				</c:if>
