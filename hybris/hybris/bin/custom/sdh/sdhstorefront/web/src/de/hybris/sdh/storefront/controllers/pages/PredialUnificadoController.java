@@ -2208,6 +2208,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		infoPreviaPSE.setClavePeriodo(clavePeriodo);
 		infoPreviaPSE.setDv(dv);
 		infoPreviaPSE.setChip(predialFormbases.getCHIP());
+		infoPreviaPSE.setMatrInmobiliaria(predialFormbases.getMatrInmobiliaria());
 
 
 		for (final PredialResponse predialItem : contribuyenteData.getPredial())

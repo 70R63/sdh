@@ -121,6 +121,7 @@
 				<sf:hidden path="fechaVenc"/>
 				<sf:hidden path="numRef"/>
 				<sf:hidden path="totalPagar"/>
+				<sf:hidden path="matrInmobiliaria"/>
 	
 				<c:if test="${flagPagarEnLinea eq true}">
 					<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit"
