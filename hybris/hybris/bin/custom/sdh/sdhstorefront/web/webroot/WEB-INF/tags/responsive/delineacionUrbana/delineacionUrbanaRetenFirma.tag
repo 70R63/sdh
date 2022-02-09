@@ -13,15 +13,15 @@
 
 <c:set var="flagPresentarDeclaracion" value="false" />
 <c:set var="flagPagarEnLinea" value="false" />
-<c:if test="${dataForm.controlCampos.btnPresentarDec == false}">
+<c:if test="${dataForm.controlCampos.btnPresentarDec == true}">
 	<c:set var="flagPresentarDeclaracion" value="true" />
 </c:if>
-<c:if test="${dataForm.controlCampos.btnPagarDec == false}">
+<c:if test="${dataForm.controlCampos.btnPagarDec == true}">
 	<c:set var="flagPagarEnLinea" value="true" />
 </c:if>
 <c:if test="${contribuyente.documentType ne 'NIT' and contribuyente.numBP eq currentUser.numBP }">
-	<c:set var="flagPresentarDeclaracion" value="true" />
-	<c:set var="flagPagarEnLinea" value="true" />
+<%-- 	<c:set var="flagPresentarDeclaracion" value="true" /> --%>
+<%-- 	<c:set var="flagPagarEnLinea" value="true" /> --%>
 	<input type="hidden" value="X" id="contribuyenteNoNIT"/>
 </c:if>
 <c:set var="tipoDescripcionID" value='${dataForm.valCont.infoContrib.tipoDoc}'/>
@@ -58,7 +58,7 @@
 <%-- 						<spring:theme code="delineacion.urbana.dec.firm.prerete" /> --%>
 <!-- 					</button> -->
 		<c:if test="${flagPresentarDeclaracion eq true}">
-		<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton" onclick="pagarlinea()" disabled="disabled">
+		<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton" onclick="pagarlinea()">
 			<!--<c:out value='${empty dataForm.infObjetoDelineacion.numForm ? "disabled":""}'/>
 			class="btn btn-primary btn-lg" onclick="pagarlinea()" >   Se comenta linea para habilitar boton 19/12/2019 Maria Torres--> 
 			<spring:theme code="delineacion.urbana.dec.firm.prerete" />
@@ -82,7 +82,7 @@
 				
 				<div class="col-md-3">
 				<c:if test="${flagPagarEnLinea eq true}">
-				<sf:button class="btn btn-primary btn-lg pagarbtn" type="button" onclick="validaBotonPago()" id="action" name="pagar" value="pagar"  disabled="true">
+				<sf:button class="btn btn-primary btn-lg pagarbtn" type="button" onclick="validaBotonPago()" id="action" name="pagar" value="pagar" >
 					<spring:theme code="impuestos.decGasolina.Pago.Pagar"/>
 				</sf:button>
 				</c:if>
