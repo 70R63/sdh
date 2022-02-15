@@ -212,6 +212,8 @@
 			<value>/faqs/**</value>
 			<value>/sdhCustomer</value>
 			<value>/sdhCustomer/**</value>
+			<value>/psePayment</value>
+			<value>/psePayment/**</value>
 		</set>
 	</property>
 	<property name="pathMatcher" ref="defaultPathMatcher" />
