@@ -330,7 +330,7 @@ ACC.opcionDeclaraciones = {
 	},
 	
 	
-	obtenerListaDeclaraciones : function() {
+	obtenerListaDeclaraciones : function(certificacionDeclaracion) {
 		ACC.spinner.show();
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.publicidadexterior.bindDataTable_Class_refresh();
@@ -344,7 +344,7 @@ ACC.opcionDeclaraciones = {
 			dataActual.claveImpuesto = claveImpuesto;
 			dataActual.anoGravable = anoGravable;
 			dataActual.periodo = ACC.opcionDeclaraciones.obtenerPeriodoPorImpuesto(claveImpuesto);
-			
+			dataActual.certificacionDeclaracion = certificacionDeclaracion;
 			
 			$.ajax({
 				url : ACC.listaDeclaracionesURL,
@@ -418,7 +418,7 @@ ACC.opcionDeclaraciones = {
 		
 	},
 	
-	obtenerListaDeclaraciones_porAnio : function() {
+	obtenerListaDeclaraciones_porAnio : function(certificacionDeclaracion) {
 		
 		ACC.spinner.show();
 		
@@ -440,7 +440,7 @@ ACC.opcionDeclaraciones = {
 				success : function(dataResponse) {
 					ACC.spinner.close();
 					ACC.opcionDeclaraciones.updateFromResponsePeriodo_porAnio(dataActual,dataResponse);
-					ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+					ACC.opcionDeclaraciones.obtenerListaDeclaraciones(certificacionDeclaracion);
 				},
 				error : function() {
 					ACC.spinner.close();
@@ -449,7 +449,7 @@ ACC.opcionDeclaraciones = {
 			});
 		}else{
 			ACC.spinner.close();
-			ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+		    ACC.opcionDeclaraciones.obtenerListaDeclaraciones(certificacionDeclaracion);
 		}
 		
 		
@@ -619,11 +619,21 @@ ACC.opcionDeclaraciones = {
 								numRadicado = value.radicados[0].numRadicado;
 							}
 
-							$('#table-delineacion1').append("<tr>"+
-									'<td>' + value.cdu + '</td>'+
-									'<td>' + numRadicado + '</td>'+
-									'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto + '" data-numRadicado="'+ numRadicado +'"' +">" + "</td>"+
-									"</tr>");
+							if(infoActual.certificacionDeclaracion != null ){
+                                if(  numRadicado == null || numRadicado == "" ){
+                                    $('#table-delineacion1').append("<tr>"+
+                                        '<td>' + value.cdu + '</td>'+
+                                        '<td>' + numRadicado + '</td>'+
+                                        '<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto + '" data-numRadicado="'+ numRadicado +'"' +">" + "</td>"+
+                                        "</tr>");
+                                }        
+                            }else{                                
+                                $('#table-delineacion1').append("<tr>"+
+                                        '<td>' + value.cdu + '</td>'+
+                                        '<td>' + numRadicado + '</td>'+
+                                        '<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto + '" data-numRadicado="'+ numRadicado +'"' +">" + "</td>"+
+                                        "</tr>");
+                            }        
 						});
 					}
 				}
