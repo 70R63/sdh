@@ -23,6 +23,7 @@ public class ImpuestoVehiculos
 	private String cilindraje;
 	private String numObjeto;
 	private String anioGravable;
+	private String avaluo;
 	private String numForm;
 	private String marca_Desc;
 	private List<ErrorEnWS> errores;
@@ -211,6 +212,23 @@ public class ImpuestoVehiculos
 	public void setAnioGravable(final String anioGravable)
 	{
 		this.anioGravable = anioGravable;
+	}
+
+	/**
+	 * @return the avaluo
+	 */
+	public String getAvaluo()
+	{
+		return avaluo;
+	}
+
+	/**
+	 * @param avaluo
+	 *           the avaluo to set
+	 */
+	public void setAvaluo(final String avaluo)
+	{
+		this.avaluo = avaluo;
 	}
 
 	/**

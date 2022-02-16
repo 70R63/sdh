@@ -28,6 +28,7 @@ import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.model.SDHVehiculosTaxModel;
 import de.hybris.sdh.core.pojos.requests.CalcVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.CatalogoVehiculosRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribPredialRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculos2Request;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
@@ -182,8 +183,9 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		model.addAttribute("customerData", customerData);
 		addAgentsToModel(model, customerData, null);
 		super.addFirmantes_impuesto(model, null, customerData);
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		final ConsultaContribPredialRequest consultaContribuyenteBPRequest = new ConsultaContribPredialRequest();
 		consultaContribuyenteBPRequest.setNumBP(numBPP);
+		consultaContribuyenteBPRequest.setAnioGravable(anioGravable);
 		final VehiculosInfObjetoForm vehiculosFormDeclaracion = new VehiculosInfObjetoForm();
 		final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
 		detalleVehiculosRequest.setBpNum(numBPP);
@@ -238,7 +240,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 				try
 				{
-					impuestoVehiculos = sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest);
+					impuestoVehiculos = sdhConsultaImpuesto_simplificado.consulta_impVehicular2(consultaContribuyenteBPRequest);
 //					sdhCustomerAccountService.updateImpuestoVehicular_simplificado(customerModel, impuestoVehiculos);
 					sdhConsultaContribuyenteBPResponse = new SDHValidaMailRolResponse();
 					sdhConsultaContribuyenteBPResponse.setVehicular(impuestoVehiculos);
@@ -272,8 +274,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 							vehiculosFormDeclaracion.setLinea(eachVehResponse.getLinea());
 							vehiculosFormDeclaracion.setModelo(eachVehResponse.getModelo());
 							vehiculosFormDeclaracion.setBlindado(eachVehResponse.getBlindado());
-							vehiculosFormDeclaracion
-									.setAvaluo(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getAvaluoActual()); //Este campo se seteaba dentro de la validacion de numForm != null, pero por reporte de incidente se removio de la validacion
+							vehiculosFormDeclaracion.setAvaluo(eachVehResponse.getAvaluo()); //Este campo se seteaba dentro de la validacion de numForm != null, pero por reporte de incidente se removio de la validacion
 
 							if (vehiculosFormDeclaracion.getNumForm() != null && !vehiculosFormDeclaracion.getNumForm().isEmpty())
 							{
