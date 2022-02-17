@@ -2160,8 +2160,24 @@ ACC.opcionDeclaraciones = {
 	
 	
 	prepararPeriodoMensual : function(){
+		var meses = [
+			'<option value="01">1-Enero</option>',
+			'<option value="02">2-Febrero</option>',
+			'<option value="03">3-Marzo</option>',
+			'<option value="04">4-Abril</option>',
+			'<option value="05">5-Mayo</option>',
+			'<option value="06">6-Junio</option>',
+			'<option value="07">7-Julio</option>',
+			'<option value="08">8-Agosto</option>',
+			'<option value="09">9-Septiembre</option>',
+			'<option value="10">10-Octubre</option>',
+			'<option value="11">11-Noviembre</option>',
+			'<option value="12">12-Diciembre</option>'
+			];
 		var perMensual = document.getElementById("Periodo1"); //mensual
 		var aniograv = $("#aniograv").val();
+		var fechaActual = new Date();
+		var mesActual = fechaActual.getMonth() +1;
 		
 		if(perMensual!=null && perMensual.style.display == "block"){
 			$("#periodoM").find("option:gt(0)").remove();
@@ -2170,23 +2186,14 @@ ACC.opcionDeclaraciones = {
 				case "00":
 					break;
 				case "2021":
-					$("#periodoM").append('<option value="10">10-Octubre</option>');
-					$("#periodoM").append('<option value="11">11-Noviembre</option>');
-					$("#periodoM").append('<option value="12">12-Diciembre</option>');
+					for(var i = 9; i<12; i++){
+						$("#periodoM").append(meses[i]);
+					}
 					break;
 				default:
-					$("#periodoM").append('<option value="01">1-Enero</option>');
-					$("#periodoM").append('<option value="02">2-Febrero</option>');
-					$("#periodoM").append('<option value="03">3-Marzo</option>');
-					$("#periodoM").append('<option value="04">4-Abril</option>');
-					$("#periodoM").append('<option value="05">5-Mayo</option>');
-					$("#periodoM").append('<option value="06">6-Junio</option>');
-					$("#periodoM").append('<option value="07">7-Julio</option>');
-					$("#periodoM").append('<option value="08">8-Agosto</option>');
-					$("#periodoM").append('<option value="09">9-Septiembre</option>');
-					$("#periodoM").append('<option value="10">10-Octubre</option>');
-					$("#periodoM").append('<option value="11">11-Noviembre</option>');
-					$("#periodoM").append('<option value="12">12-Diciembre</option>');
+					for(var i = 0; i<mesActual; i++){
+						$("#periodoM").append(meses[i]);
+					}
 					break;
 			}
 		}
