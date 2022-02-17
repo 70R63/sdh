@@ -2156,6 +2156,40 @@ ACC.opcionDeclaraciones = {
 		
 		
 		return flagError;
+	},
+	
+	
+	prepararPeriodoMensual : function(){
+		var perMensual = document.getElementById("Periodo1"); //mensual
+		var aniograv = $("#aniograv").val();
+		
+		if(perMensual!=null && perMensual.style.display == "block"){
+			$("#periodoM").find("option:gt(0)").remove();
+			switch(aniograv){
+				case "":
+				case "00":
+					break;
+				case "2021":
+					$("#periodoM").append('<option value="10">10-Octubre</option>');
+					$("#periodoM").append('<option value="11">11-Noviembre</option>');
+					$("#periodoM").append('<option value="12">12-Diciembre</option>');
+					break;
+				default:
+					$("#periodoM").append('<option value="01">1-Enero</option>');
+					$("#periodoM").append('<option value="02">2-Febrero</option>');
+					$("#periodoM").append('<option value="03">3-Marzo</option>');
+					$("#periodoM").append('<option value="04">4-Abril</option>');
+					$("#periodoM").append('<option value="05">5-Mayo</option>');
+					$("#periodoM").append('<option value="06">6-Junio</option>');
+					$("#periodoM").append('<option value="07">7-Julio</option>');
+					$("#periodoM").append('<option value="08">8-Agosto</option>');
+					$("#periodoM").append('<option value="09">9-Septiembre</option>');
+					$("#periodoM").append('<option value="10">10-Octubre</option>');
+					$("#periodoM").append('<option value="11">11-Noviembre</option>');
+					$("#periodoM").append('<option value="12">12-Diciembre</option>');
+					break;
+			}
+		}
 	}
 	
 	
