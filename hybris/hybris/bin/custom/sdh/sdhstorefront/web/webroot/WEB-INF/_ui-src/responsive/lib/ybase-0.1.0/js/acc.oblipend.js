@@ -297,7 +297,7 @@ ACC.oblipend = {
 							var clavePeriodo = "";
 							
 							if(valueH.anioGravable != null ){
-								clavePeriodo = valueH.anioGravable.substring(2,4);
+								clavePeriodo = valueH.anioGravable.substring(2,4)+"A1";;
 							}
 							
 							switch (valueH.facilidad){
