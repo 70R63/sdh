@@ -50,7 +50,7 @@
 				<div class="col-md-3">
 					<a id="downloadHelper" target="_blank"></a>
 					<c:if test="${flagPresentarDeclaracion eq true}">
-					<button id="generaDeclaracionVehiculosButton" type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton" onclick="pagarlinea()" disabled="true">
+					<button id="generaDeclaracionVehiculosButton" type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton" onclick="pagarlinea()" disabled="disabled">
 					<!-- 	<c:out value='${empty vehiculosFormDeclaracion.numForm ? "disabled":""}'/>
 						class="btn btn-primary btn-lg" onclick="pagarlinea()">  Se comenta linea para habilitar botón 19/12/2019 Maria Torres-->
 						<spring:theme code="delineacion.urbana.dec.firm.predec" />
