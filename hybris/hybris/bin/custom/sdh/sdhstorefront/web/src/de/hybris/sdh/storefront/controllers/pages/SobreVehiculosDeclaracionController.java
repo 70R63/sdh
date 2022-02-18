@@ -836,9 +836,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 					break;
 			}
 
-			System.out.println("Request para " + wsNombre + ": " + catalogoRequest);
 			catalogoResponse = gasolinaService.consultaCatalogosVehicular(catalogoRequest, sdhDetalleGasolinaWS, LOG, wsNombre);
-			System.out.println("Response de " + wsNombre + ": " + catalogoResponse);
 			dataForm.setCatalogo(catalogoResponse);
 
 

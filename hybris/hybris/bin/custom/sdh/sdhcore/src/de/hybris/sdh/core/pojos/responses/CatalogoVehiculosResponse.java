@@ -15,6 +15,7 @@ public class CatalogoVehiculosResponse
 	private List<VehicularLineaResponse> vehicularlinearesponse;
 	private List<VehicularCilindrajeResponse> vehicularcilindrajeresponse;
 	private String avaluoactual;
+	private ErrorEnWS errores;
 
 
 	/**
@@ -24,7 +25,7 @@ public class CatalogoVehiculosResponse
 	{
 		return vehicularlinearesponse;
 	}
-	
+
 	/**
 	 * @param vehicularlinearesponse
 	 *           the vehicularlinearesponse to set
@@ -33,7 +34,7 @@ public class CatalogoVehiculosResponse
 	{
 		this.vehicularlinearesponse = vehicularlinearesponse;
 	}
-	
+
 	/**
 	 * @return the vehicularcilindrajeresponse
 	 */
@@ -41,7 +42,7 @@ public class CatalogoVehiculosResponse
 	{
 		return vehicularcilindrajeresponse;
 	}
-	
+
 	/**
 	 * @param vehicularcilindrajeresponse
 	 *           the vehicularcilindrajeresponse to set
@@ -50,7 +51,7 @@ public class CatalogoVehiculosResponse
 	{
 		this.vehicularcilindrajeresponse = vehicularcilindrajeresponse;
 	}
-	
+
 	/**
 	 * @return the avaluoactual
 	 */
@@ -58,7 +59,7 @@ public class CatalogoVehiculosResponse
 	{
 		return avaluoactual;
 	}
-	
+
 	/**
 	 * @param avaluoactual
 	 *           the avaluoactual to set
@@ -68,19 +69,29 @@ public class CatalogoVehiculosResponse
 		this.avaluoactual = avaluoactual;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
+	/**
+	 * @return the errores
 	 */
+	public ErrorEnWS getErrores()
+	{
+		return errores;
+	}
+
+	/**
+	 * @param errores
+	 *           the errores to set
+	 */
+	public void setErrores(final ErrorEnWS errores)
+	{
+		this.errores = errores;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "CatalogoVehiculosResponse [vehicularlinearesponse=" + vehicularlinearesponse + ", vehicularcilindrajeresponse="
-				+ vehicularcilindrajeresponse + ", avaluoactual=" + avaluoactual + "]";
+				+ vehicularcilindrajeresponse + ", avaluoactual=" + avaluoactual + ", errores=" + errores + "]";
 	}
-
-
 
 
 }
