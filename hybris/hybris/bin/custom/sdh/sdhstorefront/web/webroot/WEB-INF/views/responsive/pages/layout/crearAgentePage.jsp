@@ -30,30 +30,31 @@ window.onload = function() {
 }
 
 function detalleBP(){
-    var t = $('#contribuyenteTable').DataTable();
+	ACC.spinner.show();
     $("#contribuyenteTable tr>td").remove();
     var urlConsulta = "<c:url value='/agentesAut/getBp?'/>"+
 	    "tipoId="+ $("#documentType").val() +
 	    "&numId="+ $("#documentNumber").val() +
 	    "&fechaExp=" + $("#issuedDate").val();
-
-//     url: "/sdhstorefront/es/agentesAut/getBp?"+
-//     "tipoId="+ $("#documentType").val() +
-//     "&numId="+ $("#documentNumber").val() +
-//     "&fechaExp=" + $("#issuedDate").val(),    
     
     $.ajax({
         url: urlConsulta,
         data:{},
         type: "GET",
         success: function(dataResponse){
+        	ACC.spinner.close();
         	if(dataResponse.tipoId != undefined ){
-                t.row.add( [dataResponse.tipoId, dataResponse.numDoc,
-                    dataResponse.nomAgen, dataResponse.tipoPers
-                ] ).draw( false );
+        		$('#contribuyenteTable').append("<tr>"+
+       				"<td>" + dataResponse.tipoId + "</td>" +
+       				"<td>" + dataResponse.numDoc + "</td>" +
+       				"<td>" + dataResponse.nomAgen + "</td>" +
+       				"<td>" + dataResponse.tipoPers + "</td>" +
+       				"</tr>");
         	}
         },
-        error: function(){}
+        error: function(){
+        	ACC.spinner.close();
+        }
     });
 	var det = document.getElementById('IdDetalleCrear');
 	det.style.display='block';

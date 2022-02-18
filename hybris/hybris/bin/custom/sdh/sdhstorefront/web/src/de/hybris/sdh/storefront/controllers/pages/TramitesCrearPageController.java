@@ -592,7 +592,7 @@ public class TramitesCrearPageController extends AbstractPageController
 //		agregarElementoTramites(elementos, "06________", "06", "Verificación de pagos", "ZT10", "A1ZTRT0001Z006","tramites.crear.categorizacion.notas.06");
 //		agregarElementoTramites(elementos, "07________", "07", "Corrección de la información causada contablemente");
 //		agregarElementoTramites(elementos, "08________", "08", "Declaración");
-//		agregarElementoTramites(elementos, "09________", "09", "Agente Autorizado");
+		agregarElementoTramites(elementos, "09________", "09", "Agente Autorizado");
 
 		//RIT
 		agregarElementoTramites(elementos, "0100______", "00", "Seleccionar");
