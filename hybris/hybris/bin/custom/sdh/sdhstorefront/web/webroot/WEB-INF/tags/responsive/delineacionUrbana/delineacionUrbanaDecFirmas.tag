@@ -14,15 +14,15 @@
 
 <c:set var="flagPresentarDeclaracion" value="false" />
 <c:set var="flagPagarEnLinea" value="false" />
-<c:if test="${dataForm.controlCampos.btnPresentarDec == true}">
+<c:if test="${dataForm.controlCampos.btnPresentarDec == false}">
 	<c:set var="flagPresentarDeclaracion" value="true" />
 </c:if>
-<c:if test="${dataForm.controlCampos.btnPagarDec == true}">
+<c:if test="${dataForm.controlCampos.btnPagarDec == false}">
 	<c:set var="flagPagarEnLinea" value="true" />
 </c:if>
 <c:if test="${contribuyente.documentType ne 'NIT' and contribuyente.numBP eq currentUser.numBP }">
-<%-- 	<c:set var="flagPresentarDeclaracion" value="true" /> --%>
-<%-- 	<c:set var="flagPagarEnLinea" value="true" /> --%>
+	<c:set var="flagPresentarDeclaracion" value="true" />
+	<c:set var="flagPagarEnLinea" value="true" />
 	<input type="hidden" value="X" id="contribuyenteNoNIT"/>
 </c:if>
 <br>
@@ -50,9 +50,9 @@
 			<div class="col-md-3">
 				<a id="downloadHelper" target="_blank"></a>
 				<c:if test="${flagPresentarDeclaracion eq true}">
-				<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton" onclick="pagarlinea()">
+				<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton" onclick="pagarlinea()" disabled="disabled">
 					<!--<c:out value='${empty dataForm.infObjetoDelineacion.numForm ? "disabled":""}'/>
-					class="btn btn-primary btn-lg" onclick="pagarlinea()">  Se comenta linea para habilitar botÛn 19/12/2019 Maria Torres-->
+					class="btn btn-primary btn-lg" onclick="pagarlinea()">  Se comenta linea para habilitar botón 19/12/2019 Maria Torres-->
 					<spring:theme code="delineacion.urbana.dec.firm.predec" />
 				</button>
 				</c:if>
@@ -74,7 +74,7 @@
 			<div class="col-md-3">
 				<c:if test="${flagPagarEnLinea eq true}">
 				<sf:button class="btn btn-primary btn-lg pagarbtn" type="button"
-					id="action" name="pagar" value="pagar" onclick="validaBotonPago()">
+					id="action" name="pagar" value="pagar" disabled="true" onclick="validaBotonPago()">
 					<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 				</sf:button>
 				</c:if>
@@ -84,7 +84,7 @@
 </div>
 
 
-<div id="dialogDU" title="DelineaciÛn Urbana">
+<div id="dialogDU" title="Delineación Urbana">
 	<div id="duDialogContent"></div>
 </div>
 
@@ -162,7 +162,7 @@ function fnaddFirmanteRep() {
 
 	} else {
 
-		alert("No se pueden agregar m·s firmantes");
+		alert("No se pueden agregar más firmantes");
 
 	}
 }

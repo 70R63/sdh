@@ -1336,8 +1336,10 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 	{
 		final DelineacionUrbanaControlCamposDec controlCampos = new DelineacionUrbanaControlCamposDec();
 		final String strRepresentanteLegalPrincipal = "Repres. Legal Principal";
+		final String strRepresentanteLegalSuplente = "Repres. Legal Suplente";
 		final String strContador = "Contador";
-		String funcionInterlocultorValida = null;
+		String funcionInterlocultorValida1 = null;
+		String funcionInterlocultorValida2 = null;
 
 		if (contribuyenteData.getDocumentType().equals("NIT") || currentUserData != null)
 		{
@@ -1348,10 +1350,12 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		switch (contribuyenteData.getDocumentType())
 		{
 			case "NIT":
-				funcionInterlocultorValida = strRepresentanteLegalPrincipal;
+				funcionInterlocultorValida1 = strRepresentanteLegalPrincipal;
+				funcionInterlocultorValida2 = strRepresentanteLegalSuplente;
 				break;
 			default:
-				funcionInterlocultorValida = strContador;
+				funcionInterlocultorValida1 = strContador;
+				funcionInterlocultorValida2 = strContador;
 				break;
 		}
 
@@ -1371,7 +1375,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 							if (!StringUtils.isEmpty(infoAgente.getBp()) && !StringUtils.isEmpty(infoAgente.getInternalFunction())
 									&& infoAgente.getInternalFunction() != null && infoAgente.getBp() != null
 									&& infoAgente.getBp().equals(currentUserData.getNumBP())
-									&& infoAgente.getInternalFunction().equals(funcionInterlocultorValida))
+									&& (infoAgente.getInternalFunction().equals(funcionInterlocultorValida1) || infoAgente.getInternalFunction().equals(funcionInterlocultorValida2)))
 							{
 								controlCampos.setBtnPresentarDec(false);
 								controlCampos.setBtnPagarDec(false);
