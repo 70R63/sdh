@@ -137,10 +137,9 @@
 		<div class="row mt-3">
 			<div class="col-md-3">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="sobre.vehiculo.declaracion.vehiculo.info.linea" /></label> <select 
+					<label class="control-label"><spring:theme code="sobre.vehiculo.declaracion.vehiculo.info.linea" /></label> <select 
 						id="linea"   class="alto_select form-control" aria-required="true"
-						onchange='actualizarCampo("cilindraje")' ></select>
+						onchange='actualizarCampo(this)' ></select>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -160,7 +159,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.cilindra" /></label> <select
 						id="cilindraje" class="alto_select form-control"
-						aria-required="true" onchange='actualizarCampo("avaluo")' ${disabledCilindraje} ></select>
+						aria-required="true" onchange='actualizarCampo(this)' ${disabledCilindraje} ></select>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -182,7 +181,7 @@
 						id="avaluoAct" name=""
 						class="newalto form-control avaluoAct valFormatoImporte"
 						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" ${disabledAvaluo} onchange='validaMontoAvaluo("${vehiculosFormDeclaracion.avaluo}")' >
+						value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" ${disabledAvaluo} >
 				</div>
 			</div>
 		</div>
