@@ -181,7 +181,7 @@
 						id="avaluoAct" name=""
 						class="newalto form-control avaluoAct valFormatoImporte"
 						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" ${disabledAvaluo} >
+						value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" ${disabledAvaluo} data-valoriginal="${vehiculosFormDeclaracion.avaluo}" onChange="validarAvaluoAct()">
 				</div>
 			</div>
 		</div>
@@ -488,6 +488,11 @@
 			alert("El nuevo monto de avaluo debe ser mayor o igual a " + montoOriginalAvaluo);
 			$('#avaluoAct').val(montoOriginalAvaluo);
 		}
+	}
+	
+	
+	function validarAvaluoAct(){
+		ACC.vehiculos.validacionMonto_avaluoAct();
 	}
 </script>
 

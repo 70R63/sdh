@@ -698,8 +698,8 @@ ACC.vehiculos = {
 					if(!bloquearCampos_flag){
 						controlCampos.avaluoAct = false;
 					}
-					$(document).off("change", "#avaluoAct", ACC.vehiculos.validacionMonto_avaluoAct);
-					$(document).on("change", "#avaluoAct", ACC.vehiculos.validacionMonto_avaluoAct);
+//					$(document).off("change", "#avaluoAct", ACC.vehiculos.validacionMonto_avaluoAct);
+//					$(document).on("change", "#avaluoAct", ACC.vehiculos.validacionMonto_avaluoAct);
 					break;
 				default:
 					var showerror = $("#AvaluoMensaje");
