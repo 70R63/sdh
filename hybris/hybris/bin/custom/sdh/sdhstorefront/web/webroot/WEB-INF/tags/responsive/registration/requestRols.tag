@@ -48,7 +48,7 @@
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.categoria" /></label> 
 						<select data-nivel="2" class=" form-control !important tramitestSNRol" id="selectNivel2">
-						<option value="01">Registro / rol tributario</option>
+						<option value="02">Registro / rol tributario</option>
 						</select>
 					</div>
 				</div>
