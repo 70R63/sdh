@@ -57,7 +57,7 @@ public class PsePaymentController {
             produces = "application/json", consumes = "application/json")
     public Response getTransactionInformation(@RequestBody GetTransactionInformationEntity getTransactionInformationEntity){
 
-        GetTransactionInformationBodyType getTransactionInformationBodyType = new GetTransactionInformationBodyType()
+        GetTransactionInformationBodyType getTransactionInformationBodyType = new GetTransactionInformationBodyType();
         getTransactionInformationBodyType.setTrazabilityCode(getTransactionInformationEntity.getTrazabilityCode());
 
         pseServices.getTransactionInformation(
