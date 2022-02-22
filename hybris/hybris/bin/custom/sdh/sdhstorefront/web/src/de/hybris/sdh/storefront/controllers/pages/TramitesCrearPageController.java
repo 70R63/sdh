@@ -608,20 +608,20 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "01010201__", "01", "Persona Natural", "ZT02", "A1ZTRT0004Z065");
 		agregarElementoTramites(elementos, "01010202__", "02", "Persona Jurídica", "ZT02", "A1ZTRT0004Z066");
 		//RIT-Creación-Registro / Rol Tributario - Persona Natural
-//		agregarElementoTramites(elementos, "0101010100", "00", "Seleccionar");
-//		agregarElementoTramites(elementos, "0101010101", "01", "Contribuyente", "ZT02", "A1ZTRT0004Z065",
-//				"tramites.crear.categorizacion.notas.0101010101");
-//		agregarElementoTramites_rol(elementos, "0101010102", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z065", "ZZAGENTE", "X");
-//		agregarElementoTramites_rol(elementos, "0101010103", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z065",
-//				"ZZREPORTANTE", "X");
-//		agregarElementoTramites(elementos, "0101010104", "04", "Terceros Autorizados");
+		agregarElementoTramites(elementos, "0101020100", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "0101020101", "01", "Contribuyente", "ZT02", "A1ZTRT0004Z065",
+				"tramites.crear.categorizacion.notas.0101010101");
+		agregarElementoTramites_rol(elementos, "0101020102", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z065", "ZZAGENTE", "X");
+		agregarElementoTramites_rol(elementos, "0101020103", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z065",
+				"ZZREPORTANTE", "X");
+		agregarElementoTramites(elementos, "0101020104", "04", "Terceros Autorizados");
 		//RIT-Actualizacion-Registro / Rol Tributario - Persona Jurídica
-//		agregarElementoTramites(elementos, "0101010200", "00", "Seleccionar");
-//		agregarElementoTramites(elementos, "0101010201", "01", "Contribuyente");
-//		agregarElementoTramites_rol(elementos, "0101010202", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z066", "ZZAGENTE", "");
-//		agregarElementoTramites_rol(elementos, "0101010203", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z066",
-//				"ZZREPORTANTE", "");
-//		agregarElementoTramites(elementos, "0101010204", "04", "Terceros Autorizados");
+		agregarElementoTramites(elementos, "0101020200", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "0101020201", "01", "Contribuyente");
+		agregarElementoTramites_rol(elementos, "0101020202", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z066", "ZZAGENTE", "");
+		agregarElementoTramites_rol(elementos, "0101020203", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z066",
+				"ZZREPORTANTE", "");
+		agregarElementoTramites(elementos, "0101020204", "04", "Terceros Autorizados");
 		//RIT-Creación-Creación de Calidad Sujeción Pasiva
 		agregarElementoTramites(elementos, "01010300__", "00", "Seleccionar");
 //		agregarElementoTramites(elementos, "01010301__", "01", "Predial unificado/ Propietario", "ZT04", "A1ZTRT0004Z067");
