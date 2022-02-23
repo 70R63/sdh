@@ -1122,6 +1122,32 @@ ACC.predial = {
 
 		
 		return validacion;
+	},
+	
+	
+	validacionMontoAD_generica_estricta : function(valOriginal, valNuevo){
+		var validacion = false;
+		var valOriginal_f = Number.NaN;
+		var valNuevo_f = Number.NaN;
+		
+		if(valOriginal != undefined){
+			valOriginal = valOriginal.replace(/\./g, '');
+			valOriginal_f = parseFloat(valOriginal);
+		}
+		
+		if(valNuevo != undefined){
+			valNuevo = valNuevo.replace(/\./g, '');
+			valNuevo_f = parseFloat(valNuevo);
+		}
+		
+		if(valOriginal_f != Number.NaN && valNuevo_f != Number.NaN){
+			if(valOriginal_f < valNuevo_f){
+				validacion = true;
+			}			
+		}
+
+		
+		return validacion;
 	}
 	
 	 

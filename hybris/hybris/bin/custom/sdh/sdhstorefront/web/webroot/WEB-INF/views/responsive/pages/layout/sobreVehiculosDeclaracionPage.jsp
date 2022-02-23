@@ -119,7 +119,7 @@
 			 ];
 		
 		var datosAdicionales = obtenerOpcionesAdicionales();
-		ACC.vehiculos.obtenerCatalogosInicialVehiculos(cat_valores_actuales,datosAdicionales.homologado,datosAdicionales.opcionUso,datosAdicionales.bloquearCampos);
+		ACC.vehiculos.obtenerCatalogosInicialVehiculos(cat_valores_actuales,datosAdicionales);
 		
 	}
 	
@@ -147,7 +147,7 @@
 				
 		if(dataActual != null){
 			var datosAdicionales = obtenerOpcionesAdicionales();
-			ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,campo_catalogo,null,datosAdicionales.homologado,datosAdicionales.opcionUso,datosAdicionales.bloquearCampos);	
+			ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,campo_catalogo,null,datosAdicionales);	
 		}
 		
 	}
@@ -157,6 +157,8 @@
 		
 		var opcionUso = "${vehiculosFormDeclaracion.opcionUso}";
 		data.homologado = "${vehiculosFormDeclaracion.homologado}";
+		data.idServicio = $("#idServiciocal").val();
+		
 		if(opcionUso != null && opcionUso.length >= 2){
 			data.opcionUso = opcionUso.substring(0,2);
 		}
@@ -167,6 +169,7 @@
 		){
 			data.bloquearCampos = true;
 		}
+		data.ejecucionInicial = "X";
 		
 		return data;
 	}

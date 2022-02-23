@@ -181,7 +181,8 @@
 						id="avaluoAct" name=""
 						class="newalto form-control avaluoAct valFormatoImporte"
 						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" ${disabledAvaluo} data-valoriginal="${vehiculosFormDeclaracion.avaluo}" onChange="validarAvaluoAct()">
+						value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" ${disabledAvaluo} 
+						data-valoriginal="${vehiculosFormDeclaracion.avaluo}" onChange="validarAvaluoAct()">
 				</div>
 			</div>
 		</div>
