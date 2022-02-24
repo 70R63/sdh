@@ -703,9 +703,9 @@ ACC.vehiculos = {
 //					$(document).on("change", "#avaluoAct", ACC.vehiculos.validacionMonto_avaluoAct);
 					break;
 				default:
-					var showerror = $("#AvaluoMensaje");
-					showerror.style.display = 'none';
-					controlCampos.avaluoAct = true;
+//					var showerror = $("#AvaluoMensaje");
+//					showerror.style.display = 'none';
+//					controlCampos.avaluoAct = true;
 					$("#avaluoAct").val(infoResponse.catalogo.avaluoactual);
 					if(!ACC.predial.validacionMontoAD_generica_estricta($("#avaluoAct").data("valoriginal"),infoResponse.catalogo.avaluoactual)){
 						alert("El avaluo no puede ser menor al original");
