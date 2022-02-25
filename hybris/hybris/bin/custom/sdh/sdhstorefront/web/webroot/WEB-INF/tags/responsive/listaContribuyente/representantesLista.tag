@@ -9,7 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="container_new_page">
+<div class="container_new_page" style="display: none">
     <form:form action="">
         <div class="row">
             <div class="col-md-12">
