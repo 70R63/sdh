@@ -188,9 +188,11 @@ public class ContribuyentesPageController extends AbstractPageController
                 final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
                         .consultaContribuyenteBP_simplificado(consultaContribBPRequest);
 
-                contibForm.setRepresentados(sdhConsultaContribuyenteBPResponse.getAgentes().stream().filter(
-                        eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc()) && "-".equalsIgnoreCase(eachAgente.getAgente()))
-                        .collect(Collectors.toList()));
+                if (sdhConsultaContribuyenteBPResponse.getAgentes() != null){
+					contibForm.setRepresentados(sdhConsultaContribuyenteBPResponse.getAgentes().stream().filter(
+							eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc()) && "-".equalsIgnoreCase(eachAgente.getAgente()))
+							.collect(Collectors.toList()));
+				}			
 
 
 
