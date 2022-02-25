@@ -3,6 +3,7 @@
  */
 package de.hybris.sdh.storefront.forms;
 
+import de.hybris.sdh.core.pojos.responses.ContribAgente;
 import de.hybris.sdh.core.pojos.responses.DetalleDeclaraciones;
 
 import java.util.List;

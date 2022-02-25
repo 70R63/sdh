@@ -22,8 +22,10 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsulFirmasRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.responses.ContribFirmasResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleDeclaraciones;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.proxySelector.SDHProxySelector;
 import de.hybris.sdh.core.services.SDHConsulFirmasService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -177,7 +179,7 @@ public class ContribuyentesPageController extends AbstractPageController
 
 					contibForm.setDeclaraciones(contribFirmasResponse.getDeclaraciones().stream()
 						.filter(eachDetDecla -> StringUtils.isNotBlank(eachDetDecla.getIdDeclaracion())).collect(Collectors.toList()));
-				
+
 				//*->Carga de representantes
                 final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
                 consultaContribBPRequest.setNumBP(customerModel.getNumBP());
@@ -189,7 +191,7 @@ public class ContribuyentesPageController extends AbstractPageController
                 contibForm.setRepresentados(sdhConsultaContribuyenteBPResponse.getAgentes().stream().filter(
                         eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc()) && "-".equalsIgnoreCase(eachAgente.getAgente()))
                         .collect(Collectors.toList()));
-		
+
 
 
 			}
