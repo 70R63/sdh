@@ -177,6 +177,19 @@ public class ContribuyentesPageController extends AbstractPageController
 
 					contibForm.setDeclaraciones(contribFirmasResponse.getDeclaraciones().stream()
 						.filter(eachDetDecla -> StringUtils.isNotBlank(eachDetDecla.getIdDeclaracion())).collect(Collectors.toList()));
+				
+				//*->Carga de representantes
+                final ConsultaContribBPRequest consultaContribBPRequest = new ConsultaContribBPRequest();
+                consultaContribBPRequest.setNumBP(customerModel.getNumBP());
+                consultaContribBPRequest.setIndicador("01,02");
+
+                final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+                        .consultaContribuyenteBP_simplificado(consultaContribBPRequest);
+
+                contibForm.setRepresentados(sdhConsultaContribuyenteBPResponse.getAgentes().stream().filter(
+                        eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc()) && "-".equalsIgnoreCase(eachAgente.getAgente()))
+                        .collect(Collectors.toList()));
+		
 
 
 			}

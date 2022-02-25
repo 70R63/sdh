@@ -15,6 +15,28 @@ import java.util.List;
 public class ContribuyenteForm
 {
 	private List<DetalleDeclaraciones> declaraciones;
+	private List<ContribAgente> representados;
+
+
+
+
+
+    /**
+     * @return the representados
+     */
+    public List<ContribAgente> getRepresentados()
+    {
+        return representados;
+    }
+
+    /**
+     * @param representados
+     *           the representados to set
+     */
+    public void setRepresentados(final List<ContribAgente> representados)
+    {
+        this.representados = representados;
+    }
 
 	/**
 	 * @return the declaraciones

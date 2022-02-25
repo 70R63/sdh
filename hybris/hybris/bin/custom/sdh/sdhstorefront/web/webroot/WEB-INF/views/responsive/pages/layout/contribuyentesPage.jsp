@@ -14,6 +14,7 @@
 <template:page pageTitle="${pageTitle}">
 </template:page>
 <cont:contribuyentesLista/>
+<cont:representantesLista/>
 
 <script type="text/javascript">
 	
