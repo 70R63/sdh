@@ -40,7 +40,6 @@
 			</a>
 		</div>
 		</c:if>
-		<c:if test="${false}">
 		<c:if test="${hasTARol_01 || hasTARol_02 || hasTARol_03 || hasTARol_04}">
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="<c:url value='/setRole?role=sdh_03' />">
@@ -76,6 +75,7 @@
 			</a>
 		</div>
 		</c:if>
+		<c:if test="${false}">
 		<c:if test="${hasARRol }">
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="<c:url value='/setRole?role=sdh_04' />">
