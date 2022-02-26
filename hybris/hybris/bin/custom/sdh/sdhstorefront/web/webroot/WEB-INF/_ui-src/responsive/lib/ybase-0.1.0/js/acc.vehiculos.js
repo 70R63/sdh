@@ -740,7 +740,7 @@ ACC.vehiculos = {
 						case "02":
 							controlCampos.linea = false;
 							controlCampos.cilindraje = false;
-							controlCampos.avaluoAct = false;
+							controlCampos.avaluoAct = true;
 							break;
 						default:
 							break;			
@@ -752,7 +752,7 @@ ACC.vehiculos = {
 						case "02":
 							controlCampos.linea = false;
 							controlCampos.cilindraje = false;
-							controlCampos.avaluoAct = false;
+							controlCampos.avaluoAct = true;
 							break;
 						default:
 							break;			
