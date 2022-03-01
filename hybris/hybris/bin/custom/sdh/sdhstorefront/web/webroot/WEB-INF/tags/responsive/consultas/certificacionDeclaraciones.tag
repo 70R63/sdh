@@ -343,7 +343,7 @@
 	}
 	
 	function SelectedAnio(selectObject) {
-		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_porAnio(X);
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_porAnio();
 
 	}
 
