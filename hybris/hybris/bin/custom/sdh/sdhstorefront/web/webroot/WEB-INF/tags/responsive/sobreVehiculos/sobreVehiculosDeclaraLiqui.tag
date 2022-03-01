@@ -186,6 +186,19 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+					</thead>
+					<tbody>
+						<tr class="avisobody">
+							<td><spring:theme code="sobre.vehiculo.declaracion.vehiculo.descripcion3" htmlEscape="false"/></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 
 		<div class="row" style="display: none" id="AvaluoMensaje"
 			class="AvaluoMensaje">
