@@ -36,6 +36,9 @@
 <c:set var="claveImpuesto_6" value="true"/>
 </c:if>
 <div class="container_new_page">
+<div class="alert alert-success" role="alert">
+ <span><spring:theme code="message.download" /> </span>
+</div>
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
