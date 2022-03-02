@@ -138,7 +138,7 @@ ACC.oblipend = {
 							var desPeriodoMensual = ACC.oblipend.obtenerPeriodoMensual(valueH.periodo);
 							var claveImpuestoExt = valueD.codImpuesto;
 							
-							if(valueH.anioGravable != null && valueH.anioGravable.lenght >= 4){
+							if(valueH.anioGravable != null ){
 								clavePeriodo = valueH.anioGravable.substring(2,4)+"A1";
 							}
 							
@@ -297,7 +297,7 @@ ACC.oblipend = {
 							var clavePeriodo = "";
 							
 							if(valueH.anioGravable != null ){
-								clavePeriodo = valueH.anioGravable.substring(2,4);
+								clavePeriodo = valueH.anioGravable.substring(2,4)+"A1";;
 							}
 							
 							switch (valueH.facilidad){
@@ -455,7 +455,7 @@ ACC.oblipend = {
 	
 	predial_generarTD_totalPagar : function(obligacion,totalPagar,objetoContrato,clavePeriodo,tpImp){
 		
-		return '<a href="' + ACC.inicialURL +'contribuyentes/rop?obligacion=' + obligacion + '&totalPagar=' + totalPagar + '&objCont=' + objetoContrato + '&clvPer=' + clavePeriodo + 'A1&tpImp=' + tpImp + '" >Generar ROP</a>'; 
+		return '<a href="' + ACC.inicialURL +'contribuyentes/rop?obligacion=' + obligacion + '&totalPagar=' + totalPagar + '&objCont=' + objetoContrato + '&clvPer=' + clavePeriodo + '&tpImp=' + tpImp + '" >Generar ROP</a>'; 
 	},
 	
 	predial_generarTD_spac : function(numFormulario,anioGravable,objetoContrato,reimpresion){
@@ -680,7 +680,7 @@ ACC.oblipend = {
 	}else if(impuestoSelc=="2"){
 	
 		tableVeh[0].setAttribute("id","example");
-		   var selectRefinementsTitle = "Vehicular";
+		   var selectRefinementsTitle = "Impuestos de Vehículos";
 	        ACC.colorbox.open(selectRefinementsTitle, {
 	            href: ".js-vehicular-facet",
 	            inline: true,

@@ -136,7 +136,7 @@ public class OpcionDeclaracionesPDFRequest
 		stringBuilder.append(obtenerValorJson("\"claseObjeto\":\"", this.getClaseObjeto(), "\","));
 		stringBuilder.append(obtenerValorJson("\"anioGravable\":\"", this.getAnioGravable(), "\","));
 		stringBuilder.append(obtenerValorJson("\"periodo\":\"", this.getPeriodo(), "\","));
-		stringBuilder.append(obtenerValorJson("\"Radicado\":\"", this.getRadicado(), "\""));
+		stringBuilder.append(obtenerValorJson("\"noRadicado\":\"", this.getRadicado(), "\""));
 		stringBuilder.append("}");
 
 

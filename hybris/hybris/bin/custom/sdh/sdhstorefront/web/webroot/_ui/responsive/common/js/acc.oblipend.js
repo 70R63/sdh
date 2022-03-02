@@ -89,9 +89,8 @@ ACC.oblipend = {
 							tr_value = 
 								"<tr>" +
 								"<td>" + valueH.anioGravable +"</td>"+
-								"<td>" + valueH.cdu +"</td>"+
-								"<td>" + valueH.chip +"</td>"+
-								"<td>" + valueH.direccion +"</td>"+
+								"<td>" + valueH.numResolucion +"</td>"+
+								"<td>" + valueH.orientacionValla +"</td>"+
 								"<td>" + valueD.estadoObligacion +"</td>"+
 								"<td>" + valueD.obligacion +"</td>"+
 								"<td>" + valueD.numFormulario +"</td>"+
@@ -116,7 +115,7 @@ ACC.oblipend = {
 	
 	
 	updateFromResponseImpuesto_delurbana : function(infoResponse){
-		var id_tabla = "#table-delurbana";
+		var id_tabla = "#table_delurbana";
 		var tablaInfo = infoResponse.headerdeli;
 		
 		$(id_tabla).find("tr:gt(0)").remove();
@@ -139,7 +138,7 @@ ACC.oblipend = {
 							var desPeriodoMensual = ACC.oblipend.obtenerPeriodoMensual(valueH.periodo);
 							var claveImpuestoExt = valueD.codImpuesto;
 							
-							if(valueH.anioGravable != null && valueH.anioGravable.lenght >= 4){
+							if(valueH.anioGravable != null ){
 								clavePeriodo = valueH.anioGravable.substring(2,4)+"A1";
 							}
 							
@@ -298,7 +297,7 @@ ACC.oblipend = {
 							var clavePeriodo = "";
 							
 							if(valueH.anioGravable != null ){
-								clavePeriodo = valueH.anioGravable.substring(2,4);
+								clavePeriodo = valueH.anioGravable.substring(2,4)+"A1";;
 							}
 							
 							switch (valueH.facilidad){
@@ -456,7 +455,7 @@ ACC.oblipend = {
 	
 	predial_generarTD_totalPagar : function(obligacion,totalPagar,objetoContrato,clavePeriodo,tpImp){
 		
-		return '<a href="' + ACC.inicialURL +'contribuyentes/rop?obligacion=' + obligacion + '&totalPagar=' + totalPagar + '&objCont=' + objetoContrato + '&clvPer=' + clavePeriodo + 'A1&tpImp=' + tpImp + '" >Generar ROP</a>'; 
+		return '<a href="' + ACC.inicialURL +'contribuyentes/rop?obligacion=' + obligacion + '&totalPagar=' + totalPagar + '&objCont=' + objetoContrato + '&clvPer=' + clavePeriodo + '&tpImp=' + tpImp + '" >Generar ROP</a>'; 
 	},
 	
 	predial_generarTD_spac : function(numFormulario,anioGravable,objetoContrato,reimpresion){
@@ -681,7 +680,7 @@ ACC.oblipend = {
 	}else if(impuestoSelc=="2"){
 	
 		tableVeh[0].setAttribute("id","example");
-		   var selectRefinementsTitle = "Vehicular";
+		   var selectRefinementsTitle = "Impuestos de Vehículos";
 	        ACC.colorbox.open(selectRefinementsTitle, {
 	            href: ".js-vehicular-facet",
 	            inline: true,

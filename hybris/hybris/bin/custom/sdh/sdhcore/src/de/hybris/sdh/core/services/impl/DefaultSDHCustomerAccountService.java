@@ -2556,7 +2556,8 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			groupList = groupList.stream()
 					.filter(c -> (c.getUid().contains("predialUsrTaxGrp") || c.getUid().contains("vehicularUsrTaxGrp")
 							|| c.getUid().contains("ICAUsrTaxGrp") || c.getUid().contains("gasolinaUsrTaxGrp")
-							|| c.getUid().contains("delineacionUsrTaxGrp") || c.getUid().contains("publicidadExtUsrTaxGrp")))
+							|| c.getUid().contains("delineacionUsrTaxGrp") || c.getUid().contains("publicidadExtUsrTaxGrp")
+                            || c.getUid().contains("reteICAUsrTaxGrp")))
 					.collect(Collectors.toSet());
 			if (!groupList.isEmpty())
 			{

@@ -119,26 +119,35 @@
 			 ];
 		
 		var datosAdicionales = obtenerOpcionesAdicionales();
-		ACC.vehiculos.obtenerCatalogosInicialVehiculos(cat_valores_actuales,datosAdicionales.homologado,datosAdicionales.opcionUso,datosAdicionales.bloquearCampos);
+		ACC.vehiculos.obtenerCatalogosInicialVehiculos(cat_valores_actuales,datosAdicionales);
 		
 	}
 	
-	function actualizarCampo(campo_catalogo){
+	function actualizarCampo(objetoActualizado){
 		var dataActual = null;
-		if(campo_catalogo == "cilindraje"){
-			$("#cilindraje").val("");
-			var elementoCat = document.getElementById("cilindraje");
-			elementoCat.disabled = "disabled";
-			$("#avaluoAct").val("");
-			dataActual = ACC.vehiculos.determinarInfoParaCatalogo("cilindraje");
-		}else if(campo_catalogo == "avaluo"){
-			$("#avaluoAct").val("");
-			dataActual = ACC.vehiculos.determinarInfoParaCatalogo("avaluo");
-		}
+		var catActualizado = $(objetoActualizado).attr('id');
+		var campo_catalogo = "";
 		
+		switch(catActualizado){
+			case "linea":
+				$("#cilindraje").val("");
+				$("#avaluoAct").val("");
+				$("#cilindraje").prop("disabled",true);
+				dataActual = ACC.vehiculos.determinarInfoParaCatalogo("cilindraje");
+				campo_catalogo = "cilindraje";
+				break;
+			case "cilindraje":
+				$("#avaluoAct").val("");
+				dataActual = ACC.vehiculos.determinarInfoParaCatalogo("avaluo");
+				campo_catalogo = "avaluo";
+				break;
+			default:
+				break;
+		}
+				
 		if(dataActual != null){
 			var datosAdicionales = obtenerOpcionesAdicionales();
-			ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,campo_catalogo,null,datosAdicionales.homologado,datosAdicionales.opcionUso,datosAdicionales.bloquearCampos);	
+			ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,campo_catalogo,null,datosAdicionales);	
 		}
 		
 	}
@@ -148,13 +157,19 @@
 		
 		var opcionUso = "${vehiculosFormDeclaracion.opcionUso}";
 		data.homologado = "${vehiculosFormDeclaracion.homologado}";
+		data.idServicio = $("#idServiciocal").val();
+		
 		if(opcionUso != null && opcionUso.length >= 2){
 			data.opcionUso = opcionUso.substring(0,2);
 		}
 		data.bloquearCampos = false;
-		if($("#disabledLiquidacion_flag").val() == "X"){
+		if($("#disabledLiquidacion_flag").val() == "X" 
+				|| ($("#idServiciocal").val() == "03")
+				|| (data.homologado == "X" && data.opcionUso == "01" )
+		){
 			data.bloquearCampos = true;
 		}
+		data.ejecucionInicial = "X";
 		
 		return data;
 	}

@@ -29,10 +29,27 @@ public class InfoPreviaPSE
 	private String placa;
 	private String concesionario;
 	private String pagoVoluntario;
+	private String matrInmobiliaria;
 
 
 
 
+	    /**
+     * @return the matrInmobiliaria
+     */
+    public String getMatrInmobiliaria()
+    {
+        return matrInmobiliaria;
+    }
+
+    /**
+     * @param matrInmobiliaria
+     *           the matrInmobiliaria to set
+     */
+    public void setMatrInmobiliaria(final String matrInmobiliaria)
+    {
+        this.matrInmobiliaria = matrInmobiliaria;
+    }
 
 
 

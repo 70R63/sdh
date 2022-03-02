@@ -28,6 +28,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 import javax.annotation.Resource;
 
@@ -115,6 +116,19 @@ public class RopPageController extends AbstractPageController
 		ropFormRequest.setClavePeriodo(clvPer);
 		ropFormRequest.setNumObjeto(objCont);
 		ropFormRequest.setNumBP(customerModel.getNumBP());
+		
+		final LocalDate localDate = LocalDate.now();
+        final Integer year = localDate.getYear();
+
+
+        if (clvPer.substring(0, 2).contains(year.toString().subSequence(2, 4)))
+        {
+            ropFormRequest.setDespliegaImporteUsuario("false");
+        }
+        else
+        {
+            ropFormRequest.setDespliegaImporteUsuario("true");
+        }
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ROP_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ROP_CMS_PAGE));

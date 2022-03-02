@@ -330,7 +330,7 @@ ACC.opcionDeclaraciones = {
 	},
 	
 	
-	obtenerListaDeclaraciones : function() {
+	obtenerListaDeclaraciones : function(certificacionDeclaracion) {
 		ACC.spinner.show();
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.publicidadexterior.bindDataTable_Class_refresh();
@@ -344,7 +344,7 @@ ACC.opcionDeclaraciones = {
 			dataActual.claveImpuesto = claveImpuesto;
 			dataActual.anoGravable = anoGravable;
 			dataActual.periodo = ACC.opcionDeclaraciones.obtenerPeriodoPorImpuesto(claveImpuesto);
-			
+			dataActual.certificacionDeclaracion = certificacionDeclaracion;
 			
 			$.ajax({
 				url : ACC.listaDeclaracionesURL,
@@ -418,7 +418,7 @@ ACC.opcionDeclaraciones = {
 		
 	},
 	
-	obtenerListaDeclaraciones_porAnio : function() {
+	obtenerListaDeclaraciones_porAnio : function(certificacionDeclaracion) {
 		
 		ACC.spinner.show();
 		
@@ -440,7 +440,7 @@ ACC.opcionDeclaraciones = {
 				success : function(dataResponse) {
 					ACC.spinner.close();
 					ACC.opcionDeclaraciones.updateFromResponsePeriodo_porAnio(dataActual,dataResponse);
-					ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+					ACC.opcionDeclaraciones.obtenerListaDeclaraciones(certificacionDeclaracion);
 				},
 				error : function() {
 					ACC.spinner.close();
@@ -449,7 +449,7 @@ ACC.opcionDeclaraciones = {
 			});
 		}else{
 			ACC.spinner.close();
-			ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+		    ACC.opcionDeclaraciones.obtenerListaDeclaraciones(certificacionDeclaracion);
 		}
 		
 		
@@ -619,11 +619,21 @@ ACC.opcionDeclaraciones = {
 								numRadicado = value.radicados[0].numRadicado;
 							}
 
-							$('#table-delineacion1').append("<tr>"+
-									'<td>' + value.cdu + '</td>'+
-									'<td>' + numRadicado + '</td>'+
-									'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto + '" data-numRadicado="'+ numRadicado +'"' +">" + "</td>"+
-									"</tr>");
+							if(infoActual.certificacionDeclaracion != null ){
+                                if(  numRadicado == null || numRadicado == "" ){
+                                    $('#table-delineacion1').append("<tr>"+
+                                        '<td>' + value.cdu + '</td>'+
+                                        '<td>' + numRadicado + '</td>'+
+                                        '<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto + '" data-numRadicado="'+ numRadicado +'"' +">" + "</td>"+
+                                        "</tr>");
+                                }        
+                            }else{                                
+                                $('#table-delineacion1').append("<tr>"+
+                                        '<td>' + value.cdu + '</td>'+
+                                        '<td>' + numRadicado + '</td>'+
+                                        '<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto + '" data-numRadicado="'+ numRadicado +'"' +">" + "</td>"+
+                                        "</tr>");
+                            }        
 						});
 					}
 				}
@@ -1717,7 +1727,7 @@ ACC.opcionDeclaraciones = {
 		var ocultarPeriodo2 = false;
         var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto,"presentar-declaracion");
+		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto,ACC.configCatalogos_ambito_presentarDeclaracion);
 		
         
         var btnAction = document.getElementById('action');
@@ -1842,7 +1852,7 @@ ACC.opcionDeclaraciones = {
 
 		var d = new Date();
 		var anoGravableBase = d.getFullYear();
-		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto,"presentar-declaracion");
+		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto,ACC.configCatalogos_ambito_presentarDeclaracion);
 		
 		$("#anoGravable").find("option:gt(0)").remove();
 		if(claveImpuesto == '1' || claveImpuesto == '2'){ // predial vehicular 
@@ -1890,6 +1900,10 @@ ACC.opcionDeclaraciones = {
 	
 	preparaAnioGravable : function(ambito){
 		var claveImpuesto = document.getElementById('seleccion').value;
+		if (claveImpuesto == null || claveImpuesto == "" ){
+            claveImpuesto = document.getElementById('selCerDecImpAR').value;
+        }    
+		
 		var d = new Date();
 		var anoGravableBase = d.getFullYear();
 		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto.substring(3,4),ambito);
@@ -2005,7 +2019,7 @@ ACC.opcionDeclaraciones = {
 		var cantidadAnoGravable = 0;
 
         switch (ambito) {
-			case "consultas":
+			case ACC.configCatalogos_ambito_consultas:
 		        switch (claveImpuesto) {
 					case "1":		//predial
 						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_Consultas_predial;
@@ -2030,10 +2044,30 @@ ACC.opcionDeclaraciones = {
 						break;
 					}
 				break;
-			case "presentar-declaracion":
+			case ACC.configCatalogos_ambito_certiDeclaracion:
+			case ACC.configCatalogos_ambito_reimpresionDeclaracion:
 		        switch (claveImpuesto) {
+					case "1":		//predial
+					case "2":		//vehiculos
+					case "3":		//ica
+					case "4":		//ReteIca
+					case "5":		//gasolina
+					case "6":		//delineacion
+					case "7":		//publicidad
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_CertiDeclaracion;
+						break;
 					default:
-						cantidadAnoGravable = 5;
+						cantidadAnoGravable = 0;
+						break;
+					}
+				break;
+			case ACC.configCatalogos_ambito_presentarDeclaracion:
+		        switch (claveImpuesto) {
+					case "6":		//delineacion
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_PresentarDeclaracion_delineacion;
+						break;
+					default:
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_PresentarDeclaracion;
 						break;
 				}
 				break;
@@ -2122,6 +2156,47 @@ ACC.opcionDeclaraciones = {
 		
 		
 		return flagError;
+	},
+	
+	
+	prepararPeriodoMensual : function(){
+		var meses = [
+			'<option value="01">1-Enero</option>',
+			'<option value="02">2-Febrero</option>',
+			'<option value="03">3-Marzo</option>',
+			'<option value="04">4-Abril</option>',
+			'<option value="05">5-Mayo</option>',
+			'<option value="06">6-Junio</option>',
+			'<option value="07">7-Julio</option>',
+			'<option value="08">8-Agosto</option>',
+			'<option value="09">9-Septiembre</option>',
+			'<option value="10">10-Octubre</option>',
+			'<option value="11">11-Noviembre</option>',
+			'<option value="12">12-Diciembre</option>'
+			];
+		var perMensual = document.getElementById("Periodo1"); //mensual
+		var aniograv = $("#aniograv").val();
+		var fechaActual = new Date();
+		var mesActual = fechaActual.getMonth() +1;
+		
+		if(perMensual!=null && perMensual.style.display == "block"){
+			$("#periodoM").find("option:gt(0)").remove();
+			switch(aniograv){
+				case "":
+				case "00":
+					break;
+				case "2021":
+					for(var i = 9; i<12; i++){
+						$("#periodoM").append(meses[i]);
+					}
+					break;
+				default:
+					for(var i = 0; i<mesActual; i++){
+						$("#periodoM").append(meses[i]);
+					}
+					break;
+			}
+		}
 	}
 	
 	

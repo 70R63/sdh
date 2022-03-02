@@ -66,7 +66,7 @@
 				<p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Palabra
 					Clave</p>
 				<input type="text" id="faqKeyWord" name="faqKeyWord"
-					class="new_alto form-control " minlength="4" maxlength="8"
+					class="new_alto form-control " minlength="4" maxlength="50"
 					size="10" value="${word}">
 
 				<button class="btn btn-primary" id="keyWordSearchs"

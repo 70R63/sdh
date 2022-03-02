@@ -3,6 +3,8 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 /**
  * @author Consultor
  *
@@ -59,6 +61,7 @@ public class ReteICA
 	 * @param consecutive
 	 *           the consecutive to set
 	 */
+	@JsonSetter("consecutivo")
 	public void setConsecutive(final String consecutive)
 	{
 		this.consecutive = consecutive;

@@ -65,8 +65,30 @@ public class OpcionDeclaracionesVista
 	private String numfactForm;
 
 	private String numBP;
+	private String certificacionDeclaracion;
 
 
+
+
+
+
+
+    /**
+     * @return the certificacionDeclaracion
+     */
+    public String getCertificacionDeclaracion()
+    {
+        return certificacionDeclaracion;
+    }
+
+    /**
+     * @param certificacionDeclaracion
+     *           the certificacionDeclaracion to set
+     */
+    public void setCertificacionDeclaracion(final String certificacionDeclaracion)
+    {
+        this.certificacionDeclaracion = certificacionDeclaracion;
+    }
 
 
 	/**

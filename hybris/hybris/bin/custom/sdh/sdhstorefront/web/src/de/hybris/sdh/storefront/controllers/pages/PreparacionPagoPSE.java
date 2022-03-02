@@ -244,7 +244,14 @@ public class PreparacionPagoPSE extends AbstractPageController
 			String ref;
 			if (psePaymentForm.getTipoDeImpuesto().equals("5101"))
 			{
-				ref = psePaymentForm.getCHIP();
+				if (psePaymentForm.getCHIP() == null || StringUtils.isBlank(psePaymentForm.getCHIP()))
+                {
+                    ref = infoPreviaPSE.getMatrInmobiliaria();
+                }
+                else
+                {
+                    ref = psePaymentForm.getCHIP();
+                }
 			}
 			else if (psePaymentForm.getTipoDeImpuesto().equals("5103"))
 			{

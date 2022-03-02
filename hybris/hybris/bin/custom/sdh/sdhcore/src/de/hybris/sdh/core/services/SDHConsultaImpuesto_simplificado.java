@@ -12,6 +12,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
+import de.hybris.sdh.core.pojos.responses.ReteICA;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public interface SDHConsultaImpuesto_simplificado
 
 	public static final String AMBITO_CONSULTAS = "consultas";
 	public static final String AMBITO_IMPUESTOS = "impuestos";
+	public static final String AMBITO_CONSULTASAR = "consultasAR";
 	public static final String AMBITO_FACTURACION = "facturacion";
 	public static final String AMBITO_PRESENTARDECLARACION = "presentarDeclaracion";
 	public static final String AMBITO_MIRIT = "mirit";
@@ -57,6 +59,13 @@ public interface SDHConsultaImpuesto_simplificado
 	ImpuestoICA consulta_impICA(ConsultaContribuyenteBPRequest request);
 
 	String consulta_impICA_string(ConsultaContribuyenteBPRequest request);
+	
+
+    //reteICA
+    ReteICA consulta_impReteICA(ConsultaContribuyenteBPRequest request);
+
+    String consulta_impReteICA_string(ConsultaContribuyenteBPRequest request);
+
 
 
 	//Gasolina

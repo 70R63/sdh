@@ -22,7 +22,7 @@
 					<tr class="avisobody">
 
 						<td><spring:theme code="sobre.vehiculos.table.descripcion" /><a
-							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
+							href="https://www.shd.gov.co/shd/vehiculos" target="_blank"> Mas
 								información</a></td>
 					</tr>
 				</tbody>

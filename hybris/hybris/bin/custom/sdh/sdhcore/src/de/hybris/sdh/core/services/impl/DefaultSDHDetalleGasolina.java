@@ -59,10 +59,10 @@ public class DefaultSDHDetalleGasolina implements SDHDetalleGasolina
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-			//			LOG.info("conectando a: " + conn.toString());
+			LOG.info("conectando a: " + conn.toString());
 
 			final String requestJson = request.toString();
-			//			LOG.info("request: " + requestJson);
+			LOG.info("request: " + requestJson);
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
@@ -81,7 +81,7 @@ public class DefaultSDHDetalleGasolina implements SDHDetalleGasolina
 				builder.append(inputLine);
 			}
 			final String result = builder.toString();
-			//			LOG.info("response: " + result);
+			LOG.info("response: " + result);
 
 			return result;
 

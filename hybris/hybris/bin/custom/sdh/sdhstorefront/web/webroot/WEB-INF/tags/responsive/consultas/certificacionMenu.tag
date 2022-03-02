@@ -30,6 +30,9 @@
 
 
 <div class="container_new_page">
+<div class="alert alert-success" role="alert">
+ <span><spring:theme code="message.download" /> </span>
+</div>
 	<div class="row">
 		<div class="headline">
 			<h2 align="center">
@@ -47,7 +50,7 @@
 			<div class="col-md-4 col-xs-12 mb-20 no-marginright" id="idImpuesto"
 				style="display: block;">
 				<span class="paso--uno pasos color-sr1">1</span>
-				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICACIÓN DE
+				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICACIï¿½N DE
 					PAGO</h2>
 				<p class="pasoClase1 metrophobic">Selecciona el impuesto que
 					deseas consultar.</p>
@@ -65,9 +68,9 @@
 			<div id="Periodo0" class="col-md-4 col-xs-12 mb-20 no-margincol">
 				<span class="paso--dos pasos color-sr2">2</span>
 				<h2 class="titulo-caja--ser-rel color-sr2 ">
-					<span class="paso2">AÑO GRAVABLE</span>
+					<span class="paso2">Aï¿½O GRAVABLE</span>
 				</h2>
-				<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
+				<p class="pasoClase2 metrophobic">Selecciona el aï¿½o gravable.</p>
 				<div class="caja--ser-rel color-sr2">
 					<select id="aniograv" class="new_alto form-control aniograv" name="aniograv"
 						onchange="SelectedAnio(this)">
@@ -87,18 +90,6 @@
 							class="new_alto form-control " name="periodo" required='required'
 							onchange="onChangeMensual(this)">
 							<option value="00">Seleccionar</option>
-<!-- 							<option value="01">1-Enero</option> -->
-<!-- 							<option value="02">2-Febrero</option> -->
-<!-- 							<option value="03">3-Marzo</option> -->
-<!-- 							<option value="04">4-Abril</option> -->
-<!-- 							<option value="05">5-Mayo</option> -->
-<!-- 							<option value="06">6-Junio</option> -->
-<!-- 							<option value="07">7-Julio</option> -->
-<!-- 							<option value="08">8-Agosto</option> -->
-<!-- 							<option value="09">9-Septiembre</option> -->
-							<option value="10">10-Octubre</option>
-							<option value="11">11-Noviembre</option>
-							<option value="12">12-Diciembre</option>
 						</select>
 					</div>
 				</div>
@@ -413,6 +404,7 @@
 
 	
 	function SelectedAnio(selectObject) {
+		ACC.opcionDeclaraciones.prepararPeriodoMensual();
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos_porAnio();
 	}
 	

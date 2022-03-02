@@ -144,9 +144,12 @@
 				$("#areaconstruccion").val("");
 				$("#areaterreno").val("");
 				$("#baseGrav").val("");
+				$("#confirmBG").val("");
 				actualizarCatalogosInferior(objetoActualizado);
 				actualizarObjetosHabilitados(objetoActualizado);
 				mostrarMensajes(objetoActualizado);
+				ACC.predial.visualizacionBasesDetalle(false);
+				$(document).off("change", "#confirmBG", ACC.predial.validacionMonto_confirmBG );
 				break;
 			case "DestinoHacendario":
 				$("#activEconomica").find("option:gt(0)").remove();
@@ -207,6 +210,7 @@
 				if(flagActualizarInferior){
 					actualizarCatalogoActividadEconomica($(objetoActualizado).val());					
 				}else{
+					$(objetoActualizado).val("");
 					alert("Sr. Contribuyente, este predio no ha sido reportado por la entidad competente como No Urbanizable. Por lo tanto, no se puede liquidar con ese destino hacendario.");			
 				}
 				break;
@@ -249,105 +253,125 @@
 				}
 				break;
 			case "DestinoHacendario":
-				var usoSuelo = $("#usoSuelo").val();
-				switch(usoSuelo){
-					case "0":
-						$("#DestinoHacendario").prop("disabled",false);
-						$("#activEconomica").prop("disabled",false);					
-						break;
-					case "1":
-					case "2":
-						$("#DestinoHacendario").prop("disabled",false);
-						$("#baseGrav").prop("disabled",false);
+				$("#DestinoHacendario").prop("disabled",false);
+				switch(valActualizado){
+					case "":
 						break;
 					default:
+						var usoSuelo = $("#usoSuelo").val();
+						switch(usoSuelo){
+							case "0":
+								$("#activEconomica").prop("disabled",false);			
+								break;
+							case "1":
+							case "2":
+								$("#baseGrav").prop("disabled",false);
+								break;
+							default:
+								break;
+						}						
 						break;
 				}
 				break;
 			case "activEconomica":
 				$("#DestinoHacendario").prop("disabled",false);
 				$("#activEconomica").prop("disabled",false);
-				$("#propiedadHorizontal").prop("disabled",false);
+				switch(valActualizado){
+					case "":
+						break;
+					default:
+						$("#propiedadHorizontal").prop("disabled",false);
+				}
 				break;
 			case "propiedadHorizontal":
 				$("#DestinoHacendario").prop("disabled",false);
 				$("#activEconomica").prop("disabled",false);
-				$("#propiedadHorizontal").prop("disabled",false);
-				$("#caracterizacionPredio").prop("disabled",false);
+				switch(valActualizado){
+				case "":
+					break;
+				default:
+					$("#propiedadHorizontal").prop("disabled",false);
+					$("#caracterizacionPredio").prop("disabled",false);
+				}
 				break;
 			case "caracterizacionPredio":
 				$("#DestinoHacendario").prop("disabled",false);
 				$("#activEconomica").prop("disabled",false);
-				$("#propiedadHorizontal").prop("disabled",false);
-				$("#caracterizacionPredio").prop("disabled",false);
-				
-				var activEconomica = $("#activEconomica").val();
-				var propiedadHorizontal = $("#propiedadHorizontal").val();
-				switch(activEconomica){
-					case "1":
-						switch(propiedadHorizontal){
-							case "N":
-								$("#areaterreno").prop("disabled",false);
-								$("#areaconstruccion").prop("disabled",false);
-								break;
-							case "P":
-								$("#areaconstruccion").prop("disabled",false);
-								break;
-						}
-						break;
-					case "3":
-						switch(propiedadHorizontal){
-							case "N":
-								$("#areaterreno").prop("disabled",false);
-								$("#areaconstruccion").prop("disabled",false);
-								break;
-							case "P":
-								$("#areaconstruccion").prop("disabled",false);
-								break;
-						}
-						break;
-						
-					case "10":
-						switch(propiedadHorizontal){
-							case "N":
-								$("#areaterreno").prop("disabled",false);
-								$("#areaconstruccion").prop("disabled",false);
-								break;
-							case "P":
-								$("#areaconstruccion").prop("disabled",false);
-								break;
-						}
-						break;
-						
-					case "48":
-						switch(propiedadHorizontal){
-							case "P":
-								$("#areaconstruccion").prop("disabled",false);
-								break;
-						}
-						break;
-						
-					case "12":
-						switch(propiedadHorizontal){
-							case "N":
-								$("#areaterreno").prop("disabled",false);
-								$("#areaconstruccion").prop("disabled",false);
-								break;
-							case "P":
-								$("#areaconstruccion").prop("disabled",false);
-								break;
-						}
-						break;
-						
-					case "2":
-						switch(propiedadHorizontal){
-							case "N":
-								$("#areaterreno").prop("disabled",false);
-								break;
-						}
-						break;
-					default:
-						break;
+				switch(valActualizado){
+				case "":
+					break;
+				default:
+					$("#propiedadHorizontal").prop("disabled",false);
+					$("#caracterizacionPredio").prop("disabled",false);
+					
+					var activEconomica = $("#activEconomica").val();
+					var propiedadHorizontal = $("#propiedadHorizontal").val();
+					switch(activEconomica){
+						case "1":
+							switch(propiedadHorizontal){
+								case "N":
+									$("#areaterreno").prop("disabled",false);
+									$("#areaconstruccion").prop("disabled",false);
+									break;
+								case "P":
+									$("#areaconstruccion").prop("disabled",false);
+									break;
+							}
+							break;
+						case "3":
+							switch(propiedadHorizontal){
+								case "N":
+									$("#areaterreno").prop("disabled",false);
+									$("#areaconstruccion").prop("disabled",false);
+									break;
+								case "P":
+									$("#areaconstruccion").prop("disabled",false);
+									break;
+							}
+							break;
+							
+						case "10":
+							switch(propiedadHorizontal){
+								case "N":
+									$("#areaterreno").prop("disabled",false);
+									$("#areaconstruccion").prop("disabled",false);
+									break;
+								case "P":
+									$("#areaconstruccion").prop("disabled",false);
+									break;
+							}
+							break;
+							
+						case "48":
+							switch(propiedadHorizontal){
+								case "P":
+									$("#areaconstruccion").prop("disabled",false);
+									break;
+							}
+							break;
+							
+						case "12":
+							switch(propiedadHorizontal){
+								case "N":
+									$("#areaterreno").prop("disabled",false);
+									$("#areaconstruccion").prop("disabled",false);
+									break;
+								case "P":
+									$("#areaconstruccion").prop("disabled",false);
+									break;
+							}
+							break;
+							
+						case "2":
+							switch(propiedadHorizontal){
+								case "N":
+									$("#areaterreno").prop("disabled",false);
+									break;
+							}
+							break;
+						default:
+							break;
+					}
 				}
 				break;
 			default:
@@ -473,10 +497,10 @@
 			case "usoSuelo":
 				switch(valActualizado){
 				case "1":
-					mensaje = "Se\u00F1or contribuyente para los predios rurales a los cuales no se les haya fijado aval\u00FAo catastral a primero de enero de 20XX, la base gravable del impuesto predial unificado ser· el valor que mediante autoaval\u00FAo establezca el contribuyente";
+					mensaje = "Se\u00F1or contribuyente para los predios rurales a los cuales no se les haya fijado aval\u00FAo catastral a primero de enero de 20XX, la base gravable del impuesto predial unificado ser\u00e1 el valor que mediante autoaval\u00FAo establezca el contribuyente";
 					break;
 				case "2":
-					mensaje = "Se\u00F1or contribuyente para los predios rurales a los cuales no se les haya fijado aval\u00FAo catastral a primero de enero la base gravable del impuesto predial unificado ser· el valor que mediante autoaval\u00FAo establezca el contribuyente.";
+					mensaje = "Se\u00F1or contribuyente para los predios rurales a los cuales no se les haya fijado aval\u00FAo catastral a primero de enero la base gravable del impuesto predial unificado ser\u00e1 el valor que mediante autoaval\u00FAo establezca el contribuyente.";
 					break;
 				default:
 					break;

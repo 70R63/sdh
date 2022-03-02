@@ -24,6 +24,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraDeli;
+import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraPredial;
 import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraVehiculos;
 import de.hybris.sdh.core.pojos.responses.ObligacionesDeliResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesDetallePublicidad;
@@ -48,6 +49,7 @@ import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
 import de.hybris.sdh.facades.questions.data.SDHICATaxData;
 import de.hybris.sdh.facades.questions.data.SDHPredialTaxData;
+import de.hybris.sdh.facades.questions.data.SDHReteICATaxData;
 import de.hybris.sdh.facades.questions.data.SDHUrbanDelineationsTaxData;
 import de.hybris.sdh.facades.questions.data.SDHVehiculosTaxData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
@@ -153,12 +155,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			throws CMSItemNotFoundException
 	{
 
-		String referrer = request.getHeader("referer");
-
-		if (referrer == null)
-		{
-			referrer = request.getServletPath();
-		}
+		final String referrer = request.getServletPath();
 
 		System.out.println("-----------      En GET de Obligaciones Pendientes      -----------");
 
@@ -166,7 +163,18 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 
 		if (referrer.contains("contribuyentes"))
 		{
-			final Map<String,String> listaImpuestosUsuario = sdhCustomerAccountService.determinaImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTAS);
+			Map<String, String> listaImpuestosUsuario = null;
+
+            if (referrer.contains("contribuyentes"))
+            {
+                listaImpuestosUsuario = sdhCustomerAccountService
+                        .determinaImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTAS);
+            }
+            else if (referrer.contains("agenteRetenedor"))
+            {
+                listaImpuestosUsuario = sdhCustomerAccountService
+                        .determinaImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTASAR);
+            }
 
 			if(listaImpuestosUsuario != null && !listaImpuestosUsuario.isEmpty()) {
 				listaImpuestosUsuario.put("99", "Todos");
@@ -576,6 +584,13 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		final ObligacionesForm obligacionesFormuno = new ObligacionesForm();
 		final ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		
+      int totalReg = Integer.parseInt(configurationService.getConfiguration().getString("config.obligacionesPendientes.totalReg"));
+      int totalReg_tmp = totalReg;
+      int rango = Integer.parseInt(configurationService.getConfiguration().getString("config.obligacionesPendientes.rango"));
+      int finRango = rango;
+      String rangoActual = "";
+		
 
 		String referrer = request.getHeader("referer");
 
@@ -593,16 +608,43 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			switch (obligacionesForm.getClaveImpuesto())
 			{
 				case "0001":
-					wsResponse = sdhObligacionesPredialService.obligacionesRequest(obligacionesRequest);
+					List<ObligacionesCabeceraPredial> wsTemp_predial = new ArrayList<ObligacionesCabeceraPredial>();
 					ObligacionesPredialResponse obligacionesPredResponse = null;
-					try {
-						obligacionesPredResponse = mapper.readValue(wsResponse,ObligacionesPredialResponse.class);
-					}catch(final Exception e) {
+					totalReg_tmp = totalReg;
+					finRango = rango;
+					rangoActual = "";
+               
+					for (int inicioRango = 1; inicioRango < totalReg; inicioRango+=(rango))
+					{
+						rangoActual = Integer.toString(inicioRango)+"-"+Integer.toString(finRango);
+					   
+						obligacionesRequest.setRango(rangoActual);
+					   wsResponse = sdhObligacionesPredialService.obligacionesRequest(obligacionesRequest);
+					   if(wsResponse != null) {
+						   try {
+						   	obligacionesPredResponse = mapper.readValue(wsResponse,ObligacionesPredialResponse.class);
+						   }catch(final Exception e) {
+						   }
+	                  if(obligacionesPredResponse!=null && obligacionesPredResponse.getHeader()!=null) {
+	                  	wsTemp_predial.addAll(obligacionesPredResponse.getHeader());
+	                  }
+					   }
+                  
+                  if(obligacionesPredResponse != null && obligacionesPredResponse.getHeader() != null && obligacionesPredResponse.getHeader().size() > 0){
+                  	if(obligacionesPredResponse.getHeader().get(0) != null && obligacionesPredResponse.getHeader().get(0).getTotalReg() != null) {
+                  		try {
+                     		totalReg = Integer.parseInt(obligacionesPredResponse.getHeader().get(0).getTotalReg().trim());
+                  		}catch(Exception e) {
+                  		}
+                  	}
+                  }else {
+                  	totalReg = 0;
+                  }
+                  
+			         finRango+=(rango);
 					}
-					if(obligacionesPredResponse!=null && obligacionesPredResponse.getHeader()!=null) {
-						obligacionesFormuno.setHeaderPred(obligacionesPredResponse.getHeader().stream()
-							.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
-					}
+					obligacionesFormuno.setHeaderPred(wsTemp_predial);
+					
 					break;
 
 				case "0002":
@@ -789,7 +831,19 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		obligacionesRequest.setBp(customerModel.getNumBP());
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 
-		final Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTAS);
+		Map<String, String> impuestosActivos = null;
+
+        if (referrer.contains("contribuyentes"))
+        {
+            impuestosActivos = sdhConsultaImpuesto_simplificado
+                    .obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTAS);
+        }
+        else if (referrer.contains("agenteRetenedor"))
+        {
+            impuestosActivos = sdhConsultaImpuesto_simplificado
+                    .obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTASAR);
+        }
+		
 		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
 
 		//solo para PRD inicio:
@@ -804,154 +858,177 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			{
 				groupUid = group.getUid();
 
-   			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PREDIAL) && groupUid.contains("predialUsrTaxGrp"))
-   			{
-   				contImpuestos.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PREDIAL) && groupUid.contains("predialUsrTaxGrp"))
+				{
+					contImpuestos.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
 
-   				if (contImpuestos != null && contImpuestos.getPredial() != null)
-   				{
-   					final List<SDHPredialTaxData> predialTaxList = new ArrayList<SDHPredialTaxData>();
-   					final SDHPredialTaxData predialTaxItem = new SDHPredialTaxData();
+					if (contImpuestos != null && contImpuestos.getPredial() != null)
+					{
+						final List<SDHPredialTaxData> predialTaxList = new ArrayList<SDHPredialTaxData>();
+						final SDHPredialTaxData predialTaxItem = new SDHPredialTaxData();
 
-   					for (final PredialResponse predialItem : contImpuestos.getPredial())
-   					{
-   						predialTaxItem.setAnioGravable(predialItem.getAnioGravable());
-   						predialTaxItem.setCHIP(predialItem.getCHIP());
-   						predialTaxItem.setContratoArrenda(predialItem.getContratoArrenda());
-   						predialTaxItem.setDireccionPredio(predialItem.getDireccionPredio());
-   						predialTaxItem.setMatrInmobiliaria(predialItem.getMatrInmobiliaria());
-   						predialTaxItem.setNumObjeto(predialItem.getNumObjeto());
+						for (final PredialResponse predialItem : contImpuestos.getPredial())
+						{
+							predialTaxItem.setAnioGravable(predialItem.getAnioGravable());
+							predialTaxItem.setCHIP(predialItem.getCHIP());
+							predialTaxItem.setContratoArrenda(predialItem.getContratoArrenda());
+							predialTaxItem.setDireccionPredio(predialItem.getDireccionPredio());
+							predialTaxItem.setMatrInmobiliaria(predialItem.getMatrInmobiliaria());
+							predialTaxItem.setNumObjeto(predialItem.getNumObjeto());
 
-   						predialTaxList.add(predialTaxItem);
-   					}
-
-
-   					customerData.setPredialTaxList(predialTaxList);
-   				}
-   				continue;
-   			}
-
-   			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.VEHICULOS) && groupUid.contains("vehicularUsrTaxGrp"))
-   			{
-   				contImpuestos.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
-
-   				if (contImpuestos != null && contImpuestos.getVehicular() != null)
-   				{
-   					final List<SDHVehiculosTaxData> vehiculosTaxList = new ArrayList<SDHVehiculosTaxData>();
-   					final SDHVehiculosTaxData vehiculosTaxItem = new SDHVehiculosTaxData();
-
-   					for (final ImpuestoVehiculos vehiculoItem : contImpuestos.getVehicular())
-   					{
-   						vehiculosTaxItem.setBlindado(vehiculoItem.getBlindado());
-   						vehiculosTaxItem.setCarroceria(vehiculoItem.getCarroceria());
-   						vehiculosTaxItem.setCilindraje(vehiculoItem.getCilindraje());
-   						vehiculosTaxItem.setClase(vehiculoItem.getClase());
-   						vehiculosTaxItem.setLinea(vehiculoItem.getLinea());
-   						vehiculosTaxItem.setMarca(vehiculoItem.getMarca());
-   						vehiculosTaxItem.setModelo(vehiculoItem.getModelo());
-   						vehiculosTaxItem.setNumObjeto(vehiculoItem.getNumObjeto());
-   						vehiculosTaxItem.setNumPuertas(vehiculoItem.getNumPuertas());
-   						vehiculosTaxItem.setPlaca(vehiculoItem.getPlaca());
-
-   						vehiculosTaxList.add(vehiculosTaxItem);
-   					}
-
-   					customerData.setVehiculosTaxList(vehiculosTaxList);
-   				}
-   				continue;
-   			}
-
-   			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.ICA) && groupUid.contains("ICAUsrTaxGrp"))
-   			{
-   				contImpuestos.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
-
-   				if (contImpuestos != null && contImpuestos.getIca() != null)
-   				{
-   					final SDHICATaxData icaTax = new SDHICATaxData();
-   					icaTax.setObjectNumber(contImpuestos.getIca().getNumObjeto());
-   					customerData.setIcaTax(icaTax);
-   				}continue;
-   			}else {
-   				customerData.setIcaTax(null);
-   			}
-
-   			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.GASOLINA) && groupUid.contains("gasolinaUsrTaxGrp"))
-   			{
-   				contImpuestos.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
-
-   				if (contImpuestos != null && contImpuestos.getGasolina() != null)
-   				{
-   					final List<SDHGasTaxData> gasTaxList = new ArrayList<SDHGasTaxData>();
-   					final SDHGasTaxData gasTaxItem = new SDHGasTaxData();
-
-   					for (final ImpuestoGasolina gasolinaItem : contImpuestos.getGasolina())
-   					{
-   						gasTaxItem.setDocumentNumber(gasolinaItem.getNumDoc());
-   						gasTaxItem.setDocumentType(gasolinaItem.getTipoDoc());
-   						gasTaxItem.setObjectNumber(gasolinaItem.getNumObjeto());
-
-   						gasTaxList.add(gasTaxItem);
-   					}
-
-   					customerData.setGasTaxList(gasTaxList);
-   				}
-   				continue;
-   			}
-
-   			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.DELINEACION) && groupUid.contains("delineacionUsrTaxGrp"))
-   			{
-   				contImpuestos.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
-
-   				if (contImpuestos != null && contImpuestos.getDelineacion() != null)
-   				{
-   					final List<SDHUrbanDelineationsTaxData> urbanDelineationsTaxList = new ArrayList<SDHUrbanDelineationsTaxData>();
-   					final SDHUrbanDelineationsTaxData urbanDelineationsTaxItem = new SDHUrbanDelineationsTaxData();
-
-   					for (final ImpuestoDelineacionUrbana delineacionItem : contImpuestos.getDelineacion())
-   					{
-   						urbanDelineationsTaxItem.setCdu(delineacionItem.getCdu());
-   						urbanDelineationsTaxItem.setExpDate(delineacionItem.getFechaExp());
-   						urbanDelineationsTaxItem.setLicenConst(delineacionItem.getLicenConst());
-   						urbanDelineationsTaxItem.setObjectNumber(delineacionItem.getNumObjeto());
-
-   						urbanDelineationsTaxList.add(urbanDelineationsTaxItem);
-   					}
+							predialTaxList.add(predialTaxItem);
+						}
 
 
-   					customerData.setUrbanDelineationsTaxList(urbanDelineationsTaxList);
-   				}continue;
-   			}
+						customerData.setPredialTaxList(predialTaxList);
+					}
+					continue;
+				}
 
-   			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PUBLICIDAD) && groupUid.contains("publicidadExtUsrTaxGrp"))
-   			{
-   				contImpuestos.setPublicidadExt(sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.VEHICULOS) && groupUid.contains("vehicularUsrTaxGrp"))
+				{
+					contImpuestos.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
 
-   				if (contImpuestos != null && contImpuestos.getPublicidadExt() != null)
-   				{
-   					final List<SDHExteriorPublicityTaxData> exteriorPublicityTaxList = new ArrayList<SDHExteriorPublicityTaxData>();
-   					final SDHExteriorPublicityTaxData exteriorPublicityTaxItem = new SDHExteriorPublicityTaxData();
+					if (contImpuestos != null && contImpuestos.getVehicular() != null)
+					{
+						final List<SDHVehiculosTaxData> vehiculosTaxList = new ArrayList<SDHVehiculosTaxData>();
+						final SDHVehiculosTaxData vehiculosTaxItem = new SDHVehiculosTaxData();
 
-   					for (final ImpuestoPublicidadExterior publicidadItem : contImpuestos.getPublicidadExt())
-   					{
-   						exteriorPublicityTaxItem.setResolutionNumber(publicidadItem.getNumResolu());
-   						exteriorPublicityTaxItem.setFenceType(publicidadItem.getTipoValla());
-   						exteriorPublicityTaxItem.setObjectNumber(publicidadItem.getNumObjeto());
-   						exteriorPublicityTaxItem.setAnoGravable(publicidadItem.getAnoGravable());
+						for (final ImpuestoVehiculos vehiculoItem : contImpuestos.getVehicular())
+						{
+							vehiculosTaxItem.setBlindado(vehiculoItem.getBlindado());
+							vehiculosTaxItem.setCarroceria(vehiculoItem.getCarroceria());
+							vehiculosTaxItem.setCilindraje(vehiculoItem.getCilindraje());
+							vehiculosTaxItem.setClase(vehiculoItem.getClase());
+							vehiculosTaxItem.setLinea(vehiculoItem.getLinea());
+							vehiculosTaxItem.setMarca(vehiculoItem.getMarca());
+							vehiculosTaxItem.setModelo(vehiculoItem.getModelo());
+							vehiculosTaxItem.setNumObjeto(vehiculoItem.getNumObjeto());
+							vehiculosTaxItem.setNumPuertas(vehiculoItem.getNumPuertas());
+							vehiculosTaxItem.setPlaca(vehiculoItem.getPlaca());
 
-   						exteriorPublicityTaxList.add(exteriorPublicityTaxItem);
+							vehiculosTaxList.add(vehiculosTaxItem);
+						}
 
-   					}
+						customerData.setVehiculosTaxList(vehiculosTaxList);
+					}
+					continue;
+				}
 
-   					customerData.setExteriorPublicityTaxList(exteriorPublicityTaxList);
-   				}
-   				continue;
-   			}
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.ICA) && groupUid.contains("ICAUsrTaxGrp"))
+				{
+					contImpuestos.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
+
+					if (contImpuestos != null && contImpuestos.getIca() != null)
+					{
+						final SDHICATaxData icaTax = new SDHICATaxData();
+						icaTax.setObjectNumber(contImpuestos.getIca().getNumObjeto());
+						customerData.setIcaTax(icaTax);
+					}continue;
+				}else {
+					customerData.setIcaTax(null);
+				}
+
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.GASOLINA) && groupUid.contains("gasolinaUsrTaxGrp"))
+				{
+					contImpuestos.setGasolina(sdhConsultaImpuesto_simplificado.consulta_impGasolina(consultaContribuyenteBPRequest));
+
+					if (contImpuestos != null && contImpuestos.getGasolina() != null)
+					{
+						final List<SDHGasTaxData> gasTaxList = new ArrayList<SDHGasTaxData>();
+						final SDHGasTaxData gasTaxItem = new SDHGasTaxData();
+
+						for (final ImpuestoGasolina gasolinaItem : contImpuestos.getGasolina())
+						{
+							gasTaxItem.setDocumentNumber(gasolinaItem.getNumDoc());
+							gasTaxItem.setDocumentType(gasolinaItem.getTipoDoc());
+							gasTaxItem.setObjectNumber(gasolinaItem.getNumObjeto());
+
+							gasTaxList.add(gasTaxItem);
+						}
+
+						customerData.setGasTaxList(gasTaxList);
+					}
+					continue;
+				}
+
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.DELINEACION) && groupUid.contains("delineacionUsrTaxGrp"))
+				{
+					contImpuestos.setDelineacion(sdhConsultaImpuesto_simplificado.consulta_impDelineacion(consultaContribuyenteBPRequest));
+
+					if (contImpuestos != null && contImpuestos.getDelineacion() != null)
+					{
+						final List<SDHUrbanDelineationsTaxData> urbanDelineationsTaxList = new ArrayList<SDHUrbanDelineationsTaxData>();
+						final SDHUrbanDelineationsTaxData urbanDelineationsTaxItem = new SDHUrbanDelineationsTaxData();
+
+						for (final ImpuestoDelineacionUrbana delineacionItem : contImpuestos.getDelineacion())
+						{
+							urbanDelineationsTaxItem.setCdu(delineacionItem.getCdu());
+							urbanDelineationsTaxItem.setExpDate(delineacionItem.getFechaExp());
+							urbanDelineationsTaxItem.setLicenConst(delineacionItem.getLicenConst());
+							urbanDelineationsTaxItem.setObjectNumber(delineacionItem.getNumObjeto());
+
+							urbanDelineationsTaxList.add(urbanDelineationsTaxItem);
+						}
+
+
+						customerData.setUrbanDelineationsTaxList(urbanDelineationsTaxList);
+					}continue;
+				}
+
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PUBLICIDAD) && groupUid.contains("publicidadExtUsrTaxGrp"))
+				{
+					contImpuestos.setPublicidadExt(sdhConsultaImpuesto_simplificado.consulta_impPublicidad(consultaContribuyenteBPRequest));
+
+					if (contImpuestos != null && contImpuestos.getPublicidadExt() != null)
+					{
+						final List<SDHExteriorPublicityTaxData> exteriorPublicityTaxList = new ArrayList<SDHExteriorPublicityTaxData>();
+						final SDHExteriorPublicityTaxData exteriorPublicityTaxItem = new SDHExteriorPublicityTaxData();
+
+						for (final ImpuestoPublicidadExterior publicidadItem : contImpuestos.getPublicidadExt())
+						{
+							exteriorPublicityTaxItem.setResolutionNumber(publicidadItem.getNumResolu());
+							exteriorPublicityTaxItem.setFenceType(publicidadItem.getTipoValla());
+							exteriorPublicityTaxItem.setObjectNumber(publicidadItem.getNumObjeto());
+							exteriorPublicityTaxItem.setAnoGravable(publicidadItem.getAnoGravable());
+
+							exteriorPublicityTaxList.add(exteriorPublicityTaxItem);
+
+						}
+
+						customerData.setExteriorPublicityTaxList(exteriorPublicityTaxList);
+					}
+					continue;
+				}
+				
+				
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.RETEICA)
+                        && groupUid.contains("reteICAUsrTaxGrp"))
+                {
+                    contImpuestos.setReteIca(sdhConsultaImpuesto_simplificado.consulta_impReteICA(consultaContribuyenteBPRequest));
+
+                    if (contImpuestos != null && contImpuestos.getReteIca() != null)
+                    {
+                        final SDHReteICATaxData sdhReteICATaxData = new SDHReteICATaxData();
+
+                        sdhReteICATaxData.setObjectNumber(contImpuestos.getReteIca().getNumObjeto());
+                        sdhReteICATaxData.setNumID(contImpuestos.getReteIca().getNumID());
+                        sdhReteICATaxData.setConsecutive(contImpuestos.getReteIca().getConsecutive());
+
+                        customerData.setReteIcaTax(sdhReteICATaxData);
+                    }
+                    continue;
+                }
+			
+			
+			
+			
 			}
 		}
 
 
 		final Map listaImpuestosCustomer = gasolinaService.obtenerListaImpuestosActivos(customerData);
-
+        
 
 
 
