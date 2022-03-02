@@ -16,6 +16,26 @@ public class RopForm
 	private String consulta;
 	private String importeusuario;
 	private String stringFact;
+	private String despliegaImporteUsuario;
+
+
+
+    /**
+     * @return the despliegaImporteUsuario
+     */
+    public String getDespliegaImporteUsuario()
+    {
+        return despliegaImporteUsuario;
+    }
+
+    /**
+     * @param despliegaImporteUsuario
+     *           the despliegaImporteUsuario to set
+     */
+    public void setDespliegaImporteUsuario(final String despliegaImporteUsuario)
+    {
+        this.despliegaImporteUsuario = despliegaImporteUsuario;
+    }
 
 	/**
 	 * @return the tipoImp

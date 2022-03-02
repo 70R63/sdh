@@ -52,7 +52,7 @@
 
 	
 	<c:choose>
-	   	<c:when test="${ropFormRequest.tipoImp == '03'}"> 
+	   	 <c:when test="${ropFormRequest.tipoImp == '03' && ropFormRequest.despliegaImporteUsuario == 'false' }"> 
 	     <div class="row" style="display: none;">
 				<div class="col-md-2">
 					<div class="form-group">
