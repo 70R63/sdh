@@ -156,6 +156,9 @@
 		var data = {};
 		
 		var opcionUso = "${vehiculosFormDeclaracion.opcionUso}";
+		var contribuyente_numBP = "${contribuyente.numBP}";
+		var currentUser_numBP = "${currentUser.numBP}";
+		var disabledLiquidacion_flag = $("#disabledLiquidacion_flag").val();
 		data.homologado = "${vehiculosFormDeclaracion.homologado}";
 		data.idServicio = $("#idServiciocal").val();
 		
@@ -163,9 +166,10 @@
 			data.opcionUso = opcionUso.substring(0,2);
 		}
 		data.bloquearCampos = false;
-		if($("#disabledLiquidacion_flag").val() == "X" 
-				|| ($("#idServiciocal").val() == "03")
-				|| (data.homologado == "X" && data.opcionUso == "01" )
+		if( disabledLiquidacion_flag == "X" 
+				|| (data.idServicio == "03")
+				|| (data.homologado == "X" && data.opcionUso == "01" 
+				|| (contribuyente_numBP != currentUser_numBP))
 		){
 			data.bloquearCampos = true;
 		}

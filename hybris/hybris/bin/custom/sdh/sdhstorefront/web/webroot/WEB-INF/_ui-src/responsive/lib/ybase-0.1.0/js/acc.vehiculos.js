@@ -197,6 +197,7 @@ ACC.vehiculos = {
 	 bindCalcularVehButton : function() {
 			$(document).on("click", ".calcularVehButton", function(e) {
 				e.preventDefault();
+				$(".calcularVehButton").prop("disabled",true);
 				ACC.spinner.show();
 				
 				var bpNum=$.trim($("#numBPcal").val());
@@ -297,6 +298,7 @@ ACC.vehiculos = {
 							$("#numForm").val(data.numForm);
 							ACC.vehiculos.habilitarBotonPresentarDeclaracion();
 						}
+						$(".calcularVehButton").prop("disabled",false);
 		},error: function () {
 			ACC.spinner.close();
         	$( "#dialogVehiculos" ).dialog( "open" );
@@ -315,6 +317,7 @@ ACC.vehiculos = {
 			$("#descuentoconbustible").val("");
 			$("#descuentoadicional").val("");
 			$("#numForm").val("");
+			$(".calcularVehButton").prop("disabled",false);
 // $("#calculoButton").prop('disabled', false);
         }
     });
@@ -326,7 +329,10 @@ ACC.vehiculos = {
 	habilitarBotonPresentarDeclaracion: function(){
 		var btnPresentarDec = document.getElementById("generaDeclaracionVehiculosButton");
 		
-		btnPresentarDec.disabled = false;
+		if(btnPresentarDec != null){
+			btnPresentarDec.disabled = false;
+		}
+		
 	},
 
 
