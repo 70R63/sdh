@@ -51,7 +51,7 @@
 			<div class="col-md-4">
 				<button  type="button" class="btn btn-primary " onclick="descargaFactura()"
 					id="" name="" value="regresar">
-					<spring:theme code="sobre.vehiculo.liqui.descfactura" />
+					<spring:theme code="sobre.vehiculo.liqui.descargapagos" />
 				</button>
 				<input type="hidden" id="objetoCont"/>
 			</div>
