@@ -14,6 +14,9 @@
 
 
 <div class="container">
+<div class="alert alert-success" role="alert">
+ <span><spring:theme code="message.download" /> </span>
+</div>
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">

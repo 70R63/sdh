@@ -9,6 +9,9 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
+<div class="alert alert-success" role="alert">
+ <span><spring:theme code="message.download" /> </span>
+</div>
 	<sf:form action="${declaracionURL}" method="POST"
 		modelAttribute="dataForm" id="forma">
 
