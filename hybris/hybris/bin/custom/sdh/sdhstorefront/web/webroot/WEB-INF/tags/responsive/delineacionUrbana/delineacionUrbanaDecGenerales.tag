@@ -14,7 +14,9 @@
 </c:if>
 <input type="hidden" value="${tipoMarca}" id="tipoMarca" />
 <div class="container_new_page">
-
+<div class="alert alert-success" role="alert">
+ <span><spring:theme code="message.download" /> </span>
+</div>
 	<div class="row">
 		<div class="col-md-6 headline">
 			<h2>
