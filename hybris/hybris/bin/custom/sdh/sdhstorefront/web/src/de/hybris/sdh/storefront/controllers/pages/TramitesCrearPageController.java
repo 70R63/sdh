@@ -585,14 +585,14 @@ public class TramitesCrearPageController extends AbstractPageController
 		//Nivel 0
 		agregarElementoTramites(elementos, "00________", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "01________", "01", "RIT");
-//		agregarElementoTramites(elementos, "02________", "02", "Novedades de registro");
+		agregarElementoTramites(elementos, "02________", "02", "Novedades de registro");
 //		agregarElementoTramites(elementos, "03________", "03", "Facturación");
 //		agregarElementoTramites(elementos, "04________", "04", "Analisis de la cuenta");
 //		agregarElementoTramites(elementos, "05________", "05", "Boletín de deudores Morosos"); //se modifica etiqueta, valor anterior = Boletín de deudores Morosos del Estado 14-01-2020 Maria Torres
 //		agregarElementoTramites(elementos, "06________", "06", "Verificación de pagos", "ZT10", "A1ZTRT0001Z006","tramites.crear.categorizacion.notas.06");
 //		agregarElementoTramites(elementos, "07________", "07", "Corrección de la información causada contablemente");
-//		agregarElementoTramites(elementos, "08________", "08", "Declaración");
-//		agregarElementoTramites(elementos, "09________", "09", "Agente Autorizado");
+		agregarElementoTramites(elementos, "08________", "08", "Declaración");
+		agregarElementoTramites(elementos, "09________", "09", "Agente Autorizado");
 
 		//RIT
 		agregarElementoTramites(elementos, "0100______", "00", "Seleccionar");
@@ -671,10 +671,10 @@ public class TramitesCrearPageController extends AbstractPageController
 //		agregarElementoTramites(elementos, "0204______", "04", "Tratamiento especial de tarifas y/o cambio de destino hacendario");
 //		agregarElementoTramites(elementos, "0205______", "05", "ICA (contribuyentes no obligados a inscribirse a CCB)");
 //		agregarElementoTramites(elementos, "0206______", "06", "Novedades Predial");
-//		agregarElementoTramites(elementos, "0207______", "07", "Novedades Vehículos");
+		agregarElementoTramites(elementos, "0207______", "07", "Novedades Vehículos");
 		//Novedades de registro-Exclusiones
 		agregarElementoTramites(elementos, "020100____", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "020101____", "01", "Predial");
+//		agregarElementoTramites(elementos, "020101____", "01", "Predial");
 		agregarElementoTramites(elementos, "020102____", "02", "Vehículos");
 //		agregarElementoTramites(elementos, "020103____", "03", "Delineación Urbana");
 		//Novedades de registro-Exclusiones-Predial
@@ -708,7 +708,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "02010303", "03", "Distrito Capital", "ZT13", "A1ZTRT0004Z016");
 		//Novedades de registro-Excenciones
 		agregarElementoTramites(elementos, "020200____", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "020201____", "01", "Predial");
+//		agregarElementoTramites(elementos, "020201____", "01", "Predial");
 		agregarElementoTramites(elementos, "020202____", "02", "Vehículos");
 //		agregarElementoTramites(elementos, "020203____", "03", "Delineación Urbana");
 //		agregarElementoTramites(elementos, "020204____", "04", "ICA");
@@ -750,7 +750,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "02020403__", "03", "Secuestro/Desaparición forzada", "ZT13", "A1ZTRT0004Z031");
 		//Novedades de registro-No Sujeción
 		agregarElementoTramites(elementos, "020300____", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "020301____", "01", "Predial");
+//		agregarElementoTramites(elementos, "020301____", "01", "Predial");
 		agregarElementoTramites(elementos, "020302____", "02", "Vehículos");
 //		agregarElementoTramites(elementos, "020303____", "03", "Delineación");
 		//Novedades de registro-No Sujeción-Predial
@@ -989,24 +989,24 @@ public class TramitesCrearPageController extends AbstractPageController
 		//Declaración
 		agregarElementoTramites(elementos, "0800______", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "0801______", "01", "Declaración valores inferiores al sugerido", "ZT12",
-				"A1ZTRT0002Z019");
-		agregarElementoTramites(elementos, "0802______", "02", "Porcentaje de copropiedad", "ZT12", "A1ZTRT0002Z020");
-		agregarElementoTramites(elementos, "0803______", "03", "Doble sujeción pasiva (Propietario, Poseedor)", "ZT12",
-				"A1ZTRT0002Z021");
-		agregarElementoTramites(elementos, "0804______", "04", "Pago Equivocado", "ZT12", "A1ZTRT0002Z022");
-		agregarElementoTramites(elementos, "0805______", "05", "Declaracion Inicial", "ZT12", "A1ZTRT0002Z034");
-		agregarElementoTramites(elementos, "0806______", "06", "Correccion", "ZT12", "A1ZTRT0002Z035");
-		agregarElementoTramites(elementos, "0807______", "07", "sin pago ", "ZT12", "A1ZTRT0002Z036");
-		agregarElementoTramites(elementos, "0808______", "08", "Presuntiva", "ZT12", "A1ZTRT0002Z037");
+				"A1ZTRT0002Z019","tramites.crear.categorizacion.notas.0801");
+//		agregarElementoTramites(elementos, "0802______", "02", "Porcentaje de copropiedad", "ZT12", "A1ZTRT0002Z020");
+//		agregarElementoTramites(elementos, "0803______", "03", "Doble sujeción pasiva (Propietario, Poseedor)", "ZT12",
+//				"A1ZTRT0002Z021");
+//		agregarElementoTramites(elementos, "0804______", "04", "Pago Equivocado", "ZT12", "A1ZTRT0002Z022");
+//		agregarElementoTramites(elementos, "0805______", "05", "Declaracion Inicial", "ZT12", "A1ZTRT0002Z034");
+//		agregarElementoTramites(elementos, "0806______", "06", "Correccion", "ZT12", "A1ZTRT0002Z035");
+//		agregarElementoTramites(elementos, "0807______", "07", "sin pago ", "ZT12", "A1ZTRT0002Z036");
+//		agregarElementoTramites(elementos, "0808______", "08", "Presuntiva", "ZT12", "A1ZTRT0002Z037");
 
 		//Agente Autorizado
 		agregarElementoTramites(elementos, "0900______", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "0901______", "01", "Crear Agente Autorizado", "contribuyentes/crearagente");
-		agregarElementoTramites(elementos, "0902______", "02", "Asignarse como Agente Autorizado",
-				"contribuyentes/asignarsecomoagente");
-		agregarElementoTramites(elementos, "0903______", "03", "Crear Agente Autorizado Entidad Bancaria", "ZT17",
-				"A1ZTRT0002Z038");
-		agregarElementoTramites(elementos, "0904______", "04", "Baja de Agente Autorizado", "ZT17", "A1ZTRT0002Z038");
+//		agregarElementoTramites(elementos, "0902______", "02", "Asignarse como Agente Autorizado",
+//				"contribuyentes/asignarsecomoagente");
+//		agregarElementoTramites(elementos, "0903______", "03", "Crear Agente Autorizado Entidad Bancaria", "ZT17",
+//				"A1ZTRT0002Z038");
+//		agregarElementoTramites(elementos, "0904______", "04", "Baja de Agente Autorizado", "ZT17", "A1ZTRT0002Z038");
 
 
 
