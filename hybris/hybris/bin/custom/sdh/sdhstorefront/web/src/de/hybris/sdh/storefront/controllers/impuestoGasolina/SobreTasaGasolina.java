@@ -1126,7 +1126,18 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 						+ psePaymentForm.getFechaLimiteDePago().substring(0, 4);
 			}
 
+			
+			String descImp = new String();
+            if (psePaymentForm.getTipoDeImpuesto().contains("5103"))
+            {
+                descImp = "Vehiculos";
+            }
+            else
+            {
+                descImp = Objects.nonNull(sdhTaxTypeModel) ? sdhTaxTypeModel.getName() : StringUtils.EMPTY;
+            }
 
+			
 			final BigInteger valorAPagar = new BigInteger(psePaymentForm.getValorAPagar());
 			final String urlRetorno = configurationService.getConfiguration().getString("sdh.payment.service.retorno.url");
 			final PaymentServiceRegisterRequest paymentServiceRegisterRequest = new PaymentServiceRegisterRequest(
