@@ -46,6 +46,9 @@
 	<c:set var="flagPagarEnLinea" value="true" />
 	<input type="hidden" value="X" id="contribuyenteNoNIT"/>
 </c:if>
+<c:if test="${contribuyente.numBP ne currentUser.numBP }">
+	<c:set var="flagSPAC" value="true" />
+</c:if>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 

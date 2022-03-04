@@ -25,6 +25,9 @@
 <c:if test="${fn:substring(predialFormsiete.opcionuso,0,2) == '01' && predialFormsiete.indicadorspac == 'X'}">
 	<c:set var="flagSPAC" value="true" />
 </c:if>
+<c:if test="${contribuyente.numBP ne currentUser.numBP }">
+	<c:set var="flagSPAC" value="true" />
+</c:if>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
