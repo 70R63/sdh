@@ -362,8 +362,8 @@ public class CertificacionPagoPageController extends AbstractPageController
 		listaDeclaracionesRequest.setImpuesto(impuesto);
 		listaDeclaracionesRequest.setAnioGravable(anioGravable);
 		listaDeclaracionesRequest.setPeriodo(periodo);
-		listaDeclaracionesRequest
-				.setNumObjeto(gasolinaService.prepararNumObjeto_certipagos(infoVista, infoVista.getCustomerData()));
+		//listaDeclaracionesRequest
+		//		.setNumObjeto(gasolinaService.prepararNumObjeto_certipagos(infoVista, infoVista.getCustomerData()));
 
 		System.out.println("Request para docs/consulPagos: " + listaDeclaracionesRequest);
 		listaDeclaracionesResponse = gasolinaService.consultaListaDeclaraciones_consulPagos(listaDeclaracionesRequest,
