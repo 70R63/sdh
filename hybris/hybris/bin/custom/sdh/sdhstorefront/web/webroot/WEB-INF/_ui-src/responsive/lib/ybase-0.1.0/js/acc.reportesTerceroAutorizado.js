@@ -434,8 +434,8 @@ ACC.reportesTerceroAutorizado = {
 			var numObjeto = $("#numObjeto").val();
 			var dataActual = {};
 
-		    
-			dataActual.numObjeto = numObjeto;				
+			dataActual.numObjeto = numObjeto;
+			dataActual.numObjeto = dataActual.numObjeto.toUpperCase();
 		}else if(opcionConsulta=="sujeto"){
 			var impuesto = $("#impuesto").val();
 			var tipdoc = $("#tipdoc").val();
