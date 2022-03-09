@@ -2052,9 +2052,11 @@ ACC.opcionDeclaraciones = {
 					case "3":		//ica
 					case "4":		//ReteIca
 					case "5":		//gasolina
-					case "6":		//delineacion
 					case "7":		//publicidad
 						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_CertiDeclaracion;
+						break;
+					case "6":		//delineacion
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_CertiDeclaracion_delineacion;
 						break;
 					default:
 						cantidadAnoGravable = 0;

@@ -1176,6 +1176,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 						else
 						{
 							final SITIITransactionsLogModel sitIITransactionsLogModel = new SITIITransactionsLogModel();
+							sitIITransactionsLogModel.setTransactionBP(numBP);
 							sitIITransactionsLogModel.setTransactionDate(java.time.LocalDate.now().toString());
 							sitIITransactionsLogModel.setTransactionTime(java.time.LocalTime.now().toString());
 							sitIITransactionsLogModel.setTransactionReference(psePaymentForm.getNumeroDeReferencia());
@@ -1186,7 +1187,8 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 							modelService.saveAll(sitIITransactionsLogModel);
 
-							LOG.error("SITIITransactionsLog:[ TransactionDate: " + sitIITransactionsLogModel.getTransactionDate()
+							LOG.error("SITIITransactionsLog:[ BP" + sitIITransactionsLogModel.getTransactionBP()
+                                    + "TransactionDate: " + sitIITransactionsLogModel.getTransactionDate()
 									+ " TransactionTime: " + sitIITransactionsLogModel.getTransactionTime() + " TransactionReference: "
 									+ sitIITransactionsLogModel.getTransactionReference() + " TransactionNUS: "
 									+ sitIITransactionsLogModel.getTransactionNUS() + " TransactionAmount: "

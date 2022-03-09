@@ -1008,6 +1008,11 @@
 			<itemtype generate="true" code="SITIITransactionsLog" extends="GenericItem" autocreate="true" >
 				<deployment table="SITIITransactionsLog" typecode="20016" />
 				<attributes>
+					<attribute type="java.lang.String" qualifier="transactionBP">
+                        <description>Transaction BP</description>
+                        <modifiers unique="true" />
+                        <persistence type="property"></persistence>
+                    </attribute> 
 					<attribute type="java.lang.String" qualifier="transactionDate">
 						<description>Transaction Date</description>
 						<modifiers unique="true" />
