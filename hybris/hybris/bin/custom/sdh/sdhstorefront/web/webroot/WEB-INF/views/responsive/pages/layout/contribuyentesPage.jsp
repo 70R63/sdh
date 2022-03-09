@@ -12,9 +12,10 @@
 <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <template:page pageTitle="${pageTitle}">
-</template:page>
+
 <cont:contribuyentesLista/>
 <cont:representantesLista/>
+</template:page>
 
 <script type="text/javascript">
 	
