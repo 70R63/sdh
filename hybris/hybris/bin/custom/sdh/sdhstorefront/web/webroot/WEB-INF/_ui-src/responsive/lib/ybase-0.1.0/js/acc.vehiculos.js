@@ -475,6 +475,8 @@ ACC.vehiculos = {
 					jur[i].calidad = "USUFRUCTUARIO";
 				} else if (jur[i].calidad == "6") {
 					jur[i].calidad = "ARRENDATARIO";
+				} else if (jur[i].calidad == "7") {
+					jur[i].calidad = "AGENTE AUTORIZADO";
 				} else {
 					jur[i].calidad = "";
 				}
