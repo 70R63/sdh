@@ -98,8 +98,8 @@
 			<h2>Secretaría Distrital de Hacienda</h2>
 			<aside class="footer">
 				<div>
-					<p>
-						<img title="Bogota" alt="Bogota" class="encabezado"
+					<p class="imgFooter">
+						<img title="Bogota" alt="Bogota" class="encabezado imgFooter"
 							src="${themeResourcePath}/images/encabezados.svg"
 							alt="Encabezados colombia" width="230" height="80">
 					</p>
