@@ -27,7 +27,7 @@ ACC.opcionDeclaraciones = {
 							 break;
 						}
 					}else{
-						break;
+						continue;
 					}
 				}
 	 	        var claveImpuesto = $("#seleccion").val();  	       
