@@ -56,8 +56,12 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.ObligacionesForm;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -660,6 +664,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 							obligacionesFormuno.setHeaderVehiculos(obligacionesVehiResponse.getHeader().stream()
 								.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
 						}
+						establecerValorValidoRop_vehicular(obligacionesFormuno);
 
 						if(obligacionesFormuno.getHeaderVehiculos() != null && obligacionesFormuno.getHeaderVehiculos().size()>0) {
    						final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
@@ -1214,6 +1219,31 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 
 //		return getViewForPage(model);
 		return null;
+	}
+
+
+
+	/**
+	 * @param obligacionesFormuno
+	 */
+	private void establecerValorValidoRop_vehicular(ObligacionesForm obligacionesFormuno)
+	{
+		String fechaInicio = configurationService.getConfiguration().getString("config.obligacionesPendientes.fechaROP_0002_DeshabilitadoInicio");
+		String fechaFin = configurationService.getConfiguration().getString("config.obligacionesPendientes.fechaROP_0002_DeshabilitadoFin");
+		
+      DateTimeFormatter formmat1 = DateTimeFormatter.ofPattern("yyyyMMdd", Locale.ENGLISH);
+      LocalDateTime ldt = LocalDateTime.now();
+      String fechaActual = formmat1.format(ldt);
+      int fechaActual_int = Integer.parseInt(fechaActual);
+      int fechaDeshabilitadoInicio_int = Integer.parseInt(fechaInicio);
+      int fechaDeshabilitadoFin_int = Integer.parseInt(fechaFin);
+
+      if(fechaDeshabilitadoInicio_int <= fechaActual_int && fechaActual_int <= fechaDeshabilitadoFin_int) {
+			obligacionesFormuno.setValorValidoROP_vehicular("");
+      } else {
+			obligacionesFormuno.setValorValidoROP_vehicular("X");
+      }
+		
 	}
 
 
