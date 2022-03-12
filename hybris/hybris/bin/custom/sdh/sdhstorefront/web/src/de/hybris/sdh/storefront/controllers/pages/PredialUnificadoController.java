@@ -598,6 +598,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					&& predialItem.getCHIP().equals(predialFormuno.getCHIP()))
 			{
 				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+				predialFormuno.setObjetocontrato(predialItem.getNumObjeto());
 			}
 		}
 
@@ -816,6 +817,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					&& predialItem.getCHIP().equals(predialFormdos.getCHIP()))
 			{
 				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+                predialFormdos.setObjetocontrato(predialItem.getNumObjeto());
 			}
 		}
 
@@ -1015,6 +1017,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					&& predialItem.getCHIP().equals(predialFormtres.getCHIP()))
 			{
 				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+                predialFormtres.setObjetocontrato(predialItem.getNumObjeto());
 			}
 		}
 
@@ -1216,6 +1219,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					&& predialItem.getCHIP().equals(predialFormcua.getCHIP()))
 			{
 				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+                predialFormcua.setObjetocontrato(predialItem.getNumObjeto());
 			}
 		}
 
@@ -1416,6 +1420,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					&& predialItem.getCHIP().equals(predialFormcinco.getCHIP()))
 			{
 				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+				predialFormcinco.setObjetocontrato(predialItem.getNumObjeto());
 			}
 		}
 
@@ -1620,6 +1625,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					&& predialItem.getCHIP().equals(predialFormseis.getCHIP()))
 			{
 				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+                predialFormseis.setObjetocontrato(predialItem.getNumObjeto());
 			}
 		}
 
@@ -1822,6 +1828,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					&& predialItem.getCHIP().equals(predialFormsiete.getCHIP()))
 			{
 				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+                predialFormsiete.setObjetocontrato(predialItem.getNumObjeto());
 			}
 		}
 
@@ -2017,6 +2024,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					&& predialItem.getCHIP().equals(predialFormocho.getCHIP()))
 			{
 				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+                predialFormocho.setObjetocontrato(predialItem.getNumObjeto());
 			}
 		}
 
@@ -2217,6 +2225,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					&& predialItem.getCHIP().equals(predialFormbases.getCHIP()))
 			{
 				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+                predialFormbases.setObjetocontrato(predialItem.getNumObjeto());
 			}
 		}
 

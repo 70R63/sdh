@@ -106,10 +106,10 @@
 				</c:if>
 				
 				<c:if test="${flagSPAC eq true}">
-					<button class="btn btn-primary btn-lg btnspac" type="submit"
-						id="btnspac" name="pagar" value="pagar" data-numForm="${predialFormseis.numFrom}" data-anio="${predialFormseis.anioGravable}" data-obj="${predialFormseis.objetocontrato}">
-						<spring:theme code="predialuno.firma.spac" />
-					</button>
+					<button class="btn btn-primary btn-lg btnspac" type="submit" id="btnspac"
+                        name="pagar" value="pagar" data-numbp="${predialFormseis.numBP}" data-numForm="${predialFormseis.numFrom}" data-anio="${predialFormseis.anioGravable}" data-obj="${predialFormseis.objetocontrato}" data-reimpresion="">
+                        <spring:theme code="predialuno.firma.spac" />
+                    </button>
 				</c:if>
 
 
