@@ -894,6 +894,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 	{
 		VehiculosControlCamposDec controlCampos = null;
 		final String strRepresentanteLegalPrincipal = "Repres. Legal Principal";
+		final String strRepresentanteLegalSuplente = "Repres. Legal Suplente";
 
 		switch (rol)
 		{
@@ -911,7 +912,8 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 						{
 							if (infoAgente.getInternalFunction() != null && infoAgente.getBp() != null
 									&& infoAgente.getBp().equals(currentUserData.getNumBP())
-									&& infoAgente.getInternalFunction().equals(strRepresentanteLegalPrincipal))
+									&& (infoAgente.getInternalFunction().equals(strRepresentanteLegalPrincipal) || 
+											infoAgente.getInternalFunction().equals(strRepresentanteLegalSuplente)))
 							{
 								controlCampos.setBtnPresentarDec(true);
 								controlCampos.setBtnPagarDec(false);
