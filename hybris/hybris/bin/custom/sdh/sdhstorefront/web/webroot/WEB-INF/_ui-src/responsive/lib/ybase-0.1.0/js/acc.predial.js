@@ -1034,6 +1034,29 @@ ACC.predial = {
 		return validacion;
 	},
 	
+	    validateFormPredialDespuesLiquidador : function(){
+        var validacion = false;
+
+        if(!ACC.predial.mostrarMensajeInfoObjeto()){
+            var myform = $("#myForm");
+            var opcUso = $("#opcionuso").val();
+            if(opcUso != null){
+                opcUso = opcUso.substring(0, 2);
+                if(opcUso == "02"){
+                    var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+                    if (r == true) {
+                        validacion = true;
+                    }
+                }else{
+                    validacion = true;
+                }
+            }
+        }
+
+        
+        return validacion;
+    },
+	
 	
 	validacionMonto_basegrav : function(){
 		var validacion = false;

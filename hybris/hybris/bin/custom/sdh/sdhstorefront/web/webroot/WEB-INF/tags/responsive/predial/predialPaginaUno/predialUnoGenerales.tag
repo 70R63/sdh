@@ -89,7 +89,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.generales.opuso" /></label> <input id="" name=""
+				        code="predialuno.generales.opuso" /></label> <input id="opcionuso" name=""
 						class="alto form-control" disabled type="text"
 						value="${predialForm.opcionuso}" maxlength="240"></input>
 				</div>

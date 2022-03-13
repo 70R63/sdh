@@ -629,6 +629,12 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado DOS --------------------------");
+		
+		if( matricula == null){
+            matricula = new String("");
+        }else{
+          matricula = matricula.replaceAll("null", "");
+        }  
 
 		CustomerData customerData = null;
 		RelContribuyenteAgenteAutorizado infoRelacion = null;
@@ -2445,7 +2451,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		detallePredialRequestcalc.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
 		detallePredialRequestcalc.setAnioGravable(predialInfoIniURL.getAnioGravable());
 		detallePredialRequestcalc.setCHIP(predialInfoIniURL.getCHIP());
-		detallePredialRequestcalc.setMatrInmobiliaria(predialInfoIniURL.getMatrInmobiliaria());
+		
+        detallePredialRequestcalc.setMatrInmobiliaria(
+                Objects.isNull(predialInfoIniURL.getMatrInmobiliaria()) ? ""
+                        : predialInfoIniURL.getMatrInmobiliaria().replaceAll("null", ""));
 
 
 		//		detallePredialRequestcalc.setNumBP("1000010203");

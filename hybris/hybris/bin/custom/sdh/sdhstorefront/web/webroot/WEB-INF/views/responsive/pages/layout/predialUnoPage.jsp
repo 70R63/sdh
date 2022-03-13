@@ -36,6 +36,14 @@ window.onload = function() {
 		}
 	}
     $(".loader").fadeOut("slow");
+	
+	validateFormPredial()
+}
+
+function validateFormPredial() {
+    debugger;
+    ACC.predial.establecerMensajeInfoObjeto("");
+    return ACC.predial.validateFormPredialDespuesLiquidador();
 }
 </script>
 
