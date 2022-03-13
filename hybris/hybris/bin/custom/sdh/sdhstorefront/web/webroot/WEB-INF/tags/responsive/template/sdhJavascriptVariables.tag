@@ -15,8 +15,10 @@
 <c:set value="2" var="configCatalogos_cantidadAnios_Consultas_publicidad" />
 <c:set value="5" var="configCatalogos_cantidadAnios_CertiDeclaracion" />
 <c:set value="9" var="configCatalogos_cantidadAnios_CertiDeclaracion_delineacion" />
+<c:set value="12" var="configCatalogos_cantidadAnios_CertiDeclaracion_vehiculos" />
 <c:set value="5" var="configCatalogos_cantidadAnios_PresentarDeclaracion" />
 <c:set value="9" var="configCatalogos_cantidadAnios_PresentarDeclaracion_delineacion" />
+<c:set value="12" var="configCatalogos_cantidadAnios_PresentarDeclaracion_vehiculos" />
 <%-- JS configuration --%>
 	<script type="text/javascript">
 
@@ -293,8 +295,10 @@
 			ACC.configCatalogos_cantidadAnios_Consultas_delineacion="${configCatalogos_cantidadAnios_Consultas_delineacion}";
 			ACC.configCatalogos_cantidadAnios_Consultas_publicidad="${configCatalogos_cantidadAnios_Consultas_publicidad}";	
 			ACC.configCatalogos_cantidadAnios_CertiDeclaracion="${configCatalogos_cantidadAnios_CertiDeclaracion}";
+			ACC.configCatalogos_cantidadAnios_CertiDeclaracion_vehiculos="${configCatalogos_cantidadAnios_CertiDeclaracion_vehiculos}";
 			ACC.configCatalogos_cantidadAnios_CertiDeclaracion_delineacion="${configCatalogos_cantidadAnios_CertiDeclaracion_delineacion}";
 			ACC.configCatalogos_cantidadAnios_PresentarDeclaracion="${configCatalogos_cantidadAnios_PresentarDeclaracion}";
+			ACC.configCatalogos_cantidadAnios_PresentarDeclaracion_vehiculos="${configCatalogos_cantidadAnios_PresentarDeclaracion_vehiculos}";
 			ACC.configCatalogos_cantidadAnios_PresentarDeclaracion_delineacion="${configCatalogos_cantidadAnios_PresentarDeclaracion_delineacion}";
 			ACC.configCatalogos_ambito_certiDeclaracion="certiDeclaracion";
 			ACC.configCatalogos_ambito_reimpresionDeclaracion="reimpresionDeclaracion";
