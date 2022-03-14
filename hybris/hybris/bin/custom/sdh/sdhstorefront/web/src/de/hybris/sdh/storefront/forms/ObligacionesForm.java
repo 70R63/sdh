@@ -36,7 +36,7 @@ public class ObligacionesForm
 
 	private List<ReteicaObligacionesHeader> headerreteica;
 	private String claveImpuesto;
-	private String valorValidoROP_vehicular;
+
 	/**
 	 * @return the header
 	 */
@@ -217,23 +217,6 @@ public class ObligacionesForm
 	{
 		this.claveImpuesto = claveImpuesto;
 	}
-
-	/**
-	 * @return the valorValidoROP_vehicular
-	 */
-	public String getValorValidoROP_vehicular()
-	{
-		return valorValidoROP_vehicular;
-	}
-
-	/**
-	 * @param valorValidoROP_vehicular the valorValidoROP_vehicular to set
-	 */
-	public void setValorValidoROP_vehicular(String valorValidoROP_vehicular)
-	{
-		this.valorValidoROP_vehicular = valorValidoROP_vehicular;
-	}
-
 
 
 }

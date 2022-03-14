@@ -304,28 +304,28 @@ ACC.oblipend = {
 								case "00":
 									td_totalPagar = valueD.obligacion;
 									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
-									td_rop = ACC.oblipend.rop_filtrado(infoResponse,td_rop);
+									td_rop = ACC.oblipend.rop_filtrado(valueH,td_rop);
 									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,"",valueH.placa,valueH.facilidad,valueH.montoFacilidad));
 									td_spac = "Sin Cupones";
 									break;
 								case "01":
 									td_totalPagar = valueH.montoFacilidad;
 									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueH.montoFacilidad,valueD.objetoContrato,clavePeriodo,tpImp);
-									td_rop = ACC.oblipend.rop_filtrado(infoResponse,td_rop);
+									td_rop = ACC.oblipend.rop_filtrado(valueH,td_rop);
 									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,"",valueH.placa,valueH.facilidad,valueH.montoFacilidad));
 									td_spac = "Sin Cupones";
 									break;
 								case "02":
 									td_totalPagar = valueH.montoFacilidad;
 									td_rop = "Sin ROP";
-									td_rop = ACC.oblipend.rop_filtrado(infoResponse,td_rop);
+									td_rop = ACC.oblipend.rop_filtrado(valueH,td_rop);
 									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,"",valueH.placa,valueH.facilidad,valueH.montoFacilidad));
 									td_spac = ACC.oblipend.predial_generarTD_spac(valueD.numFormulario,valueH.anioGravable,valueD.objetoContrato,"X");
 									break;
 								default:
 									td_totalPagar = valueD.obligacion;
 									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
-									td_rop = ACC.oblipend.rop_filtrado(infoResponse,td_rop);
+									td_rop = ACC.oblipend.rop_filtrado(valueH,td_rop);
 									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,"",valueH.placa,valueH.facilidad,valueH.montoFacilidad));
 									td_spac = "Sin Cupones";
 									break;	
@@ -362,11 +362,11 @@ ACC.oblipend = {
 	},
 	
 	
-	rop_filtrado : function(infoResponse,valorCalculado){
-		var valorRetorno = "Deshabilitado";
+	rop_filtrado : function(valueH,valorCalculado){
+		var valorRetorno = valorCalculado;
 		
-		if(infoResponse.valorValidoROP_vehicular == "X"){
-			valorRetorno = valorCalculado;
+		if(valueH.deshabilitarROP == "X"){
+			valorRetorno = "Deshabilitado";
 		}
 		
 		return valorRetorno;

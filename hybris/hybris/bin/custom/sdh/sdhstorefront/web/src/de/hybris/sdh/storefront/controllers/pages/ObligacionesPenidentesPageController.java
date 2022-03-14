@@ -1237,11 +1237,20 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
       int fechaActual_int = Integer.parseInt(fechaActual);
       int fechaDeshabilitadoInicio_int = Integer.parseInt(fechaInicio);
       int fechaDeshabilitadoFin_int = Integer.parseInt(fechaFin);
-
+      String anioGravableDeshabilitar = configurationService.getConfiguration().getString("config.obligacionesPendientes.fechaROP_0002_DeshabilitadoAnoGravable");
+      boolean debeDeshabilitar = false;
+      
       if(fechaDeshabilitadoInicio_int <= fechaActual_int && fechaActual_int <= fechaDeshabilitadoFin_int) {
-			obligacionesFormuno.setValorValidoROP_vehicular("");
-      } else {
-			obligacionesFormuno.setValorValidoROP_vehicular("X");
+      	debeDeshabilitar = true;
+      }
+      
+      if(debeDeshabilitar) {
+         for (ObligacionesCabeceraVehiculos vehiculo : obligacionesFormuno.getHeaderVehiculos())
+   		{
+         	if(vehiculo!= null && anioGravableDeshabilitar.equals(vehiculo.getAnioGravable())) {
+         		vehiculo.setDeshabilitarROP("X");
+         	}
+   		}      	
       }
 		
 	}
