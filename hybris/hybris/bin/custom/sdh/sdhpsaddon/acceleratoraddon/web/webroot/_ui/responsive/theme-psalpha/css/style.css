@@ -25787,3 +25787,131 @@ a.paginate_button {
 .tableRelacion {
   width: 95% !important;
 }
+@media (max-width: 639px) {
+  .prefooter {
+    margin-left: 4% !important;
+    margin-right: -4 !important;
+    grid-template-columns: auto;
+  }
+  .prefooter h2 {
+    font-size: 18px;
+  }
+  p .imgFooter {
+    text-align: center;
+  }
+  .menu-footer {
+    display: block !important;
+  }
+  .main-footer .copyright {
+    position: relative;
+    text-align: left !important;
+  }
+  .login-section .newLoggin {
+    width: 99%;
+    margin: 1em 1em;
+  }
+  div .footerImg {
+    position: absolute;
+  }
+  div .footerImg2 {
+    margin-left: 28%;
+  }
+  .main-header .navigation--bottom {
+    background: #F9F9F9;
+    height: auto;
+  }
+  div .forgotten-password {
+    width: 180%;
+    margin-left: -40%;
+  }
+  .container_new_page {
+    width: 95%;
+  }
+  .navigation--bottom {
+    width: auto !important;
+    max-width: auto !important;
+    margin-left: 0 !important;
+  }
+  .container_new {
+    width: 95%;
+  }
+  .navigation--bottom .navigation__overflow {
+    margin-left: 0 !important;
+    border-bottom: 1px solid #bcbaba;
+  }
+  .navigation--bottom .nav__link {
+    text-align: left;
+  }
+  .navigation--bottom .nav__links--primary .sm-back {
+    font-size: 16px;
+    width: 100%;
+  }
+  .table-responsive {
+    width: auto;
+  }
+  .headline {
+    margin-left: 0;
+    font-size: 16px;
+  }
+  ul.nav__links li {
+    border-left: 0px;
+    border-right: 0px;
+  }
+  .btn-primary {
+    margin-bottom: 3%;
+  }
+  .table-responsive {
+    width: 100%;
+    font-size: small !important;
+  }
+  .navigation--bottom .nav__links--primary.active .sub__navigation {
+    width: 100%;
+  }
+  .navigation--bottom .nav__links--products li a {
+    width: max-content;
+  }
+  .navigation--bottom .nav__links--primary .sub-navigation-section .sub-navigation-list li {
+    width: 100%;
+  }
+  .breadcrumb-section {
+    max-width: 100%;
+    width: 100%;
+    padding: 1px;
+  }
+  div.dataTables_filter {
+    float: left;
+  }
+  .table-responsive {
+    width: 100%;
+  }
+  .footerimg_gov {
+    margin-left: 50%;
+  }
+}
+@media (max-width: 1023px) and (min-width: 700px) {
+  .navigation--bottom {
+    width: 100% !important;
+  }
+  header {
+    position: absolute;
+  }
+  .navigation--bottom .navigation__overflow {
+    margin: 0px;
+    max-width: 100%;
+  }
+  .prefooter {
+    margin-bottom: 0;
+    margin-left: 5% !important;
+    margin-right: 0% !important;
+    position: inherit;
+  }
+  .main-footer .copyright .container {
+    text-align: left;
+  }
+  .main-footer {
+    position: inherit;
+  }
+  .main-footer .copyright {
+    height: 40% !important;
+  }
+}

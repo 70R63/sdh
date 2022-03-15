@@ -54,7 +54,7 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 		{
 
 
-			final DateTimeFormatter formatterOriginal = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			DateTimeFormatter formatterOriginal = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			final DateTimeFormatter formatterConvertido = DateTimeFormatter.ofPattern("yyyyMMdd");
 
 			final String fechaOriginal = request.getFechExp();
@@ -66,8 +66,19 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 			}
 			catch (final DateTimeParseException e1)
 			{
-				LOG.error("Error parsing expedition date: " + fechaOriginal);
-				return false;
+				
+				formatterOriginal = DateTimeFormatter.ofPattern("ddMMyyyy");
+
+                try
+                {
+                    final String customerExpDate = LocalDate.parse(fechaOriginal, formatterOriginal).format(formatterConvertido);
+                    request.setFechExp(customerExpDate);
+                }
+                catch (final DateTimeParseException e2)
+                {
+                    LOG.error("Error parsing expedition date: " + fechaOriginal);
+                    return false;
+                }				
 			}
 
 		}

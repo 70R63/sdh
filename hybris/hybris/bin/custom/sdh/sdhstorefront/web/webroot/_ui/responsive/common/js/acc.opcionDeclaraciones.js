@@ -2045,6 +2045,21 @@ ACC.opcionDeclaraciones = {
 					}
 				break;
 			case ACC.configCatalogos_ambito_certiDeclaracion:
+		        switch (claveImpuesto) {
+					case "1":		//predial
+					case "2":		//vehiculos
+					case "3":		//ica
+					case "4":		//ReteIca
+					case "5":		//gasolina
+					case "6":		//delineacion
+					case "7":		//publicidad
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_CertiDeclaracion;
+						break;
+					default:
+						cantidadAnoGravable = 0;
+						break;
+					}
+				break;
 			case ACC.configCatalogos_ambito_reimpresionDeclaracion:
 		        switch (claveImpuesto) {
 					case "1":		//predial
@@ -2052,11 +2067,9 @@ ACC.opcionDeclaraciones = {
 					case "3":		//ica
 					case "4":		//ReteIca
 					case "5":		//gasolina
-					case "7":		//publicidad
-						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_CertiDeclaracion;
-						break;
 					case "6":		//delineacion
-						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_CertiDeclaracion_delineacion;
+					case "7":		//publicidad
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_ReimpresionDeclaracion;
 						break;
 					default:
 						cantidadAnoGravable = 0;
@@ -2065,11 +2078,17 @@ ACC.opcionDeclaraciones = {
 				break;
 			case ACC.configCatalogos_ambito_presentarDeclaracion:
 		        switch (claveImpuesto) {
+					case "1":		//predial
+					case "2":		//vehiculos
+					case "3":		//ica
+					case "4":		//ReteIca
+					case "5":		//gasolina
 					case "6":		//delineacion
-						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_PresentarDeclaracion_delineacion;
+					case "7":		//publicidad
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_PresentarDeclaracion;
 						break;
 					default:
-						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_PresentarDeclaracion;
+						cantidadAnoGravable = 0;
 						break;
 				}
 				break;
