@@ -14,6 +14,7 @@ public class SpacRequest
 	private String objetoContrato;
 	private String num_form;
 	private String reimpresion;
+	private String tspac;
 
 
 
@@ -130,12 +131,26 @@ public class SpacRequest
 		this.reimpresion = reimpresion;
 	}
 
+	/**
+	 * @return the tspac
+	 */
+	public String getTspac()
+	{
+		return tspac;
+	}
 
-
+	/**
+	 * @param tspac
+	 *           the tspac to set
+	 */
+	public void setTspac(final String tspac)
+	{
+		this.tspac = tspac;
+	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -148,7 +163,8 @@ public class SpacRequest
 		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\",");
 		stringBuilder.append("\"objetoContrato\":\"" + this.getObjetoContrato() + "\",");
 		stringBuilder.append("\"num_form\":\"" + this.getNum_form() + "\",");
-		stringBuilder.append("\"reimpresion\":\"" + this.getReimpresion() + "\"");
+		stringBuilder.append("\"reimpresion\":\"" + this.getReimpresion() + "\",");
+		stringBuilder.append("\"tspac\":\"" + this.getTspac() + "\"");
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();
