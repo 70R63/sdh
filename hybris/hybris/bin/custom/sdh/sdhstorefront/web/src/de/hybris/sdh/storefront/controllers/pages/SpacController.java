@@ -95,7 +95,8 @@ public class SpacController extends AbstractPageController
 	final String anio, @RequestParam(value = "numform", defaultValue = "")
 	final String numform, @RequestParam(value = "numobj", defaultValue = "")
 	final String numobj, @RequestParam(value = "numbp", defaultValue = "")
-    final String numbp, final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
+    final String numbp, @RequestParam(value = "tspac", defaultValue = "")
+    final String tspac, final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET SPAC --------------------------");
 
@@ -119,6 +120,7 @@ public class SpacController extends AbstractPageController
 		spacrequest.setObjetoContrato(numobj);
 		spacrequest.setReimpresion(reimpresion);
 		spacrequest.setNum_form(numform);
+		spacrequest.setTspac(tspac);
 		try
 		{
 

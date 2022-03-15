@@ -28,13 +28,21 @@ ACC.spac = {
 								var numobj = $.trim($(this).attr("data-obj"));
 								var reimpresion = $.trim($(this).attr(
 										"data-reimpresion"));
+								
+								var tspac = "0";
+								if(confirm("¿Su predio tiene afectación COVID 19 según lo establecido en la Resolución 650 del 17 de noviembre del 2021?")){
+									tspac = "2";
+								}else{
+									tspac = "1";
+								}
+								
 								$
 										.ajax({
 											url : ACC.spacURL + '?anio=' + anio
 													+ '&numform=' + numform
 													+ '&numobj=' + numobj
-													+ '&reimpresion='
-													+ reimpresion,
+													+ '&reimpresion=' + reimpresion
+													+ '&tspac=' + tspac,
 											// data : data,
 											type : "GET",
 											success : function(spacform) {
