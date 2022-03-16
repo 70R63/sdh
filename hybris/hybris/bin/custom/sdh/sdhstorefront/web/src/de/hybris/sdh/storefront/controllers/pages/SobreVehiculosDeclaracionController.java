@@ -191,6 +191,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		detalleVehiculosRequest.setBpNum(numBPP);
 		detalleVehiculosRequest.setPlaca(placa);
 		detalleVehiculosRequest.setAnioGravable(anioGravable);
+		boolean flagMapearInformacion = true;
 
 
 		try
@@ -206,11 +207,15 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 			final DetalleVehiculosResponse detalleVehiculosResponse = mapper
 					.readValue(sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
 
-			if (!detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getId_msj().equals(""))
+			if (detalleVehiculosResponse != null && detalleVehiculosResponse.getInfo_declara() != null && detalleVehiculosResponse.getInfo_declara().getErrores() != null && detalleVehiculosResponse.getInfo_declara().getErrores().get(0) != null && 
+					detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getId_msj() != null && !detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getId_msj().equals(""))
 			{
 				GlobalMessages.addErrorMessage(model, detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getTxt_msj());
+				if(!detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getId_msj().equals("07")) {
+					flagMapearInformacion = false;
+				}
 			}
-			else
+			if(flagMapearInformacion == true)
 			{
 
 				//				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
