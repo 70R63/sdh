@@ -30,6 +30,11 @@
 <template:sdhJavascriptVariables4/>
 <script>
 
+function reporteTrmPdf(idImp, filename) {
+    var indRepote = document.getElementById("indRepote").value;
+    ACC.oblipend.bindTrmPdf(idImp,indRepote,filename);
+}
+
 function noActivo() {
 	
 	alert("Debe generar un ROP o Cupón");

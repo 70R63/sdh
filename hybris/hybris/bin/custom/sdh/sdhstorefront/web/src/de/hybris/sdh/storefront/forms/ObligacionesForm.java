@@ -36,6 +36,142 @@ public class ObligacionesForm
 
 	private List<ReteicaObligacionesHeader> headerreteica;
 	private String claveImpuesto;
+	
+	
+    private String indRepotePublicidad;
+    private String indRepoteGasolina;
+    private String indRepoteIca;
+    private String indRepoteDeli;
+    private String indRepotePredial;
+    private String indRepoteDelineacion;
+    private String indRepoteVehiculos;
+
+
+
+
+
+
+    /**
+     * @return the indRepotePublicidad
+     */
+    public String getIndRepotePublicidad()
+    {
+        return indRepotePublicidad;
+    }
+
+    /**
+     * @param indRepotePublicidad
+     *           the indRepotePublicidad to set
+     */
+    public void setIndRepotePublicidad(final String indRepotePublicidad)
+    {
+        this.indRepotePublicidad = indRepotePublicidad;
+    }
+
+    /**
+     * @return the indRepoteGasolina
+     */
+    public String getIndRepoteGasolina()
+    {
+        return indRepoteGasolina;
+    }
+
+    /**
+     * @param indRepoteGasolina
+     *           the indRepoteGasolina to set
+     */
+    public void setIndRepoteGasolina(final String indRepoteGasolina)
+    {
+        this.indRepoteGasolina = indRepoteGasolina;
+    }
+
+    /**
+     * @return the indRepoteIca
+     */
+    public String getIndRepoteIca()
+    {
+        return indRepoteIca;
+    }
+
+    /**
+     * @param indRepoteIca
+     *           the indRepoteIca to set
+     */
+    public void setIndRepoteIca(final String indRepoteIca)
+    {
+        this.indRepoteIca = indRepoteIca;
+    }
+
+    /**
+     * @return the indRepoteDeli
+     */
+    public String getIndRepoteDeli()
+    {
+        return indRepoteDeli;
+    }
+
+    /**
+     * @param indRepoteDeli
+     *           the indRepoteDeli to set
+     */
+    public void setIndRepoteDeli(final String indRepoteDeli)
+    {
+        this.indRepoteDeli = indRepoteDeli;
+    }
+
+    /**
+     * @return the indRepotePredial
+     */
+    public String getIndRepotePredial()
+    {
+        return indRepotePredial;
+    }
+
+    /**
+     * @param indRepotePredial
+     *           the indRepotePredial to set
+     */
+    public void setIndRepotePredial(final String indRepotePredial)
+    {
+        this.indRepotePredial = indRepotePredial;
+    }
+
+    /**
+     * @return the indRepoteDelineacion
+     */
+    public String getIndRepoteDelineacion()
+    {
+        return indRepoteDelineacion;
+    }
+
+    /**
+     * @param indRepoteDelineacion
+     *           the indRepoteDelineacion to set
+     */
+    public void setIndRepoteDelineacion(final String indRepoteDelineacion)
+    {
+        this.indRepoteDelineacion = indRepoteDelineacion;
+    }
+
+    /**
+     * @return the indRepoteVehiculos
+     */
+    public String getIndRepoteVehiculos()
+    {
+        return indRepoteVehiculos;
+    }
+
+    /**
+     * @param indRepoteVehiculos
+     *           the indRepoteVehiculos to set
+     */
+    public void setIndRepoteVehiculos(final String indRepoteVehiculos)
+    {
+        this.indRepoteVehiculos = indRepoteVehiculos;
+    }
+
+	
+	
 
 	/**
 	 * @return the header

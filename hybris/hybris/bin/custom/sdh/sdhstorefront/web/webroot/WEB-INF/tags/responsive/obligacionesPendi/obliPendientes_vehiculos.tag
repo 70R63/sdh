@@ -33,13 +33,21 @@
 	<div class="col-md-3 col-md-offset-8">
 		<button type="button" class="btn btn-primary btn-lg" id="action"
 			name="action" value="Imprimir" style="margin-top: 3px"
-			onclick="ACC.oblipend.bindTrmPdf('03','1','vehicularReporte.pdf');">
+			onclick="reporteTrmPdf('03','vehicularReporte.pdf');">
 			<spring:theme code="obligacion.inicial.imprimir" />
 		</button>
 	</div>
 </div>
 <div id="noCuentaPendientes_vehiculos" style="display:none;">
 	<label class="control-label"><spring:theme code="obligaciones.vehiculos.noCuentaPendientes"/></label>
+	
+	<div class="col-md-3 col-md-offset-8">
+        <button type="button" class="btn btn-primary btn-lg" id="action"
+            name="action" value="Imprimir" style="margin-top: 3px"
+            onclick="reporteTrmPdf('03','vehicularReporte.pdf');">
+            <spring:theme code="obligacion.inicial.imprimir" />
+        </button>
+    </div>
 </div>
 
 	

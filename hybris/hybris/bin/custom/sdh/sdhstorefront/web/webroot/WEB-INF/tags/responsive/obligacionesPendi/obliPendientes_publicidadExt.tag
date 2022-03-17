@@ -149,7 +149,7 @@
 	<div class="col-md-3 col-md-offset-8">
 		<button type="button" class="btn btn-primary btn-lg" id="action"
 			name="action" value="Imprimir" style="margin-top: 3px"
-			onclick="ACC.oblipend.bindTrmPdf('54','1','pubExteriorReporte.pdf');">
+			onclick="reporteTrmPdf('54','pubExteriorReporte.pdf');">
 			<spring:theme code="obligacion.inicial.imprimir" />
 		</button>
 	</div>
@@ -157,4 +157,10 @@
 
 <div id="noCuentaPendientes_publiext" style="display:none;">
 	<label class="control-label"><spring:theme code="obligaciones.publicidadExt.noCuentaPendientes"/></label>
+	
+	<button type="button" class="btn btn-primary btn-lg" id="action"
+        name="action" value="Imprimir" style="margin-top: 3px"
+        onclick="reporteTrmPdf('54','pubExteriorReporte.pdf');">
+        <spring:theme code="obligacion.inicial.imprimir" />
+    </button>
 </div>

@@ -374,6 +374,8 @@ ACC.oblipend = {
 	
 	
 	updateFromResponseImpuesto_predial : function(infoResponse){
+		
+		$(indRepote).val(infoResponse.indRepotePredial);
 		var id_tabla = "#table-predial1";
 		var tablaInfo = infoResponse.headerPred;
 		

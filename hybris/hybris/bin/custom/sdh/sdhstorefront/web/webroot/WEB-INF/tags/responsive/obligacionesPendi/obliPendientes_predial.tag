@@ -30,13 +30,22 @@
 	<div class="col-md-3 col-md-offset-8">
 		<button type="button" class="btn btn-primary btn-lg" id="action"
 			name="action" value="Imprimir" style="margin-top: 3px"
-			onclick="ACC.oblipend.bindTrmPdf('01','1','predialReporte.pdf');">
+			onclick="reporteTrmPdf('01','predialReporte.pdf')">
 			<spring:theme code="obligacion.inicial.imprimir" />
 		</button>
 	</div>
 </div>
 <div id="noCuentaPendientes_predial" style="display:none;">
 	<label class="control-label"><spring:theme code="obligaciones.predial.noCuentaPendientes"/></label>
+	
+	    
+    <div class="col-md-3 col-md-offset-8">
+        <button type="button" class="btn btn-primary btn-lg" id="action"
+            name="action" value="Imprimir" style="margin-top: 3px"
+            onclick="reporteTrmPdf('01','predialReporte.pdf')">
+            <spring:theme code="obligacion.inicial.imprimir" />
+        </button>
+    </div>
 </div>
 	
 	

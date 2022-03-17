@@ -29,11 +29,17 @@
 	<div class="col-md-3 col-md-offset-8">
 		<button type="button" class="btn btn-primary btn-lg" id="action"
 			name="action" value="Imprimir" style="margin-top: 3px"
-			onclick="ACC.oblipend.bindTrmPdf('08','1','sobGasolinaReporte.pdf');">
+			onclick="reporteTrmPdf('08','sobGasolinaReporte.pdf');">
 			<spring:theme code="obligacion.inicial.imprimir" />
 		</button>
 	</div>
 </div>
 <div id="noCuentaPendientes_gasolina" style="display:none;">
 	<label class="control-label"><spring:theme code="obligaciones.gasolina.noCuentaPendientes"/></label>
+	    
+    <button type="button" class="btn btn-primary btn-lg" id="action"
+            name="action" value="Imprimir" style="margin-top: 3px"
+            onclick="reporteTrmPdf('08','sobGasolinaReporte.pdf');">
+            <spring:theme code="obligacion.inicial.imprimir" />
+    </button>
 </div>

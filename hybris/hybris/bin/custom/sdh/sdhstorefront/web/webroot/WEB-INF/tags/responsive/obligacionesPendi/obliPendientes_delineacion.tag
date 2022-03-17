@@ -145,7 +145,7 @@
 	<div class="col-md-3 col-md-offset-8">
 		<button type="button" class="btn btn-primary btn-lg" id="action"
 			name="action" value="Imprimir" style="margin-top: 3px"
-			onclick="ACC.oblipend.bindTrmPdf('06','1','delUrbanaReporte.pdf');">
+			onclick="reporteTrmPdf('06','delUrbanaReporte.pdf');">
 			<spring:theme code="obligacion.inicial.imprimir" />
 		</button>
 	</div>
@@ -153,4 +153,9 @@
 
 <div id="noCuentaPendientes_delurbana" style="display:none;">
 	<label class="control-label"><spring:theme code="obligaciones.delineacion.noCuentaPendientes"/></label>
+	    <button type="button" class="btn btn-primary btn-lg" id="action"
+        name="action" value="Imprimir" style="margin-top: 3px"
+        onclick="reporteTrmPdf('06','delUrbanaReporte.pdf');">
+        <spring:theme code="obligacion.inicial.imprimir" />
+    </button>
 </div>

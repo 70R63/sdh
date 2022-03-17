@@ -55,6 +55,12 @@ import de.hybris.sdh.facades.questions.data.SDHVehiculosTaxData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.ObligacionesForm;
+import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraGasolina;
+import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraICA;
+import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraPublicidad;
+import de.hybris.sdh.core.pojos.responses.ObligacionesDetalleIca;
+import de.hybris.sdh.core.pojos.responses.ObligacionesDetallePredial;
+import de.hybris.sdh.core.pojos.responses.ObligacionesDetalleVehiculos;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -180,9 +186,9 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
                         .determinaImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTASAR);
             }
 
-			if(listaImpuestosUsuario != null && !listaImpuestosUsuario.isEmpty()) {
-				listaImpuestosUsuario.put("99", "Todos");
-			}
+			//f(listaImpuestosUsuario != null && !listaImpuestosUsuario.isEmpty()) {
+			//	listaImpuestosUsuario.put("99", "Todos");
+			//}
 
 			model.addAttribute("customerData", customerData);
 			model.addAttribute("obligacionesFormuno", new ObligacionesForm());
@@ -585,7 +591,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ObligacionesRequest obligacionesRequest = new ObligacionesRequest();
 		obligacionesRequest.setBp(customerModel.getNumBP());
-		final ObligacionesForm obligacionesFormuno = new ObligacionesForm();
+		ObligacionesForm obligacionesFormuno = new ObligacionesForm();
 		final ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		
@@ -649,6 +655,9 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 					}
 					obligacionesFormuno.setHeaderPred(wsTemp_predial);
 					
+					obligacionesFormuno.setClaveImpuesto(obligacionesForm.getClaveImpuesto());
+                    obligacionesFormuno = ajustaIndReporte(obligacionesFormuno);
+					
 					break;
 
 				case "0002":
@@ -700,6 +709,9 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 							}
 						}
 					}
+					
+					obligacionesFormuno.setClaveImpuesto(obligacionesForm.getClaveImpuesto());
+                    obligacionesFormuno = ajustaIndReporte(obligacionesFormuno);
 					break;
 
 				case "0003":
@@ -717,6 +729,9 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 
 						}
 					}
+					
+					obligacionesFormuno.setClaveImpuesto(obligacionesForm.getClaveImpuesto());
+                    obligacionesFormuno = ajustaIndReporte(obligacionesFormuno);
 					break;
 
 				case "0004":
@@ -738,6 +753,9 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 									.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
 						}
 					}
+					
+					obligacionesFormuno.setClaveImpuesto(obligacionesForm.getClaveImpuesto());
+                    obligacionesFormuno = ajustaIndReporte(obligacionesFormuno);
 					break;
 
 				case "0006":
@@ -773,6 +791,9 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 							}
 						}
 					}
+					
+					obligacionesFormuno.setClaveImpuesto(obligacionesForm.getClaveImpuesto());
+                    obligacionesFormuno = ajustaIndReporte(obligacionesFormuno);
 					break;
 
 				case "0007":
@@ -789,6 +810,10 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 								.filter(d -> StringUtils.isNotBlank(d.getNumResolucion())).collect(Collectors.toList()));
 						}
 					}
+					
+					
+					obligacionesFormuno.setClaveImpuesto(obligacionesForm.getClaveImpuesto());
+                    obligacionesFormuno = ajustaIndReporte(obligacionesFormuno);
 					break;
 
 				default:
@@ -1222,6 +1247,238 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	}
 
 
+    /**
+     * @param obligacionesForm
+     */
+    private ObligacionesForm ajustaIndReporte(final ObligacionesForm obligacionesFormuno)
+    {
+        if (obligacionesFormuno.getClaveImpuesto() != null)
+        {
+
+            switch (obligacionesFormuno.getClaveImpuesto())
+            {
+                case "0001":
+                    if (obligacionesFormuno.getHeaderPred() != null)
+                    {
+                        for (final ObligacionesCabeceraPredial obligacionesCabeceraPredialItem : obligacionesFormuno.getHeaderPred())
+                        {
+                            if (obligacionesCabeceraPredialItem.getDetails() != null)
+                            {
+                                for (final ObligacionesDetallePredial obligacionesDetallePredialItem : obligacionesCabeceraPredialItem
+                                        .getDetails())
+                                {
+                                    if (obligacionesDetallePredialItem.getNumReferencia() != null
+                                            && !obligacionesDetallePredialItem.getNumReferencia().contains(""))
+                                    {
+                                        obligacionesFormuno.setIndRepotePredial("1");
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        obligacionesFormuno.setIndRepotePredial("1");
+                                    }
+                                }
+                                if (obligacionesFormuno.getIndRepotePredial().contains("1"))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        obligacionesFormuno.setIndRepoteVehiculos("4");
+                    }
+                    break;
+
+                case "0002":
+                    if (obligacionesFormuno.getHeaderVehiculos() != null)
+                    {
+                        for (final ObligacionesCabeceraVehiculos obligacionesCabeceraVehiculosItem : obligacionesFormuno
+                                .getHeaderVehiculos())
+                        {
+                            if (obligacionesCabeceraVehiculosItem.getDetails() != null)
+                            {
+                                for (final ObligacionesDetalleVehiculos obligacionesDetalleVehiculosItem : obligacionesCabeceraVehiculosItem
+                                        .getDetails())
+                                {
+                                    if (obligacionesDetalleVehiculosItem.getNumReferencia() != null
+                                            && !obligacionesDetalleVehiculosItem.getNumReferencia().contains(""))
+                                    {
+                                        obligacionesFormuno.setIndRepoteVehiculos("1");
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        obligacionesFormuno.setIndRepoteVehiculos("1");
+                                    }
+                                }
+
+                                if (obligacionesFormuno.getIndRepoteVehiculos().contains("1"))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        obligacionesFormuno.setIndRepoteVehiculos("4");
+                    }
+                    break;
+
+                case "0003":
+                    if (obligacionesFormuno.getHeaderica() != null)
+                    {
+                        for (final ObligacionesCabeceraICA obligacionesCabeceraICAItem : obligacionesFormuno.getHeaderica())
+                        {
+                            if (obligacionesCabeceraICAItem.getDetails() != null)
+                            {
+                                for (final ObligacionesDetalleIca obligacionesDetalleIcaItem : obligacionesCabeceraICAItem.getDetails())
+                                {
+                                    if (obligacionesDetalleIcaItem.getNumReferencia() != null
+                                            && !obligacionesDetalleIcaItem.getNumReferencia().contains(""))
+                                    {
+                                        obligacionesFormuno.setIndRepoteIca("1");
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        obligacionesFormuno.setIndRepoteIca("1");
+                                    }
+                                }
+
+                                if (obligacionesFormuno.getIndRepoteIca().contains("1"))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        obligacionesFormuno.setIndRepoteVehiculos("4");
+                    }
+
+                    break;
+
+                case "0005":
+                    if (obligacionesFormuno.getHeadergas() != null)
+                    {
+                        for (final ObligacionesCabeceraGasolina obligacionesCabeceraGasolinaItem : obligacionesFormuno.getHeadergas())
+                        {
+                            if (obligacionesCabeceraGasolinaItem.getDetails() != null)
+                            {
+                                for (final ObligacionesDetallePublicidad obligacionesDetalleGasolinaItem : obligacionesCabeceraGasolinaItem
+                                        .getDetails())
+                                {
+                                    if (obligacionesDetalleGasolinaItem.getNumReferencia() != null
+                                            && !obligacionesDetalleGasolinaItem.getNumReferencia().contains(""))
+                                    {
+                                        obligacionesFormuno.setIndRepoteGasolina("1");
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        obligacionesFormuno.setIndRepoteGasolina("1");
+                                    }
+                                }
+
+                                if (obligacionesFormuno.getIndRepoteGasolina().contains("1"))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        obligacionesFormuno.setIndRepoteVehiculos("4");
+                    }
+
+
+                    break;
+
+                case "0006":
+                    if (obligacionesFormuno.getHeaderdeli() != null)
+                    {
+                        for (final ObligacionesCabeceraDeli obligacionesCabeceraDeliItem : obligacionesFormuno.getHeaderdeli())
+                        {
+                            if (obligacionesCabeceraDeliItem.getDetails() != null)
+                            {
+                                for (final ObligacionesDetallePublicidad obligacionesDetalleDeliItem : obligacionesCabeceraDeliItem
+                                        .getDetails())
+                                {
+                                    if (obligacionesDetalleDeliItem.getNumReferencia() != null
+                                            && !obligacionesDetalleDeliItem.getNumReferencia().contains(""))
+                                    {
+                                        obligacionesFormuno.setIndRepoteDeli("1");
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        obligacionesFormuno.setIndRepoteDeli("1");
+                                    }
+                                }
+
+                                if (obligacionesFormuno.getIndRepoteDeli().contains("1"))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        obligacionesFormuno.setIndRepoteVehiculos("4");
+                    }
+
+
+                    break;
+
+                case "0007":
+                    if (obligacionesFormuno.getHeader() != null)
+                    {
+                        for (final ObligacionesCabeceraPublicidad obligacionesCabeceraPublicidadItem : obligacionesFormuno.getHeader())
+                        {
+                            if (obligacionesCabeceraPublicidadItem.getDetails() != null)
+                            {
+                                for (final ObligacionesDetallePublicidad obligacionesDetallePublicidadItem : obligacionesCabeceraPublicidadItem
+                                        .getDetails())
+                                {
+                                    if (obligacionesDetallePublicidadItem.getNumReferencia() != null
+                                            && !obligacionesDetallePublicidadItem.getNumReferencia().contains(""))
+                                    {
+                                        obligacionesFormuno.setIndRepotePublicidad("1");
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        obligacionesFormuno.setIndRepotePublicidad("1");
+                                    }
+                                }
+
+                                if (obligacionesFormuno.getIndRepotePublicidad().contains("1"))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        obligacionesFormuno.setIndRepoteVehiculos("4");
+                    }
+
+                    break;
+            }
+        }
+
+        return obligacionesFormuno;
+
+
+    }
+
 
 	/**
 	 * @param obligacionesFormuno
@@ -1254,6 +1511,11 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
       }
 		
 	}
+	
+	 
+
+
+
 
 
 
