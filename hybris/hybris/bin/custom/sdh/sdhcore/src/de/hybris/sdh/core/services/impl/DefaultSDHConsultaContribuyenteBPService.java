@@ -217,7 +217,7 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 		}
 		catch (final Exception e)
 		{
-			LOG.info("Error al convertir response de validaContrib");
+			LOG.info("Error al convertir response de validaContrib: "+e.getMessage());
 		}
 
 		return wsResponse;

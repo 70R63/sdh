@@ -111,14 +111,24 @@ public class DetallePredialRequest
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{");
-		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
-		stringBuilder.append("\"CHIP\":\"" + this.getCHIP() + "\",");
-		stringBuilder.append("\"matrInmobiliaria\":\"" + this.getMatrInmobiliaria() + "\",");
-		stringBuilder.append("\"anioGravable\":\"" + this.getAnioGravable() + "\",");
-		stringBuilder.append("\"marca\":\"" + this.getMarca() + "\",");
+		stringBuilder.append(obtenerValorJson("\"numBP\":\"", this.getNumBP(), "\","));
+		stringBuilder.append(obtenerValorJson("\"CHIP\":\"", this.getCHIP(), "\","));
+		stringBuilder.append(obtenerValorJson("\"matrInmobiliaria\":\"", this.getMatrInmobiliaria(), "\","));
+		stringBuilder.append(obtenerValorJson("\"anioGravable\":\"", this.getAnioGravable(), "\","));
+		stringBuilder.append(obtenerValorJson("\"marca\":\"", this.getMarca(), "\""));
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();
+	}
+
+	private String obtenerValorJson(final String cadena1, final String valor, final String cadena2)
+	{
+		String valorVariable = "";
+
+		valorVariable = (valor != null) ? cadena1 + valor + cadena2 : cadena1 + cadena2;
+
+
+		return valorVariable;
 	}
 
 
