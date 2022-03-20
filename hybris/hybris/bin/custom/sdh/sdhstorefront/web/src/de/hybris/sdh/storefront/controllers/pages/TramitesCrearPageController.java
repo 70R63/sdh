@@ -998,6 +998,13 @@ public class TramitesCrearPageController extends AbstractPageController
 //		agregarElementoTramites(elementos, "0806______", "06", "Correccion", "ZT12", "A1ZTRT0002Z035");
 //		agregarElementoTramites(elementos, "0807______", "07", "sin pago ", "ZT12", "A1ZTRT0002Z036");
 //		agregarElementoTramites(elementos, "0808______", "08", "Presuntiva", "ZT12", "A1ZTRT0002Z037");
+		agregarElementoTramites(elementos, "0809______", "09", "Declaración SPAC", "ZT12", "A1ZTRT0002Z072");
+		
+		//Declaración SPAC
+		agregarElementoTramites(elementos, "080900____", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "080901____", "01", "Acogerce a SPAC", "ZT12", "A1ZTRT0003Z161");
+		agregarElementoTramites(elementos, "080902____", "02", "Anulación Declaración SPAC", "ZT12", "A1ZTRT0003Z162");
+		
 
 		//Agente Autorizado
 		agregarElementoTramites(elementos, "0900______", "00", "Seleccionar");
