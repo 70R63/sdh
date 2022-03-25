@@ -332,3 +332,6 @@ UPDATE PSHelpDeskComponent;$contentCV[unique=true];uid[unique=true];title[lang=$
 
 UPDATE PSShareThisPageComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];&componentRef;;;
 ;;ServiceShareThisPageComponent;Compartir esta página;ServiceShareThisPageComponent;;;
+
+UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];title[lang=$lang]
+;;RetenPracticadasLink;"Retenciones Practicadas";"Haga clic aquí para acceder a la opción de menú Informar sobre un problema"

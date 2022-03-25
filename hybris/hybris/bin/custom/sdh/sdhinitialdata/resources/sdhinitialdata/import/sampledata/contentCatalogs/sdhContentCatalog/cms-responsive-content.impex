@@ -157,6 +157,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; EdoCuentaLink                ; ESTADO DE CUENTAS LINK              ; "/contribuyentes/estado-de-cuenta" ;;;;;
 ; ; CertDeclaraLink              ; CERTIFICACION DECLARACION LINK      ; "/contribuyentes/consultas/certideclaraciones" ;;;;;
 ; ; DeclaracionesLink			 ; DECLARACIONES LINK   				   ;"/contribuyentes/consultas/declaraciones";;;;;
+; ; RetenPracticadasLink		 ; RETENCIONES PRACTICADAS LINK   		;"/contribuyentes/consultas/retencionespracticadas";;;;;
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
 
@@ -461,7 +462,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu PAGOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
-;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode, CertDeclaraNavNode, DeclaracionesNavNode
+;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode, CertDeclaraNavNode, DeclaracionesNavNode, RetenPracticadasNavNode
 ;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertDeclaraNavNode,ARCertPagoNavNode, ARObligacionesPendNavNode, AREdoCuentaNavNode, ARDeclaracionesNavNode
 #SE agrega la linea de abajo por salida a produccion
 #;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertDeclaraNavNode,ARCertPagoNavNode,ARDeclaracionesNavNode 
@@ -590,6 +591,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;EdoCuentaNavNode;;Estado Cuenta Link;EdoCuentaNavNode
 ;CertDeclaraNavNode;; Certificacion Declaracion Link;CertDeclaraNavNode
 ;DeclaracionesNavNode;; Declaraciones Link; DeclaracionesNavNode
+;RetenPracticadasNavNode;;Retenciones Practicadas Link;RetenPracticadasNavNode 
 
 ;ARCertPagoNavNode;;Certificacion Pago Link;ARCertPagoNavNode
 ;ARObligacionesPendNavNode;;Obligaciones Pendientes Link;ARObligacionesPendNavNode
@@ -722,6 +724,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;EdoCuentaNavNodeEntry;;Estado de cuenta Navigation Node Entry;EdoCuentaNavNode;EdoCuentaLink
 ;CertDeclaraNavNodeEntry;;Certificacion declaracion Navigation Node entry;CertDeclaraNavNode;CertDeclaraLink
 ;DeclaracionesNavNodeEntry;;Declaraciones Navigation Node Entry;DeclaracionesNavNode;DeclaracionesLink
+;RetenPracticadasNavNodeEntry;;Retenciones Practicadas Navigation Node Entry; RetenPracticadasNavNode;RetenPracticadasLink
 
 #;AR
 ;ARCertPagoNavNodeEntry;;Certificacion Pago Navigation Node Entry;ARCertPagoNavNode;ARCertPagoLink
@@ -3112,5 +3115,42 @@ INSERT_UPDATE SdhReferenceStatus; code[unique=true] ;description
                              ;02		;Pagadas
 
 INSERT_UPDATE Usergroup;uid[unique=true];locName[lang=en];locName[lang=es]
-                       ;sdh_06;Concesionarios                       
+                       ;sdh_06;Concesionarios                
                        
+                       
+INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; category(code, $productCV); product(code,$productCV);target(code)[default = 'sameWindow'];;
+#Public Sector Header Links
+; ; RetenPracticadasLink		 ; RETENCIONES PRACTICADAS LINK   		;"/contribuyentes/consultas/retencionespracticadas";;;;;
+
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&nodeRef;links(&linkRef);
+;RetenPracticadasNavNode;;Retenciones Practicadas Link;RetenPracticadasNavNode
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&nodeRef;children(uid,$contentCV);links(&linkRef);
+;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode, CertDeclaraNavNode, DeclaracionesNavNode, RetenPracticadasNavNode
+
+
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(CMSLinkComponent.uid,CMSLinkComponent.$contentCV);
+#ReportAnIssue-PopularServiceRequests links
+;RetenPracticadasNavNodeEntry;;Retenciones Practicadas Navigation Node Entry; RetenPracticadasNavNode;RetenPracticadasLink       
+
+#->INI dev-maria Agregar paginas para retenciones practicadas
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;retencionesPracticadasPage 		;Concesionarios Page 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/consultas/retencionespracticadas
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='retencionesPracticadasPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-retencionesPracticadasPage 		;SideContent				;															;SideContent-retencionesPracticadasPage						;;;
+								;						;BodyContent-retencionesPracticadasPage		;BodyContent				;															;BodyContent-retencionesPracticadasPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-retencionesPracticadasPage 	;Side Content Slot for Concesionarios Page 			;true	;								;;;
+							;							;BodyContent-retencionesPracticadasPage	;Body Content Slot for  Concesionarios Page	;true	;retencionesPracticadasPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;retencionesPracticadasPageComponent	;retencionesPracticadasPage Component	;/WEB-INF/views/responsive/pages/layout/retencionesPracticadasPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retencionesPracticadasPageComponent
+#->FIN dev-maria Agregar paginas para retenciones practicadas    
