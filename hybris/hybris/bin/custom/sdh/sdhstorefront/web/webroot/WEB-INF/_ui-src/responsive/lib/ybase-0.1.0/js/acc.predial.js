@@ -1078,7 +1078,7 @@ ACC.predial = {
 		
 		validacion = ACC.predial.validacionMontoAD_confirmBG();
 		if(validacion == false){
-			alert("El importe no puede ser menor al importe calculado");
+			alert("La base gravable debe ser mayor al valor calculado");
 			$("#confirmBG").focus();
 		}
 		

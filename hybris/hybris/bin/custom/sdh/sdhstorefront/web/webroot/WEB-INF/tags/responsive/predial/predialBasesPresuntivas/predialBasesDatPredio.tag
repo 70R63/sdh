@@ -191,6 +191,7 @@
 	function actualizarCatalogosInferior(objetoActualizado){
 		var catActualizado = $(objetoActualizado).attr('id');
 		var valActualizado = $(objetoActualizado).val();
+		var mensajePopUp = "";
 		
 		switch(catActualizado){
 			case "usoSuelo":
@@ -202,6 +203,7 @@
 					case "70":
 					case "72":
 						flagActualizarInferior = validarMarca(valActualizado);
+						mensajePopUp = "Sr. Contribuyente, este predio no ha sido reportado por la entidad competente como área protegida.\nPor lo tanto, no se puede liquidar con ese destino hacendario.";
 						break;
 					default:
 						flagActualizarInferior = true;
@@ -211,7 +213,7 @@
 					actualizarCatalogoActividadEconomica($(objetoActualizado).val());					
 				}else{
 					$(objetoActualizado).val("");
-					alert("Sr. Contribuyente, este predio no ha sido reportado por la entidad competente como No Urbanizable. Por lo tanto, no se puede liquidar con ese destino hacendario.");			
+					alert(mensajePopUp);
 				}
 				break;
 			case "activEconomica":
@@ -265,6 +267,8 @@
 								break;
 							case "1":
 							case "2":
+								$("#areaterreno").prop("disabled",false);
+								$("#areaconstruccion").prop("disabled",false);
 								$("#baseGrav").prop("disabled",false);
 								break;
 							default:
@@ -314,10 +318,11 @@
 									$("#areaconstruccion").prop("disabled",false);
 									break;
 								case "P":
-									$("#areaconstruccion").prop("disabled",false);
+									$("#areaterreno").prop("disabled",false);
 									break;
 							}
 							break;
+							
 						case "3":
 							switch(propiedadHorizontal){
 								case "N":
@@ -325,7 +330,7 @@
 									$("#areaconstruccion").prop("disabled",false);
 									break;
 								case "P":
-									$("#areaconstruccion").prop("disabled",false);
+									$("#areaterreno").prop("disabled",false);
 									break;
 							}
 							break;
@@ -337,7 +342,7 @@
 									$("#areaconstruccion").prop("disabled",false);
 									break;
 								case "P":
-									$("#areaconstruccion").prop("disabled",false);
+									$("#areaterreno").prop("disabled",false);
 									break;
 							}
 							break;
@@ -345,7 +350,7 @@
 						case "48":
 							switch(propiedadHorizontal){
 								case "P":
-									$("#areaconstruccion").prop("disabled",false);
+									$("#areaterreno").prop("disabled",false);
 									break;
 							}
 							break;
@@ -357,7 +362,7 @@
 									$("#areaconstruccion").prop("disabled",false);
 									break;
 								case "P":
-									$("#areaconstruccion").prop("disabled",false);
+									$("#areaterreno").prop("disabled",false);
 									break;
 							}
 							break;
@@ -365,6 +370,7 @@
 						case "2":
 							switch(propiedadHorizontal){
 								case "N":
+									$("#areaconstruccion").prop("disabled",false);
 									$("#areaterreno").prop("disabled",false);
 									break;
 							}
