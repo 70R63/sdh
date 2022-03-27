@@ -13,7 +13,6 @@ import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
-import de.hybris.platform.util.Config;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
@@ -67,7 +66,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.apache.commons.collections.CollectionUtils;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -122,11 +120,11 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 	@Resource(name = "sdhConsultaImpuesto_simplificado")
 	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
-	
+
 	@Resource(name = "sdhConfigCatalogos")
 	SDHConfigCatalogos sdhConfigCatalogos;
 
-	
+
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value =
 	{ "/contribuyentes/estado-de-cuenta", "/agenteRetenedor/estado-de-cuenta" }, method = RequestMethod.GET)
@@ -193,10 +191,10 @@ public class ConsultaEstado extends AbstractSearchPageController
 			ctaForm.setGasolinaSaldoFavor(edoCuentaResponse.getNewGasolinaSaldoFavor());
 			ctaForm.setPublicidadSaldoCargo(edoCuentaResponse.getNewPublicidadSaldoCargo());
 			ctaForm.setPublicidadSaldoFavor(edoCuentaResponse.getNewPublicidadSaldoFavor());
-			
-			
-			Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTAS);
-	  
+
+
+			final Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTAS);
+
 			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PREDIAL) && edoCuentaResponse.getPredial() != null && !edoCuentaResponse.getPredial().isEmpty())
 			{
 				ctaForm.setPredial(
@@ -313,10 +311,18 @@ public class ConsultaEstado extends AbstractSearchPageController
 				for (final EdoCtaPredial edoCtaPredial : ctaForm.getPredial())
 				{
 
-					final Optional<PredialResponse> result = predialFormIni.getPredial().stream()
+					Optional<PredialResponse> result = null;
+
+					result = predialFormIni.getPredial().stream()
 							.filter(item -> item.getMatrInmobiliaria() != null
 									&& item.getMatrInmobiliaria().equals(edoCtaPredial.getMatrInmobiliaria()))
 							.findFirst();
+
+					if (result.isEmpty())
+					{
+						result = predialFormIni.getPredial().stream()
+								.filter(item -> item.getCHIP() != null && item.getCHIP().equals(edoCtaPredial.getNewCHIP())).findFirst();
+					}
 
 					if (result.isPresent())
 					{

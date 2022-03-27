@@ -159,8 +159,8 @@
 							<div class="form-group">
 								<label class="control-label"><spring:theme
 										code="edocuenta.inicial.selcimpuesto" /></label> <select
-									id="impuesto" class="new_alto form-control " name="impuesto">
-									<option value="8">RETEICA</option>
+									id="impuesto" class="new_alto form-control " name="impuesto" disabled>
+									<option value="8" >RETEICA</option>
 								</select>
 							</div>
 						</div>

@@ -13,7 +13,7 @@
 <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
 <predial:predialDosGenerales />
-<<predial:predialDosDatPredio></predial:predialDosDatPredio>
+<predial:predialDosDatPredio/>
 <predial:predialDosDatLiq />
 <predial:predialDosLiqPrivada />
 <c:url value='contribuyentes/predialunificado_2' var="linkRedirection"/>
@@ -23,8 +23,18 @@
 <declaracion:predialDeclaracion/>
 <script>
 
-window.onload = function() {
+function camposAgentes(){
+	var representado = "${predialFormdos.representado}";
 	
+	if(representado != null &&  representado != '' && typeof representado != 'undefined'){
+		$("#canonArrendamiento").prop( "disabled", true );		
+	}else{
+		$("#canonArrendamiento").prop( "disabled", false );
+	}
+}
+
+window.onload = function() {
+	debugger;
 	var cosas = $(":input");
 	var tam = cosas.length;
 	if (false){
@@ -37,5 +47,7 @@ window.onload = function() {
 		}
 	}
 	$(".loader").fadeOut("slow");
+	
+	camposAgentes();
 }
 </script>
