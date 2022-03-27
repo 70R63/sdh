@@ -56,7 +56,7 @@
 	<sf:form modelAttribute="obligacionesFormuno" >
 		<div class="row">
 			<div class="col-md-6"></div>
-			<div class="col-md-3" id="idImpuesto" style="display: none;">
+			<div class="col-md-3 " id="idImpuesto" style="display: none">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="obligacion.inicial.selcimpuesto" /></label> 
@@ -64,6 +64,19 @@
 						path="claveImpuesto" items="${listaImpuestosUsuario}" referenceData="${listaImpuestosUsuario}"/>
 				</div>
 			</div>
+			
+			<div class="col-md-3 " id="idImpuestoAgente" style="display: none;">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="obligacion.inicial.selcimpuesto" /></label> 
+					
+					<sf:select class="new_alto form-control" id="impuestoAgente" name="impuestoAgente"	path="claveImpuesto"  >
+					  <sf:option value="0004" >Retención ICA</sf:option>
+					</sf:select>
+					
+				</div>
+			</div>
+			
 		</div>
 		<div class="row">
 			<div class="col-md-5"></div>

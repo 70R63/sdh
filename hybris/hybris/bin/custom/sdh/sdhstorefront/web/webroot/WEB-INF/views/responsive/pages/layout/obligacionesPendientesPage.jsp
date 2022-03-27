@@ -31,8 +31,9 @@
 <script>
 
 function reporteTrmPdf(idImp, filename) {
-    var indRepote = document.getElementById("indRepote").value;
-    ACC.oblipend.bindTrmPdf(idImp,indRepote,filename);
+	debugger;
+	var indRepote = document.getElementById("indRepote").value;
+	ACC.oblipend.bindTrmPdf(idImp,indRepote,filename);
 }
 
 function noActivo() {
@@ -49,6 +50,27 @@ function onErrorSITII() {
 	}else{
 		alert(errorSitII);
 	}
+}
+
+function displayReteICA(){
+	//Se agrega funcionalidad para agentes Retenedores
+	var url = window.parent.location.href;
+	var contenido_url = url.includes('contribuyentes');
+	
+	if(contenido_url == true){
+		var contrib_select = document.getElementById('idImpuesto');
+		contrib_select.style.display = 'block';		
+	}else{
+		var contrib_select = document.getElementById('idImpuestoAgente');
+		contrib_select.style.display = 'block';
+
+		$("#impuestoAgente").val("0004");
+		var obj=document.getElementById("impuestoAgente");
+		
+		$("#impuestoAgente").prop( "disabled", true );
+		
+	}
+	$(".loader").fadeOut("slow");
 }
 
 
@@ -119,14 +141,11 @@ function onErrorSITII() {
 			}
 		}
 		
-		var impuesto_select = document.getElementById('idImpuesto');
-		if(impuesto_select!=null){
-			impuesto_select.style.display = 'block';			
-		}
 				
 		$(".loader").fadeOut("slow");
 		
 		onErrorSITII();
+		displayReteICA();
 	}
 	function goBack() {
 		window.history.back();

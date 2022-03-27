@@ -11,7 +11,9 @@
 	tagdir="/WEB-INF/tags/responsive/obligacionesPendi"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+
 <input type="hidden" value="1" id="indRepote"/>
+
 <input type="hidden" value="${customerData.numBP}" id="contribuyente_numBP"/>
 <sf:form action="" method="POST" modelAttribute="obligacionesForm"
 	id="obligacionesForm">
@@ -42,6 +44,9 @@
 	<div class="container">
 		<obligaciones:obliPendientes_publicidadExt/>
 	</div>
+<!-- 	<div class="container"> -->
+<%-- 		<obligaciones:obliPendientes_reteica/> --%>
+<!-- 	</div> -->
 
 
 		<!-- 			tablas de detalle -->

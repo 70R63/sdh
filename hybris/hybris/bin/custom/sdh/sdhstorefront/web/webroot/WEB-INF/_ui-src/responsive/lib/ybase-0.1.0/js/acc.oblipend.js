@@ -18,6 +18,7 @@ ACC.oblipend = {
 					ACC.oblipend.updateFromResponseImpuesto_vehiculos(infoResponse);
 					break;
 				case "0004":
+				    ACC.oblipend.updateFromResponseImpuesto_reteIca(infoResponse);
 					break;
 				case "0005":
 					ACC.oblipend.updateFromResponseImpuesto_gasolina(infoResponse);
@@ -33,6 +34,21 @@ ACC.oblipend = {
 
 		
 	},
+	
+	
+	updateFromResponseImpuesto_reteIca : function(infoResponse){
+		var id_tabla = "#tabPaginacion5";
+		var tablaInfo = infoResponse.header;
+		
+		$(id_tabla).find("tr:gt(0)").remove();
+		ACC.publicidadexterior.bindDataTable_ID_refresh(id_tabla);
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("oblipend-reteica"),'block');
+		
+					
+		
+	},
+	
+	
 	
 	
 	updateFromResponseImpuesto_publiext : function(infoResponse){
@@ -297,7 +313,7 @@ ACC.oblipend = {
 							var clavePeriodo = "";
 							
 							if(valueH.anioGravable != null ){
-								clavePeriodo = valueH.anioGravable.substring(2,4)+"A1";;
+								clavePeriodo = valueH.anioGravable.substring(2,4)+"A1";
 							}
 							
 							switch (valueH.facilidad){
@@ -376,6 +392,7 @@ ACC.oblipend = {
 	updateFromResponseImpuesto_predial : function(infoResponse){
 		
 		$(indRepote).val(infoResponse.indRepotePredial);
+		
 		var id_tabla = "#table-predial1";
 		var tablaInfo = infoResponse.headerPred;
 		
@@ -487,6 +504,12 @@ ACC.oblipend = {
 	
 	
 	predial_generarTD_totalPagar : function(obligacion,totalPagar,objetoContrato,clavePeriodo,tpImp){
+		if(clavePeriodo != null && clavePeriodo.trim() != ""  ){
+			var clavePeriodoLen = clavePeriodo.length;
+			if( clavePeriodoLen == 2 ){
+				clavePeriodo =  clavePeriodo + 'A1';
+			}	
+		}	
 		
 		return '<a href="' + ACC.inicialURL +'contribuyentes/rop?obligacion=' + obligacion + '&totalPagar=' + totalPagar + '&objCont=' + objetoContrato + '&clvPer=' + clavePeriodo + '&tpImp=' + tpImp + '" >Generar ROP</a>'; 
 	},
@@ -530,9 +553,18 @@ ACC.oblipend = {
 
 	buscarObliPend : function() {
 		
+		
 		ACC.oblipend.ocultarTablasDeImpuestos();
 		
-		var impuesto = $("#impuesto").val();
+		var url = window.parent.location.href;
+	    var contenido_url = url.includes('contribuyentes');
+	
+	    if(contenido_url == true){
+		  var impuesto = $("#impuesto").val();
+		}else{
+	      var impuesto = $("#impuestoAgente").val();
+        }		
+		
 		if(impuesto != ""){
 			switch (impuesto){
 				case "0001":
