@@ -3,6 +3,8 @@ package de.hybris.sdh.facades.impl;
 import de.hybris.sdh.core.pojos.requests.ConsulFirmasRequest;
 import de.hybris.sdh.core.pojos.responses.ConsulFirmasDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.ConsulFirmasResponse;
+import de.hybris.sdh.core.pojos.responses.ContribFirmasResponse;
+import de.hybris.sdh.core.pojos.responses.DetalleDeclaraciones;
 import de.hybris.sdh.core.services.SDHConsulFirmasService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.impl.DefaultSDHConsultaFirmasService;
@@ -86,6 +88,63 @@ public class DefaultSDHConstultaFirmasFacade implements SDHConsultaFirmasFacade 
 		 if (declaraciones != null && declaraciones.getDeclaraciones() != null && !declaraciones.getDeclaraciones().isEmpty())
 		 {
 			 declaracionesFiltradas = new ArrayList<ConsulFirmasDeclaracionesResponse>();
+
+			 if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PREDIAL))
+			 {
+				 declaracionesFiltradas.addAll(declaraciones.getDeclaraciones().stream()
+						 .filter(eachDeclarcion -> eachDeclarcion.getImpuesto().equals(sdhConsultaImpuesto_simplificado.PREDIAL))
+						 .collect(Collectors.toList()));
+			 }
+			 if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.VEHICULOS))
+			 {
+				 declaracionesFiltradas.addAll(declaraciones.getDeclaraciones().stream()
+						 .filter(eachDeclarcion -> eachDeclarcion.getImpuesto().equals(sdhConsultaImpuesto_simplificado.VEHICULOS))
+						 .collect(Collectors.toList()));
+			 }
+			 if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.ICA))
+			 {
+				 declaracionesFiltradas.addAll(declaraciones.getDeclaraciones().stream()
+						 .filter(eachDeclarcion -> eachDeclarcion.getImpuesto().equals(sdhConsultaImpuesto_simplificado.ICA))
+						 .collect(Collectors.toList()));
+			 }
+			 if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.RETEICA))
+			 {
+				 declaracionesFiltradas.addAll(declaraciones.getDeclaraciones().stream()
+						 .filter(eachDeclarcion -> eachDeclarcion.getImpuesto().equals(sdhConsultaImpuesto_simplificado.RETEICA))
+						 .collect(Collectors.toList()));
+			 }
+			 if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.GASOLINA))
+			 {
+				 declaracionesFiltradas.addAll(declaraciones.getDeclaraciones().stream()
+						 .filter(eachDeclarcion -> eachDeclarcion.getImpuesto().equals(sdhConsultaImpuesto_simplificado.GASOLINA))
+						 .collect(Collectors.toList()));
+			 }
+			 if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.DELINEACION))
+			 {
+				 declaracionesFiltradas.addAll(declaraciones.getDeclaraciones().stream()
+						 .filter(eachDeclarcion -> eachDeclarcion.getImpuesto().equals(sdhConsultaImpuesto_simplificado.DELINEACION))
+						 .collect(Collectors.toList()));
+			 }
+			 if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PUBLICIDAD))
+			 {
+				 declaracionesFiltradas.addAll(declaraciones.getDeclaraciones().stream()
+						 .filter(eachDeclarcion -> eachDeclarcion.getImpuesto().equals(sdhConsultaImpuesto_simplificado.PUBLICIDAD))
+						 .collect(Collectors.toList()));
+			 }
+		 }
+
+
+		 declaraciones.setDeclaraciones(declaracionesFiltradas);
+	 }
+
+	 @Override
+	 public void filtrarFirmas_contrib(final ContribFirmasResponse declaraciones, final Map<String, String> impuestosActivos)
+	 {
+		 List<DetalleDeclaraciones> declaracionesFiltradas = null;
+
+		 if (declaraciones != null && declaraciones.getDeclaraciones() != null && !declaraciones.getDeclaraciones().isEmpty())
+		 {
+			 declaracionesFiltradas = new ArrayList<DetalleDeclaraciones>();
 
 			 if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PREDIAL))
 			 {

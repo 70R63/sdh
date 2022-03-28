@@ -29,6 +29,8 @@ import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.proxySelector.SDHProxySelector;
 import de.hybris.sdh.core.services.SDHConsulFirmasService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
+import de.hybris.sdh.facades.SDHConsultaFirmasFacade;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.ContribuyenteForm;
 
@@ -90,6 +92,12 @@ public class ContribuyentesPageController extends AbstractPageController
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
+	
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+	
+	@Resource(name="sdhConsultaFirmasFacade")
+	SDHConsultaFirmasFacade sdhConsultaFirmasFacade;
 
 	//	@Resource(name = "sdhCreaModContribuyenteFacade")
 	//	SDHCreaModContribuyenteFacade sdhCreaModContribuyenteFacade;
@@ -158,6 +166,7 @@ public class ContribuyentesPageController extends AbstractPageController
 
 				final ContribFirmasResponse contribFirmasResponse = mapper
 						.readValue(response, ContribFirmasResponse.class);
+				sdhConsultaFirmasFacade.filtrarFirmas_contrib(contribFirmasResponse, sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.AMBITO_FIRMASAGENTE));
 
 
 				for (final DetalleDeclaraciones eachPeriodo : contribFirmasResponse.getDeclaraciones())
