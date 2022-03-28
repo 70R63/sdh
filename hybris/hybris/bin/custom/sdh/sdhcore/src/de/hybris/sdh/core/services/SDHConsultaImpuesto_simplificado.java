@@ -38,6 +38,8 @@ public interface SDHConsultaImpuesto_simplificado
 	public static final String AMBITO_FACTURACION = "facturacion";
 	public static final String AMBITO_PRESENTARDECLARACION = "presentarDeclaracion";
 	public static final String AMBITO_MIRIT = "mirit";
+	public static final String AMBITO_FIRMASAGENTE = "firmasAgente";
+	public static final String AMBITO_FIRMASCONTRIBUYENTE = "firmasContribuyente";
 
 	//Predial
 	List<PredialResponse> consulta_impPredial(ConsultaContribuyenteBPRequest request);

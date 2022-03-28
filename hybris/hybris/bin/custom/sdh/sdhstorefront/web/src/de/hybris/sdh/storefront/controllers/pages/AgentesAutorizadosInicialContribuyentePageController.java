@@ -12,9 +12,11 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.ConsulFirmasRequest;
+import de.hybris.sdh.core.pojos.responses.ConsulFirmasResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.facades.SDHConsultaFirmasFacade;
 import de.hybris.sdh.facades.SDHCustomerFacade;
@@ -78,6 +80,9 @@ public class AgentesAutorizadosInicialContribuyentePageController extends Abstra
 
 	@Resource(name = "sdhCustomerAccountService")
 	private SDHCustomerAccountService sdhCustomerAccountService;
+	
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
 
 
 	@RequestMapping(value = "/autorizados/contribuyente/representando", method = RequestMethod.GET)
@@ -103,7 +108,9 @@ public class AgentesAutorizadosInicialContribuyentePageController extends Abstra
 		request.setAgente(currentUser.getNumBP());
 		request.setContribuyente(representado);
 
-		model.addAttribute("firmas",sdhConsultaFirmasFacade.getDeclaraciones(request));
+		ConsulFirmasResponse firmas =  sdhConsultaFirmasFacade.getDeclaraciones(request);
+		sdhConsultaFirmasFacade.filtrarFirmas(firmas, sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.AMBITO_FIRMASAGENTE));
+		model.addAttribute("firmas",firmas);
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		model.addAttribute("dataForm", dataForm);
 
