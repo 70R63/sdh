@@ -166,7 +166,7 @@ public class ContribuyentesPageController extends AbstractPageController
 
 				final ContribFirmasResponse contribFirmasResponse = mapper
 						.readValue(response, ContribFirmasResponse.class);
-				sdhConsultaFirmasFacade.filtrarFirmas_contrib(contribFirmasResponse, sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.AMBITO_FIRMASAGENTE));
+				sdhConsultaFirmasFacade.filtrarFirmas_contrib(contribFirmasResponse, sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.AMBITO_FIRMASCONTRIBUYENTE));
 
 
 				for (final DetalleDeclaraciones eachPeriodo : contribFirmasResponse.getDeclaraciones())
