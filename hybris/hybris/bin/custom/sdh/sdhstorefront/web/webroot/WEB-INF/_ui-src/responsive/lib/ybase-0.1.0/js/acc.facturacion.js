@@ -360,7 +360,178 @@ ACC.facturacion = {
                 $(document).off("click", ".js-"+ impuesto +"-facet .js-facet-name-" + impuesto );
             }
         });
+	},
+	
+	obtainBeneficio: function(objeto, numObjeto)  {
+	var selectRefinementsTitle = "Ser acreedor del descuento del 1%";
+	var saveObj = document.getElementById('objetosBene');
+	;
+	saveObj.value=numObjeto;
+
+	ACC.colorbox.open(selectRefinementsTitle, {
+		href: ".js-beneficio-facet",
+		inline: true,
+		width: "90%",
+		onComplete: function() {
+			$(document).on("click", ".js-beneficio-facet .js-facet-name-ben", function(e) {
+				e.preventDefault();
+				$(".js-beneficio-facet  .js-facet-ben").removeClass("active");
+				$(this).parents(".js-facet-ben").addClass("active");
+				$.colorbox.resize()
+			})
+		},
+		onClosed: function() {
+			$(document).off("click", ".js-beneficio-facet .js-facet-name-ben");
+		}
+	});
+},
+btnBeneficio: function(items) {
+	var cont = 0;
+	var saveObj = "";
+	var saveObjet = document.getElementById('objetosBene');
+	for (i = 0; i < items.length;  i++) {
+		var selected = items[i].getAttribute("aria-checked");
+		if (selected == "true") {
+			saveObj = saveObj+","+items[i].getAttribute("data-numobjeto");
+			cont = cont + 1;
+		}
+
+	}
+
+	if (cont <= 1) {
+
+		alert("Atención: Se debe seleccionar más de un predio/vehículo");
+
+	} else if (cont > 5) {
+		alert("Atención: Solo puedes seleccionar máximo 5 facturas");
+	} else {
+		saveObjet.value = saveObj;
+		var selectRefinementsTitle = "Ser acreedor del descuento del 1%";
+		ACC.colorbox.open(selectRefinementsTitle, {
+			href: ".js-beneficio-facet",
+			inline: true,
+			width: "90%",
+			onComplete: function() {
+				$(document).on("click", ".js-beneficio-facet .js-facet-name-ben", function(e) {
+					e.preventDefault();
+					$(".js-beneficio-facet  .js-facet-ben").removeClass("active");
+					$(this).parents(".js-facet-ben").addClass("active");
+					$.colorbox.resize()
+				})
+			},
+			onClosed: function() {
+				$(document).off("click", ".js-beneficio-facet .js-facet-name-ben");
+			}
+		});
+
+	}
+	},
+	
+	solBeneficio: function(objeto){
+		ACC.spinner.show();
+		$("#contObtainBen").attr("disabled","disabled");
+		ACC.colorbox.close();
 		
+		var numObjeto = document.getElementById("objetosBene");
+        var year = new Date().getFullYear();
+		var constantA1 = "A1";
+		var dataActual = {};	
+		var yearStr = "";
+		
+			dataActual.fbnum = numObjeto.value;
+			dataActual.casef = 0;
+			dataActual.i_laufi = 0;
+			if(year.toString().length >= 4){
+				yearStr = year.toString().substring(2);
+			}
+			dataActual.i_periodo = yearStr+constantA1;
+			
+			$.ajax({
+				url : ACC.anularFormularioURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataForm) {
+					ACC.spinner.close();
+			var items = document.getElementsByClassName("checkbox");
+				if (numObjeto.value.includes(",")) {
+						var objects = numObjeto.value.split(",");
+						
+						for(i=0; i<objects.length; i++){
+							for (i = 0; i < items.length; i++) {
+							var selected = items[i].getAttribute("data-numobjeto");
+
+							if (selected == objects[i]) {
+								;
+								items[i].setAttribute("aria-checked", false);
+								disabledCheck = items[i].parentNode;
+								disabledCheck2 = disabledCheck.parentNode;
+								disabledCheck3 = disabledCheck2.parentNode;
+								disabledCheck4 = disabledCheck3.parentNode;
+								disabledCheck5 = disabledCheck4.parentNode;
+								disabledCheck2.setAttribute("disabled", true);
+							}
+
+						}
+						}
+					} else {
+						for (i = 0; i < items.length; i++) {
+							var selected = items[i].getAttribute("data-numobjeto");
+							if (selected.includes(numObjeto.value)) {
+								;
+								disabledCheck = items[i].parentNode;
+								disabledCheck2 = disabledCheck.parentNode;
+								disabledCheck3 = disabledCheck2.parentNode;
+								disabledCheck4 = disabledCheck3.parentNode;
+								disabledCheck5 = disabledCheck4.parentNode;
+								
+								disabledCheck2.setAttribute("disabled", true);
+							}
+
+						}
+					}
+
+					alert("Se realizó la petición del beneficio.");
+					ACC.facturacion.deshabilitarBotonesBeneficio(numObjeto.value);
+					
+					
+				}
+			,
+				error : function() {
+					ACC.spinner.close();
+					alert("Error procesar la solicitud");	
+				}
+			});	
+				var items = document.getElementsByClassName("checkbox");
+				for (i = 0; i < items.length;  i++) {
+		var selected = items[i].getAttribute("aria-checked");
+		if (selected == "true") {
+	items[i].setAttribute("aria-checked", false);
+		}
+
+	}	
+	},
+	
+	
+	deshabilitarBotonesBeneficio : function(numObjeto){
+		$(".renglonBeneficios").each(function (index, value){
+			var numObjetoActual = $(value).attr("data-numobjeto");
+			if(numObjeto == numObjetoActual){
+				var idObjecto = $(value).attr("id");
+				switch(idObjecto){
+					case "imgDescarga":
+					case "downloadFac":
+					case "obtainBenef":
+					case "ontainBeneVehi":
+						$(value).prop("onclick", false);
+						break;
+					case "pagarFacturaBtn":
+						$(value).attr("disabled","disabled");
+						break;
+					default:
+						break;
+				}
+			}
+		});
 		
 	}
 	

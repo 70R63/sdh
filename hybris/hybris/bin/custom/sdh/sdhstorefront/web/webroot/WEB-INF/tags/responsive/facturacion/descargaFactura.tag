@@ -46,7 +46,7 @@
 	<div class="row">
 		<div class="headline">
 			<h2 align="center">
-				<span><spring:theme code="Facturación" /></span>
+				<span><spring:theme code="Facturacin" /></span>
 			</h2>
 		</div>
 	</div>
@@ -64,7 +64,7 @@
 						<option value="0001">Predial Unificado</option>
 					</c:if>
 					<c:if test="${ not empty facturacionForm.vehicular}">
-						<option value="0002">Impuesto sobre Vehículos Automotores</option>
+						<option value="0002">Impuesto sobre Vehculos Automotores</option>
 					</c:if>
 				</select>
 			</div>
@@ -94,12 +94,13 @@
 		</div>
 	</div>
 	<br>
-	<div id="table-predial" style="display: none;">
+	<div id="table-predial" style="display: none;" class="table-responsive">
 			<div class="col-md-12">
+			<button id="solBenePredial" style="float: right;" type="button" data-impuesto="0001" data-numbp="" data-anioGravable="" data-numObjeto="" onclick="btnObtainBene()">Solicitar Beneficio</button>
 				<table id="tabPaginacion0">
 					<thead>
 						<tr>
-<!-- 							<th style="text-align: center" hidden="hidden"><label class="control-label labeltabletd " for="">Año Gravable</label></th> -->
+<!-- 							<th style="text-align: center" hidden="hidden"><label class="control-label labeltabletd " for="">Ao Gravable</label></th> -->
 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""><spring:theme code="descarga.factura.predial.chip" /></label></th>
 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="descarga.factura.predial.matinm" /></label></th>
 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="descarga.factura.predial.dirpred" /></label></th>
@@ -111,10 +112,12 @@
 <%-- 								for=""> <spring:theme code="Total a pagar" /></label></th> --%>
 <!-- 							<th style="text-align: center"><label class="control-label" -->
 <%-- 								for=""> <spring:theme code="Total con pago voluntario" /></label></th> --%>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Reexpedicion de factura" /></label></th>
 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Descargar factura" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Actualizar datos" /></label></th>
+<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Beneficio 1%" /></label></th>
 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar" /></label></th>
 <%-- 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar sin aporte" /></label></th> --%>
+						<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Seleccionar" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -135,15 +138,28 @@
 <!-- 										<td></td> -->
 <!-- 										<td></td> -->
 <!-- 										<td></td> -->
-										<td><label class="control-label"
-											style="text-transform: capitalize !important"
+<td><img id="imgDescarga" class="renglonBeneficios" src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0001" data-nombreObjeto="objetoPredial" data-anioGrav="${eachPredial.anioGravable}" data-numobjeto="${eachPredial.numObjeto}"></img></td>
+										<td><label class="control-label renglonBeneficios"
+											style="text-transform: capitalize !importan;color: #2196f3; text-decoration: underline !important; font-size: 14px;t"
 											id="downloadFac" data-claveImpuesto="0001"
 											data-nombreObjeto="objetoPredial"
 											data-anioGrav="${eachPredial.anioGravable}" data-numobjeto="${eachPredial.numObjeto}"
-											onclick="reexpedicion(this)"> <span class="">Reexpedir</span></label></td>
-										<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0001" data-nombreObjeto="objetoPredial" data-anioGrav="${eachPredial.anioGravable}" data-numobjeto="${eachPredial.numObjeto}"></img></td>
-									<td><button id="pagarFacturaBtn" type="button" data-impuesto="0001" data-numbp="${facturacionForm.numbp}" data-anioGravable="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}" >Pagar</button></td>
+											onclick="reexpedicion(this)"> <span class="">Actualizar</span></label></td>
+										<td><label class="control-label renglonBeneficios"
+											style="text-transform: capitalize !important; color: #2196f3; text-decoration: underline !important; font-size: 14px;"
+											id="obtainBenef" data-claveImpuesto="0001"
+											data-nombreObjeto="objetoPredial"
+											data-anioGrav="${eachPredial.anioGravable}" data-numobjeto="${eachPredial.numObjeto}"
+											onclick="obtainBene(this)"> <span class="">Obtener Descuento</span></label></td>
+									<td><button class="renglonBeneficios" id="pagarFacturaBtn" type="button" data-impuesto="0001" data-numbp="${facturacionForm.numbp}" data-anioGravable="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}" >Pagar</button></td>
 <!-- 									<td><a onclick="validaBotonPago()"></a></td> -->
+<td>	<div class="checkbox" role="checkbox" aria-checked="false"
+								id="buzon2" style=" cursor: not-allowed;" data-numobjeto="${eachPredial.numObjeto}">
+								<label tabindex="0" class="control-label" id="checkBeEneficio"> <input
+									id="checkBeEneficio" name="checkBeEneficio" type="checkbox" ${ checked}
+									value="true">
+								</label>
+							</div></td>
 
 									</tr>
 								</c:if>
@@ -161,28 +177,34 @@
 <!-- 				</button> -->
 <!-- 			</div> -->
 <!-- 		</div> -->
+<div class="mensaje">
+								<spring:theme code="Si usted desea ser acreedor del descuento del 1% para ms de una factura y mximo 5 presiona el botn de \"Solicitar beneficio\"" htmlEscape="false" />
+							</div>
 	</div>
 
-	<div id="table-vehiculos" style="display: none;">
+	<div id="table-vehiculos" style="display: none;" class="table-responsive">
 			<div class="col-md-12">
+			<button id="solBeneVehicular" style="float: right;" type="button" data-impuesto="0002" data-numbp="" data-anioGravable="" data-numObjeto="" onclick="btnObtainBene()">Solicitar Beneficio</button>
 				<table id="tabla_vehi">
 					<thead>
 						<tr>
-<!-- 							<th style="text-align: center" hidden="hidden"><label class="control-label " for="">año gravable</label></th> -->
+<!-- 							<th style="text-align: center" hidden="hidden"><label class="control-label " for="">ao gravable</label></th> -->
 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""><spring:theme code="descarga.factura.vehiculo.placa" /></label></th>
 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="descarga.factura.vehiculo.marca" /></label></th>
 							<!-- 							<th style="text-align: center"><label class="control-label" -->
 							<%-- 								for=""> <spring:theme --%>
 							<%-- 										code="descarga.factura.vehiculo.selec" /></label></th> --%>
-<!--							<th class="col-md-1" style="text-align: center"><label class="control-labe labeltabletd l" for=""> <spring:theme code="Pago voluntario" /></label></th>-->
+<%-- 							<th class="col-md-1" style="text-align: center"><label class="control-labe labeltabletd l" for=""> <spring:theme code="Pago voluntario" /></label></th> --%>
 <!-- 							<th style="text-align: center"><label class="control-label" -->
 <%-- 								for=""> <spring:theme code="Total a pagar" /></label></th> --%>
 <!-- 							<th style="text-align: center"><label class="control-label" -->
 <%-- 								for=""> <spring:theme code="Total con pago voluntario" /></label></th> --%>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Reexpedicion de factura" /></label></th>
 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Descargar factura" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Actualizar datos" /></label></th>
+<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Beneficio 1%" /></label></th>
 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar" /></label></th>
 <%-- 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar sin aporte" /></label></th> --%>
+						<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Seleccionar" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -202,19 +224,29 @@
 <!-- 														<td></td> -->
 <!-- 										<td></td> -->
 <!-- 										<td></td> -->
-										<td><label class="control-label"
-											style="text-transform: capitalize !important"
+<td><img id="downloadFac" src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0002"
+											data-nombreObjeto="objetoVehicular"
+											data-anioGrav="${eachVehiculo.anioGravable}" data-numobjeto="${eachVehiculo.numObjeto}"></img></td>
+										<td><label class="control-label" style="text-transform: capitalize !important; color: #2196f3; text-decoration: underline !important; font-size: 14px;"
 											id="downloadFac" data-claveImpuesto="0002"
 											data-nombreObjeto="objetoVehicular"
 											data-anioGrav="${eachVehiculo.anioGravable}" data-numobjeto="${eachVehiculo.numObjeto}"
-											onclick="reexpedicion(this)"> <span class="">Reexpedir</span></label></td>
-										<td><img id="downloadFac" src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0002"
+											onclick="reexpedicion(this)"> <span class="">Actualizar</span></label></td>
+												<td><label class="control-label" style="text-transform: capitalize !important; color: #2196f3; text-decoration: underline !important; font-size: 14px;"
+											id="ontainBeneVehi" data-claveImpuesto="0002"
 											data-nombreObjeto="objetoVehicular"
-											data-anioGrav="${eachVehiculo.anioGravable}" data-numobjeto="${eachVehiculo.numObjeto}"></img></td>
-<!--										<td></td>-->
+											data-anioGrav="${eachVehiculo.anioGravable}" data-numobjeto="${eachVehiculo.numObjeto}"
+											onclick="obtainBene(this)"> <span class="">Obtener Descuento</span></label></td>
+<!-- 										<td></td> -->
 										<td><button id="pagarFacturaBtn" type="button" data-impuesto="0002" data-numbp="${facturacionForm.numbp}" data-anioGravable="${eachVehiculo.anioGravable}" data-numObjeto="${eachVehiculo.numObjeto}" >Pagar</button></td>
 <!-- 										<td><a onclick="validaBotonPago()"></a></td> -->
-
+<td><div class="checkbox" role="checkbox" aria-checked="false"
+								id="checkBeneficio" style=" cursor: not-allowed; padding: 0px;margin: 0px;" data-numobjeto="${eachVehiculo.numObjeto}">
+								<label tabindex="0" class="control-label" id="checkBeEneficio"> <input
+									id="checkBeEneficio" name="checkBeEneficio" type="checkbox"  ${ checked}
+									value="true">
+								</label>
+							</div></td>
 									</tr>
 								</c:if>
 							</c:if>
@@ -222,6 +254,9 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="mensaje">
+								<spring:theme code="Si usted desea ser acreedor del descuento del 1% para ms de una factura y mximo 5 presiona el botn de \"Solicitar beneficio\"" htmlEscape="false" />
+							</div>
 		</div>
 <!-- 		<div class="row"> -->
 <!-- 			<div class="col-md-3 col-md-offset-5"> -->

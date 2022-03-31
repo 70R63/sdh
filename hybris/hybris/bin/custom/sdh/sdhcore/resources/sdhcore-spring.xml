@@ -802,4 +802,7 @@
 	<alias alias="sdhConfigCatalogos" name="defaultSDHConfigCatalogos"/>
 	<bean name="defaultSDHConfigCatalogos" class="de.hybris.sdh.core.services.impl.DefaultSDHConfigCatalogos" />
 	
+	<alias alias="sdhAnularFormularioService" name="defaultSDHAnularFormularioService"/>
+	<bean name="defaultSDHAnularFormularioService" class="de.hybris.sdh.core.services.impl.DefaultSDHAnularFormularioService" />
+	
 </beans>
