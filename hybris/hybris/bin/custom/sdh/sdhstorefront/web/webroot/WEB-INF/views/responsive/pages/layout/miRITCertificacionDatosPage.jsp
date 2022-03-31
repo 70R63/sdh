@@ -143,12 +143,12 @@ window.onload = function() {
 <!-- 						<br> -->
 <%-- 					</c:if> --%>
 
-<%-- 					<c:if test="${uiMenuForm.bVehicular == 'X'}"> --%>
-<!-- 						<input type="radio" name="tipoImp" id="tipoImp" value="02" -->
-<!-- 							style="visibility: visible" onclick="mostrarTabla('2')"> -->
-<%-- 						<spring:theme code="mirit.certificacion.opVehicular" /> --%>
-<!-- 						<br> -->
-<%-- 					</c:if> --%>
+					<c:if test="${uiMenuForm.bVehicular == 'X'}">
+						<input type="radio" name="tipoImp" id="tipoImp" value="02"
+							style="visibility: visible" onclick="mostrarTabla('2')">
+						<spring:theme code="mirit.certificacion.opVehicular" />
+						<br>
+					</c:if>
 
 <%-- 					<c:if test="${uiMenuForm.bIca == 'X'}"> --%>
 <!-- 						<input type="radio" name="tipoImp" id="tipoImp" value="03" -->
@@ -171,12 +171,12 @@ window.onload = function() {
 						<br>
 					</c:if>
 
-					<c:if test="${uiMenuForm.bDelineacionUrbana == 'X'}">
-						<input type="radio" name="tipoImp" id="tipoImp" value="06"
-							style="visibility: visible" onclick="mostrarTabla('6')">
-						<spring:theme code="mirit.certificacion.opDelineaciónUrbana" />
-						<br>
-					</c:if>
+<%-- 					<c:if test="${uiMenuForm.bDelineacionUrbana == 'X'}"> --%>
+<!-- 						<input type="radio" name="tipoImp" id="tipoImp" value="06" -->
+<!-- 							style="visibility: visible" onclick="mostrarTabla('6')"> -->
+<%-- 						<spring:theme code="mirit.certificacion.opDelineaciónUrbana" /> --%>
+<!-- 						<br> -->
+<%-- 					</c:if> --%>
 				</div>
 			</div>
 		</div>
