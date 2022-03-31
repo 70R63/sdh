@@ -96,6 +96,7 @@ UPDATE PSCMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang];title
  ;;WorkingWithChildrenCheckLink;"Working with Children Check";"Click here for menu item Working with Children Check"
 ;;EscuelaVirtualLink;"ESCUELA VIRTUAL";"Haga clic aquí para ir a la Escuela Virtual"
 ;;PreguntasFrecuentesLink;"PREGUNTAS FRECUENTES";"Haga clic aquí para ir a las Preguntas Frecuentes"
+;;DesFacturaVALink;"DESCARGA FACTURA PREDIAL/VEHICULAR";"Haga clic aquí para ir a Descargar Factura"
 
  
 #*->-------------------------------------------------------------------------------------------------------------------------

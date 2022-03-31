@@ -3154,3 +3154,40 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;retencionesPracticadasPageComponent	;retencionesPracticadasPage Component	;/WEB-INF/views/responsive/pages/layout/retencionesPracticadasPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retencionesPracticadasPageComponent
 #->FIN dev-maria Agregar paginas para retenciones practicadas    
+
+
+#Se agregan cambios para Descarga de factura
+
+$contentCatalog=sdhContentCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+$productCatalog=sdhProductCatalog
+$productCatalogName=Public Sector Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV) ;
+$siteResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$jarResourceCms=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/cockpits/cmscockpit
+$medias=medias(code, $contentCV);
+$lang=en,es
+$mediaContainer=media(qualifier, $contentCV)[lang=$lang];
+$addonExtensionName=sdhpsaddon
+$siteUid=sdh
+
+INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; category(code, $productCV); product(code,$productCV);target(code)[default = 'sameWindow'];;
+#Public Sector Header Links
+; ; DesFacturaVALink                      ; Descarga Factura VA                            ; "/descargaFacturaVA" ; ; ; newWindow;;
+
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&nodeRef;children(uid,$contentCV);links(&linkRef);
+;EscuelaVirtualNavigationNode;;Escuela Virtual Menu;EscuelaVirtualNavigationNode;
+;PreguntasFrecuentesNavigationNode;;Preguntas Frecuentes Menu;PreguntasFrecuentesNavigationNode;
+;DesFacturaVANavigationNode;; D scarga FacturaVANavigation Menu;DesFacturaVANavigationNode;
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
+;AnnonymousCategoryNavNode;;Anonnymous Categories;SiteRootNode;AnnonymousCategoryNavNode;PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode, DesFacturaVANavigationNode
+
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(CMSLinkComponent.uid,CMSLinkComponent.$contentCV);
+;DesFacturaVANavigationNodeEntry;;Descarga Factura Predial/Vehicular Vigencia actual Menu;DesFacturaVANavigationNode;DesFacturaVALink;
+
+INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];users(uid);components(uid,$contentCV)
+;;DesFacturaVALink Anonymous;DesFacturaVALinkAnonymousRestriction;anonymous;DesFacturaVALink
