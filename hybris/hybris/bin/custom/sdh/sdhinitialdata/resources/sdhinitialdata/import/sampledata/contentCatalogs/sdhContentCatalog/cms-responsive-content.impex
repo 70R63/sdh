@@ -3191,3 +3191,21 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 
 INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];users(uid);components(uid,$contentCV)
 ;;DesFacturaVALink Anonymous;DesFacturaVALinkAnonymousRestriction;anonymous;DesFacturaVALink
+
+#->INI dev-maria Agregar paginas
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;descargaFacturaVAPage 		;Escuela Virtual	;AccountPageTemplate:sdhContentCatalog:Staged	;/descargaFacturaVA
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='descargaFacturaVAPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-descargaFacturaVAPage 	;SideContent			;																	;SideContent-descargaFacturaVAPage				;;;
+								;						;BodyContent-descargaFacturaVAPage 	;BodyContent			;																	;BodyContent-descargaFacturaVAPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-descargaFacturaVAPage 	;Side Content Slot for Escuela Virtual;true	;								;;;
+							;							;BodyContent-descargaFacturaVAPage	;Body Content Slot for Escuela Virtual;true	;descargaFacturaVAPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;descargaFacturaVAPageComponent	;descargaFacturaVAPage Component	;/WEB-INF/views/responsive/pages/layout/descargaFacturaVAPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;descargaFacturaVAPageComponent
+
+#->FIN dev-maria Agregar paginas  
