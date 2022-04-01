@@ -131,6 +131,7 @@
 					</tbody>
 				</table>
 			</div>
+			
 		</sf:form>
 	</div>
 </div>
