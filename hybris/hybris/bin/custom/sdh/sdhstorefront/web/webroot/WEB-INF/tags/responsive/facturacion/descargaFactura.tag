@@ -46,7 +46,7 @@
 	<div class="row">
 		<div class="headline">
 			<h2 align="center">
-				<span><spring:theme code="Facturacin" /></span>
+				<span><spring:theme code="Facturación" /></span>
 			</h2>
 		</div>
 	</div>
@@ -64,7 +64,7 @@
 						<option value="0001">Predial Unificado</option>
 					</c:if>
 					<c:if test="${ not empty facturacionForm.vehicular}">
-						<option value="0002">Impuesto sobre Vehculos Automotores</option>
+						<option value="0002">Impuesto sobre Vehículos Automotores</option>
 					</c:if>
 				</select>
 			</div>
@@ -178,7 +178,7 @@
 <!-- 			</div> -->
 <!-- 		</div> -->
 <div class="mensaje">
-								<spring:theme code="Si usted desea ser acreedor del descuento del 1% para ms de una factura y mximo 5 presiona el botn de \"Solicitar beneficio\"" htmlEscape="false" />
+								<spring:theme code="Si usted desea ser acreedor del descuento del 1% para más de una factura y máximo 5 presiona el botón de \"Solicitar beneficio\"" htmlEscape="false" />
 							</div>
 	</div>
 
@@ -255,7 +255,7 @@
 				</table>
 			</div>
 			<div class="mensaje">
-								<spring:theme code="Si usted desea ser acreedor del descuento del 1% para ms de una factura y mximo 5 presiona el botn de \"Solicitar beneficio\"" htmlEscape="false" />
+								<spring:theme code="Si usted desea ser acreedor del descuento del 1% para más de una factura y máximo 5 presiona el botón de \"Solicitar beneficio\"" htmlEscape="false" />
 							</div>
 		</div>
 <!-- 		<div class="row"> -->
