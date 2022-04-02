@@ -670,7 +670,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "0203______", "03", "No Sujeción");
 //		agregarElementoTramites(elementos, "0204______", "04", "Tratamiento especial de tarifas y/o cambio de destino hacendario");
 //		agregarElementoTramites(elementos, "0205______", "05", "ICA (contribuyentes no obligados a inscribirse a CCB)");
-//		agregarElementoTramites(elementos, "0206______", "06", "Novedades Predial");
+		agregarElementoTramites(elementos, "0206______", "06", "Novedades Predial");
 		agregarElementoTramites(elementos, "0207______", "07", "Novedades Vehículos");
 		//Novedades de registro-Exclusiones
 		agregarElementoTramites(elementos, "020100____", "00", "Seleccionar");

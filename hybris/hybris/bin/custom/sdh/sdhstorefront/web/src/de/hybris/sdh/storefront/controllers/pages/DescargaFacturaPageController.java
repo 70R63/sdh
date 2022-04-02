@@ -16,13 +16,17 @@ import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.pojos.requests.AnularFormularioObjeto;
+import de.hybris.sdh.core.pojos.requests.AnularFormularioRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DescargaFacturaRequest;
 import de.hybris.sdh.core.pojos.requests.FacturacionPagosRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
+import de.hybris.sdh.core.pojos.responses.AnularFormularioResponse;
 import de.hybris.sdh.core.pojos.responses.DescargaFacturaResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.FacturacionPagosResponse;
+import de.hybris.sdh.core.services.SDHAnularFormularioService;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConfigCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -51,6 +55,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import Decoder.BASE64Decoder;
 
 
@@ -71,6 +78,10 @@ public class DescargaFacturaPageController extends AbstractPageController
 	private static final String DESCARGA_FACTURA_CMS_PAGE = "descargaFacturaPage";
 
 	private static final String REDIRECT_TO_DESCARGA_FACTURA_PAGE = REDIRECT_PREFIX + "/contribuyentes/descargafactura";
+
+	private static final String COMMA = ",";
+	private static final String CONS = "0";
+
 
 	@Resource(name = "customBreadcrumbBuilder")
 	private DefaultResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -104,6 +115,9 @@ public class DescargaFacturaPageController extends AbstractPageController
 
 	@Resource(name = "sdhConfigCatalogos")
 	SDHConfigCatalogos sdhConfigCatalogos;
+
+	@Resource(name = "sdhAnularFormularioService")
+	SDHAnularFormularioService sdhAnularFormularioService;
 
 
 	@RequestMapping(value = "/contribuyentes/descargafactura", method = RequestMethod.GET)
@@ -297,6 +311,82 @@ public class DescargaFacturaPageController extends AbstractPageController
 		return dataForm;
 
 	}
+
+	@RequestMapping(value = "/contribuyentes/descargafactura/anularFormulario", method = RequestMethod.GET)
+	@ResponseBody
+	public DescargaFacturaForm anularFormularioPDF(final DescargaFacturaForm dataForm, final HttpServletResponse response,
+			final HttpServletRequest request) throws CMSItemNotFoundException
+	{
+		SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		DescargaFacturaResponse descargaFacturaResponse = null;
+		DescargaFacturaRequest descargaFacturaRequest = new DescargaFacturaRequest();
+		final String numBP = customerFacade.getCurrentCustomer().getNumBP();
+		final byte[] decodedBytes;
+
+		AnularFormularioRequest anularFormularioRequest = new AnularFormularioRequest();
+		ArrayList<AnularFormularioObjeto> listAnularFormularioObjeto = new ArrayList<AnularFormularioObjeto>();
+		AnularFormularioResponse anularFormularioResponse = new AnularFormularioResponse();
+		anularFormularioRequest.setI_laufi(dataForm.getI_laufi());
+		anularFormularioRequest.setI_period(dataForm.getI_periodo());
+		if (dataForm.getFbnum().contains(COMMA))
+		{
+
+			final String[] objects = dataForm.getFbnum().split(COMMA);
+
+			for (int i = 0; i < objects.length; i++)
+			{
+				if (objects[i] != null || objects[i] != "")
+				{
+					AnularFormularioObjeto anularFormularioObjeto = new AnularFormularioObjeto();
+					anularFormularioObjeto.setFbnum(objects[i]);
+					anularFormularioObjeto.setCasef(CONS);
+					listAnularFormularioObjeto.add(i, anularFormularioObjeto);
+				}
+			}
+			anularFormularioRequest.setIt_fbnum(listAnularFormularioObjeto);
+		}
+		else if (dataForm.getFbnum() != null)
+		{
+			AnularFormularioObjeto anularFormularioObjeto = new AnularFormularioObjeto();
+			String object = dataForm.getFbnum();
+			anularFormularioObjeto.setFbnum(object);
+			anularFormularioObjeto.setCasef(CONS);
+
+			listAnularFormularioObjeto.add(0, anularFormularioObjeto);
+			anularFormularioRequest.setIt_fbnum(listAnularFormularioObjeto);
+		}
+		else
+		{
+			LOG.info("No se encontraron objetos");
+		}
+
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try
+		{
+			anularFormularioResponse = mapper.readValue(sdhAnularFormularioService.anularFormularioReuqest(anularFormularioRequest),
+					AnularFormularioResponse.class);
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error al anular el formulario : " + e.getMessage());
+
+			final ErrorEnWS error = new ErrorEnWS();
+
+			error.setIdmsj("0");
+			error.setTxtmsj("Hubo un error al anular el formulario, por favor intentalo más tarde");
+
+			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+
+			errores.add(error);
+
+			dataForm.setErrores(errores);
+
+		}
+		return dataForm;
+
+	}
+
 
 }
 

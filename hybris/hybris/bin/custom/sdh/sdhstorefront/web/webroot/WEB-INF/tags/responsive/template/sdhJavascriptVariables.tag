@@ -189,6 +189,7 @@
 			
 			ACC.descargaFacturaURL="<c:url value='/contribuyentes/descargafactura/descargarFactura' />";
 			ACC.facturacionPagosURL="<c:url value='/contribuyentes/descargafactura/facturacionPagos' />";
+			ACC.anularFormularioURL="<c:url value='/contribuyentes/descargafactura/anularFormulario' />";
 
 			ACC.spacURL="<c:url value='/contribuyentes/spac' />";
 
