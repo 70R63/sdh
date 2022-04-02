@@ -23,6 +23,11 @@ public class DescargaFacturaForm
 	private String urlDownload;
 	private List<ErrorEnWS> errores;
 
+	private String fbnum;
+	private String casef;
+	private String i_laufi;
+	private String i_periodo;
+
 
 	/**
 	 * @return the numBP
@@ -123,6 +128,74 @@ public class DescargaFacturaForm
 	public void setTipoOperacion(final String tipoOperacion)
 	{
 		this.tipoOperacion = tipoOperacion;
+	}
+
+	/**
+	 * @return the fbnum
+	 */
+	public String getFbnum()
+	{
+		return fbnum;
+	}
+
+	/**
+	 * @param fbnum
+	 *           the fbnum to set
+	 */
+	public void setFbnum(final String fbnum)
+	{
+		this.fbnum = fbnum;
+	}
+
+	/**
+	 * @return the casef
+	 */
+	public String getCasef()
+	{
+		return casef;
+	}
+
+	/**
+	 * @param casef
+	 *           the casef to set
+	 */
+	public void setCasef(final String casef)
+	{
+		this.casef = casef;
+	}
+
+	/**
+	 * @return the i_laufi
+	 */
+	public String getI_laufi()
+	{
+		return i_laufi;
+	}
+
+	/**
+	 * @param i_laufi
+	 *           the i_laufi to set
+	 */
+	public void setI_laufi(final String i_laufi)
+	{
+		this.i_laufi = i_laufi;
+	}
+
+	/**
+	 * @return the i_periodo
+	 */
+	public String getI_periodo()
+	{
+		return i_periodo;
+	}
+
+	/**
+	 * @param i_periodo
+	 *           the i_periodo to set
+	 */
+	public void setI_periodo(final String i_periodo)
+	{
+		this.i_periodo = i_periodo;
 	}
 
 

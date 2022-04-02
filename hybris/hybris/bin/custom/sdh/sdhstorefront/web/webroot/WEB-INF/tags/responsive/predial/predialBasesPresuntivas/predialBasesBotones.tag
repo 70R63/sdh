@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!-- 
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -45,6 +46,9 @@
 	<c:set var="flagPresentarDeclaracion" value="true" />
 	<c:set var="flagPagarEnLinea" value="true" />
 	<input type="hidden" value="X" id="contribuyenteNoNIT"/>
+</c:if>
+<c:if test="${fn:substring(predialFormbases.opcionuso,0,2) == '01' && predialFormbases.indicadorspac == 'X'}">
+	<c:set var="flagSPAC" value="true" />
 </c:if>
 <c:if test="${contribuyente.numBP ne currentUser.numBP }">
 	<c:set var="flagSPAC" value="true" />
@@ -134,6 +138,29 @@
 					
 				</c:if>
 				
+				<c:if test="${flagSPAC eq true}">
+					<button class="btn btn-primary btn-lg btnspac" type="submit" id="btnspac"
+                        name="pagar" value="pagar" data-numbp="${predialFormbases.numBP}" data-numForm="${predialFormbases.numFrom}" data-anio="${predialFormbases.anioGravable}" data-obj="${predialFormbases.objetocontrato}" data-reimpresion="">
+                        <spring:theme code="predialuno.firma.spac" />
+                    </button>
+				</c:if>
+				
+			</div>
+			<div class="col-md-6" id="tableSpac" style="visibility:hidden;">
+			<br><br>
+				<table class="table tableSpacPago" id="tableSpacPago">
+					<thead>
+						<tr>
+							<th><label class="control-label labeltabletd tableident"><spring:theme
+										code="spac.table.cuotas" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="spac.table.pagar" /></label></th>
+						</tr>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
 			</div>
 
 		</sf:form>

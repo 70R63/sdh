@@ -121,19 +121,19 @@
 			<div class="col-md-6" id="tableSpac" style="visibility:hidden;">
 			<br><br>
 				<table class="table tableSpacPago" id="tableSpacPago">
-						<thead>
-							<tr>
-								<th><label class="control-label labeltabletd tableident"><spring:theme
-											code="spac.table.cuotas" /></label></th>
-								<th><label class="control-label labeltabletd"><spring:theme
-											code="spac.table.pagar" /></label></th>
-							</tr>
-						</thead>
-						<tbody>
-							
-						</tbody>
-					</table>
-				</div>
+					<thead>
+						<tr>
+							<th><label class="control-label labeltabletd tableident"><spring:theme
+										code="spac.table.cuotas" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="spac.table.pagar" /></label></th>
+						</tr>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
+			</div>
 			
 		</sf:form>
 	</div>

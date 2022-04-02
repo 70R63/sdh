@@ -1,9 +1,9 @@
 $contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Stage])[default=$contentCatalog:Stage]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 $productCatalog=sdhProductCatalog
 $productCatalogName=Public Sector Product Catalog
-$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Stage'])[unique=true,default=$productCatalog:Stage]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
 $picture=media(code, $contentCV) ;
 $siteResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/contentCatalogs/$contentCatalog
 $jarResourceCms=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/cockpits/cmscockpit
@@ -12,16 +12,6 @@ $lang=es
 $mediaContainer=media(qualifier, $contentCV)[lang=$lang];
 $addonExtensionName=sdhpsaddon
 $siteUid=sdh
-
-# CMS Site Settings - set default preview category and product
-UPDATE CMSSite; uid[unique=true]; defaultPreviewCategory(code, $productCV); defaultPreviewProduct(code, $productCV)
-              ; $siteUid   ; report-an-issue         ; report-graffiti
-
-
-# Site Logo Component
-INSERT_UPDATE PSSimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; urlLink
-; ; SiteLogoComponent ; Site Logo Component ; SiteLogoComponent ; "/"
-
 
 UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; category(code, $productCV); product(code,$productCV);target(code)[default = 'sameWindow'];;
 ; ;FacturacionLink; FACTURACION LINK    ; "/contribuyentes/descargafactura" ;;;;;
