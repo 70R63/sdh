@@ -29,7 +29,6 @@ import de.hybris.sdh.core.model.SDHVehiculosTaxModel;
 import de.hybris.sdh.core.pojos.requests.CalcVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.CatalogoVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribPredialRequest;
-import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculos2Request;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
@@ -207,12 +206,17 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 			final DetalleVehiculosResponse detalleVehiculosResponse = mapper
 					.readValue(sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
 
-			if (detalleVehiculosResponse != null && detalleVehiculosResponse.getInfo_declara() != null && detalleVehiculosResponse.getInfo_declara().getErrores() != null && detalleVehiculosResponse.getInfo_declara().getErrores().get(0) != null && 
+			if (detalleVehiculosResponse != null && detalleVehiculosResponse.getInfo_declara() != null && detalleVehiculosResponse.getInfo_declara().getErrores() != null && detalleVehiculosResponse.getInfo_declara().getErrores().get(0) != null &&
 					detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getId_msj() != null && !detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getId_msj().equals(""))
 			{
-				GlobalMessages.addErrorMessage(model, detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getTxt_msj());
 				if(!detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getId_msj().equals("07")) {
 					flagMapearInformacion = false;
+					GlobalMessages.addErrorMessage(model, detalleVehiculosResponse.getInfo_declara().getErrores().get(0).getTxt_msj());
+
+				}
+				else
+				{
+					vehiculosFormDeclaracion.setCheckPagoRop("X");
 				}
 			}
 			if(flagMapearInformacion == true)
@@ -345,6 +349,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 
 		model.addAttribute("vehiculosFormDeclaracion", vehiculosFormDeclaracion);
+
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLRACION_VEHICULOS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLRACION_VEHICULOS_CMS_PAGE));
@@ -917,7 +922,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 						{
 							if (infoAgente.getInternalFunction() != null && infoAgente.getBp() != null
 									&& infoAgente.getBp().equals(currentUserData.getNumBP())
-									&& (infoAgente.getInternalFunction().equals(strRepresentanteLegalPrincipal) || 
+									&& (infoAgente.getInternalFunction().equals(strRepresentanteLegalPrincipal) ||
 											infoAgente.getInternalFunction().equals(strRepresentanteLegalSuplente)))
 							{
 								controlCampos.setBtnPresentarDec(true);

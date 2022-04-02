@@ -131,8 +131,27 @@ public class VehiculosInfObjetoForm
 	private String aporte_activo;
 	private String descuentoadicional;
 	private String descuentoconbustible;
-	
-	
+	private String checkPagoRop;
+
+
+
+	/**
+	 * @return the checkPagoRop
+	 */
+	public String getCheckPagoRop()
+	{
+		return checkPagoRop;
+	}
+
+	/**
+	 * @param checkPagoRop
+	 *           the checkPagoRop to set
+	 */
+	public void setCheckPagoRop(final String checkPagoRop)
+	{
+		this.checkPagoRop = checkPagoRop;
+	}
+
 	/**
 	 * @return the numBP
 	 */
@@ -256,7 +275,7 @@ public class VehiculosInfObjetoForm
 	/**
 	 * @param anioGravableActual the anioGravableActual to set
 	 */
-	public void setAnioGravableActual(String anioGravableActual)
+	public void setAnioGravableActual(final String anioGravableActual)
 	{
 		this.anioGravableActual = anioGravableActual;
 	}
@@ -1496,7 +1515,7 @@ public class VehiculosInfObjetoForm
 	/**
 	 * @param aporte_activo the aporte_activo to set
 	 */
-	public void setAporte_activo(String aporte_activo)
+	public void setAporte_activo(final String aporte_activo)
 	{
 		this.aporte_activo = aporte_activo;
 	}
@@ -1512,7 +1531,7 @@ public class VehiculosInfObjetoForm
 	/**
 	 * @param descuentoadicional the descuentoadicional to set
 	 */
-	public void setDescuentoadicional(String descuentoadicional)
+	public void setDescuentoadicional(final String descuentoadicional)
 	{
 		this.descuentoadicional = descuentoadicional;
 	}
@@ -1528,7 +1547,7 @@ public class VehiculosInfObjetoForm
 	/**
 	 * @param descuentoconbustible the descuentoconbustible to set
 	 */
-	public void setDescuentoconbustible(String descuentoconbustible)
+	public void setDescuentoconbustible(final String descuentoconbustible)
 	{
 		this.descuentoconbustible = descuentoconbustible;
 	}
