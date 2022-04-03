@@ -318,7 +318,7 @@
 									$("#areaconstruccion").prop("disabled",false);
 									break;
 								case "P":
-									$("#areaterreno").prop("disabled",false);
+									$("#areaconstruccion").prop("disabled",false);
 									break;
 							}
 							break;
@@ -330,7 +330,7 @@
 									$("#areaconstruccion").prop("disabled",false);
 									break;
 								case "P":
-									$("#areaterreno").prop("disabled",false);
+									$("#areaconstruccion").prop("disabled",false);
 									break;
 							}
 							break;
@@ -342,7 +342,7 @@
 									$("#areaconstruccion").prop("disabled",false);
 									break;
 								case "P":
-									$("#areaterreno").prop("disabled",false);
+									$("#areaconstruccion").prop("disabled",false);
 									break;
 							}
 							break;
@@ -350,7 +350,7 @@
 						case "48":
 							switch(propiedadHorizontal){
 								case "P":
-									$("#areaterreno").prop("disabled",false);
+									$("#areaconstruccion").prop("disabled",false);
 									break;
 							}
 							break;
@@ -362,7 +362,7 @@
 									$("#areaconstruccion").prop("disabled",false);
 									break;
 								case "P":
-									$("#areaterreno").prop("disabled",false);
+									$("#areaconstruccion").prop("disabled",false);
 									break;
 							}
 							break;
@@ -370,7 +370,6 @@
 						case "2":
 							switch(propiedadHorizontal){
 								case "N":
-									$("#areaconstruccion").prop("disabled",false);
 									$("#areaterreno").prop("disabled",false);
 									break;
 							}
