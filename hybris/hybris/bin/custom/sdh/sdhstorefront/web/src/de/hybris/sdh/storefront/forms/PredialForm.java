@@ -117,6 +117,27 @@ public class PredialForm
 	private String actividadEconomica;
 
 	private String aporte_activo;
+	private String checkPagoRop;
+
+
+
+	/**
+	 * @return the checkPagoRop
+	 */
+	public String getCheckPagoRop()
+	{
+		return checkPagoRop;
+	}
+
+	/**
+	 * @param checkPagoRop
+	 *           the checkPagoRop to set
+	 */
+	public void setCheckPagoRop(final String checkPagoRop)
+	{
+		this.checkPagoRop = checkPagoRop;
+	}
+
 
 
 

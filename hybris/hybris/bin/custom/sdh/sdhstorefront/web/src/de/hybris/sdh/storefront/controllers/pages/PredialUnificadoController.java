@@ -10,7 +10,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -907,8 +906,19 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
+			String detallePredial = sdhDetallePredialService.detallePredial(detallePredialRequest);
+			detallePredial = detallePredial.replaceAll("(\"marcas\")(:\\{)(.*)(\\},\"estrLiquidacionPredial\")",
+					"$1:\\[\\{$3\\}\\],\"estrLiquidacionPredial\"");
+			System.out.println(detallePredial);
 			final DetallePredialResponse detallePredialResponse = mapper
-					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
+					.readValue(detallePredial, DetallePredialResponse.class);
+
+			if (detallePredialResponse.getTblErrores().get(0).getIdMensaje().contains("08"))
+			{
+				GlobalMessages.addErrorMessage(model, detallePredialResponse.getTblErrores().get(0).getDescripcionMensajes());
+				predialFormtres.setCheckPagoRop("X");
+			}
+
 
 			predialFormtres.setCheckAporte_flag(detallePredialResponse.getCheckAporte());
 			predialFormtres.setObjetocontrato(predialInfoInitres.getObjetocontrato());

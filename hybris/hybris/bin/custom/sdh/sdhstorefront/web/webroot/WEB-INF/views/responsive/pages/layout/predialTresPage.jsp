@@ -36,6 +36,20 @@ window.onload = function() {
 			}
 		}
 	}
+	
+	checkPagoRop();
+	
 	$(".loader").fadeOut("slow");
+}
+
+function checkPagoRop(){
+    debugger;
+    var chekPagoRop = "${predialFormtres.checkPagoRop}";
+    if (chekPagoRop == 'X'){
+        $( "#btnCalculo3" ).prop( "disabled", true );
+        $( ".justFirm" ).prop( "disabled", true );
+        $( ".firmAndAdd" ).prop( "disabled", true );
+        
+    }
 }
 </script>
