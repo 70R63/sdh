@@ -85,7 +85,7 @@
 					<spring:theme code="${actionNameKey}" />
 				</button>
 			</ycommerce:testId>
-				<br><br><div style="text-align: center"><a href="https://www.shd.gov.co/shd/sites/default/files/files/impuestos/paso%20a%20paso%20registro%20general.jpeg" 
+				<br><br><div style="text-align: center"><a href="${themeResourcePath}/pdf/Paso_a_paso_registro.pdf" 
 		target="_blank">Instructivo registro Oficina Virtual</a></div>
 		</fieldset>
 
