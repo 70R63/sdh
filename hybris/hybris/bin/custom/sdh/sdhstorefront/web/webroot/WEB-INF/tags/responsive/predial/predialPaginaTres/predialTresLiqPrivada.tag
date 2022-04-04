@@ -244,7 +244,7 @@
 			<div class="col-md-3">
 				<c:if
 					test="${predialFormtres.controlCampos.liquidacionPrivada != true}">
-					<button style="margin-top: 3px;" id=""
+					<button style="margin-top: 3px;" id="btnCalculo3"
 						class="btn btn-primary btn-lg" type="button"
 						onclick="calculoPred()">
 						<spring:theme code="predialtres.liquidacionpriv.calcular" />
