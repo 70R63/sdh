@@ -25951,3 +25951,8 @@ a.paginate_button {
     width: 100%;
   }
 }
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .navigation--bottom .nav__links--primary .sub-navigation-section .sub-navigation-list li {
+    padding: 1px !important;
+  }
+}

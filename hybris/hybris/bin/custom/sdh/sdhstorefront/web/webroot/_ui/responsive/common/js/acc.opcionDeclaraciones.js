@@ -137,7 +137,7 @@ ACC.opcionDeclaraciones = {
 				var valNumDocPago;
 				var valNumfactForm;
 					
-				for (var i = 0; i < e.target.form.length; i++) {
+				for (var i = 0; i < 1000; i++) {
 					nombreCampo = "registroNum_" + i;
 					valorCampo = null;
 					valorCampo = document.getElementById(nombreCampo);
@@ -659,6 +659,7 @@ ACC.opcionDeclaraciones = {
 
 
 	updateFromResponseSeleccion_certiPagos : function(infoActual,infoResponse,filtroPeriodo) {
+		debugger;
 		var desc_clavePeriodo = "";
 		var reteIca_consecutivo = "";
 		var indiceTabla = 0;
@@ -919,12 +920,22 @@ ACC.opcionDeclaraciones = {
 				var strClaveImpuesto = "'5101'";
 
 				$.each(infoResponse.predial, function (index,value){
+					debugger;
 					nombrePresentarDec = "btnPresentarDec_"+value.CHIP;
 					nombrePagarEnLinea = "btnPagarEnLinea_"+value.CHIP;
 					nombreTotalPagar = "totalPagar_"+value.CHIP;
-					var strChip = "'"+value.CHIP+"'";
+					
+					var strChip = "''";
+					if ( value.CHIP != null ){
+					  var strChip = "'"+value.CHIP+"'";	
+					}else{
+					  value.CHIP  = "";	
+					}	
+					
 					var strMatrInmobiliaria = "'"+value.matrInmobiliaria+"'";
 					var strAnioGravable = "'"+value.anioGravable+"'";
+					var strAnioGravable_value = "''";
+					
 					var strPeriodo = "''";
 					var strNumObjeto = "'"+value.numObjeto+"'";
 
@@ -942,6 +953,11 @@ ACC.opcionDeclaraciones = {
 					if(value.contratoArrenda != null){
 						contratoArrendaOut = value.contratoArrenda;
 					}
+					if(document.getElementById("anoGravable") != null){
+						strAnioGravable_value = "'"+ document.getElementById("anoGravable").value+"'";
+					}
+					
+					
 
 
 					$('#table-predial1').append("<tr>"+
@@ -962,7 +978,7 @@ ACC.opcionDeclaraciones = {
 //							'onclick="pagarEnLinea('+strClaveImpuesto+','+strAnioGravable+','+strPeriodo+','+strNumObjeto+','+strChip+')">'+
 //							'Pagar en linea</button>' + '</td>'+
 
-							'<td><a href="#" onclick="ACC.opcionDeclaraciones.validarDeclaracionPredial(' + strChip + ',' + strMatrInmobiliaria + ',' + strNumObjeto +');">Generar Declaracion</a> </td>'+
+							'<td><a href="#" onclick="ACC.opcionDeclaraciones.validarDeclaracionPredial(' + strChip + ',' + strMatrInmobiliaria + ',' + strNumObjeto + ',' + strAnioGravable_value +');">Generar Declaracion</a> </td>'+
 							"</tr>");
 				});
 
@@ -1155,9 +1171,11 @@ ACC.opcionDeclaraciones = {
 
 	
 
-	validarDeclaracionPredial : function(chip,matricula, numObjeto){
+	validarDeclaracionPredial : function(chip,matricula, numObjeto, anioGravable_value){
+		debugger;
 		ACC.spinner.show();
-	    var anioGravable = document.getElementById("anoGravable").value;
+		var anioGravable = anioGravable_value;
+
 
 	    var data = {};
 
@@ -1206,55 +1224,42 @@ ACC.opcionDeclaraciones = {
 		var parametros = "?anioGravable=" + anioGravable + "&chip=" + chip + "&matricula=" +inmobiliatia +"&numBP=" +numBp + "&objetoContrato=" + objetoContrato;
 
         var currentUrl = window.location.href;
-				if(url == "1"){
-                	 var targetUrl = "/contribuyentes/predialunificado_1" + parametros;
-                	 currentUrl_tmp = currentUrl.replace("/contribuyentes/presentar-declaracion",targetUrl);
-                     newurl = currentUrl.replace("/contribuyentes/presentar-declaracion#",targetUrl);
-                	 window.location.href =  newurl;
-                } else if(url == "2"){
-               	    var targetUrl = "/contribuyentes/predialunificado_2" + parametros;
-            	    currentUrl_tmp = currentUrl.replace("/contribuyentes/presentar-declaracion",targetUrl);
-                    newurl = currentUrl.replace("/contribuyentes/presentar-declaracion#",targetUrl);
-            	    window.location.href =  newurl;
-                } else if(url == "3"){
-               	    var targetUrl = "/contribuyentes/predialunificado_3" + parametros;
-            	    currentUrl_tmp = currentUrl.replace("/contribuyentes/presentar-declaracion",targetUrl);
-                    newurl = currentUrl.replace("/contribuyentes/presentar-declaracion#",targetUrl);
-            	    window.location.href =  newurl;
-                } else if(url == "4"){
-              	    var targetUrl = "/contribuyentes/predialunificado_4" + parametros;
-           	        currentUrl_tmp = currentUrl.replace("/contribuyentes/presentar-declaracion",targetUrl);
-                    newurl = currentUrl.replace("/contribuyentes/presentar-declaracion#",targetUrl);
-           	        window.location.href =  newurl;
-                } else if(url == "5"){
-              	    var targetUrl = "/contribuyentes/predialunificado_5" + parametros;
-           	        currentUrl_tmp = currentUrl.replace("/contribuyentes/presentar-declaracion",targetUrl);
-                    newurl = currentUrl.replace("/contribuyentes/presentar-declaracion#",targetUrl);
-           	        window.location.href =  newurl;
-                } else if(url == "6"){
-              	    var targetUrl = "/contribuyentes/predialunificado_6" + parametros;
-           	        currentUrl_tmp = currentUrl.replace("/contribuyentes/presentar-declaracion",targetUrl);
-                    newurl = currentUrl.replace("/contribuyentes/presentar-declaracion#",targetUrl);
-           	        window.location.href =  newurl;
-                } else if(url == "7"){
-              	    var targetUrl = "/contribuyentes/predialunificado_7" + parametros;
-           	        currentUrl_tmp = currentUrl.replace("/contribuyentes/presentar-declaracion",targetUrl);
-                    newurl = currentUrl.replace("/contribuyentes/presentar-declaracion#",targetUrl);
-           	        window.location.href =  newurl;
-                } else if(url == "8"){
-              	    var targetUrl = "/contribuyentes/predialunificado_8" + parametros;
-           	        currentUrl_tmp = currentUrl.replace("/contribuyentes/presentar-declaracion",targetUrl);
-                    newurl = currentUrl.replace("/contribuyentes/presentar-declaracion#",targetUrl);
-           	        window.location.href =  newurl;
-                } else if(url == "9"){
-              	    var targetUrl = "/contribuyentes/predialunificado/basespresuntivas" + parametros;
-           	        currentUrl_tmp = currentUrl.replace("/contribuyentes/presentar-declaracion",targetUrl);
-                    newurl = currentUrl.replace("/contribuyentes/presentar-declaracion#",targetUrl);
-           	        window.location.href =  newurl;
-                } else{
-            	    window.location.href =  currentUrl;
-            	    alert("Hubo un error en la declaración");
-                }
+        var currentUrl_origen = "";
+        var targetUrl = "";
+        
+        if(currentUrl.indexOf("/contribuyentes/presentar-declaracion") >= 0){
+			currentUrl_origen = "/contribuyentes/presentar-declaracion";
+		}
+		if(currentUrl.indexOf("/contribuyentes/consultas/obligaciones") >= 0){
+			currentUrl_origen = "/contribuyentes/consultas/obligaciones";
+		}
+        
+        switch (url){
+			case "1":
+			case "2":
+			case "3":
+			case "4":
+			case "5":
+			case "6":
+			case "7":
+			case "8":
+				targetUrl = "/contribuyentes/predialunificado_" + url + parametros;
+				break;
+			case "9":
+				targetUrl = "/contribuyentes/predialunificado/basespresuntivas" + parametros;
+				break;
+			default:
+				break;
+		}
+        
+        if(targetUrl != ""){
+			 currentUrl_tmp = currentUrl.replace(currentUrl_origen,targetUrl);
+             newurl = currentUrl.replace(currentUrl_origen + "#",targetUrl);
+        	 window.location.href =  newurl;
+		}else{
+    	    window.location.href =  currentUrl;
+    	    alert("Hubo un error en la declaración");
+        }
     },
 
 	validarDeclaracion : function(url,placa){
@@ -1706,6 +1711,7 @@ ACC.opcionDeclaraciones = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
+					debugger;
 					ACC.spinner.close();
 					ACC.opcionDeclaraciones.updateFromResponseSeleccion_presentarDec(dataActual,dataResponse);
 					ACC.publicidadexterior.bindDataTable_Class();
