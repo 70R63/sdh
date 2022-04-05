@@ -923,14 +923,11 @@ ACC.opcionDeclaraciones = {
 					nombrePagarEnLinea = "btnPagarEnLinea_"+value.CHIP;
 					nombreTotalPagar = "totalPagar_"+value.CHIP;
 					
-					var strChip = "''";
-					if ( value.CHIP != null ){
-					  var strChip = "'"+value.CHIP+"'";	
-					}else{
+					if ( value.CHIP == null ){
 					  value.CHIP  = "";	
 					}	
 						
-					
+					var strChip = "'"+value.CHIP+"'";	
 					var strMatrInmobiliaria = "'"+value.matrInmobiliaria+"'";
 					var strAnioGravable = "'"+value.anioGravable+"'";
 					var strAnioGravable_value = "''";
