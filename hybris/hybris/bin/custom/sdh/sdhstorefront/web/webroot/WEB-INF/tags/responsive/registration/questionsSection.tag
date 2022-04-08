@@ -13,6 +13,13 @@
 
 <div class="container">
 <div class="row" >
+	<div class="col-md-12">
+<div class="alert alert-success" role="alert">
+ <span><spring:theme code="Las siguientes preguntas buscan validar tu identidad en el proceso de registro" /> </span>
+</div>
+</div>
+</div>
+<div class="row" >
 	<div class="col-md-6 col-md-offset-3">
 		<div class="item_container_holder ">
 			<div class="forgotten-password item_container ">

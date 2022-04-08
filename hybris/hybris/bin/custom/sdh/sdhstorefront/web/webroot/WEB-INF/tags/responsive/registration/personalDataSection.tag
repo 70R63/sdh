@@ -18,10 +18,10 @@
 						action="${action}"> 
 						<fieldset>
 							<div class="headline">
-								<h2>
+								<h3>
 									<span tabindex="0"><spring:theme
 											code="register.personalData.title" /></span>
-								</h2>
+								</h3>
 							</div>
 							<div class="description">
 								<spring:theme code="register.emailUser" htmlEscape="false" />
