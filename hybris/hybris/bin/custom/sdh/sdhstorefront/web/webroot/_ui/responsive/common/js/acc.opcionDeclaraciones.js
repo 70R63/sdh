@@ -659,7 +659,6 @@ ACC.opcionDeclaraciones = {
 
 
 	updateFromResponseSeleccion_certiPagos : function(infoActual,infoResponse,filtroPeriodo) {
-		debugger;
 		var desc_clavePeriodo = "";
 		var reteIca_consecutivo = "";
 		var indiceTabla = 0;
@@ -920,18 +919,15 @@ ACC.opcionDeclaraciones = {
 				var strClaveImpuesto = "'5101'";
 
 				$.each(infoResponse.predial, function (index,value){
-					debugger;
 					nombrePresentarDec = "btnPresentarDec_"+value.CHIP;
 					nombrePagarEnLinea = "btnPagarEnLinea_"+value.CHIP;
 					nombreTotalPagar = "totalPagar_"+value.CHIP;
 					
-					var strChip = "''";
-					if ( value.CHIP != null ){
-					  var strChip = "'"+value.CHIP+"'";	
-					}else{
+					if ( value.CHIP == null ){
 					  value.CHIP  = "";	
 					}	
-					
+						
+					var strChip = "'"+value.CHIP+"'";	
 					var strMatrInmobiliaria = "'"+value.matrInmobiliaria+"'";
 					var strAnioGravable = "'"+value.anioGravable+"'";
 					var strAnioGravable_value = "''";
@@ -956,8 +952,6 @@ ACC.opcionDeclaraciones = {
 					if(document.getElementById("anoGravable") != null){
 						strAnioGravable_value = "'"+ document.getElementById("anoGravable").value+"'";
 					}
-					
-					
 
 
 					$('#table-predial1').append("<tr>"+
@@ -1172,7 +1166,6 @@ ACC.opcionDeclaraciones = {
 	
 
 	validarDeclaracionPredial : function(chip,matricula, numObjeto, anioGravable_value){
-		debugger;
 		ACC.spinner.show();
 		var anioGravable = anioGravable_value;
 
@@ -1711,7 +1704,6 @@ ACC.opcionDeclaraciones = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
-					debugger;
 					ACC.spinner.close();
 					ACC.opcionDeclaraciones.updateFromResponseSeleccion_presentarDec(dataActual,dataResponse);
 					ACC.publicidadexterior.bindDataTable_Class();

@@ -154,7 +154,10 @@ public class PreparacionPagoPSE extends AbstractPageController
 		String errorSITII = null;
 
 
-
+		if (infoPreviaPSE.getNumRef().contains("undefined"))
+		{
+			infoPreviaPSE.setNumRef("");
+		}
 
 		if (infoPreviaPSE.getNumRef() != null && !infoPreviaPSE.getNumRef().equals(""))
 		{
@@ -217,6 +220,9 @@ public class PreparacionPagoPSE extends AbstractPageController
 				mensajesError = gasolinaService.prepararMensajesError(detallePagoResponse.getErrores());
 				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER, "error.Pago.PSE.error1",
 						mensajesError);
+
+				redirectAttributes.addAttribute("errorSITII", mensajeError);
+				return "redirect: /bogota/es/contribuyentes/consultas/obligaciones";
 			}
 		}
 		//model.addAttribute("psePaymentForm", psePaymentForm);
@@ -353,9 +359,9 @@ public class PreparacionPagoPSE extends AbstractPageController
 						+ psePaymentForm.getFechaLimiteDePago().substring(4, 6) + "/"
 						+ psePaymentForm.getFechaLimiteDePago().substring(0, 4);
 			}
-			
-			
-			
+
+
+
 			String descImp = new String();
             if (psePaymentForm.getTipoDeImpuesto().contains("5103"))
             {
