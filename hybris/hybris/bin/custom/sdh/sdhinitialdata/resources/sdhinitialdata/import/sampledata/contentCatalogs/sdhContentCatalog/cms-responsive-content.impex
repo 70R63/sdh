@@ -3209,3 +3209,24 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;descargaFacturaVAPageComponent	;descargaFacturaVAPage Component	;/WEB-INF/views/responsive/pages/layout/descargaFacturaVAPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;descargaFacturaVAPageComponent
 
 #->FIN dev-maria Agregar paginas  
+
+#->INI dev-maria Agregar paginas para forgottenMail
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;forgottenMailPage 		;Forgotten Mail Page 	;AccountPageTemplate:sdhContentCatalog:Staged	;/login/recuperacorreo
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='forgottenMailPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-forgottenMailPage 		;SideContent				;															;SideContent-forgottenMailPage						;;;
+								;						;BodyContent-forgottenMailPage		;BodyContent				;															;BodyContent-forgottenMailPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-forgottenMailPage 	;Side Content Slot for Forgotten Mail Page 			;true	;								;;;
+							;							;BodyContent-forgottenMailPage	;Body Content Slot for  Forgotten Mail Page	;true	;forgottenMailPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;forgottenMailPageComponent	;forgottenMailPage Component	;/WEB-INF/views/responsive/pages/layout/forgottenMailPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;forgottenMailPageComponent
+#->FIN dev-maria Agregar paginas para forgottenMail   

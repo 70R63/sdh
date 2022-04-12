@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface SdhCustomerDao {
     Optional<CustomerModel> findByBp(String bp);
     Optional<CustomerModel> findByUid(String customerUid);
+
+	 Optional<CustomerModel> findByDocTypeNumDoc(String docType, String numDoc);
 }
