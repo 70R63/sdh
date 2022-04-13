@@ -74,6 +74,17 @@
 			<div class="forgotten-password"
 				style="margin-bottom: 1px !important; text-align: center !important;">
 				<ycommerce:testId code="login_forgotPassword_link">
+					<a href="<c:url value='/login/recuperacorreo'/>"
+						class="mail"
+						data-cbox-title="<spring:theme code="forgottenMail.title"/>"> <spring:theme
+							code="forgottenMail.title" />
+					</a>
+				</ycommerce:testId>
+			</div>
+			
+			<div class="forgotten-password"
+				style="margin-bottom: 1px !important; text-align: center !important;">
+				<ycommerce:testId code="login_forgotPassword_link">
 					<c:url value='/register' var="registerURL" />
 					<spring:theme code="login.link.getPassword" htmlEscape="false"
 						arguments="${registerURL }" />
