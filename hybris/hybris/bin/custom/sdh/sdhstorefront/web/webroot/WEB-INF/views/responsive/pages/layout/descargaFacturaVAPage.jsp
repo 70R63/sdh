@@ -29,31 +29,37 @@ window.onload = function() {
 	}
 	
 function showDownload(){
-	var dow = document.getElementById('table-download');
-	dow.style.display = 'block';
+
+	buscarInfo();
 	}
 	
 function showTag(object){
-	debugger;
 	var tag = object.value;
 	var label = document.getElementById('chip/placa');
 	var label1 = document.getElementById('chip');
 	var label2 = document.getElementById('placa');
+	
+	ACC.opcionDeclaraciones.establecerEstiloDisplay(label,'none');
+	ACC.opcionDeclaraciones.establecerEstiloDisplay(label1,'none');
+	ACC.opcionDeclaraciones.establecerEstiloDisplay(label2,'none');
 	if (tag == "00") {
-		label.style.display = 'block';
-		label1.style.display = 'none';
-		label2.style.display = 'none';
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(label,'block');
 	}else if (tag == "01") {
-		label.style.display = 'none';
-		label1.style.display = 'block';
-		label2.style.display = 'none';
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(label1,'block');
 	}else if (tag == "02") {
-		label.style.display = 'none';
-		label1.style.display = 'none';
-		label2.style.display = 'block';
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(label2,'block');
 	}
 	
-	}
+}
+
+function buscarInfo(){
+	ACC.descargaFacturaVA.buscarInfo();
+}
+
+function descargaFactura(){
+	ACC.descargaFacturaVA.descargaFactura();
+}
+
 
 </script>
 
