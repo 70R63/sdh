@@ -179,11 +179,6 @@ public class DescargaFacturaPageController extends AbstractPageController
 		DescargaFacturaResponse descargaFacturaResponse = null;
 		final DescargaFacturaRequest descargaFacturaRequest = new DescargaFacturaRequest();
 		String numBP = null;
-		if(dataForm.getNumBP() !=null ){
-			numBP = customerFacade.getCurrentCustomer().getNumBP();
-		}else {
-			
-		}
 		byte[] decodedBytes;
 
 		dataForm.setErrores(null);
