@@ -10,7 +10,7 @@
 
 <div class="container_new_page">
 	<div class="alert alert-success" role="alert">
-		<h2 align="center"><span><spring:theme code="Aquí puedes descargar tu factura Predial/vehícular de la Vigencia Actual" /></span></h2>
+		<h2 align="center"><span><spring:theme code="Aquí puedes descargar tu factura Predial de la Vigencia Actual" /></span></h2>
 		<span><spring:theme code="message.download" /> </span>
 	</div>
 	<div class="row">
@@ -29,7 +29,7 @@
 					<select id="claveImpuesto" class="new_alto form-control " name="claveImpuesto" onchange="showTag(this)">
 						<option value="00">Seleccionar</option>
 						<option value="01">Predial</option>
-						<option value="02">Impuesto Vehicular</option>
+<!-- 						<option value="02">Impuesto Vehicular</option> -->
 					</select>
 				</div>
 			</div>
