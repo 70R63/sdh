@@ -10,13 +10,13 @@
 
 <div class="container_new_page">
 	<div class="alert alert-success" role="alert">
-		<h2 align="center"><span><spring:theme code="Aquí puedes descargar tu factura Predial de la Vigencia Actual" /></span></h2>
+		<h2 align="center"><span><spring:theme code="descargaFacturaVA.descarga.titulo" /></span></h2>
 		<span><spring:theme code="message.download" /> </span>
 	</div>
 	<div class="row">
 		<div class="headline">
 			<h2 align="center">
-				<span><spring:theme code="Descargar Factura" /></span>
+				<span><spring:theme code="descargaFacturaVA.descarga.subtitulo" /></span>
 			</h2>
 		</div>
 	</div>
@@ -25,17 +25,17 @@
 		<div class="row">
 			<div class="col-md-2 col-xs-12 mb-20 no-marginright col-md-offset-2">
 				<div class="form-group">
-					<label class="control-label"><spring:theme code="Impuesto" /></label> 
+					<label class="control-label"><spring:theme code="descargaFacturaVA.descarga.campo.impuesto" /></label> 
 					<select id="claveImpuesto" class="new_alto form-control " name="claveImpuesto" onchange="showTag(this)">
-						<option value="00">Seleccionar</option>
-						<option value="01">Predial</option>
-<!-- 						<option value="02">Impuesto Vehicular</option> -->
+						<option value="00"><spring:theme code="descargaFacturaVA.descarga.opcionImpuesto0" /></option>
+						<option value="01"><spring:theme code="descargaFacturaVA.descarga.opcionImpuesto1" /></option>
+<!-- 						<option value="01"><spring:theme code="descargaFacturaVA.descarga.opcionImpuesto2" /></option> -->
 					</select>
 				</div>
 			</div>
 			<div class="col-md-2 col-xs-12 mb-20">
 				<div class="form-group">
-					<label class="control-label"><spring:theme code="Tipo de Documento" /></label> 
+					<label class="control-label"><spring:theme code="descargaFacturaVA.descarga.campo.tipoDocumento" /></label> 
 					<sf:select path="tipoDoc"  class="newalto form-control" onchange="showField()" id="tipoDoc">
 						<sf:options items="${documentTypes}" referenceData="${documentTypes}" itemLabel="name" itemValue="code" />
 					</sf:select>
@@ -43,15 +43,15 @@
 			</div>
 			<div class="col-md-2 col-xs-12 mb-20 no-margincol">
 				<div class="form-group">
-					<label class="control-label required"><spring:theme code="Número de documento" /></label> 
+					<label class="control-label required"><spring:theme code="descargaFacturaVA.descarga.campo.numeroDocumento" /></label> 
 					<input class="alto form-control" maxlength="30" size="30" type="text" value="" id="numDoc"/>
 				</div>
 			</div>
 			<div class="col-md-2 col-xs-12 mb-20 no-margincol">
 				<div class="form-group">
-					<label class="control-label" id="chip/placa" style="display: block;"><spring:theme code="Placa / CHIP" /></label>
-					<label class="control-label" id="placa" style="display: none;"><spring:theme code="Placa" /></label>
-					<label class="control-label" id="chip" style="display: none;"><spring:theme code="CHIP" /></label>		
+					<label class="control-label" id="chip/placa" style="display: block;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto0" /></label>
+					<label class="control-label" id="chip" style="display: none;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto1" /></label>
+					<label class="control-label" id="placa" style="display: none;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto2" /></label>
 					<input class="alto form-control" maxlength="30" size="30" type="text" value="" id="numObjeto"/>
 				</div>
 			</div>
