@@ -42,7 +42,9 @@
 							<sf:hidden path="clavePeriodo" />
 							<sf:hidden path="dv" />
 							<sf:hidden path="numObjeto" />
-							<sf:hidden path="CDU" />
+							<sf:hidden path="fechaVenc"/>
+                            <sf:hidden path="numRef"/>
+                            <sf:hidden path="totalPagar"/>
 							<button id="pagar" class="btn btn-primary btn-lg" type="submit" id="action" name="pagar" value="pagar" ${paymentDisabled} >
 								<spring:theme code="reteica.declaracion.firma.paglinea" />
 							</button>

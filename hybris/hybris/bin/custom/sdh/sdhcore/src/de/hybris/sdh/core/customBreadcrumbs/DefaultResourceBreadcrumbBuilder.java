@@ -102,6 +102,7 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 	private static final String PROFILE_BUZONRETE = "text.account.profile.buzonRETE";
 	private static final String BREADCRUMB_CERTIFICACIONRETE = "breadcrumb.certificacionRETE";
 	private static final String MI_RIT = "Mi RIT";
+	private static final String ESTADO_CARGAS = "Estado de Cargas";
 	private static final String CRUMBS_LINK = "#";
 	private static final String ROOT = "/";
 	private static final String PROFILE_CONCE = "/concesionarios";
@@ -796,6 +797,14 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 			subTreeMap.put(3, new CustomBreadcrumb(REGISTRO_DE_RETENCIONES, "/retenedores/cargadocumentos"));
 			treeMap.put(BREADCRUMB_RETENEDOR_CARGA, subTreeMap);
 		}
+		
+        if (resourceKey.equals(ESTADO_CARGAS))
+        {
+            subTreeMap.clear();
+            subTreeMap.put(1, new CustomBreadcrumb(ROLE, ROOT));
+            subTreeMap.put(2, new CustomBreadcrumb(REGISTRO_DE_RETENCIONES, "/retenedores/estadocargas"));
+            treeMap.put(ESTADO_CARGAS, subTreeMap);
+        }
 		//*->FIN AGENTES ESTADO DE CARGAS-----------------------------------------------------------
 
 		//*->INI AGENTES DECLARACION POR FIRMAR-----------------------------------------------------

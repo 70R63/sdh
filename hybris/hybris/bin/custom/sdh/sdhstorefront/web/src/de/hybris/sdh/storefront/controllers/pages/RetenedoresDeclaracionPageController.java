@@ -9,11 +9,11 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.pojos.requests.CalculoReteIca2Request;
 import de.hybris.sdh.core.pojos.requests.CalculoReteIcaRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
@@ -24,10 +24,12 @@ import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.SDHReteIcaFacade;
+import de.hybris.sdh.facades.questions.data.SDHReteICATaxData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.pages.forms.ReteICACalculoForm;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
@@ -44,7 +46,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +53,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Decoder.BASE64Decoder;
 
@@ -90,6 +94,9 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 	@Resource(name = "sdhCustomerFacade")
 	SDHCustomerFacade sdhCustomerFacade;
 
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;
+
 
 	@RequestMapping(value = "/retenedores/declaracion", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -104,6 +111,9 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 		{
 			return "redirect:" + "/retenedores/estadocargas";
 		}
+
+		final SDHValidaMailRolResponse contImpuestos = new SDHValidaMailRolResponse();
+		final SDHReteICATaxData reteIcaTax = new SDHReteICATaxData();
 
 		final CustomerData customerData = getCustomerFacade().getCurrentCustomer();
 		final CalculoReteIcaRequest request = new CalculoReteIcaRequest();
@@ -122,18 +132,34 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(RETEICA_DECLARACION_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		consultaContribuyenteBPRequest.setNumBP(customerData.getNumBP());
+
+		if (consultaContribuyenteBPRequest.getNumBP() != null || !consultaContribuyenteBPRequest.getNumBP().contains(""))
+		{
+			contImpuestos.setReteIca(sdhConsultaImpuesto_simplificado.consulta_impReteICA(consultaContribuyenteBPRequest));
+
+			if (contImpuestos.getReteIca() != null)
+			{
+				reteIcaTax.setConsecutive(contImpuestos.getReteIca().getConsecutive());
+				reteIcaTax.setNumID(contImpuestos.getReteIca().getNumID());
+				reteIcaTax.setObjectNumber(contImpuestos.getReteIca().getNumObjeto());
+
+				customerData.setReteIcaTax(reteIcaTax);
+			}
+		}
+
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final DetallePagoRequest detallePagoRequest = new DetallePagoRequest();
+		final DetallePagoResponse detallePagoResponse;
+
 		infoPreviaPSE.setAnoGravable(anoGravable);
 		infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
 		infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
 		infoPreviaPSE.setNumBP(customerData.getNumBP());
 		infoPreviaPSE.setClavePeriodo(perRepor);
-		infoPreviaPSE.setNumObjeto(objectNumber);
+		infoPreviaPSE.setNumObjeto(customerData.getReteIcaTax().getObjectNumber());
 		infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getRETEICA());
-		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
-
-		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
-		final DetallePagoRequest detallePagoRequest = new DetallePagoRequest();
-		final DetallePagoResponse detallePagoResponse;
 
 		detallePagoRequest.setNumBP(infoPreviaPSE.getNumBP());
 		detallePagoRequest.setClavePeriodo(infoPreviaPSE.getClavePeriodo());
@@ -144,6 +170,16 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 		System.out.println("------> detallePagoResponse");
 		System.out.println(detallePagoResponse);
 		System.out.println("------> detallePagoResponse");
+
+		if (detallePagoResponse.getNumRef() != null || !detallePagoResponse.getNumRef().contains(""))
+		{
+			infoPreviaPSE.setNumRef(detallePagoResponse.getNumRef());
+			infoPreviaPSE.setFechaVenc(detallePagoResponse.getFechVenc());
+			infoPreviaPSE.setTotalPagar(detallePagoResponse.getTotalPagar());
+		}
+
+
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 
 		return getViewForPage(model);
 	}
@@ -188,7 +224,7 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
 					GeneraDeclaracionResponse.class);
