@@ -307,6 +307,10 @@
         				<description>SDH custom field</description>
         				<persistence type="property"></persistence>
         			</attribute>
+					<attribute qualifier="esFuncionario"  type="java.lang.Boolean">
+						<description>Es funcionario</description>
+						<persistence type="property"></persistence>
+					</attribute>
         		</attributes>
         	</itemtype>
         	<itemtype code="SDHAddress" autocreate="true" generate="true">

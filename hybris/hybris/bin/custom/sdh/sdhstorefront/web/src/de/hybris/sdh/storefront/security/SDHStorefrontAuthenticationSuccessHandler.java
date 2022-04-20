@@ -11,6 +11,8 @@
 package de.hybris.sdh.storefront.security;
 
 import de.hybris.platform.acceleratorstorefrontcommons.security.StorefrontAuthenticationSuccessHandler;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 
@@ -39,6 +41,8 @@ public class SDHStorefrontAuthenticationSuccessHandler extends StorefrontAuthent
 	@Resource(name = "sdhCustomerFacade")
 	SDHCustomerFacade sdhCustomerFacade;
 
+	@Resource(name = "userService")
+	UserService userService;
 
 	private static final Logger LOG = Logger.getLogger(SDHStorefrontAuthenticationSuccessHandler.class);
 
@@ -46,11 +50,26 @@ public class SDHStorefrontAuthenticationSuccessHandler extends StorefrontAuthent
 	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response,
 										final Authentication authentication) throws IOException, ServletException
 	{
+		CustomerModel currentCustomerModel = (CustomerModel) userService
+				.getUserForUID(request.getParameter("j_username"));
+
 		Cookie cookie = new Cookie("sessionActived", "true");
 		cookie.setMaxAge(60 * 60 * 24);
 		cookie.setPath("/");
 		cookie.setSecure(false);
 		response.addCookie(cookie);
+
+		Cookie currentCustomerCookie = new Cookie("esFuncionario", Boolean.toString(currentCustomerModel.getEsFuncionario()));
+		currentCustomerCookie.setMaxAge(60 * 60 * 24);
+		currentCustomerCookie.setPath("/");
+		currentCustomerCookie.setSecure(false);
+		response.addCookie(currentCustomerCookie);
+
+		Cookie currentCustomerUidCookie = new Cookie("currentCustomerUid", request.getParameter("j_username"));
+		currentCustomerUidCookie.setMaxAge(60 * 60 * 24);
+		currentCustomerUidCookie.setPath("/");
+		currentCustomerUidCookie.setSecure(false);
+		response.addCookie(currentCustomerUidCookie);
 
 		super.onAuthenticationSuccess(request, response, authentication);
 
