@@ -178,7 +178,7 @@ public class DescargaFacturaPageController extends AbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		DescargaFacturaResponse descargaFacturaResponse = null;
 		final DescargaFacturaRequest descargaFacturaRequest = new DescargaFacturaRequest();
-		String numBP = null;
+		final String numBP = customerFacade.getCurrentCustomer().getNumBP();
 		byte[] decodedBytes;
 
 		dataForm.setErrores(null);
