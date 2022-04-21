@@ -16,14 +16,20 @@ import de.hybris.platform.acceleratorstorefrontcommons.security.GUIDCookieStrate
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.platform.servicelayer.user.UserService;
 import org.apache.commons.lang.StringUtils;
+import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
@@ -36,6 +42,8 @@ public class StorefrontLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandle
 	private GUIDCookieStrategy guidCookieStrategy;
 	private List<String> restrictedPages;
 	private SessionService sessionService;
+	private UserService userService;
+	private ModelService modelService;
 
 	protected GUIDCookieStrategy getGuidCookieStrategy()
 	{
@@ -62,6 +70,32 @@ public class StorefrontLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandle
 	public void onLogoutSuccess(final HttpServletRequest request, final HttpServletResponse response,
 								final Authentication authentication) throws IOException, ServletException
 	{
+		Optional<String> esFuncionarioOpt = Lists.newArrayList(request.getCookies()).stream()
+				.filter(cookie -> cookie.getName()
+						.equals("esFuncionario")).findFirst().map(Cookie::getValue);
+
+		Optional<String> currentCustomerUidOpt = Lists.newArrayList(request.getCookies()).stream()
+				.filter(cookie -> cookie.getName()
+						.equals("currentCustomerUid")).findFirst().map(Cookie::getValue);
+
+		if (esFuncionarioOpt.isPresent() && esFuncionarioOpt.get().equals("true")){
+			if (currentCustomerUidOpt.isPresent()){
+				CustomerModel currentCustomerModel = (CustomerModel) getUserService()
+						.getUserForUID(currentCustomerUidOpt.get());
+
+				currentCustomerModel.setNumBP("");
+				currentCustomerModel.setDocumentType("");
+				currentCustomerModel.setDocumentNumber("");
+				currentCustomerModel.setDocumentExpeditionDate(null);
+				currentCustomerModel.setFirstName("");
+				currentCustomerModel.setLastName("");
+				currentCustomerModel.setMiddleName("");
+				currentCustomerModel.setSecondLastName("");
+				getModelService().save(currentCustomerModel);
+			}
+
+		}
+
 		getGuidCookieStrategy().deleteCookie(request, response);
 		getSessionService().removeAttribute(WebConstants.USER_CONSENTS);
 
@@ -117,5 +151,22 @@ public class StorefrontLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandle
 	public void setSessionService(final SessionService sessionService)
 	{
 		this.sessionService = sessionService;
+	}
+
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public ModelService getModelService() {
+		return modelService;
+	}
+
+	public void setModelService(ModelService modelService) {
+		this.modelService = modelService;
 	}
 }

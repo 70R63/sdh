@@ -104,6 +104,7 @@
 		<js>/_ui/responsive/common/js/captcha.js</js>
 
 		<js>/_ui/responsive/common/js/acc.concesionarios.js</js>
+		<js>/_ui/responsive/common/js/acc.descargaFacturaVA.js</js>
 
     </group>
     

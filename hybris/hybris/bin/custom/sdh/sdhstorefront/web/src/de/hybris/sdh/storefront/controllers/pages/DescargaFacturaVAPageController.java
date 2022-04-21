@@ -5,26 +5,56 @@ package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.dao.SdhDocumentTypeDao;
+import de.hybris.sdh.core.form.SelectAtomValue;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultarBPRequest;
+import de.hybris.sdh.core.pojos.requests.OpcionCertiDecImprimeRequest;
+import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
+import de.hybris.sdh.core.pojos.responses.ConsultarBPResponse;
+import de.hybris.sdh.core.pojos.responses.ErrorEnWSDeclaracionesPDF;
+import de.hybris.sdh.core.pojos.responses.OpcionCertiDecImprimeResponse;
+import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConfigCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
+import de.hybris.sdh.storefront.controllers.pages.forms.DescargaFacturaVAForm;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import Decoder.BASE64Decoder;
 
 
 /**
@@ -77,13 +107,29 @@ public class DescargaFacturaVAPageController extends AbstractPageController
 
 	@Resource(name = "sdhConfigCatalogos")
 	SDHConfigCatalogos sdhConfigCatalogos;
+	
+	@Resource(name = "sdhDocumentTypeDao")
+	SdhDocumentTypeDao sdhDocumentTypeDao;
+	
+	@Resource(name = "sdhValidaContribuyenteService")
+	SDHValidaContribuyenteService sdhValidaContribuyenteService;
+	
 
 
 	@RequestMapping(value = "/descargaFacturaVA", method = RequestMethod.GET)
-	public String descargafact(final Model model) throws CMSItemNotFoundException
+	public String descargafact(@ModelAttribute("dataForm")
+	DescargaFacturaVAForm infoVista, final BindingResult bindingResult, final Model model,
+	final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro al GET Descarga Factura --------------------------");
-
+		System.out.println("---------------- En GET Descarga Factura --------------------------");
+		if(infoVista == null) {
+			infoVista = new DescargaFacturaVAForm();
+		}
+		
+		List<SelectAtomValue> documentTypes = sdhDocumentTypeDao.getAllDocumentTypes();
+		model.addAttribute("documentTypes", documentTypes);
+		model.addAttribute("infoVista", infoVista);
+		
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DESCARGA_FACTURA_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DESCARGA_FACTURA_CMS_PAGE));
@@ -92,5 +138,63 @@ public class DescargaFacturaVAPageController extends AbstractPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		return getViewForPage(model);
 	}
+	
+	
+	@RequestMapping(value = "/descargaFacturaVA/buscarInfo", method = RequestMethod.GET)
+	@ResponseBody
+	public DescargaFacturaVAForm buscarInfo(@ModelAttribute("dataForm")
+	final DescargaFacturaVAForm infoVista, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		System.out.println("------------------En GET buscar informacion------------------------");
+		ConsultarBPResponse consultarBPResponse = null;
+		final ObjectMapper mapper = new ObjectMapper();
+		String numBP = null;
+      ConsultaContribBPRequest consultaContribBPRequest = null;
+      SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
+
+		
+		
+		infoVista.setNombreContribuyente("");
+		infoVista.setUrlDownload("");
+		infoVista.setFechaExp("");
+		
+		
+		
+		ConsultarBPRequest requestConsultarBP = new ConsultarBPRequest();
+		requestConsultarBP.setNumid(infoVista.getNumDoc());
+		requestConsultarBP.setTipoid(infoVista.getTipoDoc());
+		requestConsultarBP.setFechExp(infoVista.getFechaExp());
+		final String response = sdhValidaContribuyenteService.consultarBP(requestConsultarBP);
+
+		
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try {
+			consultarBPResponse = mapper.readValue(response, ConsultarBPResponse.class);
+			numBP = consultarBPResponse.getNumBP();
+		}catch (final IOException e)
+		{
+			LOG.error("Error trying to parse JSON :" + response + " to String. Ex.Message" + e.getMessage());
+		}
+		
+		if(numBP != null) {
+			consultaContribBPRequest = new ConsultaContribBPRequest();
+			consultaContribBPRequest.setNumBP(numBP);
+			sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService.consultaContribuyenteBP_simplificado(consultaContribBPRequest );
+		}
+		
+
+		if(sdhConsultaContribuyenteBPResponse != null) {
+			infoVista.setNombreContribuyente(sdhConsultaContribuyenteBPResponse.getCompleteName());
+			if(sdhConsultaContribuyenteBPResponse.getInfoContrib() != null) {
+				infoVista.setNumBP(sdhConsultaContribuyenteBPResponse.getInfoContrib().getNumBP());
+			}
+		}
+
+
+		return infoVista;
+	}
+	
+	
 }
 

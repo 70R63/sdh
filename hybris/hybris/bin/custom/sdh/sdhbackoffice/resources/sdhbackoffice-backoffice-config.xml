@@ -149,6 +149,61 @@
 			</editorArea:tab>
 		</editorArea:editorArea>
 	</context>
+	<context component="create-wizard" type="Customer">
+		<wz:flow id="CustomerWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="custPrepare">
+				<wz:initialize property="newCust" type="ctx.TYPE_CODE"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.customer.essential.label" sublabel="create.customer.essential.sublabel">
+				<wz:content id="step1.content">
+					<wz:property-list root="newCust">
+						<wz:property qualifier="uid" type="java.lang.String"/>
+						<wz:property qualifier="customerID" type="java.lang.String"/>
+						<wz:property qualifier="name" type="java.lang.String"/>
+						<wz:property qualifier="description" type="java.lang.String"/>
+						<wz:property qualifier="esFuncionario" type="java.lang.String"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:next/>
+					<wz:done>
+						<wz:save property="newCust"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step2" label="create.customer.locale.label" sublabel="create.customer.locale.sublabel">
+				<wz:content id="step2.content">
+					<wz:property-list root="newCust">
+						<wz:property qualifier="sessionLanguage"/>
+						<wz:property qualifier="sessionCurrency"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step2.navigation">
+					<wz:cancel/>
+					<wz:back/>
+					<wz:next/>
+					<wz:done>
+						<wz:save property="newCust"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step3" label="create.customer.groups.label" sublabel="create.customer.groups.sublabel">
+				<wz:content id="step3.content">
+					<wz:property-list root="newCust">
+						<wz:property qualifier="groups"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step3.navigation">
+					<wz:cancel/>
+					<wz:back/>
+					<wz:done>
+						<wz:save property="newCust"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
 
 	<!-- Labels -->
 	<context merge-by="type" type="SdhFAQsCategory" component="base">
@@ -324,6 +379,7 @@
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="numBP"/>
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="documentType"/>
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="documentNumber"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="esFuncionario"/>
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="documentExpeditionDate"/>
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="firstName"/>
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="middleName"/>

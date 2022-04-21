@@ -211,10 +211,11 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;AREdoCuentaLink;"Estado de cuenta";"Haga clic aquí para acceder a la opción de menú Estado de cuenta"
 ;;ARCertDeclaraLink;"Certificaciones de declaración";"Haga clic aquí para acceder a la opción de menú Certificaciones de Declaración"
 ;;ARDeclaracionesLink;"Declaraciones";"Haga clic aquí para acceder a la opción del menú Declaraciones"
-
+;;ARRetenedorRegistroLink;"Registro de Retenciones";"Haga clic aquí para ir al registro de sus retenciones"
 
 ;;ARPresentarDeclaracionLink;"Generar declaración";"Haga clic aquí para acceder a la opción de menú Generar declaración"
 ;;ARListaDeclaracionLink;"Lista de declaraciones a firmar";"Haga clic aquí para acceder a la opción de menu Lista de declaraciones"
+;;AREdoCargasLink;"Estado de cargas";"Haga clic aquí para consultar el estado de sus cargas"
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
 ;;EdoCargasLink;"Estado de cargas";"Haga clic aquí para consultar el estado de sus cargas"

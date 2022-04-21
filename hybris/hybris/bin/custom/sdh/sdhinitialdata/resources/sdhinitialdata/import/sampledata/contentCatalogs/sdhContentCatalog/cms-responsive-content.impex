@@ -98,7 +98,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ;ConsultasLink; CONSULTAS LINK    ; "#" ;;;;;
 ; ;ReportantesLink; REPORTANTES LINK    ; "#" ;;;;;
 ; ;ARMiRITLink; MI RIT LINK    ; "/agenteRetenedor/mirit" ;;;;;
-#; ;RetenedorRegistroLink; REGISTRO LINK	; "/retenedores/registroretenciones" ;;;;;
+; ;ARRetenedorRegistroLink; REGISTRO LINK    ; "/retenedores/registroretenciones" ;;;;;
 ; ;RetenedorRegistroLink; REGISTRO LINK	; "/retenedores/cargadocumentos" ;;;;;
 ; ;RetenedorDeclaracionesLink; DECLARACION LINK ; "/retenedores/declaracionesfirmar" ;;;;;
 
@@ -171,6 +171,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; ARDeclaracionesLink			   ; DECLARACIONES LINK   				 ;"/agenteRetenedor/consultas/declaraciones";;;;;
 ; ; ARPresentarDeclaracionLink	   ; DECLARACIONES LINK   				 ;"/retenedores/estadocargas";;;;;
 ; ; ARListaDeclaracionLink	   	   ; LISTA LINK   				 			;"/agenteRetenedor/lista-declaraciones" ;;;;;
+; ; AREdoCargasLink                   ;CARGAS LINK                             ; "/retenedores/estadocargas";;;;;
 
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
@@ -298,7 +299,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 #;ContribuyentesCategoryNavNode;;Contributentes Categories;SiteRootNode;ContribuyentesCategoryNavNode;MiRITContribuyentesNavigationNode
 ;AutorizadosCategoryNavNode;;Autorizados Categories;SiteRootNode;AutorizadosCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
 ;ReportantesInformacionCategoryNavNode;;Reportantes Categories;SiteRootNode;ReportantesInformacionCategoryNavNode;MiRITReportanteInformacionNavigationNode,ReportantesNavigationNode
-;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;ARMiRITNavigationNode,ARMiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,ARConsultaNavigationNode
+;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;ARMiRITNavigationNode,ARMiBuzonNavigationNode,ARRetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,ARConsultaNavigationNode
 ;TerceroAutorizadoCategoryNavNode;;Tercero Autorizado Categories;SiteRootNode;TerceroAutorizadoCategoryNavNode;TerceroAutorizadoReportesNavigationNode
 ;AnnonymousCategoryNavNode;;Anonnymous Categories;SiteRootNode;AnnonymousCategoryNavNode;PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode
 
@@ -346,6 +347,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->;PagosNavigationNode;;Pagos Menu;PagosNavigationNode;PagosNavigationServiceRequestsNavNodeMenu
 ;ConsultaNavigationNode;;Consultas Menu;ConsultaNavigationNode;ConsultaNavigationServiceRequestsNavNodeMenu
 ;ARConsultaNavigationNode;;Consultas Menu;ARConsultaNavigationNode;ARConsultaNavigationServiceRequestsNavNodeMenu
+;ARRetenedorRegistroNavigationNode;;Retenedor Registros;ARRetenedorRegistroNavigationNode;ARRetenedorRegistroNavigationServiceRequestsNavNodeMenu
 ;ReportantesNavigationNode;;Reportantes Menu;ReportantesNavigationNode;ReportantesNavigationServiceRequestsNavNodeMenu
 ;RetenedorRegistroNavigationNode;;Retenedor Registros;RetenedorRegistroNavigationNode;RetenedorRegistroNavigationServiceRequestsNavNodeMenu
 ;RetenedorDeclaracionesNavigationNode;; Retenedor Declaraciones;RetenedorDeclaracionesNavigationNode;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu
@@ -396,6 +398,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;ARMiBuzonNavigationNodeEntry;;ARMi Buzon Menu;ARMiBuzonNavigationNode;ARMiBuzonLink;
 ;ARMiRITNavigationNodeEntry;;ARMi RIT Menu;ARMiRITNavigationNode;ARMiRITLink;
 ;ARConsultaNavigationNodeEntry;;Consulta Menu;ARConsultaNavigationNode;ConsultasLink;
+;ARRetenedorRegistroNavigationNodeEntry;;Retenedor Registro;ARRetenedorRegistroNavigationNode;ARRetenedorRegistroLink;
 ;ReportantesNavigationNodeEntry;;Reportantes Menu;ReportantesNavigationNode;ReportantesLink;
 ;RetenedorRegistroNavigationNodeEntry;;Retenedor Registro;RetenedorRegistroNavigationNode;RetenedorRegistroLink;
 ;RetenedorDeclaracionesNavigationNodeEntry;;Retenedor Declaraciones;RetenedorDeclaracionesNavigationNode;RetenedorDeclaracionesLink;
@@ -471,6 +474,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;ReportantesNavigationServiceRequestsNavNodeMenu;;Reportantes Service Requests Menu;ReportantesNavigationServiceRequestsNavNodeMenu;CargaNavNode, HistoricoNavNode, SancionesNavNode
 
 ;RetenedorDetalleNavigationServiceRequestsNavNodeMenu;;Retenedores Detalle Service Requests Menu;RetenedorDetalleNavigationServiceRequestsNavNodeMenu;
+;ARRetenedorRegistroNavigationServiceRequestsNavNodeMenu;;Retenedores Registro Service Requests;ARRetenedorRegistroNavigationServiceRequestsNavNodeMenu;AREdoCargasNavNode
 ;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;;Retenedores Registro Service Requests;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;EdoCargasNavNode
 ;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;;Retenedores Declaracion Service Requests;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;ARPresentarDeclaracionNavNode,ARListaDeclaracionNavNode
 ;TerceroAutorizadoReportesNavigationServiceRequestsNavNodeMenu;;TerceroAutorizado Service Requests Menu;TerceroAutorizadoReportesNavigationServiceRequestsNavNodeMenu;TerceroAutorizadoPorSujetoNavNode,TerceroAutorizadoPorObjetoNavNode
@@ -601,7 +605,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;AREdoCuentaNavNode;;Estado Cuenta Link; AREdoCuentaNavNode
 ;ARPresentarDeclaracionNavNode ;;Presentar Declaracion Link;ARPresentarDeclaracionNavNode
 ;ARListaDeclaracionNavNode ;; Lista Declaraciones Link;ARListaDeclaracionNavNode
-
+;AREdoCargasNavNode;;Declaraciones Link;AREdoCargasNavNode
 
 ;CargaNavNode;;Carga Link;CargaNavNode
 ;HistoricoNavNode;;Historico Link;HistoricoNavNode
@@ -736,6 +740,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 
 ;ARPresentarDeclaracionNavNodeEntry;;Presentar declaracion Navigation Node Entry;ARPresentarDeclaracionNavNode;ARPresentarDeclaracionLink
 ;ARListaDeclaracionNavNodeEntry;; Lista Declaraciones Firma AR Navigation Node Entry;ARListaDeclaracionNavNode;ARListaDeclaracionLink
+;AREdoCargasNavNodeEntry;;Declaraciones Navigation Node Entry;AREdoCargasNavNode;AREdoCargasLink
 
 ;CargaNavNodeEntry;;Carga Navigation Node Entry;CargaNavNode;CargaLink
 ;HistoricoNavNodeEntry;;Historico Navigation Node Entry;HistoricoNavNode;HistoricoLink

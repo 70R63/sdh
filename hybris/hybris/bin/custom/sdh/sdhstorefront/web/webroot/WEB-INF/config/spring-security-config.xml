@@ -323,6 +323,8 @@
 		<property name="useReferer" value="true"/>
 		<property name="restrictedPages" ref="logoutRestrictedPages"/>
 		<property name="sessionService" ref="sessionService"/>
+		<property name="userService" ref="userService"/>
+		<property name="modelService" ref="modelService"/>
 	</bean>
 	
      <bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
