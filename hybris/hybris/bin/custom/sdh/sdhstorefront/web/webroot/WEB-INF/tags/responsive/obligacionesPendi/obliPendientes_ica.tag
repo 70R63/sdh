@@ -1,10 +1,11 @@
 <%@ tag body-content="empty" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 
-<div class="row" id="div_titulo_ica" style="display:none;">
+<div class="row" id="div_titulo_ica" style="display: none;">
 	<h2><span><span><spring:theme code="obligacion.sujeto.ica.titulo" /></span></span></h2>
 </div>
 <div id="oblipend-ica" class="oblipend-table" style="display: none;">

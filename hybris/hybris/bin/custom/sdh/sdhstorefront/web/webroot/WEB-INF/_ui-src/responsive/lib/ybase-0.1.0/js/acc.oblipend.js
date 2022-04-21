@@ -15,7 +15,7 @@ ACC.oblipend = {
 					ACC.oblipend.updateFromResponseImpuesto_vehiculos(infoResponse);
 					break;
 				case "0003":
-					ACC.oblipend.updateFromResponseImpuesto_vehiculos(infoResponse);
+					ACC.oblipend.updateFromResponseImpuesto_ica(infoResponse);
 					break;
 				case "0004":
 				    ACC.oblipend.updateFromResponseImpuesto_reteIca(infoResponse);
@@ -478,6 +478,99 @@ ACC.oblipend = {
 		
 	},
 	
+		updateFromResponseImpuesto_ica : function(infoResponse){
+		
+		$(indRepote).val(infoResponse.indRepoteIca);
+		
+		var id_tabla = "#tabPaginacion2";
+		var tablaInfo = infoResponse.headerica;
+		
+		ACC.publicidadexterior.bindDataTable_ID_refresh(id_tabla);
+		$(id_tabla).find("tr:gt(0)").remove();
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("div_titulo_ica"),'block');
+		if(tablaInfo != null){
+			if(tablaInfo.length == 0){
+				ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("noCuentaPendientes_ica"),'block');
+			}else{
+				var tpImp = "03";
+				var claveImpuestoExt = "5102";
+				$.each(tablaInfo, function (indexH,valueH){
+					$.each(valueH.details, function (indexD,valueD){
+						var tr_value = "";
+						
+						if(valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != ""){
+							var td_totalPagar = "";
+							var td_rop = "";
+							var td_pagoVigente = "";
+							var td_spac = "";
+							var clavePeriodo = "";
+							
+							if(valueH.anioGravable != null ){
+								clavePeriodo = valueH.anioGravable.substring(2,4);
+							}
+							
+							switch (valueH.facilidad){
+								case "00":
+									td_totalPagar = valueD.obligacion;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_rop = ACC.oblipend.rop_filtrado_predial(valueH,td_rop);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,"","",valueH.facilidad,valueH.montoFacilidad));
+									td_spac = "Sin Cupones";
+									break;
+								case "01":
+									td_totalPagar = valueH.montoFacilidad;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueH.montoFacilidad,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_rop = ACC.oblipend.rop_filtrado_predial(valueH,td_rop);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,"","",valueH.facilidad,valueH.montoFacilidad));
+									td_spac = "Sin Cupones";
+									break;
+								case "02":
+									td_totalPagar = valueH.montoFacilidad;
+									td_rop = "Sin ROP";
+									td_rop = ACC.oblipend.rop_filtrado_predial(valueH,td_rop);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,"","",valueH.facilidad,valueH.montoFacilidad));
+									td_spac = ACC.oblipend.predial_generarTD_spac(valueD.numFormulario,valueH.anioGravable,valueD.objetoContrato,"X");
+									break;
+								default:
+									td_totalPagar = valueD.obligacion;
+									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_rop = ACC.oblipend.rop_filtrado_predial(valueH,td_rop);
+									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,"",valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,"","",valueH.facilidad,valueH.montoFacilidad));
+									td_spac = "Sin Cupones";
+									break;	
+							}
+							
+							tr_value = 
+								"<tr>" +
+								"<td>" + valueH.anioGravable +"</td>"+
+								"<td>" + valueH.objetoContrato +"</td>"+
+								"<td>" + valueD.estadoObligacion +"</td>"+
+								"<td>" + valueD.obligacion +"</td>"+
+								"<td>" + valueD.numFormulario +"</td>"+
+								"<td>" + valueD.numReferencia +"</td>"+
+								"<td>" + td_totalPagar +"</td>"+
+								"<td>" + valueD.objetoContrato +"</td>"+
+								"<td>" + td_rop +"</td>"+
+								"<td>" + td_pagoVigente +"</td>"+
+								"<td>" + td_spac +"</td>"+
+								"</tr>";
+								if(valueH.details.estadoObligacion != null){
+									
+									$(id_tabla).append(tr_value);	
+										ACC.publicidadexterior.bindDataTable_id(id_tabla);
+				ACC.oblipend.mostrarTablaDelImpuesto(infoResponse.claveImpuesto);
+								}
+						}
+					});
+				});
+				ACC.publicidadexterior.bindDataTable_id(id_tabla);
+				ACC.oblipend.mostrarTablaDelImpuesto(infoResponse.claveImpuesto);
+			}
+			
+		}
+					
+		
+	},
 	
 	rop_filtrado_predial : function(valueH,valorCalculado){
 		var valorRetorno = valorCalculado;
@@ -622,6 +715,7 @@ ACC.oblipend = {
 	
 	
 	updateFromResponseImpuesto_todos : function(infoResponse){
+		
 		if(infoResponse!= null){
 			switch (infoResponse.claveImpuesto){
 				case "0001":
@@ -641,6 +735,7 @@ ACC.oblipend = {
 	
 	
 	ocultarTablasDeImpuestos : function (){
+		
 		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("div_titulo_predial"),'none');
 		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("tableSpac"),'none');
 		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("noCuentaPendientes_predial"),'none');
@@ -657,6 +752,9 @@ ACC.oblipend = {
 
 		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("div_titulo_publiext"),'none');
 		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("noCuentaPendientes_publiext"),'none');
+		
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("div_titulo_ica"),'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById("noCuentaPendientes_ica"),'none');
 
 		
 		$(".oblipend-table").hide();
