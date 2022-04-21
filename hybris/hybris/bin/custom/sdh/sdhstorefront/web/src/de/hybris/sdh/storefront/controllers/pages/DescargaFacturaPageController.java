@@ -178,7 +178,7 @@ public class DescargaFacturaPageController extends AbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		DescargaFacturaResponse descargaFacturaResponse = null;
 		final DescargaFacturaRequest descargaFacturaRequest = new DescargaFacturaRequest();
-		String numBP = null;
+		final String numBP = customerFacade.getCurrentCustomer().getNumBP();
 		byte[] decodedBytes;
 
 		dataForm.setErrores(null);
@@ -193,7 +193,11 @@ public class DescargaFacturaPageController extends AbstractPageController
 		{
 			System.out.println("Request de trm/facturacion: " + descargaFacturaRequest);
 			descargaFacturaResponse = gasolinaService.descargaFactura(descargaFacturaRequest, sdhDetalleGasolinaWS, LOG);
-			System.out.println("Response de trm/facturacion: " + descargaFacturaResponse);
+			String infoResponse = null;
+			if(descargaFacturaResponse != null && descargaFacturaResponse.getPdf() != null) {
+				infoResponse = "longitud de respuesta: " + descargaFacturaResponse.getPdf().length();
+			}
+			System.out.println("Response de trm/facturacion: " + infoResponse);
 
 			dataForm.setErrores(descargaFacturaResponse.getErrores());
 
@@ -276,7 +280,11 @@ public class DescargaFacturaPageController extends AbstractPageController
    	{
    		System.out.println("Request de trm/facturacion: " + descargaFacturaRequest);
    		descargaFacturaResponse = gasolinaService.descargaFactura(descargaFacturaRequest, sdhDetalleGasolinaWS, LOG);
-   		System.out.println("Response de trm/facturacion: " + descargaFacturaResponse);
+			String infoResponse = null;
+			if(descargaFacturaResponse != null && descargaFacturaResponse.getPdf() != null) {
+				infoResponse = "longitud de respuesta: " + descargaFacturaResponse.getPdf().length();
+			}
+			System.out.println("Response de trm/facturacion: " + infoResponse);
    
    		dataForm.setErrores(descargaFacturaResponse.getErrores());
    

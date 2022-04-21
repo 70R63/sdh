@@ -81,7 +81,14 @@ public class DefaultSDHDetalleGasolina implements SDHDetalleGasolina
 				builder.append(inputLine);
 			}
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+
+			if ("https://vhshdpopci.hec.shd.gov.co:50001/RESTAdapter/trm/facturacion".equals(urlString))
+			{
+			}
+			else
+			{
+				LOG.info("response: " + result);
+			}
 
 			return result;
 
