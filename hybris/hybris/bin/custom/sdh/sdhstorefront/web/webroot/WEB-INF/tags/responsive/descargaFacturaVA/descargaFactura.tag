@@ -13,6 +13,7 @@
 		<h2 align="center"><span><spring:theme code="descargaFacturaVA.descarga.titulo" /></span></h2>
 		<span><spring:theme code="message.download" /> </span>
 	</div>
+	
 	<div class="row">
 		<div class="headline">
 			<h2 align="center">
@@ -21,15 +22,20 @@
 		</div>
 	</div>
 	<br>
+	
 	<sf:form action="" method="POST" modelAttribute="infoVista" id="forma">
 		<div class="row">
 			<div class="col-md-2 col-xs-12 mb-20 no-marginright col-md-offset-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="descargaFacturaVA.descarga.campo.impuesto" /></label> 
 					<select id="claveImpuesto" class="new_alto form-control " name="claveImpuesto" onchange="showTag(this)">
-						<option value="00"><spring:theme code="descargaFacturaVA.descarga.opcionImpuesto0" /></option>
-						<option value="01"><spring:theme code="descargaFacturaVA.descarga.opcionImpuesto1" /></option>
-<!-- 						<option value="01"><spring:theme code="descargaFacturaVA.descarga.opcionImpuesto2" /></option> -->
+					<option value="00"><spring:theme code="descargaFacturaVA.descarga.opcionImpuesto0" /></option>
+						<c:if test="${ facturacionForm.predial != null }">
+							<option value="01"><spring:theme code="descargaFacturaVA.descarga.opcionImpuesto1" /></option>
+						</c:if>
+						<c:if test="${ facturacionForm.vehicular != null }">
+							<option value="02"><spring:theme code="descargaFacturaVA.descarga.opcionImpuesto2" /></option>
+						</c:if>
 					</select>
 				</div>
 			</div>

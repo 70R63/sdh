@@ -22,8 +22,10 @@ import de.hybris.sdh.core.pojos.requests.OpcionCertiDecImprimeRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.responses.ConsultarBPResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWSDeclaracionesPDF;
+import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.OpcionCertiDecImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConfigCatalogos;
@@ -33,11 +35,15 @@ import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.pages.forms.DescargaFacturaVAForm;
+import de.hybris.sdh.storefront.controllers.pages.forms.SDHLoginForm;
+import de.hybris.sdh.storefront.forms.FacturacionForm;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -63,7 +69,7 @@ import Decoder.BASE64Decoder;
  */
 @Controller
 //@RequestMapping("")
-public class DescargaFacturaVAPageController extends AbstractPageController
+public class DescargaFacturaVAPageController extends SDHAbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(DescargaFacturaVAPageController.class);
 
@@ -125,10 +131,25 @@ public class DescargaFacturaVAPageController extends AbstractPageController
 		if(infoVista == null) {
 			infoVista = new DescargaFacturaVAForm();
 		}
+
+		
+		final Map<String, String> impuestosActivos = sdhConsultaImpuesto_simplificado.obtenerListaImpuestosActivos(sdhConsultaImpuesto_simplificado.AMBITO_FACTURACIONVA);
+
+		final FacturacionForm facturacionForm = new FacturacionForm();
+		if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PREDIAL)){
+			facturacionForm.setPredial(new ArrayList<PredialResponse>());
+		}
+		if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.VEHICULOS)){
+			facturacionForm.setVehicular(new ArrayList<ImpuestoVehiculos>());
+		}
+		
 		
 		List<SelectAtomValue> documentTypes = sdhDocumentTypeDao.getAllDocumentTypes();
 		model.addAttribute("documentTypes", documentTypes);
 		model.addAttribute("infoVista", infoVista);
+		final SDHLoginForm loginForm = new SDHLoginForm();
+		model.addAttribute("loginForm", loginForm);
+		model.addAttribute("facturacionForm", facturacionForm);
 		
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DESCARGA_FACTURA_CMS_PAGE));
