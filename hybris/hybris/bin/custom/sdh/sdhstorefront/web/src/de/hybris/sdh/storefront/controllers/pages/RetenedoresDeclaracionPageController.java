@@ -171,11 +171,14 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 		System.out.println(detallePagoResponse);
 		System.out.println("------> detallePagoResponse");
 
-		if (detallePagoResponse.getNumRef() != null || !detallePagoResponse.getNumRef().contains(""))
+		if (detallePagoResponse.getNumRef() != null)
 		{
-			infoPreviaPSE.setNumRef(detallePagoResponse.getNumRef());
-			infoPreviaPSE.setFechaVenc(detallePagoResponse.getFechVenc());
-			infoPreviaPSE.setTotalPagar(detallePagoResponse.getTotalPagar());
+			if (!detallePagoResponse.getNumRef().contains(""))
+			{
+				infoPreviaPSE.setNumRef(detallePagoResponse.getNumRef());
+				infoPreviaPSE.setFechaVenc(detallePagoResponse.getFechVenc());
+				infoPreviaPSE.setTotalPagar(detallePagoResponse.getTotalPagar());
+			}
 		}
 
 
@@ -207,13 +210,15 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 
 	@RequestMapping(value = "/retenedores/declaracion/generar", method = RequestMethod.POST)
 	@ResponseBody
-	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm, final HttpServletResponse response,
+	public GeneraDeclaracionResponse generar(final Model model, final GeneraDeclaracionForm dataForm,
+			final HttpServletResponse response,
 			final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
 		final CustomerData customerData = getCustomerFacade().getCurrentCustomer();
 		final String numForm = dataForm.getNumForm();
 
+		//final InfoPreviaPSE infoPreviaPSE = (InfoPreviaPSE) model.("infoPreviaPSE");
 		final GeneraDeclaracionRequest generaDeclaracionRequest = new GeneraDeclaracionRequest();
 
 
@@ -274,6 +279,34 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 			generaDeclaracionResponse.setErrores(errores);
 
 		}
+
+		final DetallePagoRequest detallePagoRequest = new DetallePagoRequest();
+		final DetallePagoResponse detallePagoResponse;
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+
+		//		detallePagoRequest.setNumBP(infoPreviaPSE.getNumBP());
+		//		detallePagoRequest.setClavePeriodo(infoPreviaPSE.getClavePeriodo());
+		//		detallePagoRequest.setNumObjeto(infoPreviaPSE.getNumObjeto());
+		//		detallePagoResponse = gasolinaService.consultaDetallePago(detallePagoRequest, sdhDetalleGasolinaWS, LOG);
+		//
+		//		System.out.println("------> detallePagoResponse");
+		//		System.out.println(detallePagoResponse);
+		//		System.out.println("------> detallePagoResponse");
+		//
+		//		if (detallePagoResponse.getNumRef() != null)
+		//		{
+		//			if (!detallePagoResponse.getNumRef().contains(""))
+		//			{
+		//				infoPreviaPSE.setNumRef(detallePagoResponse.getNumRef());
+		//				infoPreviaPSE.setFechaVenc(detallePagoResponse.getFechVenc());
+		//				infoPreviaPSE.setTotalPagar(detallePagoResponse.getTotalPagar());
+		//			}
+		//		}
+		//
+		//
+		//		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+
+
 
 		return generaDeclaracionResponse;
 
