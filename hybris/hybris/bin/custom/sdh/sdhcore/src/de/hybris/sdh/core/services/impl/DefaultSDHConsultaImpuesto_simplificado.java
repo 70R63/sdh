@@ -10,8 +10,8 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.pojos.responses.ReteICA;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 
 import java.io.BufferedReader;
@@ -88,12 +88,16 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		LOG.info(urlService);
 		if (wsRequest instanceof ConsultaContribuyenteBPRequest)
 		{
+			((ConsultaContribuyenteBPRequest) wsRequest)
+					.setNumBP(StringUtils.leftPad(((ConsultaContribuyenteBPRequest) wsRequest).getNumBP(), 10, "0"));
 			final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>((ConsultaContribuyenteBPRequest) wsRequest);
 			LOG.info(wsRequest);
 			wsResponse = restTemplate.postForObject(urlService, request, String.class);
 		}
 		else if (wsRequest instanceof ConsultaContribPredialRequest)
 		{
+			((ConsultaContribPredialRequest) wsRequest)
+					.setNumBP(StringUtils.leftPad(((ConsultaContribPredialRequest) wsRequest).getNumBP(), 10, "0"));
 			final HttpEntity<ConsultaContribPredialRequest> request = new HttpEntity<>((ConsultaContribPredialRequest) wsRequest);
 			LOG.info(wsRequest);
 			wsResponse = restTemplate.postForObject(urlService, request, String.class);
@@ -391,12 +395,16 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		LOG.info(urlService);
 		if (wsRequest instanceof ConsultaContribuyenteBPRequest)
 		{
+			((ConsultaContribuyenteBPRequest) wsRequest)
+					.setNumBP(StringUtils.leftPad(((ConsultaContribuyenteBPRequest) wsRequest).getNumBP(), 10, "0"));
 			final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>((ConsultaContribuyenteBPRequest) wsRequest);
 			LOG.info(wsRequest);
 			wsResponse = restTemplate.postForObject(urlService, request, String.class);
 		}
 		else if (wsRequest instanceof ConsultaContribPredialRequest)
 		{
+			((ConsultaContribPredialRequest) wsRequest)
+					.setNumBP(StringUtils.leftPad(((ConsultaContribPredialRequest) wsRequest).getNumBP(), 10, "0"));
 			final HttpEntity<ConsultaContribPredialRequest> request = new HttpEntity<>((ConsultaContribPredialRequest) wsRequest);
 			LOG.info(wsRequest);
 			wsResponse = restTemplate.postForObject(urlService, request, String.class);
