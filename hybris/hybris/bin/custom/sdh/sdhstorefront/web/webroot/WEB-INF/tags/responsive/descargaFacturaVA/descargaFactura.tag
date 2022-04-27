@@ -112,7 +112,7 @@
 	</sf:form>
 	
 	<br>
-	<div id="table-download" style="display: block;">
+	<div id="table-download" style="display: none;">
 		<div class="col-md-5 col-md-offset-3">
 			<table id="">
 				<thead>
