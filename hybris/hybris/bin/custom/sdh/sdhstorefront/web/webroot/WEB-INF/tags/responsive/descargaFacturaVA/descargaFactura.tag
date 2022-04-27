@@ -23,6 +23,28 @@
 	</div>
 	<br>
 	
+	<c:if test="${false}">
+	<sf:form action="${action}" method="get" modelAttribute="loginForm">
+		<c:choose>
+			<c:when test="${captchaEnabledForCurrentStore eq true }">
+				<div
+					class="form_field-elements control-group js-recaptcha-captchaaddon"></div>
+			</c:when>
+			<c:otherwise>
+				<formElement:formCheckbox idKey="notARobot"
+					labelKey="login.not.a.robot" path="notARobot" />
+			</c:otherwise>
+		</c:choose>
+		
+			<ycommerce:testId code="loginAndCheckoutButton">
+				<button type="submit" class="btn btn-primary redtam tam_button"
+					style="width: 20% !important; border-radius: 20px !important; background-color: #156ab5 !important; color: white !important; height: 48px !important; margin-top: 1%;">
+					<spring:theme code="${actionNameKey}" />
+				</button>
+			</ycommerce:testId>
+	</sf:form>
+	</c:if>
+	
 	<sf:form action="" method="POST" modelAttribute="infoVista" id="forma">
 		<div class="row">
 			<div class="col-md-2 col-xs-12 mb-20 no-marginright col-md-offset-2">
@@ -53,14 +75,27 @@
 					<input class="alto form-control" maxlength="30" size="30" type="text" value="" id="numDoc"/>
 				</div>
 			</div>
+			
+			<c:set var="displayImpuesto0" value="none"></c:set>
+			<c:set var="displayImpuesto1" value="none"></c:set>
+			<c:set var="displayImpuesto2" value="none"></c:set>
+			
+			
 			<div class="col-md-2 col-xs-12 mb-20 no-margincol">
 				<div class="form-group">
-					<label class="control-label" id="chip/placa" style="display: block;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto0" /></label>
+					<label class="control-label" id="chip/placa" style="display: block"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto0" /></label>
 					<label class="control-label" id="chip" style="display: none;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto1" /></label>
 					<label class="control-label" id="placa" style="display: none;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto2" /></label>
 					<input class="alto form-control" maxlength="30" size="30" type="text" value="" id="numObjeto"/>
 				</div>
 			</div>
+		</div>
+		
+		<div class="alert alert-info" role="alert" id="mensajeImpuesto1" style="display: none;">
+			<h4 align="center"><span><spring:theme code="descargaFacturaVA.descarga.subtitulo.opcionImpuesto1" /></span></h4>
+		</div>
+		<div class="alert alert-info" role="alert" id="mensajeImpuesto2" style="display: none;">
+			<h4 align="center"><span><spring:theme code="descargaFacturaVA.descarga.subtitulo.opcionImpuesto2" /></span></h4>
 		</div>
 		<div class="row">
 			<div class="col-md-2 col-md-offset-4">
@@ -76,9 +111,8 @@
 		</div>
 	</sf:form>
 	
-	
 	<br>
-	<div id="table-download" style="display: none;">
+	<div id="table-download" style="display: block;">
 		<div class="col-md-5 col-md-offset-3">
 			<table id="">
 				<thead>
