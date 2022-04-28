@@ -75,18 +75,12 @@
 					<input class="alto form-control" maxlength="30" size="30" type="text" value="" id="numDoc"/>
 				</div>
 			</div>
-			
-			<c:set var="displayImpuesto0" value="none"></c:set>
-			<c:set var="displayImpuesto1" value="none"></c:set>
-			<c:set var="displayImpuesto2" value="none"></c:set>
-			
-			
 			<div class="col-md-2 col-xs-12 mb-20 no-margincol">
 				<div class="form-group">
 					<label class="control-label" id="chip/placa" style="display: block"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto0" /></label>
 					<label class="control-label" id="chip" style="display: none;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto1" /></label>
 					<label class="control-label" id="placa" style="display: none;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto2" /></label>
-					<input class="alto form-control" maxlength="30" size="30" type="text" value="" id="numObjeto"/>
+					<input class="alto form-control" maxlength="30" size="30" type="text" value="" id="numObjeto" style="text-transform: uppercase"/>
 				</div>
 			</div>
 		</div>
