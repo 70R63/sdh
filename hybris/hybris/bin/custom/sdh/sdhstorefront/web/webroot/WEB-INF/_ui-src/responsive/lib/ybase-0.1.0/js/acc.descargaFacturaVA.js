@@ -67,7 +67,7 @@ ACC.descargaFacturaVA = {
 		debugger;
 		var numBP = $("#numBP").val();
 		var anoGravable = "2022";
-		var numObjeto = $("#numObjeto").val();
+		var numObjeto = $("#numObjeto").val().toUpperCase();
 		var tipoOperacion = "1";
 		
 		if(ACC.descargaFacturaVA.validarAntesSubmitDescargaFactura(numBP,anoGravable,numObjeto,tipoOperacion)){
