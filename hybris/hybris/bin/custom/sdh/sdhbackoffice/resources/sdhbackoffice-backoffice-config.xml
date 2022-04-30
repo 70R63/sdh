@@ -64,6 +64,7 @@
 			<list-view:column qualifier="category"/>
 			<list-view:column qualifier="question"/>
 			<list-view:column qualifier="searchCounter"/>
+			<list-view:column qualifier="modifiedtime"/>
 		</list-view:list-view>
 	</context>
 
