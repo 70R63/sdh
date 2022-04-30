@@ -23,6 +23,8 @@
 		<script type="text/javascript">
 window.onload = function() {
    $(".loader").fadeOut("slow");
+   
+   showTag($("#claveImpuesto")[0]);
 }
 	function goBack() {
 		window.history.back();
@@ -38,16 +40,22 @@ function showTag(object){
 	var label = document.getElementById('chip/placa');
 	var label1 = document.getElementById('chip');
 	var label2 = document.getElementById('placa');
+	var mensajeImpuesto1 = document.getElementById('mensajeImpuesto1');
+	var mensajeImpuesto2 = document.getElementById('mensajeImpuesto2');
 	
 	ACC.opcionDeclaraciones.establecerEstiloDisplay(label,'none');
 	ACC.opcionDeclaraciones.establecerEstiloDisplay(label1,'none');
 	ACC.opcionDeclaraciones.establecerEstiloDisplay(label2,'none');
+	ACC.opcionDeclaraciones.establecerEstiloDisplay(mensajeImpuesto1,'none');
+	ACC.opcionDeclaraciones.establecerEstiloDisplay(mensajeImpuesto2,'none');
 	if (tag == "00") {
 		ACC.opcionDeclaraciones.establecerEstiloDisplay(label,'block');
 	}else if (tag == "01") {
 		ACC.opcionDeclaraciones.establecerEstiloDisplay(label1,'block');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(mensajeImpuesto1,'block');
 	}else if (tag == "02") {
 		ACC.opcionDeclaraciones.establecerEstiloDisplay(label2,'block');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(mensajeImpuesto2,'block');
 	}
 	
 }

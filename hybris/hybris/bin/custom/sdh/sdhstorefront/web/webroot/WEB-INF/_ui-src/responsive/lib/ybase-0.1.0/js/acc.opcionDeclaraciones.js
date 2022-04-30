@@ -2077,6 +2077,8 @@ ACC.opcionDeclaraciones = {
 			case ACC.configCatalogos_ambito_presentarDeclaracion:
 		        switch (claveImpuesto) {
 					case "1":		//predial
+						cantidadAnoGravable = ACC.configCatalogos_cantidadAnios_PresentarDeclaracion_predial;
+						break;
 					case "2":		//vehiculos
 					case "3":		//ica
 					case "4":		//ReteIca

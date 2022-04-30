@@ -36,6 +36,7 @@ public interface SDHConsultaImpuesto_simplificado
 	public static final String AMBITO_IMPUESTOS = "impuestos";
 	public static final String AMBITO_CONSULTASAR = "consultasAR";
 	public static final String AMBITO_FACTURACION = "facturacion";
+	public static final String AMBITO_FACTURACIONVA = "facturacionVA";
 	public static final String AMBITO_PRESENTARDECLARACION = "presentarDeclaracion";
 	public static final String AMBITO_MIRIT = "mirit";
 	public static final String AMBITO_FIRMASAGENTE = "firmasAgente";
@@ -61,7 +62,7 @@ public interface SDHConsultaImpuesto_simplificado
 	ImpuestoICA consulta_impICA(ConsultaContribuyenteBPRequest request);
 
 	String consulta_impICA_string(ConsultaContribuyenteBPRequest request);
-	
+
 
     //reteICA
     ReteICA consulta_impReteICA(ConsultaContribuyenteBPRequest request);

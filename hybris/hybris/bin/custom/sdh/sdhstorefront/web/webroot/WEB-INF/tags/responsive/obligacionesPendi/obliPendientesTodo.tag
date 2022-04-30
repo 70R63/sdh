@@ -44,6 +44,9 @@
 	<div class="container">
 		<obligaciones:obliPendientes_publicidadExt/>
 	</div>
+	<div class="container">
+		<obligaciones:obliPendientes_ica/>
+	</div>
 <!-- 	<div class="container"> -->
 <%-- 		<obligaciones:obliPendientes_reteica/> --%>
 <!-- 	</div> -->

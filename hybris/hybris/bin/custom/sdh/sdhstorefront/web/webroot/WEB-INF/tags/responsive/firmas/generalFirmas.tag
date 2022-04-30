@@ -103,7 +103,7 @@
 					</c:if>
 				</c:when>
 				<c:otherwise>
-					<firmas:mensajeProceso />
+<%-- 					<firmas:mensajeProceso /> --%>
 					<c:if test="${modo_debug eq 'true'}">
 						<div>seccion2inicio</div>
 					</c:if>
