@@ -73,6 +73,7 @@
 				<div class="form-group">
 					<label class="control-label required"><spring:theme code="descargaFacturaVA.descarga.campo.numeroDocumento" /></label> 
 					<input class="alto form-control" maxlength="30" size="30" type="text" value="" id="numDoc"/>
+					<label class="control-label" id="mensajeNumDoc" style="display: block;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.mensajeNumDoc" /></label>
 				</div>
 			</div>
 			<div class="col-md-2 col-xs-12 mb-20 no-margincol">
@@ -81,6 +82,7 @@
 					<label class="control-label" id="chip" style="display: none;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto1" /></label>
 					<label class="control-label" id="placa" style="display: none;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto2" /></label>
 					<input class="alto form-control" maxlength="30" size="30" type="text" value="" id="numObjeto" style="text-transform: uppercase"/>
+					<label class="control-label" id="mensajeClaveObjeto" style="display: block;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.mensajeClaveObjeto" /></label>
 				</div>
 			</div>
 		</div>
