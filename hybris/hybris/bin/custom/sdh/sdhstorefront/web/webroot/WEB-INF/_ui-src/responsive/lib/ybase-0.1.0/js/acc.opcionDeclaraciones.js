@@ -1257,22 +1257,40 @@ ACC.opcionDeclaraciones = {
 
 	validarDeclaracion : function(url,placa){
 		ACC.spinner.show();
-	    var anioGravable = document.getElementById("anoGravable").value;
-	    var impuesto = document.getElementById("impuesto");
-	    impuesto = impuesto.options[impuesto.selectedIndex].value;
-	    var currentUrl_tmp = "";
+		var anioGravable = "";
+		var anoGravableHTML = document.getElementById("anoGravable");
+		if(anoGravableHTML != null){
+			anioGravable = document.getElementById("anoGravable").value;
+		}else{
+			const params = new URL("http://dummy"+url).searchParams;
+			const myParam = params.get('anioGravable');
+			anioGravable = myParam;
+		}
+		var impuesto = document.getElementById("impuesto");
+		impuesto = impuesto.options[impuesto.selectedIndex].value;
+		if(impuesto != null && impuesto.length == 4){
+			impuesto = impuesto.substring(3);
+		}
+		var currentUrl_tmp = "";
 
-	    var currentUrl = window.location.href;
-        var targetUrl = "infoObject/getUseOption?anioGravable="	+
+		var currentUrl = window.location.href;
+		var targetUrl = "infoObject/getUseOption?anioGravable="	+
                		    anioGravable + "&placa=" +
                		    placa + "&taxType=" + impuesto;
-
-        currentUrl_tmp = currentUrl.replace("contribuyentes/presentar-declaracion",targetUrl);
-        if(currentUrl_tmp != currentUrl){
-        	currentUrl = currentUrl_tmp;
-        }else{
-        	currentUrl = currentUrl.replace("contribuyentes/presentar-declaracion#",targetUrl);
-        }
+		
+		var currentURL_postfix = "";
+		if(currentUrl.indexOf("contribuyentes/presentar-declaracion") >= 0){
+			currentURL_postfix = "contribuyentes/presentar-declaracion";
+		}
+		if(currentUrl.indexOf("contribuyentes/consultas/obligaciones") >= 0){
+			currentURL_postfix = "contribuyentes/consultas/obligaciones";
+		}
+		currentUrl_tmp = currentUrl.replace(currentURL_postfix,targetUrl);
+		if(currentUrl_tmp != currentUrl){
+			currentUrl = currentUrl_tmp;
+		}else{
+			currentUrl = currentUrl.replace(currentURL_postfix+"#",targetUrl);
+		}
 
         $.ajax({
             url : currentUrl,
