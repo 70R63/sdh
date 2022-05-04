@@ -714,6 +714,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 
 					obligacionesFormuno.setClaveImpuesto(obligacionesForm.getClaveImpuesto());
 					obligacionesFormuno = ajustaIndReporte(obligacionesFormuno);
+					obligacionesFormuno.setNumBP(customerModel.getNumBP());
 					break;
 
 				case "0003":
