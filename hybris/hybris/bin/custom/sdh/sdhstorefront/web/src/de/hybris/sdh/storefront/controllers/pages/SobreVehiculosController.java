@@ -302,10 +302,10 @@ public class SobreVehiculosController extends AbstractPageController
 		}
 		model.addAttribute("vehiculosForm", vehiculosForm);
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
-		updatePageTitle(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+//		storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
+//		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
+//		updatePageTitle(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
+//		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 
 		return vehiculosForm;
 	}
