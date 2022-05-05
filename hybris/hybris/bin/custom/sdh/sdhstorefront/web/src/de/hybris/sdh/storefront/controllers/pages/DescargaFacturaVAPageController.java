@@ -17,7 +17,9 @@ import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.dao.SdhDocumentTypeDao;
 import de.hybris.sdh.core.form.SelectAtomValue;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribPredialRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultarBPRequest;
+import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.OpcionCertiDecImprimeRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.responses.ConsultarBPResponse;
@@ -44,9 +46,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -150,6 +154,7 @@ public class DescargaFacturaVAPageController extends SDHAbstractPageController
 		final SDHLoginForm loginForm = new SDHLoginForm();
 		model.addAttribute("loginForm", loginForm);
 		model.addAttribute("facturacionForm", facturacionForm);
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DESCARGA_FACTURA_CMS_PAGE));
@@ -179,7 +184,7 @@ public class DescargaFacturaVAPageController extends SDHAbstractPageController
 		infoVista.setNombreContribuyente("");
 		infoVista.setUrlDownload("");
 		infoVista.setFechaExp("");
-		
+		infoVista.setNumObjeto("");
 		
 		
 		ConsultarBPRequest requestConsultarBP = new ConsultarBPRequest();
@@ -209,6 +214,39 @@ public class DescargaFacturaVAPageController extends SDHAbstractPageController
 			infoVista.setNombreContribuyente(sdhConsultaContribuyenteBPResponse.getCompleteName());
 			if(sdhConsultaContribuyenteBPResponse.getInfoContrib() != null) {
 				infoVista.setNumBP(sdhConsultaContribuyenteBPResponse.getInfoContrib().getNumBP());
+				ConsultaContribPredialRequest requestPredial = new ConsultaContribPredialRequest();
+				requestPredial.setNumBP(sdhConsultaContribuyenteBPResponse.getInfoContrib().getNumBP());
+				requestPredial.setAnioGravable(infoVista.getAnioGravable());
+				
+				switch (infoVista.getClaveImpuesto())
+				{
+					case "0001":
+						List<PredialResponse> listaPredial = sdhConsultaImpuesto_simplificado.consulta_impPredial2(requestPredial );
+						if(listaPredial!= null) {
+							listaPredial = listaPredial.stream()
+									.filter(d -> infoVista.getClaveObjeto().equals(d.getCHIP())).collect(Collectors.toList());
+							if(!listaPredial.isEmpty() && listaPredial.get(0)!=null) {
+								infoVista.setNumObjeto(listaPredial.get(0).getNumObjeto());
+							}
+						}
+						break;
+
+					case "0002":
+						List<ImpuestoVehiculos> listaVehiculos = sdhConsultaImpuesto_simplificado.consulta_impVehicular2(requestPredial );
+						if(listaVehiculos!= null) {
+							listaVehiculos = listaVehiculos.stream()
+									.filter(d -> infoVista.getClaveObjeto().equals(d.getPlaca())).collect(Collectors.toList());
+							if(!listaVehiculos.isEmpty() && listaVehiculos.get(0)!=null) {
+								infoVista.setNumObjeto(listaVehiculos.get(0).getNumObjeto());
+							}
+						}
+						break;
+						
+					default:
+						infoVista.setNumObjeto("");
+						break;
+				}
+
 			}
 		}
 

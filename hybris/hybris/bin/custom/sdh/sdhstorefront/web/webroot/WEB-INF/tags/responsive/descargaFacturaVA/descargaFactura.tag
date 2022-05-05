@@ -24,6 +24,7 @@
 	<br>
 	
 	<c:if test="${false}">
+	<c:set var="action" value="validacion"/>
 	<sf:form action="${action}" method="get" modelAttribute="loginForm">
 		<c:choose>
 			<c:when test="${captchaEnabledForCurrentStore eq true }">
@@ -53,10 +54,10 @@
 					<select id="claveImpuesto" class="new_alto form-control " name="claveImpuesto" onchange="showTag(this)">
 					<option value="00"><spring:theme code="descargaFacturaVA.descarga.opcionImpuesto0" /></option>
 						<c:if test="${ facturacionForm.predial != null }">
-							<option value="01"><spring:theme code="descargaFacturaVA.descarga.opcionImpuesto1" /></option>
+							<option value="0001"><spring:theme code="descargaFacturaVA.descarga.opcionImpuesto1" /></option>
 						</c:if>
 						<c:if test="${ facturacionForm.vehicular != null }">
-							<option value="02"><spring:theme code="descargaFacturaVA.descarga.opcionImpuesto2" /></option>
+							<option value="0002"><spring:theme code="descargaFacturaVA.descarga.opcionImpuesto2" /></option>
 						</c:if>
 					</select>
 				</div>
@@ -64,7 +65,7 @@
 			<div class="col-md-2 col-xs-12 mb-20">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="descargaFacturaVA.descarga.campo.tipoDocumento" /></label> 
-					<sf:select path="tipoDoc"  class="newalto form-control" onchange="showField()" id="tipoDoc">
+					<sf:select path="tipoDoc"  class="newalto form-control" id="tipoDoc">
 						<sf:options items="${documentTypes}" referenceData="${documentTypes}" itemLabel="name" itemValue="code" />
 					</sf:select>
 				</div>
@@ -81,7 +82,7 @@
 					<label class="control-label" id="chip/placa" style="display: block"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto0" /></label>
 					<label class="control-label" id="chip" style="display: none;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto1" /></label>
 					<label class="control-label" id="placa" style="display: none;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto2" /></label>
-					<input class="alto form-control" maxlength="30" size="30" type="text" value="" id="numObjeto" style="text-transform: uppercase"/>
+					<input class="alto form-control" maxlength="30" size="30" type="text" value="" id="claveObjeto" style="text-transform: uppercase"/>
 					<label class="control-label" id="mensajeClaveObjeto" style="display: block;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.mensajeClaveObjeto" /></label>
 				</div>
 			</div>
@@ -108,24 +109,33 @@
 	</sf:form>
 	
 	<br>
+	
 	<div id="table-download" style="display: none;">
-		<div class="col-md-5 col-md-offset-3">
+		<div class="col-md-7 col-md-offset-1">
 			<table id="">
 				<thead>
 					<tr>
-						<th class="col-md-1" style="text-align: center">
+						<th class="col-md-3" style="text-align: center">
 							<label class="control-label labeltabletd" for="" ><spring:theme code="Nombre" /></label>
 						</th>
 						<th class="col-md-1" style="text-align: center">
 							<label class="control-label labeltabletd" for=""> <spring:theme code="Descargar factura" /></label>
 						</th>
+						<c:if test="${false}">
+						<th class="col-md-1" style="text-align: center">
+							<label class="control-label labeltabletd" for=""> <spring:theme code="Pagar" /></label>
+						</th>
+						</c:if>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td><input class="alto form-control" maxlength="50" size="30" type="text" value="nombre" id="nombreContribuyente" disabled="disabled"/>
 						<input type="hidden" value="numBP" id="numBP" disabled="disabled"/></td>
-						<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)" data-claveImpuesto="0001" data-nombreObjeto="objetoPredial" data-anioGrav="" data-numobjeto=""></img></td>
+						<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura()" data-claveImpuesto="." data-nombreObjeto="." data-anioGrav="" data-numobjeto=""></img></td>
+						<c:if test="${false}">
+						<td><button class="renglonBeneficios" id="pagarFacturaVABtn" type="button" data-impuesto="." data-numbp="." data-aniogravable="." data-numobjeto="." >Pagar</button></td>
+						</c:if>
 					</tr>
 				</tbody>
 			</table>
@@ -133,7 +143,33 @@
 	</div>
 </div>
 
-<div class="container"></div>
+<spring:url value="/impuestos/preparaPagoPSE" var="pagarURL"
+	htmlEscape="false" />
+
+<div class="container">
+	<div class="row">
+		<sf:form action="${pagarURL}" method="POST" modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
+			<div class="col-md-2">
+				<sf:hidden path="tipoImpuesto" id="pagarEnLinea_tipoImpuesto"/>
+				<sf:hidden path="numBP" id="pagarEnLinea_numBP"/>
+				<sf:hidden path="numDoc" id="pagarEnLinea_numDoc"/>
+				<sf:hidden path="tipoDoc" id="pagarEnLinea_tipoDoc"/>
+				<sf:hidden path="anoGravable" id="pagarEnLinea_anoGravable"/>
+				<sf:hidden path="periodo" id="pagarEnLinea_periodo"/>
+				<sf:hidden path="clavePeriodo" id="pagarEnLinea_clavePeriodo"/>
+				<sf:hidden path="dv" id="pagarEnLinea_dv"/>
+				<sf:hidden path="numObjeto" id="pagarEnLinea_numObjeto"/>
+				<sf:hidden path="chip" id="pagarEnLinea_chip"/>
+				<sf:hidden path="fechaVenc" id="pagarEnLinea_fechaVenc"/>
+				<sf:hidden path="numRef" id="pagarEnLinea_numRef"/>
+				<sf:hidden path="totalPagar" id="pagarEnLinea_totalPagar"/>
+				<sf:hidden path="cdu" id="pagarEnLinea_cdu"/>
+				<sf:hidden path="placa" id="pagarEnLinea_placa"/>
+				<sf:hidden path="pagoVoluntario" id="pagarEnLinea_pagoVoluntario"/>				
+			</div>
+		</sf:form>
+	</div>
+</div>
 <script>
 function valInputText(evento,objeto){
 	var newValue="";

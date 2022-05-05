@@ -15,8 +15,10 @@ public class DescargaFacturaVAForm
 	private String claveImpuesto;
 	private String numDoc;
 	private String tipoDoc;
+	private String anioGravable;
 	private String fechaExp;
 	private String claveObjeto;
+	private String numObjeto;
 	private String nombreContribuyente;
 	private String numBP;
 	private String urlDownload;
@@ -65,6 +67,20 @@ public class DescargaFacturaVAForm
 		this.tipoDoc = tipoDoc;
 	}
 	/**
+	 * @return the anioGravable
+	 */
+	public String getAnioGravable()
+	{
+		return anioGravable;
+	}
+	/**
+	 * @param anioGravable the anioGravable to set
+	 */
+	public void setAnioGravable(String anioGravable)
+	{
+		this.anioGravable = anioGravable;
+	}
+	/**
 	 * @return the fechaExp
 	 */
 	public String getFechaExp()
@@ -91,6 +107,20 @@ public class DescargaFacturaVAForm
 	public void setClaveObjeto(String claveObjeto)
 	{
 		this.claveObjeto = claveObjeto;
+	}
+	/**
+	 * @return the numObjeto
+	 */
+	public String getNumObjeto()
+	{
+		return numObjeto;
+	}
+	/**
+	 * @param numObjeto the numObjeto to set
+	 */
+	public void setNumObjeto(String numObjeto)
+	{
+		this.numObjeto = numObjeto;
 	}
 	/**
 	 * @return the nombreContribuyente
@@ -135,14 +165,15 @@ public class DescargaFacturaVAForm
 	{
 		this.urlDownload = urlDownload;
 	}
-	
 	@Override
 	public String toString()
 	{
 		return "DescargaFacturaVAForm [claveImpuesto=" + claveImpuesto + ", numDoc=" + numDoc + ", tipoDoc=" + tipoDoc
-				+ ", claveObjeto=" + claveObjeto + ", nombreContribuyente=" + nombreContribuyente + ", urlDownload=" + urlDownload
-				+ "]";
+				+ ", anioGravable=" + anioGravable + ", fechaExp=" + fechaExp + ", claveObjeto=" + claveObjeto
+				+ ", nombreContribuyente=" + nombreContribuyente + ", numBP=" + numBP + ", urlDownload=" + urlDownload + "]";
 	}
+	
+
 
 
 }

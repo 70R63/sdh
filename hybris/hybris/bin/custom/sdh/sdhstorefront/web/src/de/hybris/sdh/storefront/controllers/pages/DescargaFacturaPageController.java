@@ -168,17 +168,31 @@ public class DescargaFacturaPageController extends AbstractPageController
 		return REDIRECT_TO_DESCARGA_FACTURA_PAGE;
 	}
 
-	@RequestMapping(value = 
-			{ "/contribuyentes/descargafactura/descargarFactura"},
+	@RequestMapping(value = { "/contribuyentes/descargafactura/descargarFactura"},
 	method = RequestMethod.GET)
 	@ResponseBody
 	public DescargaFacturaForm descaragarPDF(final DescargaFacturaForm dataForm, final HttpServletResponse response,
 			final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final String numBP = customerFacade.getCurrentCustomer().getNumBP();
+		
+		llamarDescargaFactura(numBP,gasolinaService,dataForm);
+
+		return dataForm;
+
+	}
+	
+	
+	/**
+	 * @param numBP
+	 * @param gasolinaService
+	 * @param dataForm
+	 */
+	private void llamarDescargaFactura(String numBP, SobreTasaGasolinaService gasolinaService, DescargaFacturaForm dataForm)
+	{
 		DescargaFacturaResponse descargaFacturaResponse = null;
 		final DescargaFacturaRequest descargaFacturaRequest = new DescargaFacturaRequest();
-		final String numBP = customerFacade.getCurrentCustomer().getNumBP();
 		byte[] decodedBytes;
 
 		dataForm.setErrores(null);
@@ -253,13 +267,10 @@ public class DescargaFacturaPageController extends AbstractPageController
 			dataForm.setErrores(errores);
 
 		}
-		return dataForm;
-
+		
 	}
-	
-	
-	@RequestMapping(value = 
-		{ "/descargaFacturaVA/descargarFactura" }, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/descargaFacturaVA/descargarFactura" }, method = RequestMethod.GET)
 	@ResponseBody
 	public DescargaFacturaForm descaragarPDF2(final DescargaFacturaForm dataForm, final HttpServletResponse response,
 	final HttpServletRequest request) throws CMSItemNotFoundException{
@@ -267,85 +278,17 @@ public class DescargaFacturaPageController extends AbstractPageController
    	DescargaFacturaResponse descargaFacturaResponse = null;
    	final DescargaFacturaRequest descargaFacturaRequest = new DescargaFacturaRequest();
    	String numBP = null;
-   	byte[] decodedBytes;
-   
-   	dataForm.setErrores(null);
-   	dataForm.setUrlDownload(null);
-   	descargaFacturaRequest.setNumBP(dataForm.getNumBP());
-   	descargaFacturaRequest.setAnoGravable(dataForm.getAnoGravable());
-   	descargaFacturaRequest.setNumObjeto(dataForm.getNumObjeto());
-   	descargaFacturaRequest.setTipoOperacion(dataForm.getTipoOperacion());
-   
-   	try
-   	{
-   		System.out.println("Request de trm/facturacion: " + descargaFacturaRequest);
-   		descargaFacturaResponse = gasolinaService.descargaFactura(descargaFacturaRequest, sdhDetalleGasolinaWS, LOG);
-			String infoResponse = null;
-			if(descargaFacturaResponse != null && descargaFacturaResponse.getPdf() != null) {
-				infoResponse = "longitud de respuesta: " + descargaFacturaResponse.getPdf().length();
-			}
-			System.out.println("Response de trm/facturacion: " + infoResponse);
-   
-   		dataForm.setErrores(descargaFacturaResponse.getErrores());
-   
-   		if (!descargaFacturaResponse.getErrores().get(0).getId_msj().equals(""))
-   		{
-   
-   			final ErrorEnWS error = new ErrorEnWS();
-   			error.setId_msj(descargaFacturaResponse.getErrores().get(0).getId_msj());
-   			error.setTxt_msj(descargaFacturaResponse.getErrores().get(0).getTxt_msj());
-   
-   			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
-   
-   			errores.add(error);
-   
-   			dataForm.setErrores(errores);
-   
-   		}
-   		else
-   		{
-   			if (descargaFacturaResponse != null && descargaFacturaResponse.getPdf() != null
-   					&& !descargaFacturaResponse.getPdf().isEmpty())
-   			{
-   				decodedBytes = new BASE64Decoder().decodeBuffer(descargaFacturaResponse.getPdf());
-   				final String fileName = dataForm.getNumObjeto() + "-" + numBP + ".pdf";
-   
-   				final InputStream is = new ByteArrayInputStream(decodedBytes);
-   
-   				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
-   				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
-   				mediaModel.setDeleteByCronjob(Boolean.TRUE);
-   				modelService.save(mediaModel);
-   				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
-   				modelService.refresh(mediaModel);
-   
-   				dataForm.setUrlDownload(mediaModel.getDownloadURL());
-   			}
-   
-   		}
+   	if(dataForm != null) {
+   		numBP = dataForm.getNumBP();
    	}
-   	catch (final Exception e)
-   	{
-   		LOG.error("error al descargar factura : " + e.getMessage());
-   
-   		final ErrorEnWS error = new ErrorEnWS();
-   
-   		error.setIdmsj("0");
-   		error.setTxtmsj("Hubo un error al descargar la declaración, por favor intentalo más tarde");
-   
-   		final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
-   
-   		errores.add(error);
-   
-   		dataForm.setErrores(errores);
-   
-   	}
+		llamarDescargaFactura(numBP,gasolinaService,dataForm);
+		
    	return dataForm;
    
    }
 
 
-	@RequestMapping(value = "/contribuyentes/descargafactura/facturacionPagos", method = RequestMethod.GET)
+	@RequestMapping(value = {"/contribuyentes/descargafactura/facturacionPagos"}, method = RequestMethod.GET)
 	@ResponseBody
 	public FacturacionForm facturacionPagos(final FacturacionForm dataForm, final HttpServletResponse response,
 			final HttpServletRequest request) throws CMSItemNotFoundException
@@ -353,9 +296,25 @@ public class DescargaFacturaPageController extends AbstractPageController
 
 		System.out.println("---------------- Hola entro al GET Facturacion Pagos --------------------------");
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
-		FacturacionPagosResponse facturacionPagosResponse = null;
-		final FacturacionPagosRequest facturacionPagosRequest = new FacturacionPagosRequest();
 		final String numBP = customerFacade.getCurrentCustomer().getNumBP();
+		llamarFacturacionPagos(numBP,gasolinaService,dataForm);
+		
+		
+		return dataForm;
+	}
+	
+	
+	/**
+	 * @param numBP 
+	 * @param gasolinaService 
+	 * @param dataForm 
+	 * 
+	 */
+	private void llamarFacturacionPagos(String numBP, SobreTasaGasolinaService gasolinaService, FacturacionForm dataForm)
+	{
+		final FacturacionPagosRequest facturacionPagosRequest = new FacturacionPagosRequest();
+		FacturacionPagosResponse facturacionPagosResponse = null;
+		
 		final byte[] decodedBytes;
 		String clavePeriodo = null;
 
@@ -401,6 +360,21 @@ public class DescargaFacturaPageController extends AbstractPageController
 			LOG.error("error al obtener fecturacionPagos : " + e.getMessage());
 
 		}
+		
+	}
+
+	@RequestMapping(value = {"/descargaFacturaVA/facturacionPagos"}, method = RequestMethod.GET)
+	@ResponseBody
+	public FacturacionForm facturacionPagosVA(final FacturacionForm dataForm, final HttpServletResponse response,
+			final HttpServletRequest request) throws CMSItemNotFoundException
+	{
+
+		System.out.println("---------------- Hola entro al GET Facturacion Pagos --------------------------");
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final String numBP = dataForm.getNumbp();
+		llamarFacturacionPagos(numBP,gasolinaService,dataForm);
+		
+		
 		return dataForm;
 
 	}
