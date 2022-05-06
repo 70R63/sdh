@@ -23,6 +23,11 @@ window.onload = function() {
 	
 }
 
+function populateTable(){
+	debugger;
+	 ACC.retencionesPracticadas.buscarInfoTable();
+}
+
  function showTable(){
 	 var pro = document.getElementById('tableData');
 	 var detail = document.getElementById('detailRetenedor');
@@ -34,7 +39,8 @@ window.onload = function() {
 	 var data = document.getElementById('tableData');
 	 var pro = document.getElementById('detailRetenedor');
 		pro.style.display = 'block'; 
-		data.style.display = 'none';
+// 		data.style.display = '';
  }
 </script>
+
 

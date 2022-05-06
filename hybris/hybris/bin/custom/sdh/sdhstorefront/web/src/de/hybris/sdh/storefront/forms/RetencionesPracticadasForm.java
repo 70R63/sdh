@@ -21,6 +21,8 @@ import java.util.Map;
 public class RetencionesPracticadasForm
 {
 	private Map<String, String> anioGravable;
+	private String numBP;
+	private String anio;
 
 	/**
 	 * @return the anioGravable
@@ -41,6 +43,56 @@ public class RetencionesPracticadasForm
 	public void setAnioGravable(final Map<String, String> anioGravable)
 	{
 		this.anioGravable = anioGravable;
+	}
+
+
+
+
+
+	/**
+	 * @return the numBP
+	 */
+	public String getNumBP()
+	{
+		return numBP;
+	}
+
+
+
+
+
+	/**
+	 * @param numBP
+	 *           the numBP to set
+	 */
+	public void setNumBP(final String numBP)
+	{
+		this.numBP = numBP;
+	}
+
+
+
+
+
+	/**
+	 * @return the anio
+	 */
+	public String getAnio()
+	{
+		return anio;
+	}
+
+
+
+
+
+	/**
+	 * @param anio
+	 *           the anio to set
+	 */
+	public void setAnio(final String anio)
+	{
+		this.anio = anio;
 	}
 
 
@@ -239,9 +291,6 @@ public class RetencionesPracticadasForm
 	{
 		this.obKey = obKey;
 	}
-
-
-
 
 
 }

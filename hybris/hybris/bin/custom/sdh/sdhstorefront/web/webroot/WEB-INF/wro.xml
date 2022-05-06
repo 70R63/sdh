@@ -105,6 +105,7 @@
 
 		<js>/_ui/responsive/common/js/acc.concesionarios.js</js>
 		<js>/_ui/responsive/common/js/acc.descargaFacturaVA.js</js>
+		<js>/_ui/responsive/common/js/acc.retencionesPracticadas.js</js>
 
     </group>
     

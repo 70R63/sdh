@@ -805,4 +805,7 @@
 	<alias alias="sdhAnularFormularioService" name="defaultSDHAnularFormularioService"/>
 	<bean name="defaultSDHAnularFormularioService" class="de.hybris.sdh.core.services.impl.DefaultSDHAnularFormularioService" />
 	
+	<alias alias="sdhRetencionesPracticadasConsService" name="defaultSDHRetencionesPracticadasConsService"/>
+	<bean name="defaultSDHRetencionesPracticadasConsService" class="de.hybris.sdh.core.services.impl.DefaultSDHRetencionesPracticadasConsService" />
+	
 </beans>

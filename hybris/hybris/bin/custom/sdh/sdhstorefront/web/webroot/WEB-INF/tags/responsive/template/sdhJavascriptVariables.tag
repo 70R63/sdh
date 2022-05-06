@@ -194,6 +194,7 @@
 			
 			ACC.descargaFacturaVABuscarInfoURL="<c:url value='/descargaFacturaVA/buscarInfo' />";
 			ACC.descargaFacturaVADescargarFacturaURL="<c:url value='/descargaFacturaVA/descargarFactura' />";
+			ACC.retencionesPracticadasTableURL="<c:url value='/contribuyentes/consultas/retencionespracticadas/info' />";
 
 			ACC.spacURL="<c:url value='/contribuyentes/spac' />";
 

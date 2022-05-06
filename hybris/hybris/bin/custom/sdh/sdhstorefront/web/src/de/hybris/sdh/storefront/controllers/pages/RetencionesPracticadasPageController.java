@@ -8,16 +8,20 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.pojos.requests.RetencionesPracticadasConsRequest;
+import de.hybris.sdh.core.pojos.responses.RetencionesPracticadasConsResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHRelacionPagosService;
+import de.hybris.sdh.core.services.SDHRetencionesPracticadasConsService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.RetencionesPracticadasForm;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -28,8 +32,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Maria Luisa
@@ -70,6 +81,9 @@ public class RetencionesPracticadasPageController extends AbstractPageController
 	@Resource(name = "sdhCustomerAccountService")
 	SDHCustomerAccountService sdhCustomerAccountService;
 
+	@Resource(name = "sdhRetencionesPracticadasConsService")
+	SDHRetencionesPracticadasConsService sdhRetencionesPracticadasConsService;
+
 
 
 	@RequestMapping(value =
@@ -82,7 +96,7 @@ public class RetencionesPracticadasPageController extends AbstractPageController
 		final StringBuffer requestURL = request.getRequestURL();
 		final String url2 = String.valueOf(requestURL);
 
-		RetencionesPracticadasForm retencionesPracticadasForm = new RetencionesPracticadasForm();
+		final RetencionesPracticadasForm retencionesPracticadasForm = new RetencionesPracticadasForm();
 		try
 		{
 			final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
@@ -112,10 +126,59 @@ public class RetencionesPracticadasPageController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
+
+	@RequestMapping(value = "/contribuyentes/consultas/retencionespracticadas/info", method = RequestMethod.GET)
+	@ResponseBody
+	public RetencionesPracticadasConsResponse buscarInfo(@ModelAttribute("dataForm")
+	final RetencionesPracticadasForm infoVista, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		System.out.println("------------------En GET buscar informacion------------------------");
+
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final RetencionesPracticadasForm retencionesPracticadasForm = new RetencionesPracticadasForm();
+
+		final RetencionesPracticadasConsRequest request = new RetencionesPracticadasConsRequest();
+		request.setNumBP(customerModel.getNumBP());
+		request.setAnogavable(infoVista.getAnio());
+
+
+		final ObjectMapper mapper = new ObjectMapper();
+		RetencionesPracticadasConsResponse retencionesPracticadasConsResponse = new RetencionesPracticadasConsResponse();
+
+
+
+		final String response = null;
+
+
+
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try
+		{
+			retencionesPracticadasConsResponse = mapper.readValue(
+					sdhRetencionesPracticadasConsService.retencionesPracticadasRequest(request),
+					RetencionesPracticadasConsResponse.class);
+
+
+		}
+		catch (final IOException e)
+		{
+			e.printStackTrace();
+		}
+
+
+		//		retencionesPracticadasConsResponse.setBasederetencion("prueba");
+		//		retencionesPracticadasConsResponse.setIdentificacionRetenedor("prueba");
+		//		retencionesPracticadasConsResponse.setNumbbpretenedor("prueba");
+		//		retencionesPracticadasConsResponse.setPeriodoReportado("prueba");
+		//		retencionesPracticadasConsResponse.setRetenedor("prueba");
+		//		retencionesPracticadasConsResponse.setTotalRetenciones("787481273891273981");
+
+		return retencionesPracticadasConsResponse;
+	}
 	private Map<String, String> obtainAnios()
 	{
-		//		Date dt = new Date();
-		//		int year = dt.getYear();
 		final Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
 		Map<String, String> elementos = null;
