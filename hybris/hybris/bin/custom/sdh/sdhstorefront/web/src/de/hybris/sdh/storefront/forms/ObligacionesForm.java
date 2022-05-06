@@ -36,6 +36,7 @@ public class ObligacionesForm
 
 	private List<ReteicaObligacionesHeader> headerreteica;
 	private String claveImpuesto;
+	private String numBP;
 	
 	
     private String indRepotePublicidad;
@@ -352,6 +353,22 @@ public class ObligacionesForm
 	public void setClaveImpuesto(final String claveImpuesto)
 	{
 		this.claveImpuesto = claveImpuesto;
+	}
+
+	/**
+	 * @return the numBP
+	 */
+	public String getNumBP()
+	{
+		return numBP;
+	}
+
+	/**
+	 * @param numBP the numBP to set
+	 */
+	public void setNumBP(String numBP)
+	{
+		this.numBP = numBP;
 	}
 
 

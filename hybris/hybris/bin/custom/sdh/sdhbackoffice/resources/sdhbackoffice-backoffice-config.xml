@@ -64,7 +64,9 @@
 			<list-view:column qualifier="category"/>
 			<list-view:column qualifier="question"/>
 			<list-view:column qualifier="searchCounter"/>
+			<list-view:column qualifier="creationtime"/>
 			<list-view:column qualifier="modifiedtime"/>
+			<list-view:column qualifier="savedValues"/>
 		</list-view:list-view>
 	</context>
 
@@ -474,6 +476,13 @@
 			</y:labels>
 		</y:base>
     </context>
+	<context merge-by="type" parent="GenericItem" type="SavedValues" component="base" module="sdhbackoffice">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+			<y:labels>
+				<y:label>user.uid</y:label>
+			</y:labels>
+		</y:base>
+	</context>
     <context merge-by="type" parent="GenericItem" type="BaseStore" component="editor-area">
         <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
             <editorArea:tab name="hmc.properties">
