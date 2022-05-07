@@ -389,38 +389,53 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 	final int currentQuestion, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		final ConsultaContribuyenteBPRequest bp = new ConsultaContribuyenteBPRequest();
-		bp.setNumBP(getSessionService().getAttribute("numBP"));
-
-		LOG.info(getSessionService().getAttribute("numBP"));
-
-		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse;
-		try
-		{
-			final ConsultaContribBPRequest validaContribRequest = new ConsultaContribBPRequest();
-			validaContribRequest.setNumBP(getSessionService().getAttribute("numBP"));
-			validaContribRequest.setIndicador("01,02");
-			sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP_simplificado_string(validaContribRequest),
-					SDHValidaMailRolResponse.class);
-
-			valorBuzon = sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getZZAUTOBUZONE();
-
-			if (sdhConsultaContribuyenteBPResponse != null && (sdhConsultaContribuyenteBPResponse.getRoles() == null
-					|| sdhConsultaContribuyenteBPResponse.getRoles().isEmpty()))
-			{
-				model.addAttribute("currentSection", "requestRols");
-				model.addAttribute("tramitesCreacionCasoInfo", new TramitesCreacionCasoInfo());
-				return getDefaultRegistrationPage(model);
-			}
+		String numBP = getSessionService().getAttribute("numBP");
+		if(numBP != null) {
+			numBP = numBP.trim();
 		}
-		catch (final IOException e)
-		{
-			LOG.info(e.getMessage());
-		}
+		bp.setNumBP(numBP);
 
+		LOG.info(numBP);
+
+		if(numBP != null && !StringUtils.isEmpty(numBP)) {
+   		final ObjectMapper mapper = new ObjectMapper();
+   		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+   
+   		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse;
+   		try
+   		{
+   			final ConsultaContribBPRequest validaContribRequest = new ConsultaContribBPRequest();
+   			validaContribRequest.setNumBP(numBP);
+   			validaContribRequest.setIndicador("01,02");
+   			sdhConsultaContribuyenteBPResponse = mapper.readValue(
+   					sdhConsultaContribuyenteBPService.consultaContribuyenteBP_simplificado_string(validaContribRequest),
+   					SDHValidaMailRolResponse.class);
+   
+   			if(sdhConsultaContribuyenteBPResponse != null && sdhConsultaContribuyenteBPResponse.getInfoContrib() != null && sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales() != null) {
+   				valorBuzon = sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getZZAUTOBUZONE();
+   			}
+   
+   			if (sdhConsultaContribuyenteBPResponse != null && (sdhConsultaContribuyenteBPResponse.getRoles() == null
+   					|| sdhConsultaContribuyenteBPResponse.getRoles().isEmpty()))
+   			{
+   				model.addAttribute("currentSection", "requestRols");
+   				model.addAttribute("tramitesCreacionCasoInfo", new TramitesCreacionCasoInfo());
+   				return getDefaultRegistrationPage(model);
+   			}
+   		}
+   		catch (final IOException e)
+   		{
+   			LOG.info("Error al consultar BP:"+e.getMessage());
+   		}
+   		
+		}else {
+			final String msgErrorConsultarBP = "Estimado contribuyente, ocurrio un error al consultar la información, por favor intente el proceso nuevamente";
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,msgErrorConsultarBP);
+			model.addAttribute("currentSection", "questionsSection");
+			model.addAttribute("SecretAnswerForm", new SecretAnswerForm());
+			
+			return "redirect:/login";
+		}
 
 
 
