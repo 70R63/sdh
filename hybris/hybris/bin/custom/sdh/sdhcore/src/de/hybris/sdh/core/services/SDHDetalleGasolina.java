@@ -9,6 +9,6 @@ package de.hybris.sdh.core.services;
  */
 public interface SDHDetalleGasolina
 {
-	String consultaWS(Object request, String confUrl, String confUser, String confPassword,
-			String wsNombre, String wsRequestMethod);
+	String consultaWS(Object request, String confUrl, String confUser, String confPassword, String wsNombre,
+			String wsRequestMethod, String condicionResponse);
 }
