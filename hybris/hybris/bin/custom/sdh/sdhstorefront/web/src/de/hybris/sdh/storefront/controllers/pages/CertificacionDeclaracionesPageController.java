@@ -300,7 +300,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 
 		System.out.println("Request para docs/imprimeCertif: " + decImprimeRequest);
 		decImprimeResponse = gasolinaService.certiDecImprimir(decImprimeRequest, sdhDetalleGasolinaWS, LOG);
-		System.out.println("Response de docs/imprimeCertif: " + decImprimeResponse);
+//		System.out.println("Response de docs/imprimeCertif: " + decImprimeResponse);
 		if (gasolinaService.ocurrioErrorDecImprime(decImprimeResponse) != true)
 		{
 

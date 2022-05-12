@@ -34,7 +34,7 @@ public class DefaultSDHDetalleGasolina implements SDHDetalleGasolina
 
 	@Override
 	public String consultaWS(final Object request, final String confUrl, final String confUser,
-			final String confPassword, final String wsNombre, final String wsRequestMethod)
+			final String confPassword, final String wsNombre, final String wsRequestMethod, final String condicionResponse)
 	{
 		final String urlString = configurationService.getConfiguration().getString(confUrl);//"sdh.detalleGasolina.url");
 		final String user = configurationService.getConfiguration().getString(confUser);//"sdh.detalleGasolina.user");
@@ -82,12 +82,20 @@ public class DefaultSDHDetalleGasolina implements SDHDetalleGasolina
 			}
 			final String result = builder.toString();
 
-			if ("https://vhshdpopci.hec.shd.gov.co:50001/RESTAdapter/trm/facturacion".equals(urlString))
+			if (condicionResponse != null)
 			{
-			}
-			else
-			{
-				LOG.info("response: " + result);
+				switch (condicionResponse)
+				{
+					case "0": //para no imprimir el contenido, solo la longitud, pensado en los pdfs
+						if (result != null)
+						{
+							LOG.info("response: longitud de la respuesta:" + result.length());
+						}
+						break;
+					default:
+						LOG.info("response: " + result);
+						break;
+				}
 			}
 
 			return result;

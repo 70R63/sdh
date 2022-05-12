@@ -1035,7 +1035,7 @@ public class SobreTasaGasolinaService
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			detalleGasolinaResponse = mapper.readValue(
-					sdhConsultaWS.consultaWS(detalleGasolinaRequest, confUrl, confUser, confPass, wsNombre, wsReqMet),
+					sdhConsultaWS.consultaWS(detalleGasolinaRequest, confUrl, confUser, confPass, wsNombre, wsReqMet,null),
 					DetGasResponse.class);
 		}
 		catch (final Exception e)
@@ -1058,7 +1058,7 @@ public class SobreTasaGasolinaService
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			consultaGasolinaResponse = mapper.readValue(
-					sdhConsultaWS.consultaWS(consultaGasolinaRequest, confUrl, confUser, confPass, wsNombre, wsReqMet),
+					sdhConsultaWS.consultaWS(consultaGasolinaRequest, confUrl, confUser, confPass, wsNombre, wsReqMet,null),
 					CalculaGasolinaResponse.class);
 		}
 		catch (final Exception e)
@@ -1080,7 +1080,7 @@ public class SobreTasaGasolinaService
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			responseInfo = mapper.readValue(sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet),
+			responseInfo = mapper.readValue(sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet,null),
 					DetallePagoResponse.class);
 		}
 		catch (final Exception e)
@@ -1096,14 +1096,15 @@ public class SobreTasaGasolinaService
 			final String nombreClase)
 	{
 		Object responseInfo = new Object();
+		String indicadorResponse = null;
 
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			indicadorResponse = obtenerIndicadorResponse(wsNombre);
 
-
-			String wsresponse = sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet);
+			String wsresponse = sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet,indicadorResponse);
 			//			wsresponse = wsresponse.replaceAll("\"ARCHIVOS\":\\{([\"])(.*)(\"\\})", "\"ARCHIVOS\":[{\"$2\"}]");
 			//			System.out.println(confUrl + ": " + wsresponse);
 			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.CreaCasosResponse"))
@@ -1154,6 +1155,27 @@ public class SobreTasaGasolinaService
 		}
 
 		return responseInfo;
+	}
+
+	/**
+	 * @param wsNombre
+	 * @return
+	 */
+	private String obtenerIndicadorResponse(String wsNombre)
+	{
+		String indicadorResponse = null;
+		
+		switch(wsNombre) {
+			case "trm/facturacion":
+			case "docs/imprimePago":
+			case "docs/imprimeCertif":
+				indicadorResponse = "0";
+				break;
+			default:
+				indicadorResponse = "";
+		}
+		
+		return indicadorResponse;
 	}
 
 	public String obtenerURL(final String origen, final String accion, final String destino)
