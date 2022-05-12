@@ -27,13 +27,13 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -95,8 +95,8 @@ public class SpacController extends AbstractPageController
 	final String anio, @RequestParam(value = "numform", defaultValue = "")
 	final String numform, @RequestParam(value = "numobj", defaultValue = "")
 	final String numobj, @RequestParam(value = "numbp", defaultValue = "")
-    final String numbp, @RequestParam(value = "tspac", defaultValue = "")
-    final String tspac, final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
+	final String numbp, @RequestParam(value = "tspac", defaultValue = "")
+	final String tspac, final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET SPAC --------------------------");
 
@@ -107,14 +107,14 @@ public class SpacController extends AbstractPageController
 		final SpacRequest spacrequest = new SpacRequest();
 
 		final SpacForm spacform = new SpacForm();
-        if (numbp == null || numbp.isEmpty())
-        {
-            spacrequest.setNumBP(customerModel.getNumBP());
-        }
-        else
-        {
-            spacrequest.setNumBP(numbp);
-        }
+		if (numbp == null || numbp.isEmpty())
+		{
+			spacrequest.setNumBP(customerModel.getNumBP());
+		}
+		else
+		{
+			spacrequest.setNumBP(numbp);
+		}
 
 		spacrequest.setAnoGravable(anio);
 		spacrequest.setObjetoContrato(numobj);
@@ -129,7 +129,8 @@ public class SpacController extends AbstractPageController
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
-			final String response = sdhSpacService.spacRequest(spacrequest);
+			String response = sdhSpacService.spacRequest(spacrequest);
+			response = response.replaceAll("(\"cuotas_Spac\":)(\\{)(.*)(\"\\})", "$1[{$3\"}]");
 
 			final SpacResponse spacresponse = mapper.readValue(response, SpacResponse.class);
 
@@ -156,7 +157,7 @@ public class SpacController extends AbstractPageController
 	final String anio, @RequestParam(value = "numform", defaultValue = "")
 	final String numform, @RequestParam(value = "numobj", defaultValue = "")
 	final String numobj, @RequestParam(value = "numbp", defaultValue = "")
-    final String numbp, final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
+	final String numbp, final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET SPAC PDF--------------------------");
 
@@ -167,14 +168,14 @@ public class SpacController extends AbstractPageController
 		final SpacPDFRequest spacpdfrequest = new SpacPDFRequest();
 
 		final SpacForm spacform = new SpacForm();
-        if (numbp == null || numbp.isEmpty())
-        {
-            spacpdfrequest.setNumBP(customerModel.getNumBP());
-        }
-        else
-        {
-            spacpdfrequest.setNumBP(numbp);
-        }
+		if (numbp == null || numbp.isEmpty())
+		{
+			spacpdfrequest.setNumBP(customerModel.getNumBP());
+		}
+		else
+		{
+			spacpdfrequest.setNumBP(numbp);
+		}
 
 		spacpdfrequest.setAnoGravable(anio);
 		spacpdfrequest.setObjetoContrato(numobj);

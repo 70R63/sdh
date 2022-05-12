@@ -12,7 +12,27 @@ public class ConsultarBPRequest
 	private String numid;
 	private String tipoid;
 	private String fechExp;
+	private String valida;
 
+
+
+
+	/**
+	 * @return the valida
+	 */
+	public String getValida()
+	{
+		return valida;
+	}
+
+	/**
+	 * @param valida
+	 *           the valida to set
+	 */
+	public void setValida(final String valida)
+	{
+		this.valida = valida;
+	}
 
 	/**
 	 * @return the numid
@@ -69,9 +89,31 @@ public class ConsultarBPRequest
 	@Override
 	public String toString()
 	{
-		return "{ \"numid\":\"" + numid + "\", \"tipoid\":\"" + tipoid + "\", \"fechExp\":\"" + fechExp + "\"}";
+		//return "{ \"numid\":\"" + numid + "\", \"tipoid\":\"" + tipoid + "\", \"fechExp\":\"" + fechExp + "\", \"valida\":\""
+		//		+ valida + "\" }";
+
+		final StringBuilder stringBuilder = new StringBuilder();
+
+		stringBuilder.append("{");
+		stringBuilder.append(obtenerValorJson("\"numid\":\"", numid, "\","));
+		stringBuilder.append(obtenerValorJson("\"tipoid\":\"", tipoid, "\","));
+		stringBuilder.append(obtenerValorJson("\"fechExp\":\"", fechExp, "\","));
+		stringBuilder.append(obtenerValorJson("\"valida\":\"", valida, "\""));
+		stringBuilder.append("}");
+
+		return stringBuilder.toString();
 	}
 
+
+	private String obtenerValorJson(final String cadena1, final String valor, final String cadena2)
+	{
+		String valorVariable = "";
+
+		valorVariable = (valor != null) ? cadena1 + valor + cadena2 : cadena1 + cadena2;
+
+
+		return valorVariable;
+	}
 
 
 

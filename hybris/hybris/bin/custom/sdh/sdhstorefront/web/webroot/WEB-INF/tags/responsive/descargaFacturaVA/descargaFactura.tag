@@ -82,7 +82,7 @@
 					<label class="control-label" id="chip/placa" style="display: block"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto0" /></label>
 					<label class="control-label" id="chip" style="display: none;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto1" /></label>
 					<label class="control-label" id="placa" style="display: none;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.opcionImpuesto2" /></label>
-					<input class="alto form-control" maxlength="30" size="30" type="text" value="" id="claveObjeto" style="text-transform: uppercase"/>
+					<input class="alto form-control" maxlength="20" size="20" type="text" value="" id="claveObjeto" style="text-transform: uppercase"/>
 					<label class="control-label" id="mensajeClaveObjeto" style="display: block;"><spring:theme code="descargaFacturaVA.descarga.etiqueta.mensajeClaveObjeto" /></label>
 				</div>
 			</div>
