@@ -1299,7 +1299,9 @@ ACC.opcionDeclaraciones = {
 				ACC.spinner.close();
                 if(data == "02"){
                     ACC.opcionDeclaraciones.promtConfirmation(url);
-                }else{
+                }else if(data == ""){
+					alert("Error al verificar: opcionUso. Por favor reintentar el proceso");
+				}else{
                     window.location.href = url;
                 }
            	},

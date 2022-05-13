@@ -176,30 +176,38 @@ public class SdhInfoObjectUseOptionController {
     }
 
     private String getOpcionUsoVehicular(final String anioGravable, final String placa){
-        final ObjectMapper mapper = new ObjectMapper();
-        final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
-        final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-        DetalleVehiculosResponse detalleVehiculosResponse = null;
-		String opcionUso = "01";
-
-        detalleVehiculosRequest.setBpNum(customerModel.getNumBP());
-        detalleVehiculosRequest.setPlaca(placa);
-        detalleVehiculosRequest.setAnioGravable(anioGravable);
-
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        try {
-            detalleVehiculosResponse = mapper.readValue(
-                    sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
-			if (detalleVehiculosResponse != null && detalleVehiculosResponse.getInfo_declara() != null
-					&& detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
-			{
-				opcionUso = detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso();
-			}
-        } catch (final IOException e) {
-            e.printStackTrace();
-        }
-
-		return opcionUso;
+      final ObjectMapper mapper = new ObjectMapper();
+      final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
+      final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+      DetalleVehiculosResponse detalleVehiculosResponse = null;
+      String opcionUso = "";
+      String numBP = customerModel.getNumBP();
+      if(numBP != null ) {
+      	numBP = numBP.trim();
+      }
+      		
+      
+      if(numBP != null && !org.apache.commons.lang3.StringUtils.isEmpty(numBP)) {
+         detalleVehiculosRequest.setBpNum(numBP);
+         detalleVehiculosRequest.setPlaca(placa);
+         detalleVehiculosRequest.setAnioGravable(anioGravable);
+      
+         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+         try {
+         	detalleVehiculosResponse = mapper.readValue(sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
+            if (detalleVehiculosResponse != null && detalleVehiculosResponse.getInfo_declara() != null && detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
+            {
+            	opcionUso = detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso();
+            }
+         } catch (final IOException e) {
+         	LOG.error("erro al consultar opcionUso de vehicular:"+ detalleVehiculosRequest +" error:"+e.getMessage());
+         }
+      }else {
+      	LOG.error("erro al consultar opcionUso de vehicular:"+ detalleVehiculosRequest);
+      }
+      
+      
+      return opcionUso;
     }
 
 	private String getOpcionUsoPublicidad(final String anioGravable, final String numResolu, final String tipoValla)
