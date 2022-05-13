@@ -120,11 +120,54 @@ ACC.descargaFacturaVA = {
 		}
 	 },
 	 
+	 descargaCertificadoPago : function (){
+		ACC.spinner.show();
+		var numBP = $("#pagarFacturaVABtn").attr("data-numbp");
+		var numObjeto = $("#claveObjeto").val().toUpperCase();
+		
+		if(ACC.descargaFacturaVA.validarAntesSubmitDescargaCertificadoPago(numBP,numObjeto)){
+			var dataActual = {};	
+			
+			dataActual.numBP = numBP;
+			dataActual.numObjeto = numObjeto;
+			
+			$.ajax({
+				url : ACC.descargaFacturaVADescargarCertificadoPagoURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					
+					ACC.spinner.close();
+					ACC.facturacion.manejarRespuesta(dataResponse);
+					
+				}
+			,
+				error : function() {
+					
+					ACC.spinner.close();
+					alert("Error procesar la solicitud de descarga de certificado de pago");	
+				}
+			});
+		}else{
+			ACC.spinner.close();
+		}
+	 },
+	 
 	 
 	 validarAntesSubmitDescargaFactura : function(numBP,anoGravable,numObjeto,tipoOperacion){
 		var validacionOK = false;
 		
 		if(numBP != null && anoGravable != null && numObjeto != null && tipoOperacion != null){
+			validacionOK = true;
+		}
+		
+		return validacionOK;
+	},
+	
+	validarAntesSubmitDescargaCertificadoPago : function(numBP,numObjeto){
+		var validacionOK = false;
+		
+		if(numBP != null && numObjeto != null){
 			validacionOK = true;
 		}
 		

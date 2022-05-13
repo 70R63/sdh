@@ -14,6 +14,7 @@ import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.CalculoReteIca2Request;
 import de.hybris.sdh.core.pojos.requests.CatalogoVehiculosRequest;
+import de.hybris.sdh.core.pojos.requests.CertificadoPagoVARequest;
 import de.hybris.sdh.core.pojos.requests.ConsCasosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsulPagosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
@@ -39,6 +40,7 @@ import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.CalculoReteIca2Response;
 import de.hybris.sdh.core.pojos.responses.CatalogoVehiculosResponse;
+import de.hybris.sdh.core.pojos.responses.CertificadoPagoVARequesponse;
 import de.hybris.sdh.core.pojos.responses.ConsCasosResponse;
 import de.hybris.sdh.core.pojos.responses.CreaCasosResponse;
 import de.hybris.sdh.core.pojos.responses.DelineacionUUsos;
@@ -1035,7 +1037,7 @@ public class SobreTasaGasolinaService
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			detalleGasolinaResponse = mapper.readValue(
-					sdhConsultaWS.consultaWS(detalleGasolinaRequest, confUrl, confUser, confPass, wsNombre, wsReqMet,null),
+					sdhConsultaWS.consultaWS(detalleGasolinaRequest, confUrl, confUser, confPass, wsNombre, wsReqMet),
 					DetGasResponse.class);
 		}
 		catch (final Exception e)
@@ -1058,7 +1060,7 @@ public class SobreTasaGasolinaService
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			consultaGasolinaResponse = mapper.readValue(
-					sdhConsultaWS.consultaWS(consultaGasolinaRequest, confUrl, confUser, confPass, wsNombre, wsReqMet,null),
+					sdhConsultaWS.consultaWS(consultaGasolinaRequest, confUrl, confUser, confPass, wsNombre, wsReqMet),
 					CalculaGasolinaResponse.class);
 		}
 		catch (final Exception e)
@@ -1080,7 +1082,7 @@ public class SobreTasaGasolinaService
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			responseInfo = mapper.readValue(sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet,null),
+			responseInfo = mapper.readValue(sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet),
 					DetallePagoResponse.class);
 		}
 		catch (final Exception e)
@@ -1096,15 +1098,14 @@ public class SobreTasaGasolinaService
 			final String nombreClase)
 	{
 		Object responseInfo = new Object();
-		String indicadorResponse = null;
 
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			indicadorResponse = obtenerIndicadorResponse(wsNombre);
 
-			String wsresponse = sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet,indicadorResponse);
+
+			String wsresponse = sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet);
 			//			wsresponse = wsresponse.replaceAll("\"ARCHIVOS\":\\{([\"])(.*)(\"\\})", "\"ARCHIVOS\":[{\"$2\"}]");
 			//			System.out.println(confUrl + ": " + wsresponse);
 			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.CreaCasosResponse"))
@@ -1145,6 +1146,10 @@ public class SobreTasaGasolinaService
 			{
 				wsresponse = wsresponse.replace("\"stringPDF\":", "\"pdf\":");
 			}
+			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.CertificadoPagoVARequesponse"))
+			{
+				wsresponse = wsresponse.replaceAll("(\"errores\":)(\\{)(.*)(\\}\\})", "$1[{$3}]}");
+			}
 
 
 			responseInfo = mapper.readValue(wsresponse, Class.forName(nombreClase));
@@ -1155,27 +1160,6 @@ public class SobreTasaGasolinaService
 		}
 
 		return responseInfo;
-	}
-
-	/**
-	 * @param wsNombre
-	 * @return
-	 */
-	private String obtenerIndicadorResponse(String wsNombre)
-	{
-		String indicadorResponse = null;
-		
-		switch(wsNombre) {
-			case "trm/facturacion":
-			case "docs/imprimePago":
-			case "docs/imprimeCertif":
-				indicadorResponse = "0";
-				break;
-			default:
-				indicadorResponse = "";
-		}
-		
-		return indicadorResponse;
 	}
 
 	public String obtenerURL(final String origen, final String accion, final String destino)
@@ -1944,10 +1928,10 @@ public class SobreTasaGasolinaService
 		}
 		else
 		{
-			for (ImpuestoDelineacionUrbana impuestoDelineacionUrbana : list)
+			for (final ImpuestoDelineacionUrbana impuestoDelineacionUrbana : list)
 			{
-				if(impuestoDelineacionUrbana != null 
-						&& impuestoDelineacionUrbana.getCdu() != null 
+				if(impuestoDelineacionUrbana != null
+						&& impuestoDelineacionUrbana.getCdu() != null
 						&& impuestoDelineacionUrbana.getCdu().equals(infoDelineacionInput.getSelectedCDU())
 						&& (!impuestoDelineacionUrbana.getFechaExp().equals("") && impuestoDelineacionUrbana.getFechaExp().length() > 6)) {
 					anoGravable = impuestoDelineacionUrbana.getFechaExp().substring(6);
@@ -2095,7 +2079,7 @@ public class SobreTasaGasolinaService
 			final List<ImpuestoDelineacionUrbana> dealineaciones = infoDelineacion.getValCont().getDelineacion();
 			final String cduSeleccionado = infoDelineacion.getInput().getSelectedCDU();
 
-			for (ImpuestoDelineacionUrbana impuestoDelineacionUrbana : dealineaciones)
+			for (final ImpuestoDelineacionUrbana impuestoDelineacionUrbana : dealineaciones)
 			{
 				if (impuestoDelineacionUrbana != null && impuestoDelineacionUrbana.getCdu()!= null && impuestoDelineacionUrbana.getCdu().equals(cduSeleccionado))
 				{
@@ -2562,6 +2546,24 @@ public class SobreTasaGasolinaService
 		return (DescargaFacturaResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet, LOG,
 				nombreClase);
 	}
+
+	public CertificadoPagoVARequesponse descargaCertificadoPagoVA(final CertificadoPagoVARequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		final String confUrl = "sdh.certificadoPagoVA.url";
+		final String confUser = "sdh.certificadoPagoVA.user";
+		final String confPass = "sdh.certificadoPagoVA.password";
+		final String wsNombre = "trm/certificadoPagoVA";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.CertificadoPagoVARequesponse";
+
+
+		return (CertificadoPagoVARequesponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet,
+				LOG,
+				nombreClase);
+	}
+
+
 
 	public FacturacionPagosResponse facturacionPagos(final FacturacionPagosRequest requestInfo,
 			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)

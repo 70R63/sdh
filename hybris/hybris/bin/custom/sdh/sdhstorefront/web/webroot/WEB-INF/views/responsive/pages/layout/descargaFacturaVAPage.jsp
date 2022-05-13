@@ -70,12 +70,17 @@ function buscarInfo(){
 	ACC.descargaFacturaVA.buscarInfo();
 }
 
+function descargaCertificadoPago(){
+	debugger;
+	ACC.descargaFacturaVA.descargaCertificadoPago();
+}
+
 function descargaFactura(){
 	ACC.descargaFacturaVA.descargaFactura();
 }
 
 function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar,cdu,placa,facilidad,montoFacilidad,pagoVoluntario){
-	
+	debugger;
 	var numBP = $("#pagarFacturaVABtn").attr("data-numbp");
 	var numDoc = $("#numDoc").val();
 	var tipoDoc =  $("#tipoDoc").val();

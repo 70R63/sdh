@@ -534,9 +534,13 @@
     }
 
     function validarDelineacionform(hiddenCdu){
+	
     	var btnSelected = document.getElementById("auxbtn_"+hiddenCdu);
-        var nowUrl = window.location.href;
-        var targetUrl = "infoObject/getUseOption?cdu="+hiddenCdu+"&taxType=6";
+        var nowUrl = window.location.href;		
+		var anioGravable = $('#anoGravable').val();
+		var tipoLicencia = $('#btnTpLic_'+hiddenCdu).val();
+		
+        var targetUrl = "infoObject/getUseOption?cdu="+hiddenCdu+"&taxType=6&anioGravable="+anioGravable+"&tipoLicencia="+tipoLicencia;
         currentUrl = nowUrl.replace("contribuyentes/presentar-declaracion",targetUrl);
 		
 		
@@ -544,7 +548,7 @@
             url : currentUrl,
            	type : "GET",
         	success : function(dataResponse) {
-               
+    
         		
         		
         		if ( dataResponse == "99"){
