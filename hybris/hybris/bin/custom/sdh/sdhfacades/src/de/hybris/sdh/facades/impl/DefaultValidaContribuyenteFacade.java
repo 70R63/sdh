@@ -55,30 +55,29 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 
 
 			DateTimeFormatter formatterOriginal = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			final DateTimeFormatter formatterConvertido = DateTimeFormatter.ofPattern("yyyyMMdd");
+			final DateTimeFormatter formatterConvertido = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-			final String fechaOriginal = request.getFechExp();
+			final String fechaOriginal = request.getFechaExp();
 
 			try
 			{
 				final String customerExpDate = LocalDate.parse(fechaOriginal, formatterOriginal).format(formatterConvertido);
-				request.setFechExp(customerExpDate);
+				request.setFechaExp(customerExpDate);
 			}
 			catch (final DateTimeParseException e1)
 			{
-				
 				formatterOriginal = DateTimeFormatter.ofPattern("ddMMyyyy");
 
-                try
-                {
-                    final String customerExpDate = LocalDate.parse(fechaOriginal, formatterOriginal).format(formatterConvertido);
-                    request.setFechExp(customerExpDate);
-                }
-                catch (final DateTimeParseException e2)
-                {
-                    LOG.error("Error parsing expedition date: " + fechaOriginal);
-                    return false;
-                }				
+				try
+				{
+					final String customerExpDate = LocalDate.parse(fechaOriginal, formatterOriginal).format(formatterConvertido);
+					request.setFechaExp(customerExpDate);
+				}
+				catch (final DateTimeParseException e2)
+				{
+					LOG.error("Error parsing expedition date: " + fechaOriginal);
+					return false;
+				}
 			}
 
 		}
@@ -130,14 +129,14 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 
 
 			final DateTimeFormatter formatterOriginal = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			final DateTimeFormatter formatterConvertido = DateTimeFormatter.ofPattern("yyyyMMdd");
+			final DateTimeFormatter formatterConvertido = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-			final String fechaOriginal = request.getFechExp();
+			final String fechaOriginal = request.getFechaExp();
 
 			try
 			{
 				final String customerExpDate = LocalDate.parse(fechaOriginal, formatterOriginal).format(formatterConvertido);
-				request.setFechExp(customerExpDate);
+				request.setFechaExp(customerExpDate);
 			}
 			catch (final DateTimeParseException e1)
 			{

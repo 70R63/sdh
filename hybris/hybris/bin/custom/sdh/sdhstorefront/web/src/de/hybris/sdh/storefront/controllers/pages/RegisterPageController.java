@@ -160,7 +160,7 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 
 		request.setNumid(searchUserForm.getDocumentNumber());
 		request.setTipoid(searchUserForm.getDocumentType());
-		request.setFechExp(searchUserForm.getExpeditionDate());
+		request.setFechaExp(searchUserForm.getExpeditionDate());
 
 
 		if (StringUtils.isNotBlank(request.getNumid()) && StringUtils.isNotBlank(request.getTipoid()))
@@ -400,7 +400,7 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 		if(numBP != null && !StringUtils.isEmpty(numBP)) {
    		final ObjectMapper mapper = new ObjectMapper();
    		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-   
+
    		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse;
    		try
    		{
@@ -410,11 +410,11 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
    			sdhConsultaContribuyenteBPResponse = mapper.readValue(
    					sdhConsultaContribuyenteBPService.consultaContribuyenteBP_simplificado_string(validaContribRequest),
    					SDHValidaMailRolResponse.class);
-   
+
    			if(sdhConsultaContribuyenteBPResponse != null && sdhConsultaContribuyenteBPResponse.getInfoContrib() != null && sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales() != null) {
    				valorBuzon = sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getZZAUTOBUZONE();
    			}
-   
+
    			if (sdhConsultaContribuyenteBPResponse != null && (sdhConsultaContribuyenteBPResponse.getRoles() == null
    					|| sdhConsultaContribuyenteBPResponse.getRoles().isEmpty()))
    			{
@@ -427,13 +427,13 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
    		{
    			LOG.info("Error al consultar BP:"+e.getMessage());
    		}
-   		
+
 		}else {
 			final String msgErrorConsultarBP = "Estimado contribuyente, ocurrio un error al consultar la información, por favor intente el proceso nuevamente";
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,msgErrorConsultarBP);
 			model.addAttribute("currentSection", "questionsSection");
 			model.addAttribute("SecretAnswerForm", new SecretAnswerForm());
-			
+
 			return "redirect:/login";
 		}
 

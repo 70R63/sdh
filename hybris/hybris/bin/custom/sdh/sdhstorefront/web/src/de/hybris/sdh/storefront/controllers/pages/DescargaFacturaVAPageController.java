@@ -208,7 +208,7 @@ public class DescargaFacturaVAPageController extends SDHAbstractPageController
 		requestConsultarBP.setTipoid(infoVista.getTipoDoc());
 
 		//requestConsultarBP.setFechExp(infoVista.getFechaExp());
-		requestConsultarBP.setFechExp("");
+		requestConsultarBP.setFechaExp("");
 		requestConsultarBP.setValida("X");
 
 		final String response = sdhValidaContribuyenteService.consultarBP(requestConsultarBP);
