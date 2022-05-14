@@ -10,6 +10,8 @@
  */
 package de.hybris.sdh.storefront.controllers.pages.forms;
 
+import de.hybris.sdh.storefront.forms.DescargaFacturaForm;
+
 public class DescargaFacturaVAForm
 {
 	private String claveImpuesto;
@@ -22,6 +24,7 @@ public class DescargaFacturaVAForm
 	private String nombreContribuyente;
 	private String numBP;
 	private String urlDownload;
+	private DescargaFacturaForm dataForm;
 	
 	
 	/**
@@ -164,6 +167,20 @@ public class DescargaFacturaVAForm
 	public void setUrlDownload(String urlDownload)
 	{
 		this.urlDownload = urlDownload;
+	}
+	/**
+	 * @return the dataForm
+	 */
+	public DescargaFacturaForm getDataForm()
+	{
+		return dataForm;
+	}
+	/**
+	 * @param dataForm the dataForm to set
+	 */
+	public void setDataForm(DescargaFacturaForm dataForm)
+	{
+		this.dataForm = dataForm;
 	}
 	@Override
 	public String toString()

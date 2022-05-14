@@ -111,9 +111,11 @@ ACC.facturacion = {
 		var strMensajeError = "";
 		if(dataResponse != null && dataResponse.errores != null ){
     		$.each(dataResponse.errores, function( index, value ) {
-    			if(value.txt_msj.trim() != ""){
+    			if(value != null && value.txt_msj != null && value.txt_msj.trim() != ""){
     				strMensajeError = strMensajeError + value.txt_msj+"<br>";
-    			}
+    			} else if(value != null && value.txtmsj != null && value.txtmsj.trim() != ""){
+					strMensajeError = strMensajeError + value.txtmsj+"<br>";
+				}
     		});
 		}
 		

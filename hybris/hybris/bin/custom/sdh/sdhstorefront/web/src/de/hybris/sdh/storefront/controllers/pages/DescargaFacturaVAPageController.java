@@ -5,6 +5,7 @@ package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.core.model.user.CustomerModel;
@@ -74,6 +75,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import de.hybris.sdh.storefront.forms.DescargaFacturaForm;
+import de.hybris.sdh.core.pojos.responses.DescargaFacturaResponse;
+import de.hybris.sdh.core.pojos.requests.DescargaFacturaRequest;
+import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
+
+import Decoder.BASE64Decoder;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 
 /**
@@ -234,48 +244,93 @@ public class DescargaFacturaVAPageController extends SDHAbstractPageController
 			infoVista.setNombreContribuyente(sdhConsultaContribuyenteBPResponse.getCompleteName());
 			if(sdhConsultaContribuyenteBPResponse.getInfoContrib() != null) {
 				infoVista.setNumBP(sdhConsultaContribuyenteBPResponse.getInfoContrib().getNumBP());
-				final ConsultaContribPredialRequest requestPredial = new ConsultaContribPredialRequest();
-				requestPredial.setNumBP(sdhConsultaContribuyenteBPResponse.getInfoContrib().getNumBP());
-				requestPredial.setAnioGravable(infoVista.getAnioGravable());
+				
+				DescargaFacturaForm dataForm = new DescargaFacturaForm();
+				dataForm.setAnoGravable(infoVista.getAnioGravable());
+				dataForm.setNumObjeto(infoVista.getClaveObjeto());
+				dataForm.setTipoOperacion("1");
+				llamarDescargaFactura(numBP,new SobreTasaGasolinaService(configurationService),dataForm);
 
-				switch (infoVista.getClaveImpuesto())
-				{
-					case "0001":
-						List<PredialResponse> listaPredial = sdhConsultaImpuesto_simplificado.consulta_impPredial2(requestPredial );
-						if(listaPredial!= null) {
-							listaPredial = listaPredial.stream()
-									.filter(d -> infoVista.getClaveObjeto().equals(d.getCHIP())).collect(Collectors.toList());
-							if(!listaPredial.isEmpty() && listaPredial.get(0)!=null) {
-								infoVista.setNumObjeto(listaPredial.get(0).getNumObjeto());
-							}
-
-
-						}
-						break;
-
-					case "0002":
-						List<ImpuestoVehiculos> listaVehiculos = sdhConsultaImpuesto_simplificado.consulta_impVehicular2(requestPredial );
-						if(listaVehiculos!= null) {
-							listaVehiculos = listaVehiculos.stream()
-									.filter(d -> infoVista.getClaveObjeto().equals(d.getPlaca())).collect(Collectors.toList());
-							if(!listaVehiculos.isEmpty() && listaVehiculos.get(0)!=null) {
-								infoVista.setNumObjeto(listaVehiculos.get(0).getNumObjeto());
-							}
-
-						}
-						break;
-
-					default:
-						infoVista.setNumObjeto("");
-						break;
+				infoVista.setDataForm(dataForm);
+				if(validarWSFacturacion(dataForm)) {
+					infoVista.setNumObjeto(obtenerNumObjeto(infoVista.getClaveImpuesto(),sdhConsultaContribuyenteBPResponse.getInfoContrib().getNumBP(),infoVista.getAnioGravable(),infoVista.getClaveObjeto()));					
 				}
-
 			}
 		}
 
 
 		return infoVista;
 	}
+
+	/**
+	 * @param dataForm
+	 * @return
+	 */
+	private boolean validarWSFacturacion(DescargaFacturaForm dataForm)
+	{
+		boolean validacionOK = true;
+		
+		for (ErrorEnWS errorEnWS : dataForm.getErrores())
+		{
+			if(errorEnWS != null && errorEnWS.getId_msj() != null && errorEnWS.getId_msj().equals("01")) {
+				validacionOK = false;
+			}
+		}
+			
+
+		return validacionOK;
+	}
+
+
+	/**
+	 * @param claveImpuesto
+	 * @param numBP
+	 * @param anioGravable
+	 * @return
+	 */
+	private String obtenerNumObjeto(String claveImpuesto, String numBP, String anioGravable, String claveObjeto)
+	{
+		String numObjeto = null;
+		
+		final ConsultaContribPredialRequest requestPredial = new ConsultaContribPredialRequest();
+		requestPredial.setNumBP(numBP);
+		requestPredial.setAnioGravable(anioGravable);
+
+		switch (claveImpuesto)
+		{
+			case "0001":
+				List<PredialResponse> listaPredial = sdhConsultaImpuesto_simplificado.consulta_impPredial2(requestPredial );
+				if(listaPredial!= null) {
+					listaPredial = listaPredial.stream()
+							.filter(d -> claveObjeto.equals(d.getCHIP())).collect(Collectors.toList());
+					if(!listaPredial.isEmpty() && listaPredial.get(0)!=null) {
+						numObjeto = listaPredial.get(0).getNumObjeto();
+					}
+
+
+				}
+				break;
+
+			case "0002":
+				List<ImpuestoVehiculos> listaVehiculos = sdhConsultaImpuesto_simplificado.consulta_impVehicular2(requestPredial );
+				if(listaVehiculos!= null) {
+					listaVehiculos = listaVehiculos.stream()
+							.filter(d -> claveObjeto.equals(d.getPlaca())).collect(Collectors.toList());
+					if(!listaVehiculos.isEmpty() && listaVehiculos.get(0)!=null) {
+						numObjeto = listaVehiculos.get(0).getNumObjeto();
+					}
+
+				}
+				break;
+
+			default:
+				numObjeto = "";
+				break;
+		}
+		
+		return numObjeto;
+	}
+
 
 	@RequestMapping(value = "/descargaFacturaVA/preparaPagoPSE", method = RequestMethod.POST)
 	public String handlePOST_PAG(@ModelAttribute("infoPreviaPSE")
@@ -621,7 +676,88 @@ public class DescargaFacturaVAPageController extends SDHAbstractPageController
 		}
 
 	}
+	
+	
+	private void llamarDescargaFactura(final String numBP, final SobreTasaGasolinaService gasolinaService, final DescargaFacturaForm dataForm)
+	{
+		DescargaFacturaResponse descargaFacturaResponse = null;
+		final DescargaFacturaRequest descargaFacturaRequest = new DescargaFacturaRequest();
+		byte[] decodedBytes;
+
+		dataForm.setErrores(null);
+		dataForm.setUrlDownload(null);
+		descargaFacturaRequest.setNumBP(numBP);
+		//		descargaFacturaRequest.setNumBP(dataForm.getNumBP());
+		descargaFacturaRequest.setAnoGravable(dataForm.getAnoGravable());
+		descargaFacturaRequest.setNumObjeto(dataForm.getNumObjeto());
+		descargaFacturaRequest.setTipoOperacion(dataForm.getTipoOperacion());
+
+		try
+		{
+			System.out.println("Request de trm/facturacion: " + descargaFacturaRequest);
+			descargaFacturaResponse = gasolinaService.descargaFactura(descargaFacturaRequest, sdhDetalleGasolinaWS, LOG);
+			String infoResponse = null;
+			if(descargaFacturaResponse != null && descargaFacturaResponse.getPdf() != null) {
+				infoResponse = "longitud de respuesta: " + descargaFacturaResponse.getPdf().length();
+			}
+			System.out.println("Response de trm/facturacion: " + infoResponse);
+
+			dataForm.setErrores(descargaFacturaResponse.getErrores());
+
+			if (!descargaFacturaResponse.getErrores().get(0).getId_msj().equals(""))
+			{
+
+				final ErrorEnWS error = new ErrorEnWS();
+				error.setId_msj(descargaFacturaResponse.getErrores().get(0).getId_msj());
+				error.setTxt_msj(descargaFacturaResponse.getErrores().get(0).getTxt_msj());
+
+				final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+
+				errores.add(error);
+
+				dataForm.setErrores(errores);
+
+			}
+			else
+			{
+				if (descargaFacturaResponse != null && descargaFacturaResponse.getPdf() != null
+						&& !descargaFacturaResponse.getPdf().isEmpty())
+				{
+					decodedBytes = new BASE64Decoder().decodeBuffer(descargaFacturaResponse.getPdf());
+					final String fileName = dataForm.getNumObjeto() + "-" + numBP + ".pdf";
+
+					final InputStream is = new ByteArrayInputStream(decodedBytes);
+
+					final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
+					mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
+					mediaModel.setDeleteByCronjob(Boolean.TRUE);
+					modelService.save(mediaModel);
+					mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
+					modelService.refresh(mediaModel);
+
+					dataForm.setUrlDownload(mediaModel.getDownloadURL());
+				}
+
+			}
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error al descargar factura : " + e.getMessage());
+
+			final ErrorEnWS error = new ErrorEnWS();
+
+			error.setIdmsj("0");
+			error.setTxtmsj("Hubo un error al descargar la declaración, por favor intentalo más tarde");
+
+			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+
+			errores.add(error);
+
+			dataForm.setErrores(errores);
+
+		}
+
+	}
 
 
 }
-
