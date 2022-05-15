@@ -62,7 +62,23 @@ public class DefaultSDHDetalleGasolina implements SDHDetalleGasolina
 			LOG.info("conectando a: " + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+
+			if (condicionResponse != null)
+			{
+				switch (condicionResponse)
+				{
+					case "1":
+					case "3": //para no imprimir el contenido, solo la longitud, pensado en los pdfs
+						if (request != null)
+						{
+							LOG.info("wsNombre: " + wsNombre + " request: longitud del request:" + request.toString().length());
+						}
+						break;
+					default:
+						LOG.info("wsNombre: " + wsNombre + " request: " + requestJson);
+						break;
+				}
+			}
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
@@ -86,14 +102,15 @@ public class DefaultSDHDetalleGasolina implements SDHDetalleGasolina
 			{
 				switch (condicionResponse)
 				{
-					case "0": //para no imprimir el contenido, solo la longitud, pensado en los pdfs
+					case "2":
+					case "3": //para no imprimir el contenido, solo la longitud, pensado en los pdfs
 						if (result != null)
 						{
-							LOG.info("response: longitud de la respuesta:" + result.length());
+							LOG.info("wsNombre: " + wsNombre + " response: longitud de la respuesta:" + result.length());
 						}
 						break;
 					default:
-						LOG.info("response: " + result);
+						LOG.info("wsNombre: " + wsNombre + " response: " + result);
 						break;
 				}
 			}

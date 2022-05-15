@@ -152,4 +152,22 @@ public class CreaCasosArchiRequest
 
 		return valorVariable;
 	}
+
+
+	public String toString_reducido()
+	{
+		final StringBuilder stringBuilder = new StringBuilder();
+
+		stringBuilder.append("{");
+		stringBuilder.append(obtenerValorJson("\"ZZWCC_DEPEND_ID\":\"", this.getZZWCC_DEPEND_ID(), "\","));
+		stringBuilder.append(obtenerValorJson("\"ZZWCC_SERIE_ID\":\"", this.getZZWCC_SERIE_ID(), "\","));
+		stringBuilder.append(obtenerValorJson("\"ZZWCC_SSERIE_ID\":\"", this.getZZWCC_SSERIE_ID(), "\","));
+		stringBuilder.append(obtenerValorJson("\"ZZWCC_TIPODOC_ID\":\"", this.getZZWCC_TIPODOC_ID(), "\","));
+		stringBuilder.append(obtenerValorJson("\"ZZWCC_DESC_TIPODOC\":\"", this.getZZWCC_DESC_TIPODOC(), "\","));
+		stringBuilder.append(obtenerValorJson("\"ZZWCC_ARCIVO\":\"", Integer.toString(this.getZZWCC_ARCIVO().length()), "\""));
+		stringBuilder.append("}");
+
+
+		return stringBuilder.toString();
+	}
 }

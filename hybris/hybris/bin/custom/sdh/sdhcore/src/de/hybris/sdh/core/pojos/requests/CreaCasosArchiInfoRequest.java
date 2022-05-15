@@ -48,6 +48,21 @@ public class CreaCasosArchiInfoRequest
 	}
 
 
+	public String toString_reducido()
+	{
+		String returnValue = null;
+		if (archivos != null)
+		{
+			final StringBuffer sb = new StringBuffer();
+			for (final CreaCasosArchiRequest creaCasosArchiRequest : archivos)
+			{
+				sb.append(creaCasosArchiRequest.toString_reducido());
+			}
+			returnValue = "CreaCasosArchiInfoRequest [archivos=" + sb.toString() + "]";
+		}
+
+		return returnValue;
+	}
 
 
 }

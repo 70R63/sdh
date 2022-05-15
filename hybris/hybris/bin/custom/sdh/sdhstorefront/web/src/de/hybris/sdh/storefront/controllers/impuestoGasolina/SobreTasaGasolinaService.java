@@ -1169,13 +1169,19 @@ public class SobreTasaGasolinaService
 	 */
 	private String obtenerIndicadorResponse(final String wsNombre)
 	{
-		String indicadorResponse = null;
+		String indicadorResponse = null; 
+		//1 -> se imprime el request
+		//2 -> se imprime la longitud del response
+		//3 -> se imprime la longitud del request y del response
 
 		switch(wsNombre) {
 			case "trm/facturacion":
 			case "docs/imprimePago":
 			case "docs/imprimeCertif":
-				indicadorResponse = "0";
+				indicadorResponse = "2";
+				break;
+			case "crm/creaCasos":
+				indicadorResponse = "3";
 				break;
 			default:
 				indicadorResponse = "";
@@ -2295,7 +2301,7 @@ public class SobreTasaGasolinaService
 		final String confUrl = "sdh.creaCasos.url";
 		final String confUser = "sdh.creaCasos.user";
 		final String confPass = "sdh.creaCasos.password";
-		final String wsNombre = "crm_creaCasos";
+		final String wsNombre = "crm/creaCasos";
 		final String wsReqMet = "POST";
 		final String nombreClase = "de.hybris.sdh.core.pojos.responses.CreaCasosResponse";
 
