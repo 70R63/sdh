@@ -58,6 +58,7 @@ ACC.descargaFacturaVA = {
 	
 	validarDespuesSubmit_buscarInfo : function(dataResponse){
 		var validacionOK = true;
+		var apareceMsjValido = false;
 		var strMensajeError = "";
 		
 		if(dataResponse == null || ( dataResponse != null && dataResponse.dataForm == null)){
@@ -67,10 +68,16 @@ ACC.descargaFacturaVA = {
 			$.each(dataResponse.dataForm.errores,function (index, value)
         	{
         		if(value != null && value.id_msj != ""){
+					if(value.id_msj == "99"){
+						apareceMsjValido = true;
+					}
 					validacionOK = false;
 					strMensajeError = strMensajeError + "<br>" + value.txt_msj;
 				}
         	});
+		}
+		if(apareceMsjValido == true){
+			validacionOK = true;
 		}
     	if(strMensajeError != ""){
 			$("#dialogMensajes" ).dialog( "open" );
