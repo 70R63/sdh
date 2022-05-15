@@ -703,20 +703,15 @@ public class DescargaFacturaVAPageController extends SDHAbstractPageController
 			System.out.println("Response de trm/facturacion: " + infoResponse);
 
 			dataForm.setErrores(descargaFacturaResponse.getErrores());
+			List<ErrorEnWS> erroresResponse = null; 
 
-			if (!descargaFacturaResponse.getErrores().get(0).getId_msj().equals(""))
+			if(descargaFacturaResponse != null && descargaFacturaResponse.getErrores()!= null) {
+				erroresResponse = descargaFacturaResponse.getErrores().stream()
+						.filter(d -> StringUtils.isNotBlank(d.getId_msj())).collect(Collectors.toList());
+			}
+			if (erroresResponse != null && !erroresResponse.isEmpty())
 			{
-
-				final ErrorEnWS error = new ErrorEnWS();
-				error.setId_msj(descargaFacturaResponse.getErrores().get(0).getId_msj());
-				error.setTxt_msj(descargaFacturaResponse.getErrores().get(0).getTxt_msj());
-
-				final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
-
-				errores.add(error);
-
-				dataForm.setErrores(errores);
-
+				dataForm.setErrores(erroresResponse);
 			}
 			else
 			{

@@ -58,15 +58,23 @@ ACC.descargaFacturaVA = {
 	
 	validarDespuesSubmit_buscarInfo : function(dataResponse){
 		var validacionOK = true;
+		var strMensajeError = "";
 		
-		if(dataResponse != null && dataResponse.dataForm != null && dataResponse.dataForm.errores != null){
+		if(dataResponse == null || ( dataResponse != null && dataResponse.dataForm == null)){
+			validacionOK = false;
+			strMensajeError = "Error al consultar la información";
+		}else if(dataResponse != null && dataResponse.dataForm != null && dataResponse.dataForm.errores != null){
 			$.each(dataResponse.dataForm.errores,function (index, value)
         	{
-        		if(value != null && value.id_msj == "01"){
+        		if(value != null && value.id_msj != ""){
 					validacionOK = false;
-					alert(value.txt_msj);
+					strMensajeError = strMensajeError + "<br>" + value.txt_msj;
 				}
         	});
+		}
+    	if(strMensajeError != ""){
+			$("#dialogMensajes" ).dialog( "open" );
+			$("#dialogMensajesContent").html(strMensajeError);
 		}
 		
 		return validacionOK;
