@@ -1176,6 +1176,7 @@ public class SobreTasaGasolinaService
 
 		switch(wsNombre) {
 			case "trm/facturacion":
+			case "trm/certificadoPagoVA":
 			case "docs/imprimePago":
 			case "docs/imprimeCertif":
 				indicadorResponse = "2";

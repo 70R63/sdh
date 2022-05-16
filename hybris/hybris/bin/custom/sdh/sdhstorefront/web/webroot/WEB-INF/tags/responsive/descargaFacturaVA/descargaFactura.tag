@@ -122,7 +122,7 @@
 							<label class="control-label labeltabletd" for=""> <spring:theme code="Descargar factura" /></label>
 						</th>
 						<c:if test="${true}">
-						<th class="col-md-1" style="text-align: center">
+						<th id="pagarFacturaVABtnHeader" class="col-md-1" style="text-align: center">
 							<label class="control-label labeltabletd" for=""> <spring:theme code="Pagar" /></label>
 						</th>
 						<th class="col-md-1" style="text-align: center">
@@ -137,7 +137,7 @@
 						<input type="hidden" value="numBP" id="numBP" disabled="disabled"/></td>
 						<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura()" data-claveImpuesto="." data-nombreObjeto="." data-anioGrav="" data-numobjeto=""></img></td>
 						<c:if test="${true}">
-						<td><button class="renglonBeneficios" id="pagarFacturaVABtn" type="button" data-impuesto="." data-numbp="." data-aniogravable="." data-numobjeto="." >Pagar</button></td>
+						<td id="pagarFacturaVABtnTd" ><button class="renglonBeneficios" id="pagarFacturaVABtn" type="button" data-impuesto="." data-numbp="." data-aniogravable="." data-numobjeto="." >Pagar</button></td>
 						<td><button class="renglonBeneficios" id="certificadoPagoVABtn" type="button"  onclick="descargaCertificadoPago()" data-numbp="." data-numobjeto="." >Imprimir</button></td>
 						</c:if>
 					</tr>
