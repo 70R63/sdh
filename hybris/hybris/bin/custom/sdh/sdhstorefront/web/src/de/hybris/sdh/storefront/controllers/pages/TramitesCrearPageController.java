@@ -403,9 +403,9 @@ public class TramitesCrearPageController extends AbstractPageController
 				creaCasosRequest.setAtributos(atributos);
 				creaCasosRequest.setArchivosInfo(archivosInfo);
 
-				System.out.println("Request para crm/creaCasos: " + creaCasosRequest);
+				System.out.println("Request para crm/creaCasos: " + creaCasosRequest.toString_reducido());
 				creaCasosResponse = gasolinaService.creacionCaso(creaCasosRequest, sdhDetalleGasolinaWS, LOG);
-				System.out.println("Response de crm/creaCasos: " + creaCasosResponse);
+//				System.out.println("Response de crm/creaCasos: " + creaCasosResponse);
 				//				if (gasolinaService.ocurrioErrorCreacionCaso(creaCasosResponse) != true)
 				//				{
 				//				}

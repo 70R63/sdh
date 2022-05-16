@@ -224,4 +224,91 @@ public class CreaCasosRequest
 		return valorRetorno;
 	}
 
+
+	public String toString_reducido()
+	{
+		final StringBuilder stringBuilder = new StringBuilder();
+
+		if (this.getAtributos() != null || this.getArchivosInfo() != null)
+		{
+			{
+				stringBuilder.append("{");
+				stringBuilder.append("\"parametros\":");
+				stringBuilder.append("[");
+				if (this.getAtributos() != null)
+				{
+					stringBuilder.append(this.preparaAtributos_reducido());
+				}
+				stringBuilder.append("]");
+				stringBuilder.append("}");
+			}
+		}
+
+
+		return stringBuilder.toString();
+	}
+
+
+	private String preparaAtributos_reducido()
+	{
+		final StringBuilder stringBuilder = new StringBuilder();
+		CreaCasosAtribRequest infoAtrib;
+		String valorRetorno = "";
+		int indiceArchivo = 0;
+
+
+		if (this.getAtributos() != null)
+		{
+			for (int i = 0; i < this.getAtributos().size() - 1; i++)
+			{
+				infoAtrib = this.getAtributos().get(i);
+				stringBuilder.append("{");
+				stringBuilder.append(infoAtrib.toString());
+				stringBuilder.append(preparaArchivoIndice_reducido(indiceArchivo));
+				indiceArchivo++;
+				stringBuilder.append("}");
+				stringBuilder.append(",");
+			}
+			infoAtrib = this.getAtributos().get(this.getAtributos().size() - 1);
+			stringBuilder.append("{");
+			stringBuilder.append(infoAtrib.toString());
+			stringBuilder.append(preparaArchivoIndice_reducido(indiceArchivo));
+			indiceArchivo++;
+			stringBuilder.append("}");
+		}
+
+		if (stringBuilder.toString() != null)
+		{
+			valorRetorno = stringBuilder.toString();
+		}
+
+		return valorRetorno;
+	}
+
+
+	private String preparaArchivoIndice_reducido(final int indiceArchivo)
+	{
+		final StringBuilder stringBuilder = new StringBuilder();
+		String valorRetorno = "";
+
+
+		if (this.getArchivosInfo() != null && this.getArchivosInfo().getArchivos() != null
+				&& this.getArchivosInfo().getArchivos().size() > 0 && indiceArchivo < this.getArchivosInfo().getArchivos().size())
+		{
+			stringBuilder.append(",");
+			stringBuilder.append("\"archivos\":");
+			stringBuilder.append("[");
+			stringBuilder
+					.append("longitud del archivo: " + this.getArchivosInfo().getArchivos().get(indiceArchivo).toString().length());
+			stringBuilder.append("]");
+		}
+
+		if (stringBuilder.toString() != null)
+		{
+			valorRetorno = stringBuilder.toString();
+		}
+
+		return valorRetorno;
+	}
+
 }

@@ -116,7 +116,6 @@ public class PreparacionPagoPSE extends AbstractPageController
 
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/impuestos/preparaPagoPSE", method = RequestMethod.GET)
-	@RequireHardLogIn
 	public String handleGET_PAG(@ModelAttribute("psePaymentForm")
 	final PSEPaymentForm psePaymentForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes, final HttpServletRequest request, final HttpServletResponse response)
@@ -138,7 +137,6 @@ public class PreparacionPagoPSE extends AbstractPageController
 
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/impuestos/preparaPagoPSE", method = RequestMethod.POST)
-	@RequireHardLogIn
 	public String handlePOST_PAG(@ModelAttribute("infoPreviaPSE")
 	final InfoPreviaPSE infoPreviaPSE, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException

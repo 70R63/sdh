@@ -720,7 +720,7 @@ public class PSEPaymentController extends AbstractPageController
 
 			System.out.println("Request para docs/imprimePago: " + impresionRequest);
 			impresionResponse = gasolinaService.certiPagosImprimir(impresionRequest, sdhDetalleGasolinaWS, LOG);
-			System.out.println("Response de docs/imprimePago: " + impresionResponse);
+//			System.out.println("Response de docs/imprimePago: " + impresionResponse);
 
 
 			if (gasolinaService.ocurrioErrorImprimePago(impresionResponse) != true)

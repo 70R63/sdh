@@ -84,7 +84,8 @@ public class SdhInfoObjectUseOptionController {
 			@RequestParam(value = "numRadicado", defaultValue = "")
 			final String numRadicado, @RequestParam(value = "numResolu", defaultValue = "")
 			final String numResolu, @RequestParam(value = "tipoValla", defaultValue = "")
-			final String tipoValla)
+			final String tipoValla, @RequestParam(value = "tipoLicencia", defaultValue = "")
+			final String tipoLicencia)
 	{
         String opcionUso = null;
         LOG.info("getUseOptionSobreTasaGasolina");
@@ -106,7 +107,7 @@ public class SdhInfoObjectUseOptionController {
             }else if(taxType.equals("2")){ //Vehicular
 				opcionUso = this.getOpcionUsoVehicular(anioGravable, placa);
             }else if(taxType.equals("6")){ //Delineacion Urbana
-				opcionUso = this.getOpcionUsoDelineacionUrbana(cdu, numRadicado);
+				opcionUso = this.getOpcionUsoDelineacionUrbana(cdu, numRadicado, anioGravable, tipoLicencia);
             }
         }
 
@@ -175,30 +176,38 @@ public class SdhInfoObjectUseOptionController {
     }
 
     private String getOpcionUsoVehicular(final String anioGravable, final String placa){
-        final ObjectMapper mapper = new ObjectMapper();
-        final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
-        final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-        DetalleVehiculosResponse detalleVehiculosResponse = null;
-		String opcionUso = "01";
-
-        detalleVehiculosRequest.setBpNum(customerModel.getNumBP());
-        detalleVehiculosRequest.setPlaca(placa);
-        detalleVehiculosRequest.setAnioGravable(anioGravable);
-
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        try {
-            detalleVehiculosResponse = mapper.readValue(
-                    sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
-			if (detalleVehiculosResponse != null && detalleVehiculosResponse.getInfo_declara() != null
-					&& detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
-			{
-				opcionUso = detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso();
-			}
-        } catch (final IOException e) {
-            e.printStackTrace();
-        }
-
-		return opcionUso;
+      final ObjectMapper mapper = new ObjectMapper();
+      final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
+      final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+      DetalleVehiculosResponse detalleVehiculosResponse = null;
+      String opcionUso = "";
+      String numBP = customerModel.getNumBP();
+      if(numBP != null ) {
+      	numBP = numBP.trim();
+      }
+      		
+      
+      if(numBP != null && !org.apache.commons.lang3.StringUtils.isEmpty(numBP)) {
+         detalleVehiculosRequest.setBpNum(numBP);
+         detalleVehiculosRequest.setPlaca(placa);
+         detalleVehiculosRequest.setAnioGravable(anioGravable);
+      
+         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+         try {
+         	detalleVehiculosResponse = mapper.readValue(sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
+            if (detalleVehiculosResponse != null && detalleVehiculosResponse.getInfo_declara() != null && detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
+            {
+            	opcionUso = detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso();
+            }
+         } catch (final IOException e) {
+         	LOG.error("erro al consultar opcionUso de vehicular:"+ detalleVehiculosRequest +" error:"+e.getMessage());
+         }
+      }else {
+      	LOG.error("erro al consultar opcionUso de vehicular:"+ detalleVehiculosRequest);
+      }
+      
+      
+      return opcionUso;
     }
 
 	private String getOpcionUsoPublicidad(final String anioGravable, final String numResolu, final String tipoValla)
@@ -230,7 +239,8 @@ public class SdhInfoObjectUseOptionController {
 		return opcionUso;
 	}
 
-	private String getOpcionUsoDelineacionUrbana(final String cdu, final String numRadicado)
+	private String getOpcionUsoDelineacionUrbana(final String cdu, final String numRadicado, final String anioGravable,
+			final String tipoLicencia)
 	{
 		String opcionUso = null;
         final InfoObjetoDelineacionRequest infoDelineacionRequest = new InfoObjetoDelineacionRequest();
@@ -248,12 +258,18 @@ public class SdhInfoObjectUseOptionController {
 
         infoDelineacionRequest.setNumBP(customerModel.getNumBP());
         //infoDelineacionRequest.setAnoGravable(gasolinaService.getAnoGravableDU(detalleContribuyente.getDelineacion(), infoDelineacionInput));
-		infoDelineacionRequest.setAnoGravable("2020");
 		//infoDelineacionRequest.setAnoGravable(anioGravable);
 		infoDelineacionRequest.setAnoGravable("");
         infoDelineacionRequest.setCdu(cdu);
         infoDelineacionRequest.setNumRadicado(numRadicado);
-        infoDelineacionRequest.setTipoLicencia("");
+		if (tipoLicencia != null)
+		{
+		infoDelineacionRequest.setTipoLicencia(tipoLicencia);
+		}
+		else
+		{
+			infoDelineacionRequest.setTipoLicencia("");
+		}
         LOG.info(infoDelineacionRequest);
 
         infoDelineacionResponse =  gasolinaService.consultaInfoDelineacion(infoDelineacionRequest, sdhDetalleGasolinaWS, LOG);
@@ -264,12 +280,14 @@ public class SdhInfoObjectUseOptionController {
 			opcionUso = infoDelineacionResponse.getInfoDeclara().getOpcionUso();
 		}
 
-		if (numRadicado.isEmpty() && (
-		infoDelineacionResponse.getInfoDeclara().getFechaEjecutaria().equals("00/00/0000")
-				|| infoDelineacionResponse.getInfoDeclara().getFechaEjecutaria() == null))
+		if (!tipoLicencia.contentEquals("02"))
 		{
-			opcionUso = "99";
-			LOG.info("Fecha ejecutoria vacia por tanto la opcion uso es 99");
+			if (numRadicado.isEmpty() && (infoDelineacionResponse.getInfoDeclara().getFechaEjecutaria().equals("00/00/0000")
+					|| infoDelineacionResponse.getInfoDeclara().getFechaEjecutaria() == null))
+			{
+				opcionUso = "99";
+				LOG.info("Fecha ejecutoria vacia por tanto la opcion uso es 99");
+			}
 		}
 
 

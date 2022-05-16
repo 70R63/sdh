@@ -194,7 +194,12 @@
 			
 			ACC.descargaFacturaVABuscarInfoURL="<c:url value='/descargaFacturaVA/buscarInfo' />";
 			ACC.descargaFacturaVADescargarFacturaURL="<c:url value='/descargaFacturaVA/descargarFactura' />";
+
 			ACC.retencionesPracticadasTableURL="<c:url value='/contribuyentes/consultas/retencionespracticadas/info' />";
+
+			ACC.descargaFacturaVADescargarCertificadoPagoURL="<c:url value='/descargaFacturaVA/descargarCertificadoPago' />";
+			ACC.descargaFacturaVAPagosURL="<c:url value='/descargaFacturaVA/facturacionPagos' />";
+
 
 			ACC.spacURL="<c:url value='/contribuyentes/spac' />";
 
@@ -217,6 +222,8 @@
 		  	ACC.currentURL = "${currentURL}";
 		  	
 		  	ACC.inicialURL = "<c:url value='/' />";
+		  	
+		  	ACC.retencionesPracticadasTableURL="<c:url value='/contribuyentes/consultas/retencionespracticadas/info' />";
 
 		  	
 			
@@ -300,7 +307,7 @@
 			ACC.configCatalogos_cantidadAnios_Consultas_ica="${configCatalogos_cantidadAnios_Consultas_ica}";
 			ACC.configCatalogos_cantidadAnios_Consultas_gasolina="${configCatalogos_cantidadAnios_Consultas_gasolina}";
 			ACC.configCatalogos_cantidadAnios_Consultas_delineacion="${configCatalogos_cantidadAnios_Consultas_delineacion}";
-			ACC.configCatalogos_cantidadAnios_Consultas_publicidad="${configCatalogos_cantidadAnios_Consultas_publicidad}";	
+			ACC.configCatalogos_cantidadAnios_Consultas_publicidad="${configCatalogos_cantidadAnios_Consultas_publicidad}";
 			ACC.configCatalogos_cantidadAnios_CertiDeclaracion="${configCatalogos_cantidadAnios_CertiDeclaracion}";
 			ACC.configCatalogos_cantidadAnios_CertiDeclaracion_vehiculos="${configCatalogos_cantidadAnios_CertiDeclaracion_vehiculos}";
 			ACC.configCatalogos_cantidadAnios_CertiDeclaracion_delineacion="${configCatalogos_cantidadAnios_CertiDeclaracion_delineacion}";

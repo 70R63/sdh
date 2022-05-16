@@ -34,7 +34,7 @@ public class DefaultSDHDetalleGasolina implements SDHDetalleGasolina
 
 	@Override
 	public String consultaWS(final Object request, final String confUrl, final String confUser,
-			final String confPassword, final String wsNombre, final String wsRequestMethod)
+			final String confPassword, final String wsNombre, final String wsRequestMethod, final String condicionResponse)
 	{
 		final String urlString = configurationService.getConfiguration().getString(confUrl);//"sdh.detalleGasolina.url");
 		final String user = configurationService.getConfiguration().getString(confUser);//"sdh.detalleGasolina.user");
@@ -62,7 +62,23 @@ public class DefaultSDHDetalleGasolina implements SDHDetalleGasolina
 			LOG.info("conectando a: " + conn.toString());
 
 			final String requestJson = request.toString();
-			LOG.info("request: " + requestJson);
+
+			if (condicionResponse != null)
+			{
+				switch (condicionResponse)
+				{
+					case "1":
+					case "3": //para no imprimir el contenido, solo la longitud, pensado en los pdfs
+						if (request != null)
+						{
+							LOG.info("wsNombre: " + wsNombre + " request: longitud del request:" + request.toString().length());
+						}
+						break;
+					default:
+						LOG.info("wsNombre: " + wsNombre + " request: " + requestJson);
+						break;
+				}
+			}
 
 			final OutputStream os = conn.getOutputStream();
 			os.write(requestJson.getBytes());
@@ -82,12 +98,21 @@ public class DefaultSDHDetalleGasolina implements SDHDetalleGasolina
 			}
 			final String result = builder.toString();
 
-			if ("https://vhshdpopci.hec.shd.gov.co:50001/RESTAdapter/trm/facturacion".equals(urlString))
+			if (condicionResponse != null)
 			{
-			}
-			else
-			{
-				LOG.info("response: " + result);
+				switch (condicionResponse)
+				{
+					case "2":
+					case "3": //para no imprimir el contenido, solo la longitud, pensado en los pdfs
+						if (result != null)
+						{
+							LOG.info("wsNombre: " + wsNombre + " response: longitud de la respuesta:" + result.length());
+						}
+						break;
+					default:
+						LOG.info("wsNombre: " + wsNombre + " response: " + result);
+						break;
+				}
 			}
 
 			return result;

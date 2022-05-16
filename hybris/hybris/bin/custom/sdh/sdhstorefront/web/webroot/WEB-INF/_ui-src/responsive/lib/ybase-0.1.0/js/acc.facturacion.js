@@ -1,6 +1,6 @@
 ACC.facturacion = {
 
-	_autoload : ["bindBuscar","bindPagarFacturaBtn"],
+	_autoload : ["bindBuscar","bindPagarFacturaBtn","bindPagarFacturaVABtn"],
 
 	
 	bindBuscar : function(){
@@ -111,9 +111,11 @@ ACC.facturacion = {
 		var strMensajeError = "";
 		if(dataResponse != null && dataResponse.errores != null ){
     		$.each(dataResponse.errores, function( index, value ) {
-    			if(value.txt_msj.trim() != ""){
+    			if(value != null && value.txt_msj != null && value.txt_msj.trim() != ""){
     				strMensajeError = strMensajeError + value.txt_msj+"<br>";
-    			}
+    			} else if(value != null && value.txtmsj != null && value.txtmsj.trim() != ""){
+					strMensajeError = strMensajeError + value.txtmsj+"<br>";
+				}
     		});
 		}
 		
@@ -181,7 +183,7 @@ ACC.facturacion = {
 			var numObjeto = $(this).data("numobjeto");
 			var anioGravable = $(this).data("aniogravable");
 			
-			if(ACC.facturacion.validarAntesSubmitWSPagar(impuesto,anoGravable,numObjeto)){
+			if(ACC.facturacion.validarAntesSubmitWSPagar(impuesto,anioGravable,numObjeto)){
 				ACC.spinner.show();
 				var dataActual = {};	
 				
@@ -191,6 +193,45 @@ ACC.facturacion = {
 				dataActual.anioGravable = anioGravable;
 				$.ajax({
 					url : ACC.facturacionPagosURL,
+					data : dataActual,
+					type : "GET",
+					success : function(dataResponse) {
+						ACC.spinner.close();
+						ACC.facturacion.manejarRespuestaWSPagar(dataActual,dataResponse);
+					},
+					error : function() {
+						ACC.spinner.close();
+						alert("Error procesar la solicitud de proceso de pago");	
+					}
+				});
+			}
+			
+			
+		});
+		
+		
+	},
+	
+	
+	bindPagarFacturaVABtn : function(){
+		$(document).on("click", "#pagarFacturaVABtn", function(e) {
+			e.preventDefault();
+			
+			var impuesto = $("#pagarFacturaVABtn").attr("data-impuesto");
+			var numbp = $("#pagarFacturaVABtn").attr("data-numbp");
+			var numObjeto =  $("#pagarFacturaVABtn").attr("data-numobjeto");
+			var anioGravable = $("#pagarFacturaVABtn").attr("data-aniogravable");
+			
+			if(ACC.facturacion.validarAntesSubmitWSPagar(impuesto,anioGravable,numObjeto)){
+				ACC.spinner.show();
+				var dataActual = {};	
+				
+				dataActual.impuesto = impuesto;
+				dataActual.numbp = numbp;
+				dataActual.numObjeto = numObjeto;
+				dataActual.anioGravable = anioGravable;
+				$.ajax({
+					url : ACC.descargaFacturaVAPagosURL,
 					data : dataActual,
 					type : "GET",
 					success : function(dataResponse) {

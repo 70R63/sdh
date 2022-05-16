@@ -76,7 +76,12 @@ public class SdhTrmPdfController {
 
 		System.out.println("Request para trm/reportesPDF: " + request);
 		final TrmPdfResponse response = sdhTrmReportesPDF.getPDF(request);
-		System.out.println("Response para trm/reportesPDF: " + response);
+		if(response != null && response.getPdf() != null ) {
+			System.out.println("Response para trm/reportesPDF: longitud de la cadena: " + response.getPdf().length());
+		}else {
+			System.out.println("Response para trm/reportesPDF: ERROR");
+		}
+		
 		return response;
     }
 }

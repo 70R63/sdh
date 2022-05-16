@@ -11,8 +11,28 @@ public class ConsultarBPRequest
 {
 	private String numid;
 	private String tipoid;
-	private String fechExp;
+	private String fechaExp;
+	private String valida;
 
+
+
+
+	/**
+	 * @return the valida
+	 */
+	public String getValida()
+	{
+		return valida;
+	}
+
+	/**
+	 * @param valida
+	 *           the valida to set
+	 */
+	public void setValida(final String valida)
+	{
+		this.valida = valida;
+	}
 
 	/**
 	 * @return the numid
@@ -48,30 +68,53 @@ public class ConsultarBPRequest
 		this.tipoid = tipoid;
 	}
 
+
+
 	/**
-	 * @return the fechExp
+	 * @return the fechaExp
 	 */
-	public String getFechExp()
+	public String getFechaExp()
 	{
-		return fechExp;
+		return fechaExp;
 	}
 
 	/**
-	 * @param fechExp
-	 *           the fechExp to set
+	 * @param fechaExp
+	 *           the fechaExp to set
 	 */
-	public void setFechExp(final String fechExp)
+	public void setFechaExp(final String fechaExp)
 	{
-		this.fechExp = fechExp;
+		this.fechaExp = fechaExp;
 	}
-
 
 	@Override
 	public String toString()
 	{
-		return "{ \"numid\":\"" + numid + "\", \"tipoid\":\"" + tipoid + "\", \"fechExp\":\"" + fechExp + "\"}";
+		//return "{ \"numid\":\"" + numid + "\", \"tipoid\":\"" + tipoid + "\", \"fechExp\":\"" + fechExp + "\", \"valida\":\""
+		//		+ valida + "\" }";
+
+		final StringBuilder stringBuilder = new StringBuilder();
+
+		stringBuilder.append("{");
+		stringBuilder.append(obtenerValorJson("\"numid\":\"", numid, "\","));
+		stringBuilder.append(obtenerValorJson("\"tipoid\":\"", tipoid, "\","));
+		stringBuilder.append(obtenerValorJson("\"fechaExp\":\"", fechaExp, "\","));
+		stringBuilder.append(obtenerValorJson("\"valida\":\"", valida, "\""));
+		stringBuilder.append("}");
+
+		return stringBuilder.toString();
 	}
 
+
+	private String obtenerValorJson(final String cadena1, final String valor, final String cadena2)
+	{
+		String valorVariable = "";
+
+		valorVariable = (valor != null) ? cadena1 + valor + cadena2 : cadena1 + cadena2;
+
+
+		return valorVariable;
+	}
 
 
 
