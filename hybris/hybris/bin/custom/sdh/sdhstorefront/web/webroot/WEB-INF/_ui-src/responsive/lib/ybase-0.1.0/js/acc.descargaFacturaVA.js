@@ -95,7 +95,8 @@ ACC.descargaFacturaVA = {
 			$("#pagarFacturaVABtn").attr("data-impuesto",dataResponse.claveImpuesto);
 			$("#pagarFacturaVABtn").attr("data-numbp",dataResponse.numBP);
 			$("#pagarFacturaVABtn").attr("data-aniogravable",dataResponse.anioGravable);
-			$("#pagarFacturaVABtn").attr("data-numobjeto",dataResponse.numObjeto);
+			$("#pagarFacturaVABtn").attr("data-numobjeto",$("#claveObjeto").val().toUpperCase());
+			
 			
 			var dow = document.getElementById('table-download');
 			ACC.opcionDeclaraciones.establecerEstiloDisplay(dow,'block');
