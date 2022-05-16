@@ -5,7 +5,7 @@ ACC.descargaFacturaVA = {
 	
 	buscarInfo : function (){
 		ACC.spinner.show();
-		
+		debugger;
 		var dow = document.getElementById('table-download');
 		ACC.opcionDeclaraciones.establecerEstiloDisplay(dow,'none');
 		
@@ -14,6 +14,7 @@ ACC.descargaFacturaVA = {
 		$("#pagarFacturaVABtn").attr("data-numbp","");
 		$("#pagarFacturaVABtn").attr("data-aniogravable","");
 		$("#pagarFacturaVABtn").attr("data-numobjeto","");
+		$("#downloadHelper").attr("href","");
 		
 		var tipoDoc = $("#tipoDoc").val();
 		var numDoc = $("#numDoc").val();
@@ -34,9 +35,12 @@ ACC.descargaFacturaVA = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
-					
+					debugger;
 					ACC.spinner.close();
-					ACC.descargaFacturaVA.manejarRespuesta_buscarInfo(dataResponse);
+					if(ACC.descargaFacturaVA.validarDespuesSubmit_buscarInfo(dataResponse)){
+						ACC.descargaFacturaVA.manejarRespuesta_buscarInfo(dataResponse);
+					}
+					
 					
 				}
 			,
@@ -50,6 +54,38 @@ ACC.descargaFacturaVA = {
 			ACC.spinner.close();
 		}
 	 },
+	
+	
+	validarDespuesSubmit_buscarInfo : function(dataResponse){
+		var validacionOK = true;
+		var apareceMsjValido = false;
+		var strMensajeError = "";
+		
+		if(dataResponse == null || ( dataResponse != null && dataResponse.dataForm == null)){
+			validacionOK = false;
+			strMensajeError = "Error al consultar la información";
+		}else if(dataResponse != null && dataResponse.dataForm != null && dataResponse.dataForm.errores != null){
+			$.each(dataResponse.dataForm.errores,function (index, value)
+        	{
+        		if(value != null && value.id_msj != ""){
+					if(value.id_msj == "99"){
+						apareceMsjValido = true;
+					}
+					validacionOK = false;
+					strMensajeError = strMensajeError + "<br>" + value.txt_msj;
+				}
+        	});
+		}
+		if(apareceMsjValido == true){
+			validacionOK = true;
+		}
+    	if(strMensajeError != ""){
+			$("#dialogMensajes" ).dialog( "open" );
+			$("#dialogMensajesContent").html(strMensajeError);
+		}
+		
+		return validacionOK;
+	},
 	 
 	 
 	manejarRespuesta_buscarInfo : function(dataResponse){
@@ -59,10 +95,14 @@ ACC.descargaFacturaVA = {
 			$("#pagarFacturaVABtn").attr("data-impuesto",dataResponse.claveImpuesto);
 			$("#pagarFacturaVABtn").attr("data-numbp",dataResponse.numBP);
 			$("#pagarFacturaVABtn").attr("data-aniogravable",dataResponse.anioGravable);
-			$("#pagarFacturaVABtn").attr("data-numobjeto",dataResponse.numObjeto);
+			$("#pagarFacturaVABtn").attr("data-numobjeto",$("#claveObjeto").val().toUpperCase());
 			
 			var dow = document.getElementById('table-download');
 			ACC.opcionDeclaraciones.establecerEstiloDisplay(dow,'block');
+			
+			if(dataResponse.dataForm != null && dataResponse.dataForm.urlDownload !=null && dataResponse.dataForm.urlDownload != ""){
+    			$("#downloadHelper").attr("href",dataResponse.dataForm.urlDownload);
+			}
 		}else{
 			alert("Error al consultar la información del contribuyente");
 		}
@@ -84,40 +124,7 @@ ACC.descargaFacturaVA = {
 	
 	
 	descargaFactura : function (){
-		ACC.spinner.show();
-		var numBP = $("#pagarFacturaVABtn").attr("data-numbp");
-		var anoGravable = $("#pagarFacturaVABtn").attr("data-aniogravable");
-		var numObjeto = $("#claveObjeto").val().toUpperCase();
-		var tipoOperacion = "1";
-		
-		if(ACC.descargaFacturaVA.validarAntesSubmitDescargaFactura(numBP,anoGravable,numObjeto,tipoOperacion)){
-			var dataActual = {};	
-			
-			dataActual.numBP = numBP;
-			dataActual.anoGravable = anoGravable;
-			dataActual.numObjeto = numObjeto;
-			dataActual.tipoOperacion = tipoOperacion;
-			
-			$.ajax({
-				url : ACC.descargaFacturaVADescargarFacturaURL,
-				data : dataActual,
-				type : "GET",
-				success : function(dataResponse) {
-					
-					ACC.spinner.close();
-					ACC.facturacion.manejarRespuesta(dataResponse);
-					
-				}
-			,
-				error : function() {
-					
-					ACC.spinner.close();
-					alert("Error procesar la solicitud de descarga de factura");	
-				}
-			});
-		}else{
-			ACC.spinner.close();
-		}
+		document.getElementById("downloadHelper").click();
 	 },
 	 
 	 descargaCertificadoPago : function (){
