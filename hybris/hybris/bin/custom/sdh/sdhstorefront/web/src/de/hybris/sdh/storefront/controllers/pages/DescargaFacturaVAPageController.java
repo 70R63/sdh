@@ -252,9 +252,9 @@ public class DescargaFacturaVAPageController extends SDHAbstractPageController
 				llamarDescargaFactura(numBP,new SobreTasaGasolinaService(configurationService),dataForm);
 
 				infoVista.setDataForm(dataForm);
-				if(validarWSFacturacion(dataForm)) {
-					infoVista.setNumObjeto(obtenerNumObjeto(infoVista.getClaveImpuesto(),sdhConsultaContribuyenteBPResponse.getInfoContrib().getNumBP(),infoVista.getAnioGravable(),infoVista.getClaveObjeto()));					
-				}
+//				if(validarWSFacturacion(dataForm)) {
+//					infoVista.setNumObjeto(obtenerNumObjeto(infoVista.getClaveImpuesto(),sdhConsultaContribuyenteBPResponse.getInfoContrib().getNumBP(),infoVista.getAnioGravable(),infoVista.getClaveObjeto()));					
+//				}
 			}
 		}
 
@@ -713,26 +713,22 @@ public class DescargaFacturaVAPageController extends SDHAbstractPageController
 			{
 				dataForm.setErrores(erroresResponse);
 			}
-			else
+			if (descargaFacturaResponse != null && descargaFacturaResponse.getPdf() != null
+					&& !descargaFacturaResponse.getPdf().isEmpty())
 			{
-				if (descargaFacturaResponse != null && descargaFacturaResponse.getPdf() != null
-						&& !descargaFacturaResponse.getPdf().isEmpty())
-				{
-					decodedBytes = new BASE64Decoder().decodeBuffer(descargaFacturaResponse.getPdf());
-					final String fileName = dataForm.getNumObjeto() + "-" + numBP + ".pdf";
+				decodedBytes = new BASE64Decoder().decodeBuffer(descargaFacturaResponse.getPdf());
+				final String fileName = dataForm.getNumObjeto() + "-" + numBP + ".pdf";
 
-					final InputStream is = new ByteArrayInputStream(decodedBytes);
+				final InputStream is = new ByteArrayInputStream(decodedBytes);
 
-					final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
-					mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
-					mediaModel.setDeleteByCronjob(Boolean.TRUE);
-					modelService.save(mediaModel);
-					mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
-					modelService.refresh(mediaModel);
+				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
+				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
+				mediaModel.setDeleteByCronjob(Boolean.TRUE);
+				modelService.save(mediaModel);
+				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
+				modelService.refresh(mediaModel);
 
-					dataForm.setUrlDownload(mediaModel.getDownloadURL());
-				}
-
+				dataForm.setUrlDownload(mediaModel.getDownloadURL());
 			}
 		}
 		catch (final Exception e)

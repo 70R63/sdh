@@ -61,6 +61,9 @@ ACC.descargaFacturaVA = {
 		var apareceMsjValido = false;
 		var strMensajeError = "";
 		
+		$( "#pagarFacturaVABtnHeader" ).show();
+	    $( "#pagarFacturaVABtnTd" ).show();
+		
 		if(dataResponse == null || ( dataResponse != null && dataResponse.dataForm == null)){
 			validacionOK = false;
 			strMensajeError = "Error al consultar la información";
@@ -70,6 +73,8 @@ ACC.descargaFacturaVA = {
         		if(value != null && value.id_msj != ""){
 					if(value.id_msj == "99"){
 						apareceMsjValido = true;
+						$( "#pagarFacturaVABtnHeader" ).hide();
+						$( "#pagarFacturaVABtnTd" ).hide();
 					}
 					validacionOK = false;
 					strMensajeError = strMensajeError + "<br>" + value.txt_msj;
@@ -95,7 +100,8 @@ ACC.descargaFacturaVA = {
 			$("#pagarFacturaVABtn").attr("data-impuesto",dataResponse.claveImpuesto);
 			$("#pagarFacturaVABtn").attr("data-numbp",dataResponse.numBP);
 			$("#pagarFacturaVABtn").attr("data-aniogravable",dataResponse.anioGravable);
-			$("#pagarFacturaVABtn").attr("data-numobjeto",dataResponse.numObjeto);
+			$("#pagarFacturaVABtn").attr("data-numobjeto",$("#claveObjeto").val().toUpperCase());
+			
 			
 			var dow = document.getElementById('table-download');
 			ACC.opcionDeclaraciones.establecerEstiloDisplay(dow,'block');
