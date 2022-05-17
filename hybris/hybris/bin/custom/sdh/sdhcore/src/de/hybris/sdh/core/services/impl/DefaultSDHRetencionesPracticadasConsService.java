@@ -5,6 +5,7 @@ package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.RetencionesPracticadasConsRequest;
+import de.hybris.sdh.core.pojos.requests.RetencionesPracticadasReporteRequest;
 import de.hybris.sdh.core.services.SDHRetencionesPracticadasConsService;
 
 import java.io.BufferedReader;
@@ -97,6 +98,72 @@ public class DefaultSDHRetencionesPracticadasConsService implements SDHRetencion
 		catch (final Exception e)
 		{
 			LOG.error("There was an error validating a retenciones practicadas: " + e.getMessage());
+		}
+
+
+
+		// XXX Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String retencionesPracticadasReporteRequest(final RetencionesPracticadasReporteRequest request)
+	{
+		final String urlString = configurationService.getConfiguration().getString("sdh.retenciones.practicadas,reporte.url");
+		final String user = configurationService.getConfiguration().getString("sdh.retenciones.practicadas.reporte.user");
+		final String password = configurationService.getConfiguration().getString("sdh.retenciones.practicadas.reporte.password");
+
+		if (StringUtils.isAnyBlank(urlString, user, password))
+		{
+			throw new RuntimeException("Empty credentials");
+		}
+
+		try
+		{
+			final URL url = new URL(urlString);
+
+			final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+
+			final String authString = user + ":" + password;
+			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
+			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setUseCaches(false);
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			LOG.info("connection to: " + conn.toString());
+
+			final String requestJson = request.toString();
+			LOG.info("request: " + requestJson);
+
+			final OutputStream os = conn.getOutputStream();
+			os.write(requestJson.getBytes());
+			os.flush();
+			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
+			{
+				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+
+			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+			final StringBuilder builder = new StringBuilder();
+
+			String inputLine;
+			while ((inputLine = br.readLine()) != null)
+			{
+				builder.append(inputLine);
+			}
+
+
+			final String result = builder.toString();
+			//			LOG.info("response: " + result);
+
+			return result;
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("There was an error validating a retenciones practicadas reporte: " + e.getMessage());
 		}
 
 

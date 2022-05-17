@@ -12,7 +12,9 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.RetencionesPracticadasConsRequest;
+import de.hybris.sdh.core.pojos.requests.RetencionesPracticadasReporteRequest;
 import de.hybris.sdh.core.pojos.responses.RetencionesPracticadasConsResponse;
+import de.hybris.sdh.core.pojos.responses.RetencionesPracticadasReporteResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
@@ -167,16 +169,47 @@ public class RetencionesPracticadasPageController extends AbstractPageController
 			e.printStackTrace();
 		}
 
-
-		//		retencionesPracticadasConsResponse.setBasederetencion("prueba");
-		//		retencionesPracticadasConsResponse.setIdentificacionRetenedor("prueba");
-		//		retencionesPracticadasConsResponse.setNumbbpretenedor("prueba");
-		//		retencionesPracticadasConsResponse.setPeriodoReportado("prueba");
-		//		retencionesPracticadasConsResponse.setRetenedor("prueba");
-		//		retencionesPracticadasConsResponse.setTotalRetenciones("787481273891273981");
-
 		return retencionesPracticadasConsResponse;
 	}
+
+	@RequestMapping(value = "/contribuyentes/consultas/retencionespracticadas/reporte", method = RequestMethod.GET)
+	@ResponseBody
+	public RetencionesPracticadasReporteResponse descargaReporte(@ModelAttribute("dataForm")
+	final RetencionesPracticadasForm infoVista, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		System.out.println("------------------En GET Descargar Reporte------------------------");
+
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final RetencionesPracticadasForm retencionesPracticadasForm = new RetencionesPracticadasForm();
+
+		final RetencionesPracticadasReporteRequest request = new RetencionesPracticadasReporteRequest();
+		request.setNumBP(customerModel.getNumBP());
+		request.setReporte(infoVista.getReporte());
+
+
+		final ObjectMapper mapper = new ObjectMapper();
+		RetencionesPracticadasReporteResponse retencionesPracticadasReporteResponse = new RetencionesPracticadasReporteResponse();
+
+		final String response = null;
+
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try
+		{
+			retencionesPracticadasReporteResponse = mapper.readValue(
+					sdhRetencionesPracticadasConsService.retencionesPracticadasReporteRequest(request),
+					RetencionesPracticadasReporteResponse.class);
+
+		}
+		catch (final IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		return retencionesPracticadasReporteResponse;
+	}
+
 	private Map<String, String> obtainAnios()
 	{
 		final Calendar c = Calendar.getInstance();

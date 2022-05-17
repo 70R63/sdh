@@ -24,8 +24,11 @@ window.onload = function() {
 }
 
 function populateTable(){
-	debugger;
 	 ACC.retencionesPracticadas.buscarInfoTable();
+}
+
+function downloadPDF(){
+	 ACC.retencionesPracticadas.downloadPDF();
 }
 
  function showTable(){

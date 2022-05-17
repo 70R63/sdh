@@ -225,7 +225,7 @@
 		  	
 		  	ACC.retencionesPracticadasTableURL="<c:url value='/contribuyentes/consultas/retencionespracticadas/info' />";
 
-		  	
+		  	ACC.retencionesPracticadasReporteURL ="<c:url value='/contribuyentes/consultas/retencionespracticadas/reporte'/>";
 			
 		  	<c:if test="${not empty reteICATemplateURL}">
 		  		ACC.reteICADownloadTemplate ="${reteICATemplateURL}";

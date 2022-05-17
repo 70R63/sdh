@@ -3,14 +3,6 @@
  */
 package de.hybris.sdh.storefront.forms;
 
-import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
-import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
-import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
-import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
-import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
-import de.hybris.sdh.core.pojos.responses.PredialResponse;
-
-import java.util.List;
 import java.util.Map;
 
 
@@ -23,6 +15,10 @@ public class RetencionesPracticadasForm
 	private Map<String, String> anioGravable;
 	private String numBP;
 	private String anio;
+
+	private String impuesto;
+	private String reporte;
+	private String idretenedor;
 
 	/**
 	 * @return the anioGravable
@@ -99,22 +95,12 @@ public class RetencionesPracticadasForm
 
 
 
-	private List<PredialResponse> predial;
-	private List<ImpuestoVehiculos> vehicular;
-	private ImpuestoICA impuestoICA;
-	private List<ImpuestoGasolina> gasolina;
-	private List<ImpuestoDelineacionUrbana> delineacion;
-	private List<ImpuestoPublicidadExterior> publicidadExt;
-
-
-	private String obKey;
-
-
-
-
-	public RetencionesPracticadasForm()
+	/**
+	 * @return the impuesto
+	 */
+	public String getImpuesto()
 	{
-
+		return impuesto;
 	}
 
 
@@ -122,11 +108,12 @@ public class RetencionesPracticadasForm
 
 
 	/**
-	 * @return the predial
+	 * @param impuesto
+	 *           the impuesto to set
 	 */
-	public List<PredialResponse> getPredial()
+	public void setImpuesto(final String impuesto)
 	{
-		return predial;
+		this.impuesto = impuesto;
 	}
 
 
@@ -134,12 +121,11 @@ public class RetencionesPracticadasForm
 
 
 	/**
-	 * @param predial
-	 *           the predial to set
+	 * @return the reporte
 	 */
-	public void setPredial(final List<PredialResponse> predial)
+	public String getReporte()
 	{
-		this.predial = predial;
+		return reporte;
 	}
 
 
@@ -147,11 +133,12 @@ public class RetencionesPracticadasForm
 
 
 	/**
-	 * @return the vehicular
+	 * @param reporte
+	 *           the reporte to set
 	 */
-	public List<ImpuestoVehiculos> getVehicular()
+	public void setReporte(final String reporte)
 	{
-		return vehicular;
+		this.reporte = reporte;
 	}
 
 
@@ -159,12 +146,11 @@ public class RetencionesPracticadasForm
 
 
 	/**
-	 * @param vehicular
-	 *           the vehicular to set
+	 * @return the idretenedor
 	 */
-	public void setVehicular(final List<ImpuestoVehiculos> vehicular)
+	public String getIdretenedor()
 	{
-		this.vehicular = vehicular;
+		return idretenedor;
 	}
 
 
@@ -172,124 +158,12 @@ public class RetencionesPracticadasForm
 
 
 	/**
-	 * @return the impuestoICA
+	 * @param idretenedor
+	 *           the idretenedor to set
 	 */
-	public ImpuestoICA getImpuestoICA()
+	public void setIdretenedor(final String idretenedor)
 	{
-		return impuestoICA;
-	}
-
-
-
-
-
-	/**
-	 * @param impuestoICA
-	 *           the impuestoICA to set
-	 */
-	public void setImpuestoICA(final ImpuestoICA impuestoICA)
-	{
-		this.impuestoICA = impuestoICA;
-	}
-
-
-
-
-
-	/**
-	 * @return the gasolina
-	 */
-	public List<ImpuestoGasolina> getGasolina()
-	{
-		return gasolina;
-	}
-
-
-
-
-
-	/**
-	 * @param gasolina
-	 *           the gasolina to set
-	 */
-	public void setGasolina(final List<ImpuestoGasolina> gasolina)
-	{
-		this.gasolina = gasolina;
-	}
-
-
-
-
-
-	/**
-	 * @return the delineacion
-	 */
-	public List<ImpuestoDelineacionUrbana> getDelineacion()
-	{
-		return delineacion;
-	}
-
-
-
-
-
-	/**
-	 * @param delineacion
-	 *           the delineacion to set
-	 */
-	public void setDelineacion(final List<ImpuestoDelineacionUrbana> delineacion)
-	{
-		this.delineacion = delineacion;
-	}
-
-
-
-
-
-	/**
-	 * @return the publicidadExt
-	 */
-	public List<ImpuestoPublicidadExterior> getPublicidadExt()
-	{
-		return publicidadExt;
-	}
-
-
-
-
-
-	/**
-	 * @param publicidadExt
-	 *           the publicidadExt to set
-	 */
-	public void setPublicidadExt(final List<ImpuestoPublicidadExterior> publicidadExt)
-	{
-		this.publicidadExt = publicidadExt;
-	}
-
-
-
-
-
-	/**
-	 * @return the obKey
-	 */
-	public String getObKey()
-	{
-		return obKey;
-	}
-
-
-
-
-
-	/**
-	 * @param obKey
-	 *           the obKey to set
-	 */
-	public void setObKey(final String obKey)
-	{
-		this.obKey = obKey;
+		this.idretenedor = idretenedor;
 	}
 
 

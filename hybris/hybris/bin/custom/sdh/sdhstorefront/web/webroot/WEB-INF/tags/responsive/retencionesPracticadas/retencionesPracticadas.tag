@@ -10,6 +10,10 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="container_new_page">
+<a id="downloadHelper" target="_blank"></a>
+<div id="dialogMensajes" title="Descarga">
+	<div id="dialogMensajesContent"></div>
+</div>
 	<div class="alert alert-success" role="alert">
 		<span><spring:theme code="message.download" /> </span>
 	</div>
@@ -59,7 +63,7 @@
 				<div class="form-group">
 					<button type="button" class="btn btn-primary btn-lg"
 						id="descargaPDF" name="action" value="generar"
-						style="margin-top: 3px" onclick="">
+						style="margin-top: 3px" onclick="downloadPDF()">
 						<spring:theme code="relacion.inicial.descargar" />
 					</button>
 				</div>
