@@ -627,6 +627,17 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 				finRango = rango;
 				rangoActual = "";
 
+				wsResponse = sdhObligacionesPredialService.obligacionesRequest(obligacionesRequest);
+			   if(wsResponse != null) {
+				   try {
+				   	obligacionesPredResponse = mapper.readValue(wsResponse,ObligacionesPredialResponse.class);
+				   }catch(final Exception e) {
+				   }
+               if(obligacionesPredResponse!=null && obligacionesPredResponse.getHeader()!=null) {
+               	wsTemp_predial.addAll(obligacionesPredResponse.getHeader());
+               }
+			   }
+				if(false) {
 				for (int inicioRango = 1; inicioRango < totalReg; inicioRango+=(rango))
 				{
 					rangoActual = Integer.toString(inicioRango)+"-"+Integer.toString(finRango);
@@ -655,6 +666,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
                }
 
 		         finRango+=(rango);
+				}
 				}
 				obligacionesFormuno.setHeaderPred(wsTemp_predial);
 
