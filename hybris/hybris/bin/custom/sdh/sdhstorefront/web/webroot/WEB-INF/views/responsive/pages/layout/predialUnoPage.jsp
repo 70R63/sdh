@@ -36,14 +36,22 @@ window.onload = function() {
 		}
 	}
     $(".loader").fadeOut("slow");
-	
-	validateFormPredial()
+    
+    validateFormPredial()
 }
 
 function validateFormPredial() {
     debugger;
-    ACC.predial.establecerMensajeInfoObjeto("");
-    return ACC.predial.validateFormPredialDespuesLiquidador();
+    var idMensaje = "${predialForm.tblErrores[0].idMensaje}";
+    
+    if( idMensaje != "99" ){    
+    	ACC.predial.establecerMensajeInfoObjeto("");
+		return ACC.predial.validateFormPredialDespuesLiquidador();
+    }else{
+    	var mensaje = "${predialForm.tblErrores[0].descripcionMensajes}";
+    	alert(mensaje);
+    	window.history.back();
+    }	
 }
 </script>
 
