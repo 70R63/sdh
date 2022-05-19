@@ -33,9 +33,10 @@ window.onload = function() {
 		window.history.back();
 	}
 	
-function showDownload(){
-
-	buscarInfo();
+    function showDownload(){
+        if (grecaptcha.getResponse() != ''){
+            buscarInfo();
+        }
 	}
 	
 function showTag(object){

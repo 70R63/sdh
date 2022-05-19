@@ -95,6 +95,19 @@
 			<h4 align="center"><span><spring:theme code="descargaFacturaVA.descarga.subtitulo.opcionImpuesto2" /></span></h4>
 		</div>
 		<div class="row">
+		    <div class="col-md-2 col-md-offset-4">
+                <c:choose>
+                    <c:when test="${captchaEnabledForCurrentStore eq true }">
+                        <div class="form_field-elements control-group js-recaptcha-captchaaddon"></div>
+                    </c:when>
+                    <c:otherwise>
+                        <formElement:formCheckbox idKey="notARobot"
+                            labelKey="login.not.a.robot" path="notARobot" />
+                    </c:otherwise>
+                </c:choose>
+            </div>
+		</div>
+		<div class="row">
 			<div class="col-md-2 col-md-offset-4">
 				<button style="margin-top: 3px;" id="" class="btn btn-secondary btn-lg" type="button" id="facCancelar">
 					<spring:theme code="Cancelar" />

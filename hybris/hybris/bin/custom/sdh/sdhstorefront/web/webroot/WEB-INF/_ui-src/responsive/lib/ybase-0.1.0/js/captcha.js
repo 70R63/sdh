@@ -29,5 +29,7 @@ $(document).ready(function ()
 	if ($('#loginForm').html() != null )
 	{
 		ACC.captcha.bindAll();
+	}else if ($('#forma').html() != null ) {
+	    ACC.captcha.bindAll();
 	}
 });
