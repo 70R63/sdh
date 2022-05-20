@@ -48,7 +48,7 @@ public class DefaultSDHDeclaracionCertificacionServise implements SDHCalPublicid
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+			throw new RuntimeException("Error in Calculo de Publicidad: Empty credentials");
 		}
 
 		try
@@ -96,7 +96,7 @@ public class DefaultSDHDeclaracionCertificacionServise implements SDHCalPublicid
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			LOG.error("There was an error in Calculo de Publicidad: " + e.getMessage());
 		}
 
 

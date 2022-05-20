@@ -41,7 +41,7 @@ public class DefaultSDHEdoCuentaService implements SDHEdoCuentaService
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+			throw new RuntimeException("Error in Estado de cuenta: Empty credentials");
 		}
 
 		try
@@ -89,7 +89,7 @@ public class DefaultSDHEdoCuentaService implements SDHEdoCuentaService
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			LOG.error("There was an error in Estado de cuenta: " + e.getMessage());
 		}
 
 

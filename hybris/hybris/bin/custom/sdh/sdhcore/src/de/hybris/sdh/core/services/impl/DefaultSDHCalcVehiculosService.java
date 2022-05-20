@@ -48,7 +48,7 @@ public class DefaultSDHCalcVehiculosService implements SDHCalVehiculosService
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+			throw new RuntimeException("Error en calculo de vehiculos: Empty credentials");
 		}
 
 		try
@@ -96,7 +96,7 @@ public class DefaultSDHCalcVehiculosService implements SDHCalVehiculosService
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			LOG.error("There was an error in calculo de vehiculos: " + e.getMessage());
 		}
 
 

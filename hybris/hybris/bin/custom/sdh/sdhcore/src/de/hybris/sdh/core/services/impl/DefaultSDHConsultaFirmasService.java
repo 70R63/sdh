@@ -3,16 +3,18 @@ package de.hybris.sdh.core.services.impl;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.ConsulFirmasRequest;
 import de.hybris.sdh.core.services.SDHConsulFirmasService;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 
-import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import javax.annotation.Resource;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 public class DefaultSDHConsultaFirmasService implements SDHConsulFirmasService {
 
@@ -22,7 +24,7 @@ public class DefaultSDHConsultaFirmasService implements SDHConsulFirmasService {
     private ConfigurationService configurationService;
 
     @Override
-    public String getDeclaraciones(ConsulFirmasRequest request) {
+    public String getDeclaraciones(final ConsulFirmasRequest request) {
 
         final String urlString = configurationService.getConfiguration().getString("sdh.consulFirmas.url");
         final String user = configurationService.getConfiguration().getString("sdh.consulFirmas.user");
@@ -30,7 +32,7 @@ public class DefaultSDHConsultaFirmasService implements SDHConsulFirmasService {
 
         if (StringUtils.isAnyBlank(urlString, user, password))
         {
-            throw new RuntimeException("Error while validating certf nombr: Empty credentials");
+			  throw new RuntimeException("Error en Consulta Firmas: Empty credentials");
         }
 
         try
@@ -78,7 +80,7 @@ public class DefaultSDHConsultaFirmasService implements SDHConsulFirmasService {
         }
         catch (final Exception e)
         {
-            LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			  LOG.error("There was an error in Consulta Firmas: " + e.getMessage());
         }
         return null;
     }

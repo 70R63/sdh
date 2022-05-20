@@ -43,7 +43,7 @@ public class DefaultSDHObligacionesDeliService implements SDHObligacionesDeliSer
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+			throw new RuntimeException("Error in Obligaciones pendientes - Delineacion: Empty credentials");
 		}
 
 		try
@@ -91,7 +91,7 @@ public class DefaultSDHObligacionesDeliService implements SDHObligacionesDeliSer
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			LOG.error("There was an error in Obligaciones pendientes - Delineacion: " + e.getMessage());
 		}
 
 
