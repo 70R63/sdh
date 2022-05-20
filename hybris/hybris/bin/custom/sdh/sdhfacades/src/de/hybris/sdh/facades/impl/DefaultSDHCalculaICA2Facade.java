@@ -9,7 +9,9 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class DefaultSDHCalculaICA2Facade implements SDHCalculaICA2Facade
@@ -119,7 +121,7 @@ public class DefaultSDHCalculaICA2Facade implements SDHCalculaICA2Facade
 
 
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				final CalcICA2Response impuestoResponse = mapper.readValue(response, CalcICA2Response.class);
 				return impuestoResponse;
 
