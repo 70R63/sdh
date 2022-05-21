@@ -147,6 +147,7 @@
 		
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.concesionarios.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.descargaFacturaVA.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.retencionesPracticadas.js"></script>
 
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">

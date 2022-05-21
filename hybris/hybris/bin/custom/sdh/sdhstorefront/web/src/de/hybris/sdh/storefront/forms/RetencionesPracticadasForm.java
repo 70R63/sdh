@@ -3,14 +3,6 @@
  */
 package de.hybris.sdh.storefront.forms;
 
-import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
-import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
-import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
-import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
-import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
-import de.hybris.sdh.core.pojos.responses.PredialResponse;
-
-import java.util.List;
 import java.util.Map;
 
 
@@ -21,6 +13,12 @@ import java.util.Map;
 public class RetencionesPracticadasForm
 {
 	private Map<String, String> anioGravable;
+	private String numBP;
+	private String anio;
+
+	private String impuesto;
+	private String reporte;
+	private String idretenedor;
 
 	/**
 	 * @return the anioGravable
@@ -47,22 +45,12 @@ public class RetencionesPracticadasForm
 
 
 
-	private List<PredialResponse> predial;
-	private List<ImpuestoVehiculos> vehicular;
-	private ImpuestoICA impuestoICA;
-	private List<ImpuestoGasolina> gasolina;
-	private List<ImpuestoDelineacionUrbana> delineacion;
-	private List<ImpuestoPublicidadExterior> publicidadExt;
-
-
-	private String obKey;
-
-
-
-
-	public RetencionesPracticadasForm()
+	/**
+	 * @return the numBP
+	 */
+	public String getNumBP()
 	{
-
+		return numBP;
 	}
 
 
@@ -70,11 +58,12 @@ public class RetencionesPracticadasForm
 
 
 	/**
-	 * @return the predial
+	 * @param numBP
+	 *           the numBP to set
 	 */
-	public List<PredialResponse> getPredial()
+	public void setNumBP(final String numBP)
 	{
-		return predial;
+		this.numBP = numBP;
 	}
 
 
@@ -82,12 +71,11 @@ public class RetencionesPracticadasForm
 
 
 	/**
-	 * @param predial
-	 *           the predial to set
+	 * @return the anio
 	 */
-	public void setPredial(final List<PredialResponse> predial)
+	public String getAnio()
 	{
-		this.predial = predial;
+		return anio;
 	}
 
 
@@ -95,11 +83,12 @@ public class RetencionesPracticadasForm
 
 
 	/**
-	 * @return the vehicular
+	 * @param anio
+	 *           the anio to set
 	 */
-	public List<ImpuestoVehiculos> getVehicular()
+	public void setAnio(final String anio)
 	{
-		return vehicular;
+		this.anio = anio;
 	}
 
 
@@ -107,12 +96,11 @@ public class RetencionesPracticadasForm
 
 
 	/**
-	 * @param vehicular
-	 *           the vehicular to set
+	 * @return the impuesto
 	 */
-	public void setVehicular(final List<ImpuestoVehiculos> vehicular)
+	public String getImpuesto()
 	{
-		this.vehicular = vehicular;
+		return impuesto;
 	}
 
 
@@ -120,11 +108,12 @@ public class RetencionesPracticadasForm
 
 
 	/**
-	 * @return the impuestoICA
+	 * @param impuesto
+	 *           the impuesto to set
 	 */
-	public ImpuestoICA getImpuestoICA()
+	public void setImpuesto(final String impuesto)
 	{
-		return impuestoICA;
+		this.impuesto = impuesto;
 	}
 
 
@@ -132,12 +121,11 @@ public class RetencionesPracticadasForm
 
 
 	/**
-	 * @param impuestoICA
-	 *           the impuestoICA to set
+	 * @return the reporte
 	 */
-	public void setImpuestoICA(final ImpuestoICA impuestoICA)
+	public String getReporte()
 	{
-		this.impuestoICA = impuestoICA;
+		return reporte;
 	}
 
 
@@ -145,11 +133,12 @@ public class RetencionesPracticadasForm
 
 
 	/**
-	 * @return the gasolina
+	 * @param reporte
+	 *           the reporte to set
 	 */
-	public List<ImpuestoGasolina> getGasolina()
+	public void setReporte(final String reporte)
 	{
-		return gasolina;
+		this.reporte = reporte;
 	}
 
 
@@ -157,12 +146,11 @@ public class RetencionesPracticadasForm
 
 
 	/**
-	 * @param gasolina
-	 *           the gasolina to set
+	 * @return the idretenedor
 	 */
-	public void setGasolina(final List<ImpuestoGasolina> gasolina)
+	public String getIdretenedor()
 	{
-		this.gasolina = gasolina;
+		return idretenedor;
 	}
 
 
@@ -170,78 +158,13 @@ public class RetencionesPracticadasForm
 
 
 	/**
-	 * @return the delineacion
+	 * @param idretenedor
+	 *           the idretenedor to set
 	 */
-	public List<ImpuestoDelineacionUrbana> getDelineacion()
+	public void setIdretenedor(final String idretenedor)
 	{
-		return delineacion;
+		this.idretenedor = idretenedor;
 	}
-
-
-
-
-
-	/**
-	 * @param delineacion
-	 *           the delineacion to set
-	 */
-	public void setDelineacion(final List<ImpuestoDelineacionUrbana> delineacion)
-	{
-		this.delineacion = delineacion;
-	}
-
-
-
-
-
-	/**
-	 * @return the publicidadExt
-	 */
-	public List<ImpuestoPublicidadExterior> getPublicidadExt()
-	{
-		return publicidadExt;
-	}
-
-
-
-
-
-	/**
-	 * @param publicidadExt
-	 *           the publicidadExt to set
-	 */
-	public void setPublicidadExt(final List<ImpuestoPublicidadExterior> publicidadExt)
-	{
-		this.publicidadExt = publicidadExt;
-	}
-
-
-
-
-
-	/**
-	 * @return the obKey
-	 */
-	public String getObKey()
-	{
-		return obKey;
-	}
-
-
-
-
-
-	/**
-	 * @param obKey
-	 *           the obKey to set
-	 */
-	public void setObKey(final String obKey)
-	{
-		this.obKey = obKey;
-	}
-
-
-
 
 
 }
