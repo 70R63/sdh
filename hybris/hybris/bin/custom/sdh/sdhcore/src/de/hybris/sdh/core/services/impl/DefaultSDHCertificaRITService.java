@@ -49,7 +49,7 @@ public class DefaultSDHCertificaRITService implements SDHCertificaRITService
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+			throw new RuntimeException("Error in certifica RIT: Empty credentials");
 		}
 
 		try
@@ -97,7 +97,7 @@ public class DefaultSDHCertificaRITService implements SDHCertificaRITService
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			LOG.error("There was an error in certifica RIT: " + e.getMessage());
 		}
 
 

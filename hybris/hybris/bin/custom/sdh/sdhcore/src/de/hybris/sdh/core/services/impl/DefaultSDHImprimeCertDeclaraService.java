@@ -47,7 +47,7 @@ public class DefaultSDHImprimeCertDeclaraService implements SDHImprimeCertDeclar
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+			throw new RuntimeException("Error in Imprime Cert Declaracion: Empty credentials");
 		}
 
 		try
@@ -95,7 +95,7 @@ public class DefaultSDHImprimeCertDeclaraService implements SDHImprimeCertDeclar
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			LOG.error("There was an error in Imprime Cert Declaracion: " + e.getMessage());
 		}
 
 

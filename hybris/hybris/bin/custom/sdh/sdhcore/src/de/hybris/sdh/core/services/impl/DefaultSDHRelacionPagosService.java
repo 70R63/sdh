@@ -40,7 +40,7 @@ public class DefaultSDHRelacionPagosService implements SDHRelacionPagosService
 
         if (StringUtils.isAnyBlank(urlString, user, password))
         {
-            throw new RuntimeException("Error while validating certf nombr: Empty credentials");
+			  throw new RuntimeException("Error in Relacion Pagos: Empty credentials");
 		}
 
         try
@@ -88,7 +88,7 @@ public class DefaultSDHRelacionPagosService implements SDHRelacionPagosService
         }
         catch (final Exception e)
         {
-            LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			  LOG.error("There was an error in Relacion Pagos: " + e.getMessage());
         }
         return null;
 	}

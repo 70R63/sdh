@@ -51,7 +51,7 @@ public class DefaultSDHUpdateCustomerCommPrefsService implements SDHUpdateCustom
 		{
 			if (StringUtils.isAnyBlank(urlString, user, password))
 			{
-				throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+				throw new RuntimeException("Error in CreaMod Contribuyente: Empty credentials");
 			}
 
 			final URL url = new URL(urlString);
@@ -97,7 +97,7 @@ public class DefaultSDHUpdateCustomerCommPrefsService implements SDHUpdateCustom
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			LOG.error("There was an error in CreaMod Contribuyente: " + e.getMessage());
 		}
 
 

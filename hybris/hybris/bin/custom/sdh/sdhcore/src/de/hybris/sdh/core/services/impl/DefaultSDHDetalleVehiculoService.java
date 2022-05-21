@@ -41,7 +41,7 @@ public class DefaultSDHDetalleVehiculoService implements SDHDetalleVehiculosServ
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+			throw new RuntimeException("Error in Detalle Vehiculos: Empty credentials");
 		}
 
 		try
@@ -91,7 +91,7 @@ public class DefaultSDHDetalleVehiculoService implements SDHDetalleVehiculosServ
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			LOG.error("There was an error in Detalle Vehiculos: " + e.getMessage());
 		}
 
 

@@ -57,7 +57,7 @@ public class DefaultSDHSendEmailService implements SDHSendEmailService
 		{
 			if (StringUtils.isAnyBlank(urlString, user, password))
 			{
-				throw new RuntimeException("Error while sending email");
+				throw new RuntimeException("Error while sending email: Empty credentials");
 			}
 
 			final URL url = new URL(urlString);
