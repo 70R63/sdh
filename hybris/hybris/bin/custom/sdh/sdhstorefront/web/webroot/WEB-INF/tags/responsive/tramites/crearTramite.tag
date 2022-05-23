@@ -160,6 +160,24 @@ function changeNiv1(){
 		
 	}
 }
+
+function validaPDF(nombreBtn){
+	
+	
+    var file = event.target.files[0];
+    
+    if(!file.name.match('\.pdf')) {
+        alert("Solo son validos archvos PDF, favor de verificar el tipo de archivo.");
+        $("#" + nombreBtn).val(''); 
+        return;
+    }else{
+    	if(file.size>=10*1024*1024) {
+            alert("El tamaño del archivo debe ser menor o igual a 10MB.");
+            $("#" + nombreBtn).val(''); 
+            return;
+        }
+    }
+}
 </script>
 
 
