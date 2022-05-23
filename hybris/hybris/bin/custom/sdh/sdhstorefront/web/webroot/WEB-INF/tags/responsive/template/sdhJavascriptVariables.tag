@@ -194,8 +194,12 @@
 			
 			ACC.descargaFacturaVABuscarInfoURL="<c:url value='/descargaFacturaVA/buscarInfo' />";
 			ACC.descargaFacturaVADescargarFacturaURL="<c:url value='/descargaFacturaVA/descargarFactura' />";
+
+			ACC.retencionesPracticadasTableURL="<c:url value='/contribuyentes/consultas/retencionespracticadas/info' />";
+
 			ACC.descargaFacturaVADescargarCertificadoPagoURL="<c:url value='/descargaFacturaVA/descargarCertificadoPago' />";
 			ACC.descargaFacturaVAPagosURL="<c:url value='/descargaFacturaVA/facturacionPagos' />";
+
 
 			ACC.spacURL="<c:url value='/contribuyentes/spac' />";
 
@@ -221,7 +225,7 @@
 		  	
 		  	ACC.retencionesPracticadasTableURL="<c:url value='/contribuyentes/consultas/retencionespracticadas/info' />";
 
-		  	
+		  	ACC.retencionesPracticadasReporteURL ="<c:url value='/contribuyentes/consultas/retencionespracticadas/reporte'/>";
 			
 		  	<c:if test="${not empty reteICATemplateURL}">
 		  		ACC.reteICADownloadTemplate ="${reteICATemplateURL}";

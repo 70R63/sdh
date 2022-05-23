@@ -41,7 +41,7 @@ public class DefaultSDHBuzonTributarioService implements SDHBuzonTributarioServi
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+			throw new RuntimeException("Error in buzon tributario: Empty credentials");
 		}
 
 		try
@@ -88,7 +88,7 @@ public class DefaultSDHBuzonTributarioService implements SDHBuzonTributarioServi
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error buzon tributario: " + e.getMessage());
+			LOG.error("There was an error in buzon tributario: " + e.getMessage());
 		}
 
 

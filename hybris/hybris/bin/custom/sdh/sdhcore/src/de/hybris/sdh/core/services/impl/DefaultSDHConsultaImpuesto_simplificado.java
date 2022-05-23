@@ -169,7 +169,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+			throw new RuntimeException("Error in Consulta Gasolina: Empty credentials");
 		}
 
 		try
@@ -217,7 +217,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			LOG.error("There was an error in Consulta Gasolina: " + e.getMessage());
 		}
 
 
@@ -510,7 +510,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
         }
         catch (final Exception e)
         {
-            LOG.info("Error al convertir response de consulta impuesto ICA");
+			  LOG.info("Error al convertir response de consulta impuesto ReteICA");
         }
 
 

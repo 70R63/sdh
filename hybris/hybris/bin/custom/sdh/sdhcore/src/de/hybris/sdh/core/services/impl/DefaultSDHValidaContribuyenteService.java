@@ -339,7 +339,7 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+			throw new RuntimeException("Error consultar BP: Empty credentials");
 		}
 
 		try
@@ -387,7 +387,7 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			LOG.error("There was an error in consultar BP: " + e.getMessage());
 		}
 		return null;
 	}

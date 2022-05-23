@@ -51,7 +51,7 @@ public class DefaultSDHValidaMailRolService implements SDHValidaMailRolService
 		{
 			if (StringUtils.isAnyBlank(urlString, user, password))
 			{
-				throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+				throw new RuntimeException("Error while validating Mail Rol: Empty credentials");
 			}
 
 			final URL url = new URL(urlString);
@@ -97,7 +97,7 @@ public class DefaultSDHValidaMailRolService implements SDHValidaMailRolService
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			LOG.error("There was an error validating Mail Rol: " + e.getMessage());
 		}
 
 
