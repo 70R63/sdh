@@ -7,21 +7,25 @@ ACC.opcionDeclaraciones = {
 	
 	bindDeclaracionPDF : function() {
 		$(document).on("click", ".consultaDecPDF", function(e) {
+			debugger;
 			e.preventDefault();	
 			ACC.spinner.show();
 			if(ACC.opcionDeclaraciones.validarAntesSubmit()){
+				debugger;
 				var nombreCampo;
 				var valorCampo;
 				var valNumObjeto;
 				var valNumRadicado;
 					
-				for (var i = 0; i < e.target.form.length; i++) {
+				for (var i = 0; i < 5000; i++) {
+					debugger;
 					nombreCampo = "registroNum_" + i;
 					valorCampo = null;
 					valorCampo = document.getElementById(nombreCampo);
 					if(valorCampo != null){
 						var seleccionado = valorCampo.checked;
 						if(seleccionado == true){
+							 debugger;
 							 valNumObjeto = $.trim($(valorCampo).attr("data-numObjeto")); 
 							 valNumRadicado = $.trim($(valorCampo).attr("data-numRadicado")); 
 							 break;
