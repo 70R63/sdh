@@ -162,8 +162,16 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 		request.setTipoid(searchUserForm.getDocumentType());
 		request.setFechaExp(searchUserForm.getExpeditionDate());
 
+		if(request.getTipoid() != null) {
+			request.setTipoid(request.getTipoid().toUpperCase().trim());
+		}
+		if( StringUtils.isBlank(request.getTipoid()) || "SELECCIONAR".equals(request.getTipoid())) {
+			model.addAttribute("currentSection", "searchUserSection");
+			model.addAttribute(searchUserForm);
+			model.addAttribute("error_tipoid", true);
 
-		if (StringUtils.isNotBlank(request.getNumid()) && StringUtils.isNotBlank(request.getTipoid()))
+			return getDefaultRegistrationPage(model);
+		}else if (StringUtils.isNotBlank(request.getNumid()) && StringUtils.isNotBlank(request.getTipoid()))
 		{
 			final boolean userRegistered = sdhCustomerFacade.isUserRegistered(request.getNumid(), request.getTipoid());
 
