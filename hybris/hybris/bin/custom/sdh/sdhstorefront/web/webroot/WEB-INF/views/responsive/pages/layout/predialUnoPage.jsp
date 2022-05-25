@@ -44,7 +44,7 @@ function validateFormPredial() {
     debugger;
     var idMensaje = "${predialForm.tblErrores[0].idMensaje}";
     
-    if( idMensaje != "99" ){    
+    if( idMensaje != "99" && idMensaje != "09" ){        
     	ACC.predial.establecerMensajeInfoObjeto("");
 		return ACC.predial.validateFormPredialDespuesLiquidador();
     }else{
