@@ -2917,7 +2917,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					controlCampos.setLiquidacionPrivada(true);
 					controlCampos.setLiquidacion(true);
 					controlCampos.setDatosPredio(true);
+					
+					controlCampos.setBtnPresentarDec(false); //funcionalidad agregada temporalmente
+					controlCampos.setBtnPagarDec(false); //funcionalidad agregada temporalmente
 
+					if(false) { //funcionalidad comentada temporalmente
 					for (final ContribAgente infoAgente : contribuyenteData.getAgentes())
 					{
 						if (infoAgente != null)
@@ -2932,6 +2936,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 								break;
 							}
 						}
+					}
 					}
 				}
 
