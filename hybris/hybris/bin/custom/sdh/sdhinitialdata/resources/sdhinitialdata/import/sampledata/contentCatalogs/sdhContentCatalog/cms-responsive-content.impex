@@ -3091,6 +3091,7 @@ INSERT_UPDATE SdhDocumentType; code[unique=true] ;description
                              ;TPA		;TPA - Tarjeta Profesional de Abogacía
                              ;TPC		;TPC - Tarjeta Profesional de Contador Público
                              ;NIT		;NIT - Número de Identificacion Tributaria
+                             ;CD		;CD - Carnet Diplomático 
 
 #->INI dev-maria Agregar paginas para Concesionarios 19/11/1021
 $contentCatalog=sdhContentCatalog

@@ -127,7 +127,7 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 	public List<String> getIdTipes()
 	{
 
-		final List<String> idTypes = Arrays.asList("CC", "CE", "NIT", "PA", "TI", "TIE", "NITE", "NUIP");
+		final List<String> idTypes = Arrays.asList("CC", "CE", "NIT", "PA", "TI", "TIE", "NITE", "NUIP", "CD");
 
 		return idTypes;
 	}
