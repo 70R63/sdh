@@ -47,7 +47,6 @@ ACC.spac = {
 											// data : data,
 											type : "GET",
 											success : function(spacform) {
-												debugger;
 												ACC.spinner.close();
 												var cuotas = spacform.cuotas_Spac;
 												if(cuotas != null){
