@@ -80,10 +80,10 @@
 <c:set var="flagDisabled_capacidadPas" value='disabled="disabled"' />
 <c:set var="flagDisabled_capacidadTon" value='disabled="disabled"' />
 <c:choose>
-	<c:when test="${vehiculosFormDeclaracion.tipoVeh == 6}">
+	<c:when test="${vehiculosFormDeclaracion.tipoVeh == '6'}">
 		<c:set var="flagDisabled_capacidadPas" value='' />
 	</c:when>
-	<c:when test="${vehiculosFormDeclaracion.tipoVeh == 7}">
+	<c:when test="${vehiculosFormDeclaracion.tipoVeh == '7'}">
 		<c:set var="flagDisabled_capacidadTon" value='' />
 	</c:when>
 </c:choose>
