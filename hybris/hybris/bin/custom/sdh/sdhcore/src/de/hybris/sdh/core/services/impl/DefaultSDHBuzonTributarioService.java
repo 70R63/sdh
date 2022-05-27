@@ -81,7 +81,15 @@ public class DefaultSDHBuzonTributarioService implements SDHBuzonTributarioServi
 			}
 
 			final String result = builder.toString();
-			LOG.info("response: " + result);
+			if (result != null)
+			{
+				LOG.info("Longitud de la respuesta: " + result.length());
+			}
+			else
+			{
+				LOG.info("La respuesta es nula");
+			}
+
 
 			return result;
 
