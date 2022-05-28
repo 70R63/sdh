@@ -30,7 +30,7 @@ ACC.spac = {
 										"data-reimpresion"));
 								
 								var tspac = "0";
-								if(confirm("¿Su predio tiene afectación COVID 19 según lo establecido en la Resolución 650 del 17 de noviembre del 2021"+"\n" +"Cancelar: Te acoges al SPAC normal"+"\n"+"Aceptar: Te acoges a SPAC covid")){
+								if(confirm("¿Su predio tiene afectación COVID 19 según lo establecido en la Resolución 650 del 17 de noviembre del 2021? "+"\n" +"Selecciona cancelar: Te acoges al SPAC normal"+"\n"+"Selecciona aceptar: Te acoges a SPAC covid")){
 									tspac = "2";
 								}else{
 									tspac = "1";
