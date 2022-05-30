@@ -14,6 +14,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.security.GUIDCookieStrategy;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -28,6 +29,7 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.model.SDHAddressModel;
 import org.apache.commons.lang.StringUtils;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Required;
@@ -91,6 +93,11 @@ public class StorefrontLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandle
 				currentCustomerModel.setLastName("");
 				currentCustomerModel.setMiddleName("");
 				currentCustomerModel.setSecondLastName("");
+				currentCustomerModel.setTitle(null);
+				currentCustomerModel.setNameOrg1("");
+				currentCustomerModel.setAddressList(new ArrayList<>());
+				currentCustomerModel.setAgentList(new ArrayList<>());
+				currentCustomerModel.setRolList(new ArrayList<>());
 				getModelService().save(currentCustomerModel);
 			}
 
@@ -152,7 +159,6 @@ public class StorefrontLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandle
 	{
 		this.sessionService = sessionService;
 	}
-
 
 	public UserService getUserService() {
 		return userService;
