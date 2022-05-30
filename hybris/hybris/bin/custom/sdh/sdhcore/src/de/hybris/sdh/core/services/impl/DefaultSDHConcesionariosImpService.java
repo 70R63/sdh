@@ -41,7 +41,7 @@ public class DefaultSDHConcesionariosImpService implements SDHConcesionariosServ
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error while validating data: Empty credentials");
+			throw new RuntimeException("Error in Concesionarios: Empty credentials");
 		}
 
 		try
@@ -88,7 +88,7 @@ public class DefaultSDHConcesionariosImpService implements SDHConcesionariosServ
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error while consumes the service: " + e.getMessage());
+			LOG.error("There was an error in Concesionarios: " + e.getMessage());
 		}
 
 		// XXX Auto-generated method stub

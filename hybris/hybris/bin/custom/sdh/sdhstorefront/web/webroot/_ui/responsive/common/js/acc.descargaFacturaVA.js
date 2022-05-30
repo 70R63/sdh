@@ -75,7 +75,7 @@ ACC.descargaFacturaVA = {
 						apareceMsjValido = true;
 						$( "#pagarFacturaVABtnHeader" ).hide();
 						$( "#pagarFacturaVABtnTd" ).hide();
-					}	
+					}
 					validacionOK = false;
 					strMensajeError = strMensajeError + "<br>" + value.txt_msj;
 				}

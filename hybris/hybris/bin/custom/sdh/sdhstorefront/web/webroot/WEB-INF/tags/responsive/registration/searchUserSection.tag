@@ -21,6 +21,19 @@
 				</div>
 			</div>
 		</div>
+	</c:if>
+	<c:if test="${error_tipoid eq true}">
+		<div class="col-md-6 col-md-offset-3">
+			<div id="dialogMensajes" title="Error" >
+				<div id="dialogMensajesContent">
+					<div class="has-error">
+						<div class="help-block">
+							<span id="tipoid.errors"><spring:theme code="register.error.tipoid" htmlEscape="false"/></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</c:if>	
 
 	<div class="col-md-6 col-md-offset-3">
@@ -109,7 +122,10 @@ function validarCampos() {
 	var flagValidacion = false;
 	
 	var documentType = $("#documentType").val();
-	if($("#documentType").val()!= "" && documentType != "Seleccionar"){
+	if(documentType != null){
+		documentType = documentType.toUpperCase();
+	}
+	if($("#documentType").val()!= "" && documentType != "SELECCIONAR"){
 		switch (documentType){
 		case "CC":
 			var expeditionDate = $("#expeditionDate").val();

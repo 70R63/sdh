@@ -39,6 +39,7 @@
 	}
 	
 	window.onload = function() {
+		$('.loader').hide();
 		ACC.vehiculos.cargarDescripciones_val();
 		
 		var cosas = $(":input");
@@ -55,7 +56,7 @@
 		}	
 		 $(".loader").fadeOut("slow");
 		 
-		
+		 $('.loader').hide();
 		 
 		var date = new Date();
 		var currentday = date.getDate(); //obteniendo dia

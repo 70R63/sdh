@@ -41,7 +41,7 @@ public class DefaultSDHSpacService implements SDHSpacService
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+			throw new RuntimeException("Error in SPAC: Empty credentials");
 		}
 
 		try

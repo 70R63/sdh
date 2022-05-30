@@ -2474,6 +2474,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		detallePredialRequestcalc.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
 		detallePredialRequestcalc.setAnioGravable(predialInfoIniURL.getAnioGravable());
 		detallePredialRequestcalc.setCHIP(predialInfoIniURL.getCHIP());
+		detallePredialRequestcalc.setMarca("2");
 
 		detallePredialRequestcalc.setMatrInmobiliaria(
 				Objects.isNull(predialInfoIniURL.getMatrInmobiliaria()) ? ""
@@ -2493,8 +2494,12 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
+			String response = sdhDetallePredialService.detallePredial(detallePredialRequestcalc);
+			response = response.replaceAll("(\"marcas\":)(\\{)(.*)(\\},\"estrLiquidacionPredial\")",
+					"$1[{$3}],\"estrLiquidacionPredial\"");
+
 			final DetallePredialResponse detallePredialResponse = mapper
-					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequestcalc), DetallePredialResponse.class);
+					.readValue(response, DetallePredialResponse.class);
 
 			prediaFormcaldec.setRetipRegistro(detallePredialResponse.getEstrLiquidacionPrivada().getTipoRegistro());
 			prediaFormcaldec.setRetipDeclaracion(detallePredialResponse.getEstrDatosGenerales().getTipoDeclaracion());
@@ -2912,7 +2917,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					controlCampos.setLiquidacionPrivada(true);
 					controlCampos.setLiquidacion(true);
 					controlCampos.setDatosPredio(true);
+					
+					controlCampos.setBtnPresentarDec(false); //funcionalidad agregada temporalmente
+					controlCampos.setBtnPagarDec(false); //funcionalidad agregada temporalmente
 
+					if(false) { //funcionalidad comentada temporalmente
 					for (final ContribAgente infoAgente : contribuyenteData.getAgentes())
 					{
 						if (infoAgente != null)
@@ -2927,6 +2936,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 								break;
 							}
 						}
+					}
 					}
 				}
 

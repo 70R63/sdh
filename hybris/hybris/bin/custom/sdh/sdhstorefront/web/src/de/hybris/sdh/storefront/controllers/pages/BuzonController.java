@@ -163,7 +163,7 @@ public class BuzonController extends AbstractPageController
 			catch (final Exception s)
 			{
 
-			LOG.error("error getting customer info from SAP for rit page: " + s.getMessage());
+			LOG.error("error getting customer info from SAP for Mi buzon page: " + s.getMessage());
 				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 				model.addAttribute("miBuzon", miBuzon);
 			}

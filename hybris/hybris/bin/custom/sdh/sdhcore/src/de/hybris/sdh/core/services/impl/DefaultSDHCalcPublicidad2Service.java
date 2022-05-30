@@ -5,19 +5,19 @@ package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.CalcPublicidad2Request;
-import de.hybris.sdh.core.pojos.requests.CalcPublicidadRequest;
 import de.hybris.sdh.core.services.SDHCalPublicidad2Service;
-import de.hybris.sdh.core.services.SDHCalPublicidadService;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 
-import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import javax.annotation.Resource;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 
 /**
@@ -48,7 +48,7 @@ public class DefaultSDHCalcPublicidad2Service implements SDHCalPublicidad2Servic
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+			throw new RuntimeException("Error in DefaultSDHCalcPublicidad2Service: Empty credentials");
 		}
 
 		try
@@ -96,7 +96,7 @@ public class DefaultSDHCalcPublicidad2Service implements SDHCalPublicidad2Servic
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			LOG.error("There was an error in DefaultSDHCalcPublicidad2Service: " + e.getMessage());
 		}
 
 

@@ -15,7 +15,7 @@ ACC.opcionDeclaraciones = {
 				var valNumObjeto;
 				var valNumRadicado;
 					
-				for (var i = 0; i < e.target.form.length; i++) {
+				for (var i = 0; i < 5000; i++) {
 					nombreCampo = "registroNum_" + i;
 					valorCampo = null;
 					valorCampo = document.getElementById(nombreCampo);

@@ -3,16 +3,18 @@ package de.hybris.sdh.core.services.impl;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.services.SDHImpPredialService;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 
-import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import javax.annotation.Resource;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 public class SDHImpPredialServiceImpl implements SDHImpPredialService {
 
@@ -22,9 +24,9 @@ public class SDHImpPredialServiceImpl implements SDHImpPredialService {
     private ConfigurationService configurationService;
 
     @Override
-    public String getImpuesto(String bp) {
+    public String getImpuesto(final String bp) {
 
-        ConsultaContribuyenteBPRequest request = new ConsultaContribuyenteBPRequest();
+        final ConsultaContribuyenteBPRequest request = new ConsultaContribuyenteBPRequest();
         request.setNumBP(bp);
         final String urlString = configurationService.getConfiguration().getString("sdh.ingreso.impPredial.url");
         final String user = configurationService.getConfiguration().getString("sdh.ingreso.impPredial.user");
@@ -36,7 +38,7 @@ public class SDHImpPredialServiceImpl implements SDHImpPredialService {
 
         if (StringUtils.isAnyBlank(urlString, user, password))
         {
-            throw new RuntimeException("Error while validating contribuyente: Empty credentials");
+			  throw new RuntimeException("Error in impuesto Predial: Empty credentials");
         }
 
         try
@@ -84,7 +86,7 @@ public class SDHImpPredialServiceImpl implements SDHImpPredialService {
         }
         catch (final Exception e)
         {
-            LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			  LOG.error("There was an error in impuesto Predial: " + e.getMessage());
         }
 
         final long endTime = System.currentTimeMillis();

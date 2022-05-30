@@ -678,7 +678,7 @@ ACC.tramitesSeleccion = {
 
 					$('#documentos').append("<tr>" +
 						'<td><input style="width:710px; font-size:9px !important" class="inputtextnew" disabled="disabled" type="text" size="30" id="docDescArchivo_' + index + '" value="' + value.tipoDocumen_t + '"/></td>"' +
-						'<td><input style="width:405px" class="inputtextnew" type="file" size="150" id="docNombreArchivo_' + index + '" />' + '<input type="hidden" id="docDependencia_' + index + '" value="' + value.dependencia + '" />' + '<input type="hidden" id="docSerieID_' + index + '" value="' + value.serie + '" />' + '<input type="hidden" id="docSSerieID_' + index + '" value="' + subserie + '" />' + '<input type="hidden" id="docTipoDoc_' + index + '" value="' + value.tipoDocumen + '" />' + '<input type="hidden" id="docLeido_' + index + '" value="" />' + "</td>" +
+						'<td><input style="width:405px" class="inputtextnew" type="file" size="150" id="docNombreArchivo_' + index + '" onclick=validaPDF("docNombreArchivo_' + index + '")  />' + '<input type="hidden" id="docDependencia_' + index + '" value="' + value.dependencia + '" />' + '<input type="hidden" id="docSerieID_' + index + '" value="' + value.serie + '" />' + '<input type="hidden" id="docSSerieID_' + index + '" value="' + subserie + '" />' + '<input type="hidden" id="docTipoDoc_' + index + '" value="' + value.tipoDocumen + '" />' + '<input type="hidden" id="docLeido_' + index + '" value="" />' + "</td>" +
 						"</tr>");
 					mostrarTabDocs = true;
 				}

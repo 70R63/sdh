@@ -48,7 +48,7 @@ public class DefaultSDHCertifNombService implements SDHCertifNombService
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error while validating certf nombr: Empty credentials");
+			throw new RuntimeException("Error while validating certf nombre: Empty credentials");
 		}
 
 		try
@@ -96,7 +96,7 @@ public class DefaultSDHCertifNombService implements SDHCertifNombService
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+			LOG.error("There was an error certf nombre: " + e.getMessage());
 		}
 		return null;
 	}
