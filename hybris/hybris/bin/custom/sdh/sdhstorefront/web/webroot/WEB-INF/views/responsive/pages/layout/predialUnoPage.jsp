@@ -12,11 +12,30 @@
 <div class="loader"></div>
 <div class="cargandoSpinner" id="cargandoSpinner" style="display: none;"></div>
 
+
 <predial:predialUnoGenerales />
 <predial:predialUnoDatLiq />
 <predial:predialUnoLiqPrivada />
 <c:url value='contribuyentes/predialunificado_1' var="linkRedirection"/>
-<firmas:generalFirmas firmaContribuyenteRedirection="${linkRedirection}"/>
+<div class='container'>
+	<div class="row">
+		<div style='position:relative;'>
+			<firmas:generalFirmas firmaContribuyenteRedirection="${linkRedirection}"/>			
+		</div>
+	</div>	
+	<div class="form-group">
+		<div  class="col-sm-3 col-sm-push-9 guia_btn" style='z-index: 1;top: -70px;'>			
+			<label class="control-label"><spring:theme code="predialuno.firma.seccionFirmas" /></label> 
+			<span class="badge badge-primary" >2</span>
+		</div>
+	</div>
+</div>	
+
+<div id="dialogDeclaracionGuia" title="Guia SPAC">
+	<div id="dialogDeclaracionGuiaContent"></div>
+</div>
+
+
 <predial:predialUnoBotones />
 
 	<div id="dialogICA" title="Predial" ><div id="icaDialogContent"></div></div>
@@ -37,14 +56,14 @@ window.onload = function() {
 	}
     $(".loader").fadeOut("slow");
     
-    validateFormPredial()
+    validateFormPredial();
+    guia_btn();
 }
 
 function validateFormPredial() {
-    debugger;
     var idMensaje = "${predialForm.tblErrores[0].idMensaje}";
     
-    if( idMensaje != "99" && idMensaje != "09" ){        
+    if( idMensaje != "99" && idMensaje != "09" ){    
     	ACC.predial.establecerMensajeInfoObjeto("");
 		return ACC.predial.validateFormPredialDespuesLiquidador();
     }else{
@@ -52,6 +71,20 @@ function validateFormPredial() {
     	alert(mensaje);
     	window.history.back();
     }	
+}
+
+
+function guia_btn(){
+	debugger;
+	var opcionUso = "${predialForm.opcionuso}";
+	$('.guia_btn').hide();
+	
+	if (!(opcionUso == '' || opcionUso == null || opcionUso == undefined)){
+		var opcionUsoCodigo = opcionUso.substring(0,2);
+		if(opcionUsoCodigo == '01'){
+			$('.guia_btn').show();
+		}
+	}
 }
 </script>
 

@@ -1,7 +1,7 @@
 ACC.predial = {
 	flagMsjInfoObjeto : {},
 
-	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindNoAceptaFactura", "bindDialogoMensajes"],
+	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindNoAceptaFactura", "bindDialogoMensajes", "bindDialogDeclaracionGuia"],
 
 	bindoptionNo : function() {
 		$(document).on("click", ".optradio", function() {
@@ -819,9 +819,46 @@ ACC.predial = {
 		 $(document).on("click", "#predialGeneraDeclaracionButton", function (e) {
 	 	        e.preventDefault();
 	 	       ACC.opcionDeclaraciones.presentarDeclaracionGenerica();
+			   
+			//debugger;
+			
+			//var pdfDeclara = $("#downloadHelper").attr("href");
+			
+			//if (!(pdfDeclara == '' || pdfDeclara == null || pdfDeclara == undefined)){
+				var opcionUso = $.trim($("#OpcionUso").val());
+				if (!(opcionUso == '' || opcionUso == null || opcionUso == undefined)){
+					var opcionUsoCodigo = opcionUso.substring(0,2);
+					if(opcionUsoCodigo == '01'){
+						var mensaje = "Visualizar cupones de SPAC para realizar pago siga los siguientes pasos:" + "<br>" + "<br>" +
+						"7.- En el menú consultas Obligaciones pendientes/ predial/ vigencia 2022" + "<br>" + "<br>" +
+						"8.- Elegir cupón a imprimir, o pagar";
+						
+						$("#dialogDeclaracionGuia").dialog("open");
+						$("#dialogDeclaracionGuiaContent").html(mensaje);
+					}	
+				}				
+			//}
 	 	       
 		 });
+		 
+		 
 	 },
+	 
+	 
+	bindDialogDeclaracionGuia: function() {
+		debugger;
+		$("#dialogDeclaracionGuia").dialog({
+			autoOpen: false,
+			modal: true,
+			draggable: false,
+			buttons: {
+				Ok: function() {
+					$(this).dialog("close");
+				}
+			}
+		});
+
+	},
 	 
 	 
 	 ejecutarPreCalculoPB : function (numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario,actividadEconomica){
@@ -1034,28 +1071,29 @@ ACC.predial = {
 		return validacion;
 	},
 	
-	    validateFormPredialDespuesLiquidador : function(){
-        var validacion = false;
+	
+	validateFormPredialDespuesLiquidador : function(){
+		var validacion = false;
 
-        if(!ACC.predial.mostrarMensajeInfoObjeto()){
-            var myform = $("#myForm");
-            var opcUso = $("#opcionuso").val();
-            if(opcUso != null){
-                opcUso = opcUso.substring(0, 2);
-                if(opcUso == "02"){
-                    var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
-                    if (r == true) {
-                        validacion = true;
-                    }
-                }else{
-                    validacion = true;
-                }
-            }
-        }
+		if(!ACC.predial.mostrarMensajeInfoObjeto()){
+			var myform = $("#myForm");
+			var opcUso = $("#opcionuso").val();
+			if(opcUso != null){
+				opcUso = opcUso.substring(0, 2);
+				if(opcUso == "02"){
+					var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+					if (r == true) {
+						validacion = true;
+					}
+				}else{
+					validacion = true;
+				}
+			}
+		}
 
-        
-        return validacion;
-    },
+		
+		return validacion;
+	},
 	
 	
 	validacionMonto_basegrav : function(){

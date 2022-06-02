@@ -607,7 +607,7 @@ ACC.vehiculos = {
 	
 	
 	obtenerCatalogosInicialVehiculos : function(cat_valores_actuales,datosAdicionales) {
-		
+		ACC.spinner.close();
 		var controlCampos = {};
 		var elementoCat = null;
 		elementoCat = document.getElementById("linea");

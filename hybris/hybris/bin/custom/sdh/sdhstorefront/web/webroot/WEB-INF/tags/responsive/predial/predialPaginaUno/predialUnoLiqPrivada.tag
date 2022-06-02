@@ -246,6 +246,7 @@
 						class="btn btn-primary btn-lg" type="button"
 						onclick="calculoPred()">
 						<spring:theme code="predialuno.liquidacionpriv.calcular" />
+						<span class="badge badge-primary guia_btn">1</span>
 					</button>
 				</c:if>
 			</div>
@@ -285,6 +286,7 @@
 	</div>
 </form:form>
 
+
 <script type="text/javascript">
 	function calculoPred() {
 		ACC.predial.calculoPredial();
@@ -294,4 +296,5 @@
 		alert("Favor de acudir a punto de contacto para que un funcionario le apoye a generar su declaración");
 		
 	}
+	
 </script>

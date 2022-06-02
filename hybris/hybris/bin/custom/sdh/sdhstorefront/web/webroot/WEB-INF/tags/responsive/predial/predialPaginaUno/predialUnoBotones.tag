@@ -11,6 +11,7 @@
 <c:set var="flagPresentarDeclaracion" value="false" />
 <c:set var="flagPagarEnLinea" value="false" />
 <c:set var="flagSPAC" value="false" />
+<c:set var="flagRepresentante" value="false" />
 <c:if test="${predialForm.controlCampos.btnPresentarDec == false}">
 	<c:set var="flagPresentarDeclaracion" value="true" />
 </c:if>
@@ -28,7 +29,9 @@
 <c:if test="${contribuyente.numBP ne currentUser.numBP }">
 	<c:set var="flagSPAC" value="true" />
 </c:if>
-
+<c:if test="${predialForm.detallePredial2Response.infopredio.datosgenerales.numBp ne 'null' || predialForm.detallePredial2Response.infopredio.datosgenerales.numBp ne ''}">
+	<c:set var="flagRepresentante" value="true" />
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <spring:url value="/impuestos/preparaPagoPSE" var="pagarURL"
@@ -45,8 +48,8 @@
    <!--  "DatosLiquidacion":-->
  <input type="hidden" value="${predialForm.estrDatosGenerales.tipoDeclaracion}" id="TipoDeclaracion"/>
  <input type="hidden" value="${predialForm.datosJuridicos.porcentajePropiedad}" id="PorcentajePropiedad"/>
- <input type="hidden" value="" id="PorcentajeExclusion"/><!-- Estos datos se toman directamente del campo en la declaración -->
- <input type="hidden" value="" id="PorcentajeExencion"/><!-- Estos datos se toman directamente del campo en la declaración -->
+ <input type="hidden" value="" id="PorcentajeExclusion"/><!-- Estos datos se toman directamente del campo en la declaraci?n -->
+ <input type="hidden" value="" id="PorcentajeExencion"/><!-- Estos datos se toman directamente del campo en la declaraci?n -->
  <input type="hidden" value="${predialForm.estrLiquidacionPredial.tarifaLiquidacion}" id="TarifaLiquidacion"/>
  <input type="hidden" value="${predialForm.estrLiquidacionPredial.destinoHacendario}" id="DestinoHacendario"/>
  <input type="hidden" value="${predialForm.estrLiquidacionPredial.baseGravable}" id="BaseGravable"/>
@@ -70,20 +73,20 @@
 		<sf:form action="${pagarURL}" method="POST" 
 			modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
 			
+			
 			<div class="col-md-12 centercol-md-8 text-center">
 				
-				            
-                <button type="button" class="btn btn-secondary btn-lg" id="action"
-                    name="action" value="cancelar" style="margin-top: 3px"
-                    onclick="window.location.href ='<c:url value='/contribuyentes' />';">
-                    <spring:theme code="predialuno.firma.cancelar" />
-                </button>
-                
+				<button type="button" class="btn btn-secondary btn-lg" id="action"
+					name="action" value="cancelar" style="margin-top: 3px"
+					onclick="window.location.href ='<c:url value='/contribuyentes' />';">
+					<spring:theme code="predialuno.firma.cancelar" />
+				</button>
 				
 				<c:if test="${flagPresentarDeclaracion eq true}">
 					<button style="margin-top: 3px;" id="predialGeneraDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
 						type="button" disabled="disabled">
 						<spring:theme code="predialuno.firma.presendecla" />
+						<span class="badge badge-primary guia_btn" >6</span>
 					</button>
 				</c:if>
 				
@@ -109,13 +112,17 @@
 					
 				</c:if>
 				
-				<c:if test="${flagSPAC eq true}">
-					<button class="btn btn-primary btn-lg btnspac" type="submit" id="btnspac"
-                        name="pagar" value="pagar" data-numbp="${predialForm.numBP}" data-numForm="${predialForm.numFrom}" data-anio="${predialForm.anioGravable}" data-obj="${predialForm.objetocontrato}" data-reimpresion="">
-                        <spring:theme code="predialuno.firma.spac" />
-                    </button>
-				</c:if>
-				
+<c:choose>
+       <c:when test="${flagSPAC eq true}">
+		<button class="btn btn-primary btn-lg btnspac" type="submit" id="btnspac"
+						name="pagar" value="pagar" data-numbp="${predialForm.numBP}" data-numForm="${predialForm.numFrom}" data-anio="${predialForm.anioGravable}" data-obj="${predialForm.objetocontrato}" data-reimpresion="">
+						<spring:theme code="predialuno.firma.spac" />
+						<span class="badge badge-primary guia_btn" >3</span>
+					</button>
+    </c:when>
+    <c:otherwise>
+    </c:otherwise>
+</c:choose>
 	
 			</div>
 			<div class="col-md-6" id="tableSpac" style="visibility:hidden;">
