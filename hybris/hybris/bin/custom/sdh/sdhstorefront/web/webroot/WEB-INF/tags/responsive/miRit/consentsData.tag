@@ -100,6 +100,10 @@
 <!-- 										</div> -->
 <!-- 									</div> -->
 <!-- 								</div> -->
+				<div class="alert alert-info" role="alert" id="mensajeFacturacionAut" style="display: none;">
+					<h4 align="center"><span data-proceso1pc="${miRitForm.proceso1pc}" id="proceso1pcSpan"><spring:theme code="mirit.constents.descuento1PC" /></span></h4>
+				</div>
+
 				<div class="row">
 					<div class="col-12 col-md-3  ">
 						<div class="form-group ">
@@ -114,6 +118,8 @@
 		</div>
 	</div>
 </div>
+
+
 
 <div class="terminosycondiciones" style="display: none;">
 	<div class="js-terminos-facet" id="js-terminos-facet">

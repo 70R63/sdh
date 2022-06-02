@@ -19,6 +19,7 @@ import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.AnularFormularioObjeto;
 import de.hybris.sdh.core.pojos.requests.AnularFormularioRequest;
 import de.hybris.sdh.core.pojos.requests.CertificadoPagoVARequest;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DescargaFacturaRequest;
 import de.hybris.sdh.core.pojos.requests.FacturacionPagosRequest;
@@ -28,6 +29,9 @@ import de.hybris.sdh.core.pojos.responses.CertificadoPagoVARequesponse;
 import de.hybris.sdh.core.pojos.responses.DescargaFacturaResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.FacturacionPagosResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHAnularFormularioService;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConfigCatalogos;
@@ -35,6 +39,7 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
+import de.hybris.sdh.storefront.controllers.pages.forms.DescargaFacturaVAForm;
 import de.hybris.sdh.storefront.forms.DescargaFacturaForm;
 import de.hybris.sdh.storefront.forms.FacturacionForm;
 
@@ -52,6 +57,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -138,11 +144,28 @@ public class DescargaFacturaPageController extends AbstractPageController
 
 		final FacturacionForm facturacionForm = new FacturacionForm();
 		facturacionForm.setNumbp(customerModel.getNumBP());
+		ConsultaContribBPRequest contribRequest = new ConsultaContribBPRequest();
+		contribRequest.setNumBP(customerModel.getNumBP());
+		String indicadorRequest = null;
+		indicadorRequest = "01";
+		contribRequest.setIndicador(indicadorRequest);
+		SDHValidaMailRolResponse contribResponse = sdhConsultaContribuyenteBPService.consultaContribuyenteBP_simplificado(contribRequest );
+
 		if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.PREDIAL)){
-			facturacionForm.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
+			if(sdhConsultaContribuyenteBPService.tieneImpuestoActivo(contribResponse, sdhConsultaImpuesto_simplificado.PREDIAL)) {
+				List<PredialResponse> listaImpuesto = new ArrayList<PredialResponse>();
+				listaImpuesto.add(new PredialResponse());
+				facturacionForm.setPredial(listaImpuesto);
+			}
+//			facturacionForm.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
 		}
 		if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.VEHICULOS)){
-			facturacionForm.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
+			if(sdhConsultaContribuyenteBPService.tieneImpuestoActivo(contribResponse, sdhConsultaImpuesto_simplificado.VEHICULOS)) {
+				List<ImpuestoVehiculos> listaImpuesto = new ArrayList<ImpuestoVehiculos>();
+				listaImpuesto.add(new ImpuestoVehiculos());
+				facturacionForm.setVehicular(listaImpuesto);
+			}
+//			facturacionForm.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
 		}
 
 		model.addAttribute("customerData", customerData);
@@ -158,6 +181,39 @@ public class DescargaFacturaPageController extends AbstractPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		return getViewForPage(model);
 	}
+	
+	
+	@RequestMapping(value = "/contribuyentes/descargafacturabuscar", method = RequestMethod.GET)
+	@ResponseBody
+	public FacturacionForm descargafact_buscar(@ModelAttribute("dataForm") final DescargaFacturaVAForm dataForm, final HttpServletResponse response,
+			final HttpServletRequest request, final Model model) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En GET Descarga Factura Buscar--------------------------");
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+		final FacturacionForm facturacionForm = new FacturacionForm();
+
+		if(dataForm != null){
+   		switch (dataForm.getClaveImpuesto())
+   		{
+   			case "0001":
+   				facturacionForm.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
+   				break;
+   			case "0002":
+   				facturacionForm.setVehicular(sdhConsultaImpuesto_simplificado.consulta_impVehicular(consultaContribuyenteBPRequest));
+   				break;
+   				
+   			default:
+   				break;
+   		}
+		}
+
+		
+		return facturacionForm;
+	}
+	
 
 	@RequestMapping(value = "/contribuyentes/descargafactura", method = RequestMethod.POST)
 	@RequireHardLogIn

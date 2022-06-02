@@ -517,6 +517,12 @@ parent.attributes[4]=true;
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
 				    	            	$("#ritDialogContent").html("Tus autorizaciones han sido actualizadas.");
+				    	            	var proceso1pc = $("#proceso1pcSpan").attr("data-proceso1pc");
+				    	            	
+				    	            	if(proceso1pc == "X"){
+											var mensajeFacturacionAut = document.getElementById("mensajeFacturacionAut");
+											ACC.opcionDeclaraciones.establecerEstiloDisplay(mensajeFacturacionAut,'block');
+										}
 			        	        	}else
 			        	        	{
 			        	        		$("#ritDialogContent").html("");

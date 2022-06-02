@@ -319,7 +319,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		}
 		catch (final Exception e)
 		{
-			LOG.info("Error al convertir response de consulta impuesto Publicidad Exterior");
+			LOG.info("Error al convertir response de consulta impuesto Publicidad Exterior:" + e.getMessage());
 		}
 
 
@@ -373,7 +373,7 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 		}
 		catch (final Exception e)
 		{
-			LOG.info("Error al convertir response de consulta impuesto Predial");
+			LOG.info("Error al convertir response de consulta impuesto Predial" + e.getMessage());
 		}
 
 
