@@ -60,18 +60,15 @@
 			<div class="caja--ser-rel color-sr1">
 				<select class="new_alto form-control !important" id="impuesto" onchange="refreshTablas();">
 					<option value="00">Seleccionar</option>
-					<c:if test="${ not empty facturacionForm.predial}">
+					<c:if test="${ facturacionForm.predial ne null}">
 						<option value="0001">Predial Unificado</option>
 					</c:if>
-					<c:if test="${ not empty facturacionForm.vehicular}">
+					<c:if test="${ facturacionForm.vehicular ne null}">
 						<option value="0002">Impuesto sobre Vehículos Automotores</option>
 					</c:if>
 				</select>
 			</div>
 		</div>
-
-
-
 
 		<div class="col-md-4 col-xs-12 mb-20 no-margincol">
 			<span class="paso--dos pasos color-sr2">2</span>
@@ -94,80 +91,26 @@
 		</div>
 	</div>
 	<br>
-	<div id="table-predial" style="display: none;" class="table-responsive">
-			<div class="col-md-12">
+	<div id="oblipend-predial" style="display: none;" class="table-responsive">
+		<div class="col-md-12">
 			<button id="solBenePredial" style="float: right;" type="button" data-impuesto="0001" data-numbp="" data-anioGravable="" data-numObjeto="" onclick="btnObtainBene()">Solicitar Beneficio</button>
-				<table id="tabPaginacion0">
-					<thead>
-						<tr>
-<!-- 							<th style="text-align: center" hidden="hidden"><label class="control-label labeltabletd " for="">Ao Gravable</label></th> -->
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""><spring:theme code="descarga.factura.predial.chip" /></label></th>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="descarga.factura.predial.matinm" /></label></th>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="descarga.factura.predial.dirpred" /></label></th>
-							<!-- 							<th style="text-align: center"><label class="control-label" -->
-							<%-- 								for=""> <spring:theme --%>
-							<%-- 										code="descarga.factura.predial.selec" /></label></th> --%>
-<%-- 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Pago voluntario" /></label></th> --%>
-<!-- 							<th style="text-align: center"><label class="control-label" -->
-<%-- 								for=""> <spring:theme code="Total a pagar" /></label></th> --%>
-<!-- 							<th style="text-align: center"><label class="control-label" -->
-<%-- 								for=""> <spring:theme code="Total con pago voluntario" /></label></th> --%>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Descargar factura" /></label></th>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Actualizar datos" /></label></th>
-<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Beneficio 1%" /></label></th>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar" /></label></th>
-<%-- 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar sin aporte" /></label></th> --%>
-						<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Seleccionar" /></label></th>
-						</tr>
-					</thead>
-					<tbody>
-
-						<c:forEach items="${facturacionForm.predial }" var="eachPredial">
-							<c:if
-								test="${not empty eachPredial.matrInmobiliaria || not empty eachPredial.CHIP}">
-								<c:if
-									test="${not empty eachPredial.anioGravable || not empty eachPredial.direccionPredio}">
-									<tr>
-<%-- 										<td hidden="hidden"><c:out value="${eachPredial.anioGravable}" /></td> --%>
-										<td><c:out value="${eachPredial.CHIP}" /></td>
-										<td><c:out value="${eachPredial.matrInmobiliaria}" /></td>
-										<td><c:out value="${eachPredial.direccionPredio}" /></td>
-										<!-- 								<td><input class="inputtextnew" -->
-										<!-- 									style="visibility: visible !important; width: 15px" -->
-										<%-- 									type="radio" id="" name="objetoPredial" value="${eachPredial.numObjeto}"></td> --%>
-<!-- 										<td></td> -->
-<!-- 										<td></td> -->
-<!-- 										<td></td> -->
-<td><img id="imgDescarga" class="renglonBeneficios" src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0001" data-nombreObjeto="objetoPredial" data-anioGrav="${eachPredial.anioGravable}" data-numobjeto="${eachPredial.numObjeto}"></img></td>
-										<td><label class="control-label renglonBeneficios"
-											style="text-transform: capitalize !importan;color: #2196f3; text-decoration: underline !important; font-size: 14px;t"
-											id="downloadFac" data-claveImpuesto="0001"
-											data-nombreObjeto="objetoPredial"
-											data-anioGrav="${eachPredial.anioGravable}" data-numobjeto="${eachPredial.numObjeto}"
-											onclick="reexpedicion(this)"> <span class="">Actualizar</span></label></td>
-										<td><label class="control-label renglonBeneficios"
-											style="text-transform: capitalize !important; color: #2196f3; text-decoration: underline !important; font-size: 14px;"
-											id="obtainBenef" data-claveImpuesto="0001"
-											data-nombreObjeto="objetoPredial"
-											data-anioGrav="${eachPredial.anioGravable}" data-numobjeto="${eachPredial.numObjeto}"
-											onclick="obtainBene(this)"> <span class="">Obtener Descuento</span></label></td>
-									<td><button class="renglonBeneficios" id="pagarFacturaBtn" type="button" data-impuesto="0001" data-numbp="${facturacionForm.numbp}" data-anioGravable="${eachPredial.anioGravable}" data-numObjeto="${eachPredial.numObjeto}" >Pagar</button></td>
-<!-- 									<td><a onclick="validaBotonPago()"></a></td> -->
-<td>	<div class="checkbox" role="checkbox" aria-checked="false"
-								id="buzon2" style=" cursor: not-allowed;" data-numobjeto="${eachPredial.numObjeto}">
-								<label tabindex="0" class="control-label" id="checkBeEneficio"> <input
-									id="checkBeEneficio" name="checkBeEneficio" type="checkbox" ${ checked}
-									value="true">
-								</label>
-							</div></td>
-
-									</tr>
-								</c:if>
-							</c:if>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
+			<table id="table-predial1">
+				<thead>
+					<tr>
+						<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""><spring:theme code="descarga.factura.predial.chip" /></label></th>
+						<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""><spring:theme code="descarga.factura.predial.matinm" /></label></th>
+						<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""><spring:theme code="descarga.factura.predial.dirpred" /></label></th>
+						<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""><spring:theme code="Descargar factura" /></label></th>
+						<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""><spring:theme code="Actualizar datos" /></label></th>
+						<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""><spring:theme code="Beneficio 1%" /></label></th>
+						<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""><spring:theme code="Pagar" /></label></th>
+						<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""><spring:theme code="Seleccionar" /></label></th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
 <!-- 		<div class="row"> -->
 <!-- 			<div class="col-md-3 col-md-offset-5"> -->
 <!-- 				<button style="margin-top: 3px;" id="" -->
@@ -177,80 +120,27 @@
 <!-- 				</button> -->
 <!-- 			</div> -->
 <!-- 		</div> -->
-<div class="mensaje">
-								<spring:theme code="Si usted desea ser acreedor del descuento del 1% para más de una factura y máximo 5 presiona el botón de \"Solicitar beneficio\"" htmlEscape="false" />
-							</div>
+		<div class="mensaje">
+			<spring:theme code="Si usted desea ser acreedor del descuento del 1% para más de una factura y máximo 5 presiona el botón de \"Solicitar beneficio\"" htmlEscape="false" />
+		</div>
 	</div>
 
-	<div id="table-vehiculos" style="display: none;" class="table-responsive">
+	<div id="oblipend-vehiculos" style="display: none;" class="table-responsive">
 			<div class="col-md-12">
 			<button id="solBeneVehicular" style="float: right;" type="button" data-impuesto="0002" data-numbp="" data-anioGravable="" data-numObjeto="" onclick="btnObtainBene()">Solicitar Beneficio</button>
 				<table id="tabla_vehi">
 					<thead>
 						<tr>
-<!-- 							<th style="text-align: center" hidden="hidden"><label class="control-label " for="">ao gravable</label></th> -->
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""><spring:theme code="descarga.factura.vehiculo.placa" /></label></th>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="descarga.factura.vehiculo.marca" /></label></th>
-							<!-- 							<th style="text-align: center"><label class="control-label" -->
-							<%-- 								for=""> <spring:theme --%>
-							<%-- 										code="descarga.factura.vehiculo.selec" /></label></th> --%>
-<%-- 							<th class="col-md-1" style="text-align: center"><label class="control-labe labeltabletd l" for=""> <spring:theme code="Pago voluntario" /></label></th> --%>
-<!-- 							<th style="text-align: center"><label class="control-label" -->
-<%-- 								for=""> <spring:theme code="Total a pagar" /></label></th> --%>
-<!-- 							<th style="text-align: center"><label class="control-label" -->
-<%-- 								for=""> <spring:theme code="Total con pago voluntario" /></label></th> --%>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Descargar factura" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""><spring:theme code="descarga.factura.vehiculo.placa" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="descarga.factura.vehiculo.marca" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Descargar factura" /></label></th>
 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Actualizar datos" /></label></th>
-<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Beneficio 1%" /></label></th>
-							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar" /></label></th>
-<%-- 							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Pagar sin aporte" /></label></th> --%>
-						<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd " for=""> <spring:theme code="Seleccionar" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Beneficio 1%" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Pagar" /></label></th>
+							<th class="col-md-1" style="text-align: center"><label class="control-label labeltabletd" for=""> <spring:theme code="Seleccionar" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${facturacionForm.vehicular }"
-							var="eachVehiculo">
-							<c:if test="${not empty eachVehiculo.anioGravable}">
-								<c:if
-									test="${not empty eachVehiculo.placa || not empty eachVehiculo.marca}">
-									<tr>
-<%-- 										<td hidden="hidden"><c:out value="${eachVehiculo.anioGravable}" /></td> --%>
-										<td><c:out value="${eachVehiculo.placa}" /></td>
-										<td class="td_marca">${eachVehiculo.marca}</td>
-<!-- 										<td><input class="inputtextnew" -->
-<!-- 											style="visibility: visible !important; width: 15px" -->
-<!-- 											type="radio" id="" name="objetoVehicular" -->
-<%-- 											value="${eachVehiculo.numObjeto}"></td> --%>
-<!-- 														<td></td> -->
-<!-- 										<td></td> -->
-<!-- 										<td></td> -->
-<td><img id="downloadFac" src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura(this)"  data-claveImpuesto="0002"
-											data-nombreObjeto="objetoVehicular"
-											data-anioGrav="${eachVehiculo.anioGravable}" data-numobjeto="${eachVehiculo.numObjeto}"></img></td>
-										<td><label class="control-label" style="text-transform: capitalize !important; color: #2196f3; text-decoration: underline !important; font-size: 14px;"
-											id="downloadFac" data-claveImpuesto="0002"
-											data-nombreObjeto="objetoVehicular"
-											data-anioGrav="${eachVehiculo.anioGravable}" data-numobjeto="${eachVehiculo.numObjeto}"
-											onclick="reexpedicion(this)"> <span class="">Actualizar</span></label></td>
-												<td><label class="control-label" style="text-transform: capitalize !important; color: #2196f3; text-decoration: underline !important; font-size: 14px;"
-											id="ontainBeneVehi" data-claveImpuesto="0002"
-											data-nombreObjeto="objetoVehicular"
-											data-anioGrav="${eachVehiculo.anioGravable}" data-numobjeto="${eachVehiculo.numObjeto}"
-											onclick="obtainBene(this)"> <span class="">Obtener Descuento</span></label></td>
-<!-- 										<td></td> -->
-										<td><button id="pagarFacturaBtn" type="button" data-impuesto="0002" data-numbp="${facturacionForm.numbp}" data-anioGravable="${eachVehiculo.anioGravable}" data-numObjeto="${eachVehiculo.numObjeto}" >Pagar</button></td>
-<!-- 										<td><a onclick="validaBotonPago()"></a></td> -->
-<td><div class="checkbox" role="checkbox" aria-checked="false"
-								id="checkBeneficio" style=" cursor: not-allowed; padding: 0px;margin: 0px;" data-numobjeto="${eachVehiculo.numObjeto}">
-								<label tabindex="0" class="control-label" id="checkBeEneficio"> <input
-									id="checkBeEneficio" name="checkBeEneficio" type="checkbox"  ${ checked}
-									value="true">
-								</label>
-							</div></td>
-									</tr>
-								</c:if>
-							</c:if>
-						</c:forEach>
 					</tbody>
 				</table>
 			</div>
