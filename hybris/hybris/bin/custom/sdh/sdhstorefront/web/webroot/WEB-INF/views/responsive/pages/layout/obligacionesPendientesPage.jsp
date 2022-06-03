@@ -79,7 +79,7 @@ function displayReteICA(){
 <script>
 	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar,cdu,placa,facilidad,montoFacilidad){
 		
-		
+		debugger;
 		var numBP = "${customerData.numBP}";
 		var numDoc = "${customerData.documentNumber}";
 		var tipoDoc = "${customerData.documentType}";

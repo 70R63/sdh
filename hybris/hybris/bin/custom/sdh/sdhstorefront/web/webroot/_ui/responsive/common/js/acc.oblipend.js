@@ -624,6 +624,7 @@ ACC.oblipend = {
 	
 	
 	predial_generarTD_pagoVigente_aux : function(refActiva,claveImpuestoExt,anioGravable,periodo,objetoContratoD,objetoContratoH,fechaVencimiento,numReferencia,pago,cdu,placa,facilidad,montoFacilidad){
+		debugger;
 		var td_value = "";
 
 		switch (refActiva){

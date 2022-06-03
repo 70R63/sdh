@@ -846,7 +846,6 @@ ACC.predial = {
 	 
 	 
 	bindDialogDeclaracionGuia: function() {
-		debugger;
 		$("#dialogDeclaracionGuia").dialog({
 			autoOpen: false,
 			modal: true,
