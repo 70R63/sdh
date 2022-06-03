@@ -31,13 +31,21 @@
 			<div class="facet__name js-facet-name-ben">
 				<spring:theme code="" />
 				<div class="" id="obtenerBeneficioMensaje">
+<!-- 					<p> -->
+<%-- 						<b><spring:theme code="descarga.factura.descuento.mensaje1" /></b> --%>
+<!-- 					</p> -->
+<!-- 					<ul> -->
+<%-- 						<li><spring:theme code="descarga.factura.descuento.mensaje2" /></li> --%>
+<%-- 						<li><spring:theme code="descarga.factura.descuento.mensaje3" /></li> --%>
+<!-- 					</ul> -->
+<!-- 					<br> -->
 					<p>
-						<b>Recuerde activar las siguientes opciones para ser acreedor al descuento del 1%</b>
+						<spring:theme code="descarga.factura.descuento.mensaje4" />
 					</p>
-					
 					<ul>
-					<li>Autorizo el uso del buzón electrónico para recibir notificaciones</li>
-					<li>Autorizo uso de la anterisor información para fines institucionales</li>
+						<li><spring:theme code="descarga.factura.descuento.mensaje5" /></li>
+						<li><spring:theme code="descarga.factura.descuento.mensaje6" /></li>
+						<li><spring:theme code="descarga.factura.descuento.mensaje7" /></li>
 					</ul>
 				</div>
 				<br><br>

@@ -7,6 +7,7 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.ContribAgente;
+import de.hybris.sdh.core.pojos.responses.ImpuestosResponse;
 import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -18,6 +19,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -292,6 +294,54 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 
 
 		return infoContrib;
+	}
+
+	@Override
+	public boolean tieneImpuestoActivo(final SDHValidaMailRolResponse infoContrib, final String claveImpuesto)
+	{
+		boolean validacionImpuesto = false;
+		List<ImpuestosResponse> impuestos = null;
+		List<ImpuestosResponse> impuestos_tmp = null;
+		int cantidadRegistros = 0;
+
+		if (claveImpuesto != null && StringUtils.isNotBlank(claveImpuesto) && infoContrib != null
+				&& infoContrib.getImpuestos() != null && !infoContrib.getImpuestos().isEmpty())
+		{
+			impuestos = infoContrib.getImpuestos().stream().collect(Collectors.toList());
+			String claveImpuestoBusqueda_tmp = claveImpuesto;
+			if (claveImpuesto.length() == 4)
+			{
+				claveImpuestoBusqueda_tmp = claveImpuesto.substring(2);
+			}
+			final String claveImpuestoBusqueda = claveImpuestoBusqueda_tmp;
+
+			impuestos_tmp = impuestos.stream().filter(eachTax -> claveImpuestoBusqueda.equals(eachTax.getClaseObjeto()))
+					.collect(Collectors.toList());
+			if (impuestos_tmp.size() > 0)
+			{
+				final ImpuestosResponse impuestoActivo = impuestos_tmp.get(0);
+				if (impuestoActivo != null && claveImpuestoBusqueda_tmp.equals(impuestoActivo.getClaseObjeto())
+						&& impuestoActivo.getCantObjetos() != null)
+				{
+					try
+					{
+						final String cantidadRegistros_str = impuestoActivo.getCantObjetos().trim();
+						cantidadRegistros = Integer.parseInt(cantidadRegistros_str);
+					}
+					catch (final Exception e)
+					{
+						LOG.error("Error al determinar cantidad de registros para impuesto activo de cliente: " + e.getMessage());
+					}
+				}
+			}
+		}
+
+		if (cantidadRegistros > 0)
+		{
+			validacionImpuesto = true;
+		}
+
+		return validacionImpuesto;
 	}
 
 
