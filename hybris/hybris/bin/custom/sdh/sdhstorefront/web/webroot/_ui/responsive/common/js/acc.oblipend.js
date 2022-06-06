@@ -430,6 +430,13 @@ ACC.oblipend = {
 								clavePeriodo = valueH.anioGravable.substring(2,4);
 							}
 							
+							if(valueH.objetoContrato == null || valueH.objetoContrato == '' || valueH.objetoContrato == undefined){
+								if (!(valueH.matrInmobiliaria == null || valueH.matrInmobiliaria == '' || valueH.matrInmobiliaria == undefined)){
+									valueH.objetoContrato = valueH.matrInmobiliaria;
+								}	
+							}
+							
+							debugger;
 							switch (valueH.facilidad){
 								case "00":
 									td_totalPagar = valueD.obligacion;
@@ -624,9 +631,8 @@ ACC.oblipend = {
 	
 	
 	predial_generarTD_pagoVigente_aux : function(refActiva,claveImpuestoExt,anioGravable,periodo,objetoContratoD,objetoContratoH,fechaVencimiento,numReferencia,pago,cdu,placa,facilidad,montoFacilidad){
-		debugger;
 		var td_value = "";
-
+		
 		switch (refActiva){
 			case "02":
 				break;

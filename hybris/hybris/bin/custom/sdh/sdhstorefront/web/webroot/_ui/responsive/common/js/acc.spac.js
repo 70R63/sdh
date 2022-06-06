@@ -31,7 +31,7 @@ ACC.spac = {
 										"data-reimpresion"));
 								
 								var tspac = "0";
-								if(confirm("Paso 5:  ¿Su predio tiene afectación COVID según lo establecido en la Resolución 650 del 17 de noviembre del 2021"+"\n\n" +"Selecciona aceptar: Solo si tu predio es NO residencial y deseas pagar el impuesto en cuotas a partir del 2023 "+"\n"+"Selecciona cancelar: Si tu predio es residencial o si tu predio es no residencial y quieres pagar con cuotas durante 2022")){
+								if(confirm("Paso 5:  ¿Su predio tiene afectación COVID según lo establecido en la Resolución 650 del 17 de noviembre del 2021"+"\n\n\n" +"Selecciona aceptar: Solo si tu predio es NO residencial y deseas pagar el impuesto en cuotas a partir del 2023 "+"\n\n"+"Selecciona cancelar: Si tu predio es residencial o si tu predio es no residencial y quieres pagar con cuotas durante 2022")){
 									tspac = "2";
 								}else{
 									tspac = "1";

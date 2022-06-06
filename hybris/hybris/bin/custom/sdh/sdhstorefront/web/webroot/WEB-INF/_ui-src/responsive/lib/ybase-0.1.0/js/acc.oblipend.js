@@ -430,6 +430,12 @@ ACC.oblipend = {
 								clavePeriodo = valueH.anioGravable.substring(2,4);
 							}
 							
+							if(valueH.objetoContrato == null || valueH.objetoContrato == '' || valueH.objetoContrato == undefined){
+								if (!(valueH.matrInmobiliaria == null || valueH.matrInmobiliaria == '' || valueH.matrInmobiliaria == undefined)){
+									valueH.objetoContrato = valueH.matrInmobiliaria;
+								}	
+							}
+							
 							switch (valueH.facilidad){
 								case "00":
 									td_totalPagar = valueD.obligacion;
