@@ -852,7 +852,13 @@ ACC.predial = {
 			draggable: false,
 			buttons: {
 				Ok: function() {
+					debugger;
+					var currLoc = $(location).attr('href');
+					var index = currLoc.indexOf("/bogota/es");   
+					var currLoc = currLoc.substring(0, index);
+					var nextLoc = currLoc + "/bogota/es/contribuyentes/consultas/obligaciones";
 					$(this).dialog("close");
+					window.location.replace(nextLoc);
 				}
 			}
 		});

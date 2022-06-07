@@ -859,7 +859,6 @@ ACC.opcionDeclaraciones = {
 
 
 	updateFromResponseSeleccion_presentarDec : function(infoActual,infoResponse) {
-		debugger;
 		var flagHuboRegistros = false;
 		var anioGravable = document.getElementById("anoGravable").value;
 
@@ -950,7 +949,6 @@ ACC.opcionDeclaraciones = {
 					if(value.contratoArrenda != null){
 						contratoArrendaOut = value.contratoArrenda;
 					}
-					debugger;
 					if(document.getElementById("anoGravable") != null){
 						strAnioGravable_value = "'"+ document.getElementById("anoGravable").value+"'";
 					}
@@ -1260,7 +1258,6 @@ ACC.opcionDeclaraciones = {
 	validarDeclaracion : function(url,placa){
 		ACC.spinner.show();
 		var anioGravable = "";
-		debugger;
 		var anoGravableHTML = document.getElementById("anoGravable");
 		if(anoGravableHTML != null){
 			anioGravable = document.getElementById("anoGravable").value;
@@ -1848,7 +1845,7 @@ ACC.opcionDeclaraciones = {
 	
 	
 	preparaCatAnioGravable_presentarDec : function(anoGravableBase,cantidadAnos){
-        debugger;
+        
 		$("#anoGravable").find("option:gt(0)").remove();
 		for(var i=0;i<cantidadAnos;i++){
 			$('#anoGravable').append('<option value="'+ anoGravableBase +'">'+ anoGravableBase + "</option>");
@@ -1874,7 +1871,7 @@ ACC.opcionDeclaraciones = {
 		var d = new Date();
 		var anoGravableBase = d.getFullYear();
 		var cantidadAnoGravable = ACC.opcionDeclaraciones.detCantidadAnoGravable(claveImpuesto,ACC.configCatalogos_ambito_presentarDeclaracion);
-		debugger;
+		
 		$("#anoGravable").find("option:gt(0)").remove();
 		if(claveImpuesto == '1' || claveImpuesto == '2'){ // predial vehicular 
 			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,cantidadAnoGravable);
