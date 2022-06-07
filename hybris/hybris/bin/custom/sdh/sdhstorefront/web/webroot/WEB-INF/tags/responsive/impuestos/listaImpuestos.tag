@@ -608,6 +608,7 @@
 	}
 
 	function onChange() {
+		
 		var tipoImpuesto = document.getElementById("impuesto").value;
 		
 		if (tipoImpuesto == '2' || tipoImpuesto == '1' || tipoImpuesto == '6' ) { //vehicular, predial, delineacion urbana
