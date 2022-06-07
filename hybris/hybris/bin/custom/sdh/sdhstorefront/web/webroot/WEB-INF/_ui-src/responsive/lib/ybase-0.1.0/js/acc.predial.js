@@ -852,7 +852,6 @@ ACC.predial = {
 			draggable: false,
 			buttons: {
 				Ok: function() {
-					debugger;
 					var currLoc = $(location).attr('href');
 					var index = currLoc.indexOf("/bogota/es");   
 					var currLoc = currLoc.substring(0, index);
