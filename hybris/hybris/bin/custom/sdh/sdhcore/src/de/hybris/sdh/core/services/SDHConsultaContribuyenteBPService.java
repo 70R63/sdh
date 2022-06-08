@@ -22,4 +22,6 @@ public interface SDHConsultaContribuyenteBPService
 	String consultaContribuyenteBP_simplificado_string(ConsultaContribBPRequest request);
 
 	String getEntidadBancaria(String bp);
+
+	boolean tieneImpuestoActivo(SDHValidaMailRolResponse infoContrib, String claveImpuesto);
 }

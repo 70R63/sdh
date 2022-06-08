@@ -8,6 +8,7 @@ ACC.spac = {
 						"click",
 						".btnspac",
 						function(e) {
+							
 							e.preventDefault();
 							
 							ACC.spinner.show();
@@ -17,7 +18,7 @@ ACC.spac = {
 
 							divtable.style.visibility = 'hidden';
 
-							if (confirm("El SPAC es el sistema de pago del Impuesto Predial por cuotas de la presente vigencia. Si te acoges al pago de predial por cuotas no tendrás la opción del 10% de descuento por pronto pago.")) {
+							if (confirm("Paso 4:  El SPAC es el sistema de pago del Impuesto Predial por cuotas de la presente vigencia. Si te acoges al pago de predial por cuotas no tendrás la opción del 10% de descuento por pronto pago.")) {
 								var anio = $.trim($(this).attr("data-anio"));
 								var numbp = $.trim($(this).attr("data-numbp"));
 								var numform = $.trim($(this).attr(
@@ -30,7 +31,7 @@ ACC.spac = {
 										"data-reimpresion"));
 								
 								var tspac = "0";
-								if(confirm("¿Su predio tiene afectación COVID 19 según lo establecido en la Resolución 650 del 17 de noviembre del 2021"+"\n" +"Cancelar: Te acoges al SPAC normal"+"\n"+"Aceptar: Te acoges a SPAC covid")){
+								if(confirm("Paso 5:  ¿Su predio tiene afectación COVID según lo establecido en la Resolución 650 del 17 de noviembre del 2021"+"\n\n\n" +"Selecciona aceptar: Solo si tu predio es NO residencial y deseas pagar el impuesto en cuotas a partir del 2023 "+"\n\n"+"Selecciona cancelar: Si tu predio es residencial o si tu predio es no residencial y quieres pagar con cuotas durante 2022")){
 									tspac = "2";
 								}else{
 									tspac = "1";
@@ -42,6 +43,7 @@ ACC.spac = {
 													+ '&numform=' + numform
 													+ '&numobj=' + numobj
 													+ '&numbp=' + numbp
+													+ '&reimpresion='
 													+ '&reimpresion=' + reimpresion
 													+ '&tspac=' + tspac,
 											// data : data,

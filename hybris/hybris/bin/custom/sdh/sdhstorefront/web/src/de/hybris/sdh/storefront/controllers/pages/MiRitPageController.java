@@ -59,6 +59,7 @@ import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.facades.SDHCalculaICA2Facade;
 import de.hybris.sdh.facades.SDHCertifNombFacade;
 import de.hybris.sdh.facades.SDHUpdateRitFacade;
+import de.hybris.sdh.storefront.controllers.pages.forms.DescargaFacturaVAForm;
 import de.hybris.sdh.storefront.forms.CertifNombForm;
 import de.hybris.sdh.storefront.forms.MiRitForm;
 import de.hybris.sdh.storefront.forms.UpdateAddressRitForm;
@@ -94,6 +95,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -176,7 +178,8 @@ public class MiRitPageController extends AbstractPageController
 
 	@RequestMapping(method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String showView(final Model model,
+	public String showView(@ModelAttribute("facturacion")
+	MiRitForm facturacion, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 
@@ -266,6 +269,12 @@ public class MiRitPageController extends AbstractPageController
 
 			final MiRitForm miRitForm = new MiRitForm();
 
+			
+//			String proceso1pcAttr = "proceso1pc";
+//			String proceso1pcVal = sessionService.getCurrentSession().getAttribute(proceso1pcAttr);
+			if(facturacion != null && StringUtils.isNotEmpty(facturacion.getProceso1pc())) {
+				miRitForm.setProceso1pc(facturacion.getProceso1pc());
+			}
 
 			if ("nit".equalsIgnoreCase(customerModel.getDocumentType()) || "nite".equalsIgnoreCase(customerModel.getDocumentType()))
 			{

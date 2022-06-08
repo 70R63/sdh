@@ -5,34 +5,274 @@ ACC.facturacion = {
 	
 	bindBuscar : function(){
 		$(document).on("click", ".facBuscar", function(){
+			debugger;
+			var impuesto = document.getElementById('impuesto').value;
+			var anoGravable = document.getElementById('aniograv').value;
+			ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById('oblipend-predial'),'none');
+			ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById('oblipend-vehiculos'),'none');
 
-			var imp = document.getElementById('impuesto').value;
-			var tabpred = document.getElementById('table-predial');
-			var tabveh = document.getElementById('table-vehiculos');
-			var aniogravFiltro = document.getElementById('aniograv').value;
-			var borrar = false;
+
+			switch(impuesto){
+			case "0001":
+			case "0002":
+				ACC.facturacion.buscarRegistrosImpuesto(impuesto, anoGravable);
+				break;
+				
+			default:
 			
-			tabpred.style.display = 'none';
-			tabveh.style.display = 'none';
-
-			if(aniogravFiltro != ""){
-				switch(imp){
-				case "0001":
-	//				ACC.facturacion.filtrarRegistros_aniograv("tabla_vehi","0",aniogravFiltro);
-					tabpred.style.display = 'block';
-					break;
-				case "0002":
-	//				ACC.facturacion.filtrarRegistros_aniograv("tabla_vehi","0",aniogravFiltro);
-					tabveh.style.display = 'block';
-					break;
-					
-				default:
-					break;
-				}
+				break;
 			}
 			
+		});
+	},
+	
+	
+	buscarRegistrosImpuesto : function(impuesto,anoGravable){
+		
+		
+		if(ACC.facturacion.validarAntesSubmitWSBuscarReg(impuesto,anoGravable)){
+			ACC.spinner.show();
+			var dataActual = {};	
+			
+			dataActual.claveImpuesto = impuesto;
+			$.ajax({
+				url : ACC.descargaFacturaBuscarURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					ACC.spinner.close();
+					ACC.facturacion.manejarRespuestaWSBuscarReg(dataActual,dataResponse);
+				},
+				error : function() {
+					ACC.spinner.close();
+					alert("Error procesar la solicitud de busqueda de registros");	
+				}
+			});
 		}
-		);
+			
+	},
+	
+	
+	manejarRespuestaWSBuscarReg : function(dataActual,infoResponse){
+		debugger;
+		switch(dataActual.claveImpuesto){
+			case "0001":
+				ACC.facturacion.updateResponse_predial(dataActual,infoResponse);
+				break;
+			case "0002":
+				ACC.facturacion.updateResponse_vehiculos(dataActual,infoResponse);
+				break;
+			
+			default:
+				break;
+		}
+		
+		
+	},
+	
+	
+	updateResponse_vehiculos : function(dataActual,infoResponse){
+		var id_tabla = "#tabla_vehi";
+		var tablaInfo = infoResponse.vehicular;
+		
+		if(tablaInfo == null){
+			alert("No se encontraron registros");
+		}else{
+			ACC.publicidadexterior.bindDataTable_ID_refresh(id_tabla);
+			$(id_tabla).find("tr:gt(0)").remove();
+			$.each(tablaInfo, function (indexH,valueH){
+				var tr_value = "";
+				
+				if(valueH != null && ((valueH.anioGravable != null && valueH.anioGravable != "" ) &&
+					((valueH.placa != null && valueH.placa != "") || (valueH.marca != null && valueH.marca != "")))){
+					var infoAdicional = {};
+					infoAdicional.claveImpuesto = "0002";
+					infoAdicional.nombreObjeto = "objetoVehicular";
+					
+					var td_placa = ACC.facturacion.obtenerValorTD_simple(valueH.placa);
+					var td_marca = ACC.facturacion.obtenerValorTD_simple(valueH.marca);
+					var td_imagenDescarga = ACC.facturacion.obtenerValorTD_imagenDescarga(valueH,infoAdicional);
+					var td_actualizar = ACC.facturacion.obtenerValorTD_actualizar(valueH,infoAdicional);
+					var td_obtenerDescuento = ACC.facturacion.obtenerValorTD_obtenerDescuento(valueH,infoAdicional);
+					var td_pagar = ACC.facturacion.obtenerValorTD_pagar(valueH,infoAdicional);
+					var td_checkbox = ACC.facturacion.obtenerValorTD_checkbox(valueH);
+					
+					tr_value = 
+						"<tr>" +
+						"<td>" + td_placa +"</td>"+
+						'<td class="td_marca">' + td_marca +"</td>"+
+						"<td>" + td_imagenDescarga +"</td>"+
+						"<td>" + td_actualizar +"</td>"+
+						"<td>" + td_obtenerDescuento +"</td>"+
+						"<td>" + td_pagar +"</td>"+
+						"<td>" + td_checkbox +"</td>"+
+						"</tr>";
+					$(id_tabla).append(tr_value);
+				}
+			});
+			ACC.vehiculos.cargarDescripciones();
+			ACC.oblipend.mostrarTablaDelImpuesto(dataActual.claveImpuesto);
+		}
+		
+	},
+	
+	
+	updateResponse_predial : function(dataActual,infoResponse){
+		var id_tabla = "#table-predial1";
+		var tablaInfo = infoResponse.predial;
+		
+		if(tablaInfo == null){
+			alert("No se encontraron registros");
+		}else{
+			debugger;
+			ACC.publicidadexterior.bindDataTable_ID_refresh(id_tabla);
+			$(id_tabla).find("tr:gt(0)").remove();
+			$.each(tablaInfo, function (indexH,valueH){
+				var tr_value = "";
+				debugger;
+				if(valueH != null && ((valueH.matrInmobiliaria != null && valueH.matrInmobiliaria != "" ) 
+				|| (valueH.CHIP != null && valueH.CHIP != "")) && 
+				((valueH.anioGravable != null && valueH.anioGravable != "" ) ||
+				(valueH.direccionPredio != null && valueH.direccionPredio != ""))){
+					var infoAdicional = {};
+					infoAdicional.claveImpuesto = "0001";
+					infoAdicional.nombreObjeto = "objetoPredial";
+					var td_chip = ACC.facturacion.obtenerValorTD_simple(valueH.CHIP);
+					var td_matrInmobiliaria = ACC.facturacion.obtenerValorTD_simple(valueH.matrInmobiliaria);
+					var td_direccionPredio = ACC.facturacion.obtenerValorTD_simple(valueH.direccionPredio);
+					var td_imagenDescarga = ACC.facturacion.obtenerValorTD_imagenDescarga(valueH,infoAdicional);
+					var td_actualizar = ACC.facturacion.obtenerValorTD_actualizar(valueH,infoAdicional);
+					var td_obtenerDescuento = ACC.facturacion.obtenerValorTD_obtenerDescuento(valueH,infoAdicional);
+					var td_pagar = ACC.facturacion.obtenerValorTD_pagar(valueH,infoAdicional);
+					var td_checkbox = ACC.facturacion.obtenerValorTD_checkbox(valueH);
+					
+					tr_value = 
+						"<tr>" +
+						"<td>" + td_chip +"</td>"+
+						"<td>" + td_matrInmobiliaria +"</td>"+
+						"<td>" + td_direccionPredio +"</td>"+
+						"<td>" + td_imagenDescarga +"</td>"+
+						"<td>" + td_actualizar +"</td>"+
+						"<td>" + td_obtenerDescuento +"</td>"+
+						"<td>" + td_pagar +"</td>"+
+						"<td>" + td_checkbox +"</td>"+
+						"</tr>";
+					$(id_tabla).append(tr_value);
+				}
+			});
+			ACC.publicidadexterior.bindDataTable_id(id_tabla);
+			ACC.oblipend.mostrarTablaDelImpuesto(dataActual.claveImpuesto);
+		}
+		
+	},
+	
+	
+	obtenerValorTD_checkbox : function(registro){
+		var valorRetorno = "";
+		
+		if(registro != null){
+			valorRetorno = '<div class="checkbox" role="checkbox" aria-checked="false" id="buzon2" style=" cursor: not-allowed;" ' +
+						'data-numobjeto="' + registro.numObjeto + '" >' +
+						'<label tabindex="0" class="control-label" id="checkBeEneficio"><input id="checkBeEneficio" name="checkBeEneficio" type="checkbox" value="true"></label></div>';
+		}
+		
+		return valorRetorno;
+		
+	},
+	
+	
+	obtenerValorTD_pagar : function(registro, infoAdicional){
+		var valorRetorno = "";
+		
+		if(registro != null){
+			valorRetorno = '<button class="renglonBeneficios" id="pagarFacturaBtn" type="button" ' +
+						'data-impuesto="' + infoAdicional.claveImpuesto + '" ' +
+						'data-anioGravable="' + registro.anioGravable + '" ' +
+						'data-numObjeto="' + registro.numObjeto + '" ' +
+						'>Pagar</button>';
+		}
+		
+		return valorRetorno;
+		
+	},
+	
+	
+	obtenerValorTD_obtenerDescuento : function(registro, infoAdicional){
+		var valorRetorno = "";
+		
+		if(registro != null){
+			valorRetorno = '<label class="control-label renglonBeneficios"'+
+						'style="text-transform: capitalize !importan;color: #2196f3; text-decoration: underline !important; font-size: 13px;t"'+
+						'id="obtainBenef" '+
+						'data-claveImpuesto="' + infoAdicional.claveImpuesto + '" ' +
+						'data-nombreObjeto="' + infoAdicional.nombreObjeto +'" ' + 
+						'data-anioGrav="' + ACC.facturacion.obtenerValorTD_simple(registro.anioGravable) + '" ' +
+						'data-numobjeto="' + ACC.facturacion.obtenerValorTD_simple(registro.numObjeto) + '" ' +
+						'onclick="obtainBene(this)"> <span class="">Obtener Descuento</span></label>';
+		}
+		
+		return valorRetorno;
+		
+	},
+	
+	
+	obtenerValorTD_actualizar : function(registro, infoAdicional){
+		var valorRetorno = "";
+		
+		if(registro != null){
+			valorRetorno = '<label class="control-label renglonBeneficios"'+
+						'style="text-transform: capitalize !importan;color: #2196f3; text-decoration: underline !important; font-size: 13px;t"'+
+						'id="downloadFac" '+
+						'data-claveImpuesto="' + infoAdicional.claveImpuesto + '" ' +
+						'data-nombreObjeto="' + infoAdicional.nombreObjeto +'" ' + 
+						'data-anioGrav="' + ACC.facturacion.obtenerValorTD_simple(registro.anioGravable) + '" ' +
+						'data-numobjeto="' + ACC.facturacion.obtenerValorTD_simple(registro.numObjeto) + '" ' +
+						'onclick="reexpedicion(this)"> <span class="">Actualizar</span></label>';
+		}
+		
+		return valorRetorno;
+		
+	},
+	
+	
+	obtenerValorTD_imagenDescarga : function(registro, infoAdicional){
+		var valorRetorno = "";
+		
+		if(registro != null){
+			valorRetorno = '<img id="imgDescarga" class="renglonBeneficios" src="' + ACC.themeResourcePath + 
+						'/images/download_icon.png" onclick="descargaFactura(this)"' + 
+						'data-claveImpuesto="' + infoAdicional.claveImpuesto + '" ' +
+						'data-nombreObjeto="' + infoAdicional.nombreObjeto +'" ' + 
+						'data-anioGrav="' + ACC.facturacion.obtenerValorTD_simple(registro.anioGravable) + '" ' +
+						'data-numobjeto="' + ACC.facturacion.obtenerValorTD_simple(registro.numObjeto) + '" ' + 
+						'></img>';
+		}
+		
+		return valorRetorno;
+		
+	},
+	
+	
+	obtenerValorTD_simple : function(campo){
+		var valorRetorno = "";
+		
+		if(campo != null){
+			valorRetorno = campo;
+		}
+		
+		return valorRetorno;
+		
+	},
+	
+	
+	validarAntesSubmitWSBuscarReg : function(impuesto, anoGravable){
+		var validacionOK = false;
+		
+		if(impuesto != "" && impuesto != "00" && anoGravable != ""){
+			validacionOK = true;
+		}
+		
+		return validacionOK;
 	},
 	
 	
@@ -133,15 +373,8 @@ ACC.facturacion = {
 
 
 	refreshTablas : function(){
-		var tabpred = document.getElementById('table-predial');
-		var tabveh = document.getElementById('table-vehiculos');
-		
-		if(tabpred != null){
-			tabpred.style.display = 'none';
-		}
-		if(tabveh != null){
-			tabveh.style.display = 'none';
-		}
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById('oblipend-predial'),'none');
+		ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById('oblipend-vehiculos'),'none');
 
 	},
 	 

@@ -70,6 +70,7 @@ public class MiRitForm
 	private String fechaLiquidacion;
 	private String tipoRetenedor;
 	private String digVer;
+	private String proceso1pc;
 
 	private List<ImpuestoGasolina> gasolina;
 	private List<ImpuestoPublicidadExterior> publicidadExt;
@@ -994,6 +995,22 @@ public class MiRitForm
 	public void setDigVer(final String digVer)
 	{
 		this.digVer = digVer;
+	}
+
+	/**
+	 * @return the proceso1pc
+	 */
+	public String getProceso1pc()
+	{
+		return proceso1pc;
+	}
+
+	/**
+	 * @param proceso1pc the proceso1pc to set
+	 */
+	public void setProceso1pc(String proceso1pc)
+	{
+		this.proceso1pc = proceso1pc;
 	}
 
 	/**

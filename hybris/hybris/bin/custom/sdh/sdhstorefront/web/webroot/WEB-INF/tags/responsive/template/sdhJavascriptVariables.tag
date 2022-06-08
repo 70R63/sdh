@@ -191,6 +191,7 @@
 			ACC.descargaFacturaURL="<c:url value='/contribuyentes/descargafactura/descargarFactura' />";
 			ACC.facturacionPagosURL="<c:url value='/contribuyentes/descargafactura/facturacionPagos' />";
 			ACC.anularFormularioURL="<c:url value='/contribuyentes/descargafactura/anularFormulario' />";
+			ACC.descargaFacturaBuscarURL="<c:url value='/contribuyentes/descargafacturabuscar' />";
 			
 			ACC.descargaFacturaVABuscarInfoURL="<c:url value='/descargaFacturaVA/buscarInfo' />";
 			ACC.descargaFacturaVADescargarFacturaURL="<c:url value='/descargaFacturaVA/descargarFactura' />";
@@ -220,6 +221,8 @@
 			ACC.relacionPagosServicioURL = "<c:url value='/contribuyentes/consultas/relacionpagos/servicio' />";
 
 		  	ACC.currentURL = "${currentURL}";
+		  	
+		  	ACC.themeResourcePath = "${themeResourcePath}";
 		  	
 		  	ACC.inicialURL = "<c:url value='/' />";
 		  	
