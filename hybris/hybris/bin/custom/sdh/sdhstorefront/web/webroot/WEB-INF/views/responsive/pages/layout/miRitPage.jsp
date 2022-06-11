@@ -91,6 +91,8 @@ window.onload = function() {
 		$(".loader").fadeOut("slow");
 		
 		var checkbuzon = document.getElementById("buzon").disabled = true;
+		
+		ajusta_elementos();
 	};
 
 	function ajustar(selectObject) {
@@ -98,6 +100,16 @@ window.onload = function() {
 			var texto = inputn.value;
 			inputn.style.width = (texto.length + 1) * 8 + 'px';
 		}
+	
+	function ajusta_elementos(){
+		$( '#primNom' ).prop( 'disabled', true );
+		$( '#segNom' ).prop( 'disabled', true );
+		$( '#primApe' ).prop( 'disabled', true );
+		$( '#segApe' ).prop( 'disabled', true );
+		$( '#fchExp' ).prop( 'disabled', true );
+		$('#certifNombButton').hide();
+		$('#updateNombreButton').hide();
+	}
 
 
 </script>
