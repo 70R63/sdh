@@ -80,7 +80,7 @@ public class SDHStorefrontAuthenticationSuccessHandler extends StorefrontAuthent
 
 		sdhCustomerFacade.updateMiRitInfo();
 		sdhCustomerFacade.updateCustomerTaxRestrictions();
-		LOG.info("Login exitoso para BP: " + currentCustomerModel.getNumBP() + " Usuario: " + currentCustomerModel.getUid());
+		System.out.println("Login exitoso para BP: " + currentCustomerModel.getNumBP() + " Usuario: " + currentCustomerModel.getUid());
 
 
 	}
