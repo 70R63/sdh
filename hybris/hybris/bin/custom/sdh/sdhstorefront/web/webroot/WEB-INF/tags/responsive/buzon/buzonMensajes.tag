@@ -20,7 +20,7 @@
 	<sf:form>
 		<div style="aling-items: center; justify-content: center">
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2 center headline">
+				<div class="col-md-8 headline">
 					<h2>
 						<span><spring:theme code="mibuzon.mensajes.nuevos" /></span>
 					</h2>
@@ -28,7 +28,7 @@
 			</div>
 			<div>
 				<div class="row table-responsive">
-					<div class="col-md-8 col-md-offset-2 center">
+					<div class="col-md-11 center">
 						<table class="table" id="tabPaginacion0">
 							<thead>
 								<tr>
@@ -56,11 +56,11 @@
 										style="text-transform: capitalize !important" for="">
 											<spring:theme code="mibuzon.notificaciones.anexos" />
 									</label></th>
-									<th style="text-align: center"><label
-										class="control-label"
-										style="text-transform: capitalize !important" for="">
-											<spring:theme code="mibuzon.mensajes.papelera" />
-									</label></th>
+<!-- 									<th style="text-align: center"><label -->
+<!-- 										class="control-label" -->
+<!-- 										style="text-transform: capitalize !important" for=""> -->
+<%-- 											<spring:theme code="mibuzon.mensajes.papelera" /> --%>
+<!-- 									</label></th> -->
 								</tr>
 							</thead>
 							<tbody>
@@ -68,38 +68,36 @@
 								<c:forEach items="${miBuzon.mensajesMsg}" var="eachDoc">
 									<c:if
 										test="${eachDoc.tipoMensaje == '2' && eachDoc.checkLectura != 'X'}">
-										<tr>
-											<td><c:out value="${eachDoc.id_radicado}" /></td>
+											<tr>
+											<td><input class="tableBuzon" disabled="disabled" type="text" value="${eachDoc.id_radicado}"></td>
 											<td><c:out value="${eachDoc.autoridadEmisora}" /></td>
+											<td><c:out value="${eachDoc.asunto}" /></td>
+											<td><c:out value="${eachDoc.fechaNotificacion}" /></td>
+											<td></td>
+										</tr>
+										
+										
+											<c:set var="count" value="0" scope="page" />
 											<c:forEach items="${eachDoc.documentos}" var="echDocumentos">
-												<c:if test="${echDocumentos.nombreDocumento != ''}">
-													<td><c:out value="${eachDoc.asunto}" /></td>
-
-													<td><c:out value="${eachDoc.fechaNotificacion}" /></td>
+											<tr>
+												<c:if test="${echDocumentos.idDocumento != ''}">
+												<c:set var="count" value="${count + 1}" scope="page"/>
+													<td><input class="tableBuzon" disabled="disabled" type="text" value="Anexo ${count}"></td>
+													<td><c:out value="${echDocumentos.nombreDocumento}"/></td>
+													<td></td>
+													<td></td>
 													<td><label class="control-label download"
 														style="text-transform: capitalize !important" for=""
-														data-pdfimprimir="${echDocumentos.pdf}"
-														data-idRadicado="${eachDoc.id_radicado}"
-														data-autoridadEmisora="${eachDoc.autoridadEmisora}"
-														data-fechaNotificacion="${eachDoc.fechaNotificacion}"
-														data-asunto="${eachDoc.asunto}" id="download"
-														onclick="descargarNoti(this)"> <span
+														data-name="Anexo ${countNot}"
+														data-numBP="${miBuzon.numBP}"
+														data-idDocumento="${echDocumentos.idDocumento}"
+														data-idRadicado="${eachDoc.id_radicado}" onclick="descargarNoti(this)"> <span
 															class="glyphicon glyphicon-download-alt"></span></label></td>
-													<td><img
-														src="${themeResourcePath}/images/papeleranuevos.png"
-														style="width: 30px" id="papeleraMsg" class="papeleraMsg"
-														onclick="papeleraMsgLeidos(this)"
-														data-pdfimprimir="${echDocumentos.pdf}"
-														data-idRadicado="${eachDoc.id_radicado}"
-														data-autoridadEmisora="${eachDoc.autoridadEmisora}"
-														data-fechaNotificacion="${eachDoc.fechaNotificacion}"
-														data-asunto="${eachDoc.asunto}"></img></td>
 												</c:if>
+												</tr>
 											</c:forEach>
-										</tr>
-
-									</c:if>
-
+										
+										</c:if>
 								</c:forEach>
 							</tbody>
 						</table>
@@ -119,8 +117,8 @@
 			<div>
 				<div class="row table-responsive">
 
-					<div class="col-md-8 col-md-offset-2 center">
-						<table class="table table-responsive tabPaginacion1"
+					<div class="col-md-11  center">
+						<table class="table table-responsive"
 							id="tabPaginacion1">
 							<thead>
 								<tr>
@@ -148,11 +146,11 @@
 										style="text-transform: capitalize !important" for="">
 											<spring:theme code="mibuzon.notificaciones.anexos" />
 									</label></th>
-									<th style="text-align: center"><label
-										class="control-label"
-										style="text-transform: capitalize !important" for="">
-											<spring:theme code="mibuzon.mensajes.papelera" />
-									</label></th>
+<!-- 									<th style="text-align: center"><label -->
+<!-- 										class="control-label" -->
+<!-- 										style="text-transform: capitalize !important" for=""> -->
+<%-- 											<spring:theme code="mibuzon.mensajes.papelera" /> --%>
+<!--								</label></th> Se comenta linea por cambios MTorres 21.06.2022 -->
 								</tr>
 							</thead>
 							<tbody>
@@ -160,34 +158,33 @@
 									<c:if
 										test="${eachDoc.tipoMensaje == '2' && eachDoc.checkLectura == 'X'}">
 										<tr>
-											<td><c:out value="${eachDoc.id_radicado}" /></td>
+											<td><input class="tableBuzon" disabled="disabled" type="text" value="${eachDoc.id_radicado}"></td>
 											<td><c:out value="${eachDoc.autoridadEmisora}" /></td>
+											<td><c:out value="${eachDoc.asunto}" /></td>
+											<td><c:out value="${eachDoc.fechaNotificacion}" /></td>
+											<td></td>
+										</tr>
+										
+											<c:set var="count" value="0" scope="page" />
 											<c:forEach items="${eachDoc.documentos}" var="echDocumentos">
-												<c:if test="${echDocumentos.nombreDocumento != ''}">
-													<td><c:out value="${eachDoc.asunto}" /></td>
-
-													<td><c:out value="${eachDoc.fechaNotificacion}" /></td>
+											<tr>
+												<c:if test="${echDocumentos.idDocumento != ''}">
+												<c:set var="count" value="${count + 1}" scope="page"/>
+													<td><input class="tableBuzon " disabled="disabled" type="text" value="Anexo ${count}"></td>
+													<td><c:out value="${echDocumentos.nombreDocumento}"/></td>
+													<td></td>
+													<td></td>
 													<td><label class="control-label download"
 														style="text-transform: capitalize !important" for=""
-														data-pdfimprimir="${echDocumentos.pdf}"
-														data-idRadicado="${eachDoc.id_radicado}"
-														data-autoridadEmisora="${eachDoc.autoridadEmisora}"
-														data-fechaNotificacion="${eachDoc.fechaNotificacion}"
-														data-asunto="${eachDoc.asunto}" id="download"
-														onclick="descargarNoti(this)"> <span
+														data-name="Anexo ${countNot}"
+														data-numBP="${miBuzon.numBP}"
+														data-idDocumento="${echDocumentos.idDocumento}"
+														data-idRadicado="${eachDoc.id_radicado}" onclick="descargarNoti(this)"> <span
 															class="glyphicon glyphicon-download-alt"></span></label></td>
-													<td><img
-														src="${themeResourcePath}/images/papeleranuevos.png"
-														style="width: 30px" id="papeleraMsg" class="papeleraMsg"
-														onclick="papeleraMsgLeidos(this)"
-														data-pdfimprimir="${echDocumentos.pdf}"
-														data-idRadicado="${eachDoc.id_radicado}"
-														data-autoridadEmisora="${eachDoc.autoridadEmisora}"
-														data-fechaNotificacion="${eachDoc.fechaNotificacion}"
-														data-asunto="${eachDoc.asunto}"></img></td>
 												</c:if>
+													</tr>
 											</c:forEach>
-										</tr>
+									
 
 									</c:if>
 

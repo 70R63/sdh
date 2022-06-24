@@ -41,7 +41,7 @@ public class DefaultSDHBuzonTributarioService implements SDHBuzonTributarioServi
 
 		if (StringUtils.isAnyBlank(urlString, user, password))
 		{
-			throw new RuntimeException("Error in buzon tributario: Empty credentials");
+			throw new RuntimeException("Error while validating contribuyente: Empty credentials");
 		}
 
 		try
@@ -81,25 +81,14 @@ public class DefaultSDHBuzonTributarioService implements SDHBuzonTributarioServi
 			}
 
 			final String result = builder.toString();
-			if (result != null)
-			{
-				LOG.info("Longitud de la respuesta: " + result.length());
-			}
-			else
-			{
-				LOG.info("La respuesta es nula");
-			}
-
 
 			return result;
 
 		}
 		catch (final Exception e)
 		{
-			LOG.error("There was an error in buzon tributario: " + e.getMessage());
+			LOG.error("There was an error buzon tributario: " + e.getMessage());
 		}
-
-
 
 		// XXX Auto-generated method stub
 		return null;

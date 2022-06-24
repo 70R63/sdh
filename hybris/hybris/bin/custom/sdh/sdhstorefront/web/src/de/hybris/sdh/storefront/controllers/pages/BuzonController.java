@@ -17,6 +17,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.BuzonTributarioRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.responses.BuzonDocumentos;
 import de.hybris.sdh.core.pojos.responses.BuzonMensajes2;
 import de.hybris.sdh.core.pojos.responses.BuzonTributarioMsgResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -30,16 +31,18 @@ import java.util.GregorianCalendar;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -104,9 +107,6 @@ public class BuzonController extends AbstractPageController
 		final BuzonTributarioRequest buzonrequest = new BuzonTributarioRequest();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
-		//		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-
-
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
 
 		final Calendar fecha = new GregorianCalendar();
@@ -118,55 +118,59 @@ public class BuzonController extends AbstractPageController
 		//	int segundo = fecha.get(Calendar.SECOND);
 
 		final String anioact = Integer.toString(anio);
-
+		miBuzon.setNumBP(customerModel.getNumBP());
 		buzonrequest.setNumBP(customerModel.getNumBP());
 		buzonrequest.setVigencia(anioact);
 		buzonrequest.setCheckLectura("x");
+		buzonrequest.setIdDocumento("");
+		buzonrequest.setIdRadicado("");
 
 		final ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 		try
-			{
-				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = 
-						sdhConsultaContribuyenteBPService.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
+		{
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = sdhConsultaContribuyenteBPService
+					.consultaContribuyenteBP_simplificado(consultaContribuyenteBPRequest);
 
 			final BuzonTributarioMsgResponse buzonTributarioMsgResponse = mapper
 					.readValue(sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioMsgResponse.class);
+
 
 			miBuzon.setMensajesMsg(buzonTributarioMsgResponse.getMensajes());
 			final int Buzon = sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getZZAUTOBUZONE();
 
 			miBuzon.setBuzActivo(Buzon);
 
+
 			int Mi = 1;
 			int Ni = 1;
 
 			for (final BuzonMensajes2 eachTipMensaje : buzonTributarioMsgResponse.getMensajes())
-				{
+			{
 				if ("2".equals(eachTipMensaje.getTipoMensaje()))
 				{
 					miBuzon.setContMsj(Mi);
 					Mi++;
 				}
 				else if ("1".equals(eachTipMensaje.getTipoMensaje()))
-					{
+				{
 					miBuzon.setContNot(Ni);
 					Ni++;
-					}
 				}
-
-				model.addAttribute("miBuzon", miBuzon);
-
 			}
-			catch (final Exception s)
-			{
 
-			LOG.error("error getting customer info from SAP for Mi buzon page: " + s.getMessage());
-				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
-				model.addAttribute("miBuzon", miBuzon);
-			}
+			model.addAttribute("miBuzon", miBuzon);
+
+		}
+		catch (final Exception s)
+		{
+
+			LOG.error("error getting customer info from SAP for rit page: " + s.getMessage());
+			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+			model.addAttribute("miBuzon", miBuzon);
+		}
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));
@@ -192,17 +196,64 @@ public class BuzonController extends AbstractPageController
 	}
 
 	@RequestMapping(value =
-	{ "/contribuyentes/mibuzon_tributario", "/agenteRetenedor/mibuzon_tributario" }, method = RequestMethod.POST)
+	{ "/contribuyentes/mibuzon_tributario/descarga", "/agenteRetenedor/mibuzon_tributario/descarga" }, method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String buzonpost(final BindingResult bindingResult, final HttpServletRequest request, final Model model,
-			final RedirectAttributes redirectAttributes)
-			throws CMSItemNotFoundException
+	@ResponseBody
+	public String buzonDescargaPDF(final MiBuzon miBuzon, final HttpServletResponse response, final HttpServletRequest request)
+			throws CMSItemNotFoundException, JsonMappingException, JsonProcessingException
 	{
 		System.out.println("------------------Entro al POST de mi buzon inicial------------------------");
 
+		final BuzonTributarioRequest buzonrequest = new BuzonTributarioRequest();
+
+		final Calendar fecha = new GregorianCalendar();
+		final int anio = fecha.get(Calendar.YEAR);
+
+		final String anioact = Integer.toString(anio);
+		String pdf = "";
+		buzonrequest.setNumBP(miBuzon.getNumBP());
+		buzonrequest.setVigencia(anioact);
+		buzonrequest.setCheckLectura("x");
+		buzonrequest.setIdRadicado(miBuzon.getIdRadicado());
+		buzonrequest.setIdDocumento(miBuzon.getIdDocumento());
+
+		LOG.info("BuzonTributarioRequest: " + buzonrequest);
+		//		final ObjectMapper mapper = new ObjectMapper();
+		//		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+
+		try
+		{
+
+			final BuzonTributarioMsgResponse buzonTributarioMsgResponse = mapper
+					.readValue(sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioMsgResponse.class);
+
+			for (final BuzonMensajes2 mensaje : buzonTributarioMsgResponse.getMensajes())
+			{
+				if (mensaje.getId_radicado().equals(miBuzon.getIdRadicado()))
+				{
+					for (final BuzonDocumentos documentos : mensaje.getDocumentos())
+					{
+						if (!documentos.getPdf().isEmpty())
+						{
+							pdf = documentos.getPdf();
+						}
+					}
+				}
+
+			}
+		}
+		catch (final Exception s)
+		{
+
+			LOG.error("error getting customer info from SAP for rit page: " + s.getMessage());
+
+		}
+
 		final String referrer = request.getHeader("referer");
 
-		return REDIRECT_TO_MI_BUZON_PAGE;
+		return pdf;
 	}
-
 }

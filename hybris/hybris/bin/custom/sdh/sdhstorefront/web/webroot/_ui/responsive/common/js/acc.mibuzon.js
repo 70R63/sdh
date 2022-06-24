@@ -4,22 +4,40 @@ ACC.mibuzon = {
 	
 	bindDescargar : function(objetodeN) {
 
-			var newpdf = $.trim($(objetodeN).attr("data-pdfimprimir"));
-			var identif = $.trim($(objetodeN).attr("data-idRadicado")); 
-			var autoridadEmisora= $.trim($(objetodeN).attr("data-autoridadEmisora")); 
-			var asunto= $.trim($(objetodeN).attr("data-asunto"));
-			var fecnot = $.trim($(objetodeN).attr("data-fechaNotificacion"));
+			var radicado = $.trim($(objetodeN).attr("data-idRadicado")); 
+			var numBP= $.trim($(objetodeN).attr("data-numBP")); 
+			var idDocumento= $.trim($(objetodeN).attr("data-idDocumento"));
+			var name = $.trim($(objetodeN).attr("data-name"));
+			
+			var dataActual = {};	
 
-				var pdf = 'data:application/newpdf;base64,'+ newpdf;
+			dataActual.numBP = numBP;
+			dataActual.idDocumento = idDocumento;
+			dataActual.idRadicado = radicado;
+			
+			$.ajax({
+				url : ACC.descargaAnexoPDFBuzon,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+				if(dataResponse != null || dataResponse != ""){
+				var pdf = 'data:application/newpdf;base64,'+ dataResponse;
 				 var dlnk = document.getElementById('dwnldLnk');
 				  dlnk.href = pdf;
 				  dlnk.click();
+		debugger;
+		         $('#tabPaginacion1').append('<tr><td>' + name + '</td><td>'+ '</td><td>' + '</td><td>' +'</td><td><label class="control-label download2" style="text-transform: capitalize !important" data-pdfimprimir='+pdf+' id="download2" onclick="downloaddos()"> <span class="glyphicon glyphicon-download-alt"></span></label></td></tr>');
+					                      $(objetodeN).closest('tr').remove();    
+}else{
+	alert("Error procesar la solicitud de descarga de Anexo");	
+} 
+				}
+			,
+				error : function() {
 
-					 $('#tabPaginacion1').append('<tr><td>' + identif + '</td><td>' + autoridadEmisora + '</td><td>' + asunto + '</td><td>' + fecnot + '</td><td><label class="control-label download2" style="text-transform: capitalize !important" data-pdfimprimir='+newpdf+' id="download2" onclick="downloaddos()"> <span class="glyphicon glyphicon-download-alt"></span></label></td><td><img src="/sdhstorefront/_ui/addons/sdhpsaddon/responsive/theme-psalpha/images/papeleraleidos.png" style="width: 20px"  onclick="eliminarleidos(this)" ></img></td><td style="visibility: hidden;">'+ newpdf +'</td</tr>');
-
-					  $(objetodeN).closest('tr').remove();	 
-
-
+					alert("Error procesar la solicitud de descarga de Anexo");	
+				}
+			});
 	},
 	
 	bindDescargar2 : function(objetode) {	
@@ -79,11 +97,41 @@ ACC.mibuzon = {
 descargarNoti2 : function(objectNoti2){
 	
 	var noti2 = objectNoti2;
-	var newpdf = $.trim($(noti2).attr("data-pdfimprimir"));
-	var pdf = 'data:application/newpdf;base64,'+ newpdf;
-	 var dlnk = document.getElementById('dwnldLnk');
-	  dlnk.href = pdf;
-	  dlnk.click();
+
+	var radicado = $.trim($(noti2).attr("data-idRadicado")); 
+			var numBP= $.trim($(noti2).attr("data-numBP")); 
+			var idDocumento= $.trim($(noti2).attr("data-idDocumento"));
+				var name = $.trim($(noti2).attr("data-name"));
+			
+			var dataActual = {};	
+
+			dataActual.numBP = numBP;
+			dataActual.idDocumento = idDocumento;
+			dataActual.idRadicado = radicado;
+			
+			
+			$.ajax({
+				url : ACC.descargaAnexoPDFBuzon,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					debugger;
+					if(dataResponse != null || dataResponse != ""){
+				var pdf = 'data:application/newpdf;base64,'+ dataResponse;
+				 var dlnk = document.getElementById('dwnldLnk');
+				  dlnk.href = pdf;
+				  dlnk.click(); 
+					}else{
+						alert("Error procesar la solicitud de descarga de Anexo");
+					}
+			   
+				}
+			,
+				error : function() {
+
+					alert("Error procesar la solicitud de descarga de Anexo");	
+				}
+			});
 
 },
 
@@ -91,23 +139,50 @@ descargarNoti2 : function(objectNoti2){
 descargarNoti1_v2 : function(objectNoti){
 	ACC.publicidadexterior.bindDataTable_ID_refresh("#tabPaginacion2");
 	ACC.publicidadexterior.bindDataTable_ID_refresh("#tabPaginacion3");	
+	
+		var radicado = $.trim($(objectNoti).attr("data-idRadicado")); 
+			var numBP= $.trim($(objectNoti).attr("data-numBP")); 
+			var idDocumento= $.trim($(objectNoti).attr("data-idDocumento"));
+				var name = $.trim($(objectNoti).attr("data-name"));
+			
+			var dataActual = {};	
 
-	var newpdf = $.trim($(objectNoti).attr("data-pdfimprimir"));
-	var identif = $.trim($(objectNoti).attr("data-idRadicado")); 
-	var autoridadEmisora= $.trim($(objectNoti).attr("data-autoridadEmisora")); 
-	var asunto= $.trim($(objectNoti).attr("data-asunto"));
-	var fecnot = $.trim($(objectNoti).attr("data-fechaNotificacion"));
-	var pdf = 'data:application/newpdf;base64,'+ newpdf;
+			dataActual.numBP = numBP;
+			dataActual.idDocumento = idDocumento;
+			dataActual.idRadicado = radicado;
+			
+			
+			$.ajax({
+				url : ACC.descargaAnexoPDFBuzon,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					debugger;
+					if(dataResponse != null || dataResponse != ""){
+				var pdf = 'data:application/newpdf;base64,'+ dataResponse;
+				 var dlnk = document.getElementById('dwnldLnk');
+				  dlnk.href = pdf;
+				  dlnk.click(); 
+		objectNoti.offsetParent.parentNode.remove();
+	$('#tabPaginacion3').append('<tr><td>' + name + '</td><td>' + idDocumento + '</td><td>' +'</td><td>' +'</td><td><label class="control-label download2Noti" style="text-transform: capitalize !important" data-pdfimprimir='+ pdf +' id="download2Noti" onclick="downloaddosNoti(this)"> <span class="glyphicon glyphicon-download-alt"></span></label></td></tr>');
+
+					}else{
+						alert("Error procesar la solicitud de descarga de Anexo");
+					}
+			   
+				}
+			,
+				error : function() {
+
+					alert("Error procesar la solicitud de descarga de Anexo");	
+				}
+			});
+
 	
 
-	objectNoti.offsetParent.parentNode.remove();
-	$('#tabPaginacion3').append('<tr><td>' + identif + '</td><td>' + autoridadEmisora + '</td><td>' + asunto + '</td><td>' + fecnot + '</td><td><label class="control-label download2Noti" style="text-transform: capitalize !important" data-pdfimprimir='+ newpdf +' id="download2Noti" onclick="downloaddosNoti(this)"> <span class="glyphicon glyphicon-download-alt"></span></label></td></tr>');
-
-	var dlnk = document.getElementById('dwnldLnk');
-	if(dlnk!= null){
-		dlnk.href = pdf;
-		dlnk.click();		
-	}
+	
+	
+	
 
 	ACC.publicidadexterior.bindDataTable_id("#tabPaginacion2");
 	ACC.publicidadexterior.bindDataTable_id("#tabPaginacion3");

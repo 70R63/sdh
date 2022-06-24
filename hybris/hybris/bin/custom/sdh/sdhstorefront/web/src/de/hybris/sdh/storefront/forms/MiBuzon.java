@@ -39,6 +39,7 @@ public class MiBuzon
 	private String numBP;
 	private String vigencia;
 	private String checkLectura;
+	private String idDocumento;
 
 	private int contMsj;
 	private int contNot;
@@ -444,6 +445,22 @@ public class MiBuzon
 		this.buzActivo = buzActivo;
 	}
 
+	/**
+	 * @return the idDocumento
+	 */
+	public String getIdDocumento()
+	{
+		return idDocumento;
+	}
+
+	/**
+	 * @param idDocumento
+	 *           the idDocumento to set
+	 */
+	public void setIdDocumento(final String idDocumento)
+	{
+		this.idDocumento = idDocumento;
+	}
 
 	//*->FIN dev-eduardo ajuste de menu impuestos
 

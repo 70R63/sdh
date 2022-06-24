@@ -3,15 +3,20 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+
 /**
  * @author hybris
  *
  */
 public class BuzonDocumentos
 {
+	@JsonProperty("ID_Documento")
+	private String idDocumento;
 	private String nombreDocumento;
 	private String pdf;
-	
+
 	/**
 	 * @return the nombreDocumento
 	 */
@@ -19,7 +24,7 @@ public class BuzonDocumentos
 	{
 		return nombreDocumento;
 	}
-	
+
 	/**
 	 * @param nombreDocumento
 	 *           the nombreDocumento to set
@@ -35,7 +40,7 @@ public class BuzonDocumentos
 	{
 		return pdf;
 	}
-	
+
 	/**
 	 * @param pdf
 	 *           the pdf to set
@@ -45,5 +50,20 @@ public class BuzonDocumentos
 		this.pdf = pdf;
 	}
 
+	/**
+	 * @return the idDocumento
+	 */
+	public String getIdDocumento()
+	{
+		return idDocumento;
+	}
 
+	/**
+	 * @param idDocumento
+	 *           the idDocumento to set
+	 */
+	public void setIdDocumento(final String idDocumento)
+	{
+		this.idDocumento = idDocumento;
+	}
 }
