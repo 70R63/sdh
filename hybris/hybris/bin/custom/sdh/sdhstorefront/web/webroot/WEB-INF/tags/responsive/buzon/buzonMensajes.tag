@@ -79,13 +79,14 @@
 										
 											<c:set var="count" value="0" scope="page" />
 											<c:forEach items="${eachDoc.documentos}" var="echDocumentos">
+											<c:if test="${echDocumentos.nombreDocumento != null}">
 											<tr>
-												<c:if test="${echDocumentos.idDocumento != ''}">
+<%-- 												<c:if test="${echDocumentos.idDocumento != ''}"> --%>
 												<c:set var="count" value="${count + 1}" scope="page"/>
 													<td><input class="tableBuzon" disabled="disabled" type="text" value="Anexo ${count}"></td>
 													<td><c:out value="${echDocumentos.nombreDocumento}"/></td>
 													<td></td>
-													<td></td>
+													<td>${eachDoc.fechaNotificacion}</td>
 													<td><label class="control-label download"
 														style="text-transform: capitalize !important" for=""
 														data-name="Anexo ${countNot}"
@@ -93,8 +94,9 @@
 														data-idDocumento="${echDocumentos.idDocumento}"
 														data-idRadicado="${eachDoc.id_radicado}" onclick="descargarNoti(this)"> <span
 															class="glyphicon glyphicon-download-alt"></span></label></td>
-												</c:if>
+<%-- 												</c:if> --%>
 												</tr>
+												</c:if>
 											</c:forEach>
 										
 										</c:if>
@@ -167,13 +169,14 @@
 										
 											<c:set var="count" value="0" scope="page" />
 											<c:forEach items="${eachDoc.documentos}" var="echDocumentos">
+											<c:if test="${echDocumentos.nombreDocumento != null}">
 											<tr>
-												<c:if test="${echDocumentos.idDocumento != ''}">
+												
 												<c:set var="count" value="${count + 1}" scope="page"/>
 													<td><input class="tableBuzon " disabled="disabled" type="text" value="Anexo ${count}"></td>
 													<td><c:out value="${echDocumentos.nombreDocumento}"/></td>
 													<td></td>
-													<td></td>
+													<td>${eachDoc.fechaNotificacion}</td>
 													<td><label class="control-label download"
 														style="text-transform: capitalize !important" for=""
 														data-name="Anexo ${countNot}"
@@ -181,8 +184,9 @@
 														data-idDocumento="${echDocumentos.idDocumento}"
 														data-idRadicado="${eachDoc.id_radicado}" onclick="descargarNoti(this)"> <span
 															class="glyphicon glyphicon-download-alt"></span></label></td>
-												</c:if>
+											
 													</tr>
+														</c:if>
 											</c:forEach>
 									
 

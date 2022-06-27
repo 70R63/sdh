@@ -71,12 +71,13 @@
 									
 										<c:set var="countNot" value="0" scope="page" />
 									<c:forEach items="${eachDocs.documentos}" var="echDocumentosNot">
+									<c:if test="${echDocumentosNot.nombreDocumento != null}">
 									<tr>
 									<c:set var="countNot" value="${countNot + 1}" scope="page"/>
 										<td><input class="tableBuzon" disabled="disabled" type="text" value="Anexo ${countNot}"></td>
 										<td><c:out value="${echDocumentosNot.nombreDocumento}"/></td>
 										<td></td>
-										<td></td>
+										<td>${eachDocs.fechaNotificacion}</td>
 										<td><label class="control-label downloadNoti"
 															style="text-transform: capitalize !important"
 															id="downloadNoti"
@@ -89,6 +90,7 @@
 															onclick="downloadNoti(this)"> <span
 																class="glyphicon glyphicon-download-alt"></span></label></td>
 									</tr>
+									</c:if>
 									</c:forEach>
 								</c:if>
 							</c:forEach>
@@ -145,12 +147,13 @@
 									
 									<c:set var="countNot" value="0" scope="page" />
 									<c:forEach items="${eachDocs.documentos}" var="echDocumentosNot" varStatus="seq2">
+									<c:if test="${echDocumentosNot.nombreDocumento != null}">
 									<tr>
 										<c:set var="countNot" value="${countNot + 1}" scope="page"/>
 										<td><input class="tableBuzon" disabled="disabled" type="text" value="Anexo ${countNot}"></td>
 										<td><c:out value="${echDocumentosNot.nombreDocumento}"/></td>
 										<td></td>
-										<td></td>
+										<td>${eachDocs.fechaNotificacion}</td>
 										<td><label class="control-label downloadNoti"
 															style="text-transform: capitalize !important"
 															id="downloadNoti"
@@ -161,6 +164,7 @@
 															onclick="downloaddosNoti(this)"> <span
 																class="glyphicon glyphicon-download-alt"></span></label></td>
 																</tr>
+																</c:if>
 									</c:forEach>
 								</c:if>
 							</c:forEach>
