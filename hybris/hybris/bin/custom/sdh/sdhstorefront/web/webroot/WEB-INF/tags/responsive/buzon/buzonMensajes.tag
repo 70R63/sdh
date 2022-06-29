@@ -79,9 +79,8 @@
 										
 											<c:set var="count" value="0" scope="page" />
 											<c:forEach items="${eachDoc.documentos}" var="echDocumentos">
-											<c:if test="${echDocumentos.nombreDocumento != null}">
+											<c:if test="${echDocumentos.nombreDocumento != ''}">
 											<tr>
-<%-- 												<c:if test="${echDocumentos.idDocumento != ''}"> --%>
 												<c:set var="count" value="${count + 1}" scope="page"/>
 													<td><input class="tableBuzon" disabled="disabled" type="text" value="Anexo ${count}"></td>
 													<td><c:out value="${echDocumentos.nombreDocumento}"/></td>
@@ -94,7 +93,6 @@
 														data-idDocumento="${echDocumentos.idDocumento}"
 														data-idRadicado="${eachDoc.id_radicado}" onclick="descargarNoti(this)"> <span
 															class="glyphicon glyphicon-download-alt"></span></label></td>
-<%-- 												</c:if> --%>
 												</tr>
 												</c:if>
 											</c:forEach>
@@ -169,7 +167,7 @@
 										
 											<c:set var="count" value="0" scope="page" />
 											<c:forEach items="${eachDoc.documentos}" var="echDocumentos">
-											<c:if test="${echDocumentos.nombreDocumento != null}">
+											<c:if test="${echDocumentos.nombreDocumento != ''}">
 											<tr>
 												
 												<c:set var="count" value="${count + 1}" scope="page"/>

@@ -71,7 +71,7 @@
 									
 										<c:set var="countNot" value="0" scope="page" />
 									<c:forEach items="${eachDocs.documentos}" var="echDocumentosNot">
-									<c:if test="${echDocumentosNot.nombreDocumento != null}">
+									<c:if test="${echDocumentosNot.nombreDocumento != ''}">
 									<tr>
 									<c:set var="countNot" value="${countNot + 1}" scope="page"/>
 										<td><input class="tableBuzon" disabled="disabled" type="text" value="Anexo ${countNot}"></td>
@@ -147,7 +147,7 @@
 									
 									<c:set var="countNot" value="0" scope="page" />
 									<c:forEach items="${eachDocs.documentos}" var="echDocumentosNot" varStatus="seq2">
-									<c:if test="${echDocumentosNot.nombreDocumento != null}">
+									<c:if test="${echDocumentosNot.nombreDocumento != ''}">
 									<tr>
 										<c:set var="countNot" value="${countNot + 1}" scope="page"/>
 										<td><input class="tableBuzon" disabled="disabled" type="text" value="Anexo ${countNot}"></td>
