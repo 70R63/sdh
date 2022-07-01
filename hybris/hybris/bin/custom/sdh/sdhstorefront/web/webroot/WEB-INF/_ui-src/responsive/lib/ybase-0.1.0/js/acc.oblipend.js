@@ -515,6 +515,38 @@ ACC.oblipend = {
 						var tr_value = "";
 						
 						if(valueD != null && valueD.numReferencia != null && valueD.numReferencia.trim() != ""){
+							
+							var mapPeriodo =  [{clave:'A1', valor:'Anual'},
+											   {clave:'B1', valor:'Enero - Febrero'},
+											   {clave:'01', valor:'Enero - Febrero'},
+											   {clave:'B2', valor:'Marzo - Abril'},
+											   {clave:'02', valor:'Marzo - Abril'},
+											   {clave:'B3', valor:'Mayo - Junio'},
+											   {clave:'03', valor:'Mayo - Junio'},
+											   {clave:'B4', valor:'Julio - Agosto'},
+											   {clave:'04', valor:'Julio - Agosto'},
+											   {clave:'B5', valor:'Septiembre - Octubre'},
+											   {clave:'05', valor:'Septiembre - Octubre'},
+											   {clave:'B6', valor:'Noviembre - Diciembre'},
+											   {clave:'06', valor:'Noviembre - Diciembre'}
+											   ];
+							
+							
+							if( !( valueH.periodo == null || valueH.periodo == '' || valueH.periodo == undefined ) ){							
+								var codePeriodo =  valueH.periodo.substring(2,4);				   
+								if( codePeriodo == null || codePeriodo == '' || codePeriodo == undefined ){
+									codePeriodo =  valueH.periodo.substring(0,2);				   
+								}	
+								
+								var descPeriodo = "";
+								
+								for( let i = 0; i < mapPeriodo.length; i++){
+									if ( mapPeriodo[i].clave == codePeriodo ){
+										descPeriodo = mapPeriodo[i].valor;
+										break;		
+									}	
+								}		
+							}
 							var td_totalPagar = "";
 							var td_rop = "";
 							var td_pagoVigente = "";
@@ -559,7 +591,7 @@ ACC.oblipend = {
 							tr_value = 
 								"<tr>" +
 								"<td>" + valueH.anioGravable +"</td>"+
-								"<td>" + valueH.objetoContrato +"</td>"+
+								"<td>" + descPeriodo +"</td>"+
 								"<td>" + valueD.estadoObligacion +"</td>"+
 								"<td>" + valueD.obligacion +"</td>"+
 								"<td>" + valueD.numFormulario +"</td>"+
@@ -570,11 +602,10 @@ ACC.oblipend = {
 								"<td>" + td_pagoVigente +"</td>"+
 								"<td>" + td_spac +"</td>"+
 								"</tr>";
-								if(valueH.details.estadoObligacion != null){
+								if( !(valueH.details[indexD].estadoObligacion == null || valueH.details[indexD].estadoObligacion == '' || valueH.details[indexD].estadoObligacion == undefined) ){
 									
-									$(id_tabla).append(tr_value);	
-										ACC.publicidadexterior.bindDataTable_id(id_tabla);
-				ACC.oblipend.mostrarTablaDelImpuesto(infoResponse.claveImpuesto);
+									$(id_tabla).append(tr_value);										
+		  
 								}
 						}
 					});

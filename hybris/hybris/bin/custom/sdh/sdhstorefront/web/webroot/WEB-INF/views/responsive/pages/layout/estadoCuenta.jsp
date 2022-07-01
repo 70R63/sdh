@@ -27,6 +27,7 @@
 <template:sdhJavascriptVariables4/>
 <script type="text/javascript">
 	window.onload = function() {
+		var referrer = "${ctaForm.referrer}";							   
 		ACC.vehiculos.cargarDescripciones();
 		
 		var url = window.parent.location.href;
@@ -34,14 +35,12 @@
 		
 		if(contenido_url == true){
 			var contrib_select = document.getElementById('idImpuestoAgente');
-			var impblock = document.getElementById('impRetenedor');
-		
+			
 			if(contrib_select != null){
 				contrib_select.style.display = 'block';
 			}
-			if(impblock != null){
-				impblock.style.display = 'block';				
-			}
+			
+			$("#impRetenedor").show();
 		}else{
 			var contrib_select = document.getElementById('idImpuesto');
 			var impblock = document.getElementById('impContribuyente');
@@ -56,6 +55,7 @@
 			if(btn != null){
 				btn.style.display = 'block';
 			}
+			$("#impRetenedor").hide();				 
 		}
 
 		$(".loader").fadeOut("slow");
