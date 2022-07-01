@@ -430,8 +430,6 @@ ACC.oblipend = {
 								clavePeriodo = valueH.anioGravable.substring(2,4);
 							}
 							
-							debugger;
-							
 							if(valueH.objetoContrato == null || valueH.objetoContrato == '' || valueH.objetoContrato == undefined){
 								if (!(valueH.matrInmobiliaria == null || valueH.matrInmobiliaria == '' || valueH.matrInmobiliaria == undefined)){
 									valueH.objetoContrato = valueH.matrInmobiliaria;

@@ -13,30 +13,7 @@
 <spring:url value="/contribuyentes/consultas/arCertipagos"
 	var="certificacionURL" htmlEscape="false" />
 <script>
-window.onload = function() {
-	//Se agrega funcionalidad para agentes Retenedores
-	
-	var url = window.parent.location.href;
-	var contenido_url = url.includes('contribuyentes');
-	
-	if(contenido_url == true){
-		var contrib_select = document.getElementById('idImpuesto');
-		contrib_select.style.display = 'block';
-	}else{
-		var contrib_select = document.getElementById('idImpuestoAgente');
-		contrib_select.style.display = 'block';
 
-		$("#seleccion").val("0004");
-		var obj=document.getElementById("seleccion");
-		
-//  		document.getElementById("BanderaAgete").value= "X";
-		
-		ACC.opcionDeclaraciones.ocultarTablas();
-		ACC.opcionDeclaraciones.prepararPeriodo();
-		
-	}
-	$(".loader").fadeOut("slow");
-}
 function SelectedAnio(selectObject) {
 	ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
 

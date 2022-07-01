@@ -5,7 +5,7 @@ ACC.facturacion = {
 	
 	bindBuscar : function(){
 		$(document).on("click", ".facBuscar", function(){
-			debugger;
+
 			var impuesto = document.getElementById('impuesto').value;
 			var anoGravable = document.getElementById('aniograv').value;
 			ACC.opcionDeclaraciones.establecerEstiloDisplay(document.getElementById('oblipend-predial'),'none');
@@ -54,7 +54,7 @@ ACC.facturacion = {
 	
 	
 	manejarRespuestaWSBuscarReg : function(dataActual,infoResponse){
-		debugger;
+		
 		switch(dataActual.claveImpuesto){
 			case "0001":
 				ACC.facturacion.updateResponse_predial(dataActual,infoResponse);
@@ -124,12 +124,11 @@ ACC.facturacion = {
 		if(tablaInfo == null){
 			alert("No se encontraron registros");
 		}else{
-			debugger;
 			ACC.publicidadexterior.bindDataTable_ID_refresh(id_tabla);
 			$(id_tabla).find("tr:gt(0)").remove();
 			$.each(tablaInfo, function (indexH,valueH){
 				var tr_value = "";
-				debugger;
+				
 				if(valueH != null && ((valueH.matrInmobiliaria != null && valueH.matrInmobiliaria != "" ) 
 				|| (valueH.CHIP != null && valueH.CHIP != "")) && 
 				((valueH.anioGravable != null && valueH.anioGravable != "" ) ||

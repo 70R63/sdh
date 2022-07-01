@@ -35,7 +35,9 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.core.services.SDHImprimePagoService;
@@ -57,7 +59,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -68,6 +70,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Decoder.BASE64Decoder;
 
@@ -130,6 +135,11 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 	@Resource(name = "mediaService")
 	private MediaService mediaService;
 
+	@Resource(name = "sdhCustomerAccountService")
+	SDHCustomerAccountService sdhCustomerAccountService;
+
+	@Resource(name = "sdhConsultaImpuesto_simplificado")
+	SDHConsultaImpuesto_simplificado sdhConsultaImpuesto_simplificado;										  
 	@ModelAttribute("anoGravableGasolina")
 	public List<SelectAtomValue> getIdAnoGravableGasolina()
 	{
@@ -190,7 +200,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 			try
 			{
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 				final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
@@ -282,7 +292,8 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 		SDHValidaMailRolResponse customerData = null;
 
 
-		customerData = sdhCustomerFacade.getRepresentadoFromSAP(customerModel.getNumBP());
+		customerData = sdhCustomerAccountService
+				.leerImpuestosActivosContribuyente(sdhConsultaImpuesto_simplificado.AMBITO_CONSULTAS);
 		infoVista.setCatalogos(gasolinaService.prepararCatalogosOpcionDeclaraciones(customerData));
 		infoVista.setCustomerData(customerData);
 
@@ -343,8 +354,8 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 		listaDeclaracionesRequest.setImpuesto(impuesto);
 		listaDeclaracionesRequest.setAnioGravable(anioGravable);
 		listaDeclaracionesRequest.setPeriodo(periodo);
-		listaDeclaracionesRequest
-				.setNumObjeto(gasolinaService.prepararNumObjeto_certipagos(infoVista, infoVista.getCustomerData()));
+		//listaDeclaracionesRequest
+		//		.setNumObjeto(gasolinaService.prepararNumObjeto_certipagos(infoVista, infoVista.getCustomerData()));
 
 		System.out.println("Request para docs/consulPagos: " + listaDeclaracionesRequest);
 		listaDeclaracionesResponse = gasolinaService.consultaListaDeclaraciones_consulPagos(listaDeclaracionesRequest,
@@ -440,7 +451,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 
 		System.out.println("Request para docs/imprimePago: " + impresionRequest);
 		impresionResponse = gasolinaService.certiPagosImprimir(impresionRequest, sdhDetalleGasolinaWS, LOG);
-//		System.out.println("Response de docs/imprimePago: " + impresionResponse);
+		System.out.println("Response de docs/imprimePago: " + impresionResponse);
 		if (gasolinaService.ocurrioErrorImprimePago(impresionResponse) != true)
 		{
 
@@ -517,7 +528,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 				}
 
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				String consultaPagoResp = sdhConsultaPagoService.consultaPago(consultaPagoRequest);
 				consultaPagoResp = consultaPagoResp.replaceAll("(\"declaraciones\"):\\{((\"\\w*\":(\"\\w*\"|\\w*),*\\s*)*\\s*)\\}",
 						"$1:\\[\\{$2\\}\\]");
@@ -660,7 +671,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 
 
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				final ConsultaPagoResponse consultaPagoResponse = mapper
 						.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
 
@@ -748,7 +759,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 
 
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				final ConsultaPagoResponse consultaPagoResponse = mapper
 						.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
 
@@ -836,7 +847,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 
 
 				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				final ConsultaPagoResponse consultaPagoResponse = mapper
 						.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
 
