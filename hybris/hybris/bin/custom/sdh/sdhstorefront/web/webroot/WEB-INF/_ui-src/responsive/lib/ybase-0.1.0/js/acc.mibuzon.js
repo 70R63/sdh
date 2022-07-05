@@ -25,9 +25,9 @@ ACC.mibuzon = {
 				 var dlnk = document.getElementById('dwnldLnk');
 				  dlnk.href = pdf;
 				  dlnk.click();
-		debugger;
+		
 		         $('#tabPaginacion1').append('<tr><td>' + name + '</td><td>'+ '</td><td>' + '</td><td>' +'</td><td><label class="control-label download2" style="text-transform: capitalize !important" data-pdfimprimir='+pdf+' id="download2" onclick="downloaddos()"> <span class="glyphicon glyphicon-download-alt"></span></label></td></tr>');
-					                      $(objetodeN).closest('tr').remove();    
+//					                      $(objetodeN).closest('tr').remove();    
 }else{
 	alert("Error procesar la solicitud de descarga de Anexo");	
 } 
@@ -115,7 +115,7 @@ descargarNoti2 : function(objectNoti2){
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
-					debugger;
+					
 					if(dataResponse != null || dataResponse != ""){
 				var pdf = 'data:application/newpdf;base64,'+ dataResponse;
 				 var dlnk = document.getElementById('dwnldLnk');
@@ -157,13 +157,13 @@ descargarNoti1_v2 : function(objectNoti){
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
-					debugger;
+					
 					if(dataResponse != null || dataResponse != ""){
 				var pdf = 'data:application/newpdf;base64,'+ dataResponse;
 				 var dlnk = document.getElementById('dwnldLnk');
 				  dlnk.href = pdf;
 				  dlnk.click(); 
-		objectNoti.offsetParent.parentNode.remove();
+//		objectNoti.offsetParent.parentNode.remove();
 	$('#tabPaginacion3').append('<tr><td>' + name + '</td><td>' + idDocumento + '</td><td>' +'</td><td>' +'</td><td><label class="control-label download2Noti" style="text-transform: capitalize !important" data-pdfimprimir='+ pdf +' id="download2Noti" onclick="downloaddosNoti(this)"> <span class="glyphicon glyphicon-download-alt"></span></label></td></tr>');
 
 					}else{
