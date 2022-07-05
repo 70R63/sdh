@@ -211,7 +211,7 @@
 	function descargarNoti(obdesca) {
 		var objetodeN = obdesca;
 		ACC.mibuzon.bindDescargar(objetodeN);
-		objetodeN.offsetParent.parentNode.remove();
+// 		objetodeN.offsetParent.parentNode.remove();
 	}
 
 	function downloaddos(obdesc) {
@@ -222,12 +222,12 @@
 	function papeleraMsgLeidos(object) {
 		var objectf = object;
 		ACC.mibuzon.bindPapeleraNuevos(objectf);
-		objectf.offsetParent.parentNode.remove();
+// 		objectf.offsetParent.parentNode.remove();
 
 	}
 
 	function eliminarleidos(objectEl) {
 		var objecteliminar = objectEl;
-		objectEl.offsetParent.parentNode.remove();
+// 		objectEl.offsetParent.parentNode.remove();
 	}
 </script>
