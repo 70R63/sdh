@@ -38,15 +38,17 @@ INSERT_UPDATE Usergroup;uid[unique=true];locName[lang=en];locName[lang=es]
 INSERT_UPDATE BackofficeRole;uid[unique=true]                    ;locName[lang=es]                      ;description                     ;authorities
                             ;sdhCustomerSupportChatRole     ;Sdh Customer Support Chat Role ;Sdh Customer Support Chat Role  ;sdhCustomerSupportChat
                             ;sdhAmsAdminEmployeeRole        ;Sdh ASM Adminisrator Role      ;Sdh ASM Adminisrator Role       ;
+                            ;sdhJustUserRole                ;Sdh Just User Role             ;Sdh Just User Role       ;
 
 #SDH Backoffice roles
 INSERT_UPDATE BackofficeRole  ;UID[unique=true]               ;authorities
-                                ;backofficeadministratorrole  ;backofficeworkflowadmin, sdhBackOfficeAdmin
+                              ;backofficeadministratorrole  ;backofficeworkflowadmin, sdhBackOfficeAdmin
 
 
 INSERT_UPDATE Employee;UID[unique=true];name                                 ;password[default=$defaultPassword] ;description                     ;groups(uid)[mode=append]     ;backOfficeLoginDisabled
                       ;supportAgent    ;SDH Support Agent - [Name LastName]  ;                                   ;SDH Support Agent - Jorge Reyes ;sdhCustomerSupportChatRole   ;false
                       ;sdhAsmAdmin     ;SDH ASM Admin                        ;                                   ;SDH ASM Adminisrator            ;sdhAmsAdminEmployeeRole      ;false
+                      ;sdhJustUser     ;SDH Just User                        ;                                   ;SDH Just User            ;sdhJustUserRole      ;false
 
 INSERT_UPDATE Employee;uid[unique=true];name;groups(uid);backOfficeLoginDisabled;passwordEncoding;encodedPassword[default=$defaultPassword]
 #;jorge.romero;jorge.romero;sdhemployeegroup;false;plain
@@ -128,20 +130,85 @@ BackofficeRole;sdhAmsAdminEmployeeRole;;;;;;;
 ;;;;Customer.readableCatalogVersions;+;-;-;-;-
 $END_USERRIGHTS;;;;;
 
+$START_USERRIGHTS;;;;;;;;;
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+BackofficeRole;sdhJustUserRole;;;;;;;
+;;;;Customer;+;+;+;+;+
+;;;;Customer.name;+;-;-;-;-
+;;;;Customer.uid;+;+;-;-;-
+;;;;Customer.customerID;+;-;-;-;-
+;;;;Customer.numBP;+;-;-;-;-
+;;;;Customer.documentType;+;-;-;-;-
+;;;;Customer.documentNumber;+;-;-;-;-
+;;;;Customer.documentExpeditionDate;+;-;-;-;-
+;;;;Customer.firstName;+;-;-;-;-
+;;;;Customer.middleName;+;-;-;-;-
+;;;;Customer.lastName;+;-;-;-;-
+;;;;Customer.secondLastName;+;-;-;-;-
+;;;;Customer.sex;+;-;-;-;-
+;;;;Customer.nationality;+;-;-;-;-
+;;;;Customer.birthDate;+;-;-;-;-
+;;;;Customer.birthPlace;+;-;-;-;-
+;;;;Customer.originCountry;+;-;-;-;-
+;;;;Customer.useEmailForNotifications;+;-;-;-;-
+;;;;Customer.useInformationForInstitutionalPurposes;+;-;-;-;-
+;;;;Customer.sdhTitle;+;-;-;-;-
+;;;;Customer.nameOrg1;+;-;-;-;-
+;;;;Customer.nameOrg2;+;-;-;-;-
+;;;;Customer.nameOrg3;+;-;-;-;-
+;;;;Customer.nameOrg4;+;-;-;-;-
+;;;;Customer.digVer;+;-;-;-;-
+;;;;Customer.legalEntity;+;-;-;-;-
+;;;;Customer.legalOrg;+;-;-;-;-
+;;;;Customer.addressList;+;-;-;-;-
+;;;;Customer.phoneList;+;-;-;-;-
+;;;;Customer.agentList;+;-;-;-;-
+;;;;Customer.networkList;+;-;-;-;-
+;;;;Customer.rolList;+;-;-;-;-
+;;;;Customer.exteriorPublicityTaxList;+;-;-;-;-
+;;;;Customer.gasTaxList;+;-;-;-;-
+;;;;Customer.vehiculosTaxList;+;-;-;-;-
+;;;;Customer.sessionLanguge;+;-;-;-;-
+;;;;Customer.sessionCurrency;+;-;-;-;-
+;;;;Customer.groups;+;-;-;-;-
+;;;;Customer.description;+;-;-;-;-
+;;;;Customer.password;+;+;-;-;-
+;;;;Customer.passwordQuestion;+;-;-;-;-
+;;;;Customer.lastLogin;+;-;-;-;-
+;;;;Customer.loginDisabled;+;-;-;-;-
+;;;;Customer.paymentInfos;+;-;-;-;-
+;;;;Customer.tickets;+;-;-;-;-
+;;;;Customer.customerReviews;+;-;-;-;-
+;;;;Customer.Europe1PriceFactory_UTG;+;-;-;-;-
+;;;;Customer.Europe1PriceFactory_UPG;+;-;-;-;-
+;;;;Customer.Europe1PriceFactory_UDG;+;-;-;-;-
+;;;;Customer.writableCatalogVersions;+;-;-;-;-
+;;;;Customer.readableCatalogVersions;+;-;-;-;-
+$END_USERRIGHTS;;;;;
+
 #--------------- SDH User restrictions ------
 $defaultPassword=12341234
 INSERT_UPDATE BackofficeRole;uid[unique=true]           ;locName[lang=es]               ;description                     ;authorities
                             ;sdhAmsAdminEmployeeRole    ;Sdh ASM Adminisrator Role      ;Sdh ASM Adminisrator Role
+                            ;sdhJustUserRole            ;Sdh Just User Role             ;Sdh Just User Role       ;
 
 
 INSERT_UPDATE Employee  ;UID[unique=true];name      ;password[default=$defaultPassword] ;description        ;groups(uid)[mode=append]     ;backOfficeLoginDisabled
-                          ;sdhAsmAdmin     ;SDH ASM Admin ;                                   ;SDH ASM Adminisrator   ;sdhAmsAdminEmployeeRole      ;false
-                          ;sdhAdmin        ;SDH Admin   ;                                   ;SDH Adminisrator     ;sdhemployeegroup           ;false
+                        ;sdhAsmAdmin     ;SDH ASM Admin ;                                   ;SDH ASM Adminisrator   ;sdhAmsAdminEmployeeRole      ;false
+                        ;sdhJustUser     ;SDH Just User ;                                   ;SDH Just User            ;sdhJustUserRole      ;false
+                        ;sdhAdmin        ;SDH Admin   ;                                   ;SDH Adminisrator     ;sdhemployeegroup           ;false
 
 $START_USERRIGHTS;;;;;;;;;
 Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
 BackofficeRole;sdhAmsAdminEmployeeRole;;;;;;;
 ;;;;Customer;+;+;+;+;+
+$END_USERRIGHTS;;;;;
+
+$START_USERRIGHTS;;;;;;;;;
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+BackofficeRole;sdhJustUserRole;;;;;;;
+;;;;Customer;+;+;+;+;+
+;;;;Employee;+;+;+;+;+
 $END_USERRIGHTS;;;;;
 
 $START_USERRIGHTS;;;;;;;;;
