@@ -214,11 +214,13 @@ public class ConsultaEstado extends AbstractSearchPageController
 						.collect(Collectors.toList()));
 			}
 
-			//cambios para reteica
-			ctaForm.setReteica(edoCuentaResponse.getReteica());
-			ctaForm.setReteicaSaldoFavor(edoCuentaResponse.getNewReteicaSaldoFavor());
-			ctaForm.setReteicaSaldoCargo(edoCuentaResponse.getNewReteicaSaldoCargo());
-			//termina reteica
+			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.RETEICA)
+					&& edoCuentaResponse.getReteica() != null)
+			{
+				ctaForm.setReteica(edoCuentaResponse.getReteica());
+				ctaForm.setReteicaSaldoFavor(edoCuentaResponse.getNewReteicaSaldoFavor());
+				ctaForm.setReteicaSaldoCargo(edoCuentaResponse.getNewReteicaSaldoCargo());
+			}
 
 			if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.VEHICULOS) && edoCuentaResponse.getTablaVehicular() != null && !edoCuentaResponse.getTablaVehicular().isEmpty())
 			{
@@ -303,6 +305,11 @@ public class ConsultaEstado extends AbstractSearchPageController
 			if(ctaForm.getTablaICA() != null && !ctaForm.getTablaICA().isEmpty()) {
 				sdhConsultaContribuyenteBPResponse.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
 			}
+			if (ctaForm.getReteica() != null)
+			{
+				sdhConsultaContribuyenteBPResponse
+						.setReteIca(sdhConsultaImpuesto_simplificado.consulta_impReteICA(consultaContribuyenteBPRequest));
+			}						
 			if(ctaForm.getPredial() != null && !ctaForm.getPredial().isEmpty()) {
 				predialFormIni.setPredial(sdhConsultaImpuesto_simplificado.consulta_impPredial(consultaContribuyenteBPRequest));
 
@@ -480,10 +487,19 @@ public class ConsultaEstado extends AbstractSearchPageController
 		if (referrer.contains("contribuyentes"))
 		{
 			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+			ctaForm.setReferrer("contribuyentes");							 
 		}
 		else if (referrer.contains("retenedor") || referrer.contains("agenteRetenedor"))
 		{
 			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE_RETE));
+			if (referrer.contains("retenedor"))
+			{
+				ctaForm.setReferrer("retenedor");
+			}
+			if (referrer.contains("agenteRetenedor"))
+			{
+				ctaForm.setReferrer("agenteRetenedor");
+			}						  
 		}
 		else
 		{

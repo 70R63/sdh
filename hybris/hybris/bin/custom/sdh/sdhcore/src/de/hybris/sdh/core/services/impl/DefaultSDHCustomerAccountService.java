@@ -64,6 +64,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestosResponse;
 import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
+import de.hybris.sdh.core.pojos.responses.ReteICA;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 //import de.hybris.sdh.core.services.;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -2407,6 +2408,22 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		}
 		else if (taxCode == "04")//RETEICA
 		{
+			ReteICA reteIca = new ReteICA();
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			try
+			{
+				consultaContribuyenteBPRequest.setNumBP(numBP);
+				reteIca = sdhConsultaImpuesto_simplificado.consulta_impReteICA(consultaContribuyenteBPRequest);
+				sdhValidaMailRolResponse.setReteIca(reteIca);
+			}
+			catch (final Exception e)
+			{
+				e.printStackTrace();
+				sdhValidaMailRolResponse.setReteIca(reteIca);
+			}
+					   
 
 		}
 		else if (taxCode == "05")//Gasolina
@@ -2486,7 +2503,8 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		groupList = groupList.stream().filter(c -> (
 		c.getUid().contains("predialUsrTaxGrp") || c.getUid().contains("vehicularUsrTaxGrp") || c.getUid().contains("ICAUsrTaxGrp")
 				||
-				c.getUid().contains("gasolinaUsrTaxGrp") ||
+				c.getUid().contains("gasolinaUsrTaxGrp") || c.getUid().contains("reteICAUsrTaxGrp")
+				||
 				c.getUid().contains("delineacionUsrTaxGrp") || c.getUid().contains("publicidadExtUsrTaxGrp")))
 				.collect(Collectors.toSet());
 
@@ -2511,9 +2529,15 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 					continue;
 				}
 				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.ICA)
-						&& groupUid.contains("ICAUsrTaxGrp"))
+						&& groupUid.contentEquals("ICAUsrTaxGrp"))
 				{
 					customerData.setIca(sdhConsultaImpuesto_simplificado.consulta_impICA(consultaContribuyenteBPRequest));
+					continue;
+				}
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.RETEICA)
+						&& groupUid.contentEquals("reteICAUsrTaxGrp"))
+				{
+					customerData.setReteIca(sdhConsultaImpuesto_simplificado.consulta_impReteICA(consultaContribuyenteBPRequest));
 					continue;
 				}
 				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.GASOLINA)
@@ -2609,6 +2633,12 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 						&& groupUid.contains("publicidadExtUsrTaxGrp"))
 				{
 					impuestosActivosUsuario.put(sdhConsultaImpuesto_simplificado.PUBLICIDAD, "Publicidad exterior");
+					continue;
+				}
+				if (sdhConsultaImpuesto_simplificado.esImpuestoActivo(impuestosActivos, sdhConsultaImpuesto_simplificado.RETEICA)
+						&& groupUid.contains("reteICAUsrTaxGrp"))
+				{
+					impuestosActivosUsuario.put(sdhConsultaImpuesto_simplificado.RETEICA, "Retención ICA");
 					continue;
 				}
 			}

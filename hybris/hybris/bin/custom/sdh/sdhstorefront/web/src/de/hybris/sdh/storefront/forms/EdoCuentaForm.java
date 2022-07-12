@@ -54,6 +54,29 @@ public class EdoCuentaForm
 
 	private String reteicaSaldoCargo;
 	private String reteicaSaldoFavor;
+	private String referrer;
+
+
+
+
+
+
+	/**
+	 * @return the referrer
+	 */
+	public String getReferrer()
+	{
+		return referrer;
+	}
+
+	/**
+	 * @param referrer
+	 *           the referrer to set
+	 */
+	public void setReferrer(final String referrer)
+	{
+		this.referrer = referrer;
+	}					 
 
 
 
