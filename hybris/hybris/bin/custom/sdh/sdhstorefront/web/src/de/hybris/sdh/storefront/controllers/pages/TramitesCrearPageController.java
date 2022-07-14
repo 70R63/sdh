@@ -255,6 +255,26 @@ public class TramitesCrearPageController extends AbstractPageController
 
 		}
 
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final String firstName = customerModel.getFirstName();
+
+		if (!firstName.contains("BANCO"))
+		{
+			int index = 0;
+			for (final ItemSelectOption itemSelectOption : elementosResponse)
+			{
+
+				if (itemSelectOption.getKey().contentEquals("07"))
+				{
+					elementosResponse.remove(index);
+					break;
+				}
+
+				index++;
+			}
+		}
+
+
 		infoVista.setOpciones(elementosResponse);
 		infoVista.setDocTramitesResponse(docTramitesResponse);
 		infoVista.setUrlAccion(urlAccion);
@@ -287,7 +307,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		List<CreaCasosAtribRequest> atributos = null;
 		final List<CreaCasosArchiRequest> archivos = new ArrayList<CreaCasosArchiRequest>();
 		List<CreaCasoArchVista> inputInfoArchivos = null;
-		CreaCasoArchVista inputInfoArchivo_tmp = null;
+		final CreaCasoArchVista inputInfoArchivo_tmp = null;
 		CreaCasosArchiRequest archivoCarga = null;
 		CreaCasosArchiInfoRequest archivosInfo = null;
 		CreaCasosAtribRequest atributo = null;
@@ -424,10 +444,10 @@ public class TramitesCrearPageController extends AbstractPageController
 	 * @param tramitesCreacionCasoInfo
 	 * @return
 	 */
-	private List<CreaCasoArchVista> obtenerInfoArchivosInput(TramitesCreacionCasoInfo tramitesCreacionCasoInfo)
+	private List<CreaCasoArchVista> obtenerInfoArchivosInput(final TramitesCreacionCasoInfo tramitesCreacionCasoInfo)
 	{
 
-		List<CreaCasoArchVista> inputInfoArchivos = new ArrayList<CreaCasoArchVista>();
+		final List<CreaCasoArchVista> inputInfoArchivos = new ArrayList<CreaCasoArchVista>();
 		Method method = null;
 		CreaCasoArchVista inputInfoArchivo_tmp = null;
 
@@ -436,7 +456,7 @@ public class TramitesCrearPageController extends AbstractPageController
 			for (int i = 0; i < 10; i++)
 			{
 				method = tramitesCreacionCasoInfo.getClass().getMethod("getDesA" + Integer.toString(i));
-				String descA = (String) method.invoke(tramitesCreacionCasoInfo, null);
+				final String descA = (String) method.invoke(tramitesCreacionCasoInfo, null);
 
 				if (descA != null && !descA.equals(""))
 				{
@@ -456,19 +476,19 @@ public class TramitesCrearPageController extends AbstractPageController
 				}
 			}
 		}
-		catch (NoSuchMethodException e)
+		catch (final NoSuchMethodException e)
 		{
 			// XXX: handle exception
 		}
-		catch (IllegalAccessException e)
+		catch (final IllegalAccessException e)
 		{
 			// XXX: handle exception
 		}
-		catch (InvocationTargetException e)
+		catch (final InvocationTargetException e)
 		{
 			// XXX: handle exception
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			// XXX: handle exception
 		}
@@ -999,12 +1019,12 @@ public class TramitesCrearPageController extends AbstractPageController
 //		agregarElementoTramites(elementos, "0807______", "07", "sin pago ", "ZT12", "A1ZTRT0002Z036");
 //		agregarElementoTramites(elementos, "0808______", "08", "Presuntiva", "ZT12", "A1ZTRT0002Z037");
 		agregarElementoTramites(elementos, "0809______", "09", "Declaración SPAC", "ZT12", "A1ZTRT0002Z072");
-		
+
 		//Declaración SPAC
 		agregarElementoTramites(elementos, "080900____", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "080901____", "01", "Acogerce a SPAC", "ZT12", "A1ZTRT0003Z161");
 		agregarElementoTramites(elementos, "080902____", "02", "Anulación Declaración SPAC", "ZT12", "A1ZTRT0003Z162");
-		
+
 
 		//Agente Autorizado
 		agregarElementoTramites(elementos, "0900______", "00", "Seleccionar");
