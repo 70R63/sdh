@@ -555,8 +555,8 @@ public class IcaPageController extends SDHAbstractPageController
 
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final CustomerData currentUserData = this.getCustomerFacade().getCurrentCustomer();
-		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
-		final SDHValidaMailRolResponse contribuyenteData2 = sdhCustomerFacade.getRepresentadoFromSAP(representado);
+		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado,"01,02");
+		final SDHValidaMailRolResponse contribuyenteData2 = sdhCustomerFacade.getRepresentadoFromSAP(representado,"01,02");
 
 		final ConsultaContribuyenteBPRequest consultaContribRequest = new ConsultaContribuyenteBPRequest();
 		consultaContribRequest.setNumBP(representado);
