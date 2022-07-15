@@ -13,6 +13,7 @@ import de.hybris.platform.servicelayer.i18n.I18NService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.Breadcrumb;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosArchiInfoRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosArchiRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosAtribRequest;
@@ -22,6 +23,8 @@ import de.hybris.sdh.core.pojos.responses.CreaCasoArchVista;
 import de.hybris.sdh.core.pojos.responses.CreaCasosResponse;
 import de.hybris.sdh.core.pojos.responses.DocTramitesResponse;
 import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
+import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.pojos.responses.TramitesCreacionCasoInfo;
 import de.hybris.sdh.core.pojos.responses.TramitesSeleccionInfo;
 import de.hybris.sdh.core.pojos.responses.TramitesSeleccionInfoVista;
@@ -30,12 +33,14 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +55,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
