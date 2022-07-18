@@ -131,7 +131,7 @@
 						<th class="col-md-3" style="text-align: center">
 							<label class="control-label labeltabletd" for="" ><spring:theme code="Nombre" /></label>
 						</th>
-						<th class="col-md-1" style="text-align: center">
+						<th id="descargaFacturaHeader" class="col-md-1" style="text-align: center">
 							<label class="control-label labeltabletd" for=""> <spring:theme code="Descargar factura" /></label>
 						</th>
 						<c:if test="${true}">
@@ -148,7 +148,7 @@
 					<tr>
 						<td><input class="alto form-control" maxlength="50" size="30" type="text" value="nombre" id="nombreContribuyente" disabled="disabled"/>
 						<input type="hidden" value="numBP" id="numBP" disabled="disabled"/></td>
-						<td><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura()" data-claveImpuesto="." data-nombreObjeto="." data-anioGrav="" data-numobjeto=""></img></td>
+						<td id="descargaFacturaBtn" ><img src="${themeResourcePath}/images/download_icon.png" onclick="descargaFactura()" data-claveImpuesto="." data-nombreObjeto="." data-anioGrav="" data-numobjeto=""></img></td>
 						<c:if test="${true}">
 						<td id="pagarFacturaVABtnTd" ><button class="renglonBeneficios" id="pagarFacturaVABtn" type="button" data-impuesto="." data-numbp="." data-aniogravable="." data-numobjeto="." >Pagar</button></td>
 						<td><button class="renglonBeneficios" id="certificadoPagoVABtn" type="button"  onclick="descargaCertificadoPago()" data-numbp="." data-numobjeto="." >Imprimir</button></td>

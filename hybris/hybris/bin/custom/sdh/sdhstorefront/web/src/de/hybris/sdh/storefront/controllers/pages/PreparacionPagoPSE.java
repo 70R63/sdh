@@ -152,12 +152,8 @@ public class PreparacionPagoPSE extends AbstractPageController
 		String errorSITII = null;
 
 
-		if (infoPreviaPSE.getNumRef().contains("undefined"))
-		{
-			infoPreviaPSE.setNumRef("");
-		}
-
-		if (infoPreviaPSE.getNumRef() != null && !infoPreviaPSE.getNumRef().equals(""))
+		if (!(infoPreviaPSE.getNumRef() == null || infoPreviaPSE.getNumRef().equals("")
+				|| infoPreviaPSE.getNumRef().contains("undefined")))							
 		{
 			psePaymentForm.setTipoDeImpuesto(infoPreviaPSE.getTipoImpuesto());
 			psePaymentForm.setAnoGravable(infoPreviaPSE.getAnoGravable());
@@ -359,24 +355,26 @@ public class PreparacionPagoPSE extends AbstractPageController
 			}
 
 
-
-			String descImp = new String();
-            if (psePaymentForm.getTipoDeImpuesto().contains("5103"))
-            {
-                descImp = "Vehiculos";
-            }
-            else
-            {
-                descImp = Objects.nonNull(sdhTaxTypeModel) ? sdhTaxTypeModel.getName() : StringUtils.EMPTY;
-            }
-
 			final BigInteger valorAPagar = new BigInteger(psePaymentForm.getValorAPagar());
 			final String urlRetorno = configurationService.getConfiguration().getString("sdh.payment.service.retorno.url");
+
+			String descImp = new String();
+			if (psePaymentForm.getTipoDeImpuesto().contains("5103"))
+			{
+				descImp = "Vehiculos";
+			}
+			else
+			{
+				descImp = Objects.nonNull(sdhTaxTypeModel) ? sdhTaxTypeModel.getName() : StringUtils.EMPTY;
+			}
+
+																				  
+																												  
 
 			final PaymentServiceRegisterRequest paymentServiceRegisterRequest = new PaymentServiceRegisterRequest(
 					paymentServiceRegisterEntityRequest, paymentServiceRegisterApplicationRequest,
 					psePaymentForm.getTipoDeImpuesto().substring(2),
-					Objects.nonNull(sdhTaxTypeModel) ? sdhTaxTypeModel.getName() : StringUtils.EMPTY,
+					descImp,
 					psePaymentForm.getNumeroDeReferencia().replaceFirst("^0+(?!$)", ""),
 					psePaymentForm.getNumeroDeReferencia().replaceFirst("^0+(?!$)", ""),
 					psePaymentForm.getObjPago().replaceFirst("^0+(?!$)", ""), ref4,

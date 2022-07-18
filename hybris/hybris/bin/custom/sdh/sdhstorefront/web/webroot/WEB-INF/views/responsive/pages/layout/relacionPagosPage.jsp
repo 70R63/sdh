@@ -41,6 +41,7 @@ window.onload = function() {
     $(".loader").fadeOut("slow");
 	var url = window.parent.location.href;
 	var contenido_url = url.includes('agenteRetenedor');
+	$("#descargaRelacionPDF").hide();							  
 	
 }
 

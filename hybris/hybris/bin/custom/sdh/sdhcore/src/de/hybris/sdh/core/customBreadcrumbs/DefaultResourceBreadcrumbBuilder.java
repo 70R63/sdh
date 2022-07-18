@@ -646,7 +646,7 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		{
 			subTreeMap.clear();
 			subTreeMap.put(1, new CustomBreadcrumb(ROLE, ROOT));
-			subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
+			//subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
 			treeMap.put(REGISTRO_DE_RETENCIONES, subTreeMap);
 		}
 		//*->FIN AGENTES REGISTRO RETENCIONES-------------------------------------------------------
@@ -655,7 +655,7 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		{
 			subTreeMap.clear();
 			subTreeMap.put(1, new CustomBreadcrumb(ROLE, ROOT));
-			subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
+			//subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
 			treeMap.put(MI_RIT, subTreeMap);
 		}
 
@@ -663,8 +663,8 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		{
 			subTreeMap.clear();
 			subTreeMap.put(1, new CustomBreadcrumb(ROLE, ROOT));
-			subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
-			subTreeMap.put(3, new CustomBreadcrumb(MI_RIT, "/agenteRetenedor/mirit"));
+			//subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
+			subTreeMap.put(2, new CustomBreadcrumb(MI_RIT, "/agenteRetenedor/mirit"));
 			treeMap.put(BREADCRUMB_CERTIFICACIONRETE, subTreeMap);
 		}
 
@@ -673,7 +673,7 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		{
 			subTreeMap.clear();
 			subTreeMap.put(1, new CustomBreadcrumb(ROLE, ROOT));
-			subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
+			//subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
 			treeMap.put(PROFILE_BUZONRETE, subTreeMap);
 		}
 		//*->FIN MI BUZON-------------------------------------------------------------------------------
@@ -684,7 +684,7 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		{
 			subTreeMap.clear();
 			subTreeMap.put(1, new CustomBreadcrumb(ROLE, ROOT));
-			subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
+			//subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
 			treeMap.put(PROFILE_EDOCTARETE, subTreeMap);
 		}
 		//*->FIN estado de cuenta-------------------------------------------------------------------------------
@@ -694,7 +694,7 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		{
 			subTreeMap.clear();
 			subTreeMap.put(1, new CustomBreadcrumb(ROLE, ROOT));
-			subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
+			//subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
 			treeMap.put(PROFILE_OBLIGARETE, subTreeMap);
 		}
 		//*->FIN obligaciones-------------------------------------------------------------------------------
@@ -708,8 +708,8 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		{
 			subTreeMap.clear();
 			subTreeMap.put(1, new CustomBreadcrumb(ROLE, ROOT));
-			subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
-			subTreeMap.put(3, new CustomBreadcrumb(CONSULTAS, CRUMBS_LINK));
+			//subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
+			subTreeMap.put(2, new CustomBreadcrumb(CONSULTAS, CRUMBS_LINK));
 			treeMap.put(PROFILE_AR_CERTIPAGOS, subTreeMap);
 		}
 		//*->FIN CONSULTAS CERTIFICACION PAGOS-----------------------------------------------------
@@ -719,7 +719,7 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		{
 			subTreeMap.clear();
 			subTreeMap.put(1, new CustomBreadcrumb(ROLE, ROOT));
-			subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
+			//subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
 			subTreeMap.put(3, new CustomBreadcrumb(CONSULTAS, CRUMBS_LINK));
 			treeMap.put(PROFILE_AROBLIPENDIENTES, subTreeMap);
 		}
@@ -731,7 +731,7 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		{
 			subTreeMap.clear();
 			subTreeMap.put(1, new CustomBreadcrumb(ROLE, ROOT));
-			subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
+			//subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
 			subTreeMap.put(3, new CustomBreadcrumb(CONSULTAS, CRUMBS_LINK));
 			treeMap.put(PROFILE_ARRELAPAGOS, subTreeMap);
 		}
@@ -742,7 +742,7 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		{
 			subTreeMap.clear();
 			subTreeMap.put(1, new CustomBreadcrumb(ROLE, ROOT));
-			subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
+			//subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
 			subTreeMap.put(3, new CustomBreadcrumb(CONSULTAS, CRUMBS_LINK));
 			treeMap.put(PROFILE_AR_ESTADOCUENTA, subTreeMap);
 		}
@@ -754,7 +754,7 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		{
 			subTreeMap.clear();
 			subTreeMap.put(1, new CustomBreadcrumb(ROLE, ROOT));
-			subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
+			//subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
 			subTreeMap.put(3, new CustomBreadcrumb(CONSULTAS, CRUMBS_LINK));
 			treeMap.put(TEXT_CERTIFICACIONES_DE_PAGOS, subTreeMap);
 		}
@@ -765,7 +765,7 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		{
 			subTreeMap.clear();
 			subTreeMap.put(1, new CustomBreadcrumb(ROLE, ROOT));
-			subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
+			//subTreeMap.put(2, new CustomBreadcrumb(AGENTE_RETENEDOR_TEXT, RETENEDOR_LINK));
 			subTreeMap.put(3, new CustomBreadcrumb(CONSULTAS, CRUMBS_LINK));
 			treeMap.put(PROFILE_DECLARACIONES2, subTreeMap);
 		}

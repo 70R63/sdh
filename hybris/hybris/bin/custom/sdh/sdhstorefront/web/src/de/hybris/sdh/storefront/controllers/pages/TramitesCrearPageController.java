@@ -13,6 +13,7 @@ import de.hybris.platform.servicelayer.i18n.I18NService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.Breadcrumb;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribBPRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosArchiInfoRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosArchiRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosAtribRequest;
@@ -22,6 +23,8 @@ import de.hybris.sdh.core.pojos.responses.CreaCasoArchVista;
 import de.hybris.sdh.core.pojos.responses.CreaCasosResponse;
 import de.hybris.sdh.core.pojos.responses.DocTramitesResponse;
 import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
+import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.pojos.responses.TramitesCreacionCasoInfo;
 import de.hybris.sdh.core.pojos.responses.TramitesSeleccionInfo;
 import de.hybris.sdh.core.pojos.responses.TramitesSeleccionInfoVista;
@@ -30,12 +33,14 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +55,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -255,6 +263,60 @@ public class TramitesCrearPageController extends AbstractPageController
 
 		}
 
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final ConsultaContribBPRequest validaContribRequest = new ConsultaContribBPRequest();
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse;
+		validaContribRequest.setNumBP(customerModel.getNumBP());
+		validaContribRequest.setIndicador("01,02");
+
+		try
+		{
+			sdhConsultaContribuyenteBPResponse = mapper.readValue(
+					sdhConsultaContribuyenteBPService.consultaContribuyenteBP_simplificado_string(validaContribRequest),
+					SDHValidaMailRolResponse.class);
+
+			final List<NombreRolResponse> nombreRolResponse = sdhConsultaContribuyenteBPResponse.getRoles().stream()
+					.filter(s -> s.getNombreRol().contains("07")).collect(Collectors.toList());
+
+			if (nombreRolResponse == null || nombreRolResponse.isEmpty())
+			{
+				int index = 0;
+				for (final ItemSelectOption itemSelectOption : elementosResponse)
+				{
+
+					if (itemSelectOption.getKey().contentEquals("07"))
+					{
+						elementosResponse.remove(index);
+						break;
+					}
+
+					index++;
+				}
+
+				index = 0;
+				for (final ItemSelectOption itemSelectOption : elementosResponse)
+				{
+
+					if (itemSelectOption.getKey().contentEquals("03"))
+					{
+						elementosResponse.remove(index);
+						break;
+					}
+
+					index++;
+				}
+			}
+
+		}
+		catch (final IOException e)
+		{
+			LOG.info("Error al consultar BP:" + e.getMessage());
+		}
+
+
 		infoVista.setOpciones(elementosResponse);
 		infoVista.setDocTramitesResponse(docTramitesResponse);
 		infoVista.setUrlAccion(urlAccion);
@@ -287,7 +349,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		List<CreaCasosAtribRequest> atributos = null;
 		final List<CreaCasosArchiRequest> archivos = new ArrayList<CreaCasosArchiRequest>();
 		List<CreaCasoArchVista> inputInfoArchivos = null;
-		CreaCasoArchVista inputInfoArchivo_tmp = null;
+		final CreaCasoArchVista inputInfoArchivo_tmp = null;
 		CreaCasosArchiRequest archivoCarga = null;
 		CreaCasosArchiInfoRequest archivosInfo = null;
 		CreaCasosAtribRequest atributo = null;
@@ -424,10 +486,10 @@ public class TramitesCrearPageController extends AbstractPageController
 	 * @param tramitesCreacionCasoInfo
 	 * @return
 	 */
-	private List<CreaCasoArchVista> obtenerInfoArchivosInput(TramitesCreacionCasoInfo tramitesCreacionCasoInfo)
+	private List<CreaCasoArchVista> obtenerInfoArchivosInput(final TramitesCreacionCasoInfo tramitesCreacionCasoInfo)
 	{
 
-		List<CreaCasoArchVista> inputInfoArchivos = new ArrayList<CreaCasoArchVista>();
+		final List<CreaCasoArchVista> inputInfoArchivos = new ArrayList<CreaCasoArchVista>();
 		Method method = null;
 		CreaCasoArchVista inputInfoArchivo_tmp = null;
 
@@ -436,7 +498,7 @@ public class TramitesCrearPageController extends AbstractPageController
 			for (int i = 0; i < 10; i++)
 			{
 				method = tramitesCreacionCasoInfo.getClass().getMethod("getDesA" + Integer.toString(i));
-				String descA = (String) method.invoke(tramitesCreacionCasoInfo, null);
+				final String descA = (String) method.invoke(tramitesCreacionCasoInfo, null);
 
 				if (descA != null && !descA.equals(""))
 				{
@@ -456,19 +518,19 @@ public class TramitesCrearPageController extends AbstractPageController
 				}
 			}
 		}
-		catch (NoSuchMethodException e)
+		catch (final NoSuchMethodException e)
 		{
 			// XXX: handle exception
 		}
-		catch (IllegalAccessException e)
+		catch (final IllegalAccessException e)
 		{
 			// XXX: handle exception
 		}
-		catch (InvocationTargetException e)
+		catch (final InvocationTargetException e)
 		{
 			// XXX: handle exception
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			// XXX: handle exception
 		}
@@ -999,12 +1061,12 @@ public class TramitesCrearPageController extends AbstractPageController
 //		agregarElementoTramites(elementos, "0807______", "07", "sin pago ", "ZT12", "A1ZTRT0002Z036");
 //		agregarElementoTramites(elementos, "0808______", "08", "Presuntiva", "ZT12", "A1ZTRT0002Z037");
 		agregarElementoTramites(elementos, "0809______", "09", "Declaración SPAC", "ZT12", "A1ZTRT0002Z072");
-		
+
 		//Declaración SPAC
 		agregarElementoTramites(elementos, "080900____", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "080901____", "01", "Acogerce a SPAC", "ZT12", "A1ZTRT0003Z161");
 		agregarElementoTramites(elementos, "080902____", "02", "Anulación Declaración SPAC", "ZT12", "A1ZTRT0003Z162");
-		
+
 
 		//Agente Autorizado
 		agregarElementoTramites(elementos, "0900______", "00", "Seleccionar");

@@ -63,6 +63,8 @@ ACC.descargaFacturaVA = {
 		
 		$( "#pagarFacturaVABtnHeader" ).show();
 	    $( "#pagarFacturaVABtnTd" ).show();
+		$("#descargaFacturaHeader").show();
+	    $("#descargaFacturaBtn").show();							 
 		
 		if(dataResponse == null || ( dataResponse != null && dataResponse.dataForm == null)){
 			validacionOK = false;
@@ -87,6 +89,8 @@ ACC.descargaFacturaVA = {
     	if(strMensajeError != ""){
 			$("#dialogMensajes" ).dialog( "open" );
 			$("#dialogMensajesContent").html(strMensajeError);
+			$("#descargaFacturaHeader").hide();
+			$("#descargaFacturaBtn").hide();						  
 		}
 		
 		return validacionOK;

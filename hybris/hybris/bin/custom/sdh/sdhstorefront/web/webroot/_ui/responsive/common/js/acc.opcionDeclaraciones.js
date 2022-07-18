@@ -739,11 +739,11 @@ ACC.opcionDeclaraciones = {
 					indiceTabla = 0;
 					$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
 						if(value1.numObjeto != ""){
-							if(value1.numObjeto == infoResponse.customerData.reteIca.numObjeto){
+							if(value1.numObjeto == infoResponse.customerData.reteICA.numObjeto){
 								desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
-								reteIca_consecutivo = ACC.opcionDeclaraciones.obtener_desc_consecutivo(infoResponse.customerData.reteIca.consecutivo);
+								reteIca_consecutivo = ACC.opcionDeclaraciones.obtener_desc_consecutivo(infoResponse.customerData.reteICA.consecutivo);
 								$('#table-reteica1').append("<tr>"+
-									'<td>' + infoResponse.customerData.reteIca.numID  + '</td>'+
+									'<td>' + infoResponse.customerData.reteICA.numID  + '</td>'+
 									'<td>' + reteIca_consecutivo + '</td>'+
 									'<td>' + desc_clavePeriodo + '</td>'+
 									'<td>' + value1.referencia + '</td>'+

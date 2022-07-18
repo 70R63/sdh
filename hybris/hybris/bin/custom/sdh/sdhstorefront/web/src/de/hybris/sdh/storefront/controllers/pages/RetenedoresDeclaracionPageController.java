@@ -23,6 +23,7 @@ import de.hybris.sdh.core.pojos.responses.CalculoReteIcaResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
+import de.hybris.sdh.core.pojos.responses.ReteICA;												  
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaImpuesto_simplificado;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
@@ -173,7 +174,7 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 
 		if (detallePagoResponse.getNumRef() != null)
 		{
-			if (!detallePagoResponse.getNumRef().contains(""))
+			if (!detallePagoResponse.getNumRef().contentEquals(""))
 			{
 				infoPreviaPSE.setNumRef(detallePagoResponse.getNumRef());
 				infoPreviaPSE.setFechaVenc(detallePagoResponse.getFechVenc());
@@ -332,6 +333,20 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
 		final SDHValidaMailRolResponse contribuyenteData2 = sdhCustomerFacade.getRepresentadoFromSAP(representado);
 
+		ReteICA reteIcaTax = new ReteICA();
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+		try
+		{
+			consultaContribuyenteBPRequest.setNumBP(representado);
+			reteIcaTax = sdhConsultaImpuesto_simplificado.consulta_impReteICA(consultaContribuyenteBPRequest);
+			contribuyenteData2.setReteIca(reteIcaTax);
+		}
+		catch (final Exception e)
+		{
+			e.printStackTrace();
+		}
+							 
 		model.addAttribute("contribuyenteData", contribuyenteData);
 		model.addAttribute("currentUserData", currentUserData);
 		model.addAttribute("redirectURL",
@@ -377,6 +392,8 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 			}
 
 
+			final DetallePagoRequest detallePagoRequest = new DetallePagoRequest();
+			final DetallePagoResponse detallePagoResponse;															  
 			//			final SDHValidaMailRolResponse customerData2 = sdhCustomerFacade.getRepresentadoFromSAP(representado);
 			infoPreviaPSE.setAnoGravable(anoGravable);
 			infoPreviaPSE.setTipoDoc(contribuyenteData2.getInfoContrib().getTipoDoc());
@@ -387,6 +404,25 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 			infoPreviaPSE.setDv(gasolinaService.prepararDV(contribuyenteData2));
 			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoReteICA(contribuyenteData2));
 			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getRETEICA());
+			detallePagoRequest.setNumBP(infoPreviaPSE.getNumBP());
+			detallePagoRequest.setClavePeriodo(infoPreviaPSE.getClavePeriodo());
+			detallePagoRequest.setNumObjeto(infoPreviaPSE.getNumObjeto());
+			detallePagoResponse = gasolinaService.consultaDetallePago(detallePagoRequest, sdhDetalleGasolinaWS, LOG);
+
+			model.addAttribute("paymentDisabled", gasolinaService.ocurrioErrorPSE(detallePagoResponse) == true ? "disabled" : "");
+			System.out.println("------> detallePagoResponse");
+			System.out.println(detallePagoResponse);
+			System.out.println("------> detallePagoResponse");
+
+			if (detallePagoResponse.getNumRef() != null)
+			{
+				if (!detallePagoResponse.getNumRef().contentEquals(""))
+				{
+					infoPreviaPSE.setNumRef(detallePagoResponse.getNumRef());
+					infoPreviaPSE.setFechaVenc(detallePagoResponse.getFechVenc());
+					infoPreviaPSE.setTotalPagar(detallePagoResponse.getTotalPagar());
+				}
+			}														   
 		}
 		else
 		{

@@ -605,6 +605,13 @@
 		}
 		ACC.opcionDeclaraciones.preparaAnioGravable_presentarDec(tipoImpuesto);
 		document.getElementById("anoGravable").value = anio;
+		if( !("${dataForm.anoGravable}" == null || "${dataForm.anoGravable}" == '' || "${dataForm.anoGravable}" == undefined) ){
+			if( !("${dataForm.impuesto}" == null || "${dataForm.impuesto}" == '' || "${dataForm.impuesto}" == undefined) ){
+				if( "${dataForm.impuesto}" == "3" ){
+					$("#anoGravable").val("${dataForm.anoGravable}");	
+				}	
+			}		
+		}
 	}
 
 	function onChange() {

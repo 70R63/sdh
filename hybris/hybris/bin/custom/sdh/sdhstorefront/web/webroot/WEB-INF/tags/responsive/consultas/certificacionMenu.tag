@@ -415,17 +415,6 @@
 		var anioact = fecha.getFullYear();
 		var mesact = fecha.getMonth();
 
-// 		if (anio < anioact) {
-
-// 		} else {
-// 			mesact = mesact + 1;
-// 			if (per < mesact) {
-
-// 			} else {
-// 				alert("Por favor, seleccione un mes anterior");
-// 			}
-
-// 		}
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
 		ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(ACC.opcionDeclaraciones.dataActual_backup,ACC.opcionDeclaraciones.dataResponse_backup,selectObject.value);
 

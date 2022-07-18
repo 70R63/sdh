@@ -258,7 +258,7 @@
 						value="${eachValor.montoRetenido }"
 						onchange="activarValidacion_valorRetenido()" ${roValorRetenido} />
 				</div>
-				<div class="col-md-1 hidden"
+				<div class="col-md-1"
 					style="width: 5.9% !important; padding-left: 2px; padding-right: 2px;">
 					<div class="form-group ">
 						<c:if

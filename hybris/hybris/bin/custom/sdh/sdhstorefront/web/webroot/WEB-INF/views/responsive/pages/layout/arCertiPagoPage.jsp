@@ -16,28 +16,13 @@
 <script type="text/javascript">
 
 window.onload = function() {
-	//Se agrega funcionalidad para agentes Retenedores
+	var contrib_select = document.getElementById('idImpuesto');
+	contrib_select.style.display = 'block';
 	
-	var url = window.parent.location.href;
-	var contenido_url = url.includes('contribuyentes');
+	$("#seleccion").val("0004");
+	$("#seleccion").prop( "disabled", true );
+	onChange();
 	
-	if(contenido_url == true){
-		var contrib_select = document.getElementById('idImpuesto');
-		contrib_select.style.display = 'block';
-	}else{
-		var contrib_select = document.getElementById('idImpuestoAgente');
-		contrib_select.style.display = 'block';
-
-		$("#seleccion").val("0004");
-		var obj=document.getElementById("seleccion");
-		
- 		
-// 	document.getElementById("BanderaAgete").value = "X";
-
-			ACC.opcionDeclaraciones.ocultarTablas();
-			ACC.opcionDeclaraciones.prepararPeriodo();
-
-		}
 	 $(".loader").fadeOut("slow");
 	}
 </script>
