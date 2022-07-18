@@ -278,38 +278,57 @@ public class TramitesCrearPageController extends AbstractPageController
 					sdhConsultaContribuyenteBPService.consultaContribuyenteBP_simplificado_string(validaContribRequest),
 					SDHValidaMailRolResponse.class);
 
-			final List<NombreRolResponse> nombreRolResponse = sdhConsultaContribuyenteBPResponse.getRoles().stream()
-					.filter(s -> s.getNombreRol().contains("07")).collect(Collectors.toList());
+			int index = 0;
 
-			if (nombreRolResponse == null || nombreRolResponse.isEmpty())
+			if (!(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom().contains("BANCO")))
 			{
-				int index = 0;
-				for (final ItemSelectOption itemSelectOption : elementosResponse)
-				{
 
-					if (itemSelectOption.getKey().contentEquals("07"))
+				final List<NombreRolResponse> nombreRolResponse = sdhConsultaContribuyenteBPResponse.getRoles().stream()
+						.filter(s -> s.getNombreRol().contains("07")).collect(Collectors.toList());
+
+				if (nombreRolResponse == null || nombreRolResponse.isEmpty())
+				{
+					for (final ItemSelectOption itemSelectOption : elementosResponse)
 					{
-						elementosResponse.remove(index);
-						break;
+
+						if (itemSelectOption.getKey().contentEquals("07"))
+						{
+							elementosResponse.remove(index);
+							break;
+						}
+
+						index++;
 					}
 
-					index++;
+					index = 0;
+					for (final ItemSelectOption itemSelectOption : elementosResponse)
+					{
+
+						if (itemSelectOption.getKey().contentEquals("03"))
+						{
+							elementosResponse.remove(index);
+							break;
+						}
+
+						index++;
+					}
 				}
-
-				index = 0;
-				for (final ItemSelectOption itemSelectOption : elementosResponse)
+				else
 				{
-
-					if (itemSelectOption.getKey().contentEquals("03"))
+					index = 0;
+					for (final ItemSelectOption itemSelectOption : elementosResponse)
 					{
-						elementosResponse.remove(index);
-						break;
-					}
 
-					index++;
+						if (itemSelectOption.getKey().contentEquals("07"))
+						{
+							elementosResponse.remove(index);
+							break;
+						}
+
+						index++;
+					}
 				}
 			}
-
 		}
 		catch (final IOException e)
 		{
