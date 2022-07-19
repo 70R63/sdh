@@ -429,6 +429,25 @@ ACC.facturacion = {
 					type : "GET",
 					success : function(dataResponse) {
 						ACC.spinner.close();
+						
+						if ( !( dataResponse.responsePredial == null || dataResponse.responsePredial == '' || dataResponse.responsePredial == undefined ) ){
+							if ( dataResponse.responsePredial.pagado == 'X' ){
+								$("#dialogMensajes" ).dialog( "open" );
+								$("#dialogMensajesContent").html("");
+								$("#dialogMensajesContent").html("La factura ya esta pagada.");
+								return;
+							}	
+						}
+
+						if ( !( dataResponse.responseVehicular == null || dataResponse.responseVehicular == '' || dataResponse.responseVehicular == undefined ) ){
+							if ( dataResponse.responseVehicular.pagado == 'X' ){
+								$("#dialogMensajes" ).dialog( "open" );
+								$("#dialogMensajesContent").html("");
+								$("#dialogMensajesContent").html("La factura ya esta pagada.");
+								return;
+							}	
+						}
+						
 						ACC.facturacion.manejarRespuestaWSPagar(dataActual,dataResponse);
 					},
 					error : function() {
@@ -468,6 +487,25 @@ ACC.facturacion = {
 					type : "GET",
 					success : function(dataResponse) {
 						ACC.spinner.close();
+						
+						if ( !( dataResponse.responsePredial == null || dataResponse.responsePredial == '' || dataResponse.responsePredial == undefined ) ){
+							if ( dataResponse.responsePredial.pagado == 'X' ){
+								$("#dialogMensajes" ).dialog( "open" );
+								$("#dialogMensajesContent").html("");
+								$("#dialogMensajesContent").html("La factura ya esta pagada.");
+								return;
+							}	
+						}
+
+						if ( !( dataResponse.responseVehicular == null || dataResponse.responseVehicular == '' || dataResponse.responseVehicular == undefined ) ){
+							if ( dataResponse.responseVehicular.pagado == 'X' ){
+								$("#dialogMensajes" ).dialog( "open" );
+								$("#dialogMensajesContent").html("");
+								$("#dialogMensajesContent").html("La factura ya esta pagada.");
+								return;
+							}	
+						}
+						
 						ACC.facturacion.manejarRespuestaWSPagar(dataActual,dataResponse);
 					},
 					error : function() {

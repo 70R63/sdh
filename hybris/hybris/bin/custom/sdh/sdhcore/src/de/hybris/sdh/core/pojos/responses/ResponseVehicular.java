@@ -21,6 +21,29 @@ public class ResponseVehicular
 	private String fechaVencimiento;
 	private String numFormulario;
 	private String objetoContrato;
+	private String pagado;
+
+
+
+
+
+
+	/**
+	 * @return the pagado
+	 */
+	public String getPagado()
+	{
+		return pagado;
+	}
+
+	/**
+	 * @param pagado
+	 *           the pagado to set
+	 */
+	public void setPagado(final String pagado)
+	{
+		this.pagado = pagado;
+	}
 
 	/**
 	 * @return the placa
@@ -232,8 +255,12 @@ public class ResponseVehicular
 		return "ResponseVehicular [placa=" + placa + ", modelo=" + modelo + ", marca=" + marca + ", linea=" + linea
 				+ ", anoGravable=" + anoGravable + ", pagoVoluntario=" + pagoVoluntario + ", totalPagar=" + totalPagar
 				+ ", totalConVoluntario=" + totalConVoluntario + ", numReferencia=" + numReferencia + ", fechaVencimiento="
-				+ fechaVencimiento + ", numFormulario=" + numFormulario + ", objetoContrato=" + objetoContrato + "]";
+				+ fechaVencimiento + ", numFormulario=" + numFormulario + ", objetoContrato=" + objetoContrato + ", pagado=" + pagado
+				+ "]";
 	}
+
+
+
 
 
 
