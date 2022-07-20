@@ -143,7 +143,7 @@ public class RetencionesPracticadasPageController extends AbstractPageController
 
 		final RetencionesPracticadasConsRequest request = new RetencionesPracticadasConsRequest();
 		request.setNumBP(customerModel.getNumBP());
-		request.setAnogavable(infoVista.getAnio());
+		request.setAnogavable(infoVista.getAnio().substring(2, 4) + "A1");
 
 
 		final ObjectMapper mapper = new ObjectMapper();

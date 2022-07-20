@@ -15,7 +15,7 @@ public class RetencionesPracticadasConsRequest
 {
 	private String numBP;
 	private String anogavable;
-	
+
 	/**
 	 * @return the numBP
 	 */
@@ -24,7 +24,7 @@ public class RetencionesPracticadasConsRequest
 	{
 		return numBP;
 	}
-	
+
 	/**
 	 * @param numBP
 	 *           the numBP to set
@@ -34,7 +34,7 @@ public class RetencionesPracticadasConsRequest
 	{
 		this.numBP = numBP;
 	}
-	
+
 	/**
 	 * @return the anogavable
 	 */
@@ -43,7 +43,7 @@ public class RetencionesPracticadasConsRequest
 	{
 		return anogavable;
 	}
-	
+
 	/**
 	 * @param anogavable
 	 *           the anogavable to set
@@ -52,6 +52,30 @@ public class RetencionesPracticadasConsRequest
 	public void setAnogavable(final String anogavable)
 	{
 		this.anogavable = anogavable;
+	}
+
+	@Override
+	public String toString()
+	{
+		final StringBuilder stringBuilder = new StringBuilder();
+
+		stringBuilder.append("{");
+		stringBuilder.append(obtenerValorJson("\"NumBP\":\"", this.getNumBP(), "\","));
+		stringBuilder.append(obtenerValorJson("\"Anogavable\":\"", this.getAnogavable(), "\""));
+		stringBuilder.append("}");
+
+
+		return stringBuilder.toString();
+	}
+
+	private String obtenerValorJson(final String cadena1, final String valor, final String cadena2)
+	{
+		String valorVariable = "";
+
+		valorVariable = (valor != null) ? cadena1 + valor + cadena2 : cadena1 + cadena2;
+
+
+		return valorVariable;
 	}
 
 

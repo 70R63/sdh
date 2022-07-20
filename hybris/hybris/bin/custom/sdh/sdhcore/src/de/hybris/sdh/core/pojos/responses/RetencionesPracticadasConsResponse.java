@@ -14,177 +14,46 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  */
 public class RetencionesPracticadasConsResponse
 {
-	private String periodoReportado;
-	private String numbbpretenedor;
-	private String retenedor;
-	private String tipodedocumento;
-	private String identificacionRetenedor;
-	private String basederetencion;
-	private String tarifaAplicada;
-	private String valoresRetenidos;
-	private String totalRetenciones;
+
+	private Cabecera cabecera;
+	private List<DetalleRetenciones> detalle;
 	private List<UpdateRitErrorResponse> errores;
 
+
 	/**
-	 * @return the periodoReportado
+	 * @return the cabecera
 	 */
-	public String getPeriodoReportado()
+	public Cabecera getCabecera()
 	{
-		return periodoReportado;
+		return cabecera;
 	}
 
 	/**
-	 * @param periodoReportado
-	 *           the periodoReportado to set
+	 * @param cabecera
+	 *           the cabecera to set
 	 */
-	@JsonSetter("PeriodoReportado")
-	public void setPeriodoReportado(final String periodoReportado)
+	@JsonSetter("Cabecera")
+	public void setCabecera(final Cabecera cabecera)
 	{
-		this.periodoReportado = periodoReportado;
+		this.cabecera = cabecera;
 	}
 
 	/**
-	 * @return the numbbpretenedor
+	 * @return the detalle
 	 */
-	public String getNumbbpretenedor()
+	public List<DetalleRetenciones> getDetalle()
 	{
-		return numbbpretenedor;
+		return detalle;
 	}
 
 	/**
-	 * @param numbbpretenedor
-	 *           the numbbpretenedor to set
+	 * @param detalle
+	 *           the detalle to set
 	 */
-	@JsonSetter("Numbbpretenedor")
-	public void setNumbbpretenedor(final String numbbpretenedor)
+	@JsonSetter("Detalle")
+	public void setDetalle(final List<DetalleRetenciones> detalle)
 	{
-		this.numbbpretenedor = numbbpretenedor;
-	}
-
-	/**
-	 * @return the retenedor
-	 */
-	public String getRetenedor()
-	{
-		return retenedor;
-	}
-
-	/**
-	 * @param retenedor
-	 *           the retenedor to set
-	 */
-	@JsonSetter("Retenedor")
-	public void setRetenedor(final String retenedor)
-	{
-		this.retenedor = retenedor;
-	}
-
-	/**
-	 * @return the tipodedocumento
-	 */
-	public String getTipodedocumento()
-	{
-		return tipodedocumento;
-	}
-
-	/**
-	 * @param tipodedocumento
-	 *           the tipodedocumento to set
-	 */
-	@JsonSetter("Tipodedocumento")
-	public void setTipodedocumento(final String tipodedocumento)
-	{
-		this.tipodedocumento = tipodedocumento;
-	}
-
-	/**
-	 * @return the identificacionRetenedor
-	 */
-	public String getIdentificacionRetenedor()
-	{
-		return identificacionRetenedor;
-	}
-
-	/**
-	 * @param identificacionRetenedor
-	 *           the identificacionRetenedor to set
-	 */
-	@JsonSetter("IdentificacionRetenedor")
-	public void setIdentificacionRetenedor(final String identificacionRetenedor)
-	{
-		this.identificacionRetenedor = identificacionRetenedor;
-	}
-
-	/**
-	 * @return the basederetencion
-	 */
-	public String getBasederetencion()
-	{
-		return basederetencion;
-	}
-
-	/**
-	 * @param basederetencion
-	 *           the basederetencion to set
-	 */
-	@JsonSetter("Basederetencion")
-	public void setBasederetencion(final String basederetencion)
-	{
-		this.basederetencion = basederetencion;
-	}
-
-	/**
-	 * @return the tarifaAplicada
-	 */
-	public String getTarifaAplicada()
-	{
-		return tarifaAplicada;
-	}
-
-	/**
-	 * @param tarifaAplicada
-	 *           the tarifaAplicada to set
-	 */
-	@JsonSetter("TarifaAplicada")
-	public void setTarifaAplicada(final String tarifaAplicada)
-	{
-		this.tarifaAplicada = tarifaAplicada;
-	}
-
-	/**
-	 * @return the valoresRetenidos
-	 */
-	public String getValoresRetenidos()
-	{
-		return valoresRetenidos;
-	}
-
-	/**
-	 * @param valoresRetenidos
-	 *           the valoresRetenidos to set
-	 */
-	@JsonSetter("ValoresRetenidos")
-	public void setValoresRetenidos(final String valoresRetenidos)
-	{
-		this.valoresRetenidos = valoresRetenidos;
-	}
-
-	/**
-	 * @return the totalRetenciones
-	 */
-	public String getTotalRetenciones()
-	{
-		return totalRetenciones;
-	}
-
-	/**
-	 * @param totalRetenciones
-	 *           the totalRetenciones to set
-	 */
-	@JsonSetter("TotalRetenciones")
-	public void setTotalRetenciones(final String totalRetenciones)
-	{
-		this.totalRetenciones = totalRetenciones;
+		this.detalle = detalle;
 	}
 
 	/**
@@ -204,4 +73,9 @@ public class RetencionesPracticadasConsResponse
 	{
 		this.errores = errores;
 	}
+
+
+
+
+
 }

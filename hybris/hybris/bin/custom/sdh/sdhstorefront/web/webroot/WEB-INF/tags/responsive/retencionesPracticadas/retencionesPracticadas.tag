@@ -59,6 +59,8 @@
 					</button>
 				</div>
 			</div>
+			
+			<!-- 
 			<div class="col-md-2">
 				<div class="form-group">
 					<button type="button" class="btn btn-primary btn-lg"
@@ -68,6 +70,7 @@
 					</button>
 				</div>
 			</div>
+			 -->
 
 			<div class="col-md-2">
 				<div class="form-check"></div>
@@ -176,7 +179,7 @@
 		<div class="col-md-2 col-md-offset-9">
 		<button type="button" class="btn btn-primary btn-lg"
 						id="imReporte" name="action"
-						style="margin-top: 3px" onclick="">
+						style="margin-top: 3px" onclick="downloadPDF()">
 						<spring:theme code="retenciones.practicadas.tableDet.impRepo" />
 					</button>
 		</div>

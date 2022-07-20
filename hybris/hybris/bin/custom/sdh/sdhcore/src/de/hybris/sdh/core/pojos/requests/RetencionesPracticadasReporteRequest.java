@@ -90,4 +90,32 @@ public class RetencionesPracticadasReporteRequest
 	{
 		this.idretenedor = idretenedor;
 	}
+
+	@Override
+	public String toString()
+	{
+		final StringBuilder stringBuilder = new StringBuilder();
+
+		stringBuilder.append("{");
+		stringBuilder.append(obtenerValorJson("\"NumBP\":\"", this.getNumBP(), "\","));
+		stringBuilder.append(obtenerValorJson("\"Impuesto\":\"", this.getImpuesto(), "\","));
+		stringBuilder.append(obtenerValorJson("\"reporte\":\"", this.getReporte(), "\","));
+		stringBuilder.append(obtenerValorJson("\"IDretenedor\":\"", this.getIdretenedor(), "\""));
+		stringBuilder.append("}");
+
+
+		return stringBuilder.toString();
+	}
+
+	private String obtenerValorJson(final String cadena1, final String valor, final String cadena2)
+	{
+		String valorVariable = "";
+
+		valorVariable = (valor != null) ? cadena1 + valor + cadena2 : cadena1 + cadena2;
+
+
+		return valorVariable;
+	}
+
+
 }

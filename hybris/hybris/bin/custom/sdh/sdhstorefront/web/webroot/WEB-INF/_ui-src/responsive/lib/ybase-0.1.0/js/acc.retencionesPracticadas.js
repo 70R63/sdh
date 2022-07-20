@@ -17,11 +17,18 @@ ACC.retencionesPracticadas = {
 			data: dataActual,
 			type: "GET",
 			success: function(dataResponse) {
-				
 				ACC.spinner.close();
 
 				var pro = document.getElementById('tableData');
 				var detail = document.getElementById('detailRetenedor');
+				var periodo = '';
+				var retenedor = '';
+				var typeDoc = '';
+				var id_number_rete = '';
+				var base_retencion = '';
+				var tarifa_aplicada = '';
+				var val_retenido = '';
+				
 				$('#tableData').find("tr:gt(0)").remove();
 				$('#tabPaginacion0').find("tr:gt(0)").remove();
 				$('#detailTotalTable').find("tr:gt(0)").remove();
@@ -29,45 +36,56 @@ ACC.retencionesPracticadas = {
 					.append(
 						"<tr>"
 						+ '<td><input class="inputtextnew" disabled="disabled" type="text" value="'
-						+ dataResponse.Tipodedocumento
+						+ dataResponse.Cabecera.type
 						+ '" /></td>'
 						+ '<td><input class="inputtextnew" disabled="disabled" type="text" value="'
-						+ dataResponse.Numbbpretenedor
+						+ dataResponse.Cabecera.id_number
 						+ '" /></td>'
 						+ '<td><input class="inputtextnew" disabled="disabled" type="text" value="'
-						+ dataResponse.Retenedor
+						+ dataResponse.Cabecera.nombre_completo
 						+ '" /></td>'
 						+ '<td><label class="labelVerDetalle text-capitalize !important" id="labelVerDetalle" style="color: #0358d8 !important" onclick="showDetail()"> Detalle</label></td></tr>');
+				
+				if ( !( dataResponse.Detalle == null || dataResponse.Detalle == '' || dataResponse.Detalle == undefined ) ){
+				  periodo = '20' + dataResponse.Detalle[0].period_key.substring(0,2); 
+                  retenedor = dataResponse.Detalle[0].retenedor;	
+				  typeDoc = dataResponse.Detalle[0].type;				  
+				  id_number_rete = dataResponse.Detalle[0].id_number_rete; 
+				  base_retencion = dataResponse.Detalle[0].base_retencion;
+				  tarifa_aplicada = dataResponse.Detalle[0].tarifa_aplicada;
+				  val_retenido = dataResponse.Detalle[0].val_retenido;
+				}			
+				
 				$('#tabPaginacion0')
 					.append(
 						"<tr>"
 						+ '<td><input style="width: 123px !important; text-align: center" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
-						+ dataResponse.PeriodoReportado
+						+ periodo
 						+ '" /></td>'
 						+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-						+ dataResponse.Retenedor
+						+ retenedor
 						+ '" /></td>'
 						+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-						+ dataResponse.Tipodedocumento
+						+ typeDoc
 						+ '" /></td>'
 						+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-						+ dataResponse.IdentificacionRetenedor
+						+ id_number_rete
 						+ '" /></td>'
 						+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-						+ dataResponse.Basederetencion
+						+ base_retencion
 						+ '" /></td>'
 						+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-						+ dataResponse.TarifaAplicada
+						+ tarifa_aplicada
 						+ '" /></td>'
 						+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-						+ dataResponse.ValoresRetenidos
+						+ val_retenido
 						+ '" /></td></tr>');
 				$('#detailTotalTable')
 					.append(
 						"<tr>"
 						+ '<td>Total Retenciones Practicadas</td>'
 						+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-						+ dataResponse.TotalRetenciones
+						+ dataResponse.Cabecera.total_retenciones
 						+ '" /></td></tr>');
 
 				pro.style.display = 'block';

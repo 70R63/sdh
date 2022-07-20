@@ -89,7 +89,9 @@ public class DefaultSDHRetencionesPracticadasConsService implements SDHRetencion
 			}
 
 
-			final String result = builder.toString();
+			String result = builder.toString();
+			result = result.replaceAll("\"Errores\":\\{([\"])(.*)(\"\\})", "\"Errores\":[{\"$2\"}]");
+
 			LOG.info("response: " + result);
 
 			return result;
@@ -109,7 +111,7 @@ public class DefaultSDHRetencionesPracticadasConsService implements SDHRetencion
 	@Override
 	public String retencionesPracticadasReporteRequest(final RetencionesPracticadasReporteRequest request)
 	{
-		final String urlString = configurationService.getConfiguration().getString("sdh.retenciones.practicadas,reporte.url");
+		final String urlString = configurationService.getConfiguration().getString("sdh.retenciones.practicadas.reporte.url");
 		final String user = configurationService.getConfiguration().getString("sdh.retenciones.practicadas.reporte.user");
 		final String password = configurationService.getConfiguration().getString("sdh.retenciones.practicadas.reporte.password");
 
@@ -154,8 +156,8 @@ public class DefaultSDHRetencionesPracticadasConsService implements SDHRetencion
 				builder.append(inputLine);
 			}
 
-
-			final String result = builder.toString();
+			String result = builder.toString();
+			result = result.replaceAll("\"Errores\":\\{([\"])(.*)(\"\\})", "\"Errores\":[{\"$2\"}]");
 			//			LOG.info("response: " + result);
 
 			return result;
