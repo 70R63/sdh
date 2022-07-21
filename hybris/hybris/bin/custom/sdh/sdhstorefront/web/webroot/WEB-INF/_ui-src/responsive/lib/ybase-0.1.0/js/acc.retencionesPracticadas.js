@@ -47,16 +47,17 @@ ACC.retencionesPracticadas = {
 						+ '<td><label class="labelVerDetalle text-capitalize !important" id="labelVerDetalle" style="color: #0358d8 !important" onclick="showDetail()"> Detalle</label></td></tr>');
 				
 				if ( !( dataResponse.Detalle == null || dataResponse.Detalle == '' || dataResponse.Detalle == undefined ) ){
-				  periodo = '20' + dataResponse.Detalle[0].period_key.substring(0,2); 
-                  retenedor = dataResponse.Detalle[0].retenedor;	
-				  typeDoc = dataResponse.Detalle[0].type;				  
-				  id_number_rete = dataResponse.Detalle[0].id_number_rete; 
-				  base_retencion = dataResponse.Detalle[0].base_retencion;
-				  tarifa_aplicada = dataResponse.Detalle[0].tarifa_aplicada;
-				  val_retenido = dataResponse.Detalle[0].val_retenido;
-				}			
-				
-				$('#tabPaginacion0')
+				  
+				  $.each( dataResponse.Detalle , function (indexD,valueD){
+					periodo = '20' + valueD.period_key.substring(0,2); 
+					retenedor = valueD.retenedor;	
+					typeDoc = valueD.type;				  
+					id_number_rete = valueD.id_number_rete; 
+					base_retencion = valueD.base_retencion;
+					tarifa_aplicada = valueD.tarifa_aplicada;
+					val_retenido = valueD.val_retenido;
+					
+					$('#tabPaginacion0')
 					.append(
 						"<tr>"
 						+ '<td><input style="width: 123px !important; text-align: center" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
@@ -80,6 +81,11 @@ ACC.retencionesPracticadas = {
 						+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 						+ val_retenido
 						+ '" /></td></tr>');
+					  
+				  });
+				}			
+				
+				
 				$('#detailTotalTable')
 					.append(
 						"<tr>"
