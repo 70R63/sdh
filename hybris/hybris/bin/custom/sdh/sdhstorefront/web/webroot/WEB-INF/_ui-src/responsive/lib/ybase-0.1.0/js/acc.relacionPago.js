@@ -15,11 +15,25 @@ ACC.relacionPago = {
 	            type: "POST",
 	            success: function (data) {
 					var flagRegistrosAgregados = false;
+					var total_pgo = 0;
+					var aporte = 0;
 					
 					if(impuesto == "1"){
 						$("#relPagosPredial").find("tr:gt(0)").remove();
 						if(data.Relacionpagosrespons.PredialUnificado != null){
 							$.each(data.Relacionpagosrespons.PredialUnificado, function (index,value){
+								
+								total_pgo = value.total_pgo;
+								aporte = value.aporte;
+								
+								if ( total_pgo == null || total_pgo == '' || total_pgo == undefined ){
+									total_pgo = 0;
+								}	
+								
+								if ( aporte == null || aporte == '' || aporte == undefined ){
+									aporte = 0;
+								}
+								
 								if(true){
 									$('#relPagosPredial').append(
 										"<tr>"+ 
@@ -29,8 +43,8 @@ ACC.relacionPago = {
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+									
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ total_pgo +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ aporte +'" type="text" /></td>'+									
 										"</tr>"
 									);
 									flagRegistrosAgregados = true;
@@ -60,6 +74,18 @@ ACC.relacionPago = {
 						if(data.Relacionpagosrespons.Vehicular != null){
 							
 							$.each(data.Relacionpagosrespons.Vehicular, function (index,value){
+								
+								total_pgo = value.total_pgo;
+								aporte = value.aporte;
+								
+								if ( total_pgo == null || total_pgo == '' || total_pgo == undefined ){
+									total_pgo = 0;
+								}	
+								
+								if ( aporte == null || aporte == '' || aporte == undefined ){
+									aporte = 0;
+								}
+								
 								if(true){
 									$('#relPagosVehicular').append(
 										"<tr>"+ 
@@ -69,8 +95,8 @@ ACC.relacionPago = {
 										'<td><input class="inputtextnew tableRelacion" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tableRelacion" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ total_pgo +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ aporte +'" type="text" /></td>'+
 										"</tr>"
 									);
 									flagRegistrosAgregados = true;
@@ -98,6 +124,18 @@ ACC.relacionPago = {
 						$("#relPagosICA").find("tr:gt(0)").remove();
 						if(data.Relacionpagosrespons.impuestoICA != null){
 							$.each(data.Relacionpagosrespons.impuestoICA, function (index,value){
+								
+								total_pgo = value.total_pgo;
+								aporte = value.aporte;
+								
+								if ( total_pgo == null || total_pgo == '' || total_pgo == undefined ){
+									total_pgo = 0;
+								}	
+								
+								if ( aporte == null || aporte == '' || aporte == undefined ){
+									aporte = 0;
+								}
+								
 								if(true){
 									$('#relPagosICA').append(
 										"<tr>"+ 
@@ -107,8 +145,8 @@ ACC.relacionPago = {
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ total_pgo +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ aporte +'" type="text" /></td>'+
 										"</tr>"
 									);
 									flagRegistrosAgregados = true;
@@ -137,6 +175,13 @@ ACC.relacionPago = {
 						$("#relPagosPublicidad").find("tr:gt(0)").remove();
 						if(data.Relacionpagosrespons.Publicidadexterior != null){
 							$.each(data.Relacionpagosrespons.Publicidadexterior, function (index,value){
+								
+								total_pgo = value.total_pgo;
+								
+								if ( total_pgo == null || total_pgo == '' || total_pgo == undefined ){
+									total_pgo = 0;
+								}	
+								
 								if(true){
 									$('#relPagosPublicidad').append(
 										"<tr>"+ 
@@ -147,7 +192,7 @@ ACC.relacionPago = {
 									'<td><input class="inputtextnew tableRelacion"" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.doctyp +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ total_pgo +'" type="text" /></td>'+
 								    "</tr>"
 									);
 									flagRegistrosAgregados = true;									
@@ -176,6 +221,13 @@ ACC.relacionPago = {
 						$("#relPagosGasolina").find("tr:gt(0)").remove();
 						if(data.Relacionpagosrespons.SobretasaGasolina != null){
 							$.each(data.Relacionpagosrespons.SobretasaGasolina, function (index,value){
+								
+								total_pgo = value.total_pgo;
+								
+								if ( total_pgo == null || total_pgo == '' || total_pgo == undefined ){
+									total_pgo = 0;
+								}	
+								
 								if(true){
 									$('#relPagosGasolina').append(
 									"<tr>"+ 
@@ -185,7 +237,7 @@ ACC.relacionPago = {
 									'<td><input class="inputtextnew tableRelacion" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tableRelacion" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
 									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
-									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
+									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ total_pgo +'" type="text" /></td>'+
 //									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
 //									'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.aporte +'" type="text" /></td>'+
 								    "</tr>"
@@ -219,6 +271,13 @@ ACC.relacionPago = {
 						if(data.Relacionpagosrespons.DelineacionUrbana != null){
 							
 							$.each(data.Relacionpagosrespons.DelineacionUrbana, function (index,value){
+								
+								total_pgo = value.total_pgo;
+								
+								if ( total_pgo == null || total_pgo == '' || total_pgo == undefined ){
+									total_pgo = 0;
+								}	
+								
 								if(true){
 									$('#relPagosDelineacion').append(
 										"<tr>"+ 
@@ -230,7 +289,7 @@ ACC.relacionPago = {
 										'<td><input class="inputtextnew tableRelacion" disabled="disabled" value="'+ value.xblnr +'" type="text" /></td>'+
 										'<td><input class="inputtextnew" disabled="disabled" value="'+ value.fbnum +'" type="text" /></td>'+
 										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.bldat +'" type="text" /></td>'+
-										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ value.total_pgo +'" type="text" /></td>'+
+										'<td><input class="inputtextnew tabledoobli" disabled="disabled" value="'+ total_pgo +'" type="text" /></td>'+
 									    "</tr>"
 									);
 								flagRegistrosAgregados = true;
