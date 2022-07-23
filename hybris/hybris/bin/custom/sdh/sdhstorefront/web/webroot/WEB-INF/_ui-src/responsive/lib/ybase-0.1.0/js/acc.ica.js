@@ -127,7 +127,7 @@ ACC.ica = {
 					{
 						icaCalculaDeclaracionForm.tarifaAporte=$.trim($("#tarifaAporte1").val());
 					}
-					else if(idaporte == '01')
+					else if(idaporte == '01' || idaporte == '03')
 					{
 						icaCalculaDeclaracionForm.tarifaAporte=$.trim($("#tarifaAporte2").val());
 					}
