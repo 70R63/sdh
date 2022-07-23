@@ -378,7 +378,7 @@ ACC.opcionDeclaraciones = {
         var periodo = '00';
 
 		if(perBimestral != null && perBimestral.style.display == 'block'){
-			periodo = periodoB;
+			periodo = 'B' + periodoB.substring(1);
 		}else{
 			periodo = periodoM;
 		}
