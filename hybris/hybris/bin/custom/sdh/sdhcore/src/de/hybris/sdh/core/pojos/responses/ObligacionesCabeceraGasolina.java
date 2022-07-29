@@ -19,6 +19,7 @@ public class ObligacionesCabeceraGasolina
 	private String montoFacilidad;
 	private String refActiva;
 	private List<ObligacionesDetallePublicidad> details;
+	private String deshabilitarROP;
 
 
 
@@ -124,6 +125,23 @@ public class ObligacionesCabeceraGasolina
 	public void setDetails(final List<ObligacionesDetallePublicidad> details)
 	{
 		this.details = details;
+	}
+
+	/**
+	 * @return the deshabilitarROP
+	 */
+	public String getDeshabilitarROP()
+	{
+		return deshabilitarROP;
+	}
+
+	/**
+	 * @param deshabilitarROP
+	 *           the deshabilitarROP to set
+	 */
+	public void setDeshabilitarROP(final String deshabilitarROP)
+	{
+		this.deshabilitarROP = deshabilitarROP;
 	}
 
 

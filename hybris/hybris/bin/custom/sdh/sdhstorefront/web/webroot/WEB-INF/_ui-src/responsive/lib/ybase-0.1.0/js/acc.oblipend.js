@@ -242,21 +242,25 @@ ACC.oblipend = {
 								case "00":
 									td_totalPagar = valueD.obligacion;
 									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_rop = ACC.oblipend.rop_filtrado_gasolina(valueH,td_rop);
 									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,valueH.periodo,valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,"","",valueH.facilidad,valueH.montoFacilidad));
 									break;
 								case "01":
 									td_totalPagar = valueH.montoFacilidad;
 									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueH.montoFacilidad,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_rop = ACC.oblipend.rop_filtrado_gasolina(valueH,td_rop);
 									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,valueH.periodo,valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,"","",valueH.facilidad,valueH.montoFacilidad));
 									break;
 								case "02":
 									td_totalPagar = valueH.montoFacilidad;
 									td_rop = "Sin ROP";
+									td_rop = ACC.oblipend.rop_filtrado_gasolina(valueH,td_rop);
 									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,valueH.periodo,valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueH.montoFacilidad,"","",valueH.facilidad,valueH.montoFacilidad));
 									break;
 								default:
 									td_totalPagar = valueD.obligacion;
 									td_rop = ACC.oblipend.predial_generarTD_totalPagar(valueD.obligacion,valueD.obligacion,valueD.objetoContrato,clavePeriodo,tpImp);
+									td_rop = ACC.oblipend.rop_filtrado_gasolina(valueH,td_rop);
 									td_pagoVigente = ACC.oblipend.predial_generarTD_pagoVigente(valueH.refActiva,ACC.oblipend.predial_generarTD_pagoVigente_aux(valueH.refActiva,claveImpuestoExt,valueH.anioGravable,valueH.periodo,valueD.objetoContrato,valueH.objetoContrato,valueD.fechaVencimiento,valueD.numReferencia,valueD.obligacion,"","",valueH.facilidad,valueH.montoFacilidad));
 									break;	
 							}
@@ -391,6 +395,17 @@ ACC.oblipend = {
 		if(valueH.refActiva == "03"){
 			valorRetorno = obtenerURLGenDec;
 		}
+		if(valueH.deshabilitarROP == "X"){
+			valorRetorno = "Deshabilitado";
+		}
+		
+		return valorRetorno;
+	},
+	
+	
+	rop_filtrado_gasolina : function(valueH,valorCalculado){
+		var valorRetorno = valorCalculado;
+		
 		if(valueH.deshabilitarROP == "X"){
 			valorRetorno = "Deshabilitado";
 		}

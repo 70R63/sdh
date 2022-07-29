@@ -765,6 +765,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 							obligacionesFormuno.setHeadergas(obligacionesGasolinaResponse.getHeader().stream()
 									.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
 						}
+						establecerValorValidoRop_gasolina(obligacionesFormuno);
 					}
 
 					obligacionesFormuno.setClaveImpuesto(obligacionesForm.getClaveImpuesto());
@@ -1531,29 +1532,55 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	{
 		final String fechaInicio = configurationService.getConfiguration().getString("config.obligacionesPendientes.fechaROP_0002_DeshabilitadoInicio");
 		final String fechaFin = configurationService.getConfiguration().getString("config.obligacionesPendientes.fechaROP_0002_DeshabilitadoFin");
+      final String anioGravableDeshabilitar = configurationService.getConfiguration().getString("config.obligacionesPendientes.fechaROP_0002_DeshabilitadoAnoGravable");
+      boolean debeDeshabilitar = debeDeshabilitarRop_impuesto(fechaInicio,fechaFin,anioGravableDeshabilitar);
 
+      if(debeDeshabilitar) {
+         for (final ObligacionesCabeceraVehiculos itemImpuesto : obligacionesFormuno.getHeaderVehiculos())
+   		{
+         	if(itemImpuesto!= null && anioGravableDeshabilitar.equals(itemImpuesto.getAnioGravable())) {
+         		itemImpuesto.setDeshabilitarROP("X");
+         	}
+   		}
+      }
+
+	}
+	
+	
+	private void establecerValorValidoRop_gasolina(final ObligacionesForm obligacionesFormuno)
+	{
+		final String fechaInicio = configurationService.getConfiguration().getString("config.obligacionesPendientes.fechaROP_0005_DeshabilitadoInicio");
+		final String fechaFin = configurationService.getConfiguration().getString("config.obligacionesPendientes.fechaROP_0005_DeshabilitadoFin");
+      final String anioGravableDeshabilitar = configurationService.getConfiguration().getString("config.obligacionesPendientes.fechaROP_0005_DeshabilitadoAnoGravable");
+      boolean debeDeshabilitar = debeDeshabilitarRop_impuesto(fechaInicio,fechaFin,anioGravableDeshabilitar);
+
+      if(debeDeshabilitar) {
+         for (final ObligacionesCabeceraGasolina itemImpuesto : obligacionesFormuno.getHeadergas())
+   		{
+         	if(itemImpuesto!= null && anioGravableDeshabilitar.equals(itemImpuesto.getAnioGravable())) {
+         		itemImpuesto.setDeshabilitarROP("X");
+         	}
+   		}
+      }
+
+	}
+	
+	
+	private boolean debeDeshabilitarRop_impuesto(String fechaInicio, String fechaFin, String anioGravableDeshabilitar)
+	{
       final DateTimeFormatter formmat1 = DateTimeFormatter.ofPattern("yyyyMMdd", Locale.ENGLISH);
       final LocalDateTime ldt = LocalDateTime.now();
       final String fechaActual = formmat1.format(ldt);
       final int fechaActual_int = Integer.parseInt(fechaActual);
       final int fechaDeshabilitadoInicio_int = Integer.parseInt(fechaInicio);
       final int fechaDeshabilitadoFin_int = Integer.parseInt(fechaFin);
-      final String anioGravableDeshabilitar = configurationService.getConfiguration().getString("config.obligacionesPendientes.fechaROP_0002_DeshabilitadoAnoGravable");
       boolean debeDeshabilitar = false;
 
       if(fechaDeshabilitadoInicio_int <= fechaActual_int && fechaActual_int <= fechaDeshabilitadoFin_int) {
       	debeDeshabilitar = true;
       }
-
-      if(debeDeshabilitar) {
-         for (final ObligacionesCabeceraVehiculos vehiculo : obligacionesFormuno.getHeaderVehiculos())
-   		{
-         	if(vehiculo!= null && anioGravableDeshabilitar.equals(vehiculo.getAnioGravable())) {
-         		vehiculo.setDeshabilitarROP("X");
-         	}
-   		}
-      }
-
+      
+      return debeDeshabilitar;
 	}
 
 
