@@ -71,25 +71,28 @@ ACC.opcionDeclaraciones = {
 				var valorCampo;
 				var valNumObjeto;
 				var valNumRadicado;
-					
-				for (var i = 0; i < e.target.form.length; i++) {
-					nombreCampo = "registroNum_" + i;
-					valorCampo = null;
-					valorCampo = document.getElementById(nombreCampo);
-					if(valorCampo != null){
-						var seleccionado = valorCampo.checked;
-						if(seleccionado == true){
-							 valNumObjeto = $.trim($(valorCampo).attr("data-numObjeto")); 
-							 valNumRadicado = $.trim($(valorCampo).attr("data-numRadicado")); 
-							 break;
+				var totalRegistros = 0;
+				
+				if(e != null && e.target != null && e.target.form != null){
+					totalRegistros = e.target.form.length;
+					for (var i = 0; i < totalRegistros; i++) {
+						var idRegistro = e.target.form[i].id;
+						if(idRegistro != null && idRegistro.length > 11 && idRegistro.substring(0,12) == "registroNum_"){
+							valorCampo = e.target.form[i];
+							if(valorCampo != null){
+								var seleccionado = valorCampo.checked;
+								if(seleccionado == true){
+									valNumObjeto = $.trim($(valorCampo).attr("data-numObjeto")); 
+									valNumRadicado = $.trim($(valorCampo).attr("data-numRadicado")); 
+									break;
+								}
+							}
 						}
-					}else{
-						break;
 					}
 				}
-	 	        var claveImpuesto = $("#seleccion").val();  	       
-	 	        var anoGravable = $("#aniograv").val(); 	       
-	 	        var periodo = $("#periodo").val(); 	       
+				var claveImpuesto = $("#seleccion").val();  	       
+				var anoGravable = $("#aniograv").val(); 	       
+				var periodo = $("#periodo").val(); 	       
 				var dataActual = {};
 				var objContrato = valNumObjeto;
 							

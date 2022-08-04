@@ -312,10 +312,10 @@
 						<spring:theme code="certideclara.inicial.cancelar" />
 					</button>
 
-					<button type="submit"
+					<button type="button"
 						class="btn btn-primary btn-lg !important declaracionImprime"
 						id="imprimirDecButton" name="imprimirDecButton"
-						style="margin-top: 3px" onclick="">
+						style="margin-top: 3px">
 						<spring:theme code="certideclara.inicial.generar" />
 					</button>
 				</div>
