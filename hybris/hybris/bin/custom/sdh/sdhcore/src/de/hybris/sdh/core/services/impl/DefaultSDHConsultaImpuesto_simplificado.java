@@ -19,6 +19,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -580,6 +581,27 @@ public class DefaultSDHConsultaImpuesto_simplificado implements SDHConsultaImpue
 
 
 		return validacionOK;
+	}
+
+
+	@Override
+	public String getAnioGravableActual_impDelineacion()
+	{
+		return getAnioGravableActual_generico();
+	}
+
+
+	/**
+	 * @return
+	 */
+	private String getAnioGravableActual_generico()
+	{
+		final Calendar now = Calendar.getInstance();
+		final int year = now.get(Calendar.YEAR);
+		final String yearInString = String.valueOf(year);
+
+
+		return yearInString;
 	}
 
 }

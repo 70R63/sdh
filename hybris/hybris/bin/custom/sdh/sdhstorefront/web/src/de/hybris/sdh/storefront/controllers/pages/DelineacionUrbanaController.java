@@ -226,11 +226,15 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		final String mensajeError = "";
 		String paginaDestino = "";
 		String mensajeErrorDel = "";
+		String anoGravableDU = null;
 		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
 
 
-		infObjetoDelineacionExtras.setAnoGravable(
-				gasolinaService.getAnoGravableDU(infoDelineacion.getValCont().getDelineacion(), infoDelineacion.getInput()));
+		anoGravableDU = gasolinaService.getAnoGravableDU(infoDelineacion.getValCont().getDelineacion(), infoDelineacion.getInput());
+		if(anoGravableDU == null) {
+			anoGravableDU = sdhConsultaImpuesto_simplificado.getAnioGravableActual_impDelineacion();
+		}
+		infObjetoDelineacionExtras.setAnoGravable(anoGravableDU);
 		infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
 
 

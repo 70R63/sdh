@@ -95,6 +95,6 @@ public interface SDHConsultaImpuesto_simplificado
 
 	boolean esImpuestoActivo(Map<String, String> impuestosActivos, String claveImpuesto);
 
-
+	public String getAnioGravableActual_impDelineacion();
 
 }

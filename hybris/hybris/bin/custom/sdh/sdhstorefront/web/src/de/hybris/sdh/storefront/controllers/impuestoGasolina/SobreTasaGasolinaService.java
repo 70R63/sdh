@@ -1949,7 +1949,7 @@ public class SobreTasaGasolinaService
 	 */
 	public String getAnoGravableDU(final List<ImpuestoDelineacionUrbana> list, final InfoDelineacionInput infoDelineacionInput)
 	{
-		String anoGravable = "";
+		String anoGravable = null;
 
 		if (infoDelineacionInput.getSelectedAnoPresDeclaracion() != null)
 		{
@@ -1962,7 +1962,7 @@ public class SobreTasaGasolinaService
 				if(impuestoDelineacionUrbana != null
 						&& impuestoDelineacionUrbana.getCdu() != null
 						&& impuestoDelineacionUrbana.getCdu().equals(infoDelineacionInput.getSelectedCDU())
-						&& (!impuestoDelineacionUrbana.getFechaExp().equals("") && impuestoDelineacionUrbana.getFechaExp().length() > 6)) {
+						&& (impuestoDelineacionUrbana.getFechaExp() != null && !impuestoDelineacionUrbana.getFechaExp().equals("") && impuestoDelineacionUrbana.getFechaExp().length() > 6)) {
 					anoGravable = impuestoDelineacionUrbana.getFechaExp().substring(6);
 					break;
 				}
