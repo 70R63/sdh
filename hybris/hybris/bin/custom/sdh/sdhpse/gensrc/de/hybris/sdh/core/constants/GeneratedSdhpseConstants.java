@@ -1,10 +1,10 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 28 jun 2021 16:52:17                        ---
+ * --- Generated at 23 ago 2022 21:59:57                        ---
  * ----------------------------------------------------------------
  *  
- * Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+ * Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
  */
 package de.hybris.sdh.core.constants;
 

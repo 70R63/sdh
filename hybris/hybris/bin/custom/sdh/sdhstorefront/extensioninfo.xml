@@ -9,13 +9,23 @@
  Information and shall use it only in accordance with the terms of the
  license agreement you entered into with SAP.
 --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
-                        
+                                            
+    
+    
+    
+    
+    
     
     
     
     
     <extension abstractclassprefix="Generated" classprefix="SdhStorefront" name="sdhstorefront" usemaven="false">
-                                                
+                                                                                        
+        
+        
+        
+        
+        
         
         
         
@@ -39,6 +49,26 @@
         
         
         
+                                        
+        
+        
+        
+                                        
+        
+        
+        
+                                        
+        
+        
+        
+                                        
+        
+        
+        
+                                        
+        
+        
+        
                                 
         
         
@@ -49,39 +79,74 @@
         
         
         
+        
+        
+        
+        
+        
         <requires-extension name="sdhrelationshipsaddon"/>
-                                                
+                                                                                        
+        
+        
+        
+        
+        
         
         
         
         
         
         <requires-extension name="acceleratorstorefrontcommons"/>
-                                                
+                                                                                        
+        
+        
+        
+        
+        
         
         
         
         
         <requires-extension name="sdhfacades"/>
-                                                
+                                                                                        
+        
+        
+        
+        
+        
         
         
         
         
         <webmodule jspcompile="false" webroot="/sdhstorefront"/>
-                                                
+                                                                                        
+        
+        
+        
+        
+        
         
         
         
         
         <meta key="extgen-template-extension" value="true"/>
-                                            
+                                                                                    
+    
+    
+    
+    
+    
     
     
     
     
     </extension>
-                    
+                                        
+
+
+
+
+
 
 
 

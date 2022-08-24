@@ -12,30 +12,42 @@
 
 
 --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
-    	
+        	
+    
     <extension abstractclassprefix="Generated" classprefix="Publicsectoracceleratoraddon" description="sdhpsaddon extension" managername="PublicsectoracceleratoraddonManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="sdhpsaddon">
-        		
+                		
+        
         <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->
-        		
+                		
+        
+        
         <requires-extension name="sdhrelationshipsaddon"/>
         <requires-extension name="addonsupport"/>
-        		
+                		
+        
         <requires-extension name="acceleratorstorefrontcommons"/>
-        		
+                		
 		
+        
         <requires-extension name="xyformsstorefrontcommons"/>
-        		
+                		
+        
         <requires-extension name="xyformsweb"/>
-        		
+                		
+        
         <requires-extension name="publicsectorfacades"/>
-        		
+                		
+        
         <requires-extension name="assistedservicestorefront"/>
-        		
+                		
+        
         <coremodule generated="true" manager="de.hybris.platform.sdhpsaddon.jalo.PublicsectoracceleratoraddonManager" packageroot="de.hybris.platform.sdhpsaddon"/>
-        			
+                			
 			
 
 	
-    </extension>
     
+    </extension>
+        
+
 </extensioninfo>
