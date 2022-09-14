@@ -40,6 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.hybris.sdh.core.pojos.responses.OpcionUsoInfoAd;
 
 @RestController
 @RequestMapping("/infoObject")
@@ -114,6 +115,48 @@ public class SdhInfoObjectUseOptionController {
         LOG.info("opcionUso: "+opcionUso);
         return Objects.nonNull(opcionUso) ? opcionUso.replace(" ","").split("-")[0] : null;
     }
+    
+    @RequestMapping("/getUseOption_infoAd")
+ 	public OpcionUsoInfoAd getUseOption_ad(@RequestParam(value="anioGravable", defaultValue="") final String anioGravable,
+                                    @RequestParam(value="periodo", defaultValue="") final String periodo,
+                                    @RequestParam(value="taxType", defaultValue="") final String taxType,
+                                    @RequestParam(value="placa", defaultValue="") final String placa,
+                                    @RequestParam(value="cdu", defaultValue="") final String cdu,
+ 			@RequestParam(value = "numRadicado", defaultValue = "")
+ 			final String numRadicado, @RequestParam(value = "numResolu", defaultValue = "")
+ 			final String numResolu, @RequestParam(value = "tipoValla", defaultValue = "")
+ 			final String tipoValla, @RequestParam(value = "tipoLicencia", defaultValue = "")
+ 			final String tipoLicencia)
+ 	{
+         String opcionUso = null;
+         String opcionUso_retorno = null;
+         OpcionUsoInfoAd opcionUsoInfoAd = new OpcionUsoInfoAd();
+
+         if(Objects.nonNull(taxType)){
+             if(taxType.equals("5")){//Sobretasa a la gasolina
+                 opcionUso = this.getOpcionUsosobreTasaGasolina(anioGravable, periodo);
+             }else if(taxType.equals("3")){ //ICA
+                 opcionUso = this.getOpcionUsoIca(anioGravable, periodo);
+ 			}
+ 			else if (taxType.equals("4"))
+ 			{ //Publicidad
+ 				opcionUso = this.getOpcionUsoPublicidad(anioGravable, numResolu, tipoValla);
+             }else if(taxType.equals("2")){ //Vehicular
+ 				this.getOpcionUsoVehicular(anioGravable, placa,opcionUsoInfoAd);
+ 				opcionUso = opcionUsoInfoAd.getOpcionUso();
+             }else if(taxType.equals("6")){ //Delineacion Urbana
+ 				opcionUso = this.getOpcionUsoDelineacionUrbana(cdu, numRadicado, anioGravable, tipoLicencia);
+             }
+         }
+
+         opcionUso_retorno = Objects.nonNull(opcionUso) ? opcionUso.replace(" ","").split("-")[0] : null;
+         if(opcionUso_retorno != null) {
+         	opcionUsoInfoAd.setOpcionUso(opcionUso_retorno);
+         }
+         
+         return opcionUsoInfoAd;
+     }
+    
 
     private String getOpcionUsosobreTasaGasolina(final String anioGravable, final String periodo){
         final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
@@ -209,6 +252,44 @@ public class SdhInfoObjectUseOptionController {
       
       return opcionUso;
     }
+    
+    
+    private void getOpcionUsoVehicular(final String anioGravable, final String placa, OpcionUsoInfoAd opcionUsoInfoAd){
+       final ObjectMapper mapper = new ObjectMapper();
+       final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
+       final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+       DetalleVehiculosResponse detalleVehiculosResponse = null;
+       String opcionUso = "";
+       String numBP = customerModel.getNumBP();
+       if(numBP != null ) {
+       	numBP = numBP.trim();
+       }
+       		
+       
+       if(numBP != null && !org.apache.commons.lang3.StringUtils.isEmpty(numBP)) {
+          detalleVehiculosRequest.setBpNum(numBP);
+          detalleVehiculosRequest.setPlaca(placa);
+          detalleVehiculosRequest.setAnioGravable(anioGravable);
+       
+          mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+          try {
+          	detalleVehiculosResponse = mapper.readValue(sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
+             if (detalleVehiculosResponse != null && detalleVehiculosResponse.getInfo_declara() != null && detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
+             {
+            	 opcionUsoInfoAd.setOpcionUso(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso());
+            	 opcionUsoInfoAd.setErrores(detalleVehiculosResponse.getInfo_declara().getErrores());
+             }
+          } catch (final IOException e) {
+          	LOG.error("erro al consultar opcionUso de vehicular:"+ detalleVehiculosRequest +" error:"+e.getMessage());
+          }
+       }else {
+       	LOG.error("erro al consultar opcionUso de vehicular:"+ detalleVehiculosRequest);
+       }
+       
+       
+       return;
+     }
+    
 
 	private String getOpcionUsoPublicidad(final String anioGravable, final String numResolu, final String tipoValla)
 	{

@@ -1277,7 +1277,8 @@ ACC.opcionDeclaraciones = {
 		var currentUrl_tmp = "";
 
 		var currentUrl = window.location.href;
-		var targetUrl = "infoObject/getUseOption?anioGravable="	+
+		var useOption_url = "getUseOption_infoAd";
+		var targetUrl = "infoObject/" + useOption_url + "?anioGravable="	+
                		    anioGravable + "&placa=" +
                		    placa + "&taxType=" + impuesto;
 		
@@ -1300,19 +1301,41 @@ ACC.opcionDeclaraciones = {
             type : "GET",
             success : function(data) {
 				ACC.spinner.close();
-                if(data == "02"){
-                    ACC.opcionDeclaraciones.promtConfirmation(url);
-                }else if(data == ""){
-					alert("Error al verificar: opcionUso. Por favor reintentar el proceso");
-				}else{
-                    window.location.href = url;
-                }
+				var useOption_val = data.useOption;
+				var ocurrioError = false;
+				if(impuesto == "2"){
+					ocurrioError = ACC.opcionDeclaraciones.mostrarErroresInfoObjetoVehicular(data);
+				}
+				
+				if(ocurrioError == false){
+					if(useOption_val == "02"){
+                    	ACC.opcionDeclaraciones.promtConfirmation(url);
+	                }else if(useOption_val == ""){
+						alert("Error al verificar: opcionUso. Por favor reintentar el proceso");
+					}else{
+	                    window.location.href = url;
+	                }
+				}
            	},
             error : function() {
 				ACC.spinner.close();
                 alert("Error al verificar: opcionUso");
             }
         });
+	},
+	
+	
+	mostrarErroresInfoObjetoVehicular : function(data){
+		var ocurrioError  = false;
+		$.each(data.errores, function(index,value){
+			if(value.id_msj == "07" || value.id_msj == "08"){
+				ocurrioError = true;
+				alert(value.txt_msj);
+			}
+		});
+		
+			
+		return ocurrioError;
 	},
 
 

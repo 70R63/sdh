@@ -884,6 +884,7 @@ ACC.vehiculos = {
 					mensaje = value.txt_msj;
 					$("#dialogMensajesContent").html("");
 		    		$("#dialogMensajesContent").html(mensaje.trim()+"<br>");
+		    		acc.vehiculos.mostrarMensajesInfoObjeto2(errores);
 					break;
 	
 				default:
