@@ -25,10 +25,10 @@
 			</div>
 		</div>
 		<div>
-			<div class="row table-responsive">
-
-				<div class="col-md-8 col-md-offset-2 center">
-					<table class="table table-responsive" id="tabPaginacion2">
+			<div class="row">
+				<div class="table-responsive col-md-8 col-md-offset-2 center">
+				<table class="table" id="example" class="newtd">
+<!-- 					<table class="table table-responsive tabPaginacion" id="tabPaginacion2"> -->
 						<thead>
 							<tr>
 								<th style="text-align: center;"><label
@@ -71,7 +71,7 @@
 									
 										<c:set var="countNot" value="0" scope="page" />
 									<c:forEach items="${eachDocs.documentos}" var="echDocumentosNot">
-									<c:if test="${echDocumentosNot.nombreDocumento != ''}">
+										<c:if test="${echDocumentosNot.nombreDocumento != ''}">
 									<tr>
 									<c:set var="countNot" value="${countNot + 1}" scope="page"/>
 										<td><input class="tableBuzon" disabled="disabled" type="text" value="Anexo ${countNot}"></td>
@@ -112,7 +112,7 @@
 			<div class="row table-responsive">
 
 				<div class="col-md-8 col-md-offset-2 center">
-					<table class="table table-responsive" id="tabPaginacion3">
+					<table class="table table-responsive" id="tabPaginacion1">
 						<thead>
 							<tr>
 								<th style="text-align: center"><label
@@ -159,8 +159,8 @@
 															id="downloadNoti"
 															data-name="Anexo ${countNot}"
 															data-numBP="${miBuzon.numBP}"
-														data-idDocumento="${echDocumentos.idDocumento}"
-														data-idRadicado="${eachDoc.id_radicado}" 
+														data-idDocumento="${echDocumentosNot.idDocumento}"
+														data-idRadicado="${eachDocs.id_radicado}" 
 															onclick="downloaddosNoti(this)"> <span
 																class="glyphicon glyphicon-download-alt"></span></label></td>
 																</tr>
